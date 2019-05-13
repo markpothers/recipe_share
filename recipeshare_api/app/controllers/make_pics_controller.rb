@@ -1,0 +1,2 @@
+class MakePicsController < ApplicationController
+end

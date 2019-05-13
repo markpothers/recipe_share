@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  chef: one
+  recipe: one
+  time: 1
+  difficulty: 1
+  comment: MyString
+  tastiness: 1
+
+two:
+  chef: two
+  recipe: two
+  time: 1
+  difficulty: 1
+  comment: MyString
+  tastiness: 1

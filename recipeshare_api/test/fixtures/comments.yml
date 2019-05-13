@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  chef: one
+  recipe: one
+  comment: MyString
+
+two:
+  chef: two
+  recipe: two
+  comment: MyString
