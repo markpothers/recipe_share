@@ -2,6 +2,8 @@ class Chef < ApplicationRecord
 
     has_secure_password
 
+    has_one_attached :avatar
+
     has_many :recipes
     has_many :recipe_likes
     has_many :liked_recipes, :through => :recipe_likes, :source => :recipe
@@ -32,6 +34,53 @@ class Chef < ApplicationRecord
 
     def as_json(*)
         super.except('password_digest')
+    end
+
+    def self.choose_list(type = "global_ranks", chef_id = 17, limit = 50, offset = 0, ranking = "liked")
+        #types = "all_chefs", "chef_followees", "chef_followers", "chef_made", "global_ranks" // "liked", "made"
+        if type == "all_chefs"
+            Chef.order(created_at: :desc) # all chefs ordered newest first
+                .limit(limit)
+                .offset(offset)
+
+        elsif type == "chef_followees" # chefs followed by user (chef_id)
+
+            Chef.joins(:followees_as_follower)
+                .where({ follows: { followee_id: chef_id }})
+                .order("follows.created_at desc")
+                .limit(limit)
+                .offset(offset)
+
+        elsif type == "chef_followers" # chefs followed by user (chef_id)
+
+            Chef.joins(:followers_as_followee)
+                .where({ follows: { follower_id: chef_id }})
+                .order("follows.created_at desc")
+                .limit(limit)
+                .offset(offset)
+
+        elsif type =="global_ranks" # chefs according to their global rankings most recipes liked, and most recipes made
+
+            if ranking == "made"
+                table = "recipe_makes"
+            else # if ranking == "liked"
+                table = "recipe_likes"
+            end
+
+            ApplicationRecord.db.execute("SELECT #{table}.*, chefs.*, COUNT(#{table}.chef_id) AS count
+                                            FROM #{table}
+                                            JOIN chefs ON chefs.id = #{table}.chef_id
+                                            GROUP BY #{table}.chef_id
+                                            ORDER BY COUNT(#{table}.chef_id) DESC
+                                            LIMIT #{table}
+                                            OFFSET #{table}")
+
+        else # if all else fails, just show all chefs ordered most recent first
+            Chef.order(created_at: :desc)
+                .limit(limit)
+                .offset(offset)
+        end
+
     end
 
 end

@@ -15,6 +15,7 @@ class RecipeMakesController < ApplicationController
 
     def create
         @recipe_make = RecipeMake.create(recipe_make_params)
+        @recipe.images.attach(recipe_params[:images])
         if @recipe_make.save
             render json: @recipe_make
         else
@@ -32,6 +33,7 @@ class RecipeMakesController < ApplicationController
 
     def update
         @recipe_make.update(recipe_make_params)
+        @recipe.images.attach(recipe_params[:images])
         if @recipe_make.save
             render json: @recipe_make
         else
@@ -54,7 +56,7 @@ class RecipeMakesController < ApplicationController
     end
 
     def recipe_make_params
-        params.require(:recipe_make).permit(:recipe_id, :chef_id, :time, :difficulty, :comment, :tastiness)
+        params.require(:recipe_make).permit(:recipe_id, :chef_id, :time, :difficulty, :comment, :tastiness, :content, images: [])
     end
 
 end

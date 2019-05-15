@@ -15,7 +15,8 @@ class ChefsController < ApplicationController
     end
 
     def index
-        render json: Chef.all
+        @chefs = Chef.choose_list
+        render json: @chefs
     end
 
     # def new
@@ -63,7 +64,7 @@ class ChefsController < ApplicationController
     end
 
     def chef_params
-        params.require(:chef).permit(:first_name, :last_name, :username, :password, :password_confirmation, :password_digest, :country, :imageURL)
+        params.require(:chef).permit(:first_name, :last_name, :username, :password, :password_confirmation, :password_digest, :country, :imageURL, :avatar)
     end
 
 end

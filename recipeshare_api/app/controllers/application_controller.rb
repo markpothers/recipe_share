@@ -18,6 +18,7 @@ class ApplicationController < ActionController::API
             token = request.headers['Authorization'.split(" ")[1]]
             payload = JWT.decode(token, 'may_secret_phrase')[0]
             if Chef.find(params['id'])
+                @chef = Chef.find(params['id'])
                 return true # i.e. the user is logged in
             else # couldn't find chef in database
                 render json: {error: true, message: "Could not find user in Application Controller logged_in? method"}

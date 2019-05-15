@@ -70,7 +70,7 @@ end
     end
 end
 
-200.times do
+800.times do
     RecipeMake.create(chef_id: Chef.all.sample.id, recipe_id: Recipe.all.sample.id, created_at: Time.now, time: rand(600..6000), difficulty: rand(10), tastiness: rand(10), comment: Faker::ChuckNorris.fact)
 end
 

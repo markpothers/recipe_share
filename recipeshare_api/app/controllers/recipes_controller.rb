@@ -6,7 +6,8 @@ class RecipesController < ApplicationController
 
 
     def index
-        render json: Recipe.all
+        @recipes = Recipe.choose_list
+        render json: @recipes #, methods: [:add_count]
     end
 
     # def new
@@ -15,6 +16,7 @@ class RecipesController < ApplicationController
 
     def create
         @recipe = Recipe.create(recipe_params)
+        @recipe.images.attach(recipe_params[:images])
         if @recipe.save
             render json: @recipe
         else
@@ -32,6 +34,7 @@ class RecipesController < ApplicationController
 
     def update
         @recipe.update(recipe_params)
+        @recipe.images.attach(recipe_params[:images])
         if @recipe.save
             render json: @recipe
         else
@@ -54,7 +57,7 @@ class RecipesController < ApplicationController
     end
 
     def recipe_params
-        params.require(:recipe).permit(:name, :chef_id)
+        params.require(:recipe).permit(:name, :chef_id, :time, :difficulty, :instructions, :content, images: [])
     end
 
 end
