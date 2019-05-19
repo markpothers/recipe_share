@@ -14,7 +14,7 @@ class Recipe < ApplicationRecord
 
   has_many_attached :images
 
-  def self.choose_list(type = "global_ranks", chef_id = 44, limit = 50, offset = 0, ranking = "made")
+  def self.choose_list(type = "global_ranks", chef_id = 1, limit = 1, offset = 0, ranking = "liked")
     #types = "all", "chef", "chef_liked", "chef_made", "global_ranks" // "liked", "made"
     if type == "all"
       Recipe.order(created_at: :desc) # all recipes ordered most-recent first
@@ -54,7 +54,7 @@ class Recipe < ApplicationRecord
         #insert this to add rank "ROW_NUMBER() OVER(ORDER BY COUNT(recipe_likes.recipe_id) DESC) AS Row"
 
         ApplicationRecord.db.execute("SELECT
-                                        recipes.*, COUNT(#{table}.recipe_id)
+                                        recipes.*, COUNT(#{table}.recipe_id) As count
                                         FROM #{table}
                                         JOIN recipes ON #{table}.recipe_id = recipes.id
                                         #{chefFilter}
@@ -80,5 +80,43 @@ class Recipe < ApplicationRecord
             .offset(offset)
     end
   end
+
+  def self.find_details(ids)
+
+      # details = {
+      #   comments: Recipe.find_comments(ids),
+      #   ingredients: Recipe.find_ingredients(ids)
+      # }
+
+      
+      details = {comments: Comment.where(recipe_id: ids),
+        recipe_images: RecipeImage.where(recipe_id: ids),
+        recipe_likes: RecipeLike.where(recipe_id: ids),
+        recipe_makes: RecipeMake.where(recipe_id: ids),
+        make_pics: MakePic.where(recipe_id: ids)}
+
+    # comments = Comment.where(recipe_id: ids)
+    # recipe_images = RecipeImage.where(recipe_id: ids)
+    # recipe_likes = RecipeLike.where(recipe_id: ids)
+    # recipe_makes = RecipeMake.where(recipe_id: ids)
+    # make_pics = MakePic.where(recipe_id: ids)
+
+    # detailsarray=[comments, ingredients]
+    # details = {comments: comments, ingredients: ingredients, ingredients: ingredients, recipe_images: recipe_images, recipes_likes: recipe_likes, recipe_makes: recipe_makes, make_pics: make_pics}
+    return details
+  end
+
+  # def self.find_comments(ids)
+  #   Comment.where(recipe_id: ids)
+  # end
+
+  # def self.find_ingredients(ids)
+  #   ingredientUses = IngredientUse.where(recipe_id: ids)
+  #   ingredients_ids = ingredientUses.map do |use|
+  #     use = use.ingredient_id
+  #   end
+  #   ingredients = Ingredient.where(id: ingredients_ids.uniq)
+  #   byebug
+  # end
 
 end

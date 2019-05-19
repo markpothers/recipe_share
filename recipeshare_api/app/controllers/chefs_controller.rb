@@ -3,11 +3,12 @@ class ChefsController < ApplicationController
     # skip_before_action :verify_authenticity_token
     # skip_before_action :authenticate, :only => [:new, :create]
     before_action :define_current_chef
-    skip_before_action :define_current_chef, :only => [:index, :create]
+    skip_before_action :define_current_chef, :only => [:index, :create, :authenticate]
 
     def authenticate
-        @chef = Chef.find_by(name: parmas[:name])
-        if @chef.authenticate(params[:password])
+        @chef = Chef.find_by(e_mail: chef_params[:e_mail])
+        if @chef.authenticate(chef_params[:password])
+            puts "loggin in!"
             render json: @chef, methods: [:auth_token]
         else
             render json: {error: true, message: 'Invalid Login'}
@@ -26,11 +27,18 @@ class ChefsController < ApplicationController
     def create
         if chef_params[:password] === chef_params[:password_confirmation]
             @chef = Chef.new(chef_params)
-                if @chef.save
-                    render json: @chef, methods: [:auth_token]
-                else
-                    render json: {error: true, message: 'User could not be saved for reasons which need to be specified'}
+            if @chef.save
+                if image_params[:imageURL] != ""
+                    File.open("public/chef-avatar-#{@chef.id}.jpg", 'wb') do |f|
+                        f.write(Base64.decode64(image_params[:imageURL]))
+                    end
+                    @chef.imageURL = "/chef-avatar-#{@chef.id}.jpg"
+                    @chef.save
                 end
+                render json: @chef, methods: [:auth_token]
+            else
+                render json: {error: true, message: @chef.errors.full_messages}
+            end
         else
             render json: {error: true, message: "Password confirmation did not match password", chef: chef_params}
         end
@@ -44,8 +52,13 @@ class ChefsController < ApplicationController
     # end
 
     def update
-        @chef.update(chef_params)
+        puts @chef
+        puts params
+        byebug
+        @chef.update(imageURL: params[imageURL])
+
         if @chef.save
+
             render json: @chef, methods: [:auth_token]
         else
             render json: {error: true, message: "Chef updating failed for reasons that need to be specified", chef: chef_params}
@@ -64,7 +77,11 @@ class ChefsController < ApplicationController
     end
 
     def chef_params
-        params.require(:chef).permit(:first_name, :last_name, :username, :password, :password_confirmation, :password_digest, :country, :imageURL, :avatar)
+        params.require(:chef).permit(:first_name, :last_name, :username, :e_mail, :password, :password_confirmation, :country)
+    end
+
+    def image_params
+        params.require(:chef).permit(:imageURL)
     end
 
 end

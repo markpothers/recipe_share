@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/stympy/faker.git
-  revision: ed382d11a58311f1701f82bbe18f3b4fb7636e27
+  revision: a26e802f9e9d578e2b8df3d094f0a77a5c6b1f80
   branch: master
   specs:
     faker (1.9.3)
@@ -140,7 +140,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.4.1)
+    sqlite3 (1.3.13)
     strings (0.1.5)
       strings-ansi (~> 0.1)
       unicode-display_width (~> 1.5)
@@ -180,7 +180,7 @@ DEPENDENCIES
   rails (~> 5.2.3)
   spring
   spring-watcher-listen (~> 2.0.0)
-  sqlite3 (~> 1.4.1)
+  sqlite3 (~> 1.3.6)
   tzinfo-data
 
 RUBY VERSION

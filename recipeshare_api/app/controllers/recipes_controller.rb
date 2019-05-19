@@ -2,12 +2,32 @@ class RecipesController < ApplicationController
 
     # skip_before_action :verify_authenticity_token
     before_action :define_current_recipe
-    skip_before_action :define_current_recipe, :only => [:index, :create]
+    skip_before_action :define_current_recipe, :only => [:index, :create, :details]
 
 
     def index
-        @recipes = Recipe.choose_list
+        @recipes = Recipe.choose_list(recipe_params["listType"], recipe_params["chef_id"], recipe_params["limit"], recipe_params["offset"], recipe_params["ranking"])
         render json: @recipes #, methods: [:add_count]
+    end
+
+    def details
+        # @recipes_details = Recipe.find_details(details_params["listed_recipes"])
+
+            ingredientUses = IngredientUse.where(recipe_id: details_params["listed_recipes"])
+            ingredients_ids = ingredientUses.map do |use|
+                use = use.ingredient_id
+            end
+
+        details = {recipes: Recipe.where(id: details_params["listed_recipes"]),
+            comments: Comment.where(recipe_id: details_params["listed_recipes"]),
+            recipe_images: RecipeImage.where(recipe_id: details_params["listed_recipes"]),
+            recipe_likes: RecipeLike.where(recipe_id: details_params["listed_recipes"]),
+            recipe_makes: RecipeMake.where(recipe_id: details_params["listed_recipes"]),
+            make_pics: MakePic.where(recipe_id: details_params["listed_recipes"]),
+            ingredient_uses: IngredientUse.where(recipe_id: details_params["listed_recipes"]),
+            ingredients: Ingredient.where(id: ingredients_ids.uniq)
+            }
+        render json: details #, methods: [:add_count]
     end
 
     # def new
@@ -57,7 +77,11 @@ class RecipesController < ApplicationController
     end
 
     def recipe_params
-        params.require(:recipe).permit(:name, :chef_id, :time, :difficulty, :instructions, :content, images: [])
+        params.require(:recipe).permit(:allRecipes, :listType, :limit, :offset, :ranking, :name, :chef_id, :time, :difficulty, :instructions, :content)
+    end
+
+    def details_params
+        params.require(:details).permit(:listed_recipes => [])
     end
 
 end

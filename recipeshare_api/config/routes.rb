@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy, :index]
 
   get '/', to: 'recipes#index', as:'home'
-  post '/login', to: 'users#authenticate'
+  post '/login', to: 'chefs#authenticate'
+  post '/', to: 'recipes#index'
+  post '/details', to: 'recipes#details'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

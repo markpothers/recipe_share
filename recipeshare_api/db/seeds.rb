@@ -70,10 +70,20 @@ end
     end
 end
 
-800.times do
+200.times do
     RecipeMake.create(chef_id: Chef.all.sample.id, recipe_id: Recipe.all.sample.id, created_at: Time.now, time: rand(600..6000), difficulty: rand(10), tastiness: rand(10), comment: Faker::ChuckNorris.fact)
 end
 
 200.times do
     Comment.create(chef_id: Chef.all.sample.id, recipe_id: Recipe.all.sample.id, comment: Faker::GreekPhilosophers.quote)
+end
+
+images = ["/recipe_images/recipe2", "/recipe_images/recipe3", "/recipe_images/recipe4", "/recipe_images/recipe5", "/recipe_images/recipe6", "/recipe_images/recipe7", "/recipe_images/recipe8", "/recipe_images/recipe9", "/recipe_images/recipe10", "/recipe_images/recipe11", "/recipe_images/recipe12", "/recipe_images/recipe13", "/recipe_images/recipe14", "/recipe_images/recipe15", "/recipe_images/recipe16", "/recipe_images/recipe17", "/recipe_images/recipe1", "/recipe_images/recipe24", "/recipe_images/recipe26", "/recipe_images/recipe29", "/recipe_images/recipe30", "/recipe_images/recipe33", "/recipe_images/recipe34", "/recipe_images/recipe35", "/recipe_images/recipe36", "/recipe_images/recipe37", "/recipe_images/recipe39", "/recipe_images/recipe45", "/recipe_images/recipe49", "/recipe_images/recipe50", "/recipe_images/recipe51", "/recipe_images/recipe52", "/recipe_images/recipe53", "/recipe_images/recipe54", "/recipe_images/recipe55", "/recipe_images/recipe56", "/recipe_images/recipe57", "/recipe_images/recipe58", "/recipe_images/recipe59", "/recipe_images/recipe60", "/recipe_images/recipe61", "/recipe_images/recipe62", "/recipe_images/recipe63", "/recipe_images/recipe65", "/recipe_images/recipe66"]
+
+200.times do
+    RecipeImage.create(recipe: Recipe.all.sample, imageURL: images.sample)
+end
+
+200.times do
+    MakePic.create(chef: Chef.all.sample, recipe: Recipe.all.sample, imageURL: images.sample)
 end

@@ -1,3 +1,5 @@
+# require 'bcrypt'
+
 class Chef < ApplicationRecord
 
     has_secure_password
@@ -20,20 +22,24 @@ class Chef < ApplicationRecord
     has_many :recipe_makes
     has_many :made_recipes, :through => :recipe_makes, :source => :recipe
 
-    # validates :e_mail, uniqueness: true, message: "This e-mall address has an existing account.  Please log in or reset your password"
-    # validates :e_mail, inclusion: {in: "@"}, message: "Please provide a valid e-mail address."
+    # validates :username, :e_mail, presence: true
+    # validates :username, length: {minimum: 3}
+    # validates :e_mail, uniqueness: true #, message: "This e-mall address has an existing account.  Please log in or reset your password"
+    # # validates :e_mail, inclusion: {in: "@"} #, message: "Please provide a valid e-mail address."
     # validates :password, length: {minimum: 6}
 
-    def password=(value)
-        self.password_digest = Bcrypt.hash(value)
-    end
+    # def password=(value)
+    #     byebug
+    #     self.password_digest = Bcrypt.hash(value)
+
+    # end
 
     def auth_token
         JWT.encode({id: self.id}, 'my_secret_phrase')
     end
 
     def as_json(*)
-        super.except('password_digest')
+        super.except('password', 'password_confirmation', 'password_digest', 'created_at', 'updated_at', 'country', 'e_mail')
     end
 
     def self.choose_list(type = "global_ranks", chef_id = 17, limit = 50, offset = 0, ranking = "liked")
