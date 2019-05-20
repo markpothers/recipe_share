@@ -28,6 +28,8 @@ Ingredient_Use.destroy_all
 Recipe.destroy_all
 Chef.destroy_all
 Ingredient.destroy_all
+RecipeImage.destroy_all
+MakePic.destroy_all
 
 # ActiveRecord::Base.connection.reset_pk_sequence!('RecipeLikes')
 # ActiveRecord::Base.connection.reset_pk_sequence!('Follows')
@@ -78,12 +80,16 @@ end
     Comment.create(chef_id: Chef.all.sample.id, recipe_id: Recipe.all.sample.id, comment: Faker::GreekPhilosophers.quote)
 end
 
-images = ["/recipe_images/recipe2", "/recipe_images/recipe3", "/recipe_images/recipe4", "/recipe_images/recipe5", "/recipe_images/recipe6", "/recipe_images/recipe7", "/recipe_images/recipe8", "/recipe_images/recipe9", "/recipe_images/recipe10", "/recipe_images/recipe11", "/recipe_images/recipe12", "/recipe_images/recipe13", "/recipe_images/recipe14", "/recipe_images/recipe15", "/recipe_images/recipe16", "/recipe_images/recipe17", "/recipe_images/recipe1", "/recipe_images/recipe24", "/recipe_images/recipe26", "/recipe_images/recipe29", "/recipe_images/recipe30", "/recipe_images/recipe33", "/recipe_images/recipe34", "/recipe_images/recipe35", "/recipe_images/recipe36", "/recipe_images/recipe37", "/recipe_images/recipe39", "/recipe_images/recipe45", "/recipe_images/recipe49", "/recipe_images/recipe50", "/recipe_images/recipe51", "/recipe_images/recipe52", "/recipe_images/recipe53", "/recipe_images/recipe54", "/recipe_images/recipe55", "/recipe_images/recipe56", "/recipe_images/recipe57", "/recipe_images/recipe58", "/recipe_images/recipe59", "/recipe_images/recipe60", "/recipe_images/recipe61", "/recipe_images/recipe62", "/recipe_images/recipe63", "/recipe_images/recipe65", "/recipe_images/recipe66"]
+images = ["/recipe_image_files/recipe2.jpg", "/recipe_image_files/recipe3.jpg", "/recipe_image_files/recipe4.jpg", "/recipe_image_files/recipe5.jpg", "/recipe_image_files/recipe6.jpg", "/recipe_image_files/recipe7.jpg", "/recipe_image_files/recipe8.jpg", "/recipe_image_files/recipe9.jpg", "/recipe_image_files/recipe10.jpg", "/recipe_image_files/recipe11.jpg", "/recipe_image_files/recipe12.jpg", "/recipe_image_files/recipe13.jpg", "/recipe_image_files/recipe14.jpg", "/recipe_image_files/recipe15.jpg", "/recipe_image_files/recipe16.jpg", "/recipe_image_files/recipe17.jpg", "/recipe_image_files/recipe1.jpg", "/recipe_image_files/recipe24.jpg", "/recipe_image_files/recipe26.jpg", "/recipe_image_files/recipe29.jpg", "/recipe_image_files/recipe30.jpg", "/recipe_image_files/recipe33.jpg", "/recipe_image_files/recipe34.jpg", "/recipe_image_files/recipe35.jpg", "/recipe_image_files/recipe36.jpg", "/recipe_image_files/recipe37.jpg", "/recipe_image_files/recipe39.jpg", "/recipe_image_files/recipe45.jpg", "/recipe_image_files/recipe49.jpg", "/recipe_image_files/recipe50.jpg", "/recipe_image_files/recipe51.jpg", "/recipe_image_files/recipe52.jpg", "/recipe_image_files/recipe53.jpg", "/recipe_image_files/recipe54.jpg", "/recipe_image_files/recipe55.jpg", "/recipe_image_files/recipe56.jpg", "/recipe_image_files/recipe57.jpg", "/recipe_image_files/recipe58.jpg", "/recipe_image_files/recipe59.jpg", "/recipe_image_files/recipe60.jpg", "/recipe_image_files/recipe61.jpg", "/recipe_image_files/recipe62.jpg", "/recipe_image_files/recipe63.jpg", "/recipe_image_files/recipe65.jpg", "/recipe_image_files/recipe66.jpg"]
 
-200.times do
-    RecipeImage.create(recipe: Recipe.all.sample, imageURL: images.sample)
+# 200.times do
+#     RecipeImage.create(recipe: Recipe.all.sample, imageURL: images.sample)
+# end
+
+Recipe.all.each do |recipe|
+    RecipeImage.create(recipe_id: recipe.id, imageURL: images.sample)
 end
 
-200.times do
-    MakePic.create(chef: Chef.all.sample, recipe: Recipe.all.sample, imageURL: images.sample)
+Recipe.all.each do |recipe|
+    MakePic.create(chef: Chef.all.sample, recipe: recipe, imageURL: images.sample)
 end

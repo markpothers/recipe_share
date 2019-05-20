@@ -6,7 +6,7 @@ class RecipesController < ApplicationController
 
 
     def index
-        @recipes = Recipe.choose_list(recipe_params["listType"], recipe_params["chef_id"], recipe_params["limit"], recipe_params["offset"], recipe_params["ranking"])
+        @recipes = Recipe.choose_list(list_params["listType"], list_params["chef_id"], list_params["limit"], list_params["offset"], list_params["ranking"])
         render json: @recipes #, methods: [:add_count]
     end
 
@@ -35,9 +35,19 @@ class RecipesController < ApplicationController
     # end
 
     def create
-        @recipe = Recipe.create(recipe_params)
-        @recipe.images.attach(recipe_params[:images])
+        @recipe = Recipe.create(newRecipe_params)
         if @recipe.save
+            if newRecipe_image_params[:imagebase64] != ""
+                @recipe_image = RecipeImage.create(recipe_id: @recipe.id)
+
+                File.open("public/recipe_image_files/recipe-image-#{@recipe_image.id}.jpg", 'wb') do |f|
+                    f.write(Base64.decode64(newRecipe_image_params[:imageBase64]))
+                end
+                puts "public/recipe_image_files/recipe-image-#{@recipe_image.id}.jpg"
+                @recipe_image.imageURL = "/recipe_image_files/recipe-image-#{@recipe_image.id}.jpg"
+                @recipe_image.save
+# byebug
+            end
             render json: @recipe
         else
             render json: {error: true, message: 'Ooops.  Something went wrong saving the recipe.'}
@@ -76,12 +86,20 @@ class RecipesController < ApplicationController
         @recipe = Recipe.find(params[:id])
     end
 
-    def recipe_params
+    def list_params
         params.require(:recipe).permit(:allRecipes, :listType, :limit, :offset, :ranking, :name, :chef_id, :time, :difficulty, :instructions, :content)
     end
 
     def details_params
         params.require(:details).permit(:listed_recipes => [])
+    end
+
+    def newRecipe_params
+        params.require(:recipe).permit(:name, :chef_id, :time, :difficulty, :instructions)
+    end
+
+    def newRecipe_image_params
+        params.require(:recipe).permit(:imageBase64)
     end
 
 end

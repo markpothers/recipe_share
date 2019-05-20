@@ -12,6 +12,8 @@ import {
 // import { MonoText } from '../../components/StyledText'
 import { Container, Header, Content, Form, Item, Input, Label, Button, Icon } from 'native-base';
 import { connect } from 'react-redux'
+import { databaseURL } from '../functionalComponents/databaseURL'
+
 
 const mapStateToProps = (state) => ({
   e_mail: state.loginUserDetails.e_mail,
@@ -40,7 +42,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     loginChef = () => {
       console.log("sending login")
-      fetch('http://10.0.0.145:3000/login', {
+      fetch(`${databaseURL}/login`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'

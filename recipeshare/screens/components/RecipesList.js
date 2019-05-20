@@ -12,6 +12,7 @@ import { Container, Header, Content, List, ListItem, Thumbnail, Left, Body, Righ
 import { WebBrowser } from 'expo'
 import { MonoText } from '../../components/StyledText'
 import RecipeCard from './RecipeCard'
+import { databaseURL } from '../functionalComponents/databaseURL'
 import { connect } from 'react-redux'
 
 const mapStateToProps = (state) => ({
@@ -19,13 +20,15 @@ const mapStateToProps = (state) => ({
       chef_Recipes: state.recipes.chef,
       chef_liked_Recipes: state.recipes.chef_liked,
       chef_made_Recipes: state.recipes.chef_made,
-      global_ranks_Recipes: state.recipes.global_ranks
+      global_ranks_Recipes: state.recipes.global_ranks,
+      recipes_details: state.recipes_details
 })
 
 const mapDispatchToProps = {
   fetchRecipeLists: (listType) => {
       return dispatch => {
-          fetch('http://10.0.0.145:3000/', {
+        console.log(databaseURL)
+          fetch(`${databaseURL}/`, {
               method: "POST",
               headers: {
                 'Content-Type': 'application/json'
@@ -42,11 +45,12 @@ const mapDispatchToProps = {
           })
           .then(res => res.json())
           .then(recipes => {
+            console.log("sending recipes list to store")
               dispatch({ type: 'STORE_ALL_RECIPES', recipeType: listType, recipeList: recipes})
               recipe_ids = recipes.map(recipe =>{
                 return recipe.id
               })
-              fetch('http://10.0.0.145:3000/details', {
+              fetch(`${databaseURL}/details`, {
                 method: "POST",
                 headers: {
                   'Content-Type': 'application/json'
@@ -57,6 +61,8 @@ const mapDispatchToProps = {
               })
               .then(res => res.json())
               .then(recipe_details => {
+                // console.log(recipe_details)
+                console.log("sending recipe lists details to store")
                 dispatch({ type: 'STORE_RECIPES_DETAILS', recipeType: listType, recipesDetailsList: recipe_details})
                 // console.log(listType)
                 // console.log(recipe_details.recipes)
@@ -86,11 +92,22 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     renderRecipeListItems = () => {
       return this.props[this.props["listChoice"] + `_Recipes`].map(recipe => {
-        return <RecipeCard key={recipe.id} {...recipe} listChoice={this.props["listChoice"]}/>
+        if (this.props.recipes_details[this.props["listChoice"]].recipe_images != undefined ){
+          const recipe_image = this.props.recipes_details[this.props["listChoice"]].recipe_images.find(image => image.recipe_id == recipe.id)
+          // console.log(`${databaseURL}${recipe_image.imageURL}`)
+          if (recipe_image != undefined){
+            return <RecipeCard key={recipe.id} {...recipe} imageURL={{ uri: `${databaseURL}${recipe_image.imageURL}` }}/>
+          } else {
+          return <RecipeCard key={recipe.id} {...recipe} imageURL={require("./peas.jpg")}/>
+          }
+        }else{
+          return <RecipeCard key={recipe.id} {...recipe} imageURL={require("./peas.jpg")}/>
+        }
       })
     }
 
     render() {
+      // console.log(this.props)
       return (
         <Container>
           <Content>

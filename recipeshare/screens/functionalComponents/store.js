@@ -20,6 +20,20 @@ const initialState = {
     chef_made: [],
     global_ranks: []
   },
+  newRecipeDetails: {
+    name: "",
+    instructions: "",
+    ingredients: {
+      ingredient1 :{
+        name:"",
+        quantity: "",
+        unit: ""
+      }
+    },
+    difficulty: "",
+    time: "",
+    imageBase64: ""
+  },
   newUserDetails: {
     first_name: "",
     last_name: "",

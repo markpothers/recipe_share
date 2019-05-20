@@ -9,6 +9,8 @@ import {
   View,
 } from 'react-native';
 import { connect } from 'react-redux'
+import { databaseURL } from '../functionalComponents/databaseURL'
+
 
 const mapStateToProps = (state) => ({
   recipes_details: state.recipes_details,
@@ -34,23 +36,23 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     renderRecipe = () => {
       const recipe = this.props.recipes_details[this.props["listChoice"]].recipes.find(recipe => recipe.id == this.props["recipeID"])
-      // console.log(recipe)
       return <Text>{recipe.name}</Text>
     }
 
     renderRecipeImages = () => {
-      // console.log(this.props.recipes_details[this.props["listChoice"]].recipe_images)
       const recipe = this.props.recipes_details[this.props["listChoice"]].recipe_images.find(recipe => recipe.recipe_id == this.props["recipeID"])
-      // console.log(recipe)
       if (recipe != undefined){
-        return <Image style={{width: 300, height: 300}} source={{uri: `http://10.0.0.145:3000${recipe.imageURL}.jpg`}}></Image>
+        return <Image style={{width: 250, height: 250}} source={{uri: `${databaseURL}${recipe.imageURL}`}}></Image>
       } else {
         return <Text>No image available</Text>
       }
     }
 
     renderRecipeIngredients = () => {
-
+      const ingredient_uses = this.props.recipes_details[this.props["listChoice"]].ingredient_uses.filter(ingredient_use => ingredient_use.recipe_id == this.props["recipeID"])
+      const list_values = ingredient_uses.map(ingredient_use => [ingredient_use.ingredient_id, ingredient_use.quantity, ingredient_use.unit])
+      const ingredients = list_values.map(list_value => [...list_value, (this.props.recipes_details[this.props["listChoice"]].ingredients.find(ingredient => ingredient.id == list_value[0]).name)])
+      return ingredients.map(ingredient => <Text key={ingredient[0]}>{ingredient[1]} {ingredient[2]} {ingredient[3]}</Text> )
     }
 
     renderRecipeInstructions = () => {
@@ -60,38 +62,32 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     renderRecipeLikes = () => {
       const likes = this.props.recipes_details[this.props["listChoice"]].recipe_likes.filter(like => like.recipe_id == this.props["recipeID"])
-      // console.log(likes)
       return <Text>Likes: {likes.length}</Text>
     }
 
     renderRecipeMakes = () => {
       const makes = this.props.recipes_details[this.props["listChoice"]].recipe_makes.filter(make => make.recipe_id == this.props["recipeID"])
-      // console.log(makes)
       return <Text>makes: {makes.length}</Text>
     }
 
     renderRecipeMakePics = () => {
-      // console.log(this.props.recipes_details[this.props["listChoice"]].make_pics)
       const make_pics = this.props.recipes_details[this.props["listChoice"]].make_pics.filter(make_pic => make_pic.recipe_id == this.props["recipeID"])
-      // console.log(make_pics[0])
       return make_pics.map(make_pic => {
         return (
           <React.Fragment key={make_pic.id}>
-            <Image style={{width: 300, height: 300}} source={{uri: `http://10.0.0.145:3000${make_pic.imageURL}.jpg`}}></Image>
+            <Image style={{width: 250, height: 250}} source={{uri: `${databaseURL}${make_pic.imageURL}`}}></Image>
           </React.Fragment>
         )
       })
     }
 
     renderRecipeComments = () => {
-      // console.log(this.props.recipes_details[this.props["listChoice"]].comments)
       const comments = this.props.recipes_details[this.props["listChoice"]].comments.filter(comment => comment.recipe_id == this.props["recipeID"])
-      // console.log(comments[0])
       return comments.map(comment => {
         return (
           <React.Fragment key={comment.id}>
             <Text>Comment:</Text>
-            <Text>{comment.comment}</Text> 
+            <Text>{comment.comment}</Text>
           </React.Fragment>
         )
       })
@@ -104,10 +100,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       return (
         <Container>
           <Header>
-              <Text>Recipe Details</Text>
+          {this.renderRecipe()}
           </Header>
           <ScrollView>
-            {this.renderRecipe()}
             {this.renderRecipeImages()}
             {this.renderRecipeIngredients()}
             {this.renderRecipeInstructions()}

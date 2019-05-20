@@ -30,6 +30,30 @@ const reducer = (currentState, action) => {
                 e_mail: "",
                 password: "",
                 }}
+        case 'UPDATE_NEW_RECIPE_DETAILS':
+            return {...currentState, newRecipeDetails: {...currentState.newRecipeDetails, [action.parameter]: action.content}}
+        case 'UPDATE_RECIPE_INGREDIENTS':
+            return {...currentState, newRecipeDetails: {...currentState.newRecipeDetails, ingredients: {...currentState.newRecipeDetails.ingredients, [action.ingredientIndex]: {
+                name: action.ingredientName,
+                quantity: action.ingredientQuantity,
+                unit: action.ingredientUnit
+            }}}}
+        case 'CLEAR_NEW_RECIPE_DETAILS':
+            console.log("clearing new recipe details")
+            return {...currentState, newRecipeDetails: {
+                name: "",
+                instructions: "",
+                ingredients: {
+                  ingredient1 :{
+                    name:"",
+                    quantity: "",
+                    unit: ""
+                  }
+                },
+                difficulty: "",
+                time: "",
+                imageBase64: ""
+                }}
         default:
             return currentState
     }

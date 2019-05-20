@@ -16,7 +16,8 @@ import { countries } from '../dataComponents/countries'
 import { ImagePicker } from 'expo'
 import {Camera, Permissions, DangerZone } from 'expo'
 import { connect } from 'react-redux'
-const {DeviceMotion} = DangerZone
+import { databaseURL } from '../functionalComponents/databaseURL'
+
 
 
 const mapStateToProps = (state) => ({
@@ -102,7 +103,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     submitChef = () => {
       console.log("sending new user details")
-      fetch('http://10.0.0.145:3000/chefs', {
+      fetch(`${databaseURL}/chefs`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
