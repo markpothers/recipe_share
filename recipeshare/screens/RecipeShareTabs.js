@@ -51,19 +51,30 @@ import ChefDetails from './tabs/chefDetails'
               <Text>Recipe Share</Text>
           </Header>
           <Tabs renderTabBar={()=> <ScrollableTab />}>
-          <Tab heading="New Recipe">
-              <NewRecipe/>
+          
+          
+          <Tab heading="Top Recipes">
+              <RecipesList listChoice={"global_ranks"} />
             </Tab>
-
-              <Tab heading="All Recipes">
+          
+          
+          <Tab heading="All Recipes">
               <RecipesList listChoice={"all"}/>
             </Tab>
 
 
 
           <Tab heading="Recipe Details">
-                <RecipeDetails listChoice={"all"} recipeID={500}/>
-              </Tab>
+                <RecipeDetails listChoice={"all"} recipeID={537}/>
+              </Tab> 
+    
+    
+    
+          <Tab heading="New Recipe">
+              <NewRecipe/>
+            </Tab>
+
+
               <Tab heading="Chef Details">
                 <ChefDetails />
               </Tab>
@@ -89,13 +100,6 @@ import ChefDetails from './tabs/chefDetails'
             </Tab>
             <Tab heading="Chef's Recipes">
               <RecipesList listChoice={"chef"} />
-            </Tab>
-            <Tab heading="Top Recipes">
-              <RecipesList listChoice={"global_ranks"} />
-            </Tab>
-
-            <Tab heading="New Recipes">
-              <NewRecipe />
             </Tab>
 
 

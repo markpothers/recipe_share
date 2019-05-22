@@ -10,7 +10,7 @@ export default class RecipeCard extends Component {
         return (
             <ListItem thumbnail>
                 <Left>
-                    <Thumbnail square source={this.props.imageURL} />
+                    <Thumbnail square style={{height: 150, width: 150}} source={this.props.imageURL} />
                 </Left>
                 <Body>
                     <Text>{this.props.id}: {this.props.name}</Text>

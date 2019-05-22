@@ -14,19 +14,17 @@ import { databaseURL } from '../functionalComponents/databaseURL'
 
 const mapStateToProps = (state) => ({
   recipes_details: state.recipes_details,
+  loggedInChef: state.loggedInChef
 })
 
 const mapDispatchToProps = {
-//   fetchAllRecipes: () => {
-//       return dispatch => {
-//           fetch('http://10.185.4.207:3000')
-//           .then(res => res.json())
-//           .then(recipes => {
-//               dispatch({ type: 'STORE_ALL_RECIPES', recipes: recipes})
-//           })
-//       }
-//   }
+    addRecipeLike: (like, listType) => {
+      return dispatch => {
+        dispatch({ type: 'ADD_RECIPE_LIKE', like: like, listType: listType})
+    }
+  }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   class RecipeDetails extends React.Component {
@@ -93,10 +91,31 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       })
     }
 
+    likeRecipe = () => {
+      // console.log("I like this recipe")
+            fetch(`${databaseURL}/recipe_likes`, {
+                method: "POST",
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  recipe_like: {
+                    recipe_id: this.props["recipeID"],
+                    chef_id: this.props.loggedInChef.id,
+                  }
+                })
+            })
+            .then(res => res.json())
+            .then(like => {
+              // console.log(like)
+              this.props.addRecipeLike(like, this.props["listChoice"])
+            })
+    }
+
 
     render() {
-      // console.log(this.props.recipes_details[this.props["listChoice"]].comments)
-      console.log(this.props["recipeID"])
+      // console.log(this.props["listChoice"])
+      // console.log(this.props["recipeID"])
       return (
         <Container>
           <Header>
@@ -107,12 +126,24 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             {this.renderRecipeIngredients()}
             {this.renderRecipeInstructions()}
             {this.renderRecipeLikes()}
-            {this.renderRecipeMakes()}
+            {/* {this.renderRecipeMakes()} */}
             {this.renderRecipeMakePics()}
             {this.renderRecipeComments()}
           </ScrollView>
+          <Button rounded danger style={styles.floatingButton} onPress={this.likeRecipe}>
+              <Icon name='heart' />
+          </Button>
         </Container>
       );
     }
   }
 )
+
+const styles = StyleSheet.create({
+  floatingButton: {
+    position: 'absolute',
+    left: '81%',
+    bottom: '3%',
+    zIndex: 1
+  }
+});

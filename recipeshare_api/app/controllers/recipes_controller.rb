@@ -6,11 +6,13 @@ class RecipesController < ApplicationController
 
 
     def index
+        # byebug
         @recipes = Recipe.choose_list(list_params["listType"], list_params["chef_id"], list_params["limit"], list_params["offset"], list_params["ranking"])
         render json: @recipes #, methods: [:add_count]
     end
 
     def details
+        # byebug
         # @recipes_details = Recipe.find_details(details_params["listed_recipes"])
 
             ingredientUses = IngredientUse.where(recipe_id: details_params["listed_recipes"])
@@ -46,17 +48,21 @@ class RecipesController < ApplicationController
                 puts "public/recipe_image_files/recipe-image-#{@recipe_image.id}.jpg"
                 @recipe_image.imageURL = "/recipe_image_files/recipe-image-#{@recipe_image.id}.jpg"
                 @recipe_image.save
-# byebug
             end
+                puts newRecipe_Ingredient_params
+
+                @recipe.ingredients=(newRecipe_Ingredient_params)
+                @recipe.save
+
             render json: @recipe
         else
             render json: {error: true, message: 'Ooops.  Something went wrong saving the recipe.'}
         end
     end
 
-    def show
-        render json: @recipe
-    end
+    # def show
+    #     render json: @recipe
+    # end
 
     # def edit
     #     render json: @recipe
@@ -100,6 +106,10 @@ class RecipesController < ApplicationController
 
     def newRecipe_image_params
         params.require(:recipe).permit(:imageBase64)
+    end
+
+    def newRecipe_Ingredient_params
+        params.require(:recipe).permit(ingredients: {})
     end
 
 end

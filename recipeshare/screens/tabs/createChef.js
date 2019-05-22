@@ -28,7 +28,8 @@ const mapStateToProps = (state) => ({
   password: state.newUserDetails.password,
   password_confirmation: state.newUserDetails.password_confirmation,
   country: state.newUserDetails.country,
-  imageURL: state.newUserDetails.imageURL
+  imageURL: state.newUserDetails.imageURL,
+  loggedInChef: state.loggedInChef
 })
 
 const mapDispatchToProps = {
@@ -40,6 +41,11 @@ const mapDispatchToProps = {
   clearNewUserDetails: () => {
     return dispatch => {
       dispatch({ type: 'CLEAR_NEW_USER_DETAILS'})
+    }
+  },
+  loginChef: (id, username) => {
+    return dispatch => {
+      dispatch({type: 'LOG_IN_CHEF', id: id, username: username})
     }
   }
 }
@@ -122,6 +128,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
               console.log(chef)
             })
           })
+        this.props.loginChef(chef.id, chef.username)
       })
       .catch(error => {
         console.log(error)

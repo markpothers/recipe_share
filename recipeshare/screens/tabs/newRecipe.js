@@ -22,7 +22,7 @@ const mapStateToProps = (state) => ({
   difficulty: state.newRecipeDetails.difficulty,
   time: state.newRecipeDetails.time,
   imageBase64: state.newRecipeDetails.imageBase64,
-  chef_id: 1
+  chef_id: state.loggedInChef.id
 })
 
 const mapDispatchToProps = {
@@ -47,11 +47,10 @@ const mapDispatchToProps = {
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   class NewRecipe extends React.Component {
-
+  
     state = {
       hasPermission: false,
-      frontFacing: false,
-  }
+    }
 
   componentDidMount(){
     Permissions.askAsync(Permissions.CAMERA_ROLL)
@@ -65,47 +64,46 @@ export default connect(mapStateToProps, mapDispatchToProps)(
   }
 
   renderIngredientsList = () =>{
-    // const n = Object.keys(this.props.ingredients).length
-    // console.log(Object.keys(this.props.ingredients))
-    // console.log(n)
+    // console.log(Object.keys(this.props.ingredients).sort())
+     return Object.keys(this.props.ingredients).sort().map(ingredient => {
+      //  console.log(this.props.ingredients[ingredient])
+        return (
+          <React.Fragment key={ingredient}>
+            <Item rounded floatingLabel key={ingredient.name}>
+              <Label>Ingredient {ingredient[ingredient.length-1]} Name </Label>
+              <Input onChange={(e) => this.addIngredientToList(ingredient, e.nativeEvent.text, this.props.ingredients[ingredient].quantity, this.props.ingredients[ingredient].unit)} value={this.props.ingredients[ingredient].name} />
+            </Item>
+            <Item rounded floatingLabel key={ingredient.quantity}>
+              <Label>Ingredient {ingredient[ingredient.length-1]} Quantity</Label>
+              <Input onChange={(e) => this.addIngredientToList(ingredient, this.props.ingredients[ingredient].name, e.nativeEvent.text, this.props.ingredients[ingredient].unit)} value={this.props.ingredients[ingredient].quantity}/>
+            </Item>
+              <Item rounded floatingLabel key={ingredient.unit}>
+              <Label>Ingredient {ingredient[ingredient.length-1]} Unit</Label>
+            <Input onChange={(e) => this.addIngredientToList(ingredient, this.props.ingredients[ingredient].name, this.props.ingredients[ingredient].quantity, e.nativeEvent.text)} value={this.props.ingredients[ingredient].unit}/>
+            </Item>
+          </React.Fragment>
+        )
+      })
 
-    return Object.keys(this.props.ingredients).map(ingredient => {
-      console.log(this.props.ingredients[ingredient].name)
-      return (
-        <React.Fragment key={ingredient}>
-          <Item rounded floatingLabel>
-            <Label>Ingredient Name</Label>
-            <Input onChange={(e) => this.addIngredientToList(ingredient, e.nativeEvent.text)} value={this.props.ingredients[ingredient].name}/>
-          </Item>
-          {/* <Item rounded floatingLabel>
-            <Label>Ingredient Quantity</Label>
-            <Input onChange={(e) => this.addIngredientToList(ingredient, undefined, e.nativeEvent.text)}/>
-          </Item>
-            <Item rounded floatingLabel>
-            <Label>Ingredient Unit</Label>
-          <Input onChange={(e) => this.addIngredientToList(ingredient, undefined, undefined, e.nativeEvent.text)}/>
-          </Item> */}
-        </React.Fragment>
-      )
-    })
   }
 
   renderNewIngredientItem = () => {
     const n = Object.keys(this.props.ingredients).length+1
+    // console.log(this.props.ingredients[`ingredient${n}`])
     return (
-      <React.Fragment key={n}>
-        <Item rounded floatingLabel>
-          <Label>Ingredient Name</Label>
-          <Input onChange={(e) => this.addIngredientToList(`ingredient${n}`, e.nativeEvent.text)}/>
+      <React.Fragment key={`ingredient${n}`}>
+        <Item rounded floatingLabel key={[`ingredient${n}`].name}>
+          <Label>Ingredient {n} Name </Label>
+          <Input onChange={(e) => this.addIngredientToList(`ingredient${n}`, e.nativeEvent.text, "", "")} />
         </Item>
-        {/* <Item rounded floatingLabel>
-          <Label>Ingredient Quantity</Label>
-          <Input onChange={(e) => this.addIngredientToList(`ingredient${n}`, undefined, e.nativeEvent.text)}/>
+        <Item rounded floatingLabel key={[`ingredient${n}`].quantity}>
+          <Label>Ingredient {n} Quantity</Label>
+          <Input onChange={(e) => this.addIngredientToList(`ingredient${n}`, "", e.nativeEvent.text, "")} />
         </Item>
-          <Item rounded floatingLabel>
-          <Label>Ingredient Unit</Label>
-        <Input onChange={(e) => this.addIngredientToList(`ingredient${n}`, undefined, undefined, e.nativeEvent.text)}/>
-        </Item> */}
+          <Item rounded floatingLabel key={[`ingredient${n}`].unit}>
+          <Label>Ingredient {n} Unit</Label>
+        <Input onChange={(e) => this.addIngredientToList(`ingredient${n}`, "", "", e.nativeEvent.text)} />
+        </Item>
       </React.Fragment>
     )
   }
@@ -118,7 +116,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     handleTextInput = (e, parameter) => {
-      console.log("click")
       this.props.saveRecipeDetails(parameter, e.nativeEvent.text)
     }
 
@@ -170,8 +167,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     render() {
       // console.log(this.props.ingredients)
       return (
-          <ScrollView>
           <Container>
+          <ScrollView>
             <Content>
               <Form>
               <Item rounded floatingLabel >
@@ -182,8 +179,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                   <Label>Instructions</Label>
                   <Input onChange={(e) => this.handleTextInput(e, "instructions")}/>
                 </Item>
-                  {this.renderIngredientsList()}
-                  {this.renderNewIngredientItem()}
+                  {[ ...this.renderIngredientsList(), this.renderNewIngredientItem()]}
                 <Item rounded floatingLabel >
                   <Label>Difficulty</Label>
                   <Input onChange={(e) => this.handleTextInput(e, "difficulty")}/>
@@ -206,8 +202,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 </Button>
               </Form>
             </Content>
+            </ScrollView>
+
           </Container>
-          </ScrollView>
       )
     }
 

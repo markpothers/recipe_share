@@ -21,11 +21,18 @@ const mapStateToProps = (state) => ({
       chef_liked_Recipes: state.recipes.chef_liked,
       chef_made_Recipes: state.recipes.chef_made,
       global_ranks_Recipes: state.recipes.global_ranks,
-      recipes_details: state.recipes_details
+      recipes_details: state.recipes_details,
+      loggedInChef: state.loggedInChef,
+      global_ranking: state.global_ranking
 })
 
 const mapDispatchToProps = {
-  fetchRecipeLists: (listType) => {
+  changeRanking: () => {
+    return dispatch => {
+      dispatch({ type: 'CHANGE_GLOBAL_RANKING'})
+    }
+  },
+  fetchRecipeLists: (listType, chef_id, global_ranking) => {
       return dispatch => {
         console.log(databaseURL)
           fetch(`${databaseURL}/`, {
@@ -36,15 +43,16 @@ const mapDispatchToProps = {
               body: JSON.stringify({
                 recipe: {
                   listType: listType,
-                  chef_id: 1,
+                  chef_id: chef_id,
                   limit: 100,
                   offset: 0,
-                  ranking: "made"
+                  ranking: global_ranking
                 }
               })
           })
           .then(res => res.json())
           .then(recipes => {
+            // console.log(recipes)
             console.log("sending recipes list to store")
               dispatch({ type: 'STORE_ALL_RECIPES', recipeType: listType, recipeList: recipes})
               recipe_ids = recipes.map(recipe =>{
@@ -82,12 +90,17 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(
   class RecipesList extends React.Component {
 
-    handleButton = () => {
+    handleNewRecipeButton = () => {
       console.log("button pressed")
     }
 
+    handleRankChoiceButton = () => {
+      this.props.changeRanking()
+      this.props.fetchRecipeLists(this.props["listChoice"], this.props.loggedInChef.id, this.props.global_ranking)
+    }
+
     componentDidMount = () => {
-      this.props.fetchRecipeLists(this.props["listChoice"])
+      this.props.fetchRecipeLists(this.props["listChoice"], this.props.loggedInChef.id, this.props.global_ranking)
     }
 
     renderRecipeListItems = () => {
@@ -106,19 +119,33 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       })
     }
 
+    renderGlobalListButton = () => {
+      if (this.props["listChoice"] == "global_ranks"){
+        return (
+          <Button rounded danger style={styles.floatingButton1} onPress={this.handleRankChoiceButton}>
+              <Icon name='pizza' />
+              {/* <Text>New Recipe</Text> */}
+          </Button>
+        )
+      }
+    }
+
     render() {
-      // console.log(this.props)
+      // console.log(this.props.global_ranking)
+      // console.log(Object.values(this.props[this.props["listChoice"] + `_Recipes`]))
       return (
         <Container>
           <Content>
+            {/* <Text>Most {this.props.global_ranking} recipes </Text> */}
             <List>
               {this.renderRecipeListItems()}
             </List>
           </Content>
-          <Button rounded success style={styles.floatingButton} onPress={this.handleButton}>
+          <Button rounded success style={styles.floatingButton} onPress={this.handleNewRecipeButton}>
               <Icon name='pizza' />
               {/* <Text>New Recipe</Text> */}
           </Button>
+              {this.renderGlobalListButton()}
         </Container>
       )
     }
@@ -144,6 +171,12 @@ const styles = StyleSheet.create({
       position: 'absolute',
       left: '81%',
       bottom: '3%',
+      zIndex: 1
+    },
+    floatingButton1: {
+      position: 'absolute',
+      left: '81%',
+      bottom: '15%',
       zIndex: 1
     }
   });

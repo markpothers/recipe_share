@@ -11,7 +11,7 @@ import {
 import { connect } from 'react-redux'
 
 const mapStateToProps = (state) => ({
-    //   recipes: state.recipes
+    loggedInChef: state.loggedInChef
 })
 
 const mapDispatchToProps = {
@@ -39,7 +39,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           <Header>
               <Text>Chef Details</Text>
           </Header>
-            <Text>Here are the details of this Chef</Text>
+            <Text>Chef ID: {this.props.loggedInChef.id}</Text>
+            <Text>Chef username: {this.props.loggedInChef.username}</Text>
         </Container>
       );
     }

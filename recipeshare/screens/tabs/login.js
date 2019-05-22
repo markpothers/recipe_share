@@ -18,6 +18,7 @@ import { databaseURL } from '../functionalComponents/databaseURL'
 const mapStateToProps = (state) => ({
   e_mail: state.loginUserDetails.e_mail,
   password: state.loginUserDetails.password,
+  loggedInChef: state.loggedInChef
 })
 
 const mapDispatchToProps = {
@@ -29,6 +30,11 @@ const mapDispatchToProps = {
   clearLoginUserDetails: () => {
     return dispatch => {
       dispatch({ type: 'CLEAR_LOGIN_USER_DETAILS'})
+    }
+  },
+  loginChef: (id, username) => {
+    return dispatch => {
+      dispatch({type: 'LOG_IN_CHEF', id: id, username: username})
     }
   }
 }
@@ -61,6 +67,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
               console.log(chef)
             })
           })
+        this.props.loginChef(chef.id, chef.username)
       })
       .catch(error => {
         console.log(error)

@@ -54,6 +54,26 @@ const reducer = (currentState, action) => {
                 time: "",
                 imageBase64: ""
                 }}
+        case 'ADD_RECIPE_LIKE':
+                return {...currentState, recipes_details: {...currentState.recipes_details, [action.listType]: {...currentState.recipes_details[action.listType], recipe_likes: [...currentState.recipes_details[action.listType].recipe_likes, action.like]}}}
+        case 'LOG_IN_CHEF':
+            console.log("logging in chef")
+            return {...currentState, loggedInChef: {
+                id: action.id,
+                username: action.username
+                }
+            }
+            case 'UPDATE_LOGGED_IN_CHEF':
+                    console.log("updating logged in chef")
+                    return {...currentState, loggedInChef: {
+                        id: action.id,
+                        username: action.username
+                        }
+                    }
+            case 'CHANGE_GLOBAL_RANKING':
+                    console.log("switching ranking")
+                    const newValue = currentState.global_ranking == "liked" ? "made" : "liked"
+                    return {...currentState, global_ranking: newValue}
         default:
             return currentState
     }

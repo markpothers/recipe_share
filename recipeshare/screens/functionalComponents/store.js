@@ -6,6 +6,11 @@ const initialState = {
   recipeSearch: {
     chefID: 1
   },
+  loggedInChef: {
+    id: "",
+    username: ""
+  },
+  global_ranking: "liked",
   recipes: {
     all: [],
     chef: [],

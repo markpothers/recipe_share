@@ -81,42 +81,20 @@ class Recipe < ApplicationRecord
     end
   end
 
-  def self.find_details(ids)
+  # def self.find_details(ids)
+  #     details = {comments: Comment.where(recipe_id: ids),
+  #       recipe_images: RecipeImage.where(recipe_id: ids),
+  #       recipe_likes: RecipeLike.where(recipe_id: ids),
+  #       recipe_makes: RecipeMake.where(recipe_id: ids),
+  #       make_pics: MakePic.where(recipe_id: ids)}
+  #   return details
+  # end
 
-      # details = {
-      #   comments: Recipe.find_comments(ids),
-      #   ingredients: Recipe.find_ingredients(ids)
-      # }
-
-      
-      details = {comments: Comment.where(recipe_id: ids),
-        recipe_images: RecipeImage.where(recipe_id: ids),
-        recipe_likes: RecipeLike.where(recipe_id: ids),
-        recipe_makes: RecipeMake.where(recipe_id: ids),
-        make_pics: MakePic.where(recipe_id: ids)}
-
-    # comments = Comment.where(recipe_id: ids)
-    # recipe_images = RecipeImage.where(recipe_id: ids)
-    # recipe_likes = RecipeLike.where(recipe_id: ids)
-    # recipe_makes = RecipeMake.where(recipe_id: ids)
-    # make_pics = MakePic.where(recipe_id: ids)
-
-    # detailsarray=[comments, ingredients]
-    # details = {comments: comments, ingredients: ingredients, ingredients: ingredients, recipe_images: recipe_images, recipes_likes: recipe_likes, recipe_makes: recipe_makes, make_pics: make_pics}
-    return details
+  def ingredients=(ingredients)
+    ingredients["ingredients"].keys.each do |ingredient|
+      dbIngredient = Ingredient.find_or_create_by(name: ingredients["ingredients"][ingredient]["name"])
+      IngredientUse.create(recipe_id: self.id, ingredient_id: dbIngredient.id, quantity: ingredients["ingredients"][ingredient]["quantity"], unit: ingredients["ingredients"][ingredient]["unit"])
+    end
   end
-
-  # def self.find_comments(ids)
-  #   Comment.where(recipe_id: ids)
-  # end
-
-  # def self.find_ingredients(ids)
-  #   ingredientUses = IngredientUse.where(recipe_id: ids)
-  #   ingredients_ids = ingredientUses.map do |use|
-  #     use = use.ingredient_id
-  #   end
-  #   ingredients = Ingredient.where(id: ingredients_ids.uniq)
-  #   byebug
-  # end
 
 end
