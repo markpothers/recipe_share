@@ -1,80 +1,86 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import BrowseRecipesScreen from '../screens/BrowseRecipes';
+import MyRecipeBookScreen from '../screens/MyRecipeBook';
+import ProfileScreen from '../screens/ProfileScreen';
+import RecipeDetailsScreen from '../screens/recipeDetails'
+import NewRecipeScreen from '../screens/tabs/newRecipe'
 
-import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import OrigHomeScreen from '../screens/OrigHomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
-
-const HomeStack = createStackNavigator({
-  Home: HomeScreen,
+const BrowseRecipesStack = createStackNavigator({
+  BrowseRecipes: BrowseRecipesScreen,
+  RecipeDetails: RecipeDetailsScreen,
+  NewRecipe: NewRecipeScreen
 });
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+BrowseRecipesStack.navigationOptions = {
+  tabBarLabel: 'Browse recipes',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
+    <Icon size={25} color="#8d8d8d"
       focused={focused}
       name={
         Platform.OS === 'ios'
           ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
+          : 'food-variant'
       }
     />
   ),
 };
 
-const OrigHomeStack = createStackNavigator({
-  OrigHome: OrigHomeScreen,
+const MyRecipeBookStack = createStackNavigator({
+  MyRecipeBook: MyRecipeBookScreen,
+  RecipeDetails: RecipeDetailsScreen,
+  NewRecipe: NewRecipeScreen
 });
 
-OrigHomeStack.navigationOptions = {
-  tabBarLabel: 'OrigHome',
+MyRecipeBookStack.navigationOptions = {
+  tabBarLabel: 'My recipe book',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
+    <Icon size={25} color="#8d8d8d"
       focused={focused}
       name={
         Platform.OS === 'ios'
           ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
+          : 'book-open-page-variant'
       }
     />
   ),
 };
 
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
+const ProfileStack = createStackNavigator({
+  Profile: ProfileScreen,
 });
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+ProfileStack.navigationOptions = {
+  tabBarLabel: 'Profile',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
-    />
-  ),
-};
-
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
-});
-
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+    <Icon  size={25} color="#8d8d8d"
+    focused={focused}
+    name={
+      Platform.OS === 'ios'
+        ? `ios-information-circle${focused ? '' : '-outline'}`
+        : 'account'
+    }
     />
   ),
 };
 
 export default createBottomTabNavigator({
-  HomeStack,
-  OrigHomeStack,
-  LinksStack,
-  SettingsStack,
-});
+  BrowseRecipes: BrowseRecipesStack,
+  MyRecipeBook: MyRecipeBookStack,
+  Profile: ProfileStack,
+  },
+  {
+    initialRouteName: "BrowseRecipes",  //not sure why the default values don't work.  maybe explore later
+      // defaultNavigationOptions: {
+      //   headerStyle: {
+      //     backgroundColor: '#f4511e',
+      //   },
+      //   headerTintColor: '#fff',
+      //   headerTitleStyle: {
+      //       fontWeight: 'bold',
+      //   }
+      // }
+  }
+);

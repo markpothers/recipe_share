@@ -1,18 +1,10 @@
 import React from 'react'
-import {
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native'
-// import { WebBrowser } from 'expo'
-// import { MonoText } from '../../components/StyledText'
-import { Container, Header, Content, Form, Item, Input, Label, Button, Icon } from 'native-base';
+import {Text, AsyncStorage, ImageBackground } from 'react-native'
+import { Container, Header, Content, Form, Item, Input, Label, Button, View } from 'native-base';
 import { connect } from 'react-redux'
 import { databaseURL } from '../functionalComponents/databaseURL'
+import { styles } from '../functionalComponents/RSStyleSheet'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 const mapStateToProps = (state) => ({
@@ -32,7 +24,7 @@ const mapDispatchToProps = {
       dispatch({ type: 'CLEAR_LOGIN_USER_DETAILS'})
     }
   },
-  loginChef: (id, username) => {
+  loginChefToState: (id, username) => {
     return dispatch => {
       dispatch({type: 'LOG_IN_CHEF', id: id, username: username})
     }
@@ -40,7 +32,10 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  class Login extends React.Component {
+  class LoginScreen extends React.Component {
+    static navigationOptions = {
+      header: null,
+    };
 
     handleTextInput = (e, parameter) => {
       this.props.saveLoginChefDetails(parameter, e.nativeEvent.text)
@@ -59,15 +54,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       })
       .then(res => res.json())
       .then(chef => {
-        console.log(chef)
+        if (!chef.error){
           AsyncStorage.setItem('chef', JSON.stringify(chef), () => {
             AsyncStorage.getItem('chef', (err, res) => {
-              const chef = JSON.parse(res)
               console.log(err)
-              console.log(chef)
+              this.props.navigation.navigate('Home')
             })
           })
-        this.props.loginChef(chef.id, chef.username)
+        }
       })
       .catch(error => {
         console.log(error)
@@ -78,41 +72,37 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       // console.log(this.props)
       return (
         <Container>
-          <Content>
-            <Form>
-              <Item floatingLabel>
-                <Label>e-mail</Label>
-                <Input onChange={(e) => this.handleTextInput(e, "e_mail")}/>
-              </Item>
-              <Item floatingLabel last>
-                <Label>Password</Label>
-                <Input onChange={(e) => this.handleTextInput(e, "password")}/>
-              </Item>
-              <Button large rounded success style={styles.submitButton} onPress={e => this.loginChef(e)}>
-              <Icon name='person' />
-              <Text>Submit</Text>
-              </Button>
-            </Form>
-          </Content>
+          {/* <ImageBackground source={require("../components/peas.jpg")} style={styles.background} imageStyle={styles.backgroundImageStyle}> */}
+          <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
+            <Content style={styles.loginForm}>
+              <Form >
+                <Item rounded style={styles.loginHeader}>
+                <Text style={styles.loginTitle}>Welcome, chef!{"\n"} Please log in or register</Text>
+                </Item>
+                <Item rounded style={styles.loginInputBox}>
+                  {/* <Label>e-mail</Label> */}
+                  <Input placeholder="e-mail" keyboardType="email-address" onChange={(e) => this.handleTextInput(e, "e_mail")}/>
+                </Item>
+                <Item rounded style={styles.loginInputBox}>
+                  {/* <Label>Password</Label> */}
+                  <Input placeholder="password" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")}/>
+                </Item>
+                <View style={styles.loginFormButtonWrapper}>
+                  <Button rounded warning style={styles.loginFormButton} onPress={() => this.props.navigation.navigate('CreateChef')}>
+                    <Icon style={styles.standardIcon} size={25} name='account-plus'></Icon>
+                    <Text style={styles.createChefFormButtonText}>Register</Text>
+                  </Button>
+                  <Button rounded success style={styles.loginFormButton} onPress={e => this.loginChef(e)}>
+                    <Icon style={styles.standardIcon} size={25} name='login'></Icon>
+                    <Text style={styles.createChefFormButtonText}>Login</Text>
+                  </Button>
+                </View>
+              </Form>
+            </Content>
+          </ImageBackground>
         </Container>
       )
     }
 
   }
 )
-
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-    },
-    contentContainer: {
-      paddingTop: 30,
-    },
-    getStartedText: {
-      fontSize: 17,
-      color: 'rgba(96,100,109, 1)',
-      lineHeight: 24,
-      textAlign: 'center',
-    }
-  });

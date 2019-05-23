@@ -94,6 +94,6 @@ Recipe.all.each do |recipe|
     MakePic.create(chef: Chef.all.sample, recipe: recipe, imageURL: images.sample)
 end
 
-35.times do 
-    Recipe.last.destroy
+107.times do 
+    Chef.last.delete
 end

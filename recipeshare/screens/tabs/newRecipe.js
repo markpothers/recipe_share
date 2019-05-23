@@ -1,19 +1,17 @@
 import React from 'react'
-import {
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native'
-import { WebBrowser, ImagePicker } from 'expo'
-import { MonoText } from '../../components/StyledText'
-import { Container, Header, Content, Form, Item, Input, Label, Button, Icon, Picker } from 'native-base';
+import { ScrollView, StyleSheet, Text, AsyncStorage, ImageBackground, TextInput} from 'react-native'
+import { ImagePicker } from 'expo'
+import { Container, Header, Content, Form, Item, Input, Label, Button, Picker, View } from 'native-base';
 import { connect } from 'react-redux'
 import { databaseURL } from '../functionalComponents/databaseURL'
 import {Camera, Permissions, DangerZone } from 'expo'
+import { styles } from '../functionalComponents/RSStyleSheet'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { times } from '../dataComponents/times'
+import { difficulties } from '../dataComponents/difficulties'
+import { units } from '../dataComponents/units'
+
+
 
 const mapStateToProps = (state) => ({
   name: state.newRecipeDetails.name,
@@ -44,10 +42,12 @@ const mapDispatchToProps = {
 
 }
 
-
 export default connect(mapStateToProps, mapDispatchToProps)(
   class NewRecipe extends React.Component {
-  
+    static navigationOptions = {
+      title: 'Create a new recipe!',
+    }
+    
     state = {
       hasPermission: false,
     }
@@ -63,60 +63,88 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         })
   }
 
+  timesPicker = () => {
+    return times.map( time => {
+      return <Picker.Item style={styles.pickerText} key={time} label={time} value={time} />
+    })
+  }
+
+  difficultiesPicker = () => {
+    return difficulties.map( difficulty => {
+      return <Picker.Item style={styles.pickerText} key={difficulty} label={difficulty} value={difficulty} />
+    })
+  }
+
+  unitsPicker = () => {
+    return units.map( unit => {
+      return <Picker.Item style={styles.pickerText}key={unit} label={unit} value={unit} />
+    })
+  }
+
   renderIngredientsList = () =>{
     // console.log(Object.keys(this.props.ingredients).sort())
      return Object.keys(this.props.ingredients).sort().map(ingredient => {
-      //  console.log(this.props.ingredients[ingredient])
         return (
-          <React.Fragment key={ingredient}>
-            <Item rounded floatingLabel key={ingredient.name}>
-              <Label>Ingredient {ingredient[ingredient.length-1]} Name </Label>
-              <Input onChange={(e) => this.addIngredientToList(ingredient, e.nativeEvent.text, this.props.ingredients[ingredient].quantity, this.props.ingredients[ingredient].unit)} value={this.props.ingredients[ingredient].name} />
+          <View style={styles.ingredientContainer} key={ingredient}>
+            <Item rounded style={styles.addIngredientNameInputBox} key={ingredient.name}>
+              {/* <Label>Ingredient {ingredient[ingredient.length-1]} Name </Label> */}
+              <Input style={styles.newRecipeTextCentering} placeholder={`Ingredient ${ingredient[ingredient.length-1]} Name`} onChange={(e) => this.addIngredientToList(ingredient, e.nativeEvent.text, this.props.ingredients[ingredient].quantity, this.props.ingredients[ingredient].unit)} value={this.props.ingredients[ingredient].name} />
             </Item>
-            <Item rounded floatingLabel key={ingredient.quantity}>
-              <Label>Ingredient {ingredient[ingredient.length-1]} Quantity</Label>
-              <Input onChange={(e) => this.addIngredientToList(ingredient, this.props.ingredients[ingredient].name, e.nativeEvent.text, this.props.ingredients[ingredient].unit)} value={this.props.ingredients[ingredient].quantity}/>
+            <Item rounded style={styles.addIngredientQuantityInputBox} key={ingredient.quantity}>
+              {/* <Label>Qty</Label> */}
+              <Input style={styles.QtyTextCentering} placeholder="Qty" keyboardType="phone-pad" onChange={(e) => this.addIngredientToList(ingredient, this.props.ingredients[ingredient].name, e.nativeEvent.text, this.props.ingredients[ingredient].unit)} value={this.props.ingredients[ingredient].quantity}/>
             </Item>
-              <Item rounded floatingLabel key={ingredient.unit}>
-              <Label>Ingredient {ingredient[ingredient.length-1]} Unit</Label>
-            <Input onChange={(e) => this.addIngredientToList(ingredient, this.props.ingredients[ingredient].name, this.props.ingredients[ingredient].quantity, e.nativeEvent.text)} value={this.props.ingredients[ingredient].unit}/>
+              <Item rounded style={styles.addIngredientUnitInputBox} key={ingredient.unit}>
+              {/* <Label>Unit</Label> */}
+              <Picker style={styles.unitPicker}
+                      mode="dropdown"
+                      iosIcon={<Icon name="arrow-down" />}
+                      onValueChange={(e) => this.addIngredientToList(ingredient, this.props.ingredients[ingredient].name, this.props.ingredients[ingredient].quantity, e)} value={this.props.ingredients[ingredient].unit}
+                      >
+                      <Picker.Item style={styles.pickerText} key={this.props.ingredients[ingredient].unit} label={this.props.ingredients[ingredient].unit} value={this.props.ingredients[ingredient].unit} />
+                      {this.unitsPicker()}
+              </Picker>
+            {/* <Input style={styles.QtyTextCentering} placeholder="Unit" onChange={(e) => this.addIngredientToList(ingredient, this.props.ingredients[ingredient].name, this.props.ingredients[ingredient].quantity, e.nativeEvent.text)} value={this.props.ingredients[ingredient].unit}/> */}
             </Item>
-          </React.Fragment>
+          </View>
         )
       })
-
   }
 
   renderNewIngredientItem = () => {
     const n = Object.keys(this.props.ingredients).length+1
     // console.log(this.props.ingredients[`ingredient${n}`])
     return (
-      <React.Fragment key={`ingredient${n}`}>
-        <Item rounded floatingLabel key={[`ingredient${n}`].name}>
-          <Label>Ingredient {n} Name </Label>
-          <Input onChange={(e) => this.addIngredientToList(`ingredient${n}`, e.nativeEvent.text, "", "")} />
+      <View style={styles.ingredientContainer} key={`ingredient${n}`}>
+        <Item rounded style={styles.addIngredientNameInputBox} key={[`ingredient${n}`].name}>
+          {/* <Label>Ingredient {n} Name </Label> */}
+          <Input style={styles.newRecipeTextCentering} placeholder={`Ingredient ${n} Name`} onChange={(e) => this.addIngredientToList(`ingredient${n}`, e.nativeEvent.text, "", "Oz")} />
         </Item>
-        <Item rounded floatingLabel key={[`ingredient${n}`].quantity}>
-          <Label>Ingredient {n} Quantity</Label>
-          <Input onChange={(e) => this.addIngredientToList(`ingredient${n}`, "", e.nativeEvent.text, "")} />
+        <Item rounded style={styles.addIngredientQuantityInputBox} key={[`ingredient${n}`].quantity}>
+          {/* <Label>Qty</Label> */}
+          <Input style={styles.QtyTextCentering} placeholder="Qty" keyboardType="phone-pad" onChange={(e) => this.addIngredientToList(`ingredient${n}`, "", e.nativeEvent.text, "Oz")} />
         </Item>
-          <Item rounded floatingLabel key={[`ingredient${n}`].unit}>
-          <Label>Ingredient {n} Unit</Label>
-        <Input onChange={(e) => this.addIngredientToList(`ingredient${n}`, "", "", e.nativeEvent.text)} />
+          <Item rounded style={styles.addIngredientUnitInputBox} key={[`ingredient${n}`].unit}>
+          {/* <Label>Unit</Label> */}
+          <Picker style={styles.unitPicker}
+                      mode="dropdown"
+                      iosIcon={<Icon name="arrow-down" />}
+                      onValueChange={(e) => this.addIngredientToList(`ingredient${n}`, "", "", e)}
+                      >
+                      {this.unitsPicker()}
+          </Picker>
+        {/* <Input style={styles.QtyTextCentering} placeholder="Unit" onChange={(e) => this.addIngredientToList(`ingredient${n}`, "", "", e.nativeEvent.text)} /> */}
         </Item>
-      </React.Fragment>
+      </View>
     )
   }
-
-
-
 
     addIngredientToList = (ingredientIndex, ingredientName = this.props.ingredients.ingredient1.name, ingredientQuantity = this.props.ingredients.ingredient1.quantity, ingredientUnit = this.props.ingredients.ingredient1.unit) => {
       this.props.addIngredientToRecipeDetails(ingredientIndex, ingredientName, ingredientQuantity, ingredientUnit)
     }
 
-    handleTextInput = (e, parameter) => {
-      this.props.saveRecipeDetails(parameter, e.nativeEvent.text)
+    handleTextInput = (text, parameter) => {
+      this.props.saveRecipeDetails(parameter, text)
     }
 
     pickImage = async () => {
@@ -142,87 +170,102 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     submitRecipe = () => {
-      console.log("sending new recipe details")
-      fetch(`${databaseURL}/recipes`, {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          recipe: this.props
-        })
-      })
-      .then(res => res.json())
-      .then(recipe => {
-        console.log(recipe)
-        this.props.clearNewRecipeDetails()
-      })
-      .catch(error => {
-        console.log(error)
-      })
-    }
+      AsyncStorage.getItem('chef', (err, res) => {
+        const loggedInChef = JSON.parse(res)
+            console.log("sending new recipe details")
+            fetch(`${databaseURL}/recipes`, {
+              method: "POST",
+              headers: {
+                Authorization: `Bearer ${loggedInChef.auth_token}`,
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                recipe: this.props
+              })
+            })
+            .then(res => res.json())
+            .then(recipe => {
+              console.log(recipe)
+              this.props.clearNewRecipeDetails()
+            })
+            .catch(error => {
+              console.log(error)
+            })
+    })
+  }
 
 
 
     render() {
-      // console.log(this.props.ingredients)
+      console.log(this.props)
       return (
-          <Container>
-          <ScrollView>
-            <Content>
-              <Form>
-              <Item rounded floatingLabel >
-                  <Label>Recipe Name</Label>
-                  <Input onChange={(e) => this.handleTextInput(e, "name")}/>
-                </Item>
-                  <Item rounded floatingLabel>
-                  <Label>Instructions</Label>
-                  <Input onChange={(e) => this.handleTextInput(e, "instructions")}/>
-                </Item>
-                  {[ ...this.renderIngredientsList(), this.renderNewIngredientItem()]}
-                <Item rounded floatingLabel >
-                  <Label>Difficulty</Label>
-                  <Input onChange={(e) => this.handleTextInput(e, "difficulty")}/>
-                </Item>
-                <Item rounded floatingLabel last>
-                  <Label>Time</Label>
-                  <Input onChange={(e) => this.handleTextInput(e, "time")}/>
-                </Item>
-                <Button large rounded error title="Choose Photo" onPress={this.pickImage}>
-                  <Icon name='camera' />
-                  <Text>Choose Photo</Text>
-                </Button>
-                <Button large rounded error title="Take Photo" onPress={this.openCamera}>
-                  <Icon name='camera' />
-                  <Text>Take Photo</Text>
-                </Button>
-                <Button large rounded success style={styles.submitButton} onPress={e => this.submitRecipe(e)}>
-                <Icon name='pizza' />
-                <Text>Submit</Text>
-                </Button>
-              </Form>
-            </Content>
+        <Container>
+          <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
+            <ScrollView>
+              <Content style={styles.createRecipeForm}>
+                <Form>
+                  <View>
+                    <Item rounded style={styles.createRecipeInputBox} >
+                      {/* <Label>Recipe Name</Label> */}
+                      <Input style={styles.newRecipeTextCentering} placeholder="Recipe Name" onChange={(e) => this.handleTextInput(e.nativeEvent.text, "name")}/>
+                    </Item>
+                    <Item rounded style={styles.createRecipeTextAreaBox}>
+                      {/* <Label>Instructions</Label> */}
+                      <Input style={styles.createRecipeTextAreaInput} placeholder="Instructions" multiline={true} numberOfLines={4} onChange={(e) => this.handleTextInput(e.nativeEvent.text, "instructions")}/>
+                    </Item>
+                  </View>
+                    {[ ...this.renderIngredientsList(), this.renderNewIngredientItem()]}
+                  <View style={styles.timeAndDifficultyWrapper}>
+                    <Item rounded style={styles.timeAndDifficultyTitleItem}>
+                      <Text style={styles.timeAndDifficultyTitle}>Time:</Text>
+                    </Item>
+                    <Item rounded style={styles.timeAndDifficultyTitleItem}>
+                      <Text style={styles.timeAndDifficultyTitle}>Difficulty:</Text>
+                    </Item>
+                  </View>
+                  <View style={styles.timeAndDifficultyWrapper}>
+                    <Item rounded picker style={styles.timeAndDifficulty} >
+                      <Picker style={styles.picker}
+                      mode="dropdown"
+                      iosIcon={<Icon name="arrow-down" />}
+                      onValueChange={e => this.handleTextInput(e, "time")}
+                      >
+                      {this.timesPicker()}
+                      </Picker>
+                    </Item>
+                    <Item rounded picker style={styles.timeAndDifficulty}>
+                      <Picker style={styles.picker}
+                      mode="dropdown"
+                      iosIcon={<Icon name="arrow-down" />}
+                      onValueChange={e => this.handleTextInput(e, "difficulty")}
+                      >
+                      {this.difficultiesPicker()}
+                      </Picker>
+                    </Item>
+                  </View>
+                  <View style={styles.loginFormButtonWrapper}>
+                    <Button rounded info style={styles.createRecipeFormButton} title="Choose Photo" onPress={this.pickImage}>
+                      <Icon style={styles.standardIcon} size={25} name='camera-burst' />
+                      <Text style={styles.createChefFormButtonText}>Choose{"\n"}photo</Text>
+                    </Button>
+                    <Button rounded warning style={styles.createRecipeFormButton} title="Take Photo" onPress={this.openCamera}>
+                      <Icon style={styles.standardIcon} size={25} name='camera' />
+                      <Text style={styles.createChefFormButtonText}>Take{"\n"}photo</Text>
+                    </Button>
+                  </View>
+                  <View style={styles.loginFormButtonWrapper}>
+                    <Button rounded success style={styles.createRecipeFormSubmitButton} onPress={e => this.submitRecipe(e)}>
+                      <Icon style={styles.standardIcon} size={25} name='login' />
+                      <Text style={styles.createChefFormButtonText}>Submit</Text>
+                    </Button>
+                  </View>
+                </Form>
+              </Content>
             </ScrollView>
-
-          </Container>
+          </ImageBackground>
+        </Container>
       )
     }
 
   }
 )
-
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-    },
-    contentContainer: {
-      paddingTop: 30,
-    },
-    getStartedText: {
-      fontSize: 17,
-      color: 'rgba(96,100,109, 1)',
-      lineHeight: 24,
-      textAlign: 'center',
-    }
-  });

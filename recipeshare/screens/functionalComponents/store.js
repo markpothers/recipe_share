@@ -32,11 +32,11 @@ const initialState = {
       ingredient1 :{
         name:"",
         quantity: "",
-        unit: ""
+        unit: "Oz"
       }
     },
-    difficulty: "",
-    time: "",
+    difficulty: "0",
+    time: "00:15",
     imageBase64: ""
   },
   newUserDetails: {

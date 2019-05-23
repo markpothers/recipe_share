@@ -39,7 +39,7 @@ class Chef < ApplicationRecord
     end
 
     def as_json(*)
-        super.except('password', 'password_confirmation', 'password_digest', 'created_at', 'updated_at', 'country', 'e_mail')
+        super.except('password', 'password_confirmation', 'password_digest', 'created_at', 'updated_at', 'country')
     end
 
     def self.choose_list(type = "global_ranks", chef_id = 17, limit = 50, offset = 0, ranking = "liked")

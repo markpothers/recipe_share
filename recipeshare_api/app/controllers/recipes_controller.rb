@@ -7,7 +7,7 @@ class RecipesController < ApplicationController
 
     def index
         # byebug
-        @recipes = Recipe.choose_list(list_params["listType"], list_params["chef_id"], list_params["limit"], list_params["offset"], list_params["ranking"])
+        @recipes = Recipe.choose_list(list_params["listType"], @chef.id, list_params["limit"], list_params["offset"], list_params["ranking"])
         render json: @recipes #, methods: [:add_count]
     end
 
@@ -28,7 +28,7 @@ class RecipesController < ApplicationController
             make_pics: MakePic.where(recipe_id: details_params["listed_recipes"]),
             ingredient_uses: IngredientUse.where(recipe_id: details_params["listed_recipes"]),
             ingredients: Ingredient.where(id: ingredients_ids.uniq)
-            }
+        }
         render json: details #, methods: [:add_count]
     end
 

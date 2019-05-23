@@ -8,16 +8,16 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import RecipesList from './components/RecipesList';
+import RecipesList from '../components/RecipesList';
 // import MyRecipes from './tabs/myRecipes';
 // import MyLikedRecipes from './tabs/myLikedRecipes';
 // import MyMadeRecipes from './tabs/myMadeRecipes';
 // import TopRecipes from './tabs/topRecipes';
-import NewRecipe from './tabs/newRecipe'
-import CreateChef from './tabs/createChef'
-import Login from './tabs/login'
-import RecipeDetails from './tabs/recipeDetails'
-import ChefDetails from './tabs/chefDetails'
+import NewRecipe from '../tabs/newRecipe'
+import CreateChef from '../tabs/createChef'
+import Login from '../tabs/login'
+import RecipeDetails from '../recipeDetails'
+import ChefDetails from '../tabs/Profile'
 
 // import { connect } from 'react-redux'
 
@@ -47,29 +47,20 @@ import ChefDetails from './tabs/chefDetails'
     render() {
       return (
         <Container>
-          <Header>
+          {/* <Header>
               <Text>Recipe Share</Text>
-          </Header>
+          </Header> */}
           <Tabs renderTabBar={()=> <ScrollableTab />}>
-          
-          
-          <Tab heading="Top Recipes">
-              <RecipesList listChoice={"global_ranks"} />
-            </Tab>
-          
-          
+
           <Tab heading="All Recipes">
               <RecipesList listChoice={"all"}/>
             </Tab>
-
-
-
+          <Tab heading="Top Recipes">
+              <RecipesList listChoice={"global_ranks"} />
+            </Tab>
           <Tab heading="Recipe Details">
                 <RecipeDetails listChoice={"all"} recipeID={537}/>
-              </Tab> 
-    
-    
-    
+              </Tab>
           <Tab heading="New Recipe">
               <NewRecipe/>
             </Tab>
@@ -78,16 +69,6 @@ import ChefDetails from './tabs/chefDetails'
               <Tab heading="Chef Details">
                 <ChefDetails />
               </Tab>
-             <Tab heading="Login">
-                <Login />
-              </Tab>
-              
-                          <Tab heading="Create Chef">
-                <CreateChef />
-              </Tab>
-
-          
-
 
             <Tab heading="My Recipes">
               <RecipesList listChoice={"chef"} />

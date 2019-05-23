@@ -4,6 +4,7 @@ class ChefsController < ApplicationController
     # skip_before_action :authenticate, :only => [:new, :create]
     before_action :define_current_chef
     skip_before_action :define_current_chef, :only => [:index, :create, :authenticate]
+    skip_before_action :logged_in?, :only => [:authenticate, :create]
 
     def authenticate
         @chef = Chef.find_by(e_mail: chef_params[:e_mail])
