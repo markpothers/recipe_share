@@ -69,7 +69,7 @@ ProfileStack.navigationOptions = {
 export default createBottomTabNavigator({
   BrowseRecipes: BrowseRecipesStack,
   MyRecipeBook: MyRecipeBookStack,
-  Profile: ProfileStack,
+  // Profile: ProfileStack,
   },
   {
     initialRouteName: "BrowseRecipes",  //not sure why the default values don't work.  maybe explore later
@@ -82,5 +82,11 @@ export default createBottomTabNavigator({
       //       fontWeight: 'bold',
       //   }
       // }
+  },
+  {
+    tabBarOptions: {
+      activeTintColor: '8d8d8d',
+      inactiveTintColor: '8d8d8d',
+    },
   }
 );

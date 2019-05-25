@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, TouchableOpacity, View, AsyncStorage } from 'react-native'
+import { StyleSheet, TouchableOpacity, View, AsyncStorage, ImageBackground, ScrollView, FlatList, Text } from 'react-native'
 import { Container, Header, Content, List, ListItem, Thumbnail, Left, Body, Right, Button, Icon } from 'native-base'
 import RecipeCard from './RecipeCard'
 import { databaseURL } from '../functionalComponents/databaseURL'
@@ -115,6 +115,33 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       })
     }
 
+    renderRecipeListItem = (item) => {
+      // console.log(item.index)
+      // return <RecipeCard {...item} />
+      // return this.props[this.props["listChoice"] + `_Recipes`].map(recipe => {
+        let imageURL = null
+        if (this.props.recipes_details[this.props["listChoice"]].recipe_images != undefined ){
+          // console.log("test")
+          if (this.props.recipes_details[this.props["listChoice"]].recipe_images.find(image => image.recipe_id == item.item.id) != undefined){
+            const recipe_image = this.props.recipes_details[this.props["listChoice"]].recipe_images.find(image => image.recipe_id == item.item.id)
+            imageURL = { uri: `${databaseURL}${recipe_image.imageURL}` }
+          }
+        } else {
+          imageURL = require("./peas.jpg")
+        }
+          // console.log(`${databaseURL}${recipe_image.imageURL}`)
+        //   if (recipe_image != undefined){
+        //     return <RecipeCard listChoice={this.props["listChoice"]} key={item.index.toString()} {...item} imageURL={{ uri: `${databaseURL}${recipe_image.imageURL}` }} navigation={this.props.navigation}/>
+        //   } else {
+        //   return <RecipeCard listChoice={this.props["listChoice"]} key={item.index.toString()} {...item} imageURL={require("./peas.jpg")}/>
+        //   }
+        // }else{
+          // console.log(item.item.name)
+          return <RecipeCard listChoice={this.props["listChoice"]} key={item.index.toString()} {...item} imageURL={imageURL} navigation={this.props.navigation}/>
+        }
+    //   })
+    // }
+
     renderGlobalListButton = () => {
       if (this.props["listChoice"] == "global_ranks"){
         return (
@@ -128,17 +155,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     render() {
       // console.log(this.props.navigation)
-      // console.log(Object.values(this.props[this.props["listChoice"] + `_Recipes`]))
+      // console.log(this.props[this.props["listChoice"] + `_Recipes`])
       return (
-        <Container>
-          <Content>
-            {/* <Text>Most {this.props.global_ranking} recipes </Text> */}
-            <List>
-              {this.renderRecipeListItems()}
-            </List>
-          </Content>
-              {this.renderGlobalListButton()}
-        </Container>
+
+            <FlatList
+              data={this.props[this.props["listChoice"] + `_Recipes`]}
+              renderItem={this.renderRecipeListItem}
+              keyExtractor={(item) => item.id.toString()}
+            />
+
       )
     }
 

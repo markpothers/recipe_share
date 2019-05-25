@@ -46,6 +46,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
   class NewRecipe extends React.Component {
     static navigationOptions = {
       title: 'Create a new recipe!',
+      headerStyle: {    //styles possibly needed if app-wide styling doesn't work
+      backgroundColor: '#104e01',
+      opacity: 0.8
+    },
+    headerTintColor: '#fff59b',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
     }
     
     state = {
@@ -88,7 +96,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           <View style={styles.ingredientContainer} key={ingredient}>
             <Item rounded style={styles.addIngredientNameInputBox} key={ingredient.name}>
               {/* <Label>Ingredient {ingredient[ingredient.length-1]} Name </Label> */}
-              <Input style={styles.newRecipeTextCentering} placeholder={`Ingredient ${ingredient[ingredient.length-1]} Name`} onChange={(e) => this.addIngredientToList(ingredient, e.nativeEvent.text, this.props.ingredients[ingredient].quantity, this.props.ingredients[ingredient].unit)} value={this.props.ingredients[ingredient].name} />
+              <Input style={styles.newRecipeTextCentering} placeholder={`Ingredient name`} onChange={(e) => this.addIngredientToList(ingredient, e.nativeEvent.text, this.props.ingredients[ingredient].quantity, this.props.ingredients[ingredient].unit)} value={this.props.ingredients[ingredient].name} />
             </Item>
             <Item rounded style={styles.addIngredientQuantityInputBox} key={ingredient.quantity}>
               {/* <Label>Qty</Label> */}
@@ -118,7 +126,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       <View style={styles.ingredientContainer} key={`ingredient${n}`}>
         <Item rounded style={styles.addIngredientNameInputBox} key={[`ingredient${n}`].name}>
           {/* <Label>Ingredient {n} Name </Label> */}
-          <Input style={styles.newRecipeTextCentering} placeholder={`Ingredient ${n} Name`} onChange={(e) => this.addIngredientToList(`ingredient${n}`, e.nativeEvent.text, "", "Oz")} />
+          <Input style={styles.newRecipeTextCentering} placeholder={`New ingredient name`} onChange={(e) => this.addIngredientToList(`ingredient${n}`, e.nativeEvent.text, "", "Oz")} />
         </Item>
         <Item rounded style={styles.addIngredientQuantityInputBox} key={[`ingredient${n}`].quantity}>
           {/* <Label>Qty</Label> */}
@@ -187,6 +195,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             .then(recipe => {
               console.log(recipe)
               this.props.clearNewRecipeDetails()
+              this.props.navigation.navigate('BrowseRecipes')
             })
             .catch(error => {
               console.log(error)
@@ -197,7 +206,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 
     render() {
-      console.log(this.props)
+      console.log(this.props.chef_id)
       return (
         <Container>
           <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
@@ -207,14 +216,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                   <View>
                     <Item rounded style={styles.createRecipeInputBox} >
                       {/* <Label>Recipe Name</Label> */}
-                      <Input style={styles.newRecipeTextCentering} placeholder="Recipe Name" onChange={(e) => this.handleTextInput(e.nativeEvent.text, "name")}/>
-                    </Item>
-                    <Item rounded style={styles.createRecipeTextAreaBox}>
-                      {/* <Label>Instructions</Label> */}
-                      <Input style={styles.createRecipeTextAreaInput} placeholder="Instructions" multiline={true} numberOfLines={4} onChange={(e) => this.handleTextInput(e.nativeEvent.text, "instructions")}/>
+                      <Input style={styles.newRecipeTextCentering} value={this.props.name} placeholder="Recipe Name" onChange={(e) => this.handleTextInput(e.nativeEvent.text, "name")}/>
                     </Item>
                   </View>
                     {[ ...this.renderIngredientsList(), this.renderNewIngredientItem()]}
+                  <View>
+                    <Item rounded style={styles.createRecipeTextAreaBox}>
+                      {/* <Label>Instructions</Label> */}
+                      <Input style={styles.createRecipeTextAreaInput} value={this.props.instructions} placeholder="Instructions" multiline={true} numberOfLines={4} onChange={(e) => this.handleTextInput(e.nativeEvent.text, "instructions")}/>
+                    </Item>
+                  </View>
                   <View style={styles.timeAndDifficultyWrapper}>
                     <Item rounded style={styles.timeAndDifficultyTitleItem}>
                       <Text style={styles.timeAndDifficultyTitle}>Time:</Text>
@@ -230,6 +241,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                       iosIcon={<Icon name="arrow-down" />}
                       onValueChange={e => this.handleTextInput(e, "time")}
                       >
+                      <Picker.Item style={styles.pickerText} key={this.props.time} label={this.props.time} value={this.props.time} />
                       {this.timesPicker()}
                       </Picker>
                     </Item>
@@ -239,6 +251,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                       iosIcon={<Icon name="arrow-down" />}
                       onValueChange={e => this.handleTextInput(e, "difficulty")}
                       >
+                      <Picker.Item style={styles.pickerText} key={this.props.difficulty} label={this.props.difficulty} value={this.props.difficulty} />
                       {this.difficultiesPicker()}
                       </Picker>
                     </Item>

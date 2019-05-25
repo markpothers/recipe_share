@@ -113,9 +113,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         if (!chef.error){
           AsyncStorage.setItem('chef', JSON.stringify(chef), () => {
             AsyncStorage.getItem('chef', (err, res) => {
-              // const chef = JSON.parse(res)
               console.log(err)
-              this.props.navigation.navigate('Home')
+              this.props.navigation.navigate('AppLoading')
             })
           })
         }

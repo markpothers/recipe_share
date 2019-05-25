@@ -7,8 +7,23 @@ import { AsyncStorage } from 'react-native'
 
 
 export default class ProfileScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Profile page',
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: 'My profile',
+      headerStyle: {    //styles possibly needed if app-wide styling doesn't work
+        backgroundColor: '#104e01',
+        opacity: 0.8
+      },
+      headerTintColor: '#fff59b',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+      headerRight: (
+        <Button rounded style={styles.newButton} onPress={navigation.getParam('newRecipe')}>
+          <Icon name='plus' size={40} style={styles.newIcon}/>
+        </Button>
+      ),
+    }
   };
 
 

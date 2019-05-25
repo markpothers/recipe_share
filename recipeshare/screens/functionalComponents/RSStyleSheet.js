@@ -4,9 +4,143 @@ import { StyleSheet } from 'react-native';
 
 
 export const styles = StyleSheet.create({
+    scrollableTabs: {
+      flex: 1,
+      borderStyle: 'solid',
+      borderWidth: 2,
+      backgroundColor: '#f700ffef',
+      opacity: 0.5,
+    },
+    thumbnail: {
+      position: 'absolute',
+      height: '100%',
+      width: '100%',
+      marginTop: '0%',
+      marginLeft: '0%',
+      marginBottom: '0%'
+    },
+    recipeCardLeftContent: {
+      // position: 'absolute',
+      flex: 1,
+      // left: '0%',
+      // marginTop: '0%',
+      // marginLeft: '0%',
+      // marginRight: '0%',
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: '50%',
+      height: '100%',
+      // borderStyle: 'solid',
+      // borderWidth: 2,
+    },
+    recipeCardRightContent: {
+      // position: 'absolute',
+      flex: 1,
+      // left: '50%',
+      // marginTop: '0%',
+      // marginLeft: '0%',
+      // marginRight: '0%',
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: '50%',
+      height: '100%',
+      // borderStyle: 'solid',
+      // borderWidth: 2,
+    },
+    recipeCardName: {
+      position: 'absolute',
+      bottom: '66%',
+      fontWeight: 'bold',
+      fontSize: 16,
+      color: "#505050",
+      // height: '100%',
+      // width: '100%',
+      // alignSelf: 'center',
+      // marginTop: '0%',
+      // marginLeft: '8%',
+      // marginBottom: '0%'
+      textAlign: 'center'
+    },
+    recipeCardChefName: {
+      position: 'absolute',
+      bottom: '40%',
+      // fontWeight: 'bold',
+      fontSize: 16,
+      color: "#505050",
+      // height: '100%',
+      // width: '100%',
+      // alignSelf: 'center',
+      // marginTop: '0%',
+      // marginLeft: '8%',
+      // marginBottom: '0%'
+      textAlign: 'center'
+    },
+    recipeCardOther: {
+      position: 'absolute',
+      bottom: '20%',
+      // fontWeight: 'bold',
+      fontSize: 16,
+      color: "#505050",
+      // height: '100%',
+      // width: '100%',
+      // alignSelf: 'center',
+      // marginTop: '0%',
+      // marginLeft: '8%',
+      // marginBottom: '0%'
+      textAlign: 'center'
+    },
+    scrollTabHeader: {
+      // backgroundColor: '#104e01',
+      opacity: 1,
+    },
+    tabStyle: {
+      // flex: 1,
+      // borderStyle: 'solid',
+      // borderWidth: 2,
+      backgroundColor: '#104e01',
+      opacity: 0.8,
+      width: '50%'
+    },
+    scrollUnderline: {
+      backgroundColor: '#f8e858f8',
+    },
+    activeTabHeadingText: {
+      fontWeight: 'bold',
+      color: "#f8e858f8",
+    },
+    inactiveTabHeadingText: {
+      fontWeight: 'normal',
+      color: "#fff59b",
+    },
+    recipeCard: {
+      marginTop: '1%',
+      marginLeft: '1%',
+      marginRight: '1%',
+      marginBottom: '0%',
+      flexDirection: 'row',
+      width: '98%',
+      height: 149,
+      // borderStyle: 'solid',
+      // borderWidth: 1,
+      // borderColor: '#505050',
+      overflow: 'hidden',
+      borderRadius: 20,
+      backgroundColor: 'white',
+      opacity: 0.9,
+      // padding: 0
+    },
+    pink: {
+      backgroundColor: '#f700ffef',
+      opacity: 0.5,
+      flex: 1,
+      borderStyle: 'solid',
+    },
     container: {
       flex: 1,
-      // backgroundColor: '#fff',
+      borderStyle: 'solid',
+      borderWidth: 2,
+      // backgroundColor: '#f700ffef',
+      // opacity: 0.5
     },
     background: {
       width: '100%',
@@ -14,7 +148,7 @@ export const styles = StyleSheet.create({
       // opacity: '20%'
     },
     backgroundImageStyle: {
-      opacity: 0.5
+      opacity: 0.8
     },
     contentContainer: {
       paddingTop: 30,
@@ -124,6 +258,22 @@ export const styles = StyleSheet.create({
         width: 50,
         justifyContent: 'center',
     },
+    newButton: {
+      height: 50,
+      width: 50,
+      justifyContent: 'center',
+      color: '#f700ffef'
+    },
+    newButton: {
+      height: 50,
+      width: 50,
+      justifyContent: 'center',
+      backgroundColor: '#fff59b',
+      alignSelf: 'center',
+    },
+    newIcon:{
+      color: '#104e01'
+    },
     standardIcon: {
       color: "#505050"
     },
@@ -199,23 +349,23 @@ export const styles = StyleSheet.create({
       // position: 'relative',
        // bottom: '0%',
        marginTop: '2%',
-       marginLeft: '10%',
-       marginRight: '10%',
+       marginLeft: '1%',
+       marginRight: '1%',
        backgroundColor: 'white',
        opacity: 0.9,
        height: 50,
-       width: '80%'
+       width: '98%'
      },
      createRecipeTextAreaBox: {
       // position: 'relative',
        // bottom: '0%',
        marginTop: '2%',
-       marginLeft: '10%',
-       marginRight: '10%',
+       marginLeft: '1%',
+       marginRight: '1%',
        backgroundColor: 'white',
        opacity: 0.9,
        height: 150,
-       width: '80%'
+       width: '98%'
      },
      createRecipeTextAreaInput: {
        height: 130,
@@ -276,7 +426,7 @@ export const styles = StyleSheet.create({
       // position: 'relative',
        // bottom: '0%',
        marginTop: '2%',
-       marginLeft: '2%',
+       marginLeft: '1%',
        marginRight: '1%',
        backgroundColor: 'white',
        opacity: 0.9,
@@ -292,14 +442,14 @@ export const styles = StyleSheet.create({
        backgroundColor: 'white',
        opacity: 0.9,
        height: 50,
-       width: '18%'
+       width: '20%'
     },
     addIngredientUnitInputBox: {
       // position: 'relative',
        // bottom: '0%',
        marginTop: '2%',
        marginLeft: '1%',
-       marginRight: '2%',
+       marginRight: '1%',
        backgroundColor: 'white',
        opacity: 0.9,
        height: 50,
@@ -382,6 +532,164 @@ export const styles = StyleSheet.create({
     unitPicker: {
       margin: '5%',
       bottom: '2%',
+    },
+    detailsHeader: {
+      // borderStyle: 'solid',
+      // borderWidth: 2,
+      // borderColor: 'black',
+      width: '98%',
+      justifyContent: 'center',
+      marginLeft: '1%',
+      marginRight: '1%',
+      marginTop: '2%',
+      borderRadius: 20,
+      backgroundColor: 'white',
+      // backgroundColor: '#fff59b',
+      opacity: 0.9,
+    },
+    detailsImageWrapper: {
+      // borderStyle: 'solid',
+      // borderWidth: 2,
+      // borderColor: 'black',
+      width: '98%',
+      marginLeft: '1%',
+      marginRight: '1%',
+      marginTop: '2%',
+      marginBottom: '2%',
+      // justifyContent: 'center',
+      // alignItems: 'center',
+      // borderRadius: 20,
+      // overflow: 'hidden',
+    },
+    detailsIngredients: {
+      // borderStyle: 'solid',
+      // borderWidth: 2,
+      // borderColor: 'black',
+      width: '98%',
+      marginLeft: '1%',
+      marginRight: '1%',
+      // marginTop: '2%',
+      borderRadius: 20,
+      backgroundColor: 'white',
+      opacity: 0.9,
+    },
+    detailsInstructions: {
+      // borderStyle: 'solid',
+      // borderWidth: 2,
+      // borderColor: 'black',
+      width: '98%',
+      marginLeft: '1%',
+      marginRight: '1%',
+      marginTop: '2%',
+      borderRadius: 20,
+      backgroundColor: 'white',
+      opacity: 0.9,
+      marginBottom: '2%'
 
     },
+    detailsLikes: {
+      // borderStyle: 'solid',
+      // borderWidth: 2,
+      // borderColor: 'black',
+      width: '48%',
+      marginLeft: '1%',
+      marginRight: '1%',
+      marginTop: '2%',
+      borderRadius: 20,
+      backgroundColor: 'white',
+      opacity: 0.9,
+      flex: 1
+    },
+    detailsMakePics: {
+      // borderStyle: 'solid',
+      // borderWidth: 2,
+      // borderColor: 'black',
+      width: '98%',
+      marginLeft: '1%',
+      marginRight: '1%',
+      marginTop: '2%',
+      flexDirection: 'row',
+      borderRadius: 20,
+      backgroundColor: 'white',
+      opacity: 0.9,
+    },
+    detailsComments: {
+      // borderStyle: 'solid',
+      // borderWidth: 2,
+      // borderColor: 'black',
+      width: '98%',
+      marginLeft: '1%',
+      marginRight: '1%',
+      marginTop: '2%',
+      borderRadius: 20,
+      backgroundColor: 'white',
+      opacity: 0.9,
+    },
+    detailsHeaderTextBox: {
+      marginLeft: '2%',
+      marginRight: '2%',
+      // marginTop: '2%',
+      // marginBottom: '2%',
+      textAlign: 'center',
+      fontWeight: 'bold',
+      fontSize: 24,
+      color: "#505050",
+      // color: "#104e01",
+    },
+    detailsSubHeadings: {
+      marginLeft: '3%',
+      marginRight: '3%',
+      // marginTop: '2%',
+      // marginBottom: '2%',
+      // textAlign: 'center',
+      fontWeight: 'bold',
+      fontSize: 16,
+      color: "#505050",
+    },
+    detailsContents: {
+      marginLeft: '3%',
+      marginRight: '3%',
+      // marginTop: '2%',
+      // marginBottom: '2%',
+      // textAlign: 'center',
+      // fontWeight: 'bold',
+      fontSize: 16,
+      color: "#505050",
+    },
+    detailsLikesAndMakesContents: {
+      marginLeft: '3%',
+      marginRight: '3%',
+      // marginTop: '2%',
+      // marginBottom: '2%',
+      // textAlign: 'center',
+      // fontWeight: 'bold',
+      fontSize: 16,
+      color: "#505050",
+      textAlign: 'center'
+    },
+    detailsImage:{
+      borderRadius: 20,
+    },
+    ingredientsTable:{
+      flexDirection: 'row',
+      overflow: 'hidden',
+      // marginLeft: '2%'
+    },
+    ingredientName:{
+      flex: 1,
+      textAlign: 'left',
+    },
+    ingredientQuantity:{
+      flex: 0.25,
+      textAlign: 'left',
+
+    },
+    ingredientUnit:{
+      flex: 0.75,
+      textAlign: 'left',
+
+    },
+    detailsLikesAndMakes:{
+      flexDirection: 'row'
+    }
   });

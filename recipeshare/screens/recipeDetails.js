@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Header, Text, Button } from 'native-base';
-import {Image, ScrollView, StyleSheet, AsyncStorage } from 'react-native';
+import {Image, ScrollView, StyleSheet, AsyncStorage, View, ImageBackground } from 'react-native';
 import { connect } from 'react-redux'
 import { databaseURL } from './functionalComponents/databaseURL'
 import { styles } from './functionalComponents/RSStyleSheet'
@@ -22,24 +22,41 @@ const mapDispatchToProps = {
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   class RecipeDetails extends React.Component {
-    static navigationOptions = {
-      title: 'Recipe details',
+    static navigationOptions = ({ navigation }) => {
+      return {
+        title: 'Recipe details',
+        headerStyle: {    //styles possibly needed if app-wide styling doesn't work
+          backgroundColor: '#104e01',
+          opacity: 0.8
+        },
+        headerTintColor: '#fff59b',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+        headerRight: (
+          <Button rounded style={styles.newButton} onPress={navigation.getParam('likeRecipe')}>
+            <Icon name='heart-outline' size={33} style={styles.newIcon} />
+          </Button>
+        ),
+      };
+      
     }
 
     componentDidMount = () => {
+      this.props.navigation.setParams({likeRecipe: this.likeRecipe})
     }
 
     renderRecipe = (listChoice, recipeID) => {
       const recipe = this.props.recipes_details[listChoice].recipes.find(recipe => recipe.id == recipeID)
-      return <Text>{recipe.name}</Text>
+      return <Text style={[styles.detailsHeaderTextBox]}>{recipe.name}</Text>
     }
 
     renderRecipeImages = (listChoice, recipeID) => {
       const recipe = this.props.recipes_details[listChoice].recipe_images.find(recipe => recipe.recipe_id == recipeID)
       if (recipe != undefined){
-        return <Image style={{width: 250, height: 250}} source={{uri: `${databaseURL}${recipe.imageURL}`}}></Image>
+        return <Image style={[{width: '100%', height: 250}, styles.detailsImage]} source={{uri: `${databaseURL}${recipe.imageURL}`}}></Image>
       } else {
-        return <Text>No image available</Text>
+        return <Image style={[{width: '100%', height: 250}, styles.detailsImage]} source={require("./components/peas.jpg")}></Image>
       }
     }
 
@@ -47,22 +64,28 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       const ingredient_uses = this.props.recipes_details[listChoice].ingredient_uses.filter(ingredient_use => ingredient_use.recipe_id == recipeID)
       const list_values = ingredient_uses.map(ingredient_use => [ingredient_use.ingredient_id, ingredient_use.quantity, ingredient_use.unit])
       const ingredients = list_values.map(list_value => [...list_value, (this.props.recipes_details[listChoice].ingredients.find(ingredient => ingredient.id == list_value[0]).name)])
-      return ingredients.map(ingredient => <Text key={ingredient[0]}>{ingredient[1]} {ingredient[2]} {ingredient[3]}</Text> )
+      return ingredients.map(ingredient => (
+            <View style={styles.ingredientsTable} key={ingredient[0]}>
+               <Text style={[styles.detailsContents, styles.ingredientName]}>{ingredient[3]}</Text>
+               <Text style={[styles.detailsContents, styles.ingredientQuantity]}>{ingredient[1]}</Text>
+               <Text style={[styles.detailsContents, styles.ingredientUnit]}>{ingredient[2]}</Text>
+            </View>
+            ))
     }
 
     renderRecipeInstructions = (listChoice, recipeID) => {
       const recipe = this.props.recipes_details[listChoice].recipes.find(recipe => recipe.id == recipeID)
-      return <Text>{recipe.instructions}</Text>
+      return <Text style={[styles.detailsContents]}>{recipe.instructions}</Text>
     }
 
     renderRecipeLikes = (listChoice, recipeID) => {
       const likes = this.props.recipes_details[listChoice].recipe_likes.filter(like => like.recipe_id == recipeID)
-      return <Text>Likes: {likes.length}</Text>
+      return <Text style={[styles.detailsLikesAndMakesContents]}>Likes: {likes.length}</Text>
     }
 
     renderRecipeMakes = (listChoice, recipeID) => {
       const makes = this.props.recipes_details[listChoice].recipe_makes.filter(make => make.recipe_id == recipeID)
-      return <Text>makes: {makes.length}</Text>
+      return <Text style={[styles.detailsLikesAndMakesContents]}>Makes: {makes.length}</Text>
     }
 
     renderRecipeMakePics = (listChoice, recipeID) => {
@@ -70,7 +93,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       return make_pics.map(make_pic => {
         return (
           <React.Fragment key={make_pic.id}>
-            <Image style={{width: 250, height: 250}} source={{uri: `${databaseURL}${make_pic.imageURL}`}}></Image>
+            <Image style={{width: 115, height: 115}} source={{uri: `${databaseURL}${make_pic.imageURL}`}}></Image>
           </React.Fragment>
         )
       })
@@ -81,14 +104,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       return comments.map(comment => {
         return (
           <React.Fragment key={comment.id}>
-            <Text>Comment:</Text>
-            <Text>{comment.comment}</Text>
+            <Text style={[styles.detailsContents]}>Comment:</Text>
+            <Text style={[styles.detailsContents]}>{comment.comment}</Text>
           </React.Fragment>
         )
       })
     }
 
-    likeRecipe = (listChoice, recipeID) => {
+    likeRecipe = () => {
       AsyncStorage.getItem('chef', (err, res) => {
         const loggedInChef = JSON.parse(res)
             fetch(`${databaseURL}/recipe_likes`, {
@@ -99,44 +122,62 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 },
                 body: JSON.stringify({
                   recipe_like: {
-                    recipe_id: recipeID,
-                    chef_id: this.props.loggedInChef.id,
+                    recipe_id: this.props.navigation.getParam('recipeID'),
+                    chef_id: loggedInChef.id,
                   }
                 })
             })
             .then(res => res.json())
             .then(like => {
               // console.log(like)
-              this.props.addRecipeLike(like, listChoice)
+              this.props.addRecipeLike(like, this.props.navigation.getParam('listChoice'))
             })
           })
     }
 
     render() {
-      // console.log(this.props)
+      // console.log(this.props.navigation)
       const { navigation } = this.props;
       const listChoice = navigation.getParam('listChoice')
       const recipeID = navigation.getParam('recipeID')
-      console.log(listChoice)
-      console.log(recipeID)
+      // console.log(listChoice)
+      // console.log(recipeID)
       return (
-        <Container>
-          <Header>
-            {this.renderRecipe(listChoice, recipeID)}
-          </Header>
-          <ScrollView>
-            {this.renderRecipeImages(listChoice, recipeID)}
-            {this.renderRecipeIngredients(listChoice, recipeID)}
-            {this.renderRecipeInstructions(listChoice, recipeID)}
-            {this.renderRecipeLikes(listChoice, recipeID)}
-            {/* {this.renderRecipeMakes(listChoice, recipeID)} */}
-            {this.renderRecipeMakePics(listChoice, recipeID)}
-            {this.renderRecipeComments(listChoice, recipeID)}
-          </ScrollView>
-          <Button rounded danger style={styles.floatingButton} onPress={this.likeRecipe}>
-              <Icon name='heart-outline' size={25} />
-          </Button>
-        </Container>
+        <View style={{flex:1}}>
+          <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
+            <View style={styles.detailsHeader}>
+              {this.renderRecipe(listChoice, recipeID)}
+            </View>
+            <ScrollView contentContainerStyle={{flexGrow:1}}>
+              <View style={styles.detailsLikesAndMakes}>
+                <View style={styles.detailsLikes}>
+                  {this.renderRecipeLikes(listChoice, recipeID)}
+                </View>
+                {/* <View style={styles.detailsLikes}>
+                  {this.renderRecipeMakes(listChoice, recipeID)}
+                </View> */}
+              </View>
+              <View style={styles.detailsImageWrapper}>
+                {this.renderRecipeImages(listChoice, recipeID)}
+              </View>
+              <View style={styles.detailsIngredients}>
+                <Text style={styles.detailsSubHeadings}>Ingredients:</Text>
+                {this.renderRecipeIngredients(listChoice, recipeID)}
+              </View>
+              <View style={styles.detailsInstructions}>
+              <Text style={styles.detailsSubHeadings}>Instructions:</Text>
+                {this.renderRecipeInstructions(listChoice, recipeID)}
+              </View>
+              {/* <View style={styles.detailsMakePics}>
+                {this.renderRecipeMakePics(listChoice, recipeID)}
+              </View> */}
+              {/* <View style={styles.detailsComments}>
+              <Text style={styles.detailsSubHeadings}>Comments:</Text>
+                {this.renderRecipeComments(listChoice, recipeID)}
+              </View> */}
+            </ScrollView>
+          </ImageBackground>
+        </View>
       );
     }
   }
