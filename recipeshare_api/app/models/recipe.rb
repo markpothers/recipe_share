@@ -32,14 +32,14 @@ class Recipe < ApplicationRecord
             .where({ recipe_likes: { chef_id: chef_id }})
             .order("recipe_likes.created_at desc")
             .limit(limit)
-            .offset(offset)
+            .offset(offset).uniq
 
     elsif type == "chef_made" # recipes liked by use_chef ordered by most-recently liked
       Recipe.joins(:recipe_makes)
             .where({ recipe_makes: { chef_id: chef_id }})
             .order("recipe_makes.created_at desc")
             .limit(limit)
-            .offset(offset)
+            .offset(offset).uniq
 
     elsif type =="global_ranks" # recipes according to their global rankings # with filter based on chef name working if needed
 

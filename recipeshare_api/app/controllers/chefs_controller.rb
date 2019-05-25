@@ -30,10 +30,10 @@ class ChefsController < ApplicationController
             @chef = Chef.new(chef_params)
             if @chef.save
                 if image_params[:imageURL] != ""
-                    File.open("public/chef-avatar-#{@chef.id}.jpg", 'wb') do |f|
+                    File.open("public/chef_avatars/chef-avatar-#{@chef.id}.jpg", 'wb') do |f|
                         f.write(Base64.decode64(image_params[:imageURL]))
                     end
-                    @chef.imageURL = "/chef-avatar-#{@chef.id}.jpg"
+                    @chef.imageURL = "/chef_avatars/chef-avatar-#{@chef.id}.jpg"
                     @chef.save
                 end
                 render json: @chef, methods: [:auth_token]

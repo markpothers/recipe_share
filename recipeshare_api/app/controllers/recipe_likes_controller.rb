@@ -14,6 +14,7 @@ class RecipeLikesController < ApplicationController
     # end
 
     def create
+        # byebug
         @recipe_like = RecipeLike.create(recipe_like_params)
         if @recipe_like.save
             render json: @recipe_like
