@@ -22,7 +22,7 @@ class ChefsController < ApplicationController
     end
 
     def index
-        @chefs = Chef.choose_list
+        @chefs = Chef.choose_list(list_params["listType"], @chef.id, list_params["limit"], list_params["offset"], list_params["ranking"])
         render json: @chefs
     end
 
@@ -90,6 +90,10 @@ class ChefsController < ApplicationController
 
     def image_params
         params.require(:chef).permit(:imageURL)
+    end
+
+    def list_params
+        params.require(:chef).permit(:allRecipes, :listType, :limit, :offset, :ranking, :chef_id)
     end
 
 end

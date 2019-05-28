@@ -37,7 +37,7 @@ export default class ProfileScreen extends React.Component {
     return (
       <React.Fragment>
         <ChefDetails/>
-          <Button rounded danger style={styles.floatingButton} onPress={this.logout}>
+          <Button rounded danger style={styles.logoutButton} onPress={this.logout}>
             <Icon name='logout' size={25} />
           </Button>
       </React.Fragment>

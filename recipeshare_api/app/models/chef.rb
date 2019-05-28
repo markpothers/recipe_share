@@ -44,43 +44,55 @@ class Chef < ApplicationRecord
     end
 
     def self.choose_list(type = "global_ranks", chef_id = 17, limit = 50, offset = 0, ranking = "liked")
-        #types = "all_chefs", "chef_followees", "chef_followers", "chef_made", "global_ranks" // "liked", "made"
+        #types = "all_chefs", "chef_followees", "chef_followers", "chef_made", "global_ranks_chefs" // "liked", "made"
         if type == "all_chefs"
             Chef.order(created_at: :desc) # all chefs ordered newest first
                 .limit(limit)
                 .offset(offset)
 
         elsif type == "chef_followees" # chefs followed by user (chef_id)
+            Chef.joins(:followers_as_followee)
+                .where({ follows: { follower_id: chef_id }})
+                .order("follows.created_at desc")
+                .limit(limit)
+                .offset(offset).uniq
+
+        elsif type == "chef_followers" # chefs followed by user (chef_id)
 
             Chef.joins(:followees_as_follower)
                 .where({ follows: { followee_id: chef_id }})
                 .order("follows.created_at desc")
                 .limit(limit)
-                .offset(offset)
+                .offset(offset).uniq
 
-        elsif type == "chef_followers" # chefs followed by user (chef_id)
-
-            Chef.joins(:followers_as_followee)
-                .where({ follows: { follower_id: chef_id }})
-                .order("follows.created_at desc")
-                .limit(limit)
-                .offset(offset)
-
-        elsif type =="global_ranks" # chefs according to their global rankings most recipes liked, and most recipes made
+        elsif type =="global_ranks_chefs" # chefs according to their global rankings most recipes liked, and most recipes made
 
             if ranking == "made"
                 table = "recipe_makes"
             else # if ranking == "liked"
                 table = "recipe_likes"
             end
+            byebug
+            ApplicationRecord.db.execute("SELECT recipe_likes.*, chefs.*, COUNT(recipe_likes.chef_id) AS count
+                                            FROM recipe_likes
+                                            JOIN chefs ON chefs.id = recipe_likes.chef_id
+                                            GROUP BY recipe_likes.chef_id
+                                            ORDER BY COUNT(recipe_likes.chef_id) DESC
+                                            LIMIT #{limit}
+                                            OFFSET #{offset}")
 
-            ApplicationRecord.db.execute("SELECT #{table}.*, chefs.*, COUNT(#{table}.chef_id) AS count
-                                            FROM #{table}
-                                            JOIN chefs ON chefs.id = #{table}.chef_id
-                                            GROUP BY #{table}.chef_id
-                                            ORDER BY COUNT(#{table}.chef_id) DESC
-                                            LIMIT #{table}
-                                            OFFSET #{table}")
+
+
+
+
+
+
+
+
+
+
+
+
 
         else # if all else fails, just show all chefs ordered most recent first
             Chef.order(created_at: :desc)

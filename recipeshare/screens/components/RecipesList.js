@@ -1,10 +1,13 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacity, View, AsyncStorage, ImageBackground, ScrollView, FlatList, Text } from 'react-native'
-import { Container, Header, Content, List, ListItem, Thumbnail, Left, Body, Right, Button, Icon } from 'native-base'
+import { Container, Header, Content, List, ListItem, Thumbnail, Left, Body, Right, Button} from 'native-base'
 import RecipeCard from './RecipeCard'
 import { databaseURL } from '../functionalComponents/databaseURL'
 import { connect } from 'react-redux'
 import { styles } from '../functionalComponents/RSStyleSheet'
+import { fetchRecipeList } from '../functionalComponents/recipeListFetch'
+import { fetchRecipeDetails } from '../functionalComponents/recipeListDetailsFetch'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const mapStateToProps = (state) => ({
       all_Recipes: state.recipes.all,
@@ -23,149 +26,124 @@ const mapDispatchToProps = {
       dispatch({ type: 'CHANGE_GLOBAL_RANKING'})
     }
   },
-  fetchRecipeLists: (listType, chef_id, global_ranking) => {
-      return dispatch => {
-        AsyncStorage.getItem('chef', (err, res) => {
-            const loggedInChef = JSON.parse(res)
-                        console.log(databaseURL)
-                        // console.log(chef_id)
-                          fetch(`${databaseURL}/`, {
-                              method: "POST",
-                              headers: {
-                                Authorization: `Bearer ${loggedInChef.auth_token}`,
-                                'Content-Type': 'application/json'
-                              },
-                              body: JSON.stringify({
-                                recipe: {
-                                  listType: listType,
-                                  chef_id: chef_id,
-                                  limit: 100,
-                                  offset: 0,
-                                  ranking: global_ranking
-                                }
-                              })
-                          })
-                          .then(res => res.json())
-                          .then(recipes => {
-                            // console.log(recipes)
-                            // console.log("sending recipes list to store")
-                              dispatch({ type: 'STORE_ALL_RECIPES', recipeType: listType, recipeList: recipes})
-                              recipe_ids = recipes.map(recipe =>{
-                                return recipe.id
-                              })
-                              fetch(`${databaseURL}/details`, {
-                                method: "POST",
-                                headers: {
-                                  Authorization: `Bearer ${loggedInChef.auth_token}`,
-                                  'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify({
-                                  details: {listed_recipes: recipe_ids}
-                                })
-                              })
-                              .then(res => res.json())
-                              .then(recipe_details => {
-                                // console.log(recipe_details)
-                                // console.log(recipe_details)
-                                // console.log("sending recipe lists details to store")
-                                dispatch({ type: 'STORE_RECIPES_DETAILS', recipeType: listType, recipesDetailsList: recipe_details})
-                                // console.log(listType)
-                                // console.log(recipe_details.recipes)
-                                // console.log(recipe_details.comments[0])
-                                // console.log(recipe_details.ingredient_uses[0])
-                                // console.log(recipe_details.ingredients[0])
-                                // console.log(recipe_details.recipe_images[0])
-                                // console.log(recipe_details.recipe_likes[0])
-                                // console.log(recipe_details.recipe_makes[0])
-                                // console.log(recipe_details.make_pics[0])
-                              })
-                          })
-                        })
+  storeRecipeList: (listChoice, recipes) => {
+    return dispatch => {
+      dispatch({ type: 'STORE_RECIPE_LISTS', recipeType: listChoice, recipeList: recipes})
       }
-  }
+  },
+  storeRecipeDetails: (listChoice, recipe_details) => {
+    return dispatch => {
+      dispatch({ type: 'STORE_RECIPES_DETAILS', recipeType: listChoice, recipesDetailsList: recipe_details})
+    }
+  },
+  appendToRecipeList: (listChoice, new_recipes) => {
+    return dispatch => {
+      dispatch({ type: 'APPEND_TO_RECIPE_LISTS', recipeType: listChoice, recipeList: new_recipes})
+      }
+  },
+  appendToRecipeDetails: (listChoice, new_recipe_details) => {
+    return dispatch => {
+      dispatch({ type: 'APPEND_TO_RECIPES_DETAILS', recipeType: listChoice, recipesDetailsList: new_recipe_details})
+    }
+  },
+  clearListedRecipes: (listChoice) => {
+    return dispatch => {
+      dispatch({ type: 'CLEAR_LISTED_RECIPES', recipeType: listChoice})
+    }
+  },
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   class RecipesList extends React.Component {
 
-    handleNewRecipeButton = () => {
-      console.log("button pressed")
+    state = {
+      limit: 50,
+      offset: 0
     }
 
-    handleRankChoiceButton = () => {
-      // this.props.changeRanking()
-      // this.props.fetchRecipeLists(this.props["listChoice"], this.props.loggedInChef.id, this.props.global_ranking =='liked' ? 'made' : 'liked')
+    handleRankChoiceButton = async() => {
+      await this.props.changeRanking()
+      await this.setState({limit: 50, offset: 0})
+      this.fetchRecipeListThenDetails()
     }
 
     componentDidMount = () => {
-      this.props.fetchRecipeLists(this.props["listChoice"], this.props.loggedInChef.id, this.props.global_ranking)
+      this.fetchRecipeListThenDetails()
     }
 
-    renderRecipeListItems = () => {
-      return this.props[this.props["listChoice"] + `_Recipes`].map(recipe => {
-        if (this.props.recipes_details[this.props["listChoice"]].recipe_images != undefined ){
-          const recipe_image = this.props.recipes_details[this.props["listChoice"]].recipe_images.find(image => image.recipe_id == recipe.id)
-          // console.log(`${databaseURL}${recipe_image.imageURL}`)
-          if (recipe_image != undefined){
-            return <RecipeCard listChoice={this.props["listChoice"]} key={recipe.id} {...recipe} imageURL={{ uri: `${databaseURL}${recipe_image.imageURL}` }} navigation={this.props.navigation}/>
-          } else {
-          return <RecipeCard listChoice={this.props["listChoice"]} key={recipe.id} {...recipe} imageURL={require("./peas.jpg")}/>
-          }
-        }else{
-          return <RecipeCard listChoice={this.props["listChoice"]} key={recipe.id} {...recipe} imageURL={require("./peas.jpg")}/>
-        }
+    fetchRecipeListThenDetails = async() => {
+
+      let recipes = await fetchRecipeList(this.props["listChoice"], this.props.chef_id, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token)
+      this.props.storeRecipeList(this.props["listChoice"], recipes)
+      recipe_ids = recipes.map(recipe => {
+        return recipe.id
       })
+      // console.log(recipe_ids)
+      const recipe_details = await fetchRecipeDetails(recipe_ids, this.props.loggedInChef.auth_token)
+      this.props.storeRecipeDetails(this.props["listChoice"], recipe_details)
+    }
+
+    fetchAdditionalRecipesThenDetailsForList = async() => {
+      const new_recipes = await fetchRecipeList(this.props["listChoice"], this.props.chef_id, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token)
+      this.props.appendToRecipeList(this.props["listChoice"], new_recipes)
+      new_recipe_ids = new_recipes.map(recipe => {
+        return recipe.id
+      })
+      const new_recipe_details = await fetchRecipeDetails(new_recipe_ids, this.props.loggedInChef.auth_token)
+      this.props.appendToRecipeDetails(this.props["listChoice"], new_recipe_details)
     }
 
     renderRecipeListItem = (item) => {
-      // console.log(item.index)
-      // return <RecipeCard {...item} />
-      // return this.props[this.props["listChoice"] + `_Recipes`].map(recipe => {
-        let imageURL = null
-        if (this.props.recipes_details[this.props["listChoice"]].recipe_images != undefined ){
-          // console.log("test")
-          if (this.props.recipes_details[this.props["listChoice"]].recipe_images.find(image => image.recipe_id == item.item.id) != undefined){
-            const recipe_image = this.props.recipes_details[this.props["listChoice"]].recipe_images.find(image => image.recipe_id == item.item.id)
-            imageURL = { uri: `${databaseURL}${recipe_image.imageURL}` }
-          }
-        } else {
-          imageURL = require("./peas.jpg")
+      let imageURL = null
+      if (this.props.recipes_details[this.props["listChoice"]].recipe_images != undefined ){
+        if (this.props.recipes_details[this.props["listChoice"]].recipe_images.find(image => image.recipe_id == item.item.id) != undefined){
+          const recipe_image = this.props.recipes_details[this.props["listChoice"]].recipe_images.find(image => image.recipe_id == item.item.id)
+          imageURL = { uri: `${databaseURL}${recipe_image.imageURL}` }
         }
-          // console.log(`${databaseURL}${recipe_image.imageURL}`)
-        //   if (recipe_image != undefined){
-        //     return <RecipeCard listChoice={this.props["listChoice"]} key={item.index.toString()} {...item} imageURL={{ uri: `${databaseURL}${recipe_image.imageURL}` }} navigation={this.props.navigation}/>
-        //   } else {
-        //   return <RecipeCard listChoice={this.props["listChoice"]} key={item.index.toString()} {...item} imageURL={require("./peas.jpg")}/>
-        //   }
-        // }else{
-          // console.log(item.item.name)
-          return <RecipeCard listChoice={this.props["listChoice"]} key={item.index.toString()} {...item} imageURL={imageURL} navigation={this.props.navigation}/>
-        }
-    //   })
-    // }
+      } else {
+        imageURL = require("./peas.jpg")
+      }
+        return <RecipeCard listChoice={this.props["listChoice"]} key={item.index.toString()} {...item} imageURL={imageURL} navigation={this.props.navigation}/>
+    }
 
     renderGlobalListButton = () => {
       if (this.props["listChoice"] == "global_ranks"){
         return (
-          <Button rounded danger style={styles.floatingButton1} onPress={this.handleRankChoiceButton}>
-              <Icon name='pizza' />
-              {/* <Text>New Recipe</Text> */}
+          <Button rounded danger style={styles.rankButton} onPress={this.handleRankChoiceButton}>
+              {this.props.global_ranking == 'liked' ? <Icon style={styles.rankIcon} size={25} name='thumb-up' /> : <Icon style={styles.rankIcon} size={25} name='thumb-up-outline' />}
+              {this.props.global_ranking == 'liked' ? <Text style={styles.rankButtonText}>Most likes</Text> : <Text style={styles.rankButtonText}>Most makes</Text>}
           </Button>
         )
       }
     }
 
+    refresh = async () => {
+      await this.setState({limit: 50, offset: 0})
+      this.props.clearListedRecipes(this.props["listChoice"])
+      this.fetchRecipeListThenDetails()
+    }
+
+    onEndReached = async () => {
+      await this.setState({offset: this.state.offset + 50})
+      this.fetchAdditionalRecipesThenDetailsForList()
+    }
+
     render() {
-      // console.log(this.props.chef_Recipes)
-      console.log(this.props["listChoice"])
+      // console.log("rendering")
       return (
-
-            <FlatList
-              data={this.props[this.props["listChoice"] + `_Recipes`]}
-              renderItem={this.renderRecipeListItem}
-              keyExtractor={(item) => item.id.toString()}
-            />
-
+        <React.Fragment>
+          <FlatList
+            data={this.props[this.props["listChoice"] + `_Recipes`]}
+            extraData={this.props.recipes_details[this.props["listChoice"]]}
+            renderItem={this.renderRecipeListItem}
+            keyExtractor={(item) => item.id.toString()}
+            onRefresh={this.refresh}
+            refreshing={false}
+            onEndReached={this.onEndReached}
+            onEndReachedThreshold={0.3}
+          />
+          {this.renderGlobalListButton()}
+        </React.Fragment>
       )
     }
 

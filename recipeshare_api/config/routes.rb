@@ -14,8 +14,10 @@ Rails.application.routes.draw do
 
   get '/', to: 'recipes#index', as:'home'
   post '/login', to: 'chefs#authenticate'
-  post '/', to: 'recipes#index'
-  post '/details', to: 'recipes#details'
+  post '/recipes/index', to: 'recipes#index'
+  post '/recipes/details', to: 'recipes#details'
+  post '/chefs/index', to: 'chefs#index'
+  post '/chefs/details', to: 'chefs#index'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

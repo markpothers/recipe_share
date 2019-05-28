@@ -53,7 +53,19 @@ const initialState = {
   loginUserDetails: {
     e_mail: "",
     password: ""
-  }
+  },
+  chefs: {
+    all_chefs: [],
+    followed: [],
+    global_ranks_chefs: [],
+    chef_followees: [],
+    chef_followers: []
+  },
+  chefs_details: {
+    all: [],
+    followed: [],
+    global_ranks: []
+  },
 }
 
   const middleware = compose(

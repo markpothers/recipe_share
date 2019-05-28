@@ -7,7 +7,7 @@ class RecipesController < ApplicationController
 
     def index
         # byebug
-        @recipes = Recipe.choose_list(list_params["listType"], @chef.id, list_params["limit"], list_params["offset"], list_params["ranking"])
+        @recipes = Recipe.choose_list(list_params["listType"], list_params["chef_id"], list_params["limit"], list_params["offset"], list_params["ranking"])
         render json: @recipes #, methods: [:add_count]
     end
 
@@ -38,6 +38,7 @@ class RecipesController < ApplicationController
     # end
 
     def create
+        # byebug
         @recipe = Recipe.create(newRecipe_params)
         if @recipe.save
             if newRecipe_image_params[:imagebase64] != ""
@@ -94,7 +95,7 @@ class RecipesController < ApplicationController
     end
 
     def list_params
-        params.require(:recipe).permit(:allRecipes, :listType, :limit, :offset, :ranking, :name, :chef_id, :time, :difficulty, :instructions, :content)
+        params.require(:recipe).permit(:listType, :limit, :offset, :ranking, :chef_id)
     end
 
     def details_params

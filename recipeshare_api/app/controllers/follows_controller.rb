@@ -18,7 +18,7 @@ class FollowsController < ApplicationController
         if @follow.save
             render json: @follow
         else
-            render json: {error: true, message: 'Ooops.  Something went wrong saving the follow.'}
+            render json: {error: true, message: @follow.errors.full_messages}
         end
     end
 
@@ -54,7 +54,7 @@ class FollowsController < ApplicationController
     end
 
     def follow_params
-        params.require(:follow).permit(:recipe_id, :chef_id, :time, :difficulty, :comment, :tastiness)
+        params.require(:follow).permit(:follower_id, :followee_id)
     end
 
 end

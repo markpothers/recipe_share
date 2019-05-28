@@ -107,7 +107,7 @@ export const styles = StyleSheet.create({
       // borderWidth: 2,
       backgroundColor: '#104e01',
       opacity: 0.8,
-      width: '50%'
+      // width: '50%'
     },
     scrollUnderline: {
       backgroundColor: '#f8e858f8',
@@ -264,29 +264,56 @@ export const styles = StyleSheet.create({
       // color: 'white'
       opacity: 0.9
     },
-    floatingButton: {
+    rankButton: {
         position: 'absolute',
-        left: '81%',
+        left: '61%',
         bottom: '3%',
         zIndex: 1,
         height: 50,
-        width: 50,
+        width: 130,
         justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#fff59b'
+      },
+      rankIcon: {
+        color: "#104e01"
+      },
+      rankButtonText: {
+        marginLeft: '5%',
+        marginRight: '5%',
+
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 14,
+        color: "#104e01",
       },
     standardButton: {
         height: 50,
         width: 50,
         justifyContent: 'center',
     },
-    newButton: {
+    // newButton: {
+    //   height: 50,
+    //   width: 50,
+    //   justifyContent: 'center',
+    //   color: '#f700ffef'
+    // },
+    logoutButton: {
+      position: 'absolute',
+      left: '81%',
+      bottom: '3%',
+      zIndex: 1,
       height: 50,
       width: 50,
       justifyContent: 'center',
-      color: '#f700ffef'
+      alignItems: 'center',
+      // backgroundColor: '#f700ffef'
     },
     newButton: {
-      height: 50,
-      width: 50,
+      height: 40,
+      width: 40,
+      // marginLeft: '2%',
+      // marginRight: '2%',
       justifyContent: 'center',
       backgroundColor: '#fff59b',
       alignSelf: 'center',

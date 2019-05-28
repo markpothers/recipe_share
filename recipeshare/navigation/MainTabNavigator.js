@@ -6,12 +6,14 @@ import BrowseRecipesScreen from '../screens/BrowseRecipes';
 import MyRecipeBookScreen from '../screens/MyRecipeBook';
 import ProfileScreen from '../screens/ProfileScreen';
 import RecipeDetailsScreen from '../screens/recipeDetails'
+import ChefDetailsScreen from '../screens/chefDetails'
 import NewRecipeScreen from '../screens/tabs/newRecipe'
 
 const BrowseRecipesStack = createStackNavigator({
   BrowseRecipes: BrowseRecipesScreen,
   RecipeDetails: RecipeDetailsScreen,
-  NewRecipe: NewRecipeScreen
+  NewRecipe: NewRecipeScreen,
+  ChefDetails: ChefDetailsScreen
 });
 
 BrowseRecipesStack.navigationOptions = {
@@ -31,7 +33,8 @@ BrowseRecipesStack.navigationOptions = {
 const MyRecipeBookStack = createStackNavigator({
   MyRecipeBook: MyRecipeBookScreen,
   RecipeDetails: RecipeDetailsScreen,
-  NewRecipe: NewRecipeScreen
+  NewRecipe: NewRecipeScreen,
+  ChefDetails: ChefDetailsScreen
 });
 
 MyRecipeBookStack.navigationOptions = {

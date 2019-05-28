@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View, ImageBackground } from 'react-native';
 import { Container, Tab, Tabs, ScrollableTab, Button } from 'native-base';
 import RecipesList from './components/RecipesList';
+import ChefList from './components/ChefList';
 import { connect } from 'react-redux'
 import { styles } from './functionalComponents/RSStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -23,7 +24,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
   class BrowseRecipes extends React.Component {
     static navigationOptions = ({ navigation }) => {
       return {
-        title: 'Browse recipes',
+        title: 'Browse',
         headerStyle: {    //styles possibly needed if app-wide styling doesn't work
           backgroundColor: '#104e01',
           opacity: 0.8
@@ -53,14 +54,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       this.props.navigation.navigate('RecipeDetails', {listChoice: listChoice, recipeID: recipeID})
     }
 
+    navigateToChefDetails = (listChoice, chefID) =>{
+      this.props.navigation.navigate('ChefDetails', {listChoice: listChoice, chefID: chefID})
+    }
 
     render() {
       // console.log(this.navigateToRecipeDetails)
       return (
-        <Container stye={styles.mainPageContainer}>
+        <Container style={styles.mainPageContainer}>
           <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
             <Tabs style={styles.scrollTabHeader} tabBarUnderlineStyle={styles.scrollUnderline} renderTabBar={()=> <ScrollableTab style={styles.scrollTabHeader}/>}>
-              <Tab textStyle  ={styles.inactiveTabHeadingText} activeTextStyle={styles.activeTabHeadingText} tabStyle={styles.tabStyle} activeTabStyle={styles.tabStyle} heading="All Recipes">
+              <Tab textStyle  ={styles.inactiveTabHeadingText} activeTextStyle={styles.activeTabHeadingText} tabStyle={styles.tabStyle} activeTabStyle={styles.tabStyle} heading="Newest Recipes">
                 <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
                   <RecipesList listChoice={"all"} navigation={this.navigateToRecipeDetails}/>
                 </ImageBackground>
@@ -70,9 +74,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                   <RecipesList listChoice={"global_ranks"} navigation={this.navigateToRecipeDetails}/>
                 </ImageBackground>
               </Tab>
-              {/* <Tab textStyle={styles.inactiveTabHeadingText} activeTextStyle={styles.activeTabHeadingText} tabStyle={styles.tabStyle} activeTabStyle={styles.tabStyle} heading="Chef's Recipes">
+              <Tab textStyle={styles.inactiveTabHeadingText} activeTextStyle={styles.activeTabHeadingText} tabStyle={styles.tabStyle} activeTabStyle={styles.tabStyle} heading="Newest Chefs">
                 <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
-                  <RecipesList listChoice={"chef"} />
+                  <ChefList listChoice={"all_chefs"} navigation={this.navigateToChefDetails}/>
+                </ImageBackground>
+              </Tab>
+              {/* <Tab textStyle={styles.inactiveTabHeadingText} activeTextStyle={styles.activeTabHeadingText} tabStyle={styles.tabStyle} activeTabStyle={styles.tabStyle} heading="Top Chefs">
+                <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
+                  <ChefList listChoice={"global_ranks_chefs"} navigation={this.navigateToChefDetails}/>
                 </ImageBackground>
               </Tab> */}
             </Tabs>
