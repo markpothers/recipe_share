@@ -11,9 +11,9 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-  updateLoggedInChefInState: (id, username) => {
+  updateLoggedInChefInState: (id, username, auth_token) => {
     return dispatch => {
-      dispatch({ type: 'UPDATE_LOGGED_IN_CHEF', id: id, username: username})
+      dispatch({ type: 'UPDATE_LOGGED_IN_CHEF', id: id, username: username, auth_token: auth_token})
     }
   }
 }
@@ -29,12 +29,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       AsyncStorage.getItem('chef', (err, res) => {
         if (res != null) {
           const loggedInChef = JSON.parse(res)
-          console.log(loggedInChef)
-          this.props.updateLoggedInChefInState(loggedInChef.id, loggedInChef.username)
+          // console.log(loggedInChef)
+          this.props.updateLoggedInChefInState(loggedInChef.id, loggedInChef.username, loggedInChef.auth_token)
           this.props.navigation.navigate('Home')
         } else {
+          // this.props.navigation.navigate('Login')
           this.props.navigation.navigate('Login')
-          // this.props.navigation.navigate('CreateChef')
         }
       })
     }

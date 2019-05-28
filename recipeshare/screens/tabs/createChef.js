@@ -1,5 +1,5 @@
 import React from 'react'
-import {ScrollView, StyleSheet, Text, AsyncStorage, ImageBackground} from 'react-native'
+import {ScrollView, StyleSheet, Text, AsyncStorage, ImageBackground, KeyboardAvoidingView} from 'react-native'
 import { Container, Header, Content, Form, Item, Input, Label, Button, Picker, View } from 'native-base';
 import { countries } from '../dataComponents/countries'
 import { ImagePicker } from 'expo'
@@ -47,7 +47,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     };
 
     state = {
-      hasPermission: false
+      hasPermission: false,
+      errors: []
     }
 
     componentDidMount(){
@@ -111,12 +112,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       .then(res => res.json())
       .then(chef => {
         if (!chef.error){
+          // console.log(chef)
+          this.setState({errors: []})
           AsyncStorage.setItem('chef', JSON.stringify(chef), () => {
             AsyncStorage.getItem('chef', (err, res) => {
               console.log(err)
               this.props.navigation.navigate('AppLoading')
             })
           })
+        } else {
+          // console.log(chef.message)
+          this.setState({errors: chef.message})
         }
       })
       .catch(error => {
@@ -124,81 +130,110 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       })
     }
 
+    renderEmailError = () => {
+      const emailErrors = this.state.errors.filter(message => message.startsWith("E mail")) 
+      return emailErrors.map(error => (
+        <View style={styles.formRow} key={error}>
+          <Item rounded style={styles.formError}>
+            <Text style={styles.formErrorText}>{error}</Text>
+          </Item>
+        </View>
+      ))
+    }
+
+    renderUsernameError = () => {
+      const usernameErrors = this.state.errors.filter(message => message.startsWith("Username")) 
+      return usernameErrors.map(error => (
+        <View style={styles.formRow} key={error}>
+          <Item rounded style={styles.formError}>
+            <Text style={styles.formErrorText}>{error}</Text>
+          </Item>
+        </View>
+      ))
+    }
+
+    renderPasswordError = () => {
+      const passwordErrors = this.state.errors.filter(message => message.startsWith("Password")) 
+      return passwordErrors.map(error => (
+        <View style={styles.formRow} key={error}>
+          <Item rounded style={styles.formError}>
+            <Text style={styles.formErrorText}>{error}</Text>
+          </Item>
+        </View>
+      ))
+    }
+
     render() {
+      // console.log(this.state.errors)
       return (
-        <Container>
-        <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
-          <Content style={styles.createChefForm}>
-           <Form >
-            {/* <Item rounded style={styles.loginInputBox}>
-                <Label>First Name (optional)</Label>
-                <Input onChange={(e) => this.handleTextInput(e, "first_name")}/>
-              </Item>
-                <Item rounded style={styles.loginInputBox}>
-                <Label>Last Name (optional)</Label>
-                <Input onChange={(e) => this.handleTextInput(e, "last_name")}/>
-              </Item> */}
-              <View style={styles.loginFormButtonWrapper}>
-                <Item rounded style={styles.loginHeader}>
-                  <Text style={styles.createChefTitle}>Please register as our newest chef!</Text>
-                </Item>
-              </View>
-              {/* <View style={styles.createChefFormInputWrapper}> */}
-                <Item rounded style={styles.createChefInputBox}>
-                  {/* <Label>e-mail</Label> */}
-                  <Input placeholder="e-mail" keyboardType="email-address" onChange={(e) => this.handleTextInput(e, "e_mail")}/>
-                </Item>
-                <Item rounded style={styles.createChefInputBox}>
-                  {/* <Label>Username</Label> */}
-                  <Input placeholder="username" onChange={(e) => this.handleTextInput(e, "username")}/>
-                </Item>
-              {/* </View> */}
-              {/* <View style={styles.createChefFormInputWrapper}> */}
-                <Item rounded picker style={styles.createChefInputBox}>
-                  <Picker
-                    mode="dropdown"
-                    iosIcon={<Icon name="arrow-down" />}
-                    onValueChange={e => this.onCountryChange(e, "country")}
-                  >
-                    <Picker.Item key={this.props.country} label={this.props.country} value={this.props.country} />
-                    {this.countriesPicker()}
-                  </Picker>
-                </Item>
-              {/* </View> */}
-              {/* <View style={styles.createChefFormInputWrapper}> */}
-                <Item rounded style={styles.createChefInputBox} >
-                  {/* <Label>Password</Label> */}
-                  <Input placeholder="password" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")}/>
-                </Item>
-                <Item rounded style={styles.createChefInputBox} >
-                  {/* <Label>Password Confirmation</Label> */}
-                  <Input placeholder="confirm password" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password_confirmation")}/>
-                </Item>
-              {/* </View> */}
-             <View style={styles.loginFormButtonWrapper}>
-                <Button rounded info style={styles.createChefFormButton} title="Choose Photo" onPress={this.pickImage}>
-                  <Icon style={styles.standardIcon} size={25} name='camera-burst' />
-                  <Text style={styles.createChefFormButtonText}>Choose{"\n"}photo</Text>
-                </Button>
-                <Button rounded info style={styles.createChefFormButton} title="Take Photo" onPress={this.openCamera}>
-                  <Icon style={styles.standardIcon} size={25} name='camera' />
-                  <Text style={styles.createChefFormButtonText}>Take{"\n"}photo</Text>
-                </Button>
-              </View>
-              <View style={styles.loginFormButtonWrapper}>
-                <Button rounded warning style={styles.createChefFormButton} onPress={() => this.props.navigation.navigate('Login')}>
-                  <Icon style={styles.standardIcon} size={25} name='login' />
-                  <Text style={styles.createChefFormButtonText}>Return to{"\n"} login screen</Text>
-                </Button>
-                <Button rounded success style={styles.createChefFormButton} onPress={e => this.submitChef(e)}>
-                  <Icon style={styles.standardIcon} size={25} name='login-variant' />
-                  <Text style={styles.createChefFormButtonText}>Submit &{"\n"}log in</Text>
-                </Button>
-              </View>
-            </Form>
-          </Content>
+        <KeyboardAvoidingView  style={styles.mainPageContainer} behavior="padding">
+          <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
+            <View style={styles.createChefForm}>
+              <ScrollView>
+                <View style={styles.formRow}>
+                  <Item rounded style={styles.loginHeader}>
+                    <Text style={styles.createChefTitle}>Please register as our newest chef!</Text>
+                  </Item>
+                </View>
+                <View style={styles.formRow}>
+                  <Item rounded style={styles.createChefInputBox}>
+                    <Input placeholder="e-mail" keyboardType="email-address" onChange={(e) => this.handleTextInput(e, "e_mail")}/>
+                  </Item>
+                </View>
+                  {this.renderEmailError()}
+                <View style={styles.formRow}>
+                  <Item rounded style={styles.createChefInputBox}>
+                    <Input placeholder="username" onChange={(e) => this.handleTextInput(e, "username")}/>
+                  </Item>
+                </View>
+                {this.renderUsernameError()}
+                <View style={styles.formRow}>
+                  <Item rounded picker style={styles.createChefInputBox}>
+                    <Picker
+                      mode="dropdown"
+                      iosIcon={<Icon name="arrow-down" />}
+                      onValueChange={e => this.onCountryChange(e, "country")}
+                    >
+                      <Picker.Item key={this.props.country} label={this.props.country} value={this.props.country} />
+                      {this.countriesPicker()}
+                    </Picker>
+                  </Item>
+                </View>
+                <View style={styles.formRow}>
+                  <Item rounded style={styles.createChefInputBox} >
+                    <Input placeholder="password" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")}/>
+                  </Item>
+                </View>
+                <View style={styles.formRow}>
+                  <Item rounded style={styles.createChefInputBox} >
+                    <Input placeholder="confirm password" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password_confirmation")}/>
+                  </Item>
+                </View>
+                {this.renderPasswordError()}
+                  <View style={styles.formRow}>
+                  <Button rounded info style={styles.createChefFormButton} title="Choose Photo" onPress={this.pickImage}>
+                    <Icon style={styles.standardIcon} size={25} name='camera-burst' />
+                    <Text style={styles.createChefFormButtonText}>Choose{"\n"}photo</Text>
+                  </Button>
+                  <Button rounded info style={styles.createChefFormButton} title="Take Photo" onPress={this.openCamera}>
+                    <Icon style={styles.standardIcon} size={25} name='camera' />
+                    <Text style={styles.createChefFormButtonText}>Take{"\n"}photo</Text>
+                  </Button>
+                </View>
+                <View style={styles.formRow}>
+                  <Button rounded warning style={styles.createChefFormButton} onPress={() => this.props.navigation.navigate('Login')}>
+                    <Icon style={styles.standardIcon} size={25} name='login' />
+                    <Text style={styles.createChefFormButtonText}>Return to{"\n"} login screen</Text>
+                  </Button>
+                  <Button rounded success style={styles.createChefFormButton} onPress={e => this.submitChef(e)}>
+                    <Icon style={styles.standardIcon} size={25} name='login-variant' />
+                    <Text style={styles.createChefFormButtonText}>Submit &{"\n"}log in</Text>
+                  </Button>
+                </View>
+              </ScrollView>
+            </View>
           </ImageBackground>
-        </Container>
+        </KeyboardAvoidingView>
       )
     }
 

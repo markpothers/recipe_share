@@ -14,6 +14,7 @@ class ApplicationController < ActionController::API
     # before_action :define_current_chef
 
     def logged_in?
+        # byebug
         begin
             token = request.headers['Authorization'].split(" ")[1]
             payload = JWT.decode(token, 'my_secret_phrase')[0]

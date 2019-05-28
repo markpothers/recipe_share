@@ -28,6 +28,7 @@ const mapDispatchToProps = {
         AsyncStorage.getItem('chef', (err, res) => {
             const loggedInChef = JSON.parse(res)
                         console.log(databaseURL)
+                        // console.log(chef_id)
                           fetch(`${databaseURL}/`, {
                               method: "POST",
                               headers: {
@@ -47,7 +48,7 @@ const mapDispatchToProps = {
                           .then(res => res.json())
                           .then(recipes => {
                             // console.log(recipes)
-                            console.log("sending recipes list to store")
+                            // console.log("sending recipes list to store")
                               dispatch({ type: 'STORE_ALL_RECIPES', recipeType: listType, recipeList: recipes})
                               recipe_ids = recipes.map(recipe =>{
                                 return recipe.id
@@ -65,7 +66,8 @@ const mapDispatchToProps = {
                               .then(res => res.json())
                               .then(recipe_details => {
                                 // console.log(recipe_details)
-                                console.log("sending recipe lists details to store")
+                                // console.log(recipe_details)
+                                // console.log("sending recipe lists details to store")
                                 dispatch({ type: 'STORE_RECIPES_DETAILS', recipeType: listType, recipesDetailsList: recipe_details})
                                 // console.log(listType)
                                 // console.log(recipe_details.recipes)
@@ -91,8 +93,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     handleRankChoiceButton = () => {
-      this.props.changeRanking()
-      this.props.fetchRecipeLists(this.props["listChoice"], this.props.loggedInChef.id, this.props.global_ranking =='liked' ? 'made' : 'liked')
+      // this.props.changeRanking()
+      // this.props.fetchRecipeLists(this.props["listChoice"], this.props.loggedInChef.id, this.props.global_ranking =='liked' ? 'made' : 'liked')
     }
 
     componentDidMount = () => {
@@ -154,8 +156,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
-      // console.log(this.props.navigation)
-      // console.log(this.props[this.props["listChoice"] + `_Recipes`])
+      // console.log(this.props.chef_Recipes)
+      console.log(this.props["listChoice"])
       return (
 
             <FlatList

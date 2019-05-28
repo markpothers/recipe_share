@@ -29,6 +29,7 @@ class RecipesController < ApplicationController
             ingredient_uses: IngredientUse.where(recipe_id: details_params["listed_recipes"]),
             ingredients: Ingredient.where(id: ingredients_ids.uniq)
         }
+        # byebug
         render json: details #, methods: [:add_count]
     end
 
@@ -56,7 +57,7 @@ class RecipesController < ApplicationController
 
             render json: @recipe
         else
-            render json: {error: true, message: 'Ooops.  Something went wrong saving the recipe.'}
+            render json: {error: true, message: @recipe.errors.full_messages}
         end
     end
 

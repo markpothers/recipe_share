@@ -22,11 +22,12 @@ class Chef < ApplicationRecord
     has_many :recipe_makes
     has_many :made_recipes, :through => :recipe_makes, :source => :recipe
 
-    # validates :username, :e_mail, presence: true
-    # validates :username, length: {minimum: 3}
-    # validates :e_mail, uniqueness: true #, message: "This e-mall address has an existing account.  Please log in or reset your password"
-    # # validates :e_mail, inclusion: {in: "@"} #, message: "Please provide a valid e-mail address."
-    # validates :password, length: {minimum: 6}
+    validates :e_mail, presence: {message: "must be included."}
+    validates :username, presence: {message: "must be included."}
+    validates :username, length: {minimum: 3, message: "must be at least 3 characters."}
+    validates :e_mail, uniqueness: {message: "exists. Please register a different e-mail address."}
+    # validates :e_mail, inclusion: {in: %w(@), message: "must be a valid e-mail address."}
+    validates :password, length: {minimum: 6, message: "must be at least 6 characters."}
 
     # def password=(value)
     #     byebug
@@ -39,7 +40,7 @@ class Chef < ApplicationRecord
     end
 
     def as_json(*)
-        super.except('password', 'password_confirmation', 'password_digest', 'created_at', 'updated_at', 'country')
+        super.except('password', 'password_confirmation', 'password_digest', 'updated_at')
     end
 
     def self.choose_list(type = "global_ranks", chef_id = 17, limit = 50, offset = 0, ranking = "liked")

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, AsyncStorage, ImageBackground } from 'react-native'
+import {Text, AsyncStorage, ImageBackground, KeyboardAvoidingView } from 'react-native'
 import { Container, Header, Content, Form, Item, Input, Label, Button, View } from 'native-base';
 import { connect } from 'react-redux'
 import { databaseURL } from '../functionalComponents/databaseURL'
@@ -37,12 +37,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       header: null,
     };
 
+    state = {
+      loginError: ""
+    }
+
     handleTextInput = (e, parameter) => {
       this.props.saveLoginChefDetails(parameter, e.nativeEvent.text)
     }
 
     loginChef = () => {
-      console.log("sending login")
+      // console.log("sending login")
       fetch(`${databaseURL}/login`, {
         method: "POST",
         headers: {
@@ -54,13 +58,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       })
       .then(res => res.json())
       .then(chef => {
+        // console.log(chef)
         if (!chef.error){
+          this.setState({error: ""})
           AsyncStorage.setItem('chef', JSON.stringify(chef), () => {
             AsyncStorage.getItem('chef', (err, res) => {
               console.log(err)
               this.props.navigation.navigate('Home')
             })
           })
+        } else {
+          // console.log(chef.message)
+          this.setState({error: chef.message})
         }
       })
       .catch(error => {
@@ -68,39 +77,66 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       })
     }
 
+    renderEmailError = () => {
+      if (this.state.error === "email"){
+        return (
+          <View style={styles.formRow}>
+            <Item rounded style={styles.formError}>
+              <Text style={styles.formErrorText}>E-mail address not found.  Please register.</Text>
+            </Item>
+          </View>
+        )
+      }
+    }
+
+    renderPasswordError = () => {
+      if (this.state.error === "password"){
+        return (
+          <View style={styles.formRow}>
+            <Item rounded style={styles.formError}>
+              <Text style={styles.formErrorText}>Password not recognized</Text>
+            </Item>
+          </View>
+        )
+      }
+    }
+
     render() {
-      // console.log(this.props)
+      // console.log(this.state)
       return (
-        <Container>
-          {/* <ImageBackground source={require("../components/peas.jpg")} style={styles.background} imageStyle={styles.backgroundImageStyle}> */}
+        <KeyboardAvoidingView  style={styles.mainPageContainer} behavior="padding">
           <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
-            <Content style={styles.loginForm}>
-              <Form >
+            <View style={styles.loginForm} >
+              <View style={styles.formRow}>
                 <Item rounded style={styles.loginHeader}>
-                <Text style={styles.loginTitle}>Welcome, chef!{"\n"} Please log in or register</Text>
+                  <Text style={styles.loginTitle}>Welcome, chef!{"\n"} Please log in or register</Text>
                 </Item>
+              </View>
+              <View style={styles.formRow}>
                 <Item rounded style={styles.loginInputBox}>
-                  {/* <Label>e-mail</Label> */}
                   <Input placeholder="e-mail" keyboardType="email-address" onChange={(e) => this.handleTextInput(e, "e_mail")}/>
                 </Item>
+              </View>
+              {this.renderEmailError()}
+              <View style={styles.formRow}>
                 <Item rounded style={styles.loginInputBox}>
-                  {/* <Label>Password</Label> */}
                   <Input placeholder="password" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")}/>
                 </Item>
-                <View style={styles.loginFormButtonWrapper}>
-                  <Button rounded warning style={styles.loginFormButton} onPress={() => this.props.navigation.navigate('CreateChef')}>
-                    <Icon style={styles.standardIcon} size={25} name='account-plus'></Icon>
+              </View>
+              {this.renderPasswordError()}
+              <View style={styles.formRow}>
+                <Button rounded warning style={styles.loginFormButton} onPress={() => this.props.navigation.navigate('CreateChef')}>
+                  <Icon style={styles.standardIcon} size={25} name='account-plus'></Icon>
                     <Text style={styles.createChefFormButtonText}>Register</Text>
-                  </Button>
-                  <Button rounded success style={styles.loginFormButton} onPress={e => this.loginChef(e)}>
-                    <Icon style={styles.standardIcon} size={25} name='login'></Icon>
+                </Button>
+                <Button rounded success style={styles.loginFormButton} onPress={e => this.loginChef(e)}>
+                  <Icon style={styles.standardIcon} size={25} name='login'></Icon>
                     <Text style={styles.createChefFormButtonText}>Login</Text>
                   </Button>
-                </View>
-              </Form>
-            </Content>
+              </View>
+            </View>
           </ImageBackground>
-        </Container>
+        </KeyboardAvoidingView >
       )
     }
 

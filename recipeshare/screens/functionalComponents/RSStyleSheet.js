@@ -4,6 +4,14 @@ import { StyleSheet } from 'react-native';
 
 
 export const styles = StyleSheet.create({
+  mainPageContainer:{
+    // borderStyle: 'solid',
+    // borderWidth: 2,
+    // borderColor: '#9e0000f8',
+    // overflow: 'scroll'
+    flex: 1,
+    // flexDirection: 'column'
+  },
     scrollableTabs: {
       flex: 1,
       borderStyle: 'solid',
@@ -120,9 +128,9 @@ export const styles = StyleSheet.create({
       flexDirection: 'row',
       width: '98%',
       height: 149,
-      // borderStyle: 'solid',
-      // borderWidth: 1,
-      // borderColor: '#505050',
+      borderStyle: 'solid',
+      borderWidth: 1,
+      borderColor: '#505050',
       overflow: 'hidden',
       borderRadius: 20,
       backgroundColor: 'white',
@@ -145,6 +153,7 @@ export const styles = StyleSheet.create({
     background: {
       width: '100%',
       height: '100%',
+      flex: 1
       // opacity: '20%'
     },
     backgroundImageStyle: {
@@ -164,23 +173,28 @@ export const styles = StyleSheet.create({
       bottom: '20%',
       // borderStyle: 'solid',
       // borderWidth: 2,
-      width: '100%'
+      // borderColor: '#9e0000f8',
+      width: '100%',
+      // height: '60%'
     },
     loginInputBox: {
       // position: 'relative',
       // bottom: '0%',
-      marginTop: '2%',
+      marginTop: '0%',
       marginLeft: '10%',
       marginRight: '10%',
       backgroundColor: 'white',
       opacity: 0.9,
       height: 50,
-      width: '80%'
+      width: '80%',
+      // borderStyle: 'solid',
+      // borderWidth: 2,
+      // borderColor: '#9e0000f8',
     },
     loginHeader: {
       // position: 'relative',
       // bottom: '0%',
-      marginTop: '2%',
+      marginTop: '0%',
       marginLeft: '10%',
       marginRight: '10%',
       backgroundColor: 'white',
@@ -188,7 +202,10 @@ export const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
       height: 50,
-      width: '80%'
+      width: '80%',
+      // borderStyle: 'solid',
+      // borderWidth: 2,
+      // borderColor: '#9e0000f8',
     },
     loginTitle: {
       position: 'absolute',
@@ -205,8 +222,8 @@ export const styles = StyleSheet.create({
       color: "#505050",
     },
     createChefTitle: {
-      position: 'absolute',
-      bottom: '26%',
+      // position: 'absolute',
+      // bottom: '26%',
       // marginTop: '10%',
       // marginBottom: '10%',
       marginLeft: '5%',
@@ -218,19 +235,22 @@ export const styles = StyleSheet.create({
       fontSize: 16,
       color: "#505050",
     },
-    loginFormButtonWrapper: {
-      // borderStyle: 'solid',
-      // borderWidth: 2,
-      width: '100%',
+    formRow: {
+      // position: 'absolute',
+      // width: '100%',
       flex: 1,
       // flexWrap: 'wrap', 
       // alignItems: 'flex-start',
+      marginTop: '1%',
       flexDirection:'row',
       justifyContent: 'center',
       alignItems: 'center',
+      // borderStyle: 'solid',
+      // borderWidth: 2,
+      // borderColor: '#9e0000f8',
     },
     loginFormButton:{
-      marginTop: '2%',
+      marginTop: '0%',
       marginLeft: '5%',
       marginRight: '5%',
       // position: 'relative',
@@ -285,14 +305,20 @@ export const styles = StyleSheet.create({
       // color: 'white'
     },
     createChefForm: {
-      position: 'absolute',
-      bottom: '10%',
+      // position: 'absolute',
+      top: '15%',
       // borderStyle: 'solid',
       // borderWidth: 2,
-      width: '100%'
+      // borderColor: '#ffee00f8',
+      // justifyContent: 'center',
+      // alignItems: 'center',
+      width: '100%',
+      height: '85%',
+      // flex: 1,
+      // overflow: 'scroll'
     },
     createChefFormButton:{
-      marginTop: '2%',
+      marginTop: '0%',
       marginLeft: '5%',
       marginRight: '5%',
       // position: 'relative',
@@ -330,7 +356,7 @@ export const styles = StyleSheet.create({
     createChefInputBox: {
      // position: 'relative',
       // bottom: '0%',
-      marginTop: '2%',
+      marginTop: '0%',
       marginLeft: '10%',
       marginRight: '10%',
       backgroundColor: 'white',
@@ -348,7 +374,7 @@ export const styles = StyleSheet.create({
     createRecipeInputBox: {
       // position: 'relative',
        // bottom: '0%',
-       marginTop: '2%',
+       marginTop: '0%',
        marginLeft: '1%',
        marginRight: '1%',
        backgroundColor: 'white',
@@ -359,7 +385,7 @@ export const styles = StyleSheet.create({
      createRecipeTextAreaBox: {
       // position: 'relative',
        // bottom: '0%',
-       marginTop: '2%',
+       marginTop: '0%',
        marginLeft: '1%',
        marginRight: '1%',
        backgroundColor: 'white',
@@ -371,7 +397,7 @@ export const styles = StyleSheet.create({
        height: 130,
      },
      createRecipeFormButton:{
-      marginTop: '2%',
+      marginTop: '0%',
       marginLeft: '5%',
       marginRight: '5%',
       // position: 'relative',
@@ -386,8 +412,8 @@ export const styles = StyleSheet.create({
       opacity: 0.9
     },
     createRecipeFormSubmitButton:{
-      marginTop: '2%',
-      marginBottom: '2%',
+      marginTop: '0%',
+      marginBottom: '1%',
       marginLeft: '5%',
       marginRight: '5%',
       // position: 'relative',
@@ -425,7 +451,7 @@ export const styles = StyleSheet.create({
     addIngredientNameInputBox: {
       // position: 'relative',
        // bottom: '0%',
-       marginTop: '2%',
+       marginTop: '0%',
        marginLeft: '1%',
        marginRight: '1%',
        backgroundColor: 'white',
@@ -436,7 +462,7 @@ export const styles = StyleSheet.create({
     addIngredientQuantityInputBox: {
       // position: 'relative',
        // bottom: '0%',
-       marginTop: '2%',
+       marginTop: '0%',
       //  marginLeft: '1%',
       //  marginRight: '1%',
        backgroundColor: 'white',
@@ -447,7 +473,7 @@ export const styles = StyleSheet.create({
     addIngredientUnitInputBox: {
       // position: 'relative',
        // bottom: '0%',
-       marginTop: '2%',
+       marginTop: '0%',
        marginLeft: '1%',
        marginRight: '1%',
        backgroundColor: 'white',
@@ -478,7 +504,7 @@ export const styles = StyleSheet.create({
     timeAndDifficulty: {
     //  position: 'absolute',
        // bottom: '0%',
-       marginTop: '2%',
+       marginTop: '1%',
        marginLeft: '5%',
        marginRight: '5%',
        backgroundColor: 'white',
@@ -489,7 +515,7 @@ export const styles = StyleSheet.create({
      timeAndDifficultyTitleItem: {
       //  position: 'absolute',
          // bottom: '0%',
-         marginTop: '2%',
+         marginTop: '1%',
          marginLeft: '5%',
          marginRight: '5%',
          backgroundColor: 'white',
@@ -691,5 +717,33 @@ export const styles = StyleSheet.create({
     },
     detailsLikesAndMakes:{
       flexDirection: 'row'
+    },
+    formError:{
+      // position: 'relative',
+      // bottom: '0%',
+      marginTop: '0%',
+      marginLeft: '10%',
+      marginRight: '10%',
+      backgroundColor: 'white',
+      opacity: 0.9,
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: 30,
+      width: '80%'
+    },
+    formErrorText:{
+      // position: 'absolute',
+      // bottom: '0.5%',
+      // marginTop: '10%',
+      // marginBottom: '10%',
+      // marginLeft: '5%',
+      marginRight: '5%',
+      // backgroundColor: 'white',
+      // opacity: 0.75,
+      flex: 1,
+      textAlign: 'right',
+      // fontWeight: 'bold',
+      fontSize: 12,
+      color: "#9e0000f8",
     }
   });

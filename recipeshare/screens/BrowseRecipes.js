@@ -57,10 +57,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     render() {
       // console.log(this.navigateToRecipeDetails)
       return (
-        <View >
+        <Container stye={styles.mainPageContainer}>
           <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
             <Tabs style={styles.scrollTabHeader} tabBarUnderlineStyle={styles.scrollUnderline} renderTabBar={()=> <ScrollableTab style={styles.scrollTabHeader}/>}>
-              <Tab textStyle={styles.inactiveTabHeadingText} activeTextStyle={styles.activeTabHeadingText} tabStyle={styles.tabStyle} activeTabStyle={styles.tabStyle} heading="All Recipes">
+              <Tab textStyle  ={styles.inactiveTabHeadingText} activeTextStyle={styles.activeTabHeadingText} tabStyle={styles.tabStyle} activeTabStyle={styles.tabStyle} heading="All Recipes">
                 <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
                   <RecipesList listChoice={"all"} navigation={this.navigateToRecipeDetails}/>
                 </ImageBackground>
@@ -77,7 +77,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
               </Tab> */}
             </Tabs>
           </ImageBackground>
-        </View>
+        </Container>
       );
     }
 

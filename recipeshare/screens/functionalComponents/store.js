@@ -8,7 +8,8 @@ const initialState = {
   },
   loggedInChef: {
     id: "",
-    username: ""
+    username: "",
+    auth_token: ""
   },
   global_ranking: "liked",
   recipes: {

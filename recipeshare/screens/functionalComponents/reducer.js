@@ -3,15 +3,15 @@ import React from 'react'
 const reducer = (currentState, action) => {
     switch(action.type){
         case 'STORE_ALL_RECIPES':
-            console.log("saving recipes list")
+            // console.log("saving recipes list")
             return {...currentState, recipes: {...currentState.recipes, [action.recipeType]: action.recipeList}}
         case 'STORE_RECIPES_DETAILS':
-            console.log("saving recipes details")
+            // console.log("saving recipes details")
             return {...currentState, recipes_details: {...currentState.recipes_details, [action.recipeType]: action.recipesDetailsList}}
         case 'UPDATE_NEW_USER_DETAILS':
             return {...currentState, newUserDetails: {...currentState.newUserDetails, [action.parameter]: action.content}}
         case 'CLEAR_NEW_USER_DETAILS':
-            console.log("clearing new user details")
+            // console.log("clearing new user details")
             return {...currentState, newUserDetails: {
                 first_name: "",
                 last_name: "",
@@ -25,7 +25,7 @@ const reducer = (currentState, action) => {
         case 'UPDATE_LOGIN_USER_DETAILS':
             return {...currentState, loginUserDetails: {...currentState.loginUserDetails, [action.parameter]: action.content}}
         case 'CLEAR_LOGIN_USER_DETAILS':
-            console.log("clearing login details")
+            // console.log("clearing login details")
             return {...currentState, loginUserDetails: {
                 e_mail: "",
                 password: "",
@@ -39,7 +39,7 @@ const reducer = (currentState, action) => {
                 unit: action.ingredientUnit
             }}}}
         case 'CLEAR_NEW_RECIPE_DETAILS':
-            console.log("clearing new recipe details")
+            // console.log("clearing new recipe details")
             return {...currentState, newRecipeDetails: {
                 name: "",
                 instructions: "",
@@ -61,17 +61,17 @@ const reducer = (currentState, action) => {
             return {...currentState, loggedInChef: {
                 id: action.id,
                 username: action.username
-                }
             }
-            case 'UPDATE_LOGGED_IN_CHEF':
-                    console.log("updating logged in chef")
-                    return {...currentState, loggedInChef: {
-                        id: action.id,
-                        username: action.username
-                        }
-                    }
+            }
+        case 'UPDATE_LOGGED_IN_CHEF':
+            // console.log("updating logged in chef")
+            return {...currentState, loggedInChef: {
+                id: action.id,
+                username: action.username,
+                auth_token: action.auth_token
+                }}
             case 'CHANGE_GLOBAL_RANKING':
-                    console.log("switching ranking")
+                    // console.log("switching ranking")
                     const newValue = currentState.global_ranking == "liked" ? "made" : "liked"
                     return {...currentState, global_ranking: newValue}
         default:

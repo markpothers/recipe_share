@@ -7,12 +7,17 @@ class ChefsController < ApplicationController
     skip_before_action :logged_in?, :only => [:authenticate, :create]
 
     def authenticate
-        @chef = Chef.find_by(e_mail: chef_params[:e_mail])
-        if @chef.authenticate(chef_params[:password])
-            puts "loggin in!"
-            render json: @chef, methods: [:auth_token]
+        if @chef = Chef.find_by(e_mail: chef_params[:e_mail])
+            if @chef.authenticate(chef_params[:password])
+                puts "logging in!"
+                render json: @chef, methods: [:auth_token]
+            else
+                puts "bad password"
+                render json: {error: true, message: 'password'}
+            end
         else
-            render json: {error: true, message: 'Invalid Login'}
+            puts "bad e-mail address"
+            render json: {error: true, message: 'email'}
         end
     end
 
@@ -38,14 +43,16 @@ class ChefsController < ApplicationController
                 end
                 render json: @chef, methods: [:auth_token]
             else
+                puts @chef.errors.full_messages
                 render json: {error: true, message: @chef.errors.full_messages}
             end
         else
-            render json: {error: true, message: "Password confirmation did not match password", chef: chef_params}
+            render json: {error: true, message: ["Passwords do not match"] } #, chef: chef_params}
         end
     end
 
     def show
+        # byebug
         render json: @chef
     end
 

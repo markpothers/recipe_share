@@ -69,7 +69,7 @@ ProfileStack.navigationOptions = {
 export default createBottomTabNavigator({
   BrowseRecipes: BrowseRecipesStack,
   MyRecipeBook: MyRecipeBookStack,
-  // Profile: ProfileStack,
+  Profile: ProfileStack,
   },
   {
     initialRouteName: "BrowseRecipes",  //not sure why the default values don't work.  maybe explore later

@@ -18,11 +18,11 @@ export default class ProfileScreen extends React.Component {
       headerTitleStyle: {
         fontWeight: 'bold',
       },
-      headerRight: (
-        <Button rounded style={styles.newButton} onPress={navigation.getParam('newRecipe')}>
-          <Icon name='plus' size={40} style={styles.newIcon}/>
-        </Button>
-      ),
+      // headerRight: (
+      //   <Button rounded style={styles.newButton} onPress={navigation.getParam('logout')}>
+      //     <Icon name='plus' size={40} style={styles.newIcon}/>
+      //   </Button>
+      // ),
     }
   };
 
@@ -33,6 +33,7 @@ export default class ProfileScreen extends React.Component {
   }
 
   render() {
+
     return (
       <React.Fragment>
         <ChefDetails/>

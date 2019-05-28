@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView, StyleSheet, Text, AsyncStorage, ImageBackground, TextInput} from 'react-native'
+import { ScrollView, StyleSheet, Text, AsyncStorage, ImageBackground, TextInput, KeyboardAvoidingView} from 'react-native'
 import { ImagePicker } from 'expo'
 import { Container, Header, Content, Form, Item, Input, Label, Button, Picker, View } from 'native-base';
 import { connect } from 'react-redux'
@@ -93,7 +93,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     // console.log(Object.keys(this.props.ingredients).sort())
      return Object.keys(this.props.ingredients).sort().map(ingredient => {
         return (
-          <View style={styles.ingredientContainer} key={ingredient}>
+          <View style={styles.formRow} key={ingredient}>
+          {/* <View style={styles.ingredientContainer} key={ingredient}> */}
             <Item rounded style={styles.addIngredientNameInputBox} key={ingredient.name}>
               {/* <Label>Ingredient {ingredient[ingredient.length-1]} Name </Label> */}
               <Input style={styles.newRecipeTextCentering} placeholder={`Ingredient name`} onChange={(e) => this.addIngredientToList(ingredient, e.nativeEvent.text, this.props.ingredients[ingredient].quantity, this.props.ingredients[ingredient].unit)} value={this.props.ingredients[ingredient].name} />
@@ -114,6 +115,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
               </Picker>
             {/* <Input style={styles.QtyTextCentering} placeholder="Unit" onChange={(e) => this.addIngredientToList(ingredient, this.props.ingredients[ingredient].name, this.props.ingredients[ingredient].quantity, e.nativeEvent.text)} value={this.props.ingredients[ingredient].unit}/> */}
             </Item>
+          {/* </View> */}
           </View>
         )
       })
@@ -123,7 +125,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     const n = Object.keys(this.props.ingredients).length+1
     // console.log(this.props.ingredients[`ingredient${n}`])
     return (
-      <View style={styles.ingredientContainer} key={`ingredient${n}`}>
+      <View style={styles.formRow} key={`ingredient${n}`}>
+
+      {/* <View style={styles.ingredientContainer} key={`ingredient${n}`}> */}
         <Item rounded style={styles.addIngredientNameInputBox} key={[`ingredient${n}`].name}>
           {/* <Label>Ingredient {n} Name </Label> */}
           <Input style={styles.newRecipeTextCentering} placeholder={`New ingredient name`} onChange={(e) => this.addIngredientToList(`ingredient${n}`, e.nativeEvent.text, "", "Oz")} />
@@ -143,6 +147,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           </Picker>
         {/* <Input style={styles.QtyTextCentering} placeholder="Unit" onChange={(e) => this.addIngredientToList(`ingredient${n}`, "", "", e.nativeEvent.text)} /> */}
         </Item>
+      {/* </View> */}
       </View>
     )
   }
@@ -208,19 +213,19 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     render() {
       console.log(this.props.chef_id)
       return (
-        <Container>
+        <KeyboardAvoidingView  style={styles.mainPageContainer} behavior="padding">
           <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
             <ScrollView>
-              <Content style={styles.createRecipeForm}>
+              <KeyboardAvoidingView style={styles.createRecipeForm} behavior="padding">
                 <Form>
-                  <View>
+                  <View style={styles.formRow}>
                     <Item rounded style={styles.createRecipeInputBox} >
                       {/* <Label>Recipe Name</Label> */}
                       <Input style={styles.newRecipeTextCentering} value={this.props.name} placeholder="Recipe Name" onChange={(e) => this.handleTextInput(e.nativeEvent.text, "name")}/>
                     </Item>
                   </View>
                     {[ ...this.renderIngredientsList(), this.renderNewIngredientItem()]}
-                  <View>
+                    <View style={styles.formRow}>
                     <Item rounded style={styles.createRecipeTextAreaBox}>
                       {/* <Label>Instructions</Label> */}
                       <Input style={styles.createRecipeTextAreaInput} value={this.props.instructions} placeholder="Instructions" multiline={true} numberOfLines={4} onChange={(e) => this.handleTextInput(e.nativeEvent.text, "instructions")}/>
@@ -256,7 +261,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                       </Picker>
                     </Item>
                   </View>
-                  <View style={styles.loginFormButtonWrapper}>
+                  <View style={styles.formRow}>
                     <Button rounded info style={styles.createRecipeFormButton} title="Choose Photo" onPress={this.pickImage}>
                       <Icon style={styles.standardIcon} size={25} name='camera-burst' />
                       <Text style={styles.createChefFormButtonText}>Choose{"\n"}photo</Text>
@@ -266,17 +271,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                       <Text style={styles.createChefFormButtonText}>Take{"\n"}photo</Text>
                     </Button>
                   </View>
-                  <View style={styles.loginFormButtonWrapper}>
+                  <View style={styles.formRow}>
                     <Button rounded success style={styles.createRecipeFormSubmitButton} onPress={e => this.submitRecipe(e)}>
                       <Icon style={styles.standardIcon} size={25} name='login' />
                       <Text style={styles.createChefFormButtonText}>Submit</Text>
                     </Button>
                   </View>
                 </Form>
-              </Content>
+              </KeyboardAvoidingView>
             </ScrollView>
           </ImageBackground>
-        </Container>
+        </KeyboardAvoidingView>
       )
     }
 

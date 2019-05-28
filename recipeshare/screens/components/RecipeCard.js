@@ -7,7 +7,7 @@ import { styles } from '../functionalComponents/RSStyleSheet'
 export default class RecipeCard extends Component {
     
     render() {
-        // console.log(this.props.listChoice)
+        // console.log(this.props.item.id)
         // if (this.props.index % 2 == 0) {
             return (
                 // <ListItem style={styles.recipeCard} onPress={() => this.props.navigation(this.props["listChoice"], this.props.id)}>
