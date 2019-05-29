@@ -10,7 +10,7 @@ export default class ProfileScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: 'My profile',
-      headerStyle: {    //styles possibly needed if app-wide styling doesn't work
+      headerStyle: {
         backgroundColor: '#104e01',
         opacity: 0.8
       },

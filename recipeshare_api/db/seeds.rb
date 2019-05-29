@@ -21,15 +21,17 @@ require 'faker'
 # ActiveRecord::Migration.create_table(:ingredients)
 # ActiveRecord::Migration.create_table(:ingredient_uses)
 
+MakePic.destroy_all
+Comment.destroy_all
+RecipeImage.destroy_all
 RecipeLike.destroy_all
+RecipeMake.destroy_all
 Follow.destroy_all
 Friendship.destroy_all
-Ingredient_Use.destroy_all
+IngredientUse.destroy_all
 Recipe.destroy_all
 Chef.destroy_all
 Ingredient.destroy_all
-RecipeImage.destroy_all
-MakePic.destroy_all
 
 # ActiveRecord::Base.connection.reset_pk_sequence!('RecipeLikes')
 # ActiveRecord::Base.connection.reset_pk_sequence!('Follows')
@@ -45,38 +47,80 @@ MakePic.destroy_all
 end
 
 100.times do
-    Chef.create(first_name: Faker::TvShows::StarTrek.character, last_name: Faker::TvShows::StarTrek.specie, username: Faker::Books::CultureSeries.planet, imageURL:Faker::Avatar.image, e_mail:Faker::Internet.email, country: Faker::TvShows::StarTrek.location, created_at: Time.now)
+    Chef.create(username: Faker::Books::CultureSeries.planet, imageURL:Faker::Avatar.image, e_mail:Faker::Internet.email, country: Faker::TvShows::StarTrek.location, created_at: Time.now, password: '123456', password_confirmation: '123456')
 end
 
-500.times do
-    Recipe.create(name: Faker::Food.dish, chef_id: Chef.all.sample.id, instructions: Faker::Food.description, time: rand(600..6000), difficulty: rand(10), created_at: Time.now)
+
+difficulties = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+
+times = [
+    "00:15",
+    "00:30",
+    "00:45",
+    "01:00",
+    "01:15",
+    "01:30",
+    "01:45",
+    "02:00",
+    "02:15",
+    "02:30",
+    "02:45",
+    "03:00",
+    "03:15",
+    "03:30",
+    "03:45",
+    "04:00",
+    "04:15",
+    "04:30",
+    "04:45",
+    "05:00",
+    "05:15",
+    "05:30",
+    "05:45",
+    "06:00",
+]
+
+250.times do
+    Recipe.create(name: Faker::Food.dish, chef_id: Chef.all.sample.id, instructions: Faker::Food.description, time: times.sample, difficulty: difficulties.sample, created_at: Time.now)
 end
 
-200.times do
-    Friendship.create(requestor_id: Chef.all.sample.id, acceptor_id: Chef.all.sample.id, created_at: Time.now)
-end
+# 200.times do
+#     Friendship.create(requestor_id: Chef.all.sample.id, acceptor_id: Chef.all.sample.id, created_at: Time.now)
+# end
 
-199.times do
+300.times do
     Follow.create(followee_id: Chef.all.sample.id, follower_id: Chef.all.sample.id, created_at: Time.now)
 end
 
-200.times do
+1000.times do
     RecipeLike.create(chef_id: Chef.all.sample.id, recipe_id: Recipe.all.sample.id, created_at: Time.now)
 end
 
-5.times do
+units = [
+    "Oz",
+    "lb",
+    "g",
+    "tsp",
+    "tbsp",
+    "fl oz",
+    "cup",
+    "ml",
+    "each"
+]
+
+8.times do
     Recipe.all.each do |recipe|
         string = Faker::Food.measurement
         array = string.split(" ")
-        IngredientUse.create(recipe_id: recipe.id, ingredient_id: Ingredient.all.sample.id, quantity: array[0], unit: array[1], created_at: Time.now)
+        IngredientUse.create(recipe_id: recipe.id, ingredient_id: Ingredient.all.sample.id, quantity: array[0], unit: units.sample, created_at: Time.now)
     end
 end
 
-200.times do
+500.times do
     RecipeMake.create(chef_id: Chef.all.sample.id, recipe_id: Recipe.all.sample.id, created_at: Time.now, time: rand(600..6000), difficulty: rand(10), tastiness: rand(10), comment: Faker::ChuckNorris.fact)
 end
 
-200.times do
+500.times do
     Comment.create(chef_id: Chef.all.sample.id, recipe_id: Recipe.all.sample.id, comment: Faker::GreekPhilosophers.quote)
 end
 
@@ -90,10 +134,10 @@ Recipe.all.each do |recipe|
     RecipeImage.create(recipe_id: recipe.id, imageURL: images.sample)
 end
 
-Recipe.all.each do |recipe|
-    MakePic.create(chef: Chef.all.sample, recipe: recipe, imageURL: images.sample)
-end
+# Recipe.all.each do |recipe|
+#     MakePic.create(chef: Chef.all.sample, recipe: recipe, imageURL: images.sample)
+# end
 
-13.times do 
-    Recipe.last.destroy
-end
+# 13.times do 
+#     Recipe.last.destroy
+# end

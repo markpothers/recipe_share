@@ -2,7 +2,7 @@ class RecipeLikesController < ApplicationController
 
     # skip_before_action :verify_authenticity_token
     before_action :define_current_recipe_like
-    skip_before_action :define_current_recipe_like, :only => [:index, :create]
+    skip_before_action :define_current_recipe_like, :only => [:index, :create, :destroy]
 
 
     def index
@@ -41,10 +41,12 @@ class RecipeLikesController < ApplicationController
     end
 
     def destroy
-        if @recipe_like.destroy
-            render json: {message: "recipe_like deleted!"}
+        @recipe_likes = RecipeLike.where(recipe_id: recipe_like_params["recipe_id"]).where(chef_id: recipe_like_params["chef_id"] )
+        @recipe_ids = @recipe_likes.map { |like| like.id }
+        if RecipeLike.destroy(@recipe_ids)
+            render json: @recipe_ids
         else
-            render json: {error: true, message: "Ooops.  That's embarassing.  We couldn't delete that recipe_like.  You shouldn't even be able to see this message!"}
+            render json: {message: false}
         end
     end
 

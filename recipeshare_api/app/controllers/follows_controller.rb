@@ -2,11 +2,20 @@ class FollowsController < ApplicationController
 
     # skip_before_action :verify_authenticity_token
     before_action :define_current_follow
-    skip_before_action :define_current_follow, :only => [:index, :create]
+    skip_before_action :define_current_follow, :only => [:index, :create, :check, :destroy]
 
 
     def index
         render json: Follow.all
+    end
+
+    def check
+        # byebug
+        if Follow.where(follower_id: follow_params["follower_id"]).where(followee_id: follow_params["followee_id"]) != []
+            render json: true
+        else
+            render json: false
+        end
     end
 
     # def new
@@ -40,10 +49,12 @@ class FollowsController < ApplicationController
     end
 
     def destroy
-        if @follow.destroy
-            render json: {message: "follow deleted!"}
+        @follows = Follow.where(follower_id: follow_params["follower_id"]).where(followee_id: follow_params["followee_id"] )
+        @follow_ids = @follows.map { |like| like.id }
+        if Follow.destroy(@follow_ids)
+            render json: true
         else
-            render json: {error: true, message: "Ooops.  That's embarassing.  We couldn't delete that follow.  You shouldn't even be able to see this message!"}
+            render json: false
         end
     end
 

@@ -24,7 +24,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
   class BrowseRecipes extends React.Component {
     static navigationOptions = ({ navigation }) => {
       return {
-        title: 'Browse',
+        title: 'Recipe-Share',
         headerStyle: {    //styles possibly needed if app-wide styling doesn't work
           backgroundColor: '#104e01',
           opacity: 0.8

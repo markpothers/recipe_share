@@ -3,7 +3,7 @@ class CreateRecipes < ActiveRecord::Migration[5.2]
     create_table :recipes do |t|
       t.string :name
       t.belongs_to :chef, foreign_key: true
-      t.integer :time
+      t.string :time
       t.integer :difficulty
       t.string :instructions
 

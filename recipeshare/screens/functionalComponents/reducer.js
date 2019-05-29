@@ -76,9 +76,11 @@ const reducer = (currentState, action) => {
                 imageBase64: ""
                 }}
         case 'ADD_RECIPE_LIKE':
-                return {...currentState, recipes_details: {...currentState.recipes_details, [action.listType]: {...currentState.recipes_details[action.listType], recipe_likes: [...currentState.recipes_details[action.listType].recipe_likes, action.like]}}}
+            return {...currentState, recipes_details: {...currentState.recipes_details, [action.listType]: {...currentState.recipes_details[action.listType], recipe_likes: [...currentState.recipes_details[action.listType].recipe_likes, action.like]}}}
         case 'ADD_RECIPE_MAKE':
             return {...currentState, recipes_details: {...currentState.recipes_details, [action.listType]: {...currentState.recipes_details[action.listType], recipe_makes: [...currentState.recipes_details[action.listType].recipe_makes, action.make]}}}
+        case 'REMOVE_RECIPE_LIKES':
+            return {...currentState, recipes_details: {...currentState.recipes_details, [action.listType]: {...currentState.recipes_details[action.listType], recipe_likes: action.recipe_likes}}}
         case 'LOG_IN_CHEF':
             console.log("logging in chef")
             return {...currentState, loggedInChef: {
@@ -100,16 +102,16 @@ const reducer = (currentState, action) => {
             console.log("saving chefs list")
             return {...currentState, chefs: {...currentState.chefs, [action.chefType]: action.chefList}}
         case 'CLEAR_LISTED_CHEFS':
-            console.log("clearing listed chefs")
+            // console.log("clearing listed chefs")
             return {...currentState, chefs: {...currentState.chefs, [action.chefType]: []}}
         case 'STORE_CHEFS_DETAILS':
-            console.log(action.chefsDetailsList)
+            // console.log(action.chefsDetailsList)
             return {...currentState, chefs_details: {...currentState.chefs_details, [action.chefType]: action.chefsDetailsList}}
         case 'APPEND_TO_CHEF_LISTS':
-            console.log(currentState.chefs[action.chefType])
+            // console.log(currentState.chefs[action.chefType])
             return {...currentState, chefs: {...currentState.chefs, [action.chefType]: [...currentState.chefs[action.chefType], ...action.chefList]}}
         case 'APPEND_TO_CHEFS_DETAILS':
-            console.log("appending chefs details")
+            // console.log("appending chefs details")
             // console.log(currentState.chefs_details[action.chefType].comments)
             // console.log(action.chefsDetailsList)
             return {...currentState, chefs_details: {

@@ -24,7 +24,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     fetchChefDetails = () => {
-      console.log(databaseURL)
+      // console.log(databaseURL)
       fetch(`${databaseURL}/chefs/${this.props.loggedInChef.id}`, {
         method: "GET",
         headers: {
@@ -34,7 +34,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       })
       .then(res => res.json())
       .then(chef => {
-        console.log(chef)
+        // console.log(chef)
         this.setState({chef_details: chef})
       })
     }
@@ -48,12 +48,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
-      console.log(this.state.chef_details)
+      // console.log(this.state.chef_details)
         return (
           <View style={styles.mainPageContainer}>
             <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
               <View style={styles.detailsHeader}>
-                <Text style={[styles.detailsHeaderTextBox, {textAlign: 'left'}]}>User: {this.state.chef_details.id}</Text>
+                {/* <Text style={[styles.detailsHeaderTextBox, {textAlign: 'left'}]}>User: {this.state.chef_details.id}</Text> */}
                 <Text style={[styles.detailsHeaderTextBox]}>{this.state.chef_details.username}</Text>
               </View>
               <View style={styles.detailsImageWrapper}>

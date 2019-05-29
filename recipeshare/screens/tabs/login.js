@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, AsyncStorage, ImageBackground, KeyboardAvoidingView } from 'react-native'
+import {Text, AsyncStorage, ImageBackground, KeyboardAvoidingView, Image } from 'react-native'
 import { Container, Header, Content, Form, Item, Input, Label, Button, View } from 'native-base';
 import { connect } from 'react-redux'
 import { databaseURL } from '../functionalComponents/databaseURL'
@@ -58,13 +58,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       })
       .then(res => res.json())
       .then(chef => {
-        // console.log(chef)
         if (!chef.error){
-          this.setState({error: ""})
+          // this.setState({error: ""})
           AsyncStorage.setItem('chef', JSON.stringify(chef), () => {
             AsyncStorage.getItem('chef', (err, res) => {
               console.log(err)
-              this.props.navigation.navigate('Home')
+              this.props.navigation.navigate('AppLoading')
             })
           })
         } else {
@@ -106,6 +105,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       return (
         <KeyboardAvoidingView  style={styles.mainPageContainer} behavior="padding">
           <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
+            <View style={styles.logoContainer}>
+              <Image style={styles.logo} source={require('./logo.png')}/>
+            </View>
             <View style={styles.loginForm} >
               <View style={styles.formRow}>
                 <Item rounded style={styles.loginHeader}>

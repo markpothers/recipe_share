@@ -83,18 +83,18 @@ export const styles = StyleSheet.create({
       // marginBottom: '0%'
       textAlign: 'center'
     },
-    recipeCardOther: {
+    recipeCardOtherTop: {
       position: 'absolute',
-      bottom: '20%',
-      // fontWeight: 'bold',
+      bottom: '30%',
       fontSize: 16,
       color: "#505050",
-      // height: '100%',
-      // width: '100%',
-      // alignSelf: 'center',
-      // marginTop: '0%',
-      // marginLeft: '8%',
-      // marginBottom: '0%'
+      textAlign: 'center'
+    },
+    recipeCardOtherBottom: {
+      position: 'absolute',
+      bottom: '15%',
+      fontSize: 16,
+      color: "#505050",
       textAlign: 'center'
     },
     scrollTabHeader: {
@@ -772,5 +772,19 @@ export const styles = StyleSheet.create({
       // fontWeight: 'bold',
       fontSize: 12,
       color: "#9e0000f8",
-    }
+    },
+    logoContainer: {
+      // position: 'absolute',
+      // top: '10%',
+      width: '100%',
+      height: '30%',
+      // borderStyle: 'solid',
+      // borderWidth: 2
+    },
+    logo: {
+      // position: 'absolute',
+      top: '40%',
+      width: '100%',
+      flex: 1
+    },
   });

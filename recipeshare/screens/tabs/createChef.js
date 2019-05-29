@@ -91,7 +91,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       let result = await ImagePicker.launchCameraAsync({
         allowsEditing: true,
         aspect: [4, 3],
-        quality: 0.1,
+        quality: 0.3,
         base64: true
       })
       // console.log(result)
@@ -113,13 +113,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       .then(chef => {
         if (!chef.error){
           // console.log(chef)
-          this.setState({errors: []})
+          // this.setState({errors: []})
           AsyncStorage.setItem('chef', JSON.stringify(chef), () => {
             AsyncStorage.getItem('chef', (err, res) => {
               console.log(err)
               this.props.navigation.navigate('AppLoading')
             })
           })
+
         } else {
           // console.log(chef.message)
           this.setState({errors: chef.message})

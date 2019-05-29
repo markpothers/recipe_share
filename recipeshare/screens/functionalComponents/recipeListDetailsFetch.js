@@ -17,7 +17,6 @@ export const fetchRecipeDetails = (recipe_ids, auth_token) => {
         })
         .then(res => res.json())
         .then(recipe_details => {
-            // console.log(recipe_details)
             resolve(recipe_details)
         })
     })

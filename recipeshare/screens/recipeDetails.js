@@ -22,7 +22,13 @@ const mapDispatchToProps = {
       return dispatch => {
         dispatch({ type: 'ADD_RECIPE_MAKE', make: make, listType: listType})
     }
+  },
+  removeRecipeLikes: (remaining_likes, listType) => {
+      return dispatch => {
+        dispatch({ type: 'REMOVE_RECIPE_LIKES', recipe_likes: remaining_likes, listType: listType})
+      }
   }
+
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
@@ -30,7 +36,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     static navigationOptions = ({ navigation }) => {
       return {
         title: 'Recipe details',
-        headerStyle: {    //styles possibly needed if app-wide styling doesn't work
+        headerStyle: {
           backgroundColor: '#104e01',
           opacity: 0.8
         },
@@ -40,22 +46,63 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         },
         headerRight: (
           <React.Fragment>
-            <Button rounded style={styles.newButton} onPress={navigation.getParam('likeRecipe')}>
-              <Icon name='heart-outline' size={28} style={styles.newIcon} />
-            </Button>
-            <Button rounded style={styles.newButton} onPress={navigation.getParam('makeRecipe')}>
+            {navigation.getParam('likeable') == false ? <Button rounded style={styles.newButton} onPress={navigation.getParam('unlikeRecipe')}><Icon name='heart' size={28} style={styles.newIcon}/></Button> : <Button rounded style={styles.newButton} onPress={navigation.getParam('likeRecipe')}><Icon name='heart-outline' size={28} style={styles.newIcon}/></Button> }
+            {navigation.getParam('makeable') == false ? <Button rounded style={styles.newButton}><Icon name='food-off' size={28} style={styles.newIcon}/></Button> : <Button rounded style={styles.newButton} onPress={navigation.getParam('makeRecipe')}><Icon name='food' size={28} style={styles.newIcon}/></Button> }
+            {/* <Button rounded style={styles.newButton} onPress={navigation.getParam('makeRecipe')}>
               <Icon name='food-variant' size={28} style={styles.newIcon} />
-            </Button>
+            </Button> */}
           </React.Fragment>
         ),
       };
-      
     }
 
     componentDidMount = () => {
-      this.props.navigation.setParams({
-        likeRecipe: this.likeRecipe,
-        makeRecipe: this.makeRecipe})
+      // this.props.navigation.setParams({
+      //   likeRecipe: this.likeRecipe,
+      //   makeRecipe: this.makeRecipe,
+      //   unlikeRecipe: this.unlikeRecipe})
+      this.checkLikeable()
+      this.checkMakeable()
+    }
+
+    checkLikeable = () => {
+      const likes = this.props.recipes_details[this.props.navigation.getParam('listChoice')].recipe_likes.filter(like => like.recipe_id == this.props.navigation.getParam('recipeID'))
+      let myLike = null
+      myLike = likes.find(like => like.chef_id == this.props.loggedInChef.id)
+        if (myLike){
+          this.props.navigation.setParams({
+            likeable: false,
+            likeRecipe: this.likeRecipe,
+            makeRecipe: this.makeRecipe,
+            unlikeRecipe: this.unlikeRecipe
+          })
+        } else {
+          this.props.navigation.setParams({
+            likeable: true,
+            likeRecipe: this.likeRecipe,
+            unlikeRecipe: this.unlikeRecipe
+          })
+        }
+    }
+
+    checkMakeable = () => {
+      const makes = this.props.recipes_details[this.props.navigation.getParam('listChoice')].recipe_makes.filter(make => make.recipe_id == this.props.navigation.getParam('recipeID'))
+      let mymake = null
+      mymake = makes.find(make => make.chef_id == this.props.loggedInChef.id)
+      // console.log(mymake)
+        if (mymake){
+          // console.log("mymake was true")
+          this.props.navigation.setParams({
+            makeable: false,
+            makeRecipe: this.makeRecipe,
+          })
+        } else {
+          // console.log("mymake was false")
+          this.props.navigation.setParams({
+            makeable: true,
+            makeRecipe: this.makeRecipe,
+          })
+        }
     }
 
     renderRecipe = (listChoice, recipeID) => {
@@ -124,42 +171,60 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     likeRecipe = () => {
-      AsyncStorage.getItem('chef', (err, res) => {
-        const loggedInChef = JSON.parse(res)
             fetch(`${databaseURL}/recipe_likes`, {
                 method: "POST",
                 headers: {
-                  Authorization: `Bearer ${loggedInChef.auth_token}`,
+                  Authorization: `Bearer ${this.props.loggedInChef.auth_token}`,
                   'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                   recipe: {
                     recipe_id: this.props.navigation.getParam('recipeID'),
-                    chef_id: loggedInChef.id,
+                    chef_id: this.props.loggedInChef.id,
                   }
                 })
             })
             .then(res => res.json())
             .then(like => {
               // console.log(like)
-                this.props.addRecipeLike(like, this.props.navigation.getParam('listChoice'))
+              this.props.addRecipeLike(like, this.props.navigation.getParam('listChoice'))
+              this.checkLikeable()
             })
-          })
     }
 
-    makeRecipe = () => {
-      AsyncStorage.getItem('chef', (err, res) => {
-        const loggedInChef = JSON.parse(res)
-            fetch(`${databaseURL}/recipe_makes`, {
-                method: "POST",
+    unlikeRecipe = () => {
+            fetch(`${databaseURL}/recipe_likes`, {
+                method: "DELETE",
                 headers: {
-                  Authorization: `Bearer ${loggedInChef.auth_token}`,
+                  Authorization: `Bearer ${this.props.loggedInChef.auth_token}`,
                   'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                   recipe: {
                     recipe_id: this.props.navigation.getParam('recipeID'),
-                    chef_id: loggedInChef.id,
+                    chef_id: this.props.loggedInChef.id,
+                  }
+                })
+            })
+            .then(res => res.json())
+            .then(unlikes => {
+              const remaining_likes = this.props.recipes_details[this.props.navigation.getParam('listChoice')].recipe_likes.filter(like => like.id != unlikes[0])
+              this.props.removeRecipeLikes(remaining_likes, this.props.navigation.getParam('listChoice'))
+              this.checkLikeable()
+            })
+    }
+
+    makeRecipe = () => {
+            fetch(`${databaseURL}/recipe_makes`, {
+                method: "POST",
+                headers: {
+                  Authorization: `Bearer ${this.props.loggedInChef.auth_token}`,
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  recipe: {
+                    recipe_id: this.props.navigation.getParam('recipeID'),
+                    chef_id: this.props.loggedInChef.id,
                   }
                 })
             })
@@ -167,8 +232,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             .then(make => {
               // console.log(make)
                 this.props.addRecipeMake(make, this.props.navigation.getParam('listChoice'))
+                this.checkMakeable()
             })
-          })
     }
 
     render() {
@@ -200,6 +265,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 <Text style={styles.detailsSubHeadings}>Ingredients:</Text>
                 {this.renderRecipeIngredients(listChoice, recipeID)}
               </View>
+              {/* <View style={styles.detailsInstructions}>
+              <Text style={styles.detailsSubHeadings}>Liked:</Text>
+                {this.renderILikeThis(listChoice, recipeID)}
+              </View> */}
               <View style={styles.detailsInstructions}>
               <Text style={styles.detailsSubHeadings}>Instructions:</Text>
                 {this.renderRecipeInstructions(listChoice, recipeID)}

@@ -57,7 +57,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
   class RecipesList extends React.Component {
 
     state = {
-      limit: 50,
+      limit: 20,
       offset: 0
     }
 
@@ -118,23 +118,23 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     refresh = async () => {
-      await this.setState({limit: 50, offset: 0})
+      await this.setState({limit: 20, offset: 0})
       this.props.clearListedRecipes(this.props["listChoice"])
       this.fetchRecipeListThenDetails()
     }
 
     onEndReached = async () => {
-      await this.setState({offset: this.state.offset + 50})
+      await this.setState({offset: this.state.offset + 20})
       this.fetchAdditionalRecipesThenDetailsForList()
     }
 
     render() {
-      // console.log("rendering")
+      // console.log(this.props[this.props["listChoice"] + `_Recipes`])
       return (
         <React.Fragment>
           <FlatList
             data={this.props[this.props["listChoice"] + `_Recipes`]}
-            extraData={this.props.recipes_details[this.props["listChoice"]]}
+            extraData={this.props.recipes_details}
             renderItem={this.renderRecipeListItem}
             keyExtractor={(item) => item.id.toString()}
             onRefresh={this.refresh}

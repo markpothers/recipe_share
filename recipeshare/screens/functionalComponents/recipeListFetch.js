@@ -2,7 +2,7 @@ import React from 'react'
 import { databaseURL } from './databaseURL'
 
 export const fetchRecipeList = (listType, chef_id, limit, offset, global_ranking, auth_token) => {
-    console.log(chef_id)
+
     return new Promise((resolve) => {
         fetch(`${databaseURL}/recipes/index`, {
             method: "POST",
@@ -22,7 +22,6 @@ export const fetchRecipeList = (listType, chef_id, limit, offset, global_ranking
         })
         .then(res => res.json())
         .then(recipes => {
-            // console.log(recipes)
             resolve(recipes)
         })
     })

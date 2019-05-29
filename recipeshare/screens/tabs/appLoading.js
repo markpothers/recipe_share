@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, AsyncStorage} from 'react-native'
+import { StyleSheet, Text, AsyncStorage, View, ImageBackground, Image} from 'react-native'
 import { Container, Content } from 'native-base';
 import { connect } from 'react-redux'
 import { styles } from '../functionalComponents/RSStyleSheet'
@@ -21,7 +21,7 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(
   class AppLoading extends React.Component {
     static navigationOptions = {
-      title: 'App Loading!',
+      header: null,
     };
 
     componentDidMount = () => {
@@ -33,7 +33,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           this.props.updateLoggedInChefInState(loggedInChef.id, loggedInChef.username, loggedInChef.auth_token)
           this.props.navigation.navigate('Home')
         } else {
-          // this.props.navigation.navigate('Login')
           this.props.navigation.navigate('Login')
         }
       })
@@ -42,11 +41,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     render() {
       // console.log(this.props)
       return (
-        <Container>
-          <Content>
-            <Text>App Loading...</Text>
-          </Content>
-        </Container>
+        <View style={styles.mainPageContainer}>
+          <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
+            <View style={styles.logoContainer}>
+              <Image style={styles.logo} source={require('./logo.png')}/>
+            </View>
+          </ImageBackground>
+        </View>
       )
     }
 

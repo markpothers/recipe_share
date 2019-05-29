@@ -164,7 +164,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       let result = await ImagePicker.launchImageLibraryAsync({
         allowsEditing: true,
         aspect: [4, 3],
-        quality: 0.1,
+        quality: 0.3,
         base64: true
       })
       // console.log(result)
@@ -175,7 +175,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       let result = await ImagePicker.launchCameraAsync({
         allowsEditing: true,
         aspect: [4, 3],
-        quality: 0.1,
+        quality: 0.3,
         base64: true
       })
       // console.log(result)
@@ -200,7 +200,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             .then(recipe => {
               console.log(recipe)
               this.props.clearNewRecipeDetails()
-              this.props.navigation.navigate('BrowseRecipes')
+              this.props.navigation.navigate('MyRecipeBook')
             })
             .catch(error => {
               console.log(error)
@@ -208,10 +208,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     })
   }
 
-
-
     render() {
-      console.log(this.props.chef_id)
+      // console.log(this.props.chef_id)
       return (
         <KeyboardAvoidingView  style={styles.mainPageContainer} behavior="padding">
           <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
