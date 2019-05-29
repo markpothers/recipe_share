@@ -117,6 +117,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           AsyncStorage.setItem('chef', JSON.stringify(chef), () => {
             AsyncStorage.getItem('chef', (err, res) => {
               console.log(err)
+              this.props.clearNewUserDetails()
               this.props.navigation.navigate('AppLoading')
             })
           })

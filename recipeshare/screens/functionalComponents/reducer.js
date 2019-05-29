@@ -99,7 +99,7 @@ const reducer = (currentState, action) => {
                 const newValue = currentState.global_ranking == "liked" ? "made" : "liked"
                 return {...currentState, global_ranking: newValue}
         case 'STORE_CHEF_LIST':
-            console.log("saving chefs list")
+            // console.log("saving chefs list")
             return {...currentState, chefs: {...currentState.chefs, [action.chefType]: action.chefList}}
         case 'CLEAR_LISTED_CHEFS':
             // console.log("clearing listed chefs")
