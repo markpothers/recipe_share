@@ -6,6 +6,7 @@ class CreateRecipes < ActiveRecord::Migration[5.2]
       t.string :time
       t.integer :difficulty
       t.string :instructions
+      t.boolean :hidden
 
       t.timestamps
     end

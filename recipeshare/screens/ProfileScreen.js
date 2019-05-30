@@ -18,14 +18,8 @@ export default class ProfileScreen extends React.Component {
       headerTitleStyle: {
         fontWeight: 'bold',
       },
-      // headerRight: (
-      //   <Button rounded style={styles.newButton} onPress={navigation.getParam('logout')}>
-      //     <Icon name='plus' size={40} style={styles.newIcon}/>
-      //   </Button>
-      // ),
     }
   };
-
 
   logout = () => {
     AsyncStorage.removeItem('chef', () => {})

@@ -47,7 +47,7 @@ Ingredient.destroy_all
 end
 
 100.times do
-    Chef.create(username: Faker::Books::CultureSeries.planet, imageURL:Faker::Avatar.image, e_mail:Faker::Internet.email, country: Faker::TvShows::StarTrek.location, created_at: Time.now, password: '123456', password_confirmation: '123456')
+    Chef.create(username: Faker::Books::CultureSeries.planet, imageURL:Faker::Avatar.image, e_mail:Faker::Internet.email, country: Faker::TvShows::StarTrek.location, hidden: false, created_at: Time.now, password: '123456', password_confirmation: '123456')
 end
 
 
@@ -81,7 +81,7 @@ times = [
 ]
 
 250.times do
-    Recipe.create(name: Faker::Food.dish, chef_id: Chef.all.sample.id, instructions: Faker::Food.description, time: times.sample, difficulty: difficulties.sample, created_at: Time.now)
+    Recipe.create(name: Faker::Food.dish, hidden: false, chef_id: Chef.all.sample.id, instructions: Faker::Food.description, time: times.sample, difficulty: difficulties.sample, created_at: Time.now)
 end
 
 # 200.times do

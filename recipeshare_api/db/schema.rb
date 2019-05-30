@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2019_05_13_230713) do
     t.string "password_confirmation"
     t.string "password_digest"
     t.string "imageURL"
+    t.boolean "hidden"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -139,6 +140,7 @@ ActiveRecord::Schema.define(version: 2019_05_13_230713) do
     t.string "time"
     t.integer "difficulty"
     t.string "instructions"
+    t.boolean "hidden"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["chef_id"], name: "index_recipes_on_chef_id"

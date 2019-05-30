@@ -46,7 +46,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
   class NewRecipe extends React.Component {
     static navigationOptions = {
       title: 'Create a new recipe!',
-      headerStyle: {    //styles possibly needed if app-wide styling doesn't work
+      headerStyle: {
       backgroundColor: '#104e01',
       opacity: 0.8
     },
@@ -90,21 +90,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(
   }
 
   renderIngredientsList = () =>{
-    // console.log(Object.keys(this.props.ingredients).sort())
      return Object.keys(this.props.ingredients).sort().map(ingredient => {
         return (
           <View style={styles.formRow} key={ingredient}>
-          {/* <View style={styles.ingredientContainer} key={ingredient}> */}
             <Item rounded style={styles.addIngredientNameInputBox} key={ingredient.name}>
-              {/* <Label>Ingredient {ingredient[ingredient.length-1]} Name </Label> */}
-              <Input style={styles.newRecipeTextCentering} placeholder={`Ingredient name`} onChange={(e) => this.addIngredientToList(ingredient, e.nativeEvent.text, this.props.ingredients[ingredient].quantity, this.props.ingredients[ingredient].unit)} value={this.props.ingredients[ingredient].name} />
+              <Input style={styles.newRecipeTextCentering} placeholder={`Ingredient name`}  autoCapitalize="none" onChange={(e) => this.addIngredientToList(ingredient, e.nativeEvent.text, this.props.ingredients[ingredient].quantity, this.props.ingredients[ingredient].unit)} value={this.props.ingredients[ingredient].name} />
             </Item>
             <Item rounded style={styles.addIngredientQuantityInputBox} key={ingredient.quantity}>
-              {/* <Label>Qty</Label> */}
               <Input style={styles.QtyTextCentering} placeholder="Qty" keyboardType="phone-pad" onChange={(e) => this.addIngredientToList(ingredient, this.props.ingredients[ingredient].name, e.nativeEvent.text, this.props.ingredients[ingredient].unit)} value={this.props.ingredients[ingredient].quantity}/>
             </Item>
               <Item rounded style={styles.addIngredientUnitInputBox} key={ingredient.unit}>
-              {/* <Label>Unit</Label> */}
               <Picker style={styles.unitPicker}
                       mode="dropdown"
                       iosIcon={<Icon name="arrow-down" />}
@@ -113,9 +108,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                       <Picker.Item style={styles.pickerText} key={this.props.ingredients[ingredient].unit} label={this.props.ingredients[ingredient].unit} value={this.props.ingredients[ingredient].unit} />
                       {this.unitsPicker()}
               </Picker>
-            {/* <Input style={styles.QtyTextCentering} placeholder="Unit" onChange={(e) => this.addIngredientToList(ingredient, this.props.ingredients[ingredient].name, this.props.ingredients[ingredient].quantity, e.nativeEvent.text)} value={this.props.ingredients[ingredient].unit}/> */}
             </Item>
-          {/* </View> */}
           </View>
         )
       })
@@ -130,7 +123,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       {/* <View style={styles.ingredientContainer} key={`ingredient${n}`}> */}
         <Item rounded style={styles.addIngredientNameInputBox} key={[`ingredient${n}`].name}>
           {/* <Label>Ingredient {n} Name </Label> */}
-          <Input style={styles.newRecipeTextCentering} placeholder={`New ingredient name`} onChange={(e) => this.addIngredientToList(`ingredient${n}`, e.nativeEvent.text, "", "Oz")} />
+          <Input style={styles.newRecipeTextCentering} placeholder={`New ingredient name`}  autoCapitalize="none" onChange={(e) => this.addIngredientToList(`ingredient${n}`, e.nativeEvent.text, "", "Oz")} />
         </Item>
         <Item rounded style={styles.addIngredientQuantityInputBox} key={[`ingredient${n}`].quantity}>
           {/* <Label>Qty</Label> */}
@@ -200,7 +193,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             .then(recipe => {
               console.log(recipe)
               this.props.clearNewRecipeDetails()
-              this.props.navigation.navigate('MyRecipeBook')
+              this.props.navigation.navigate('MyRecipeBook', {refresh: true})
             })
             .catch(error => {
               console.log(error)

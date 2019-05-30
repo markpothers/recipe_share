@@ -1,6 +1,6 @@
 import React from 'react'
-import { StyleSheet, TouchableOpacity, View, AsyncStorage, ImageBackground, ScrollView, FlatList, Text } from 'react-native'
-import { Container, Header, Content, List, ListItem, Thumbnail, Left, Body, Right, Button} from 'native-base'
+import { FlatList, Text } from 'react-native'
+import { Button} from 'native-base'
 import RecipeCard from './RecipeCard'
 import { databaseURL } from '../functionalComponents/databaseURL'
 import { connect } from 'react-redux'
@@ -8,6 +8,7 @@ import { styles } from '../functionalComponents/RSStyleSheet'
 import { fetchRecipeList } from '../functionalComponents/recipeListFetch'
 import { fetchRecipeDetails } from '../functionalComponents/recipeListDetailsFetch'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { NavigationEvents } from 'react-navigation';
 
 const mapStateToProps = (state) => ({
       all_Recipes: state.recipes.all,
@@ -68,17 +69,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     componentDidMount = () => {
+    }
+
+    respondToFocus = () =>{
       this.fetchRecipeListThenDetails()
     }
 
     fetchRecipeListThenDetails = async() => {
-
       let recipes = await fetchRecipeList(this.props["listChoice"], this.props.chef_id, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token)
       this.props.storeRecipeList(this.props["listChoice"], recipes)
       recipe_ids = recipes.map(recipe => {
         return recipe.id
       })
-      // console.log(recipe_ids)
       const recipe_details = await fetchRecipeDetails(recipe_ids, this.props.loggedInChef.auth_token)
       this.props.storeRecipeDetails(this.props["listChoice"], recipe_details)
     }
@@ -132,6 +134,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       // console.log(this.props[this.props["listChoice"] + `_Recipes`])
       return (
         <React.Fragment>
+          <NavigationEvents onWillFocus={this.respondToFocus}/>
           <FlatList
             data={this.props[this.props["listChoice"] + `_Recipes`]}
             extraData={this.props.recipes_details}

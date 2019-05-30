@@ -48,9 +48,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           <React.Fragment>
             {navigation.getParam('likeable') == false ? <Button rounded style={styles.newButton} onPress={navigation.getParam('unlikeRecipe')}><Icon name='heart' size={28} style={styles.newIcon}/></Button> : <Button rounded style={styles.newButton} onPress={navigation.getParam('likeRecipe')}><Icon name='heart-outline' size={28} style={styles.newIcon}/></Button> }
             {navigation.getParam('makeable') == false ? <Button rounded style={styles.newButton}><Icon name='food-off' size={28} style={styles.newIcon}/></Button> : <Button rounded style={styles.newButton} onPress={navigation.getParam('makeRecipe')}><Icon name='food' size={28} style={styles.newIcon}/></Button> }
-            {/* <Button rounded style={styles.newButton} onPress={navigation.getParam('makeRecipe')}>
-              <Icon name='food-variant' size={28} style={styles.newIcon} />
-            </Button> */}
+            <Button rounded style={styles.newButton} onPress={navigation.getParam('deleteRecipe')}>
+              <Icon name='delete-outline' size={28} style={styles.newIcon} />
+            </Button>
           </React.Fragment>
         ),
       };
@@ -74,15 +74,36 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             likeable: false,
             likeRecipe: this.likeRecipe,
             makeRecipe: this.makeRecipe,
-            unlikeRecipe: this.unlikeRecipe
+            unlikeRecipe: this.unlikeRecipe,
+            deleteRecipe: this.deleteRecipe
           })
         } else {
           this.props.navigation.setParams({
             likeable: true,
             likeRecipe: this.likeRecipe,
-            unlikeRecipe: this.unlikeRecipe
+            unlikeRecipe: this.unlikeRecipe,
+            deleteRecipe: this.deleteRecipe
           })
         }
+    }
+
+    deleteRecipe = () => {
+      fetch(`${databaseURL}/recipes/${this.props.navigation.getParam('recipeID')}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${this.props.loggedInChef.auth_token}`,
+          'Content-Type': 'application/json'
+        }
+    })
+    .then(res => res.json())
+    .then(response => {
+      // console.log(response)
+      if (response == true){
+        this.props.navigation.goBack()
+      }
+      // this.props.addRecipeLike(like, this.props.navigation.getParam('listChoice'))
+      // this.checkLikeable()
+    })
     }
 
     checkMakeable = () => {

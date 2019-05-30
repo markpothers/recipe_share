@@ -8,7 +8,13 @@ class RecipesController < ApplicationController
     def index
         # byebug
         @recipes = Recipe.choose_list(list_params["listType"], list_params["chef_id"], list_params["limit"], list_params["offset"], list_params["ranking"])
-        render json: @recipes #, methods: [:add_count]
+        # byebug
+        if list_params["listType"] == "global_ranks"
+            @filtered_recipes = @recipes.select { |recipe| recipe["hidden"] == 0 }
+        else
+            @filtered_recipes = @recipes.select { |recipe| recipe.hidden == false }
+        end
+        render json: @filtered_recipes #, methods: [:add_count]
     end
 
     def details
@@ -81,10 +87,13 @@ class RecipesController < ApplicationController
     end
 
     def destroy
-        if @recipe.destroy
-            render json: {message: "Recipe deleted!"}
+        @recipe = Recipe.find(params["id"])
+        @recipe.hidden=(true)
+        @recipe.save
+        if @recipe.hidden=(true)
+            render json: true
         else
-            render json: {error: true, message: "Ooops.  That's embarassing.  We couldn't delete that recipe."}
+            render json: false
         end
     end
 

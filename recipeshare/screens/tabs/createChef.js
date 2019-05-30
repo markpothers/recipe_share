@@ -179,13 +179,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 </View>
                 <View style={styles.formRow}>
                   <Item rounded style={styles.createChefInputBox}>
-                    <Input placeholder="e-mail" keyboardType="email-address" onChange={(e) => this.handleTextInput(e, "e_mail")}/>
+                    <Input placeholder="e-mail" keyboardType="email-address"  autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "e_mail")}/>
                   </Item>
                 </View>
                   {this.renderEmailError()}
                 <View style={styles.formRow}>
                   <Item rounded style={styles.createChefInputBox}>
-                    <Input placeholder="username" onChange={(e) => this.handleTextInput(e, "username")}/>
+                    <Input placeholder="username"  autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "username")}/>
                   </Item>
                 </View>
                 {this.renderUsernameError()}
@@ -203,12 +203,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 </View>
                 <View style={styles.formRow}>
                   <Item rounded style={styles.createChefInputBox} >
-                    <Input placeholder="password" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")}/>
+                    <Input placeholder="password"  autoCapitalize="none" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")}/>
                   </Item>
                 </View>
                 <View style={styles.formRow}>
                   <Item rounded style={styles.createChefInputBox} >
-                    <Input placeholder="confirm password" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password_confirmation")}/>
+                    <Input placeholder="confirm password"  autoCapitalize="none" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password_confirmation")}/>
                   </Item>
                 </View>
                 {this.renderPasswordError()}

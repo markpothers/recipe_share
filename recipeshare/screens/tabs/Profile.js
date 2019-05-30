@@ -15,6 +15,7 @@ const mapDispatchToProps = {
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   class ChefDetails extends React.Component {
+
     state = {
       chef_details: {}
     }

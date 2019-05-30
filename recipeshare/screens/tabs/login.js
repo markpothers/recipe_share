@@ -117,7 +117,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
               </View>
               <View style={styles.formRow}>
                 <Item rounded style={styles.loginInputBox}>
-                  <Input placeholder="e-mail" keyboardType="email-address" onChange={(e) => this.handleTextInput(e, "e_mail")}/>
+                  <Input placeholder="e-mail" keyboardType="email-address" autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "e_mail")}/>
                 </Item>
               </View>
               {this.renderEmailError()}
