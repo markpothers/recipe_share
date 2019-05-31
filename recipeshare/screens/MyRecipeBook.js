@@ -42,16 +42,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     componentDidMount = () => {
       this.props.navigation.setParams({newRecipe: this.navigateToNewRecipe})
-      // this.props.navigation.addListener('willFocus', this.respondToFocus)
     }
 
-    // respondToFocus = () =>{
-    //   console.log("refocused")
-    //   this.forceUpdate()
-    // }
-
-
-    navigateToNewRecipe = () => {
+     navigateToNewRecipe = () => {
       this.props.navigation.navigate('NewRecipe')
     }
 

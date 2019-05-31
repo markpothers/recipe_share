@@ -7,8 +7,8 @@ import { connect } from 'react-redux'
 import { styles } from '../functionalComponents/RSStyleSheet'
 import { fetchRecipeList } from '../functionalComponents/recipeListFetch'
 import { fetchRecipeDetails } from '../functionalComponents/recipeListDetailsFetch'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { NavigationEvents } from 'react-navigation';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { NavigationEvents } from 'react-navigation'
 
 const mapStateToProps = (state) => ({
       all_Recipes: state.recipes.all,
@@ -64,19 +64,24 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     handleRankChoiceButton = async() => {
       await this.props.changeRanking()
-      await this.setState({limit: 50, offset: 0})
+      await this.setState({limit: 20, offset: 0})
       this.fetchRecipeListThenDetails()
     }
 
     componentDidMount = () => {
+      this.fetchRecipeListThenDetails()
     }
 
-    respondToFocus = () =>{
+    respondToFocus = async() =>{
+      // console.log(this.props["listChoice"])
+      await this.setState({offset: 0})
       this.fetchRecipeListThenDetails()
     }
 
     fetchRecipeListThenDetails = async() => {
+      // console.log("asking the server")
       let recipes = await fetchRecipeList(this.props["listChoice"], this.props.chef_id, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token)
+      console.log(recipes.length)
       this.props.storeRecipeList(this.props["listChoice"], recipes)
       recipe_ids = recipes.map(recipe => {
         return recipe.id
@@ -149,6 +154,5 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         </React.Fragment>
       )
     }
-
   }
 )

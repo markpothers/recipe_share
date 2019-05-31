@@ -17,18 +17,24 @@ class Recipe < ApplicationRecord
   def self.choose_list(type = "global_ranks", chef_id = 1, limit = 1, offset = 0, ranking = "liked")
     #types = "all", "chef", "chef_liked", "chef_made", "global_ranks" // "liked", "made"
     if type == "all"
+      # byebug
       Recipe.order(created_at: :desc) # all recipes ordered most-recent first
+            .where(hidden: false)
             .limit(limit)
             .offset(offset)
 
+            Recipe.order(created_at: :desc).where(hidden: false).limit(limit).offset(offset)
+
     elsif type == "chef" # recipes created by me ordered most-recent first
       Recipe.where(chef_id: chef_id)
+            .where(hidden: false)
             .order(created_at: :desc)
             .limit(limit)
             .offset(offset)
 
     elsif type == "chef_liked" # recipes liked by use_chef ordered by most-recently liked
       Recipe.joins(:recipe_likes)
+            .where(hidden: false)
             .where({ recipe_likes: { chef_id: chef_id }})
             .order("recipe_likes.created_at desc")
             .limit(limit)
@@ -36,6 +42,7 @@ class Recipe < ApplicationRecord
 
     elsif type == "chef_made" # recipes liked by use_chef ordered by most-recently liked
       Recipe.joins(:recipe_makes)
+            .where(hidden: false)
             .where({ recipe_makes: { chef_id: chef_id }})
             .order("recipe_makes.created_at desc")
             .limit(limit)
@@ -57,11 +64,13 @@ class Recipe < ApplicationRecord
                                         recipes.*, COUNT(#{table}.recipe_id) As count
                                         FROM #{table}
                                         JOIN recipes ON #{table}.recipe_id = recipes.id
+                                        WHERE hidden=0
                                         #{chefFilter}
                                         GROUP BY #{table}.recipe_id
                                         ORDER BY count(#{table}.recipe_id) DESC
                                         LIMIT #{limit}
                                         OFFSET #{offset}")
+
 
             # correct SQL query:
             # SELECT ROW_NUMBER() OVER(ORDER BY COUNT(recipe_likes.recipe_id) DESC) AS Row,

@@ -1,3 +1,3 @@
 import React from 'react'
 
-export const databaseURL = 'http://10.185.2.204:3000'
+export const databaseURL = 'http://10.185.7.26:3000'

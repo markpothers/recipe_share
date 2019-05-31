@@ -193,7 +193,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             .then(recipe => {
               console.log(recipe)
               this.props.clearNewRecipeDetails()
-              this.props.navigation.navigate('MyRecipeBook', {refresh: true})
+              this.props.navigation.navigate('MyRecipeBook')
             })
             .catch(error => {
               console.log(error)

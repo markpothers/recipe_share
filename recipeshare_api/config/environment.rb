@@ -3,4 +3,4 @@ require_relative 'application'
 
 # Initialize the Rails application.
 Rails.application.initialize!
-ActiveRecord::Base.logger = nil
+# ActiveRecord::Base.logger = nil

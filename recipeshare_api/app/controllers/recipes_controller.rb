@@ -9,12 +9,12 @@ class RecipesController < ApplicationController
         # byebug
         @recipes = Recipe.choose_list(list_params["listType"], list_params["chef_id"], list_params["limit"], list_params["offset"], list_params["ranking"])
         # byebug
-        if list_params["listType"] == "global_ranks"
-            @filtered_recipes = @recipes.select { |recipe| recipe["hidden"] == 0 }
-        else
-            @filtered_recipes = @recipes.select { |recipe| recipe.hidden == false }
-        end
-        render json: @filtered_recipes #, methods: [:add_count]
+        # if list_params["listType"] == "global_ranks"
+        #     @filtered_recipes = @recipes.select { |recipe| recipe["hidden"] == 0 }
+        # else
+        #     @filtered_recipes = @recipes.select { |recipe| recipe.hidden == false }
+        # end
+        render json: @recipes #, methods: [:add_count]
     end
 
     def details
@@ -46,6 +46,7 @@ class RecipesController < ApplicationController
     def create
         # byebug
         @recipe = Recipe.create(newRecipe_params)
+        @recipe.hidden=(false)
         if @recipe.save
             if newRecipe_image_params[:imagebase64] != ""
                 @recipe_image = RecipeImage.create(recipe_id: @recipe.id)
@@ -57,7 +58,7 @@ class RecipesController < ApplicationController
                 @recipe_image.imageURL = "/recipe_image_files/recipe-image-#{@recipe_image.id}.jpg"
                 @recipe_image.save
             end
-                puts newRecipe_Ingredient_params
+                # puts newRecipe_Ingredient_params
 
                 @recipe.ingredients=(newRecipe_Ingredient_params)
                 @recipe.save
