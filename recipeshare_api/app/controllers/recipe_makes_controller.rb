@@ -17,9 +17,9 @@ class RecipeMakesController < ApplicationController
         # byebug
         @recipe_make = RecipeMake.create(recipe_make_params)
         if @recipe_make.save
-            render json: @recipe_make
+            render json: true
         else
-            render json: {error: true, message: 'Ooops.  Something went wrong saving the recipe_make.'}
+            render json: {message: false}
         end
     end
 

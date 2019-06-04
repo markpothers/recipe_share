@@ -13,6 +13,7 @@ import { NavigationEvents } from 'react-navigation'
 const mapStateToProps = (state) => ({
       all_Recipes: state.recipes.all,
       chef_Recipes: state.recipes.chef,
+      chef_feed_Recipes: state.recipes.chef_feed,
       chef_liked_Recipes: state.recipes.chef_liked,
       chef_made_Recipes: state.recipes.chef_made,
       global_ranks_Recipes: state.recipes.global_ranks,
@@ -81,35 +82,36 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     fetchRecipeListThenDetails = async() => {
       // console.log("asking the server")
       let recipes = await fetchRecipeList(this.props["listChoice"], this.props.chef_id, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token)
-      console.log(recipes.length)
+      // console.log(recipes.length)
+      // console.log(this.props["listChoice"])
       this.props.storeRecipeList(this.props["listChoice"], recipes)
-      recipe_ids = recipes.map(recipe => {
-        return recipe.id
-      })
-      const recipe_details = await fetchRecipeDetails(recipe_ids, this.props.loggedInChef.auth_token)
-      this.props.storeRecipeDetails(this.props["listChoice"], recipe_details)
+      // recipe_ids = recipes.map(recipe => {
+      //   return recipe.id
+      // })
+      // const recipe_details = await fetchRecipeDetails(recipe_ids, this.props.loggedInChef.auth_token)
+      // this.props.storeRecipeDetails(this.props["listChoice"], recipe_details)
     }
 
     fetchAdditionalRecipesThenDetailsForList = async() => {
       const new_recipes = await fetchRecipeList(this.props["listChoice"], this.props.chef_id, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token)
       this.props.appendToRecipeList(this.props["listChoice"], new_recipes)
-      new_recipe_ids = new_recipes.map(recipe => {
-        return recipe.id
-      })
-      const new_recipe_details = await fetchRecipeDetails(new_recipe_ids, this.props.loggedInChef.auth_token)
-      this.props.appendToRecipeDetails(this.props["listChoice"], new_recipe_details)
+      // new_recipe_ids = new_recipes.map(recipe => {
+      //   return recipe.id
+      // })
+      // const new_recipe_details = await fetchRecipeDetails(new_recipe_ids, this.props.loggedInChef.auth_token)
+      // this.props.appendToRecipeDetails(this.props["listChoice"], new_recipe_details)
     }
 
     renderRecipeListItem = (item) => {
-      let imageURL = null
-      if (this.props.recipes_details[this.props["listChoice"]].recipe_images != undefined ){
-        if (this.props.recipes_details[this.props["listChoice"]].recipe_images.find(image => image.recipe_id == item.item.id) != undefined){
-          const recipe_image = this.props.recipes_details[this.props["listChoice"]].recipe_images.find(image => image.recipe_id == item.item.id)
-          imageURL = { uri: `${databaseURL}${recipe_image.imageURL}` }
-        }
-      } else {
-        imageURL = require("./peas.jpg")
-      }
+      // let imageURL = null
+      // if (this.props.recipes_details[this.props["listChoice"]].recipe_images != undefined ){
+      //   if (this.props.recipes_details[this.props["listChoice"]].recipe_images.find(image => image.recipe_id == item.item.id) != undefined){
+      //     const recipe_image = this.props.recipes_details[this.props["listChoice"]].recipe_images.find(image => image.recipe_id == item.item.id)
+      //     imageURL = { uri: `${databaseURL}${recipe_image.imageURL}` }
+      //   }
+      // } else {
+        let imageURL = require("./peas.jpg")
+      // }
         return <RecipeCard listChoice={this.props["listChoice"]} key={item.index.toString()} {...item} imageURL={imageURL} navigation={this.props.navigation}/>
     }
 

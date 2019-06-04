@@ -12,10 +12,10 @@ Rails.application.routes.draw do
   resources :chefs
   resources :sessions, only: [:new, :create, :destroy, :index]
 
-  get '/', to: 'recipes#index', as:'home'
+  # get '/', to: 'recipes#index', as:'home'
   post '/login', to: 'chefs#authenticate'
-  post '/recipes/index', to: 'recipes#index'
-  post '/recipes/details', to: 'recipes#details'
+  # post '/recipes/index', to: 'recipes#index'
+  # post '/recipes/details', to: 'recipes#details'
   post '/chefs/index', to: 'chefs#index'
   post '/chefs/details', to: 'chefs#index'
   delete '/recipe_likes', to: 'recipe_likes#destroy'

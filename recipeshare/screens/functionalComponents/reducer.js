@@ -8,9 +8,9 @@ const reducer = (currentState, action) => {
         case 'CLEAR_LISTED_RECIPES':
             // console.log("clearing listed recipes")
             return {...currentState, recipes: {...currentState.recipes, [action.recipeType]: []}}
-        case 'STORE_RECIPES_DETAILS':
-            // console.log(action.recipesDetailsList)
-            return {...currentState, recipes_details: {...currentState.recipes_details, [action.recipeType]: action.recipesDetailsList}}
+        case 'STORE_RECIPE_DETAILS':
+            // console.log(action.recipe_details)
+            return {...currentState, recipe_details: action.recipe_details}
         case 'APPEND_TO_RECIPE_LISTS':
             // console.log(currentState.recipes[action.recipeType])
             return {...currentState, recipes: {...currentState.recipes, [action.recipeType]: [...currentState.recipes[action.recipeType], ...action.recipeList]}}
@@ -76,9 +76,11 @@ const reducer = (currentState, action) => {
                 imageBase64: ""
                 }}
         case 'ADD_RECIPE_LIKE':
-            return {...currentState, recipes_details: {...currentState.recipes_details, [action.listType]: {...currentState.recipes_details[action.listType], recipe_likes: [...currentState.recipes_details[action.listType].recipe_likes, action.like]}}}
+            return {...currentState, recipe_details: {...currentState.recipe_details, recipe_likes: currentState.recipe_details.recipe_likes+1}}
+        case 'REMOVE_RECIPE_LIKE':
+            return {...currentState, recipe_details: {...currentState.recipe_details, recipe_likes: currentState.recipe_details.recipe_likes-1}}
         case 'ADD_RECIPE_MAKE':
-            return {...currentState, recipes_details: {...currentState.recipes_details, [action.listType]: {...currentState.recipes_details[action.listType], recipe_makes: [...currentState.recipes_details[action.listType].recipe_makes, action.make]}}}
+            return {...currentState, recipe_details: {...currentState.recipe_details, recipe_makes: currentState.recipe_details.recipe_makes+1}}
         case 'REMOVE_RECIPE_LIKES':
             return {...currentState, recipes_details: {...currentState.recipes_details, [action.listType]: {...currentState.recipes_details[action.listType], recipe_likes: action.recipe_likes}}}
         case 'LOG_IN_CHEF':

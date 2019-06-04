@@ -17,9 +17,9 @@ class RecipeLikesController < ApplicationController
         # byebug
         @recipe_like = RecipeLike.create(recipe_like_params)
         if @recipe_like.save
-            render json: @recipe_like
+            render json: true
         else
-            render json: {error: true, message: 'Ooops.  Something went wrong saving the recipe_like.'}
+            render json: false
         end
     end
 
@@ -44,7 +44,7 @@ class RecipeLikesController < ApplicationController
         @recipe_likes = RecipeLike.where(recipe_id: recipe_like_params["recipe_id"]).where(chef_id: recipe_like_params["chef_id"] )
         @recipe_ids = @recipe_likes.map { |like| like.id }
         if RecipeLike.destroy(@recipe_ids)
-            render json: @recipe_ids
+            render json: true
         else
             render json: {message: false}
         end

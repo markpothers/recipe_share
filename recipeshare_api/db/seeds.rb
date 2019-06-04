@@ -134,9 +134,11 @@ Recipe.all.each do |recipe|
     RecipeImage.create(recipe_id: recipe.id, imageURL: images.sample)
 end
 
-# Recipe.all.each do |recipe|
-#     MakePic.create(chef: Chef.all.sample, recipe: recipe, imageURL: images.sample)
-# end
+5.times do
+    Recipe.all.each do |recipe|
+        MakePic.create(chef: Chef.all.sample, recipe: recipe, imageURL: images.sample)
+    end
+end
 
 # 13.times do 
 #     Recipe.last.destroy

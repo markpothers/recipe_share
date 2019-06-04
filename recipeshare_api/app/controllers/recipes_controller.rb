@@ -7,37 +7,38 @@ class RecipesController < ApplicationController
 
     def index
         # byebug
-        @recipes = Recipe.choose_list(list_params["listType"], list_params["chef_id"], list_params["limit"], list_params["offset"], list_params["ranking"])
+        @recipes = Recipe.choose_list(params["listType"], params["chef_id"], params["limit"], params["offset"], params["global_ranking"], @chef.id)
         # byebug
         # if list_params["listType"] == "global_ranks"
         #     @filtered_recipes = @recipes.select { |recipe| recipe["hidden"] == 0 }
         # else
         #     @filtered_recipes = @recipes.select { |recipe| recipe.hidden == false }
         # end
+        # byebug
         render json: @recipes #, methods: [:add_count]
     end
 
-    def details
-        # byebug
-        # @recipes_details = Recipe.find_details(details_params["listed_recipes"])
+    # def details
+    #     # byebug
+    #     # @recipes_details = Recipe.find_details(details_params["listed_recipes"])
 
-            ingredientUses = IngredientUse.where(recipe_id: details_params["listed_recipes"])
-            ingredients_ids = ingredientUses.map do |use|
-                use = use.ingredient_id
-            end
+    #         ingredientUses = IngredientUse.where(recipe_id: details_params["listed_recipes"])
+    #         ingredients_ids = ingredientUses.map do |use|
+    #             use = use.ingredient_id
+    #         end
 
-        details = {recipes: Recipe.where(id: details_params["listed_recipes"]),
-            comments: Comment.where(recipe_id: details_params["listed_recipes"]),
-            recipe_images: RecipeImage.where(recipe_id: details_params["listed_recipes"]),
-            recipe_likes: RecipeLike.where(recipe_id: details_params["listed_recipes"]),
-            recipe_makes: RecipeMake.where(recipe_id: details_params["listed_recipes"]),
-            make_pics: MakePic.where(recipe_id: details_params["listed_recipes"]),
-            ingredient_uses: IngredientUse.where(recipe_id: details_params["listed_recipes"]),
-            ingredients: Ingredient.where(id: ingredients_ids.uniq)
-        }
-        # byebug
-        render json: details #, methods: [:add_count]
-    end
+    #     details = {recipes: Recipe.where(id: details_params["listed_recipes"]),
+    #         comments: Comment.where(recipe_id: details_params["listed_recipes"]),
+    #         recipe_images: RecipeImage.where(recipe_id: details_params["listed_recipes"]),
+    #         recipe_likes: RecipeLike.where(recipe_id: details_params["listed_recipes"]),
+    #         recipe_makes: RecipeMake.where(recipe_id: details_params["listed_recipes"]),
+    #         make_pics: MakePic.where(recipe_id: details_params["listed_recipes"]),
+    #         ingredient_uses: IngredientUse.where(recipe_id: details_params["listed_recipes"]),
+    #         ingredients: Ingredient.where(id: ingredients_ids.uniq)
+    #     }
+    #     # byebug
+    #     render json: details #, methods: [:add_count]
+    # end
 
     # def new
     #     @recipe = Recipe.new
@@ -69,9 +70,9 @@ class RecipesController < ApplicationController
         end
     end
 
-    # def show
-    #     render json: @recipe
-    # end
+    def show
+        render json: @recipe.get_details(@chef)
+    end
 
     # def edit
     #     render json: @recipe

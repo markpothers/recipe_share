@@ -15,16 +15,17 @@ const initialState = {
   recipes: {
     all: [],
     chef: [],
+    chef_feed: [],
     chef_liked: [],
     chef_made: [],
     global_ranks: []
   },
   recipes_details: {
-    all: [],
-    chef: [],
-    chef_liked: [],
-    chef_made: [],
-    global_ranks: []
+    // all: [],
+    // chef: [],
+    // chef_liked: [],
+    // chef_made: [],
+    // global_ranks: []
   },
   newRecipeDetails: {
     name: "",

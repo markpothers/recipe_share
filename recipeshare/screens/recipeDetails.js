@@ -1,34 +1,44 @@
 import React from 'react';
-import { Container, Header, Text, Button } from 'native-base';
-import {Image, ScrollView, StyleSheet, AsyncStorage, View, ImageBackground } from 'react-native';
+import { Text, Button } from 'native-base';
+import {Image, ScrollView, View, ImageBackground } from 'react-native';
 import { connect } from 'react-redux'
 import { databaseURL } from './functionalComponents/databaseURL'
 import { styles } from './functionalComponents/RSStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon2 from 'react-native-vector-icons/MaterialIcons';
 
 
 const mapStateToProps = (state) => ({
-  recipes_details: state.recipes_details,
+  recipe_details: state.recipe_details,
   loggedInChef: state.loggedInChef
 })
 
 const mapDispatchToProps = {
-    addRecipeLike: (like, listType) => {
+    addRecipeLike: () => {
       return dispatch => {
-        dispatch({ type: 'ADD_RECIPE_LIKE', like: like, listType: listType})
+        dispatch({ type: 'ADD_RECIPE_LIKE'})
     }
   },
-    addRecipeMake: (make, listType) => {
+  removeRecipeLike: () => {
+    return dispatch => {
+      dispatch({ type: 'REMOVE_RECIPE_LIKE'})
+  }
+},
+    addRecipeMake: () => {
       return dispatch => {
-        dispatch({ type: 'ADD_RECIPE_MAKE', make: make, listType: listType})
+        dispatch({ type: 'ADD_RECIPE_MAKE'})
     }
   },
   removeRecipeLikes: (remaining_likes, listType) => {
       return dispatch => {
         dispatch({ type: 'REMOVE_RECIPE_LIKES', recipe_likes: remaining_likes, listType: listType})
       }
-  }
-
+  },
+  storeRecipeDetails: (recipe_details) => {
+    return dispatch => {
+      dispatch({ type: 'STORE_RECIPE_DETAILS', recipe_details: recipe_details})
+    }
+}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
@@ -48,6 +58,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           <React.Fragment>
             {navigation.getParam('likeable') == false ? <Button rounded style={styles.newButton} onPress={navigation.getParam('unlikeRecipe')}><Icon name='heart' size={28} style={styles.newIcon}/></Button> : <Button rounded style={styles.newButton} onPress={navigation.getParam('likeRecipe')}><Icon name='heart-outline' size={28} style={styles.newIcon}/></Button> }
             {navigation.getParam('makeable') == false ? <Button rounded style={styles.newButton}><Icon name='food-off' size={28} style={styles.newIcon}/></Button> : <Button rounded style={styles.newButton} onPress={navigation.getParam('makeRecipe')}><Icon name='food' size={28} style={styles.newIcon}/></Button> }
+            {/* <Button rounded style={styles.newButton} onPress={navigation.getParam('editRecipe')}>
+              <Icon2 name='edit' size={28} style={styles.newIcon} />
+            </Button> */}
             <Button rounded style={styles.newButton} onPress={navigation.getParam('deleteRecipe')}>
               <Icon name='delete-outline' size={28} style={styles.newIcon} />
             </Button>
@@ -57,34 +70,35 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     componentDidMount = () => {
-      // this.props.navigation.setParams({
-      //   likeRecipe: this.likeRecipe,
-      //   makeRecipe: this.makeRecipe,
-      //   unlikeRecipe: this.unlikeRecipe})
-      this.checkLikeable()
-      this.checkMakeable()
+      this.fetchRecipeDetails()
     }
 
-    checkLikeable = () => {
-      const likes = this.props.recipes_details[this.props.navigation.getParam('listChoice')].recipe_likes.filter(like => like.recipe_id == this.props.navigation.getParam('recipeID'))
-      let myLike = null
-      myLike = likes.find(like => like.chef_id == this.props.loggedInChef.id)
-        if (myLike){
-          this.props.navigation.setParams({
-            likeable: false,
-            likeRecipe: this.likeRecipe,
-            makeRecipe: this.makeRecipe,
-            unlikeRecipe: this.unlikeRecipe,
-            deleteRecipe: this.deleteRecipe
-          })
-        } else {
-          this.props.navigation.setParams({
-            likeable: true,
-            likeRecipe: this.likeRecipe,
-            unlikeRecipe: this.unlikeRecipe,
-            deleteRecipe: this.deleteRecipe
-          })
+    fetchRecipeDetails = () => {
+      // console.log(this.props.navigation.getParam('recipeID'))
+      fetch(`${databaseURL}/recipes/${this.props.navigation.getParam('recipeID')}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${this.props.loggedInChef.auth_token}`,
+          'Content-Type': 'application/json'
         }
+      })
+      .then(res => res.json())
+      .then(recipe_details => {
+        this.props.storeRecipeDetails(recipe_details)
+          this.props.navigation.setParams({
+            likeable: recipe_details.likeable,
+            makeable: recipe_details.makeable,
+            likeRecipe: this.likeRecipe,
+            unlikeRecipe: this.unlikeRecipe,
+            deleteRecipe: this.deleteRecipe,
+            makeRecipe: this.makeRecipe,
+            editRecipe: this.navigateToEditRecipe
+          })
+      })
+    }
+
+    navigateToEditRecipe = () => {
+      // this.props.navigation.navigate('NewRecipe', {recipeID: this.props.navigation.getParam('recipeID')})
     }
 
     deleteRecipe = () => {
@@ -97,213 +111,232 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     })
     .then(res => res.json())
     .then(response => {
-      // console.log(response)
       if (response == true){
         this.props.navigation.goBack()
       }
-      // this.props.addRecipeLike(like, this.props.navigation.getParam('listChoice'))
-      // this.checkLikeable()
     })
     }
 
-    checkMakeable = () => {
-      const makes = this.props.recipes_details[this.props.navigation.getParam('listChoice')].recipe_makes.filter(make => make.recipe_id == this.props.navigation.getParam('recipeID'))
-      let mymake = null
-      mymake = makes.find(make => make.chef_id == this.props.loggedInChef.id)
-      // console.log(mymake)
-        if (mymake){
-          // console.log("mymake was true")
-          this.props.navigation.setParams({
-            makeable: false,
-            makeRecipe: this.makeRecipe,
-          })
-        } else {
-          // console.log("mymake was false")
-          this.props.navigation.setParams({
-            makeable: true,
-            makeRecipe: this.makeRecipe,
-          })
-        }
-    }
-
-    renderRecipe = (listChoice, recipeID) => {
-      const recipe = this.props.recipes_details[listChoice].recipes.find(recipe => recipe.id == recipeID)
-      return <Text style={[styles.detailsHeaderTextBox]}>{recipe.name}</Text>
-    }
-
-    renderRecipeImages = (listChoice, recipeID) => {
-      const recipe = this.props.recipes_details[listChoice].recipe_images.find(recipe => recipe.recipe_id == recipeID)
-      if (recipe != undefined){
-        return <Image style={[{width: '100%', height: 250}, styles.detailsImage]} source={{uri: `${databaseURL}${recipe.imageURL}`}}></Image>
+    renderRecipeName = () => {
+      if (this.props.recipe_details != undefined){
+      return <Text style={[styles.detailsHeaderTextBox]}>{this.props.recipe_details.recipe.name}</Text>
       } else {
-        return <Image style={[{width: '100%', height: 250}, styles.detailsImage]} source={require("./components/peas.jpg")}></Image>
+        return <Text style={[styles.detailsHeaderTextBox]}>Recipe Name</Text>
       }
     }
 
-    renderRecipeIngredients = (listChoice, recipeID) => {
-      const ingredient_uses = this.props.recipes_details[listChoice].ingredient_uses.filter(ingredient_use => ingredient_use.recipe_id == recipeID)
-      const list_values = ingredient_uses.map(ingredient_use => [ingredient_use.ingredient_id, ingredient_use.quantity, ingredient_use.unit])
-      const ingredients = list_values.map(list_value => [...list_value, (this.props.recipes_details[listChoice].ingredients.find(ingredient => ingredient.id == list_value[0]).name)])
-      return ingredients.map(ingredient => (
-            <View style={styles.ingredientsTable} key={ingredient[0]}>
-               <Text style={[styles.detailsContents, styles.ingredientName]}>{ingredient[3]}</Text>
-               <Text style={[styles.detailsContents, styles.ingredientQuantity]}>{ingredient[1]}</Text>
-               <Text style={[styles.detailsContents, styles.ingredientUnit]}>{ingredient[2]}</Text>
-            </View>
-            ))
+    renderRecipeImages = () => {
+      if (this.props.recipe_details != undefined){
+        if (this.props.recipe_details.recipe_images.imageURL != ""){
+        return <Image style={[{width: '100%', height: 250}, styles.detailsImage]} source={{uri: `${databaseURL}${this.props.recipe_details.recipe_images[0].imageURL}`}}></Image>
+        }
+      } else {
+          return <Image style={[{width: '100%', height: 250}, styles.detailsImage]} source={require("./components/peas.jpg")}></Image>
+      }
     }
 
-    renderRecipeInstructions = (listChoice, recipeID) => {
-      const recipe = this.props.recipes_details[listChoice].recipes.find(recipe => recipe.id == recipeID)
-      return <Text style={[styles.detailsContents]}>{recipe.instructions}</Text>
+    renderRecipeIngredients = () => {
+      if (this.props.recipe_details != undefined){
+        const ingredient_uses = this.props.recipe_details.ingredient_uses
+        const list_values = ingredient_uses.map(ingredient_use => [ingredient_use.ingredient_id, ingredient_use.quantity, ingredient_use.unit])
+        const ingredients = list_values.map(list_value => [...list_value, (this.props.recipe_details.ingredients.find(ingredient => ingredient.id == list_value[0]).name)])
+        return ingredients.map(ingredient => (
+              <View style={styles.ingredientsTable} key={ingredient[0]}>
+                <Text style={[styles.detailsContents, styles.ingredientName]}>{ingredient[3]}</Text>
+                <Text style={[styles.detailsContents, styles.ingredientQuantity]}>{ingredient[1]}</Text>
+                <Text style={[styles.detailsContents, styles.ingredientUnit]}>{ingredient[2]}</Text>
+              </View>
+              ))
+      } else {
+        return <Text style={[styles.detailsContents]}>Ingredients</Text>
+      }
     }
 
-    renderRecipeLikes = (listChoice, recipeID) => {
-      const likes = this.props.recipes_details[listChoice].recipe_likes.filter(like => like.recipe_id == recipeID)
-      return <Text style={[styles.detailsLikesAndMakesContents]}>Likes: {likes.length}</Text>
+    renderRecipeInstructions = () => {
+      if (this.props.recipe_details != undefined){
+        return <Text style={[styles.detailsContents]}>{this.props.recipe_details.recipe.instructions}</Text>
+        } else {
+          return <Text style={[styles.detailsContents]}>Recipe Instructions</Text>
+        }
     }
 
-    renderRecipeMakes = (listChoice, recipeID) => {
-      const makes = this.props.recipes_details[listChoice].recipe_makes.filter(make => make.recipe_id == recipeID)
-      return <Text style={[styles.detailsLikesAndMakesContents]}>Makes: {makes.length}</Text>
+    renderRecipeLikes = () => {
+      if (this.props.recipe_details != undefined){
+        return <Text style={[styles.detailsLikesAndMakesContents]}>Likes: {this.props.recipe_details.recipe_likes}</Text>
+        } else {
+          return <Text style={[styles.detailsLikesAndMakesContents]}>likes</Text>
+      }
     }
 
-    renderRecipeMakePics = (listChoice, recipeID) => {
-      const make_pics = this.props.recipes_details[listChoice].make_pics.filter(make_pic => make_pic.recipe_id == recipeID)
-      return make_pics.map(make_pic => {
-        return (
-          <React.Fragment key={make_pic.id}>
-            <Image style={{width: 115, height: 115}} source={{uri: `${databaseURL}${make_pic.imageURL}`}}></Image>
-          </React.Fragment>
-        )
-      })
+    renderRecipeMakes = () => {
+      if (this.props.recipe_details != undefined){
+        return <Text style={[styles.detailsLikesAndMakesContents]}>Makes: {this.props.recipe_details.recipe_makes}</Text>
+        } else {
+          return <Text style={[styles.detailsLikesAndMakesContents]}>makes</Text>
+      }
     }
 
-    renderRecipeComments = (listChoice, recipeID) => {
-      const comments = this.props.recipes_details[listChoice].comments.filter(comment => comment.recipe_id == recipeID)
-      return comments.map(comment => {
-        return (
-          <React.Fragment key={comment.id}>
-            <Text style={[styles.detailsContents]}>Comment:</Text>
-            <Text style={[styles.detailsContents]}>{comment.comment}</Text>
-          </React.Fragment>
-        )
-      })
+    renderRecipeTime = () => {
+      if (this.props.recipe_details != undefined){
+        return <Text style={[styles.detailsLikesAndMakesContents]}>Time: {this.props.recipe_details.recipe.time}</Text>
+        } else {
+          return <Text style={[styles.detailsLikesAndMakesContents]}>time</Text>
+      }
+    }
+
+    renderRecipeDifficulty = () => {
+      if (this.props.recipe_details != undefined){
+        return <Text style={[styles.detailsLikesAndMakesContents]}>Difficulty: {this.props.recipe_details.recipe.difficulty}</Text>
+        } else {
+          return <Text style={[styles.detailsLikesAndMakesContents]}>difficulty</Text>
+      }
+    }
+
+    renderRecipeMakePics = () => {
+      if (this.props.recipe_details != undefined){
+        return this.props.recipe_details.make_pics.map(make_pic => {
+          return (
+            <React.Fragment key={make_pic.id}>
+              <Image style={{width: 115, height: 115}} source={{uri: `${databaseURL}${make_pic.imageURL}`}}></Image>
+            </React.Fragment>
+          )
+        })
+      }
+    }
+
+    renderRecipeComments = () => {
+      if (this.props.recipe_details != undefined){
+        return this.props.recipe_details.comments.map(comment => {
+          return (
+            <React.Fragment key={comment.id}>
+              <Text style={[styles.detailsContents]}>Comment:</Text>
+              <Text style={[styles.detailsContents]}>{comment.comment}</Text>
+            </React.Fragment>
+          )
+        })
+      } else {
+        return <Text style={[styles.detailsLikesAndMakesContents]}>No comments</Text>
+      }
     }
 
     likeRecipe = () => {
-            fetch(`${databaseURL}/recipe_likes`, {
-                method: "POST",
-                headers: {
-                  Authorization: `Bearer ${this.props.loggedInChef.auth_token}`,
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                  recipe: {
-                    recipe_id: this.props.navigation.getParam('recipeID'),
-                    chef_id: this.props.loggedInChef.id,
-                  }
-                })
-            })
-            .then(res => res.json())
-            .then(like => {
-              // console.log(like)
-              this.props.addRecipeLike(like, this.props.navigation.getParam('listChoice'))
-              this.checkLikeable()
-            })
+      fetch(`${databaseURL}/recipe_likes`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${this.props.loggedInChef.auth_token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            recipe: {
+              recipe_id: this.props.navigation.getParam('recipeID'),
+              chef_id: this.props.loggedInChef.id,
+            }
+          })
+      })
+      .then(res => res.json())
+      .then(like => {
+        if (like == true) {
+          this.props.addRecipeLike()
+          this.props.navigation.setParams({
+            likeable: false,
+          })
+        }
+      })
     }
 
     unlikeRecipe = () => {
-            fetch(`${databaseURL}/recipe_likes`, {
-                method: "DELETE",
-                headers: {
-                  Authorization: `Bearer ${this.props.loggedInChef.auth_token}`,
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                  recipe: {
-                    recipe_id: this.props.navigation.getParam('recipeID'),
-                    chef_id: this.props.loggedInChef.id,
-                  }
-                })
-            })
-            .then(res => res.json())
-            .then(unlikes => {
-              const remaining_likes = this.props.recipes_details[this.props.navigation.getParam('listChoice')].recipe_likes.filter(like => like.id != unlikes[0])
-              this.props.removeRecipeLikes(remaining_likes, this.props.navigation.getParam('listChoice'))
-              this.checkLikeable()
-            })
+      fetch(`${databaseURL}/recipe_likes`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${this.props.loggedInChef.auth_token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            recipe: {
+              recipe_id: this.props.navigation.getParam('recipeID'),
+              chef_id: this.props.loggedInChef.id,
+            }
+          })
+      })
+      .then(res => res.json())
+      .then(unlike => {
+        if (unlike == true) {
+          this.props.removeRecipeLike()
+          this.props.navigation.setParams({
+            likeable: true,
+          })
+        }
+      })
     }
 
     makeRecipe = () => {
-            fetch(`${databaseURL}/recipe_makes`, {
-                method: "POST",
-                headers: {
-                  Authorization: `Bearer ${this.props.loggedInChef.auth_token}`,
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                  recipe: {
-                    recipe_id: this.props.navigation.getParam('recipeID'),
-                    chef_id: this.props.loggedInChef.id,
-                  }
-                })
-            })
-            .then(res => res.json())
-            .then(make => {
-              // console.log(make)
-                this.props.addRecipeMake(make, this.props.navigation.getParam('listChoice'))
-                this.checkMakeable()
-            })
+      fetch(`${databaseURL}/recipe_makes`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${this.props.loggedInChef.auth_token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            recipe: {
+              recipe_id: this.props.navigation.getParam('recipeID'),
+              chef_id: this.props.loggedInChef.id,
+            }
+          })
+      })
+      .then(res => res.json())
+      .then(make => {
+        if (make == true) {
+          this.props.addRecipeMake()
+          this.props.navigation.setParams({
+            makeable: false,
+          })
+        }
+      })
     }
 
     render() {
-      
-      console.log("showing details")
-      const { navigation } = this.props;
-      const listChoice = navigation.getParam('listChoice')
-      const recipeID = navigation.getParam('recipeID')
-      const recipe = this.props.recipes_details[listChoice].recipes.find(recipe => recipe.id == recipeID)
-      if(!recipe) return <Text style={[styles.detailsHeaderTextBox]}>Not Found</Text>
-      // console.log(listChoice)
-      console.log(recipeID)
+      console.log(this.props.recipe_details)
       return (
         <View style={{flex:1}}>
           <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
             <View style={styles.detailsHeader}>
-              {this.renderRecipe(listChoice, recipeID)}
+              {this.renderRecipeName()}
             </View>
             <ScrollView contentContainerStyle={{flexGrow:1}}>
               <View style={styles.detailsLikesAndMakes}>
                 <View style={styles.detailsLikes}>
-                  {this.renderRecipeLikes(listChoice, recipeID)}
+                  {this.renderRecipeLikes()}
                 </View>
                 <View style={styles.detailsLikes}>
-                  {this.renderRecipeMakes(listChoice, recipeID)}
+                  {this.renderRecipeMakes()}
+                </View>
+              </View>
+              <View style={styles.detailsLikesAndMakes}>
+                <View style={styles.detailsLikes}>
+                  {this.renderRecipeTime()}
+                </View>
+                <View style={styles.detailsLikes}>
+                  {this.renderRecipeDifficulty()}
                 </View>
               </View>
               <View style={styles.detailsImageWrapper}>
-                {this.renderRecipeImages(listChoice, recipeID)}
+                {this.renderRecipeImages()}
               </View>
               <View style={styles.detailsIngredients}>
                 <Text style={styles.detailsSubHeadings}>Ingredients:</Text>
-                {this.renderRecipeIngredients(listChoice, recipeID)}
+                {this.renderRecipeIngredients()}
               </View>
-              {/* <View style={styles.detailsInstructions}>
-              <Text style={styles.detailsSubHeadings}>Liked:</Text>
-                {this.renderILikeThis(listChoice, recipeID)}
-              </View> */}
               <View style={styles.detailsInstructions}>
               <Text style={styles.detailsSubHeadings}>Instructions:</Text>
-                {this.renderRecipeInstructions(listChoice, recipeID)}
+                {this.renderRecipeInstructions()}
               </View>
-              {/* <View style={styles.detailsMakePics}>
-                {this.renderRecipeMakePics(listChoice, recipeID)}
-              </View> */}
-              {/* <View style={styles.detailsComments}>
+              <ScrollView horizontal="true">
+                {this.renderRecipeMakePics()}
+              </ScrollView>
+              <View style={styles.detailsComments}>
               <Text style={styles.detailsSubHeadings}>Comments:</Text>
-                {this.renderRecipeComments(listChoice, recipeID)}
-              </View> */}
+                {this.renderRecipeComments()}
+              </View>
             </ScrollView>
           </ImageBackground>
         </View>
