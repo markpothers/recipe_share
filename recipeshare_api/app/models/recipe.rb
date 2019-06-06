@@ -14,8 +14,8 @@ class Recipe < ApplicationRecord
 
   has_many_attached :images
 
-  def self.choose_list(type = "global_ranks", chef_id = 1, limit = 1, offset = 0, ranking = "liked", owner_id = 1)
-    #types = "all", "chef", "chef_liked", "chef_made", "global_ranks" // "liked", "made"
+  def self.choose_list(type = "all", chef_id = 1, limit = 1, offset = 0, ranking = "liked", owner_id = 1)
+    #types = "all", "chef", "chef_liked", "chef_made", "most_liked", "most_made" // "liked", "made"
     if type == "all"
 
       ApplicationRecord.db.execute("SELECT recipes.*, recipe_images.imageURL
@@ -69,30 +69,23 @@ class Recipe < ApplicationRecord
                                     LIMIT (?)
                                     OFFSET (?)", [chef_id, limit, offset])
 
-    elsif type =="global_ranks" # recipes according to their global rankings # with filter based on chef name working if needed
+    elsif type =="most_liked" # recipes according to their global rankings # with filter based on chef name working if needed
 
         chefFilter = ""  # "WHERE recipes.chef_id = #{chef_id}"  # stitutute this line in if needed
-
-        if ranking == "made"
-            table = "recipe_makes"
-        else # if ranking == "liked"
-            table= "recipe_likes"
-        end
 
         #insert this to add rank "ROW_NUMBER() OVER(ORDER BY COUNT(recipe_likes.recipe_id) DESC) AS Row"
 
       ApplicationRecord.db.execute("SELECT
-                                    recipes.*, recipe_images.imageURL, COUNT(#{table}.recipe_id) As count
-                                    FROM #{table}
-                                    JOIN recipes ON #{table}.recipe_id = recipes.id
+                                    recipes.*, recipe_images.imageURL, COUNT(recipe_likes.recipe_id) As count
+                                    FROM recipe_likes
+                                    JOIN recipes ON recipe_likes.recipe_id = recipes.id
                                     JOIN recipe_images ON recipe_images.recipe_id = recipes.id
                                     WHERE hidden=0
                                     #{chefFilter}
-                                    GROUP BY #{table}.recipe_id
-                                    ORDER BY count(#{table}.recipe_id) DESC
+                                    GROUP BY recipe_likes.recipe_id
+                                    ORDER BY count(recipe_likes.recipe_id) DESC
                                     LIMIT (?)
                                     OFFSET (?)", [limit, offset])
-
 
             # correct SQL query:
             # SELECT ROW_NUMBER() OVER(ORDER BY COUNT(recipe_likes.recipe_id) DESC) AS Row,
@@ -104,6 +97,21 @@ class Recipe < ApplicationRecord
             # LIMIT 50
             # OFFSET 0
 
+    elsif type =="most_made" # recipes according to their global rankings # with filter based on chef name working if needed
+
+      chefFilter = ""  # "WHERE recipes.chef_id = #{chef_id}"  # stitutute this line in if needed
+
+    ApplicationRecord.db.execute("SELECT
+                                  recipes.*, recipe_images.imageURL, COUNT(recipe_makes.recipe_id) As count
+                                  FROM recipe_makes
+                                  JOIN recipes ON recipe_makes.recipe_id = recipes.id
+                                  JOIN recipe_images ON recipe_images.recipe_id = recipes.id
+                                  WHERE hidden=0
+                                  #{chefFilter}
+                                  GROUP BY recipe_makes.recipe_id
+                                  ORDER BY count(recipe_makes.recipe_id) DESC
+                                  LIMIT (?)
+                                  OFFSET (?)", [limit, offset])
 
     else # if all else fails, just show all recipes ordered most recent first
       Recipe.order(created_at: :desc)

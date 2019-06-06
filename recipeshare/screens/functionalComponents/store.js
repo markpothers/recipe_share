@@ -18,7 +18,9 @@ const initialState = {
     chef_feed: [],
     chef_liked: [],
     chef_made: [],
-    global_ranks: []
+    global_ranks: [],
+    most_liked: [],
+    most_made: []
   },
   recipes_details: {
     // all: [],

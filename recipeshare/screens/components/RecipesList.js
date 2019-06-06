@@ -8,7 +8,8 @@ import { styles } from '../functionalComponents/RSStyleSheet'
 import { fetchRecipeList } from '../functionalComponents/recipeListFetch'
 import { fetchRecipeDetails } from '../functionalComponents/recipeListDetailsFetch'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import { NavigationEvents } from 'react-navigation'
+import { NavigationEvents, withNavigation } from 'react-navigation'
+
 
 const mapStateToProps = (state) => ({
       all_Recipes: state.recipes.all,
@@ -17,6 +18,8 @@ const mapStateToProps = (state) => ({
       chef_liked_Recipes: state.recipes.chef_liked,
       chef_made_Recipes: state.recipes.chef_made,
       global_ranks_Recipes: state.recipes.global_ranks,
+      most_liked_Recipes: state.recipes.most_liked,
+      most_made_Recipes: state.recipes.most_made,
       recipes_details: state.recipes_details,
       loggedInChef: state.loggedInChef,
       global_ranking: state.global_ranking
@@ -55,7 +58,7 @@ const mapDispatchToProps = {
   },
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
+export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
   class RecipesList extends React.Component {
 
     state = {
@@ -102,6 +105,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       // this.props.appendToRecipeDetails(this.props["listChoice"], new_recipe_details)
     }
 
+    navigateToRecipeDetails = (recipeID) =>{
+      // console.log("test")
+      this.props.navigation.navigate('RecipeDetails', {recipeID: recipeID})
+    }
+
     renderRecipeListItem = (item) => {
       // let imageURL = null
       // if (this.props.recipes_details[this.props["listChoice"]].recipe_images != undefined ){
@@ -112,7 +120,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       // } else {
         let imageURL = require("./peas.jpg")
       // }
-        return <RecipeCard listChoice={this.props["listChoice"]} key={item.index.toString()} {...item} imageURL={imageURL} navigation={this.props.navigation}/>
+        return <RecipeCard listChoice={this.props["listChoice"]} key={item.index.toString()} {...item} imageURL={imageURL} navigateToRecipeDetails={this.navigateToRecipeDetails}/>
     }
 
     renderGlobalListButton = () => {
@@ -138,7 +146,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
-      // console.log(this.props[this.props["listChoice"] + `_Recipes`])
       return (
         <React.Fragment>
           <NavigationEvents onWillFocus={this.respondToFocus}/>
@@ -157,4 +164,4 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       )
     }
   }
-)
+))

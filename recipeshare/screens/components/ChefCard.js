@@ -5,7 +5,7 @@ import { styles } from '../functionalComponents/RSStyleSheet'
 export default function ChefCard(props) {
     // console.log(props.listChoice)
         return (
-            <TouchableOpacity activeOpacity={0.8} style={styles.recipeCard} onPress={() => props.navigation(props.listChoice, props.item.id)}>
+            <TouchableOpacity activeOpacity={0.7} style={styles.recipeCard} onPress={() => props.navigation(props.listChoice, props.item.id)}>
                 <View style={styles.recipeCardRightContent} >
                     <Image style={styles.thumbnail} source={props.imageURL} />
                 </View>

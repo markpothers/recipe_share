@@ -1,75 +1,12 @@
 import React from 'react';
 import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator, createMaterialTopTabNavigator, createDrawerNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import BrowseRecipesScreen from '../screens/BrowseRecipes';
-import MyRecipeBookScreen from '../screens/MyRecipeBook';
-import ProfileScreen from '../screens/ProfileScreen';
-import RecipeDetailsScreen from '../screens/recipeDetails'
-import ChefDetailsScreen from '../screens/chefDetails'
-import NewRecipeScreen from '../screens/tabs/newRecipe'
+import BrowseRecipesStack from './BrowseRecipesNavigator'
+import MyRecipeBookStack from './MyRecipeBookNavigator'
+import ProfileStack from './ProfileNavigator'
 
-const BrowseRecipesStack = createStackNavigator({
-  BrowseRecipes: BrowseRecipesScreen,
-  RecipeDetails: RecipeDetailsScreen,
-  NewRecipe: NewRecipeScreen,
-  ChefDetails: ChefDetailsScreen
-});
-
-BrowseRecipesStack.navigationOptions = {
-  tabBarLabel: 'Browse recipes',
-  tabBarIcon: ({ focused }) => (
-    <Icon size={25} color="#8d8d8d"
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'food-variant'
-      }
-    />
-  ),
-};
-
-const MyRecipeBookStack = createStackNavigator({
-  MyRecipeBook: MyRecipeBookScreen,
-  RecipeDetails: RecipeDetailsScreen,
-  NewRecipe: NewRecipeScreen,
-  ChefDetails: ChefDetailsScreen
-});
-
-MyRecipeBookStack.navigationOptions = {
-  tabBarLabel: 'My recipe book',
-  tabBarIcon: ({ focused }) => (
-    <Icon size={25} color="#8d8d8d"
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'book-open-page-variant'
-      }
-    />
-  ),
-};
-
-const ProfileStack = createStackNavigator({
-  Profile: ProfileScreen,
-});
-
-ProfileStack.navigationOptions = {
-  tabBarLabel: 'Profile',
-  tabBarIcon: ({ focused }) => (
-    <Icon  size={25} color="#8d8d8d"
-    focused={focused}
-    name={
-      Platform.OS === 'ios'
-        ? `ios-information-circle${focused ? '' : '-outline'}`
-        : 'account'
-    }
-    />
-  ),
-};
-
-export default createBottomTabNavigator({
+export default createDrawerNavigator({
   BrowseRecipes: BrowseRecipesStack,
   MyRecipeBook: MyRecipeBookStack,
   Profile: ProfileStack,

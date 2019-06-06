@@ -12,6 +12,10 @@ export const styles = StyleSheet.create({
     flex: 1,
     // flexDirection: 'column'
   },
+  headerContainer: {
+    flex: 1,
+    flexDirection: 'row'
+  },
     scrollableTabs: {
       flex: 1,
       borderStyle: 'solid',
