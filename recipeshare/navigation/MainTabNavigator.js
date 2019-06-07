@@ -5,9 +5,10 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import BrowseRecipesStack from './BrowseRecipesNavigator'
 import MyRecipeBookStack from './MyRecipeBookNavigator'
 import ProfileStack from './ProfileNavigator'
+import BrowseRecipesCoverStack from './BrowseRecipesCover'
 
 export default createDrawerNavigator({
-  BrowseRecipes: BrowseRecipesStack,
+  BrowseRecipes: BrowseRecipesCoverStack,
   MyRecipeBook: MyRecipeBookStack,
   Profile: ProfileStack,
   },

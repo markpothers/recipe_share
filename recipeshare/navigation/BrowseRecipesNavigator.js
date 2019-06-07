@@ -82,46 +82,22 @@ const BrowseRecipesStack = createStackNavigator({
   ChefDetails: ChefDetailsScreen
 },{
   defaultNavigationOptions: {
-    headerTitle: <BrowseRecipesHeader/>
-    // title: "Recipe-Share",
-    // headerStyle: {
-    //   backgroundColor: '#104e01',
-    //   // marginTop: 0,
-    //   // height: 55,
-    //   // overflow: 'hidden'
-    //   // marginTop: -25,
-    //   // height: 0,
-    //   // overflow: 'hidden'
-    // },
-    // headerTintColor: '#fff59b',
-    // headerTitleStyle: {  //text styles for the header title
-    //   fontWeight: 'bold',
-    //   marginHorizontal: 16,
-    //   textAlign: 'left',
-    //   // marginLeft: -5,
-    //   fontSize: 20
-    //   // overflow: 'hidden'
-    // },
-    // headerLeft: (
-    //   <Button title="Drawer" onPress={() => navigation.toggleDrawer()}>
-    //     <Icon name='plus' size={40} style={styles.newIcon}/>
-    //   </Button>
-    // )
+    header: null
   }
 });
 
-BrowseRecipesStack.navigationOptions = {
-  tabBarLabel: 'Browse recipes',
-  tabBarIcon: ({ focused }) => (
-    <Icon size={25} color="#8d8d8d"
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'food-variant'
-      }
-    />
-  ),
-};
+// BrowseRecipesStack.navigationOptions = {
+//   tabBarLabel: 'Browse recipes',
+//   tabBarIcon: ({ focused }) => (
+//     <Icon size={25} color="#8d8d8d"
+//       focused={focused}
+//       name={
+//         Platform.OS === 'ios'
+//           ? `ios-information-circle${focused ? '' : '-outline'}`
+//           : 'food-variant'
+//       }
+//     />
+//   ),
+// };
 
 export default BrowseRecipesStack

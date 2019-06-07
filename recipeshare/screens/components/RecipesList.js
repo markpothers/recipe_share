@@ -145,7 +145,12 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
       this.fetchAdditionalRecipesThenDetailsForList()
     }
 
+    onScroll = () => {
+      this.props.respondToListScroll()
+    }
+
     render() {
+      // console.log(this.props.sawTheScroll)
       return (
         <React.Fragment>
           <NavigationEvents onWillFocus={this.respondToFocus}/>
@@ -158,6 +163,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
             refreshing={false}
             onEndReached={this.onEndReached}
             onEndReachedThreshold={0.3}
+            onScroll={this.onScroll}
           />
           {this.renderGlobalListButton()}
         </React.Fragment>

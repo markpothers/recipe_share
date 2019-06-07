@@ -14,7 +14,11 @@ export const styles = StyleSheet.create({
   },
   headerContainer: {
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    // height: 20,
+    // overflow: 'hidden',
+    // borderStyle: 'solid',
+    // borderWidth: 2
   },
     scrollableTabs: {
       flex: 1,

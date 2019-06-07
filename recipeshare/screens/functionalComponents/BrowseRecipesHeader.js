@@ -6,15 +6,14 @@ import { withNavigation } from 'react-navigation'
 
 class BrowseRecipesHeader extends React.Component {
     render () {
-        console.log(this.props.navigation)
         return (
             <View style={styles.headerContainer}>
                 <TouchableOpacity >
-                    <Icon name='menu' size={40} onPress={() => this.props.navigation.toggleDrawer()}/>
+                    <Icon name='menu' size={33} onPress={() => this.props.navigation.toggleDrawer()}/>
                 </TouchableOpacity>
-                <Text style={{fontSize: 24}}>Mark's Header</Text>
+                <Text style={{fontSize: 24}}>Browse Recipes</Text>
                 <TouchableOpacity >
-                    <Icon name='plus' size={40} onPress={() => this.props.navigation.navigate('NewRecipe')}/>
+                    <Icon name='plus' size={33} onPress={() => this.props.navigation.navigate('NewRecipe')}/>
                 </TouchableOpacity>
             </View>
             )
