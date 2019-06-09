@@ -17,13 +17,18 @@ class BrowseRecipesCover extends React.Component {
   static router = BrowseRecipesStack.router
   static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: <BrowseRecipesHeader/>,
+      headerTitle: "Cover Page", //<BrowseRecipesHeader/>,
       headerStyle: {
         backgroundColor: '#104e01',
-        marginTop: 0, // -25 to hide entirely
-        height: navigation.getParam('headerY'),
-        overflow: 'hidden'
+        borderTop: 'solid',
+        borderTopWidth: 24,
+        borderColor: '#fff59b',
+        // marginTop: 24, // -25 to hide entirely
+        height: navigation.getParam('headerHeight'),
+        overflow: 'hidden',
+        
       },
+    }}
       // headerTintColor: '#fff59b',  // move these settings to the BrowseRecipesHeader to give it the right colors
       // headerTitleStyle: {
       //   fontWeight: 'bold',
@@ -40,28 +45,50 @@ class BrowseRecipesCover extends React.Component {
       //     </Button> */}
       //   </React.Fragment>
       // ),
-    }}
+    // }}
 
     state = {
-      headerY: new Animated.Value(0)
+      headerHeight: new Animated.Value(0)
+    }
+
+    componentWillMount = () => {
+      const HEADER_MAX_HEIGHT = 60
+      const HEADER_MIN_HEIGHT = 0
+      const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT
+
+      this.props.navigation.setParams({headerHeight: this.state.headerHeight.interpolate({
+        inputRange: [0, HEADER_SCROLL_DISTANCE],
+        outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
+        extrapolate: 'clamp'
+      })
+      });
     }
 
     componentWillMount = () => {
       // this.props.navigation.setParams({headerY: this.state.headerY})
-      this.props.navigation.setParams({headerY: this.state.headerY.interpolate({
-        inputRange: [0, 100],
-        outputRange: [50, -50],
+      this.props.navigation.setParams({headerHeight: this.state.headerHeight.interpolate({
+        inputRange: [0, 1],
+        outputRange: [80, 0],
         extrapolate: 'clamp'
       })})
     }
 
-    respondToListScroll = () => {
-      console.log("I saw the scroll")
-      Animated.event([{nativeEvent: {contentOffset: {y: this.state.headerY}}}]) 
+    componentDidMount = () => {
+      Animated.event( this.props.navigation.setParams({headerHeight: this.state.headerHeight.interpolate({
+        inputRange: [0, 1],
+        outputRange: [80, 0],
+        extrapolate: 'clamp'
+      })}))
+    }
+
+    respondToListScroll = (e) => {
+      console.log(e)
+      // Animated.event(this.props.navigation.setParams({headerHeight: e.nativeEvent.contentOffset.y}))
+      // Animated.event([{nativeEvent: {contentOffset: {y: e.nativeEvent.contentOffset.y}}}])
     }
 
   render () {
-    // console.log(this.props)
+    console.log(this.state.headerHeight)
     return (
     <BrowseRecipesStack navigation={this.props.navigation} screenProps={this.respondToListScroll} />
     )

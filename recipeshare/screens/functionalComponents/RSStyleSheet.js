@@ -1,8 +1,6 @@
 import React from 'react'
 import { StyleSheet } from 'react-native';
 
-
-
 export const styles = StyleSheet.create({
   mainPageContainer:{
     // borderStyle: 'solid',
@@ -13,12 +11,33 @@ export const styles = StyleSheet.create({
     // flexDirection: 'column'
   },
   headerContainer: {
-    flex: 1,
+    // flex: 1,
     flexDirection: 'row',
+    // position: 'absolute',
+    // bottom: '33%',
+    width: '100%',
     // height: 20,
     // overflow: 'hidden',
     // borderStyle: 'solid',
     // borderWidth: 2
+  },
+  headerDrawerButton: {
+    marginLeft: 10,
+    marginRight: 10,
+    // color: '#f700ffef'
+  },
+  headerNewButton: {
+    position: 'absolute',
+    left: '85%',
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  headerIcon:{
+    color: '#fff59b'
+  },
+  headerText:{
+    fontSize: 24,
+    color: '#fff59b'
   },
     scrollableTabs: {
       flex: 1,
@@ -484,7 +503,10 @@ export const styles = StyleSheet.create({
       // alignItems: 'center',
     },
     addIngredientNameInputBox: {
-      // position: 'relative',
+      position: 'absolute',
+      flex: 1,
+      left: '2%',
+      zIndex: 1,
        // bottom: '0%',
        marginTop: '0%',
        marginLeft: '1%',

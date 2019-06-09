@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, Text } from 'react-native'
+import { Animated, FlatList, Text } from 'react-native'
 import { Button} from 'native-base'
 import RecipeCard from './RecipeCard'
 import { databaseURL } from '../functionalComponents/databaseURL'
@@ -8,7 +8,7 @@ import { styles } from '../functionalComponents/RSStyleSheet'
 import { fetchRecipeList } from '../functionalComponents/recipeListFetch'
 import { fetchRecipeDetails } from '../functionalComponents/recipeListDetailsFetch'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import { NavigationEvents, withNavigation } from 'react-navigation'
+import { NavigationEvents, withNavigation, Header } from 'react-navigation'
 
 
 const mapStateToProps = (state) => ({
@@ -60,6 +60,24 @@ const mapDispatchToProps = {
 
 export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
   class RecipesList extends React.Component {
+    static navigationOptions = ({ navigation }) => {
+      return {
+        headerTitle: 'My recipe book',
+        headerStyle: {    //styles possibly needed if app-wide styling doesn't work
+          backgroundColor: '#104e01',
+          opacity: 0.8
+        },
+        headerTintColor: '#fff59b',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+        headerRight: (
+          <Button rounded style={styles.newButton} onPress={navigation.getParam('newRecipe')}>
+            <Icon name='plus' size={40} style={styles.newIcon}/>
+          </Button>
+        ),
+      }
+    };
 
     state = {
       limit: 20,
@@ -145,8 +163,9 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
       this.fetchAdditionalRecipesThenDetailsForList()
     }
 
-    onScroll = () => {
-      this.props.respondToListScroll()
+    onScroll = (e) => {
+      e.persist()
+      // this.props.respondToListScroll(e)
     }
 
     render() {
@@ -163,7 +182,8 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
             refreshing={false}
             onEndReached={this.onEndReached}
             onEndReachedThreshold={0.3}
-            onScroll={this.onScroll}
+            // onScroll={e => this.onScroll(e)}
+            // scrollEventThrottle={16}
           />
           {this.renderGlobalListButton()}
         </React.Fragment>

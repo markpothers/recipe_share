@@ -7,6 +7,7 @@ class IngredientsController < ApplicationController
 
 
     def index
+        # @ingredients = Ingredient.where("name LIKE '%#{params[:subString]}%'")
         render json: Ingredient.all
     end
 

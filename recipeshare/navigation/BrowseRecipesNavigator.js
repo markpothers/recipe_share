@@ -76,15 +76,26 @@ const BrowseRecipesTabs = createMaterialTopTabNavigator({
 })
 
 const BrowseRecipesStack = createStackNavigator({
+  NewRecipe: NewRecipeScreen,
   BrowseRecipes: BrowseRecipesTabs,
   RecipeDetails: RecipeDetailsScreen,
   NewRecipe: NewRecipeScreen,
   ChefDetails: ChefDetailsScreen
 },{
   defaultNavigationOptions: {
-    header: null
-  }
-});
+    headerTitle: <BrowseRecipesHeader/>,
+    headerStyle: {    //styles possibly needed if app-wide styling doesn't work
+      backgroundColor: '#104e01',
+      opacity: 0.8
+    },
+    headerTintColor: '#fff59b',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
+
+}
+}
+);
 
 // BrowseRecipesStack.navigationOptions = {
 //   tabBarLabel: 'Browse recipes',

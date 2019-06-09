@@ -8,7 +8,8 @@ import ProfileStack from './ProfileNavigator'
 import BrowseRecipesCoverStack from './BrowseRecipesCover'
 
 export default createDrawerNavigator({
-  BrowseRecipes: BrowseRecipesCoverStack,
+  OldBrowseRecipes: BrowseRecipesStack,
+  BrowseRecipes: BrowseRecipesStack,  //BrowseRecipesCoverStack to include the cover page instead
   MyRecipeBook: MyRecipeBookStack,
   Profile: ProfileStack,
   },

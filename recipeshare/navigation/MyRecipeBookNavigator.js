@@ -25,18 +25,18 @@ const MyRecipeBookStack = createStackNavigator({
   ChefDetails: ChefDetailsScreen
 });
 
-MyRecipeBookStack.navigationOptions = {
-  tabBarLabel: 'My recipe book',
-  tabBarIcon: ({ focused }) => (
-    <Icon size={25} color="#8d8d8d"
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'book-open-page-variant'
-      }
-    />
-  ),
-};
+// MyRecipeBookStack.navigationOptions = {
+//   tabBarLabel: 'My recipe book',
+//   tabBarIcon: ({ focused }) => (
+//     <Icon size={25} color="#8d8d8d"
+//       focused={focused}
+//       name={
+//         Platform.OS === 'ios'
+//           ? `ios-information-circle${focused ? '' : '-outline'}`
+//           : 'book-open-page-variant'
+//       }
+//     />
+//   ),
+// };
 
 export default MyRecipeBookStack

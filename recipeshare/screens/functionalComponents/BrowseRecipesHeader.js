@@ -8,12 +8,12 @@ class BrowseRecipesHeader extends React.Component {
     render () {
         return (
             <View style={styles.headerContainer}>
-                <TouchableOpacity >
-                    <Icon name='menu' size={33} onPress={() => this.props.navigation.toggleDrawer()}/>
+                <TouchableOpacity style={styles.headerDrawerButton}>
+                    <Icon name='menu' style={styles.headerIcon} size={33} onPress={() => this.props.navigation.toggleDrawer()}/>
                 </TouchableOpacity>
-                <Text style={{fontSize: 24}}>Browse Recipes</Text>
-                <TouchableOpacity >
-                    <Icon name='plus' size={33} onPress={() => this.props.navigation.navigate('NewRecipe')}/>
+                <Text style={styles.headerText}>Browse Recipes</Text>
+                <TouchableOpacity style={styles.headerNewButton}>
+                    <Icon name='plus' style={styles.headerIcon} size={33} onPress={() => this.props.navigation.navigate('NewRecipe')}/>
                 </TouchableOpacity>
             </View>
             )
