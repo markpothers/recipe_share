@@ -2,12 +2,7 @@ import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator, createMaterialTopTabNavigator, createDrawerNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import BrowseRecipesScreen from '../screens/BrowseRecipes';
-import MyRecipeBookScreen from '../screens/MyRecipeBook';
-import ProfileScreen from '../screens/ProfileScreen';
-import RecipeDetailsScreen from '../screens/recipeDetails'
-import ChefDetailsScreen from '../screens/chefDetails'
-import NewRecipeScreen from '../screens/tabs/newRecipe'
+import ProfileScreen from '../src/profile/ProfileScreen';
 
 const ProfileStack = createStackNavigator({
   Profile: ProfileScreen,

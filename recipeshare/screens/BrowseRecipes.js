@@ -1,12 +1,12 @@
 import React from 'react';
 import { StyleSheet, View, ImageBackground } from 'react-native';
 import { Container, Tab, Tabs, ScrollableTab, Button } from 'native-base';
-import RecipesList from './components/RecipesList';
-import ChefList from './components/ChefList';
+import RecipesList from '../src/recipeLists/RecipesList';
+import ChefList from '../src/chefLists/ChefList';
 import { connect } from 'react-redux'
-import { styles } from './functionalComponents/RSStyleSheet'
+import { styles } from '../src/generalStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import NewRecipe from './tabs/newRecipe';
+import NewRecipe from '../src/newRecipe/newRecipe';
 
 const mapStateToProps = (state) => ({
       loggedInChef: state.loggedInChef

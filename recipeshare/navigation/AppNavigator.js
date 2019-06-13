@@ -1,8 +1,8 @@
 import React from 'react';
 import { createAppContainer, createSwitchNavigator, createStackNavigator } from 'react-navigation';
-import LoginScreen from '../screens/tabs/login'
-import CreateChef from '../screens/tabs/createChef'
-import AppLoading from '../screens/tabs/appLoading'
+import LoginScreen from '../src/users/login'
+import CreateChef from '../src/users/createChef'
+import AppLoading from '../src/users/appLoading'
 
 //basically shows the loading screen which refers to Home or login.  Can move back and forth between login and new user.
 //New user logs straight in as we

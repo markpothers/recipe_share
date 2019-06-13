@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 import { Ionicons } from '@expo/vector-icons';
-import { store } from './screens/functionalComponents/store'
+import { store } from './src/functionalComponents/store'
 // This was requested by react Navigation although I can't see the difference in functionality
 import { useScreens } from 'react-native-screens';
 useScreens();

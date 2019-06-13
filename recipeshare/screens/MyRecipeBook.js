@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, View, ImageBackground } from 'react-native';
 import { Container, Button, Tab, Tabs, ScrollableTab } from 'native-base';
-import RecipesList from './components/RecipesList';
+import RecipesList from '../src/recipeLists/RecipesList';
 import { connect } from 'react-redux'
-import { styles } from './functionalComponents/RSStyleSheet'
+import { styles } from '../src/generalStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import ChefList from './components/ChefList';
+import ChefList from '../src/chefLists/ChefList';
 
 const mapStateToProps = (state) => ({
       loggedInChef: state.loggedInChef

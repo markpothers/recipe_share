@@ -4,13 +4,13 @@ import { createStackNavigator, createBottomTabNavigator, createMaterialTopTabNav
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import BrowseRecipesScreen from '../screens/BrowseRecipes';
 import MyRecipeBookScreen from '../screens/MyRecipeBook';
-import ProfileScreen from '../screens/ProfileScreen';
-import RecipeDetailsScreen from '../screens/recipeDetails'
-import ChefDetailsScreen from '../screens/chefDetails'
-import NewRecipeScreen from '../screens/tabs/newRecipe'
+import ProfileScreen from '../src/profile/ProfileScreen';
+import RecipeDetailsScreen from '../src/recipeDetails/recipeDetails'
+import ChefDetailsScreen from '../src/chefDetails/chefDetails'
+import NewRecipeScreen from '../src/newRecipe/newRecipe'
 import { ChefFeedScreen, NewestRecipesScreen, MostLikedRecipesScreen, MostMadeRecipesScreen, NewestChefsScreen, MostLikedChefsScreen, MostMadeChefsScreen} from './BrowseRecipesTabs'
-import { styles } from '../screens/functionalComponents/RSStyleSheet'
-import BrowseRecipesHeader from '../screens/functionalComponents/BrowseRecipesHeader'
+import { styles } from './navigationStyleSheet'
+import BrowseRecipesHeader from './BrowseRecipesHeader'
 
 const BrowseRecipesTabs = createMaterialTopTabNavigator({
   ChefFeed: {
@@ -60,23 +60,28 @@ const BrowseRecipesTabs = createMaterialTopTabNavigator({
     height: 50,
     width: Dimensions.get('window').width
   },
+  lazy: true,
   tabBarOptions:{
     upperCaseLabel: false,
     scrollEnabled: true,
     labelStyle: {
-      // fontSize: 14,
+      fontSize: 14,
+      color: '#fff59b',
     },
     tabStyle: {
-      // width: 150,
+      // width: 100,
+      height: 60,
     },
     style: {
-      // backgroundColor: 'green',
+      backgroundColor: '#104e01',
+      borderStyle: 'solid',
+      borderWidth: 2,
     },
   }
 })
 
 const BrowseRecipesStack = createStackNavigator({
-  NewRecipe: NewRecipeScreen,
+  // NewRecipe: NewRecipeScreen,
   BrowseRecipes: BrowseRecipesTabs,
   RecipeDetails: RecipeDetailsScreen,
   NewRecipe: NewRecipeScreen,
@@ -86,16 +91,18 @@ const BrowseRecipesStack = createStackNavigator({
     headerTitle: <BrowseRecipesHeader/>,
     headerStyle: {    //styles possibly needed if app-wide styling doesn't work
       backgroundColor: '#104e01',
-      opacity: 0.8
+      // opacity: 0.8,
+      borderStyle: 'solid',
+      borderWidth: 2,
+      height: 60,  // cannot be less than 24 as includes space for the notification bar
     },
     headerTintColor: '#fff59b',
-    headerTitleStyle: {
-      fontWeight: 'bold',
-    },
+    // headerTitleStyle: {
+    //   fontWeight: 'bold',
+    // },
 
 }
-}
-);
+});
 
 // BrowseRecipesStack.navigationOptions = {
 //   tabBarLabel: 'Browse recipes',
