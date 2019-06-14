@@ -1,0 +1,2 @@
+class ReSharesController < ApplicationController
+end

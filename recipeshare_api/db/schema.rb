@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_13_230713) do
+ActiveRecord::Schema.define(version: 2019_06_14_164549) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -101,6 +101,15 @@ ActiveRecord::Schema.define(version: 2019_05_13_230713) do
     t.datetime "updated_at", null: false
     t.index ["chef_id"], name: "index_make_pics_on_chef_id"
     t.index ["recipe_id"], name: "index_make_pics_on_recipe_id"
+  end
+
+  create_table "re_shares", force: :cascade do |t|
+    t.integer "recipe_id"
+    t.integer "chef_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chef_id"], name: "index_re_shares_on_chef_id"
+    t.index ["recipe_id"], name: "index_re_shares_on_recipe_id"
   end
 
   create_table "recipe_images", force: :cascade do |t|

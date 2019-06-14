@@ -3,29 +3,21 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   mainPageContainer:{
-    // borderStyle: 'solid',
-    // borderWidth: 2,
-    // borderColor: '#9e0000f8',
-    // overflow: 'scroll'
     flex: 1,
-    // flexDirection: 'column'
   },
   headerContainer: {
     // flex: 1,
     flexDirection: 'row',
-    // position: 'absolute',
-    // bottom: '33%',
+    alignItems: 'center',
     width: '100%',
-    height: 60,
-    // overflow: 'hidden',
-    borderStyle: 'solid',
-    borderWidth: 2,
-    // marginTop: -24,
+    height: 55,
+    // borderStyle: 'solid',
+    // borderWidth: 2,
+    borderColor: '#fff59b',
   },
   headerDrawerButton: {
     marginLeft: 10,
     marginRight: 10,
-    // color: '#f700ffef'
   },
   headerNewButton: {
     position: 'absolute',
@@ -44,7 +36,6 @@ export const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     flex: 1
-    // opacity: '20%'
   },
   backgroundImageStyle: {
     opacity: 0.8

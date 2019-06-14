@@ -57,10 +57,10 @@ const BrowseRecipesTabs = createMaterialTopTabNavigator({
   }
 }, {
   initialLayout: {
-    height: 50,
+    height: 55,
     width: Dimensions.get('window').width
   },
-  lazy: true,
+  // lazy: true,
   tabBarOptions:{
     upperCaseLabel: false,
     scrollEnabled: true,
@@ -70,12 +70,12 @@ const BrowseRecipesTabs = createMaterialTopTabNavigator({
     },
     tabStyle: {
       // width: 100,
-      height: 60,
+      height: 55,
     },
     style: {
       backgroundColor: '#104e01',
-      borderStyle: 'solid',
-      borderWidth: 2,
+      // borderStyle: 'solid',
+      // borderWidth: 2,
     },
   }
 })
@@ -91,9 +91,8 @@ const BrowseRecipesStack = createStackNavigator({
     headerTitle: <BrowseRecipesHeader/>,
     headerStyle: {    //styles possibly needed if app-wide styling doesn't work
       backgroundColor: '#104e01',
-      // opacity: 0.8,
-      borderStyle: 'solid',
-      borderWidth: 2,
+      // borderStyle: 'solid',
+      // borderWidth: 2,
       height: 60,  // cannot be less than 24 as includes space for the notification bar
     },
     headerTintColor: '#fff59b',
