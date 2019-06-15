@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, Platform, Button, Text, Dimensions } from 'react-native';
+import { Platform, Button, Text, Dimensions } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator, createMaterialTopTabNavigator, createDrawerNavigator } from 'react-navigation';
 import BrowseRecipesStack from './BrowseRecipesNavigator'
 import { styles } from './navigationStyleSheet'
