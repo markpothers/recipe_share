@@ -21,7 +21,7 @@ export default function RecipeCard(props) {
                     </View>
                 </View>
                 <TouchableOpacity style={styles.recipeCardTopRightContainer} >
-                    <Image style={styles.avatarThumbnail} source={{uri: `${databaseURL}${props.item.imageURL}`}} />
+                    <AvatarImage chefImageURL={props.item.chefImageURL}/>
                 </TouchableOpacity>
             </View>
             <TouchableOpacity style={styles.recipeCardImageContainer} activeOpacity={0.7} onPress={() => props.navigateToRecipeDetails(props.item.id)}>
@@ -31,37 +31,38 @@ export default function RecipeCard(props) {
                 <TouchableOpacity style={styles.recipeCardBottomSubContainers}>
                     <Icon name='share-outline' size={23} style={styles.icon}/>
                     {/* <Icon name='share' size={23} style={styles.icon}/> */}
-                    <Text style={styles.recipeCarBottomOther} >00</Text>
+                    <Text style={styles.recipeCarBottomOther} >{props.item.sharesCount}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.recipeCardBottomSubContainers}>
                     <Icon name='heart-outline' size={23} style={styles.icon}/>
                     {/* <Icon name='heart' size={23} style={styles.icon}/> */}
-                    <Text style={styles.recipeCarBottomOther} >72</Text>
+                    <Text style={styles.recipeCarBottomOther} >{props.item.likesCount}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.recipeCardBottomSubContainers}>
                     <Icon name='food' size={23} style={styles.icon}/>
                     {/* <Icon name='food-off' size={23} style={styles.icon}/> */}
-                    <Text style={styles.recipeCarBottomOther} >107</Text>
+                    <Text style={styles.recipeCarBottomOther} >{props.item.makesCount}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.recipeCardBottomSubContainers}>
                     <Icon name='comment-outline' size={23} style={styles.icon}/>
                     {/* <Icon name='comment' size={23} style={styles.icon}/> */}
-                    <Text style={styles.recipeCarBottomOther} >2896</Text>
+                    <Text style={styles.recipeCarBottomOther} >{props.item.commentsCount}</Text>
                 </TouchableOpacity>
             </View>
         </View>
-
-
-
-        // <TouchableOpacity activeOpacity={0.7} style={styles.recipeCard} onPress={() => props.navigateToRecipeDetails(props.item.id)}>
-        //     <View style={styles.recipeCardRightContent} >
-        //         <Image style={styles.thumbnail} source={{uri: `${databaseURL}${props.item.imageURL}`}} />
-        //     </View>
-        //     <View style={styles.recipeCardRightContent} >
-        //         <Text style={styles.recipeCardName}>{props.item.name}</Text>
-        //         <Text style={styles.recipeCarBottomOtherTop} numberOfLines={1}>Prep time: {props.item.time}</Text>
-        //         <Text style={styles.recipeCardOtherBottom} numberOfLines={1}>Difficulty: {props.item.difficulty}/10</Text>
-        //     </View>
-        // </TouchableOpacity>
     )
+}
+
+function AvatarImage(chefImageURL) {
+    const URL = chefImageURL.chefImageURL
+    // console.log(URL)
+    if (URL == null) {
+        return (
+            <Image style={styles.avatarThumbnail} source={require("../dataComponents/peas.jpg")} />
+        )
+    } else {
+    return (
+        <Image style={styles.avatarThumbnail} source={URL.startsWith("http") ? {uri: URL} : {uri: `${databaseURL}${URL}`}} />
+        )
+    }
 }

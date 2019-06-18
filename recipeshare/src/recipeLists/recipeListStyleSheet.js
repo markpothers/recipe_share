@@ -3,9 +3,9 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
     recipeCard: {
       marginTop: '2%',
-      width: '98%',
-      marginLeft: '1%',
-      marginRight: '1%',
+      width: '100%',
+      marginLeft: '0%',
+      marginRight: '0%',
       borderStyle: 'solid',
       borderRadius: 5,
       borderWidth: 1,
@@ -40,8 +40,8 @@ export const styles = StyleSheet.create({
       overflow: 'hidden'
     },
     avatarThumbnail: {
-      position: 'absolute',
-      height: 75,
+      // position: 'absolute',
+      height: 60,
       width: '96%',
       marginRight: '4%'
     },

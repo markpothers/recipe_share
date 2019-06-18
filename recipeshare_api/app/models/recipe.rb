@@ -27,7 +27,7 @@ class Recipe < ApplicationRecord
       #                               ORDER BY (recipes.created_at) DESC
       #                               LIMIT (?)
       #                               OFFSET (?)", [limit, offset])
-
+# byebug
 
       ApplicationRecord.db.execute("SELECT recipes.*, recipe_images.imageURL,
                                     chefs.username ,chefs.imageURL as chefImageURL,
@@ -50,7 +50,7 @@ class Recipe < ApplicationRecord
                                     GROUP BY recipes.id
                                     ORDER BY recipes.created_at DESC
                                     LIMIT (?)
-                                    OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offest]
+                                    OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offset])
 
     elsif type == "chef" # recipes created by me ordered most-recent first
 
@@ -83,7 +83,7 @@ class Recipe < ApplicationRecord
                                       GROUP BY recipes.id
                                       ORDER BY recipes.created_at DESC
                                       LIMIT (?)
-                                      OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, query_chef_id, limit, offest]
+                                      OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, query_chef_id, limit, offset])
 
     elsif type == "chef_feed" # recipes created by me ordered most-recent first
 
@@ -118,7 +118,7 @@ class Recipe < ApplicationRecord
                                       GROUP BY recipes.id
                                       ORDER BY recipes.created_at DESC
                                       LIMIT (?)
-                                      OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offest]
+                                      OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offset])
 
 
     elsif type == "chef_liked" # recipes liked by use_chef ordered by most-recently liked
@@ -153,7 +153,7 @@ class Recipe < ApplicationRecord
                                       GROUP BY recipes.id
                                       ORDER BY recipes.created_at DESC
                                       LIMIT (?)
-                                      OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offest]
+                                      OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offset])
   
     elsif type == "chef_made" # recipes liked by use_chef ordered by most-recently liked
 
@@ -187,7 +187,7 @@ class Recipe < ApplicationRecord
                                       GROUP BY recipes.id
                                       ORDER BY recipes.created_at DESC
                                       LIMIT (?)
-                                      OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offest]
+                                      OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offset])
 
     elsif type =="most_liked" # recipes according to their global rankings # with filter based on chef name working if needed
 
@@ -228,7 +228,7 @@ class Recipe < ApplicationRecord
                                       GROUP BY recipes.id
                                       ORDER BY (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id) DESC
                                       LIMIT (?)
-                                      OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offest]
+                                      OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offset])
   
 
             # correct SQL query:
@@ -278,7 +278,7 @@ class Recipe < ApplicationRecord
                                 GROUP BY recipes.id
                                 ORDER BY (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id) DESC
                                 LIMIT (?)
-                                OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offest]
+                                OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offset])
 
     else # if all else fails, just show all recipes ordered most recent first
 
@@ -303,7 +303,7 @@ class Recipe < ApplicationRecord
                                 GROUP BY recipes.id
                                 ORDER BY recipes.created_at DESC
                                 LIMIT (?)
-                                OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offest]
+                                OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offset])
 
     end
   end
