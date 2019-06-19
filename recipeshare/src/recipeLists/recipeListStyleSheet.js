@@ -14,9 +14,11 @@ export const styles = StyleSheet.create({
     recipeCardTopPostedByContainer: {
       // borderBottomStyle: 'solid 0.5',
       borderBottomWidth: 0.5,
-      width: '96%',
-      marginLeft: '2%',
-      marginRight: '2%'
+      width: '96.4%',
+      marginLeft: '1.6%',
+      marginRight: '2%',
+      paddingBottom: '1%',
+      paddingTop: '1%'
     },
     recipeCardTopContainer: {
       flexDirection: 'row',
@@ -37,13 +39,14 @@ export const styles = StyleSheet.create({
       // borderWidth: 2,
       justifyContent: 'center',
       alignItems: 'center',
-      overflow: 'hidden'
+      overflow: 'hidden',
     },
     avatarThumbnail: {
       // position: 'absolute',
       height: 60,
       width: '96%',
-      marginRight: '4%'
+      marginRight: '4%',
+      borderRadius: 5,
     },
     recipeCardTopLeftUpperContainer:{
       // borderStyle: 'solid',
@@ -76,6 +79,7 @@ export const styles = StyleSheet.create({
       position: 'absolute',
       height: '100%',
       width: '100%',
+      borderRadius: 5
     },
     recipeCardBottomContainer: {
       flexDirection: 'row',

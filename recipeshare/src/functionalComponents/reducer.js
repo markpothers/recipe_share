@@ -75,6 +75,9 @@ const reducer = (currentState, action) => {
                 time: "00:15",
                 imageBase64: ""
                 }}
+        case 'LIKE_RECIPE':
+                currentState.recipes[action.listType].find( recipe => recipe.id === recipeID)
+            return {...currentState, recipes: {...currentState.recipes, [action.recipeType]: {...currentState.recipes[action.listType], }}}
         case 'ADD_RECIPE_LIKE':
             return {...currentState, recipe_details: {...currentState.recipe_details, recipe_likes: currentState.recipe_details.recipe_likes+1}}
         case 'REMOVE_RECIPE_LIKE':

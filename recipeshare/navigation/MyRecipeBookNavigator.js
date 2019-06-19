@@ -22,7 +22,7 @@ const MyRecipeBookTabs = createMaterialTopTabNavigator({
     height: 55,
     width: Dimensions.get('window').width
   },
-  // lazy: true,
+  lazy: true,
   tabBarOptions:{
     upperCaseLabel: false,
     scrollEnabled: true,

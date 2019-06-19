@@ -140,10 +140,10 @@ end
     end
 end
 
-1000.times do
+200.times do
     ReShare.create(chef_id: Chef.all.sample.id, recipe_id: Recipe.all.sample.id, created_at: Time.now)
 end
 
-# 13.times do 
-#     Recipe.last.destroy
-# end
+20.times do 
+    RecipeLike.last.destroy
+end

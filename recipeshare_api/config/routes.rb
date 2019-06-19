@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   post '/chefs/index', to: 'chefs#index'
   post '/chefs/details', to: 'chefs#index'
   delete '/recipe_likes', to: 'recipe_likes#destroy'
+  delete '/re_shares', to: 're_shares#destroy'
   post '/follows/check', to: 'follows#check'
   delete '/follows', to: 'follows#destroy'
 

@@ -1,15 +1,16 @@
 import React from 'react'
-import { Animated, FlatList, Text } from 'react-native'
+import { FlatList, Text } from 'react-native'
 import { Button} from 'native-base'
 import RecipeCard from './RecipeCard'
-import { databaseURL } from '../dataComponents/databaseURL'
 import { connect } from 'react-redux'
 import { styles } from './recipeListStyleSheet'
-import { fetchRecipeList } from './recipeListFetch'
-import { fetchRecipeDetails } from './recipeListDetailsFetch'
+import { fetchRecipeList } from '../fetches/recipeListFetch'
+import { postRecipeLike } from '../fetches/postRecipeLike'
+import { postReShare } from '../fetches/postReShare'
+import { postRecipeMake } from '../fetches/postRecipeMake'
+import { destroyRecipeLike } from '../fetches/destroyRecipeLike'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import { NavigationEvents, withNavigation, Header } from 'react-navigation'
-
+import { NavigationEvents, withNavigation } from 'react-navigation'
 
 const mapStateToProps = (state) => ({
       all_Recipes: state.recipes.all,
@@ -51,11 +52,11 @@ const mapDispatchToProps = {
       dispatch({ type: 'APPEND_TO_RECIPES_DETAILS', recipeType: listChoice, recipesDetailsList: new_recipe_details})
     }
   },
-  clearListedRecipes: (listChoice) => {
-    return dispatch => {
-      dispatch({ type: 'CLEAR_LISTED_RECIPES', recipeType: listChoice})
-    }
-  },
+  // clearListedRecipes: (listChoice) => {
+  //   return dispatch => {
+  //     dispatch({ type: 'CLEAR_LISTED_RECIPES', recipeType: listChoice})
+  //   }
+  // },
 }
 
 export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
@@ -95,50 +96,31 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
     }
 
     respondToFocus = async() =>{
-      // console.log(this.props["listChoice"])
       await this.setState({offset: 0})
       this.fetchRecipeListThenDetails()
     }
 
     fetchRecipeListThenDetails = async() => {
-      // console.log("asking the server")
       let recipes = await fetchRecipeList(this.props["listChoice"], this.props.chef_id, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token)
-      // console.log(recipes.length)
-      // console.log(this.props["listChoice"])
       this.props.storeRecipeList(this.props["listChoice"], recipes)
-      // recipe_ids = recipes.map(recipe => {
-      //   return recipe.id
-      // })
-      // const recipe_details = await fetchRecipeDetails(recipe_ids, this.props.loggedInChef.auth_token)
-      // this.props.storeRecipeDetails(this.props["listChoice"], recipe_details)
     }
 
     fetchAdditionalRecipesThenDetailsForList = async() => {
       const new_recipes = await fetchRecipeList(this.props["listChoice"], this.props.chef_id, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token)
       this.props.appendToRecipeList(this.props["listChoice"], new_recipes)
-      // new_recipe_ids = new_recipes.map(recipe => {
-      //   return recipe.id
-      // })
-      // const new_recipe_details = await fetchRecipeDetails(new_recipe_ids, this.props.loggedInChef.auth_token)
-      // this.props.appendToRecipeDetails(this.props["listChoice"], new_recipe_details)
     }
 
     navigateToRecipeDetails = (recipeID) =>{
-      // console.log("test")
       this.props.navigation.navigate('RecipeDetails', {recipeID: recipeID})
     }
 
+    navigateToChefDetails = (chefID) => {
+      this.props.navigation.navigate('ChefDetails', {listChoice: this.props["listChoice"], chefID: chefID})
+    }
+
     renderRecipeListItem = (item) => {
-      // let imageURL = null
-      // if (this.props.recipes_details[this.props["listChoice"]].recipe_images != undefined ){
-      //   if (this.props.recipes_details[this.props["listChoice"]].recipe_images.find(image => image.recipe_id == item.item.id) != undefined){
-      //     const recipe_image = this.props.recipes_details[this.props["listChoice"]].recipe_images.find(image => image.recipe_id == item.item.id)
-      //     imageURL = { uri: `${databaseURL}${recipe_image.imageURL}` }
-      //   }
-      // } else {
         let imageURL = require("../dataComponents/peas.jpg")
-      // }
-        return <RecipeCard listChoice={this.props["listChoice"]} key={item.index.toString()} {...item} imageURL={imageURL} navigateToRecipeDetails={this.navigateToRecipeDetails}/>
+        return <RecipeCard listChoice={this.props["listChoice"]} key={item.index.toString()} {...item} imageURL={imageURL} navigateToRecipeDetails={this.navigateToRecipeDetails} navigateToChefDetails={this.navigateToChefDetails} likeRecipe={this.likeRecipe} unlikeRecipe={this.unlikeRecipe} makeRecipe={this.makeRecipe} reShareRecipe={this.reShareRecipe}/>
     }
 
     renderGlobalListButton = () => {
@@ -154,7 +136,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
 
     refresh = async () => {
       await this.setState({limit: 20, offset: 0})
-      this.props.clearListedRecipes(this.props["listChoice"])
+      // this.props.clearListedRecipes(this.props["listChoice"])
       this.fetchRecipeListThenDetails()
     }
 
@@ -168,8 +150,72 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
       this.props.respondToListScroll(e)
     }
 
+    likeRecipe = async(recipeID) => {
+      const likePosted = await postRecipeLike(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
+      if (likePosted) {
+        const recipes = this.props[this.props["listChoice"] + `_Recipes`].map( (recipe) => {
+          if (recipe['id'] === recipeID){
+            recipe['likesCount'] += 1
+            recipe['chef_liked'] += 1
+            return recipe
+          } else {
+            return recipe
+          }
+        })
+        this.props.storeRecipeList(this.props["listChoice"], recipes)
+      }
+    }
+
+    unlikeRecipe = async(recipeID) => {
+      const unlikePosted = await destroyRecipeLike(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
+      if (unlikePosted) {
+        const recipes = this.props[this.props["listChoice"] + `_Recipes`].map( (recipe) => {
+          if (recipe['id'] === recipeID){
+            recipe['likesCount'] -= 1
+            recipe['chef_liked'] = 0
+            return recipe
+          } else {
+            return recipe
+          }
+        })
+        this.props.storeRecipeList(this.props["listChoice"], recipes)
+      }
+    }
+
+    makeRecipe = async(recipeID) => {
+      const makePosted = await postRecipeMake(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
+      if (makePosted) {
+        const recipes = this.props[this.props["listChoice"] + `_Recipes`].map( (recipe) => {
+          if (recipe['id'] === recipeID){
+            recipe['makesCount'] += 1
+            recipe['chef_made'] += 1
+            return recipe
+          } else {
+            return recipe
+          }
+        })
+        this.props.storeRecipeList(this.props["listChoice"], recipes)
+      }
+    }
+
+    reShareRecipe = async(recipeID) => {
+      const likePosted = await postReShare(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
+      if (likePosted) {
+        const recipes = this.props[this.props["listChoice"] + `_Recipes`].map( (recipe) => {
+          if (recipe['id'] === recipeID){
+            recipe['sharesCount'] += 1
+            recipe['chef_shared'] += 1
+            return recipe
+          } else {
+            return recipe
+          }
+        })
+        this.props.storeRecipeList(this.props["listChoice"], recipes)
+      }
+    }
+
     render() {
-      // console.log(this.props.sawTheScroll)
+      // console.log(this.props.chef_feed_Recipes.length)
       return (
         <React.Fragment>
           <NavigationEvents onWillFocus={this.respondToFocus}/>

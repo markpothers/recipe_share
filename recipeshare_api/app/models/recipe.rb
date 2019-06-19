@@ -79,7 +79,7 @@ class Recipe < ApplicationRecord
                                       LEFT OUTER JOIN recipe_likes ON recipes.id = recipe_likes.recipe_id
                                       LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id
                                       LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id
-                                      WHERE recipes.hidden=0 AND chef_id = (?)
+                                      WHERE recipes.hidden=0 AND recipes.chef_id = (?)
                                       GROUP BY recipes.id
                                       ORDER BY recipes.created_at DESC
                                       LIMIT (?)
@@ -96,30 +96,36 @@ class Recipe < ApplicationRecord
       #                               LIMIT (?)
       #                               OFFSET (?)", [owner_id, limit, offset])
 
-    ApplicationRecord.db.execute("SELECT recipes.*, recipe_images.imageURL,
-                                      chefs.username ,chefs.imageURL as chefImageURL,
-                                        (SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id) As sharesCount,
-                                        (SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id AND re_shares.chef_id = (?)) As chef_shared,
-                                        (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id) As likesCount,
-                                        (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id AND recipe_likes.chef_id = (?)) As chef_liked,
-                                        (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id) As makesCount,
-                                        (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id AND recipe_makes.chef_id = (?)) As chef_made,
-                                        (SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id) As commentsCount,
-                                        (SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id AND comments.chef_id = (?)) As chef_commented
-                                      FROM recipes
-                                      LEFT OUTER JOIN recipe_images ON recipe_images.recipe_id = recipes.id
-                                      LEFT OUTER JOIN chefs ON recipes.chef_id = chefs.id
-                                      LEFT OUTER JOIN re_shares ON recipes.id = re_shares.recipe_id
-                                      LEFT OUTER JOIN recipe_likes ON recipes.id = recipe_likes.recipe_id
-                                      LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id
-                                      LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id
-                                      JOIN follows ON recipes.chef_id = followee_id
-                                      WHERE recipes.hidden=0 AND follows.follower_id = (?)
-                                      GROUP BY recipes.id
-                                      ORDER BY recipes.created_at DESC
+      ApplicationRecord.db.execute("SELECT recipes.*, recipe_images.imageURL,
+                                    chefs.username ,chefs.imageURL as chefImageURL, sharers.sharer_username, sharers.sharer_id, sharers.shared_id,
+                                      (SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id) As sharesCount,
+                                      (SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id AND re_shares.chef_id = (?)) As chef_shared,
+                                      (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id) As likesCount,
+                                      (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id AND recipe_likes.chef_id = (?)) As chef_liked,
+                                      (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id) As makesCount,
+                                      (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id AND recipe_makes.chef_id = (?)) As chef_made,
+                                      (SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id) As commentsCount,
+                                      (SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id AND comments.chef_id = (?)) As chef_commented
+                                    FROM recipes
+                                    LEFT OUTER JOIN recipe_images ON recipe_images.recipe_id = recipes.id
+                                    LEFT OUTER JOIN chefs ON recipes.chef_id = chefs.id
+                                    LEFT OUTER JOIN re_shares ON recipes.id = re_shares.recipe_id
+                                    LEFT OUTER JOIN recipe_likes ON recipes.id = recipe_likes.recipe_id
+                                    LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id
+                                    LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id
+                                    LEFT OUTER JOIN (
+                                        SELECT chefs.username AS sharer_username, chefs.id AS sharer_id, re_shares.recipe_id AS shared_id
+                                        FROM chefs
+                                        JOIN re_shares ON chefs.id = re_shares.chef_id
+                                        WHERE re_shares.chef_id IN (SELECT follows.followee_id FROM follows WHERE follower_id = (?))
+                                        GROUP BY re_shares.recipe_id
+                                        ) AS sharers ON recipes.id = shared_id
+                                    JOIN follows ON recipes.chef_id = followee_id
+                                    WHERE recipes.hidden=0 AND ( follows.follower_id = (?) OR re_shares.chef_id IN (SELECT follows.followee_id FROM follows WHERE follower_id = (?)))
+                                    GROUP BY recipes.id
+                                    ORDER BY recipes.created_at DESC
                                       LIMIT (?)
-                                      OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offset])
-
+                                      OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offset])
 
     elsif type == "chef_liked" # recipes liked by use_chef ordered by most-recently liked
 
