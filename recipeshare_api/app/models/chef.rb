@@ -21,6 +21,8 @@ class Chef < ApplicationRecord
     has_many :commented_recipes, :through => :comments, :source => :recipe
     has_many :recipe_makes
     has_many :made_recipes, :through => :recipe_makes, :source => :recipe
+    has_many :re_shares
+    has_many :shared_recipes, :through => :re_shares, :source => :recipe
 
     validates :e_mail, presence: {message: "must be included."}
     validates :username, presence: {message: "must be included."}
