@@ -10,6 +10,7 @@ const reducer = (currentState, action) => {
             return {...currentState, recipes: {...currentState.recipes, [action.recipeType]: []}}
         case 'STORE_RECIPE_DETAILS':
             // console.log(action.recipe_details)
+            // console.log(action.recipe_details)
             return {...currentState, recipe_details: action.recipe_details}
         case 'APPEND_TO_RECIPE_LISTS':
             // console.log(currentState.recipes[action.recipeType])
@@ -84,6 +85,8 @@ const reducer = (currentState, action) => {
             return {...currentState, recipe_details: {...currentState.recipe_details, recipe_likes: currentState.recipe_details.recipe_likes-1}}
         case 'ADD_RECIPE_MAKE':
             return {...currentState, recipe_details: {...currentState.recipe_details, recipe_makes: currentState.recipe_details.recipe_makes+1}}
+        case 'ADD_RECIPE_SHARE':
+            return {...currentState, recipe_details: {...currentState.recipe_details, recipe_shares: currentState.recipe_details.recipe_shares+1}}
         case 'REMOVE_RECIPE_LIKES':
             return {...currentState, recipes_details: {...currentState.recipes_details, [action.listType]: {...currentState.recipes_details[action.listType], recipe_likes: action.recipe_likes}}}
         case 'LOG_IN_CHEF':

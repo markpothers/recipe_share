@@ -18,7 +18,8 @@ export const styles = StyleSheet.create({
       marginLeft: '1.6%',
       marginRight: '2%',
       paddingBottom: '1%',
-      paddingTop: '1%'
+      paddingTop: '1%',
+      flexDirection: 'row'
     },
     recipeCardTopContainer: {
       flexDirection: 'row',
@@ -52,10 +53,20 @@ export const styles = StyleSheet.create({
       // borderStyle: 'solid',
       // borderWidth: 2,
       width: '96%',
-      marginTop: '1%',
-      marginBottom: '1%',
+      // marginTop: '1%',
+      // marginBottom: '1%',
       marginLeft: '2%',
       marginRight: '2%'
+    },
+    recipeCardTopLeftMiddleContainer:{
+      // borderStyle: 'solid',
+      // borderWidth: 2,
+      width: '96%',
+      // marginTop: '1%',
+      // marginBottom: '1%',
+      marginLeft: '2%',
+      marginRight: '2%',
+      flexDirection: 'row'
     },
     recipeCardTopLeftLowerContainer:{
       flexDirection: 'row',
@@ -64,15 +75,15 @@ export const styles = StyleSheet.create({
       width: '96%',
       justifyContent: 'center',
       alignItems: 'center',
-      marginTop: '1%',
-      marginBottom: '1%',
+      // marginTop: '1%',
+      // marginBottom: '1%',
       marginLeft: '2%',
       marginRight: '2%'
     },
     recipeCardImageContainer: {
       // borderStyle: 'solid',
       // borderWidth: 2,
-      height: 275,
+      height: 250,
       width: '100%'
     },
     thumbnail: {
@@ -108,15 +119,20 @@ export const styles = StyleSheet.create({
       textAlign: 'left'
     },
     recipeCardTopOther: {
-      fontSize: 16,
+      fontSize: 13,
       color: "#505050",
       flex: 1
     },
-    recipeCardBottomOther: {
-      marginLeft: '10%',
-      fontSize: 16,
+    recipeCardTopItalic:{
+      fontSize: 13,
       color: "#505050",
-      flex: 1,
+      fontStyle: 'italic'
+    },
+    recipeCardBottomOther: {
+      marginLeft: '5%',
+      fontSize: 16,
+      fontWeight: 'bold',
+      color: "#505050",
       textAlign: 'center'
     },
 });

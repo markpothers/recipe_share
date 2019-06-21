@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, Text } from 'react-native'
+import { FlatList } from 'react-native'
 import { Button} from 'native-base'
 import RecipeCard from './RecipeCard'
 import { connect } from 'react-redux'
@@ -60,7 +60,7 @@ const mapDispatchToProps = {
 }
 
 export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
-  class RecipesList extends React.Component {
+  class RecipesList extends React.PureComponent {
     static navigationOptions = ({ navigation }) => {
       return {
         headerTitle: 'My recipe book',
@@ -93,6 +93,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
 
     componentDidMount = () => {
       this.fetchRecipeListThenDetails()
+      // this.navigateToRecipeDetails(454)
     }
 
     respondToFocus = async() =>{
@@ -120,19 +121,24 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
 
     renderRecipeListItem = (item) => {
         let imageURL = require("../dataComponents/peas.jpg")
-        return <RecipeCard listChoice={this.props["listChoice"]} key={item.index.toString()} {...item} imageURL={imageURL} navigateToRecipeDetails={this.navigateToRecipeDetails} navigateToChefDetails={this.navigateToChefDetails} likeRecipe={this.likeRecipe} unlikeRecipe={this.unlikeRecipe} makeRecipe={this.makeRecipe} reShareRecipe={this.reShareRecipe}/>
+        return (
+          // <View style={styles.recipeCard} key={item.index.toString()}>
+            <RecipeCard listChoice={this.props["listChoice"]} key={item.index.toString()} {...item.item} navigateToRecipeDetails={this.navigateToRecipeDetails} navigateToChefDetails={this.navigateToChefDetails} likeRecipe={this.likeRecipe} unlikeRecipe={this.unlikeRecipe} makeRecipe={this.makeRecipe} reShareRecipe={this.reShareRecipe}/>
+            // <RecipeCardTouchables {...item.item} likeRecipe={this.likeRecipe} unlikeRecipe={this.unlikeRecipe} makeRecipe={this.makeRecipe} reShareRecipe={this.reShareRecipe}/>
+          // </View>
+          )
     }
 
-    renderGlobalListButton = () => {
-      if (this.props["listChoice"] == "global_ranks"){
-        return (
-          <Button rounded danger style={styles.rankButton} onPress={this.handleRankChoiceButton}>
-              {this.props.global_ranking == 'liked' ? <Icon style={styles.rankIcon} size={25} name='thumb-up' /> : <Icon style={styles.rankIcon} size={25} name='thumb-up-outline' />}
-              {this.props.global_ranking == 'liked' ? <Text style={styles.rankButtonText}>Most likes</Text> : <Text style={styles.rankButtonText}>Most makes</Text>}
-          </Button>
-        )
-      }
-    }
+    // renderGlobalListButton = () => {
+    //   if (this.props["listChoice"] == "global_ranks"){
+    //     return (
+    //       <Button rounded danger style={styles.rankButton} onPress={this.handleRankChoiceButton}>
+    //           {this.props.global_ranking == 'liked' ? <Icon style={styles.rankIcon} size={25} name='thumb-up' /> : <Icon style={styles.rankIcon} size={25} name='thumb-up-outline' />}
+    //           {this.props.global_ranking == 'liked' ? <Text style={styles.rankButtonText}>Most likes</Text> : <Text style={styles.rankButtonText}>Most makes</Text>}
+    //       </Button>
+    //     )
+    //   }
+    // }
 
     refresh = async () => {
       await this.setState({limit: 20, offset: 0})
@@ -227,11 +233,12 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
             onRefresh={this.refresh}
             refreshing={false}
             onEndReached={this.onEndReached}
-            onEndReachedThreshold={0.3}
+            onEndReachedThreshold={1}
+            // initialNumToRender={200}
             // onScroll={e => this.onScroll(e)}
             // scrollEventThrottle={16}
           />
-          {this.renderGlobalListButton()}
+          {/* {this.renderGlobalListButton()} */}
         </React.Fragment>
       )
     }

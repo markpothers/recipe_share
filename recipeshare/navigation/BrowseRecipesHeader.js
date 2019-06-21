@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, View, TouchableOpacity, Text } from 'react-native'
+import { View, TouchableOpacity, Text } from 'react-native'
 import { styles } from './navigationStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { withNavigation } from 'react-navigation'
