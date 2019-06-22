@@ -80,13 +80,17 @@ const reducer = (currentState, action) => {
                 currentState.recipes[action.listType].find( recipe => recipe.id === recipeID)
             return {...currentState, recipes: {...currentState.recipes, [action.recipeType]: {...currentState.recipes[action.listType], }}}
         case 'ADD_RECIPE_LIKE':
-            return {...currentState, recipe_details: {...currentState.recipe_details, recipe_likes: currentState.recipe_details.recipe_likes+1}}
+            return {...currentState, recipe_details: {...currentState.recipe_details, recipe_likes: currentState.recipe_details.recipe_likes+1, likeable: false}}
         case 'REMOVE_RECIPE_LIKE':
-            return {...currentState, recipe_details: {...currentState.recipe_details, recipe_likes: currentState.recipe_details.recipe_likes-1}}
+            return {...currentState, recipe_details: {...currentState.recipe_details, recipe_likes: currentState.recipe_details.recipe_likes-1, likeable: true}}
         case 'ADD_RECIPE_MAKE':
-            return {...currentState, recipe_details: {...currentState.recipe_details, recipe_makes: currentState.recipe_details.recipe_makes+1}}
+            return {...currentState, recipe_details: {...currentState.recipe_details, recipe_makes: currentState.recipe_details.recipe_makes+1, makeable: false}}
         case 'ADD_RECIPE_SHARE':
             return {...currentState, recipe_details: {...currentState.recipe_details, recipe_shares: currentState.recipe_details.recipe_shares+1}}
+        case 'ADD_MAKE_PIC':
+            return {...currentState, recipe_details: {...currentState.recipe_details, make_pics: [action.makePic, ...currentState.recipe_details.make_pics]}}
+        case 'SAVE_REMAINING_MAKE_PICS':
+            return {...currentState, recipe_details: {...currentState.recipe_details, make_pics: action.makePics}}
         case 'REMOVE_RECIPE_LIKES':
             return {...currentState, recipes_details: {...currentState.recipes_details, [action.listType]: {...currentState.recipes_details[action.listType], recipe_likes: action.recipe_likes}}}
         case 'LOG_IN_CHEF':

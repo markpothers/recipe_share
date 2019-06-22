@@ -43,7 +43,7 @@ export const styles = StyleSheet.create({
       marginBottom: '1%',
       // justifyContent: 'center',
       // alignItems: 'center',
-      // borderRadius: 5,
+      borderRadius: 5,
       // overflow: 'hidden',
     },
     detailsIngredients: {
@@ -57,6 +57,8 @@ export const styles = StyleSheet.create({
       borderRadius: 5,
       backgroundColor: 'white',
       // opacity: 0.9,
+      paddingTop: '1%',
+      // paddingBottom: '1%'
     },
     detailsInstructions: {
       borderStyle: 'solid',
@@ -69,11 +71,13 @@ export const styles = StyleSheet.create({
       borderRadius: 5,
       backgroundColor: 'white',
       // opacity: 0.9,
-      marginBottom: '1%',
+      // marginBottom: '1%',
+      paddingTop: '1%',
+      paddingBottom: '1%'
     },
     detailsMakePicsContainer: {
       borderStyle: 'solid',
-      borderWidth: 1,
+      borderWidth: 0.5,
       // borderColor: 'black',
       // width: '100%',
       // marginLeft: '0%',
@@ -82,8 +86,12 @@ export const styles = StyleSheet.create({
       borderRadius: 5,
       backgroundColor: 'white',
       // opacity: 0.9,
-      marginBottom: '1%',
+      // marginBottom: '1%',
+      paddingTop: '1%',
       // height: 250
+    },
+    detailsLikesAndMakes:{
+      // flexDirection: 'row'
     },
     detailsLikes: {
       borderStyle: 'solid',
@@ -97,7 +105,29 @@ export const styles = StyleSheet.create({
       backgroundColor: 'white',
       // opacity: 0.9,
       flex: 1,
-      flexDirection: 'row'
+      flexDirection: 'row',
+      paddingTop: '0.5%',
+      paddingBottom: '0.5%',
+      height: 30,
+      // justifyContent: 'center',
+      // alignItems: 'center',
+    },
+    buttonAndText: {
+      flexDirection: 'row',
+      // position: 'absolute'
+      bottom: '10%',
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      // alignSelf: 'center',
+      // borderStyle: 'solid',
+      // borderWidth: 1,
+    },
+    icon: {
+      color: "#505050"
+    },
+    addIcon: {
+      color: "#505050",
     },
     detailsMakePics: {
       borderStyle: 'solid',
@@ -126,12 +156,10 @@ export const styles = StyleSheet.create({
     detailsSubHeadings: {
       marginLeft: '3%',
       marginRight: '3%',
-      // marginTop: '1%',
-      // marginBottom: '1%',
-      // textAlign: 'center',
       fontWeight: 'bold',
       fontSize: 16,
       color: "#505050",
+      width: '80%'
     },
     detailsContents: {
       marginLeft: '3%',
@@ -153,13 +181,13 @@ export const styles = StyleSheet.create({
       fontSize: 16,
       color: "#505050",
     },
-    detailsLikesAndMakesContents: {
-      marginLeft: '3%',
-      marginRight: '3%',
-      // marginTop: '1%',
-      // marginBottom: '1%',
-      // textAlign: 'center',
-      // fontWeight: 'bold',
+    detailsLikesAndMakesUpperContents: {
+      fontSize: 16,
+      color: "#505050",
+      textAlign: 'center',
+      marginLeft: '5%'
+    },
+    detailsLikesAndMakesLowerContents: {
       fontSize: 16,
       color: "#505050",
       textAlign: 'center',
@@ -171,26 +199,37 @@ export const styles = StyleSheet.create({
     ingredientsTable:{
       flexDirection: 'row',
       overflow: 'hidden',
-      // marginLeft: '1%'
+      width: '96%',
+      marginLeft: '2%',
+      marginRight: '2%',
+      borderBottomColor: '#505050',
+      borderBottomWidth: 0.5,
+      paddingBottom: '0.25%',
+      paddingTop: '0.25%'
+
     },
     ingredientName:{
       flex: 1,
       textAlign: 'left',
+      // fontStyle: 'italic',
+      fontWeight: 'normal',
+      marginLeft: '6%',
+      color: "#505050",
     },
     ingredientQuantity:{
       flex: 0.25,
       textAlign: 'left',
+      color: "#505050",
     },
     ingredientUnit:{
       flex: 0.75,
       textAlign: 'left',
-    },
-    detailsLikesAndMakes:{
-      // flexDirection: 'row'
+      color: "#505050",
     },
     detailsComments: {
       borderStyle: 'solid',
       borderWidth: 1,
+      paddingTop: '1%',
       // borderColor: 'black',
       // height: 500,
       width: '100%',
@@ -205,30 +244,53 @@ export const styles = StyleSheet.create({
       flexDirection: 'row',
       marginTop: '1%',
       // marginBottom: '2%'
+      width: '96%',
+      marginLeft: '2%',
+      marginRight: '2%',
+      borderBottomColor: '#505050',
+      borderBottomWidth: 0.5,
+      paddingBottom: '1%'
     },
     commentLeftContainer: {
       // flexDirection: 'row'
       flex: 2,
-      borderStyle: 'solid',
-      borderWidth: 1,
+      // borderStyle: 'solid',
+      // borderWidth: 1,
     },
     commentRightContainer: {
       // flexDirection: 'row'
-      borderStyle: 'solid',
-      borderWidth: 1,
+      // borderStyle: 'solid',
+      // borderWidth: 1,
       flex: 8
     },
-    makepicScrollView:{
+    makePicScrollView:{
       // position: 'absolute',
       borderStyle: 'solid',
-      borderWidth: 2,
+      borderWidth: 1,
       // height: 115,
       // width: 115
+      marginTop: '1%',
     },
     avatarThumbnail:{
       height: 60,
       width: '96%',
       marginRight: '4%',
       borderRadius: 5,
+    },
+    makePicContainer: {
+      height: 115,
+      width: 115
+    },
+    makePic: {
+      position: 'absolute'
+    },
+    makePicTrashCanButton: {
+      zIndex: 1,
+      position: 'absolute',
+      top: 75,
+      left: 85,
+    },
+    makePicTrashCan: {
+      color: '#ffffff'
     }
   });

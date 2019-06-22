@@ -342,7 +342,7 @@ class Recipe < ApplicationRecord
         likeable: RecipeLike.where(chef_id: chef.id).where(recipe_id: self.id).empty?,
         recipe_makes: RecipeMake.where(recipe_id: self.id).length,
         makeable: makeable,
-        make_pics: MakePic.where(recipe_id: self.id),
+        make_pics: MakePic.where(recipe_id: self.id).order('created_at DESC'),
         ingredient_uses: ingredientUses,
         ingredients: Ingredient.where(id: ingredients_ids)
     }
