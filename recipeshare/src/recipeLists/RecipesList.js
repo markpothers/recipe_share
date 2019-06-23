@@ -115,15 +115,19 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
       this.props.navigation.navigate('RecipeDetails', {recipeID: recipeID})
     }
 
+    navigateToRecipeDetailsAndComment = (recipeID) =>{
+      this.props.navigation.navigate('RecipeDetails', {recipeID: recipeID, commenting: true})
+    }
+
     navigateToChefDetails = (chefID) => {
       this.props.navigation.navigate('ChefDetails', {listChoice: this.props["listChoice"], chefID: chefID})
     }
 
     renderRecipeListItem = (item) => {
-        let imageURL = require("../dataComponents/peas.jpg")
+        // let imageURL = require("../dataComponents/peas.jpg")
         return (
           // <View style={styles.recipeCard} key={item.index.toString()}>
-            <RecipeCard listChoice={this.props["listChoice"]} key={item.index.toString()} {...item.item} navigateToRecipeDetails={this.navigateToRecipeDetails} navigateToChefDetails={this.navigateToChefDetails} likeRecipe={this.likeRecipe} unlikeRecipe={this.unlikeRecipe} makeRecipe={this.makeRecipe} reShareRecipe={this.reShareRecipe}/>
+            <RecipeCard listChoice={this.props["listChoice"]} key={item.index.toString()} {...item.item} navigateToRecipeDetails={this.navigateToRecipeDetails} navigateToRecipeDetailsAndComment={this.navigateToRecipeDetailsAndComment} navigateToChefDetails={this.navigateToChefDetails} likeRecipe={this.likeRecipe} unlikeRecipe={this.unlikeRecipe} makeRecipe={this.makeRecipe} reShareRecipe={this.reShareRecipe}/>
             // <RecipeCardTouchables {...item.item} likeRecipe={this.likeRecipe} unlikeRecipe={this.unlikeRecipe} makeRecipe={this.makeRecipe} reShareRecipe={this.reShareRecipe}/>
           // </View>
           )

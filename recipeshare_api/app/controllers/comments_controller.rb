@@ -16,9 +16,9 @@ class CommentsController < ApplicationController
     def create
         @comment = Comment.create(comment_params)
         if @comment.save
-            render json: @comment
+            render json: Comment.getRecipesComments(comment_params['recipe_id'])
         else
-            render json: {error: true, message: 'Ooops.  Something went wrong saving the comment.'}
+            render json: false
         end
     end
 
@@ -40,10 +40,11 @@ class CommentsController < ApplicationController
     end
 
     def destroy
-        if @comment.destroy
-            render json: {message: "Comment deleted!"}
+        @comment = Comment.find(params[:id])
+        if Comment.destroy(params[:id])
+            render json: Comment.getRecipesComments(@comment.recipe_id)
         else
-            render json: {error: true, message: "Ooops.  That's embarassing.  We couldn't delete that comment.  You shouldn't even be able to see this message!"}
+            render json: false
         end
     end
 

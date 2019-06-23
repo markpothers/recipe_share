@@ -333,10 +333,11 @@ class Recipe < ApplicationRecord
         use = use.ingredient_id
     end
     return recipe_details = {recipe: self,
-        comments: ApplicationRecord.db.execute("SELECT comments.*, chefs.username, chefs.id, chefs.imageURL
+        comments: ApplicationRecord.db.execute("SELECT comments.*, chefs.username, chefs.imageURL
                                                 FROM comments
                                                 JOIN chefs ON chefs.id = comments.chef_id
-                                                WHERE comments.recipe_id = (?)", [self.id]),
+                                                WHERE comments.recipe_id = (?)
+                                                ORDER BY comments.created_at DESC", [self.id]),
         recipe_images: RecipeImage.where(recipe_id: self.id),
         recipe_likes: RecipeLike.where(recipe_id: self.id).length,
         likeable: RecipeLike.where(chef_id: chef.id).where(recipe_id: self.id).empty?,

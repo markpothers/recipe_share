@@ -24,11 +24,13 @@ export const styles = StyleSheet.create({
       // borderColor: 'black',
       width: '100%',
       justifyContent: 'center',
+      alignItems: 'center',
       marginLeft: '0%',
       marginRight: '0%',
       marginTop: '1%',
       borderRadius: 5,
       backgroundColor: 'white',
+      flexDirection: 'row'
       // backgroundColor: '#fff59b',
       // opacity: 0.9,
     },
@@ -151,6 +153,7 @@ export const styles = StyleSheet.create({
       fontWeight: 'bold',
       fontSize: 24,
       color: "#505050",
+      width: '80%'
       // color: "#104e01",
     },
     detailsSubHeadings: {
@@ -180,6 +183,7 @@ export const styles = StyleSheet.create({
       fontStyle: 'italic',
       fontSize: 16,
       color: "#505050",
+      width: '79%'
     },
     detailsLikesAndMakesUpperContents: {
       fontSize: 16,
@@ -263,6 +267,9 @@ export const styles = StyleSheet.create({
       // borderWidth: 1,
       flex: 8
     },
+    commentRightTopContainer:{
+      flexDirection: 'row'
+    },
     makePicScrollView:{
       // position: 'absolute',
       borderStyle: 'solid',
@@ -292,5 +299,17 @@ export const styles = StyleSheet.create({
     },
     makePicTrashCan: {
       color: '#ffffff'
+    },
+    commentTrashCanButton:{
+      zIndex: 1,
+    },
+    commentTrashCan: {
+      color: '#505050'
+    },
+    headerButton: {
+      marginRight: '4%'
+    },
+    headerIcon: {
+      color: '#505050'
     }
   });

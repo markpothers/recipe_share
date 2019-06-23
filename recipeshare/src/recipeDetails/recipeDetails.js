@@ -1,19 +1,23 @@
 import React from 'react';
-import { Button } from 'native-base';
-import { Image, ScrollView, View, ImageBackground, Text, TouchableOpacity } from 'react-native';
+import { Image, ScrollView, View, ImageBackground, Text, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import { connect } from 'react-redux'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { styles } from './recipeDetailsStyleSheet'
 import { postRecipeLike } from '../fetches/postRecipeLike'
 import { postMakePic } from '../fetches/postMakePic'
+import { fetchRecipeDetails } from '../fetches/fetchRecipeDetails'
 import { postReShare } from '../fetches/postReShare'
 import { postRecipeMake } from '../fetches/postRecipeMake'
+import { postComment } from '../fetches/postComment'
 import { destroyRecipeLike } from '../fetches/destroyRecipeLike'
 import { destroyMakePic } from '../fetches/destroyMakePic'
+import { destroyComment } from '../fetches/destroyComment'
+import { destroyRecipe } from '../fetches/destroyRecipe'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import RecipeComment from './recipeComment'
 import {Camera, Permissions, DangerZone } from 'expo'
 import { ImagePicker } from 'expo'
+import RecipeNewComment from './recipeNewComment';
 
 const mapStateToProps = (state) => ({
   recipe_details: state.recipe_details,
@@ -34,6 +38,11 @@ const mapDispatchToProps = {
   addRecipeMake: () => {
     return dispatch => {
       dispatch({ type: 'ADD_RECIPE_MAKE'})
+    }
+  },
+  updateComments: (comments) => {
+    return dispatch => {
+      dispatch({ type: 'UPDATE_COMMENTS', comments: comments})
     }
   },
   addReShare: () => {
@@ -65,73 +74,57 @@ const mapDispatchToProps = {
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   class RecipeDetails extends React.Component {
-    static navigationOptions = ({ navigation }) => {
-      return {
-        title: 'Recipe details',
-        headerStyle: {
-          backgroundColor: '#104e01',
-          // opacity: 0.8
-        },
-        headerTintColor: '#fff59b',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
-        headerRight: (
-          <React.Fragment>
-            {/* {navigation.getParam('likeable') == false ? <Button rounded style={styles.newButton} onPress={navigation.getParam('unlikeRecipe')}><Icon name='heart' size={28} style={styles.newIcon}/></Button> : <Button rounded style={styles.newButton} onPress={navigation.getParam('likeRecipe')}><Icon name='heart-outline' size={28} style={styles.newIcon}/></Button> } */}
-            {/* {navigation.getParam('makeable') == false ? <Button rounded style={styles.newButton}><Icon name='food-off' size={28} style={styles.newIcon}/></Button> : <Button rounded style={styles.newButton} onPress={navigation.getParam('makeRecipe')}><Icon name='food' size={28} style={styles.newIcon}/></Button> } */}
-            {/* <Button rounded style={styles.newButton} onPress={navigation.getParam('editRecipe')}>
-              <Icon2 name='edit' size={28} style={styles.newIcon} />
-            </Button> */}
-            <Button rounded style={styles.newButton} onPress={navigation.getParam('deleteRecipe')}>
-              <Icon name='delete-outline' size={28} style={styles.newIcon} />
-            </Button>
-          </React.Fragment>
-        ),
-      };
+    // static navigationOptions = ({ navigation }) => {
+    //   return {
+    //     title: 'Recipe details',
+    //     headerStyle: {
+    //       backgroundColor: '#104e01',
+    //       // opacity: 0.8
+    //     },
+    //     headerTintColor: '#fff59b',
+    //     headerTitleStyle: {
+    //       fontWeight: 'bold',
+    //     }
+    //   };
+    // }
+
+    state = {
+      commenting: false,
+      commentText: ""
     }
 
-    componentDidMount = () => {
-      this.fetchRecipeDetails()
-    }
-
-    fetchRecipeDetails = () => {
-      // console.log(this.props.navigation.getParam('recipeID'))
-      fetch(`${databaseURL}/recipes/${this.props.navigation.getParam('recipeID')}`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${this.props.loggedInChef.auth_token}`,
-          'Content-Type': 'application/json'
-        }
-      })
-      .then(res => res.json())
-      .then(recipe_details => {
+    componentDidMount = async() => {
+      const recipe_details = await fetchRecipeDetails(this.props.navigation.getParam('recipeID'), this.props.loggedInChef.auth_token)
+      if (recipe_details) {
         this.props.storeRecipeDetails(recipe_details)
-          this.props.navigation.setParams({
-            deleteRecipe: this.deleteRecipe,
-            editRecipe: this.navigateToEditRecipe
-          })
-      })
+      }
+      if (this.props.navigation.getParam('commenting') === true ){
+        this.setState({commenting: true})
+      }
     }
 
-    navigateToEditRecipe = () => {
+    editRecipe = () => {
       // this.props.navigation.navigate('NewRecipe', {recipeID: this.props.navigation.getParam('recipeID')})
     }
 
-    deleteRecipe = () => {
-      fetch(`${databaseURL}/recipes/${this.props.navigation.getParam('recipeID')}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${this.props.loggedInChef.auth_token}`,
-          'Content-Type': 'application/json'
-        }
-    })
-    .then(res => res.json())
-    .then(response => {
-      if (response == true){
+    deleteRecipe = async() => {
+      const deleted = await destroyRecipe(this.props.recipe_details.recipe.id, this.props.loggedInChef.auth_token)
+      if (deleted) {
         this.props.navigation.goBack()
       }
-    })
+    }
+
+    renderEditDeleteButtons = () => {
+      return (
+        <React.Fragment>
+          <TouchableOpacity style={styles.headerButton} onPress={this.editRecipe}>
+            <Icon name='playlist-edit' size={24} style={styles.headerIcon}/>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.headerButton} onPress={this.deleteRecipe}>
+            <Icon name='trash-can-outline' size={24} style={styles.headerIcon}/>
+          </TouchableOpacity>
+        </React.Fragment>
+      )
     }
 
     renderRecipeImages = () => {
@@ -178,7 +171,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       if (this.props.recipe_details.comments.length > 0){
         return (
           this.props.recipe_details.comments.map( comment => {
-            return <RecipeComment key={comment.comment} {...comment} />
+            return <RecipeComment key={`${comment.id} ${comment.comment}`} {...comment} loggedInChefID={this.props.loggedInChef.id} deleteComment={this.deleteComment}/>
           })
         )
       } else {
@@ -266,16 +259,48 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       }
     }
 
-    
+    newComment = () => {
+        this.setState({commenting: true})
+    }
+
+    cancelComment = () => {
+      this.setState({
+        commenting: false,
+        commentText: ""
+      })
+    }
+
+    saveComment = async() => {
+      const comments = await postComment(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.state.commentText)
+      if (comments) {
+        this.props.updateComments(comments)
+        this.setState({
+          commenting: false,
+          commentText: ""
+        })
+      }
+    }
+
+    handleCommentTextInput = (commentText) => {
+      this.setState({commentText: commentText})
+    }
+
+    deleteComment = async(commentID) => {
+      const comments = await destroyComment(this.props.loggedInChef.auth_token, commentID)
+      if (comments) {
+        this.props.updateComments(comments)
+      }
+    }
 
     render() {
       if (this.props.recipe_details != undefined){
-        // console.log(this.props.recipe_details)
+        // console.log(this.props.recipe_details.comments[0])
         return (
-          <View style={{flex:1}}>
+          <KeyboardAvoidingView behavior="padding" style={{flex:1}}>
             <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
               <View style={styles.detailsHeader}>
                 <Text style={[styles.detailsHeaderTextBox]}>{this.props.recipe_details.recipe.name}</Text>
+                {this.renderEditDeleteButtons()}
               </View>
               <ScrollView contentContainerStyle={{flexGrow:1}}>
                 <View style={styles.detailsLikesAndMakes}>
@@ -316,18 +341,19 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     {this.renderRecipeMakePics()}
                   </ScrollView>
                 </View>
-                <View style={[styles.detailsComments, {height: (130 + this.props.recipe_details.comments.length*100)}]}>
+                <View style={[styles.detailsComments, {height: (150 + this.props.recipe_details.comments.length*90)}]}>
                   <View style={{flexDirection: 'row'}}>
                     <Text style={styles.detailsSubHeadings}>Comments:</Text>
-                    <TouchableOpacity>
-                      <Icon name='comment-plus' size={24} style={styles.addIcon}/>
+                    <TouchableOpacity onPress={this.state.commenting ? (this.state.commentText === "" ? this.cancelComment : this.saveComment ) : this.newComment}>
+                      <Icon name={this.state.commenting ? (this.state.commentText === "" ? 'comment-remove' : 'comment-check' ) : 'comment-plus'} size={24} style={styles.addIcon}/>
                     </TouchableOpacity>
                   </View>
+                  {this.state.commenting ? <RecipeNewComment {...this.props.loggedInChef} commentText={this.state.commentText} handleCommentTextInput={this.handleCommentTextInput} /> : null}
                   {this.renderRecipeComments()}
                 </View>
               </ScrollView>
             </ImageBackground>
-          </View>
+          </KeyboardAvoidingView>
         );
       } else {
         return <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle} />

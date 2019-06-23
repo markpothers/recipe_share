@@ -81,6 +81,8 @@ const reducer = (currentState, action) => {
             return {...currentState, recipes: {...currentState.recipes, [action.recipeType]: {...currentState.recipes[action.listType], }}}
         case 'ADD_RECIPE_LIKE':
             return {...currentState, recipe_details: {...currentState.recipe_details, recipe_likes: currentState.recipe_details.recipe_likes+1, likeable: false}}
+        case 'UPDATE_COMMENTS':
+            return {...currentState, recipe_details: {...currentState.recipe_details, comments: action.comments}}
         case 'REMOVE_RECIPE_LIKE':
             return {...currentState, recipe_details: {...currentState.recipe_details, recipe_likes: currentState.recipe_details.recipe_likes-1, likeable: true}}
         case 'ADD_RECIPE_MAKE':
@@ -97,14 +99,15 @@ const reducer = (currentState, action) => {
             console.log("logging in chef")
             return {...currentState, loggedInChef: {
                 id: action.id,
-                username: action.username
+                username: action.username,
             }}
         case 'UPDATE_LOGGED_IN_CHEF':
             // console.log("updating logged in chef")
             return {...currentState, loggedInChef: {
                 id: action.id,
                 username: action.username,
-                auth_token: action.auth_token
+                auth_token: action.auth_token,
+                imageURL: action.imageURL
                 }}
         case 'CHANGE_GLOBAL_RANKING':
                 // console.log("switching ranking")
