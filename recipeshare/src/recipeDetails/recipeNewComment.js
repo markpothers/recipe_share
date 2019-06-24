@@ -4,8 +4,9 @@ import { styles } from './recipeDetailsStyleSheet'
 import { databaseURL } from '../dataComponents/databaseURL'
 
 export default class RecipeNewComment extends React.PureComponent {
+
     render() {
-        // console.log(this.props.commentText)
+        // console.log(this.props)
         return (
           <View style={styles.commentContainer}>
             <View style={styles.commentLeftContainer}>
@@ -13,7 +14,16 @@ export default class RecipeNewComment extends React.PureComponent {
             </View>
             <View style={styles.commentRightContainer}>
               <Text style={[styles.detailsContentsHeader]}>{this.props.username}:</Text>
-              <TextInput style={[styles.detailsContents]} value={this.props.commentText} multiline={true} numberOfLines={3} placeholder="Type comment here..." onChange={(e) => this.props.handleCommentTextInput(e.nativeEvent.text)}></TextInput>
+              <TextInput
+                style={styles.detailsContents}
+                value={this.props.commentText}
+                multiline={true}
+                numberOfLines={3}
+                placeholder="Type comment here..."
+                onChange={(e) => this.props.handleCommentTextInput(e.nativeEvent.text)}
+                autoFocus={true}
+                onFocus={this.props.scrollToNewComment}
+                ></TextInput>
             </View>
           </View>
         )

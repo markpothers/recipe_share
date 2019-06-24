@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
       alignItems: 'center',
       marginLeft: '0%',
       marginRight: '0%',
-      marginTop: '1%',
+      marginTop: 4,
       borderRadius: 5,
       backgroundColor: 'white',
       flexDirection: 'row'
@@ -41,7 +41,7 @@ export const styles = StyleSheet.create({
       width: '100%',
       marginLeft: '0%',
       marginRight: '0%',
-      marginTop: '1%',
+      marginTop: 4,
       marginBottom: '1%',
       // justifyContent: 'center',
       // alignItems: 'center',
@@ -55,7 +55,7 @@ export const styles = StyleSheet.create({
       width: '100%',
       marginLeft: '0%',
       marginRight: '0%',
-      // marginTop: '1%',
+      // marginTop: 4,
       borderRadius: 5,
       backgroundColor: 'white',
       // opacity: 0.9,
@@ -69,7 +69,7 @@ export const styles = StyleSheet.create({
       width: '100%',
       marginLeft: '0%',
       marginRight: '0%',
-      marginTop: '1%',
+      marginTop: 4,
       borderRadius: 5,
       backgroundColor: 'white',
       // opacity: 0.9,
@@ -84,13 +84,14 @@ export const styles = StyleSheet.create({
       // width: '100%',
       // marginLeft: '0%',
       // marginRight: '0%',
-      marginTop: '1%',
+      marginTop: 4,
       borderRadius: 5,
       backgroundColor: 'white',
       // opacity: 0.9,
       // marginBottom: '1%',
       paddingTop: '1%',
       // height: 250
+      flex: 1
     },
     detailsLikesAndMakes:{
       // flexDirection: 'row'
@@ -102,7 +103,7 @@ export const styles = StyleSheet.create({
       width: '100%',
       marginLeft: '0%',
       marginRight: '0%',
-      marginTop: '1%',
+      marginTop: 4,
       borderRadius: 5,
       backgroundColor: 'white',
       // opacity: 0.9,
@@ -138,7 +139,7 @@ export const styles = StyleSheet.create({
       width: '100%',
       marginLeft: '0%',
       marginRight: '0%',
-      marginTop: '1%',
+      marginTop: 4,
       flexDirection: 'row',
       borderRadius: 5,
       backgroundColor: 'white',
@@ -147,7 +148,7 @@ export const styles = StyleSheet.create({
     detailsHeaderTextBox: {
       marginLeft: '1%',
       marginRight: '1%',
-      // marginTop: '1%',
+      // marginTop: 4,
       // marginBottom: '1%',
       textAlign: 'center',
       fontWeight: 'bold',
@@ -167,7 +168,7 @@ export const styles = StyleSheet.create({
     detailsContents: {
       marginLeft: '3%',
       marginRight: '3%',
-      // marginTop: '1%',
+      // marginTop: 4,
       // marginBottom: '1%',
       // textAlign: 'center',
       // fontWeight: 'bold',
@@ -177,7 +178,7 @@ export const styles = StyleSheet.create({
     detailsContentsHeader: {
       marginLeft: '3%',
       marginRight: '3%',
-      // marginTop: '1%',
+      // marginTop: 4,
       // marginBottom: '1%',
       // textAlign: 'center',
       fontStyle: 'italic',
@@ -239,14 +240,15 @@ export const styles = StyleSheet.create({
       width: '100%',
       marginLeft: '0%',
       marginRight: '0%',
-      marginTop: '1%',
+      marginTop: 4,
+      marginBottom: 4,
       borderRadius: 5,
       backgroundColor: 'white',
       // opacity: 0.9,
     },
     commentContainer: {
       flexDirection: 'row',
-      marginTop: '1%',
+      marginTop: 4,
       // marginBottom: '2%'
       width: '96%',
       marginLeft: '2%',
@@ -271,12 +273,10 @@ export const styles = StyleSheet.create({
       flexDirection: 'row'
     },
     makePicScrollView:{
-      // position: 'absolute',
-      borderStyle: 'solid',
-      borderWidth: 1,
-      // height: 115,
-      // width: 115
-      marginTop: '1%',
+      height: 120,
+      borderRadius: 5,
+      marginTop: 4,
+      // flex: 1  // DO NOT USE THIS IT BREAKS EVERYTHING
     },
     avatarThumbnail:{
       height: 60,
@@ -286,15 +286,18 @@ export const styles = StyleSheet.create({
     },
     makePicContainer: {
       height: 115,
-      width: 115
+      width: 115,
+      borderRadius: 5,
+      overflow: 'hidden'
     },
-    makePic: {
-      position: 'absolute'
-    },
+    // makePic: {
+    //   position: 'absolute',
+    //   height: 115
+    // },
     makePicTrashCanButton: {
       zIndex: 1,
       position: 'absolute',
-      top: 75,
+      top: 85,
       left: 85,
     },
     makePicTrashCan: {

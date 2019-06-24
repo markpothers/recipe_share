@@ -341,14 +341,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     {this.renderRecipeMakePics()}
                   </ScrollView>
                 </View>
-                <View style={[styles.detailsComments, {height: (150 + this.props.recipe_details.comments.length*90)}]}>
+                <View style={styles.detailsComments}>
                   <View style={{flexDirection: 'row'}}>
                     <Text style={styles.detailsSubHeadings}>Comments:</Text>
                     <TouchableOpacity onPress={this.state.commenting ? (this.state.commentText === "" ? this.cancelComment : this.saveComment ) : this.newComment}>
                       <Icon name={this.state.commenting ? (this.state.commentText === "" ? 'comment-remove' : 'comment-check' ) : 'comment-plus'} size={24} style={styles.addIcon}/>
                     </TouchableOpacity>
                   </View>
-                  {this.state.commenting ? <RecipeNewComment {...this.props.loggedInChef} commentText={this.state.commentText} handleCommentTextInput={this.handleCommentTextInput} /> : null}
+                  {this.state.commenting ? <RecipeNewComment {...this.props.loggedInChef} commentText={this.state.commentText} handleCommentTextInput={this.handleCommentTextInput} saveComment={this.saveComment} scrollToNewComment={this.scrollToNewComment}/> : null}
                   {this.renderRecipeComments()}
                 </View>
               </ScrollView>
