@@ -60,7 +60,7 @@ const BrowseRecipesTabs = createMaterialTopTabNavigator({
     height: 55,
     width: Dimensions.get('window').width
   },
-  lazy: true,
+  // lazy: true,
   tabBarOptions:{
     upperCaseLabel: false,
     scrollEnabled: true,
@@ -81,7 +81,7 @@ const BrowseRecipesTabs = createMaterialTopTabNavigator({
 })
 
 const BrowseRecipesStack = createStackNavigator({
-  // NewRecipe: NewRecipeScreen,
+  NewRecipe: NewRecipeScreen,
   BrowseRecipes: BrowseRecipesTabs,
   RecipeDetails: RecipeDetailsScreen,
   NewRecipe: NewRecipeScreen,

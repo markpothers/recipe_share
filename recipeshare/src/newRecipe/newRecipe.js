@@ -1,9 +1,7 @@
 import React from 'react'
-import { ScrollView, StyleSheet, Text, AsyncStorage, ImageBackground, TextInput, KeyboardAvoidingView, TouchableOpacity} from 'react-native'
+import { ScrollView, Text, ImageBackground, TextInput, KeyboardAvoidingView, TouchableOpacity, View, Picker } from 'react-native'
 import { ImagePicker } from 'expo'
-import { Container, Header, Content, Form, Item, Input, Label, Button, Picker, View } from 'native-base';
 import { connect } from 'react-redux'
-import { databaseURL } from '../dataComponents/databaseURL'
 import {Camera, Permissions, DangerZone } from 'expo'
 import { styles } from './newRecipeStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -11,6 +9,8 @@ import { times } from '../dataComponents/times'
 import { difficulties } from '../dataComponents/difficulties'
 import { units } from '../dataComponents/units'
 import Autocomplete from 'react-native-autocomplete-input';
+import { postRecipe } from '../fetches/postRecipe'
+import { fetchIngredients } from '../fetches/fetchIngredients'
 
 const mapStateToProps = (state) => ({
   name: state.newRecipeDetails.name,
@@ -19,9 +19,8 @@ const mapStateToProps = (state) => ({
   difficulty: state.newRecipeDetails.difficulty,
   time: state.newRecipeDetails.time,
   imageBase64: state.newRecipeDetails.imageBase64,
-  chef_id: state.loggedInChef.id,
-  auth_token: state.loggedInChef.auth_token,
-  recipe_details: state.recipe_details
+  recipe_details: state.recipe_details,
+  loggedInChef: state.loggedInChef
 })
 
 const mapDispatchToProps = {
@@ -45,17 +44,17 @@ const mapDispatchToProps = {
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   class NewRecipe extends React.Component {
-    static navigationOptions = {
-      title: 'Create a new recipe!',
-      headerStyle: {
-      backgroundColor: '#104e01',
-      opacity: 0.8
-    },
-    headerTintColor: '#fff59b',
-    headerTitleStyle: {
-      fontWeight: 'bold',
-    },
-    }
+    // static navigationOptions = {
+    //   title: 'Create a new recipe!',
+    //   headerStyle: {
+    //   backgroundColor: '#104e01',
+    //   opacity: 0.8
+    // },
+    // headerTintColor: '#fff59b',
+    // headerTitleStyle: {
+    //   fontWeight: 'bold',
+    // },
+    // }
 
     state = {
       hasPermission: false,
@@ -64,7 +63,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     renderAutoIngredientsListItem = (item, ingredient) => {
-      // console.log(item.item.id.toString())
       return (
         <TouchableOpacity style={{padding: 5, zIndex: 2}} key={item.item.id.toString()} onPress={(e) => this.addIngredientToList(ingredient, item.item.name, this.props.ingredients[ingredient].quantity, this.props.ingredients[ingredient].unit)}>
           <Text>{item.item.name}</Text>
@@ -95,11 +93,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     })
   }
 
-  testMethod = (e) => {
-    console.log(e)
-  }
-
-
   unitsPicker = () => {
     return units.map( unit => {
       return <Picker.Item style={styles.pickerText}key={unit} label={unit} value={unit} />
@@ -110,18 +103,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     this.setState({focused: !this.state.focused})
   }
 
-  fetchIngredientsForAutoComplete = () => {
-    fetch(`${databaseURL}/ingredients`, {
-      method: "GET",
-      headers: {
-          Authorization: `Bearer ${this.props.auth_token}`,
-          'Content-Type': 'application/json'
-      }
-    })
-    .then(res => res.json())
-    .then(ingredients => {
+  fetchIngredientsForAutoComplete = async() => {
+    const ingredients = await fetchIngredients(this.props.loggedInChef.auth_token)
+    if (ingredients) {
       this.setState({ingredientsList: ingredients})
-    })
+    }
   }
 
   keyExtractor = (item, index) => item.id.toString()
@@ -129,9 +115,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
   renderIngredientsList = () =>{
      return Object.keys(this.props.ingredients).sort().map(ingredient => {
         return (
-          <View style={styles.formRow} key={ingredient}>
-            <View style={styles.addIngredientNameInputBox} key={ingredient.name}>
-              {/* <Input style={styles.newRecipeTextCentering} placeholder={`Ingredient name`}  autoCapitalize="none" onChange={(e) => this.addIngredientToList(ingredient, e.nativeEvent.text, this.props.ingredients[ingredient].quantity, this.props.ingredients[ingredient].unit)} value={this.props.ingredients[ingredient].name} /> */}
+          <View style={styles.transparentFormRow} key={ingredient}>
+            {/* <View style={styles.addIngredientNameInputBox} key={ingredient.name}> */}
               <Autocomplete
                 data={this.state.ingredientsList.filter(ing => ing.name.toLowerCase().startsWith(this.props.ingredients[ingredient].name))}
                 defaultValue={''}
@@ -143,27 +128,28 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 autoCorrect={false}
                 value={this.props.ingredients[ingredient].name}
                 hideResults={this.state.focused && this.props.ingredients[ingredient].name.length > 1 ? false : true}
-                // containerStyle={{borderWidth: 0, zIndex: 1}}
-                // inputContainerStyle={{borderWidth: 0, margin: 0, overflow: 'scroll', height: 200}}
-                listStyle={{zIndex: 2, position: 'absolute'}} // deactivate to shorten and make a scrolling list
+                // containerStyle={styles.addIngredientNameInputBox}
+                // inputContainerStyle={styles.ingredientTextAdjustment}
+                listStyle={styles.autocompleteList} // deactivate to shorten and make a scrolling list
                 // style={{backgroundColor: 'transparent', fontSize: 14}}
                 onFocus={this.isFocused}
                 onBlur={this.isFocused}
+                scrollViewProps={{nestedScrollEnabled: true}}
               />
+            {/* </View> */}
+            <View style={styles.addIngredientQuantityInputBox} key={ingredient.quantity}>
+              <TextInput style={styles.ingredientTextAdjustment} placeholder="Qty" keyboardType="phone-pad" onChange={(e) => this.addIngredientToList(ingredient, this.props.ingredients[ingredient].name, e.nativeEvent.text, this.props.ingredients[ingredient].unit)} value={this.props.ingredients[ingredient].quantity}/>
             </View>
-            <Item rounded style={styles.addIngredientQuantityInputBox} key={ingredient.quantity}>
-              <Input style={styles.QtyTextCentering} placeholder="Qty" keyboardType="phone-pad" onChange={(e) => this.addIngredientToList(ingredient, this.props.ingredients[ingredient].name, e.nativeEvent.text, this.props.ingredients[ingredient].unit)} value={this.props.ingredients[ingredient].quantity}/>
-            </Item>
-              <Item rounded style={styles.addIngredientUnitInputBox} key={ingredient.unit}>
+              <View style={styles.addIngredientUnitInputBox} key={ingredient.unit}>
               <Picker style={styles.unitPicker}
                       mode="dropdown"
                       iosIcon={<Icon name="arrow-down" />}
                       onValueChange={(e) => this.addIngredientToList(ingredient, this.props.ingredients[ingredient].name, this.props.ingredients[ingredient].quantity, e)} value={this.props.ingredients[ingredient].unit}
                       >
-                      <Picker.Item style={styles.pickerText} key={this.props.ingredients[ingredient].unit} label={this.props.ingredients[ingredient].unit} value={this.props.ingredients[ingredient].unit} />
+                      <Picker.Item style={styles.ingredientTextAdjustment} key={this.props.ingredients[ingredient].unit} label={this.props.ingredients[ingredient].unit} value={this.props.ingredients[ingredient].unit} />
                       {this.unitsPicker()}
               </Picker>
-            </Item>
+            </View>
           </View>
         )
       })
@@ -173,23 +159,22 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     const n = Object.keys(this.props.ingredients).length+1
     // console.log(this.props.ingredients[`ingredient${n}`])
     return (
-      <View style={styles.formRow} key={`ingredient${n}`}>
-
-        <Item rounded style={styles.addIngredientNameInputBox} key={[`ingredient${n}`].name}>
-          <Input style={styles.newRecipeTextCentering} placeholder={`New ingredient name`}  autoCapitalize="none" onChange={(e) => this.addIngredientToList(`ingredient${n}`, e.nativeEvent.text, "", "Oz")} />
-        </Item>
-        <Item rounded style={styles.addIngredientQuantityInputBox} key={[`ingredient${n}`].quantity}>
-          <Input style={styles.QtyTextCentering} placeholder="Qty" keyboardType="phone-pad" onChange={(e) => this.addIngredientToList(`ingredient${n}`, "", e.nativeEvent.text, "Oz")} />
-        </Item>
-          <Item rounded style={styles.addIngredientUnitInputBox} key={[`ingredient${n}`].unit}>
-          <Picker style={styles.unitPicker}
+      <View style={styles.transparentFormRow} key={`ingredient${n}`}>
+        <View style={styles.addIngredientNameInputBox} key={[`ingredient${n}`].name}>
+          <TextInput style={styles.ingredientTextAdjustment} placeholder={`New ingredient name`}  autoCapitalize="none" onChange={(e) => this.addIngredientToList(`ingredient${n}`, e.nativeEvent.text, "", "Oz")} />
+        </View>
+        <View style={styles.addIngredientQuantityInputBox} key={[`ingredient${n}`].quantity}>
+          <TextInput style={styles.ingredientTextAdjustment} placeholder="Qty" keyboardType="phone-pad" onChange={(e) => this.addIngredientToList(`ingredient${n}`, "", e.nativeEvent.text, "Oz")} />
+        </View>
+          <View style={styles.addIngredientUnitInputBox} key={[`ingredient${n}`].unit}>
+          <Picker style={styles.ingredientTextAdjustment}
                       mode="dropdown"
                       iosIcon={<Icon name="arrow-down" />}
                       onValueChange={(e) => this.addIngredientToList(`ingredient${n}`, "", "", e)}
                       >
                       {this.unitsPicker()}
           </Picker>
-        </Item>
+        </View>
       </View>
     )
   }
@@ -224,63 +209,43 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       this.props.saveRecipeDetails("imageBase64", result.base64)
     }
 
-    submitRecipe = () => {
-      AsyncStorage.getItem('chef', (err, res) => {
-        const loggedInChef = JSON.parse(res)
-            console.log("sending new recipe details")
-            fetch(`${databaseURL}/recipes`, {
-              method: "POST",
-              headers: {
-                Authorization: `Bearer ${loggedInChef.auth_token}`,
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                recipe: this.props
-              })
-            })
-            .then(res => res.json())
-            .then(recipe => {
-              console.log(recipe)
-              this.props.clearNewRecipeDetails()
-              this.props.navigation.navigate('MyRecipeBook')
-            })
-            .catch(error => {
-              console.log(error)
-            })
-    })
-  }
+    submitRecipe = async() => {
+      const recipe = await postRecipe(this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.props.name, this.props.ingredients, this.props.instructions, this.props.time, this.props.difficulty, this.props.imageBase64)
+      if (recipe) {
+        this.props.clearNewRecipeDetails()
+        this.props.navigation.navigate('MyRecipeBook')
+      }
+    }
 
     render() {
-      // console.log(this.state.ingredientsList.filter(ing => ing.name.toLowerCase().startsWith(this.props.ingredients.ingredient1.name)).length)
+      // console.log(this.props)
       return (
-        <KeyboardAvoidingView  style={styles.mainPageContainer} behavior="padding">
-          <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
+        <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
+          <KeyboardAvoidingView  style={styles.mainPageContainer} behavior="padding">
             <ScrollView>
-              <KeyboardAvoidingView style={styles.createRecipeForm} behavior="padding">
-                <Form>
+              {/* <KeyboardAvoidingView style={styles.createRecipeForm} behavior="padding"> */}
+                {/* <View> */}
                   <View style={styles.formRow}>
-                    <Item rounded style={styles.createRecipeInputBox} >
-                      {/* <Label>Recipe Name</Label> */}
-                      <Input style={styles.newRecipeTextCentering} value={this.props.name} placeholder="Recipe Name" onChange={(e) => this.handleTextInput(e.nativeEvent.text, "name")}/>
-                    </Item>
+                    <View style={styles.createRecipeInputBox} >
+                      <TextInput style={styles.newRecipeTextCentering} value={this.props.name} placeholder="Recipe Name" onChange={(e) => this.handleTextInput(e.nativeEvent.text, "name")}/>
+                    </View>
                   </View>
                     {[ ...this.renderIngredientsList(), this.renderNewIngredientItem()]}
-                    <View style={styles.formRow}>
-                    <Item rounded style={styles.createRecipeTextAreaBox}>
-                      {/* <Label>Instructions</Label> */}
-                      <Input style={styles.createRecipeTextAreaInput} value={this.props.instructions} placeholder="Instructions" multiline={true} numberOfLines={4} onChange={(e) => this.handleTextInput(e.nativeEvent.text, "instructions")}/>
-                    </Item>
+                  <View style={styles.formRow}>
+                    <View style={styles.createRecipeTextAreaBox}>
+                      <TextInput style={styles.createRecipeTextAreaInput} value={this.props.instructions} placeholder="Instructions" multiline={true} numberOfLines={4} onChange={(e) => this.handleTextInput(e.nativeEvent.text, "instructions")}/>
+                    </View>
                   </View>
-                  <View style={styles.timeAndDifficultyWrapper}>
-                    <Item rounded style={styles.timeAndDifficultyTitleItem}>
+                  <View style={styles.transparentFormRow}>
+                    <View style={styles.timeAndDifficultyTitleItem}>
                       <Text style={styles.timeAndDifficultyTitle}>Time:</Text>
-                    </Item>
-                    <Item rounded style={styles.timeAndDifficultyTitleItem}>
+                    </View>
+                    <View style={styles.timeAndDifficultyTitleItem}>
                       <Text style={styles.timeAndDifficultyTitle}>Difficulty:</Text>
-                    </Item>
+                    </View>
                   </View>
-                  <View style={styles.timeAndDifficultyWrapper}>
-                    <Item rounded picker style={styles.timeAndDifficulty} >
+                  <View style={styles.transparentFormRow}>
+                    <View picker style={styles.timeAndDifficulty} >
                       <Picker style={styles.picker}
                       mode="dropdown"
                       iosIcon={<Icon name="arrow-down" />}
@@ -289,8 +254,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                       <Picker.Item style={styles.pickerText} key={this.props.time} label={this.props.time} value={this.props.time} />
                       {this.timesPicker()}
                       </Picker>
-                    </Item>
-                    <Item rounded picker style={styles.timeAndDifficulty}>
+                    </View>
+                    <View picker style={styles.timeAndDifficulty}>
                       <Picker style={styles.picker}
                       mode="dropdown"
                       iosIcon={<Icon name="arrow-down" />}
@@ -299,29 +264,30 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                       <Picker.Item style={styles.pickerText} key={this.props.difficulty} label={this.props.difficulty} value={this.props.difficulty} />
                       {this.difficultiesPicker()}
                       </Picker>
-                    </Item>
+                    </View>
                   </View>
-                  <View style={styles.formRow}>
-                    <Button rounded info style={styles.createRecipeFormButton} title="Choose Photo" onPress={this.pickImage}>
+                  <View style={styles.transparentFormRow}>
+                    <TouchableOpacity style={styles.createRecipeFormButton} activeOpacity={0.7} title="Choose Photo" onPress={this.pickImage}>
                       <Icon style={styles.standardIcon} size={25} name='camera-burst' />
-                      <Text style={styles.createChefFormButtonText}>Choose{"\n"}photo</Text>
-                    </Button>
-                    <Button rounded warning style={styles.createRecipeFormButton} title="Take Photo" onPress={this.openCamera}>
+                      <Text style={styles.createRecipeFormButtonText}>Choose{"\n"}photo</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.createRecipeFormButton} activeOpacity={0.7} title="Take Photo" onPress={this.openCamera}>
                       <Icon style={styles.standardIcon} size={25} name='camera' />
-                      <Text style={styles.createChefFormButtonText}>Take{"\n"}photo</Text>
-                    </Button>
+                      <Text style={styles.createRecipeFormButtonText}>Take{"\n"}photo</Text>
+                    </TouchableOpacity>
                   </View>
-                  <View style={styles.formRow}>
-                    <Button rounded success style={styles.createRecipeFormSubmitButton} onPress={e => this.submitRecipe(e)}>
+                  <View style={styles.transparentFormRow}>
+                    <TouchableOpacity style={[styles.createRecipeFormButton,{marginBottom: 4}]} activeOpacity={0.7} onPress={e => this.submitRecipe(e)}>
                       <Icon style={styles.standardIcon} size={25} name='login' />
-                      <Text style={styles.createChefFormButtonText}>Submit</Text>
-                    </Button>
+                      <Text style={styles.createRecipeFormButtonText}>Submit</Text>
+                    </TouchableOpacity>
                   </View>
-                </Form>
-              </KeyboardAvoidingView>
+                {/* </View> */}
+              {/* </KeyboardAvoidingView> */}
             </ScrollView>
-          </ImageBackground>
-        </KeyboardAvoidingView>
+          </KeyboardAvoidingView>
+        </ImageBackground>
+
       )
     }
 
