@@ -117,7 +117,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         return (
           <View style={styles.transparentFormRow} key={ingredient}>
             {/* <View style={styles.addIngredientNameInputBox} key={ingredient.name}> */}
-              <Autocomplete
+              {/* <Autocomplete
                 data={this.state.ingredientsList.filter(ing => ing.name.toLowerCase().startsWith(this.props.ingredients[ingredient].name))}
                 defaultValue={''}
                 onChangeText={(e) =>  this.addIngredientToList(ingredient, e, this.props.ingredients[ingredient].quantity, this.props.ingredients[ingredient].unit)}
@@ -135,7 +135,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 onFocus={this.isFocused}
                 onBlur={this.isFocused}
                 scrollViewProps={{nestedScrollEnabled: true}}
-              />
+              /> */}
             {/* </View> */}
             <View style={styles.addIngredientQuantityInputBox} key={ingredient.quantity}>
               <TextInput style={styles.ingredientTextAdjustment} placeholder="Qty" keyboardType="phone-pad" onChange={(e) => this.addIngredientToList(ingredient, this.props.ingredients[ingredient].name, e.nativeEvent.text, this.props.ingredients[ingredient].unit)} value={this.props.ingredients[ingredient].quantity}/>

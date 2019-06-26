@@ -19,8 +19,8 @@ export const styles = StyleSheet.create({
     flexDirection:'row',
     justifyContent: 'center',
     alignItems: 'center',
-    // borderStyle: 'solid',
-    // borderWidth: 1,
+    borderStyle: 'solid',
+    borderWidth: 1,
     borderRadius: 5,
     // overflow: 'hidden',
     width: '100%',
@@ -43,7 +43,7 @@ export const styles = StyleSheet.create({
      justifyContent: 'center',
      width: '96%',
      marginLeft: '2%',
-     marginRight: '2%'
+     marginRight: '2%',
    },
    createRecipeTextAreaBox: {
     // position: 'relative',
@@ -53,14 +53,16 @@ export const styles = StyleSheet.create({
      marginRight: '2%',
      backgroundColor: 'white',
     //  opacity: 0.9,
-     height: 132,
-     width: '96%'
+     height: 140,
+     width: '96%',
+    //  borderStyle: 'solid',
+    //  borderWidth: 1,
    },
    newRecipeTextCentering: {
     // position: 'absolute',
    },
    createRecipeTextAreaInput: {
-     height: 122,
+     height: 130,
      marginTop: 4,
     //  marginBottom: 5,
     //  borderStyle: 'solid',
