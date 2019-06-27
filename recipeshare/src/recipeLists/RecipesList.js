@@ -61,24 +61,24 @@ const mapDispatchToProps = {
 
 export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
   class RecipesList extends React.PureComponent {
-    static navigationOptions = ({ navigation }) => {
-      return {
-        headerTitle: 'My recipe book',
-        headerStyle: {    //styles possibly needed if app-wide styling doesn't work
-          backgroundColor: '#104e01',
-          opacity: 0.8
-        },
-        headerTintColor: '#fff59b',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
-        headerRight: (
-          <Button rounded style={styles.newButton} onPress={navigation.getParam('newRecipe')}>
-            <Icon name='plus' size={40} style={styles.newIcon}/>
-          </Button>
-        ),
-      }
-    };
+    // static navigationOptions = ({ navigation }) => {
+    //   return {
+    //     headerTitle: 'My recipe book',
+    //     headerStyle: {    //styles possibly needed if app-wide styling doesn't work
+    //       backgroundColor: '#104e01',
+    //       opacity: 0.8
+    //     },
+    //     headerTintColor: '#fff59b',
+    //     headerTitleStyle: {
+    //       fontWeight: 'bold',
+    //     },
+    //     headerRight: (
+    //       <Button rounded style={styles.newButton} onPress={navigation.getParam('newRecipe')}>
+    //         <Icon name='plus' size={40} style={styles.newIcon}/>
+    //       </Button>
+    //     ),
+    //   }
+    // };
 
     state = {
       limit: 20,
@@ -225,7 +225,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
-      // console.log(this.props.chef_feed_Recipes.length)
+      // console.log((this.props[this.props["listChoice"] + `_Recipes`]).length)
       return (
         <React.Fragment>
           <NavigationEvents onWillFocus={this.respondToFocus}/>

@@ -3,12 +3,16 @@ class IngredientsController < ApplicationController
     # skip_before_action :verify_authenticity_token
     before_action :define_current_ingredient
     skip_before_action :define_current_ingredient, :only => [:index, :create]
+    skip_before_action :logged_in?, :only => [:index]
 
 
 
     def index
+        # byebug
         # @ingredients = Ingredient.where("name LIKE '%#{params[:subString]}%'")
-        render json: Ingredient.all
+        @ingredients = Ingredient.all
+        # byebug
+        render json: @ingredients
     end
 
     # def new

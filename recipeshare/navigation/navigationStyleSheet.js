@@ -37,7 +37,4 @@ export const styles = StyleSheet.create({
     height: '100%',
     flex: 1
   },
-  backgroundImageStyle: {
-    opacity: 0.8
-  },
 });

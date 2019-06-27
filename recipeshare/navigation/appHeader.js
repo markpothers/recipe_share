@@ -4,14 +4,14 @@ import { styles } from './navigationStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { withNavigation } from 'react-navigation'
 
-class BrowseRecipesHeader extends React.Component {
+class AppHeader extends React.PureComponent {
     render () {
         return (
             <View style={styles.headerContainer}>
                 <TouchableOpacity style={styles.headerDrawerButton}>
                     <Icon name='menu' style={styles.headerIcon} size={33} onPress={() => this.props.navigation.toggleDrawer()}/>
                 </TouchableOpacity>
-                <Text style={styles.headerText}>Browse Recipes</Text>
+                <Text style={styles.headerText}>{this.props.text}</Text>
                 <TouchableOpacity style={styles.headerNewButton}>
                     <Icon name='plus' style={styles.headerIcon} size={33} onPress={() => this.props.navigation.navigate('NewRecipe')}/>
                 </TouchableOpacity>
@@ -20,4 +20,4 @@ class BrowseRecipesHeader extends React.Component {
     }
 }
 
-export default withNavigation(BrowseRecipesHeader)
+export default withNavigation(AppHeader)

@@ -9,7 +9,7 @@ import RecipeDetailsScreen from '../src/recipeDetails/recipeDetails'
 import ChefDetailsScreen from '../src/chefDetails/chefDetails'
 import NewRecipeScreen from '../src/newRecipe/newRecipe'
 import { MyRecipesScreen, MyLikedRecipesScreen, MyMadeRecipesScreen, ChefsFollowedScreen, ChefsFollowingScreen} from './MyRecipeBookTabs'
-import BrowseRecipesHeader from './BrowseRecipesHeader'
+import AppHeader from './appHeader'
 
 const MyRecipeBookTabs = createMaterialTopTabNavigator({
   MyRecipes: MyRecipesScreen,
@@ -49,10 +49,9 @@ const MyRecipeBookStack = createStackNavigator({
   ChefDetails: ChefDetailsScreen
 },{
   defaultNavigationOptions: {
-    headerTitle: <BrowseRecipesHeader/>,
+    headerTitle: <AppHeader text={"My Recipe Book"}/>,
     headerStyle: {    //styles possibly needed if app-wide styling doesn't work
       backgroundColor: '#104e01',
-      // opacity: 0.8,
       // borderStyle: 'solid',
       // borderWidth: 2,
       height: 60,  // cannot be less than 24 as includes space for the notification bar

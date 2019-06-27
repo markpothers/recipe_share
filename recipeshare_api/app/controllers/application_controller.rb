@@ -25,6 +25,7 @@ class ApplicationController < ActionController::API
                 render json: {error: true, message: "Could not find user in Application Controller logged_in? method"}
             end
         rescue # bad token
+            byebug
             render json: {error: true, message: "Invalid authentication with JWT"}
         end
     end
