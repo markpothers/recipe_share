@@ -127,7 +127,7 @@ export const styles = StyleSheet.create({
      marginRight: '2%',
      backgroundColor: 'white',
      height: 42,
-     width: '37%',
+     width: '30%',
      borderStyle: 'solid',
      justifyContent: 'center',
      borderWidth: 1,
@@ -137,7 +137,7 @@ export const styles = StyleSheet.create({
      backgroundColor: 'white',
      justifyContent: 'center',
      height: 42,
-     width: '61%',
+     width: '68%',
      borderStyle: 'solid',
      borderWidth: 1,
      borderRadius: 5,
@@ -145,7 +145,7 @@ export const styles = StyleSheet.create({
   ingredientTextAdjustment: {
     marginLeft: 7,
   },
-  autCompleteRowContainer: {
+  autoCompleteRowContainer: {
     flex: 1,
     marginTop: 4,
     flexDirection:'row',
@@ -153,14 +153,28 @@ export const styles = StyleSheet.create({
   },
   autoCompleteContainer: {
     position: 'absolute',
-    width: '51%',
+    width: '49%',
      borderRadius: 5,
   },
   quantityAndUnitContainer: {
     marginLeft: '1%',
-    width: '48%',
-    left: '51%',
+    width: '40%',
+    left: '49%',
     flexDirection: 'row',
+  },
+  deleteIngredientContainer: {
+    position: 'absolute',
+    marginLeft: '1%',
+    width: '8%',
+    height: 42,
+    left: '90%',
+    flexDirection: 'row',
+    borderRadius: 5,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   autoCompleteOuterContainerStyle: {
     borderRadius: 5,
@@ -171,7 +185,7 @@ export const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderColor: 'transparent',
     borderRadius: 5,
-    borderWidth: 0
+    borderWidth: 0,
   },
   autoCompleteInput: {
     borderRadius: 5,
@@ -187,5 +201,14 @@ export const styles = StyleSheet.create({
     width: '90%',
     borderStyle: 'solid',
     borderWidth: 1,
+  },
+  ingredientDeleteTrashCanButton: {
+    // zIndex: 1,
+    // position: 'absolute',
+    // top: 85,
+    // left: 85,
+  },
+  ingredientTrashCan: {
+    color: '#505050'
   },
 })

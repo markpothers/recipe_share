@@ -97,7 +97,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     editRecipe = () => {
-      // console.log(this.props.recipe_details)
       this.props.navigation.navigate('NewRecipe', {recipe_details: this.props.recipe_details})
     }
 

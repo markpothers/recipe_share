@@ -315,10 +315,10 @@ byebug
   end
 
   def ingredients=(ingredients)
+    IngredientUse.where(recipe_id: self.id).destroy_all
     ingredients["ingredients"].keys.each do |ingredient|
       dbIngredient = Ingredient.find_or_create_by(name: ingredients["ingredients"][ingredient]["name"])
-      ing_use = IngredientUse.find_or_create_by(recipe_id: self.id, ingredient_id: dbIngredient.id)
-      ing_use.update(recipe_id: self.id, ingredient_id: dbIngredient.id, quantity: ingredients["ingredients"][ingredient]["quantity"], unit: ingredients["ingredients"][ingredient]["unit"])
+      ing_use = IngredientUse.find_or_create_by(recipe_id: self.id, ingredient_id: dbIngredient.id, quantity: ingredients["ingredients"][ingredient]["quantity"], unit: ingredients["ingredients"][ingredient]["unit"])
     end
   end
 

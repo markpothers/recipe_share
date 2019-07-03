@@ -41,7 +41,12 @@ const mapDispatchToProps = {
     return dispatch => {
       dispatch({ type: 'CLEAR_NEW_RECIPE_DETAILS'})
     }
-  }
+  },
+  storeAllIngredients: (ingredients) => {
+    return dispatch => {
+      dispatch({ type: 'STORE_ALL_INGREDIENTS', ingredients: ingredients})
+    }
+  },
 
 }
 
@@ -137,9 +142,20 @@ export default connect(mapStateToProps, mapDispatchToProps)(
   }
 
   renderIngredientsList = () =>{
-     return Object.keys(this.props.ingredients).sort().map((ingredient, index) => {
-        return (
-          <IngredientAutoComplete key={ingredient} ingredientIndex={ingredient} ingredient={this.props.ingredients[ingredient]} ingredientsList={this.state.ingredientsList} focused={this.state[ingredient]} index={index} ingredientsLength={Object.keys(this.props.ingredients).length} isFocused={this.isFocused} addIngredientToList={this.addIngredientToList} unitsPicker={this.unitsPicker} />
+     return Object.keys(this.props.ingredients).sort((a,b)=> parseInt(a.split("ingredient")[1])-parseInt(b.split("ingredient")[1])).map((ingredient, index) => {
+      return (
+          <IngredientAutoComplete
+            removeIngredient={this.removeIngredient}
+            key={ingredient}
+            ingredientIndex={ingredient}
+            ingredient={this.props.ingredients[ingredient]}
+            ingredientsList={this.state.ingredientsList}
+            focused={this.state[ingredient]}
+            index={index}
+            ingredientsLength={Object.keys(this.props.ingredients).length}
+            isFocused={this.isFocused}
+            addIngredientToRecipeDetails={this.props.addIngredientToRecipeDetails}
+            unitsPicker={this.unitsPicker} />
           // <View style={styles.autCompleteRowContainer} key={ingredient}>
           //   <View style={[styles.autoCompleteContainer, {zIndex: (Object.keys(this.props.ingredients).length - index) }]} key={ingredient}>
           //   {/* <TextInput style={styles.ingredientTextAdjustment} placeholder={`Ingredient name`}  autoCapitalize="none" onChange={(e) => this.addIngredientToList(ingredient, e.nativeEvent.text, this.props.ingredients[ingredient].quantity, this.props.ingredients[ingredient].unit)} value={this.props.ingredients[ingredient].name} /> */}
@@ -191,7 +207,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       unit: "Oz"
     }}
     return (
-      <IngredientAutoComplete key={`ingredient${n}`} ingredientIndex={`ingredient${n}`} ingredient={newIngredient[`ingredient${n}`]} ingredientsList={this.state.ingredientsList} focused={this.state[`ingredient${n}`]} index={0} ingredientsLength={0} isFocused={this.isFocused} addIngredientToList={this.addIngredientToList} unitsPicker={this.unitsPicker} />
+      <IngredientAutoComplete
+        removeIngredient={this.removeIngredient}
+        key={`ingredient${n}`}
+        ingredientIndex={`ingredient${n}`}
+        ingredient={newIngredient[`ingredient${n}`]}
+        ingredientsList={this.state.ingredientsList}
+        focused={this.state[`ingredient${n}`]}
+        index={0}
+        ingredientsLength={0}
+        isFocused={this.isFocused}
+        addIngredientToRecipeDetails={this.props.addIngredientToRecipeDetails}
+        unitsPicker={this.unitsPicker} />
 
       // <View style={styles.autCompleteRowContainer} key={`ingredient${n}`}>
       //   <View style={[styles.autoCompleteContainer, {zIndex: 0}]} key={`ingredient${n}`}>
@@ -239,8 +266,21 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       this.isFocused(ingredient, true)
     }
 
-    addIngredientToList = (ingredientIndex, ingredientName, ingredientQuantity, ingredientUnit) => {
-      this.props.addIngredientToRecipeDetails(ingredientIndex, ingredientName, ingredientQuantity, ingredientUnit)
+    // addIngredientToList = (ingredientIndex, ingredientName, ingredientQuantity, ingredientUnit) => {
+    //   this.props.addIngredientToRecipeDetails(ingredientIndex, ingredientName, ingredientQuantity, ingredientUnit)
+    // }
+
+    removeIngredient = (ingredientIndex) => {
+      let newIngredients = {}
+      let remainingIngredients = Object.keys(this.props.ingredients).filter(ing => ing !== ingredientIndex  && this.props.ingredients[ing].name !== "")
+      remainingIngredients.sort((a,b)=> parseInt(a.split("ingredient")[1])-parseInt(b.split("ingredient")[1])).forEach( (ing, index) => {
+        newIngredients[`ingredient${index+1}`] = {
+          "name": this.props.ingredients[ing].name,
+          "quantity": this.props.ingredients[ing].quantity,
+          "unit": this.props.ingredients[ing].unit,
+        }
+      })
+      this.props.storeAllIngredients(newIngredients)
     }
 
     handleTextInput = (text, parameter) => {
@@ -284,7 +324,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
-      // console.log(this.props)
+      // console.log(this.props.ingredients)
       return (
         <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.mainPageContainer} imageStyle={styles.backgroundImageStyle}>
           {this.state.choosingPicture ? this.renderPictureChooser() : null}

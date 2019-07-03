@@ -60,6 +60,9 @@ const reducer = (currentState, action) => {
                 quantity: action.ingredientQuantity,
                 unit: action.ingredientUnit
             }}}}
+        case 'STORE_ALL_INGREDIENTS':
+            // console.log(action.ingredients)
+            return {...currentState, newRecipeDetails: {...currentState.newRecipeDetails, ingredients: action.ingredients}}
         case 'CLEAR_NEW_RECIPE_DETAILS':
             // console.log("clearing new recipe details")
             return {...currentState, newRecipeDetails: {
