@@ -109,16 +109,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     renderEditDeleteButtons = () => {
-      return (
-        <React.Fragment>
-          <TouchableOpacity style={styles.headerButton} onPress={this.editRecipe}>
-            <Icon name='playlist-edit' size={24} style={styles.headerIcon}/>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.headerButton} onPress={this.deleteRecipe}>
-            <Icon name='trash-can-outline' size={24} style={styles.headerIcon}/>
-          </TouchableOpacity>
-        </React.Fragment>
-      )
+      if (this.props.recipe_details.recipe.chef_id === this.props.loggedInChef.id || this.props.loggedInChef.is_admin){
+        return (
+          <React.Fragment>
+            <TouchableOpacity style={styles.headerButton} onPress={this.editRecipe}>
+              <Icon name='playlist-edit' size={24} style={styles.headerIcon}/>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.headerButton} onPress={this.deleteRecipe}>
+              <Icon name='trash-can-outline' size={24} style={styles.headerIcon}/>
+            </TouchableOpacity>
+          </React.Fragment>
+        )
+      }
     }
 
     renderRecipeImages = () => {
@@ -150,7 +152,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     renderRecipeMakePics = () => {
         return this.props.recipe_details.make_pics.map(make_pic => {
-          if (make_pic.chef_id === this.props.loggedInChef.id){
+          if (make_pic.chef_id === this.props.loggedInChef.id || this.props.loggedInChef.is_admin){
           return (
             <View key={`${make_pic.id}${make_pic.imageURL}`} style={styles.makePicContainer}>
               <Image style={[{width: '100%', height: '100%'}, styles.makePic]} source={{uri: `${databaseURL}${make_pic.imageURL}`}}></Image>
@@ -173,7 +175,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       if (this.props.recipe_details.comments.length > 0 || this.state.commenting){
         return (
           this.props.recipe_details.comments.map( comment => {
-            return <RecipeComment key={`${comment.id} ${comment.comment}`} {...comment} loggedInChefID={this.props.loggedInChef.id} deleteComment={this.deleteComment}/>
+            return <RecipeComment key={`${comment.id} ${comment.comment}`} {...comment} loggedInChefID={this.props.loggedInChef.id} is_admin={this.props.loggedInChef.is_admin} deleteComment={this.deleteComment}/>
           })
         )
       } else {
@@ -305,7 +307,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     render() {
       if (this.props.recipe_details != undefined){
-        // console.log(this.state.commenting)
+        // console.log(this.props.loggedInChef)
         return (
           <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={83} style={{flex:1}}>
             <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>

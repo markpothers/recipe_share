@@ -31,20 +31,27 @@ class CommentsController < ApplicationController
     # end
 
     def update
-        @comment.update(comment_params)
-        if @comment.save
-            render json: @comment
+        if @comment.chef_id === @chef.id || @chef.is_admin === true
+            @comment.update(comment_params)
+            if @comment.save
+                render json: @comment
+            else
+                render json: {error: true, message: 'Ooops.  Something went wrong updating the comment.'}
+            end
         else
-            render json: {error: true, message: 'Ooops.  Something went wrong updating the comment.'}
+            render json: {error: true, message: "Unauthorized"}
         end
     end
 
     def destroy
-        @comment = Comment.find(params[:id])
-        if Comment.destroy(params[:id])
-            render json: Comment.getRecipesComments(@comment.recipe_id)
+        if @comment.chef_id === @chef.id || @chef.is_admin === true
+            if Comment.destroy(params[:id])
+                render json: Comment.getRecipesComments(@comment.recipe_id)
+            else
+                render json: false
+            end
         else
-            render json: false
+            render json: {error: true, message: "Unauthorized"}
         end
     end
 

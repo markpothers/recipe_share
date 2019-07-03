@@ -53,35 +53,41 @@ class RecipesController < ApplicationController
 
     def update
         # byebug
-        @recipe.update(newRecipe_params)
-        if newRecipe_image_params[:imageBase64] != "" && newRecipe_image_params[:imageBase64] != nil
-            @recipe_image = RecipeImage.create(recipe_id: @recipe.id)
+        if @recipe.chef_id === @chef.id || @chef.is_admin === true
+            @recipe.update(newRecipe_params)
+            if newRecipe_image_params[:imageBase64] != "" && newRecipe_image_params[:imageBase64] != nil
+                @recipe_image = RecipeImage.create(recipe_id: @recipe.id)
 
-            File.open("public/recipe_image_files/recipe-image-#{@recipe_image.id}.jpg", 'wb') do |f|
-                f.write(Base64.decode64(newRecipe_image_params[:imageBase64]))
+                File.open("public/recipe_image_files/recipe-image-#{@recipe_image.id}.jpg", 'wb') do |f|
+                    f.write(Base64.decode64(newRecipe_image_params[:imageBase64]))
+                end
+                puts "public/recipe_image_files/recipe-image-#{@recipe_image.id}.jpg"
+                @recipe_image.imageURL = "/recipe_image_files/recipe-image-#{@recipe_image.id}.jpg"
+                @recipe_image.save
             end
-            puts "public/recipe_image_files/recipe-image-#{@recipe_image.id}.jpg"
-            @recipe_image.imageURL = "/recipe_image_files/recipe-image-#{@recipe_image.id}.jpg"
-            # byebug
-            @recipe_image.save
-        end
-        # byebug
-        @recipe.ingredients=(newRecipe_Ingredient_params)
-        if @recipe.save
-            render json: @recipe
+            @recipe.ingredients=(newRecipe_Ingredient_params)
+            if @recipe.save
+                render json: @recipe
+            else
+                render json: {error: true, message: @recipe.errors.full_messages}
+            end
         else
-            render json: {error: true, message: @recipe.errors.full_messages}
+            render json: {error: true, message: "Unauthorized"}
         end
     end
 
     def destroy
-        @recipe = Recipe.find(params["id"])
-        @recipe.hidden=(true)
-        @recipe.save
-        if @recipe.hidden=(true)
-            render json: true
+        # byebug
+        if @recipe.chef_id === @chef.id || @chef.is_admin === true
+            @recipe.hidden=(true)
+            @recipe.save
+            if @recipe.hidden=(true)
+                render json: true
+            else
+                render json: false
+            end
         else
-            render json: false
+            render json: {error: true, message: "Unauthorized"}
         end
     end
 

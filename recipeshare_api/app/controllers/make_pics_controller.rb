@@ -27,19 +27,20 @@ class MakePicsController < ApplicationController
     end
 
     def destroy
-        if MakePic.destroy(params[:id])
-            render json: true
+        @make_pic = MakePic.find(params[:id])
+        if @make_pic.chef_id === @chef.id || @chef.is_admin === true
+            if MakePic.destroy(params[:id])
+                render json: true
+            else
+                render json: false
+            end
         else
-            render json: false
+            render json: {error: true, message: "Unauthorized"}
         end
     end
 
 
     private
-
-    def define_current_make_pic
-        @make_pic = MakePic.find(params[:id])
-    end
 
     def make_pic_params
         params.require(:recipe).permit(:recipe_id, :chef_id, :base64)

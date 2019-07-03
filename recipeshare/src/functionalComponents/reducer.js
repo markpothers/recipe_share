@@ -107,7 +107,8 @@ const reducer = (currentState, action) => {
                 id: action.id,
                 username: action.username,
                 auth_token: action.auth_token,
-                imageURL: action.imageURL
+                imageURL: action.imageURL,
+                is_admin: action.is_admin
                 }}
         case 'CHANGE_GLOBAL_RANKING':
                 // console.log("switching ranking")

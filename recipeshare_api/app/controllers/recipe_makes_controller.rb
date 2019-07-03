@@ -31,21 +31,27 @@ class RecipeMakesController < ApplicationController
     #     render json: @recipe_make
     # end
 
-    def update
-        @recipe_make.update(recipe_make_params)
-        @recipe.images.attach(recipe_params[:images])
-        if @recipe_make.save
-            render json: @recipe_make
-        else
-            render json: {error: true, message: 'Ooops.  Something went wrong updating the recipe_make.'}
-        end
-    end
+
+
+    # def update
+    #     @recipe_make.update(recipe_make_params)
+    #     @recipe.images.attach(recipe_params[:images])
+    #     if @recipe_make.save
+    #         render json: @recipe_make
+    #     else
+    #         render json: {error: true, message: 'Ooops.  Something went wrong updating the recipe_make.'}
+    #     end
+    # end
 
     def destroy
-        if @recipe_make.destroy
-            render json: {message: "recipe_make deleted!"}
+        if @recipe_make.chef_id === @chef.id || @chef.is_admin === true
+            if @recipe_make.destroy
+                render json: {message: "recipe_make deleted!"}
+            else
+                render json: {error: true, message: "Ooops.  That's embarassing.  We couldn't delete that recipe_make.  You shouldn't even be able to see this message!"}
+            end
         else
-            render json: {error: true, message: "Ooops.  That's embarassing.  We couldn't delete that recipe_make.  You shouldn't even be able to see this message!"}
+            render json: {error: true, message: "Unauthorized"}
         end
     end
 

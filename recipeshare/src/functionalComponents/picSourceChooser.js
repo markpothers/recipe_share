@@ -1,6 +1,7 @@
 import React from 'react'
 import { Modal, Text, View, TouchableOpacity } from 'react-native'
-import {Camera, Permissions, DangerZone } from 'expo'
+// import {Camera, Permissions, DangerZone } from 'expo'
+import * as Permissions from 'expo-permissions'
 import { ImagePicker } from 'expo'
 import { styles } from './functionalComponentsStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';

@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 export default class RecipeComment extends React.PureComponent {
 
   renderCommentDeleteButton = () => {
-    if (this.props.loggedInChefID === this.props.chef_id) {
+    if (this.props.loggedInChefID === this.props.chef_id || this.props.is_admin) {
       return (
         <TouchableOpacity style={styles.commentTrashCanButton} onPress={() => this.props.deleteComment(this.props.id)}>
         <Icon name='trash-can-outline' size={24} style={[styles.icon, styles.commentTrashCan]}/>

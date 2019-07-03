@@ -28,9 +28,9 @@ class IngredientsController < ApplicationController
         end
     end
 
-    def show
-        render json: @ingredient
-    end
+    # def show
+    #     render json: @ingredient
+    # end
 
     # def edit
     #     render json: @ingredient

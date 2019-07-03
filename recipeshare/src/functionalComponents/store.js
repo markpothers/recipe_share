@@ -9,7 +9,9 @@ const initialState = {
   loggedInChef: {
     id: "",
     username: "",
-    auth_token: ""
+    auth_token: "",
+    imageURL: "",
+    is_admin: false
   },
   global_ranking: "liked",
   recipes: {

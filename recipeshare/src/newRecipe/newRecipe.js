@@ -1,7 +1,8 @@
 import React from 'react'
 import { ScrollView, Text, ImageBackground, TextInput, KeyboardAvoidingView, TouchableOpacity, View, Picker } from 'react-native'
 import { connect } from 'react-redux'
-import {Camera, Permissions, DangerZone } from 'expo'
+// import {Camera, Permissions, DangerZone } from 'expo'
+import * as Permissions from 'expo-permissions'
 import { styles } from './newRecipeStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { times } from '../dataComponents/times'
