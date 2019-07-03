@@ -1,6 +1,5 @@
 import React from 'react'
-import {Text, AsyncStorage, ImageBackground, KeyboardAvoidingView, Image } from 'react-native'
-import { Container, Header, Content, Form, Item, Input, Label, Button, View } from 'native-base';
+import {Text, AsyncStorage, ImageBackground, KeyboardAvoidingView, Image, View, TextInput, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { styles } from './usersStyleSheet'
@@ -46,7 +45,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     loginChef = () => {
-      // console.log("sending login")
+      console.log("sending login")
       fetch(`${databaseURL}/login`, {
         method: "POST",
         headers: {
@@ -59,7 +58,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       .then(res => res.json())
       .then(chef => {
         if (!chef.error){
-          // this.setState({error: ""})
           AsyncStorage.setItem('chef', JSON.stringify(chef), () => {
             AsyncStorage.getItem('chef', (err, res) => {
               console.log(err)
@@ -68,7 +66,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             })
           })
         } else {
-          // console.log(chef.message)
+          console.log(chef.message)
           this.setState({error: chef.message})
         }
       })
@@ -81,9 +79,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       if (this.state.error === "email"){
         return (
           <View style={styles.formRow}>
-            <Item rounded style={styles.formError}>
+            <View style={styles.formError}>
               <Text style={styles.formErrorText}>E-mail address not found.  Please register.</Text>
-            </Item>
+            </View>
           </View>
         )
       }
@@ -93,9 +91,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       if (this.state.error === "password"){
         return (
           <View style={styles.formRow}>
-            <Item rounded style={styles.formError}>
+            <View style={styles.formError}>
               <Text style={styles.formErrorText}>Password not recognized</Text>
-            </Item>
+            </View>
           </View>
         )
       }
@@ -111,31 +109,31 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             </View>
             <View style={styles.loginForm} >
               <View style={styles.formRow}>
-                <Item rounded style={styles.loginHeader}>
+                <View style={styles.loginHeader}>
                   <Text style={styles.loginTitle}>Welcome, chef!{"\n"} Please log in or register</Text>
-                </Item>
+                </View>
               </View>
               <View style={styles.formRow}>
-                <Item rounded style={styles.loginInputBox}>
-                  <Input placeholder="e-mail" keyboardType="email-address" autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "e_mail")}/>
-                </Item>
+                <View style={styles.loginInputBox}>
+                  <TextInput style={styles.loginTextBox} placeholder="e-mail" keyboardType="email-address" autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "e_mail")}/>
+                </View>
               </View>
               {this.renderEmailError()}
               <View style={styles.formRow}>
-                <Item rounded style={styles.loginInputBox}>
-                  <Input placeholder="password" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")}/>
-                </Item>
+                <View style={styles.loginInputBox}>
+                  <TextInput style={styles.loginTextBox} placeholder="password" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")}/>
+                </View>
               </View>
               {this.renderPasswordError()}
               <View style={styles.formRow}>
-                <Button rounded warning style={styles.loginFormButton} onPress={() => this.props.navigation.navigate('CreateChef')}>
+                <TouchableOpacity style={styles.loginFormButton} activeOpacity={0.7} onPress={() => this.props.navigation.navigate('CreateChef')}>
                   <Icon style={styles.standardIcon} size={25} name='account-plus'></Icon>
-                    <Text style={styles.createChefFormButtonText}>Register</Text>
-                </Button>
-                <Button rounded success style={styles.loginFormButton} onPress={e => this.loginChef(e)}>
+                    <Text style={styles.loginFormButtonText}>Register</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.loginFormButton} activeOpacity={0.7} onPress={e => this.loginChef(e)}>
                   <Icon style={styles.standardIcon} size={25} name='login'></Icon>
-                    <Text style={styles.createChefFormButtonText}>Login</Text>
-                  </Button>
+                    <Text style={styles.loginFormButtonText}>Login</Text>
+                  </TouchableOpacity>
               </View>
             </View>
           </ImageBackground>

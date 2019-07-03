@@ -14,6 +14,7 @@ export const fetchRecipeList = (listType, chef_id, limit, offset, global_ranking
         })
         .then(res => res.json())
         .then(recipes => {
+            // console.log(recipes)
             resolve(recipes)
         })
     })

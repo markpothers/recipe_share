@@ -2,10 +2,10 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     recipeCard: {
-      marginTop: '2%',
+      // height: 319,
+      marginTop: 2,
+      marginBottom: 2,
       width: '100%',
-      marginLeft: '0%',
-      marginRight: '0%',
       borderStyle: 'solid',
       borderRadius: 5,
       borderWidth: 1,
@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
     recipeCardTopPostedByContainer: {
       // borderBottomStyle: 'solid 0.5',
       borderBottomWidth: 0.5,
+      height: 25,
       width: '96.4%',
       marginLeft: '1.6%',
       marginRight: '2%',
@@ -25,6 +26,7 @@ export const styles = StyleSheet.create({
       flexDirection: 'row',
       // borderStyle: 'solid',
       // borderWidth: 2,
+      height: 61,
       width: '100%',
       marginTop: '1%',
       marginBottom: '1%'
@@ -96,6 +98,7 @@ export const styles = StyleSheet.create({
       flexDirection: 'row',
       marginTop: '1%',
       marginBottom: '1%',
+      height: 25,
       // borderStyle: 'solid',
       // borderWidth: 2,
     },

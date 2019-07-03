@@ -1,3 +1,5 @@
+require 'securerandom'
+
 class RecipesController < ApplicationController
 
     # skip_before_action :verify_authenticity_token
@@ -8,62 +10,33 @@ class RecipesController < ApplicationController
     def index
         # byebug
         @recipes = Recipe.choose_list(params["listType"], params["chef_id"], params["limit"], params["offset"], params["global_ranking"], @chef.id)
-        # byebug
-        # if list_params["listType"] == "global_ranks"
-        #     @filtered_recipes = @recipes.select { |recipe| recipe["hidden"] == 0 }
-        # else
-        #     @filtered_recipes = @recipes.select { |recipe| recipe.hidden == false }
-        # end
-        # byebug
         render json: @recipes #, methods: [:add_count]
     end
-
-    # def details
-    #     # byebug
-    #     # @recipes_details = Recipe.find_details(details_params["listed_recipes"])
-
-    #         ingredientUses = IngredientUse.where(recipe_id: details_params["listed_recipes"])
-    #         ingredients_ids = ingredientUses.map do |use|
-    #             use = use.ingredient_id
-    #         end
-
-    #     details = {recipes: Recipe.where(id: details_params["listed_recipes"]),
-    #         comments: Comment.where(recipe_id: details_params["listed_recipes"]),
-    #         recipe_images: RecipeImage.where(recipe_id: details_params["listed_recipes"]),
-    #         recipe_likes: RecipeLike.where(recipe_id: details_params["listed_recipes"]),
-    #         recipe_makes: RecipeMake.where(recipe_id: details_params["listed_recipes"]),
-    #         make_pics: MakePic.where(recipe_id: details_params["listed_recipes"]),
-    #         ingredient_uses: IngredientUse.where(recipe_id: details_params["listed_recipes"]),
-    #         ingredients: Ingredient.where(id: ingredients_ids.uniq)
-    #     }
-    #     # byebug
-    #     render json: details #, methods: [:add_count]
-    # end
 
     # def new
     #     @recipe = Recipe.new
     # end
 
     def create
-        # byebug
         @recipe = Recipe.create(newRecipe_params)
         @recipe.hidden=(false)
         if @recipe.save
-            if newRecipe_image_params[:imagebase64] != ""
+            if newRecipe_image_params[:imageBase64] != "" && newRecipe_image_params[:imageBase64] != nil
                 @recipe_image = RecipeImage.create(recipe_id: @recipe.id)
-
-                File.open("public/recipe_image_files/recipe-image-#{@recipe_image.id}.jpg", 'wb') do |f|
+                hex = SecureRandom.hex
+                until RecipeImage.find_by(hex: hex) == nil
+                    hex = SecureRandom.hex
+                end
+                File.open("public/recipe_image_files/recipe-image-#{hex}.jpg", 'wb') do |f|
                     f.write(Base64.decode64(newRecipe_image_params[:imageBase64]))
                 end
-                puts "public/recipe_image_files/recipe-image-#{@recipe_image.id}.jpg"
-                @recipe_image.imageURL = "/recipe_image_files/recipe-image-#{@recipe_image.id}.jpg"
+                puts "public/recipe_image_files/recipe-image-#{hex}.jpg"
+                @recipe_image.imageURL = "/recipe_image_files/recipe-image-#{hex}.jpg"
+                @recipe_image.hex=hex
                 @recipe_image.save
             end
-                # puts newRecipe_Ingredient_params
-
-                @recipe.ingredients=(newRecipe_Ingredient_params)
-                @recipe.save
-
+            @recipe.ingredients=(newRecipe_Ingredient_params)
+            @recipe.save
             render json: @recipe
         else
             render json: {error: true, message: @recipe.errors.full_messages}
@@ -79,12 +52,25 @@ class RecipesController < ApplicationController
     # end
 
     def update
-        @recipe.update(recipe_params)
-        @recipe.images.attach(recipe_params[:images])
+        # byebug
+        @recipe.update(newRecipe_params)
+        if newRecipe_image_params[:imageBase64] != "" && newRecipe_image_params[:imageBase64] != nil
+            @recipe_image = RecipeImage.create(recipe_id: @recipe.id)
+
+            File.open("public/recipe_image_files/recipe-image-#{@recipe_image.id}.jpg", 'wb') do |f|
+                f.write(Base64.decode64(newRecipe_image_params[:imageBase64]))
+            end
+            puts "public/recipe_image_files/recipe-image-#{@recipe_image.id}.jpg"
+            @recipe_image.imageURL = "/recipe_image_files/recipe-image-#{@recipe_image.id}.jpg"
+            # byebug
+            @recipe_image.save
+        end
+        # byebug
+        @recipe.ingredients=(newRecipe_Ingredient_params)
         if @recipe.save
             render json: @recipe
         else
-            render json: {error: true, message: 'Ooops.  Something went wrong updating the recipe.'}
+            render json: {error: true, message: @recipe.errors.full_messages}
         end
     end
 

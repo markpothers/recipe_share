@@ -1,3 +1,5 @@
+require 'securerandom'
+
 class ChefsController < ApplicationController
 
     # skip_before_action :verify_authenticity_token
@@ -33,12 +35,18 @@ class ChefsController < ApplicationController
     def create
         if chef_params[:password] === chef_params[:password_confirmation]
             @chef = Chef.new(chef_params)
+            @chef.is_admin = false
             if @chef.save
                 if image_params[:imageURL] != ""
-                    File.open("public/chef_avatars/chef-avatar-#{@chef.id}.jpg", 'wb') do |f|
+                    hex = SecureRandom.hex
+                    until Chef.find_by(hex: hex) == nil
+                        hex = SecureRandom.hex
+                    end
+                    File.open("public/chef_avatars/chef-avatar-#{hex}.jpg", 'wb') do |f|
                         f.write(Base64.decode64(image_params[:imageURL]))
                     end
-                    @chef.imageURL = "/chef_avatars/chef-avatar-#{@chef.id}.jpg"
+                    @chef.imageURL = "/chef_avatars/chef-avatar-#{hex}.jpg"
+                    @chef.hex=hex
                     @chef.save
                 end
                 render json: @chef, methods: [:auth_token]

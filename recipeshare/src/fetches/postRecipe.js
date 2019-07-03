@@ -17,7 +17,7 @@ export const postRecipe = (chef_id, auth_token, name, ingredients, instructions,
                     instructions: instructions,
                     time: time,
                     difficulty: difficulty,
-                    imageBase64
+                    imageBase64: imageBase64
                 }
             })
         })

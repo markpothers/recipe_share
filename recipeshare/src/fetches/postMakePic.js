@@ -1,7 +1,7 @@
 import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
 
-export const postMakePic = (recipeID, chefID, auth_token, base64) => {
+export const postMakePic = (recipeID, chefID, auth_token, image) => {
     return new Promise((resolve) => {
         fetch(`${databaseURL}/make_pics`, {
             method: "POST",
@@ -13,7 +13,7 @@ export const postMakePic = (recipeID, chefID, auth_token, base64) => {
             recipe: {
                 recipe_id: recipeID,
                 chef_id: chefID,
-                base64: base64
+                base64: image.base64
             }
             })
         })

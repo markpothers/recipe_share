@@ -314,5 +314,30 @@ export const styles = StyleSheet.create({
     },
     headerIcon: {
       color: '#505050'
-    }
+    },
+
+    createRecipeFormButton:{
+      marginLeft: '5%',
+      marginRight: '5%',
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: '35%',
+      height: 44,
+      flexDirection:'row',
+      borderRadius: 5,
+      backgroundColor: '#fff59b',
+      borderStyle: 'solid',
+      borderWidth: 1,
+    },
+    createRecipeFormButtonText: {
+      marginLeft: '5%',
+      marginRight: '5%',
+      textAlign: 'center',
+      fontWeight: 'bold',
+      fontSize: 14,
+      color: '#104e01',
+    },
+    standardIcon: {
+      color: '#104e01',
+    },
   });

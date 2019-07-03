@@ -15,9 +15,9 @@ import { destroyComment } from '../fetches/destroyComment'
 import { destroyRecipe } from '../fetches/destroyRecipe'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import RecipeComment from './recipeComment'
-import {Camera, Permissions, DangerZone } from 'expo'
-import { ImagePicker } from 'expo'
 import RecipeNewComment from './recipeNewComment';
+import AppHeader from '../../navigation/appHeader'
+import PicSourceChooser from '../functionalComponents/picSourceChooser'
 
 const mapStateToProps = (state) => ({
   recipe_details: state.recipe_details,
@@ -74,23 +74,16 @@ const mapDispatchToProps = {
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   class RecipeDetails extends React.Component {
-    // static navigationOptions = ({ navigation }) => {
-    //   return {
-    //     title: 'Recipe details',
-    //     headerStyle: {
-    //       backgroundColor: '#104e01',
-    //       // opacity: 0.8
-    //     },
-    //     headerTintColor: '#fff59b',
-    //     headerTitleStyle: {
-    //       fontWeight: 'bold',
-    //     }
-    //   };
-    // }
+    static navigationOptions = ({ navigation }) => {
+      return {
+        headerTitle: <AppHeader text={"Recipe Details"} />,
+      };
+    }
 
     state = {
       commenting: false,
-      commentText: ""
+      commentText: "",
+      choosingPicSource: false
     }
 
     componentDidMount = async() => {
@@ -104,7 +97,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     editRecipe = () => {
-      // this.props.navigation.navigate('NewRecipe', {recipeID: this.props.navigation.getParam('recipeID')})
+      // console.log(this.props.recipe_details)
+      this.props.navigation.navigate('NewRecipe', {recipe_details: this.props.recipe_details})
     }
 
     deleteRecipe = async() => {
@@ -128,8 +122,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     renderRecipeImages = () => {
-      if (this.props.recipe_details.recipe_images.imageURL != ""){
-      return <Image style={[{width: '100%', height: 250}, styles.detailsImage]} source={{uri: `${databaseURL}${this.props.recipe_details.recipe_images[0].imageURL}`}}></Image>
+      if (this.props.recipe_details.recipe_images.imageURL != []){
+      return <Image style={[{width: '100%', height: 250}, styles.detailsImage]} source={{uri: `${databaseURL}${this.props.recipe_details.recipe_images[this.props.recipe_details.recipe_images.length-1].imageURL}`}}></Image>
       }
     }
 
@@ -138,7 +132,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       const list_values = ingredient_uses.map(ingredient_use => [ingredient_use.ingredient_id, ingredient_use.quantity, ingredient_use.unit])
       const ingredients = list_values.map(list_value => [...list_value, (this.props.recipe_details.ingredients.find(ingredient => ingredient.id == list_value[0]).name)])
       return ingredients.map(ingredient => (
-            <View style={styles.ingredientsTable} key={ingredient[0]}>
+            <View style={styles.ingredientsTable} key={`${ingredient[0]}${ingredient[3]}${ingredient[1]}${ingredient[2]}`}>
               <Text style={[styles.detailsContents, styles.ingredientName]}>{ingredient[3]}</Text>
               <Text style={[styles.detailsContents, styles.ingredientQuantity]}>{ingredient[1]}</Text>
               <Text style={[styles.detailsContents, styles.ingredientUnit]}>{ingredient[2]}</Text>
@@ -146,29 +140,37 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       ))
     }
 
+    renderMakePicScrollView = () => {
+      return (
+        <ScrollView horizontal="true" style={styles.makePicScrollView}>
+          {this.renderRecipeMakePics()}
+        </ScrollView>
+      )
+    }
+
     renderRecipeMakePics = () => {
-      return this.props.recipe_details.make_pics.map(make_pic => {
-        if (make_pic.chef_id === this.props.loggedInChef.id){
-        return (
-          <View key={make_pic.imageURL} style={styles.makePicContainer}>
-            <Image style={[{width: '100%', height: '100%'}, styles.makePic]} source={{uri: `${databaseURL}${make_pic.imageURL}`}}></Image>
-            <TouchableOpacity style={styles.makePicTrashCanButton} onPress={() => this.deleteMakePic(make_pic.id)}>
-              <Icon name='trash-can-outline' size={24} style={[styles.icon, styles.makePicTrashCan]}/>
-            </TouchableOpacity>
-          </View>
-        )
-        } else {
-          return(
-            <View key={make_pic.imageURL} style={styles.makePicContainer}>
+        return this.props.recipe_details.make_pics.map(make_pic => {
+          if (make_pic.chef_id === this.props.loggedInChef.id){
+          return (
+            <View key={`${make_pic.id}${make_pic.imageURL}`} style={styles.makePicContainer}>
               <Image style={[{width: '100%', height: '100%'}, styles.makePic]} source={{uri: `${databaseURL}${make_pic.imageURL}`}}></Image>
+              <TouchableOpacity style={styles.makePicTrashCanButton} onPress={() => this.deleteMakePic(make_pic.id)}>
+                <Icon name='trash-can-outline' size={24} style={[styles.icon, styles.makePicTrashCan]}/>
+              </TouchableOpacity>
             </View>
           )
-        }
-      })
+          } else {
+            return(
+              <View key={`${make_pic.id}${make_pic.imageURL}`} style={styles.makePicContainer}>
+                <Image style={[{width: '100%', height: '100%'}, styles.makePic]} source={{uri: `${databaseURL}${make_pic.imageURL}`}}></Image>
+              </View>
+            )
+          }
+        })
     }
 
     renderRecipeComments = () => {
-      if (this.props.recipe_details.comments.length > 0){
+      if (this.props.recipe_details.comments.length > 0 || this.state.commenting){
         return (
           this.props.recipe_details.comments.map( comment => {
             return <RecipeComment key={`${comment.id} ${comment.comment}`} {...comment} loggedInChefID={this.props.loggedInChef.id} deleteComment={this.deleteComment}/>
@@ -239,17 +241,26 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       }
     }
 
-    newMakePic = async() => {
-      let result = await ImagePicker.launchCameraAsync({
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 0.3,
-        base64: true
-      })
-      const makePic = await postMakePic(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token, result.base64)
-      if (makePic) {
-          this.props.addMakePic(makePic)
+    newMakePic = () => {
+      this.setState({choosingPicSource: true})
+    }
+
+    sourceChosen = () =>{
+      this.setState({choosingPicSource: false})
+    }
+
+    saveImage = async(image) => {
+      if (image.cancelled === false){
+        const makePic = await postMakePic(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token, image)
+        if (makePic) {
+            this.props.addMakePic(makePic)
+            this.setState({choosingPicSource: false})
+        }
       }
+    }
+    
+    renderPictureChooser = () => {
+      return <PicSourceChooser saveImage={this.saveImage} sourceChosen={this.sourceChosen} key={"pic-chooser"}/>
     }
 
     deleteMakePic = async(makePicID) => {
@@ -294,10 +305,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     render() {
       if (this.props.recipe_details != undefined){
-        // console.log(this.props.recipe_details.comments[0])
+        // console.log(this.state.commenting)
         return (
-          <KeyboardAvoidingView behavior="padding" style={{flex:1}}>
+          <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={83} style={{flex:1}}>
             <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
+              {this.state.choosingPicSource ? this.renderPictureChooser() : null}
               <View style={styles.detailsHeader}>
                 <Text style={[styles.detailsHeaderTextBox]}>{this.props.recipe_details.recipe.name}</Text>
                 {this.renderEditDeleteButtons()}
@@ -337,9 +349,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                       <Icon name='image-plus' size={24} style={styles.addIcon}/>
                     </TouchableOpacity>
                   </View>
-                  <ScrollView horizontal="true" style={styles.makePicScrollView}>
-                    {this.renderRecipeMakePics()}
-                  </ScrollView>
+                  {this.props.recipe_details.make_pics.length === 0 ? <Text style={[styles.detailsContents]}>No other images yet.  Be the first!</Text> :null}
+                  {this.props.recipe_details.make_pics.length !== 0 ? this.renderMakePicScrollView() : null}
                 </View>
                 <View style={styles.detailsComments}>
                   <View style={{flexDirection: 'row'}}>

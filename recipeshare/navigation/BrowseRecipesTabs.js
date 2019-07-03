@@ -2,7 +2,6 @@ import React from 'react';
 import { Platform, Text, View, ImageBackground, Button } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator, createMaterialTopTabNavigator, createDrawerNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import ProfileScreen from '../src/profile/Profile';
 import ChefDetailsScreen from '../src/chefDetails/chefDetails'
 import NewRecipeScreen from '../src/newRecipe/newRecipe'
 import { styles } from './navigationStyleSheet'

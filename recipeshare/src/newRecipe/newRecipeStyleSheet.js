@@ -110,7 +110,6 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
   },
   unitPicker: {
-    margin: '5%',
     bottom: '2%',
   },
   createRecipeFormButtonText: {
@@ -168,7 +167,11 @@ export const styles = StyleSheet.create({
   },
   autoCompleteInputContainerStyle: {
     borderRadius: 5,
-    backgroundColor: 'white',
+    backgroundColor: 'transparent',
+    borderStyle: 'solid',
+    borderColor: 'transparent',
+    borderRadius: 5,
+    borderWidth: 0
   },
   autoCompleteInput: {
     borderRadius: 5,

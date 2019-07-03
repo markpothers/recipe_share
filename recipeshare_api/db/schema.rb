@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 2019_06_14_164549) do
     t.string "password_digest"
     t.string "imageURL"
     t.boolean "hidden"
+    t.string "hex"
+    t.boolean "is_admin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -97,6 +99,7 @@ ActiveRecord::Schema.define(version: 2019_06_14_164549) do
     t.integer "chef_id"
     t.integer "recipe_id"
     t.string "imageURL"
+    t.string "hex"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["chef_id"], name: "index_make_pics_on_chef_id"
@@ -116,6 +119,7 @@ ActiveRecord::Schema.define(version: 2019_06_14_164549) do
     t.string "name"
     t.integer "recipe_id"
     t.string "imageURL"
+    t.string "hex"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["recipe_id"], name: "index_recipe_images_on_recipe_id"

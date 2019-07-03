@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
+require 'securerandom'
 # ActiveRecord::Migration.drop_table(:likes)
 # ActiveRecord::Migration.drop_table(:follows)
 # ActiveRecord::Migration.drop_table(:friendships)
@@ -21,6 +22,7 @@ require 'faker'
 # ActiveRecord::Migration.create_table(:ingredients)
 # ActiveRecord::Migration.create_table(:ingredient_uses)
 
+ReShare.destroy_all
 MakePic.destroy_all
 Comment.destroy_all
 RecipeImage.destroy_all
@@ -42,12 +44,12 @@ Ingredient.destroy_all
 # ActiveRecord::Base.connection.reset_pk_sequence!('Chefs')
 
 
-500.times do
+100.times do
     Ingredient.create(name: Faker::Food.ingredient, created_at: Time.now)
 end
 
 100.times do
-    Chef.create(username: Faker::Books::CultureSeries.planet, imageURL:Faker::Avatar.image, e_mail:Faker::Internet.email, country: Faker::TvShows::StarTrek.location, hidden: false, created_at: Time.now, password: '123456', password_confirmation: '123456')
+    Chef.create(is_admin: false, username: Faker::Books::CultureSeries.planet, imageURL:Faker::Avatar.image, e_mail:Faker::Internet.email, country: Faker::TvShows::StarTrek.location, hidden: false, created_at: Time.now, password: '123456', password_confirmation: '123456', hex: SecureRandom.hex)
 end
 
 
@@ -131,12 +133,12 @@ images = ["/recipe_image_files/recipe2.jpg", "/recipe_image_files/recipe3.jpg", 
 # end
 
 Recipe.all.each do |recipe|
-    RecipeImage.create(recipe_id: recipe.id, imageURL: images.sample)
+    RecipeImage.create(recipe_id: recipe.id, imageURL: images.sample, hex: SecureRandom.hex)
 end
 
 5.times do
     Recipe.all.each do |recipe|
-        MakePic.create(chef: Chef.all.sample, recipe: recipe, imageURL: images.sample)
+        MakePic.create(chef: Chef.all.sample, recipe: recipe, imageURL: images.sample, hex: SecureRandom.hex)
     end
 end
 
@@ -144,6 +146,6 @@ end
     ReShare.create(chef_id: Chef.all.sample.id, recipe_id: Recipe.all.sample.id, created_at: Time.now)
 end
 
-20.times do 
-    RecipeLike.last.destroy
-end
+# 3.times do 
+#     MakePic.last.destroy
+# end

@@ -18,7 +18,7 @@ export default class RecipeNewComment extends React.PureComponent {
                 style={styles.detailsContents}
                 value={this.props.commentText}
                 multiline={true}
-                numberOfLines={3}
+                numberOfLines={2}
                 placeholder="Type comment here..."
                 onChange={(e) => this.props.handleCommentTextInput(e.nativeEvent.text)}
                 autoFocus={true}

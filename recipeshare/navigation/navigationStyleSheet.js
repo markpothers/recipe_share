@@ -13,11 +13,11 @@ export const styles = StyleSheet.create({
     height: 55,
     // borderStyle: 'solid',
     // borderWidth: 2,
-    borderColor: '#fff59b',
+    // borderColor: '#fff59b',
   },
   headerDrawerButton: {
-    marginLeft: 10,
-    marginRight: 10,
+    marginLeft: 15,
+    marginRight: 8,
   },
   headerNewButton: {
     position: 'absolute',
@@ -35,6 +35,6 @@ export const styles = StyleSheet.create({
   background: {
     width: '100%',
     height: '100%',
-    flex: 1
+    // flex: 1
   },
 });

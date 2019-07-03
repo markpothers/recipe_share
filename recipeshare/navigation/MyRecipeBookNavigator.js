@@ -4,7 +4,6 @@ import { createStackNavigator, createBottomTabNavigator, createMaterialTopTabNav
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 // import BrowseRecipesScreen from '../screens/BrowseRecipes';
 // import MyRecipeBookScreen from '../screens/MyRecipeBook';
-// import ProfileScreen from '../screens/ProfileScreen';
 import RecipeDetailsScreen from '../src/recipeDetails/recipeDetails'
 import ChefDetailsScreen from '../src/chefDetails/chefDetails'
 import NewRecipeScreen from '../src/newRecipe/newRecipe'

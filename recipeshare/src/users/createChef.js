@@ -1,14 +1,13 @@
 import React from 'react'
-import {ScrollView, StyleSheet, Text, AsyncStorage, ImageBackground, KeyboardAvoidingView} from 'react-native'
-import { Container, Header, Content, Form, Item, Input, Label, Button, Picker, View } from 'native-base';
+import {ScrollView, StyleSheet, Text, AsyncStorage, ImageBackground, KeyboardAvoidingView, TouchableOpacity, TextInput, View} from 'react-native'
+import { Picker } from 'native-base';
 import { countries } from '../dataComponents/countries'
-import { ImagePicker } from 'expo'
 import {Camera, Permissions, DangerZone } from 'expo'
 import { connect } from 'react-redux'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { styles } from './usersStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import PicSourceChooser from '../functionalComponents/picSourceChooser'
 
 const mapStateToProps = (state) => ({
   first_name: state.newUserDetails.first_name,
@@ -48,7 +47,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     state = {
       hasPermission: false,
-      errors: []
+      errors: [],
+      choosingPicture: false
     }
 
     componentDidMount(){
@@ -76,26 +76,45 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       this.props.saveChefDetails(parameter, value)
     }
 
-    pickImage = async () => {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 0.1,
-        base64: true
-      })
-      // console.log(result)
-      this.props.saveChefDetails("imageURL", result.base64)
+    // pickImage = async () => {
+    //   let result = await ImagePicker.launchImageLibraryAsync({
+    //     allowsEditing: true,
+    //     aspect: [4, 3],
+    //     quality: 0.1,
+    //     base64: true
+    //   })
+    //   // console.log(result)
+    //   this.props.saveChefDetails("imageURL", result.base64)
+    // }
+
+    // openCamera = async () => {
+    //   let result = await ImagePicker.launchCameraAsync({
+    //     allowsEditing: true,
+    //     aspect: [4, 3],
+    //     quality: 0.3,
+    //     base64: true
+    //   })
+    //   // console.log(result)
+    //   this.props.saveChefDetails("imageURL", result.base64)
+    // }
+
+    choosePicture = () =>{
+      this.setState({choosingPicture: true})
     }
 
-    openCamera = async () => {
-      let result = await ImagePicker.launchCameraAsync({
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 0.3,
-        base64: true
-      })
-      // console.log(result)
-      this.props.saveChefDetails("imageURL", result.base64)
+    sourceChosen = () =>{
+      this.setState({choosingPicture: false})
+    }
+
+    renderPictureChooser = () => {
+      return <PicSourceChooser saveImage={this.saveImage} sourceChosen={this.sourceChosen} key={"pic-chooser"}/>
+    }
+
+    saveImage = async(image) => {
+      if (image.cancelled === false){
+        this.props.saveChefDetails("imageURL", image.base64)
+        this.setState({choosingPicture: false})
+      }
     }
 
     submitChef = () => {
@@ -133,34 +152,34 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     renderEmailError = () => {
-      const emailErrors = this.state.errors.filter(message => message.startsWith("E mail")) 
+      const emailErrors = this.state.errors.filter(message => message.startsWith("E mail"))
       return emailErrors.map(error => (
         <View style={styles.formRow} key={error}>
-          <Item rounded style={styles.formError}>
+          <View style={styles.formError}>
             <Text style={styles.formErrorText}>{error}</Text>
-          </Item>
+          </View>
         </View>
       ))
     }
 
     renderUsernameError = () => {
-      const usernameErrors = this.state.errors.filter(message => message.startsWith("Username")) 
+      const usernameErrors = this.state.errors.filter(message => message.startsWith("Username"))
       return usernameErrors.map(error => (
         <View style={styles.formRow} key={error}>
-          <Item rounded style={styles.formError}>
+          <View style={styles.formError}>
             <Text style={styles.formErrorText}>{error}</Text>
-          </Item>
+          </View>
         </View>
       ))
     }
 
     renderPasswordError = () => {
-      const passwordErrors = this.state.errors.filter(message => message.startsWith("Password")) 
+      const passwordErrors = this.state.errors.filter(message => message.startsWith("Password"))
       return passwordErrors.map(error => (
         <View style={styles.formRow} key={error}>
-          <Item rounded style={styles.formError}>
+          <View style={styles.formError}>
             <Text style={styles.formErrorText}>{error}</Text>
-          </Item>
+          </View>
         </View>
       ))
     }
@@ -170,27 +189,28 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       return (
         <KeyboardAvoidingView  style={styles.mainPageContainer} behavior="padding">
           <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
+          {this.state.choosingPicture ? this.renderPictureChooser() : null}
             <View style={styles.createChefForm}>
               <ScrollView>
                 <View style={styles.formRow}>
-                  <Item rounded style={styles.loginHeader}>
+                  <View style={styles.loginHeader}>
                     <Text style={styles.createChefTitle}>Please register as our newest chef!</Text>
-                  </Item>
+                  </View>
                 </View>
                 <View style={styles.formRow}>
-                  <Item rounded style={styles.createChefInputBox}>
-                    <Input placeholder="e-mail" keyboardType="email-address"  autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "e_mail")}/>
-                  </Item>
+                  <View style={styles.loginInputBox}>
+                    <TextInput style={styles.loginTextBox} placeholder="e-mail" keyboardType="email-address"  autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "e_mail")}/>
+                  </View>
                 </View>
                   {this.renderEmailError()}
                 <View style={styles.formRow}>
-                  <Item rounded style={styles.createChefInputBox}>
-                    <Input placeholder="username"  autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "username")}/>
-                  </Item>
+                  <View style={styles.loginInputBox}>
+                    <TextInput style={styles.loginTextBox} placeholder="username"  autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "username")}/>
+                  </View>
                 </View>
                 {this.renderUsernameError()}
                 <View style={styles.formRow}>
-                  <Item rounded picker style={styles.createChefInputBox}>
+                  <View picker style={styles.loginInputBox}>
                     <Picker
                       mode="dropdown"
                       iosIcon={<Icon name="arrow-down" />}
@@ -199,38 +219,36 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                       <Picker.Item key={this.props.country} label={this.props.country} value={this.props.country} />
                       {this.countriesPicker()}
                     </Picker>
-                  </Item>
+                  </View>
                 </View>
                 <View style={styles.formRow}>
-                  <Item rounded style={styles.createChefInputBox} >
-                    <Input placeholder="password"  autoCapitalize="none" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")}/>
-                  </Item>
+                  <View style={styles.loginInputBox} >
+                    <TextInput style={styles.loginTextBox} placeholder="password"  autoCapitalize="none" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")}/>
+                  </View>
                 </View>
                 <View style={styles.formRow}>
-                  <Item rounded style={styles.createChefInputBox} >
-                    <Input placeholder="confirm password"  autoCapitalize="none" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password_confirmation")}/>
-                  </Item>
+                  <View style={styles.loginInputBox} >
+                    <TextInput style={styles.loginTextBox} placeholder="confirm password"  autoCapitalize="none" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password_confirmation")}/>
+                  </View>
                 </View>
                 {this.renderPasswordError()}
                   <View style={styles.formRow}>
-                  <Button rounded info style={styles.createChefFormButton} title="Choose Photo" onPress={this.pickImage}>
-                    <Icon style={styles.standardIcon} size={25} name='camera-burst' />
-                    <Text style={styles.createChefFormButtonText}>Choose{"\n"}photo</Text>
-                  </Button>
-                  <Button rounded info style={styles.createChefFormButton} title="Take Photo" onPress={this.openCamera}>
+                  <TouchableOpacity style={styles.loginFormButton} activeOpacity={0.7} onPress={() => this.props.navigation.navigate('Login')}>
+                    <Icon style={styles.standardIcon} size={25} name='login' />
+                    <Text style={styles.loginFormButtonText}>Return to{"\n"} login screen</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.loginFormButton} activeOpacity={0.7} title="Take Photo" onPress={this.choosePicture}>
                     <Icon style={styles.standardIcon} size={25} name='camera' />
-                    <Text style={styles.createChefFormButtonText}>Take{"\n"}photo</Text>
-                  </Button>
+                    <Text style={styles.loginFormButtonText}>Add{"\n"}picture</Text>
+                  </TouchableOpacity>
                 </View>
                 <View style={styles.formRow}>
-                  <Button rounded warning style={styles.createChefFormButton} onPress={() => this.props.navigation.navigate('Login')}>
-                    <Icon style={styles.standardIcon} size={25} name='login' />
-                    <Text style={styles.createChefFormButtonText}>Return to{"\n"} login screen</Text>
-                  </Button>
-                  <Button rounded success style={styles.createChefFormButton} onPress={e => this.submitChef(e)}>
+                  {/* <View style={styles.loginFormButton} >
+                  </View> */}
+                  <TouchableOpacity style={styles.loginFormButton} activeOpacity={0.7} onPress={e => this.submitChef(e)}>
                     <Icon style={styles.standardIcon} size={25} name='login-variant' />
-                    <Text style={styles.createChefFormButtonText}>Submit &{"\n"}log in</Text>
-                  </Button>
+                    <Text style={styles.loginFormButtonText}>Submit &{"\n"}log in</Text>
+                  </TouchableOpacity>
                 </View>
               </ScrollView>
             </View>

@@ -1,6 +1,5 @@
 import React from 'react'
 import { ScrollView, Text, ImageBackground, TextInput, KeyboardAvoidingView, TouchableOpacity, View, Picker } from 'react-native'
-import { ImagePicker } from 'expo'
 import { connect } from 'react-redux'
 import {Camera, Permissions, DangerZone } from 'expo'
 import { styles } from './newRecipeStyleSheet'
@@ -9,9 +8,11 @@ import { times } from '../dataComponents/times'
 import { difficulties } from '../dataComponents/difficulties'
 import { units } from '../dataComponents/units'
 import { postRecipe } from '../fetches/postRecipe'
+import { patchRecipe } from '../fetches/patchRecipe'
 import { fetchIngredients } from '../fetches/fetchIngredients'
 import IngredientAutoComplete from './ingredientAutoComplete'
 import AppHeader from '../../navigation/appHeader'
+import PicSourceChooser from '../functionalComponents/picSourceChooser'
 
 const mapStateToProps = (state) => ({
   name: state.newRecipeDetails.name,
@@ -52,7 +53,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     state = {
       hasPermission: false,
       ingredientsList: [],
-      ingredient1: false
+      ingredient1: false,
+      choosingPicture: false
     }
 
     // renderAutoIngredientsListItem = (item, ingredient) => {
@@ -63,6 +65,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     // }
 
   componentDidMount(){
+    this.props.clearNewRecipeDetails()
+    if (this.props.navigation.getParam('recipe_details') !== undefined){
+      let recipe_details = this.props.navigation.getParam('recipe_details')
+      this.props.saveRecipeDetails('name', recipe_details.recipe.name)
+      this.props.saveRecipeDetails('instructions', recipe_details.recipe.instructions)
+      this.props.saveRecipeDetails('time', recipe_details.recipe.time)
+      this.props.saveRecipeDetails('difficulty', recipe_details.recipe.difficulty.toString())
+      const list_values = recipe_details.ingredient_uses.map(ingredient_use => [ingredient_use.ingredient_id, ingredient_use.quantity, ingredient_use.unit])
+      const ingredientsForEdit = list_values.map(list_value => [...list_value, (recipe_details.ingredients.find(ingredient => ingredient.id == list_value[0]).name)])
+      ingredientsForEdit.forEach( (ing, index) => this.props.addIngredientToRecipeDetails(`ingredient${index+1}`, ing[3], ing[1], ing[2]))
+    }
     Permissions.askAsync(Permissions.CAMERA_ROLL)
         .then(permission => {
             this.setState({hasPermission: permission.status == 'granted'})
@@ -72,6 +85,25 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             this.setState({hasPermission: permission.status == 'granted'})
         })
     this.fetchIngredientsForAutoComplete()
+  }
+
+  choosePicture = () =>{
+    this.setState({choosingPicture: true})
+  }
+
+  sourceChosen = () =>{
+    this.setState({choosingPicture: false})
+  }
+
+  renderPictureChooser = () => {
+    return <PicSourceChooser saveImage={this.saveImage} sourceChosen={this.sourceChosen} key={"pic-chooser"}/>
+  }
+
+  saveImage = async(image) => {
+    if (image.cancelled === false){
+      this.props.saveRecipeDetails("imageBase64", image.base64)
+      this.setState({choosingPicture: false})
+    }
   }
 
   timesPicker = () => {
@@ -214,31 +246,39 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       this.props.saveRecipeDetails(parameter, text)
     }
 
-    pickImage = async () => {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 0.3,
-        base64: true
-      })
-      this.props.saveRecipeDetails("imageBase64", result.base64)
-    }
+    // pickImage = async () => {
+    //   let result = await ImagePicker.launchImageLibraryAsync({
+    //     allowsEditing: true,
+    //     aspect: [4, 3],
+    //     quality: 0.3,
+    //     base64: true
+    //   })
+    //   this.props.saveRecipeDetails("imageBase64", result.base64)
+    // }
 
-    openCamera = async () => {
-      let result = await ImagePicker.launchCameraAsync({
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 0.3,
-        base64: true
-      })
-      this.props.saveRecipeDetails("imageBase64", result.base64)
-    }
+    // openCamera = async () => {
+    //   let result = await ImagePicker.launchCameraAsync({
+    //     allowsEditing: true,
+    //     aspect: [4, 3],
+    //     quality: 0.3,
+    //     base64: true
+    //   })
+    //   this.props.saveRecipeDetails("imageBase64", result.base64)
+    // }
 
     submitRecipe = async() => {
-      const recipe = await postRecipe(this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.props.name, this.props.ingredients, this.props.instructions, this.props.time, this.props.difficulty, this.props.imageBase64)
-      if (recipe) {
-        this.props.clearNewRecipeDetails()
-        this.props.navigation.navigate('MyRecipeBook')
+      if (this.props.navigation.getParam('recipe_details') !== undefined){
+        const recipe = await patchRecipe(this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.props.name, this.props.ingredients, this.props.instructions, this.props.time, this.props.difficulty, this.props.imageBase64, this.props.navigation.getParam('recipe_details').recipe.id)
+        if (recipe) {
+          this.props.clearNewRecipeDetails()
+          this.props.navigation.navigate('MyRecipeBook')
+        }
+      }else{
+        const recipe = await postRecipe(this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.props.name, this.props.ingredients, this.props.instructions, this.props.time, this.props.difficulty, this.props.imageBase64)
+        if (recipe) {
+          this.props.clearNewRecipeDetails()
+          this.props.navigation.navigate('MyRecipeBook')
+        }
       }
     }
 
@@ -246,7 +286,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       // console.log(this.props)
       return (
         <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.mainPageContainer} imageStyle={styles.backgroundImageStyle}>
-          <KeyboardAvoidingView  style={styles.mainPageContainer} behavior="padding">
+          {this.state.choosingPicture ? this.renderPictureChooser() : null}
+          <KeyboardAvoidingView  style={styles.mainPageContainer} keyboardVerticalOffset={83} behavior="padding">
             <ScrollView keyboardShouldPersistTaps='always'>
                   <View style={styles.formRow}>
                     <View style={styles.createRecipeInputBox} >
@@ -290,21 +331,25 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     </View>
                   </View>
                   <View style={styles.transparentFormRow}>
-                    <TouchableOpacity style={styles.createRecipeFormButton} activeOpacity={0.7} title="Choose Photo" onPress={this.pickImage}>
+                    {/* <TouchableOpacity style={styles.createRecipeFormButton} activeOpacity={0.7} title="Choose Photo" onPress={this.choosePicture}>
                       <Icon style={styles.standardIcon} size={25} name='camera-burst' />
-                      <Text style={styles.createRecipeFormButtonText}>Choose{"\n"}photo</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.createRecipeFormButton} activeOpacity={0.7} title="Take Photo" onPress={this.openCamera}>
+                      <Text style={styles.createRecipeFormButtonText}>Add{"\n"}picture</Text>
+                    </TouchableOpacity> */}
+                    <TouchableOpacity style={styles.createRecipeFormButton} activeOpacity={0.7} title="Take Photo" onPress={this.choosePicture}>
                       <Icon style={styles.standardIcon} size={25} name='camera' />
-                      <Text style={styles.createRecipeFormButtonText}>Take{"\n"}photo</Text>
+                      <Text style={styles.createRecipeFormButtonText}>Add{"\n"}picture</Text>
                     </TouchableOpacity>
-                  </View>
-                  <View style={styles.transparentFormRow}>
                     <TouchableOpacity style={[styles.createRecipeFormButton,{marginBottom: 4}]} activeOpacity={0.7} onPress={e => this.submitRecipe(e)}>
                       <Icon style={styles.standardIcon} size={25} name='login' />
                       <Text style={styles.createRecipeFormButtonText}>Submit</Text>
                     </TouchableOpacity>
                   </View>
+                  {/* <View style={styles.transparentFormRow}>
+                    <TouchableOpacity style={[styles.createRecipeFormButton,{marginBottom: 4}]} activeOpacity={0.7} onPress={e => this.submitRecipe(e)}>
+                      <Icon style={styles.standardIcon} size={25} name='login' />
+                      <Text style={styles.createRecipeFormButtonText}>Submit</Text>
+                    </TouchableOpacity>
+                  </View> */}
             </ScrollView>
           </KeyboardAvoidingView>
         </ImageBackground>

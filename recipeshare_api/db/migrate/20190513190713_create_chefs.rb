@@ -11,6 +11,8 @@ class CreateChefs < ActiveRecord::Migration[5.2]
       t.string :password_digest
       t.string :imageURL
       t.boolean :hidden
+      t.string :hex
+      t.boolean :is_admin
       t.datetime :created_at
 
       t.timestamps
