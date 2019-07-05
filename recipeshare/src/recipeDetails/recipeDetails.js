@@ -92,8 +92,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         this.props.storeRecipeDetails(recipe_details)
       }
       if (this.props.navigation.getParam('commenting') === true ){
-        this.setState({commenting: true})
+        await this.setState({commenting: true})
+        setTimeout( () => {
+          this.myScroll.scrollTo({x: 0, y: 700, animated: true})
+        }, 200)
       }
+    }
+
+    scrolled =(e) => {
+      // console.log(e.nativeEvent)
     }
 
     editRecipe = () => {
@@ -123,8 +130,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     renderRecipeImages = () => {
-      if (this.props.recipe_details.recipe_images.imageURL != []){
-      return <Image style={[{width: '100%', height: 250}, styles.detailsImage]} source={{uri: `${databaseURL}${this.props.recipe_details.recipe_images[this.props.recipe_details.recipe_images.length-1].imageURL}`}}></Image>
+      if (this.props.recipe_details.recipe_images.length !== 0){
+        // if (this.props.recipe_details.recipe_images.imageURL !== []){
+          return <Image style={[{width: '100%', height: 250}, styles.detailsImage]} source={{uri: `${databaseURL}${this.props.recipe_details.recipe_images[this.props.recipe_details.recipe_images.length-1].imageURL}`}}></Image>
+        // }
       }
     }
 
@@ -174,7 +183,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       if (this.props.recipe_details.comments.length > 0 || this.state.commenting){
         return (
           this.props.recipe_details.comments.map( comment => {
-            return <RecipeComment key={`${comment.id} ${comment.comment}`} {...comment} loggedInChefID={this.props.loggedInChef.id} is_admin={this.props.loggedInChef.is_admin} deleteComment={this.deleteComment}/>
+            return <RecipeComment newCommentView={this.newCommentView} key={`${comment.id} ${comment.comment}`} {...comment} loggedInChefID={this.props.loggedInChef.id} is_admin={this.props.loggedInChef.is_admin} deleteComment={this.deleteComment}/>
           })
         )
       } else {
@@ -306,7 +315,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     render() {
       if (this.props.recipe_details != undefined){
-        // console.log(this.props.loggedInChef)
+        // console.log(this.myScroll.nativeEvent.contentOffset.y)
+        // console.log(this.props.navigation.dangerouslyGetParent().state.routeName)
+        // console.log(this.props.navigation.dangerouslyGetParent().state.index)
         return (
           <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={83} style={{flex:1}}>
             <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
@@ -315,7 +326,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 <Text style={[styles.detailsHeaderTextBox]}>{this.props.recipe_details.recipe.name}</Text>
                 {this.renderEditDeleteButtons()}
               </View>
-              <ScrollView contentContainerStyle={{flexGrow:1}}>
+              <ScrollView contentContainerStyle={{flexGrow:1}} ref={(ref) =>this.myScroll = ref} onScroll={this.scrolled}>
                 <View style={styles.detailsLikesAndMakes}>
                   <View style={styles.detailsLikes}>
                     <View style={styles.buttonAndText}>
@@ -360,7 +371,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                       <Icon name={this.state.commenting ? (this.state.commentText === "" ? 'comment-remove' : 'comment-check' ) : 'comment-plus'} size={24} style={styles.addIcon}/>
                     </TouchableOpacity>
                   </View>
-                  {this.state.commenting ? <RecipeNewComment {...this.props.loggedInChef} commentText={this.state.commentText} handleCommentTextInput={this.handleCommentTextInput} saveComment={this.saveComment} scrollToNewComment={this.scrollToNewComment}/> : null}
+                  {this.state.commenting ? <RecipeNewComment scrollToLocation={this.scrollToLocation} {...this.props.loggedInChef} commentText={this.state.commentText} handleCommentTextInput={this.handleCommentTextInput} saveComment={this.saveComment} /> : null}
                   {this.renderRecipeComments()}
                 </View>
               </ScrollView>

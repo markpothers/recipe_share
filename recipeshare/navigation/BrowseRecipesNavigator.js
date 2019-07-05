@@ -7,23 +7,22 @@ import MyRecipeBookScreen from '../screens/MyRecipeBook';
 import RecipeDetailsScreen from '../src/recipeDetails/recipeDetails'
 import ChefDetailsScreen from '../src/chefDetails/chefDetails'
 import NewRecipeScreen from '../src/newRecipe/newRecipe'
-import { ChefFeedScreen, NewestRecipesScreen, MostLikedRecipesScreen, MostMadeRecipesScreen, NewestChefsScreen, MostLikedChefsScreen, MostMadeChefsScreen} from './BrowseRecipesTabs'
-import { styles } from './navigationStyleSheet'
+import { NewestRecipesScreen, MostLikedRecipesScreen, MostMadeRecipesScreen, NewestChefsScreen, MostLikedChefsScreen, MostMadeChefsScreen} from './BrowseRecipesTabs'
 import AppHeader from './appHeader'
 
 const BrowseRecipesTabs = createMaterialTopTabNavigator({
-  ChefFeed: {
-    screen: ChefFeedScreen,
-    navigationOptions: {
-      tabBarLabel: 'My Feed',
-    }
-  },
   NewestRecipes:  {
     screen: NewestRecipesScreen,
     navigationOptions: {
       tabBarLabel: 'Newest Recipes',
     }
   },
+  // NewestRecipes:  {
+  //   screen: NewestRecipesScreen,
+  //   navigationOptions: {
+  //     tabBarLabel: 'Newest Recipes',
+  //   }
+  // },
   MostLikedRecipes:  {
     screen: MostLikedRecipesScreen,
     navigationOptions: {

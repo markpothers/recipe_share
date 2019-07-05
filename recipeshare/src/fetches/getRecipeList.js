@@ -1,7 +1,7 @@
 import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
 
-export const fetchRecipeList = (listType, chef_id, limit, offset, global_ranking, auth_token) => {
+export const getRecipeList = (listType, chef_id, limit, offset, global_ranking, auth_token) => {
 
     return new Promise((resolve) => {
         // console.log(databaseURL)

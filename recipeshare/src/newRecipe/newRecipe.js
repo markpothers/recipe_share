@@ -70,7 +70,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     //     </TouchableOpacity>      )
     // }
 
+    // componentWillUnmount = ()=>{
+    //   console.log(this.props.navigation.dangerouslyGetParent().state.routeName)
+    //   console.log("unmounting in new Recipe")
+    // }
+
   componentDidMount(){
+    // console.log(this.props.navigation.dangerouslyGetParent().state.routeName)
+    // console.log("mounting in newRecipe")
     this.props.clearNewRecipeDetails()
     if (this.props.navigation.getParam('recipe_details') !== undefined){
       let recipe_details = this.props.navigation.getParam('recipe_details')
@@ -312,19 +319,21 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         const recipe = await patchRecipe(this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.props.name, this.props.ingredients, this.props.instructions, this.props.time, this.props.difficulty, this.props.imageBase64, this.props.navigation.getParam('recipe_details').recipe.id)
         if (recipe) {
           this.props.clearNewRecipeDetails()
+          this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
           this.props.navigation.navigate('MyRecipeBook')
         }
       }else{
         const recipe = await postRecipe(this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.props.name, this.props.ingredients, this.props.instructions, this.props.time, this.props.difficulty, this.props.imageBase64)
         if (recipe) {
           this.props.clearNewRecipeDetails()
+          this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
           this.props.navigation.navigate('MyRecipeBook')
         }
       }
     }
 
     render() {
-      // console.log(this.props.ingredients)
+      // console.log("new recipe")
       return (
         <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.mainPageContainer} imageStyle={styles.backgroundImageStyle}>
           {this.state.choosingPicture ? this.renderPictureChooser() : null}

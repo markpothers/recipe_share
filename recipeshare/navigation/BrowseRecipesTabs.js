@@ -8,19 +8,6 @@ import { styles } from './navigationStyleSheet'
 import RecipesList from '../src/recipeLists/RecipesList'
 import ChefList from '../src/chefLists/ChefList'
 
-export class ChefFeedScreen extends React.Component {
-  render (){
-    // console.log(this.props.screenProps)
-    return (
-      <View style={styles.mainPageContainer}>
-        <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} >
-          <RecipesList listChoice={"chef_feed"} respondToListScroll={this.props.screenProps}/>
-        </ImageBackground>
-      </View>
-    )
-  }
-}
-
 export class NewestRecipesScreen extends React.Component {
   render (){
     return (

@@ -10,7 +10,7 @@ export default class RecipeNewComment extends React.PureComponent {
         return (
           <View style={styles.commentContainer}>
             <View style={styles.commentLeftContainer}>
-              <Image style={styles.avatarThumbnail} source={{uri: `${databaseURL}${this.props.imageURL}`}}/>
+              <Image style={styles.avatarThumbnail} source={ (this.props.imageURL!==null ? ({uri: `${databaseURL}${this.props.imageURL}`}) : require("../dataComponents/peas.jpg")) }/>
             </View>
             <View style={styles.commentRightContainer}>
               <Text style={[styles.detailsContentsHeader]}>{this.props.username}:</Text>

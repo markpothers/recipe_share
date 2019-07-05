@@ -83,9 +83,9 @@ class Recipe < ApplicationRecord
                                       GROUP BY recipes.id
                                       ORDER BY recipes.updated_at DESC
                                       LIMIT (?)
-                                      OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, query_chef_id, limit, offset])
+                                      OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offset])
 
-    elsif type == "chef_feed" # recipes created by me ordered most-recent first
+    elsif type == "chef_feed" # recipes by chefs I follow ordered most-recent first
 
       # ApplicationRecord.db.execute("SELECT recipes.id, recipes.name, recipes.chef_id, recipes.time, recipes.difficulty, recipes.instructions, recipes.updated_at, recipe_images.imageURL, follows.followee_id, follows.follower_id
       #                               FROM recipes

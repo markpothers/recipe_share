@@ -13,6 +13,7 @@
   "dependencies": {
     "@expo/samples": "3.0.3",
     "expo": "^33.0.0",
+    "expo-image-picker": "~5.0.2",
     "gradle": "^1.0.9",
     "native-base": "^2.12.1",
     "react": "16.8.6",

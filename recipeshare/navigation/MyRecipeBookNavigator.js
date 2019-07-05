@@ -7,16 +7,46 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import RecipeDetailsScreen from '../src/recipeDetails/recipeDetails'
 import ChefDetailsScreen from '../src/chefDetails/chefDetails'
 import NewRecipeScreen from '../src/newRecipe/newRecipe'
-import { MyRecipesScreen, MyLikedRecipesScreen, MyMadeRecipesScreen, ChefsFollowedScreen, ChefsFollowingScreen} from './MyRecipeBookTabs'
+import { ChefFeedScreen, MyRecipesScreen, MyLikedRecipesScreen, MyMadeRecipesScreen, ChefsFollowedScreen, ChefsFollowingScreen} from './MyRecipeBookTabs'
 import AppHeader from './appHeader'
 
 const MyRecipeBookTabs = createMaterialTopTabNavigator({
-  MyRecipes: MyRecipesScreen,
-  MyLikedRecipes: MyLikedRecipesScreen,
-  MyMadeRecipes: MyMadeRecipesScreen,
-  ChefsFollowed: ChefsFollowedScreen,
-  ChefsFollowing: ChefsFollowingScreen
-}, {
+  ChefFeed: {
+    screen: ChefFeedScreen,
+    navigationOptions: {
+      tabBarLabel: 'My Feed',
+    }
+  },
+  MyRecipes: {
+    screen: MyRecipesScreen,
+    navigationOptions: {
+      tabBarLabel: 'My Recipes',
+    }
+  },
+  MyLikedRecipes: {
+    screen: MyLikedRecipesScreen,
+    navigationOptions: {
+      tabBarLabel: "Recipes I've liked",
+    }
+  },
+  MyMadeRecipes: {
+  screen: MyMadeRecipesScreen,
+    navigationOptions: {
+      tabBarLabel: "Recipes I've made",
+    }
+  },
+  ChefsFollowed: {
+    screen: ChefsFollowedScreen,
+    navigationOptions: {
+      tabBarLabel: 'Chefs I follow',
+    }
+  },
+  ChefsFollowing: {
+    screen: ChefsFollowingScreen,
+    navigationOptions: {
+      tabBarLabel: 'Chefs following me',
+    }
+  }}, {
   initialLayout: {
     height: 55,
     width: Dimensions.get('window').width

@@ -15,10 +15,13 @@ class AppHeader extends React.PureComponent {
     }
 
     render () {
+        // console.log(this.props)
         return (
             <View style={styles.headerContainer}>
                 {this.props.navigation.dangerouslyGetParent().state.index === 0 ? this.renderDrawerButton() : null}
-                <Text style={styles.headerText}>{this.props.text}</Text>
+                <TouchableOpacity>
+                    <Text style={styles.headerText}>{this.props.text}</Text>
+                </TouchableOpacity>
                 <TouchableOpacity style={styles.headerNewButton}>
                     <Icon name='plus' style={styles.headerIcon} size={33} onPress={() => this.props.navigation.navigate('NewRecipe')}/>
                 </TouchableOpacity>

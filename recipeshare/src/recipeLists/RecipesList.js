@@ -4,7 +4,7 @@ import { Button} from 'native-base'
 import RecipeCard from './RecipeCard'
 import { connect } from 'react-redux'
 import { styles } from './recipeListStyleSheet'
-import { fetchRecipeList } from '../fetches/recipeListFetch'
+import { getRecipeList } from '../fetches/getRecipeList'
 import { postRecipeLike } from '../fetches/postRecipeLike'
 import { postReShare } from '../fetches/postReShare'
 import { postRecipeMake } from '../fetches/postRecipeMake'
@@ -93,8 +93,10 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
 
     componentDidMount = () => {
       this.fetchRecipeListThenDetails()
-      // this.navigateToRecipeDetails(454)
     }
+
+    // componentWillUnmount = () => {
+    // }
 
     respondToFocus = async() =>{
       await this.setState({offset: 0})
@@ -102,12 +104,12 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
     }
 
     fetchRecipeListThenDetails = async() => {
-      let recipes = await fetchRecipeList(this.props["listChoice"], this.props.chef_id, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token)
+      let recipes = await getRecipeList(this.props["listChoice"], this.props.chef_id, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token)
       this.props.storeRecipeList(this.props["listChoice"], recipes)
     }
 
     fetchAdditionalRecipesThenDetailsForList = async() => {
-      const new_recipes = await fetchRecipeList(this.props["listChoice"], this.props.chef_id, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token)
+      const new_recipes = await getRecipeList(this.props["listChoice"], this.props.chef_id, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token)
       this.props.appendToRecipeList(this.props["listChoice"], new_recipes)
     }
 
@@ -124,29 +126,13 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
     }
 
     renderRecipeListItem = (item) => {
-        // let imageURL = require("../dataComponents/peas.jpg")
         return (
-          // <View style={styles.recipeCard} key={item.index.toString()}>
             <RecipeCard listChoice={this.props["listChoice"]} key={item.index.toString()} {...item.item} navigateToRecipeDetails={this.navigateToRecipeDetails} navigateToRecipeDetailsAndComment={this.navigateToRecipeDetailsAndComment} navigateToChefDetails={this.navigateToChefDetails} likeRecipe={this.likeRecipe} unlikeRecipe={this.unlikeRecipe} makeRecipe={this.makeRecipe} reShareRecipe={this.reShareRecipe}/>
-            // <RecipeCardTouchables {...item.item} likeRecipe={this.likeRecipe} unlikeRecipe={this.unlikeRecipe} makeRecipe={this.makeRecipe} reShareRecipe={this.reShareRecipe}/>
-          // </View>
           )
     }
 
-    // renderGlobalListButton = () => {
-    //   if (this.props["listChoice"] == "global_ranks"){
-    //     return (
-    //       <Button rounded danger style={styles.rankButton} onPress={this.handleRankChoiceButton}>
-    //           {this.props.global_ranking == 'liked' ? <Icon style={styles.rankIcon} size={25} name='thumb-up' /> : <Icon style={styles.rankIcon} size={25} name='thumb-up-outline' />}
-    //           {this.props.global_ranking == 'liked' ? <Text style={styles.rankButtonText}>Most likes</Text> : <Text style={styles.rankButtonText}>Most makes</Text>}
-    //       </Button>
-    //     )
-    //   }
-    // }
-
     refresh = async () => {
       await this.setState({limit: 20, offset: 0})
-      // this.props.clearListedRecipes(this.props["listChoice"])
       this.fetchRecipeListThenDetails()
     }
 
@@ -225,7 +211,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
-      // console.log((this.props[this.props["listChoice"] + `_Recipes`]).length)
+      // console.log("recipe details")
       return (
         <React.Fragment>
           <NavigationEvents onWillFocus={this.respondToFocus}/>
@@ -242,7 +228,6 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
             // onScroll={e => this.onScroll(e)}
             // scrollEventThrottle={16}
           />
-          {/* {this.renderGlobalListButton()} */}
         </React.Fragment>
       )
     }

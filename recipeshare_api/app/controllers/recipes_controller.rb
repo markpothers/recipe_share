@@ -20,6 +20,7 @@ class RecipesController < ApplicationController
     def create
         @recipe = Recipe.create(newRecipe_params)
         @recipe.hidden=(false)
+        @recipe.chef_id=@chef.id
         if @recipe.save
             if newRecipe_image_params[:imageBase64] != "" && newRecipe_image_params[:imageBase64] != nil
                 @recipe_image = RecipeImage.create(recipe_id: @recipe.id)
@@ -106,7 +107,7 @@ class RecipesController < ApplicationController
     end
 
     def newRecipe_params
-        params.require(:recipe).permit(:name, :chef_id, :time, :difficulty, :instructions)
+        params.require(:recipe).permit(:name, :time, :difficulty, :instructions)
     end
 
     def newRecipe_image_params
