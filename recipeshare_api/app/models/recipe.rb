@@ -16,7 +16,7 @@ class Recipe < ApplicationRecord
 
   has_many_attached :images
 
-  def self.choose_list(type = "all", query_chef_id = 1, limit = 1, offset = 0, ranking = "liked", user_chef_id = 1)
+  def self.choose_list(type = "all", queryChefID = 1, limit = 1, offset = 0, ranking = "liked", user_chef_id = 1)
     #types = "all", "chef", "chef_liked", "chef_made", "most_liked", "most_made" // "liked", "made"
     if type == "all"
 
@@ -83,7 +83,7 @@ class Recipe < ApplicationRecord
                                       GROUP BY recipes.id
                                       ORDER BY recipes.updated_at DESC
                                       LIMIT (?)
-                                      OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offset])
+                                      OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, limit, offset])
 
     elsif type == "chef_feed" # recipes by chefs I follow ordered most-recent first
 
@@ -125,7 +125,7 @@ class Recipe < ApplicationRecord
                                     GROUP BY recipes.id
                                     ORDER BY recipes.updated_at DESC
                                       LIMIT (?)
-                                      OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offset])
+                                      OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, queryChefID, queryChefID, limit, offset])
 
     elsif type == "chef_liked" # recipes liked by use_chef ordered by most-recently liked
 
@@ -159,7 +159,7 @@ class Recipe < ApplicationRecord
                                       GROUP BY recipes.id
                                       ORDER BY recipes.updated_at DESC
                                       LIMIT (?)
-                                      OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offset])
+                                      OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, limit, offset])
   
     elsif type == "chef_made" # recipes liked by use_chef ordered by most-recently liked
 
@@ -193,7 +193,7 @@ class Recipe < ApplicationRecord
                                       GROUP BY recipes.id
                                       ORDER BY recipes.updated_at DESC
                                       LIMIT (?)
-                                      OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offset])
+                                      OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, limit, offset])
 
     elsif type =="most_liked" # recipes according to their global rankings # with filter based on chef name working if needed
 

@@ -14,6 +14,7 @@ class CreateChefs < ActiveRecord::Migration[5.2]
       t.string :hex
       t.boolean :is_admin
       t.datetime :created_at
+      t.string :profile_text
 
       t.timestamps
     end

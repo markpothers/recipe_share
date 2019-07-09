@@ -49,7 +49,7 @@ Ingredient.destroy_all
 end
 
 100.times do
-    Chef.create(is_admin: false, username: Faker::Books::CultureSeries.planet, imageURL:Faker::Avatar.image, e_mail:Faker::Internet.email, country: Faker::TvShows::StarTrek.location, hidden: false, created_at: Time.now, password: '123456', password_confirmation: '123456', hex: SecureRandom.hex)
+    Chef.create(is_admin: false, username: Faker::Books::CultureSeries.planet, imageURL:Faker::Avatar.image, e_mail:Faker::Internet.email, country: Faker::TvShows::StarTrek.location, hidden: false, created_at: Time.now, password: '123456', password_confirmation: '123456', hex: SecureRandom.hex, profile_text: Faker::GreekPhilosophers.quote)
 end
 
 

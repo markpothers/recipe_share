@@ -1,21 +1,18 @@
 import React from 'react'
-import { StyleSheet, TouchableOpacity, View, AsyncStorage, ImageBackground, ScrollView, FlatList, Text } from 'react-native'
-import { Container, Header, Content, List, ListItem, Thumbnail, Left, Body, Right, Button} from 'native-base'
+import { FlatList } from 'react-native'
 import ChefCard from './ChefCard'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { connect } from 'react-redux'
-import { styles } from './chefListStyleSheet'
-import { fetchChefList } from './chefListFetch'
-// import { fetchChefDetails } from './chefListDetailsFetch'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { getChefList } from '../fetches/getChefList'
+import { NavigationEvents, withNavigation } from 'react-navigation'
 
 const mapStateToProps = (state) => ({
       all_chefs: state.chefs.all_chefs,
       followed_chefs: state.chefs.followed,
-      global_ranks_chefs: state.chefs.global_ranks_chefs,
       loggedInChef: state.loggedInChef,
       chefs_details: state.chefs_details,
-      global_ranking: state.global_ranking,
+      most_liked_chefs: state.chefs.most_liked_chefs,
+      most_made_chefs: state.chefs.most_made_chefs,
       chef_followees: state.chefs.chef_followees,
       chef_followers: state.chefs.chef_followers
 })
@@ -27,6 +24,7 @@ const mapDispatchToProps = {
     }
   },
   storeChefList: (listChoice, chefs) => {
+    // console.log(chefs)
     return dispatch => {
       dispatch({ type: 'STORE_CHEF_LIST', chefType: listChoice, chefList: chefs})
       }
@@ -54,7 +52,7 @@ const mapDispatchToProps = {
   },
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
+export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
   class ChefList extends React.Component {
 
     state = {
@@ -62,24 +60,26 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       offset: 0
     }
 
-    handleRankChoiceButton = async() => {
-      await this.props.changeRanking()
-      await this.setState({limit: 20, offset: 0})
-      this.fetchChefListThenDetails()
-    }
+    // handleRankChoiceButton = async() => {
+    //   await this.props.changeRanking()
+    //   await this.setState({limit: 1, offset: 0})
+    //   this.fetchChefList()
+    // }
 
     componentDidMount = () => {
-      this.fetchChefListThenDetails()
+      this.fetchChefList()
     }
 
-    fetchChefListThenDetails = async() => {
-      let chefs = await fetchChefList(this.props["listChoice"], this.props.loggedInChef.id, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token)
+    fetchChefList = async() => {
+      const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
+      let chefs = await getChefList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.loggedInChef.auth_token)
+      // console.log(chefs)
       this.props.storeChefList(this.props["listChoice"], chefs)
-      // console.log(this.props["listChoice"])
     }
 
-    fetchAdditionalChefsThenDetailsForList = async() => {
-      const new_chefs = await fetchChefList(this.props["listChoice"], this.props.loggedInChef.id, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token)
+    fetchAdditionalChefs = async() => {
+      const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
+      const new_chefs = await getChefList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.loggedInChef.auth_token)
       this.props.appendToChefList(this.props["listChoice"], new_chefs)
     }
 
@@ -92,34 +92,37 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           imageURL = { uri: `${databaseURL}${item.item.imageURL}` }
         }
       }
-      // console.log(item)
-        return <ChefCard listChoice={this.props["listChoice"]} key={item.index.toString()} {...item} imageURL={imageURL} navigation={this.props.navigation}/>
+        return <ChefCard listChoice={this.props["listChoice"]} key={item.index.toString()} {...item.item} imageURL={imageURL} navigateToChefDetails={this.navigateToChefDetails}/>
     }
 
-    renderGlobalListButton = () => {
-      if (this.props["listChoice"] == "global_ranks_chefs"){
-        return (
-          <Button rounded danger style={styles.rankButton} onPress={this.handleRankChoiceButton}>
-              {this.props.global_ranking == 'liked' ? <Icon style={styles.rankIcon} size={25} name='thumb-up' /> : <Icon style={styles.rankIcon} size={25} name='thumb-up-outline' />}
-              {this.props.global_ranking == 'liked' ? <Text style={styles.rankButtonText}>Most liked</Text> : <Text style={styles.rankButtonText}>Most made</Text>}
-          </Button>
-        )
-      }
-    }
+    // renderGlobalListButton = () => {
+    //   if (this.props["listChoice"] == "global_ranks_chefs"){
+    //     return (
+    //       <Button rounded danger style={styles.rankButton} onPress={this.handleRankChoiceButton}>
+    //           {this.props.global_ranking == 'liked' ? <Icon style={styles.rankIcon} size={25} name='thumb-up' /> : <Icon style={styles.rankIcon} size={25} name='thumb-up-outline' />}
+    //           {this.props.global_ranking == 'liked' ? <Text style={styles.rankButtonText}>Most liked</Text> : <Text style={styles.rankButtonText}>Most made</Text>}
+    //       </Button>
+    //     )
+    //   }
+    // }
 
     refresh = async () => {
-      await this.setState({limit: 50, offset: 0})
+      await this.setState({limit: 20, offset: 0})
       this.props.clearListedChefs(this.props["listChoice"])
-      this.fetchChefListThenDetails()
+      this.fetchChefList()
     }
 
     onEndReached = async () => {
       await this.setState({offset: this.state.offset + 20})
-      this.fetchAdditionalChefsThenDetailsForList()
+      this.fetchAdditionalChefs()
+    }
+
+    navigateToChefDetails = (chefID) => {
+      this.props.navigation.navigate('ChefDetails', {chefID: chefID})
     }
 
     render() {
-      // console.log(this.props["listChoice"])
+      // console.log(this.props[this.props["listChoice"]])
       return (
         <React.Fragment>
           <FlatList
@@ -132,10 +135,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             onEndReached={this.onEndReached}
             onEndReachedThreshold={0.3}
           />
-          {this.renderGlobalListButton()}
+          {/* {this.renderGlobalListButton()} */}
         </React.Fragment>
       )
     }
 
   }
-)
+))

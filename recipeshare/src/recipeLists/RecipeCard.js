@@ -23,7 +23,7 @@ export default class RecipeCard extends React.PureComponent {
                         </View>
                         <View style={styles.recipeCardTopLeftMiddleContainer}>
                             <Text style={styles.recipeCardTopItalic}>Created by: </Text>
-                            <TouchableOpacity onPress={() => this.props.navigateToChefDetails(this.props.listChoice, this.props.chef_id)}>
+                            <TouchableOpacity onPress={() => this.props.navigateToChefDetails(this.props.chef_id)}>
                                 <Text style={styles.recipeCardTopItalic}>{this.props.username}</Text>
                             </TouchableOpacity>
                         </View>
@@ -32,7 +32,7 @@ export default class RecipeCard extends React.PureComponent {
                             <Text style={styles.recipeCardTopOther} >Difficulty: {this.props.difficulty}/10</Text>
                         </View>
                     </View>
-                    <TouchableOpacity style={styles.recipeCardTopRightContainer} onPress={() => this.props.navigateToChefDetails(this.props.listChoice, this.props.chef_id)}>
+                    <TouchableOpacity style={styles.recipeCardTopRightContainer} onPress={() => this.props.navigateToChefDetails(this.props.chef_id)}>
                         <AvatarImage chefImageURL={this.props.chefImageURL}/>
                     </TouchableOpacity>
                 </View>

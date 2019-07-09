@@ -13,7 +13,7 @@ export default createDrawerNavigator({
   Profile: ProfileStack,
   },
   {
-    initialRouteName: "BrowseRecipes"
+    initialRouteName: "MyRecipeBook"
   },
   {
     tabBarOptions: {

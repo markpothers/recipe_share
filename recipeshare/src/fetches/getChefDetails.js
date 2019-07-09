@@ -1,9 +1,9 @@
 import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
 
-export const fetchRecipeDetails = (recipe_id, auth_token) => {
+export const getChefDetails = (chef_id, auth_token) => {
     return new Promise((resolve) => {
-        fetch(`${databaseURL}/recipes/${recipe_id}`, {
+        fetch(`${databaseURL}/chefs/${chef_id}`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${auth_token}`,
@@ -11,9 +11,9 @@ export const fetchRecipeDetails = (recipe_id, auth_token) => {
             },
         })
         .then(res => res.json())
-        .then(recipe_details => {
-            if (recipe_details) {
-                resolve(recipe_details)
+        .then(chef_details => {
+            if (chef_details) {
+                resolve(chef_details)
             }
         })
     })

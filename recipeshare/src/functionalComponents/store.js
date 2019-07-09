@@ -62,14 +62,15 @@ const initialState = {
   chefs: {
     all_chefs: [],
     followed: [],
-    global_ranks_chefs: [],
+    most_liked_chefs: [],
+    most_made_chefs: [],
     chef_followees: [],
     chef_followers: []
   },
-  chefs_details: {
-    all: [],
-    followed: [],
-    global_ranks: []
+  chef_details: {
+    // all: [],
+    // followed: [],
+    // global_ranks: []
   },
 }
 

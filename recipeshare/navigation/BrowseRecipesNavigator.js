@@ -11,6 +11,12 @@ import { NewestRecipesScreen, MostLikedRecipesScreen, MostMadeRecipesScreen, New
 import AppHeader from './appHeader'
 
 const BrowseRecipesTabs = createMaterialTopTabNavigator({
+  // NewestChefs:  {
+  //   screen: NewestChefsScreen,
+  //   navigationOptions: {
+  //     tabBarLabel: 'Newest Chefs',
+  //   },
+  // },
   NewestRecipes:  {
     screen: NewestRecipesScreen,
     navigationOptions: {

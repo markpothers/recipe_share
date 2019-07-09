@@ -129,22 +129,10 @@ const reducer = (currentState, action) => {
         case 'APPEND_TO_CHEF_LISTS':
             // console.log(currentState.chefs[action.chefType])
             return {...currentState, chefs: {...currentState.chefs, [action.chefType]: [...currentState.chefs[action.chefType], ...action.chefList]}}
-        case 'APPEND_TO_CHEFS_DETAILS':
-            // console.log("appending chefs details")
-            // console.log(currentState.chefs_details[action.chefType].comments)
-            // console.log(action.chefsDetailsList)
-            return {...currentState, chefs_details: {
-                ...currentState.chefs_details, [action.chefType]: {
-                    comments: [...currentState.chefs_details[action.chefType].comments, ...action.chefsDetailsList.comments],
-                    ingredient_uses: [...currentState.chefs_details[action.chefType].ingredient_uses, ...action.chefsDetailsList.ingredient_uses],
-                    ingredients: [...currentState.chefs_details[action.chefType].ingredients, ...action.chefsDetailsList.ingredients],
-                    make_pics: [...currentState.chefs_details[action.chefType].make_pics, ...action.chefsDetailsList.make_pics],
-                    chef_images: [...currentState.chefs_details[action.chefType].chef_images, ...action.chefsDetailsList.chef_images],
-                    chef_likes: [...currentState.chefs_details[action.chefType].chef_likes, ...action.chefsDetailsList.chef_likes],
-                    chef_makes: [...currentState.chefs_details[action.chefType].chef_makes, ...action.chefsDetailsList.chef_makes],
-                    chefs: [...currentState.chefs_details[action.chefType].chefs, ...action.chefsDetailsList.chefs],
-                }}}
-                 default:
+        case 'STORE_CHEF_DETAILS':
+            // console.log(action.chef_details)
+            return {...currentState, chef_details: action.chef_details}
+        default:
             return currentState
     }
 }

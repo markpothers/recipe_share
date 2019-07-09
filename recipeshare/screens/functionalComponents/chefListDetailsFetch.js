@@ -1,5 +1,5 @@
 import React from 'react'
-import { databaseURL } from '../dataComponents/databaseURL'
+import { databaseURL } from '../../src/dataComponents/databaseURL'
 
 
 export const fetchChefDetails = (chefs, auth_token) => {

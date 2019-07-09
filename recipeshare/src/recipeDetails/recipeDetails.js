@@ -5,7 +5,7 @@ import { databaseURL } from '../dataComponents/databaseURL'
 import { styles } from './recipeDetailsStyleSheet'
 import { postRecipeLike } from '../fetches/postRecipeLike'
 import { postMakePic } from '../fetches/postMakePic'
-import { fetchRecipeDetails } from '../fetches/fetchRecipeDetails'
+import { getRecipeDetails } from '../fetches/getRecipeDetails'
 import { postReShare } from '../fetches/postReShare'
 import { postRecipeMake } from '../fetches/postRecipeMake'
 import { postComment } from '../fetches/postComment'
@@ -87,7 +87,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     componentDidMount = async() => {
-      const recipe_details = await fetchRecipeDetails(this.props.navigation.getParam('recipeID'), this.props.loggedInChef.auth_token)
+      const recipe_details = await getRecipeDetails(this.props.navigation.getParam('recipeID'), this.props.loggedInChef.auth_token)
       if (recipe_details) {
         this.props.storeRecipeDetails(recipe_details)
       }
@@ -315,7 +315,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     render() {
       if (this.props.recipe_details != undefined){
-        // console.log(this.myScroll.nativeEvent.contentOffset.y)
+        // console.log(this.myScroll.nativeEvent.conte?ntOffset.y)
         // console.log(this.props.navigation.dangerouslyGetParent().state.routeName)
         // console.log(this.props.navigation.dangerouslyGetParent().state.index)
         return (

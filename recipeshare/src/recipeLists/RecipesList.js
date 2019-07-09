@@ -85,11 +85,11 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
       offset: 0
     }
 
-    handleRankChoiceButton = async() => {
-      await this.props.changeRanking()
-      await this.setState({limit: 20, offset: 0})
-      this.fetchRecipeListThenDetails()
-    }
+    // handleRankChoiceButton = async() => {
+    //   await this.props.changeRanking()
+    //   await this.setState({limit: 20, offset: 0})
+    //   this.fetchRecipeListThenDetails()
+    // }
 
     componentDidMount = () => {
       this.fetchRecipeListThenDetails()
@@ -104,25 +104,31 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
     }
 
     fetchRecipeListThenDetails = async() => {
-      let recipes = await getRecipeList(this.props["listChoice"], this.props.chef_id, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token)
+      // console.log(this.props.queryChefID)
+      const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
+      let recipes = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token)
       this.props.storeRecipeList(this.props["listChoice"], recipes)
     }
 
     fetchAdditionalRecipesThenDetailsForList = async() => {
-      const new_recipes = await getRecipeList(this.props["listChoice"], this.props.chef_id, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token)
+      const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
+      const new_recipes = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token)
       this.props.appendToRecipeList(this.props["listChoice"], new_recipes)
     }
 
     navigateToRecipeDetails = (recipeID) =>{
+      this.props.parentNavigator ? this.props.parentNavigator('RecipeDetails', {recipeID: recipeID}) : null
       this.props.navigation.navigate('RecipeDetails', {recipeID: recipeID})
     }
 
     navigateToRecipeDetailsAndComment = (recipeID) =>{
+      this.props.parentNavigator ? this.props.parentNavigator('RecipeDetails', {recipeID: recipeID, commenting: true}) : null
       this.props.navigation.navigate('RecipeDetails', {recipeID: recipeID, commenting: true})
     }
 
     navigateToChefDetails = (chefID) => {
-      this.props.navigation.navigate('ChefDetails', {listChoice: this.props["listChoice"], chefID: chefID})
+      this.props.parentNavigator ? this.props.parentNavigator('ChefDetails', {chefID: chefID}) : null
+      this.props.navigation.navigate('ChefDetails', {chefID: chefID})
     }
 
     renderRecipeListItem = (item) => {
@@ -211,7 +217,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
-      // console.log("recipe details")
+      // console.log(this.props)
       return (
         <React.Fragment>
           <NavigationEvents onWillFocus={this.respondToFocus}/>

@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2019_06_14_164549) do
     t.string "hex"
     t.boolean "is_admin"
     t.datetime "created_at", null: false
+    t.string "profile_text"
     t.datetime "updated_at", null: false
   end
 

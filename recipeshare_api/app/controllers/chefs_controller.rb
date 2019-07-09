@@ -4,8 +4,6 @@ class ChefsController < ApplicationController
 
     # skip_before_action :verify_authenticity_token
     # skip_before_action :authenticate, :only => [:new, :create]
-    before_action :define_current_chef
-    skip_before_action :define_current_chef, :only => [:index, :create, :authenticate]
     skip_before_action :logged_in?, :only => [:authenticate, :create]
 
     def authenticate
@@ -24,7 +22,7 @@ class ChefsController < ApplicationController
     end
 
     def index
-        @chefs = Chef.choose_list(list_params["listType"], @chef.id, list_params["limit"], list_params["offset"], list_params["ranking"])
+        @chefs = Chef.choose_list(params["listType"], params["queryChefID"], params["limit"], params["offset"], @chef.id)
         render json: @chefs
     end
 
@@ -36,6 +34,7 @@ class ChefsController < ApplicationController
         if chef_params[:password] === chef_params[:password_confirmation]
             @chef = Chef.new(chef_params)
             @chef.is_admin = false
+            @chef.hidden = false
             if @chef.save
                 if image_params[:imageURL] != ""
                     hex = SecureRandom.hex
@@ -61,7 +60,8 @@ class ChefsController < ApplicationController
 
     def show
         # byebug
-        render json: @chef
+        @queryChef = Chef.find(params[:id])
+        render json: @queryChef.get_details(@chef)
     end
 
     # def edit
@@ -87,10 +87,6 @@ class ChefsController < ApplicationController
     end
 
     private
-
-    def define_current_chef
-        @chef = Chef.find(params[:id])
-    end
 
     def chef_params
         params.require(:chef).permit(:first_name, :last_name, :username, :e_mail, :password, :password_confirmation, :country)
