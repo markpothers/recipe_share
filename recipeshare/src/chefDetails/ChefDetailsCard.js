@@ -7,7 +7,7 @@ import { databaseURL } from '../dataComponents/databaseURL'
 export default class ChefDetailsCard extends React.PureComponent {
 
     render(){
-    // console.log(this.props.chef)
+    // console.log(this.props.chef_followed)
         return (
             <View style={styles.chefCard}>
                 <View style={styles.chefCardTopContainer}>
@@ -31,9 +31,9 @@ export default class ChefDetailsCard extends React.PureComponent {
                     </View>
                 </View>
                 <View style={styles.chefCardBottomContainer}>
-                    <TouchableOpacity style={styles.chefCardBottomSubContainers} >
-                        <Icon name='account-multiple-plus' size={24} style={styles.icon}/>
-                        {/* {this.props.chef_followed === 0 ? <Icon name='account-multiple-plus' size={24} style={styles.icon}/> : <Icon name='account-multiple-plus-outline' size={24} style={styles.icon}/> } */}
+                    <TouchableOpacity style={styles.chefCardBottomSubContainers} onPress={(this.props.chef_followed === true ? (e => this.props.unFollowChef(this.props.chef.id)) : (e => this.props.followChef(this.props.chef.id)))}>
+                        {/* <Icon name='account-multiple-plus' size={24} style={styles.icon}/> */}
+                        {this.props.chef_followed === true ? <Icon name='account-multiple-plus' size={24} style={styles.icon}/> : <Icon name='account-multiple-plus-outline' size={24} style={styles.icon}/> }
                         <Text style={styles.chefCardBottomOther} >{this.props.followers.length}</Text>
                     </TouchableOpacity>
                     <View style={styles.chefCardBottomSubContainers}>

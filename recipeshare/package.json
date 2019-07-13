@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "@expo/samples": "3.0.3",
+    "@expo/vector-icons": "^10.0.0",
     "expo": "^33.0.0",
+    "expo-font": "~5.0.1",
     "expo-image-picker": "~5.0.2",
     "gradle": "^1.0.9",
     "native-base": "^2.12.1",

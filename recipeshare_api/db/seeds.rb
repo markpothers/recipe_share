@@ -44,7 +44,7 @@ Ingredient.destroy_all
 # ActiveRecord::Base.connection.reset_pk_sequence!('Chefs')
 
 
-100.times do
+500.times do
     Ingredient.create(name: Faker::Food.ingredient, created_at: Time.now)
 end
 

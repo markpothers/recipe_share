@@ -98,6 +98,10 @@ const reducer = (currentState, action) => {
             return {...currentState, recipe_details: {...currentState.recipe_details, make_pics: action.makePics}}
         case 'REMOVE_RECIPE_LIKES':
             return {...currentState, recipes_details: {...currentState.recipes_details, [action.listType]: {...currentState.recipes_details[action.listType], recipe_likes: action.recipe_likes}}}
+        case 'STORE_NEW_FOLLOWERS':
+            return {...currentState, chefs_details: {...currentState.chefs_details, [action.chefID]: {...currentState.chefs_details[action.chefID], followers: action.followers, chef_followed: !currentState.chefs_details[action.chefID].chef_followed}}}
+        case 'UPDATE_CHEF_IN_LIST':
+            return {...currentState, chefs: {...currentState.chefs, [action.chefType]: action.chefList}}
         case 'LOG_IN_CHEF':
             console.log("logging in chef")
             return {...currentState, loggedInChef: {
@@ -123,15 +127,18 @@ const reducer = (currentState, action) => {
         case 'CLEAR_LISTED_CHEFS':
             // console.log("clearing listed chefs")
             return {...currentState, chefs: {...currentState.chefs, [action.chefType]: []}}
-        case 'STORE_CHEFS_DETAILS':
-            // console.log(action.chefsDetailsList)
-            return {...currentState, chefs_details: {...currentState.chefs_details, [action.chefType]: action.chefsDetailsList}}
+        // case 'STORE_CHEFS_DETAILS':
+        //     // console.log(action.chefsDetailsList)
+        //     return {...currentState, chefs_details: {...currentState.chefs_details, [action.chefType]: action.chefsDetailsList}}
         case 'APPEND_TO_CHEF_LISTS':
             // console.log(currentState.chefs[action.chefType])
             return {...currentState, chefs: {...currentState.chefs, [action.chefType]: [...currentState.chefs[action.chefType], ...action.chefList]}}
         case 'STORE_CHEF_DETAILS':
             // console.log(action.chef_details)
-            return {...currentState, chef_details: action.chef_details}
+            return {...currentState, chefs_details: {...currentState.chefs_details, [action.chefID]: action.chef_details}}
+        case 'CLEAR_CHEF_DETAILS':
+            // console.log(action.chef_details)
+            return {...currentState, chef_details: {}}
         default:
             return currentState
     }

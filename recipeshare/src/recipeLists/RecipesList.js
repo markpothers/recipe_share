@@ -1,15 +1,12 @@
 import React from 'react'
 import { FlatList } from 'react-native'
-import { Button} from 'native-base'
 import RecipeCard from './RecipeCard'
 import { connect } from 'react-redux'
-import { styles } from './recipeListStyleSheet'
 import { getRecipeList } from '../fetches/getRecipeList'
 import { postRecipeLike } from '../fetches/postRecipeLike'
 import { postReShare } from '../fetches/postReShare'
 import { postRecipeMake } from '../fetches/postRecipeMake'
 import { destroyRecipeLike } from '../fetches/destroyRecipeLike'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { NavigationEvents, withNavigation } from 'react-navigation'
 
 const mapStateToProps = (state) => ({
@@ -60,36 +57,13 @@ const mapDispatchToProps = {
 }
 
 export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
-  class RecipesList extends React.PureComponent {
-    // static navigationOptions = ({ navigation }) => {
-    //   return {
-    //     headerTitle: 'My recipe book',
-    //     headerStyle: {    //styles possibly needed if app-wide styling doesn't work
-    //       backgroundColor: '#104e01',
-    //       opacity: 0.8
-    //     },
-    //     headerTintColor: '#fff59b',
-    //     headerTitleStyle: {
-    //       fontWeight: 'bold',
-    //     },
-    //     headerRight: (
-    //       <Button rounded style={styles.newButton} onPress={navigation.getParam('newRecipe')}>
-    //         <Icon name='plus' size={40} style={styles.newIcon}/>
-    //       </Button>
-    //     ),
-    //   }
-    // };
+  class RecipesList extends React.Component {
 
     state = {
       limit: 20,
-      offset: 0
+      offset: 0,
+      isDisplayed: true
     }
-
-    // handleRankChoiceButton = async() => {
-    //   await this.props.changeRanking()
-    //   await this.setState({limit: 20, offset: 0})
-    //   this.fetchRecipeListThenDetails()
-    // }
 
     componentDidMount = () => {
       this.fetchRecipeListThenDetails()
@@ -98,13 +72,18 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
     // componentWillUnmount = () => {
     // }
 
+    shouldComponentUpdate = (nextProps, nextState) => {
+      return (
+        this.state.isDisplayed
+      )
+    }
+
     respondToFocus = async() =>{
       await this.setState({offset: 0})
       this.fetchRecipeListThenDetails()
     }
 
     fetchRecipeListThenDetails = async() => {
-      // console.log(this.props.queryChefID)
       const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
       let recipes = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token)
       this.props.storeRecipeList(this.props["listChoice"], recipes)
@@ -117,18 +96,16 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
     }
 
     navigateToRecipeDetails = (recipeID) =>{
-      this.props.parentNavigator ? this.props.parentNavigator('RecipeDetails', {recipeID: recipeID}) : null
-      this.props.navigation.navigate('RecipeDetails', {recipeID: recipeID})
+      this.props.parentNavigator ? this.props.parentNavigator('RecipeDetails', {recipeID: recipeID}) : this.props.navigation.navigate('RecipeDetails', {recipeID: recipeID})
     }
 
     navigateToRecipeDetailsAndComment = (recipeID) =>{
-      this.props.parentNavigator ? this.props.parentNavigator('RecipeDetails', {recipeID: recipeID, commenting: true}) : null
-      this.props.navigation.navigate('RecipeDetails', {recipeID: recipeID, commenting: true})
+      this.props.parentNavigator ? this.props.parentNavigator('RecipeDetails', {recipeID: recipeID, commenting: true}) : this.props.navigation.navigate('RecipeDetails', {recipeID: recipeID, commenting: true})
+
     }
 
     navigateToChefDetails = (chefID) => {
-      this.props.parentNavigator ? this.props.parentNavigator('ChefDetails', {chefID: chefID}) : null
-      this.props.navigation.navigate('ChefDetails', {chefID: chefID})
+      this.props.parentNavigator ? this.props.parentNavigator('ChefDetails', {chefID: chefID}) : this.props.navigation.navigate('ChefDetails', {chefID: chefID})
     }
 
     renderRecipeListItem = (item) => {
@@ -216,11 +193,23 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
       }
     }
 
+    respondToBlur = () =>{
+      this.setState({isDisplayed: false})
+    }
+
+    respondToFocus = async() =>{
+      await this.setState({
+        offset: 0,
+        isDisplayed: true
+      })
+      this.fetchRecipeListThenDetails()
+    }
+
     render() {
-      // console.log(this.props)
+      // console.log(this.props["listChoice"])
       return (
         <React.Fragment>
-          <NavigationEvents onWillFocus={this.respondToFocus}/>
+          <NavigationEvents onWillFocus={this.respondToFocus} onWillBlur={this.respondToBlur}/>
           <FlatList
             data={this.props[this.props["listChoice"] + `_Recipes`]}
             extraData={this.props.recipes_details}

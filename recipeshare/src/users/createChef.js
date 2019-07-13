@@ -1,8 +1,7 @@
 import React from 'react'
-import {ScrollView, StyleSheet, Text, AsyncStorage, ImageBackground, KeyboardAvoidingView, TouchableOpacity, TextInput, View} from 'react-native'
+import {ScrollView, Text, AsyncStorage, ImageBackground, KeyboardAvoidingView, TouchableOpacity, TextInput, View} from 'react-native'
 import { Picker } from 'native-base';
 import { countries } from '../dataComponents/countries'
-// import {Camera, Permissions, DangerZone } from 'expo'
 import * as Permissions from 'expo-permissions'
 import { connect } from 'react-redux'
 import { databaseURL } from '../dataComponents/databaseURL'
@@ -19,6 +18,7 @@ const mapStateToProps = (state) => ({
   password_confirmation: state.newUserDetails.password_confirmation,
   country: state.newUserDetails.country,
   imageURL: state.newUserDetails.imageURL,
+  profile_text: state.newUserDetails.profile_text,
   loggedInChef: state.loggedInChef
 })
 
@@ -77,28 +77,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       this.props.saveChefDetails(parameter, value)
     }
 
-    // pickImage = async () => {
-    //   let result = await ImagePicker.launchImageLibraryAsync({
-    //     allowsEditing: true,
-    //     aspect: [4, 3],
-    //     quality: 0.1,
-    //     base64: true
-    //   })
-    //   // console.log(result)
-    //   this.props.saveChefDetails("imageURL", result.base64)
-    // }
-
-    // openCamera = async () => {
-    //   let result = await ImagePicker.launchCameraAsync({
-    //     allowsEditing: true,
-    //     aspect: [4, 3],
-    //     quality: 0.3,
-    //     base64: true
-    //   })
-    //   // console.log(result)
-    //   this.props.saveChefDetails("imageURL", result.base64)
-    // }
-
     choosePicture = () =>{
       this.setState({choosingPicture: true})
     }
@@ -126,7 +104,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          chef: this.props
+          chef: {
+            username: this.props.username,
+            e_mail: this.props.e_mail,
+            password: this.props.password,
+            password_confirmation: this.props.password_confirmation,
+            country: this.props.country,
+            imageURL: this.props.imageURL,
+            profile_text: this.props.profile_text
+          }
         })
       })
       .then(res => res.json())
@@ -186,7 +172,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
-      // console.log(this.state.errors)
+      // console.log(this.props)
       return (
         <KeyboardAvoidingView  style={styles.mainPageContainer} behavior="padding">
           <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
@@ -223,6 +209,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                   </View>
                 </View>
                 <View style={styles.formRow}>
+                  <View style={styles.loginInputAreaBox} >
+                    <TextInput style={styles.loginTextBox} value={this.props.profile_text} placeholder="about me" multiline={true} numberOfLines={3} onChange={(e) => this.handleTextInput(e, "profile_text")}/>
+                  </View>
+                </View>
+                <View style={styles.formRow}>
                   <View style={styles.loginInputBox} >
                     <TextInput style={styles.loginTextBox} placeholder="password"  autoCapitalize="none" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")}/>
                   </View>
@@ -244,8 +235,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                   </TouchableOpacity>
                 </View>
                 <View style={styles.formRow}>
-                  {/* <View style={styles.loginFormButton} >
-                  </View> */}
                   <TouchableOpacity style={styles.loginFormButton} activeOpacity={0.7} onPress={e => this.submitChef(e)}>
                     <Icon style={styles.standardIcon} size={25} name='login-variant' />
                     <Text style={styles.loginFormButtonText}>Submit &{"\n"}log in</Text>

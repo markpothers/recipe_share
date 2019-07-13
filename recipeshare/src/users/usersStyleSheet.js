@@ -28,6 +28,16 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 5
   },
+  loginInputAreaBox: {
+    marginTop: '0%',
+    marginLeft: '10%',
+    marginRight: '10%',
+    backgroundColor: 'white',
+    height: 88,
+    width: '80%',
+    justifyContent: 'center',
+    borderRadius: 5
+  },
   loginHeader: {
     marginTop: '0%',
     marginLeft: '10%',
@@ -118,5 +128,9 @@ export const styles = StyleSheet.create({
     top: '40%',
     width: '100%',
     flex: 1
+  },
+  profileTextAreaInput: {
+    height: 130,
+    marginTop: 4,
   },
   });

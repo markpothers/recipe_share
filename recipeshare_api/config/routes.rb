@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   post '/chefs/details', to: 'chefs#index'
   delete '/recipe_likes', to: 'recipe_likes#destroy'
   delete '/re_shares', to: 're_shares#destroy'
-  post '/follows/check', to: 'follows#check'
+  # post '/follows/check', to: 'follows#check'
   delete '/follows', to: 'follows#destroy'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

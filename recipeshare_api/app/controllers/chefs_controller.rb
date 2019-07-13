@@ -89,7 +89,7 @@ class ChefsController < ApplicationController
     private
 
     def chef_params
-        params.require(:chef).permit(:first_name, :last_name, :username, :e_mail, :password, :password_confirmation, :country)
+        params.require(:chef).permit(:first_name, :last_name, :username, :e_mail, :password, :password_confirmation, :country, :profile_text)
     end
 
     def image_params

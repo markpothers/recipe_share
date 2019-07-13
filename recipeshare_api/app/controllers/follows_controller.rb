@@ -23,6 +23,7 @@ class FollowsController < ApplicationController
     # end
 
     def create
+        # byebug
         @follow = Follow.create(follow_params)
         if @follow.save
             render json: @follow
@@ -49,6 +50,7 @@ class FollowsController < ApplicationController
     # end
     
     def destroy
+        # byebug
         if follow_params["follower_id"] === @chef.id || @chef.is_admin === true
             @follows = Follow.where(follower_id: follow_params["follower_id"]).where(followee_id: follow_params["followee_id"] )
             @follow_ids = @follows.map { |like| like.id }

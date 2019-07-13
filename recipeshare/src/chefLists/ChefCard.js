@@ -7,7 +7,7 @@ import { databaseURL } from '../dataComponents/databaseURL'
 export default class ChefCard extends React.PureComponent {
 
     render(){
-    // console.log(this.props.followers)
+    // console.log(this.props)
         return (
             <View style={styles.chefCard}>
                 <View style={styles.chefCardTopContainer}>
@@ -23,7 +23,7 @@ export default class ChefCard extends React.PureComponent {
                             </View>
                         </View>
                         <ScrollView nestedScrollEnabled={true} style={styles.chefCardTopLeftLowerContainer}>
-                            <Text style={styles.chefCardTopOther} >I love to make sauces and bake bread.  These are my passions.</Text>
+                            <Text style={styles.chefCardTopOther} >{this.props.profile_text}</Text>
                         </ScrollView>
                     </View>
                     <TouchableOpacity style={styles.chefCardTopRightContainer} onPress={() => this.props.navigateToChefDetails(this.props.id)}>
@@ -31,9 +31,9 @@ export default class ChefCard extends React.PureComponent {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.chefCardBottomContainer}>
-                    <TouchableOpacity style={styles.chefCardBottomSubContainers} >
+                    <TouchableOpacity style={styles.chefCardBottomSubContainers}  onPress={(this.props.user_chef_following > 0 ? (e => this.props.unFollowChef(this.props.id)) : (e => this.props.followChef(this.props.id)))}>
                         {/* <Icon name='account-multiple-plus' size={24} style={styles.icon}/> */}
-                        {this.props.user_chef_followed === 0 ? <Icon name='account-multiple-plus' size={24} style={styles.icon}/> : <Icon name='account-multiple-plus-outline' size={24} style={styles.icon}/> }
+                        {this.props.user_chef_following > 0 ? <Icon name='account-multiple-plus' size={24} style={styles.icon}/> : <Icon name='account-multiple-plus-outline' size={24} style={styles.icon}/> }
                         <Text style={styles.chefCardBottomOther} >{this.props.followers === null ? 0 : this.props.followers}</Text>
                     </TouchableOpacity>
                     <View style={styles.chefCardBottomSubContainers} >
@@ -56,9 +56,7 @@ export default class ChefCard extends React.PureComponent {
 }
 
 function AvatarImage(chefImageURL) {
-    // console.log(chefImageURL)
     const URL = chefImageURL.chefImageURL
-    // console.log(typeof URL)
     if (URL === null || URL === undefined) {
         return (
             <Image style={styles.avatarThumbnail} source={require("../dataComponents/peas.jpg")} />

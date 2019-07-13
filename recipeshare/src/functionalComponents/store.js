@@ -3,9 +3,6 @@ import ReduxThunk from 'redux-thunk'
 import reducer from './reducer'
 
 const initialState = {
-  recipeSearch: {
-    chefID: 1
-  },
   loggedInChef: {
     id: "",
     username: "",
@@ -13,7 +10,6 @@ const initialState = {
     imageURL: "",
     is_admin: false
   },
-  global_ranking: "liked",
   recipes: {
     all: [],
     chef: [],
@@ -25,11 +21,7 @@ const initialState = {
     most_made: []
   },
   recipes_details: {
-    // all: [],
-    // chef: [],
-    // chef_liked: [],
-    // chef_made: [],
-    // global_ranks: []
+
   },
   newRecipeDetails: {
     name: "",
@@ -53,7 +45,8 @@ const initialState = {
     password: "",
     password_confirmation: "",
     country: "United States",
-    imageURL: ""
+    imageURL: "",
+    profile_text: ""
   },
   loginUserDetails: {
     e_mail: "",
@@ -67,16 +60,13 @@ const initialState = {
     chef_followees: [],
     chef_followers: []
   },
-  chef_details: {
-    // all: [],
-    // followed: [],
-    // global_ranks: []
+  chefs_details: {
+
   },
 }
 
   const middleware = compose(
     applyMiddleware(ReduxThunk)
-    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 
   export const store = createStore(reducer, initialState, middleware)

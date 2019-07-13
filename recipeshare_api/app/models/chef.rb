@@ -52,7 +52,7 @@ class Chef < ApplicationRecord
             #     .limit(limit)
             #     .offset(offset)
 
-                ApplicationRecord.db.execute("SELECT chefs.id, chefs.username, chefs.country, chefs.imageURL, chefs.created_at,
+                ApplicationRecord.db.execute("SELECT chefs.id, chefs.username, chefs.country, chefs.imageURL, chefs.created_at, chefs.profile_text,
                                                 (SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id) AS followers,
                                                 (SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id AND follows.follower_id = (?)) AS user_chef_following,
                                                 (SELECT COUNT(*) FROM recipes WHERE recipes.chef_id = chefs.id) AS recipe_count,
@@ -89,8 +89,7 @@ class Chef < ApplicationRecord
             #     .order("follows.created_at desc")
             #     .limit(limit)
             #     .offset(offset).uniq
-
-                ApplicationRecord.db.execute("SELECT chefs.id, chefs.username, chefs.country, chefs.imageURL, chefs.created_at,
+                ApplicationRecord.db.execute("SELECT chefs.id, chefs.username, chefs.country, chefs.imageURL, chefs.created_at, chefs.profile_text,
                                                 (SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id) AS followers,
                                                 (SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id AND follows.follower_id = (?)) AS user_chef_following,
                                                 (SELECT COUNT(*) FROM recipes WHERE recipes.chef_id = chefs.id) AS recipe_count,
@@ -119,7 +118,7 @@ class Chef < ApplicationRecord
                                             LEFT OUTER JOIN follows ON follows.followee_id = chefs.id
                                             WHERE follows.follower_id = (?)
                                             GROUP BY chefs.id
-                                            ORDER BY chefs.created_at DESC
+                                            ORDER BY follows.created_at DESC
                                             LIMIT (?)
                                             OFFSET (?)", [userChefID, queryChefID, limit, offset])
 
@@ -131,7 +130,7 @@ class Chef < ApplicationRecord
             #     .limit(limit)
             #     .offset(offset).uniq
 
-            ApplicationRecord.db.execute("SELECT chefs.id, chefs.username, chefs.country, chefs.imageURL, chefs.created_at,
+            ApplicationRecord.db.execute("SELECT chefs.id, chefs.username, chefs.country, chefs.imageURL, chefs.created_at, chefs.profile_text,
                                             (SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id) AS followers,
                                             (SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id AND follows.follower_id = (?)) AS user_chef_following,
                                             (SELECT COUNT(*) FROM recipes WHERE recipes.chef_id = chefs.id) AS recipe_count,
@@ -171,7 +170,7 @@ class Chef < ApplicationRecord
             else # if ranking == "liked"
                 order = "liked_recipes.liked_count"
             end
-            ApplicationRecord.db.execute("SELECT chefs.id, chefs.username, chefs.country, chefs.imageURL, chefs.created_at,
+            ApplicationRecord.db.execute("SELECT chefs.id, chefs.username, chefs.country, chefs.imageURL, chefs.created_at, chefs.profile_text,
                                                         (SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id) AS followers,
                                                         (SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id AND follows.follower_id = (?)) AS user_chef_following,
                                                         (SELECT COUNT(*) FROM recipes WHERE recipes.chef_id = chefs.id) AS recipe_count,

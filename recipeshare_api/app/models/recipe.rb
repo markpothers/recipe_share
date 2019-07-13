@@ -157,7 +157,7 @@ class Recipe < ApplicationRecord
                                       LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id
                                       WHERE recipes.hidden=0 AND (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id AND recipe_likes.chef_id = (?))>0
                                       GROUP BY recipes.id
-                                      ORDER BY recipes.updated_at DESC
+                                      ORDER BY recipe_likes.updated_at DESC
                                       LIMIT (?)
                                       OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, limit, offset])
   
@@ -191,7 +191,7 @@ class Recipe < ApplicationRecord
                                       LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id
                                       WHERE recipes.hidden=0 AND (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id AND recipe_makes.chef_id = (?))>0
                                       GROUP BY recipes.id
-                                      ORDER BY recipes.updated_at DESC
+                                      ORDER BY recipe_makes.updated_at DESC
                                       LIMIT (?)
                                       OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, limit, offset])
 

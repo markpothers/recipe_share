@@ -1,7 +1,6 @@
 import React from 'react'
 import { ScrollView, Text, ImageBackground, TextInput, KeyboardAvoidingView, TouchableOpacity, View, Picker } from 'react-native'
 import { connect } from 'react-redux'
-// import {Camera, Permissions, DangerZone } from 'expo'
 import * as Permissions from 'expo-permissions'
 import { styles } from './newRecipeStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -63,21 +62,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       choosingPicture: false
     }
 
-    // renderAutoIngredientsListItem = (item, ingredient) => {
-    //   return (
-    //     <TouchableOpacity style={{padding: 5, zIndex: 2}} key={item.item.id.toString()} onPress={(e) => this.addIngredientToList(ingredient, item.item.name, this.props.ingredients[ingredient].quantity, this.props.ingredients[ingredient].unit)}>
-    //       <Text>{item.item.name}</Text>
-    //     </TouchableOpacity>      )
-    // }
-
-    // componentWillUnmount = ()=>{
-    //   console.log(this.props.navigation.dangerouslyGetParent().state.routeName)
-    //   console.log("unmounting in new Recipe")
-    // }
-
-  componentDidMount(){
-    // console.log(this.props.navigation.dangerouslyGetParent().state.routeName)
-    // console.log("mounting in newRecipe")
+    componentDidMount(){
     this.props.clearNewRecipeDetails()
     if (this.props.navigation.getParam('recipe_details') !== undefined){
       let recipe_details = this.props.navigation.getParam('recipe_details')
@@ -163,45 +148,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             isFocused={this.isFocused}
             addIngredientToRecipeDetails={this.props.addIngredientToRecipeDetails}
             unitsPicker={this.unitsPicker} />
-          // <View style={styles.autCompleteRowContainer} key={ingredient}>
-          //   <View style={[styles.autoCompleteContainer, {zIndex: (Object.keys(this.props.ingredients).length - index) }]} key={ingredient}>
-          //   {/* <TextInput style={styles.ingredientTextAdjustment} placeholder={`Ingredient name`}  autoCapitalize="none" onChange={(e) => this.addIngredientToList(ingredient, e.nativeEvent.text, this.props.ingredients[ingredient].quantity, this.props.ingredients[ingredient].unit)} value={this.props.ingredients[ingredient].name} /> */}
-          //     <Autocomplete
-          //       data={this.state.ingredientsList.filter(ing => ing.name.toLowerCase().startsWith(this.props.ingredients[ingredient].name))}
-          //       defaultValue={''}
-          //       onChangeText={(e) =>  this.addIngredientToList(ingredient, e, this.props.ingredients[ingredient].quantity, this.props.ingredients[ingredient].unit)}
-          //       renderItem={e => this.renderAutoIngredientsListItem(e, ingredient)}
-          //       keyExtractor={(item) => item.id.toString()}
-          //       autoCapitalize="none"
-          //       placeholder={`Ingredient name`}
-          //       autoCorrect={false}
-          //       value={this.props.ingredients[ingredient].name}
-          //       hideResults={this.state[ingredient] && this.props.ingredients[ingredient].name.length > 1 ? false : true}
-          //       containerStyle={styles.autoCompleteOuterContainerStyle}
-          //       inputContainerStyle={styles.autoCompleteInputContainerStyle}
-          //       listStyle={styles.autoCompleteList}
-          //       style={styles.autoCompleteInput}
-          //       onFocus={() => this.isFocused(ingredient, true)}
-          //       onBlur={() => this.isFocused(ingredient, false)}
-          //       flatListProps={{nestedScrollEnabled: true}}
-          //     />
-          //   </View>
-          //     <View style={styles.quantityAndUnitContainer}>
-          //       <View style={styles.addIngredientQuantityInputBox} key={ingredient.quantity}>
-          //         <TextInput style={styles.ingredientTextAdjustment} placeholder="Qty" keyboardType="phone-pad" onChange={(e) => this.addIngredientToList(ingredient, this.props.ingredients[ingredient].name, e.nativeEvent.text, this.props.ingredients[ingredient].unit)} value={this.props.ingredients[ingredient].quantity}/>
-          //       </View>
-          //       <View style={styles.addIngredientUnitInputBox} key={ingredient.unit}>
-          //       <Picker style={styles.unitPicker}
-          //               mode="dropdown"
-          //               iosIcon={<Icon name="arrow-down" />}
-          //               onValueChange={(e) => this.addIngredientToList(ingredient, this.props.ingredients[ingredient].name, this.props.ingredients[ingredient].quantity, e)} value={this.props.ingredients[ingredient].unit}
-          //               >
-          //               <Picker.Item style={styles.ingredientTextAdjustment} key={this.props.ingredients[ingredient].unit} label={this.props.ingredients[ingredient].unit} value={this.props.ingredients[ingredient].unit} />
-          //               {this.unitsPicker()}
-          //       </Picker>
-          //     </View>
-          //   </View>
-          // </View>
         )
       })
   }
@@ -226,45 +172,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         isFocused={this.isFocused}
         addIngredientToRecipeDetails={this.props.addIngredientToRecipeDetails}
         unitsPicker={this.unitsPicker} />
-
-      // <View style={styles.autCompleteRowContainer} key={`ingredient${n}`}>
-      //   <View style={[styles.autoCompleteContainer, {zIndex: 0}]} key={`ingredient${n}`}>
-      //     {/* <TextInput style={styles.ingredientTextAdjustment} placeholder={`New ingredient name`}  autoCapitalize="none" onChange={(e) => this.addIngredientToList(`ingredient${n}`, e.nativeEvent.text, "", "Oz")} /> */}
-      //       <Autocomplete
-      //         // data={this.state.ingredientsList.filter(ing => ing.name.toLowerCase().startsWith(this.props.ingredients[`ingredient${n}`].name))}
-      //         defaultValue={''}
-      //         onChangeText={(e) =>  this.handleNewIngredientByName(`ingredient${n}`, e)}
-      //         // renderItem={e => this.renderAutoIngredientsListItem(e, `ingredient${n}`)}
-      //         // keyExtractor={(item) => item.id.toString()}
-      //         autoCapitalize="none"
-      //         placeholder={`New ingredient name`}
-      //         // autoCorrect={false}
-      //         // value={this.props.ingredients[`ingredient${n}`].name}
-      //         hideResults={true}
-      //         containerStyle={styles.autoCompleteOuterContainerStyle}
-      //         inputContainerStyle={styles.autoCompleteInputContainerStyle}
-      //         // listStyle={styles.autoCompleteList}
-      //         style={styles.autoCompleteInput}
-      //         // onFocus={() => this.isFocused(ingredient, true)}
-      //         // onBlur={() => this.isFocused(ingredient, false)}
-      //         // flatListProps={{nestedScrollEnabled: true}}
-      //       />
-      //   </View>
-      //   <View style={styles.quantityAndUnitContainer}>
-      //     <View style={styles.addIngredientQuantityInputBox} key={[`ingredient${n}`].quantity}>
-      //       <TextInput style={styles.ingredientTextAdjustment} placeholder="Qty" keyboardType="phone-pad" onChange={(e) => this.addIngredientToList(`ingredient${n}`, "", e.nativeEvent.text, "Oz")} />
-      //     </View>
-      //       <View style={styles.addIngredientUnitInputBox} key={[`ingredient${n}`].unit}>
-      //       <Picker style={styles.ingredientTextAdjustment}
-      //                   mode="dropdown"
-      //                   iosIcon={<Icon name="arrow-down" />}
-      //                   onValueChange={(e) => this.addIngredientToList(`ingredient${n}`, "", "", e)}
-      //                   >
-      //                   {this.unitsPicker()}
-      //       </Picker>
-      //     </View>
-      //   </View>
-      // </View>
     )
   }
 
@@ -272,10 +179,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       this.addIngredientToList(ingredient, name, "", "Oz")
       this.isFocused(ingredient, true)
     }
-
-    // addIngredientToList = (ingredientIndex, ingredientName, ingredientQuantity, ingredientUnit) => {
-    //   this.props.addIngredientToRecipeDetails(ingredientIndex, ingredientName, ingredientQuantity, ingredientUnit)
-    // }
 
     removeIngredient = (ingredientIndex) => {
       let newIngredients = {}
@@ -293,26 +196,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     handleTextInput = (text, parameter) => {
       this.props.saveRecipeDetails(parameter, text)
     }
-
-    // pickImage = async () => {
-    //   let result = await ImagePicker.launchImageLibraryAsync({
-    //     allowsEditing: true,
-    //     aspect: [4, 3],
-    //     quality: 0.3,
-    //     base64: true
-    //   })
-    //   this.props.saveRecipeDetails("imageBase64", result.base64)
-    // }
-
-    // openCamera = async () => {
-    //   let result = await ImagePicker.launchCameraAsync({
-    //     allowsEditing: true,
-    //     aspect: [4, 3],
-    //     quality: 0.3,
-    //     base64: true
-    //   })
-    //   this.props.saveRecipeDetails("imageBase64", result.base64)
-    // }
 
     submitRecipe = async() => {
       if (this.props.navigation.getParam('recipe_details') !== undefined){
@@ -333,7 +216,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
-      // console.log("new recipe")
+      // console.log(this.props.ingredients)
       return (
         <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.mainPageContainer} imageStyle={styles.backgroundImageStyle}>
           {this.state.choosingPicture ? this.renderPictureChooser() : null}
@@ -381,10 +264,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     </View>
                   </View>
                   <View style={styles.transparentFormRow}>
-                    {/* <TouchableOpacity style={styles.createRecipeFormButton} activeOpacity={0.7} title="Choose Photo" onPress={this.choosePicture}>
-                      <Icon style={styles.standardIcon} size={25} name='camera-burst' />
-                      <Text style={styles.createRecipeFormButtonText}>Add{"\n"}picture</Text>
-                    </TouchableOpacity> */}
                     <TouchableOpacity style={styles.createRecipeFormButton} activeOpacity={0.7} title="Take Photo" onPress={this.choosePicture}>
                       <Icon style={styles.standardIcon} size={25} name='camera' />
                       <Text style={styles.createRecipeFormButtonText}>Add{"\n"}picture</Text>
@@ -394,12 +273,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                       <Text style={styles.createRecipeFormButtonText}>Submit</Text>
                     </TouchableOpacity>
                   </View>
-                  {/* <View style={styles.transparentFormRow}>
-                    <TouchableOpacity style={[styles.createRecipeFormButton,{marginBottom: 4}]} activeOpacity={0.7} onPress={e => this.submitRecipe(e)}>
-                      <Icon style={styles.standardIcon} size={25} name='login' />
-                      <Text style={styles.createRecipeFormButtonText}>Submit</Text>
-                    </TouchableOpacity>
-                  </View> */}
             </ScrollView>
           </KeyboardAvoidingView>
         </ImageBackground>

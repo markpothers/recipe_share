@@ -7,18 +7,30 @@ import { getChefDetails } from '../fetches/getChefDetails'
 import AppHeader from '../../navigation/appHeader'
 import ChefDetailsCard from './ChefDetailsCard'
 import { MyRecipeBookTabsContainer } from './ChefDetailsNavigators'
+import { postFollow } from '../fetches/postFollow'
+import { destroyFollow } from '../fetches/destroyFollow'
 
 const mapStateToProps = (state) => ({
   loggedInChef: state.loggedInChef,
-  chef_details: state.chef_details,
+  chefs_details: state.chefs_details,
 })
 
 const mapDispatchToProps = {
   storeChefDetails: (chef_details) => {
     return dispatch => {
-      dispatch({ type: 'STORE_CHEF_DETAILS', chef_details: chef_details})
+      dispatch({ type: 'STORE_CHEF_DETAILS', chefID: `chef${chef_details.chef.id}`, chef_details: chef_details})
     }
-  }
+  },
+  storeNewFollowers: (followee_id, followers) => {
+    return dispatch => {
+      dispatch({ type: 'STORE_NEW_FOLLOWERS', chefID: `chef${followee_id}`, followers: followers})
+    }
+  },
+  // clearChefDetails: () => {
+  //   return dispatch => {
+  //     dispatch({type: 'CLEAR_CHEF_DETAILS'})
+  //   }
+  // }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
@@ -26,19 +38,27 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     static navigationOptions = ({ navigation }) => {
       return {
         headerTitle: <AppHeader text={"Chef Details"} />,
-      };
+      }
     }
 
-    componentDidMount = async() => {
+    componentDidMount = () => {
+      this.fetchChefDetails()
+    }
+
+    componentWillUnmount = () => {
+      // console.log("unmounting")
+      // this.props.clearChefDetails()
+    }
+
+    fetchChefDetails = async() => {
       const chef_details = await getChefDetails(this.props.navigation.getParam('chefID'), this.props.loggedInChef.auth_token)
       if (chef_details) {
-        // console.log(chef_details)
         this.props.storeChefDetails(chef_details)
       }
     }
 
     renderChefImage = () => {
-      const chef = this.props.chef_details
+      const chef = this.props.chefs_details[`chef${this.props.navigation.getParam('chefID')}`]
       if (chef != undefined){
         if (chef.imageURL != null) {
           if (chef.imageURL.startsWith("http")) {
@@ -56,79 +76,20 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       this.props.navigation.navigate('RecipeDetails', {recipeID: recipeID})
     }
 
-    checkFollow = () => {
-      fetch(`${databaseURL}/follows/check`, {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${this.props.loggedInChef.auth_token}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            follow: {
-              follower_id: this.props.loggedInChef.id,
-              followee_id: this.props.navigation.getParam('chefID'),
-            }
-          })
-      })
-      .then(res => res.json())
-      .then(response => {
-        // console.log(response)
-        if (response == true){
-          this.props.navigation.setParams({
-            followable: false,
-            followChef: this.followChef,
-            unfollowChef: this.unfollowChef
-          })
-        } else {
-          this.props.navigation.setParams({
-            followable: true,
-            followChef: this.followChef,
-            unfollowChef: this.unfollowChef
-          })
-        }
-        })
+    followChef = async(followee_id) => {
+      const followPosted = await postFollow(this.props.loggedInChef.id, followee_id, this.props.loggedInChef.auth_token)
+      if (followPosted) {
+        let newFollowers = [...this.props.chefs_details[`chef${this.props.navigation.getParam('chefID')}`].followers, followPosted]
+        this.props.storeNewFollowers(followee_id, newFollowers)
+      }
     }
 
-    followChef = () => {
-      fetch(`${databaseURL}/follows`, {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${this.props.loggedInChef.auth_token}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            follow: {
-              follower_id: this.props.loggedInChef.id,
-              followee_id: this.props.navigation.getParam('chefID'),
-            }
-          })
-      })
-      .then(res => res.json())
-      .then(follow => {
-        // console.log(follow)
-        this.checkFollow()
-      })
-    }
-
-    unfollowChef = () => {
-      fetch(`${databaseURL}/follows`, {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${this.props.loggedInChef.auth_token}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            follow: {
-              follower_id: this.props.loggedInChef.id,
-              followee_id: this.props.navigation.getParam('chefID'),
-            }
-          })
-      })
-      .then(res => res.json())
-      .then(unfollow => {
-        // console.log(unfollow)
-        this.checkFollow()
-      })
+    unFollowChef = async(followee_id) => {
+      const followPosted = await destroyFollow(this.props.loggedInChef.id, followee_id, this.props.loggedInChef.auth_token)
+      if (followPosted) {
+        let newFollowers = this.props.chefs_details[`chef${this.props.navigation.getParam('chefID')}`].followers.filter( follower => follower.follower_id !== this.props.loggedInChef.id)
+        this.props.storeNewFollowers(followee_id, newFollowers)
+      }
     }
 
     parentNavigator = (route, params) => {
@@ -136,14 +97,21 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
-      if(this.props.chef_details.chef !== undefined){
-        // console.log(this.props.chef_details.chef.id)
+      // console.log(this.props.chefs_details[`chef${this.props.navigation.getParam('chefID')}`])
+      if(this.props.chefs_details[`chef${this.props.navigation.getParam('chefID')}`] !== undefined){
+        const chef_details = this.props.chefs_details[`chef${this.props.navigation.getParam('chefID')}`]
+        // console.log(this.props.chefs_details)
         return (
           <View style={{flex:1}}>
             <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
               <ScrollView contentContainerStyle={{flexGrow:1}}>
-                <ChefDetailsCard {...this.props.chef_details} imageURL={this.props.chef_details.chef.imageURL} reNavigate={this.reNavigate}/>
-                <MyRecipeBookTabsContainer screenProps={{parentNavigator: this.parentNavigator, queryChefID: this.props.chef_details.chef.id}}/>
+                <ChefDetailsCard 
+                  {...chef_details} 
+                  imageURL={chef_details.chef.imageURL} 
+                  reNavigate={this.reNavigate}
+                  followChef={this.followChef}
+                  unFollowChef={this.unFollowChef}/>
+                <MyRecipeBookTabsContainer screenProps={{parentNavigator: this.parentNavigator, queryChefID: chef_details.chef.id}}/>
               </ScrollView>
             </ImageBackground>
           </View>

@@ -6,14 +6,14 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class RecipeCard extends React.PureComponent {
     navigateToSharer = (chefID) => {
-        this.props.navigateToChefDetails(this.props.listChoice, chefID)
+        this.props.navigateToChefDetails(chefID)
     }
 
     render() {
         // console.log(this.props)
         return (
             <View style={styles.recipeCard} >
-                {this.props.sharer_id? <PostedBy navigateToSharer={this.navigateToSharer} username={this.props.sharer_username} chefID={this.props.sharer_id} /> : null }
+                {this.props.sharer_id? <PostedBy navigateToSharer={this.navigateToSharer} username={this.props.sharer_username} sharer_id={this.props.sharer_id} /> : null }
                 <View style={styles.recipeCardTopContainer}>
                     <View style={styles.recipeCardTopLeftContainer}>
                         <View style={styles.recipeCardTopLeftUpperContainer}>

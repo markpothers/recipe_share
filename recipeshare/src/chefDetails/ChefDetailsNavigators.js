@@ -1,20 +1,9 @@
 import React from 'react';
-import { View, ImageBackground, Dimensions } from 'react-native';
-import { createMaterialTopTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation';
-import RecipesList from '../recipeLists/RecipesList'
-import ChefList from '../chefLists/ChefList'
-import { styles } from '../../navigation/navigationStyleSheet'
-import { ChefFeedScreen, MyRecipesScreen, MyLikedRecipesScreen, MyMadeRecipesScreen, ChefsFollowedScreen, ChefsFollowingScreen} from './ChefDetailsTabs'
-import RecipeDetailsScreen from '../recipeDetails/recipeDetails'
-// import ChefDetailsScreen from '../chefDetails/chefDetails'
+import { Dimensions } from 'react-native';
+import { createMaterialTopTabNavigator, createAppContainer } from 'react-navigation';
+import { MyRecipesScreen, MyLikedRecipesScreen, MyMadeRecipesScreen, ChefsFollowedScreen, ChefsFollowingScreen} from './ChefDetailsTabs'
 
 const MyRecipeBookTabs = createMaterialTopTabNavigator({
-  // ChefFeed: {
-  //   screen: ChefFeedScreen,
-  //   navigationOptions: {
-  //     tabBarLabel: 'My Feed',
-  //   }
-  // },
   MyRecipes: {
     screen: MyRecipesScreen,
     navigationOptions: {
@@ -58,25 +47,12 @@ const MyRecipeBookTabs = createMaterialTopTabNavigator({
       color: '#fff59b',
     },
     tabStyle: {
-      // width: 100,
       height: 55,
     },
     style: {
       backgroundColor: '#104e01',
-      // borderStyle: 'solid',
-      // borderWidth: 2,
     },
   }
 })
-
-// const ChefDetailsRecipeBookStack = createStackNavigator({
-//   MyRecipeBook: MyRecipeBookTabs,
-//   RecipeDetails: RecipeDetailsScreen,
-//   // ChefDetails: ChefDetailsScreen
-// },{
-//   defaultNavigationOptions: {
-//     header: null
-// }
-// });
 
 export const MyRecipeBookTabsContainer = createAppContainer(MyRecipeBookTabs)

@@ -66,10 +66,10 @@ const mapDispatchToProps = {
     }
   },
   storeRecipeDetails: (recipe_details) => {
-  return dispatch => {
-    dispatch({ type: 'STORE_RECIPE_DETAILS', recipe_details: recipe_details})
+    return dispatch => {
+      dispatch({ type: 'STORE_RECIPE_DETAILS', recipe_details: recipe_details})
+    }
   }
-}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
@@ -131,9 +131,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     renderRecipeImages = () => {
       if (this.props.recipe_details.recipe_images.length !== 0){
-        // if (this.props.recipe_details.recipe_images.imageURL !== []){
           return <Image style={[{width: '100%', height: 250}, styles.detailsImage]} source={{uri: `${databaseURL}${this.props.recipe_details.recipe_images[this.props.recipe_details.recipe_images.length-1].imageURL}`}}></Image>
-        // }
       }
     }
 
@@ -268,7 +266,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         }
       }
     }
-    
+
     renderPictureChooser = () => {
       return <PicSourceChooser saveImage={this.saveImage} sourceChosen={this.sourceChosen} key={"pic-chooser"}/>
     }
@@ -316,8 +314,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     render() {
       if (this.props.recipe_details != undefined){
         // console.log(this.myScroll.nativeEvent.conte?ntOffset.y)
-        // console.log(this.props.navigation.dangerouslyGetParent().state.routeName)
-        // console.log(this.props.navigation.dangerouslyGetParent().state.index)
         return (
           <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={83} style={{flex:1}}>
             <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
