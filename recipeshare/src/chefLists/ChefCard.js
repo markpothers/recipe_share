@@ -33,7 +33,7 @@ export default class ChefCard extends React.PureComponent {
                 <View style={styles.chefCardBottomContainer}>
                     <TouchableOpacity style={styles.chefCardBottomSubContainers}  onPress={(this.props.user_chef_following > 0 ? (e => this.props.unFollowChef(this.props.id)) : (e => this.props.followChef(this.props.id)))}>
                         {/* <Icon name='account-multiple-plus' size={24} style={styles.icon}/> */}
-                        {this.props.user_chef_following > 0 ? <Icon name='account-multiple-plus' size={24} style={styles.icon}/> : <Icon name='account-multiple-plus-outline' size={24} style={styles.icon}/> }
+                        {this.props.user_chef_following > 0 ? <Icon name='account-multiple-minus' size={24} style={styles.icon}/> : <Icon name='account-multiple-plus-outline' size={24} style={styles.icon}/> }
                         <Text style={styles.chefCardBottomOther} >{this.props.followers === null ? 0 : this.props.followers}</Text>
                     </TouchableOpacity>
                     <View style={styles.chefCardBottomSubContainers} >

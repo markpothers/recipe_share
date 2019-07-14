@@ -100,7 +100,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       // console.log(this.props.chefs_details[`chef${this.props.navigation.getParam('chefID')}`])
       if(this.props.chefs_details[`chef${this.props.navigation.getParam('chefID')}`] !== undefined){
         const chef_details = this.props.chefs_details[`chef${this.props.navigation.getParam('chefID')}`]
-        // console.log(this.props.chefs_details)
         return (
           <View style={{flex:1}}>
             <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
@@ -108,10 +107,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 <ChefDetailsCard 
                   {...chef_details} 
                   imageURL={chef_details.chef.imageURL} 
-                  reNavigate={this.reNavigate}
                   followChef={this.followChef}
                   unFollowChef={this.unFollowChef}/>
-                <MyRecipeBookTabsContainer screenProps={{parentNavigator: this.parentNavigator, queryChefID: chef_details.chef.id}}/>
+                <View style={styles.recipeBookContainer}>
+                  <MyRecipeBookTabsContainer screenProps={{parentNavigator: this.parentNavigator, queryChefID: chef_details.chef.id}}/>
+                </View>
               </ScrollView>
             </ImageBackground>
           </View>

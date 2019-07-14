@@ -214,21 +214,25 @@ class Chef < ApplicationRecord
                     imageURL: self.imageURL,
                     created_at: self.created_at,
                     profile_text: self.profile_text},
-            # comments: Comment.where(chef_id: self.id).order('updated_at DESC'),
+            comments: Comment.where(chef_id: self.id).order('updated_at DESC'),
             recipe_likes: RecipeLike.where(chef_id: self.id),
             recipe_makes: RecipeMake.where(chef_id: self.id),
             re_shares: ReShare.where(chef_id: self.id),
-            # make_pics: MakePic.where(chef_id: self.id).order('updated_at DESC'),
+            make_pics: MakePic.where(chef_id: self.id).order('updated_at DESC'),
             recipes: recipes,
             recipe_likes_received: RecipeLike.where(recipe_id: recipe_ids),
             recipe_makes_received: RecipeMake.where(recipe_id: recipe_ids),
             comments_received: Comment.where(recipe_id: recipe_ids),
             re_shares_received: ReShare.where(recipe_id: recipe_ids),
-            # make_pics_received: MakePic.where(recipe_id: recipe_ids),
+            make_pics_received: MakePic.where(recipe_id: recipe_ids),
             followers: Follow.where(followee_id: self.id),
             following: Follow.where(follower_id: self.id),
             chef_followed: Follow.where(followee_id: self.id, follower_id: userChef.id).length>0,
-            chef_commented: Comment.where(recipe_id: recipe_ids, chef_id: userChef.id).length>0
+            chef_commented: Comment.where(recipe_id: recipe_ids, chef_id: userChef.id).length>0,
+            chef_liked: RecipeLike.where(recipe_id: recipe_ids, chef_id: userChef.id).length>0,
+            chef_made: RecipeMake.where(recipe_id: recipe_ids, chef_id: userChef.id).length>0,
+            chef_shared: ReShare.where(recipe_id: recipe_ids, chef_id: userChef.id).length>0,
+            chef_make_piced: MakePic.where(recipe_id: recipe_ids, chef_id: userChef.id).length>0
         }
 
     end

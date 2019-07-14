@@ -222,6 +222,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
             // initialNumToRender={200}
             // onScroll={e => this.onScroll(e)}
             // scrollEventThrottle={16}
+            nestedScrollEnabled={true}
           />
         </React.Fragment>
       )

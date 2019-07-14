@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
   chefCard: {
     // height: 319,
     marginTop: 2,
-    marginBottom: 2,
+    marginBottom: 1,
     width: '100%',
     borderStyle: 'solid',
     borderRadius: 5,
@@ -56,6 +56,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
+    paddingBottom: '4%'
   },
   avatarThumbnail: {
     // position: 'absolute',
@@ -95,17 +96,18 @@ export const styles = StyleSheet.create({
     marginLeft: '2%',
     marginRight: '2%'
   },
-  chefCardImageContainer: {
-    // borderStyle: 'solid',
-    // borderWidth: 2,
-    height: 250,
-    width: '100%'
-  },
+  // chefCardImageContainer: {
+  //   // borderStyle: 'solid',
+  //   // borderWidth: 2,
+  //   height: 250,
+  //   width: '100%',
+  //   marginBottom: '2%'
+  // },
   thumbnail: {
     position: 'absolute',
     height: '100%',
     width: '100%',
-    borderRadius: 5
+    borderRadius: 5,
   },
   chefCardBottomContainer: {
     flexDirection: 'row',
@@ -114,19 +116,6 @@ export const styles = StyleSheet.create({
     height: 25,
     // borderStyle: 'solid',
     // borderWidth: 2,
-  },
-  chefCardBottomSubContainers: {
-    flexDirection: 'row',
-    flex: 1,
-    // borderStyle: 'solid',
-    // borderWidth: 2,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  icon: {
-    color: '#505050',
-    alignSelf: 'center',
-    marginRight: '10%'
   },
   chefCardHighlighted: {
     fontWeight: 'bold',
@@ -150,5 +139,89 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: "#505050",
     textAlign: 'center'
-  }
+  },
+  recipeBookContainer: {
+    flex: 1,
+    // borderStyle: 'solid',
+    // borderWidth: 5,
+    // borderColor: 'yellow',
+    height: 555
+  },
+  chefDetailsStats: {
+    borderStyle: 'solid',
+    borderWidth: 1,
+    // borderColor: 'black',
+    width: '100%',
+    marginLeft: '0%',
+    marginRight: '0%',
+    marginTop: 1,
+    marginBottom: 1,
+    borderRadius: 5,
+    backgroundColor: 'white',
+    // opacity: 0.9,
+    flexDirection: 'row',
+    paddingTop: '0.5%',
+    paddingBottom: '0.5%',
+    height: 30,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+  },
+  chefDetailsColumnHeaders: {
+    // flex: 4,
+    fontSize: 16,
+    color: "#505050",
+    fontWeight: 'bold',
+    // width: '37%',
+    marginLeft: '62%',
+    top: '0.3%'
+  },
+  icon: {
+    color: "#505050",
+    marginLeft: '5%'
+  },
+  chefDetailsRowTitle: {
+    // flex: 4,
+    fontSize: 16,
+    color: "#505050",
+    // textAlign: 'center',
+    width: '37%',
+    marginLeft: '5%',
+    top: '0.3%'
+  },
+  chefDetailsRowContents: {
+    fontSize: 16,
+    color: "#505050",
+    textAlign: 'center',
+    // flex: 3
+    width: '10%',
+    marginLeft: '5%',
+    top: '0.3%'
+  },
+  chefRecipesRowContents: {
+    fontSize: 16,
+    color: "#505050",
+    fontWeight: 'bold',
+    // flex: 3
+    width: '45%',
+    marginLeft: '5%',
+    top: '0.3%'
+  },
+  chefRecipesFollowContainer: {
+    flexDirection: 'row',
+    // borderStyle: 'solid',
+    // borderWidth: 2,
+    marginLeft: '5%',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  chefDetailsRecipesFollowNumber: {
+    fontSize: 16,
+    color: "#505050",
+    textAlign: 'center',
+    fontWeight: 'bold',
+    // flex: 3
+    // width: '10%',
+    marginLeft: '3%',
+    top: '0.3%'
+  },
   });

@@ -24,7 +24,7 @@ class AppHeader extends React.PureComponent {
         // I don't understand this at all and honestly believe it's a bug in react navigation.
         return (
             <View style={styles.headerContainer}>
-                {this.props.navigation.state.routeName !== "ChefDetails" && this.props.navigation.state.routeName !== "NewRecipe" ? this.renderDrawerButton() : null}
+                {this.props.navigation.state.routeName !== "ChefDetails" && this.props.navigation.state.routeName !== "NewRecipe" && this.props.navigation.state.routeName !== "RecipeDetails" ? this.renderDrawerButton() : null}
                 <TouchableOpacity onPress={() => this.props.navigation.popToTop()}>
                     <Text style={styles.headerText}>{this.props.text}</Text>
                 </TouchableOpacity>
