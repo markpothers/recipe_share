@@ -16,8 +16,17 @@ class Recipe < ApplicationRecord
 
   has_many_attached :images
 
-  def self.choose_list(type = "all", queryChefID = 1, limit = 1, offset = 0, ranking = "liked", user_chef_id = 1)
+  def self.choose_list(type = "all", queryChefID = 1, limit = 1, offset = 0, ranking = "liked", user_chef_id = 1, filters="", cuisine="None")
     #types = "all", "chef", "chef_liked", "chef_made", "most_liked", "most_made" // "liked", "made"
+
+    filter_string=filters.split("/").map{|filter| filter.split(" ").join("_")}.map{|filter| "AND recipes.#{filter} = 1 "}.join("")
+
+    if cuisine != "Any"
+      cuisine_string="AND recipes.cuisine = '#{cuisine.split(" ").join("_")}' "
+    else
+      cuisine_string=""
+    end
+
     if type == "all"
 
       # ApplicationRecord.db.execute("SELECT recipes.*, recipe_images.imageURL
@@ -47,6 +56,8 @@ class Recipe < ApplicationRecord
                                     LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id
                                     LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id
                                     WHERE recipes.hidden=0
+                                    #{filter_string}
+                                    #{cuisine_string}
                                     GROUP BY recipes.id
                                     ORDER BY recipes.updated_at DESC
                                     LIMIT (?)
@@ -80,6 +91,8 @@ class Recipe < ApplicationRecord
                                       LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id
                                       LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id
                                       WHERE recipes.hidden=0 AND recipes.chef_id = (?)
+                                      #{filter_string}
+                                      #{cuisine_string}
                                       GROUP BY recipes.id
                                       ORDER BY recipes.updated_at DESC
                                       LIMIT (?)
@@ -122,6 +135,8 @@ class Recipe < ApplicationRecord
                                         ) AS sharers ON recipes.id = shared_id
                                     JOIN follows ON recipes.chef_id = followee_id
                                     WHERE recipes.hidden=0 AND ( follows.follower_id = (?) OR re_shares.chef_id IN (SELECT follows.followee_id FROM follows WHERE follower_id = (?)))
+                                    #{filter_string}
+                                    #{cuisine_string}
                                     GROUP BY recipes.id
                                     ORDER BY recipes.updated_at DESC
                                       LIMIT (?)
@@ -156,6 +171,8 @@ class Recipe < ApplicationRecord
                                       LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id
                                       LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id
                                       WHERE recipes.hidden=0 AND (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id AND recipe_likes.chef_id = (?))>0
+                                      #{filter_string}
+                                      #{cuisine_string}
                                       GROUP BY recipes.id
                                       ORDER BY recipe_likes.updated_at DESC
                                       LIMIT (?)
@@ -190,6 +207,8 @@ class Recipe < ApplicationRecord
                                       LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id
                                       LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id
                                       WHERE recipes.hidden=0 AND (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id AND recipe_makes.chef_id = (?))>0
+                                      #{filter_string}
+                                      #{cuisine_string}
                                       GROUP BY recipes.id
                                       ORDER BY recipe_makes.updated_at DESC
                                       LIMIT (?)
@@ -231,6 +250,8 @@ class Recipe < ApplicationRecord
                                       LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id
                                       LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id
                                       WHERE recipes.hidden=0
+                                      #{filter_string}
+                                      #{cuisine_string}
                                       GROUP BY recipes.id
                                       ORDER BY (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id) DESC
                                       LIMIT (?)
@@ -281,6 +302,8 @@ class Recipe < ApplicationRecord
                                 LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id
                                 LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id
                                 WHERE recipes.hidden=0
+                                #{filter_string}
+                                #{cuisine_string}
                                 GROUP BY recipes.id
                                 ORDER BY (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id) DESC
                                 LIMIT (?)
@@ -306,11 +329,13 @@ class Recipe < ApplicationRecord
                                 LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id
                                 LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id
                                 WHERE recipes.hidden=0
+                                #{filter_string}
+                                #{cuisine_string}
                                 GROUP BY recipes.id
                                 ORDER BY recipes.updated_at DESC
                                 LIMIT (?)
                                 OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offset])
-byebug
+# byebug
     end
   end
 

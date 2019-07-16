@@ -35,6 +35,7 @@ class ChefsController < ApplicationController
             @chef = Chef.new(chef_params)
             @chef.is_admin = false
             @chef.hidden = false
+            @chef.is_member = false
             if @chef.save
                 if image_params[:imageURL] != ""
                     hex = SecureRandom.hex

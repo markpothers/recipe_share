@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 2019_06_14_164549) do
     t.boolean "is_admin"
     t.datetime "created_at", null: false
     t.string "profile_text"
+    t.boolean "is_member"
     t.datetime "updated_at", null: false
   end
 
@@ -155,6 +156,29 @@ ActiveRecord::Schema.define(version: 2019_06_14_164549) do
     t.integer "difficulty"
     t.string "instructions"
     t.boolean "hidden"
+    t.boolean "breakfast"
+    t.boolean "lunch"
+    t.boolean "dinner"
+    t.boolean "dessert"
+    t.boolean "vegetarian"
+    t.boolean "vegan"
+    t.boolean "salad"
+    t.boolean "soup"
+    t.boolean "side"
+    t.boolean "chicken"
+    t.boolean "red_meat"
+    t.boolean "seafood"
+    t.boolean "whole30"
+    t.boolean "paleo"
+    t.boolean "keto"
+    t.boolean "gluten_free"
+    t.boolean "freezer_meal"
+    t.boolean "weeknight"
+    t.boolean "weekend"
+    t.boolean "bread"
+    t.boolean "dairy_free"
+    t.boolean "white_meat"
+    t.string "cuisine"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["chef_id"], name: "index_recipes_on_chef_id"

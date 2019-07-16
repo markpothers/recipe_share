@@ -138,4 +138,24 @@ export const styles = StyleSheet.create({
       color: "#505050",
       textAlign: 'center'
     },
+    filterButton: {
+      position: 'absolute',
+      backgroundColor: '#fff59b',
+      borderStyle: 'solid',
+      borderWidth: 1,
+      borderColor: '#104e01',
+      width: 50,
+      height: 50,
+      justifyContent: 'center',
+      alignItems: 'center',
+      top: '86%',
+      left: '80%',
+      borderRadius: 100,
+      zIndex: 1
+    },
+    filterIcon:{
+      color: '#104e01',
+      // alignSelf: 'center',
+      // marginLeft: '10%'
+    }
 });

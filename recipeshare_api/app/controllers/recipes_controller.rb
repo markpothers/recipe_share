@@ -9,7 +9,7 @@ class RecipesController < ApplicationController
 
     def index
         # byebug
-        @recipes = Recipe.choose_list(params["listType"], params["queryChefID"], params["limit"], params["offset"], params["global_ranking"], @chef.id)
+        @recipes = Recipe.choose_list(params["listType"], params["queryChefID"], params["limit"], params["offset"], params["global_ranking"], @chef.id, params["filters"], params["cuisine"])
         render json: @recipes #, methods: [:add_count]
     end
 

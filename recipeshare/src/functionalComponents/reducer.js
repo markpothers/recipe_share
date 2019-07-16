@@ -139,6 +139,13 @@ const reducer = (currentState, action) => {
         case 'CLEAR_CHEF_DETAILS':
             // console.log(action.chef_details)
             return {...currentState, chef_details: {}}
+        case 'TOGGLE_FILTER_CATEGORY':
+            // console.log(action.chef_details)
+            return {...currentState, filter_settings: {...currentState.filter_settings, [action.category]: action.value}}
+        case 'CLEAR_FILTERS':
+            return {...currentState, filter_settings: action.clearedFilters, cuisine: "Any"}
+        case 'SET_CUISINE':
+            return {...currentState, cuisine: action.cuisine}
         default:
             return currentState
     }

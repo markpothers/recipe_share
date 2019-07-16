@@ -6,39 +6,6 @@ import { databaseURL } from '../dataComponents/databaseURL'
 
 export default class ChefDetailsCard extends React.PureComponent {
 
-    // renderLikeButton = () => {
-    //     if (this.props.recipe_details.likeable){
-    //       return (
-    //         <TouchableOpacity onPress={this.likeRecipe}>
-    //           <Icon name='heart-outline' size={24} style={styles.icon}/>
-    //         </TouchableOpacity>
-    //       )
-    //     } else {
-    //       return (
-    //         <TouchableOpacity onPress={this.unlikeRecipe}>
-    //           <Icon name='heart' size={24} style={styles.icon}/>
-    //         </TouchableOpacity>
-    //       )
-    //     }
-    //   }
-  
-    //   renderMakeButton = () => {
-    //     if (this.props.recipe_details.makeable){
-    //       return (
-    //         <TouchableOpacity onPress={this.makeRecipe}>
-    //           <Icon name='food' size={24} style={styles.icon}/>
-    //         </TouchableOpacity>
-    //       )
-    //     } else {
-    //       return (
-    //         <TouchableOpacity>
-    //           <Icon name='food-off' size={24} style={styles.icon}/>
-    //         </TouchableOpacity>
-    //       )
-    //     }
-    //   }
-
-
     render(){
     // console.log(this.props.comments)
         return (

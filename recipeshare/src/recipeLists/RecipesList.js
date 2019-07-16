@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList } from 'react-native'
+import { FlatList, View, TouchableOpacity } from 'react-native'
 import RecipeCard from './RecipeCard'
 import { connect } from 'react-redux'
 import { getRecipeList } from '../fetches/getRecipeList'
@@ -8,6 +8,10 @@ import { postReShare } from '../fetches/postReShare'
 import { postRecipeMake } from '../fetches/postRecipeMake'
 import { destroyRecipeLike } from '../fetches/destroyRecipeLike'
 import { NavigationEvents, withNavigation } from 'react-navigation'
+// import { TouchableOpacity } from 'react-native-gesture-handler';
+import { styles } from './recipeListStyleSheet'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import FilterMenu from '../functionalComponents/filterMenu'
 
 const mapStateToProps = (state) => ({
       all_Recipes: state.recipes.all,
@@ -20,7 +24,9 @@ const mapStateToProps = (state) => ({
       most_made_Recipes: state.recipes.most_made,
       recipes_details: state.recipes_details,
       loggedInChef: state.loggedInChef,
-      global_ranking: state.global_ranking
+      global_ranking: state.global_ranking,
+      filter_settings: state.filter_settings,
+      cuisine: state.cuisine
 })
 
 const mapDispatchToProps = {
@@ -62,7 +68,8 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
     state = {
       limit: 20,
       offset: 0,
-      isDisplayed: true
+      isDisplayed: true,
+      filterDisplayed: false
     }
 
     componentDidMount = () => {
@@ -85,13 +92,13 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
 
     fetchRecipeListThenDetails = async() => {
       const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
-      let recipes = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token)
+      let recipes = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.cuisine)
       this.props.storeRecipeList(this.props["listChoice"], recipes)
     }
 
     fetchAdditionalRecipesThenDetailsForList = async() => {
       const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
-      const new_recipes = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token)
+      const new_recipes = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.cuisine)
       this.props.appendToRecipeList(this.props["listChoice"], new_recipes)
     }
 
@@ -205,11 +212,23 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
       this.fetchRecipeListThenDetails()
     }
 
+    handleFilterButton = () =>{
+      this.setState({filterDisplayed: true})
+    }
+
+    closeFilterAndRefresh = () => {
+      this.setState({filterDisplayed: false})
+      this.refresh()
+    }
+
     render() {
-      // console.log(this.props["listChoice"])
+      // console.log(this.state.filterDisplayed)
       return (
         <React.Fragment>
           <NavigationEvents onWillFocus={this.respondToFocus} onWillBlur={this.respondToBlur}/>
+            <TouchableOpacity style={styles.filterButton} activeOpacity={0.7} onPress={this.handleFilterButton}>
+              {1===1 ? <Icon name='filter-outline' size={24} style={styles.filterIcon}/> : <Icon name='filter-outline' size={24} style={styles.filterIcon}/> }
+            </TouchableOpacity>
           <FlatList
             data={this.props[this.props["listChoice"] + `_Recipes`]}
             extraData={this.props.recipes_details}
@@ -224,6 +243,8 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
             // scrollEventThrottle={16}
             nestedScrollEnabled={true}
           />
+          {this.state.filterDisplayed ? <FilterMenu handleFilterButton={this.handleFilterButton} refresh={this.refresh} closeFilterAndRefresh={this.closeFilterAndRefresh}/> : null}
+
         </React.Fragment>
       )
     }

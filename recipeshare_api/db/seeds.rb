@@ -49,7 +49,18 @@ Ingredient.destroy_all
 end
 
 100.times do
-    Chef.create(is_admin: false, username: Faker::Books::CultureSeries.planet, imageURL:Faker::Avatar.image, e_mail:Faker::Internet.email, country: Faker::TvShows::StarTrek.location, hidden: false, created_at: Time.now, password: '123456', password_confirmation: '123456', hex: SecureRandom.hex, profile_text: Faker::GreekPhilosophers.quote)
+    Chef.create(is_admin: false, 
+        username: Faker::Books::CultureSeries.planet, 
+        imageURL:Faker::Avatar.image, 
+        e_mail:Faker::Internet.email, 
+        country: Faker::TvShows::StarTrek.location, 
+        hidden: false, 
+        created_at: Time.now, 
+        password: '123456', 
+        password_confirmation: '123456', 
+        hex: SecureRandom.hex, 
+        profile_text: Faker::GreekPhilosophers.quote,
+        is_member: false)
 end
 
 
@@ -82,8 +93,48 @@ times = [
     "06:00",
 ]
 
+cuisines = [
+    "American",
+    "British",
+    "French",
+    "Chinese",
+    "Japanese",
+    "Indian",
+    "Vietnamese"
+]
+
 250.times do
-    Recipe.create(name: Faker::Food.dish, hidden: false, chef_id: Chef.all.sample.id, instructions: Faker::Food.description, time: times.sample, difficulty: difficulties.sample, created_at: Time.now)
+    Recipe.create(name: Faker::Food.dish,
+        hidden: false,
+        chef_id: Chef.all.sample.id,
+        instructions: Faker::Food.description,
+        time: times.sample,
+        difficulty: difficulties.sample,
+        created_at: Time.now,
+        breakfast: Faker::Boolean.boolean,
+        lunch: Faker::Boolean.boolean,
+        dinner: Faker::Boolean.boolean,
+        chicken: Faker::Boolean.boolean,
+        red_meat: Faker::Boolean.boolean,
+        seafood: Faker::Boolean.boolean,
+        vegetarian: Faker::Boolean.boolean,
+        salad: Faker::Boolean.boolean,
+        vegan: Faker::Boolean.boolean,
+        soup: Faker::Boolean.boolean,
+        dessert: Faker::Boolean.boolean,
+        side: Faker::Boolean.boolean,
+        whole30: Faker::Boolean.boolean,
+        paleo: Faker::Boolean.boolean,
+        freezer_meal: Faker::Boolean.boolean,
+        keto: Faker::Boolean.boolean,
+        weeknight: Faker::Boolean.boolean,
+        weekend: Faker::Boolean.boolean,
+        gluten_free: Faker::Boolean.boolean,
+        bread: Faker::Boolean.boolean,
+        dairy_free: Faker::Boolean.boolean,
+        white_meat: Faker::Boolean.boolean,
+        cuisine: cuisines.sample,
+        )
 end
 
 # 200.times do
@@ -148,4 +199,8 @@ end
 
 # 3.times do 
 #     MakePic.last.destroy
+# end
+
+# Recipe.all.each do |recipe|
+#     recipe.cuisine=""
 # end
