@@ -108,7 +108,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                   {...chef_details} 
                   imageURL={chef_details.chef.imageURL} 
                   followChef={this.followChef}
-                  unFollowChef={this.unFollowChef}/>
+                  unFollowChef={this.unFollowChef}
+                  notProfile={true}/>
                 <View style={styles.recipeBookContainer}>
                   <MyRecipeBookTabsContainer screenProps={{parentNavigator: this.parentNavigator, queryChefID: chef_details.chef.id}}/>
                 </View>

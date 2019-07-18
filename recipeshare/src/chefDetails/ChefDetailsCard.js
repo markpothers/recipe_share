@@ -6,8 +6,19 @@ import { databaseURL } from '../dataComponents/databaseURL'
 
 export default class ChefDetailsCard extends React.PureComponent {
 
+    renderFollowButton = () => {
+        return (
+            <React.Fragment>
+                <TouchableOpacity style={styles.chefRecipesFollowContainer} onPress={(this.props.chef_followed === true ? (e => this.props.unFollowChef(this.props.chef.id)) : (e => this.props.followChef(this.props.chef.id)))}>
+                    {this.props.chef_followed === true ? <Icon name='account-multiple-plus' size={24} style={styles.icon}/> : <Icon name='account-multiple-plus-outline' size={24} style={styles.icon}/> }
+                </TouchableOpacity>
+                <Text style={styles.chefDetailsRecipesFollowNumber} >{this.props.followers.length}</Text>
+            </React.Fragment>
+        )
+    }
+
+
     render(){
-    // console.log(this.props.comments)
         return (
             <View>
                 <View style={styles.chefCard}>
@@ -36,10 +47,7 @@ export default class ChefDetailsCard extends React.PureComponent {
                   <View style={styles.chefDetailsStats}>
                     <Icon name='food' size={24} style={styles.icon}/>
                     <Text style={[styles.chefRecipesRowContents]}>Recipes created:   {this.props.recipes.length}</Text>
-                    <TouchableOpacity style={styles.chefRecipesFollowContainer} onPress={(this.props.chef_followed === true ? (e => this.props.unFollowChef(this.props.chef.id)) : (e => this.props.followChef(this.props.chef.id)))}>
-                        {this.props.chef_followed === true ? <Icon name='account-multiple-plus' size={24} style={styles.icon}/> : <Icon name='account-multiple-plus-outline' size={24} style={styles.icon}/> }
-                    </TouchableOpacity>
-                    <Text style={styles.chefDetailsRecipesFollowNumber} >{this.props.followers.length}</Text>
+                        {this.props.notProfile ? this.renderFollowButton() : null}
                   </View>
                   <View style={styles.chefDetailsStats}>
                     <Text style={[styles.chefDetailsColumnHeaders]}>Given:   Received:</Text>

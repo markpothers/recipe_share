@@ -4,8 +4,8 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   modalFullScreenContainer:{
     flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
     // height: '100%',
     // width: '100%'
     //     borderStyle: 'solid',
@@ -13,13 +13,15 @@ export const styles = StyleSheet.create({
   },
   picChooserModalContainer:{
     // position: 'absolute',
-    right: '12.5%',
-    top: '25%',
+    // right: '12.5%',
+    // top: '25%',
     // borderStyle: 'solid',
     // borderWidth: 1,
     // alignSelf: 'center',
-    height: 250,
+    height: '50%',
     width: '50%',
+    marginTop: '25%',
+    marginBottom: '25%',
     marginLeft: '25%',
     marginRight: '25%',
     // borderRadius: 5

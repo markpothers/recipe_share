@@ -2,8 +2,8 @@ import React from 'react';
 import { Container, Header, Text, Button, Icon  } from 'native-base';
 import {Image, Platform, ScrollView, StyleSheet, TouchableOpacity, View, ImageBackground } from 'react-native';
 import { connect } from 'react-redux'
-import { styles } from './profileStyleSheet'
-import { databaseURL } from '../dataComponents/databaseURL'
+import { styles } from '../src/profile/profileStyleSheet'
+import { databaseURL } from '../src/dataComponents/databaseURL'
 
 const mapStateToProps = (state) => ({
     loggedInChef: state.loggedInChef

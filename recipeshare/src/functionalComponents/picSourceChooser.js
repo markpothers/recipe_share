@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, Text, View, TouchableOpacity } from 'react-native'
+import { Modal, Text, View, TouchableOpacity, Dimensions } from 'react-native'
 import * as ImagePicker from 'expo-image-picker'
 import { styles } from './functionalComponentsStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -34,7 +34,7 @@ export default class PicSourceChooser extends React.PureComponent{
             visible={true}
             onRequestClose={this.props.sourceChosen}
             >
-                <View style={styles.modalFullScreenContainer}>
+                <View style={[styles.modalFullScreenContainer, {height: Dimensions.get('window').height, width: Dimensions.get('window').width}]}>
                     <View style={styles.picChooserModalContainer}>
                             <TouchableOpacity style={styles.picSourceChooserButton} activeOpacity={0.7} title="Choose Photo" onPress={this.pickImage}>
                                 <Icon style={styles.standardIcon} size={50} name='camera-burst' />
