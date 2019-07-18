@@ -39,11 +39,11 @@ const mapDispatchToProps = {
             dispatch({ type: 'CLEAR_NEW_RECIPE_FILTERS', clearedFilters: clearedFilters})
           }
         },
-        setNewRecipeCuisine: (cuisine) => {
-      return dispatch => {
-          dispatch({ type: 'SET_NEW_RECIPE_CUISINE', cuisine: cuisine})
-      }
-      },
+    setNewRecipeCuisine: (cuisine) => {
+        return dispatch => {
+            dispatch({ type: 'SET_NEW_RECIPE_CUISINE', cuisine: cuisine})
+        }
+    },
   }
 
 export default connect(mapStateToProps, mapDispatchToProps)(

@@ -49,6 +49,18 @@ const mapDispatchToProps = {
       dispatch({ type: 'STORE_ALL_INGREDIENTS', ingredients: ingredients})
     }
   },
+  switchNewRecipeFilterValue: (category, value) => {
+    return dispatch => {
+      // console.log(category)
+      // console.log(value)
+      dispatch({ type: 'TOGGLE_NEW_RECIPE_FILTER_CATEGORY', category: category, value: value})
+    }
+  },
+  setNewRecipeCuisine: (cuisine) => {
+    return dispatch => {
+        dispatch({ type: 'SET_NEW_RECIPE_CUISINE', cuisine: cuisine})
+    }
+},
 
 }
 
@@ -69,14 +81,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     componentDidMount(){
     this.props.clearNewRecipeDetails()
     if (this.props.navigation.getParam('recipe_details') !== undefined){
-      let recipe_details = this.props.navigation.getParam('recipe_details')
-      this.props.saveRecipeDetails('name', recipe_details.recipe.name)
-      this.props.saveRecipeDetails('instructions', recipe_details.recipe.instructions)
-      this.props.saveRecipeDetails('time', recipe_details.recipe.time)
-      this.props.saveRecipeDetails('difficulty', recipe_details.recipe.difficulty.toString())
-      const list_values = recipe_details.ingredient_uses.map(ingredient_use => [ingredient_use.ingredient_id, ingredient_use.quantity, ingredient_use.unit])
-      const ingredientsForEdit = list_values.map(list_value => [...list_value, (recipe_details.ingredients.find(ingredient => ingredient.id == list_value[0]).name)])
-      ingredientsForEdit.forEach( (ing, index) => this.props.addIngredientToRecipeDetails(`ingredient${index+1}`, ing[3], ing[1], ing[2]))
+      this.setRecipeParamsForEditing()
     }
     Permissions.askAsync(Permissions.CAMERA_ROLL)
         .then(permission => {
@@ -87,6 +92,20 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             this.setState({hasPermission: permission.status == 'granted'})
         })
     this.fetchIngredientsForAutoComplete()
+  }
+
+  setRecipeParamsForEditing = () => {
+    let recipe_details = this.props.navigation.getParam('recipe_details')
+    this.props.saveRecipeDetails('name', recipe_details.recipe.name)
+    this.props.saveRecipeDetails('instructions', recipe_details.recipe.instructions)
+    this.props.saveRecipeDetails('time', recipe_details.recipe.time)
+    this.props.saveRecipeDetails('difficulty', recipe_details.recipe.difficulty.toString())
+    const list_values = recipe_details.ingredient_uses.map(ingredient_use => [ingredient_use.ingredient_id, ingredient_use.quantity, ingredient_use.unit])
+    const ingredientsForEdit = list_values.map(list_value => [...list_value, (recipe_details.ingredients.find(ingredient => ingredient.id == list_value[0]).name)])
+    ingredientsForEdit.forEach( (ing, index) => this.props.addIngredientToRecipeDetails(`ingredient${index+1}`, ing[3], ing[1], ing[2]))
+    // console.log(Object.keys(this.props.filter_settings))
+    this.props.setNewRecipeCuisine(recipe_details.recipe.cuisine)
+    Object.keys(this.props.filter_settings).forEach( category => this.props.switchNewRecipeFilterValue(category, recipe_details.recipe[category.toLowerCase().split(" ").join("_")]))
   }
 
   choosePicture = () =>{
