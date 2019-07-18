@@ -7,56 +7,58 @@ import { cuisines } from '../dataComponents/cuisines'
 import { clearedFilters } from '../dataComponents/clearedFilters'
 
 const mapStateToProps = (state) => ({
-    all_Recipes: state.recipes.all,
-    chef_Recipes: state.recipes.chef,
-    chef_feed_Recipes: state.recipes.chef_feed,
-    chef_liked_Recipes: state.recipes.chef_liked,
-    chef_made_Recipes: state.recipes.chef_made,
-    global_ranks_Recipes: state.recipes.global_ranks,
-    most_liked_Recipes: state.recipes.most_liked,
-    most_made_Recipes: state.recipes.most_made,
-    recipes_details: state.recipes_details,
-    loggedInChef: state.loggedInChef,
-    global_ranking: state.global_ranking,
     filter_settings: state.filter_settings,
     cuisine: state.cuisine,
+    newRecipeFilterSettings: state.newRecipeDetails.filter_settings,
+    newRecipeCuisine: state.newRecipeDetails.cuisine,
 })
 
 const mapDispatchToProps = {
-    switchFilterValue: (category, value) => {
+    switchRecipesListFilterValue: (category, value) => {
       return dispatch => {
-        dispatch({ type: 'TOGGLE_FILTER_CATEGORY', category: category, value: value})
+        dispatch({ type: 'TOGGLE_RECIPES_LIST_FILTER_CATEGORY', category: category, value: value})
       }
     },
-    clearFilters: () => {
+    clearRecipesListFilters: () => {
         return dispatch => {
-          dispatch({ type: 'CLEAR_FILTERS', clearedFilters: clearedFilters})
+          dispatch({ type: 'CLEAR_RECIPES_LIST_FILTERS', clearedFilters: clearedFilters})
         }
       },
-    setCuisine: (cuisine) => {
+      setRecipesListCuisine: (cuisine) => {
     return dispatch => {
-        dispatch({ type: 'SET_CUISINE', cuisine: cuisine})
+        dispatch({ type: 'SET_RECIPES_LIST_CUISINE', cuisine: cuisine})
     }
     },
+    switchNewRecipeFilterValue: (category, value) => {
+        return dispatch => {
+          dispatch({ type: 'TOGGLE_NEW_RECIPE_FILTER_CATEGORY', category: category, value: value})
+        }
+      },
+      clearNewRecipeFilters: () => {
+          return dispatch => {
+            dispatch({ type: 'CLEAR_NEW_RECIPE_FILTERS', clearedFilters: clearedFilters})
+          }
+        },
+        setNewRecipeCuisine: (cuisine) => {
+      return dispatch => {
+          dispatch({ type: 'SET_NEW_RECIPE_CUISINE', cuisine: cuisine})
+      }
+      },
   }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
     class FilterMenu extends React.PureComponent{
 
-        handleClearFilterButton = async() =>{
-            await this.props.clearFilters()
-            this.props.closeFilterAndRefresh()
-        }
-
         renderLeftColumnCategories = () => {
             // console.log(Object.keys(this.props.filter_settings).sort().filter( (cat, index) => index <= keysPerCol ))
-            return Object.keys(this.props.filter_settings).sort().filter( (cat, index) => index % 2 === 0 ).map( category => {
+            const filtersList = this.props.newRecipe ? this.props.newRecipeFilterSettings : this.props.filter_settings
+            return Object.keys(filtersList).sort().filter( (cat, index) => index % 2 === 0 ).map( category => {
                 return (
                     <View 
                         style={styles.columnRow}
                         key={category}>
                         <View style={styles.switchContainer}>
-                            <Switch value={this.props.filter_settings[category]} onChange={(e) => this.props.switchFilterValue(category, e.nativeEvent.value)}/>
+                            <Switch value={filtersList[category]} onChange={(e) => this.handleCategoryChange(category, e.nativeEvent.value)}/>
                         </View>
                         <View style={styles.categoryContainer}>
                             <Text style={styles.categoryText}>{category}</Text>
@@ -67,11 +69,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         }
 
         renderRightColumnCategories = () => {
-            return Object.keys(this.props.filter_settings).sort().filter( (cat, index) => index % 2 !== 0 ).map( category => {
+            const filtersList = this.props.newRecipe ? this.props.newRecipeFilterSettings : this.props.filter_settings
+            return Object.keys(filtersList).sort().filter( (cat, index) => index % 2 !== 0 ).map( category => {
                 return (
                     <View style={styles.columnRow} key={category}>
                         <View style={styles.switchContainer}>
-                            <Switch value={this.props.filter_settings[category]} onChange={(e) => this.props.switchFilterValue(category, e.nativeEvent.value)}/>
+                            <Switch value={filtersList[category]} onChange={(e) => this.handleCategoryChange(category, e.nativeEvent.value)}/>
                         </View>
                         <View style={styles.categoryContainer}>
                             <Text style={styles.categoryText}>{category}</Text>
@@ -87,8 +90,25 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             })
           }
 
+        handleApplyButton = () => {
+            this.props.newRecipe ? this.props.handleCategoriesButton() : this.props.closeFilterAndRefresh()
+        }
+
+        handleCategoryChange = (category, value) => {
+            this.props.newRecipe ? this.props.switchNewRecipeFilterValue(category, value) : this.props.switchRecipesListFilterValue(category, value)
+        }
+
+        handleCuisineChange = (cuisine) => {
+            this.props.newRecipe ? this.props.setNewRecipeCuisine(cuisine) : this.props.setRecipesListCuisine(cuisine)
+        }
+
+        handleClearButton = () => {
+            this.props.newRecipe ? this.props.clearNewRecipeFilters() : this.props.clearRecipesListFilters()
+        }
+
         render() {
             // console.log(store)
+            let selectedCuisine = this.props.newRecipe ? this.props.newRecipeCuisine : this.props.cuisine
             return (
                 <Modal
                 animationType="fade"
@@ -100,7 +120,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                             }]}>
                         <View style={styles.contentsContainer}>
                             <View style={styles.titleContainer}>
-                                <Text style={styles.title}>Apply filters to recipes list</Text>
+                                <Text style={styles.title}>{this.props.title}</Text>
                             </View>
                             <View style={styles.columnsContainer}>
                                 <View style={styles.column}>
@@ -117,28 +137,28 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                                         <Picker style={styles.picker}
                                         mode="dropdown"
                                         iosIcon={<Icon name="arrow-down" />}
-                                        onValueChange={e => this.props.setCuisine(e)}
+                                        onValueChange={this.handleCuisineChange}
                                         >
-                                        <Picker.Item style={styles.pickerText} key={this.props.cuisine} label={this.props.cuisine} value={this.props.cuisine} />
+                                        <Picker.Item style={styles.pickerText} key={selectedCuisine} label={selectedCuisine} value={selectedCuisine} />
                                             {this.cuisinesPicker()}
                                         </Picker>
                                     </View>
                                 </View>
                                 <View style={styles.clearFiltersButtonContainer}>
-                                    <TouchableOpacity style={styles.clearFiltersButton} activeOpacity={0.7} title="clearFilters" onPress={this.handleClearFilterButton}>
+                                    <TouchableOpacity style={styles.clearFiltersButton} activeOpacity={0.7} title="clearFilters" onPress={this.handleClearButton}>
                                         <Icon style={styles.clearFiltersIcon} size={25} name='cancel' />
                                         <Text style={styles.clearFiltersButtonText}>Clear{"\n"}filters</Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity style={styles.applyFiltersButton} activeOpacity={0.7} title="applyFilters" onPress={this.props.closeFilterAndRefresh}>
+                                    <TouchableOpacity style={styles.applyFiltersButton} activeOpacity={0.7} title="applyFilters" onPress={this.handleApplyButton}>
                                         <Icon style={styles.applyFiltersIcon} size={25} name='check' />
-                                        <Text style={styles.applyFiltersButtonText}>Apply</Text>
+                                        <Text style={styles.applyFiltersButtonText}>{this.props.confirmButtonText}</Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>
                         </View>
-                        <TouchableOpacity style={styles.filterButton} activeOpacity={0.7} onPress={this.props.closeFilterAndRefresh}>
+                        {/* <TouchableOpacity style={styles.filterButton} activeOpacity={0.7} onPress={this.handleApplyButton}>
                             <Icon name='filter' size={24} style={styles.filterIcon}/>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                     </View>
                 </Modal>
             )

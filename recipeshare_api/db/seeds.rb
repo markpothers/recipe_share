@@ -123,7 +123,7 @@ cuisines = [
         soup: Faker::Boolean.boolean,
         dessert: Faker::Boolean.boolean,
         side: Faker::Boolean.boolean,
-        whole30: Faker::Boolean.boolean,
+        whole_30: Faker::Boolean.boolean,
         paleo: Faker::Boolean.boolean,
         freezer_meal: Faker::Boolean.boolean,
         keto: Faker::Boolean.boolean,

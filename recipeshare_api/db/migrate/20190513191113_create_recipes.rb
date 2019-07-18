@@ -19,7 +19,7 @@ class CreateRecipes < ActiveRecord::Migration[5.2]
       t.boolean :chicken
       t.boolean :red_meat
       t.boolean :seafood
-      t.boolean :whole30
+      t.boolean :whole_30
       t.boolean :paleo
       t.boolean :keto
       t.boolean :gluten_free

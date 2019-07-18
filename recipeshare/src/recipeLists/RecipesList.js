@@ -227,7 +227,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
         <React.Fragment>
           <NavigationEvents onWillFocus={this.respondToFocus} onWillBlur={this.respondToBlur}/>
             <TouchableOpacity style={styles.filterButton} activeOpacity={0.7} onPress={this.handleFilterButton}>
-              {1===1 ? <Icon name='filter-outline' size={24} style={styles.filterIcon}/> : <Icon name='filter-outline' size={24} style={styles.filterIcon}/> }
+              <Icon name='filter' size={24} style={styles.filterIcon}/>
             </TouchableOpacity>
           <FlatList
             data={this.props[this.props["listChoice"] + `_Recipes`]}
@@ -243,7 +243,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
             // scrollEventThrottle={16}
             nestedScrollEnabled={true}
           />
-          {this.state.filterDisplayed ? <FilterMenu handleFilterButton={this.handleFilterButton} refresh={this.refresh} closeFilterAndRefresh={this.closeFilterAndRefresh}/> : null}
+          {this.state.filterDisplayed ? <FilterMenu handleFilterButton={this.handleFilterButton} refresh={this.refresh} closeFilterAndRefresh={this.closeFilterAndRefresh} confirmButtonText={"Apply"} title={"Apply filters to recipes list"}/> : null}
 
         </React.Fragment>
       )

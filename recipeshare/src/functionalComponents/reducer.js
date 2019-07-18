@@ -77,8 +77,33 @@ const reducer = (currentState, action) => {
                 },
                 difficulty: "0",
                 time: "00:15",
-                imageBase64: ""
-                }}
+                imageBase64: "",
+                filter_settings: {
+                  "Breakfast": false,
+                  "Lunch": false,
+                  "Dinner": false,
+                  "Chicken": false,
+                  "Red meat": false,
+                  "Seafood": false,
+                  "Vegetarian": false,
+                  "Salad": false,
+                  "Vegan": false,
+                  "Soup": false,
+                  "Dessert": false,
+                  "Side": false,
+                  "Whole 30": false,
+                  "Paleo": false,
+                  "Freezer meal": false,
+                  "Keto": false,
+                  "Weeknight": false,
+                  "Weekend": false,
+                  "Gluten free": false,
+                  "Bread": false,
+                  "Dairy free": false,
+                  "White meat": false,
+                },
+                cuisine: "Any",
+              }}
         case 'LIKE_RECIPE':
                 currentState.recipes[action.listType].find( recipe => recipe.id === recipeID)
             return {...currentState, recipes: {...currentState.recipes, [action.recipeType]: {...currentState.recipes[action.listType], }}}
@@ -139,13 +164,20 @@ const reducer = (currentState, action) => {
         case 'CLEAR_CHEF_DETAILS':
             // console.log(action.chef_details)
             return {...currentState, chef_details: {}}
-        case 'TOGGLE_FILTER_CATEGORY':
+        case 'TOGGLE_RECIPES_LIST_FILTER_CATEGORY':
             // console.log(action.chef_details)
             return {...currentState, filter_settings: {...currentState.filter_settings, [action.category]: action.value}}
-        case 'CLEAR_FILTERS':
+        case 'CLEAR_RECIPES_LIST_FILTERS':
             return {...currentState, filter_settings: action.clearedFilters, cuisine: "Any"}
-        case 'SET_CUISINE':
+        case 'SET_RECIPES_LIST_CUISINE':
             return {...currentState, cuisine: action.cuisine}
+        case 'TOGGLE_NEW_RECIPE_FILTER_CATEGORY':
+            // console.log(action.chef_details)
+            return {...currentState, newRecipeDetails: {...currentState.newRecipeDetails, filter_settings: {...currentState.newRecipeDetails.filter_settings, [action.category]: action.value}}}
+        case 'CLEAR_NEW_RECIPE_FILTERS':
+            return {...currentState, newRecipeDetails: {...currentState.newRecipeDetails, filter_settings: action.clearedFilters, cuisine: "Any"}}
+        case 'SET_NEW_RECIPE_CUISINE':
+            return {...currentState, newRecipeDetails: {...currentState.newRecipeDetails, cuisine: action.cuisine}}
         default:
             return currentState
     }

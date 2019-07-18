@@ -13,6 +13,7 @@ import { fetchIngredients } from '../fetches/fetchIngredients'
 import IngredientAutoComplete from './ingredientAutoComplete'
 import AppHeader from '../../navigation/appHeader'
 import PicSourceChooser from '../functionalComponents/picSourceChooser'
+import FilterMenu from '../functionalComponents/filterMenu'
 
 const mapStateToProps = (state) => ({
   name: state.newRecipeDetails.name,
@@ -21,6 +22,8 @@ const mapStateToProps = (state) => ({
   difficulty: state.newRecipeDetails.difficulty,
   time: state.newRecipeDetails.time,
   imageBase64: state.newRecipeDetails.imageBase64,
+  filter_settings: state.newRecipeDetails.filter_settings,
+  cuisine: state.newRecipeDetails.cuisine,
   recipe_details: state.recipe_details,
   loggedInChef: state.loggedInChef
 })
@@ -59,7 +62,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       hasPermission: false,
       ingredientsList: [],
       ingredient1: false,
-      choosingPicture: false
+      choosingPicture: false,
+      filterDisplayed: false
     }
 
     componentDidMount(){
@@ -199,14 +203,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     submitRecipe = async() => {
       if (this.props.navigation.getParam('recipe_details') !== undefined){
-        const recipe = await patchRecipe(this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.props.name, this.props.ingredients, this.props.instructions, this.props.time, this.props.difficulty, this.props.imageBase64, this.props.navigation.getParam('recipe_details').recipe.id)
+        const recipe = await patchRecipe(this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.props.name, this.props.ingredients, this.props.instructions, this.props.time, this.props.difficulty, this.props.imageBase64, this.props.filter_settings, this.props.cuisine, this.props.navigation.getParam('recipe_details').recipe.id)
         if (recipe) {
           this.props.clearNewRecipeDetails()
           this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
           this.props.navigation.navigate('MyRecipeBook')
         }
       }else{
-        const recipe = await postRecipe(this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.props.name, this.props.ingredients, this.props.instructions, this.props.time, this.props.difficulty, this.props.imageBase64)
+        const recipe = await postRecipe(this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.props.name, this.props.ingredients, this.props.instructions, this.props.time, this.props.difficulty, this.props.imageBase64, this.props.filter_settings, this.props.cuisine)
         if (recipe) {
           this.props.clearNewRecipeDetails()
           this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
@@ -215,8 +219,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       }
     }
 
+    handleCategoriesButton = () =>{
+      this.setState({filterDisplayed: !this.state.filterDisplayed})
+    }
+
     render() {
-      // console.log(this.props.ingredients)
+      // console.log(this.props.filter_settings)
       return (
         <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.mainPageContainer} imageStyle={styles.backgroundImageStyle}>
           {this.state.choosingPicture ? this.renderPictureChooser() : null}
@@ -268,12 +276,23 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                       <Icon style={styles.standardIcon} size={25} name='camera' />
                       <Text style={styles.createRecipeFormButtonText}>Add{"\n"}picture</Text>
                     </TouchableOpacity>
+                    <TouchableOpacity style={styles.createRecipeFormButton} activeOpacity={0.7} onPress={this.handleCategoriesButton}>
+                      <Icon style={styles.standardIcon} size={25} name='filter' />
+                      <Text style={styles.createRecipeFormButtonText}>Select{"\n"}categories</Text>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={styles.transparentFormRow}>
+                    {/* <TouchableOpacity style={styles.createRecipeFormButton} activeOpacity={0.7} onPress={this.handleFilterButton}>
+                      <Icon style={styles.standardIcon} size={25} name='filter' />
+                      <Text style={styles.createRecipeFormButtonText}>Select{"\n"}categories</Text>
+                    </TouchableOpacity> */}
                     <TouchableOpacity style={[styles.createRecipeFormButton,{marginBottom: 4}]} activeOpacity={0.7} onPress={e => this.submitRecipe(e)}>
                       <Icon style={styles.standardIcon} size={25} name='login' />
                       <Text style={styles.createRecipeFormButtonText}>Submit</Text>
                     </TouchableOpacity>
                   </View>
             </ScrollView>
+            {this.state.filterDisplayed ? <FilterMenu handleCategoriesButton={this.handleCategoriesButton} newRecipe={true} confirmButtonText={"Save"} title={"Select categories for your recipe"}/> : null}
           </KeyboardAvoidingView>
         </ImageBackground>
 

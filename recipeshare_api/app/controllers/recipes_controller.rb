@@ -18,9 +18,13 @@ class RecipesController < ApplicationController
     # end
 
     def create
-        @recipe = Recipe.create(newRecipe_params)
+        @recipe = Recipe.new(newRecipe_params)
         @recipe.hidden=(false)
         @recipe.chef_id=@chef.id
+        newRecipe_filter_settings["filter_settings"].keys.each do |category|
+            newRecipe_filter_settings["filter_settings"][category] ? @recipe[category.downcase.split(" ").join("_")] = true : @recipe[category.downcase.split(" ").join("_")] = false
+        end
+        @recipe.cuisine=newRecipe_filter_settings["cuisine"]
         if @recipe.save
             if newRecipe_image_params[:imageBase64] != "" && newRecipe_image_params[:imageBase64] != nil
                 @recipe_image = RecipeImage.create(recipe_id: @recipe.id)
@@ -116,6 +120,10 @@ class RecipesController < ApplicationController
 
     def newRecipe_Ingredient_params
         params.require(:recipe).permit(ingredients: {})
+    end
+
+    def newRecipe_filter_settings
+        params.require(:recipe).permit(:cuisine, :filter_settings => {})
     end
 
 end
