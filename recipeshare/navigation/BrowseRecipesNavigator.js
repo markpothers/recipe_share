@@ -2,8 +2,8 @@ import React from 'react';
 import { Platform, Button, Text, Dimensions } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator, createMaterialTopTabNavigator, createDrawerNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import BrowseRecipesScreen from '../screens/BrowseRecipes';
-import MyRecipeBookScreen from '../screens/MyRecipeBook';
+// import BrowseRecipesScreen from '../screens/BrowseRecipes';
+// import MyRecipeBookScreen from '../screens/MyRecipeBook';
 import RecipeDetailsScreen from '../src/recipeDetails/recipeDetails'
 import ChefDetailsScreen from '../src/chefDetails/chefDetails'
 import NewRecipeScreen from '../src/newRecipe/newRecipe'

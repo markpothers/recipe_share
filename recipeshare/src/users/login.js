@@ -103,9 +103,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       // console.log(databaseURL)
       return (
         <KeyboardAvoidingView  style={styles.mainPageContainer} behavior="padding">
-          <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
+          <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
             <View style={styles.logoContainer}>
-              <Image style={styles.logo} source={require('./logo.png')}/>
+              <Image style={styles.logo} source={require('../dataComponents/logo.png')}/>
             </View>
             <View style={styles.loginForm} >
               <View style={styles.formRow}>

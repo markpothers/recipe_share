@@ -1,6 +1,6 @@
 import React from 'react'
-import {ScrollView, Text, AsyncStorage, ImageBackground, KeyboardAvoidingView, TouchableOpacity, TextInput, View} from 'react-native'
-import { Picker } from 'native-base';
+import {ScrollView, Text, AsyncStorage, ImageBackground, KeyboardAvoidingView, TouchableOpacity, TextInput, View, Picker } from 'react-native'
+// import { Picker } from 'native-base';
 import { countries } from '../dataComponents/countries'
 import * as Permissions from 'expo-permissions'
 import { connect } from 'react-redux'
@@ -175,7 +175,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       // console.log(this.props)
       return (
         <KeyboardAvoidingView  style={styles.mainPageContainer} behavior="padding">
-          <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
+          <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
           {this.state.choosingPicture ? this.renderPictureChooser() : null}
             <View style={styles.createChefForm}>
               <ScrollView>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { styles } from './profileStyleSheet'
-import { Container, Header, Text, Button,  } from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { AsyncStorage, View, ImageBackground, TouchableOpacity } from 'react-native'
 import AppHeader from '../../navigation/appHeader'
@@ -61,7 +60,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         const chef_details = this.props.chefs_details[`chef${this.props.loggedInChef.id}`]
         return (
           <React.Fragment>
-            <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
+            <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
               <ChefDetailsCard {...chef_details} imageURL={chef_details.chef.imageURL}/>
                 <TouchableOpacity activeOpacity={0.7} style={styles.logoutButton} onPress={this.logout}>
                   <Icon name='logout' size={25} style={styles.icon} />
@@ -72,7 +71,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       } else {
         return (
           <View style={{flex:1}}>
-            <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
+            <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
             </ImageBackground>
           </View>
         )

@@ -18,6 +18,7 @@ class RecipesController < ApplicationController
     # end
 
     def create
+        byebug
         @recipe = Recipe.new(newRecipe_params)
         @recipe.hidden=(false)
         @recipe.chef_id=@chef.id

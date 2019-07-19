@@ -17,7 +17,7 @@ class ApplicationController < ActionController::API
         # byebug
         begin
             token = request.headers['Authorization'].split(" ")[1]
-            payload = JWT.decode(token, 'my_secret_phrase')[0]
+            payload = JWT.decode(token, 'f9aaac712f7cdb36b9ecc7714166f539')[0]
             if Chef.find(payload["id"])
                 @chef = Chef.find(payload["id"])
                 return true # i.e. the user is logged in

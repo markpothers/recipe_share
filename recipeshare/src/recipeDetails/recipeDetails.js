@@ -316,7 +316,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         // console.log(this.myScroll.nativeEvent.conte?ntOffset.y)
         return (
           <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={83} style={{flex:1}}>
-            <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
+            <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
               {this.state.choosingPicSource ? this.renderPictureChooser() : null}
               <View style={styles.detailsHeader}>
                 <Text style={[styles.detailsHeaderTextBox]}>{this.props.recipe_details.recipe.name}</Text>
@@ -376,7 +376,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           </KeyboardAvoidingView>
         );
       } else {
-        return <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle} />
+        return <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle} />
       }
     }
   }

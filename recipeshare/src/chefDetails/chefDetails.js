@@ -102,7 +102,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         const chef_details = this.props.chefs_details[`chef${this.props.navigation.getParam('chefID')}`]
         return (
           <View style={{flex:1}}>
-            <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
+            <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
               <ScrollView contentContainerStyle={{flexGrow:1}}>
                 <ChefDetailsCard 
                   {...chef_details} 
@@ -120,7 +120,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       } else {
         return (
           <View style={{flex:1}}>
-            <ImageBackground source={{uri: 'https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/4007181/910/607/m2/fpnw/wm1/laura_kei-spinach-leaves-cover-.jpg?1518635518&s=dfeb27bc4b219f4a965c61d725e58413'}} style={styles.background} imageStyle={styles.backgroundImageStyle}>
+            <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
             </ImageBackground>
           </View>
         )

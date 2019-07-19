@@ -38,7 +38,7 @@ class Chef < ApplicationRecord
     # end
 
     def auth_token
-        JWT.encode({id: self.id}, 'my_secret_phrase')
+        JWT.encode({id: self.id}, 'f9aaac712f7cdb36b9ecc7714166f539')
     end
 
     def as_json(*)
