@@ -103,6 +103,8 @@ cuisines = [
     "Vietnamese"
 ]
 
+serves = ['Any', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+
 250.times do
     Recipe.create(name: Faker::Food.dish,
         hidden: false,
@@ -134,6 +136,7 @@ cuisines = [
         dairy_free: Faker::Boolean.boolean,
         white_meat: Faker::Boolean.boolean,
         cuisine: cuisines.sample,
+        serves: serves.sample,
         )
 end
 

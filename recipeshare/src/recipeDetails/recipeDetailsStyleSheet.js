@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
       alignItems: 'center',
       marginLeft: '0%',
       marginRight: '0%',
-      marginTop: 4,
+      marginTop: 3,
       borderRadius: 5,
       backgroundColor: 'white',
       flexDirection: 'row'
@@ -41,7 +41,7 @@ export const styles = StyleSheet.create({
       width: '100%',
       marginLeft: '0%',
       marginRight: '0%',
-      marginTop: 4,
+      marginTop: 3,
       marginBottom: '1%',
       // justifyContent: 'center',
       // alignItems: 'center',
@@ -84,7 +84,7 @@ export const styles = StyleSheet.create({
       // width: '100%',
       // marginLeft: '0%',
       // marginRight: '0%',
-      marginTop: 4,
+      marginTop: 3,
       borderRadius: 5,
       backgroundColor: 'white',
       // opacity: 0.9,
@@ -103,7 +103,7 @@ export const styles = StyleSheet.create({
       width: '100%',
       marginLeft: '0%',
       marginRight: '0%',
-      marginTop: 4,
+      marginTop: 3,
       borderRadius: 5,
       backgroundColor: 'white',
       // opacity: 0.9,
@@ -139,7 +139,7 @@ export const styles = StyleSheet.create({
       width: '100%',
       marginLeft: '0%',
       marginRight: '0%',
-      marginTop: 4,
+      marginTop: 3,
       flexDirection: 'row',
       borderRadius: 5,
       backgroundColor: 'white',
@@ -240,7 +240,7 @@ export const styles = StyleSheet.create({
       width: '100%',
       marginLeft: '0%',
       marginRight: '0%',
-      marginTop: 4,
+      marginTop: 3,
       marginBottom: 4,
       borderRadius: 5,
       backgroundColor: 'white',
@@ -248,7 +248,7 @@ export const styles = StyleSheet.create({
     },
     commentContainer: {
       flexDirection: 'row',
-      marginTop: 4,
+      marginTop: 3,
       // marginBottom: '2%'
       width: '96%',
       marginLeft: '2%',
@@ -275,7 +275,7 @@ export const styles = StyleSheet.create({
     makePicScrollView:{
       height: 120,
       borderRadius: 5,
-      marginTop: 4,
+      marginTop: 3,
       // flex: 1  // DO NOT USE THIS IT BREAKS EVERYTHING
     },
     avatarThumbnail:{

@@ -4,13 +4,16 @@ import { styles } from './filterMenuStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux'
 import { cuisines } from '../dataComponents/cuisines'
+import { serves } from '../dataComponents/serves'
 import { clearedFilters } from '../dataComponents/clearedFilters'
 
 const mapStateToProps = (state) => ({
     filter_settings: state.filter_settings,
     cuisine: state.cuisine,
+    serves: state.serves,
     newRecipeFilterSettings: state.newRecipeDetails.filter_settings,
     newRecipeCuisine: state.newRecipeDetails.cuisine,
+    newRecipeServes: state.newRecipeDetails.serves,
 })
 
 const mapDispatchToProps = {
@@ -29,6 +32,11 @@ const mapDispatchToProps = {
         dispatch({ type: 'SET_RECIPES_LIST_CUISINE', cuisine: cuisine})
     }
     },
+    setRecipesListServes: (serves) => {
+        return dispatch => {
+            dispatch({ type: 'SET_RECIPES_LIST_SERVES', serves: serves})
+        }
+        },
     switchNewRecipeFilterValue: (category, value) => {
         return dispatch => {
           dispatch({ type: 'TOGGLE_NEW_RECIPE_FILTER_CATEGORY', category: category, value: value})
@@ -42,6 +50,11 @@ const mapDispatchToProps = {
     setNewRecipeCuisine: (cuisine) => {
         return dispatch => {
             dispatch({ type: 'SET_NEW_RECIPE_CUISINE', cuisine: cuisine})
+        }
+    },
+    setNewRecipeServes: (serves) => {
+        return dispatch => {
+            dispatch({ type: 'SET_NEW_RECIPE_SERVES', serves: serves})
         }
     },
   }
@@ -90,6 +103,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             })
           }
 
+        servesPicker = () => {
+        return serves.sort((a,b) => a-b ).map( serve => {
+            return <Picker.Item style={styles.pickerText} key={serve} label={serve} value={serve} />
+        })
+        }
+
         handleApplyButton = () => {
             this.props.newRecipe ? this.props.handleCategoriesButton() : this.props.closeFilterAndRefresh()
         }
@@ -102,6 +121,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             this.props.newRecipe ? this.props.setNewRecipeCuisine(cuisine) : this.props.setRecipesListCuisine(cuisine)
         }
 
+        handleServesChange = (serves) => {
+            this.props.newRecipe ? this.props.setNewRecipeServes(serves) : this.props.setRecipesListServes(serves)
+        }
+
         handleClearButton = () => {
             this.props.newRecipe ? this.props.clearNewRecipeFilters() : this.props.clearRecipesListFilters()
         }
@@ -109,6 +132,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         render() {
             // console.log(store)
             let selectedCuisine = this.props.newRecipe ? this.props.newRecipeCuisine : this.props.cuisine
+            let selectedServes = this.props.newRecipe ? this.props.newRecipeServes : this.props.serves
             return (
                 <Modal
                 animationType="fade"
@@ -141,6 +165,19 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                                         >
                                         <Picker.Item style={styles.pickerText} key={selectedCuisine} label={selectedCuisine} value={selectedCuisine} />
                                             {this.cuisinesPicker()}
+                                        </Picker>
+                                    </View>
+                                </View>
+                                <View style={styles.bottomTopContainer}>
+                                    <Text style={styles.title}>Serves:</Text>
+                                    <View picker style={styles.cuisinePicker} >
+                                        <Picker style={styles.picker}
+                                        mode="dropdown"
+                                        iosIcon={<Icon name="arrow-down" />}
+                                        onValueChange={this.handleServesChange}
+                                        >
+                                        <Picker.Item style={styles.pickerText} key={selectedServes} label={selectedServes} value={selectedServes} />
+                                            {this.servesPicker()}
                                         </Picker>
                                     </View>
                                 </View>

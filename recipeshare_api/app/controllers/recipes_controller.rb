@@ -9,7 +9,7 @@ class RecipesController < ApplicationController
 
     def index
         # byebug
-        @recipes = Recipe.choose_list(params["listType"], params["queryChefID"], params["limit"], params["offset"], params["global_ranking"], @chef.id, params["filters"], params["cuisine"])
+        @recipes = Recipe.choose_list(params["listType"], params["queryChefID"], params["limit"], params["offset"], params["global_ranking"], @chef.id, params["filters"], params["cuisine"], params["serves"])
         render json: @recipes #, methods: [:add_count]
     end
 
@@ -24,7 +24,6 @@ class RecipesController < ApplicationController
         newRecipe_filter_settings["filter_settings"].keys.each do |category|
             newRecipe_filter_settings["filter_settings"][category] ? @recipe[category.downcase.split(" ").join("_")] = true : @recipe[category.downcase.split(" ").join("_")] = false
         end
-        @recipe.cuisine=newRecipe_filter_settings["cuisine"]
         if @recipe.save
             if newRecipe_image_params[:imageBase64] != "" && newRecipe_image_params[:imageBase64] != nil
                 @recipe_image = RecipeImage.create(recipe_id: @recipe.id)
@@ -115,7 +114,7 @@ class RecipesController < ApplicationController
     end
 
     def newRecipe_params
-        params.require(:recipe).permit(:name, :time, :difficulty, :instructions)
+        params.require(:recipe).permit(:name, :time, :difficulty, :instructions, :cuisine, :serves)
     end
 
     def newRecipe_image_params
@@ -127,7 +126,7 @@ class RecipesController < ApplicationController
     end
 
     def newRecipe_filter_settings
-        params.require(:recipe).permit(:cuisine, :filter_settings => {})
+        params.require(:recipe).permit(:filter_settings => {})
     end
 
 end

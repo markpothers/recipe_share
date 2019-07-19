@@ -30,6 +30,7 @@ class CreateRecipes < ActiveRecord::Migration[5.2]
       t.boolean :dairy_free
       t.boolean :white_meat
       t.string :cuisine
+      t.string :serves
 
       t.timestamps
     end

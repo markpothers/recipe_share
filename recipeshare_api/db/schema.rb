@@ -179,6 +179,7 @@ ActiveRecord::Schema.define(version: 2019_06_14_164549) do
     t.boolean "dairy_free"
     t.boolean "white_meat"
     t.string "cuisine"
+    t.string "serves"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["chef_id"], name: "index_recipes_on_chef_id"

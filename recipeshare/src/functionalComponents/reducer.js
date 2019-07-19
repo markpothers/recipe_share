@@ -103,6 +103,7 @@ const reducer = (currentState, action) => {
                   "White meat": false,
                 },
                 cuisine: "Any",
+                serves: "Any"
               }}
         case 'LIKE_RECIPE':
                 currentState.recipes[action.listType].find( recipe => recipe.id === recipeID)
@@ -168,16 +169,20 @@ const reducer = (currentState, action) => {
             // console.log(action.chef_details)
             return {...currentState, filter_settings: {...currentState.filter_settings, [action.category]: action.value}}
         case 'CLEAR_RECIPES_LIST_FILTERS':
-            return {...currentState, filter_settings: action.clearedFilters, cuisine: "Any"}
-        case 'SET_RECIPES_LIST_CUISINE':
-            return {...currentState, cuisine: action.cuisine}
+            return {...currentState, filter_settings: action.clearedFilters, cuisine: "Any", serves: "Any"}
+            case 'SET_RECIPES_LIST_CUISINE':
+                return {...currentState, cuisine: action.cuisine}
+        case 'SET_RECIPES_LIST_SERVES':
+                return {...currentState, serves: action.serves}
         case 'TOGGLE_NEW_RECIPE_FILTER_CATEGORY':
             // console.log(action.chef_details)
             return {...currentState, newRecipeDetails: {...currentState.newRecipeDetails, filter_settings: {...currentState.newRecipeDetails.filter_settings, [action.category]: action.value}}}
         case 'CLEAR_NEW_RECIPE_FILTERS':
-            return {...currentState, newRecipeDetails: {...currentState.newRecipeDetails, filter_settings: action.clearedFilters, cuisine: "Any"}}
-        case 'SET_NEW_RECIPE_CUISINE':
-            return {...currentState, newRecipeDetails: {...currentState.newRecipeDetails, cuisine: action.cuisine}}
+            return {...currentState, newRecipeDetails: {...currentState.newRecipeDetails, filter_settings: action.clearedFilters, cuisine: "Any", serves: "Any"}}
+            case 'SET_NEW_RECIPE_CUISINE':
+                return {...currentState, newRecipeDetails: {...currentState.newRecipeDetails, cuisine: action.cuisine}}
+        case 'SET_NEW_RECIPE_SERVES':
+            return {...currentState, newRecipeDetails: {...currentState.newRecipeDetails, serves: action.serves}}
         default:
             return currentState
     }

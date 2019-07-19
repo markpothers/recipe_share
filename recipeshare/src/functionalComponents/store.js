@@ -61,6 +61,7 @@ const initialState = {
       "White meat": false,
     },
     cuisine: "Any",
+    serves: "Any"
   },
   newUserDetails: {
     first_name: "",
@@ -111,6 +112,7 @@ const initialState = {
     "White meat": false,
   },
   cuisine: "Any",
+  serves: "Any",
 }
 
   const middleware = compose(

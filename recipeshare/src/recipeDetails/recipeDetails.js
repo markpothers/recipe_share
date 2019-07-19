@@ -95,7 +95,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         await this.setState({commenting: true})
         setTimeout( () => {
           this.myScroll.scrollTo({x: 0, y: 700, animated: true})
-        }, 200)
+        }, 300)
       }
     }
 
@@ -335,6 +335,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     </View>
                   </View>
                   <View style={styles.detailsLikes}>
+                    <Text style={[styles.detailsLikesAndMakesLowerContents]}>Serves: {this.props.recipe_details.recipe.serves}</Text>
                     <Text style={[styles.detailsLikesAndMakesLowerContents]}>Time: {this.props.recipe_details.recipe.time}</Text>
                     <Text style={[styles.detailsLikesAndMakesLowerContents]}>Difficulty: {this.props.recipe_details.recipe.difficulty}</Text>
                   </View>

@@ -24,6 +24,7 @@ const mapStateToProps = (state) => ({
   imageBase64: state.newRecipeDetails.imageBase64,
   filter_settings: state.newRecipeDetails.filter_settings,
   cuisine: state.newRecipeDetails.cuisine,
+  serves: state.newRecipeDetails.serves,
   recipe_details: state.recipe_details,
   loggedInChef: state.loggedInChef
 })
@@ -60,6 +61,11 @@ const mapDispatchToProps = {
     return dispatch => {
         dispatch({ type: 'SET_NEW_RECIPE_CUISINE', cuisine: cuisine})
     }
+},
+setNewRecipeServes: (serves) => {
+  return dispatch => {
+      dispatch({ type: 'SET_NEW_RECIPE_SERVES', serves: serves})
+  }
 },
 
 }
@@ -105,6 +111,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     ingredientsForEdit.forEach( (ing, index) => this.props.addIngredientToRecipeDetails(`ingredient${index+1}`, ing[3], ing[1], ing[2]))
     // console.log(Object.keys(this.props.filter_settings))
     this.props.setNewRecipeCuisine(recipe_details.recipe.cuisine)
+    this.props.setNewRecipeServes(recipe_details.recipe.serves)
     Object.keys(this.props.filter_settings).forEach( category => this.props.switchNewRecipeFilterValue(category, recipe_details.recipe[category.toLowerCase().split(" ").join("_")]))
   }
 
@@ -222,14 +229,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     submitRecipe = async() => {
       if (this.props.navigation.getParam('recipe_details') !== undefined){
-        const recipe = await patchRecipe(this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.props.name, this.props.ingredients, this.props.instructions, this.props.time, this.props.difficulty, this.props.imageBase64, this.props.filter_settings, this.props.cuisine, this.props.navigation.getParam('recipe_details').recipe.id)
+        const recipe = await patchRecipe(this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.props.name, this.props.ingredients, this.props.instructions, this.props.time, this.props.difficulty, this.props.imageBase64, this.props.filter_settings, this.props.cuisine, this.props.serves, this.props.navigation.getParam('recipe_details').recipe.id)
         if (recipe) {
           this.props.clearNewRecipeDetails()
           this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
           this.props.navigation.navigate('MyRecipeBook')
         }
       }else{
-        const recipe = await postRecipe(this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.props.name, this.props.ingredients, this.props.instructions, this.props.time, this.props.difficulty, this.props.imageBase64, this.props.filter_settings, this.props.cuisine)
+        const recipe = await postRecipe(this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.props.name, this.props.ingredients, this.props.instructions, this.props.time, this.props.difficulty, this.props.imageBase64, this.props.filter_settings, this.props.cuisine, this.props.serves)
         if (recipe) {
           this.props.clearNewRecipeDetails()
           this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen

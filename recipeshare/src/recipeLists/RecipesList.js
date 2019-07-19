@@ -26,7 +26,8 @@ const mapStateToProps = (state) => ({
       loggedInChef: state.loggedInChef,
       global_ranking: state.global_ranking,
       filter_settings: state.filter_settings,
-      cuisine: state.cuisine
+      cuisine: state.cuisine,
+      serves: state.serves,
 })
 
 const mapDispatchToProps = {
@@ -92,13 +93,13 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
 
     fetchRecipeListThenDetails = async() => {
       const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
-      let recipes = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.cuisine)
+      let recipes = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.cuisine, this.props.serves)
       this.props.storeRecipeList(this.props["listChoice"], recipes)
     }
 
     fetchAdditionalRecipesThenDetailsForList = async() => {
       const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
-      const new_recipes = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.cuisine)
+      const new_recipes = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.cuisine, this.props.serves)
       this.props.appendToRecipeList(this.props["listChoice"], new_recipes)
     }
 
