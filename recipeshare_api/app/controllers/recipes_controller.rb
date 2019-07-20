@@ -20,7 +20,6 @@ class RecipesController < ApplicationController
     def create
         byebug
         @recipe = Recipe.new(newRecipe_params)
-        @recipe.hidden=(false)
         @recipe.chef_id=@chef.id
         newRecipe_filter_settings["filter_settings"].keys.each do |category|
             newRecipe_filter_settings["filter_settings"][category] ? @recipe[category.downcase.split(" ").join("_")] = true : @recipe[category.downcase.split(" ").join("_")] = false

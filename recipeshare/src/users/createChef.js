@@ -1,6 +1,5 @@
 import React from 'react'
 import {ScrollView, Text, AsyncStorage, ImageBackground, KeyboardAvoidingView, TouchableOpacity, TextInput, View, Picker } from 'react-native'
-// import { Picker } from 'native-base';
 import { countries } from '../dataComponents/countries'
 import * as Permissions from 'expo-permissions'
 import { connect } from 'react-redux'
@@ -117,16 +116,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       })
       .then(res => res.json())
       .then(chef => {
+        console.log(chef)
         if (!chef.error){
           // console.log(chef)
           // this.setState({errors: []})
-          AsyncStorage.setItem('chef', JSON.stringify(chef), () => {
-            AsyncStorage.getItem('chef', (err, res) => {
-              console.log(err)
+          // AsyncStorage.setItem('chef', JSON.stringify(chef), () => {
+            // AsyncStorage.getItem('chef', (err, res) => {
+              // console.log(err)
               this.props.clearNewUserDetails()
-              this.props.navigation.navigate('AppLoading')
-            })
-          })
+              this.props.navigation.navigate('Login')
+            // })
+          // })
 
         } else {
           // console.log(chef.message)
@@ -181,7 +181,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
               <ScrollView>
                 <View style={styles.formRow}>
                   <View style={styles.loginHeader}>
-                    <Text style={styles.createChefTitle}>Please register as our newest chef!</Text>
+                    <Text style={styles.createChefTitle}>Please register and click the link in your confirmation e-mail!</Text>
                   </View>
                 </View>
                 <View style={styles.formRow}>
@@ -237,7 +237,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 <View style={styles.formRow}>
                   <TouchableOpacity style={styles.loginFormButton} activeOpacity={0.7} onPress={e => this.submitChef(e)}>
                     <Icon style={styles.standardIcon} size={25} name='login-variant' />
-                    <Text style={styles.loginFormButtonText}>Submit &{"\n"}log in</Text>
+                    <Text style={styles.loginFormButtonText}>Submit &{"\n"} go to log in</Text>
                   </TouchableOpacity>
                 </View>
               </ScrollView>

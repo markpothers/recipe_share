@@ -72,6 +72,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         return (
           <View style={{flex:1}}>
             <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
+              <TouchableOpacity activeOpacity={0.7} style={styles.logoutButton} onPress={this.logout}>
+                <Icon name='logout' size={25} style={styles.icon} />
+              </TouchableOpacity>
             </ImageBackground>
           </View>
         )

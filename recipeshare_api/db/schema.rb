@@ -43,12 +43,14 @@ ActiveRecord::Schema.define(version: 2019_06_14_164549) do
     t.string "password_confirmation"
     t.string "password_digest"
     t.string "imageURL"
-    t.boolean "hidden"
+    t.boolean "hidden", default: false
     t.string "hex"
-    t.boolean "is_admin"
+    t.boolean "is_admin", default: false
     t.datetime "created_at", null: false
     t.string "profile_text"
-    t.boolean "is_member"
+    t.boolean "is_member", default: false
+    t.boolean "activated", default: false
+    t.string "activation_digest"
     t.datetime "updated_at", null: false
   end
 
@@ -155,7 +157,7 @@ ActiveRecord::Schema.define(version: 2019_06_14_164549) do
     t.string "time"
     t.integer "difficulty"
     t.string "instructions"
-    t.boolean "hidden"
+    t.boolean "hidden", default: false
     t.boolean "breakfast"
     t.boolean "lunch"
     t.boolean "dinner"

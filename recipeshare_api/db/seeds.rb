@@ -48,19 +48,19 @@ Ingredient.destroy_all
     Ingredient.create(name: Faker::Food.ingredient, created_at: Time.now)
 end
 
-100.times do
-    Chef.create(is_admin: false, 
+10.times do
+    Chef.create(
         username: Faker::Books::CultureSeries.planet, 
         imageURL:Faker::Avatar.image, 
         e_mail:Faker::Internet.email, 
         country: Faker::TvShows::StarTrek.location, 
-        hidden: false, 
         created_at: Time.now, 
         password: '123456', 
         password_confirmation: '123456', 
         hex: SecureRandom.hex, 
         profile_text: Faker::GreekPhilosophers.quote,
-        is_member: false)
+        activated: true,
+        )
 end
 
 

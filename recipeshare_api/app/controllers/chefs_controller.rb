@@ -2,9 +2,7 @@ require 'securerandom'
 
 class ChefsController < ApplicationController
 
-    # skip_before_action :verify_authenticity_token
-    # skip_before_action :authenticate, :only => [:new, :create]
-    skip_before_action :logged_in?, :only => [:authenticate, :create]
+    skip_before_action :logged_in?, :only => [:authenticate, :create,:activate, :forgot_password, :password_reset]
 
     def authenticate
         if @chef = Chef.find_by(e_mail: chef_params[:e_mail])
@@ -33,29 +31,40 @@ class ChefsController < ApplicationController
     def create
         if chef_params[:password] === chef_params[:password_confirmation]
             @chef = Chef.new(chef_params)
-            @chef.is_admin = false
-            @chef.hidden = false
-            @chef.is_member = false
             if @chef.save
-                if image_params[:imageURL] != ""
-                    hex = SecureRandom.hex
-                    until Chef.find_by(hex: hex) == nil
+                @chef.activation_digest = JWT.encode({id: @chef.id}, 'e9c25029ce138bee53480013fb005e5b')
+                    if image_params[:imageURL] != ""
                         hex = SecureRandom.hex
+                        until Chef.find_by(hex: hex) == nil
+                            hex = SecureRandom.hex
+                        end
+                        File.open("public/chef_avatars/chef-avatar-#{hex}.jpg", 'wb') do |f|
+                            f.write(Base64.decode64(image_params[:imageURL]))
+                        end
+                        @chef.imageURL = "/chef_avatars/chef-avatar-#{hex}.jpg"
+                        @chef.hex=hex
+                        @chef.save
                     end
-                    File.open("public/chef_avatars/chef-avatar-#{hex}.jpg", 'wb') do |f|
-                        f.write(Base64.decode64(image_params[:imageURL]))
-                    end
-                    @chef.imageURL = "/chef_avatars/chef-avatar-#{hex}.jpg"
-                    @chef.hex=hex
-                    @chef.save
-                end
-                render json: @chef, methods: [:auth_token]
+                @chef.save
+                ChefMailer.with(chef: @chef).account_activation.deliver_now
+                render json: true
             else
                 puts @chef.errors.full_messages
                 render json: {error: true, message: @chef.errors.full_messages}
             end
         else
             render json: {error: true, message: ["Passwords do not match"] } #, chef: chef_params}
+        end
+    end
+
+    def activate
+        @chef = Chef.find_by(e_mail: params[:email])
+        if @chef.activation_digest == params[:token]
+            @chef.update_attribute(:activated, true)
+            @chef.update_attribute(:activation_digest, "")
+            render json: {message: "Thanks for confirming your e-mail.  Please log in through the app and enjoy!"}
+        else
+            render json: {error: true, message: ["Tokens did not match"] }
         end
     end
 
@@ -66,19 +75,42 @@ class ChefsController < ApplicationController
     end
 
     # def edit
+    #     byebug
     # end
 
     def update
-        puts @chef
-        puts params
-        byebug
         @chef.update(imageURL: params[imageURL])
-
         if @chef.save
 
             render json: @chef, methods: [:auth_token]
         else
             render json: {error: true, message: "Chef updating failed for reasons that need to be specified", chef: chef_params}
+        end
+    end
+
+    # def forgot_password
+    #     # byebug
+    #     @chef = Chef.find_by(e_mail: params[:email])
+    #     if @chef
+    #         ChefMailer.with(chef: @chef).password_reset.deliver_now
+    #         render json: {error: true, message: "Thanks.  An e-mail is on its way with a new password."}
+    #     else
+    #         render json: {error: true, message: "E-mail not found.  Please enter valid e-mail to reset password or register."}
+    #     end
+    # end
+
+    def password_reset
+        # byebug
+        @chef = Chef.find_by(e_mail: params[:email])
+        if @chef
+            newHex = SecureRandom.hex(8)
+            @chef.password = newHex
+            @chef.password_confirmation = newHex
+            @chef.save
+            ChefMailer.with(chef: @chef, password: newHex).password_reset.deliver_now
+            render json: {error: false, message: "We've sent you a new password.  Please check your e-mail"}
+        else
+            render json: {error: true, message: "Please enter your registered e-mail address to receive a new password."}
         end
     end
 

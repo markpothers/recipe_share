@@ -4,22 +4,40 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   mainPageContainer:{
     flex: 1,
+    // height: 640
+  },
+  scrollContainer:{
+    // borderStyle: 'solid',
+    // borderWidth: 2,
+    // flexGrow: 1
+    //     borderStyle: 'solid',
+    // borderWidth: 2,
+    // borderColor: 'yellow'
   },
   background: {
-    width: '100%',
-    height: '100%',
-    flex: 1
+    // width: '100%',
+    // height: '100%',
+    flex: 1,
+    // borderStyle: 'solid',
+    // borderWidth: 2,
+    // borderColor: 'yellow'
   },
   backgroundImageStyle: {
     // opacity: 0.8
   },
   loginForm: {
-    position: 'absolute',
-    bottom: '20%',
+    // position: 'absolute',
+    // bottom: '20%',
+    // top: '40%',
+    // flex: 1,
     width: '100%',
+    marginTop: '5%',
+    // height: 400,
+    // borderStyle: 'solid',
+    // borderWidth: 2
   },
   loginInputBox: {
-    marginTop: '0%',
+    // marginTop: '0%',
     marginLeft: '10%',
     marginRight: '10%',
     backgroundColor: 'white',
@@ -39,7 +57,7 @@ export const styles = StyleSheet.create({
     borderRadius: 5
   },
   loginHeader: {
-    marginTop: '0%',
+    // marginTop: '0%',
     marginLeft: '10%',
     marginRight: '10%',
     backgroundColor: 'white',
@@ -70,13 +88,16 @@ export const styles = StyleSheet.create({
     color: "#505050",
   },
   formRow: {
-    flex: 1,
+    // flex: 1,
     marginTop: '1%',
     flexDirection:'row',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
     width: '100%',
+    // height: 44,
+    // borderStyle: 'solid',
+    // borderWidth: 5,
   },
   loginFormButton:{
     marginLeft: '5%',
@@ -114,23 +135,45 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
-    height: 28,
+    height: 38,
     width: '80%'
   },
   formErrorText:{
     color: "#9e0000f8",
+    marginLeft: '2%',
+    marginRight: '2%'
   },
   logoContainer: {
-    width: '100%',
-    height: '30%',
+    // flex: 1,
+    // width: '100%',
+    // top:'15%',
+    height: '40%',
+    // borderStyle: 'solid',
+    // borderWidth: 2,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   logo: {
-    top: '40%',
-    width: '100%',
-    flex: 1
+    top: '10%',
+    width: '75%',
+    height: '100%',
+    // flex: 1
   },
   profileTextAreaInput: {
     height: 130,
     marginTop: 4,
+  },
+  buttonPlaceholder:{
+    marginLeft: '5%',
+    marginRight: '5%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '35%',
+    height: 44,
+    flexDirection:'row',
+    borderRadius: 5,
+    // backgroundColor: '#fff59b',
+    // borderStyle: 'solid',
+    // borderWidth: 1,
   },
   });

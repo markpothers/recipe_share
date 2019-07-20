@@ -20,7 +20,12 @@ class ApplicationController < ActionController::API
             payload = JWT.decode(token, 'f9aaac712f7cdb36b9ecc7714166f539')[0]
             if Chef.find(payload["id"])
                 @chef = Chef.find(payload["id"])
-                return true # i.e. the user is logged in
+                if @chef.activated
+                    return true # i.e. the user is logged in
+                else
+                    render json: {error: true, message: "This user is not active"}
+                end
+
             else # couldn't find chef in database
                 render json: {error: true, message: "Could not find user in Application Controller logged_in? method"}
             end

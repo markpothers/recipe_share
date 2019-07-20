@@ -1,0 +1,12 @@
+Chef#account_activation
+
+<%= @greeting %>
+
+    Thanks for joining Recipe-Share.
+    Here's the activation link to complete setup of your account.
+
+<%= "http://73.166.74.229:3000/account_activation?token=#{@chef.activation_digest}&email=#{@chef.e_mail.split("@").join("%40")}" %>
+
+    You're just a click away from countless recipe ideas to enjoy.
+    Thanks so much for signing up.
+    Recipe-Share Admin"

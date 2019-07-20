@@ -1,10 +1,11 @@
 import React from 'react'
-import {Text, AsyncStorage, ImageBackground, KeyboardAvoidingView, Image, View, TextInput, TouchableOpacity } from 'react-native'
+import {Text, AsyncStorage, ImageBackground, KeyboardAvoidingView, Image, View, TextInput, TouchableOpacity, ScrollView, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { styles } from './usersStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import { getNewPassword } from '../fetches/getNewPassword'
+// import { ScrollView } from 'react-native-gesture-handler';
 
 const mapStateToProps = (state) => ({
   e_mail: state.loginUserDetails.e_mail,
@@ -99,45 +100,77 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       }
     }
 
+    forgotPassword = async() => {
+      const response = await getNewPassword(this.props.e_mail)
+      if (response){
+        // console.log(response)
+        this.setState({error: "forgotPassword", forgottenPasswordMessage: response.message})
+      }
+    }
+
+    renderForgotPasswordError = () => {
+      if (this.state.error === "forgotPassword"){
+        return (
+          <View style={styles.formRow}>
+            <View style={styles.formError}>
+              <Text style={styles.formErrorText}>{this.state.forgottenPasswordMessage}</Text>
+            </View>
+          </View>
+        )
+      }
+    }
+
     render() {
-      // console.log(databaseURL)
+      // console.log(Dimensions.get('window').height)
       return (
-        <KeyboardAvoidingView  style={styles.mainPageContainer} behavior="padding">
-          <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
-            <View style={styles.logoContainer}>
-              <Image style={styles.logo} source={require('../dataComponents/logo.png')}/>
-            </View>
-            <View style={styles.loginForm} >
-              <View style={styles.formRow}>
-                <View style={styles.loginHeader}>
-                  <Text style={styles.loginTitle}>Welcome, chef!{"\n"} Please log in or register</Text>
-                </View>
+        <ImageBackground source={require('../dataComponents/spinach.jpg')} style={[styles.background,{height: Dimensions.get('window').height,
+        width: Dimensions.get('window').width,
+        }]} imageStyle={styles.backgroundImageStyle}>
+          <KeyboardAvoidingView style={styles.mainPageContainer} behavior="padding">
+              <View style={styles.logoContainer}>
+                <Image style={styles.logo} resizeMode={"contain"} source={require('../dataComponents/logo.png')}/>
               </View>
-              <View style={styles.formRow}>
-                <View style={styles.loginInputBox}>
-                  <TextInput style={styles.loginTextBox} placeholder="e-mail" keyboardType="email-address" autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "e_mail")}/>
+              <View style={styles.loginForm} >
+                <View style={styles.formRow}>
+                  <View style={styles.loginHeader}>
+                    <Text style={styles.loginTitle}>Welcome, chef!{"\n"} Please log in or register</Text>
+                  </View>
                 </View>
-              </View>
-              {this.renderEmailError()}
-              <View style={styles.formRow}>
-                <View style={styles.loginInputBox}>
-                  <TextInput style={styles.loginTextBox} placeholder="password" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")}/>
+                <View style={styles.formRow}>
+                  <View style={styles.loginInputBox}>
+                    <TextInput style={styles.loginTextBox} placeholder="e-mail" keyboardType="email-address" autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "e_mail")}/>
+                  </View>
                 </View>
-              </View>
-              {this.renderPasswordError()}
-              <View style={styles.formRow}>
-                <TouchableOpacity style={styles.loginFormButton} activeOpacity={0.7} onPress={() => this.props.navigation.navigate('CreateChef')}>
-                  <Icon style={styles.standardIcon} size={25} name='account-plus'></Icon>
-                    <Text style={styles.loginFormButtonText}>Register</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.loginFormButton} activeOpacity={0.7} onPress={e => this.loginChef(e)}>
-                  <Icon style={styles.standardIcon} size={25} name='login'></Icon>
-                    <Text style={styles.loginFormButtonText}>Login</Text>
+                {this.renderEmailError()}
+                {this.renderForgotPasswordError()}
+                <View style={styles.formRow}>
+                  <View style={styles.loginInputBox}>
+                    <TextInput style={styles.loginTextBox} placeholder="password" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")}/>
+                  </View>
+                </View>
+                {this.renderPasswordError()}
+                <View style={styles.formRow}>
+                  <TouchableOpacity style={styles.loginFormButton} activeOpacity={0.7} onPress={() => this.props.navigation.navigate('CreateChef')}>
+                    <Icon style={styles.standardIcon} size={25} name='account-plus'></Icon>
+                      <Text style={styles.loginFormButtonText}>Register</Text>
                   </TouchableOpacity>
+                  <TouchableOpacity style={styles.loginFormButton} activeOpacity={0.7} onPress={e => this.loginChef(e)}>
+                    <Icon style={styles.standardIcon} size={25} name='login'></Icon>
+                      <Text style={styles.loginFormButtonText}>Login</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.formRow}>
+                  <TouchableOpacity style={styles.loginFormButton} activeOpacity={0.7} onPress={this.forgotPassword}>
+                    <Icon style={styles.standardIcon} size={25} name='lock-open'></Icon>
+                      <Text style={styles.loginFormButtonText}>Reset{"\n"}password</Text>
+                  </TouchableOpacity>
+                  <View style={styles.buttonPlaceholder}>
+                  </View>
+                </View>
               </View>
-            </View>
-          </ImageBackground>
-        </KeyboardAvoidingView >
+          </KeyboardAvoidingView >
+        </ImageBackground>
+
       )
     }
 

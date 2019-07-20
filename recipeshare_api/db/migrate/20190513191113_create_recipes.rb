@@ -6,7 +6,7 @@ class CreateRecipes < ActiveRecord::Migration[5.2]
       t.string :time
       t.integer :difficulty
       t.string :instructions
-      t.boolean :hidden
+      t.boolean :hidden, default: false
       t.boolean :breakfast
       t.boolean :lunch
       t.boolean :dinner
