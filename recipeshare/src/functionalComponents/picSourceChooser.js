@@ -27,6 +27,7 @@ export default class PicSourceChooser extends React.PureComponent{
     }
 
     render() {
+        // console.log("picsourcechooser rendering")
         return (
             <Modal
             animationType="fade"

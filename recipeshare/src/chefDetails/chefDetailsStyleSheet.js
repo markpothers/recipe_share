@@ -224,4 +224,14 @@ export const styles = StyleSheet.create({
     marginLeft: '3%',
     top: '0.3%'
   },
+  nameContainer:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    // justifyContent: 'center'
+  },
+  editButton: {
+    marginRight: '15%',
+    marginLeft: '7%',
+  },
+
   });

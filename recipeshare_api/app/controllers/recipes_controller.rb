@@ -18,7 +18,7 @@ class RecipesController < ApplicationController
     # end
 
     def create
-        byebug
+        # byebug
         @recipe = Recipe.new(newRecipe_params)
         @recipe.chef_id=@chef.id
         newRecipe_filter_settings["filter_settings"].keys.each do |category|

@@ -113,6 +113,7 @@ const initialState = {
   },
   cuisine: "Any",
   serves: "Any",
+  stayLoggedIn: false,
 }
 
   const middleware = compose(

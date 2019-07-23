@@ -183,6 +183,8 @@ const reducer = (currentState, action) => {
                 return {...currentState, newRecipeDetails: {...currentState.newRecipeDetails, cuisine: action.cuisine}}
         case 'SET_NEW_RECIPE_SERVES':
             return {...currentState, newRecipeDetails: {...currentState.newRecipeDetails, serves: action.serves}}
+        case 'STAY_LOGGED_IN':
+            return {...currentState, stayLoggedIn: action.value}
         default:
             return currentState
     }

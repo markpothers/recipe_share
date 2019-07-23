@@ -48,7 +48,7 @@ Ingredient.destroy_all
     Ingredient.create(name: Faker::Food.ingredient, created_at: Time.now)
 end
 
-10.times do
+100.times do
     Chef.create(
         username: Faker::Books::CultureSeries.planet, 
         imageURL:Faker::Avatar.image, 
@@ -60,6 +60,8 @@ end
         hex: SecureRandom.hex, 
         profile_text: Faker::GreekPhilosophers.quote,
         activated: true,
+        password_is_auto: false,
+        password_created_at: Time.now
         )
 end
 
@@ -93,13 +95,33 @@ times = [
     "06:00",
 ]
 
-cuisines = [
+const cuisines = [
+    "Any",
     "American",
+    "Brazilian",
     "British",
-    "French",
+    "Cajun",
+    "Caribbean",
     "Chinese",
-    "Japanese",
+    "Cuban",
+    "Egyptian",
+    "French",
+    "German",
+    "Greek",
     "Indian",
+    "Italian",
+    "Japanese",
+    "Korean",
+    "Mediterranean",
+    "Mexican",
+    "Moroccan",
+    "Peruvian",
+    "Polish",
+    "Portuguese",
+    "Spanish",
+    "Swedish",
+    "Thai",
+    "Turkish",
     "Vietnamese"
 ]
 

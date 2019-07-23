@@ -6,6 +6,7 @@ import { AsyncStorage, View, ImageBackground, TouchableOpacity } from 'react-nat
 import AppHeader from '../../navigation/appHeader'
 import ChefDetailsCard from '../chefDetails/ChefDetailsCard'
 import { getChefDetails } from '../fetches/getChefDetails'
+import ChefEditor from './chefEditor'
 
 const mapStateToProps = (state) => ({
   loggedInChef: state.loggedInChef,
@@ -33,6 +34,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       }
     };
 
+    state = {
+      editingChef: false
+    }
+
     componentDidMount = () => {
       this.fetchChefDetails()
     }
@@ -54,14 +59,24 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       this.props.navigation.navigate('Login')
     }
 
+    editingChef = () => {
+      this.setState({editingChef: !this.state.editingChef})
+    }
+
+    chefUpdated = () => {
+      this.setState({editingChef: !this.state.editingChef})
+      this.fetchChefDetails()
+    }
+
     render() {
       // console.log(this.props.chefs_details[`chef${this.props.navigation.getParam('chefID')}`])
       if(this.props.chefs_details[`chef${this.props.loggedInChef.id}`] !== undefined){
         const chef_details = this.props.chefs_details[`chef${this.props.loggedInChef.id}`]
         return (
           <React.Fragment>
+            {this.state.editingChef ? <ChefEditor editingChef={this.editingChef} {...chef_details} chefUpdated={this.chefUpdated}/> : null}
             <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
-              <ChefDetailsCard {...chef_details} imageURL={chef_details.chef.imageURL}/>
+              <ChefDetailsCard editChef={this.editingChef} myProfile={true} {...chef_details} imageURL={chef_details.chef.imageURL}/>
                 <TouchableOpacity activeOpacity={0.7} style={styles.logoutButton} onPress={this.logout}>
                   <Icon name='logout' size={25} style={styles.icon} />
                 </TouchableOpacity>

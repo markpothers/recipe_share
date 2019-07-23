@@ -6,12 +6,23 @@ class ChefsController < ApplicationController
 
     def authenticate
         if @chef = Chef.find_by(e_mail: chef_params[:e_mail])
-            if @chef.authenticate(chef_params[:password])
-                puts "logging in!"
-                render json: @chef, methods: [:auth_token]
+
+            if @chef.activated
+                if (!@chef.password_is_auto) || (@chef.password_is_auto && (Time.now - @chef.password_created_at <= 86400))
+                    if (@chef.authenticate(chef_params[:password]))
+                        puts "logging in!"
+                        render json: @chef, methods: [:auth_token]
+                    else
+                        puts "bad password"
+                        render json: {error: true, message: 'password'}
+                    end
+                else
+                    puts "auto password expired"
+                    render json: {error: true, message: "password_expired"}
+                end
             else
-                puts "bad password"
-                render json: {error: true, message: 'password'}
+                puts "account hasn't been activated"
+                render json: {error: true, message: "activation"}
             end
         else
             puts "bad e-mail address"
@@ -31,6 +42,8 @@ class ChefsController < ApplicationController
     def create
         if chef_params[:password] === chef_params[:password_confirmation]
             @chef = Chef.new(chef_params)
+            @chef.password_is_auto = false
+            @chef.password_created_at = Time.now
             if @chef.save
                 @chef.activation_digest = JWT.encode({id: @chef.id}, 'e9c25029ce138bee53480013fb005e5b')
                     if image_params[:imageURL] != ""
@@ -79,12 +92,40 @@ class ChefsController < ApplicationController
     # end
 
     def update
-        @chef.update(imageURL: params[imageURL])
-        if @chef.save
+        # byebug
+        @chef = Chef.find(params[:id])
+        @chef.username != chef_params[:username] ? @chef.update_attribute(:username, chef_params[:username]) : nil
+        @chef.profile_text != chef_params[:profile_text] ? @chef.update_attribute(:profile_text, chef_params[:profile_text]) : nil
+        @chef.country != chef_params[:country] ? @chef.update_attribute(:country, chef_params[:country]) : nil
+        # byebug
+        if image_params[:imageURL] != ""
+            hex = SecureRandom.hex
+            until Chef.find_by(hex: hex) == nil
+                hex = SecureRandom.hex
+            end
+            File.open("public/chef_avatars/chef-avatar-#{hex}.jpg", 'wb') do |f|
+                f.write(Base64.decode64(image_params[:imageURL]))
+            end
+            @chef.update_attribute(:imageURL, "/chef_avatars/chef-avatar-#{hex}.jpg")
+            @chef.update_attribute(:hex, hex)
+        end
 
-            render json: @chef, methods: [:auth_token]
+        if chef_params[:updatingPassword]
+            if chef_params[:password] == chef_params[:password_confirmation]
+                @chef.password = chef_params[:password]
+                @chef.password_confirmation = chef_params[:password_conformation]
+                @chef.password_is_auto = false
+                @chef.password_created_at = Time.now
+                if @chef.save
+                    render json: @chef, methods: [:auth_token]
+                else
+                    render json: {error: true, message: @chef.errors.full_messages}
+                end
+            else
+                render json: {error: true, message: ["Passwords do not match"] } #, chef: chef_params}
+            end
         else
-            render json: {error: true, message: "Chef updating failed for reasons that need to be specified", chef: chef_params}
+            render json: @chef, methods: [:auth_token]
         end
     end
 
@@ -103,9 +144,11 @@ class ChefsController < ApplicationController
         # byebug
         @chef = Chef.find_by(e_mail: params[:email])
         if @chef
-            newHex = SecureRandom.hex(8)
+            newHex = SecureRandom.hex(6)
             @chef.password = newHex
             @chef.password_confirmation = newHex
+            @chef.password_is_auto = true
+            @chef.password_created_at = Time.now
             @chef.save
             ChefMailer.with(chef: @chef, password: newHex).password_reset.deliver_now
             render json: {error: false, message: "We've sent you a new password.  Please check your e-mail"}
@@ -122,7 +165,7 @@ class ChefsController < ApplicationController
     private
 
     def chef_params
-        params.require(:chef).permit(:first_name, :last_name, :username, :e_mail, :password, :password_confirmation, :country, :profile_text)
+        params.require(:chef).permit(:first_name, :last_name, :username, :e_mail, :password, :password_confirmation, :country, :profile_text, :updatingPassword)
     end
 
     def image_params

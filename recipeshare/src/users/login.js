@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, AsyncStorage, ImageBackground, KeyboardAvoidingView, Image, View, TextInput, TouchableOpacity, ScrollView, Dimensions } from 'react-native'
+import {Text, AsyncStorage, ImageBackground, KeyboardAvoidingView, Image, View, TextInput, TouchableOpacity, ScrollView, Dimensions, Switch } from 'react-native'
 import { connect } from 'react-redux'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { styles } from './usersStyleSheet'
@@ -10,7 +10,8 @@ import { getNewPassword } from '../fetches/getNewPassword'
 const mapStateToProps = (state) => ({
   e_mail: state.loginUserDetails.e_mail,
   password: state.loginUserDetails.password,
-  loggedInChef: state.loggedInChef
+  loggedInChef: state.loggedInChef,
+  stayingLoggedIn: state.stayLoggedIn,
 })
 
 const mapDispatchToProps = {
@@ -27,6 +28,16 @@ const mapDispatchToProps = {
   loginChefToState: (id, username) => {
     return dispatch => {
       dispatch({type: 'LOG_IN_CHEF', id: id, username: username})
+    }
+  },
+  stayLoggedIn: (value) => {
+    return dispatch => {
+      dispatch({type: 'STAY_LOGGED_IN', value: value})
+    }
+  },
+  updateLoggedInChefInState: (id, username, auth_token, imageURL, is_admin) => {
+    return dispatch => {
+      dispatch({ type: 'UPDATE_LOGGED_IN_CHEF', id: id, username: username, auth_token: auth_token, imageURL: imageURL, is_admin: is_admin})
     }
   }
 }
@@ -59,13 +70,19 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       .then(res => res.json())
       .then(chef => {
         if (!chef.error){
-          AsyncStorage.setItem('chef', JSON.stringify(chef), () => {
-            AsyncStorage.getItem('chef', (err, res) => {
-              console.log(err)
-              this.props.clearLoginUserDetails()
-              this.props.navigation.navigate('AppLoading')
+          if(this.props.stayingLoggedIn){
+            AsyncStorage.setItem('chef', JSON.stringify(chef), () => {
+              AsyncStorage.getItem('chef', (err, res) => {
+                console.log(err)
+                this.props.clearLoginUserDetails()
+                this.props.navigation.navigate('AppLoading')
+              })
             })
-          })
+          }else{
+            this.props.updateLoggedInChefInState(chef.id, chef.username, chef.auth_token, chef.imageURL, chef.is_admin, chef.is_member)
+            this.props.clearLoginUserDetails()
+            this.props.navigation.navigate('Home')
+          }
         } else {
           console.log(chef.message)
           this.setState({error: chef.message})
@@ -100,6 +117,30 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       }
     }
 
+    renderPasswordExpiredError = () => {
+      if (this.state.error === "password_expired"){
+        return (
+          <View style={styles.formRow}>
+            <View style={styles.formError}>
+              <Text style={styles.formErrorText}>Automatically generated password has expired.  Please reset your password.</Text>
+            </View>
+          </View>
+        )
+      }
+    }
+
+    renderAccountActivationError = () => {
+      if (this.state.error === "activation"){
+        return (
+          <View style={styles.formRow}>
+            <View style={styles.formError}>
+              <Text style={styles.formErrorText}>Account not yet activated.  Please click the link in your confirmation e-mail.</Text>
+            </View>
+          </View>
+        )
+      }
+    }
+
     forgotPassword = async() => {
       const response = await getNewPassword(this.props.e_mail)
       if (response){
@@ -121,12 +162,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
-      // console.log(Dimensions.get('window').height)
+      // console.log(this.props.e_mail)
       return (
         <ImageBackground source={require('../dataComponents/spinach.jpg')} style={[styles.background,{height: Dimensions.get('window').height,
         width: Dimensions.get('window').width,
         }]} imageStyle={styles.backgroundImageStyle}>
           <KeyboardAvoidingView style={styles.mainPageContainer} behavior="padding">
+            <ScrollView style={styles.scrollContainer}>
               <View style={styles.logoContainer}>
                 <Image style={styles.logo} resizeMode={"contain"} source={require('../dataComponents/logo.png')}/>
               </View>
@@ -143,31 +185,36 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 </View>
                 {this.renderEmailError()}
                 {this.renderForgotPasswordError()}
+                {this.renderAccountActivationError()}
                 <View style={styles.formRow}>
                   <View style={styles.loginInputBox}>
                     <TextInput style={styles.loginTextBox} placeholder="password" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")}/>
                   </View>
                 </View>
                 {this.renderPasswordError()}
+                {this.renderPasswordExpiredError()}
                 <View style={styles.formRow}>
                   <TouchableOpacity style={styles.loginFormButton} activeOpacity={0.7} onPress={() => this.props.navigation.navigate('CreateChef')}>
                     <Icon style={styles.standardIcon} size={25} name='account-plus'></Icon>
                       <Text style={styles.loginFormButtonText}>Register</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.loginFormButton} activeOpacity={0.7} onPress={e => this.loginChef(e)}>
-                    <Icon style={styles.standardIcon} size={25} name='login'></Icon>
-                      <Text style={styles.loginFormButtonText}>Login</Text>
-                    </TouchableOpacity>
+                  <View style={styles.loginFormButton}>
+                    <Text style={styles.loginFormButtonText}>Stay{"\n"}logged in</Text>
+                    <Switch value={this.props.stayingLoggedIn} onChange={(e) => this.props.stayLoggedIn(e.nativeEvent.value)}/>
+                  </View>
                 </View>
                 <View style={styles.formRow}>
                   <TouchableOpacity style={styles.loginFormButton} activeOpacity={0.7} onPress={this.forgotPassword}>
                     <Icon style={styles.standardIcon} size={25} name='lock-open'></Icon>
-                      <Text style={styles.loginFormButtonText}>Reset{"\n"}password</Text>
+                    <Text style={styles.loginFormButtonText}>Reset{"\n"}password</Text>
                   </TouchableOpacity>
-                  <View style={styles.buttonPlaceholder}>
-                  </View>
+                  <TouchableOpacity style={styles.loginFormButton} activeOpacity={0.7} onPress={e => this.loginChef(e)}>
+                    <Icon style={styles.standardIcon} size={25} name='login'></Icon>
+                      <Text style={styles.loginFormButtonText}>Login</Text>
+                  </TouchableOpacity>
                 </View>
               </View>
+              </ScrollView>
           </KeyboardAvoidingView >
         </ImageBackground>
 

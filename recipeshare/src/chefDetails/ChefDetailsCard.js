@@ -17,6 +17,13 @@ export default class ChefDetailsCard extends React.PureComponent {
         )
     }
 
+    renderEditButton = () => {
+        return (
+          <TouchableOpacity style={styles.editButton} onPress={this.props.editChef}>
+            <Icon name='playlist-edit' size={24} style={styles.icon}/>
+          </TouchableOpacity>
+        )
+      }
 
     render(){
         return (
@@ -25,7 +32,8 @@ export default class ChefDetailsCard extends React.PureComponent {
                     <View style={styles.chefCardTopContainer}>
                         <View style={styles.chefCardTopLeftContainer}>
                             <View style={styles.chefCardTopLeftUpperContainer}>
-                                <View>
+                                <View style={styles.nameContainer}>
+                                    {this.props.myProfile ? this.renderEditButton() : null}
                                     <Text style={styles.chefCardHighlighted}>{this.props.chef.username}</Text>
                                 </View>
                             </View>

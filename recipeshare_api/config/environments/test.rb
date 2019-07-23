@@ -38,13 +38,15 @@ Rails.application.configure do
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              'smtp.googlemail.com',
-    port:                 25,
-    domain:               'googlemail.com',
-    user_name:            'pothers22@googlemail.com',
-    password:             'headphones',
+    address:              'smtp.recipe-share.com',
+    port:                 587,
+    domain:               'recipe-share.com',
+    user_name:            'admin@recipe-share.com',
+    password:             'Raspberries22!',
     authentication:       'plain',
-    enable_starttls_auto: true  }
+    enable_starttls_auto: true  ,
+    openssl_verify_mode: 'none',
+  }
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr

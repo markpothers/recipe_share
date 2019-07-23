@@ -2,7 +2,6 @@ import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
 
 export const getNewPassword = (e_mail) => {
-
     return new Promise((resolve) => {
         // console.log(databaseURL)
         fetch(`${databaseURL}/password_reset?email=${e_mail}`, {
@@ -13,7 +12,7 @@ export const getNewPassword = (e_mail) => {
         })
         .then(res => res.json())
         .then(response => {
-            // console.log(recipes)
+            // console.log(response)
             resolve(response)
         })
     })

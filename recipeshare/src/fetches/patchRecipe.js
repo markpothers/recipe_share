@@ -20,8 +20,7 @@ export const patchRecipe = (chef_id, auth_token, name, ingredients, instructions
                     imageBase64: imageBase64,
                     filter_settings: filter_settings,
                     cuisine: cuisine,
-                    serves,
-                    serves
+                    serves: serves
                 }
             })
         })

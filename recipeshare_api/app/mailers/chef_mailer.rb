@@ -13,10 +13,4 @@ class ChefMailer < ApplicationMailer
     mail(to: @chef.e_mail, subject: "Recipe-Share password reset")
   end
 
-  # def new_password(chef, password)
-  #   @chef = chef
-  #   @password = password
-  #   @greeting = "Hi #{@chef.username},"
-  #   mail(to: @chef.e_mail, subject: "Recipe-Share password reset")
-  # end
 end

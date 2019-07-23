@@ -4,47 +4,32 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   mainPageContainer:{
     flex: 1,
-    // height: 640
   },
   scrollContainer:{
-    // borderStyle: 'solid',
-    // borderWidth: 2,
-    // flexGrow: 1
-    //     borderStyle: 'solid',
-    // borderWidth: 2,
-    // borderColor: 'yellow'
+    flexGrow: 1,
   },
   background: {
-    // width: '100%',
-    // height: '100%',
     flex: 1,
-    // borderStyle: 'solid',
-    // borderWidth: 2,
-    // borderColor: 'yellow'
   },
   backgroundImageStyle: {
     // opacity: 0.8
   },
   loginForm: {
-    // position: 'absolute',
-    // bottom: '20%',
-    // top: '40%',
-    // flex: 1,
     width: '100%',
     marginTop: '5%',
-    // height: 400,
-    // borderStyle: 'solid',
-    // borderWidth: 2
+    height: 280,
   },
   loginInputBox: {
-    // marginTop: '0%',
     marginLeft: '10%',
     marginRight: '10%',
     backgroundColor: 'white',
     height: 44,
     width: '80%',
     justifyContent: 'center',
-    borderRadius: 5
+    borderRadius: 5,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#104e01'
   },
   loginInputAreaBox: {
     marginTop: '0%',
@@ -54,10 +39,12 @@ export const styles = StyleSheet.create({
     height: 88,
     width: '80%',
     justifyContent: 'center',
-    borderRadius: 5
+    borderRadius: 5,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#104e01'
   },
   loginHeader: {
-    // marginTop: '0%',
     marginLeft: '10%',
     marginRight: '10%',
     backgroundColor: 'white',
@@ -65,7 +52,10 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     height: 44,
     width: '80%',
-    borderRadius: 5
+    borderRadius: 5,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#104e01'
   },
   loginTitle: {
     marginLeft: '5%',
@@ -88,16 +78,12 @@ export const styles = StyleSheet.create({
     color: "#505050",
   },
   formRow: {
-    // flex: 1,
     marginTop: '1%',
     flexDirection:'row',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
     width: '100%',
-    // height: 44,
-    // borderStyle: 'solid',
-    // borderWidth: 5,
   },
   loginFormButton:{
     marginLeft: '5%',
@@ -111,6 +97,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#fff59b',
     borderStyle: 'solid',
     borderWidth: 1,
+    borderColor: '#104e01'
   },
   loginFormButtonText: {
     marginLeft: '5%',
@@ -144,20 +131,13 @@ export const styles = StyleSheet.create({
     marginRight: '2%'
   },
   logoContainer: {
-    // flex: 1,
-    // width: '100%',
-    // top:'15%',
-    height: '40%',
-    // borderStyle: 'solid',
-    // borderWidth: 2,
+    height: 275,
     justifyContent: 'center',
     alignItems: 'center'
   },
   logo: {
-    top: '10%',
     width: '75%',
     height: '100%',
-    // flex: 1
   },
   profileTextAreaInput: {
     height: 130,
@@ -172,8 +152,5 @@ export const styles = StyleSheet.create({
     height: 44,
     flexDirection:'row',
     borderRadius: 5,
-    // backgroundColor: '#fff59b',
-    // borderStyle: 'solid',
-    // borderWidth: 1,
   },
   });

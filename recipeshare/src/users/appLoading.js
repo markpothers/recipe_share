@@ -29,7 +29,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         if (res != null) {
           const loggedInChef = JSON.parse(res)
           // console.log(loggedInChef)
-          this.props.updateLoggedInChefInState(loggedInChef.id, loggedInChef.username, loggedInChef.auth_token, loggedInChef.imageURL, loggedInChef.is_admin)
+          this.props.updateLoggedInChefInState(loggedInChef.id, loggedInChef.username, loggedInChef.auth_token, loggedInChef.imageURL, loggedInChef.is_admin, loggedInChef.is_member)
           this.props.navigation.navigate('Home')
         } else {
           this.props.navigation.navigate('Login')
@@ -43,7 +43,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         <View style={styles.mainPageContainer}>
           <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
             <View style={styles.logoContainer}>
-              <Image style={styles.logo} source={require('../dataComponents/logo.png')}/>
+              <Image style={styles.logo} resizeMode={"contain"} source={require('../dataComponents/logo.png')}/>
             </View>
           </ImageBackground>
         </View>

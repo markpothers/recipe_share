@@ -18,6 +18,8 @@ class CreateChefs < ActiveRecord::Migration[5.2]
       t.boolean :is_member, default: false
       t.boolean :activated, default: false
       t.string :activation_digest
+      t.boolean :password_is_auto
+      t.datetime :password_created_at
 
 
       t.timestamps

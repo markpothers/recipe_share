@@ -51,6 +51,8 @@ ActiveRecord::Schema.define(version: 2019_06_14_164549) do
     t.boolean "is_member", default: false
     t.boolean "activated", default: false
     t.string "activation_digest"
+    t.boolean "password_is_auto"
+    t.datetime "password_created_at"
     t.datetime "updated_at", null: false
   end
 

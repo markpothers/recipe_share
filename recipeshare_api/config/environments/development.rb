@@ -55,15 +55,17 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :sendmail
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_options = {from: 'pothers22@googlemail.com'}
+  config.action_mailer.default_options = {from: 'admin@recipe-share.com'}
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              'smtp.googlemail.com',
-    port:                 25,
-    domain:               'googlemail.com',
-    user_name:            'pothers22@googlemail.com',
-    password:             'headphones',
+    address:              'smtp.recipe-share.com',
+    port:                 587,
+    domain:               'recipe-share.com',
+    user_name:            'admin@recipe-share.com',
+    password:             'Raspberries22!',
     authentication:       'plain',
-    enable_starttls_auto: true  }
+    enable_starttls_auto: true  ,
+    openssl_verify_mode: 'none',
+  }
 end

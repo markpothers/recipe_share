@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, Text, View, TouchableOpacity, Switch, Dimensions, Picker } from 'react-native'
+import { Modal, Text, View, TouchableOpacity, Switch, Dimensions, Picker, Platform } from 'react-native'
 import { styles } from './filterMenuStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux'
@@ -162,21 +162,24 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                                         mode="dropdown"
                                         iosIcon={<Icon name="arrow-down" />}
                                         onValueChange={this.handleCuisineChange}
+                                        selectedValue={selectedCuisine}
                                         >
-                                        <Picker.Item style={styles.pickerText} key={selectedCuisine} label={selectedCuisine} value={selectedCuisine} />
+                                        {/* <Picker.Item style={styles.pickerText} key={selectedCuisine} label={selectedCuisine} value={selectedCuisine} /> */}
                                             {this.cuisinesPicker()}
                                         </Picker>
                                     </View>
                                 </View>
                                 <View style={styles.bottomTopContainer}>
-                                    <Text style={styles.title}>Serves:</Text>
+                                    {Platform.OS === 'ios' ? <Icon style={styles.dropDownIcon} size={25} name='arrow-expand-vertical' /> : null}
+                                    <Text style={styles.title}>Serves: </Text>
                                     <View picker style={styles.cuisinePicker} >
                                         <Picker style={styles.picker}
                                         mode="dropdown"
                                         iosIcon={<Icon name="arrow-down" />}
                                         onValueChange={this.handleServesChange}
+                                        selectedValue={selectedServes}
                                         >
-                                        <Picker.Item style={styles.pickerText} key={selectedServes} label={selectedServes} value={selectedServes} />
+                                        {/* <Picker.Item style={styles.pickerText} key={selectedServes} label={selectedServes} value={selectedServes} /> */}
                                             {this.servesPicker()}
                                         </Picker>
                                     </View>
