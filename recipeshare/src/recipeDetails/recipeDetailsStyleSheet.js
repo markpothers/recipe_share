@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
     detailsHeader: {
       borderStyle: 'solid',
       borderWidth: 1,
-      // borderColor: 'black',
+      borderColor: '#104e01',
       width: '100%',
       justifyContent: 'center',
       alignItems: 'center',
@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
     detailsImageWrapper: {
       borderStyle: 'solid',
       borderWidth: 1,
-      // borderColor: 'black',
+      borderColor: '#104e01',
       width: '100%',
       marginLeft: '0%',
       marginRight: '0%',
@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
     detailsIngredients: {
       borderStyle: 'solid',
       borderWidth: 1,
-      // borderColor: 'black',
+      borderColor: '#104e01',
       width: '100%',
       marginLeft: '0%',
       marginRight: '0%',
@@ -65,7 +65,7 @@ export const styles = StyleSheet.create({
     detailsInstructions: {
       borderStyle: 'solid',
       borderWidth: 1,
-      // borderColor: 'black',
+      borderColor: '#104e01',
       width: '100%',
       marginLeft: '0%',
       marginRight: '0%',
@@ -79,8 +79,8 @@ export const styles = StyleSheet.create({
     },
     detailsMakePicsContainer: {
       borderStyle: 'solid',
-      borderWidth: 0.5,
-      // borderColor: 'black',
+      borderWidth: 1,
+      borderColor: '#104e01',
       // width: '100%',
       // marginLeft: '0%',
       // marginRight: '0%',
@@ -99,7 +99,7 @@ export const styles = StyleSheet.create({
     detailsLikes: {
       borderStyle: 'solid',
       borderWidth: 1,
-      // borderColor: 'black',
+      borderColor: '#104e01',
       width: '100%',
       marginLeft: '0%',
       marginRight: '0%',
@@ -135,7 +135,7 @@ export const styles = StyleSheet.create({
     detailsMakePics: {
       borderStyle: 'solid',
       borderWidth: 1,
-      // borderColor: 'black',
+      borderColor: '#104e01',
       width: '100%',
       marginLeft: '0%',
       marginRight: '0%',
@@ -207,7 +207,7 @@ export const styles = StyleSheet.create({
       width: '96%',
       marginLeft: '2%',
       marginRight: '2%',
-      borderBottomColor: '#505050',
+      borderBottomColor: '#104e01',
       borderBottomWidth: 0.5,
       paddingBottom: '0.25%',
       paddingTop: '0.25%'
@@ -235,7 +235,7 @@ export const styles = StyleSheet.create({
       borderStyle: 'solid',
       borderWidth: 1,
       paddingTop: '1%',
-      // borderColor: 'black',
+      borderColor: '#104e01',
       // height: 500,
       width: '100%',
       marginLeft: '0%',
@@ -253,7 +253,7 @@ export const styles = StyleSheet.create({
       width: '96%',
       marginLeft: '2%',
       marginRight: '2%',
-      borderBottomColor: '#505050',
+      borderBottomColor: '#104e01',
       borderBottomWidth: 0.5,
       paddingBottom: '1%'
     },

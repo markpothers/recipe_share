@@ -14,6 +14,14 @@ class AppHeader extends React.PureComponent {
         )
     }
 
+    renderNewRecipeButton = () => {
+        return (
+            <TouchableOpacity style={styles.headerNewButton}>
+            <Icon name='plus' style={styles.headerIcon} size={33} onPress={() => this.props.navigation.navigate('NewRecipe')}/>
+        </TouchableOpacity>
+        )
+    }
+
     render () {
         // console.log("rendering header")
         // console.log(this.props.navigation.state.routeName === "MyRecipeBook") //NB: Using this test should NOT WORK!!!!
@@ -28,9 +36,7 @@ class AppHeader extends React.PureComponent {
                 <TouchableOpacity onPress={() => this.props.navigation.popToTop()}>
                     <Text style={styles.headerText}>{this.props.text}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.headerNewButton}>
-                    <Icon name='plus' style={styles.headerIcon} size={33} onPress={() => this.props.navigation.navigate('NewRecipe')}/>
-                </TouchableOpacity>
+                { this.props.navigation.state.routeName !== "NewRecipe" ? this.renderNewRecipeButton() : null }
             </View>
             )
     }

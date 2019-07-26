@@ -27,6 +27,7 @@ export const styles = StyleSheet.create({
       borderStyle: 'solid',
       borderRadius: 5,
       borderWidth: 1,
+      borderColor: '#104e01',
       backgroundColor: 'white'
     },
     chefCardTopPostedByContainer: {

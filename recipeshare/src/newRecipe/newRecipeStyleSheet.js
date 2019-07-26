@@ -19,6 +19,7 @@ export const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderWidth: 1,
     borderRadius: 5,
+    borderColor: '#104e01',
     width: '100%',
     backgroundColor: 'white',
   },
@@ -44,6 +45,7 @@ export const styles = StyleSheet.create({
      backgroundColor: 'white',
      height: 140,
      width: '96%',
+     justifyContent: 'center'
    },
    newRecipeTextCentering: {
     // position: 'absolute',
@@ -55,6 +57,7 @@ export const styles = StyleSheet.create({
    timeAndDifficultyWrapper: {
     borderStyle: 'solid',
     borderWidth: 2,
+    borderColor: '#104e01',
     width: '100%',
     marginTop: 4,
     flex: 1,
@@ -72,6 +75,7 @@ export const styles = StyleSheet.create({
        alignItems: 'center',
        borderStyle: 'solid',
        borderWidth: 1,
+       borderColor: '#104e01',
      },
    timeAndDifficultyTitle: {
     marginLeft: '5%',
@@ -80,18 +84,23 @@ export const styles = StyleSheet.create({
     color: "#505050",
     },
   timeAndDifficulty: {
-        marginLeft: '5%',
-        marginRight: '5%',
-        backgroundColor: 'white',
-        width: '35%',
-        borderRadius: 5,
-        borderStyle: 'solid',
-        borderWidth: 1,
-      },
+    marginLeft: '5%',
+    marginRight: '5%',
+    backgroundColor: 'white',
+    width: '35%',
+    borderRadius: 5,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#104e01',
+    justifyContent: 'center'
+  },
   picker: {
     height: 44,
     borderStyle: 'solid',
     borderWidth: 1,
+    borderColor: '#104e01',
+    justifyContent: 'center',
+    overflow: 'hidden'
   },
   pickerText: {
     // textAlign: 'center'
@@ -108,9 +117,12 @@ export const styles = StyleSheet.create({
     backgroundColor: '#fff59b',
     borderStyle: 'solid',
     borderWidth: 1,
+    borderColor: '#104e01',
   },
   unitPicker: {
     bottom: '2%',
+    justifyContent: 'center',
+    overflow: 'hidden'
   },
   createRecipeFormButtonText: {
     marginLeft: '5%',
@@ -131,6 +143,7 @@ export const styles = StyleSheet.create({
      borderStyle: 'solid',
      justifyContent: 'center',
      borderWidth: 1,
+     borderColor: '#104e01',
      borderRadius: 5,
   },
   addIngredientUnitInputBox: {
@@ -140,7 +153,9 @@ export const styles = StyleSheet.create({
      width: '68%',
      borderStyle: 'solid',
      borderWidth: 1,
+     borderColor: '#104e01',
      borderRadius: 5,
+     overflow: 'hidden'
   },
   ingredientTextAdjustment: {
     marginLeft: 7,
@@ -154,7 +169,8 @@ export const styles = StyleSheet.create({
   autoCompleteContainer: {
     position: 'absolute',
     width: '49%',
-     borderRadius: 5,
+    borderRadius: 5,
+    // justifyContent: 'center'
   },
   quantityAndUnitContainer: {
     marginLeft: '1%',
@@ -171,6 +187,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     borderRadius: 5,
     borderStyle: 'solid',
+    borderColor: '#104e01',
     borderWidth: 1,
     backgroundColor: 'white',
     justifyContent: 'center',
@@ -192,6 +209,7 @@ export const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderStyle: 'solid',
     borderWidth: 1,
+    borderColor: '#104e01',
     height: 42,
     paddingLeft: '4%',
   },
@@ -201,6 +219,9 @@ export const styles = StyleSheet.create({
     width: '90%',
     borderStyle: 'solid',
     borderWidth: 1,
+    borderColor: '#104e01',
+    marginLeft: '5%',
+    marginRight: '5%',
   },
   ingredientDeleteTrashCanButton: {
     // zIndex: 1,
@@ -210,5 +231,17 @@ export const styles = StyleSheet.create({
   },
   ingredientTrashCan: {
     color: '#505050'
+  },
+  iOSdropDownIcon: {
+    position: 'absolute',
+    // height: 25,
+    // width: 25,
+    left: '80%',
+    top: '36%',
+    zIndex: 2,
+    // borderStyle: 'solid',
+    // borderWidth: 1,
+    // borderColor: '#104e01',
+    color: '#104e01',
   },
 })

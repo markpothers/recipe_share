@@ -2,6 +2,7 @@ import React from 'react'
 import { Modal, Text, View, TouchableOpacity, Switch, Dimensions, Picker, Platform } from 'react-native'
 import { styles } from './filterMenuStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon2 from 'react-native-vector-icons/Entypo';
 import { connect } from 'react-redux'
 import { cuisines } from '../dataComponents/cuisines'
 import { serves } from '../dataComponents/serves'
@@ -130,7 +131,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         }
 
         render() {
-            // console.log(store)
+            // console.log(Platform)
             let selectedCuisine = this.props.newRecipe ? this.props.newRecipeCuisine : this.props.cuisine
             let selectedServes = this.props.newRecipe ? this.props.newRecipeServes : this.props.serves
             return (
@@ -142,7 +143,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     <View style={[styles.modalFullScreenContainer, {height: Dimensions.get('window').height,
                             width: Dimensions.get('window').width,
                             }]}>
-                        <View style={styles.contentsContainer}>
+                        <View style={[styles.contentsContainer, (Platform.OS !== 'ios' ? styles.contentsContainerAndroidCorrection : null )]}>
                             <View style={styles.titleContainer}>
                                 <Text style={styles.title}>{this.props.title}</Text>
                             </View>
@@ -156,6 +157,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                             </View>
                             <View style={styles.bottomContainer}>
                                 <View style={styles.bottomTopContainer}>
+                                    {Platform.OS === 'ios' ? <Icon2 style={styles.iOSdropDownIcon} size={15} name='select-arrows' /> : null}
                                     <Text style={styles.title}>Cuisine:</Text>
                                     <View picker style={styles.cuisinePicker} >
                                         <Picker style={styles.picker}
@@ -170,7 +172,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                                     </View>
                                 </View>
                                 <View style={styles.bottomTopContainer}>
-                                    {Platform.OS === 'ios' ? <Icon style={styles.dropDownIcon} size={25} name='arrow-expand-vertical' /> : null}
+                                    {Platform.OS === 'ios' ? <Icon2 style={styles.iOSdropDownIcon} size={15} name='select-arrows' /> : null}
                                     <Text style={styles.title}>Serves: </Text>
                                     <View picker style={styles.cuisinePicker} >
                                         <Picker style={styles.picker}

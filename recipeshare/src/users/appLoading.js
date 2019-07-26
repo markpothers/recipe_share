@@ -43,7 +43,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         <View style={styles.mainPageContainer}>
           <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
             <View style={styles.logoContainer}>
-              <Image style={styles.logo} resizeMode={"contain"} source={require('../dataComponents/logo.png')}/>
+              <Image style={styles.logo} resizeMode={"contain"} source={require('../dataComponents/yellowLogo.png')}/>
             </View>
           </ImageBackground>
         </View>

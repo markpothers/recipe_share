@@ -4,21 +4,24 @@ import { createStackNavigator, createBottomTabNavigator, createMaterialTopTabNav
 import BrowseRecipesStack from './BrowseRecipesNavigator'
 import MyRecipeBookStack from './MyRecipeBookNavigator'
 import ProfileStack from './ProfileNavigator'
+import Drawer from './Drawer'
 import BrowseRecipesCoverStack from './BrowseRecipesCover'
 
-export default createDrawerNavigator({
+export default MainDrawerNavigator = createDrawerNavigator({
   // OldBrowseRecipes: BrowseRecipesStack,
   BrowseRecipes: BrowseRecipesStack,  //BrowseRecipesCoverStack to include the cover page instead
   MyRecipeBook: MyRecipeBookStack,
   Profile: ProfileStack,
   },
   {
-    initialRouteName: "MyRecipeBook"
+    initialRouteName: "MyRecipeBook",
+    contentComponent: Drawer
   },
   {
     tabBarOptions: {
       activeTintColor: '8d8d8d',
       inactiveTintColor: '8d8d8d',
     },
-  }
+  },
+
 );

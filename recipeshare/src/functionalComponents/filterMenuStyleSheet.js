@@ -16,8 +16,8 @@ export const styles = StyleSheet.create({
     // marginRight: '20%',
     // marginBottom: '20%',
     // borderRadius: 5,
-    // justifyContent: 'center',
-    // alignItems: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   contentsContainer:{
     // flex: 1,
@@ -26,21 +26,28 @@ export const styles = StyleSheet.create({
     borderColor: '#104e01',
     backgroundColor: '#fff59b',
     // top: '5%',
-    height: '80%',  //'77%',
-    width: '80%',
-    marginTop: '12%',
-    marginLeft: '10%',
+    height: '95%',
+    // width: '80%',
+    // marginTop: '3%',
+    // marginLeft: '10%',
     // marginRight: '20%',
     // marginBottom: '20%',
     borderRadius: 5,
     // justifyContent: 'center',
     alignItems: 'center',
   },
+  contentsContainerAndroidCorrection:{
+    height: '77%',
+    width: '80%',
+  },
   titleContainer: {
     // flex: 1,
     justifyContent: 'center',
     marginTop: '2%',
-    // alignItems: 'center'
+    height: 27 ,
+    alignItems: 'center',
+    // borderWidth: 1, 
+    width: '100%',
   },
   title: {
     color: '#104e01',
@@ -134,11 +141,11 @@ export const styles = StyleSheet.create({
     columnsContainer: {
       // flex: 9,
       flexDirection: 'row',
-      marginTop: '2%',
+      // marginTop: '2%',
       // borderColor: '#720000',
       // borderStyle: 'solid',
       // borderWidth: 1,
-    },
+    }, 
     column: {
       flex: 1,
       marginLeft: '2%'
@@ -176,20 +183,21 @@ export const styles = StyleSheet.create({
     bottomTopContainer: {
       flexDirection: 'row',
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
+      marginRight: '5%'
     },
     cuisinePicker: {
       // flex: 1,
       height: 44,
-      marginLeft: '5%',
-      // marginRight: '5%',
+      marginLeft: '3%',
+      // marginRight: '23%',
       backgroundColor: 'white',
       width: '60%',
       borderRadius: 5,
       // borderStyle: 'solid',
       // borderWidth: 1,
       // justifyContent: 'center',
-      // alignItems: 'center',
+      // alignItems: 'flex-start',
       borderStyle: 'solid',
       borderColor: '#104e01',
       borderWidth: 1,
@@ -205,17 +213,17 @@ export const styles = StyleSheet.create({
       bottom: '7%',
       justifyContent: 'center',
       overflow: 'hidden',
-      // alignItems: 'center',
+      // alignItems: 'flex-start',
     },
     pickerText: {
-      // textAlign: 'center'
+      // textAlign: 'left'
     },
-    dropDownIcon: {
-      // position: 'absolute',
+    iOSdropDownIcon: {
+      position: 'absolute',
       // height: 25,
       // width: 25,
-      left: '475%',
-      top: '1.5%',
+      left: '78.5%',
+      top: '40%',
       zIndex: 2,
       // borderStyle: 'solid',
       // borderWidth: 1,

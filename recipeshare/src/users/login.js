@@ -134,7 +134,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         return (
           <View style={styles.formRow}>
             <View style={styles.formError}>
-              <Text style={styles.formErrorText}>Account not yet activated.  Please click the link in your confirmation e-mail.</Text>
+              <Text style={styles.formErrorText}>Account not yet activated.  Please click the link in your confirmation e-mail. (Don't forget to check spam!)</Text>
             </View>
           </View>
         )
@@ -170,7 +170,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           <KeyboardAvoidingView style={styles.mainPageContainer} behavior="padding">
             <ScrollView style={styles.scrollContainer}>
               <View style={styles.logoContainer}>
-                <Image style={styles.logo} resizeMode={"contain"} source={require('../dataComponents/logo.png')}/>
+                <Image style={styles.logo} resizeMode={"contain"} source={require('../dataComponents/yellowLogo.png')}/>
               </View>
               <View style={styles.loginForm} >
                 <View style={styles.formRow}>

@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
       marginBottom: 2,
       width: '100%',
       borderStyle: 'solid',
+      borderColor: '#104e01',
       borderRadius: 5,
       borderWidth: 1,
       backgroundColor: 'white'
@@ -14,6 +15,7 @@ export const styles = StyleSheet.create({
     recipeCardTopPostedByContainer: {
       // borderBottomStyle: 'solid 0.5',
       borderBottomWidth: 0.5,
+      borderBottomColor: '#104e01',
       height: 25,
       width: '96.4%',
       marginLeft: '1.6%',

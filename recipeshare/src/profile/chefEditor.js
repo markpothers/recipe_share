@@ -1,7 +1,8 @@
 import React from 'react'
-import { Modal, Text, View, TouchableOpacity, Dimensions, Picker, TextInput } from 'react-native'
+import { Modal, Text, View, TouchableOpacity, Dimensions, Picker, TextInput, Platform } from 'react-native'
 import { styles } from './chefEditorStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon2 from 'react-native-vector-icons/Entypo';
 import { connect } from 'react-redux'
 import { countries } from '../dataComponents/countries'
 import PicSourceChooser from '../functionalComponents/picSourceChooser'
@@ -175,9 +176,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                             width: Dimensions.get('window').width,
                             }]}>
                         {this.state.choosingPicture ? this.renderPictureChooser() : null}
-                        <View style={styles.contentsContainer}>
+                        <View style={[styles.contentsContainer, (Platform.OS === 'ios' ? {height: '75%'} : {height: '67%'})]}>
                             <View style={styles.titleContainer}>
-                                <Text style={styles.title}>Update your profile and password</Text>
+                                <Text style={styles.title}>Update your profile & password</Text>
                             </View>
                             <View style={styles.formRow}>
                                 <View style={styles.editChefInputBox}>
@@ -191,12 +192,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                             </View>
                             <View style={styles.formRow}>
                                 <View picker style={styles.countryPicker} >
+                                    {Platform.OS === 'ios' ? <Icon2 style={styles.iOSdropDownIcon} size={15} name='select-arrows' /> : null}
                                     <Picker style={styles.picker}
                                     mode="dropdown"
                                     iosIcon={<Icon name="arrow-down" />}
                                     onValueChange={e => this.updateChef(e, "country")}
+                                    selectedValue={this.props.country}
                                     >
-                                    <Picker.Item style={styles.pickerText} key={this.props.country} label={this.props.country} value={this.props.country} />
+                                    {/* <Picker.Item style={styles.pickerText} key={this.props.country} label={this.props.country} value={this.props.country} /> */}
                                         {this.countriesPicker()}
                                     </Picker>
                                 </View>

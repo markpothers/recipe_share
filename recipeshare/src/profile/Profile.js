@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { styles } from './profileStyleSheet'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { AsyncStorage, View, ImageBackground, TouchableOpacity } from 'react-native'
+import { View, ImageBackground } from 'react-native'
 import AppHeader from '../../navigation/appHeader'
 import ChefDetailsCard from '../chefDetails/ChefDetailsCard'
 import { getChefDetails } from '../fetches/getChefDetails'
@@ -54,11 +53,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       }
     }
 
-    logout = () => {
-      AsyncStorage.removeItem('chef', () => {})
-      this.props.navigation.navigate('Login')
-    }
-
     editingChef = () => {
       this.setState({editingChef: !this.state.editingChef})
     }
@@ -77,9 +71,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             {this.state.editingChef ? <ChefEditor editingChef={this.editingChef} {...chef_details} chefUpdated={this.chefUpdated}/> : null}
             <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
               <ChefDetailsCard editChef={this.editingChef} myProfile={true} {...chef_details} imageURL={chef_details.chef.imageURL}/>
-                <TouchableOpacity activeOpacity={0.7} style={styles.logoutButton} onPress={this.logout}>
-                  <Icon name='logout' size={25} style={styles.icon} />
-                </TouchableOpacity>
             </ImageBackground>
           </React.Fragment>
         )
@@ -87,9 +78,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         return (
           <View style={{flex:1}}>
             <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
-              <TouchableOpacity activeOpacity={0.7} style={styles.logoutButton} onPress={this.logout}>
-                <Icon name='logout' size={25} style={styles.icon} />
-              </TouchableOpacity>
             </ImageBackground>
           </View>
         )

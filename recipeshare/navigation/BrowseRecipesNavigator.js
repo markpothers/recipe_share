@@ -1,9 +1,6 @@
 import React from 'react';
-import { Platform, Button, Text, Dimensions } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator, createMaterialTopTabNavigator, createDrawerNavigator } from 'react-navigation';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-// import BrowseRecipesScreen from '../screens/BrowseRecipes';
-// import MyRecipeBookScreen from '../screens/MyRecipeBook';
+import { Dimensions } from 'react-native';
+import { createStackNavigator, createMaterialTopTabNavigator } from 'react-navigation';
 import RecipeDetailsScreen from '../src/recipeDetails/recipeDetails'
 import ChefDetailsScreen from '../src/chefDetails/chefDetails'
 import NewRecipeScreen from '../src/newRecipe/newRecipe'
@@ -11,24 +8,12 @@ import { NewestRecipesScreen, MostLikedRecipesScreen, MostMadeRecipesScreen, New
 import AppHeader from './appHeader'
 
 const BrowseRecipesTabs = createMaterialTopTabNavigator({
-  // NewestChefs:  {
-  //   screen: NewestChefsScreen,
-  //   navigationOptions: {
-  //     tabBarLabel: 'Newest Chefs',
-  //   },
-  // },
   NewestRecipes:  {
     screen: NewestRecipesScreen,
     navigationOptions: {
       tabBarLabel: 'Newest Recipes',
     }
   },
-  // NewestRecipes:  {
-  //   screen: NewestRecipesScreen,
-  //   navigationOptions: {
-  //     tabBarLabel: 'Newest Recipes',
-  //   }
-  // },
   MostLikedRecipes:  {
     screen: MostLikedRecipesScreen,
     navigationOptions: {

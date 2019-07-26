@@ -1,9 +1,10 @@
 import React from 'react'
-import { ScrollView, Text, ImageBackground, TextInput, KeyboardAvoidingView, TouchableOpacity, View, Picker } from 'react-native'
+import { ScrollView, Text, ImageBackground, TextInput, KeyboardAvoidingView, TouchableOpacity, View, Picker, Platform } from 'react-native'
 import { connect } from 'react-redux'
 import * as Permissions from 'expo-permissions'
 import { styles } from './newRecipeStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon2 from 'react-native-vector-icons/Entypo';
 import { times } from '../dataComponents/times'
 import { difficulties } from '../dataComponents/difficulties'
 import { units } from '../dataComponents/units'
@@ -261,7 +262,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                       <TextInput style={styles.newRecipeTextCentering} value={this.props.name} placeholder="Recipe Name" onChange={(e) => this.handleTextInput(e.nativeEvent.text, "name")}/>
                     </View>
                   </View>
-                    {[ ...this.renderIngredientsList(), this.renderNewIngredientItem()]}
+                  {[ ...this.renderIngredientsList(), this.renderNewIngredientItem()]}
                   <View style={styles.formRow}>
                     <View style={styles.createRecipeTextAreaBox}>
                       <TextInput style={styles.createRecipeTextAreaInput} value={this.props.instructions} placeholder="Instructions" multiline={true} numberOfLines={4} onChange={(e) => this.handleTextInput(e.nativeEvent.text, "instructions")}/>
@@ -277,22 +278,24 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                   </View>
                   <View style={styles.transparentFormRow}>
                     <View picker style={styles.timeAndDifficulty} >
+                      {Platform.OS === 'ios' ? <Icon2 style={styles.iOSdropDownIcon} size={15} name='select-arrows' /> : null}
                       <Picker style={styles.picker}
                       mode="dropdown"
                       iosIcon={<Icon name="arrow-down" />}
                       onValueChange={e => this.handleTextInput(e, "time")}
+                      selectedValue={this.props.time}
                       >
-                      <Picker.Item style={styles.pickerText} key={this.props.time} label={this.props.time} value={this.props.time} />
                         {this.timesPicker()}
                       </Picker>
                     </View>
                     <View picker style={styles.timeAndDifficulty}>
+                      {Platform.OS === 'ios' ? <Icon2 style={styles.iOSdropDownIcon} size={15} name='select-arrows' /> : null}
                       <Picker style={styles.picker}
                       mode="dropdown"
                       iosIcon={<Icon name="arrow-down" />}
                       onValueChange={e => this.handleTextInput(e, "difficulty")}
+                      selectedValue={this.props.difficulty}
                       >
-                      <Picker.Item style={styles.pickerText} key={this.props.difficulty} label={this.props.difficulty} value={this.props.difficulty} />
                         {this.difficultiesPicker()}
                       </Picker>
                     </View>
@@ -308,10 +311,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     </TouchableOpacity>
                   </View>
                   <View style={styles.transparentFormRow}>
-                    {/* <TouchableOpacity style={styles.createRecipeFormButton} activeOpacity={0.7} onPress={this.handleFilterButton}>
-                      <Icon style={styles.standardIcon} size={25} name='filter' />
-                      <Text style={styles.createRecipeFormButtonText}>Select{"\n"}categories</Text>
-                    </TouchableOpacity> */}
                     <TouchableOpacity style={[styles.createRecipeFormButton,{marginBottom: 4}]} activeOpacity={0.7} onPress={e => this.submitRecipe(e)}>
                       <Icon style={styles.standardIcon} size={25} name='login' />
                       <Text style={styles.createRecipeFormButtonText}>Submit</Text>

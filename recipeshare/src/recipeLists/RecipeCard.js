@@ -40,7 +40,7 @@ export default class RecipeCard extends React.PureComponent {
                         <Image style={styles.thumbnail} source={{uri: `${databaseURL}${this.props.imageURL}`}} />
                     </TouchableOpacity>
                     <View style={styles.recipeCardBottomContainer}>
-                    <TouchableOpacity style={styles.recipeCardBottomSubContainers} onPress={this.props.chef_shared === 0 ? () => this.props.reShareRecipe(this.props.id) : null }>
+                    <TouchableOpacity style={styles.recipeCardBottomSubContainers} onPress={this.props.chef_shared === 0 ? () => this.props.reShareRecipe(this.props.id) : () => this.props.unReShareRecipe(this.props.id) }>
                         {this.props.chef_shared === 0 ? <Icon name='share-outline' size={24} style={styles.icon}/> : <Icon name='share' size={24} style={styles.icon}/> }
                         <Text style={styles.recipeCardBottomOther} >{this.props.sharesCount}</Text>
                     </TouchableOpacity>

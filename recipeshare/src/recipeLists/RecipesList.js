@@ -7,6 +7,7 @@ import { postRecipeLike } from '../fetches/postRecipeLike'
 import { postReShare } from '../fetches/postReShare'
 import { postRecipeMake } from '../fetches/postRecipeMake'
 import { destroyRecipeLike } from '../fetches/destroyRecipeLike'
+import { destroyReShare } from '../fetches/destroyReShare'
 import { NavigationEvents, withNavigation } from 'react-navigation'
 // import { TouchableOpacity } from 'react-native-gesture-handler';
 import { styles } from './recipeListStyleSheet'
@@ -118,7 +119,18 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
 
     renderRecipeListItem = (item) => {
         return (
-            <RecipeCard listChoice={this.props["listChoice"]} key={item.index.toString()} {...item.item} navigateToRecipeDetails={this.navigateToRecipeDetails} navigateToRecipeDetailsAndComment={this.navigateToRecipeDetailsAndComment} navigateToChefDetails={this.navigateToChefDetails} likeRecipe={this.likeRecipe} unlikeRecipe={this.unlikeRecipe} makeRecipe={this.makeRecipe} reShareRecipe={this.reShareRecipe}/>
+            <RecipeCard listChoice={this.props["listChoice"]}
+              key={item.index.toString()} 
+              {...item.item} 
+              navigateToRecipeDetails={this.navigateToRecipeDetails} 
+              navigateToRecipeDetailsAndComment={this.navigateToRecipeDetailsAndComment} 
+              navigateToChefDetails={this.navigateToChefDetails} 
+              likeRecipe={this.likeRecipe} 
+              unlikeRecipe={this.unlikeRecipe} 
+              makeRecipe={this.makeRecipe} 
+              reShareRecipe={this.reShareRecipe}
+              unReShareRecipe={this.unReShareRecipe} 
+              />
           )
     }
 
@@ -186,12 +198,28 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
     }
 
     reShareRecipe = async(recipeID) => {
-      const likePosted = await postReShare(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
-      if (likePosted) {
+      const reSharePosted = await postReShare(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
+      if (reSharePosted) {
         const recipes = this.props[this.props["listChoice"] + `_Recipes`].map( (recipe) => {
           if (recipe['id'] === recipeID){
             recipe['sharesCount'] += 1
             recipe['chef_shared'] += 1
+            return recipe
+          } else {
+            return recipe
+          }
+        })
+        this.props.storeRecipeList(this.props["listChoice"], recipes)
+      }
+    }
+
+    unReShareRecipe = async(recipeID) => {
+      const unReShared = await destroyReShare(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
+      if (unReShared) {
+        const recipes = this.props[this.props["listChoice"] + `_Recipes`].map( (recipe) => {
+          if (recipe['id'] === recipeID){
+            recipe['sharesCount'] -= 1
+            recipe['chef_shared'] = 0
             return recipe
           } else {
             return recipe

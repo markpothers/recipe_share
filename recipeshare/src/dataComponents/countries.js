@@ -1,7 +1,6 @@
 import React from 'react'
 
 export const countries = [
-    "United Kingdom",
     "Afghanistan",
     "Albania",
     "Algeria",
@@ -187,6 +186,7 @@ export const countries = [
     "Uganda",
     "Ukraine",
     "United Arab Emirates",
+    "United Kingdom",
     "United States",
     "Uruguay",
     "Uzbekistan",

@@ -1,11 +1,12 @@
 import React from 'react'
-import {ScrollView, Text, AsyncStorage, ImageBackground, KeyboardAvoidingView, TouchableOpacity, TextInput, View, Picker } from 'react-native'
+import {ScrollView, Text, ImageBackground, KeyboardAvoidingView, TouchableOpacity, TextInput, View, Picker, Platform, TouchableWithoutFeedback } from 'react-native'
 import { countries } from '../dataComponents/countries'
 import * as Permissions from 'expo-permissions'
 import { connect } from 'react-redux'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { styles } from './usersStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon2 from 'react-native-vector-icons/Entypo';
 import PicSourceChooser from '../functionalComponents/picSourceChooser'
 
 const mapStateToProps = (state) => ({
@@ -171,6 +172,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       ))
     }
 
+    onPickerTouch = () => {
+      console.log("pickertouched")
+    }
+
     render() {
       // console.log(this.props)
       return (
@@ -196,14 +201,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                   </View>
                 </View>
                 {this.renderUsernameError()}
-                <View style={styles.formRow}>
-                  <View picker style={styles.loginInputBox}>
+                <View style={[styles.formRow, {zIndex: 1}]}>
+                  <View picker style={[styles.pickerInputBox, (this.state.pickerFocused ? {height: 170} : {height: 44})]}>
+                    {Platform.OS === 'ios' ? <Icon2 style={styles.iOSdropDownIcon} size={15} name='select-arrows' /> : null}
                     <Picker
                       mode="dropdown"
-                      iosIcon={<Icon name="arrow-down" />}
                       onValueChange={e => this.onCountryChange(e, "country")}
+                      selectedValue={this.props.country}
                     >
-                      <Picker.Item key={this.props.country} label={this.props.country} value={this.props.country} />
                       {this.countriesPicker()}
                     </Picker>
                   </View>
