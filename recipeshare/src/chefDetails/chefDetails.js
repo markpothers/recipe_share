@@ -38,6 +38,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     static navigationOptions = ({ navigation }) => {
       return {
         headerTitle: <AppHeader text={"Chef Details"} />,
+        headerLeft: null,
       }
     }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import {ScrollView, Text, ImageBackground, KeyboardAvoidingView, TouchableOpacity, TextInput, View, Picker, Platform, TouchableWithoutFeedback } from 'react-native'
+import {ScrollView, Text, ImageBackground, KeyboardAvoidingView, TouchableOpacity, TextInput, View, Picker, Platform, Switch } from 'react-native'
 import { countries } from '../dataComponents/countries'
 import * as Permissions from 'expo-permissions'
 import { connect } from 'react-redux'
@@ -8,6 +8,7 @@ import { styles } from './usersStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon2 from 'react-native-vector-icons/Entypo';
 import PicSourceChooser from '../functionalComponents/picSourceChooser'
+import { TAndC } from './tAndC'
 
 const mapStateToProps = (state) => ({
   first_name: state.newUserDetails.first_name,
@@ -49,7 +50,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     state = {
       hasPermission: false,
       errors: [],
-      choosingPicture: false
+      choosingPicture: false,
+      tAndCAgreed: false,
+      viewingTandC: false,
     }
 
     componentDidMount(){
@@ -176,6 +179,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       console.log("pickertouched")
     }
 
+    handleTandCSwitch = () => {
+      this.setState({tAndCAgreed: !this.state.tAndCAgreed})
+    }
+
+    handleViewTandC = () => {
+      this.setState({viewingTandC: !this.state.viewingTandC})
+    }
+
+    renderTandC = () => {
+
+    }
+
     render() {
       // console.log(this.props)
       return (
@@ -229,20 +244,30 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                   </View>
                 </View>
                 {this.renderPasswordError()}
-                  <View style={styles.formRow}>
-                  <TouchableOpacity style={styles.loginFormButton} activeOpacity={0.7} onPress={() => this.props.navigation.navigate('Login')}>
-                    <Icon style={styles.standardIcon} size={25} name='login' />
-                    <Text style={styles.loginFormButtonText}>Return to{"\n"} login screen</Text>
+                <View style={styles.formRow}>
+                  <TouchableOpacity style={styles.loginInputBox} activeOpacity={0.7} onPress={this.handleViewTandC}>
+                    <Text style={styles.loginTextBox}>View Terms & conditions</Text>
                   </TouchableOpacity>
+                {this.state.viewingTandC ? <TAndC handleViewTandC={this.handleViewTandC}/> : null}
+                </View>
+                <View style={styles.formRow}>
+                  <View style={styles.loginFormButton}>
+                    <Text style={styles.loginFormButtonText}>Agree{"\n"}T&C</Text>
+                    <Switch value={this.state.tAndCAgreed} onChange={this.handleTandCSwitch}/>
+                  </View>
                   <TouchableOpacity style={styles.loginFormButton} activeOpacity={0.7} title="Take Photo" onPress={this.choosePicture}>
                     <Icon style={styles.standardIcon} size={25} name='camera' />
                     <Text style={styles.loginFormButtonText}>Add{"\n"}picture</Text>
                   </TouchableOpacity>
                 </View>
                 <View style={styles.formRow}>
-                  <TouchableOpacity style={styles.loginFormButton} activeOpacity={0.7} onPress={e => this.submitChef(e)}>
+                <TouchableOpacity style={styles.loginFormButton} activeOpacity={0.7} onPress={() => this.props.navigation.navigate('Login')}>
+                    <Icon style={styles.standardIcon} size={25} name='login' />
+                    <Text style={styles.loginFormButtonText}>Return to{"\n"} login screen</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.loginFormButton} activeOpacity={0.7} onPress={(this.state.tAndCAgreed ? e => this.submitChef(e) : null )}>
                     <Icon style={styles.standardIcon} size={25} name='login-variant' />
-                    <Text style={styles.loginFormButtonText}>Submit &{"\n"} go to log in</Text>
+                    <Text style={styles.loginFormButtonText}>{(this.state.tAndCAgreed ? "Submit &\n go to log in" : "Please\naccept T&C")}</Text>
                   </TouchableOpacity>
                 </View>
               </ScrollView>

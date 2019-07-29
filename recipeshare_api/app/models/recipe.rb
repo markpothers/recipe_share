@@ -384,7 +384,9 @@ class Recipe < ApplicationRecord
         makeable: makeable,
         make_pics: MakePic.where(recipe_id: self.id).order('updated_at DESC'),
         ingredient_uses: ingredientUses,
-        ingredients: Ingredient.where(id: ingredients_ids)
+        ingredients: Ingredient.where(id: ingredients_ids),
+        chef_username: self.chef.username,
+        chef_id: self.chef.id,
     }
   end
 

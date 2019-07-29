@@ -145,6 +145,12 @@ export const styles = StyleSheet.create({
       backgroundColor: 'white',
       // opacity: 0.9,
     },
+    headerTextView:{
+      width: '80%',
+      flexDirection: 'row',
+      alignItems: 'flex-end',
+      justifyContent: 'center',
+    },
     detailsHeaderTextBox: {
       marginLeft: '1%',
       marginRight: '1%',
@@ -152,9 +158,21 @@ export const styles = StyleSheet.create({
       // marginBottom: '1%',
       textAlign: 'center',
       fontWeight: 'bold',
-      fontSize: 24,
+      fontSize: 22,
       color: "#505050",
-      width: '80%'
+      // width: '60%'
+      // color: "#104e01",
+    },
+    detailsHeaderUsername: {
+      marginLeft: '1%',
+      marginRight: '1%',
+      // marginTop: 8,
+      // marginBottom: '1%',
+      textAlign: 'left',
+      // fontWeight: 'bold',
+      fontSize: 14,
+      color: "#505050",
+      // width: '20%'
       // color: "#104e01",
     },
     detailsSubHeadings: {

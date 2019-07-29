@@ -14,11 +14,19 @@ class AppHeader extends React.PureComponent {
         )
     }
 
+    renderBackButton = () => {
+        return (
+            <TouchableOpacity style={styles.headerDrawerButton}>
+                <Icon name='arrow-left' style={styles.headerIcon} size={33} onPress={() => this.props.navigation.goBack()}/>
+            </TouchableOpacity>
+        )
+    }
+
     renderNewRecipeButton = () => {
         return (
             <TouchableOpacity style={styles.headerNewButton}>
-            <Icon name='plus' style={styles.headerIcon} size={33} onPress={() => this.props.navigation.navigate('NewRecipe')}/>
-        </TouchableOpacity>
+                <Icon name='plus' style={styles.headerIcon} size={33} onPress={() => this.props.navigation.navigate('NewRecipe')}/>
+            </TouchableOpacity>
         )
     }
 
@@ -32,11 +40,15 @@ class AppHeader extends React.PureComponent {
         // I don't understand this at all and honestly believe it's a bug in react navigation.
         return (
             <View style={styles.headerContainer}>
-                {this.props.navigation.state.routeName !== "ChefDetails" && this.props.navigation.state.routeName !== "NewRecipe" && this.props.navigation.state.routeName !== "RecipeDetails" ? this.renderDrawerButton() : null}
-                <TouchableOpacity onPress={() => this.props.navigation.popToTop()}>
+                <View style={styles.headerEnd}>
+                    {this.props.navigation.state.routeName !== "ChefDetails" && this.props.navigation.state.routeName !== "NewRecipe" && this.props.navigation.state.routeName !== "RecipeDetails" ? this.renderDrawerButton() : this.renderBackButton()}
+                </View>
+                <TouchableOpacity  style={styles.headerMiddle} onPress={() => this.props.navigation.popToTop()}>
                     <Text style={styles.headerText}>{this.props.text}</Text>
                 </TouchableOpacity>
-                { this.props.navigation.state.routeName !== "NewRecipe" ? this.renderNewRecipeButton() : null }
+                <View style={styles.headerEnd}>
+                    { this.props.navigation.state.routeName !== "NewRecipe" ? this.renderNewRecipeButton() : null }
+                </View>
             </View>
             )
     }

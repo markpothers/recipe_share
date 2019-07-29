@@ -21,7 +21,8 @@ import PicSourceChooser from '../functionalComponents/picSourceChooser'
 
 const mapStateToProps = (state) => ({
   recipe_details: state.recipe_details,
-  loggedInChef: state.loggedInChef
+  loggedInChef: state.loggedInChef,
+  filter_settings: state.filter_settings,
 })
 
 const mapDispatchToProps = {
@@ -77,6 +78,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     static navigationOptions = ({ navigation }) => {
       return {
         headerTitle: <AppHeader text={"Recipe Details"} />,
+        // headerRight: null
+        headerLeft: null,
       };
     }
 
@@ -311,18 +314,28 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       }
     }
 
+    renderFilterCategories = () => {
+      const categories = Object.keys(this.props.filter_settings).sort().filter( category => this.props.recipe_details.recipe[category.split(" ").join("_").toLowerCase()])
+      return <Text style={[styles.detailsContents]}>{categories.join(",  ")}</Text>
+    }
+
     render() {
       if (this.props.recipe_details != undefined){
-        // console.log(this.myScroll.nativeEvent.conte?ntOffset.y)
+        // console.log(this.props.recipe_details.chef_username)
         return (
           <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={83} style={{flex:1}}>
             <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
               {this.state.choosingPicSource ? this.renderPictureChooser() : null}
               <View style={styles.detailsHeader}>
-                <Text style={[styles.detailsHeaderTextBox]}>{this.props.recipe_details.recipe.name}</Text>
+                <View style={styles.headerTextView}>
+                  <Text style={[styles.detailsHeaderTextBox]}>{this.props.recipe_details.recipe.name}</Text>
+                  <TouchableOpacity onPress={() => this.props.navigation.navigate('ChefDetails', {chefID: this.props.recipe_details.chef_id})}>
+                    <Text style={[styles.detailsHeaderUsername]}>by {this.props.recipe_details.chef_username}</Text>
+                  </TouchableOpacity>
+                </View>
                 {this.renderEditDeleteButtons()}
               </View>
-              <ScrollView contentContainerStyle={{flexGrow:1}} ref={(ref) =>this.myScroll = ref} onScroll={this.scrolled}>
+              <ScrollView contentContainerStyle={{flexGrow:1}} ref={(ref) =>this.myScroll = ref} >
                 <View style={styles.detailsLikesAndMakes}>
                   <View style={styles.detailsLikes}>
                     <View style={styles.buttonAndText}>
@@ -348,8 +361,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                   {this.renderRecipeIngredients()}
                 </View>
                 <View style={styles.detailsInstructions}>
-                <Text style={styles.detailsSubHeadings}>Instructions:</Text>
+                  <Text style={styles.detailsSubHeadings}>Instructions:</Text>
                   <Text style={[styles.detailsContents]}>{this.props.recipe_details.recipe.instructions}</Text>
+                </View>
+                <View style={styles.detailsInstructions}>
+                  <Text style={styles.detailsSubHeadings}>Categories:</Text>
+                  {this.renderFilterCategories()}
                 </View>
                 <View style={styles.detailsMakePicsContainer}>
                   <View style={{flexDirection: 'row'}}>

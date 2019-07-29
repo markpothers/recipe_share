@@ -75,6 +75,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
   class NewRecipe extends React.Component {
     static navigationOptions = {
       headerTitle: <AppHeader text={"Create a New Recipe"}/>,
+      // headerRight: null,
+      headerLeft: null,
     }
 
     state = {

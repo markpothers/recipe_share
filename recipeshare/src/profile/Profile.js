@@ -30,6 +30,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     static navigationOptions = ({ navigation }) => {
       return {
         headerTitle: <AppHeader text={"Profile"}/>,
+        headerLeft: null,
       }
     };
 

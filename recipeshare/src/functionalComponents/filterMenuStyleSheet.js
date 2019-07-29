@@ -26,8 +26,8 @@ export const styles = StyleSheet.create({
     borderColor: '#104e01',
     backgroundColor: '#fff59b',
     // top: '5%',
-    height: '95%',
-    // width: '80%',
+    // height: '95%',
+    width: '95%',
     // marginTop: '3%',
     // marginLeft: '10%',
     // marginRight: '20%',
@@ -35,10 +35,6 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     // justifyContent: 'center',
     alignItems: 'center',
-  },
-  contentsContainerAndroidCorrection:{
-    height: '77%',
-    width: '80%',
   },
   titleContainer: {
     // flex: 1,
@@ -222,7 +218,7 @@ export const styles = StyleSheet.create({
       position: 'absolute',
       // height: 25,
       // width: 25,
-      left: '78.5%',
+      left: '75%',
       top: '40%',
       zIndex: 2,
       // borderStyle: 'solid',
@@ -232,9 +228,10 @@ export const styles = StyleSheet.create({
     },
     clearFiltersButtonContainer: {
       // alignItems: 'center',
-      flex: 1,
+      // flex: 1,
+      height: 53,
       flexDirection: 'row',
-      marginTop: '2%'
+      marginTop: '2%',
     },
     clearFiltersButton:{
       marginLeft: '5%',

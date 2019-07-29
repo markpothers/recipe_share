@@ -42,7 +42,7 @@ class Chef < ApplicationRecord
     end
 
     def as_json(*)
-        super.except('password', 'password_confirmation', 'password_digest', 'updated_at', 'hidden', 'activated', 'activation_digest')
+        super.except('password', 'password_confirmation', 'password_digest', 'updated_at', 'hidden', 'activated', 'activation_digest', 'password_created_at', 'password_is_auto"')
     end
 
     def self.choose_list(type = "all_chefs", queryChefID = 1, limit = 50, offset = 0, userChefID = 1)

@@ -15,22 +15,35 @@ export const styles = StyleSheet.create({
     // borderWidth: 2,
     // borderColor: '#fff59b',
   },
+  headerEnd:{
+    width: '15%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  headerMiddle:{
+    width: '70%',
+    height: '100%',
+    // alignItems: 'center',
+    justifyContent: 'center'
+  },
   headerDrawerButton: {
     marginLeft: 15,
     marginRight: 8,
   },
   headerNewButton: {
-    position: 'absolute',
-    left: '85%',
-    marginLeft: 10,
-    marginRight: 10,
+    // position: 'absolute',
+    // left: '85%',
+    // marginLeft: 10,
+    // marginRight: 10,
   },
   headerIcon:{
     color: '#fff59b'
   },
   headerText:{
     fontSize: 24,
-    color: '#fff59b'
+    color: '#fff59b',
+    marginLeft: 10
   },
   background: {
     width: '100%',

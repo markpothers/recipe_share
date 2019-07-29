@@ -143,7 +143,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     <View style={[styles.modalFullScreenContainer, {height: Dimensions.get('window').height,
                             width: Dimensions.get('window').width,
                             }]}>
-                        <View style={[styles.contentsContainer, (Platform.OS !== 'ios' ? styles.contentsContainerAndroidCorrection : null )]}>
+                        <View style={styles.contentsContainer}>
                             <View style={styles.titleContainer}>
                                 <Text style={styles.title}>{this.props.title}</Text>
                             </View>
