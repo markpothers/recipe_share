@@ -20,12 +20,12 @@ const BrowseRecipesTabs = createMaterialTopTabNavigator({
       tabBarLabel: 'Most Liked Recipes',
     }
   },
-  MostMadeRecipes:  {
-    screen: MostMadeRecipesScreen,
-    navigationOptions: {
-      tabBarLabel: 'Most Made Recipes',
-    }
-  },
+  // MostMadeRecipes:  {
+  //   screen: MostMadeRecipesScreen,
+  //   navigationOptions: {
+  //     tabBarLabel: 'Most Made Recipes',
+  //   }
+  // },
   NewestChefs:  {
     screen: NewestChefsScreen,
     navigationOptions: {
@@ -38,12 +38,12 @@ const BrowseRecipesTabs = createMaterialTopTabNavigator({
       tabBarLabel: 'Most Liked Chefs',
     },
   },
-  MostMadeChefs:  {
-    screen: MostMadeChefsScreen,
-    navigationOptions: {
-      tabBarLabel: 'Most Made Chefs',
-    },
-  }
+  // MostMadeChefs:  {
+  //   screen: MostMadeChefsScreen,
+  //   navigationOptions: {
+  //     tabBarLabel: 'Most Made Chefs',
+  //   },
+  // }
 }, {
   initialLayout: {
     height: 55,

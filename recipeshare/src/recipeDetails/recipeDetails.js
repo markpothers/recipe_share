@@ -342,13 +342,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                       {this.renderLikeButton()}
                       <Text style={[styles.detailsLikesAndMakesUpperContents]}>Likes: {this.props.recipe_details.recipe_likes}</Text>
                     </View>
-                    <View style={styles.buttonAndText}>
+                    {/* <View style={styles.buttonAndText}>
                       {this.renderMakeButton()}
                       <Text style={[styles.detailsLikesAndMakesUpperContents]}>Makes: {this.props.recipe_details.recipe_makes}</Text>
+                    </View> */}
+                    <View style={styles.buttonAndText}>
+                      <Text style={[styles.detailsLikesAndMakesUpperContents]}>Serves: {this.props.recipe_details.recipe.serves}</Text>
                     </View>
                   </View>
                   <View style={styles.detailsLikes}>
-                    <Text style={[styles.detailsLikesAndMakesLowerContents]}>Serves: {this.props.recipe_details.recipe.serves}</Text>
+                    {/* <Text style={[styles.detailsLikesAndMakesLowerContents]}>Serves: {this.props.recipe_details.recipe.serves}</Text> */}
                     <Text style={[styles.detailsLikesAndMakesLowerContents]}>Time: {this.props.recipe_details.recipe.time}</Text>
                     <Text style={[styles.detailsLikesAndMakesLowerContents]}>Difficulty: {this.props.recipe_details.recipe.difficulty}</Text>
                   </View>

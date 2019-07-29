@@ -48,10 +48,10 @@ export default class RecipeCard extends React.PureComponent {
                         {this.props.chef_liked === 0 ? <Icon name='heart-outline' size={24} style={styles.icon}/> : <Icon name='heart' size={24} style={styles.icon}/> }
                         <Text style={styles.recipeCardBottomOther} >{this.props.likesCount}</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.recipeCardBottomSubContainers} onPress={this.props.chef_made === 0 ? () => this.props.makeRecipe(this.props.id) : null }>
+                    {/* <TouchableOpacity style={styles.recipeCardBottomSubContainers} onPress={this.props.chef_made === 0 ? () => this.props.makeRecipe(this.props.id) : null }>
                         {this.props.chef_made === 0 ? <Icon name='food' size={24} style={styles.icon}/> : <Icon name='food-off' size={24} style={styles.icon}/> }
                         <Text style={styles.recipeCardBottomOther} >{this.props.makesCount}</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                     <TouchableOpacity style={styles.recipeCardBottomSubContainers} onPress={() => this.props.navigateToRecipeDetailsAndComment(this.props.id)}>
                         {this.props.chef_commented === 0 ? <Icon name='comment-outline' size={24} style={styles.icon}/> : <Icon name='comment' size={24} style={styles.icon}/> }
                         <Text style={styles.recipeCardBottomOther} >{this.props.commentsCount}</Text>

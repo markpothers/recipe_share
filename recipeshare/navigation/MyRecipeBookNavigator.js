@@ -29,12 +29,12 @@ const MyRecipeBookTabs = createMaterialTopTabNavigator({
       tabBarLabel: "Recipes I've liked",
     }
   },
-  MyMadeRecipes: {
-  screen: MyMadeRecipesScreen,
-    navigationOptions: {
-      tabBarLabel: "Recipes I've made",
-    }
-  },
+  // MyMadeRecipes: {
+  // screen: MyMadeRecipesScreen,
+  //   navigationOptions: {
+  //     tabBarLabel: "Recipes I've made",
+  //   }
+  // },
   ChefsFollowed: {
     screen: ChefsFollowedScreen,
     navigationOptions: {

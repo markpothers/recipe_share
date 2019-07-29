@@ -72,12 +72,12 @@ export default class ChefDetailsCard extends React.PureComponent {
                     <Text style={[styles.chefDetailsRowContents]}>{this.props.recipe_likes.length}</Text>
                     <Text style={[styles.chefDetailsRowContents]}>{this.props.recipe_likes_received.length}</Text>
                   </View>
-                  <View style={styles.chefDetailsStats}>
+                  {/* <View style={styles.chefDetailsStats}>
                     {this.props.chef_made === true ? <Icon name='food-off' size={24} style={styles.icon}/> : <Icon name='food' size={24} style={styles.icon}/> }
                     <Text style={[styles.chefDetailsRowTitle]}>Recipes made:</Text>
                     <Text style={[styles.chefDetailsRowContents]}>{this.props.recipe_makes.length}</Text>
                     <Text style={[styles.chefDetailsRowContents]}>{this.props.recipe_makes_received.length}</Text>
-                  </View>
+                  </View> */}
                   <View style={styles.chefDetailsStats}>
                     {this.props.chef_followed === true ? <Icon name='account-multiple' size={24} style={styles.icon}/> : <Icon name='account-multiple-outline' size={24} style={styles.icon}/> }
                     <Text style={[styles.chefDetailsRowTitle]}>Follows:</Text>
