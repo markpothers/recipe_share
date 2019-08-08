@@ -3,7 +3,7 @@ import { Dimensions } from 'react-native';
 import { createMaterialTopTabNavigator, createAppContainer } from 'react-navigation';
 import { MyRecipesScreen, MyLikedRecipesScreen, MyMadeRecipesScreen, ChefsFollowedScreen, ChefsFollowingScreen} from './ChefDetailsTabs'
 
-const MyRecipeBookTabs = createMaterialTopTabNavigator({
+export const MyRecipeBookTabs = createMaterialTopTabNavigator({
   MyRecipes: {
     screen: MyRecipesScreen,
     navigationOptions: {
@@ -16,12 +16,12 @@ const MyRecipeBookTabs = createMaterialTopTabNavigator({
       tabBarLabel: "Recipes I've liked",
     }
   },
-  MyMadeRecipes: {
-  screen: MyMadeRecipesScreen,
-    navigationOptions: {
-      tabBarLabel: "Recipes I've made",
-    }
-  },
+  // MyMadeRecipes: {
+  // screen: MyMadeRecipesScreen,
+  //   navigationOptions: {
+  //     tabBarLabel: "Recipes I've made",
+  //   }
+  // },
   ChefsFollowed: {
     screen: ChefsFollowedScreen,
     navigationOptions: {

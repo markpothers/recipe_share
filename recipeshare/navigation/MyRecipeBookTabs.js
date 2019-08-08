@@ -71,7 +71,6 @@ export class ChefsFollowedScreen extends React.Component {
 
 export class ChefsFollowingScreen extends React.Component {
   render (){
-    console.log(this.props.screenProps)
     return (
       <View style={styles.mainPageContainer}>
         <ImageBackground source={require('../src/dataComponents/spinach.jpg')} style={styles.background} >

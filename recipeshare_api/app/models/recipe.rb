@@ -43,7 +43,7 @@ class Recipe < ApplicationRecord
       #                               OFFSET (?)", [limit, offset])
 # byebug
 
-      ApplicationRecord.db.execute("SELECT recipes.*, recipe_images.imageURL,
+        ApplicationRecord.db.execute("SELECT recipes.*, recipe_images.imageURL,
                                     chefs.username ,chefs.imageURL as chefImageURL,
                                       (SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id) As sharesCount,
                                       (SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id AND re_shares.chef_id = (?)) As chef_shared,

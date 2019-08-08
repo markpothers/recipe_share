@@ -99,7 +99,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         }
 
         cuisinesPicker = () => {
-            return cuisines.sort().map( cuisine => {
+            return cuisines.map( cuisine => {
               return <Picker.Item style={styles.pickerText} key={cuisine} label={cuisine} value={cuisine} />
             })
           }

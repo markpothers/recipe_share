@@ -6,7 +6,7 @@ import { styles } from './chefDetailsStyleSheet'
 import { getChefDetails } from '../fetches/getChefDetails'
 import AppHeader from '../../navigation/appHeader'
 import ChefDetailsCard from './ChefDetailsCard'
-import { MyRecipeBookTabsContainer } from './ChefDetailsNavigators'
+import { MyRecipeBookTabsContainer, MyRecipeBookTabs } from './ChefDetailsNavigators'
 import { postFollow } from '../fetches/postFollow'
 import { destroyFollow } from '../fetches/destroyFollow'
 
@@ -113,12 +113,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                   notProfile={true}/>
                 <View style={styles.recipeBookContainer}>
                   <MyRecipeBookTabsContainer screenProps={{parentNavigator: this.parentNavigator, queryChefID: chef_details.chef.id}}/>
+                  {/* <MyRecipeBook/> */}
                 </View>
               </ScrollView>
             </ImageBackground>
           </View>
         )
       } else {
+        // console.log(this.props)
         return (
           <View style={{flex:1}}>
             <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>

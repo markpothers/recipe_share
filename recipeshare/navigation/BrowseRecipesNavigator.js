@@ -78,7 +78,7 @@ const BrowseRecipesStack = createStackNavigator({
 },{
   defaultNavigationOptions: {
     headerTitle: <AppHeader text={"Browse Recipes"}/>,
-    headerRight: null,
+    // headerRight: null,
     headerStyle: {    //styles possibly needed if app-wide styling doesn't work
       backgroundColor: '#104e01',
       // borderStyle: 'solid',

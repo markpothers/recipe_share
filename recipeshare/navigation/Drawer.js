@@ -22,7 +22,7 @@ export default (connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render(){
-        // console.log(this.props.loggedInChef.imageURL)
+        // console.log(this.props.loggedInChef)
       return (
       <ScrollView>
         <SafeAreaView style={[styles.mainPageContainer, {height: Dimensions.get('window').height*0.96}]} forceInset={{ top: 'always', horizontal: 'never' }}>
@@ -70,6 +70,7 @@ export default (connect(mapStateToProps, mapDispatchToProps)(
   }))
 
   function AvatarImage(props) {
+    // console.log(props)
     const URL = props.imageURL
     if (URL == null) {
         return (

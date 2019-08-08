@@ -2,7 +2,6 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     recipeCard: {
-      // height: 319,
       marginTop: 2,
       marginBottom: 2,
       width: '100%',
@@ -13,7 +12,6 @@ export const styles = StyleSheet.create({
       backgroundColor: 'white'
     },
     recipeCardTopPostedByContainer: {
-      // borderBottomStyle: 'solid 0.5',
       borderBottomWidth: 0.5,
       borderBottomColor: '#104e01',
       height: 25,
@@ -26,67 +24,45 @@ export const styles = StyleSheet.create({
     },
     recipeCardTopContainer: {
       flexDirection: 'row',
-      // borderStyle: 'solid',
-      // borderWidth: 2,
-      height: 61,
       width: '100%',
       marginTop: '1%',
       marginBottom: '1%'
     },
     recipeCardTopLeftContainer: {
       flex: 8,
-      // borderStyle: 'solid',
-      // borderWidth: 2,
     },
     recipeCardTopRightContainer: {
       flex: 2,
-      // borderStyle: 'solid',
-      // borderWidth: 2,
       justifyContent: 'center',
       alignItems: 'center',
       overflow: 'hidden',
     },
     avatarThumbnail: {
-      // position: 'absolute',
       height: 60,
       width: '96%',
       marginRight: '4%',
       borderRadius: 5,
     },
     recipeCardTopLeftUpperContainer:{
-      // borderStyle: 'solid',
-      // borderWidth: 2,
       width: '96%',
-      // marginTop: '1%',
-      // marginBottom: '1%',
       marginLeft: '2%',
       marginRight: '2%'
     },
     recipeCardTopLeftMiddleContainer:{
-      // borderStyle: 'solid',
-      // borderWidth: 2,
       width: '96%',
-      // marginTop: '1%',
-      // marginBottom: '1%',
       marginLeft: '2%',
       marginRight: '2%',
       flexDirection: 'row'
     },
     recipeCardTopLeftLowerContainer:{
       flexDirection: 'row',
-      // borderStyle: 'solid',
-      // borderWidth: 2,
       width: '96%',
       justifyContent: 'center',
       alignItems: 'center',
-      // marginTop: '1%',
-      // marginBottom: '1%',
       marginLeft: '2%',
       marginRight: '2%'
     },
     recipeCardImageContainer: {
-      // borderStyle: 'solid',
-      // borderWidth: 2,
       height: 250,
       width: '100%'
     },
@@ -101,14 +77,10 @@ export const styles = StyleSheet.create({
       marginTop: '1%',
       marginBottom: '1%',
       height: 25,
-      // borderStyle: 'solid',
-      // borderWidth: 2,
     },
     recipeCardBottomSubContainers: {
       flexDirection: 'row',
       flex: 1,
-      // borderStyle: 'solid',
-      // borderWidth: 2,
       justifyContent: 'center',
       alignItems: 'center'
     },
@@ -157,7 +129,5 @@ export const styles = StyleSheet.create({
     },
     filterIcon:{
       color: '#104e01',
-      // alignSelf: 'center',
-      // marginLeft: '10%'
     }
 });

@@ -120,14 +120,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     renderEditDeleteButtons = () => {
       if (this.props.recipe_details.recipe.chef_id === this.props.loggedInChef.id || this.props.loggedInChef.is_admin){
         return (
-          <React.Fragment>
+          <View style={styles.detailsHeaderButtonsContainer}>
             <TouchableOpacity style={styles.headerButton} onPress={this.editRecipe}>
               <Icon name='playlist-edit' size={24} style={styles.headerIcon}/>
             </TouchableOpacity>
             <TouchableOpacity style={styles.headerButton} onPress={this.deleteRecipe}>
               <Icon name='trash-can-outline' size={24} style={styles.headerIcon}/>
             </TouchableOpacity>
-          </React.Fragment>
+          </View>
         )
       }
     }
@@ -315,7 +315,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     renderFilterCategories = () => {
+      // console.log(this.props.recipe_details.recipe.cuisine)
       const categories = Object.keys(this.props.filter_settings).sort().filter( category => this.props.recipe_details.recipe[category.split(" ").join("_").toLowerCase()])
+      // this.props.recipe_details.recipe.cuisine === "Any" ? null : categories.unshift(this.props.recipe_details.recipe.cuisine)
       return <Text style={[styles.detailsContents]}>{categories.join(",  ")}</Text>
     }
 
@@ -327,13 +329,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
               {this.state.choosingPicSource ? this.renderPictureChooser() : null}
               <View style={styles.detailsHeader}>
-                <View style={styles.headerTextView}>
-                  <Text style={[styles.detailsHeaderTextBox]}>{this.props.recipe_details.recipe.name}</Text>
-                  <TouchableOpacity onPress={() => this.props.navigation.navigate('ChefDetails', {chefID: this.props.recipe_details.chef_id})}>
-                    <Text style={[styles.detailsHeaderUsername]}>by {this.props.recipe_details.chef_username}</Text>
-                  </TouchableOpacity>
+                <View style={styles.detailsHeaderTopRow}>
+                  <View style={styles.headerTextView}>
+                    <Text style={[styles.detailsHeaderTextBox]}>{this.props.recipe_details.recipe.name}</Text>
+                  </View>
+                    {this.renderEditDeleteButtons()}
                 </View>
-                {this.renderEditDeleteButtons()}
+                {/* <TouchableOpacity style={styles.usernameContainer} onPress={() => this.props.navigation.navigate('ChefDetails', {chefID: this.props.recipe_details.chef_id})}>
+                      <Text style={[styles.detailsHeaderUsername]}>by {this.props.recipe_details.chef_username}</Text>
+                </TouchableOpacity> */}
               </View>
               <ScrollView contentContainerStyle={{flexGrow:1}} ref={(ref) =>this.myScroll = ref} >
                 <View style={styles.detailsLikesAndMakes}>
@@ -347,7 +351,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                       <Text style={[styles.detailsLikesAndMakesUpperContents]}>Makes: {this.props.recipe_details.recipe_makes}</Text>
                     </View> */}
                     <View style={styles.buttonAndText}>
-                      <Text style={[styles.detailsLikesAndMakesUpperContents]}>Serves: {this.props.recipe_details.recipe.serves}</Text>
+                      <Text style={[styles.detailsLikesAndMakesLowerContents]}>Serves: {this.props.recipe_details.recipe.serves}</Text>
                     </View>
                   </View>
                   <View style={styles.detailsLikes}>
@@ -366,6 +370,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 <View style={styles.detailsInstructions}>
                   <Text style={styles.detailsSubHeadings}>Instructions:</Text>
                   <Text style={[styles.detailsContents]}>{this.props.recipe_details.recipe.instructions}</Text>
+                </View>
+                <View style={styles.detailsInstructions}>
+                  <Text style={styles.detailsSubHeadings}>Cuisine:</Text>
+                  <Text style={[styles.detailsContents]}>{this.props.recipe_details.recipe.cuisine}</Text>
                 </View>
                 <View style={styles.detailsInstructions}>
                   <Text style={styles.detailsSubHeadings}>Categories:</Text>

@@ -56,7 +56,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
 
     respondToFocus = async() =>{
       await this.setState({offset: 0})
-      // this.fetchChefList()
+      this.fetchChefList()
     }
 
     fetchChefList = async() => {

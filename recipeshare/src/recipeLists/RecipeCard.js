@@ -16,11 +16,9 @@ export default class RecipeCard extends React.PureComponent {
                 {this.props.sharer_id? <PostedBy navigateToSharer={this.navigateToSharer} username={this.props.sharer_username} sharer_id={this.props.sharer_id} /> : null }
                 <View style={styles.recipeCardTopContainer}>
                     <View style={styles.recipeCardTopLeftContainer}>
-                        <View style={styles.recipeCardTopLeftUpperContainer}>
-                            <TouchableOpacity activeOpacity={0.7} onPress={() => this.props.navigateToRecipeDetails(this.props.id)}>
-                                <Text style={styles.recipeCardHighlighted}>{this.props.name}</Text>
-                            </TouchableOpacity>
-                        </View>
+                        <TouchableOpacity style={styles.recipeCardTopLeftUpperContainer} activeOpacity={0.7} onPress={() => this.props.navigateToRecipeDetails(this.props.id)}>
+                            <Text style={styles.recipeCardHighlighted}>{this.props.name}</Text>
+                        </TouchableOpacity>
                         <View style={styles.recipeCardTopLeftMiddleContainer}>
                             <Text style={styles.recipeCardTopItalic}>Created by: </Text>
                             <TouchableOpacity onPress={() => this.props.navigateToChefDetails(this.props.chef_id)}>

@@ -137,7 +137,9 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 5,
     height: 38,
-    width: '80%'
+    width: '80%',
+    borderWidth: 1,
+    borderColor: '#104e01'
   },
   formErrorText:{
     color: "#9e0000f8",

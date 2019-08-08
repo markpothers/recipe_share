@@ -62,7 +62,6 @@ class RecipesController < ApplicationController
             newRecipe_filter_settings["filter_settings"].keys.each do |category|
                 newRecipe_filter_settings["filter_settings"][category] ? @recipe[category.downcase.split(" ").join("_")] = true : @recipe[category.downcase.split(" ").join("_")] = false
             end
-            @recipe.cuisine=newRecipe_filter_settings["cuisine"]
             if newRecipe_image_params[:imageBase64] != "" && newRecipe_image_params[:imageBase64] != nil
                 @recipe_image = RecipeImage.create(recipe_id: @recipe.id)
 

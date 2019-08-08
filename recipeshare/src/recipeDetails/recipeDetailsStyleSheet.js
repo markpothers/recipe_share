@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
       marginTop: 3,
       borderRadius: 5,
       backgroundColor: 'white',
-      flexDirection: 'row'
+      // flexDirection: 'row'
       // backgroundColor: '#fff59b',
       // opacity: 0.9,
     },
@@ -143,37 +143,38 @@ export const styles = StyleSheet.create({
       flexDirection: 'row',
       borderRadius: 5,
       backgroundColor: 'white',
-      // opacity: 0.9,
     },
     headerTextView:{
-      width: '80%',
-      flexDirection: 'row',
-      alignItems: 'flex-end',
-      justifyContent: 'center',
+      marginLeft: '2%',
+      width: '78%',
+    },
+    detailsHeaderTopRow:{
+      flexDirection: 'row'
     },
     detailsHeaderTextBox: {
-      marginLeft: '1%',
-      marginRight: '1%',
-      // marginTop: 4,
-      // marginBottom: '1%',
       textAlign: 'center',
       fontWeight: 'bold',
       fontSize: 22,
       color: "#505050",
-      // width: '60%'
-      // color: "#104e01",
+      width: '100%',
+    },
+    usernameContainer:{
+      width: '100%',
+      marginRight: '5%'
+    },
+    detailsHeaderButtonsContainer:{
+      flexDirection: 'row',
+      width: '20%',
+      justifyContent: 'center',
+      alignItems: 'center'
     },
     detailsHeaderUsername: {
       marginLeft: '1%',
       marginRight: '1%',
-      // marginTop: 8,
-      // marginBottom: '1%',
-      textAlign: 'left',
-      // fontWeight: 'bold',
+      textAlign: 'right',
       fontSize: 14,
       color: "#505050",
-      // width: '20%'
-      // color: "#104e01",
+      width: '100%'
     },
     detailsSubHeadings: {
       marginLeft: '3%',
@@ -186,19 +187,12 @@ export const styles = StyleSheet.create({
     detailsContents: {
       marginLeft: '3%',
       marginRight: '3%',
-      // marginTop: 4,
-      // marginBottom: '1%',
-      // textAlign: 'center',
-      // fontWeight: 'bold',
       fontSize: 16,
       color: "#505050",
     },
     detailsContentsHeader: {
       marginLeft: '3%',
       marginRight: '3%',
-      // marginTop: 4,
-      // marginBottom: '1%',
-      // textAlign: 'center',
       fontStyle: 'italic',
       fontSize: 16,
       color: "#505050",
