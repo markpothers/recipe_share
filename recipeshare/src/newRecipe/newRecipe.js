@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView, Text, ImageBackground, TextInput, KeyboardAvoidingView, TouchableOpacity, View, Picker, Platform } from 'react-native'
+import { ScrollView, Text, ImageBackground, TextInput, KeyboardAvoidingView, TouchableOpacity, View, Picker, Platform, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
 import * as Permissions from 'expo-permissions'
 import { styles } from './newRecipeStyleSheet'
@@ -84,24 +84,27 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       ingredientsList: [],
       ingredient1: false,
       choosingPicture: false,
-      filterDisplayed: false
+      filterDisplayed: false,
+      awaitingServer: false
     }
 
-    componentDidMount(){
-    this.props.clearNewRecipeDetails()
-    if (this.props.navigation.getParam('recipe_details') !== undefined){
-      this.setRecipeParamsForEditing()
+    componentDidMount = async() => {
+      await this.setState({awaitingServer: true})
+      this.props.clearNewRecipeDetails()
+      if (this.props.navigation.getParam('recipe_details') !== undefined){
+        this.setRecipeParamsForEditing()
+      }
+      Permissions.askAsync(Permissions.CAMERA_ROLL)
+          .then(permission => {
+              this.setState({hasPermission: permission.status == 'granted'})
+          })
+          Permissions.askAsync(Permissions.CAMERA)
+          .then(permission => {
+              this.setState({hasPermission: permission.status == 'granted'})
+          })
+      this.fetchIngredientsForAutoComplete()
+      await this.setState({awaitingServer: false})
     }
-    Permissions.askAsync(Permissions.CAMERA_ROLL)
-        .then(permission => {
-            this.setState({hasPermission: permission.status == 'granted'})
-        })
-        Permissions.askAsync(Permissions.CAMERA)
-        .then(permission => {
-            this.setState({hasPermission: permission.status == 'granted'})
-        })
-    this.fetchIngredientsForAutoComplete()
-  }
 
   setRecipeParamsForEditing = () => {
     let recipe_details = this.props.navigation.getParam('recipe_details')
@@ -131,10 +134,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
   }
 
   saveImage = async(image) => {
+    await this.setState({awaitingServer: true})
     if (image.cancelled === false){
       this.props.saveRecipeDetails("imageBase64", image.base64)
       this.setState({choosingPicture: false})
     }
+    await this.setState({awaitingServer: false})
   }
 
   timesPicker = () => {
@@ -253,10 +258,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
-      // console.log(this.props.filter_settings)
+      // console.log(this.state.awaitingServer)
       return (
         <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.mainPageContainer} imageStyle={styles.backgroundImageStyle}>
           {this.state.choosingPicture ? this.renderPictureChooser() : null}
+          {this.state.awaitingServer ? <ActivityIndicator style={styles.activityIndicator} size="large" color="#104e01" /> : null }
           <KeyboardAvoidingView  style={styles.mainPageContainer} keyboardVerticalOffset={83} behavior="padding">
             <ScrollView keyboardShouldPersistTaps='always'>
                   <View style={styles.formRow}>

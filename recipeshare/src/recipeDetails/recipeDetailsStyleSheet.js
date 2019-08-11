@@ -357,7 +357,7 @@ export const styles = StyleSheet.create({
       height: 45,
       zIndex: 1,
       left: '45%',
-      top: '25%',
+      top: '7%',
       borderRadius: 100,
       backgroundColor: '#fff59b',
       borderColor: '#104e01',

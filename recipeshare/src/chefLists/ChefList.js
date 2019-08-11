@@ -7,6 +7,7 @@ import { getChefList } from '../fetches/getChefList'
 import { NavigationEvents, withNavigation } from 'react-navigation'
 import { postFollow } from '../fetches/postFollow'
 import { destroyFollow } from '../fetches/destroyFollow'
+import { styles } from './chefListStyleSheet'
 
 const mapStateToProps = (state) => ({
       all_chefs: state.chefs.all_chefs,
@@ -61,15 +62,19 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
     }
 
     fetchChefList = async() => {
+      await this.setState({awaitingServer: true})
       const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
       let chefs = await getChefList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.loggedInChef.auth_token)
       this.props.storeChefList(this.props["listChoice"], chefs)
+      await this.setState({awaitingServer: false})
     }
 
     fetchAdditionalChefs = async() => {
+      await this.setState({awaitingServer: true})
       const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
       const new_chefs = await getChefList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.loggedInChef.auth_token)
       this.props.appendToChefList(this.props["listChoice"], new_chefs)
+      await this.setState({awaitingServer: false})
     }
 
     renderChefListItem = (item) => {
