@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, ScrollView, View, ImageBackground, Text, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { Image, ScrollView, View, ImageBackground, Text, TouchableOpacity, KeyboardAvoidingView, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { styles } from './recipeDetailsStyleSheet'
@@ -86,10 +86,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     state = {
       commenting: false,
       commentText: "",
-      choosingPicSource: false
+      choosingPicSource: false,
+      awaitingServer: false
     }
 
     componentDidMount = async() => {
+      await this.setState({awaitingServer: true})
       const recipe_details = await getRecipeDetails(this.props.navigation.getParam('recipeID'), this.props.loggedInChef.auth_token)
       if (recipe_details) {
         this.props.storeRecipeDetails(recipe_details)
@@ -100,6 +102,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           this.myScroll.scrollTo({x: 0, y: 700, animated: true})
         }, 300)
       }
+      await this.setState({awaitingServer: false})
     }
 
     scrolled =(e) => {
@@ -225,31 +228,39 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     likeRecipe = async() => {
+      await this.setState({awaitingServer: true})
       const likePosted = await postRecipeLike(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
       if (likePosted) {
           this.props.addRecipeLike()
       }
+      await this.setState({awaitingServer: false})
     }
 
     unlikeRecipe = async() => {
+      await this.setState({awaitingServer: true})
       const unlikePosted = await destroyRecipeLike(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
       if (unlikePosted) {
         this.props.removeRecipeLike()
       }
+      await this.setState({awaitingServer: false})
     }
 
     makeRecipe = async() => {
+      await this.setState({awaitingServer: true})
       const makePosted = await postRecipeMake(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
       if (makePosted) {
         this.props.addRecipeMake()
       }
+      await this.setState({awaitingServer: false})
     }
 
     reShareRecipe = async() => {
+      await this.setState({awaitingServer: true})
       const reSharePosted = await postReShare(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
       if (reSharePosted) {
           this.props.addReShare()
       }
+      await this.setState({awaitingServer: false})
     }
 
     newMakePic = () => {
@@ -261,6 +272,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     saveImage = async(image) => {
+      await this.setState({awaitingServer: true})
       if (image.cancelled === false){
         const makePic = await postMakePic(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token, image)
         if (makePic) {
@@ -268,6 +280,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             this.setState({choosingPicSource: false})
         }
       }
+      await this.setState({awaitingServer: false})
     }
 
     renderPictureChooser = () => {
@@ -275,10 +288,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     deleteMakePic = async(makePicID) => {
+      await this.setState({awaitingServer: true})
       const destroyed = await destroyMakePic(this.props.loggedInChef.id, this.props.loggedInChef.auth_token, makePicID)
       if (destroyed){
         this.props.saveRemainingMakePics(this.props.recipe_details.make_pics.filter( pic => pic.id !== makePicID))
       }
+      await this.setState({awaitingServer: false})
     }
 
     newComment = () => {
@@ -293,6 +308,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     saveComment = async() => {
+      await this.setState({awaitingServer: true})
       const comments = await postComment(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.state.commentText)
       if (comments) {
         this.props.updateComments(comments)
@@ -301,6 +317,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           commentText: ""
         })
       }
+      await this.setState({awaitingServer: false})
     }
 
     handleCommentTextInput = (commentText) => {
@@ -328,6 +345,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={83} style={{flex:1}}>
             <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
               {this.state.choosingPicSource ? this.renderPictureChooser() : null}
+              {this.state.awaitingServer ? <ActivityIndicator style={styles.activityIndicator} size="large" color="#104e01" /> : null }
               <View style={styles.detailsHeader}>
                 <View style={styles.detailsHeaderTopRow}>
                   <View style={styles.headerTextView}>

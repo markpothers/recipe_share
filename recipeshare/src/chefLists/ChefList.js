@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList } from 'react-native'
+import { FlatList, ActivityIndicator } from 'react-native'
 import ChefCard from './ChefCard'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { connect } from 'react-redux'
@@ -47,7 +47,8 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
 
     state = {
       limit: 20,
-      offset: 0
+      offset: 0,
+      awaitingServer: false
     }
 
     componentDidMount = () => {
@@ -91,6 +92,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
     }
 
     followChef = async(followee_id) => {
+      await this.setState({awaitingServer: true})
       const followPosted = await postFollow(this.props.loggedInChef.id, followee_id, this.props.loggedInChef.auth_token)
       if (followPosted) {
         let updatedChefs = this.props[this.props["listChoice"]].map( chef => {
@@ -104,9 +106,11 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
         })
         this.props.storeChefList(this.props["listChoice"], updatedChefs)
       }
+      await this.setState({awaitingServer: false})
     }
 
     unFollowChef = async(followee_id) => {
+      await this.setState({awaitingServer: true})
       const followPosted = await destroyFollow(this.props.loggedInChef.id, followee_id, this.props.loggedInChef.auth_token)
       if (followPosted) {
         let updatedChefs = this.props[this.props["listChoice"]].map( chef => {
@@ -120,6 +124,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
         })
         this.props.storeChefList(this.props["listChoice"], updatedChefs)
       }
+      await this.setState({awaitingServer: false})
     }
 
     refresh = async () => {
@@ -142,6 +147,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
       return (
         <React.Fragment>
           <NavigationEvents onWillFocus={this.respondToFocus}/>
+          {this.state.awaitingServer ? <ActivityIndicator style={styles.activityIndicator} size="large" color="#104e01" /> : null }
           <FlatList
             data={this.props[this.props["listChoice"]]}
             renderItem={this.renderChefListItem}

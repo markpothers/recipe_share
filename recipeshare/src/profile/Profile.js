@@ -1,11 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { styles } from './profileStyleSheet'
-import { View, ImageBackground } from 'react-native'
+import { View, ImageBackground, TouchableOpacity } from 'react-native'
 import AppHeader from '../../navigation/appHeader'
 import ChefDetailsCard from '../chefDetails/ChefDetailsCard'
 import { getChefDetails } from '../fetches/getChefDetails'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import ChefEditor from './chefEditor'
+import { getDatabaseBackup } from '../fetches/getDatabaseBackup'
+import { getDatabaseRestore } from '../fetches/getDatabaseRestore'
+
 
 const mapStateToProps = (state) => ({
   loggedInChef: state.loggedInChef,
@@ -63,14 +67,63 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       this.fetchChefDetails()
     }
 
+    manualBackupDatabase = async() => {
+      const confirmation = await getDatabaseBackup(this.props.loggedInChef.auth_token, "manual")
+      confirmation ? console.log("database manually backed up") : console.log("database backup failed or not permitted")
+    }
+
+    autoBackupDatabase = async() => {
+      const confirmation = await getDatabaseBackup(this.props.loggedInChef.auth_token, "auto")
+      confirmation ? console.log("database auto backup cycle started") : console.log("database auto backup cycle failed or not permitted")
+    }
+
+    // autoBackupDatabaseStop = async() => {
+    //   const confirmation = await getDatabaseBackup(this.props.loggedInChef.auth_token, "stop")
+    //   confirmation ? console.log("database auto backup cycle stopped") : console.log("database auto backup stop failed or not permitted")
+    // }
+
+    restorePrimaryDatabase = async() => {
+      const confirmation = await getDatabaseRestore(this.props.loggedInChef.auth_token, "primary")
+      confirmation ? console.log("database restored from primary backup") : console.log("primary backup restore failed or not permitted")
+    }
+
+    restoreSecondaryDatabase = async() => {
+      const confirmation = await getDatabaseRestore(this.props.loggedInChef.auth_token, "secondary")
+      confirmation ? console.log("database restored from secondary backup") : console.log("secondary backup restore failed or not permitted")
+    }
+
+    renderDatabaseButtons = () => {
+      return (
+        <React.Fragment>
+            <TouchableOpacity style={styles.dbManualBackupButton} activeOpacity={0.7} onPress={this.manualBackupDatabase}>
+                <Icon name='database-plus' size={24} style={styles.filterIcon}/>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.dbAutoBackupButton} activeOpacity={0.7} onPress={this.autoBackupDatabase}>
+                <Icon name='database-refresh' size={24} style={styles.filterIcon}/>
+              </TouchableOpacity>
+              {/* <TouchableOpacity style={styles.dbAutoBackupStopButton} activeOpacity={0.7} onPress={this.autoBackupDatabaseStop}>
+                <Icon name='database-remove' size={24} style={styles.filterIcon}/>
+              </TouchableOpacity> */}
+              <TouchableOpacity style={styles.dbPrimaryRestoreButton} activeOpacity={0.7} onPress={this.restorePrimaryDatabase}>
+                <Icon name='database-export' size={24} style={styles.filterIcon}/>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.dbSecondaryRestoreButton} activeOpacity={0.7} onPress={this.restoreSecondaryDatabase}>
+                <Icon name='database-import' size={24} style={styles.filterIcon}/>
+              </TouchableOpacity>
+        </React.Fragment>
+
+      )
+    }
+
     render() {
-      // console.log(this.props.chefs_details[`chef${this.props.navigation.getParam('chefID')}`])
+      // console.log(this.props.loggedInChef)
       if(this.props.chefs_details[`chef${this.props.loggedInChef.id}`] !== undefined){
         const chef_details = this.props.chefs_details[`chef${this.props.loggedInChef.id}`]
         return (
           <React.Fragment>
             {this.state.editingChef ? <ChefEditor editingChef={this.editingChef} {...chef_details} chefUpdated={this.chefUpdated}/> : null}
             <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
+              {this.props.loggedInChef.is_admin ? this.renderDatabaseButtons() : null}
               <ChefDetailsCard editChef={this.editingChef} myProfile={true} {...chef_details} imageURL={chef_details.chef.imageURL}/>
             </ImageBackground>
           </React.Fragment>
@@ -79,6 +132,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         return (
           <View style={{flex:1}}>
             <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
+              {this.props.loggedInChef.is_admin ? this.renderDatabaseButtons() : null}
             </ImageBackground>
           </View>
         )

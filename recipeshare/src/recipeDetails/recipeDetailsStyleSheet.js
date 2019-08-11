@@ -327,7 +327,6 @@ export const styles = StyleSheet.create({
     headerIcon: {
       color: '#505050'
     },
-
     createRecipeFormButton:{
       marginLeft: '5%',
       marginRight: '5%',
@@ -352,4 +351,16 @@ export const styles = StyleSheet.create({
     standardIcon: {
       color: '#104e01',
     },
+    activityIndicator:{
+      position: 'absolute',
+      width: 45,
+      height: 45,
+      zIndex: 1,
+      left: '45%',
+      top: '25%',
+      borderRadius: 100,
+      backgroundColor: '#fff59b',
+      borderColor: '#104e01',
+      borderWidth: 1
+    }
   });

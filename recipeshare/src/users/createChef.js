@@ -1,9 +1,9 @@
 import React from 'react'
-import {ScrollView, Text, ImageBackground, KeyboardAvoidingView, TouchableOpacity, TextInput, View, Picker, Platform, Switch } from 'react-native'
+import {ScrollView, Text, ImageBackground, KeyboardAvoidingView, TouchableOpacity, TextInput, View, Picker, Platform, Switch, ActivityIndicator } from 'react-native'
 import { countries } from '../dataComponents/countries'
 import * as Permissions from 'expo-permissions'
 import { connect } from 'react-redux'
-import { databaseURL } from '../dataComponents/databaseURL'
+import { postChef } from '../fetches/postChef'
 import { styles } from './usersStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon2 from 'react-native-vector-icons/Entypo';
@@ -53,6 +53,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       choosingPicture: false,
       tAndCAgreed: false,
       viewingTandC: false,
+      awaitingServer: false
     }
 
     componentDidMount(){
@@ -99,47 +100,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       }
     }
 
-    submitChef = () => {
+    submitChef = async() => {
+      await this.setState({awaitingServer: true})
       console.log("sending new user details")
-      fetch(`${databaseURL}/chefs`, {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          chef: {
-            username: this.props.username,
-            e_mail: this.props.e_mail,
-            password: this.props.password,
-            password_confirmation: this.props.password_confirmation,
-            country: this.props.country,
-            imageURL: this.props.imageURL,
-            profile_text: this.props.profile_text
-          }
-        })
-      })
-      .then(res => res.json())
-      .then(chef => {
-        console.log(chef)
+      const chef = await postChef(this.props.username, this.props.e_mail, this.props.password, this.props.password_confirmation, this.props.country, this.props.imageURL, this.props.profile_text)
         if (!chef.error){
-          // console.log(chef)
-          // this.setState({errors: []})
-          // AsyncStorage.setItem('chef', JSON.stringify(chef), () => {
-            // AsyncStorage.getItem('chef', (err, res) => {
-              // console.log(err)
               this.props.clearNewUserDetails()
               this.props.navigation.navigate('Login')
-            // })
-          // })
-
         } else {
-          // console.log(chef.message)
           this.setState({errors: chef.message})
+          await this.setState({awaitingServer: false})
         }
-      })
-      .catch(error => {
-        console.log(error)
-      })
     }
 
     renderEmailError = () => {
@@ -187,16 +158,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       this.setState({viewingTandC: !this.state.viewingTandC})
     }
 
-    renderTandC = () => {
-
-    }
-
     render() {
       // console.log(this.props)
       return (
         <KeyboardAvoidingView  style={styles.mainPageContainer} behavior="padding">
           <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
           {this.state.choosingPicture ? this.renderPictureChooser() : null}
+          {this.state.awaitingServer ? <ActivityIndicator style={styles.activityIndicator} size="large" color="#104e01" /> : null }
             <View style={styles.createChefForm}>
               <ScrollView>
                 <View style={styles.formRow}>
@@ -276,7 +244,5 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         </KeyboardAvoidingView>
       )
     }
-
   }
 )
-

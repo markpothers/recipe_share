@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, ScrollView, View, ImageBackground } from 'react-native';
+import { Image, ScrollView, View, ImageBackground, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { styles } from './chefDetailsStyleSheet'
@@ -42,6 +42,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       }
     }
 
+    state = {
+      awaitingServer: false
+    }
+
     componentDidMount = () => {
       this.fetchChefDetails()
     }
@@ -78,19 +82,23 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     followChef = async(followee_id) => {
+      await this.setState({awaitingServer: true})
       const followPosted = await postFollow(this.props.loggedInChef.id, followee_id, this.props.loggedInChef.auth_token)
       if (followPosted) {
         let newFollowers = [...this.props.chefs_details[`chef${this.props.navigation.getParam('chefID')}`].followers, followPosted]
         this.props.storeNewFollowers(followee_id, newFollowers)
       }
+      await this.setState({awaitingServer: false})
     }
 
     unFollowChef = async(followee_id) => {
+      await this.setState({awaitingServer: true})
       const followPosted = await destroyFollow(this.props.loggedInChef.id, followee_id, this.props.loggedInChef.auth_token)
       if (followPosted) {
         let newFollowers = this.props.chefs_details[`chef${this.props.navigation.getParam('chefID')}`].followers.filter( follower => follower.follower_id !== this.props.loggedInChef.id)
         this.props.storeNewFollowers(followee_id, newFollowers)
       }
+      await this.setState({awaitingServer: false})
     }
 
     parentNavigator = (route, params) => {
@@ -104,6 +112,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         return (
           <View style={{flex:1}}>
             <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
+            {this.state.awaitingServer ? <ActivityIndicator style={styles.activityIndicator} size="large" color="#104e01" /> : null }
               <ScrollView contentContainerStyle={{flexGrow:1}}>
                 <ChefDetailsCard 
                   {...chef_details} 

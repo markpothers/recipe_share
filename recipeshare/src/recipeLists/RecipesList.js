@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, View, TouchableOpacity } from 'react-native'
+import { FlatList, ActivityIndicator, TouchableOpacity } from 'react-native'
 import RecipeCard from './RecipeCard'
 import { connect } from 'react-redux'
 import { getRecipeList } from '../fetches/getRecipeList'
@@ -9,7 +9,6 @@ import { postRecipeMake } from '../fetches/postRecipeMake'
 import { destroyRecipeLike } from '../fetches/destroyRecipeLike'
 import { destroyReShare } from '../fetches/destroyReShare'
 import { NavigationEvents, withNavigation } from 'react-navigation'
-// import { TouchableOpacity } from 'react-native-gesture-handler';
 import { styles } from './recipeListStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FilterMenu from '../functionalComponents/filterMenu'
@@ -71,7 +70,8 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
       limit: 20,
       offset: 0,
       isDisplayed: true,
-      filterDisplayed: false
+      filterDisplayed: false,
+      awaitingServer: false
     }
 
     componentDidMount = () => {
@@ -93,15 +93,19 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
     }
 
     fetchRecipeListThenDetails = async() => {
+      await this.setState({awaitingServer: true})
       const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
       let recipes = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.cuisine, this.props.serves)
       this.props.storeRecipeList(this.props["listChoice"], recipes)
+      await this.setState({awaitingServer: false})
     }
 
     fetchAdditionalRecipesThenDetailsForList = async() => {
+      await this.setState({awaitingServer: true})
       const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
       const new_recipes = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.cuisine, this.props.serves)
       this.props.appendToRecipeList(this.props["listChoice"], new_recipes)
+      await this.setState({awaitingServer: false})
     }
 
     navigateToRecipeDetails = (recipeID) =>{
@@ -150,6 +154,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
     }
 
     likeRecipe = async(recipeID) => {
+      await this.setState({awaitingServer: true})
       const likePosted = await postRecipeLike(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
       if (likePosted) {
         const recipes = this.props[this.props["listChoice"] + `_Recipes`].map( (recipe) => {
@@ -163,9 +168,11 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
         })
         this.props.storeRecipeList(this.props["listChoice"], recipes)
       }
+      await this.setState({awaitingServer: false})
     }
 
     unlikeRecipe = async(recipeID) => {
+      await this.setState({awaitingServer: true})
       const unlikePosted = await destroyRecipeLike(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
       if (unlikePosted) {
         const recipes = this.props[this.props["listChoice"] + `_Recipes`].map( (recipe) => {
@@ -179,9 +186,11 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
         })
         this.props.storeRecipeList(this.props["listChoice"], recipes)
       }
+      await this.setState({awaitingServer: false})
     }
 
     makeRecipe = async(recipeID) => {
+      await this.setState({awaitingServer: true})
       const makePosted = await postRecipeMake(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
       if (makePosted) {
         const recipes = this.props[this.props["listChoice"] + `_Recipes`].map( (recipe) => {
@@ -195,9 +204,11 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
         })
         this.props.storeRecipeList(this.props["listChoice"], recipes)
       }
+      await this.setState({awaitingServer: false})
     }
 
     reShareRecipe = async(recipeID) => {
+      await this.setState({awaitingServer: true})
       const reSharePosted = await postReShare(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
       if (reSharePosted) {
         const recipes = this.props[this.props["listChoice"] + `_Recipes`].map( (recipe) => {
@@ -211,9 +222,11 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
         })
         this.props.storeRecipeList(this.props["listChoice"], recipes)
       }
+      await this.setState({awaitingServer: false})
     }
 
     unReShareRecipe = async(recipeID) => {
+      await this.setState({awaitingServer: true})
       const unReShared = await destroyReShare(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
       if (unReShared) {
         const recipes = this.props[this.props["listChoice"] + `_Recipes`].map( (recipe) => {
@@ -227,6 +240,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
         })
         this.props.storeRecipeList(this.props["listChoice"], recipes)
       }
+      await this.setState({awaitingServer: false})
     }
 
     respondToBlur = () =>{
@@ -251,10 +265,11 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
-      // console.log(this.state.filterDisplayed)
+      // console.log(this.state.awaitingServer)
       return (
         <React.Fragment>
           <NavigationEvents onWillFocus={this.respondToFocus} onWillBlur={this.respondToBlur}/>
+            {this.state.awaitingServer ? <ActivityIndicator style={styles.activityIndicator} size="large" color="#104e01" /> : null }
             <TouchableOpacity style={styles.filterButton} activeOpacity={0.7} onPress={this.handleFilterButton}>
               <Icon name='filter' size={24} style={styles.filterIcon}/>
             </TouchableOpacity>
@@ -273,7 +288,6 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
             nestedScrollEnabled={true}
           />
           {this.state.filterDisplayed ? <FilterMenu handleFilterButton={this.handleFilterButton} refresh={this.refresh} closeFilterAndRefresh={this.closeFilterAndRefresh} confirmButtonText={"Apply"} title={"Apply filters to recipes list"}/> : null}
-
         </React.Fragment>
       )
     }

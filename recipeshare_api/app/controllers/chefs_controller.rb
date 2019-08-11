@@ -6,7 +6,6 @@ class ChefsController < ApplicationController
 
     def authenticate
         if @chef = Chef.find_by(e_mail: chef_params[:e_mail])
-
             if @chef.activated
                 if (!@chef.password_is_auto) || (@chef.password_is_auto && (Time.now - @chef.password_created_at <= 86400))
                     if (@chef.authenticate(chef_params[:password]))
