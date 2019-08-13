@@ -27,12 +27,12 @@ export default class IngredientAutoComplete extends React.Component {
 
   render(){
     const { ingredient, index, ingredientsLength, ingredientIndex } = this.props
-    // console.log(`${ingredient.name}  zIndex: ${ingredientsLength - index}`)
+    // console.log(this.props.ingredientsList.sort((a, b) => (a.name > b.name) ? 1 : -1))
       return (
         <View style={[styles.autoCompleteRowContainer, (Platform.OS === 'ios' ? {zIndex: (ingredientsLength - index) } : null)]} key={ingredientIndex}>
           <View style={[styles.autoCompleteContainer, (Platform.OS !== 'ios' ? {zIndex: (ingredientsLength - index) } : null)]} key={ingredientIndex}>
             <Autocomplete
-              data={this.props.ingredientsList.filter(ing => ing.name.toLowerCase().startsWith(ingredient.name.toLowerCase()))}
+              data={this.props.ingredientsList.sort((a, b) => (a.name > b.name) ? 1 : -1).filter(ing => ing.name.toLowerCase().startsWith(ingredient.name.toLowerCase()))}
               defaultValue={''}
               onChangeText={(e) =>  this.props.addIngredientToRecipeDetails(ingredientIndex, e, ingredient.quantity, ingredient.unit)}
               renderItem={e => this.renderAutoIngredientsListItem(e, ingredientIndex, ingredient)}

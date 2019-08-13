@@ -1,15 +1,5 @@
 class ApplicationController < ActionController::API
 
-    #    protect_from_forgery with: :exception
-
-    #    before_action :authenticate
-
-    # def authenticate
-    #     if session[:username] == nil
-    #         redirect_to '/sessions/new'
-    #     end
-    # end
-
     before_action :logged_in?
     # before_action :define_current_chef
 
@@ -21,23 +11,19 @@ class ApplicationController < ActionController::API
             if Chef.find(payload["id"])
                 @chef = Chef.find(payload["id"])
                 if @chef.activated
+                    # byebug
                     return true # i.e. the user is logged in
                 else
-                    render json: {error: true, message: "This user is not active"}
+                    render json: {error: true, message: "This user is not yet active"}
                 end
 
             else # couldn't find chef in database
-                render json: {error: true, message: "Could not find user in Application Controller logged_in? method"}
+                render json: {error: true, message: "Could not find user in the database"}
             end
         rescue # bad token
             # byebug
-            render json: {error: true, message: "Invalid authentication with JWT"}
+            render json: {error: true, message: "Invalid authentication"}
         end
     end
-
-    # def define_current_chef
-    #     @chef = Chef.find(payload['id'])
-    # end
-
 
 end

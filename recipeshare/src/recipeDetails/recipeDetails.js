@@ -422,7 +422,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           </KeyboardAvoidingView>
         );
       } else {
-        return <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle} />
+        return (
+          <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
+            {this.state.awaitingServer ? <ActivityIndicator style={styles.activityIndicator} size="large" color="#104e01" /> : null }
+          </ImageBackground>
+        )
       }
     }
   }

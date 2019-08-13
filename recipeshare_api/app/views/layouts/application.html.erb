@@ -2,7 +2,11 @@
 <html>
   <head>
     <title>Timelines</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
 <style>
 
@@ -12,9 +16,55 @@
 
   <body>
 
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/">Timelines</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler02" aria-controls="navbarToggler02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarToggler02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item">
+        <a class="nav-link" href=<%=cities_path%>>Cities Index</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href=<%=people_path%>>People Index</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href=<%=employers_path%>>Employers Index</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href=<%=events_path%>>Events Index</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href=<%=positions_path%>>Positions Index</a>
+      </li>
+    </ul>
+
+      <%if !current_page?('/') && !current_page?('/search')%>
+        <a class="btn btn-primary" href=<%="/#{params[:controller]}/new"%> id="new_button">Create New <%=params[:controller].singularize.titleize%></a>
+      <%end%>
+      
+    <form class="form-inline my-2 my-lg-0" accept-charset="UTF-8" action="/search" method="get">
+      <input name="utf8" type="hidden" value="&#x2713;">
+      <%= text_field_tag :query, params[:query], :class => "form-control mr-sm-2", :placeholder => "Search Indexes", :type => "search"%>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+      <hr>
+
 <%= yield %>
   </body>
+  <footer>
+    <hr>
 
+    <%=form_tag("/sessions/#{session[:user_id]}", method: :post) %>
+    <input type="hidden" name="_method" value="DELETE" />
+    <%=submit_tag "Logout" %>
+ 
+  </footer>
 
 </html>
 

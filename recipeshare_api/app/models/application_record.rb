@@ -7,13 +7,4 @@ class ApplicationRecord < ActiveRecord::Base
     return sqldb
   end
 
-  def self.setInterval(delay)
-    Thread.new do
-      loop do
-        sleep delay
-          yield
-      end
-    end
-  end
-
 end

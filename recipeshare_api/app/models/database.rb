@@ -48,4 +48,13 @@ class Database < ApplicationRecord
     restoredb.finish
   end
 
+  def self.setInterval(delay)
+    Thread.new do
+      loop do
+        sleep delay
+          yield
+      end
+    end
+  end
+
 end

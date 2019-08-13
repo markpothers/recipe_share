@@ -74,11 +74,9 @@ class ChefsController < ApplicationController
         if @chef.activation_digest == params[:token]
             @chef.update_attribute(:activated, true)
             @chef.update_attribute(:activation_digest, "")
-            render json: {message: "Thanks for confirming your e-mail.  Please log in through the app and enjoy!"}
-            # StaticPagesController.activated()
-            # render file: 'public/activated.html'
+            redirect_to '/account_confirmation/activated.html'
         else
-            render json: {error: true, message: ["Tokens did not match"] }
+            redirect_to '/account_confirmation/rejected.html'
         end
     end
 

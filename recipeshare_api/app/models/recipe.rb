@@ -355,7 +355,10 @@ class Recipe < ApplicationRecord
   def ingredients=(ingredients)
     IngredientUse.where(recipe_id: self.id).destroy_all
     ingredients["ingredients"].keys.each do |ingredient|
-      dbIngredient = Ingredient.find_or_create_by(name: ingredients["ingredients"][ingredient]["name"])
+      ing_name = ingredients["ingredients"][ingredient]["name"].downcase
+      first_letter = ing_name[0].upcase
+      ing_name = [first_letter, ing_name.split("").drop(1).join("")].join("")
+      dbIngredient = Ingredient.find_or_create_by(name: ing_name)
       ing_use = IngredientUse.find_or_create_by(recipe_id: self.id, ingredient_id: dbIngredient.id, quantity: ingredients["ingredients"][ingredient]["quantity"], unit: ingredients["ingredients"][ingredient]["unit"])
     end
   end
@@ -365,11 +368,11 @@ class Recipe < ApplicationRecord
     if (RecipeMake.where(chef_id: chef.id).where(recipe_id: self.id).last && Time.now - RecipeMake.where(chef_id: chef.id).where(recipe_id: self.id).last.updated_at > 86400) || !RecipeMake.where(chef_id: chef.id).where(recipe_id: self.id).last
       makeable = true
     else
-        makeable = false
+      makeable = false
     end
     ingredientUses = IngredientUse.where(recipe_id: self.id)
     ingredients_ids = ingredientUses.map do |use|
-        use = use.ingredient_id
+      use = use.ingredient_id
     end
     return recipe_details = {recipe: self,
         comments: ApplicationRecord.db.execute("SELECT comments.*, chefs.username, chefs.imageURL

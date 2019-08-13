@@ -14,11 +14,11 @@ class DatabasesController < ApplicationController
 
     def autoBackup
         if @chef.is_admin === true
-           ApplicationRecord.setInterval(60) do
+           Database.setInterval(60) do
                 Database.dbPrimaryBackup()
                 puts "Primary backing up"
             end
-            ApplicationRecord.setInterval(300) do
+            Database.setInterval(300) do
                 Database.dbSecondaryBackup()
                 puts "Secondary backing up"
             end
