@@ -87,6 +87,7 @@ export const styles = StyleSheet.create({
     marginLeft: '5%',
     marginRight: '5%',
     backgroundColor: 'white',
+    height: 44,
     width: '35%',
     borderRadius: 5,
     borderStyle: 'solid',
@@ -255,5 +256,8 @@ export const styles = StyleSheet.create({
     backgroundColor: '#fff59b',
     borderColor: '#104e01',
     borderWidth: 1
+  },
+  IOSPickerText: {
+    marginLeft: '10%'
   }
 })

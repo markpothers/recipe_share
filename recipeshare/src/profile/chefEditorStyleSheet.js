@@ -155,10 +155,7 @@ export const styles = StyleSheet.create({
   applyFiltersIcon: {
     color: '#fff59b',
   },
-  iOSdropDownIcon: {
-    position: 'absolute',
-    left: '85%',
-    zIndex: 2,
-    color: '#104e01',
-  },
+  IOSCountryTextBox: {
+    marginLeft: '3%'
+  }
   });

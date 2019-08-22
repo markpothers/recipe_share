@@ -2,11 +2,11 @@ import React from 'react'
 import { Modal, Text, View, TouchableOpacity, Switch, Dimensions, Picker, Platform } from 'react-native'
 import { styles } from './filterMenuStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Icon2 from 'react-native-vector-icons/Entypo';
 import { connect } from 'react-redux'
 import { cuisines } from '../dataComponents/cuisines'
 import { serves } from '../dataComponents/serves'
 import { clearedFilters } from '../dataComponents/clearedFilters'
+import DualOSPicker from '../functionalComponents/DualOSPicker'
 
 const mapStateToProps = (state) => ({
     filter_settings: state.filter_settings,
@@ -64,11 +64,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     class FilterMenu extends React.PureComponent{
 
         renderLeftColumnCategories = () => {
-            // console.log(Object.keys(this.props.filter_settings).sort().filter( (cat, index) => index <= keysPerCol ))
             const filtersList = this.props.newRecipe ? this.props.newRecipeFilterSettings : this.props.filter_settings
             return Object.keys(filtersList).sort().filter( (cat, index) => index % 2 === 0 ).map( category => {
                 return (
-                    <View 
+                    <View
                         style={styles.columnRow}
                         key={category}>
                         <View style={styles.switchContainer}>
@@ -98,18 +97,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             })
         }
 
-        cuisinesPicker = () => {
-            return cuisines.map( cuisine => {
-              return <Picker.Item style={styles.pickerText} key={cuisine} label={cuisine} value={cuisine} />
-            })
-          }
-
-        servesPicker = () => {
-        return serves.sort((a,b) => a-b ).map( serve => {
-            return <Picker.Item style={styles.pickerText} key={serve} label={serve} value={serve} />
-        })
-        }
-
         handleApplyButton = () => {
             this.props.newRecipe ? this.props.handleCategoriesButton() : this.props.closeFilterAndRefresh()
         }
@@ -133,7 +120,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         render() {
             // console.log(Platform)
             let selectedCuisine = this.props.newRecipe ? this.props.newRecipeCuisine : this.props.cuisine
-            let selectedServes = this.props.newRecipe ? this.props.newRecipeServes : this.props.serves
             return (
                 <Modal
                 animationType="fade"
@@ -157,33 +143,21 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                             </View>
                             <View style={styles.bottomContainer}>
                                 <View style={styles.bottomTopContainer}>
-                                    {Platform.OS === 'ios' ? <Icon2 style={styles.iOSdropDownIcon} size={15} name='select-arrows' /> : null}
                                     <Text style={styles.title}>Cuisine:</Text>
-                                    <View picker style={styles.cuisinePicker} >
-                                        <Picker style={styles.picker}
-                                        mode="dropdown"
-                                        iosIcon={<Icon name="arrow-down" />}
-                                        onValueChange={this.handleCuisineChange}
-                                        selectedValue={selectedCuisine}
-                                        >
-                                        {/* <Picker.Item style={styles.pickerText} key={selectedCuisine} label={selectedCuisine} value={selectedCuisine} /> */}
-                                            {this.cuisinesPicker()}
-                                        </Picker>
+                                    <View style={styles.picker} >
+                                        <DualOSPicker
+                                            onChoiceChange={this.handleCuisineChange}
+                                            options={cuisines}
+                                            selectedChoice={selectedCuisine}/>
                                     </View>
                                 </View>
                                 <View style={styles.bottomTopContainer}>
-                                    {Platform.OS === 'ios' ? <Icon2 style={styles.iOSdropDownIcon} size={15} name='select-arrows' /> : null}
                                     <Text style={styles.title}>Serves: </Text>
-                                    <View picker style={styles.cuisinePicker} >
-                                        <Picker style={styles.picker}
-                                        mode="dropdown"
-                                        iosIcon={<Icon name="arrow-down" />}
-                                        onValueChange={this.handleServesChange}
-                                        selectedValue={selectedServes}
-                                        >
-                                        {/* <Picker.Item style={styles.pickerText} key={selectedServes} label={selectedServes} value={selectedServes} /> */}
-                                            {this.servesPicker()}
-                                        </Picker>
+                                    <View picker style={styles.picker} >
+                                        <DualOSPicker
+                                            onChoiceChange={this.handleServesChange}
+                                            options={serves}
+                                            selectedChoice={this.props.serves}/>
                                     </View>
                                 </View>
                                 <View style={styles.clearFiltersButtonContainer}>
@@ -198,9 +172,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                                 </View>
                             </View>
                         </View>
-                        {/* <TouchableOpacity style={styles.filterButton} activeOpacity={0.7} onPress={this.handleApplyButton}>
-                            <Icon name='filter' size={24} style={styles.filterIcon}/>
-                        </TouchableOpacity> */}
                     </View>
                 </Modal>
             )

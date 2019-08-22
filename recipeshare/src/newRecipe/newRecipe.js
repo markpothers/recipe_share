@@ -1,13 +1,11 @@
 import React from 'react'
-import { ScrollView, Text, ImageBackground, TextInput, KeyboardAvoidingView, TouchableOpacity, View, Picker, Platform, ActivityIndicator } from 'react-native'
+import { ScrollView, Text, ImageBackground, TextInput, KeyboardAvoidingView, TouchableOpacity, View, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
 import * as Permissions from 'expo-permissions'
 import { styles } from './newRecipeStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Icon2 from 'react-native-vector-icons/Entypo';
 import { times } from '../dataComponents/times'
 import { difficulties } from '../dataComponents/difficulties'
-import { units } from '../dataComponents/units'
 import { postRecipe } from '../fetches/postRecipe'
 import { patchRecipe } from '../fetches/patchRecipe'
 import { fetchIngredients } from '../fetches/fetchIngredients'
@@ -15,6 +13,7 @@ import IngredientAutoComplete from './ingredientAutoComplete'
 import AppHeader from '../../navigation/appHeader'
 import PicSourceChooser from '../functionalComponents/picSourceChooser'
 import FilterMenu from '../functionalComponents/filterMenu'
+import DualOSPicker from '../functionalComponents/DualOSPicker'
 
 const mapStateToProps = (state) => ({
   name: state.newRecipeDetails.name,
@@ -53,8 +52,6 @@ const mapDispatchToProps = {
   },
   switchNewRecipeFilterValue: (category, value) => {
     return dispatch => {
-      // console.log(category)
-      // console.log(value)
       dispatch({ type: 'TOGGLE_NEW_RECIPE_FILTER_CATEGORY', category: category, value: value})
     }
   },
@@ -62,13 +59,12 @@ const mapDispatchToProps = {
     return dispatch => {
         dispatch({ type: 'SET_NEW_RECIPE_CUISINE', cuisine: cuisine})
     }
-},
-setNewRecipeServes: (serves) => {
-  return dispatch => {
-      dispatch({ type: 'SET_NEW_RECIPE_SERVES', serves: serves})
-  }
-},
-
+  },
+  setNewRecipeServes: (serves) => {
+    return dispatch => {
+        dispatch({ type: 'SET_NEW_RECIPE_SERVES', serves: serves})
+    }
+  },
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
@@ -85,7 +81,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       ingredient1: false,
       choosingPicture: false,
       filterDisplayed: false,
-      awaitingServer: false
+      awaitingServer: false,
     }
 
     componentDidMount = async() => {
@@ -115,7 +111,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     const list_values = recipe_details.ingredient_uses.map(ingredient_use => [ingredient_use.ingredient_id, ingredient_use.quantity, ingredient_use.unit])
     const ingredientsForEdit = list_values.map(list_value => [...list_value, (recipe_details.ingredients.find(ingredient => ingredient.id == list_value[0]).name)])
     ingredientsForEdit.forEach( (ing, index) => this.props.addIngredientToRecipeDetails(`ingredient${index+1}`, ing[3], ing[1], ing[2]))
-    // console.log(Object.keys(this.props.filter_settings))
     this.props.setNewRecipeCuisine(recipe_details.recipe.cuisine)
     this.props.setNewRecipeServes(recipe_details.recipe.serves)
     Object.keys(this.props.filter_settings).forEach( category => this.props.switchNewRecipeFilterValue(category, recipe_details.recipe[category.toLowerCase().split(" ").join("_")]))
@@ -140,24 +135,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       this.setState({choosingPicture: false})
     }
     await this.setState({awaitingServer: false})
-  }
-
-  timesPicker = () => {
-    return times.map( time => {
-      return <Picker.Item style={styles.pickerText} key={time} label={time} value={time} />
-    })
-  }
-
-  difficultiesPicker = () => {
-    return difficulties.map( difficulty => {
-      return <Picker.Item style={styles.pickerText} key={difficulty} label={difficulty} value={difficulty} />
-    })
-  }
-
-  unitsPicker = () => {
-    return units.map( unit => {
-      return <Picker.Item style={styles.pickerText}key={unit} label={unit} value={unit} />
-    })
   }
 
   isFocused = (ingredient, state) => {
@@ -185,7 +162,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             ingredientsLength={Object.keys(this.props.ingredients).length}
             isFocused={this.isFocused}
             addIngredientToRecipeDetails={this.props.addIngredientToRecipeDetails}
-            unitsPicker={this.unitsPicker} />
+          />
         )
       })
   }
@@ -209,7 +186,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         ingredientsLength={0}
         isFocused={this.isFocused}
         addIngredientToRecipeDetails={this.props.addIngredientToRecipeDetails}
-        unitsPicker={this.unitsPicker} />
+      />
     )
   }
 
@@ -257,6 +234,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       this.setState({filterDisplayed: !this.state.filterDisplayed})
     }
 
+    onTimesChoiceChange = (choice) => {
+      this.handleTextInput(choice, "time")
+    }
+
+    onDifficultiesChoiceChange = (choice) => {
+      this.handleTextInput(choice, "difficulty")
+    }
+
     render() {
       // console.log(this.state.awaitingServer)
       return (
@@ -286,26 +271,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                   </View>
                   <View style={styles.transparentFormRow}>
                     <View picker style={styles.timeAndDifficulty} >
-                      {Platform.OS === 'ios' ? <Icon2 style={styles.iOSdropDownIcon} size={15} name='select-arrows' /> : null}
-                      <Picker style={styles.picker}
-                      mode="dropdown"
-                      iosIcon={<Icon name="arrow-down" />}
-                      onValueChange={e => this.handleTextInput(e, "time")}
-                      selectedValue={this.props.time}
-                      >
-                        {this.timesPicker()}
-                      </Picker>
+                      <DualOSPicker
+                        onChoiceChange={this.onTimesChoiceChange}
+                        options={times}
+                        selectedChoice={this.props.time}/>
                     </View>
                     <View picker style={styles.timeAndDifficulty}>
-                      {Platform.OS === 'ios' ? <Icon2 style={styles.iOSdropDownIcon} size={15} name='select-arrows' /> : null}
-                      <Picker style={styles.picker}
-                      mode="dropdown"
-                      iosIcon={<Icon name="arrow-down" />}
-                      onValueChange={e => this.handleTextInput(e, "difficulty")}
-                      selectedValue={this.props.difficulty}
-                      >
-                        {this.difficultiesPicker()}
-                      </Picker>
+                      <DualOSPicker
+                        onChoiceChange={this.onDifficultiesChoiceChange}
+                        options={difficulties}
+                        selectedChoice={this.props.difficulty}/>
                     </View>
                   </View>
                   <View style={styles.transparentFormRow}>

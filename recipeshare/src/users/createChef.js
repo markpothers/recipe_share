@@ -1,14 +1,14 @@
 import React from 'react'
-import {ScrollView, Text, ImageBackground, KeyboardAvoidingView, TouchableOpacity, TextInput, View, Picker, Platform, Switch, ActivityIndicator } from 'react-native'
+import {ScrollView, Text, ImageBackground, KeyboardAvoidingView, TouchableOpacity, TextInput, View, Switch, ActivityIndicator } from 'react-native'
 import { countries } from '../dataComponents/countries'
 import * as Permissions from 'expo-permissions'
 import { connect } from 'react-redux'
 import { postChef } from '../fetches/postChef'
 import { styles } from './usersStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Icon2 from 'react-native-vector-icons/Entypo';
 import PicSourceChooser from '../functionalComponents/picSourceChooser'
 import { TAndC } from './tAndC'
+import DualOSPicker from '../functionalComponents/DualOSPicker'
 
 const mapStateToProps = (state) => ({
   first_name: state.newUserDetails.first_name,
@@ -25,6 +25,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   saveChefDetails: (parameter, content) => {
+    console.log("saving chef")
     return dispatch => {
       dispatch({ type: 'UPDATE_NEW_USER_DETAILS', parameter: parameter, content: content})
     }
@@ -53,7 +54,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       choosingPicture: false,
       tAndCAgreed: false,
       viewingTandC: false,
-      awaitingServer: false
+      awaitingServer: false,
     }
 
     componentDidMount(){
@@ -67,18 +68,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           })
     }
 
-    countriesPicker = () => {
-      return countries.map( country => {
-        return <Picker.Item key={country} label={country} value={country} />
-      })
-    }
-
     handleTextInput = (e, parameter) => {
       this.props.saveChefDetails(parameter, e.nativeEvent.text)
-    }
-
-    onCountryChange(value, parameter) {
-      this.props.saveChefDetails(parameter, value)
     }
 
     choosePicture = () =>{
@@ -146,8 +137,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       ))
     }
 
-    onPickerTouch = () => {
-      console.log("pickertouched")
+    onCountryChange = (choice) => {
+      this.props.saveChefDetails("country", choice)
     }
 
     handleTandCSwitch = () => {
@@ -159,7 +150,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
-      // console.log(this.props)
+      // console.log(this.props.saveChefDetails)
       return (
         <KeyboardAvoidingView  style={styles.mainPageContainer} behavior="padding">
           <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
@@ -186,14 +177,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 {this.renderUsernameError()}
                 <View style={[styles.formRow, {zIndex: 1}]}>
                   <View picker style={[styles.pickerInputBox, (this.state.pickerFocused ? {height: 170} : {height: 44})]}>
-                    {Platform.OS === 'ios' ? <Icon2 style={styles.iOSdropDownIcon} size={15} name='select-arrows' /> : null}
-                    <Picker
-                      mode="dropdown"
-                      onValueChange={e => this.onCountryChange(e, "country")}
-                      selectedValue={this.props.country}
-                    >
-                      {this.countriesPicker()}
-                    </Picker>
+                    <DualOSPicker
+                      onChoiceChange={this.onCountryChange}
+                      options={countries}
+                      selectedChoice={this.props.country}/>
                   </View>
                 </View>
                 <View style={styles.formRow}>
@@ -214,7 +201,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 {this.renderPasswordError()}
                 <View style={styles.formRow}>
                   <TouchableOpacity style={styles.loginInputBox} activeOpacity={0.7} onPress={this.handleViewTandC}>
-                    <Text style={styles.loginTextBox}>View Terms & conditions</Text>
+                    <Text style={styles.loginTextBox}>View Terms & Conditions</Text>
                   </TouchableOpacity>
                 {this.state.viewingTandC ? <TAndC handleViewTandC={this.handleViewTandC}/> : null}
                 </View>

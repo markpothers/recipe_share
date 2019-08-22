@@ -1,11 +1,10 @@
 import React from 'react'
-import {Text, AsyncStorage, ImageBackground, KeyboardAvoidingView, Image, View, TextInput, TouchableOpacity, ScrollView, Dimensions, Switch } from 'react-native'
+import {Text, AsyncStorage, ImageBackground, KeyboardAvoidingView, Image, View, TextInput, TouchableOpacity, ScrollView, Dimensions, Switch, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
-import { databaseURL } from '../dataComponents/databaseURL'
 import { styles } from './usersStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { getNewPassword } from '../fetches/getNewPassword'
-// import { ScrollView } from 'react-native-gesture-handler';
+import { loginChef } from '../fetches/loginChef'
 
 const mapStateToProps = (state) => ({
   e_mail: state.loginUserDetails.e_mail,
@@ -49,48 +48,38 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     };
 
     state = {
-      loginError: ""
+      loginError: "",
+      awaitingServer: false,
     }
 
     handleTextInput = (e, parameter) => {
       this.props.saveLoginChefDetails(parameter, e.nativeEvent.text)
     }
 
-    loginChef = () => {
+    loginChef = async() => {
+      await this.setState({awaitingServer: true})
       console.log("sending login")
-      fetch(`${databaseURL}/login`, {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          chef: this.props
-        })
-      })
-      .then(res => res.json())
-      .then(chef => {
-        if (!chef.error){
-          if(this.props.stayingLoggedIn){
-            AsyncStorage.setItem('chef', JSON.stringify(chef), () => {
-              AsyncStorage.getItem('chef', (err, res) => {
-                console.log(err)
-                this.props.clearLoginUserDetails()
-                this.props.navigation.navigate('AppLoading')
-              })
+      const chef = await loginChef(this.props)
+      if (!chef.error){
+        if(this.props.stayingLoggedIn){
+          AsyncStorage.setItem('chef', JSON.stringify(chef), () => {
+            AsyncStorage.getItem('chef', (err, res) => {
+              console.log(err)
+              this.props.clearLoginUserDetails()
+              this.props.navigation.navigate('AppLoading')
             })
-          }else{
-            this.props.updateLoggedInChefInState(chef.id, chef.username, chef.auth_token, chef.imageURL, chef.is_admin, chef.is_member)
-            this.props.clearLoginUserDetails()
-            this.props.navigation.navigate('Home')
-          }
-        } else {
-          console.log(chef.message)
-          this.setState({error: chef.message})
+          })
+        }else{
+          this.props.updateLoggedInChefInState(chef.id, chef.username, chef.auth_token, chef.imageURL, chef.is_admin, chef.is_member)
+          this.props.clearLoginUserDetails()
+          await this.setState({awaitingServer: false})
+          this.props.navigation.navigate('Home')
         }
-      })
-      .catch(error => {
-        console.log(error)
-      })
+      } else {
+        console.log(chef.message)
+        this.setState({error: chef.message})
+        await this.setState({awaitingServer: false})
+      }
     }
 
     renderEmailError = () => {
@@ -168,6 +157,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         width: Dimensions.get('window').width,
         }]} imageStyle={styles.backgroundImageStyle}>
           <KeyboardAvoidingView style={styles.mainPageContainer} behavior="padding">
+          {this.state.awaitingServer ? <ActivityIndicator style={styles.activityIndicator} size="large" color="#104e01" /> : null }
             <ScrollView style={styles.scrollContainer}>
               <View style={styles.logoContainer}>
                 <Image style={styles.logo} resizeMode={"contain"} source={require('../dataComponents/yellowLogo.png')}/>

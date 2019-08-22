@@ -1,9 +1,10 @@
 import React from 'react'
-import { Text, TextInput, TouchableOpacity, View, Picker, Keyboard, Platform } from 'react-native'
+import { Text, TextInput, TouchableOpacity, View, Keyboard, Platform } from 'react-native'
 import { styles } from './newRecipeStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Icon2 from 'react-native-vector-icons/Entypo';
 import Autocomplete from 'react-native-autocomplete-input';
+import { units } from '../dataComponents/units'
+import DualOSPicker from '../functionalComponents/DualOSPicker'
 
 export default class IngredientAutoComplete extends React.Component {
 
@@ -11,7 +12,8 @@ export default class IngredientAutoComplete extends React.Component {
     return (
       <TouchableOpacity style={{padding: 5, zIndex: 2}} key={item.item.id.toString()} onPress={(e) => this.handleListItemTouch(ingredientIndex, item.item.name, ingredient.quantity, ingredient.unit)}>
         <Text>{item.item.name}</Text>
-      </TouchableOpacity>      )
+      </TouchableOpacity>
+    )
   }
 
   handleListItemTouch = (ingredientIndex, name, quantity, unit) => {
@@ -25,9 +27,12 @@ export default class IngredientAutoComplete extends React.Component {
     }
   }
 
+  onChoiceChange = (choice) => {
+    this.handlePickerChange(this.props.ingredientIndex, this.props.ingredient.name, this.props.ingredient.quantity, choice)
+  }
+
   render(){
     const { ingredient, index, ingredientsLength, ingredientIndex } = this.props
-    // console.log(this.props.ingredientsList.sort((a, b) => (a.name > b.name) ? 1 : -1))
       return (
         <View style={[styles.autoCompleteRowContainer, (Platform.OS === 'ios' ? {zIndex: (ingredientsLength - index) } : null)]} key={ingredientIndex}>
           <View style={[styles.autoCompleteContainer, (Platform.OS !== 'ios' ? {zIndex: (ingredientsLength - index) } : null)]} key={ingredientIndex}>
@@ -40,7 +45,6 @@ export default class IngredientAutoComplete extends React.Component {
               autoCapitalize="none"
               placeholder={`Ingredient name`}
               autoCorrect={false}
-              // multiline={true}
               value={ingredient.name}
               hideResults={this.props.focused && ingredient.name.length > 1 ? false : true}
               containerStyle={styles.autoCompleteOuterContainerStyle}
@@ -57,16 +61,10 @@ export default class IngredientAutoComplete extends React.Component {
                 <TextInput style={styles.ingredientTextAdjustment} placeholder="Qty" keyboardType="phone-pad" onChange={(e) => this.props.addIngredientToRecipeDetails(ingredientIndex, ingredient.name, e.nativeEvent.text, ingredient.unit)} value={ingredient.quantity}/>
               </View>
               <View style={styles.addIngredientUnitInputBox} key={`${ingredientIndex}unit`}>
-                    {Platform.OS === 'ios' ? <Icon2 style={styles.iOSdropDownIcon} size={15} name='select-arrows' /> : null}
-                    <Picker style={styles.unitPicker}
-                      mode="dropdown"
-                      iosIcon={<Icon name="arrow-down" />}
-                      onValueChange={(e) => this.handlePickerChange(ingredientIndex, ingredient.name, ingredient.quantity, e)}
-                      selectedValue={ingredient.unit}
-                      >
-                      {/* <Picker.Item style={styles.ingredientTextAdjustment} key={`${ingredientIndex}unit`} label={ingredient.unit} value={ingredient.unit} /> */}
-                        {this.props.unitsPicker()}
-                    </Picker>
+                <DualOSPicker
+                  onChoiceChange={this.onChoiceChange}
+                  options={units}
+                  selectedChoice={ingredient.unit}/>
               </View>
             </View>
             <View style={styles.deleteIngredientContainer} key={`${ingredientIndex}delete`}>
