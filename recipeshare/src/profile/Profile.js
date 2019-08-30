@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { styles } from './profileStyleSheet'
-import { View, ImageBackground, TouchableOpacity } from 'react-native'
+import { View, ImageBackground, TouchableOpacity, ActivityIndicator } from 'react-native'
 import AppHeader from '../../navigation/appHeader'
 import ChefDetailsCard from '../chefDetails/ChefDetailsCard'
 import { getChefDetails } from '../fetches/getChefDetails'
@@ -9,11 +9,14 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import ChefEditor from './chefEditor'
 import { getDatabaseBackup } from '../fetches/getDatabaseBackup'
 import { getDatabaseRestore } from '../fetches/getDatabaseRestore'
-
+import DeleteChefOption from './deleteChefOption'
+import PicSourceChooser from '../functionalComponents/picSourceChooser'
+import { destroyChef } from '../fetches/destroyChef'
 
 const mapStateToProps = (state) => ({
   loggedInChef: state.loggedInChef,
   chefs_details: state.chefs_details,
+  imageBase64: state.newUserDetails.imageURL,
 })
 
 const mapDispatchToProps = {
@@ -25,6 +28,11 @@ const mapDispatchToProps = {
   storeNewFollowers: (followee_id, followers) => {
     return dispatch => {
       dispatch({ type: 'STORE_NEW_FOLLOWERS', chefID: `chef${followee_id}`, followers: followers})
+    }
+  },
+  saveChefDetails: (parameter, content) => {
+    return dispatch => {
+      dispatch({ type: 'UPDATE_NEW_USER_DETAILS', parameter: parameter, content: content})
     }
   },
 }
@@ -39,11 +47,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     };
 
     state = {
-      editingChef: false
+      awaitingServer: false,
+      editingChef: false,
+      choosingPicture: false,
+      deleteChefOptionVisible: false
     }
 
     componentDidMount = () => {
+      // await this.setState({awaitingServer: true})
       this.fetchChefDetails()
+      // await this.setState({awaitingServer: false})
+
     }
 
     componentWillUnmount = () => {
@@ -52,20 +66,94 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     fetchChefDetails = async() => {
+      await this.setState({awaitingServer: true})
       const chef_details = await getChefDetails(this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
       if (chef_details) {
         this.props.storeChefDetails(chef_details)
       }
+      await this.setState({awaitingServer: false})
     }
 
     editingChef = () => {
-      this.setState({editingChef: !this.state.editingChef})
+      this.setState({editingChef: true})
     }
 
-    chefUpdated = () => {
-      this.setState({editingChef: !this.state.editingChef})
-      this.fetchChefDetails()
+    chefUpdated = (chefChanged) => {
+      this.setState({editingChef: false})
+      chefChanged ? this.fetchChefDetails() : null
     }
+
+    showDeleteChefOption = () => {
+      this.setState({deleteChefOptionVisible: true,
+        editingChef: false})
+    }
+
+    closeDeleteChefOption = () => {
+      this.setState({deleteChefOptionVisible: false,
+        editingChef: true})
+    }
+
+    renderDeleteChefOption = () => {
+        return (
+          <DeleteChefOption
+            // deleteAndLeaveRecipes={this.deleteAndLeaveRecipes}
+            deleteChefAccount={this.deleteChefAccount}
+            closeDeleteChefOptions={this.closeDeleteChefOption}
+            closeDeleteChefOption={this.closeDeleteChefOption}
+          />
+        )
+      }
+
+    choosePicture = () =>{
+      this.setState({choosingPicture: true,
+        editingChef: false})
+    }
+
+    sourceChosen = () =>{
+      this.setState({choosingPicture: false,
+        editingChef: true})
+    }
+
+    saveImage = async(image) => {
+      if (image.cancelled === false){
+          this.props.saveChefDetails("imageURL", image.base64)
+          this.sourceChosen()
+      }
+  }
+
+    renderPictureChooser = () => {
+        return <PicSourceChooser saveImage={this.saveImage} sourceChosen={this.sourceChosen} key={"pic-chooser"}/>
+    }
+
+    renderChefEditor = () => {
+      const chef_details = this.props.chefs_details[`chef${this.props.loggedInChef.id}`]
+      return (
+        <ChefEditor
+          editingChef={this.editingChef}
+          {...chef_details}
+          chefUpdated={this.chefUpdated}
+          deleteChefAccount={this.deleteChefAccount}
+          closeDeleteChefOption={this.closeDeleteChefOption}
+          showDeleteChefOption={this.showDeleteChefOption}
+          choosePicture={this.choosePicture}
+          />
+      )
+    }
+
+    deleteChefAccount = async(deleteRecipes) => {
+      const chef = this.props.loggedInChef
+      const deletedChef = await destroyChef(chef.auth_token, chef.id, deleteRecipes)
+      console.log(deletedChef)
+      // if (deletedChef){
+      //     // console.log(updatedChef)
+      //     if (deletedChef.error){
+      //         this.setState({errors: updatedChef.message})
+      //     } else {
+      //         AsyncStorage.removeItem('chef', () => {})
+      //         this.props.navigation.navigate('Login')
+      //     }
+      // }
+  }
 
     manualBackupDatabase = async() => {
       const confirmation = await getDatabaseBackup(this.props.loggedInChef.auth_token, "manual")
@@ -121,9 +209,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         const chef_details = this.props.chefs_details[`chef${this.props.loggedInChef.id}`]
         return (
           <React.Fragment>
-            {this.state.editingChef ? <ChefEditor editingChef={this.editingChef} {...chef_details} chefUpdated={this.chefUpdated}/> : null}
+            {this.state.editingChef ? this.renderChefEditor() : null}
             <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
+              {this.state.awaitingServer ? <ActivityIndicator style={styles.activityIndicator} size="large" color="#104e01" /> : null }
               {this.props.loggedInChef.is_admin ? this.renderDatabaseButtons() : null}
+              {this.state.choosingPicture ? this.renderPictureChooser() : null}
+              {this.state.deleteChefOptionVisible ? this.renderDeleteChefOption() : null}
               <ChefDetailsCard editChef={this.editingChef} myProfile={true} {...chef_details} imageURL={chef_details.chef.imageURL}/>
             </ImageBackground>
           </React.Fragment>
@@ -132,7 +223,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         return (
           <View style={{flex:1}}>
             <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
+              {this.state.awaitingServer ? <ActivityIndicator style={styles.activityIndicator} size="large" color="#104e01" /> : null }
               {this.props.loggedInChef.is_admin ? this.renderDatabaseButtons() : null}
+              {this.state.choosingPicture ? this.renderPictureChooser() : null}
+              {this.state.deleteChefOptionVisible ? this.renderDeleteChefOption() : null}
             </ImageBackground>
           </View>
         )

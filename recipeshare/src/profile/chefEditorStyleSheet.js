@@ -6,13 +6,16 @@ export const styles = StyleSheet.create({
     // flex: 1,
   },
   contentsContainer:{
+    position: 'absolute',
+    left: '10%',
+    top: '12.5%',
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: '#104e01',
     backgroundColor: '#fff59b',
     width: '80%',
-    marginTop: '12%',
-    marginLeft: '10%',
+    // marginTop: '12%',
+    // marginLeft: '10%',
     borderRadius: 5,
     alignItems: 'center',
   },
@@ -27,11 +30,11 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   editChefInputBox: {
-    marginLeft: '10%',
-    marginRight: '10%',
+    marginLeft: '7.5%',
+    marginRight: '7.5%',
     backgroundColor: 'white',
     height: 44,
-    width: '80%',
+    width: '85%',
     justifyContent: 'center',
     borderRadius: 5,
     borderStyle: 'solid',
@@ -39,12 +42,15 @@ export const styles = StyleSheet.create({
     borderColor: '#104e01'
   },
   formRow: {
-    marginTop: '1.5%',
+    marginTop: '2%',
     flexDirection:'row',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
     width: '100%',
+  },
+  bottomSpacer: {
+    height: 5,
   },
   editChefTextBox: {
     marginLeft: '3%',
@@ -52,11 +58,11 @@ export const styles = StyleSheet.create({
   },
   editChefInputAreaBox: {
     marginTop: '0%',
-    marginLeft: '10%',
-    marginRight: '10%',
+    marginLeft: '7.5%',
+    marginRight: '7.5%',
     backgroundColor: 'white',
     height: 88,
-    width: '80%',
+    width: '85%',
     justifyContent: 'center',
     borderRadius: 5,
     borderStyle: 'solid',
@@ -65,10 +71,10 @@ export const styles = StyleSheet.create({
   },
   countryPicker: {
     height: 44,
-    marginLeft: '10%',
-    marginRight: '10%',
+    marginLeft: '7.5%',
+    marginRight: '7.5%',
     backgroundColor: 'white',
-    width: '80%',
+    width: '85%',
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
@@ -108,9 +114,15 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: '2%'
   },
+  buttonPlaceholder:{
+    marginLeft: '2.5%',
+    marginRight: '2.5%',
+    width: '40%',
+    height: 44,
+  },
   clearFiltersButton:{
-    marginLeft: '5%',
-    marginRight: '5%',
+    marginLeft: '2.5%',
+    marginRight: '2.5%',
     justifyContent: 'center',
     alignItems: 'center',
     width: '40%',
@@ -134,8 +146,8 @@ export const styles = StyleSheet.create({
     color: '#104e01',
   },
   applyFiltersButton:{
-    marginLeft: '5%',
-    marginRight: '5%',
+    marginLeft: '2.5%',
+    marginRight: '2.5%',
     justifyContent: 'center',
     alignItems: 'center',
     width: '40%',
@@ -157,5 +169,28 @@ export const styles = StyleSheet.create({
   },
   IOSCountryTextBox: {
     marginLeft: '3%'
+  },
+  deleteChefOptionTitleContainer:{
+    justifyContent: 'center',
+    marginLeft: '5%',
+    marginRight: '5%',
+    marginTop: 5,
+    marginBottom: 5,
+  },
+  deleteChefOptionContentsContainer:{
+    position: 'absolute',
+    left: '12.5%',
+    top: '27.5%',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#104e01',
+    backgroundColor: '#fff59b',
+    width: '75%',
+    // marginTop: '50%',
+    // marginLeft: '12.5%',
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    // paddingBottom: '1%'
   }
   });

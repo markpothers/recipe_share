@@ -157,8 +157,12 @@ class ChefsController < ApplicationController
     end
 
     def destroy
-        @chef.destroy
-        render json: {message: "Chef deleted.  Sorry to see you go but thanks for checking us out."}
+        # byebug
+        if params[:deleteRecipes] === "true"
+            render json: true
+        else
+            render json: true
+        end
     end
 
     private

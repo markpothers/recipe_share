@@ -1,12 +1,14 @@
 import React from 'react'
-import { Modal, Text, View, TouchableOpacity, Dimensions, TextInput, Platform } from 'react-native'
+import { Modal, Text, View, TouchableOpacity, Dimensions, TextInput } from 'react-native'
 import { styles } from './chefEditorStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux'
 import { countries } from '../dataComponents/countries'
-import PicSourceChooser from '../functionalComponents/picSourceChooser'
+// import PicSourceChooser from '../functionalComponents/picSourceChooser'
 import { patchChef } from '../fetches/patchChef'
+// import { destroyChef } from '../fetches/destroyChef'
 import DualOSPicker from '../functionalComponents/DualOSPicker'
+// import DeleteChefOption from './deleteChefOption'
 
 const mapStateToProps = (state) => ({
     username: state.newUserDetails.username,
@@ -43,8 +45,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         state = {
             errors: [],
             updatingPassword: false,
-            choosingPicture: false,
+            // choosingPicture: false,
             updateModalVisible: true,
+            // deleteChefOptionVisible: false
         }
 
         componentDidMount = () => {
@@ -57,24 +60,31 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             this.updateChef(this.props.chef.country, "country")
         }
 
-        choosePicture = () =>{
-            this.setState({choosingPicture: true})
-        }
-      
-        sourceChosen = () =>{
-            this.setState({choosingPicture: false})
-        }
-    
-        renderPictureChooser = () => {
-            return <PicSourceChooser saveImage={this.saveImage} sourceChosen={this.sourceChosen} key={"pic-chooser"}/>
-        }
-    
-        saveImage = async(image) => {
-            if (image.cancelled === false){
-                this.props.saveChefDetails("imageURL", image.base64)
-                this.setState({choosingPicture: false})
-            }
-        }
+        // choosePicture = () =>{
+        //     this.setState({choosingPicture: true})
+        // }
+
+        // sourceChosen = () =>{
+        //     this.setState({choosingPicture: false})
+        // }
+
+        // renderPictureChooser = () => {
+        //     return <PicSourceChooser saveImage={this.saveImage} sourceChosen={this.sourceChosen} key={"pic-chooser"}/>
+        // }
+
+        // showDeleteChefOption = () => {
+        //     this.setState({deleteChefOptionVisible: true})
+        // }
+        // renderDeleteChefOption = () => {
+        //     return <DeleteChefOption deleteAndLeaveRecipes={this.deleteAndLeaveRecipes} deleteChefAccount={this.deleteChefAccount} closeDeleteChefOptions={this.closeDeleteChefOption}/>
+        // }
+
+        // saveImage = async(image) => {
+        //     if (image.cancelled === false){
+        //         this.props.saveChefDetails("imageURL", image.base64)
+        //         this.setState({choosingPicture: false})
+        //     }
+        // }
 
         renderPasswordError = () => {
             const passwordErrors = this.state.errors.filter(message => message.startsWith("Password"))
@@ -120,7 +130,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         }
 
         handleTextInput = (e, parameter) => {
-        this.props.saveChefDetails(parameter, e.nativeEvent.text)
+            this.props.saveChefDetails(parameter, e.nativeEvent.text)
         }
 
         updateChef = (value, parameter) => {
@@ -129,7 +139,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
         cancelUpdate = () => {
             this.props.clearNewUserDetails()
-            this.props.editingChef()
+            this.props.chefUpdated(false)
         }
 
         saveUpdatedChef = async() => {
@@ -152,19 +162,38 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     } else {
                         this.props.updateLoggedInChefInState(updatedChef.id, updatedChef.username, updatedChef.auth_token, updatedChef.imageURL, updatedChef.is_admin, updatedChef.is_member)
                         this.props.clearNewUserDetails()
-                        this.props.chefUpdated()
+                        this.props.chefUpdated(true)
                     }
                 }
             }
         }
 
-          onCountryChange = (choice) => {
-            this.props.saveChefDetails("country", choice)
-          }
+        // deleteChefAccount = async(deleteRecipes) => {
+        //     const chef = this.props.loggedInChef
+        //     const deletedChef = await destroyChef(chef.auth_token, chef.id, deleteRecipes)
+        //     console.log(deletedChef)
+        //     // if (deletedChef){
+        //     //     // console.log(updatedChef)
+        //     //     if (deletedChef.error){
+        //     //         this.setState({errors: updatedChef.message})
+        //     //     } else {
+        //     //         AsyncStorage.removeItem('chef', () => {})
+        //     //         this.props.navigation.navigate('Login')
+        //     //     }
+        //     // }
+        // }
 
-          closeIOSPicker = () => {
+        closeDeleteChefOption = () => {
+            this.setState({deleteChefOptionVisible: false})
+        }
+
+        onCountryChange = (choice) => {
+            this.props.saveChefDetails("country", choice)
+        }
+
+        closeIOSPicker = () => {
             this.setState({IOSPickerShowing: false})
-          }
+        }
 
         render() {
             // console.log(this.props)
@@ -177,8 +206,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     <View style={[styles.modalFullScreenContainer, {height: Dimensions.get('window').height,
                             width: Dimensions.get('window').width,
                             }]}>
-                        {this.state.choosingPicture ? this.renderPictureChooser() : null}
-                        <View style={[styles.contentsContainer, (Platform.OS === 'ios' ? {height: '75%'} : {height: '67%'})]}>
+                        {/* {this.state.deleteChefOptionVisible ? this.renderDeleteChefOption() : null} */}
+                        {/* {this.state.choosingPicture ? this.renderPictureChooser() : null} */}
+                        <View style={styles.contentsContainer}>
                             <View style={styles.titleContainer}>
                                 <Text style={styles.title}>Update your profile & password</Text>
                             </View>
@@ -204,9 +234,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                             {!this.state.updatingPassword ? this.renderNewPasswordButton() : null}
                             {this.renderPasswordError()}
                             <View style={styles.formRow}>
-                                <TouchableOpacity style={styles.clearFiltersButton} activeOpacity={0.7} title="change_picture" onPress={this.choosePicture}>
+                                <TouchableOpacity style={styles.clearFiltersButton} activeOpacity={0.7} title="change_picture" onPress={this.props.choosePicture}>
                                     <Icon style={styles.clearFiltersIcon} size={25} name='camera' />
                                     <Text style={styles.clearFiltersButtonText}>Update{"\n"}picture</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.clearFiltersButton} activeOpacity={0.7} title="clearFilters" onPress={this.props.showDeleteChefOption}>
+                                    <Icon style={styles.clearFiltersIcon} size={25} name='account-remove' />
+                                    <Text style={styles.clearFiltersButtonText}>Delete {"\n"} account</Text>
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.formRow}>
@@ -218,6 +252,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                                     <Icon style={styles.applyFiltersIcon} size={25} name='check' />
                                     <Text style={styles.applyFiltersButtonText}>Save</Text>
                                 </TouchableOpacity>
+                            </View>
+                            <View style={styles.bottomSpacer}>
                             </View>
                         </View>
                     </View>
