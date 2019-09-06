@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { styles } from './profileStyleSheet'
-import { View, ImageBackground, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { View, ImageBackground, TouchableOpacity, ActivityIndicator, AsyncStorage } from 'react-native'
 import AppHeader from '../../navigation/appHeader'
 import ChefDetailsCard from '../chefDetails/ChefDetailsCard'
 import { getChefDetails } from '../fetches/getChefDetails'
@@ -143,16 +143,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     deleteChefAccount = async(deleteRecipes) => {
       const chef = this.props.loggedInChef
       const deletedChef = await destroyChef(chef.auth_token, chef.id, deleteRecipes)
-      console.log(deletedChef)
-      // if (deletedChef){
-      //     // console.log(updatedChef)
-      //     if (deletedChef.error){
-      //         this.setState({errors: updatedChef.message})
-      //     } else {
-      //         AsyncStorage.removeItem('chef', () => {})
-      //         this.props.navigation.navigate('Login')
-      //     }
-      // }
+      if (deletedChef){
+        AsyncStorage.removeItem('chef', () => {})
+          this.props.navigation.navigate('Login')
+      }
   }
 
     manualBackupDatabase = async() => {

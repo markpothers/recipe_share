@@ -29,6 +29,10 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold'
   },
+  paragraph: {
+    color: '#104e01',
+    fontSize: 16,
+  },
   editChefInputBox: {
     marginLeft: '7.5%',
     marginRight: '7.5%',
@@ -179,13 +183,13 @@ export const styles = StyleSheet.create({
   },
   deleteChefOptionContentsContainer:{
     position: 'absolute',
-    left: '12.5%',
-    top: '27.5%',
+    left: '10%',
+    top: '15%',
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: '#104e01',
     backgroundColor: '#fff59b',
-    width: '75%',
+    width: '80%',
     // marginTop: '50%',
     // marginLeft: '12.5%',
     borderRadius: 5,

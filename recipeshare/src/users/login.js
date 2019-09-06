@@ -130,6 +130,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       }
     }
 
+    renderAccountDeactivatedError = () => {
+      if (this.state.error === "deactivated"){
+        return (
+          <View style={styles.formRow}>
+            <View style={styles.formError}>
+              <Text style={styles.formErrorText}>This account was deactivated.  Reset your password to reactivate your account.</Text>
+            </View>
+          </View>
+        )
+      }
+    }
+
     forgotPassword = async() => {
       const response = await getNewPassword(this.props.e_mail)
       if (response){
@@ -176,6 +188,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 {this.renderEmailError()}
                 {this.renderForgotPasswordError()}
                 {this.renderAccountActivationError()}
+                {this.renderAccountDeactivatedError()}
                 <View style={styles.formRow}>
                   <View style={styles.loginInputBox}>
                     <TextInput style={styles.loginTextBox} placeholder="password" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")}/>

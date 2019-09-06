@@ -62,13 +62,13 @@ export default class ChefDetailsCard extends React.PureComponent {
                   </View>
                   <View style={styles.chefDetailsStats}>
                     {this.props.chef_shared === true ? <Icon name='share' size={24} style={styles.icon}/> : <Icon name='share-outline' size={24} style={styles.icon}/> }
-                    <Text style={[styles.chefDetailsRowTitle]}>Recipes re-shares:</Text>
+                    <Text style={[styles.chefDetailsRowTitle]}>Recipe re-shares:</Text>
                     <Text style={[styles.chefDetailsRowContents]}>{this.props.re_shares.length}</Text>
                     <Text style={[styles.chefDetailsRowContents]}>{this.props.re_shares_received.length}</Text>
                   </View>
                   <View style={styles.chefDetailsStats}>
                     {this.props.chef_liked === true ? <Icon name='heart' size={24} style={styles.icon}/> : <Icon name='heart-outline' size={24} style={styles.icon}/> }
-                    <Text style={[styles.chefDetailsRowTitle]}>Recipes liked:</Text>
+                    <Text style={[styles.chefDetailsRowTitle]}>Recipe likes:</Text>
                     <Text style={[styles.chefDetailsRowContents]}>{this.props.recipe_likes.length}</Text>
                     <Text style={[styles.chefDetailsRowContents]}>{this.props.recipe_likes_received.length}</Text>
                   </View>
