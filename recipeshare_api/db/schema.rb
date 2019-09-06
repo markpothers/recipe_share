@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_14_164549) do
+ActiveRecord::Schema.define(version: 2019_09_05_235043) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2019_06_14_164549) do
     t.boolean "password_is_auto"
     t.datetime "password_created_at"
     t.datetime "updated_at", null: false
+    t.boolean "deactivated", default: false
   end
 
   create_table "comments", force: :cascade do |t|
@@ -62,6 +63,7 @@ ActiveRecord::Schema.define(version: 2019_06_14_164549) do
     t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "hidden", default: false
     t.index ["chef_id"], name: "index_comments_on_chef_id"
     t.index ["recipe_id"], name: "index_comments_on_recipe_id"
   end
@@ -71,6 +73,7 @@ ActiveRecord::Schema.define(version: 2019_06_14_164549) do
     t.integer "follower_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "hidden", default: false
     t.index ["followee_id"], name: "index_follows_on_followee_id"
     t.index ["follower_id"], name: "index_follows_on_follower_id"
   end
@@ -80,6 +83,7 @@ ActiveRecord::Schema.define(version: 2019_06_14_164549) do
     t.integer "acceptor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "hidden", default: false
     t.index ["acceptor_id"], name: "index_friendships_on_acceptor_id"
     t.index ["requestor_id"], name: "index_friendships_on_requestor_id"
   end
@@ -108,6 +112,7 @@ ActiveRecord::Schema.define(version: 2019_06_14_164549) do
     t.string "hex"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "hidden", default: false
     t.index ["chef_id"], name: "index_make_pics_on_chef_id"
     t.index ["recipe_id"], name: "index_make_pics_on_recipe_id"
   end
@@ -117,6 +122,7 @@ ActiveRecord::Schema.define(version: 2019_06_14_164549) do
     t.integer "chef_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "hidden", default: false
     t.index ["chef_id"], name: "index_re_shares_on_chef_id"
     t.index ["recipe_id"], name: "index_re_shares_on_recipe_id"
   end
@@ -128,6 +134,7 @@ ActiveRecord::Schema.define(version: 2019_06_14_164549) do
     t.string "hex"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "hidden", default: false
     t.index ["recipe_id"], name: "index_recipe_images_on_recipe_id"
   end
 
@@ -136,6 +143,7 @@ ActiveRecord::Schema.define(version: 2019_06_14_164549) do
     t.integer "recipe_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "hidden", default: false
     t.index ["chef_id"], name: "index_recipe_likes_on_chef_id"
     t.index ["recipe_id"], name: "index_recipe_likes_on_recipe_id"
   end

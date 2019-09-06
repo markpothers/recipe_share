@@ -13,4 +13,11 @@ class ChefMailer < ApplicationMailer
     mail(to: @chef.e_mail, subject: "Recipe-Share password reset")
   end
 
+  def reactivate_acount
+    @chef = params[:chef]
+    @password = params[:password]
+    @greeting = "Hi #{@chef.username},"
+    mail(to: @chef.e_mail, subject: "Recipe-Share password reset")
+  end
+
 end

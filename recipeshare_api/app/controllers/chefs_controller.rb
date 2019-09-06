@@ -6,22 +6,27 @@ class ChefsController < ApplicationController
 
     def authenticate
         if @chef = Chef.find_by(e_mail: chef_params[:e_mail])
-            if @chef.activated
-                if (!@chef.password_is_auto) || (@chef.password_is_auto && (Time.now - @chef.password_created_at <= 86400))
-                    if (@chef.authenticate(chef_params[:password]))
-                        puts "logging in!"
-                        render json: @chef, methods: [:auth_token]
+            if !@chef.deactivated
+                if @chef.activated
+                    if (!@chef.password_is_auto) || (@chef.password_is_auto && (Time.now - @chef.password_created_at <= 86400))
+                        if (@chef.authenticate(chef_params[:password]))
+                            puts "logging in!"
+                            render json: @chef, methods: [:auth_token]
+                        else
+                            puts "bad password"
+                            render json: {error: true, message: 'password'}
+                        end
                     else
-                        puts "bad password"
-                        render json: {error: true, message: 'password'}
+                        puts "auto password expired"
+                        render json: {error: true, message: "password_expired"}
                     end
                 else
-                    puts "auto password expired"
-                    render json: {error: true, message: "password_expired"}
+                    puts "account hasn't been activated"
+                    render json: {error: true, message: "activation"}
                 end
             else
-                puts "account hasn't been activated"
-                render json: {error: true, message: "activation"}
+                puts "account has been deactivated"
+                render json: {error: true, message: "deactivated"}
             end
         else
             puts "bad e-mail address"
@@ -149,7 +154,11 @@ class ChefsController < ApplicationController
             @chef.password_is_auto = true
             @chef.password_created_at = Time.now
             @chef.save
-            ChefMailer.with(chef: @chef, password: newHex).password_reset.deliver_now
+            if @chef.deactivated
+                ChefMailer.with(chef: @chef, password: newHex).reactivate_account.deliver_now
+                render json: {error: false, message: "We've sent you a link to re-activate your account."}
+            end
+            ChefMailer.with(chef: @chef, password: newHex).reactivate_acount.deliver_now
             render json: {error: false, message: "We've sent you a new password.  Please check your e-mail"}
         else
             render json: {error: true, message: "Please enter your registered e-mail address to receive a new password."}
@@ -159,9 +168,11 @@ class ChefsController < ApplicationController
     def destroy
         # byebug
         if params[:deleteRecipes] === "true"
-            render json: true
+            @chef.hide_everything()
+            render json: {error: false, deleted: true}
         else
-            render json: true
+            @chef.deactivate()
+            render json: {error: false, deactivated: true}
         end
     end
 

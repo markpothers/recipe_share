@@ -1,0 +1,12 @@
+Chef#account_activation
+
+<%= @greeting %>
+
+    Thanks for re-activating your Recipe-Share account.
+    Here's the activation link to re-activate your account.
+
+<%= "http://73.166.74.229:3000/account_activation?token=#{@chef.activation_digest}&email=#{@chef.e_mail.split("@").join("%40")}" %>
+
+    Once you confirm you want to re-activate your account, we'll reset your password and send a follow up e-mail.
+    Welcome back!
+    Recipe-Share Admin"

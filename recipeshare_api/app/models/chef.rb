@@ -23,6 +23,9 @@ class Chef < ApplicationRecord
     has_many :made_recipes, :through => :recipe_makes, :source => :recipe
     has_many :re_shares
     has_many :shared_recipes, :through => :re_shares, :source => :recipe
+    has_many :recipe_images
+    has_many :make_pics
+
 
     validates :e_mail, presence: {message: "must be included."}
     validates :username, presence: {message: "must be included."}
@@ -78,6 +81,7 @@ class Chef < ApplicationRecord
                                                 LEFT OUTER JOIN recipes ON recipes.id = comments.recipe_id
                                                 WHERE recipes.hidden = 0
                                                 GROUP BY recipes.chef_id) AS commented_recipes ON commented_recipes.counter_chef_id = chefs.id
+                                            WHERE chefs.hidden=0
                                             GROUP BY chefs.id
                                             ORDER BY chefs.created_at DESC
                                             LIMIT (?)
@@ -116,7 +120,7 @@ class Chef < ApplicationRecord
                                                 WHERE recipes.hidden = 0
                                                 GROUP BY recipes.chef_id) AS commented_recipes ON commented_recipes.counter_chef_id = chefs.id
                                             LEFT OUTER JOIN follows ON follows.followee_id = chefs.id
-                                            WHERE follows.follower_id = (?)
+                                            WHERE follows.follower_id = (?) AND chefs.hidden=0
                                             GROUP BY chefs.id
                                             ORDER BY follows.created_at DESC
                                             LIMIT (?)
@@ -157,7 +161,7 @@ class Chef < ApplicationRecord
                                             WHERE recipes.hidden = 0
                                             GROUP BY recipes.chef_id) AS commented_recipes ON commented_recipes.counter_chef_id = chefs.id
                                         LEFT OUTER JOIN follows ON follows.follower_id = chefs.id
-                                        WHERE follows.followee_id = (?)
+                                        WHERE follows.followee_id = (?) AND chefs.hidden=0
                                         GROUP BY chefs.id
                                         ORDER BY chefs.created_at DESC
                                         LIMIT (?)
@@ -196,6 +200,7 @@ class Chef < ApplicationRecord
                                                         LEFT OUTER JOIN recipes ON recipes.id = comments.recipe_id
                                                         WHERE recipes.hidden = 0
                                                         GROUP BY recipes.chef_id) AS commented_recipes ON commented_recipes.counter_chef_id = chefs.id
+                                                    WHERE chefs.hidden=0
                                                     GROUP BY chefs.id
                                                     ORDER BY #{order} DESC
                                                     LIMIT (?)
@@ -234,11 +239,27 @@ class Chef < ApplicationRecord
             chef_shared: ReShare.where(recipe_id: recipe_ids, chef_id: userChef.id).length>0,
             chef_make_piced: MakePic.where(recipe_id: recipe_ids, chef_id: userChef.id).length>0
         }
-
     end
 
+    def hide_everything
+        self.re_shares.each {|c| c.update_attribute(:hidden, true)}
+        self.comments.each {|c| c.update_attribute(:hidden, true) }
+        self.recipe_likes.each {|c| c.update_attribute(:hidden, true) }
+        self.follows_as_follower.each {|c| c.update_attribute(:hidden, true) }
+        self.follows_as_followee.each {|c| c.update_attribute(:hidden, true) }
+        self.recipe_makes.each {|c| c.update_attribute(:hidden, true) }
+        self.make_pics.each {|c| c.update_attribute(:hidden, true) }
+        self.recipes.each {|c| c.update_attribute(:hidden, true) }
+        self.update_attribute(:hidden, true)
+        self.update_attribute(:e_mail, "e-mail address erased on account closure")
+    end
 
-
-
+    def deactivate
+        self.update_attribute(:deactivated, true)
+        self.update_attribute(:username, "Anonymous")
+        self.update_attribute(:profile_text, "This chef has deactivated their profile but allowed us to keep displaying their recipes.")
+        self.update_attribute(:imageURL, "/peas.jpg")
+        self.update_attribute(:hex, "")
+    end
 
 end
