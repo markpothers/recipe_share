@@ -58,6 +58,7 @@ class RecipesController < ApplicationController
     def update
         # byebug
         if @recipe.chef_id === @chef.id || @chef.is_admin === true
+            byebug
             @recipe.update(newRecipe_params)
             newRecipe_filter_settings["filter_settings"].keys.each do |category|
                 newRecipe_filter_settings["filter_settings"][category] ? @recipe[category.downcase.split(" ").join("_")] = true : @recipe[category.downcase.split(" ").join("_")] = false

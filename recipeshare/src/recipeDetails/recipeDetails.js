@@ -92,6 +92,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     componentDidMount = async() => {
       await this.setState({awaitingServer: true})
+      this.props.storeRecipeDetails(null)
       const recipe_details = await getRecipeDetails(this.props.navigation.getParam('recipeID'), this.props.loggedInChef.auth_token)
       if (recipe_details) {
         this.props.storeRecipeDetails(recipe_details)
@@ -351,8 +352,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
-      if (this.props.recipe_details != undefined){
-        // console.log(this.props.recipe_details.chef_username)
+      if (this.props.recipe_details != (undefined || null)){
+        // console.log(this.props.recipe_details.recipe.acknowledgement)
         return (
           <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={83} style={{flex:1}}>
             <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
@@ -409,7 +410,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                   <Text style={styles.detailsSubHeadings}>Categories:</Text>
                   {this.renderFilterCategories()}
                 </View>
-                {this.props.recipe_details.recipe.acknowledgement != ("" || null) ? this.renderAcknowledgement() : null}
+                {this.props.recipe_details.recipe.acknowledgement != ("" && null) ? this.renderAcknowledgement() : null}
                 <View style={styles.detailsMakePicsContainer}>
                   <View style={{flexDirection: 'row'}}>
                     <Text style={styles.detailsSubHeadings}>Images from other users:</Text>
