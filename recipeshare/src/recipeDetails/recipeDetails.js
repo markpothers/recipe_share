@@ -109,11 +109,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       // console.log(e.nativeEvent)
     }
 
-    editRecipe = () => {
+    editRecipe = async() => {
+      await this.setState({awaitingServer: true})
       this.props.navigation.navigate('NewRecipe', {recipe_details: this.props.recipe_details})
+      await this.setState({awaitingServer: false})
     }
 
     deleteRecipe = async() => {
+      await this.setState({awaitingServer: true})
       const deleted = await destroyRecipe(this.props.recipe_details.recipe.id, this.props.loggedInChef.auth_token)
       if (deleted) {
         this.props.navigation.goBack()
@@ -338,6 +341,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       return <Text style={[styles.detailsContents]}>{categories.join(",  ")}</Text>
     }
 
+    renderAcknowledgement = () => {
+      return (
+        <View style={styles.detailsInstructions}>
+          <Text style={styles.detailsSubHeadings}>Acknowledgement:</Text>
+          <Text style={[styles.detailsContents]}>{this.props.recipe_details.recipe.acknowledgement}</Text>
+        </View>
+      )
+    }
+
     render() {
       if (this.props.recipe_details != undefined){
         // console.log(this.props.recipe_details.chef_username)
@@ -397,6 +409,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                   <Text style={styles.detailsSubHeadings}>Categories:</Text>
                   {this.renderFilterCategories()}
                 </View>
+                {this.props.recipe_details.recipe.acknowledgement != ("" || null) ? this.renderAcknowledgement() : null}
                 <View style={styles.detailsMakePicsContainer}>
                   <View style={{flexDirection: 'row'}}>
                     <Text style={styles.detailsSubHeadings}>Images from other users:</Text>

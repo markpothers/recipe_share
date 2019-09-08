@@ -3,7 +3,7 @@ import { databaseURL } from '../dataComponents/databaseURL'
 
 export const loginChef = (chef) => {
     return new Promise((resolve) => {
-        fetch(`${databaseURL}/login`, {
+        fetch(`${databaseURL}/chefs/authenticate`, {
             method: "POST",
             headers: {
               'Content-Type': 'application/json'

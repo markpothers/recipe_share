@@ -12,10 +12,10 @@ Rails.application.routes.draw do
   resources :ingredients
   resources :chefs
 
-  get '/account_activation', to: 'chefs#activate'
+  get '/activate', to: 'chefs#activate'
+  get '/reactivate', to: 'chefs#reactivate'
   get '/password_reset', to: 'chefs#password_reset'
-  get 'forgot_password', to: 'chefs#forgot_password'
-  post '/login', to: 'chefs#authenticate'
+  post '/chefs/authenticate', to: 'chefs#authenticate'
   delete '/recipe_likes', to: 'recipe_likes#destroy'
   delete '/re_shares', to: 're_shares#destroy'
   delete '/follows', to: 'follows#destroy'

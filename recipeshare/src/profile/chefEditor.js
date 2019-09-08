@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, Text, View, TouchableOpacity, Dimensions, TextInput } from 'react-native'
+import { Modal, Text, View, ScrollView, KeyboardAvoidingView, TouchableOpacity, Dimensions, TextInput } from 'react-native'
 import { styles } from './chefEditorStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux'
@@ -55,9 +55,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         }
 
         populateBoxes = () => {
-            this.updateChef(this.props.chef.username, "username")
-            this.updateChef(this.props.chef.profile_text, "profile_text")
-            this.updateChef(this.props.chef.country, "country")
+            this.props.username == "" ? this.updateChef(this.props.chef.username, "username") : null
+            this.props.profile_text == "" ? this.updateChef(this.props.chef.profile_text, "profile_text") : null
+            this.props.country == "United States" ? this.updateChef(this.props.chef.country, "country") : null
         }
 
         // choosePicture = () =>{
@@ -203,60 +203,62 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 transparent={true}
                 visible={this.state.updateModalVisible}
                 >
-                    <View style={[styles.modalFullScreenContainer, {height: Dimensions.get('window').height,
-                            width: Dimensions.get('window').width,
-                            }]}>
-                        {/* {this.state.deleteChefOptionVisible ? this.renderDeleteChefOption() : null} */}
-                        {/* {this.state.choosingPicture ? this.renderPictureChooser() : null} */}
-                        <View style={styles.contentsContainer}>
-                            <View style={styles.titleContainer}>
-                                <Text style={styles.title}>Update your profile & password</Text>
-                            </View>
-                            <View style={styles.formRow}>
-                                <View style={styles.editChefInputBox}>
-                                    <TextInput style={styles.editChefTextBox} value={this.props.username} placeholder="username"  autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "username")}/>
+                    <ScrollView>
+                        <View style={[styles.modalFullScreenContainer, {height: Dimensions.get('window').height,
+                                width: Dimensions.get('window').width,
+                                }]}>
+                            {/* {this.state.deleteChefOptionVisible ? this.renderDeleteChefOption() : null} */}
+                            {/* {this.state.choosingPicture ? this.renderPictureChooser() : null} */}
+                            <View style={styles.contentsContainer}>
+                                <View style={styles.titleContainer}>
+                                    <Text style={styles.title}>Update your profile & password</Text>
                                 </View>
-                            </View>
-                            <View style={styles.formRow}>
-                                <View style={styles.editChefInputAreaBox} >
-                                    <TextInput style={styles.editChefTextBox} value={this.props.profile_text} placeholder="about me" multiline={true} numberOfLines={3} onChange={(e) => this.handleTextInput(e, "profile_text")}/>
+                                <View style={styles.formRow}>
+                                    <View style={styles.editChefInputBox}>
+                                        <TextInput style={styles.editChefTextBox} value={this.props.username} placeholder="username"  autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "username")}/>
+                                    </View>
                                 </View>
-                            </View>
-                            <View style={styles.formRow}>
-                                <View picker style={styles.countryPicker} >
-                                    <DualOSPicker
-                                        onChoiceChange={this.onCountryChange}
-                                        options={countries}
-                                        selectedChoice={this.props.country}/>
+                                <View style={styles.formRow}>
+                                    <View style={styles.editChefInputAreaBox} >
+                                        <TextInput style={styles.editChefTextBox} value={this.props.profile_text} placeholder="about me" multiline={true} numberOfLines={3} onChange={(e) => this.handleTextInput(e, "profile_text")}/>
+                                    </View>
                                 </View>
-                            </View>
-                            {this.state.updatingPassword ? this.renderNewPasswordOptions() : null}
-                            {!this.state.updatingPassword ? this.renderNewPasswordButton() : null}
-                            {this.renderPasswordError()}
-                            <View style={styles.formRow}>
-                                <TouchableOpacity style={styles.clearFiltersButton} activeOpacity={0.7} title="change_picture" onPress={this.props.choosePicture}>
-                                    <Icon style={styles.clearFiltersIcon} size={25} name='camera' />
-                                    <Text style={styles.clearFiltersButtonText}>Update{"\n"}picture</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.clearFiltersButton} activeOpacity={0.7} title="clearFilters" onPress={this.props.showDeleteChefOption}>
-                                    <Icon style={styles.clearFiltersIcon} size={25} name='account-remove' />
-                                    <Text style={styles.clearFiltersButtonText}>Delete {"\n"} account</Text>
-                                </TouchableOpacity>
-                            </View>
-                            <View style={styles.formRow}>
-                                <TouchableOpacity style={styles.clearFiltersButton} activeOpacity={0.7} title="clearFilters" onPress={this.cancelUpdate}>
-                                    <Icon style={styles.clearFiltersIcon} size={25} name='cancel' />
-                                    <Text style={styles.clearFiltersButtonText}>Cancel</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.applyFiltersButton} activeOpacity={0.7} title="applyFilters" onPress={this.saveUpdatedChef}>
-                                    <Icon style={styles.applyFiltersIcon} size={25} name='check' />
-                                    <Text style={styles.applyFiltersButtonText}>Save</Text>
-                                </TouchableOpacity>
-                            </View>
-                            <View style={styles.bottomSpacer}>
+                                <View style={styles.formRow}>
+                                    <View picker style={styles.countryPicker} >
+                                        <DualOSPicker
+                                            onChoiceChange={this.onCountryChange}
+                                            options={countries}
+                                            selectedChoice={this.props.country}/>
+                                    </View>
+                                </View>
+                                {this.state.updatingPassword ? this.renderNewPasswordOptions() : null}
+                                {!this.state.updatingPassword ? this.renderNewPasswordButton() : null}
+                                {this.renderPasswordError()}
+                                <View style={styles.formRow}>
+                                    <TouchableOpacity style={styles.clearFiltersButton} activeOpacity={0.7} title="change_picture" onPress={this.props.choosePicture}>
+                                        <Icon style={styles.clearFiltersIcon} size={25} name='camera' />
+                                        <Text style={styles.clearFiltersButtonText}>Update{"\n"}picture</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={styles.clearFiltersButton} activeOpacity={0.7} title="clearFilters" onPress={this.props.showDeleteChefOption}>
+                                        <Icon style={styles.clearFiltersIcon} size={25} name='account-remove' />
+                                        <Text style={styles.clearFiltersButtonText}>Delete {"\n"} account</Text>
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={styles.formRow}>
+                                    <TouchableOpacity style={styles.clearFiltersButton} activeOpacity={0.7} title="clearFilters" onPress={this.cancelUpdate}>
+                                        <Icon style={styles.clearFiltersIcon} size={25} name='cancel' />
+                                        <Text style={styles.clearFiltersButtonText}>Cancel</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={styles.applyFiltersButton} activeOpacity={0.7} title="applyFilters" onPress={this.saveUpdatedChef}>
+                                        <Icon style={styles.applyFiltersIcon} size={25} name='check' />
+                                        <Text style={styles.applyFiltersButtonText}>Save</Text>
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={styles.bottomSpacer}>
+                                </View>
                             </View>
                         </View>
-                    </View>
+                    </ScrollView>
                 </Modal>
             )
         }

@@ -25,6 +25,7 @@ const mapStateToProps = (state) => ({
   filter_settings: state.newRecipeDetails.filter_settings,
   cuisine: state.newRecipeDetails.cuisine,
   serves: state.newRecipeDetails.serves,
+  acknowledgement: state.newRecipeDetails.acknowledgement,
   recipe_details: state.recipe_details,
   loggedInChef: state.loggedInChef
 })
@@ -107,6 +108,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     this.props.saveRecipeDetails('name', recipe_details.recipe.name)
     this.props.saveRecipeDetails('instructions', recipe_details.recipe.instructions)
     this.props.saveRecipeDetails('time', recipe_details.recipe.time)
+    this.props.saveRecipeDetails('acknowledgement', recipe_details.recipe.acknowledgement)
     this.props.saveRecipeDetails('difficulty', recipe_details.recipe.difficulty.toString())
     const list_values = recipe_details.ingredient_uses.map(ingredient_use => [ingredient_use.ingredient_id, ingredient_use.quantity, ingredient_use.unit])
     const ingredientsForEdit = list_values.map(list_value => [...list_value, (recipe_details.ingredients.find(ingredient => ingredient.id == list_value[0]).name)])
@@ -213,15 +215,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     submitRecipe = async() => {
+      await this.setState({awaitingServer: true})
       if (this.props.navigation.getParam('recipe_details') !== undefined){
-        const recipe = await patchRecipe(this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.props.name, this.props.ingredients, this.props.instructions, this.props.time, this.props.difficulty, this.props.imageBase64, this.props.filter_settings, this.props.cuisine, this.props.serves, this.props.navigation.getParam('recipe_details').recipe.id)
+        const recipe = await patchRecipe(this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.props.name, this.props.ingredients, this.props.instructions, this.props.time, this.props.difficulty, this.props.imageBase64, this.props.filter_settings, this.props.cuisine, this.props.serves, this.props.navigation.getParam('recipe_details').recipe.id, this.props.acknowledgement)
         if (recipe) {
           this.props.clearNewRecipeDetails()
           this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
           this.props.navigation.navigate('MyRecipeBook')
         }
       }else{
-        const recipe = await postRecipe(this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.props.name, this.props.ingredients, this.props.instructions, this.props.time, this.props.difficulty, this.props.imageBase64, this.props.filter_settings, this.props.cuisine, this.props.serves)
+        const recipe = await postRecipe(this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.props.name, this.props.ingredients, this.props.instructions, this.props.time, this.props.difficulty, this.props.imageBase64, this.props.filter_settings, this.props.cuisine, this.props.serves, this.props.acknowledgement)
         if (recipe) {
           this.props.clearNewRecipeDetails()
           this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
@@ -259,6 +262,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                   <View style={styles.formRow}>
                     <View style={styles.createRecipeTextAreaBox}>
                       <TextInput style={styles.createRecipeTextAreaInput} value={this.props.instructions} placeholder="Instructions" multiline={true} numberOfLines={4} onChange={(e) => this.handleTextInput(e.nativeEvent.text, "instructions")}/>
+                    </View>
+                  </View>
+                  <View style={styles.formRow}>
+                    <View style={styles.createRecipeInputBox} >
+                      <TextInput style={styles.newRecipeTextCentering} value={this.props.acknowledgement} placeholder="Acknowledge your recipe's source if it's not yourself" onChange={(e) => this.handleTextInput(e.nativeEvent.text, "acknowledgement")}/>
                     </View>
                   </View>
                   <View style={styles.transparentFormRow}>

@@ -61,7 +61,8 @@ const initialState = {
       "White meat": false,
     },
     cuisine: "Any",
-    serves: "Any"
+    serves: "Any",
+    acknowledgement: ""
   },
   newUserDetails: {
     first_name: "",

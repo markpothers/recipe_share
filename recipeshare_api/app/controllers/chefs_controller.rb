@@ -2,7 +2,7 @@ require 'securerandom'
 
 class ChefsController < ApplicationController
 
-    skip_before_action :logged_in?, :only => [:authenticate, :create,:activate, :forgot_password, :password_reset]
+    skip_before_action :logged_in?, :only => [:authenticate, :create, :activate, :password_reset, :reactivate]
 
     def authenticate
         if @chef = Chef.find_by(e_mail: chef_params[:e_mail])
@@ -133,35 +133,44 @@ class ChefsController < ApplicationController
         end
     end
 
-    # def forgot_password
-    #     # byebug
-    #     @chef = Chef.find_by(e_mail: params[:email])
-    #     if @chef
-    #         ChefMailer.with(chef: @chef).password_reset.deliver_now
-    #         render json: {error: true, message: "Thanks.  An e-mail is on its way with a new password."}
-    #     else
-    #         render json: {error: true, message: "E-mail not found.  Please enter valid e-mail to reset password or register."}
-    #     end
-    # end
-
     def password_reset
-        # byebug
         @chef = Chef.find_by(e_mail: params[:email])
-        if @chef
+        if @chef.deactivated
+            # reactivate chef
+            @chef.update_attribute(:activation_digest, JWT.encode({id: @chef.id}, 'e9c25029ce138bee53480013fb005e5b'))
+            ChefMailer.with(chef: @chef).reactivate_account.deliver_now
+            render json: {error: false, message: "We've e-mailed you a link to re-activate your account."}
+        else
+            if @chef
+                newHex = SecureRandom.hex(6)
+                @chef.password = newHex
+                @chef.password_confirmation = newHex
+                @chef.password_is_auto = true
+                @chef.password_created_at = Time.now
+                @chef.save
+                ChefMailer.with(chef: @chef, password: newHex).password_reset.deliver_now
+                render json: {error: false, message: "We've sent you a new password.  Please check your e-mail"}
+            else
+                render json: {error: true, message: "Please enter your registered e-mail address to receive a new password."}
+            end
+        end
+    end
+
+    def reactivate
+        @chef = Chef.find_by(e_mail: params[:email])
+        if @chef.activation_digest == params[:token]
+            @chef.update_attribute(:deactivated, false)
+            @chef.update_attribute(:activation_digest, "")
             newHex = SecureRandom.hex(6)
             @chef.password = newHex
             @chef.password_confirmation = newHex
             @chef.password_is_auto = true
             @chef.password_created_at = Time.now
             @chef.save
-            if @chef.deactivated
-                ChefMailer.with(chef: @chef, password: newHex).reactivate_account.deliver_now
-                render json: {error: false, message: "We've sent you a link to re-activate your account."}
-            end
-            ChefMailer.with(chef: @chef, password: newHex).reactivate_acount.deliver_now
-            render json: {error: false, message: "We've sent you a new password.  Please check your e-mail"}
+            ChefMailer.with(chef: @chef, password: newHex).password_reset.deliver_now
+            redirect_to '/account_confirmation/reactivation_confirmed.html'
         else
-            render json: {error: true, message: "Please enter your registered e-mail address to receive a new password."}
+            redirect_to '/account_confirmation/reactivation_rejected.html'
         end
     end
 

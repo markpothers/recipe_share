@@ -41,6 +41,7 @@ const reducer = (currentState, action) => {
                 e_mail: "",
                 password: "",
                 password_confirmation: "",
+                profile_text: "",
                 country: "United States",
                 imageURL: ""
               }}
@@ -103,7 +104,8 @@ const reducer = (currentState, action) => {
                   "White meat": false,
                 },
                 cuisine: "Any",
-                serves: "Any"
+                serves: "Any",
+                acknowledgement: ""
               }}
         case 'LIKE_RECIPE':
                 currentState.recipes[action.listType].find( recipe => recipe.id === recipeID)
