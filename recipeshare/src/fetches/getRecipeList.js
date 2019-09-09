@@ -6,7 +6,7 @@ export const getRecipeList = (listType, queryChefID, limit, offset, global_ranki
     const filters = Object.keys(filter_settings).filter( category => filter_settings[category] === true).join("/").toLowerCase()
 
     return new Promise((resolve) => {
-        // console.log(databaseURL)
+        console.log(databaseURL)
         fetch(`${databaseURL}/recipes?listType=${listType}&queryChefID=${queryChefID}&limit=${limit}&offset=${offset}&global_ranking=${global_ranking}&filters=${filters}&cuisine=${cuisine}&serves=${serves}`, {
             method: "GET",
             headers: {
