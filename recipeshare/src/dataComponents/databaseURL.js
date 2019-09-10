@@ -6,4 +6,4 @@ import React from 'react'
 
 // export const databaseURL = 'http://192.168.1.190:3000'
 
-export const databaseURL = 'http://35.237.119.38'
+export const databaseURL = 'http://35.231.104.130'
