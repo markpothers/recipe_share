@@ -8,7 +8,7 @@
     Here's the activation link to confirm your request.
 </p>
 <p>
-    <%= link_to "Confirm re-activation", "http://35.237.119.38/reactivate?token=#{@chef.activation_digest}&email=#{@chef.e_mail.split("@").join("%40")}" %>
+    <%= link_to "Confirm re-activation", "http://35.231.104.130/reactivate?token=#{@chef.activation_digest}&email=#{@chef.e_mail.split("@").join("%40")}" %>
 </p>
 <p>
     Once you confirm you want to re-activate your account, we'll reset your password and send a follow up e-mail.
