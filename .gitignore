@@ -3,7 +3,7 @@ capybara-*.html
 .rspec
 /db/*.sqlite3
 /db/*.sqlite3-journal
-/public/system
+# /public/system
 /recipeshare_api/public
 /coverage/
 /spec/tmp
