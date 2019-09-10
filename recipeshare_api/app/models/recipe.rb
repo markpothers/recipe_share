@@ -357,8 +357,8 @@ class Recipe < ApplicationRecord
     ingredients["ingredients"].keys.each do |ingredient|
       if ingredient != ""
         ing_name = ingredients["ingredients"][ingredient]["name"].downcase
-        console.log("ingredient:")
-        console.log(ingredient)
+        puts "ingredient:"
+        puts ingredient
         first_letter = ing_name[0].upcase
         ing_name = [first_letter, ing_name.split("").drop(1).join("")].join("")
         dbIngredient = Ingredient.find_or_create_by(name: ing_name)
