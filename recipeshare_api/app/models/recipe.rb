@@ -355,11 +355,13 @@ class Recipe < ApplicationRecord
   def ingredients=(ingredients)
     IngredientUse.where(recipe_id: self.id).destroy_all
     ingredients["ingredients"].keys.each do |ingredient|
-      ing_name = ingredients["ingredients"][ingredient]["name"].downcase
-      first_letter = ing_name[0].upcase
-      ing_name = [first_letter, ing_name.split("").drop(1).join("")].join("")
-      dbIngredient = Ingredient.find_or_create_by(name: ing_name)
-      ing_use = IngredientUse.find_or_create_by(recipe_id: self.id, ingredient_id: dbIngredient.id, quantity: ingredients["ingredients"][ingredient]["quantity"], unit: ingredients["ingredients"][ingredient]["unit"])
+      if ingredient != ""
+        ing_name = ingredients["ingredients"][ingredient]["name"].downcase
+        first_letter = ing_name[0].upcase
+        ing_name = [first_letter, ing_name.split("").drop(1).join("")].join("")
+        dbIngredient = Ingredient.find_or_create_by(name: ing_name)
+        ing_use = IngredientUse.find_or_create_by(recipe_id: self.id, ingredient_id: dbIngredient.id, quantity: ingredients["ingredients"][ingredient]["quantity"], unit: ingredients["ingredients"][ingredient]["unit"])
+      end
     end
   end
 
