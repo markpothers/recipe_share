@@ -355,10 +355,8 @@ class Recipe < ApplicationRecord
   def ingredients=(ingredients)
     IngredientUse.where(recipe_id: self.id).destroy_all
     ingredients["ingredients"].keys.each do |ingredient|
-      if ingredient != ""
+      if ingredients["ingredients"][ingredient]["name"] != ""
         ing_name = ingredients["ingredients"][ingredient]["name"].downcase
-        puts "ingredient:"
-        puts ingredient
         first_letter = ing_name[0].upcase
         ing_name = [first_letter, ing_name.split("").drop(1).join("")].join("")
         dbIngredient = Ingredient.find_or_create_by(name: ing_name)
