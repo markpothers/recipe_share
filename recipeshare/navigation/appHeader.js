@@ -43,9 +43,9 @@ class AppHeader extends React.PureComponent {
                 <View style={styles.headerEnd}>
                     {this.props.navigation.state.routeName !== "ChefDetails" && this.props.navigation.state.routeName !== "NewRecipe" && this.props.navigation.state.routeName !== "RecipeDetails" ? this.renderDrawerButton() : this.renderBackButton()}
                 </View>
-                <TouchableOpacity  style={styles.headerMiddle} onPress={() => this.props.navigation.popToTop()}>
+                <View  style={styles.headerMiddle} >
                     <Text style={styles.headerText}>{this.props.text}</Text>
-                </TouchableOpacity>
+                </View>
                 <View style={styles.headerEnd}>
                     { this.props.navigation.state.routeName !== "NewRecipe" ? this.renderNewRecipeButton() : null }
                 </View>

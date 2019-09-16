@@ -71,7 +71,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                         style={styles.columnRow}
                         key={category}>
                         <View style={styles.switchContainer}>
-                            <Switch value={filtersList[category]} onChange={(e) => this.handleCategoryChange(category, e.nativeEvent.value)}/>
+                            <Switch style={(Platform.OS == 'ios' ? {transform:[{scaleX:.8},{scaleY:.8}]}:null)} value={filtersList[category]} onChange={(e) => this.handleCategoryChange(category, e.nativeEvent.value)}/>
                         </View>
                         <View style={styles.categoryContainer}>
                             <Text style={styles.categoryText}>{category}</Text>
@@ -87,7 +87,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 return (
                     <View style={styles.columnRow} key={category}>
                         <View style={styles.switchContainer}>
-                            <Switch value={filtersList[category]} onChange={(e) => this.handleCategoryChange(category, e.nativeEvent.value)}/>
+                            <Switch style={(Platform.OS == 'ios' ? {transform:[{scaleX:.8},{scaleY:.8}]}:null)} value={filtersList[category]} onChange={(e) => this.handleCategoryChange(category, e.nativeEvent.value)}/>
                         </View>
                         <View style={styles.categoryContainer}>
                             <Text style={styles.categoryText}>{category}</Text>
@@ -120,6 +120,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         render() {
             // console.log(Platform)
             let selectedCuisine = this.props.newRecipe ? this.props.newRecipeCuisine : this.props.cuisine
+            let selectedServes = this.props.newRecipe ? this.props.newRecipeServes : this.props.serves
             return (
                 <Modal
                 animationType="fade"
@@ -157,7 +158,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                                         <DualOSPicker
                                             onChoiceChange={this.handleServesChange}
                                             options={serves}
-                                            selectedChoice={this.props.serves}/>
+                                            selectedChoice={selectedServes}/>
                                     </View>
                                 </View>
                                 <View style={styles.clearFiltersButtonContainer}>

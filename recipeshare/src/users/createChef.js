@@ -208,7 +208,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 <View style={styles.formRow}>
                   <View style={styles.loginFormButton}>
                     <Text style={styles.loginFormButtonText}>Agree{"\n"}T&C</Text>
-                    <Switch value={this.state.tAndCAgreed} onChange={this.handleTandCSwitch}/>
+                    <Switch style={(Platform.OS === 'ios' ? {transform:[{scaleX:.8},{scaleY:.8}]}:null)} value={this.state.tAndCAgreed} onChange={this.handleTandCSwitch}/>
                   </View>
                   <TouchableOpacity style={styles.loginFormButton} activeOpacity={0.7} title="Take Photo" onPress={this.choosePicture}>
                     <Icon style={styles.standardIcon} size={25} name='camera' />

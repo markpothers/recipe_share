@@ -12,7 +12,7 @@ const ProfileStack = createStackNavigator({
       backgroundColor: '#104e01',
       // borderStyle: 'solid',
       // borderWidth: 2,
-      height: 60,  // cannot be less than 24 as includes space for the notification bar
+      height: 50,  // cannot be less than 24 as includes space for the notification bar
     },
     headerTintColor: '#fff59b',
     // headerTitleStyle: {

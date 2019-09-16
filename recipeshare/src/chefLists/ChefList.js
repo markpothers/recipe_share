@@ -52,21 +52,26 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
       awaitingServer: false
     }
 
-    componentDidMount = () => {
-      this.fetchChefList()
+    componentDidMount = async() => {
+      await this.setState({awaitingServer: true})
+      await this.fetchChefList()
+      await this.setState({awaitingServer: false})
+
     }
 
     respondToFocus = async() =>{
+      await this.setState({awaitingServer: true})
       await this.setState({offset: 0})
-      this.fetchChefList()
+      await this.fetchChefList()
+      await this.setState({awaitingServer: false})
     }
 
     fetchChefList = async() => {
-      await this.setState({awaitingServer: true})
+      // await this.setState({awaitingServer: true})
       const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
       let chefs = await getChefList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.loggedInChef.auth_token)
       this.props.storeChefList(this.props["listChoice"], chefs)
-      await this.setState({awaitingServer: false})
+      // await this.setState({awaitingServer: false})
     }
 
     fetchAdditionalChefs = async() => {

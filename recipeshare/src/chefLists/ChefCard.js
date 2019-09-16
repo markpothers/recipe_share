@@ -44,11 +44,11 @@ export default class ChefCard extends React.PureComponent {
                         <Icon name='food' size={24} style={styles.icon}/>
                         <Text style={styles.chefCardBottomOther} >{this.props.recipe_makes_received === null ? 0 : this.props.recipe_makes_received}</Text>
                     </View> */}
-                    <TouchableOpacity style={styles.chefCardBottomSubContainers}>
+                    <View style={styles.chefCardBottomSubContainers}>
                         <Icon name='comment-outline' size={24} style={styles.icon}/>
                         {/* {this.props.chef_commented === 0 ? <Icon name='comment-outline' size={24} style={styles.icon}/> : <Icon name='comment' size={24} style={styles.icon}/> } */}
                         <Text style={styles.chefCardBottomOther} >{this.props.comments_received === null ? 0 : this.props.comments_received}</Text>
-                    </TouchableOpacity>
+                    </View>
                 </View>
             </View>
         )

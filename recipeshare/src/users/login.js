@@ -203,7 +203,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                   </TouchableOpacity>
                   <View style={styles.loginFormButton}>
                     <Text style={styles.loginFormButtonText}>Stay{"\n"}logged in</Text>
-                    <Switch value={this.props.stayingLoggedIn} onChange={(e) => this.props.stayLoggedIn(e.nativeEvent.value)}/>
+                    <Switch style={(Platform.OS === 'ios' ? {transform:[{scaleX:.8},{scaleY:.8}]}:null)} value={this.props.stayingLoggedIn} onChange={(e) => this.props.stayLoggedIn(e.nativeEvent.value)}/>
                   </View>
                 </View>
                 <View style={styles.formRow}>

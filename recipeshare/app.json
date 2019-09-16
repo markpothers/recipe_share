@@ -23,6 +23,7 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.recipe_share.recipe_share",
       "supportsTablet": true
     },
     "android": {

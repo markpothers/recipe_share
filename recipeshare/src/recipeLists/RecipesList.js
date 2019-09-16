@@ -74,8 +74,10 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
       awaitingServer: false
     }
 
-    componentDidMount = () => {
-      this.fetchRecipeListThenDetails()
+    componentDidMount = async() => {
+      await this.setState({awaitingServer: true})
+      await this.fetchRecipeListThenDetails()
+      await this.setState({awaitingServer: false})
     }
 
     // componentWillUnmount = () => {
@@ -88,16 +90,18 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
     }
 
     respondToFocus = async() =>{
+      await this.setState({awaitingServer: true})
       await this.setState({offset: 0})
-      this.fetchRecipeListThenDetails()
+      await this.fetchRecipeListThenDetails()
+      await this.setState({awaitingServer: false})
     }
 
     fetchRecipeListThenDetails = async() => {
-      await this.setState({awaitingServer: true})
+      // await this.setState({awaitingServer: true})
       const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
       let recipes = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.cuisine, this.props.serves)
       this.props.storeRecipeList(this.props["listChoice"], recipes)
-      await this.setState({awaitingServer: false})
+      // await this.setState({awaitingServer: false})
     }
 
     fetchAdditionalRecipesThenDetailsForList = async() => {
