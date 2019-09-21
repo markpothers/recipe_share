@@ -1,5 +1,5 @@
 import React from 'react'
-import {ScrollView, Text, ImageBackground, KeyboardAvoidingView, TouchableOpacity, TextInput, View, Switch, ActivityIndicator } from 'react-native'
+import { Platform, ScrollView, Text, ImageBackground, KeyboardAvoidingView, TouchableOpacity, TextInput, View, Switch, ActivityIndicator } from 'react-native'
 import { countries } from '../dataComponents/countries'
 import * as Permissions from 'expo-permissions'
 import { connect } from 'react-redux'

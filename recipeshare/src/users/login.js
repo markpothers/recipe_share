@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, AsyncStorage, ImageBackground, KeyboardAvoidingView, Image, View, TextInput, TouchableOpacity, ScrollView, Dimensions, Switch, ActivityIndicator } from 'react-native'
+import { Platform, Text, AsyncStorage, ImageBackground, KeyboardAvoidingView, Image, View, TextInput, TouchableOpacity, ScrollView, Dimensions, Switch, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
 import { styles } from './usersStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
