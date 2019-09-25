@@ -60,6 +60,8 @@ const BrowseRecipesTabs = createMaterialTopTabNavigator({
     tabStyle: {
       // width: 100,
       height: 55,
+      paddingTop: 0,
+      paddingBottom: 0
     },
     style: {
       backgroundColor: '#104e01',

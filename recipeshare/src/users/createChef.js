@@ -5,6 +5,7 @@ import * as Permissions from 'expo-permissions'
 import { connect } from 'react-redux'
 import { postChef } from '../fetches/postChef'
 import { styles } from './usersStyleSheet'
+import { centralStyles } from '../centralStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import PicSourceChooser from '../functionalComponents/picSourceChooser'
 import { TAndC } from './tAndC'
@@ -155,7 +156,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         <KeyboardAvoidingView  style={styles.mainPageContainer} behavior="padding">
           <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
           {this.state.choosingPicture ? this.renderPictureChooser() : null}
-          {this.state.awaitingServer ? <ActivityIndicator style={styles.activityIndicator} size="large" color="#104e01" /> : null }
+          {this.state.awaitingServer ? <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={Platform.OS === 'ios' ? centralStyles.activityIndicator : null} size="large" color="#104e01" /></View> : null }
             <View style={styles.createChefForm}>
               <ScrollView>
                 <View style={styles.formRow}>

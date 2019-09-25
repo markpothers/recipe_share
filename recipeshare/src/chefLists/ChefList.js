@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, ActivityIndicator } from 'react-native'
+import { FlatList, ActivityIndicator, Platform, View } from 'react-native'
 import ChefCard from './ChefCard'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { connect } from 'react-redux'
@@ -8,6 +8,7 @@ import { NavigationEvents, withNavigation } from 'react-navigation'
 import { postFollow } from '../fetches/postFollow'
 import { destroyFollow } from '../fetches/destroyFollow'
 import { styles } from './chefListStyleSheet'
+import { centralStyles } from '../centralStyleSheet'
 
 const mapStateToProps = (state) => ({
       all_chefs: state.chefs.all_chefs,
@@ -157,7 +158,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
       return (
         <React.Fragment>
           <NavigationEvents onWillFocus={this.respondToFocus}/>
-          {this.state.awaitingServer ? <ActivityIndicator style={styles.activityIndicator} size="large" color="#104e01" /> : null }
+            {this.state.awaitingServer ? <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={Platform.OS === 'ios' ? centralStyles.activityIndicator : null} size="large" color="#104e01" /></View> : null }
           <FlatList
             data={this.props[this.props["listChoice"]]}
             renderItem={this.renderChefListItem}

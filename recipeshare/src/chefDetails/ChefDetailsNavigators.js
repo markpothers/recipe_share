@@ -48,6 +48,8 @@ export const MyRecipeBookTabs = createMaterialTopTabNavigator({
     },
     tabStyle: {
       height: 55,
+      paddingTop: 0,
+      paddingBottom: 0
     },
     style: {
       backgroundColor: '#104e01',

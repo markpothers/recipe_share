@@ -154,7 +154,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                                 </View>
                                 <View style={styles.bottomTopContainer}>
                                     <Text style={styles.title}>Serves: </Text>
-                                    <View picker style={styles.picker} >
+                                    <View style={styles.picker} >
                                         <DualOSPicker
                                             onChoiceChange={this.handleServesChange}
                                             options={serves}

@@ -93,7 +93,7 @@ export const styles = StyleSheet.create({
     // justifyContent: 'center',
     // alignItems: 'center',
     // marginTop: '1%',
-    // marginBottom: '1%',
+    marginBottom: '2%',
     marginLeft: '2%',
     marginRight: '2%'
   },
@@ -172,9 +172,10 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     color: "#505050",
     fontWeight: 'bold',
-    // width: '37%',
-    marginLeft: '62%',
-    top: '0.3%'
+    width: '100%',
+    marginRight: '10%',
+    top: '0.3%',
+    textAlign: 'right'
   },
   icon: {
     color: "#505050",
@@ -233,19 +234,5 @@ export const styles = StyleSheet.create({
   editButton: {
     marginRight: '15%',
     marginLeft: '7%',
-  },
-  activityIndicator:{
-    position: 'absolute',
-    width: 45,
-    height: 45,
-    zIndex: 1,
-    left: '45%',
-    // top: '25%',
-    borderRadius: 100,
-    backgroundColor: '#fff59b',
-    borderColor: '#104e01',
-    borderWidth: 1,
-    borderColor: '#104e01',
-    borderWidth: 1
   }
   });

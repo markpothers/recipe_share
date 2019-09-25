@@ -18,7 +18,7 @@ export function TAndC(props) {
                     <View style={styles.titleContainer}>
                         <Text style={styles.title}>Terms & Conditions</Text>
                     </View>
-                    <View style={[styles.editChefInputAreaBox, (Platform.OS === 'ios' ? {height: '84%'} : {height: '86%'})]} >
+                    <View style={[styles.editChefInputAreaBox, (Platform.OS === 'ios' ? {height: '87%'} : {height: '89%'})]} >
                         <ScrollView>
                             <Text style={styles.tAndCText}>{termsAndConditions}</Text>
                         </ScrollView>

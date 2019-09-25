@@ -1,8 +1,9 @@
 import React from 'react';
-import { Image, ScrollView, View, ImageBackground, Text, TouchableOpacity, KeyboardAvoidingView, ActivityIndicator } from 'react-native';
+import { Image, ScrollView, View, ImageBackground, Text, TouchableOpacity, KeyboardAvoidingView, ActivityIndicator, Platform } from 'react-native';
 import { connect } from 'react-redux'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { styles } from './recipeDetailsStyleSheet'
+import { centralStyles } from '../centralStyleSheet'
 import { postRecipeLike } from '../fetches/postRecipeLike'
 import { postMakePic } from '../fetches/postMakePic'
 import { getRecipeDetails } from '../fetches/getRecipeDetails'
@@ -339,7 +340,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       // console.log(this.props.recipe_details.recipe.cuisine)
       const categories = Object.keys(this.props.filter_settings).sort().filter( category => this.props.recipe_details.recipe[category.split(" ").join("_").toLowerCase()])
       // this.props.recipe_details.recipe.cuisine === "Any" ? null : categories.unshift(this.props.recipe_details.recipe.cuisine)
-      return <Text style={[styles.detailsContents]}>{categories.join(",  ")}</Text>
+      if (categories.length > 0){
+        return (
+          <View style={styles.detailsInstructions}>
+            <Text style={styles.detailsSubHeadings}>Categories:</Text>
+            <Text style={[styles.detailsContents]}>{categories.join(",  ")}</Text>
+          </View>
+        )
+      } else {
+        return null
+      }
     }
 
     renderAcknowledgement = () => {
@@ -351,14 +361,23 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       )
     }
 
+    renderCuisine = () => {
+      return (
+        <View style={styles.detailsInstructions}>
+        <Text style={styles.detailsSubHeadings}>Cuisine:</Text>
+        <Text style={[styles.detailsContents]}>{this.props.recipe_details.recipe.cuisine}</Text>
+      </View>
+      )
+    }
+
     render() {
       if (this.props.recipe_details != (undefined || null)){
-        // console.log(this.props.recipe_details.recipe.acknowledgement)
+        console.log(this.props.recipe_details.recipe.acknowledgement)
         return (
           <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={83} style={{flex:1}}>
             <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
               {this.state.choosingPicSource ? this.renderPictureChooser() : null}
-              {this.state.awaitingServer ? <ActivityIndicator style={styles.activityIndicator} size="large" color="#104e01" /> : null }
+              {this.state.awaitingServer ? <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={Platform.OS === 'ios' ? centralStyles.activityIndicator : null} size="large" color="#104e01" /></View> : null }
               <View style={styles.detailsHeader}>
                 <View style={styles.detailsHeaderTopRow}>
                   <View style={styles.headerTextView}>
@@ -366,9 +385,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                   </View>
                     {this.renderEditDeleteButtons()}
                 </View>
-                {/* <TouchableOpacity style={styles.usernameContainer} onPress={() => this.props.navigation.navigate('ChefDetails', {chefID: this.props.recipe_details.chef_id})}>
-                      <Text style={[styles.detailsHeaderUsername]}>by {this.props.recipe_details.chef_username}</Text>
-                </TouchableOpacity> */}
               </View>
               <ScrollView contentContainerStyle={{flexGrow:1}} ref={(ref) =>this.myScroll = ref} >
                 <View style={styles.detailsLikesAndMakes}>
@@ -377,16 +393,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                       {this.renderLikeButton()}
                       <Text style={[styles.detailsLikesAndMakesUpperContents]}>Likes: {this.props.recipe_details.recipe_likes}</Text>
                     </View>
-                    {/* <View style={styles.buttonAndText}>
-                      {this.renderMakeButton()}
-                      <Text style={[styles.detailsLikesAndMakesUpperContents]}>Makes: {this.props.recipe_details.recipe_makes}</Text>
-                    </View> */}
                     <View style={styles.buttonAndText}>
                       <Text style={[styles.detailsLikesAndMakesLowerContents]}>Serves: {this.props.recipe_details.recipe.serves}</Text>
                     </View>
                   </View>
                   <View style={styles.detailsLikes}>
-                    {/* <Text style={[styles.detailsLikesAndMakesLowerContents]}>Serves: {this.props.recipe_details.recipe.serves}</Text> */}
                     <Text style={[styles.detailsLikesAndMakesLowerContents]}>Time: {this.props.recipe_details.recipe.time}</Text>
                     <Text style={[styles.detailsLikesAndMakesLowerContents]}>Difficulty: {this.props.recipe_details.recipe.difficulty}</Text>
                   </View>
@@ -402,15 +413,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                   <Text style={styles.detailsSubHeadings}>Instructions:</Text>
                   <Text style={[styles.detailsContents]}>{this.props.recipe_details.recipe.instructions}</Text>
                 </View>
-                <View style={styles.detailsInstructions}>
-                  <Text style={styles.detailsSubHeadings}>Cuisine:</Text>
-                  <Text style={[styles.detailsContents]}>{this.props.recipe_details.recipe.cuisine}</Text>
-                </View>
-                <View style={styles.detailsInstructions}>
-                  <Text style={styles.detailsSubHeadings}>Categories:</Text>
-                  {this.renderFilterCategories()}
-                </View>
-                {this.props.recipe_details.recipe.acknowledgement != ("" && null) ? this.renderAcknowledgement() : null}
+                {this.props.recipe_details.recipe.cuisine != "Any" ? this.renderCuisine() : null}
+                {this.renderFilterCategories()}
+                {this.props.recipe_details.recipe.acknowledgement != ("" || null) ? this.renderAcknowledgement() : null}
                 <View style={styles.detailsMakePicsContainer}>
                   <View style={{flexDirection: 'row'}}>
                     <Text style={styles.detailsSubHeadings}>Images from other users:</Text>
@@ -438,7 +443,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       } else {
         return (
           <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
-            {this.state.awaitingServer ? <ActivityIndicator style={styles.activityIndicator} size="large" color="#104e01" /> : null }
+            {this.state.awaitingServer ? <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={Platform.OS === 'ios' ? centralStyles.activityIndicator : null} size="large" color="#104e01" /></View> : null }
           </ImageBackground>
         )
       }

@@ -30,6 +30,7 @@ export const styles = StyleSheet.create({
     },
     recipeCardTopLeftContainer: {
       flex: 8,
+      justifyContent: 'center'
     },
     recipeCardTopRightContainer: {
       flex: 2,
@@ -129,16 +130,5 @@ export const styles = StyleSheet.create({
     },
     filterIcon:{
       color: '#104e01',
-    },
-    activityIndicator:{
-      position: 'absolute',
-      width: 45,
-      height: 45,
-      zIndex: 1,
-      left: '45%',
-      borderRadius: 100,
-      backgroundColor: '#fff59b',
-      borderColor: '#104e01',
-      borderWidth: 1
     }
 });

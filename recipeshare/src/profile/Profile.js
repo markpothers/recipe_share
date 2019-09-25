@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { styles } from './profileStyleSheet'
-import { View, ImageBackground, TouchableOpacity, ActivityIndicator, AsyncStorage } from 'react-native'
+import { centralStyles } from '../centralStyleSheet'
+import { View, ImageBackground, TouchableOpacity, ActivityIndicator, AsyncStorage, Platform } from 'react-native'
 import AppHeader from '../../navigation/appHeader'
 import ChefDetailsCard from '../chefDetails/ChefDetailsCard'
 import { getChefDetails } from '../fetches/getChefDetails'
@@ -205,7 +206,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           <React.Fragment>
             {this.state.editingChef ? this.renderChefEditor() : null}
             <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
-              {this.state.awaitingServer ? <ActivityIndicator style={styles.activityIndicator} size="large" color="#104e01" /> : null }
+              {this.state.awaitingServer ? <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={Platform.OS === 'ios' ? centralStyles.activityIndicator : null} size="large" color="#104e01" /></View> : null }
               {this.props.loggedInChef.is_admin ? this.renderDatabaseButtons() : null}
               {this.state.choosingPicture ? this.renderPictureChooser() : null}
               {this.state.deleteChefOptionVisible ? this.renderDeleteChefOption() : null}
@@ -217,7 +218,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         return (
           <View style={{flex:1}}>
             <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
-              {this.state.awaitingServer ? <ActivityIndicator style={styles.activityIndicator} size="large" color="#104e01" /> : null }
+              {this.state.awaitingServer ? <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={Platform.OS === 'ios' ? centralStyles.activityIndicator : null} size="large" color="#104e01" /></View> : null }
               {this.props.loggedInChef.is_admin ? this.renderDatabaseButtons() : null}
               {this.state.choosingPicture ? this.renderPictureChooser() : null}
               {this.state.deleteChefOptionVisible ? this.renderDeleteChefOption() : null}

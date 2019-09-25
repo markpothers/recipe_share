@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, ActivityIndicator, TouchableOpacity } from 'react-native'
+import { FlatList, ActivityIndicator, TouchableOpacity, View, Platform } from 'react-native'
 import RecipeCard from './RecipeCard'
 import { connect } from 'react-redux'
 import { getRecipeList } from '../fetches/getRecipeList'
@@ -10,6 +10,7 @@ import { destroyRecipeLike } from '../fetches/destroyRecipeLike'
 import { destroyReShare } from '../fetches/destroyReShare'
 import { NavigationEvents, withNavigation } from 'react-navigation'
 import { styles } from './recipeListStyleSheet'
+import { centralStyles } from '../centralStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FilterMenu from '../functionalComponents/filterMenu'
 
@@ -273,7 +274,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
       return (
         <React.Fragment>
           <NavigationEvents onWillFocus={this.respondToFocus} onWillBlur={this.respondToBlur}/>
-            {this.state.awaitingServer ? <ActivityIndicator style={styles.activityIndicator} size="large" color="#104e01" /> : null }
+            {this.state.awaitingServer ? <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={Platform.OS === 'ios' ? centralStyles.activityIndicator : null} size="large" color="#104e01" /></View> : null }
             <TouchableOpacity style={styles.filterButton} activeOpacity={0.7} onPress={this.handleFilterButton}>
               <Icon name='filter' size={24} style={styles.filterIcon}/>
             </TouchableOpacity>

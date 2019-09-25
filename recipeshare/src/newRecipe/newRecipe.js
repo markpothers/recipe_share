@@ -1,8 +1,9 @@
 import React from 'react'
-import { ScrollView, Text, ImageBackground, TextInput, KeyboardAvoidingView, TouchableOpacity, View, ActivityIndicator } from 'react-native'
+import { ScrollView, Text, ImageBackground, TextInput, KeyboardAvoidingView, TouchableOpacity, View, ActivityIndicator, Platform } from 'react-native'
 import { connect } from 'react-redux'
 import * as Permissions from 'expo-permissions'
 import { styles } from './newRecipeStyleSheet'
+import { centralStyles } from '../centralStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { times } from '../dataComponents/times'
 import { difficulties } from '../dataComponents/difficulties'
@@ -250,8 +251,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       return (
         <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.mainPageContainer} imageStyle={styles.backgroundImageStyle}>
           {this.state.choosingPicture ? this.renderPictureChooser() : null}
-          {this.state.awaitingServer ? <ActivityIndicator style={styles.activityIndicator} size="large" color="#104e01" /> : null }
-          <KeyboardAvoidingView  style={styles.mainPageContainer} keyboardVerticalOffset={83} behavior="padding">
+          {this.state.awaitingServer ? <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={Platform.OS === 'ios' ? centralStyles.activityIndicator : null} size="large" color="#104e01" /></View> : null }
+          <KeyboardAvoidingView  style={styles.mainPageContainer} keyboardVerticalOffset={72} behavior="padding">
             <ScrollView keyboardShouldPersistTaps='always'>
                   <View style={styles.formRow}>
                     <View style={styles.createRecipeInputBox} >

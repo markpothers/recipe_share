@@ -1,8 +1,9 @@
 import React from 'react';
-import { Image, ScrollView, View, ImageBackground, ActivityIndicator } from 'react-native';
+import { Image, ScrollView, View, ImageBackground, ActivityIndicator, Platform } from 'react-native';
 import { connect } from 'react-redux'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { styles } from './chefDetailsStyleSheet'
+import { centralStyles } from '../centralStyleSheet'
 import { getChefDetails } from '../fetches/getChefDetails'
 import AppHeader from '../../navigation/appHeader'
 import ChefDetailsCard from './ChefDetailsCard'
@@ -114,7 +115,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         return (
           <View style={{flex:1}}>
             <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
-            {this.state.awaitingServer ? <ActivityIndicator style={styles.activityIndicator} size="large" color="#104e01" /> : null }
+              {this.state.awaitingServer ? <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={Platform.OS === 'ios' ? centralStyles.activityIndicator : null} size="large" color="#104e01" /></View> : null }
               <ScrollView contentContainerStyle={{flexGrow:1}}>
                 <ChefDetailsCard 
                   {...chef_details} 
@@ -135,7 +136,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         return (
           <View style={{flex:1}}>
             <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
-              {this.state.awaitingServer ? <ActivityIndicator style={styles.activityIndicator} size="large" color="#104e01" /> : null }
+              {this.state.awaitingServer ? <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={Platform.OS === 'ios' ? centralStyles.activityIndicator : null} size="large" color="#104e01" /></View> : null }
             </ImageBackground>
           </View>
         )

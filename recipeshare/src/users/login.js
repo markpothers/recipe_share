@@ -2,6 +2,7 @@ import React from 'react'
 import { Platform, Text, AsyncStorage, ImageBackground, KeyboardAvoidingView, Image, View, TextInput, TouchableOpacity, ScrollView, Dimensions, Switch, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
 import { styles } from './usersStyleSheet'
+import { centralStyles} from '../centralStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { getNewPassword } from '../fetches/getNewPassword'
 import { loginChef } from '../fetches/loginChef'
@@ -169,7 +170,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         width: Dimensions.get('window').width,
         }]} imageStyle={styles.backgroundImageStyle}>
           <KeyboardAvoidingView style={styles.mainPageContainer} behavior="padding">
-          {this.state.awaitingServer ? <ActivityIndicator style={styles.activityIndicator} size="large" color="#104e01" /> : null }
+            {this.state.awaitingServer ? <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={Platform.OS === 'ios' ? centralStyles.activityIndicator : null} size="large" color="#104e01" /></View> : null }
             <ScrollView style={styles.scrollContainer}>
               <View style={styles.logoContainer}>
                 <Image style={styles.logo} resizeMode={"contain"} source={require('../dataComponents/yellowLogo.png')}/>
