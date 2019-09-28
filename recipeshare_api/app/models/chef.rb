@@ -4,8 +4,6 @@ class Chef < ApplicationRecord
 
     has_secure_password
 
-    has_one_attached :avatar
-
     has_many :recipes
     has_many :recipe_likes
     has_many :liked_recipes, :through => :recipe_likes, :source => :recipe
@@ -34,12 +32,6 @@ class Chef < ApplicationRecord
     # validates :e_mail, inclusion: {in: %w(@), message: "must be a valid e-mail address."}
     validates :password, length: {minimum: 6, message: "must be at least 6 characters."}
 
-    # def password=(value)
-    #     byebug
-    #     self.password_digest = Bcrypt.hash(value)
-
-    # end
-
     def auth_token
         JWT.encode({id: self.id}, 'f9aaac712f7cdb36b9ecc7714166f539')
     end
@@ -51,9 +43,6 @@ class Chef < ApplicationRecord
     def self.choose_list(type = "all_chefs", queryChefID = 1, limit = 50, offset = 0, userChefID = 1)
         #types = "all_chefs", "chef_followees", "chef_followers", "chef_made", "most_liked_chefs", "most_made_chefs"
         if type == "all_chefs"
-            # Chef.order(created_at: :desc) # all chefs ordered newest first
-            #     .limit(limit)
-            #     .offset(offset)
 
                 ApplicationRecord.db.execute("SELECT chefs.id, chefs.username, chefs.country, chefs.imageURL, chefs.created_at, chefs.profile_text,
                                                 (SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id) AS followers,
@@ -88,11 +77,7 @@ class Chef < ApplicationRecord
                                             OFFSET (?)", [userChefID, limit, offset])
 
         elsif type == "chef_followees" # chefs followed by user (chef_id)
-            # Chef.joins(:followers_as_followee)
-            #     .where({ follows: { follower_id: chef_id }})
-            #     .order("follows.created_at desc")
-            #     .limit(limit)
-            #     .offset(offset).uniq
+
                 ApplicationRecord.db.execute("SELECT chefs.id, chefs.username, chefs.country, chefs.imageURL, chefs.created_at, chefs.profile_text,
                                                 (SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id) AS followers,
                                                 (SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id AND follows.follower_id = (?)) AS user_chef_following,
@@ -127,12 +112,6 @@ class Chef < ApplicationRecord
                                             OFFSET (?)", [userChefID, queryChefID, limit, offset])
 
         elsif type == "chef_followers" # chefs followed by user (chef_id)
-
-            # Chef.joins(:followees_as_follower)
-            #     .where({ follows: { followee_id: chef_id }})
-            #     .order("follows.created_at desc")
-            #     .limit(limit)
-            #     .offset(offset).uniq
 
             ApplicationRecord.db.execute("SELECT chefs.id, chefs.username, chefs.country, chefs.imageURL, chefs.created_at, chefs.profile_text,
                                             (SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id) AS followers,

@@ -1,6 +1,5 @@
 class IngredientUsesController < ApplicationController
 
-    # skip_before_action :verify_authenticity_token
     before_action :define_current_ingredient_use
     skip_before_action :define_current_ingredient_use, :only => [:index, :create]
 

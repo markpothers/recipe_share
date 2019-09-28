@@ -1,13 +1,12 @@
 class FollowsController < ApplicationController
 
-    # skip_before_action :verify_authenticity_token
     before_action :define_current_follow
     skip_before_action :define_current_follow, :only => [:index, :create, :check, :destroy]
 
 
-    def index
-        render json: Follow.all
-    end
+    # def index
+    #     render json: Follow.all
+    # end
 
     def check
         # byebug

@@ -55,15 +55,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     componentDidMount = () => {
-      // await this.setState({awaitingServer: true})
       this.fetchChefDetails()
-      // await this.setState({awaitingServer: false})
-
     }
 
     componentWillUnmount = () => {
-      // console.log("unmounting")
-      // this.props.clearChefDetails()
     }
 
     fetchChefDetails = async() => {

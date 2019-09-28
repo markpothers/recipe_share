@@ -7,7 +7,6 @@ import { getChefList } from '../fetches/getChefList'
 import { NavigationEvents, withNavigation } from 'react-navigation'
 import { postFollow } from '../fetches/postFollow'
 import { destroyFollow } from '../fetches/destroyFollow'
-import { styles } from './chefListStyleSheet'
 import { centralStyles } from '../centralStyleSheet'
 
 const mapStateToProps = (state) => ({

@@ -4,7 +4,6 @@ class MakePicsController < ApplicationController
 
     def create
         # byebug
-        # @make_pic = MakePic.create(make_pic_params)
         if make_pic_params[:base64] != ""
             @make_pic = MakePic.create(recipe_id: make_pic_params[:recipe_id], chef_id: make_pic_params[:chef_id])
             hex = SecureRandom.hex
@@ -14,7 +13,6 @@ class MakePicsController < ApplicationController
             File.open("public/make_pic_files/make_pic_#{hex}.jpg", 'wb') do |f|
                 f.write(Base64.decode64(make_pic_params[:base64]))
             end
-            # puts "public/make_pic_files/make_pic_#{@hex}.jpg"
             @make_pic.imageURL = "/make_pic_files/make_pic_#{hex}.jpg"
             @make_pic.hex=hex
             @make_pic.save

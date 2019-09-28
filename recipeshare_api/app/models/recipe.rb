@@ -14,8 +14,6 @@ class Recipe < ApplicationRecord
 
   accepts_nested_attributes_for :ingredient_uses
 
-  has_many_attached :images
-
   def self.choose_list(type = "all", queryChefID = 1, limit = 1, offset = 0, ranking = "liked", user_chef_id = 1, filters="", cuisine="None", serves="Any")
     #types = "all", "chef", "chef_liked", "chef_made", "most_liked", "most_made" // "liked", "made"
 

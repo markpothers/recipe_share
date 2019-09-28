@@ -70,7 +70,7 @@ class ChefsController < ApplicationController
                 render json: {error: true, message: @chef.errors.full_messages}
             end
         else
-            render json: {error: true, message: ["Passwords do not match"] } #, chef: chef_params}
+            render json: {error: true, message: ["Passwords do not match"] }
         end
     end
 
@@ -126,7 +126,7 @@ class ChefsController < ApplicationController
                     render json: {error: true, message: @chef.errors.full_messages}
                 end
             else
-                render json: {error: true, message: ["Passwords do not match"] } #, chef: chef_params}
+                render json: {error: true, message: ["Passwords do not match"] }
             end
         else
             render json: @chef, methods: [:auth_token]
@@ -135,8 +135,7 @@ class ChefsController < ApplicationController
 
     def password_reset
         @chef = Chef.find_by(e_mail: params[:email])
-        if @chef.deactivated
-            # reactivate chef
+        if @chef.deactivated  # reactivate chef
             @chef.update_attribute(:activation_digest, JWT.encode({id: @chef.id}, 'e9c25029ce138bee53480013fb005e5b'))
             ChefMailer.with(chef: @chef).reactivate_account.deliver_now
             render json: {error: false, message: "We've e-mailed you a link to re-activate your account."}

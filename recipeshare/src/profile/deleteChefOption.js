@@ -28,8 +28,6 @@ export default class DeleteChefOption extends React.PureComponent{
                                 <Icon style={styles.applyFiltersIcon} size={25} name='cancel' />
                                 <Text style={styles.applyFiltersButtonText}>Cancel</Text>
                             </TouchableOpacity>
-                            {/* <View style={styles.buttonPlaceholder}>
-                            </View> */}
                         </View>
                         <View style={styles.formRow}>
                             <TouchableOpacity style={styles.clearFiltersButton} activeOpacity={0.7} title="deleteEverything" onPress={() => this.props.deleteChefAccount(true)}>

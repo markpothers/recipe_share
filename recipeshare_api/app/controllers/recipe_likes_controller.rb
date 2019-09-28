@@ -1,6 +1,5 @@
 class RecipeLikesController < ApplicationController
 
-    # skip_before_action :verify_authenticity_token
     before_action :define_current_recipe_like
     skip_before_action :define_current_recipe_like, :only => [:index, :create, :destroy]
 

@@ -1,6 +1,5 @@
 class RecipeMakesController < ApplicationController
 
-    # skip_before_action :verify_authenticity_token
     before_action :define_current_recipe_make
     skip_before_action :define_current_recipe_make, :only => [:index, :create]
 
@@ -30,8 +29,6 @@ class RecipeMakesController < ApplicationController
     # def edit
     #     render json: @recipe_make
     # end
-
-
 
     # def update
     #     @recipe_make.update(recipe_make_params)

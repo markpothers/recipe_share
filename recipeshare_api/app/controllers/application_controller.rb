@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::API
 
     before_action :logged_in?
-    # before_action :define_current_chef
 
     def logged_in?
         # byebug

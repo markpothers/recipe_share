@@ -26,18 +26,6 @@ class BrowseRecipesCover extends React.Component {
         fontWeight: 'normal',
         color: '#fff59b'
       },
-      //headerRight: (
-        // <React.Fragment>
-          // {/* {navigation.getParam('likeable') == false ? <Button rounded style={styles.newButton} onPress={navigation.getParam('unlikeRecipe')}><Icon name='heart' size={28} style={styles.newIcon}/></Button> : <Button rounded style={styles.newButton} onPress={navigation.getParam('likeRecipe')}><Icon name='heart-outline' size={28} style={styles.newIcon}/></Button> } */}
-          // {/* {navigation.getParam('makeable') == false ? <Button rounded style={styles.newButton}><Icon name='food-off' size={28} style={styles.newIcon}/></Button> : <Button rounded style={styles.newButton} onPress={navigation.getParam('makeRecipe')}><Icon name='food' size={28} style={styles.newIcon}/></Button> } */}
-          // {/* <Button rounded style={styles.newButton} onPress={navigation.getParam('editRecipe')}>
-          //   <Icon2 name='edit' size={28} style={styles.newIcon} />
-          // </Button> */}
-          // {/* <Button rounded style={styles.newButton} onPress={navigation.getParam('deleteRecipe')}>
-          //   <Icon name='delete-outline' size={28} style={styles.newIcon} />
-          // </Button> */}
-        // </React.Fragment>
-      // ),
     }}
 
     state = {

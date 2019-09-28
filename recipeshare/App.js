@@ -3,7 +3,6 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Provider } from 'react-redux'
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
-// import { Ionicons } from '@expo/vector-icons';
 import { store } from './src/functionalComponents/store'
 // This was requested by react Navigation although I can't see the difference in functionality
 import { useScreens } from 'react-native-screens';
@@ -36,15 +35,6 @@ export default class App extends React.Component {
   }
 
   _loadResourcesAsync = async () => {
-    // return Promise.all([
-    //   Font.loadAsync({
-    //     // This is the font that we are using for our tab bar and for Nodebase
-    //     ...Icon.Ionicons.font,
-    //     'Roboto': require('native-base/Fonts/Roboto.ttf'),
-    //     'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
-    //   }),
-
-    // ]);
   };
 
   _handleLoadingError = error => {

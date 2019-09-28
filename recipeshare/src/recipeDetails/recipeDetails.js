@@ -337,9 +337,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     renderFilterCategories = () => {
-      // console.log(this.props.recipe_details.recipe.cuisine)
       const categories = Object.keys(this.props.filter_settings).sort().filter( category => this.props.recipe_details.recipe[category.split(" ").join("_").toLowerCase()])
-      // this.props.recipe_details.recipe.cuisine === "Any" ? null : categories.unshift(this.props.recipe_details.recipe.cuisine)
       if (categories.length > 0){
         return (
           <View style={styles.detailsInstructions}>

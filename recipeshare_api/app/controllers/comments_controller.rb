@@ -1,6 +1,5 @@
 class CommentsController < ApplicationController
 
-    # skip_before_action :verify_authenticity_token
     before_action :define_current_comment
     skip_before_action :define_current_comment, :only => [:index, :create]
 
@@ -22,9 +21,9 @@ class CommentsController < ApplicationController
         end
     end
 
-    def show
-        render json: @comment
-    end
+    # def show
+    #     render json: @comment
+    # end
 
     # def edit
     #     render json: @comment

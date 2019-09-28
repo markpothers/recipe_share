@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "recipe_share_ui",
-    "slug": "recipeshare",
+    "name": "Recipe-Share",
+    "slug": "recipe-share",
     "privacy": "public",
-    "sdkVersion": "33.0.0",
+    "sdkVersion": "35.0.0",
     "platforms": [
       "ios",
       "android"
@@ -23,7 +23,6 @@
       "**/*"
     ],
     "ios": {
-      // "bundleIdentifier": "com.recipe_share",
       "supportsTablet": true
     },
     "android": {

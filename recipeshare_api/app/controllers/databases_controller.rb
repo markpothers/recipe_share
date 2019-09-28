@@ -1,7 +1,5 @@
 class DatabasesController < ApplicationController
 
-    # skip_before_action :verify_authenticity_token
-
     def manualBackup
         if @chef.is_admin === true
             Database.dbPrimaryBackup()
@@ -14,7 +12,7 @@ class DatabasesController < ApplicationController
 
     def autoBackup
         if @chef.is_admin === true
-           Database.setInterval(60) do
+            Database.setInterval(60) do
                 Database.dbPrimaryBackup()
                 puts "Primary backing up"
             end

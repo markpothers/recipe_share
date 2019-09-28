@@ -12,7 +12,6 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   backgroundImageStyle: {
-    // opacity: 0.8
   },
   loginForm: {
     width: '100%',
@@ -30,7 +29,6 @@ export const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: '#104e01',
-    // overflow: 'hidden',
   },
   pickerInputBox: {
     marginLeft: '10%',

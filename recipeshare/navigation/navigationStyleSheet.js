@@ -6,14 +6,10 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   headerContainer: {
-    // flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     width: '100%',
     height: 55,
-    // borderStyle: 'solid',
-    // borderWidth: 2,
-    // borderColor: '#fff59b',
   },
   headerEnd:{
     width: '15%',
@@ -24,7 +20,6 @@ export const styles = StyleSheet.create({
   headerMiddle:{
     width: '70%',
     height: '100%',
-    // alignItems: 'center',
     justifyContent: 'center'
   },
   headerDrawerButton: {
@@ -32,10 +27,7 @@ export const styles = StyleSheet.create({
     marginRight: 8,
   },
   headerNewButton: {
-    // position: 'absolute',
-    // left: '85%',
-    // marginLeft: 10,
-    // marginRight: 10,
+
   },
   headerIcon:{
     color: '#fff59b'
@@ -48,6 +40,5 @@ export const styles = StyleSheet.create({
   background: {
     width: '100%',
     height: '100%',
-    // flex: 1
   },
 });

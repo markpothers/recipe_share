@@ -2,7 +2,6 @@ require 'securerandom'
 
 class RecipesController < ApplicationController
 
-    # skip_before_action :verify_authenticity_token
     before_action :define_current_recipe
     skip_before_action :define_current_recipe, :only => [:index, :create, :details]
 
@@ -10,7 +9,7 @@ class RecipesController < ApplicationController
     def index
         # byebug
         @recipes = Recipe.choose_list(params["listType"], params["queryChefID"], params["limit"], params["offset"], params["global_ranking"], @chef.id, params["filters"], params["cuisine"], params["serves"])
-        render json: @recipes #, methods: [:add_count]
+        render json: @recipes
     end
 
     # def new
