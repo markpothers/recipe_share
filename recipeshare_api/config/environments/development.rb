@@ -63,7 +63,7 @@ Rails.application.configure do
     port:                 587,
     domain:               'recipe-share.com',
     user_name:            'admin@recipe-share.com',
-    password:             'Raspberries22!',
+    password:             '7a86xXayx4ms6mM',
     authentication:       'plain',
     enable_starttls_auto: true  ,
     openssl_verify_mode: 'none',
