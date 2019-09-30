@@ -24,7 +24,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     };
 
     componentDidMount = () => {
-      // AsyncStorage.removeItem('chef', () => {})
+      AsyncStorage.removeItem('chef', () => {})
       AsyncStorage.getItem('chef', (err, res) => {
         if (res != null) {
           const loggedInChef = JSON.parse(res)
