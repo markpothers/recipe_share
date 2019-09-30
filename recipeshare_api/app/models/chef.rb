@@ -33,7 +33,7 @@ class Chef < ApplicationRecord
     validates :password, length: {minimum: 6, message: "must be at least 6 characters."}
 
     def auth_token
-        JWT.encode({id: self.id}, 'f9aaac712f7cdb36b9ecc7714166f539')
+        JWT.encode({id: self.id}, Rails.application.credentials.JWT[:secret_key])
     end
 
     def as_json(*)
