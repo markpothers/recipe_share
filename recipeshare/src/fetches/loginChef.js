@@ -2,6 +2,7 @@ import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
 
 export const loginChef = (chef) => {
+  console.log(databaseURL)
     return new Promise((resolve) => {
         fetch(`${databaseURL}/chefs/authenticate`, {
             method: "POST",
