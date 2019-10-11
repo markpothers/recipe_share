@@ -51,14 +51,12 @@ class ChefsController < ApplicationController
             if @chef.save
                 @chef.activation_digest = JWT.encode({id: @chef.id},  Rails.application.credentials.JWT[:secret_key])
                     if image_params[:imageURL] != ""
-                        hex = SecureRandom.hex
+                        hex = SecureRandom.hex(20)
                         until Chef.find_by(hex: hex) == nil
-                            hex = SecureRandom.hex
+                            hex = SecureRandom.hex(20)
                         end
-                        File.open("public/chef_avatars/chef-avatar-#{hex}.jpg", 'wb') do |f|
-                            f.write(Base64.decode64(image_params[:imageURL]))
-                        end
-                        @chef.imageURL = "/chef_avatars/chef-avatar-#{hex}.jpg"
+                        mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:chef_avatars], hex, image_params[:imageURL])
+                        @chef.imageURL = mediaURL
                         @chef.hex=hex
                         @chef.save
                     end

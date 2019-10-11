@@ -58,14 +58,5 @@ Rails.application.configure do
   config.action_mailer.default_options = {from: 'admin@recipe-share.com'}
 
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address:              'smtp.recipe-share.com',
-    port:                 587,
-    domain:               'recipe-share.com',
-    user_name:            'admin@recipe-share.com',
-    password:             Rails.application.credentials.email[:password],
-    authentication:       'plain',
-    enable_starttls_auto: true  ,
-    openssl_verify_mode: 'none',
-  }
+  config.action_mailer.smtp_settings = Rails.application.credentials.email[:details]
 end

@@ -6,14 +6,12 @@ class MakePicsController < ApplicationController
         # byebug
         if make_pic_params[:base64] != ""
             @make_pic = MakePic.create(recipe_id: make_pic_params[:recipe_id], chef_id: make_pic_params[:chef_id])
-            hex = SecureRandom.hex
+            hex = SecureRandom.hex(20)
             until MakePic.find_by(hex: hex) == nil
-                hex = SecureRandom.hex
+                hex = SecureRandom.hex(20)
             end
-            File.open("public/make_pic_files/make_pic_#{hex}.jpg", 'wb') do |f|
-                f.write(Base64.decode64(make_pic_params[:base64]))
-            end
-            @make_pic.imageURL = "/make_pic_files/make_pic_#{hex}.jpg"
+            mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:make_pics], hex, make_pic_params[:base64])
+            @make_pic.imageURL = mediaURL
             @make_pic.hex=hex
             @make_pic.save
         end

@@ -10,7 +10,7 @@ export default class RecipeCard extends React.PureComponent {
     }
 
     render() {
-        // console.log(this.props)
+        // console.log(this.props.imageURL)
         return (
             <View style={styles.recipeCard} >
                 {this.props.sharer_id? <PostedBy navigateToSharer={this.navigateToSharer} username={this.props.sharer_username} sharer_id={this.props.sharer_id} /> : null }
@@ -35,7 +35,7 @@ export default class RecipeCard extends React.PureComponent {
                     </TouchableOpacity>
                 </View>
                     <TouchableOpacity style={styles.recipeCardImageContainer} activeOpacity={0.7} onPress={() => this.props.navigateToRecipeDetails(this.props.id)}>
-                        <Image style={styles.thumbnail} source={{uri: `${databaseURL}${this.props.imageURL}`}} />
+                        <Image style={styles.thumbnail} source={{uri: this.props.imageURL}} />
                     </TouchableOpacity>
                     <View style={styles.recipeCardBottomContainer}>
                     <TouchableOpacity style={styles.recipeCardBottomSubContainers} onPress={this.props.chef_shared === 0 ? () => this.props.reShareRecipe(this.props.id) : () => this.props.unReShareRecipe(this.props.id) }>

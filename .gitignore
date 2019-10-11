@@ -1,10 +1,10 @@
 *.rbc
 capybara-*.html
 .rspec
-# /db/*.sqlite3
+# recipeshare_api/db/*.sqlite3
 /db/*.sqlite3-journal
 /public/system
-/recipeshare_api/public
+# /recipeshare_api/public
 /coverage/
 /spec/tmp
 *.orig

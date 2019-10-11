@@ -25,4 +25,8 @@ class ApplicationController < ActionController::API
         end
     end
 
+    def self.upload_file
+
+    end
+
 end

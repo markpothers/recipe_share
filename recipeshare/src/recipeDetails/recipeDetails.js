@@ -142,7 +142,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     renderRecipeImages = () => {
       if (this.props.recipe_details.recipe_images.length !== 0){
-          return <Image style={[{width: '100%', height: 250}, styles.detailsImage]} source={{uri: `${databaseURL}${this.props.recipe_details.recipe_images[this.props.recipe_details.recipe_images.length-1].imageURL}`}}></Image>
+          return <Image style={[{width: '100%', height: 250}, styles.detailsImage]} source={{uri: this.props.recipe_details.recipe_images[this.props.recipe_details.recipe_images.length-1].imageURL}}></Image>
       }
     }
 
@@ -181,7 +181,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           } else {
             return(
               <View key={`${make_pic.id}${make_pic.imageURL}`} style={styles.makePicContainer}>
-                <Image style={[{width: '100%', height: '100%'}, styles.makePic]} source={{uri: `${databaseURL}${make_pic.imageURL}`}}></Image>
+                <Image style={[{width: '100%', height: '100%'}, styles.makePic]} source={{uri: make_pic.imageURL}}></Image>
               </View>
             )
           }
@@ -370,7 +370,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     render() {
       if (this.props.recipe_details != (undefined || null)){
-        console.log(this.props.recipe_details.recipe.acknowledgement)
+        // console.log(this.props.recipe_details)
         return (
           <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={83} style={{flex:1}}>
             <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
