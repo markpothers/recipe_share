@@ -8,7 +8,7 @@
     Here's the activation link to complete setup of your account.
 </p>
 <p>
-    <%= link_to "Confirm e-mail", "#{Rails.application.credentials.email[:details]}/activate?token=#{@chef.activation_digest}&email=#{@chef.e_mail.split("@").join("%40")}" %>
+    <%= link_to "Confirm e-mail", "#{Rails.application.credentials.server[:ip_address]}/activate?token=#{@chef.activation_digest}&email=#{@chef.e_mail.split("@").join("%40")}" %>
 </p>
 <p>
     You're just a click away from countless recipe ideas to enjoy.

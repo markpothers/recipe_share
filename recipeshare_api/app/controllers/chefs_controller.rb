@@ -101,14 +101,12 @@ class ChefsController < ApplicationController
         @chef.country != chef_params[:country] ? @chef.update_attribute(:country, chef_params[:country]) : nil
         # byebug
         if image_params[:imageURL] != ""
-            hex = SecureRandom.hex
+            hex = SecureRandom.hex(20)
             until Chef.find_by(hex: hex) == nil
-                hex = SecureRandom.hex
+                hex = SecureRandom.hex(20)
             end
-            File.open("public/chef_avatars/chef-avatar-#{hex}.jpg", 'wb') do |f|
-                f.write(Base64.decode64(image_params[:imageURL]))
-            end
-            @chef.update_attribute(:imageURL, "/chef_avatars/chef-avatar-#{hex}.jpg")
+            mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:chef_avatars], hex, image_params[:imageURL])
+            @chef.update_attribute(:imageURL, mediaURL)
             @chef.update_attribute(:hex, hex)
         end
 

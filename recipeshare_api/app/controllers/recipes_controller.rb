@@ -25,7 +25,7 @@ class RecipesController < ApplicationController
         end
         if @recipe.save
             if newRecipe_image_params[:imageBase64] != "" && newRecipe_image_params[:imageBase64] != nil
-                recipe_image = RecipeImage.create(recipe_id: recipe_id)
+                recipe_image = RecipeImage.create(recipe_id: @recipe.id)
                 hex = SecureRandom.hex(20)
                 until RecipeImage.find_by(hex: hex) == nil
                     hex = SecureRandom.hex(20)
@@ -59,14 +59,15 @@ class RecipesController < ApplicationController
                 newRecipe_filter_settings["filter_settings"][category] ? @recipe[category.downcase.split(" ").join("_")] = true : @recipe[category.downcase.split(" ").join("_")] = false
             end
             if newRecipe_image_params[:imageBase64] != "" && newRecipe_image_params[:imageBase64] != nil
-                @recipe_image = RecipeImage.create(recipe_id: @recipe.id)
-
-                File.open("public/recipe_image_files/recipe-image-#{@recipe_image.id}.jpg", 'wb') do |f|
-                    f.write(Base64.decode64(newRecipe_image_params[:imageBase64]))
+                recipe_image = RecipeImage.create(recipe_id: @recipe.id)
+                hex = SecureRandom.hex(20)
+                until RecipeImage.find_by(hex: hex) == nil
+                    hex = SecureRandom.hex(20)
                 end
-                puts "public/recipe_image_files/recipe-image-#{@recipe_image.id}.jpg"
-                @recipe_image.imageURL = "/recipe_image_files/recipe-image-#{@recipe_image.id}.jpg"
-                @recipe_image.save
+                mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:recipe_images], hex, newRecipe_image_params[:imageBase64])
+                recipe_image.imageURL = mediaURL
+                recipe_image.hex=hex
+                recipe_image.save
             end
             @recipe.ingredients=(newRecipe_Ingredient_params)
             if @recipe.save

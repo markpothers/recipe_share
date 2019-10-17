@@ -172,7 +172,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           if (make_pic.chef_id === this.props.loggedInChef.id || this.props.loggedInChef.is_admin){
           return (
             <View key={`${make_pic.id}${make_pic.imageURL}`} style={styles.makePicContainer}>
-              <Image style={[{width: '100%', height: '100%'}, styles.makePic]} source={{uri: `${databaseURL}${make_pic.imageURL}`}}></Image>
+              <Image style={[{width: '100%', height: '100%'}, styles.makePic]} source={{uri: make_pic.imageURL}}></Image>
               <TouchableOpacity style={styles.makePicTrashCanButton} onPress={() => this.deleteMakePic(make_pic.id)}>
                 <Icon name='trash-can-outline' size={24} style={[styles.icon, styles.makePicTrashCan]}/>
               </TouchableOpacity>
