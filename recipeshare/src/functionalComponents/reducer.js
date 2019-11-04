@@ -5,9 +5,9 @@ const reducer = (currentState, action) => {
         case 'STORE_RECIPE_LISTS':
             // console.log("saving recipes list")
             return {...currentState, recipes: {...currentState.recipes, [action.recipeType]: action.recipeList}}
-        case 'CLEAR_LISTED_RECIPES':
-            // console.log("clearing listed recipes")
-            return {...currentState, recipes: {...currentState.recipes, [action.recipeType]: []}}
+        // case 'CLEAR_LISTED_RECIPES':
+        //     // console.log("clearing listed recipes")
+        //     return {...currentState, recipes: {...currentState.recipes, [action.recipeType]: []}}
         case 'STORE_RECIPE_DETAILS':
             // console.log(action.recipe_details)
             // console.log(action.recipe_details)
@@ -107,9 +107,9 @@ const reducer = (currentState, action) => {
                 serves: "Any",
                 acknowledgement: ""
               }}
-        case 'LIKE_RECIPE':
-                currentState.recipes[action.listType].find( recipe => recipe.id === recipeID)
-            return {...currentState, recipes: {...currentState.recipes, [action.recipeType]: {...currentState.recipes[action.listType], }}}
+        // case 'LIKE_RECIPE':
+        //         currentState.recipes[action.listType].find( recipe => recipe.id === recipeID)
+        //     return {...currentState, recipes: {...currentState.recipes, [action.recipeType]: {...currentState.recipes[action.listType], }}}
         case 'ADD_RECIPE_LIKE':
             return {...currentState, recipe_details: {...currentState.recipe_details, recipe_likes: currentState.recipe_details.recipe_likes+1, likeable: false}}
         case 'UPDATE_COMMENTS':
@@ -128,8 +128,8 @@ const reducer = (currentState, action) => {
             return {...currentState, recipes_details: {...currentState.recipes_details, [action.listType]: {...currentState.recipes_details[action.listType], recipe_likes: action.recipe_likes}}}
         case 'STORE_NEW_FOLLOWERS':
             return {...currentState, chefs_details: {...currentState.chefs_details, [action.chefID]: {...currentState.chefs_details[action.chefID], followers: action.followers, chef_followed: !currentState.chefs_details[action.chefID].chef_followed}}}
-        case 'UPDATE_CHEF_IN_LIST':
-            return {...currentState, chefs: {...currentState.chefs, [action.chefType]: action.chefList}}
+        // case 'UPDATE_CHEF_IN_LIST':
+        //     return {...currentState, chefs: {...currentState.chefs, [action.chefType]: action.chefList}}
         case 'LOG_IN_CHEF':
             console.log("logging in chef")
             return {...currentState, loggedInChef: {
@@ -145,10 +145,10 @@ const reducer = (currentState, action) => {
                 imageURL: action.imageURL,
                 is_admin: action.is_admin
                 }}
-        case 'CHANGE_GLOBAL_RANKING':
-                // console.log("switching ranking")
-                const newValue = currentState.global_ranking == "liked" ? "made" : "liked"
-                return {...currentState, global_ranking: newValue}
+        // case 'CHANGE_GLOBAL_RANKING':
+        //         // console.log("switching ranking")
+        //         const newValue = currentState.global_ranking == "liked" ? "made" : "liked"
+        //         return {...currentState, global_ranking: newValue}
         case 'STORE_CHEF_LIST':
             // console.log("saving chefs list")
             return {...currentState, chefs: {...currentState.chefs, [action.chefType]: action.chefList}}
@@ -172,8 +172,8 @@ const reducer = (currentState, action) => {
             return {...currentState, filter_settings: {...currentState.filter_settings, [action.category]: action.value}}
         case 'CLEAR_RECIPES_LIST_FILTERS':
             return {...currentState, filter_settings: action.clearedFilters, cuisine: "Any", serves: "Any"}
-            case 'SET_RECIPES_LIST_CUISINE':
-                return {...currentState, cuisine: action.cuisine}
+        case 'SET_RECIPES_LIST_CUISINE':
+            return {...currentState, cuisine: action.cuisine}
         case 'SET_RECIPES_LIST_SERVES':
                 return {...currentState, serves: action.serves}
         case 'TOGGLE_NEW_RECIPE_FILTER_CATEGORY':
@@ -181,8 +181,8 @@ const reducer = (currentState, action) => {
             return {...currentState, newRecipeDetails: {...currentState.newRecipeDetails, filter_settings: {...currentState.newRecipeDetails.filter_settings, [action.category]: action.value}}}
         case 'CLEAR_NEW_RECIPE_FILTERS':
             return {...currentState, newRecipeDetails: {...currentState.newRecipeDetails, filter_settings: action.clearedFilters, cuisine: "Any", serves: "Any"}}
-            case 'SET_NEW_RECIPE_CUISINE':
-                return {...currentState, newRecipeDetails: {...currentState.newRecipeDetails, cuisine: action.cuisine}}
+        case 'SET_NEW_RECIPE_CUISINE':
+            return {...currentState, newRecipeDetails: {...currentState.newRecipeDetails, cuisine: action.cuisine}}
         case 'SET_NEW_RECIPE_SERVES':
             return {...currentState, newRecipeDetails: {...currentState.newRecipeDetails, serves: action.serves}}
         case 'STAY_LOGGED_IN':

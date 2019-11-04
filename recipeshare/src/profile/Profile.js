@@ -13,6 +13,8 @@ import { getDatabaseRestore } from '../fetches/getDatabaseRestore'
 import DeleteChefOption from './deleteChefOption'
 import PicSourceChooser from '../functionalComponents/picSourceChooser'
 import { destroyChef } from '../fetches/destroyChef'
+import { NavigationEvents, withNavigation } from 'react-navigation'
+
 
 const mapStateToProps = (state) => ({
   loggedInChef: state.loggedInChef,
@@ -58,7 +60,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       this.fetchChefDetails()
     }
 
-    componentWillUnmount = () => {
+    respondToFocus= () => {
+      // console.log("did focus")
+      this.fetchChefDetails()
+    }
+
+    respondToBlur= () => {
+      // console.log("did Blur")
     }
 
     fetchChefDetails = async() => {
@@ -200,6 +208,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         return (
           <React.Fragment>
             {this.state.editingChef ? this.renderChefEditor() : null}
+            <NavigationEvents onWillFocus={this.respondToFocus} onWillBlur={this.respondToBlur}/>
             <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
               {this.state.awaitingServer ? <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={Platform.OS === 'ios' ? centralStyles.activityIndicator : null} size="large" color="#104e01" /></View> : null }
               {this.props.loggedInChef.is_admin ? this.renderDatabaseButtons() : null}

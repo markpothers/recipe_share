@@ -23,9 +23,8 @@ export const styles = StyleSheet.create({
     height: undefined,
     flex: 1
   },
-  userName:{
-    fontSize: 20,
-    marginLeft: '10%',
+  userNameHeader:{
+    fontSize: 16,
     color: "#505050",
   },
   userName:{
@@ -35,33 +34,31 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   bottomContainer:{
-    marginTop: '3%',
     flexDirection: 'row',
-    height: '11%',
+    height: 75,
     width: '90%',
     marginLeft: '5%',
     marginRight: '5%',
+    alignItems: 'center'
   },
-  bottomLeftContainer:{
+  bottomRightContainer:{
+    height: '100%',
     width: '25%',
     overflow: 'hidden',
     borderRadius: 5,
     aspectRatio: 1
   },
-  avatarThumbnail: {
-    position: 'absolute',
-    height: '100%',
-    width: '100%',
-  },
-  bottomRightContainer:{
+  bottomLeftContainer:{
     height: '100%',
     width: '75%',
     justifyContent: 'center',
-    bottom: '1%'
+  },
+  avatarThumbnail: {
+    height: '100%',
+    width: '100%',
   },
   horizontalRule:{
     width: '90%',
-    marginTop: '1%',
     marginLeft: '5%',
     marginRight: '5%',
     borderBottomColor: '#104e01',
@@ -89,7 +86,6 @@ export const styles = StyleSheet.create({
     marginLeft: '6%'
   },
   logoutContainer: {
-    height: '15%',
     width: '90%',
     marginTop: '5%',
     marginLeft: '5%',

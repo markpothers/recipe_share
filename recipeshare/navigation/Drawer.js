@@ -24,7 +24,7 @@ export default (connect(mapStateToProps, mapDispatchToProps)(
     render(){
         // console.log(this.props.loggedInChef)
       return (
-      <ScrollView>
+      // <ScrollView>
         <SafeAreaView style={[styles.mainPageContainer, {height: Dimensions.get('window').height*0.96}]} forceInset={{ top: 'always', horizontal: 'never' }}>
           <View style={styles.headerContainer}>
             <View style={styles.headerTopContainer}>
@@ -48,11 +48,11 @@ export default (connect(mapStateToProps, mapDispatchToProps)(
           </View>
           <View style={styles.horizontalRule}></View>
           <View style={styles.bottomContainer}>
-              <View style={styles.bottomRightContainer}>
-              <Text style={styles.userNameheader}>Logged in as:</Text>
+              <View style={styles.bottomLeftContainer}>
+              <Text style={styles.userNameHeader}>Logged in as:</Text>
               <Text style={styles.userName}>{this.props.loggedInChef.username}</Text>
               </View>
-              <View style={styles.bottomLeftContainer}>
+              <View style={styles.bottomRightContainer}>
                 <AvatarImage imageURL={this.props.loggedInChef.imageURL}/>
               </View>
             </View>
@@ -64,7 +64,7 @@ export default (connect(mapStateToProps, mapDispatchToProps)(
             </TouchableOpacity>
           </View>
         </SafeAreaView>
-      </ScrollView>
+      // </ScrollView>
       )
     }
   }))

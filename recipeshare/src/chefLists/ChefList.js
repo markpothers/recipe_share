@@ -21,11 +21,11 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-  changeRanking: () => {
-    return dispatch => {
-      dispatch({ type: 'CHANGE_GLOBAL_RANKING'})
-    }
-  },
+  // changeRanking: () => {
+  //   return dispatch => {
+  //     dispatch({ type: 'CHANGE_GLOBAL_RANKING'})
+  //   }
+  // },
   storeChefList: (listChoice, chefs) => {
     return dispatch => {
       dispatch({ type: 'STORE_CHEF_LIST', chefType: listChoice, chefList: chefs})

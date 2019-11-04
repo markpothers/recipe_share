@@ -32,11 +32,11 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-  changeRanking: () => {
-    return dispatch => {
-      dispatch({ type: 'CHANGE_GLOBAL_RANKING'})
-    }
-  },
+  // changeRanking: () => {
+  //   return dispatch => {
+  //     dispatch({ type: 'CHANGE_GLOBAL_RANKING'})
+  //   }
+  // },
   storeRecipeList: (listChoice, recipes) => {
     return dispatch => {
       dispatch({ type: 'STORE_RECIPE_LISTS', recipeType: listChoice, recipeList: recipes})
@@ -119,7 +119,6 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
 
     navigateToRecipeDetailsAndComment = (recipeID) =>{
       this.props.parentNavigator ? this.props.parentNavigator('RecipeDetails', {recipeID: recipeID, commenting: true}) : this.props.navigation.navigate('RecipeDetails', {recipeID: recipeID, commenting: true})
-
     }
 
     navigateToChefDetails = (chefID) => {

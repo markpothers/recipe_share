@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Recipe-Share",
-    "slug": "recipe-share",
+    "slug": "expo.io/@mpothecary/recipe-share",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": [
@@ -23,7 +23,7 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
     },
     "android": {
       "package": "com.recipe_share.recipe_share"

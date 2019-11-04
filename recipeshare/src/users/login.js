@@ -51,6 +51,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     state = {
       loginError: "",
       awaitingServer: false,
+      forgottenPasswordMessage: ''
     }
 
     handleTextInput = (e, parameter) => {
@@ -83,24 +84,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       }
     }
 
-    renderEmailError = () => {
-      if (this.state.error === "email"){
+    renderCredentialsError = () => {
+      if (this.state.error === "invalid"){
         return (
           <View style={styles.formRow}>
             <View style={styles.formError}>
-              <Text style={styles.formErrorText}>E-mail address not found.  Please register.</Text>
-            </View>
-          </View>
-        )
-      }
-    }
-
-    renderPasswordError = () => {
-      if (this.state.error === "password"){
-        return (
-          <View style={styles.formRow}>
-            <View style={styles.formError}>
-              <Text style={styles.formErrorText}>Password not recognized</Text>
+              <Text style={styles.formErrorText}>Username and password combination not recognized.</Text>
             </View>
           </View>
         )
@@ -186,7 +175,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     <TextInput style={styles.loginTextBox} placeholder="e-mail" keyboardType="email-address" autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "e_mail")}/>
                   </View>
                 </View>
-                {this.renderEmailError()}
                 {this.renderForgotPasswordError()}
                 {this.renderAccountActivationError()}
                 {this.renderAccountDeactivatedError()}
@@ -195,7 +183,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     <TextInput style={styles.loginTextBox} placeholder="password" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")}/>
                   </View>
                 </View>
-                {this.renderPasswordError()}
+                {this.renderCredentialsError()}
                 {this.renderPasswordExpiredError()}
                 <View style={styles.formRow}>
                   <TouchableOpacity style={styles.loginFormButton} activeOpacity={0.7} onPress={() => this.props.navigation.navigate('CreateChef')}>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Image, ScrollView, View, ImageBackground, Text, TouchableOpacity, KeyboardAvoidingView, ActivityIndicator, Platform } from 'react-native';
 import { connect } from 'react-redux'
-import { databaseURL } from '../dataComponents/databaseURL'
 import { styles } from './recipeDetailsStyleSheet'
 import { centralStyles } from '../centralStyleSheet'
 import { postRecipeLike } from '../fetches/postRecipeLike'
@@ -369,8 +368,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
-      if (this.props.recipe_details != (undefined || null)){
-        // console.log(this.props.recipe_details)
+      if (this.props.recipe_details != (undefined && null)){
+        // console.log(this.props.recipe_details.recipe)
+        // console.log(this.props.recipe_details.recipe.acknowledgement === "")
         return (
           <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={83} style={{flex:1}}>
             <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
@@ -413,7 +413,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 </View>
                 {this.props.recipe_details.recipe.cuisine != "Any" ? this.renderCuisine() : null}
                 {this.renderFilterCategories()}
-                {this.props.recipe_details.recipe.acknowledgement != ("" || null) ? this.renderAcknowledgement() : null}
+                {this.props.recipe_details.recipe.acknowledgement != ("" && null) && this.renderAcknowledgement()}
                 <View style={styles.detailsMakePicsContainer}>
                   <View style={{flexDirection: 'row'}}>
                     <Text style={styles.detailsSubHeadings}>Images from other users:</Text>
@@ -421,8 +421,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                       <Icon name='image-plus' size={24} style={styles.addIcon}/>
                     </TouchableOpacity>
                   </View>
-                  {this.props.recipe_details.make_pics.length === 0 ? <Text style={[styles.detailsContents]}>No other images yet.  Be the first!</Text> :null}
-                  {this.props.recipe_details.make_pics.length !== 0 ? this.renderMakePicScrollView() : null}
+                  {this.props.recipe_details.make_pics.length === 0 && <Text style={[styles.detailsContents]}>No other images yet.  Be the first!</Text>}
+                  {this.props.recipe_details.make_pics.length !== 0 && this.renderMakePicScrollView()}
                 </View>
                 <View style={styles.detailsComments}>
                   <View style={{flexDirection: 'row'}}>

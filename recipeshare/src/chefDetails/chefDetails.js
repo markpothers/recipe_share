@@ -10,6 +10,7 @@ import ChefDetailsCard from './ChefDetailsCard'
 import { MyRecipeBookTabsContainer, MyRecipeBookTabs } from './ChefDetailsNavigators'
 import { postFollow } from '../fetches/postFollow'
 import { destroyFollow } from '../fetches/destroyFollow'
+import { NavigationEvents, withNavigation } from 'react-navigation'
 
 const mapStateToProps = (state) => ({
   loggedInChef: state.loggedInChef,
@@ -27,11 +28,11 @@ const mapDispatchToProps = {
       dispatch({ type: 'STORE_NEW_FOLLOWERS', chefID: `chef${followee_id}`, followers: followers})
     }
   },
-  // clearChefDetails: () => {
-  //   return dispatch => {
-  //     dispatch({type: 'CLEAR_CHEF_DETAILS'})
-  //   }
-  // }
+  clearChefDetails: () => {
+    return dispatch => {
+      dispatch({type: 'CLEAR_CHEF_DETAILS'})
+    }
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
@@ -53,6 +54,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       await this.setState({awaitingServer: false})
     }
 
+    respondToFocus = async() =>{
+      await this.setState({awaitingServer: true})
+      await this.fetchChefDetails()
+      await this.setState({awaitingServer: false})
+    }
+
     componentWillUnmount = () => {
       // console.log("unmounting")
       // this.props.clearChefDetails()
@@ -69,11 +76,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       const chef = this.props.chefs_details[`chef${this.props.navigation.getParam('chefID')}`]
       if (chef != undefined){
         if (chef.imageURL != null) {
-          if (chef.imageURL.startsWith("http")) {
             return <Image style={{width: '100%', height: '100%'}} source={{uri: chef.imageURL}}></Image>
-          } else {
-            return <Image style={{width: '100%', height: '100%'}} source={{uri: `${databaseURL}${chef.imageURL}`}}></Image>
-          }
         } else {
           return <Image style={{width: '100%', height: '100%'}} source={require("../dataComponents/peas.jpg")}></Image>
         }
@@ -115,6 +118,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         return (
           <View style={{flex:1}}>
             <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
+              <NavigationEvents onWillFocus={this.respondToFocus}/>
               {this.state.awaitingServer ? <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={Platform.OS === 'ios' ? centralStyles.activityIndicator : null} size="large" color="#104e01" /></View> : null }
               <ScrollView contentContainerStyle={{flexGrow:1}}>
                 <ChefDetailsCard 

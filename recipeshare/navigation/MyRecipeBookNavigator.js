@@ -67,6 +67,9 @@ const MyRecipeBookTabs = createMaterialTopTabNavigator({
       // borderStyle: 'solid',
       // borderWidth: 2,
     },
+    indicatorStyle: {
+      backgroundColor: '#fff59b'
+    }
   }
 })
 

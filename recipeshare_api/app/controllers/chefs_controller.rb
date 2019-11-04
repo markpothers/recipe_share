@@ -14,7 +14,7 @@ class ChefsController < ApplicationController
                             render json: @chef, methods: [:auth_token]
                         else
                             puts "bad password"
-                            render json: {error: true, message: 'password'}
+                            render json: {error: true, message: 'invalid'}
                         end
                     else
                         puts "auto password expired"
@@ -30,7 +30,7 @@ class ChefsController < ApplicationController
             end
         else
             puts "bad e-mail address"
-            render json: {error: true, message: 'email'}
+            render json: {error: true, message: 'invalid'}
         end
     end
 

@@ -26,7 +26,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   saveChefDetails: (parameter, content) => {
-    console.log("saving chef")
+    // console.log("saving chef")
     return dispatch => {
       dispatch({ type: 'UPDATE_NEW_USER_DETAILS', parameter: parameter, content: content})
     }
