@@ -11,6 +11,10 @@ capybara-*.html
 rerun.txt
 pickle-email-*.html
 
+# .out file to ignore nohup output
+.out
+
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
