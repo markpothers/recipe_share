@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get '/database/stopautobackup', to: 'databases#stopAutoBackup'
   get '/database/primaryrestore', to: 'databases#primaryRestore'
   get '/database/secondaryrestore', to: 'databases#secondaryRestore'
-
+  get '*path' => redirect('/welcome.html')
+  get '/' => redirect('/welcome.html')
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
