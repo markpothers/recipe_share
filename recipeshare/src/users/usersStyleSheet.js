@@ -70,12 +70,13 @@ export const styles = StyleSheet.create({
     borderColor: '#104e01'
   },
   loginTitle: {
-    marginLeft: '5%',
-    marginRight: '5%',
+    width: '100%',
+    borderRadius: 5,
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 16,
     color: "#505050",
+    backgroundColor: 'white'
   },
   loginTextBox: {
     marginLeft: '3%',

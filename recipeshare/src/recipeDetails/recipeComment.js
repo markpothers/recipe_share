@@ -29,7 +29,7 @@ export default class RecipeComment extends React.PureComponent {
               {this.renderCommentDeleteButton()}
             </View>
             <View>
-              <Text style={[styles.detailsContents]}>{this.props.comment}</Text>
+              <Text style={[styles.detailsContents, {paddingLeft: 0}]}>{this.props.comment}</Text>
             </View>
           </View>
         </View>

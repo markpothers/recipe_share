@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet } from 'react-native';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
 
 export const styles = StyleSheet.create({
   mainPageContainer:{
@@ -63,6 +64,21 @@ export const styles = StyleSheet.create({
       // paddingBottom: '1%'
     },
     detailsInstructions: {
+      // borderStyle: 'solid',
+      borderBottomWidth: 0.5,
+      borderColor: '#104e01',
+      width: '96%',
+      marginLeft: '2%',
+      marginRight: '2%',
+      // marginTop: 4,
+      // borderRadius: 5,
+      // backgroundColor: 'white',
+      // opacity: 0.9,
+      // marginBottom: '1%',
+      paddingTop: '1%',
+      paddingBottom: '1%'
+    },
+    detailsContainer: {
       borderStyle: 'solid',
       borderWidth: 1,
       borderColor: '#104e01',
@@ -189,6 +205,7 @@ export const styles = StyleSheet.create({
       marginRight: '3%',
       fontSize: 16,
       color: "#505050",
+      paddingLeft: responsiveWidth(2)
     },
     detailsContentsHeader: {
       marginLeft: '3%',

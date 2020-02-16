@@ -1,9 +1,11 @@
 import React from 'react'
 import { Modal, Text, View, TouchableOpacity, Dimensions, ScrollView, Platform } from 'react-native'
-import { styles } from './tAndCStyleSheet'
+import { styles } from './textPopUpStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { termsAndConditions } from '../dataComponents/termsAndConditions'
-export function TAndC(props) {
+// import { termsAndConditions } from '../dataComponents/termsAndConditions'
+// import termsAndConditionsText from '../dataComponents/termsAndConditionsText.txt'
+
+export function TextPopUp(props) {
     // console.log(this.props)
     return (
         <Modal
@@ -16,17 +18,17 @@ export function TAndC(props) {
                     }]}>
                 <View style={styles.contentsContainer}>
                     <View style={styles.titleContainer}>
-                        <Text style={styles.title}>Terms & Conditions</Text>
+                        <Text style={styles.title}>{props.title}</Text>
                     </View>
                     <View style={[styles.editChefInputAreaBox, (Platform.OS === 'ios' ? {height: '87%'} : {height: '89%'})]} >
                         <ScrollView>
-                            <Text style={styles.tAndCText}>{termsAndConditions}</Text>
+                            <Text style={styles.tAndCText}>{props.text}</Text>
                         </ScrollView>
                     </View>
                     <View style={styles.formRow}>
                         <View style={styles.buttonPlaceholder}>
                         </View>
-                        <TouchableOpacity style={styles.closeButton} activeOpacity={0.7} title="close" onPress={props.handleViewTandC}>
+                        <TouchableOpacity style={styles.closeButton} activeOpacity={0.7} title="close" onPress={props.close}>
                             <Icon style={styles.closeIcon} size={25} name='check' />
                             <Text style={styles.closeButtonText}>Close</Text>
                         </TouchableOpacity>

@@ -43,7 +43,7 @@ export default class IngredientAutoComplete extends React.Component {
               renderItem={e => this.renderAutoIngredientsListItem(e, ingredientIndex, ingredient)}
               keyExtractor={(item) => item.id.toString()}
               autoCapitalize="none"
-              placeholder={`Ingredient name`}
+              placeholder={`Ingredient ${index+1}`}
               autoCorrect={false}
               value={ingredient.name}
               hideResults={this.props.focused && ingredient.name.length > 1 ? false : true}

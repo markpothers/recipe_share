@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
   },
   pickerContainer: {
     height: '100%',
-    width: '100%'
+    width: '100%',
   },
   IOSSelectedChoiceContainer: {
     width: '100%',

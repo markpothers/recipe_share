@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet } from 'react-native';
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions';
 
 export const styles = StyleSheet.create({
   mainPageContainer:{
@@ -65,12 +66,12 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
    },
    timeAndDifficultyTitleItem: {
-       marginLeft: '5%',
-       marginRight: '5%',
+      //  marginLeft: '5%',
+      //  marginRight: '5%',
        backgroundColor: 'white',
        borderRadius: 5,
-       height: 44,
-       width: '35%',
+       height: responsiveHeight(6),
+       width: responsiveWidth(38),
        justifyContent: 'center',
        alignItems: 'center',
        borderStyle: 'solid',
@@ -78,17 +79,18 @@ export const styles = StyleSheet.create({
        borderColor: '#104e01',
      },
    timeAndDifficultyTitle: {
-    marginLeft: '5%',
-    marginRight: '5%',
+    // marginLeft: '5%',
+    // marginRight: '5%',
     fontSize: 16,
     color: "#505050",
     },
   timeAndDifficulty: {
-    marginLeft: '5%',
-    marginRight: '5%',
+    // paddingLeft: responsiveWidth(8),
+    // marginRight: '5%',
     backgroundColor: 'white',
-    height: 44,
-    width: '35%',
+    height: responsiveHeight(6),
+    width: responsiveWidth(38),
+    // marginRight: responsiveWidth(0.5),
     borderRadius: 5,
     borderStyle: 'solid',
     borderWidth: 1,
@@ -139,7 +141,7 @@ export const styles = StyleSheet.create({
   addIngredientQuantityInputBox: {
      marginRight: '2%',
      backgroundColor: 'white',
-     height: 42,
+     height: '100%',
      width: '30%',
      borderStyle: 'solid',
      justifyContent: 'center',
@@ -150,7 +152,7 @@ export const styles = StyleSheet.create({
   addIngredientUnitInputBox: {
      backgroundColor: 'white',
      justifyContent: 'center',
-     height: 42,
+     height: '100%',
      width: '68%',
      borderStyle: 'solid',
      borderWidth: 1,
@@ -162,15 +164,18 @@ export const styles = StyleSheet.create({
     marginLeft: 7,
   },
   autoCompleteRowContainer: {
-    flex: 1,
-    marginTop: 4,
+    // flex: 1,
+    marginTop: responsiveHeight(0.5),
     flexDirection:'row',
     width: '100%',
+    height: responsiveHeight(6),
+    // borderWidth: 1
   },
   autoCompleteContainer: {
     position: 'absolute',
     width: '49%',
     borderRadius: 5,
+    height: '100%',
     // justifyContent: 'center'
   },
   quantityAndUnitContainer: {
@@ -183,7 +188,7 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     marginLeft: '1%',
     width: '8%',
-    height: 42,
+    height: '100%',
     left: '90%',
     flexDirection: 'row',
     borderRadius: 5,
@@ -211,7 +216,7 @@ export const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: '#104e01',
-    height: 42,
+    height: '100%',
     paddingLeft: '4%',
   },
   autoCompleteList: {
@@ -247,5 +252,34 @@ export const styles = StyleSheet.create({
   },
   IOSPickerText: {
     marginLeft: '10%'
-  }
+  },
+  deleteInstructionContainer: {
+    // position: 'absolute',
+    // marginLeft: '1%',
+    // width: '8%',
+    height: '100%',
+    // left: '90%',
+    flexDirection: 'row',
+    borderRadius: 5,
+    borderStyle: 'solid',
+    borderColor: '#104e01',
+    borderWidth: 1,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  instructionInput:{
+    // height: responsiveHeight(6),
+    width: '75%',
+    backgroundColor: 'white',
+    textAlign: 'left',
+    textAlignVertical: 'center',
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#104e01',
+    paddingLeft: responsiveWidth(2),
+    fontSize: responsiveFontSize(2),
+    paddingTop: responsiveHeight(1),
+    paddingBottom: responsiveHeight(1),
+  },
 })

@@ -25,7 +25,7 @@ const initialState = {
   },
   newRecipeDetails: {
     name: "",
-    instructions: "",
+    instructions: ['test', 'test2'],
     ingredients: {
       ingredient1 :{
         name:"",
@@ -76,8 +76,8 @@ const initialState = {
     profile_text: ""
   },
   loginUserDetails: {
-    e_mail: "",
-    password: ""
+    e_mail: "markpothers@hotmail.com",
+    password: "123456"
   },
   chefs: {
     all_chefs: [],

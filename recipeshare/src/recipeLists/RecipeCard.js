@@ -13,7 +13,7 @@ export default class RecipeCard extends React.PureComponent {
         // console.log(this.props.imageURL)
         return (
             <View style={styles.recipeCard} >
-                {this.props.sharer_id? <PostedBy navigateToSharer={this.navigateToSharer} username={this.props.sharer_username} sharer_id={this.props.sharer_id} /> : null }
+                {this.props.sharer_id && <PostedBy navigateToSharer={this.navigateToSharer} username={this.props.sharer_username} sharer_id={this.props.sharer_id} /> }
                 <View style={styles.recipeCardTopContainer}>
                     <View style={styles.recipeCardTopLeftContainer}>
                         <TouchableOpacity style={styles.recipeCardTopLeftUpperContainer} activeOpacity={0.7} onPress={() => this.props.navigateToRecipeDetails(this.props.id)}>

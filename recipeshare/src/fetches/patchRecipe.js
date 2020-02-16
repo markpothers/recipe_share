@@ -1,7 +1,7 @@
 import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
 
-export const patchRecipe = (chef_id, auth_token, name, ingredients, instructions, time, difficulty, imageBase64, filter_settings, cuisine, serves, recipeID, acknowledgement) => {
+export const patchRecipe = (chef_id, auth_token, name, ingredients, instructions, instructionsOrder, time, difficulty, imageBase64, filter_settings, cuisine, serves, recipeID, acknowledgement) => {
     return new Promise((resolve) => {
         fetch(`${databaseURL}/recipes/${recipeID}`, {
             method: "PATCH",
@@ -15,6 +15,7 @@ export const patchRecipe = (chef_id, auth_token, name, ingredients, instructions
                     name: name,
                     ingredients: ingredients,
                     instructions: instructions,
+                    instructionsOrder, instructionsOrder,
                     time: time,
                     difficulty: difficulty,
                     imageBase64: imageBase64,

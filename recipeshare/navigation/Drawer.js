@@ -17,8 +17,9 @@ export default (connect(mapStateToProps, mapDispatchToProps)(
   class Drawer extends React.PureComponent {
 
     logout = () => {
-      AsyncStorage.removeItem('chef', () => {})
-      this.props.navigation.navigate('Login')
+      AsyncStorage.removeItem('chef', () => {
+        this.props.navigation.navigate('Login')
+      })
     }
 
     render(){
@@ -50,11 +51,13 @@ export default (connect(mapStateToProps, mapDispatchToProps)(
           <View style={styles.bottomContainer}>
               <View style={styles.bottomLeftContainer}>
               <Text style={styles.userNameHeader}>Logged in as:</Text>
-              <Text style={styles.userName}>{this.props.loggedInChef.username}</Text>
+              <TouchableOpacity onPress={e => this.props.navigation.navigate('Profile')}>
+                <Text style={styles.userName}>{this.props.loggedInChef.username}</Text>
+              </TouchableOpacity>
               </View>
-              <View style={styles.bottomRightContainer}>
+              <TouchableOpacity style={styles.bottomRightContainer} onPress={e => this.props.navigation.navigate('Profile')}>
                 <AvatarImage imageURL={this.props.loggedInChef.imageURL}/>
-              </View>
+              </TouchableOpacity>
             </View>
           <View style={styles.horizontalRule}></View>
           <View style={styles.logoutContainer}>

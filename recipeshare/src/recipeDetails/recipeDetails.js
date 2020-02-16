@@ -95,6 +95,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       this.props.storeRecipeDetails(null)
       const recipe_details = await getRecipeDetails(this.props.navigation.getParam('recipeID'), this.props.loggedInChef.auth_token)
       if (recipe_details) {
+        // console.log(recipe_details)
         this.props.storeRecipeDetails(recipe_details)
       }
       if (this.props.navigation.getParam('commenting') === true ){
@@ -339,7 +340,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       const categories = Object.keys(this.props.filter_settings).sort().filter( category => this.props.recipe_details.recipe[category.split(" ").join("_").toLowerCase()])
       if (categories.length > 0){
         return (
-          <View style={styles.detailsInstructions}>
+          <View style={styles.detailsContainer}>
             <Text style={styles.detailsSubHeadings}>Categories:</Text>
             <Text style={[styles.detailsContents]}>{categories.join(",  ")}</Text>
           </View>
@@ -351,7 +352,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     renderAcknowledgement = () => {
       return (
-        <View style={styles.detailsInstructions}>
+        <View style={styles.detailsContainer}>
           <Text style={styles.detailsSubHeadings}>Acknowledgement:</Text>
           <Text style={[styles.detailsContents]}>{this.props.recipe_details.recipe.acknowledgement}</Text>
         </View>
@@ -360,11 +361,22 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     renderCuisine = () => {
       return (
-        <View style={styles.detailsInstructions}>
-        <Text style={styles.detailsSubHeadings}>Cuisine:</Text>
-        <Text style={[styles.detailsContents]}>{this.props.recipe_details.recipe.cuisine}</Text>
-      </View>
+        <View style={styles.detailsContainer}>
+          <Text style={styles.detailsSubHeadings}>Cuisine:</Text>
+          <Text style={[styles.detailsContents]}>{this.props.recipe_details.recipe.cuisine}</Text>
+        </View>
       )
+    }
+
+    renderRecipeInstructions = () => {
+      // console.log(this.props.recipe_details.instructions)
+      return this.props.recipe_details.instructions.map(instruction => {
+        return (
+          <View style={styles.detailsInstructions} key={instruction.step}>
+            <Text style={[styles.detailsContents]}>{instruction.instruction}</Text>
+          </View>
+        )
+      })
     }
 
     render() {
@@ -407,13 +419,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                   <Text style={styles.detailsSubHeadings}>Ingredients:</Text>
                   {this.renderRecipeIngredients()}
                 </View>
-                <View style={styles.detailsInstructions}>
+                <View style={styles.detailsContainer}>
                   <Text style={styles.detailsSubHeadings}>Instructions:</Text>
-                  <Text style={[styles.detailsContents]}>{this.props.recipe_details.recipe.instructions}</Text>
+                    {this.renderRecipeInstructions()}
+                  {/* <Text style={[styles.detailsContents]}>{this.props.recipe_details.recipe.instructions}</Text> */}
                 </View>
                 {this.props.recipe_details.recipe.cuisine != "Any" ? this.renderCuisine() : null}
                 {this.renderFilterCategories()}
-                {this.props.recipe_details.recipe.acknowledgement != ("" && null) && this.renderAcknowledgement()}
+                {(this.props.recipe_details.recipe.acknowledgement != "" && this.props.recipe_details.recipe.acknowledgement != null) && this.renderAcknowledgement()}
                 <View style={styles.detailsMakePicsContainer}>
                   <View style={{flexDirection: 'row'}}>
                     <Text style={styles.detailsSubHeadings}>Images from other users:</Text>
