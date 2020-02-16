@@ -5,7 +5,6 @@ class CreateRecipes < ActiveRecord::Migration[5.2]
       t.belongs_to :chef, foreign_key: true
       t.string :time
       t.integer :difficulty
-      t.string :instructions
       t.boolean :hidden, default: false
       t.boolean :breakfast
       t.boolean :lunch

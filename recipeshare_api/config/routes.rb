@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :instructions
   resources :re_shares
   resources :make_pics
   resources :comments

@@ -3,6 +3,7 @@ class Recipe < ApplicationRecord
   belongs_to :chef
   has_many :ingredient_uses
   has_many :ingredients, through: :ingredient_uses
+  has_many :instructions
   has_many :recipe_likes
   has_many :likers, :through => :recipe_likes, :source => :chef
   has_many :comments
@@ -363,8 +364,15 @@ class Recipe < ApplicationRecord
     end
   end
 
-  def get_details(chef)
+  def instructions=(instructions)
     # byebug
+    Instruction.where(recipe: self).destroy_all
+    instructions["instructionsOrder"].each_with_index do |ins, index|
+      Instruction.create(instruction: instructions["instructions"][ins], step: index, recipe: self, active: true)
+    end
+  end
+
+  def get_details(chef)
     if (RecipeMake.where(chef_id: chef.id).where(recipe_id: self.id).last && Time.now - RecipeMake.where(chef_id: chef.id).where(recipe_id: self.id).last.updated_at > 86400) || !RecipeMake.where(chef_id: chef.id).where(recipe_id: self.id).last
       makeable = true
     else
@@ -388,6 +396,7 @@ class Recipe < ApplicationRecord
         make_pics: MakePic.where(recipe_id: self.id).order('updated_at DESC'),
         ingredient_uses: ingredientUses,
         ingredients: Ingredient.where(id: ingredients_ids),
+        instructions: Instruction.where(recipe: self).where(active: true).order(:step),
         chef_username: self.chef.username,
         chef_id: self.chef.id,
     }

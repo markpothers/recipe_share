@@ -131,7 +131,6 @@ serves = ['Any', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
     Recipe.create(name: Faker::Food.dish,
         hidden: false,
         chef_id: Chef.all.sample.id,
-        instructions: Faker::Food.description,
         time: times.sample,
         difficulty: difficulties.sample,
         created_at: Time.now,
@@ -193,6 +192,33 @@ units = [
         IngredientUse.create(recipe_id: recipe.id, ingredient_id: Ingredient.all.sample.id, quantity: array[0], unit: units.sample, created_at: Time.now)
     end
 end
+
+Recipe.all.each do |recipe|
+    string = Faker::Food.description
+    Instruction.create(recipe_id: recipe.id, instruction: string, active: true, step: 0)
+end
+
+Recipe.all.each do |recipe|
+    string = Faker::Food.description
+    Instruction.create(recipe_id: recipe.id, instruction: string, active: true, step: 1)
+end
+
+Recipe.all.each do |recipe|
+    string = Faker::Food.description
+    Instruction.create(recipe_id: recipe.id, instruction: string, active: true, step: 2)
+end
+
+Recipe.all.each do |recipe|
+    string = Faker::Food.description
+    Instruction.create(recipe_id: recipe.id, instruction: string, active: true, step: 3)
+end
+
+Recipe.all.each do |recipe|
+    string = Faker::Food.description
+    Instruction.create(recipe_id: recipe.id, instruction: string, active: true, step: 4)
+end
+
+
 
 500.times do
     RecipeMake.create(chef_id: Chef.all.sample.id, recipe_id: Recipe.all.sample.id, created_at: Time.now, time: rand(600..6000), difficulty: rand(10), tastiness: rand(10), comment: Faker::ChuckNorris.fact)

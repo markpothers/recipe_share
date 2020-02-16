@@ -36,6 +36,7 @@ class RecipesController < ApplicationController
                 recipe_image.save
             end
             @recipe.ingredients=(newRecipe_Ingredient_params)
+            @recipe.instructions=(newRecipe_Instructions_params)
             @recipe.save
             render json: @recipe
         else
@@ -70,6 +71,7 @@ class RecipesController < ApplicationController
                 recipe_image.save
             end
             @recipe.ingredients=(newRecipe_Ingredient_params)
+            @recipe.instructions=(newRecipe_Instructions_params)
             if @recipe.save
                 render json: @recipe
             else
@@ -110,7 +112,7 @@ class RecipesController < ApplicationController
     end
 
     def newRecipe_params
-        params.require(:recipe).permit(:name, :time, :difficulty, :instructions, :cuisine, :serves, :acknowledgement)
+        params.require(:recipe).permit(:name, :time, :difficulty, :cuisine, :serves, :acknowledgement)
     end
 
     def newRecipe_image_params
@@ -119,6 +121,10 @@ class RecipesController < ApplicationController
 
     def newRecipe_Ingredient_params
         params.require(:recipe).permit(ingredients: {})
+    end
+
+    def newRecipe_Instructions_params
+        params.require(:recipe).permit(instructions: {}, :instructionsOrder => [] )
     end
 
     def newRecipe_filter_settings

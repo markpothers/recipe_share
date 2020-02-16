@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_08_153818) do
+ActiveRecord::Schema.define(version: 2020_01_16_013713) do
 
   create_table "chefs", force: :cascade do |t|
     t.string "first_name"
@@ -84,6 +84,16 @@ ActiveRecord::Schema.define(version: 2019_09_08_153818) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "instructions", force: :cascade do |t|
+    t.string "instruction"
+    t.integer "step"
+    t.integer "recipe_id"
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_instructions_on_recipe_id"
+  end
+
   create_table "make_pics", force: :cascade do |t|
     t.integer "chef_id"
     t.integer "recipe_id"
@@ -145,7 +155,6 @@ ActiveRecord::Schema.define(version: 2019_09_08_153818) do
     t.integer "chef_id"
     t.string "time"
     t.integer "difficulty"
-    t.string "instructions"
     t.boolean "hidden", default: false
     t.boolean "breakfast"
     t.boolean "lunch"

@@ -28,7 +28,7 @@ class Chef < ApplicationRecord
     validates :e_mail, presence: {message: "must be included."}
     validates :username, presence: {message: "must be included."}
     validates :username, length: {minimum: 3, message: "must be at least 3 characters."}
-    validates :e_mail, uniqueness: {message: "exists. Please register a different e-mail address."}
+    validates :e_mail, uniqueness: {message: "is invalid"}
     # validates :e_mail, inclusion: {in: %w(@), message: "must be a valid e-mail address."}
     validates :password, length: {minimum: 6, message: "must be at least 6 characters."}
 
