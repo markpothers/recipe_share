@@ -17,7 +17,7 @@ export const patchChef = (chefID, auth_token, username, profile_text, country, u
                     updatingPassword: updatingPassword,
                     password: password,
                     password_confirmation: password_confirmation,
-                    imageURL: imageBase64
+                    image_url: imageBase64
                 }
             })
         })

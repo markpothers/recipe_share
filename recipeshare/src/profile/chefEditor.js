@@ -12,7 +12,7 @@ const mapStateToProps = (state) => ({
     password: state.newUserDetails.password,
     password_confirmation: state.newUserDetails.password_confirmation,
     country: state.newUserDetails.country,
-    imageBase64: state.newUserDetails.imageURL,
+    imageBase64: state.newUserDetails.image_url,
     profile_text: state.newUserDetails.profile_text,
     loggedInChef: state.loggedInChef,
     stayingLoggedIn: state.stayLoggedIn,
@@ -29,9 +29,9 @@ const mapDispatchToProps = {
           dispatch({ type: 'CLEAR_NEW_USER_DETAILS'})
         }
       },
-      updateLoggedInChefInState: (id, username, auth_token, imageURL, is_admin) => {
+      updateLoggedInChefInState: (id, username, auth_token, image_url, is_admin) => {
         return dispatch => {
-          dispatch({ type: 'UPDATE_LOGGED_IN_CHEF', id: id, username: username, auth_token: auth_token, imageURL: imageURL, is_admin: is_admin})
+          dispatch({ type: 'UPDATE_LOGGED_IN_CHEF', id: id, username: username, auth_token: auth_token, image_url: image_url, is_admin: is_admin})
         }
       }
   }
@@ -123,13 +123,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                         AsyncStorage.setItem('chef', JSON.stringify(updatedChef), () => {
                             AsyncStorage.getItem('chef', (err, res) => {
                             console.log(err)
-                            this.props.updateLoggedInChefInState(updatedChef.id, updatedChef.username, updatedChef.auth_token, updatedChef.imageURL, updatedChef.is_admin, updatedChef.is_member)
+                            this.props.updateLoggedInChefInState(updatedChef.id, updatedChef.username, updatedChef.auth_token, updatedChef.image_url, updatedChef.is_admin, updatedChef.is_member)
                             this.props.clearNewUserDetails()
                             this.props.chefUpdated()
                             })
                         })
                     } else {
-                        this.props.updateLoggedInChefInState(updatedChef.id, updatedChef.username, updatedChef.auth_token, updatedChef.imageURL, updatedChef.is_admin, updatedChef.is_member)
+                        this.props.updateLoggedInChefInState(updatedChef.id, updatedChef.username, updatedChef.auth_token, updatedChef.image_url, updatedChef.is_admin, updatedChef.is_member)
                         this.props.clearNewUserDetails()
                         this.props.chefUpdated(true)
                     }

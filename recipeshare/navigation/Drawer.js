@@ -56,7 +56,7 @@ export default (connect(mapStateToProps, mapDispatchToProps)(
               </TouchableOpacity>
               </View>
               <TouchableOpacity style={styles.bottomRightContainer} onPress={e => this.props.navigation.navigate('Profile')}>
-                <AvatarImage imageURL={this.props.loggedInChef.imageURL}/>
+                <AvatarImage image_url={this.props.loggedInChef.image_url}/>
               </TouchableOpacity>
             </View>
           <View style={styles.horizontalRule}></View>
@@ -74,7 +74,7 @@ export default (connect(mapStateToProps, mapDispatchToProps)(
 
   function AvatarImage(props) {
     // console.log(props)
-    const URL = props.imageURL
+    const URL = props.image_url
     if (URL == null) {
         return (
             <Image style={styles.avatarThumbnail} source={require("../src/dataComponents/peas.jpg")} />

@@ -11,7 +11,7 @@ class MakePicsController < ApplicationController
                 hex = SecureRandom.hex(20)
             end
             mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:make_pics], hex, make_pic_params[:base64])
-            @make_pic.imageURL = mediaURL
+            @make_pic.image_url = mediaURL
             @make_pic.hex=hex
             @make_pic.save
         end

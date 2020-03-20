@@ -22,7 +22,7 @@ const mapStateToProps = (state) => ({
   password: state.newUserDetails.password,
   password_confirmation: state.newUserDetails.password_confirmation,
   country: state.newUserDetails.country,
-  imageURL: state.newUserDetails.imageURL,
+  image_url: state.newUserDetails.image_url,
   profile_text: state.newUserDetails.profile_text,
   loggedInChef: state.loggedInChef
 })
@@ -92,7 +92,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     saveImage = async(image) => {
       if (image.cancelled === false){
-        this.props.saveChefDetails("imageURL", image.base64)
+        this.props.saveChefDetails("image_url", image.base64)
         this.setState({choosingPicture: false})
       }
     }
@@ -100,7 +100,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     submitChef = async() => {
       await this.setState({awaitingServer: true})
       console.log("sending new user details")
-      const chef = await postChef(this.props.username, this.props.e_mail, this.props.password, this.props.password_confirmation, this.props.country, this.props.imageURL, this.props.profile_text)
+      const chef = await postChef(this.props.username, this.props.e_mail, this.props.password, this.props.password_confirmation, this.props.country, this.props.image_url, this.props.profile_text)
         if (!chef.error){
               this.props.clearNewUserDetails()
               this.props.navigation.navigate('Login')
@@ -199,13 +199,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             {/* password*/}
             <View style={centralStyles.formSection}>
               <View style={centralStyles.formInputContainer}>
-                <TextInput style={centralStyles.formInput} value={this.props.password} placeholder="password" autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "password")}/>
+                <TextInput style={centralStyles.formInput} value={this.props.password} placeholder="password" autoCapitalize="none" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")}/>
               </View>
             </View>
             {/* password confirmation*/}
             <View style={centralStyles.formSection}>
               <View style={centralStyles.formInputContainer}>
-                <TextInput style={centralStyles.formInput} value={this.props.password_confirmation} placeholder="password confirmation" autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "password_confirmation")}/>
+                <TextInput style={centralStyles.formInput} value={this.props.password_confirmation} placeholder="password confirmation" autoCapitalize="none" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password_confirmation")}/>
               </View>
               {this.renderPasswordError()}
             </View>

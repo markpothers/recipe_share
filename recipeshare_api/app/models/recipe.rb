@@ -18,7 +18,7 @@ class Recipe < ApplicationRecord
   def self.choose_list(type = "all", queryChefID = 1, limit = 1, offset = 0, ranking = "liked", user_chef_id = 1, filters="", cuisine="None", serves="Any")
     #types = "all", "chef", "chef_liked", "chef_made", "most_liked", "most_made" // "liked", "made"
 
-    filter_string=filters.split("/").map{|filter| filter.split(" ").join("_")}.map{|filter| "AND recipes.#{filter} = 1 "}.join("")
+    filter_string=filters.split("/").map{|filter| filter.split(" ").join("_")}.map{|filter| "AND recipes.#{filter} = 't' "}.join("")
 
     if cuisine != "Any"
       cuisine_string="AND recipes.cuisine = '#{cuisine.split(" ").join("_")}' "
@@ -28,12 +28,12 @@ class Recipe < ApplicationRecord
 
     serves_string = ""
     if serves != "Any"
-      serves_string ="AND recipes.serves = #{serves}"
+      serves_string ="AND recipes.serves = '#{serves}'"
     end
 
     if type == "all"
 
-      # ApplicationRecord.db.execute("SELECT recipes.*, recipe_images.imageURL
+      # ApplicationRecord.db.exec("SELECT recipes.*, recipe_images.image_url
       #                               FROM recipes
       #                               JOIN recipe_images ON recipe_images.recipe_id = recipes.id
       #                               WHERE hidden=0
@@ -42,16 +42,16 @@ class Recipe < ApplicationRecord
       #                               OFFSET (?)", [limit, offset])
 # byebug
 
-        ApplicationRecord.db.execute("SELECT recipes.*, recipe_images.imageURL,
-                                    chefs.username ,chefs.imageURL as chefImageURL,
-                                      (SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id) As sharesCount,
-                                      (SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id AND re_shares.chef_id = (?)) As chef_shared,
-                                      (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id) As likesCount,
-                                      (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id AND recipe_likes.chef_id = (?)) As chef_liked,
-                                      (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id) As makesCount,
-                                      (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id AND recipe_makes.chef_id = (?)) As chef_made,
-                                      (SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id) As commentsCount,
-                                      (SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id AND comments.chef_id = (?)) As chef_commented
+        ApplicationRecord.db.exec("SELECT DISTINCT recipes.*, recipe_images.image_url,
+                                    chefs.username ,chefs.image_url AS chefimage_url,
+                                      COALESCE((SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id), 0) AS shares_count,
+                                      COALESCE((SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id AND re_shares.chef_id = $1), 0) AS chef_shared,
+                                      COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id), 0) AS likes_count,
+                                      COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id AND recipe_likes.chef_id = $1), 0) AS chef_liked,
+                                      COALESCE((SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id), 0) AS makes_count,
+                                      COALESCE((SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id AND recipe_makes.chef_id = $1), 0) AS chef_made,
+                                      COALESCE((SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id), 0) AS comments_count,
+                                      COALESCE((SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id AND comments.chef_id = $1), 0) AS chef_commented
                                     FROM recipes
                                     LEFT OUTER JOIN recipe_images ON recipe_images.recipe_id = recipes.id
                                     LEFT OUTER JOIN chefs ON recipes.chef_id = chefs.id
@@ -59,18 +59,17 @@ class Recipe < ApplicationRecord
                                     LEFT OUTER JOIN recipe_likes ON recipes.id = recipe_likes.recipe_id
                                     LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id
                                     LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id
-                                    WHERE recipes.hidden=0
+                                    WHERE recipes.hidden = false
                                     #{filter_string}
                                     #{cuisine_string}
                                     #{serves_string}
-                                    GROUP BY recipes.id
                                     ORDER BY recipes.updated_at DESC
-                                    LIMIT (?)
-                                    OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offset])
+                                    LIMIT $2
+                                    OFFSET $3", [user_chef_id, limit, offset])
 
     elsif type == "chef" # recipes created by me ordered most-recent first
 
-      # ApplicationRecord.db.execute("SELECT recipes.*, recipe_images.imageURL
+      # ApplicationRecord.db.exec("SELECT recipes.*, recipe_images.image_url
       #                               FROM recipes
       #                               JOIN recipe_images ON recipe_images.recipe_id = recipes.id
       #                               WHERE hidden=0 AND chef_id = ?
@@ -78,16 +77,16 @@ class Recipe < ApplicationRecord
       #                               LIMIT (?)
       #                               OFFSET (?)", [chef_id, limit, offset])
 
-      ApplicationRecord.db.execute("SELECT recipes.*, recipe_images.imageURL,
-                                      chefs.username ,chefs.imageURL as chefImageURL,
-                                        (SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id) As sharesCount,
-                                        (SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id AND re_shares.chef_id = (?)) As chef_shared,
-                                        (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id) As likesCount,
-                                        (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id AND recipe_likes.chef_id = (?)) As chef_liked,
-                                        (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id) As makesCount,
-                                        (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id AND recipe_makes.chef_id = (?)) As chef_made,
-                                        (SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id) As commentsCount,
-                                        (SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id AND comments.chef_id = (?)) As chef_commented
+      ApplicationRecord.db.exec("SELECT DISTINCT recipes.*, recipe_images.image_url,
+                                      chefs.username ,chefs.image_url AS chefimage_url,
+                                      COALESCE((SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id), 0) AS shares_count,
+                                      COALESCE((SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id AND re_shares.chef_id = $1), 0) AS chef_shared,
+                                      COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id), 0) AS likes_count,
+                                      COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id AND recipe_likes.chef_id = $1), 0) AS chef_liked,
+                                      COALESCE((SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id), 0) AS makes_count,
+                                      COALESCE((SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id AND recipe_makes.chef_id = $1), 0) AS chef_made,
+                                      COALESCE((SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id), 0) AS comments_count,
+                                      COALESCE((SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id AND comments.chef_id = $1), 0) AS chef_commented
                                       FROM recipes
                                       LEFT OUTER JOIN recipe_images ON recipe_images.recipe_id = recipes.id
                                       LEFT OUTER JOIN chefs ON recipes.chef_id = chefs.id
@@ -95,18 +94,17 @@ class Recipe < ApplicationRecord
                                       LEFT OUTER JOIN recipe_likes ON recipes.id = recipe_likes.recipe_id
                                       LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id
                                       LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id
-                                      WHERE recipes.hidden=0 AND recipes.chef_id = (?)
+                                      WHERE recipes.hidden = false AND recipes.chef_id = $2
                                       #{filter_string}
                                       #{cuisine_string}
                                       #{serves_string}
-                                      GROUP BY recipes.id
                                       ORDER BY recipes.updated_at DESC
-                                      LIMIT (?)
-                                      OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, limit, offset])
+                                      LIMIT $3
+                                      OFFSET $4", [user_chef_id, queryChefID, limit, offset])
 
     elsif type == "chef_feed" # recipes by chefs I follow ordered most-recent first
 
-      # ApplicationRecord.db.execute("SELECT recipes.id, recipes.name, recipes.chef_id, recipes.time, recipes.difficulty, recipes.instructions, recipes.updated_at, recipe_images.imageURL, follows.followee_id, follows.follower_id
+      # ApplicationRecord.db.exec("SELECT recipes.id, recipes.name, recipes.chef_id, recipes.time, recipes.difficulty, recipes.instructions, recipes.updated_at, recipe_images.image_url, follows.followee_id, follows.follower_id
       #                               FROM recipes
       #                               JOIN recipe_images ON recipe_images.recipe_id = recipes.id
       #                               JOIN follows ON recipes.chef_id = followee_id
@@ -115,16 +113,16 @@ class Recipe < ApplicationRecord
       #                               LIMIT (?)
       #                               OFFSET (?)", [owner_id, limit, offset])
 
-      ApplicationRecord.db.execute("SELECT recipes.*, recipe_images.imageURL,
-                                    chefs.username ,chefs.imageURL as chefImageURL, sharers.sharer_username, sharers.sharer_id, sharers.shared_id,
-                                      (SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id) As sharesCount,
-                                      (SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id AND re_shares.chef_id = (?)) As chef_shared,
-                                      (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id) As likesCount,
-                                      (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id AND recipe_likes.chef_id = (?)) As chef_liked,
-                                      (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id) As makesCount,
-                                      (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id AND recipe_makes.chef_id = (?)) As chef_made,
-                                      (SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id) As commentsCount,
-                                      (SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id AND comments.chef_id = (?)) As chef_commented
+      ApplicationRecord.db.exec("SELECT DISTINCT recipes.*, recipe_images.image_url,
+                                    chefs.username ,chefs.image_url AS chefimage_url, sharers.sharer_username, sharers.sharer_id, sharers.shared_id,
+                                    COALESCE((SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id), 0) AS shares_count,
+                                    COALESCE((SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id AND re_shares.chef_id = $1), 0) AS chef_shared,
+                                    COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id), 0) AS likes_count,
+                                    COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id AND recipe_likes.chef_id = $1), 0) AS chef_liked,
+                                    COALESCE((SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id), 0) AS makes_count,
+                                    COALESCE((SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id AND recipe_makes.chef_id = $1), 0) AS chef_made,
+                                    COALESCE((SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id), 0) AS comments_count,
+                                    COALESCE((SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id AND comments.chef_id = $1), 0) AS chef_commented
                                     FROM recipes
                                     LEFT OUTER JOIN recipe_images ON recipe_images.recipe_id = recipes.id
                                     LEFT OUTER JOIN chefs ON recipes.chef_id = chefs.id
@@ -136,22 +134,20 @@ class Recipe < ApplicationRecord
                                         SELECT chefs.username AS sharer_username, chefs.id AS sharer_id, re_shares.recipe_id AS shared_id
                                         FROM chefs
                                         JOIN re_shares ON chefs.id = re_shares.chef_id
-                                        WHERE re_shares.chef_id IN (SELECT follows.followee_id FROM follows WHERE follower_id = (?))
-                                        GROUP BY re_shares.recipe_id
+                                        WHERE re_shares.chef_id IN (SELECT follows.followee_id FROM follows WHERE follower_id = $2)
                                         ) AS sharers ON recipes.id = shared_id
                                     JOIN follows ON recipes.chef_id = followee_id
-                                    WHERE recipes.hidden=0 AND ( follows.follower_id = (?) OR re_shares.chef_id IN (SELECT follows.followee_id FROM follows WHERE follower_id = (?)))
+                                    WHERE recipes.hidden = false AND ( follows.follower_id = $2 OR re_shares.chef_id IN (SELECT follows.followee_id FROM follows WHERE follower_id = $2))
                                     #{filter_string}
                                     #{cuisine_string}
                                     #{serves_string}
-                                    GROUP BY recipes.id
                                     ORDER BY recipes.updated_at DESC
-                                      LIMIT (?)
-                                      OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, queryChefID, queryChefID, limit, offset])
+                                    LIMIT $3
+                                    OFFSET $4", [user_chef_id, queryChefID, limit, offset])
 
     elsif type == "chef_liked" # recipes liked by use_chef ordered by most-recently liked
 
-      # ApplicationRecord.db.execute("SELECT recipes.id, recipes.name, recipes.chef_id, recipes.time, recipes.difficulty, recipes.instructions, recipe_likes.updated_at, recipe_likes.chef_id, recipe_images.imageURL
+      # ApplicationRecord.db.exec("SELECT recipes.id, recipes.name, recipes.chef_id, recipes.time, recipes.difficulty, recipes.instructions, recipe_likes.updated_at, recipe_likes.chef_id, recipe_images.image_url
       #                               FROM recipes
       #                               JOIN recipe_images ON recipe_images.recipe_id = recipes.id
       #                               JOIN recipe_likes ON recipe_likes.recipe_id = recipes.id
@@ -160,16 +156,16 @@ class Recipe < ApplicationRecord
       #                               LIMIT (?)
       #                               OFFSET (?)", [chef_id, limit, offset])
 
-        ApplicationRecord.db.execute("SELECT recipes.*, recipe_images.imageURL,
-                                      chefs.username ,chefs.imageURL as chefImageURL,
-                                        (SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id) As sharesCount,
-                                        (SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id AND re_shares.chef_id = (?)) As chef_shared,
-                                        (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id) As likesCount,
-                                        (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id AND recipe_likes.chef_id = (?)) As chef_liked,
-                                        (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id) As makesCount,
-                                        (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id AND recipe_makes.chef_id = (?)) As chef_made,
-                                        (SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id) As commentsCount,
-                                        (SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id AND comments.chef_id = (?)) As chef_commented
+        ApplicationRecord.db.exec("SELECT DISTINCT recipes.*, recipe_images.image_url,
+                                      chefs.username ,chefs.image_url AS chefimage_url, recipe_likes.updated_at,
+                                      COALESCE((SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id), 0) AS shares_count,
+                                      COALESCE((SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id AND re_shares.chef_id = $1), 0) AS chef_shared,
+                                      COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id), 0) AS likes_count,
+                                      COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id AND recipe_likes.chef_id = $1), 0) AS chef_liked,
+                                      COALESCE((SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id), 0) AS makes_count,
+                                      COALESCE((SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id AND recipe_makes.chef_id = $1), 0) AS chef_made,
+                                      COALESCE((SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id), 0) AS comments_count,
+                                      COALESCE((SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id AND comments.chef_id = $1), 0) AS chef_commented
                                       FROM recipes
                                       LEFT OUTER JOIN recipe_images ON recipe_images.recipe_id = recipes.id
                                       LEFT OUTER JOIN chefs ON recipes.chef_id = chefs.id
@@ -177,18 +173,17 @@ class Recipe < ApplicationRecord
                                       LEFT OUTER JOIN recipe_likes ON recipes.id = recipe_likes.recipe_id
                                       LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id
                                       LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id
-                                      WHERE recipes.hidden=0 AND (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id AND recipe_likes.chef_id = (?))>0
+                                      WHERE recipes.hidden = false AND (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id AND recipe_likes.chef_id = $2)>0
                                       #{filter_string}
                                       #{cuisine_string}
                                       #{serves_string}
-                                      GROUP BY recipes.id
                                       ORDER BY recipe_likes.updated_at DESC
-                                      LIMIT (?)
-                                      OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, limit, offset])
+                                      LIMIT $3
+                                      OFFSET $4", [user_chef_id, queryChefID, limit, offset])
   
     elsif type == "chef_made" # recipes liked by use_chef ordered by most-recently liked
 
-      # recipes = ApplicationRecord.db.execute("SELECT recipes.id, recipes.name, recipes.chef_id, recipes.time, recipes.difficulty, recipes.instructions, recipe_makes.updated_at, recipe_makes.chef_id, recipe_images.imageURL
+      # recipes = ApplicationRecord.db.exec("SELECT recipes.id, recipes.name, recipes.chef_id, recipes.time, recipes.difficulty, recipes.instructions, recipe_makes.updated_at, recipe_makes.chef_id, recipe_images.image_url
       #                               FROM recipes
       #                               JOIN recipe_images ON recipe_images.recipe_id = recipes.id
       #                               JOIN recipe_makes ON recipe_makes.recipe_id = recipes.id
@@ -197,16 +192,16 @@ class Recipe < ApplicationRecord
       #                               LIMIT (?)
       #                               OFFSET (?)", [chef_id, limit, offset])
 
-        ApplicationRecord.db.execute("SELECT recipes.*, recipe_images.imageURL,
-                                      chefs.username ,chefs.imageURL as chefImageURL,
-                                        (SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id) As sharesCount,
-                                        (SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id AND re_shares.chef_id = (?)) As chef_shared,
-                                        (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id) As likesCount,
-                                        (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id AND recipe_likes.chef_id = (?)) As chef_liked,
-                                        (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id) As makesCount,
-                                        (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id AND recipe_makes.chef_id = (?)) As chef_made,
-                                        (SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id) As commentsCount,
-                                        (SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id AND comments.chef_id = (?)) As chef_commented
+        ApplicationRecord.db.exec("SELECT DISTINCT recipes.*, recipe_images.image_url,
+                                      chefs.username ,chefs.image_url AS chefimage_url, recipe_makes.updated_at,
+                                      COALESCE((SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id), 0) AS shares_count,
+                                      COALESCE((SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id AND re_shares.chef_id = $1), 0) AS chef_shared,
+                                      COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id), 0) AS likes_count,
+                                      COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id AND recipe_likes.chef_id = $1), 0) AS chef_liked,
+                                      COALESCE((SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id), 0) AS makes_count,
+                                      COALESCE((SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id AND recipe_makes.chef_id = $1), 0) AS chef_made,
+                                      COALESCE((SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id), 0) AS comments_count,
+                                      COALESCE((SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id AND comments.chef_id = $1), 0) AS chef_commented
                                       FROM recipes
                                       LEFT OUTER JOIN recipe_images ON recipe_images.recipe_id = recipes.id
                                       LEFT OUTER JOIN chefs ON recipes.chef_id = chefs.id
@@ -214,23 +209,22 @@ class Recipe < ApplicationRecord
                                       LEFT OUTER JOIN recipe_likes ON recipes.id = recipe_likes.recipe_id
                                       LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id
                                       LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id
-                                      WHERE recipes.hidden=0 AND (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id AND recipe_makes.chef_id = (?))>0
+                                      WHERE recipes.hidden = false AND (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id AND recipe_makes.chef_id = $2)>0
                                       #{filter_string}
                                       #{cuisine_string}
                                       #{serves_string}
-                                      GROUP BY recipes.id
                                       ORDER BY recipe_makes.updated_at DESC
-                                      LIMIT (?)
-                                      OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, limit, offset])
+                                      LIMIT $3
+                                      OFFSET $4", [user_chef_id, queryChefID, limit, offset])
 
-    elsif type =="most_liked" # recipes according to their global rankings # with filter based on chef name working if needed
+    elsif type =="most_liked" # recipes according to their global rankings # with filter bASed on chef name working if needed
 
         chefFilter = ""  # "WHERE recipes.chef_id = #{chef_id}"  # stitutute this line in if needed
 
         #insert this to add rank "ROW_NUMBER() OVER(ORDER BY COUNT(recipe_likes.recipe_id) DESC) AS Row"
 
-      # ApplicationRecord.db.execute("SELECT
-      #                               recipes.*, recipe_images.imageURL, COUNT(recipe_likes.recipe_id) As count
+      # ApplicationRecord.db.exec("SELECT
+      #                               recipes.*, recipe_images.image_url, COUNT(recipe_likes.recipe_id) AS count
       #                               FROM recipe_likes
       #                               JOIN recipes ON recipe_likes.recipe_id = recipes.id
       #                               JOIN recipe_images ON recipe_images.recipe_id = recipes.id
@@ -241,16 +235,16 @@ class Recipe < ApplicationRecord
       #                               LIMIT (?)
       #                               OFFSET (?)", [limit, offset])
 
-        ApplicationRecord.db.execute("SELECT recipes.*, recipe_images.imageURL,
-                                      chefs.username ,chefs.imageURL as chefImageURL,
-                                        (SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id) As sharesCount,
-                                        (SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id AND re_shares.chef_id = (?)) As chef_shared,
-                                        (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id) As likesCount,
-                                        (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id AND recipe_likes.chef_id = (?)) As chef_liked,
-                                        (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id) As makesCount,
-                                        (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id AND recipe_makes.chef_id = (?)) As chef_made,
-                                        (SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id) As commentsCount,
-                                        (SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id AND comments.chef_id = (?)) As chef_commented
+        ApplicationRecord.db.exec("SELECT DISTINCT recipes.*, recipe_images.image_url,
+                                      chefs.username ,chefs.image_url AS chefimage_url,
+                                      COALESCE((SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id), 0) AS shares_count,
+                                      COALESCE((SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id AND re_shares.chef_id = $1), 0) AS chef_shared,
+                                      COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id), 0) AS likes_count,
+                                      COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id AND recipe_likes.chef_id = $1), 0) AS chef_liked,
+                                      COALESCE((SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id), 0) AS makes_count,
+                                      COALESCE((SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id AND recipe_makes.chef_id = $1), 0) AS chef_made,
+                                      COALESCE((SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id), 0) AS comments_count,
+                                      COALESCE((SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id AND comments.chef_id = $1), 0) AS chef_commented
                                       FROM recipes
                                       LEFT OUTER JOIN recipe_images ON recipe_images.recipe_id = recipes.id
                                       LEFT OUTER JOIN chefs ON recipes.chef_id = chefs.id
@@ -258,14 +252,13 @@ class Recipe < ApplicationRecord
                                       LEFT OUTER JOIN recipe_likes ON recipes.id = recipe_likes.recipe_id
                                       LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id
                                       LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id
-                                      WHERE recipes.hidden=0
+                                      WHERE recipes.hidden = false
                                       #{filter_string}
                                       #{cuisine_string}
                                       #{serves_string}
-                                      GROUP BY recipes.id
-                                      ORDER BY (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id) DESC
-                                      LIMIT (?)
-                                      OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offset])
+                                      ORDER BY likes_count DESC
+                                      LIMIT $2
+                                      OFFSET $3", [user_chef_id, limit, offset])
   
 
             # correct SQL query:
@@ -278,12 +271,12 @@ class Recipe < ApplicationRecord
             # LIMIT 50
             # OFFSET 0
 
-    elsif type =="most_made" # recipes according to their global rankings # with filter based on chef name working if needed
+    elsif type =="most_made" # recipes according to their global rankings # with filter bASed on chef name working if needed
 
       chefFilter = ""  # "WHERE recipes.chef_id = #{chef_id}"  # stitutute this line in if needed
 
-    # ApplicationRecord.db.execute("SELECT
-    #                               recipes.*, recipe_images.imageURL, COUNT(recipe_makes.recipe_id) As count
+    # ApplicationRecord.db.exec("SELECT
+    #                               recipes.*, recipe_images.image_url, COUNT(recipe_makes.recipe_id) AS count
     #                               FROM recipe_makes
     #                               JOIN recipes ON recipe_makes.recipe_id = recipes.id
     #                               JOIN recipe_images ON recipe_images.recipe_id = recipes.id
@@ -294,16 +287,16 @@ class Recipe < ApplicationRecord
     #                               LIMIT (?)
     #                               OFFSET (?)", [limit, offset])
 
-    ApplicationRecord.db.execute("SELECT recipes.*, recipe_images.imageURL,
-                                chefs.username ,chefs.imageURL as chefImageURL,
-                                  (SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id) As sharesCount,
-                                  (SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id AND re_shares.chef_id = (?)) As chef_shared,
-                                  (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id) As likesCount,
-                                  (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id AND recipe_likes.chef_id = (?)) As chef_liked,
-                                  (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id) As makesCount,
-                                  (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id AND recipe_makes.chef_id = (?)) As chef_made,
-                                  (SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id) As commentsCount,
-                                  (SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id AND comments.chef_id = (?)) As chef_commented
+    ApplicationRecord.db.exec("SELECT DISTINCT recipes.*, recipe_images.image_url,
+                                chefs.username ,chefs.image_url AS chefimage_url,
+                                COALESCE((SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id), 0) AS shares_count,
+                                COALESCE((SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id AND re_shares.chef_id = $1), 0) AS chef_shared,
+                                COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id), 0) AS likes_count,
+                                COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id AND recipe_likes.chef_id = $1), 0) AS chef_liked,
+                                COALESCE((SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id), 0) AS makes_count,
+                                COALESCE((SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id AND recipe_makes.chef_id = $1), 0) AS chef_made,
+                                COALESCE((SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id), 0) AS comments_count,
+                                COALESCE((SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id AND comments.chef_id = $1), 0) AS chef_commented
                                 FROM recipes
                                 LEFT OUTER JOIN recipe_images ON recipe_images.recipe_id = recipes.id
                                 LEFT OUTER JOIN chefs ON recipes.chef_id = chefs.id
@@ -311,27 +304,26 @@ class Recipe < ApplicationRecord
                                 LEFT OUTER JOIN recipe_likes ON recipes.id = recipe_likes.recipe_id
                                 LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id
                                 LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id
-                                WHERE recipes.hidden=0
+                                WHERE recipes.hidden = false
                                 #{filter_string}
                                 #{cuisine_string}
                                 #{serves_string}
-                                GROUP BY recipes.id
                                 ORDER BY (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id) DESC
-                                LIMIT (?)
-                                OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offset])
+                                LIMIT $2
+                                OFFSET $3", [user_chef_id, limit, offset])
 
     else # if all else fails, just show all recipes ordered most recent first
 
-    ApplicationRecord.db.execute("SELECT recipes.*, recipe_images.imageURL,
-                                chefs.username ,chefs.imageURL as chefImageURL,
-                                  (SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id) As sharesCount,
-                                  (SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id AND re_shares.chef_id = (?)) As chef_shared,
-                                  (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id) As likesCount,
-                                  (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id AND recipe_likes.chef_id = (?)) As chef_liked,
-                                  (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id) As makesCount,
-                                  (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id AND recipe_makes.chef_id = (?)) As chef_made,
-                                  (SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id) As commentsCount,
-                                  (SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id AND comments.chef_id = (?)) As chef_commented
+    ApplicationRecord.db.exec("SELECT DISTINCT recipes.*, recipe_images.image_url,
+                                chefs.username ,chefs.image_url AS chefimage_url,
+                                COALESCE((SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id), 0) AS shares_count,
+                                COALESCE((SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id AND re_shares.chef_id = $1), 0) AS chef_shared,
+                                COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id), 0) AS likes_count,
+                                COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id AND recipe_likes.chef_id = $1), 0) AS chef_liked,
+                                COALESCE((SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id), 0) AS makes_count,
+                                COALESCE((SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id AND recipe_makes.chef_id = $1), 0) AS chef_made,
+                                COALESCE((SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id), 0) AS comments_count,
+                                COALESCE((SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id AND comments.chef_id = $1), 0) AS chef_commented
                                 FROM recipes
                                 LEFT OUTER JOIN recipe_images ON recipe_images.recipe_id = recipes.id
                                 LEFT OUTER JOIN chefs ON recipes.chef_id = chefs.id
@@ -339,14 +331,13 @@ class Recipe < ApplicationRecord
                                 LEFT OUTER JOIN recipe_likes ON recipes.id = recipe_likes.recipe_id
                                 LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id
                                 LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id
-                                WHERE recipes.hidden=0
+                                WHERE recipes.hidden = false
                                 #{filter_string}
                                 #{cuisine_string}
                                 #{serves_string}
-                                GROUP BY recipes.id
                                 ORDER BY recipes.updated_at DESC
-                                LIMIT (?)
-                                OFFSET (?)", [user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offset])
+                                LIMIT $2
+                                OFFSET $3", [user_chef_id, limit, offset])
 # byebug
     end
   end
@@ -383,10 +374,10 @@ class Recipe < ApplicationRecord
       use = use.ingredient_id
     end
     return recipe_details = {recipe: self,
-        comments: ApplicationRecord.db.execute("SELECT comments.*, chefs.username, chefs.imageURL
+        comments: ApplicationRecord.db.exec("SELECT comments.*, chefs.username, chefs.image_url
                                                 FROM comments
                                                 JOIN chefs ON chefs.id = comments.chef_id
-                                                WHERE comments.recipe_id = (?)
+                                                WHERE comments.recipe_id = $1
                                                 ORDER BY comments.updated_at DESC", [self.id]),
         recipe_images: RecipeImage.where(recipe_id: self.id),
         recipe_likes: RecipeLike.where(recipe_id: self.id).length,

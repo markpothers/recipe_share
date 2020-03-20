@@ -5,7 +5,7 @@ Chef#account_activation
     Thanks for joining Recipe-Share.
     Here's the activation link to complete setup of your account.
 
-<%= "#{Rails.application.credentials.server[:ip_address]}/activate?token=#{@chef.activation_digest}&email=#{@chef.e_mail.split("@").join("%40")}" %>
+<%= "#{Rails.application.credentials.server[Rails.env.to_sym]}/activate?token=#{@chef.activation_digest}&email=#{@chef.e_mail.split("@").join("%40")}" %>
 
     You're just a click away from countless recipe ideas to enjoy.
     Thanks so much for signing up.

@@ -27,13 +27,13 @@ export default class ChefCard extends React.PureComponent {
                         </ScrollView>
                     </View>
                     <TouchableOpacity style={styles.chefCardTopRightContainer} onPress={() => this.props.navigateToChefDetails(this.props.id)}>
-                        <AvatarImage chefImageURL={this.props.imageURL}/>
+                        <AvatarImage chefimage_url={this.props.image_url}/>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.chefCardBottomContainer}>
-                    <TouchableOpacity style={styles.chefCardBottomSubContainers}  onPress={(this.props.user_chef_following > 0 ? (e => this.props.unFollowChef(this.props.id)) : (e => this.props.followChef(this.props.id)))}>
+                    <TouchableOpacity style={styles.chefCardBottomSubContainers}  onPress={(parseInt(this.props.user_chef_following) > 0 ? (e => this.props.unFollowChef(this.props.id)) : (e => this.props.followChef(this.props.id)))}>
                         {/* <Icon name='account-multiple-plus' size={24} style={styles.icon}/> */}
-                        {this.props.user_chef_following > 0 ? <Icon name='account-multiple-minus' size={24} style={styles.icon}/> : <Icon name='account-multiple-plus-outline' size={24} style={styles.icon}/> }
+                        {parseInt(this.props.user_chef_following) > 0 ? <Icon name='account-multiple-minus' size={24} style={styles.icon}/> : <Icon name='account-multiple-plus-outline' size={24} style={styles.icon}/> }
                         <Text style={styles.chefCardBottomOther} >{this.props.followers === null ? 0 : this.props.followers}</Text>
                     </TouchableOpacity>
                     <View style={styles.chefCardBottomSubContainers} >
@@ -55,8 +55,8 @@ export default class ChefCard extends React.PureComponent {
     }
 }
 
-function AvatarImage(chefImageURL) {
-    const URL = chefImageURL.chefImageURL
+function AvatarImage(chefimage_url) {
+    const URL = chefimage_url.chefimage_url
     if (URL === null || URL === undefined) {
         return (
             <Image style={styles.avatarThumbnail} source={require("../dataComponents/peas.jpg")} />

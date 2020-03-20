@@ -9,7 +9,7 @@ class CreateChefs < ActiveRecord::Migration[5.2]
       t.string :password
       t.string :password_confirmation
       t.string :password_digest
-      t.string :imageURL
+      t.string :image_url
       t.boolean :hidden, default: false
       t.string :hex
       t.boolean :is_admin, default: false

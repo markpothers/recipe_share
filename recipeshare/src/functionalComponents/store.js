@@ -7,7 +7,7 @@ const initialState = {
     id: "",
     username: "",
     auth_token: "",
-    imageURL: "",
+    image_url: "",
     is_admin: false
   },
   recipes: {
@@ -67,13 +67,13 @@ const initialState = {
   newUserDetails: {
     first_name: "",
     last_name: "",
-    username: "",
-    e_mail: "",
-    password: "",
-    password_confirmation: "",
+    username: "pothers",
+    e_mail: "markpothers@hotmail.com",
+    password: "123456",
+    password_confirmation: "123456",
     country: "United States",
-    imageURL: "",
-    profile_text: ""
+    image_url: "",
+    profile_text: "I like baking bread"
   },
   loginUserDetails: {
     e_mail: "markpothers@hotmail.com",

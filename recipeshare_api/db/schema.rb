@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2020_01_16_013713) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "chefs", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -21,7 +24,7 @@ ActiveRecord::Schema.define(version: 2020_01_16_013713) do
     t.string "password"
     t.string "password_confirmation"
     t.string "password_digest"
-    t.string "imageURL"
+    t.string "image_url"
     t.boolean "hidden", default: false
     t.string "hex"
     t.boolean "is_admin", default: false
@@ -37,8 +40,8 @@ ActiveRecord::Schema.define(version: 2020_01_16_013713) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.integer "chef_id"
-    t.integer "recipe_id"
+    t.bigint "chef_id"
+    t.bigint "recipe_id"
     t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -48,8 +51,8 @@ ActiveRecord::Schema.define(version: 2020_01_16_013713) do
   end
 
   create_table "follows", force: :cascade do |t|
-    t.integer "followee_id"
-    t.integer "follower_id"
+    t.bigint "followee_id"
+    t.bigint "follower_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "hidden", default: false
@@ -58,8 +61,8 @@ ActiveRecord::Schema.define(version: 2020_01_16_013713) do
   end
 
   create_table "friendships", force: :cascade do |t|
-    t.integer "requestor_id"
-    t.integer "acceptor_id"
+    t.bigint "requestor_id"
+    t.bigint "acceptor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "hidden", default: false
@@ -68,8 +71,8 @@ ActiveRecord::Schema.define(version: 2020_01_16_013713) do
   end
 
   create_table "ingredient_uses", force: :cascade do |t|
-    t.integer "recipe_id"
-    t.integer "ingredient_id"
+    t.bigint "recipe_id"
+    t.bigint "ingredient_id"
     t.string "quantity"
     t.string "unit"
     t.datetime "created_at", null: false
@@ -87,7 +90,7 @@ ActiveRecord::Schema.define(version: 2020_01_16_013713) do
   create_table "instructions", force: :cascade do |t|
     t.string "instruction"
     t.integer "step"
-    t.integer "recipe_id"
+    t.bigint "recipe_id"
     t.boolean "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -95,9 +98,9 @@ ActiveRecord::Schema.define(version: 2020_01_16_013713) do
   end
 
   create_table "make_pics", force: :cascade do |t|
-    t.integer "chef_id"
-    t.integer "recipe_id"
-    t.string "imageURL"
+    t.bigint "chef_id"
+    t.bigint "recipe_id"
+    t.string "image_url"
     t.string "hex"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -107,8 +110,8 @@ ActiveRecord::Schema.define(version: 2020_01_16_013713) do
   end
 
   create_table "re_shares", force: :cascade do |t|
-    t.integer "recipe_id"
-    t.integer "chef_id"
+    t.bigint "recipe_id"
+    t.bigint "chef_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "hidden", default: false
@@ -118,8 +121,8 @@ ActiveRecord::Schema.define(version: 2020_01_16_013713) do
 
   create_table "recipe_images", force: :cascade do |t|
     t.string "name"
-    t.integer "recipe_id"
-    t.string "imageURL"
+    t.bigint "recipe_id"
+    t.string "image_url"
     t.string "hex"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -128,8 +131,8 @@ ActiveRecord::Schema.define(version: 2020_01_16_013713) do
   end
 
   create_table "recipe_likes", force: :cascade do |t|
-    t.integer "chef_id"
-    t.integer "recipe_id"
+    t.bigint "chef_id"
+    t.bigint "recipe_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "hidden", default: false
@@ -138,8 +141,8 @@ ActiveRecord::Schema.define(version: 2020_01_16_013713) do
   end
 
   create_table "recipe_makes", force: :cascade do |t|
-    t.integer "chef_id"
-    t.integer "recipe_id"
+    t.bigint "chef_id"
+    t.bigint "recipe_id"
     t.integer "time"
     t.integer "difficulty"
     t.string "comment"
@@ -152,7 +155,7 @@ ActiveRecord::Schema.define(version: 2020_01_16_013713) do
 
   create_table "recipes", force: :cascade do |t|
     t.string "name"
-    t.integer "chef_id"
+    t.bigint "chef_id"
     t.string "time"
     t.integer "difficulty"
     t.boolean "hidden", default: false
@@ -186,4 +189,19 @@ ActiveRecord::Schema.define(version: 2020_01_16_013713) do
     t.index ["chef_id"], name: "index_recipes_on_chef_id"
   end
 
+  add_foreign_key "comments", "chefs"
+  add_foreign_key "comments", "recipes"
+  add_foreign_key "ingredient_uses", "ingredients"
+  add_foreign_key "ingredient_uses", "recipes"
+  add_foreign_key "instructions", "recipes"
+  add_foreign_key "make_pics", "chefs"
+  add_foreign_key "make_pics", "recipes"
+  add_foreign_key "re_shares", "chefs"
+  add_foreign_key "re_shares", "recipes"
+  add_foreign_key "recipe_images", "recipes"
+  add_foreign_key "recipe_likes", "chefs"
+  add_foreign_key "recipe_likes", "recipes"
+  add_foreign_key "recipe_makes", "chefs"
+  add_foreign_key "recipe_makes", "recipes"
+  add_foreign_key "recipes", "chefs"
 end

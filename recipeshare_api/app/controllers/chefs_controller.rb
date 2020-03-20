@@ -35,7 +35,9 @@ class ChefsController < ApplicationController
     end
 
     def index
+        # byebug
         @chefs = Chef.choose_list(params["listType"], params["queryChefID"], params["limit"], params["offset"], @chef.id)
+        # byebug
         render json: @chefs
     end
 
@@ -50,13 +52,13 @@ class ChefsController < ApplicationController
             @chef.password_created_at = Time.now
             if @chef.save
                 @chef.activation_digest = JWT.encode({id: @chef.id},  Rails.application.credentials.JWT[:secret_key])
-                    if image_params[:imageURL] != ""
+                    if image_params[:image_url] != ""
                         hex = SecureRandom.hex(20)
                         until Chef.find_by(hex: hex) == nil
                             hex = SecureRandom.hex(20)
                         end
-                        mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:chef_avatars], hex, image_params[:imageURL])
-                        @chef.imageURL = mediaURL
+                        mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:chef_avatars], hex, image_params[:image_url])
+                        @chef.image_url = mediaURL
                         @chef.hex=hex
                         @chef.save
                     end
@@ -100,13 +102,13 @@ class ChefsController < ApplicationController
         @chef.profile_text != chef_params[:profile_text] ? @chef.update_attribute(:profile_text, chef_params[:profile_text]) : nil
         @chef.country != chef_params[:country] ? @chef.update_attribute(:country, chef_params[:country]) : nil
         # byebug
-        if image_params[:imageURL] != ""
+        if image_params[:image_url] != ""
             hex = SecureRandom.hex(20)
             until Chef.find_by(hex: hex) == nil
                 hex = SecureRandom.hex(20)
             end
-            mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:chef_avatars], hex, image_params[:imageURL])
-            @chef.update_attribute(:imageURL, mediaURL)
+            mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:chef_avatars], hex, image_params[:image_url])
+            @chef.update_attribute(:image_url, mediaURL)
             @chef.update_attribute(:hex, hex)
         end
 
@@ -187,7 +189,7 @@ class ChefsController < ApplicationController
     end
 
     def image_params
-        params.require(:chef).permit(:imageURL)
+        params.require(:chef).permit(:image_url)
     end
 
     def list_params

@@ -31,6 +31,7 @@ RecipeMake.destroy_all
 Follow.destroy_all
 Friendship.destroy_all
 IngredientUse.destroy_all
+Instruction.destroy_all
 Recipe.destroy_all
 Chef.destroy_all
 Ingredient.destroy_all
@@ -51,7 +52,7 @@ end
 100.times do
     Chef.create(
         username: Faker::Books::CultureSeries.planet, 
-        imageURL:Faker::Avatar.image, 
+        image_url:Faker::Avatar.image, 
         e_mail:Faker::Internet.email, 
         country: Faker::TvShows::StarTrek.location, 
         created_at: Time.now, 
@@ -95,7 +96,7 @@ times = [
     "06:00",
 ]
 
-const cuisines = [
+cuisines = [
     "Any",
     "American",
     "Brazilian",
@@ -234,16 +235,16 @@ images = ["https://www.googleapis.com/download/storage/v1/b/5d4dd3e98f4c-recipe-
 "https://www.googleapis.com/download/storage/v1/b/5d4dd3e98f4c-recipe-images/o/recipe57.jpg?alt=media", "https://www.googleapis.com/download/storage/v1/b/5d4dd3e98f4c-recipe-images/o/recipe58.jpg?alt=media", "https://www.googleapis.com/download/storage/v1/b/5d4dd3e98f4c-recipe-images/o/recipe59.jpg?alt=media", "https://www.googleapis.com/download/storage/v1/b/5d4dd3e98f4c-recipe-images/o/recipe60.jpg?alt=media", "https://www.googleapis.com/download/storage/v1/b/5d4dd3e98f4c-recipe-images/o/recipe61.jpg?alt=media", "https://www.googleapis.com/download/storage/v1/b/5d4dd3e98f4c-recipe-images/o/recipe62.jpg?alt=media", "https://www.googleapis.com/download/storage/v1/b/5d4dd3e98f4c-recipe-images/o/recipe63.jpg?alt=media", "https://www.googleapis.com/download/storage/v1/b/5d4dd3e98f4c-recipe-images/o/recipe65.jpg?alt=media", "https://www.googleapis.com/download/storage/v1/b/5d4dd3e98f4c-recipe-images/o/recipe66.jpg?alt=media"]
 
 # 200.times do
-#     RecipeImage.create(recipe: Recipe.all.sample, imageURL: images.sample)
+#     RecipeImage.create(recipe: Recipe.all.sample, image_url: images.sample)
 # end
 
 Recipe.all.each do |recipe|
-    RecipeImage.create(recipe_id: recipe.id, imageURL: images.sample, hex: SecureRandom.hex)
+    RecipeImage.create(recipe_id: recipe.id, image_url: images.sample, hex: SecureRandom.hex)
 end
 
 5.times do
     Recipe.all.each do |recipe|
-        MakePic.create(chef: Chef.all.sample, recipe: recipe, imageURL: images.sample, hex: SecureRandom.hex)
+        MakePic.create(chef: Chef.all.sample, recipe: recipe, image_url: images.sample, hex: SecureRandom.hex)
     end
 end
 

@@ -4,22 +4,43 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
 #
-default: &default
-  adapter: sqlite3
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
+# default: &default
+#   adapter: sqlite3
+#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+#   timeout: 5000
 
 development:
-  <<: *default
-  database: db/development.sqlite3
+  # <<: *default
+  adapter: postgresql
+  encoding: UTF8
+  pool: 5
+  timeout: 5000
+  username: "postgres"
+  password: <%= Rails.application.credentials[:postgres_password] %>
+  database: "development"
+  host:   localhost
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
-  database: db/test.sqlite3
+  # <<: *default
+  adapter: postgresql
+  encoding: UTF8
+  pool: 5
+  timeout: 5000
+  username: "postgres"
+  password: <%= Rails.application.credentials[:postgres_password] %>
+  database: "test"
+  host:   "/cloudsql/recipe-share-269804:us-central1:recipe-share"
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  # <<: *default
+  adapter: postgresql
+  encoding: UTF8
+  pool: 5
+  timeout: 5000
+  username: "postgres"
+  password: <%= Rails.application.credentials[:postgres_password] %>
+  database: "production"
+  host:   "/cloudsql/recipe-share-269804:us-central1:recipe-share"

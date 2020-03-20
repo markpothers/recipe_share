@@ -7,8 +7,8 @@ class RecipesController < ApplicationController
 
 
     def index
-        # byebug
         @recipes = Recipe.choose_list(params["listType"], params["queryChefID"], params["limit"], params["offset"], params["global_ranking"], @chef.id, params["filters"], params["cuisine"], params["serves"])
+        # byebug
         render json: @recipes
     end
 
@@ -31,7 +31,7 @@ class RecipesController < ApplicationController
                     hex = SecureRandom.hex(20)
                 end
                 mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:recipe_images], hex, newRecipe_image_params[:imageBase64])
-                recipe_image.imageURL = mediaURL
+                recipe_image.image_url = mediaURL
                 recipe_image.hex=hex
                 recipe_image.save
             end
@@ -66,7 +66,7 @@ class RecipesController < ApplicationController
                     hex = SecureRandom.hex(20)
                 end
                 mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:recipe_images], hex, newRecipe_image_params[:imageBase64])
-                recipe_image.imageURL = mediaURL
+                recipe_image.image_url = mediaURL
                 recipe_image.hex=hex
                 recipe_image.save
             end

@@ -75,8 +75,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     renderChefImage = () => {
       const chef = this.props.chefs_details[`chef${this.props.navigation.getParam('chefID')}`]
       if (chef != undefined){
-        if (chef.imageURL != null) {
-            return <Image style={{width: '100%', height: '100%'}} source={{uri: chef.imageURL}}></Image>
+        if (chef.image_url != null) {
+            return <Image style={{width: '100%', height: '100%'}} source={{uri: chef.image_url}}></Image>
         } else {
           return <Image style={{width: '100%', height: '100%'}} source={require("../dataComponents/peas.jpg")}></Image>
         }
@@ -123,7 +123,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
               <ScrollView contentContainerStyle={{flexGrow:1}}>
                 <ChefDetailsCard 
                   {...chef_details} 
-                  imageURL={chef_details.chef.imageURL} 
+                  image_url={chef_details.chef.image_url} 
                   followChef={this.followChef}
                   unFollowChef={this.unFollowChef}
                   notProfile={true}/>

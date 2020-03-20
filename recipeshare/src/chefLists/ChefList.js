@@ -83,19 +83,19 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
     }
 
     renderChefListItem = (item) => {
-      let imageURL = null
-      if (item.item.imageURL != null) {
-        if (item.item.imageURL.startsWith("http")) {
-          imageURL = { uri: item.item.imageURL }
+      let image_url = null
+      if (item.item.image_url != null) {
+        if (item.item.image_url.startsWith("http")) {
+          image_url = { uri: item.item.image_url }
         } else {
-          imageURL = { uri: `${databaseURL}${item.item.imageURL}` }
+          image_url = { uri: `${databaseURL}${item.item.image_url}` }
         }
       }
         return <ChefCard
                 listChoice={this.props["listChoice"]}
                 key={item.index.toString()}
                 {...item.item}
-                imageURL={imageURL}
+                image_url={image_url}
                 navigateToChefDetails={this.navigateToChefDetails}
                 followChef={this.followChef}
                 unFollowChef={this.unFollowChef}/>
@@ -107,8 +107,8 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
       if (followPosted) {
         let updatedChefs = this.props[this.props["listChoice"]].map( chef => {
           if (chef['id'] === followee_id){
-            chef['followers'] +=1
-            chef['user_chef_following'] += 1
+            chef['followers'] = parseInt(chef['followers']) + 1
+            chef['user_chef_following'] = 1
            return chef
         } else {
           return chef
@@ -125,7 +125,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
       if (followPosted) {
         let updatedChefs = this.props[this.props["listChoice"]].map( chef => {
           if (chef['id'] === followee_id){
-            chef['followers'] -=1
+            chef['followers'] = parseInt(chef['followers']) - 1
             chef['user_chef_following'] = 0
            return chef
         } else {
@@ -164,7 +164,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
             keyExtractor={(item) => item.id.toString()}
             onRefresh={this.refresh}
             refreshing={false}
-            onEndReached={this.onEndReached}
+            // onEndReached={this.onEndReached}
             onEndReachedThreshold={0.3}
           />
         </React.Fragment>

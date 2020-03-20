@@ -101,6 +101,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
       // await this.setState({awaitingServer: true})
       const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
       let recipes = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.cuisine, this.props.serves)
+      // console.log(recipes[0])
       this.props.storeRecipeList(this.props["listChoice"], recipes)
       // await this.setState({awaitingServer: false})
     }
@@ -163,8 +164,8 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
       if (likePosted) {
         const recipes = this.props[this.props["listChoice"] + `_Recipes`].map( (recipe) => {
           if (recipe['id'] === recipeID){
-            recipe['likesCount'] += 1
-            recipe['chef_liked'] += 1
+            recipe['likes_count'] = parseInt(recipe['likes_count']) + 1
+            recipe['chef_liked'] = 1
             return recipe
           } else {
             return recipe
@@ -181,7 +182,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
       if (unlikePosted) {
         const recipes = this.props[this.props["listChoice"] + `_Recipes`].map( (recipe) => {
           if (recipe['id'] === recipeID){
-            recipe['likesCount'] -= 1
+            recipe['likes_count'] = parseInt(recipe['likes_count']) - 1
             recipe['chef_liked'] = 0
             return recipe
           } else {
@@ -199,8 +200,8 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
       if (makePosted) {
         const recipes = this.props[this.props["listChoice"] + `_Recipes`].map( (recipe) => {
           if (recipe['id'] === recipeID){
-            recipe['makesCount'] += 1
-            recipe['chef_made'] += 1
+            recipe['makes_count'] = parseInt(recipe['makes_count']) + 1
+            recipe['chef_made'] = 1
             return recipe
           } else {
             return recipe
@@ -217,8 +218,8 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
       if (reSharePosted) {
         const recipes = this.props[this.props["listChoice"] + `_Recipes`].map( (recipe) => {
           if (recipe['id'] === recipeID){
-            recipe['sharesCount'] += 1
-            recipe['chef_shared'] += 1
+            recipe['shares_count'] = parseInt(recipe['shares_count']) + 1
+            recipe['chef_shared'] = 1
             return recipe
           } else {
             return recipe
@@ -235,7 +236,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
       if (unReShared) {
         const recipes = this.props[this.props["listChoice"] + `_Recipes`].map( (recipe) => {
           if (recipe['id'] === recipeID){
-            recipe['sharesCount'] -= 1
+            recipe['shares_count'] = parseInt(recipe['shares_count']) - 1
             recipe['chef_shared'] = 0
             return recipe
           } else {

@@ -142,7 +142,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     renderRecipeImages = () => {
       if (this.props.recipe_details.recipe_images.length !== 0){
-          return <Image style={[{width: '100%', height: 250}, styles.detailsImage]} source={{uri: this.props.recipe_details.recipe_images[this.props.recipe_details.recipe_images.length-1].imageURL}}></Image>
+          return <Image style={[{width: '100%', height: 250}, styles.detailsImage]} source={{uri: this.props.recipe_details.recipe_images[this.props.recipe_details.recipe_images.length-1].image_url}}></Image>
       }
     }
 
@@ -171,8 +171,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         return this.props.recipe_details.make_pics.map(make_pic => {
           if (make_pic.chef_id === this.props.loggedInChef.id || this.props.loggedInChef.is_admin){
           return (
-            <View key={`${make_pic.id}${make_pic.imageURL}`} style={styles.makePicContainer}>
-              <Image style={[{width: '100%', height: '100%'}, styles.makePic]} source={{uri: make_pic.imageURL}}></Image>
+            <View key={`${make_pic.id}${make_pic.image_url}`} style={styles.makePicContainer}>
+              <Image style={[{width: '100%', height: '100%'}, styles.makePic]} source={{uri: make_pic.image_url}}></Image>
               <TouchableOpacity style={styles.makePicTrashCanButton} onPress={() => this.deleteMakePic(make_pic.id)}>
                 <Icon name='trash-can-outline' size={24} style={[styles.icon, styles.makePicTrashCan]}/>
               </TouchableOpacity>
@@ -180,8 +180,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           )
           } else {
             return(
-              <View key={`${make_pic.id}${make_pic.imageURL}`} style={styles.makePicContainer}>
-                <Image style={[{width: '100%', height: '100%'}, styles.makePic]} source={{uri: make_pic.imageURL}}></Image>
+              <View key={`${make_pic.id}${make_pic.image_url}`} style={styles.makePicContainer}>
+                <Image style={[{width: '100%', height: '100%'}, styles.makePic]} source={{uri: make_pic.image_url}}></Image>
               </View>
             )
           }

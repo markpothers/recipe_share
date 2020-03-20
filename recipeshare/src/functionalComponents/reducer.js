@@ -43,7 +43,7 @@ const reducer = (currentState, action) => {
                 password_confirmation: "",
                 profile_text: "",
                 country: "United States",
-                imageURL: ""
+                image_url: ""
               }}
         case 'UPDATE_LOGIN_USER_DETAILS':
             return {...currentState, loginUserDetails: {...currentState.loginUserDetails, [action.parameter]: action.content}}
@@ -142,7 +142,7 @@ const reducer = (currentState, action) => {
                 id: action.id,
                 username: action.username,
                 auth_token: action.auth_token,
-                imageURL: action.imageURL,
+                image_url: action.image_url,
                 is_admin: action.is_admin
                 }}
         // case 'CHANGE_GLOBAL_RANKING':

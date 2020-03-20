@@ -1,18 +1,23 @@
 require "google/cloud/storage"
+require "pg"
 
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
   def self.db
-    sqldb = SQLite3::Database.new('./db/development.sqlite3')
-    sqldb.results_as_hash = true
-    return sqldb
+    # byebug
+    pgrsdb = PG::Connection.new(host: 'localhost',
+                                port: 5432,
+                                dbname: ActiveRecord::Base.connection.current_database,
+                                user: 'postgres',
+                                password: Rails.application.credentials[:postgres_password])
+    return pgrsdb
   end
 
 
   def self.storage_bucket(bucket)
     @storage_bucket ||= begin
-    storage = Google::Cloud::Storage.new project_id: "handy-coil-240820",
+    storage = Google::Cloud::Storage.new project_id: Rails.application.credentials.Google[:project_name],
                                         credentials: Rails.application.credentials.Google[:credentials]
     storage.bucket bucket
     end

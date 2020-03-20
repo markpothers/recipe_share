@@ -5,7 +5,7 @@ Chef#account_activation
     Thanks for requesting to re-activate your Recipe-Share account.
     Here's the activation link to confirm your request.
 
-<%= "#{Rails.application.credentials.server[:ip_address]}/reactivate?token=#{@chef.activation_digest}&email=#{@chef.e_mail.split("@").join("%40")}" %>
+<%= "#{Rails.application.credentials.server[Rails.env.to_sym]}/reactivate?token=#{@chef.activation_digest}&email=#{@chef.e_mail.split("@").join("%40")}" %>
 
     Once you confirm you want to re-activate your account, we'll reset your password and send a follow up e-mail.
     Welcome back!

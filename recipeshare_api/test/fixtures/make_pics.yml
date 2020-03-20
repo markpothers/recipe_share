@@ -3,9 +3,9 @@
 one:
   chef: one
   recipe: one
-  imageURL: MyString
+  image_url: MyString
 
 two:
   chef: two
   recipe: two
-  imageURL: MyString
+  image_url: MyString

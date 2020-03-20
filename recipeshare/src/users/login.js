@@ -36,9 +36,9 @@ const mapDispatchToProps = {
       dispatch({type: 'STAY_LOGGED_IN', value: value})
     }
   },
-  updateLoggedInChefInState: (id, username, auth_token, imageURL, is_admin) => {
+  updateLoggedInChefInState: (id, username, auth_token, image_url, is_admin) => {
     return dispatch => {
-      dispatch({ type: 'UPDATE_LOGGED_IN_CHEF', id: id, username: username, auth_token: auth_token, imageURL: imageURL, is_admin: is_admin})
+      dispatch({ type: 'UPDATE_LOGGED_IN_CHEF', id: id, username: username, auth_token: auth_token, image_url: image_url, is_admin: is_admin})
     }
   }
 }
@@ -74,7 +74,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             })
           })
         }else{
-          this.props.updateLoggedInChefInState(chef.id, chef.username, chef.auth_token, chef.imageURL, chef.is_admin, chef.is_member)
+          this.props.updateLoggedInChefInState(chef.id, chef.username, chef.auth_token, chef.image_url, chef.is_admin, chef.is_member)
           this.props.clearLoginUserDetails()
           await this.setState({
             loginError: false,

@@ -47,7 +47,7 @@ export default class ChefDetailsCard extends React.PureComponent {
                             </ScrollView>
                         </View>
                         <View style={styles.chefCardTopRightContainer}>
-                            <AvatarImage chefImageURL={this.props.chef.imageURL}/>
+                            <AvatarImage chefimage_url={this.props.chef.image_url}/>
                         </View>
                     </View>
                 </View>
@@ -102,9 +102,9 @@ export default class ChefDetailsCard extends React.PureComponent {
     }
 }
 
-function AvatarImage(chefImageURL) {
-    // console.log(chefImageURL)
-    const URL = chefImageURL.chefImageURL
+function AvatarImage(chefimage_url) {
+    // console.log(chefimage_url)
+    const URL = chefimage_url.chefimage_url
     // console.log(typeof URL)
     if (URL === null || URL === undefined) {
         return (

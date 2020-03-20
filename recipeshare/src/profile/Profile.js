@@ -19,7 +19,7 @@ import { NavigationEvents, withNavigation } from 'react-navigation'
 const mapStateToProps = (state) => ({
   loggedInChef: state.loggedInChef,
   chefs_details: state.chefs_details,
-  imageBase64: state.newUserDetails.imageURL,
+  imageBase64: state.newUserDetails.image_url,
 })
 
 const mapDispatchToProps = {
@@ -120,7 +120,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     saveImage = async(image) => {
       if (image.cancelled === false){
-          this.props.saveChefDetails("imageURL", image.base64)
+          this.props.saveChefDetails("image_url", image.base64)
           this.sourceChosen()
       }
   }
@@ -214,7 +214,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
               {this.props.loggedInChef.is_admin ? this.renderDatabaseButtons() : null}
               {this.state.choosingPicture ? this.renderPictureChooser() : null}
               {this.state.deleteChefOptionVisible ? this.renderDeleteChefOption() : null}
-              <ChefDetailsCard editChef={this.editingChef} myProfile={true} {...chef_details} imageURL={chef_details.chef.imageURL}/>
+              <ChefDetailsCard editChef={this.editingChef} myProfile={true} {...chef_details} image_url={chef_details.chef.image_url}/>
             </ImageBackground>
           </React.Fragment>
         )
