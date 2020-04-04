@@ -15,10 +15,10 @@ development:
   encoding: UTF8
   pool: 5
   timeout: 5000
-  username: "postgres"
-  password: <%= Rails.application.credentials[:postgres_password] %>
-  database: "development"
-  host:   localhost
+  username: <%= Rails.application.credentials.Google[:postgres_username] %>
+  password: <%= Rails.application.credentials.Google[:postgres_password] %>
+  database: <%= Rails.application.credentials.Google[:database_names][Rails.env.to_sym] %>
+  host: <%= Rails.application.credentials.Google[:database_hosts][Rails.env.to_sym] %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -29,10 +29,10 @@ test:
   encoding: UTF8
   pool: 5
   timeout: 5000
-  username: "postgres"
-  password: <%= Rails.application.credentials[:postgres_password] %>
-  database: "test"
-  host:   "/cloudsql/recipe-share-269804:us-central1:recipe-share"
+  username: <%= Rails.application.credentials.Google[:postgres_username] %>
+  password: <%= Rails.application.credentials.Google[:postgres_password] %>
+  database: <%= Rails.application.credentials.Google[:database_names][Rails.env.to_sym] %>
+  host: <%= Rails.application.credentials.Google[:database_hosts][Rails.env.to_sym] %>
 
 production:
   # <<: *default
@@ -40,7 +40,7 @@ production:
   encoding: UTF8
   pool: 5
   timeout: 5000
-  username: "postgres"
-  password: <%= Rails.application.credentials[:postgres_password] %>
-  database: "production"
-  host:   "/cloudsql/recipe-share-269804:us-central1:recipe-share"
+  username: <%= Rails.application.credentials.Google[:postgres_username] %>
+  password: <%= Rails.application.credentials.Google[:postgres_password] %>
+  database: <%= Rails.application.credentials.Google[:database_names][Rails.env.to_sym] %>
+  host: <%= Rails.application.credentials.Google[:database_hosts][Rails.env.to_sym] %>

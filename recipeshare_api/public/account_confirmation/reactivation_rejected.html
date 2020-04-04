@@ -47,7 +47,7 @@
     <div>
       <h1>Recipe-Share</h1>
       <h3>We're sorry but your reactivation token didn't match our records.</h3>
-      <h3>Please contact us at </h3><a href="mailto:admin@recipe-share.com">admin@recipe-share.com</a><h3> and we'll fix the problem as soon as possible.</h3>
+      <h3>Please contact us at </h3><a href="<%= Rails.application.credentials.email[:admin_email] %>">admin@recipe-share.com</a><h3> and we'll fix the problem as soon as possible.</h3>
     </div>
   </div>
 </body>

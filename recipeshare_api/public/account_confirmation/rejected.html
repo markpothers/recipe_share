@@ -47,7 +47,7 @@
     <div>
       <h1>Recipe-Share</h1>
       <h3>We're sorry but your activation token didn't match our records.  Please re-register or click the activation link.</h3>
-      <h3>If you need additional support, please feel free to contact us at:</h3> <a href="mailto:admin@recipe-share.com">admin@recipe-share.com</a>.
+      <h3>If you need additional support, please feel free to contact us at:</h3> <a href="<%= Rails.application.credentials.email[:admin_email] %>">admin@recipe-share.com</a>.
     </div>
   </div>
 </body>
