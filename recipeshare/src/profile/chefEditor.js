@@ -217,7 +217,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     transparent={true}
                     visible={this.state.updateModalVisible}
                     >
-                        <KeyboardAvoidingView behavior="padding">
+                        <KeyboardAvoidingView>
                             {this.renderContents()}
                         </KeyboardAvoidingView>
                     </Modal>

@@ -154,7 +154,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       return (
         <ImageBackground source={require('../dataComponents/spinach.jpg')} style={centralStyles.spinachFullBackground}>
         <SafeAreaView style={centralStyles.fullPageSafeAreaView}>
-        <KeyboardAvoidingView style={centralStyles.fullPageKeyboardAvoidingView} behavior="padding">
+        <KeyboardAvoidingView style={centralStyles.fullPageKeyboardAvoidingView}>
         {this.state.awaitingServer && <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={centralStyles.activityIndicator } size="large" color="#104e01" /></View>}
         {this.state.choosingPicture ? this.renderPictureChooser() : null}
         <ScrollView style={centralStyles.fullPageScrollView}>
@@ -283,7 +283,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 
 {/* 
-        <KeyboardAvoidingView  style={styles.mainPageContainer} behavior="padding">
+        <KeyboardAvoidingView  style={styles.mainPageContainer} >
           <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
           {this.state.choosingPicture ? this.renderPictureChooser() : null}
           {this.state.awaitingServer ? <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={Platform.OS === 'ios' ? centralStyles.activityIndicator : null} size="large" color="#104e01" /></View> : null }

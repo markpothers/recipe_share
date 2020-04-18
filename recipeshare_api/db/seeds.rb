@@ -167,11 +167,11 @@ end
 # end
 
 300.times do
-    Follow.create(followee_id: Chef.all.sample.id, follower_id: Chef.all.sample.id, created_at: Time.now)
+    Follow.find_or_create_by(followee_id: Chef.all.sample.id, follower_id: Chef.all.sample.id, created_at: Time.now)
 end
 
 1000.times do
-    RecipeLike.create(chef_id: Chef.all.sample.id, recipe_id: Recipe.all.sample.id, created_at: Time.now)
+    RecipeLike.find_or_create_by(chef_id: Chef.all.sample.id, recipe_id: Recipe.all.sample.id)
 end
 
 units = [
@@ -249,7 +249,7 @@ end
 end
 
 200.times do
-    ReShare.create(chef_id: Chef.all.sample.id, recipe_id: Recipe.all.sample.id, created_at: Time.now)
+    ReShare.find_or_create_by(chef_id: Chef.all.sample.id, recipe_id: Recipe.all.sample.id, created_at: Time.now)
 end
 
 # 3.times do 

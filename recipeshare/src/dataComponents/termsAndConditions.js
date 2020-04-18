@@ -248,7 +248,7 @@ the new terms, you are no longer authorized to use the Service.
 Contact Us  
 ----------
 
-If you have any questions about these Terms, please contact us.
+If you have any questions about these Terms, please contact us at admin@recipe-share.com
 
 
 `

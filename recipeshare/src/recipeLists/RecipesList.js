@@ -270,6 +270,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
+
       // console.log(this.state.awaitingServer)
       return (
         <React.Fragment>

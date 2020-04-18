@@ -44,10 +44,10 @@ class Chef < ApplicationRecord
         #types = "all_chefs", "chef_followees", "chef_followers", "chef_made", "most_liked_chefs", "most_made_chefs"
         if type == "all_chefs"
             # byebug
-            # ApplicationRecord.db.exec("SELECT * from chefs ORDER BY created_at DESC")
-                ApplicationRecord.db.exec("SELECT DISTINCT chefs.id, chefs.username, chefs.country, chefs.image_url, chefs.created_at, chefs.profile_text,
+            # Chef.find_by_sql(["SELECT * from chefs ORDER BY created_at DESC")
+                Chef.find_by_sql(["SELECT DISTINCT chefs.id, chefs.username, chefs.country, chefs.image_url, chefs.created_at, chefs.profile_text,
                                                 COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id), 0) AS followers,
-                                                COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id AND follows.follower_id = $1), 0) AS user_chef_following,
+                                                COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id AND follows.follower_id = ?), 0) AS user_chef_following,
                                                 COALESCE((SELECT COUNT(*) FROM recipes WHERE recipes.chef_id = chefs.id), 0) AS recipe_count,
                                                 COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.chef_id = chefs.id), 0) AS recipe_likes_given,
                                                 COALESCE(liked_recipes.liked_count, 0) AS recipe_likes_received,
@@ -73,14 +73,14 @@ class Chef < ApplicationRecord
                                                 GROUP BY recipes.chef_id) AS commented_recipes ON commented_recipes.counter_chef_id = chefs.id
                                             WHERE chefs.hidden = false
                                             ORDER BY chefs.created_at DESC
-                                            LIMIT $2
-                                            OFFSET $3", [userChefID, limit, offset])
+                                            LIMIT ?
+                                            OFFSET ?", userChefID, limit, offset])
 
         elsif type == "chef_followees" # chefs followed by user (chef_id)
 
-                ApplicationRecord.db.exec("SELECT DISTINCT chefs.id, chefs.username, chefs.country, chefs.image_url, chefs.created_at, chefs.profile_text, follows.created_at,
+                Chef.find_by_sql(["SELECT DISTINCT chefs.id, chefs.username, chefs.country, chefs.image_url, chefs.created_at, chefs.profile_text, follows.created_at,
                                                 COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id), 0) AS followers,
-                                                COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id AND follows.follower_id = $1), 0) AS user_chef_following,
+                                                COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id AND follows.follower_id = ?), 0) AS user_chef_following,
                                                 COALESCE((SELECT COUNT(*) FROM recipes WHERE recipes.chef_id = chefs.id), 0) AS recipe_count,
                                                 COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.chef_id = chefs.id), 0) AS recipe_likes_given,
                                                 COALESCE(liked_recipes.liked_count, 0) AS recipe_likes_received,
@@ -105,16 +105,16 @@ class Chef < ApplicationRecord
                                                 WHERE recipes.hidden = false
                                                 GROUP BY recipes.chef_id) AS commented_recipes ON commented_recipes.counter_chef_id = chefs.id
                                             LEFT OUTER JOIN follows ON follows.followee_id = chefs.id
-                                            WHERE follows.follower_id = $2 AND chefs.hidden = false
+                                            WHERE follows.follower_id = ? AND chefs.hidden = false
                                             ORDER BY follows.created_at DESC
-                                            LIMIT $3
-                                            OFFSET $4", [userChefID, queryChefID, limit, offset])
+                                            LIMIT ?
+                                            OFFSET ?", userChefID, queryChefID, limit, offset])
 
         elsif type == "chef_followers" # chefs followed by user (chef_id)
 
-            ApplicationRecord.db.exec("SELECT DISTINCT chefs.id, chefs.username, chefs.country, chefs.image_url, chefs.created_at, chefs.profile_text, follows.created_at,
+            Chef.find_by_sql(["SELECT DISTINCT chefs.id, chefs.username, chefs.country, chefs.image_url, chefs.created_at, chefs.profile_text, follows.created_at,
                                             COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id), 0) AS followers,
-                                            COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id AND follows.follower_id = $1), 0) AS user_chef_following,
+                                            COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id AND follows.follower_id = ?), 0) AS user_chef_following,
                                             COALESCE((SELECT COUNT(*) FROM recipes WHERE recipes.chef_id = chefs.id), 0) AS recipe_count,
                                             COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.chef_id = chefs.id), 0) AS recipe_likes_given,
                                             COALESCE(liked_recipes.liked_count, 0) AS recipe_likes_received,
@@ -139,10 +139,10 @@ class Chef < ApplicationRecord
                                             WHERE recipes.hidden = false
                                             GROUP BY recipes.chef_id) AS commented_recipes ON commented_recipes.counter_chef_id = chefs.id
                                         LEFT OUTER JOIN follows ON follows.follower_id = chefs.id
-                                        WHERE follows.followee_id = $2 AND chefs.hidden = false
+                                        WHERE follows.followee_id = ? AND chefs.hidden = false
                                         ORDER BY chefs.created_at DESC
-                                        LIMIT $3
-                                        OFFSET $4", [userChefID, queryChefID, limit, offset])
+                                        LIMIT ?
+                                        OFFSET ?", userChefID, queryChefID, limit, offset])
 
         elsif type === "most_liked_chefs"  || type === "most_made_chefs" # chefs according to their global rankings most recipes liked, and most recipes made
 
@@ -151,9 +151,9 @@ class Chef < ApplicationRecord
             else # if ranking == "liked"
                 order = "recipe_likes_received"
             end
-            ApplicationRecord.db.exec("SELECT DISTINCT chefs.id, chefs.username, chefs.country, chefs.image_url, chefs.created_at, chefs.profile_text,
+            Chef.find_by_sql(["SELECT DISTINCT chefs.id, chefs.username, chefs.country, chefs.image_url, chefs.created_at, chefs.profile_text,
                                             COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id), 0) AS followers,
-                                            COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id AND follows.follower_id = $1), 0) AS user_chef_following,
+                                            COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id AND follows.follower_id = ?), 0) AS user_chef_following,
                                             COALESCE((SELECT COUNT(*) FROM recipes WHERE recipes.chef_id = chefs.id), 0) AS recipe_count,
                                             COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.chef_id = chefs.id), 0) AS recipe_likes_given,
                                             COALESCE(liked_recipes.liked_count, 0) AS recipe_likes_received,
@@ -179,8 +179,8 @@ class Chef < ApplicationRecord
                                             GROUP BY recipes.chef_id) AS commented_recipes ON commented_recipes.counter_chef_id = chefs.id
                                         WHERE chefs.hidden = false
                                         ORDER BY #{order} DESC
-                                        LIMIT $2
-                                        OFFSET $3", [userChefID, limit, offset])
+                                        LIMIT ?
+                                        OFFSET ?", userChefID, limit, offset])
         end
     end
 

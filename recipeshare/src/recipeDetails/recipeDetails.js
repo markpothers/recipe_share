@@ -101,7 +101,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       if (this.props.navigation.getParam('commenting') === true ){
         await this.setState({commenting: true})
         setTimeout( () => {
-          this.myScroll.scrollTo({x: 0, y: 700, animated: true})
+          this.myScroll.scrollTo({x: 0, y: 1400, animated: true})
         }, 300)
       }
       await this.setState({awaitingServer: false})
@@ -326,6 +326,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     handleCommentTextInput = (commentText) => {
+      console.log("mark")
       this.setState({commentText: commentText})
     }
 
@@ -384,7 +385,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         // console.log(this.props.recipe_details.recipe)
         // console.log(this.props.recipe_details.recipe.acknowledgement === "")
         return (
-          <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={83} style={{flex:1}}>
+          <KeyboardAvoidingView style={{flex:1}}>
             <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
               {this.state.choosingPicSource ? this.renderPictureChooser() : null}
               {this.state.awaitingServer ? <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={Platform.OS === 'ios' ? centralStyles.activityIndicator : null} size="large" color="#104e01" /></View> : null }

@@ -164,7 +164,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       return (
         <ImageBackground source={require('../dataComponents/spinach.jpg')} style={centralStyles.spinachFullBackground}>
         <SafeAreaView style={centralStyles.fullPageSafeAreaView}>
-        <KeyboardAvoidingView style={centralStyles.fullPageKeyboardAvoidingView} behavior="padding">
+        <KeyboardAvoidingView style={centralStyles.fullPageKeyboardAvoidingView} >
         {this.state.awaitingServer && <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={centralStyles.activityIndicator } size="large" color="#104e01" /></View>}
         <ScrollView style={centralStyles.fullPageScrollView}>
           <View style={styles.logoContainer}>

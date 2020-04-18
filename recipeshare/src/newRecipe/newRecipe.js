@@ -420,7 +420,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       return (
         <ImageBackground source={require('../dataComponents/spinach.jpg')} style={centralStyles.spinachFullBackground}>
         <SafeAreaView style={centralStyles.fullPageSafeAreaView}>
-        <KeyboardAvoidingView style={centralStyles.fullPageKeyboardAvoidingView} behavior="padding">
+        <KeyboardAvoidingView style={centralStyles.fullPageKeyboardAvoidingView}>
         {this.state.awaitingServer && <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={centralStyles.activityIndicator } size="large" color="#104e01" /></View>}
         {this.state.filterDisplayed ? <FilterMenu handleCategoriesButton={this.handleCategoriesButton} newRecipe={true} confirmButtonText={"Save"} title={"Select categories for your recipe"}/> : null}
         {this.state.choosingPicture ? this.renderPictureChooser() : null}

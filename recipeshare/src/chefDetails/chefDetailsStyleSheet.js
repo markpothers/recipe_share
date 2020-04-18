@@ -146,7 +146,7 @@ export const styles = StyleSheet.create({
     // borderStyle: 'solid',
     // borderWidth: 5,
     // borderColor: 'yellow',
-    height: 555
+    height: 566
   },
   chefDetailsStats: {
     borderStyle: 'solid',

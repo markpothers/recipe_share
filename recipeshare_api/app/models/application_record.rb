@@ -4,15 +4,22 @@ require "pg"
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
-  def self.db
-    # byebug
-    pgrsdb = PG::Connection.new(host: Rails.application.credentials.Google[:database_hosts][Rails.env.to_sym],
-                                port: 5432,
-                                dbname: Rails.application.credentials.Google[:database_names][Rails.env.to_sym],
-                                user: Rails.application.credentials.Google[:postgres_username],
-                                password: Rails.application.credentials.Google[:postgres_password])
-    return pgrsdb
-  end
+  # def self.db
+  #   details = {
+  #     host: Rails.application.credentials.Google[:database_hosts][Rails.env.to_sym],
+  #                               port: 5432,
+  #                               dbname: Rails.application.credentials.Google[:database_names][Rails.env.to_sym],
+  #                               user: Rails.application.credentials.Google[:postgres_username],
+  #                               password: Rails.application.credentials.Google[:postgres_password]
+  #   }
+  #   byebug
+  #   pgrsdb = PG::Connection.new(host: Rails.application.credentials.Google[:database_hosts][Rails.env.to_sym],
+  #                               port: 5432,
+  #                               dbname: Rails.application.credentials.Google[:database_names][Rails.env.to_sym],
+  #                               user: Rails.application.credentials.Google[:postgres_username],
+  #                               password: Rails.application.credentials.Google[:postgres_password])
+  #   return pgrsdb
+  # end
 
 
   def self.storage_bucket(bucket)
