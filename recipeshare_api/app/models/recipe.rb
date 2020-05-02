@@ -45,8 +45,10 @@ class Recipe < ApplicationRecord
       # sql = ""
 # byebug
 
-        recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*, recipe_images.image_url,
-                                    chefs.username ,chefs.image_url AS chefimage_url,
+        recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*,
+                                      MAX(recipe_images.image_url) AS image_url,
+                                      MAX(chefs.username) AS username,
+                                      MAX(chefs.image_url) AS chefimage_url,
                                       COALESCE((SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id), 0) AS shares_count,
                                       COALESCE((SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id AND re_shares.chef_id = ?), 0) AS chef_shared,
                                       COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id), 0) AS likes_count,
@@ -66,6 +68,7 @@ class Recipe < ApplicationRecord
                                     #{filter_string}
                                     #{cuisine_string}
                                     #{serves_string}
+                                    GROUP BY recipes.id
                                     ORDER BY recipes.updated_at DESC
                                     LIMIT ?
                                     OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offset])
@@ -80,8 +83,10 @@ class Recipe < ApplicationRecord
       #                               LIMIT (?)
       #                               OFFSET (?)", [chef_id, limit, offset])
 
-      recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*, recipe_images.image_url,
-                                      chefs.username ,chefs.image_url AS chefimage_url,
+      recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*, 
+                                        MAX(recipe_images.image_url) AS image_url,
+                                        MAX(chefs.username) AS username,
+                                        MAX(chefs.image_url) AS chefimage_url,
                                       COALESCE((SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id), 0) AS shares_count,
                                       COALESCE((SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id AND re_shares.chef_id = ?), 0) AS chef_shared,
                                       COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id), 0) AS likes_count,
@@ -101,6 +106,7 @@ class Recipe < ApplicationRecord
                                       #{filter_string}
                                       #{cuisine_string}
                                       #{serves_string}
+                                      GROUP BY recipes.id
                                       ORDER BY recipes.updated_at DESC
                                       LIMIT ?
                                       OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, limit, offset])
@@ -116,8 +122,13 @@ class Recipe < ApplicationRecord
       #                               LIMIT (?)
       #                               OFFSET (?)", [owner_id, limit, offset])
 
-      recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*, recipe_images.image_url,
-                                    chefs.username ,chefs.image_url AS chefimage_url, sharers.sharer_username, sharers.sharer_id, sharers.shared_id,
+      recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*,
+                                    MAX(recipe_images.image_url) AS image_url,
+                                    MAX(chefs.username) AS username,
+                                    MAX(chefs.image_url) AS chefimage_url,
+                                    MAX(sharers.sharer_username) AS sharer_username,
+                                    MAX(sharers.sharer_id) AS sharer_id,
+                                    MAX(sharers.shared_id) AS shared_id,
                                     COALESCE((SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id), 0) AS shares_count,
                                     COALESCE((SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id AND re_shares.chef_id = ?), 0) AS chef_shared,
                                     COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id), 0) AS likes_count,
@@ -144,6 +155,7 @@ class Recipe < ApplicationRecord
                                     #{filter_string}
                                     #{cuisine_string}
                                     #{serves_string}
+                                    GROUP BY recipes.id
                                     ORDER BY recipes.updated_at DESC
                                     LIMIT ?
                                     OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, queryChefID, queryChefID, limit, offset])
@@ -246,8 +258,10 @@ class Recipe < ApplicationRecord
       #                               LIMIT (?)
       #                               OFFSET (?)", [limit, offset])
 
-        recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*, recipe_images.image_url,
-                                      chefs.username ,chefs.image_url AS chefimage_url,
+        recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*, 
+                                        MAX(recipe_images.image_url) AS image_url,
+                                        MAX(chefs.username) AS username,
+                                        MAX(chefs.image_url) AS chefimage_url,
                                       COALESCE((SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id), 0) AS shares_count,
                                       COALESCE((SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id AND re_shares.chef_id = ?), 0) AS chef_shared,
                                       COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id), 0) AS likes_count,
@@ -267,6 +281,7 @@ class Recipe < ApplicationRecord
                                       #{filter_string}
                                       #{cuisine_string}
                                       #{serves_string}
+                                      GROUP BY recipes.id
                                       ORDER BY likes_count DESC
                                       LIMIT ?
                                       OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offset])
@@ -298,8 +313,10 @@ class Recipe < ApplicationRecord
     #                               LIMIT (?)
     #                               OFFSET (?)", [limit, offset])
 
-    recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*, recipe_images.image_url,
-                                chefs.username ,chefs.image_url AS chefimage_url,
+    recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*,
+                                  MAX(recipe_images.image_url) AS image_url,
+                                  MAX(chefs.username) AS username,
+                                  MAX(chefs.image_url) AS chefimage_url,
                                 COALESCE((SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id), 0) AS shares_count,
                                 COALESCE((SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id AND re_shares.chef_id = ?), 0) AS chef_shared,
                                 COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id), 0) AS likes_count,
@@ -319,14 +336,17 @@ class Recipe < ApplicationRecord
                                 #{filter_string}
                                 #{cuisine_string}
                                 #{serves_string}
+                                GROUP BY recipes.id
                                 ORDER BY (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id) DESC
                                 LIMIT ?
                                 OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offset])
 
     else # if all else fails, just show all recipes ordered most recent first
 
-    recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*, recipe_images.image_url,
-                                chefs.username ,chefs.image_url AS chefimage_url,
+    recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*,
+                                  MAX(recipe_images.image_url) AS image_url,
+                                  MAX(chefs.username) AS username,
+                                  MAX(chefs.image_url) AS chefimage_url,
                                 COALESCE((SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id), 0) AS shares_count,
                                 COALESCE((SELECT COUNT(*) FROM re_shares WHERE re_shares.recipe_id = recipes.id AND re_shares.chef_id = ?), 0) AS chef_shared,
                                 COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id), 0) AS likes_count,
@@ -346,12 +366,12 @@ class Recipe < ApplicationRecord
                                 #{filter_string}
                                 #{cuisine_string}
                                 #{serves_string}
+                                GROUP BY recipes.id
                                 ORDER BY recipes.updated_at DESC
                                 LIMIT ?
                                 OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offset])
 # byebug
     end
-    # pg.finish
     return recipes_results
   end
 
