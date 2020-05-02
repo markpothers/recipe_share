@@ -11,6 +11,7 @@ import { MyRecipeBookTabsContainer, MyRecipeBookTabs } from './ChefDetailsNaviga
 import { postFollow } from '../fetches/postFollow'
 import { destroyFollow } from '../fetches/destroyFollow'
 import { NavigationEvents, withNavigation } from 'react-navigation'
+import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 
 const mapStateToProps = (state) => ({
   loggedInChef: state.loggedInChef,
@@ -112,37 +113,34 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
-      // console.log(this.props.chefs_details[`chef${this.props.navigation.getParam('chefID')}`])
       if(this.props.chefs_details[`chef${this.props.navigation.getParam('chefID')}`] !== undefined){
         const chef_details = this.props.chefs_details[`chef${this.props.navigation.getParam('chefID')}`]
+        // console.log(this.props.chefs_details[`chef${this.props.navigation.getParam('chefID')}`].recipe_likes.length)
         return (
-          <View style={{flex:1}}>
-            <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
-              <NavigationEvents onWillFocus={this.respondToFocus}/>
-              {this.state.awaitingServer ? <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={Platform.OS === 'ios' ? centralStyles.activityIndicator : null} size="large" color="#104e01" /></View> : null }
-              <ScrollView contentContainerStyle={{flexGrow:1}}>
-                <ChefDetailsCard 
-                  {...chef_details} 
-                  image_url={chef_details.chef.image_url} 
-                  followChef={this.followChef}
-                  unFollowChef={this.unFollowChef}
-                  notProfile={true}/>
-                <View style={styles.recipeBookContainer}>
-                  <MyRecipeBookTabsContainer screenProps={{parentNavigator: this.parentNavigator, queryChefID: chef_details.chef.id}}/>
-                  {/* <MyRecipeBook/> */}
-                </View>
-              </ScrollView>
-            </ImageBackground>
-          </View>
+          <SpinachAppContainer awaitingServer={this.state.awaitingServer}>
+            <NavigationEvents onWillFocus={this.respondToFocus}/>
+            <ScrollView contentContainerStyle={{flexGrow:1}}>
+              <ChefDetailsCard 
+                {...chef_details} 
+                image_url={chef_details.chef.image_url} 
+                followChef={this.followChef}
+                unFollowChef={this.unFollowChef}
+                notProfile={true}/>
+              <View style={styles.recipeBookContainer}>
+                <MyRecipeBookTabsContainer screenProps={{
+                  parentNavigator: this.parentNavigator, 
+                  queryChefID: chef_details.chef.id,
+                  fetchChefDetails: this.fetchChefDetails}
+                }/>
+              </View>
+            </ScrollView>
+          </SpinachAppContainer>
         )
       } else {
         // console.log(this.props)
         return (
-          <View style={{flex:1}}>
-            <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
-              {this.state.awaitingServer ? <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={Platform.OS === 'ios' ? centralStyles.activityIndicator : null} size="large" color="#104e01" /></View> : null }
-            </ImageBackground>
-          </View>
+          <SpinachAppContainer awaitingServer={this.state.awaitingServer}>
+          </SpinachAppContainer>
         )
       }
     }

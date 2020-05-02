@@ -13,6 +13,7 @@ import DualOSPicker from '../functionalComponents/DualOSPicker'
 import { termsAndConditions } from '../dataComponents/termsAndConditions'
 import { privacyPolicy } from '../dataComponents/privacyPolicy'
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions'
+import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 
 const mapStateToProps = (state) => ({
   first_name: state.newUserDetails.first_name,
@@ -152,12 +153,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     render() {
       // console.log(this.props.saveChefDetails)
       return (
-        <ImageBackground source={require('../dataComponents/spinach.jpg')} style={centralStyles.spinachFullBackground}>
-        <SafeAreaView style={centralStyles.fullPageSafeAreaView}>
-        <KeyboardAvoidingView style={centralStyles.fullPageKeyboardAvoidingView}>
-        {this.state.awaitingServer && <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={centralStyles.activityIndicator } size="large" color="#104e01" /></View>}
+        <SpinachAppContainer scrollingEnabled={true} awaitingServer={this.state.awaitingServer}>
         {this.state.choosingPicture ? this.renderPictureChooser() : null}
-        <ScrollView style={centralStyles.fullPageScrollView}>
           <View style={[centralStyles.formContainer, {marginTop: responsiveHeight(10)}]}>
             {/* title */}
             <View style={centralStyles.formSection}>
@@ -274,118 +271,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
               </View>
             </View>
           </View>
-
-
-
-
-
-
-
-
-{/* 
-        <KeyboardAvoidingView  style={styles.mainPageContainer} >
-          <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
-          {this.state.choosingPicture ? this.renderPictureChooser() : null}
-          {this.state.awaitingServer ? <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={Platform.OS === 'ios' ? centralStyles.activityIndicator : null} size="large" color="#104e01" /></View> : null }
-            <View style={styles.createChefForm}>
-              <ScrollView>
-                <View style={styles.formRow}>
-                  <View style={styles.loginHeader}>
-                    <Text style={styles.createChefTitle}>Please register and click the link in your confirmation e-mail!</Text>
-                  </View>
-                </View>
-                <View style={styles.formRow}>
-                  <View style={styles.loginInputBox}>
-                    <TextInput style={styles.loginTextBox} placeholder="e-mail" keyboardType="email-address"  autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "e_mail")}/>
-                  </View>
-                </View>
-                  {this.renderEmailError()}
-                <View style={styles.formRow}>
-                  <View style={styles.loginInputBox}>
-                    <TextInput style={styles.loginTextBox} placeholder="username"  autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "username")}/>
-                  </View>
-                </View>
-                {this.renderUsernameError()}
-                <View style={[styles.formRow, {zIndex: 1}]}>
-                  <View picker style={[styles.pickerInputBox, (this.state.pickerFocused ? {height: 170} : {height: 44})]}>
-                    <DualOSPicker
-                      onChoiceChange={this.onCountryChange}
-                      options={countries}
-                      selectedChoice={this.props.country}/>
-                  </View>
-                </View>
-                <View style={styles.formRow}>
-                  <View style={styles.loginInputAreaBox} >
-                    <TextInput style={styles.loginTextBox} value={this.props.profile_text} placeholder="about me" multiline={true} numberOfLines={3} onChange={(e) => this.handleTextInput(e, "profile_text")}/>
-                  </View>
-                </View>
-                <View style={styles.formRow}>
-                  <View style={styles.loginInputBox} >
-                    <TextInput style={styles.loginTextBox} placeholder="password"  autoCapitalize="none" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")}/>
-                  </View>
-                </View>
-                <View style={styles.formRow}>
-                  <View style={styles.loginInputBox} >
-                    <TextInput style={styles.loginTextBox} placeholder="confirm password"  autoCapitalize="none" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password_confirmation")}/>
-                  </View>
-                </View>
-                {this.renderPasswordError()}
-                <View style={styles.formRow}>
-                  <TouchableOpacity style={styles.loginInputBox} activeOpacity={0.7} onPress={() => this.setState({viewingTermsAndConditions: true})}>
-                    <Text style={styles.loginTextBox}>{`View Terms & Conditions`}</Text>
-                  </TouchableOpacity>
-                  {this.state.viewingTermsAndConditions && (
-                    <TextPopUp
-                      close={() => this.setState({viewingTermsAndConditions: false})}
-                      title={`Terms and Conditions`}
-                      text={termsAndConditions}
-                    />
-                  )}
-                </View>
-                <View style={styles.formRow}>
-                  <TouchableOpacity style={[styles.loginInputBox, {marginRight: 0, width: '40%'}]} activeOpacity={0.7} onPress={() => this.setState({viewingPrivacyPolicy: true})}>
-                    <Text style={styles.loginTextBox}>View Privacy Policy</Text>
-                  </TouchableOpacity>
-                  {this.state.viewingPrivacyPolicy && (
-                    <TextPopUp
-                      close={() => this.setState({viewingPrivacyPolicy: false})}
-                      title={`Privacy Policy`}
-                      text={privacyPolicy}
-                    />
-                  )}
-                  <View style={[styles.loginFormButton, {width:'30%', marginRight: 0}]}>
-                    <Text style={styles.loginFormButtonText}>Agree Privacy{"\n"}Policy</Text>
-                    <Switch style={(Platform.OS === 'ios' ? {transform:[{scaleX:.8},{scaleY:.8}]}:null)} value={this.state.tAndCAgreed} onChange={this.handleTandCSwitch}/>
-                  </View>
-                </View>
-                <View style={styles.formRow}>
-                  <View style={styles.loginFormButton}>
-                    <Text style={styles.loginFormButtonText}>Agree{"\n"}T&C</Text>
-                    <Switch style={(Platform.OS === 'ios' ? {transform:[{scaleX:.8},{scaleY:.8}]}:null)} value={this.state.tAndCAgreed} onChange={this.handleTandCSwitch}/>
-                  </View>
-                  <TouchableOpacity style={styles.loginFormButton} activeOpacity={0.7} title="Take Photo" onPress={this.choosePicture}>
-                    <Icon style={styles.standardIcon} size={25} name='camera' />
-                    <Text style={styles.loginFormButtonText}>Add{"\n"}picture</Text>
-                  </TouchableOpacity>
-                </View>
-                <View style={styles.formRow}>
-                <TouchableOpacity style={styles.loginFormButton} activeOpacity={0.7} onPress={() => this.props.navigation.navigate('Login')}>
-                    <Icon style={styles.standardIcon} size={25} name='login' />
-                    <Text style={styles.loginFormButtonText}>Return to{"\n"} login screen</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.loginFormButton} activeOpacity={0.7} onPress={(this.state.tAndCAgreed ? e => this.submitChef(e) : null )}>
-                    <Icon style={styles.standardIcon} size={25} name='login-variant' />
-                    <Text style={styles.loginFormButtonText}>{(this.state.tAndCAgreed ? "Submit &\n go to log in" : "Please\naccept T&C")}</Text>
-                  </TouchableOpacity>
-                </View>
-              </ScrollView>
-            </View>
-          </ImageBackground>
-        </KeyboardAvoidingView> */}
-        </ScrollView>
-        </KeyboardAvoidingView>
-        </SafeAreaView>
-        </ImageBackground>
+        </SpinachAppContainer>
       )
     }
   }

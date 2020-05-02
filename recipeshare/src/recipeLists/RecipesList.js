@@ -13,6 +13,7 @@ import { styles } from './recipeListStyleSheet'
 import { centralStyles } from '../centralStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FilterMenu from '../functionalComponents/filterMenu'
+import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 
 const mapStateToProps = (state) => ({
       all_Recipes: state.recipes.all,
@@ -172,6 +173,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
           }
         })
         this.props.storeRecipeList(this.props["listChoice"], recipes)
+        this.props.fetchChefDetails && this.props.fetchChefDetails()
       }
       await this.setState({awaitingServer: false})
     }
@@ -190,6 +192,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
           }
         })
         this.props.storeRecipeList(this.props["listChoice"], recipes)
+        this.props.fetchChefDetails && this.props.fetchChefDetails()
       }
       await this.setState({awaitingServer: false})
     }
@@ -226,6 +229,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
           }
         })
         this.props.storeRecipeList(this.props["listChoice"], recipes)
+        this.props.fetchChefDetails && this.props.fetchChefDetails()
       }
       await this.setState({awaitingServer: false})
     }
@@ -244,6 +248,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
           }
         })
         this.props.storeRecipeList(this.props["listChoice"], recipes)
+        this.props.fetchChefDetails && this.props.fetchChefDetails()
       }
       await this.setState({awaitingServer: false})
     }
@@ -271,11 +276,10 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
 
     render() {
 
-      // console.log(this.state.awaitingServer)
+      // console.log(this.props.addLikeCount)
       return (
-        <React.Fragment>
+        <SpinachAppContainer awaitingServer={this.state.awaitingServer}>
           <NavigationEvents onWillFocus={this.respondToFocus} onWillBlur={this.respondToBlur}/>
-            {this.state.awaitingServer ? <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={Platform.OS === 'ios' ? centralStyles.activityIndicator : null} size="large" color="#104e01" /></View> : null }
             <TouchableOpacity style={styles.filterButton} activeOpacity={0.7} onPress={this.handleFilterButton}>
               <Icon name='filter' size={24} style={styles.filterIcon}/>
             </TouchableOpacity>
@@ -294,7 +298,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
             nestedScrollEnabled={true}
           />
           {this.state.filterDisplayed ? <FilterMenu handleFilterButton={this.handleFilterButton} refresh={this.refresh} closeFilterAndRefresh={this.closeFilterAndRefresh} confirmButtonText={"Apply"} title={"Apply filters to recipes list"}/> : null}
-        </React.Fragment>
+        </SpinachAppContainer>
       )
     }
   }

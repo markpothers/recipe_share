@@ -18,6 +18,7 @@ import RecipeComment from './recipeComment'
 import RecipeNewComment from './recipeNewComment';
 import AppHeader from '../../navigation/appHeader'
 import PicSourceChooser from '../functionalComponents/picSourceChooser'
+import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 
 const mapStateToProps = (state) => ({
   recipe_details: state.recipe_details,
@@ -385,10 +386,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         // console.log(this.props.recipe_details.recipe)
         // console.log(this.props.recipe_details.recipe.acknowledgement === "")
         return (
-          <KeyboardAvoidingView style={{flex:1}}>
-            <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
+          <SpinachAppContainer awaitingServer={this.state.awaitingServer}>
               {this.state.choosingPicSource ? this.renderPictureChooser() : null}
-              {this.state.awaitingServer ? <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={Platform.OS === 'ios' ? centralStyles.activityIndicator : null} size="large" color="#104e01" /></View> : null }
               <View style={styles.detailsHeader}>
                 <View style={styles.detailsHeaderTopRow}>
                   <View style={styles.headerTextView}>
@@ -449,14 +448,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                   {this.renderRecipeComments()}
                 </View>
               </ScrollView>
-            </ImageBackground>
-          </KeyboardAvoidingView>
+          </SpinachAppContainer>
         );
       } else {
         return (
-          <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
-            {this.state.awaitingServer ? <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={Platform.OS === 'ios' ? centralStyles.activityIndicator : null} size="large" color="#104e01" /></View> : null }
-          </ImageBackground>
+          <SpinachAppContainer awaitingServer={this.state.awaitingServer}>
+          </SpinachAppContainer>
         )
       }
     }

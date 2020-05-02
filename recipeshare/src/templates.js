@@ -6,6 +6,7 @@ import { centralStyles } from '../centralStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { getNewPassword } from '../fetches/getNewPassword'
 import { loginChef } from '../fetches/loginChef'
+import SpinachAppContainer from './spinachAppContainer/SpinachAppContainer'
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   class Templates extends React.Component {
@@ -26,12 +27,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     render() {
       // console.log(this.props.e_mail)
       return (
-        <ImageBackground source={require('../dataComponents/spinach.jpg')} style={centralStyles.spinachFullBackground}>
-        <SafeAreaView style={centralStyles.fullPageSafeAreaView}>
-        <KeyboardAvoidingView style={centralStyles.fullPageKeyboardAvoidingView} >
-        {this.state.awaitingServer && <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={centralStyles.activityIndicator } size="large" color="#104e01" /></View>}
-        <ScrollView style={centralStyles.fullPageScrollView}>
-
+        <SpinachAppContainer awaitingServer={this.state.awaitingServer} scrollingEnabled={true}>
           {/* logo   */}
           <View style={styles.logoContainer}>
             <Image style={styles.logo} resizeMode={"contain"} source={require('../dataComponents/yellowLogo.png')}/>
@@ -136,11 +132,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
         </View>
 
-
-        </ScrollView>
-        </KeyboardAvoidingView>
-        </SafeAreaView>
-        </ImageBackground>
+        </SpinachAppContainer>
 
       )
     }

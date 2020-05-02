@@ -141,7 +141,7 @@ export const styles = StyleSheet.create({
   addIngredientQuantityInputBox: {
      marginRight: '2%',
      backgroundColor: 'white',
-     height: '100%',
+     height: responsiveHeight(6),
      width: '30%',
      borderStyle: 'solid',
      justifyContent: 'center',
@@ -152,7 +152,7 @@ export const styles = StyleSheet.create({
   addIngredientUnitInputBox: {
      backgroundColor: 'white',
      justifyContent: 'center',
-     height: '100%',
+     height: responsiveHeight(6),
      width: '68%',
      borderStyle: 'solid',
      borderWidth: 1,
@@ -168,14 +168,14 @@ export const styles = StyleSheet.create({
     marginTop: responsiveHeight(0.5),
     flexDirection:'row',
     width: '100%',
-    height: responsiveHeight(6),
+    // height: responsiveHeight(6),
     // borderWidth: 1
   },
   autoCompleteContainer: {
     position: 'absolute',
     width: '49%',
     borderRadius: 5,
-    height: '100%',
+    // height: '100%',
     // justifyContent: 'center'
   },
   quantityAndUnitContainer: {
@@ -216,7 +216,7 @@ export const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: '#104e01',
-    height: '100%',
+    height: responsiveHeight(6),
     paddingLeft: '4%',
   },
   autoCompleteList: {

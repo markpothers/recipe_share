@@ -5,8 +5,8 @@ import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 import { store } from './src/functionalComponents/store'
 // This was requested by react Navigation although I can't see the difference in functionality
-import { enableScreens } from 'react-native-screens';
-enableScreens();
+// import { enableScreens } from 'react-native-screens';
+// enableScreens();
 
 export default class App extends React.Component {
   state = {

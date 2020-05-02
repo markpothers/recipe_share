@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet } from 'react-native';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions'
 
-const inDevelopment = false
+const inDevelopment = true
 
 export const centralStyles = StyleSheet.create({
   activityIndicator:{
@@ -24,20 +24,39 @@ export const centralStyles = StyleSheet.create({
     zIndex: 1
   },
   spinachFullBackground: {
-    flex: 1,
+    // flex: 1,
+    width: responsiveWidth(100),
+    height: responsiveHeight(100),
     borderWidth: inDevelopment ? 1 : 0,
-    borderColor: 'black'
+    borderColor: 'black',
+    position: 'absolute',
+    // zIndex: -2,
+    // top: 0,
+    // left: 0,
+    // overflow: 'scroll'
   },
   fullPageSafeAreaView: {
     flex: 1,
+    // width: '100%',
+    // height: '100%',
     borderWidth: inDevelopment ? 1 : 0,
-    borderColor: 'white'
+    borderColor: 'blue',
+    // justifyContent: 'flex-end'
   },
   fullPageKeyboardAvoidingView: {
     flex: 1,
     borderWidth: inDevelopment ? 1 : 0,
-    borderColor: 'red'
+    borderColor: 'red',
+    position: 'absolute',
   },
+  // fullPageKeyboardAvoidingViewContentContainer: {
+  //   // flex: 1,
+  //   width: '25%',
+  //   height: '25%',
+  //   borderWidth: inDevelopment ? 1 : 0,
+  //   borderColor: 'blue',
+  //   backgroundColor: 'blue',
+  // },
   fullPageScrollView: {
     flex: 1,
     borderWidth: inDevelopment ? 1 : 0,

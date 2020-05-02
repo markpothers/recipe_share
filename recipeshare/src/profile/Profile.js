@@ -14,6 +14,7 @@ import DeleteChefOption from './deleteChefOption'
 import PicSourceChooser from '../functionalComponents/picSourceChooser'
 import { destroyChef } from '../fetches/destroyChef'
 import { NavigationEvents, withNavigation } from 'react-navigation'
+import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 
 
 const mapStateToProps = (state) => ({
@@ -206,28 +207,19 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       if(this.props.chefs_details[`chef${this.props.loggedInChef.id}`] !== undefined){
         const chef_details = this.props.chefs_details[`chef${this.props.loggedInChef.id}`]
         return (
-          <React.Fragment>
+          <SpinachAppContainer awaitingServer={this.state.awaitingServer}>
             {this.state.editingChef ? this.renderChefEditor() : null}
             <NavigationEvents onWillFocus={this.respondToFocus} onWillBlur={this.respondToBlur}/>
-            <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
-              {this.state.awaitingServer ? <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={Platform.OS === 'ios' ? centralStyles.activityIndicator : null} size="large" color="#104e01" /></View> : null }
               {this.props.loggedInChef.is_admin ? this.renderDatabaseButtons() : null}
               {this.state.choosingPicture ? this.renderPictureChooser() : null}
               {this.state.deleteChefOptionVisible ? this.renderDeleteChefOption() : null}
               <ChefDetailsCard editChef={this.editingChef} myProfile={true} {...chef_details} image_url={chef_details.chef.image_url}/>
-            </ImageBackground>
-          </React.Fragment>
+          </SpinachAppContainer>
         )
       } else {
         return (
-          <View style={{flex:1}}>
-            <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
-              {this.state.awaitingServer ? <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={Platform.OS === 'ios' ? centralStyles.activityIndicator : null} size="large" color="#104e01" /></View> : null }
-              {this.props.loggedInChef.is_admin ? this.renderDatabaseButtons() : null}
-              {this.state.choosingPicture ? this.renderPictureChooser() : null}
-              {this.state.deleteChefOptionVisible ? this.renderDeleteChefOption() : null}
-            </ImageBackground>
-          </View>
+          <SpinachAppContainer awaitingServer={this.state.awaitingServer}>
+          </SpinachAppContainer>
         )
       }
     }

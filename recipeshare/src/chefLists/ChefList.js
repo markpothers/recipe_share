@@ -8,6 +8,7 @@ import { NavigationEvents, withNavigation } from 'react-navigation'
 import { postFollow } from '../fetches/postFollow'
 import { destroyFollow } from '../fetches/destroyFollow'
 import { centralStyles } from '../centralStyleSheet'
+import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 
 const mapStateToProps = (state) => ({
       all_chefs: state.chefs.all_chefs,
@@ -155,9 +156,8 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
     render() {
       // console.log(this.props[this.props["listChoice"]])
       return (
-        <React.Fragment>
+        <SpinachAppContainer awaitingServer={this.state.awaitingServer}>
           <NavigationEvents onWillFocus={this.respondToFocus}/>
-            {this.state.awaitingServer ? <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={Platform.OS === 'ios' ? centralStyles.activityIndicator : null} size="large" color="#104e01" /></View> : null }
           <FlatList
             data={this.props[this.props["listChoice"]]}
             renderItem={this.renderChefListItem}
@@ -167,7 +167,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
             // onEndReached={this.onEndReached}
             onEndReachedThreshold={0.3}
           />
-        </React.Fragment>
+        </SpinachAppContainer>
       )
     }
 

@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { getNewPassword } from '../fetches/getNewPassword'
 import { loginChef } from '../fetches/loginChef'
 import { responsiveWidth } from 'react-native-responsive-dimensions'
+import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 
 const mapStateToProps = (state) => ({
   e_mail: state.loginUserDetails.e_mail,
@@ -53,7 +54,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       loginError: false,
       error: 'invalid ',
       awaitingServer: false,
-      // forgottenPasswordMessage: ''
     }
 
     handleTextInput = (e, parameter) => {
@@ -91,54 +91,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       }
     }
 
-    // renderCredentialsError = () => {
-    //   if (this.state.error === "invalid"){
-    //     return (
-    //       <View style={styles.formRow}>
-    //         <View style={styles.formError}>
-    //           <Text style={styles.formErrorText}>Username and password combination not recognized.</Text>
-    //         </View>
-    //       </View>
-    //     )
-    //   }
-    // }
-
-    // renderPasswordExpiredError = () => {
-    //   if (this.state.error === "password_expired"){
-    //     return (
-    //       <View style={styles.formRow}>
-    //         <View style={styles.formError}>
-    //           <Text style={styles.formErrorText}>Automatically generated password has expired.  Please reset your password.</Text>
-    //         </View>
-    //       </View>
-    //     )
-    //   }
-    // }
-
-    // renderAccountActivationError = () => {
-    //   if (this.state.error === "activation"){
-    //     return (
-    //       <View style={styles.formRow}>
-    //         <View style={styles.formError}>
-    //           <Text style={styles.formErrorText}>Account not yet activated.  Please click the link in your confirmation e-mail. (Don't forget to check spam!)</Text>
-    //         </View>
-    //       </View>
-    //     )
-    //   }
-    // }
-
-    // renderAccountDeactivatedError = () => {
-    //   if (this.state.error === "deactivated"){
-    //     return (
-    //       <View style={styles.formRow}>
-    //         <View style={styles.formError}>
-    //           <Text style={styles.formErrorText}>This account was deactivated.  Reset your password to reactivate your account.</Text>
-    //         </View>
-    //       </View>
-    //     )
-    //   }
-    // }
-
     forgotPassword = async() => {
       const response = await getNewPassword(this.props.e_mail)
       if (response){
@@ -147,26 +99,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       }
     }
 
-    // renderForgotPasswordError = () => {
-    //   if (this.state.error === "forgotPassword"){
-    //     return (
-    //       <View style={styles.formRow}>
-    //         <View style={styles.formError}>
-    //           <Text style={styles.formErrorText}>{this.state.forgottenPasswordMessage}</Text>
-    //         </View>
-    //       </View>
-    //     )
-    //   }
-    // }
-
     render() {
       // console.log(this.props.e_mail)
       return (
-        <ImageBackground source={require('../dataComponents/spinach.jpg')} style={centralStyles.spinachFullBackground}>
-        <SafeAreaView style={centralStyles.fullPageSafeAreaView}>
-        <KeyboardAvoidingView style={centralStyles.fullPageKeyboardAvoidingView} >
-        {this.state.awaitingServer && <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={centralStyles.activityIndicator } size="large" color="#104e01" /></View>}
-        <ScrollView style={centralStyles.fullPageScrollView}>
+        <SpinachAppContainer scrollingEnabled={true} awaitingServer={this.state.awaitingServer}>
           <View style={styles.logoContainer}>
             <Image style={styles.logo} resizeMode={"contain"} source={require('../dataComponents/yellowLogo.png')}/>
           </View>
@@ -219,68 +155,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 </TouchableOpacity>
               </View>
             </View>
-
-
-
-
-
-
-
-
           </View>
-
-
-
-
-              {/* <View style={styles.loginForm} >
-                <View style={styles.formRow}>
-                  <View style={styles.loginHeader}>
-                    <Text style={styles.loginTitle}>Welcome, chef!{"\n"} Please log in or register</Text>
-                  </View>
-                </View>
-                <View style={styles.formRow}>
-                  <View style={styles.loginInputBox}>
-                    <TextInput style={styles.loginTextBox} placeholder="e-mail" keyboardType="email-address" autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "e_mail")}/>
-                  </View>
-                </View>
-                {this.renderForgotPasswordError()}
-                {this.renderAccountActivationError()}
-                {this.renderAccountDeactivatedError()}
-                <View style={styles.formRow}>
-                  <View style={styles.loginInputBox}>
-                    <TextInput style={styles.loginTextBox} placeholder="password" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")}/>
-                  </View>
-                </View>
-                {this.renderCredentialsError()}
-                {this.renderPasswordExpiredError()}
-                <View style={styles.formRow}>
-                  <TouchableOpacity style={styles.loginFormButton} activeOpacity={0.7} onPress={() => this.props.navigation.navigate('CreateChef')}>
-                    <Icon style={styles.standardIcon} size={25} name='account-plus'></Icon>
-                      <Text style={styles.loginFormButtonText}>Register</Text>
-                  </TouchableOpacity>
-                  <View style={styles.loginFormButton}>
-                    <Text style={styles.loginFormButtonText}>Stay{"\n"}logged in</Text>
-                    <Switch style={(Platform.OS === 'ios' ? {transform:[{scaleX:.8},{scaleY:.8}]}:null)} value={this.props.stayingLoggedIn} onChange={(e) => this.props.stayLoggedIn(e.nativeEvent.value)}/>
-                  </View>
-                </View>
-                <View style={styles.formRow}>
-                  <TouchableOpacity style={styles.loginFormButton} activeOpacity={0.7} onPress={this.forgotPassword}>
-                    <Icon style={styles.standardIcon} size={25} name='lock-open'></Icon>
-                    <Text style={styles.loginFormButtonText}>Reset{"\n"}password</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.loginFormButton} activeOpacity={0.7} onPress={e => this.loginChef(e)}>
-                    <Icon style={styles.standardIcon} size={25} name='login'></Icon>
-                      <Text style={styles.loginFormButtonText}>Login</Text>
-                  </TouchableOpacity>
-                </View>
-              </View> */}
-        </ScrollView>
-        </KeyboardAvoidingView>
-        </SafeAreaView>
-        </ImageBackground>
-
+        </SpinachAppContainer>
       )
     }
-
   }
 )

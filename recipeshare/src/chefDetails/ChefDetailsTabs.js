@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ImageBackground } from 'react-native';
+import { ImageBackground } from 'react-native';
 import RecipesList from '../recipeLists/RecipesList'
 import ChefList from '../chefLists/ChefList'
 import { styles } from '../../navigation/navigationStyleSheet'
@@ -7,13 +7,11 @@ import { styles } from '../../navigation/navigationStyleSheet'
 export class ChefFeedScreen extends React.Component {
   render (){
     return (
-      <View style={styles.mainPageContainer}>
-        <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} >
           <RecipesList listChoice={"chef_feed"}
             parentNavigator={this.props.screenProps.parentNavigator}
-            queryChefID={this.props.screenProps.queryChefID}/>
-        </ImageBackground>
-      </View>
+            queryChefID={this.props.screenProps.queryChefID}
+            fetchChefDetails={this.props.screenProps.fetchChefDetails}
+          />
     )
   }
 }
@@ -21,14 +19,12 @@ export class ChefFeedScreen extends React.Component {
 export class MyRecipesScreen extends React.Component {
   render (){
     return (
-      <View style={styles.mainPageContainer}>
-        <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} >
           <RecipesList
             listChoice={"chef"}
             parentNavigator={this.props.screenProps.parentNavigator}
-            queryChefID={this.props.screenProps.queryChefID}/>
-        </ImageBackground>
-      </View>
+            queryChefID={this.props.screenProps.queryChefID}
+            fetchChefDetails={this.props.screenProps.fetchChefDetails}
+          />
     )
   }
 }
@@ -36,13 +32,11 @@ export class MyRecipesScreen extends React.Component {
 export class MyLikedRecipesScreen extends React.Component {
   render (){
     return (
-      <View style={styles.mainPageContainer}>
-        <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} >
           <RecipesList listChoice={"chef_liked"}
             parentNavigator={this.props.screenProps.parentNavigator}
-            queryChefID={this.props.screenProps.queryChefID}/>
-        </ImageBackground>
-      </View>
+            queryChefID={this.props.screenProps.queryChefID}
+            fetchChefDetails={this.props.screenProps.fetchChefDetails}
+          />
     )
   }
 }
@@ -50,13 +44,11 @@ export class MyLikedRecipesScreen extends React.Component {
 export class MyMadeRecipesScreen extends React.Component {
   render (){
     return (
-      <View style={styles.mainPageContainer}>
-        <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} >
           <RecipesList listChoice={"chef_made"}
             parentNavigator={this.props.screenProps.parentNavigator}
-            queryChefID={this.props.screenProps.queryChefID}/>
-        </ImageBackground>
-      </View>
+            queryChefID={this.props.screenProps.queryChefID}
+            fetchChefDetails={this.props.screenProps.fetchChefDetails}
+          />
     )
   }
 }
@@ -64,13 +56,11 @@ export class MyMadeRecipesScreen extends React.Component {
 export class ChefsFollowedScreen extends React.Component {
   render (){
     return (
-      <View style={styles.mainPageContainer}>
-        <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} >
           <ChefList listChoice={"chef_followees"}
             parentNavigator={this.props.screenProps.parentNavigator}
-            queryChefID={this.props.screenProps.queryChefID}/>
-        </ImageBackground>
-      </View>
+            queryChefID={this.props.screenProps.queryChefID}
+            fetchChefDetails={this.props.screenProps.fetchChefDetails}
+          />
     )
   }
 }
@@ -79,13 +69,11 @@ export class ChefsFollowingScreen extends React.Component {
   render (){
     // console.log(this.props.screenProps)
     return (
-      <View style={styles.mainPageContainer}>
-        <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} >
           <ChefList listChoice={"chef_followers"}
             parentNavigator={this.props.screenProps.parentNavigator}
-            queryChefID={this.props.screenProps.queryChefID}/>
-        </ImageBackground>
-      </View>
+            queryChefID={this.props.screenProps.queryChefID}
+            fetchChefDetails={this.props.screenProps.fetchChefDetails}
+          />
     )
   }
 }

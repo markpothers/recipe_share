@@ -8,17 +8,11 @@ import RecipesList from '../src/recipeLists/RecipesList'
 import ChefList from '../src/chefLists/ChefList'
 import { styles } from './navigationStyleSheet'
 
-const spinach = require('../src/dataComponents/spinach.jpg')
-
 export class ChefFeedScreen extends React.Component {
   render (){
     // console.log(this.props.screenProps)
     return (
-      <View style={styles.mainPageContainer}>
-        <ImageBackground source={spinach} style={styles.background} >
-          <RecipesList listChoice={"chef_feed"} respondToListScroll={this.props.screenProps}/>
-        </ImageBackground>
-      </View>
+        <RecipesList listChoice={"chef_feed"} respondToListScroll={this.props.screenProps}/>
     )
   }
 }
@@ -26,11 +20,7 @@ export class ChefFeedScreen extends React.Component {
 export class MyRecipesScreen extends React.Component {
   render (){
     return (
-      <View style={styles.mainPageContainer}>
-        <ImageBackground source={spinach} style={styles.background} >
-          <RecipesList listChoice={"chef"} respondToListScroll={this.props.screenProps}/>
-        </ImageBackground>
-      </View>
+        <RecipesList listChoice={"chef"} respondToListScroll={this.props.screenProps}/>
     )
   }
 }
@@ -38,11 +28,7 @@ export class MyRecipesScreen extends React.Component {
 export class MyLikedRecipesScreen extends React.Component {
   render (){
     return (
-      <View style={styles.mainPageContainer}>
-        <ImageBackground source={spinach} style={styles.background} >
-          <RecipesList listChoice={"chef_liked"} respondToListScroll={this.props.screenProps}/>
-        </ImageBackground>
-      </View>
+        <RecipesList listChoice={"chef_liked"} respondToListScroll={this.props.screenProps}/>
     )
   }
 }
@@ -50,11 +36,7 @@ export class MyLikedRecipesScreen extends React.Component {
 export class MyMadeRecipesScreen extends React.Component {
   render (){
     return (
-      <View style={styles.mainPageContainer}>
-        <ImageBackground source={spinach} style={styles.background} >
-          <RecipesList listChoice={"chef_made"} respondToListScroll={this.props.screenProps}/>
-        </ImageBackground>
-      </View>
+        <RecipesList listChoice={"chef_made"} respondToListScroll={this.props.screenProps}/>
     )
   }
 }
@@ -62,11 +44,7 @@ export class MyMadeRecipesScreen extends React.Component {
 export class ChefsFollowedScreen extends React.Component {
   render (){
     return (
-      <View style={styles.mainPageContainer}>
-        <ImageBackground source={spinach} style={styles.background} >
-          <ChefList listChoice={"chef_followees"} respondToListScroll={this.props.screenProps}/>
-        </ImageBackground>
-      </View>
+        <ChefList listChoice={"chef_followees"} respondToListScroll={this.props.screenProps}/>
     )
   }
 }
@@ -74,11 +52,7 @@ export class ChefsFollowedScreen extends React.Component {
 export class ChefsFollowingScreen extends React.Component {
   render (){
     return (
-      <View style={styles.mainPageContainer}>
-        <ImageBackground source={spinach} style={styles.background} >
-          <ChefList listChoice={"chef_followers"} respondToListScroll={this.props.screenProps}/>
-        </ImageBackground>
-      </View>
+        <ChefList listChoice={"chef_followers"} respondToListScroll={this.props.screenProps}/>
     )
   }
 }

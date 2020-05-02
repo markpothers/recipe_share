@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet } from 'react-native';
+import { responsiveHeight } from 'react-native-responsive-dimensions';
 
 export const styles = StyleSheet.create({
   mainPageContainer:{
@@ -146,7 +147,7 @@ export const styles = StyleSheet.create({
     // borderStyle: 'solid',
     // borderWidth: 5,
     // borderColor: 'yellow',
-    height: 566
+    height: responsiveHeight(100) - 74
   },
   chefDetailsStats: {
     borderStyle: 'solid',

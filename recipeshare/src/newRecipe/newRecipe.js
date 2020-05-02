@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, PanResponder, ScrollView, SafeAreaView, Text, ImageBackground, TextInput, KeyboardAvoidingView, TouchableOpacity, View, ActivityIndicator, Platform } from 'react-native'
+import { FlatList, PanResponder, ScrollView, SafeAreaView, Text, Image, TextInput, KeyboardAvoidingView, TouchableOpacity, View, ActivityIndicator, Platform } from 'react-native'
 import { connect } from 'react-redux'
 import * as Permissions from 'expo-permissions'
 import { styles } from './newRecipeStyleSheet'
@@ -18,6 +18,7 @@ import DualOSPicker from '../functionalComponents/DualOSPicker'
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions'
 import SortableList from 'react-native-sortable-list';
 import InstructionRow from './instructionRow'
+import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 
 const mapStateToProps = (state) => ({
   name: state.newRecipeDetails.name,
@@ -418,21 +419,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       const instructionsHeight = (this.state.instructionsOrder.length+1)*9.5
       // console.log(instructionsHeight)
       return (
-        <ImageBackground source={require('../dataComponents/spinach.jpg')} style={centralStyles.spinachFullBackground}>
-        <SafeAreaView style={centralStyles.fullPageSafeAreaView}>
-        <KeyboardAvoidingView style={centralStyles.fullPageKeyboardAvoidingView}>
+        <SpinachAppContainer scrollingEnabled={true}>
         {this.state.awaitingServer && <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={centralStyles.activityIndicator } size="large" color="#104e01" /></View>}
         {this.state.filterDisplayed ? <FilterMenu handleCategoriesButton={this.handleCategoriesButton} newRecipe={true} confirmButtonText={"Save"} title={"Select categories for your recipe"}/> : null}
         {this.state.choosingPicture ? this.renderPictureChooser() : null}
-        <ScrollView style={centralStyles.fullPageScrollView} 
-          nestedScrollEnabled={true} 
-          // scrollEnabled={this.state.scrollingEnabled} 
-          // keyboardShouldPersistTaps={'always'}
-          // onPanResponderGrant={() => console.log('granted')}
-          // onPanResponderRelease={() => console.log('released')}
-          // disableScrollViewPanResponder={true}
-          ref={(c) => { this.scrollView = c; }}
-          >
           {/* form */}
           <View style={[centralStyles.formContainer, {width: responsiveWidth(100), marginLeft: 0, marginRight: 0}]}>
             {/* recipe name */}
@@ -663,18 +653,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     </TouchableOpacity>
                   </View> */}
 
-
-
-
-
-
-        </ScrollView>
-        </KeyboardAvoidingView>
-        </SafeAreaView>
-        </ImageBackground>
-
-
-
+        </SpinachAppContainer>
 
 
       )
