@@ -74,7 +74,7 @@ const MyRecipeBookTabs = createMaterialTopTabNavigator({
 })
 
 const MyRecipeBookStack = createStackNavigator({
-  // NewRecipe: NewRecipeScreen,
+  NewRecipe: NewRecipeScreen,
   MyRecipeBook: MyRecipeBookTabs,
   RecipeDetails: RecipeDetailsScreen,
   NewRecipe: NewRecipeScreen,

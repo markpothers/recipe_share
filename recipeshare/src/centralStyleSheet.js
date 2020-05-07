@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet } from 'react-native';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions'
 
-const inDevelopment = true
+const inDevelopment = false
 
 export const centralStyles = StyleSheet.create({
   activityIndicator:{

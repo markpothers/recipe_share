@@ -70,7 +70,7 @@ export default class InstructionRow extends React.Component {
                 value={this.props.data}
                 placeholder={`New step`}
                 onChangeText={(t) => this.props.handleInstructionChange(t, this.props.index)}
-                // onBlur={this.props.addNewInstruction}
+                onBlur={this.props.addNewInstruction}
                 onEndEditing={this.props.addNewInstruction}
             />
             {/* <Text style={[centralStyles.formInput, {width: '75%'}]} value={this.props.data} placeholder={`Instructions step`} onChangeText={(t) => this.handleInstructionChange(t, index)}>{this.props.data}</Text> */}

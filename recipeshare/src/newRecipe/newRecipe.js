@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, PanResponder, ScrollView, SafeAreaView, Text, Image, TextInput, KeyboardAvoidingView, TouchableOpacity, View, ActivityIndicator, Platform } from 'react-native'
+import { RefreshControl, FlatList, PanResponder, ScrollView, SafeAreaView, Text, Image, TextInput, KeyboardAvoidingView, TouchableOpacity, View, ActivityIndicator, Platform } from 'react-native'
 import { connect } from 'react-redux'
 import * as Permissions from 'expo-permissions'
 import { styles } from './newRecipeStyleSheet'
@@ -91,8 +91,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       instructions: {
         step_0: 'Pre heat oven to 450F, and start to chop all the vegetables.  Add 2 tbsp of pure olive oil to the pan and wait until it is just starting to smoke.',
         step_1: 'Dice the chicken',
-        step_2: 'Add the onion to the pan and fry for 2-4 minutes until it is browning',
-        step_3: ''
+        step_2: 'Add the onion to the pan and fry for 2-4 minutes until it is browning ',
+        step_3: '',
+        refreshTrigger: {}
       },
       instructionsOrder: ['step_0', 'step_1', 'step_2', 'step_3'],
       // numberOfInstructionsSteps: 3,
@@ -344,9 +345,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           newInstructions[newOrder[index]] = text
           // console.log('test value')
           // console.log(this.state.instructions[this.state.instructionsOrder[this.state.instructionsOrder.length-1]])
+          newRefreshTrigger = {time: new Date()}
+          newInstructions.refreshTrigger = newRefreshTrigger
           return ({
               instructions: newInstructions,
-              instructionsOrder: newOrder
+              instructionsOrder: newOrder,
             })
         })
       // }
@@ -391,7 +394,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       // console.log('released')
       // setTimeout((()=>this.setState({scrollingEnabled: true})), 2000)
       // this.setState({scrollingEnabled: true})
-      this.scrollView.setNativeProps({ scrollEnabled: true })
+      // this.scrollView.setNativeProps({ scrollEnabled: true })
 
     }
 
@@ -399,7 +402,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       // console.log('activated')
       // clearTimeout(sorterTimer)
       // this.setState({scrollingEnabled: false})
-      this.scrollView.setNativeProps({ scrollEnabled: false })
+      // this.scrollView.setNativeProps({ scrollEnabled: false })
       // sorterTimer = setTimeout((()=>this.setState({scrollingEnabled: true})), 5000)
     }
 
@@ -418,52 +421,58 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       // console.log(this.state.instructionsOrder)
       const instructionsHeight = (this.state.instructionsOrder.length+1)*9.5
       // console.log(instructionsHeight)
+      // console.log(RefreshControl)
       return (
-        <SpinachAppContainer scrollingEnabled={true}>
-        {this.state.awaitingServer && <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={centralStyles.activityIndicator } size="large" color="#104e01" /></View>}
+        <SpinachAppContainer awaitingServer={this.state.awaitingServer} scrollingEnabled={true}>
         {this.state.filterDisplayed ? <FilterMenu handleCategoriesButton={this.handleCategoriesButton} newRecipe={true} confirmButtonText={"Save"} title={"Select categories for your recipe"}/> : null}
         {this.state.choosingPicture ? this.renderPictureChooser() : null}
           {/* form */}
           <View style={[centralStyles.formContainer, {width: responsiveWidth(100), marginLeft: 0, marginRight: 0}]}>
             {/* recipe name */}
-            <View style={centralStyles.formSection}>
+            {/* <View style={centralStyles.formSection}>
               <View style={centralStyles.formInputContainer}>
               <TextInput style={centralStyles.formInput} value={this.props.name} placeholder="Recipe name" onChangeText={(t) => this.handleTextInput(t, "name")}/>
               </View>
-            </View>
+            </View> */}
             {/* separator */}
-            <View style={centralStyles.formSectionSeparatorContainer}>
+            {/* <View style={centralStyles.formSectionSeparatorContainer}>
               <View style={centralStyles.formSectionSeparator}>
               </View>
-            </View>
-            {[...this.renderIngredientsList(), this.renderNewIngredientItem()]}
+            </View> */}
+            {/* {[...this.renderIngredientsList(), this.renderNewIngredientItem()]} */}
             {/* separator */}
-            <View style={centralStyles.formSectionSeparatorContainer}>
+            {/* <View style={centralStyles.formSectionSeparatorContainer}>
               <View style={centralStyles.formSectionSeparator}>
               </View>
-            </View>
-            <View style={[centralStyles.formSection]}>
+            </View> */}
+            <View style={[centralStyles.formSection, {minHeight: 100}]}>
               <SortableList
                             // {...(this.panResponder ? this.panResponder.panHandlers : null)}
-                style={{ flex: 1, borderColor: 'blue', borderWidth: 0 }}
-                contentContainerStyle={{borderWidth: 0, borderColor: 'yellow', flex: 1}}
-                innerContainerStyle={{borderWidth: 0, borderColor: 'red'}}
+                style={{ flex: 1, borderColor: 'blue', borderWidth: 3}}
+                contentContainerStyle={{borderWidth: 1, borderColor: 'yellow', flex: 1}}
+                innerContainerStyle={{borderWidth: 1, borderColor: 'red'}}
                 // sortRowStyle={{marginTop:0}}
                 data={this.state.instructions}
                 order={this.state.instructionsOrder}
                 onChangeOrder={newOrder => this.updateInstructionsOrder(newOrder)}
                 // scrollEnabled={true}
                 rowActivationTime={0}
-                onPressRow={this.handleRowPress}
+                onPressRow={this.handleRowPress} //does nothing currently
                 numberOfInstructionsSteps={this.state.numberOfInstructionsSteps}
+                refreshControl={
+                  <RefreshControl
+                    refreshing={false}
+                    // onRefresh={}
+                  />
+                }
                 // onPressRow={this.handleActivateRow}
                 // onPanResponderGrant={() => this.setState({scrollingEnabled: false})}
                 // onPanResponderGrant={() => console.log('granted')}
                 // onPanResponderRelease={() => this.setState({scrollingEnabled: true})}
                 // onPanResponderRelease={() => console.log('released')}
-                onActivateRow={this.handleActivateRow}
+                onActivateRow={this.handleActivateRow} //does nothing currently
                 //onReleaseRow={() => this.setState({scrollingEnabled: true})}
-                onReleaseRow={this.handleInstructionRowRelease}
+                onReleaseRow={this.handleInstructionRowRelease} //does nothing currently
                 // manuallyActivateRows={true}
                 // onReleaseRow={null}
                 // renderHeader={() => this.renderNewIngredientItem()}
@@ -492,7 +501,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     index={index}
                     disabled={disabled}
                     active={active}
-                    toggleScrollViewEnabled={this.toggleScrollViewEnabled}
+                    // toggleScrollViewEnabled={this.toggleScrollViewEnabled}
                     order={this.state.instructionsOrder}
                     // panResponder={this.panResponder}
                     // scrollView={this.scrollView}
@@ -532,18 +541,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(
               />
             </View>
              {/* separator */}
-             <View style={centralStyles.formSectionSeparatorContainer}>
+             {/* <View style={centralStyles.formSectionSeparatorContainer}>
               <View style={centralStyles.formSectionSeparator}>
               </View>
-            </View>
+            </View> */}
             {/* acknowledgement */}
-            <View style={centralStyles.formSection}>
+            {/* <View style={centralStyles.formSection}>
               <View style={centralStyles.formInputContainer}>
               <TextInput style={centralStyles.formInput} value={this.props.acknowledgement} placeholder="Acknowledge your recipe's source if it's not yourself" onChangeText={(t) => this.handleTextInput(t, "acknowledgement")}/>
               </View>
-            </View>
+            </View> */}
             {/* time and difficulty titles */}
-            <View style={[centralStyles.formSection, {width: responsiveWidth(80)}]}>
+            {/* <View style={[centralStyles.formSection, {width: responsiveWidth(80)}]}>
               <View style={centralStyles.formInputContainer}>
                 <View style={styles.timeAndDifficultyTitleItem}>
                   <Text style={styles.timeAndDifficultyTitle}>Time:</Text>
@@ -552,9 +561,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                   <Text style={styles.timeAndDifficultyTitle}>Difficulty:</Text>
                 </View>
               </View>
-            </View>
+            </View> */}
             {/* time and difficulty dropdowns */}
-            <View style={[centralStyles.formSection, {width: responsiveWidth(80)}]}>
+            {/* <View style={[centralStyles.formSection, {width: responsiveWidth(80)}]}>
               <View style={centralStyles.formInputContainer}>
                 <View picker style={[styles.timeAndDifficulty, {paddingLeft: responsiveWidth(8)}]} >
                   <DualOSPicker
@@ -569,9 +578,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     selectedChoice={this.props.difficulty}/>
                 </View>
               </View>
-            </View>
+            </View> */}
             {/* add picture and select categories*/}
-            <View style={[centralStyles.formSection, {width: responsiveWidth(80)}]}>
+            {/* <View style={[centralStyles.formSection, {width: responsiveWidth(80)}]}>
               <View style={centralStyles.formInputContainer}>
                 <TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={this.choosePicture}>
                   <Icon style={centralStyles.greenButtonIcon} size={25} name='camera'></Icon>
@@ -582,80 +591,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     <Text style={centralStyles.greenButtonText}>Select{"\n"}categories</Text>
                 </TouchableOpacity>
               </View>
-            </View>
+            </View> */}
             {/* submit */}
-            <View style={[centralStyles.formSection, {width: responsiveWidth(80)}]}>
+            {/* <View style={[centralStyles.formSection, {width: responsiveWidth(80)}]}>
               <View style={[centralStyles.formInputContainer, {justifyContent: 'center'}]}>
                 <TouchableOpacity style={[centralStyles.yellowRectangleButton]} activeOpacity={0.7} onPress={e => this.submitRecipe(e)}>
                   <Icon style={centralStyles.greenButtonIcon} size={25} name='login'></Icon>
                     <Text style={centralStyles.greenButtonText}>Submit</Text>
                 </TouchableOpacity>
               </View>
-            </View>
+            </View> */}
           </View>
-
-
-
-
-{/* 
-                  <View style={[styles.formRow, {marginTop: 100}]}>
-                    <View style={styles.createRecipeInputBox} >
-                      <TextInput style={styles.newRecipeTextCentering} value={this.props.name} placeholder="Recipe Name" onChange={(e) => this.handleTextInput(e.nativeEvent.text, "name")}/>
-                    </View>
-                  </View>
-                  {[ ...this.renderIngredientsList(), this.renderNewIngredientItem()]}
-                  <View style={styles.formRow}>
-                    <View style={styles.createRecipeTextAreaBox}>
-                      <TextInput style={styles.createRecipeTextAreaInput} value={this.props.instructions} placeholder="Instructions" multiline={true} numberOfLines={4} onChange={(e) => this.handleTextInput(e.nativeEvent.text, "instructions")}/>
-                    </View>
-                  </View>
-                  <View style={styles.formRow}>
-                    <View style={styles.createRecipeInputBox} >
-                      <TextInput style={styles.newRecipeTextCentering} value={this.props.acknowledgement} placeholder="Acknowledge your recipe's source if it's not yourself" onChange={(e) => this.handleTextInput(e.nativeEvent.text, "acknowledgement")}/>
-                    </View>
-                  </View>
-                  <View style={styles.transparentFormRow}>
-                    <View style={styles.timeAndDifficultyTitleItem}>
-                      <Text style={styles.timeAndDifficultyTitle}>Time:</Text>
-                    </View>
-                    <View style={styles.timeAndDifficultyTitleItem}>
-                      <Text style={styles.timeAndDifficultyTitle}>Difficulty:</Text>
-                    </View>
-                  </View>
-                  <View style={styles.transparentFormRow}>
-                    <View picker style={styles.timeAndDifficulty} >
-                      <DualOSPicker
-                        onChoiceChange={this.onTimesChoiceChange}
-                        options={times}
-                        selectedChoice={this.props.time}/>
-                    </View>
-                    <View picker style={styles.timeAndDifficulty}>
-                      <DualOSPicker
-                        onChoiceChange={this.onDifficultiesChoiceChange}
-                        options={difficulties}
-                        selectedChoice={this.props.difficulty}/>
-                    </View>
-                  </View>
-                  <View style={styles.transparentFormRow}>
-                    <TouchableOpacity style={styles.createRecipeFormButton} activeOpacity={0.7} title="Take Photo" onPress={this.choosePicture}>
-                      <Icon style={styles.standardIcon} size={25} name='camera' />
-                      <Text style={styles.createRecipeFormButtonText}>Add{"\n"}picture</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.createRecipeFormButton} activeOpacity={0.7} onPress={this.handleCategoriesButton}>
-                      <Icon style={styles.standardIcon} size={25} name='filter' />
-                      <Text style={styles.createRecipeFormButtonText}>Select{"\n"}categories</Text>
-                    </TouchableOpacity>
-                  </View>
-                  <View style={styles.transparentFormRow}>
-                    <TouchableOpacity style={[styles.createRecipeFormButton,{marginBottom: 4}]} activeOpacity={0.7} onPress={e => this.submitRecipe(e)}>
-                      <Icon style={styles.standardIcon} size={25} name='login' />
-                      <Text style={styles.createRecipeFormButtonText}>Submit</Text>
-                    </TouchableOpacity>
-                  </View> */}
-
         </SpinachAppContainer>
-
-
       )
     }
 
