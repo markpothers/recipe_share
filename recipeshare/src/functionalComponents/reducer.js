@@ -68,7 +68,13 @@ const reducer = (currentState, action) => {
             // console.log("clearing new recipe details")
             return {...currentState, newRecipeDetails: {
                 name: "",
-                instructions: "",
+                instructions: [
+                    'Pre heat oven to 450F...',
+                    'Dice the chicken...',
+                    'Add the onion...',
+                    '',
+                  ],
+                instructionImages: [],
                 ingredients: {
                   ingredient1 :{
                     name:"",

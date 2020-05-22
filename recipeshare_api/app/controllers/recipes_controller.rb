@@ -24,13 +24,13 @@ class RecipesController < ApplicationController
             newRecipe_filter_settings["filter_settings"][category] ? @recipe[category.downcase.split(" ").join("_")] = true : @recipe[category.downcase.split(" ").join("_")] = false
         end
         if @recipe.save
-            if newRecipe_image_params[:imageBase64] != "" && newRecipe_image_params[:imageBase64] != nil
+            if newRecipe_primary_image_params[:primaryImageBase64] != "" && newRecipe_primary_image_params[:primaryImageBase64] != nil
                 recipe_image = RecipeImage.create(recipe_id: @recipe.id)
                 hex = SecureRandom.hex(20)
                 until RecipeImage.find_by(hex: hex) == nil
                     hex = SecureRandom.hex(20)
                 end
-                mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:recipe_images], hex, newRecipe_image_params[:imageBase64])
+                mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:recipe_images], hex, newRecipe_primary_image_params[:primaryImageBase64])
                 recipe_image.image_url = mediaURL
                 recipe_image.hex=hex
                 recipe_image.save
@@ -115,8 +115,8 @@ class RecipesController < ApplicationController
         params.require(:recipe).permit(:name, :time, :difficulty, :cuisine, :serves, :acknowledgement)
     end
 
-    def newRecipe_image_params
-        params.require(:recipe).permit(:imageBase64)
+    def newRecipe_primary_image_params
+        params.require(:recipe).permit(:primaryImageBase64)
     end
 
     def newRecipe_Ingredient_params
@@ -124,7 +124,7 @@ class RecipesController < ApplicationController
     end
 
     def newRecipe_Instructions_params
-        params.require(:recipe).permit(instructions: {}, :instructionsOrder => [] )
+        params.require(:recipe).permit(instructions: [], instruction_images: [])
     end
 
     def newRecipe_filter_settings

@@ -12,9 +12,6 @@ const mapStateToProps = (state) => ({
     filter_settings: state.filter_settings,
     cuisine: state.cuisine,
     serves: state.serves,
-    newRecipeFilterSettings: state.newRecipeDetails.filter_settings,
-    newRecipeCuisine: state.newRecipeDetails.cuisine,
-    newRecipeServes: state.newRecipeDetails.serves,
 })
 
 const mapDispatchToProps = {
@@ -38,26 +35,6 @@ const mapDispatchToProps = {
             dispatch({ type: 'SET_RECIPES_LIST_SERVES', serves: serves})
         }
         },
-    switchNewRecipeFilterValue: (category, value) => {
-        return dispatch => {
-          dispatch({ type: 'TOGGLE_NEW_RECIPE_FILTER_CATEGORY', category: category, value: value})
-        }
-      },
-      clearNewRecipeFilters: () => {
-          return dispatch => {
-            dispatch({ type: 'CLEAR_NEW_RECIPE_FILTERS', clearedFilters: clearedFilters})
-          }
-        },
-    setNewRecipeCuisine: (cuisine) => {
-        return dispatch => {
-            dispatch({ type: 'SET_NEW_RECIPE_CUISINE', cuisine: cuisine})
-        }
-    },
-    setNewRecipeServes: (serves) => {
-        return dispatch => {
-            dispatch({ type: 'SET_NEW_RECIPE_SERVES', serves: serves})
-        }
-    },
   }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
@@ -102,15 +79,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         }
 
         handleCategoryChange = (category, value) => {
-            this.props.newRecipe ? this.props.switchNewRecipeFilterValue(category, value) : this.props.switchRecipesListFilterValue(category, value)
+            this.props.newRecipe ? this.props.switchNewRecipeFilterValue(category) : this.props.switchRecipesListFilterValue(category, value)
         }
 
         handleCuisineChange = (cuisine) => {
-            this.props.newRecipe ? this.props.setNewRecipeCuisine(cuisine) : this.props.setRecipesListCuisine(cuisine)
+            this.props.newRecipe ? this.props.setNewRecipeCuisine(cuisine, "cuisine") : this.props.setRecipesListCuisine(cuisine)
         }
 
         handleServesChange = (serves) => {
-            this.props.newRecipe ? this.props.setNewRecipeServes(serves) : this.props.setRecipesListServes(serves)
+            this.props.newRecipe ? this.props.setNewRecipeServes(serves, "serves") : this.props.setRecipesListServes(serves)
         }
 
         handleClearButton = () => {

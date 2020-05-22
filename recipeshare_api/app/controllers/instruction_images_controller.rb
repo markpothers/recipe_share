@@ -1,0 +1,2 @@
+class InstructionImagesController < ApplicationController
+end

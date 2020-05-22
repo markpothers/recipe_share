@@ -1,5 +1,5 @@
 import React from 'react'
-import { RefreshControl, FlatList, PanResponder, ScrollView, SafeAreaView, Text, Image, TextInput, KeyboardAvoidingView, TouchableOpacity, View, ActivityIndicator, Platform } from 'react-native'
+import { FlatList, ScrollView, Text, Image, TextInput, TouchableOpacity, View, Platform } from 'react-native'
 import { connect } from 'react-redux'
 import * as Permissions from 'expo-permissions'
 import { styles } from './newRecipeStyleSheet'
@@ -16,61 +16,21 @@ import PicSourceChooser from '../functionalComponents/picSourceChooser'
 import FilterMenu from '../functionalComponents/filterMenu'
 import DualOSPicker from '../functionalComponents/DualOSPicker'
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions'
-import SortableList from 'react-native-sortable-list';
 import InstructionRow from './instructionRow'
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
+import { AutoDragSortableView } from 'react-native-drag-sort'
+import { clearedFilters } from '../dataComponents/clearedFilters'
 
 const mapStateToProps = (state) => ({
-  name: state.newRecipeDetails.name,
-  instructions: state.newRecipeDetails.instructions,
-  ingredients: state.newRecipeDetails.ingredients,
-  difficulty: state.newRecipeDetails.difficulty,
-  time: state.newRecipeDetails.time,
-  imageBase64: state.newRecipeDetails.imageBase64,
-  filter_settings: state.newRecipeDetails.filter_settings,
-  cuisine: state.newRecipeDetails.cuisine,
-  serves: state.newRecipeDetails.serves,
-  acknowledgement: state.newRecipeDetails.acknowledgement,
-  recipe_details: state.recipe_details,
   loggedInChef: state.loggedInChef
 })
 
 const mapDispatchToProps = {
-  saveRecipeDetails: (parameter, content) => {
-    return dispatch => {
-      dispatch({ type: 'UPDATE_NEW_RECIPE_DETAILS', parameter: parameter, content: content})
-    }
-  },
-  addIngredientToRecipeDetails: (ingredientIndex, ingredientName, ingredientQuantity, ingredientUnit) => {
-    return dispatch => {
-      dispatch({ type: 'UPDATE_RECIPE_INGREDIENTS', ingredientIndex: ingredientIndex, ingredientName: ingredientName, ingredientQuantity: ingredientQuantity, ingredientUnit: ingredientUnit})
-    }
-  },
   clearNewRecipeDetails: () => {
     return dispatch => {
       dispatch({ type: 'CLEAR_NEW_RECIPE_DETAILS'})
     }
-  },
-  storeAllIngredients: (ingredients) => {
-    return dispatch => {
-      dispatch({ type: 'STORE_ALL_INGREDIENTS', ingredients: ingredients})
-    }
-  },
-  switchNewRecipeFilterValue: (category, value) => {
-    return dispatch => {
-      dispatch({ type: 'TOGGLE_NEW_RECIPE_FILTER_CATEGORY', category: category, value: value})
-    }
-  },
-  setNewRecipeCuisine: (cuisine) => {
-    return dispatch => {
-        dispatch({ type: 'SET_NEW_RECIPE_CUISINE', cuisine: cuisine})
-    }
-  },
-  setNewRecipeServes: (serves) => {
-    return dispatch => {
-        dispatch({ type: 'SET_NEW_RECIPE_SERVES', serves: serves})
-    }
-  },
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
@@ -85,25 +45,63 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       hasPermission: false,
       ingredientsList: [],
       ingredient1: false,
-      choosingPicture: false,
+      choosingPrimaryPicture: false,
+      choosingInstructionPicture: false,
+      instructionImageIndex: 0,
       filterDisplayed: false,
       awaitingServer: false,
-      instructions: {
-        step_0: 'Pre heat oven to 450F, and start to chop all the vegetables.  Add 2 tbsp of pure olive oil to the pan and wait until it is just starting to smoke.',
-        step_1: 'Dice the chicken',
-        step_2: 'Add the onion to the pan and fry for 2-4 minutes until it is browning ',
-        step_3: '',
-        refreshTrigger: {}
-      },
-      instructionsOrder: ['step_0', 'step_1', 'step_2', 'step_3'],
-      // numberOfInstructionsSteps: 3,
-      scrollingEnabled: true
+      instructionHeights: [responsiveHeight(7.2), responsiveHeight(7.2)],
+      averageInstructionHeight: responsiveHeight(7.2),
+      scrollingEnabled: true,
+      newRecipeDetails: {
+        name: "Test recipe",
+        instructions: [
+            'Pre heat oven to 450F...',
+            '',
+          ],
+        instructionImages: ['', ''],
+        ingredients: {
+          ingredient1 :{
+            name:"Chicken breast",
+            quantity: "0.5",
+            unit: "each"
+          }
+        },
+        difficulty: "0",
+        time: "00:15",
+        primaryImageBase64: "",
+        filter_settings: {
+          "Breakfast": false,
+          "Lunch": false,
+          "Dinner": false,
+          "Chicken": true,
+          "Red meat": true,
+          "Seafood": false,
+          "Vegetarian": false,
+          "Salad": false,
+          "Vegan": false,
+          "Soup": true,
+          "Dessert": false,
+          "Side": true,
+          "Whole 30": false,
+          "Paleo": false,
+          "Freezer meal": false,
+          "Keto": false,
+          "Weeknight": true,
+          "Weekend": false,
+          "Gluten free": false,
+          "Bread": true,
+          "Dairy free": false,
+          "White meat": false,
+        },
+        cuisine: "Cuban",
+        serves: "6",
+        acknowledgement: "This is my own recipe"
+      }
     }
 
     componentDidMount = async() => {
       await this.setState({awaitingServer: true})
-      // this.panResponder = this.createPanResponder()
-      this.props.clearNewRecipeDetails()
       if (this.props.navigation.getParam('recipe_details') !== undefined){
         this.setRecipeParamsForEditing()
       }
@@ -117,99 +115,123 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           })
       this.fetchIngredientsForAutoComplete()
       await this.setState({awaitingServer: false})
-      // this.panResponder = PanResponder.create({
-      //   onStartShouldSetPanResponder: (evt, gestureState) => true,
-      //   onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
-      //   onMoveShouldSetPanResponder: (evt, gestureState) => true,
-      //   onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
-      //   onPanResponderGrant: ( event, gesture) => {
-      //     console.log('pan responder granted')
-      //   },
-      //   onPanResponderMove: ( event, gesture) => {
-      //     console.log('pan responder moving')
-      //   },
-      //   onPanResponderMove: ( event, gesture) => {
-      //     console.log('pan responder moving')
-      //   },
-      //   onPanResponderRelease: (event, gesture) => {
-      //     console.log('pan responder released')
-      //   }
-      // })
     }
 
-    // createPanResponder = () => {
-    //   return PanResponder.create({
-    //     onStartShouldSetPanResponder: (evt, gestureState) => true,
-    //     onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
-    //     onMoveShouldSetPanResponder: (evt, gestureState) => true,
-    //     onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
-    //     onPanResponderGrant: ( event, gesture) => {
-    //       console.log('pan responder granted')
-    //       this.scrollView.setNativeProps({ scrollEnabled: false })
+  componentDidUpdate = () => {
+    this.addNewInstruction()
+    // console.log(this.state.newRecipeDetails.primaryImageBase64)
+  }
 
-    //     },
-    //     onPanResponderMove: ( event, gesture) => {
-    //       console.log('pan responder moving')
-    //     },
-    //     onPanResponderMove: ( event, gesture) => {
-    //       console.log('pan responder moving')
-    //     },
-    //     onPanResponderRelease: (event, gesture) => {
-    //       console.log('pan responder released')
-    //       this.scrollView.setNativeProps({ scrollEnabled: true })
+  activateScrollView = () => {
+    this.setState({scrollingEnabled: true})
+  }
 
-    //     }
-    //   })
-    // }
-
-  // componentDidUpdate = () => {
-
-  // }
+  deactivateScrollView = () => {
+    this.setState({scrollingEnabled: false})
+  }
 
   setRecipeParamsForEditing = () => {
-    let recipe_details = this.props.navigation.getParam('recipe_details')
-    this.props.saveRecipeDetails('name', recipe_details.recipe.name)
-    this.props.saveRecipeDetails('instructions', recipe_details.recipe.instructions)
-    this.props.saveRecipeDetails('time', recipe_details.recipe.time)
-    this.props.saveRecipeDetails('acknowledgement', recipe_details.recipe.acknowledgement)
-    this.props.saveRecipeDetails('difficulty', recipe_details.recipe.difficulty.toString())
-    const list_values = recipe_details.ingredient_uses.map(ingredient_use => [ingredient_use.ingredient_id, ingredient_use.quantity, ingredient_use.unit])
-    const ingredientsForEdit = list_values.map(list_value => [...list_value, (recipe_details.ingredients.find(ingredient => ingredient.id == list_value[0]).name)])
-    ingredientsForEdit.forEach( (ing, index) => this.props.addIngredientToRecipeDetails(`ingredient${index+1}`, ing[3], ing[1], ing[2]))
-    this.props.setNewRecipeCuisine(recipe_details.recipe.cuisine)
-    this.props.setNewRecipeServes(recipe_details.recipe.serves)
-    Object.keys(this.props.filter_settings).forEach( category => this.props.switchNewRecipeFilterValue(category, recipe_details.recipe[category.toLowerCase().split(" ").join("_")]))
-    let newInstructions = {}
-    let newOrder = []
-    recipe_details.instructions.forEach(instruction => {
-      newInstructions[`step_${instruction.step}`] = instruction.instruction
-      newOrder.push(`step_${instruction.step}`)
+    let recipeDetails = this.props.navigation.getParam('recipe_details')
+    // console.log(recipeDetails)
+    let recipe = recipeDetails.recipe
+    // console.log(recipe)
+    let newIngredients = {}
+    const list_values = recipeDetails.ingredient_uses.map(ingredient_use => [ingredient_use.ingredient_id, ingredient_use.quantity, ingredient_use.unit])
+    const ingredientsForEdit = list_values.map(list_value => [...list_value, (recipeDetails.ingredients.find(ingredient => ingredient.id == list_value[0]).name)])
+    ingredientsForEdit.forEach( (ing, index) => {
+      newIngredients[`ingredient${index+1}`] = {
+        name: ing[3],
+        quantity: ing[1],
+        unit: ing[2]
+      }
+    })
+    let newInstructionImages = recipeDetails.instructions.map( i => {
+      let image = recipeDetails.instruction_images.find( j => j.instruction_id == i.id)
+      if (image){
+        return image
+      } else {
+        return ''
+      }
     })
     this.setState({
-      instructions: newInstructions,
-      order: newOrder
+      instructionHeights: recipeDetails.instructions.map( i => responsiveHeight(7.2)),
+      newRecipeDetails: {
+        name: recipe.name,
+        instructions: recipeDetails.instructions.map( i => i.instruction),
+        instructionImages: newInstructionImages,
+        ingredients: newIngredients,
+        difficulty: recipe.difficulty.toString(),
+        time: recipe.time,
+        primaryImageBase64: recipeDetails.recipe_images,
+        filter_settings: {
+          "Breakfast": recipe["breakfast"],
+          "Lunch": recipe["lunch"],
+          "Dinner": recipe["dinner"],
+          "Chicken": recipe["chicken"],
+          "Red meat": recipe["red meat"],
+          "Seafood": recipe["seafood"],
+          "Vegetarian": recipe["vegetarian"],
+          "Salad": recipe["salad"],
+          "Vegan": recipe["vegan"],
+          "Soup": recipe["soup"],
+          "Dessert": recipe["dessert"],
+          "Side": recipe["side"],
+          "Whole 30": recipe["whole 30"],
+          "Paleo": recipe["paleo"],
+          "Freezer meal": recipe["freezer meal"],
+          "Keto": recipe["keto"],
+          "Weeknight": recipe["weeknight"],
+          "Weekend": recipe["weekend"],
+          "Gluten free": recipe["gluten free"],
+          "Bread": recipe["bread"],
+          "Dairy free": recipe["dairy free"],
+          "White meat": recipe["white meat"],
+        },
+        cuisine: recipe.cuisine,
+        serves: recipe.serves,
+        acknowledgement: recipe.acknowledgement
+      }
     })
   }
 
-  choosePicture = () =>{
-    this.setState({choosingPicture: true})
+  choosePrimaryPicture = () =>{
+    this.setState({choosingPrimaryPicture: true})
   }
 
-  sourceChosen = () =>{
-    this.setState({choosingPicture: false})
+  primarySourceChosen = () =>{
+    this.setState({choosingPrimaryPicture: false})
   }
 
-  renderPictureChooser = () => {
-    return <PicSourceChooser saveImage={this.saveImage} sourceChosen={this.sourceChosen} key={"pic-chooser"}/>
+  renderPrimaryPictureChooser = () => {
+    let imageSource = typeof this.state.newRecipeDetails.primaryImageBase64 == 'object' && this.state.newRecipeDetails.primaryImageBase64.length > 0 ? this.state.newRecipeDetails.primaryImageBase64[0].image_url : `data:image/jpeg;base64,${this.state.newRecipeDetails.primaryImageBase64}`
+    return (
+      <PicSourceChooser
+      saveImage={this.savePrimaryImage}
+      sourceChosen={this.primarySourceChosen}
+      key={"primary-pic-chooser"}
+      imageSource={imageSource}
+    />
+    )
   }
 
-  saveImage = async(image) => {
+  savePrimaryImage = async(image) => {
     await this.setState({awaitingServer: true})
     if (image.cancelled === false){
-      this.props.saveRecipeDetails("imageBase64", image.base64)
-      this.setState({choosingPicture: false})
+      this.setState((state) => {
+        return ({
+          choosingPicture: false,
+          newRecipeDetails: {...state.newRecipeDetails, primaryImageBase64: image.base64},
+          awaitingServer: false,
+          choosingPrimaryPicture: false
+        })
+      })
     }
-    await this.setState({awaitingServer: false})
+    else {
+      await this.setState({
+        awaitingServer: false,
+        choosingPrimaryPicture: false
+      })
+    }
   }
 
   isFocused = (ingredient, state) => {
@@ -224,26 +246,26 @@ export default connect(mapStateToProps, mapDispatchToProps)(
   }
 
   renderIngredientsList = () =>{
-     return Object.keys(this.props.ingredients).sort((a,b)=> parseInt(a.split("ingredient")[1])-parseInt(b.split("ingredient")[1])).map((ingredient, index) => {
+     return Object.keys(this.state.newRecipeDetails.ingredients).sort((a,b)=> parseInt(a.split("ingredient")[1])-parseInt(b.split("ingredient")[1])).map((ingredient, index) => {
       return (
           <IngredientAutoComplete
             removeIngredient={this.removeIngredient}
             key={ingredient}
             ingredientIndex={ingredient}
-            ingredient={this.props.ingredients[ingredient]}
+            ingredient={this.state.newRecipeDetails.ingredients[ingredient]}
             ingredientsList={this.state.ingredientsList}
             focused={this.state[ingredient]}
             index={index}
-            ingredientsLength={Object.keys(this.props.ingredients).length}
+            ingredientsLength={Object.keys(this.state.newRecipeDetails.ingredients).length}
             isFocused={this.isFocused}
-            addIngredientToRecipeDetails={this.props.addIngredientToRecipeDetails}
+            addIngredientToRecipeDetails={this.addIngredientToNewRecipeDetails}
           />
         )
       })
   }
 
   renderNewIngredientItem = () => {
-    const n = Object.keys(this.props.ingredients).length+1
+    const n = Object.keys(this.state.newRecipeDetails.ingredients).length+1
     const newIngredient = {[`ingredient${n}`]: {
       name: "",
       quantity: "",
@@ -260,45 +282,94 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         index={n-1}
         ingredientsLength={0}
         isFocused={this.isFocused}
-        addIngredientToRecipeDetails={this.props.addIngredientToRecipeDetails}
+        addIngredientToRecipeDetails={this.addIngredientToNewRecipeDetails}
       />
     )
   }
 
-    handleNewIngredientByName = (ingredient, name) => {
-      this.addIngredientToList(ingredient, name, "", "Oz")
-      this.isFocused(ingredient, true)
-    }
+  addIngredientToNewRecipeDetails = (ingredientIndex, name, quantity, unit) => {
+    this.setState((state) => {
+      return ({
+        newRecipeDetails: {
+          ...state.newRecipeDetails,
+          ingredients: {
+            ...state.newRecipeDetails.ingredients,
+            [ingredientIndex]: {
+              name: name,
+              quantity: quantity,
+              unit: unit
+            }
+          }
+        }
+      })
+    })
+  }
 
     removeIngredient = (ingredientIndex) => {
       let newIngredients = {}
-      let remainingIngredients = Object.keys(this.props.ingredients).filter(ing => ing !== ingredientIndex  && this.props.ingredients[ing].name !== "")
+      let remainingIngredients = Object.keys(this.state.newRecipeDetails.ingredients).filter(ing => ing !== ingredientIndex && this.state.newRecipeDetails.ingredients[ing].name !== "")
       remainingIngredients.sort((a,b)=> parseInt(a.split("ingredient")[1])-parseInt(b.split("ingredient")[1])).forEach( (ing, index) => {
         newIngredients[`ingredient${index+1}`] = {
-          "name": this.props.ingredients[ing].name,
-          "quantity": this.props.ingredients[ing].quantity,
-          "unit": this.props.ingredients[ing].unit,
+          "name": this.state.newRecipeDetails.ingredients[ing].name,
+          "quantity": this.state.newRecipeDetails.ingredients[ing].quantity,
+          "unit": this.state.newRecipeDetails.ingredients[ing].unit,
         }
       })
-      this.props.storeAllIngredients(newIngredients)
+      this.setState((state) => {
+        return ({
+          newRecipeDetails: {...state.newRecipeDetails, ingredients: newIngredients},
+        })
+      })
     }
 
-    handleTextInput = (text, parameter) => {
-      this.props.saveRecipeDetails(parameter, text)
+    handleInput = (text, parameter) => {
+      this.setState((state)=>{
+        return({
+          newRecipeDetails: {...state.newRecipeDetails, [parameter]: text},
+        })
+      })
     }
 
     submitRecipe = async() => {
       await this.setState({awaitingServer: true})
       if (this.props.navigation.getParam('recipe_details') !== undefined){
-        const recipe = await patchRecipe(this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.props.name, this.props.ingredients, this.state.instructions, this.state.instructionsOrder, this.props.time, this.props.difficulty, this.props.imageBase64, this.props.filter_settings, this.props.cuisine, this.props.serves, this.props.navigation.getParam('recipe_details').recipe.id, this.props.acknowledgement)
+        const recipe = await patchRecipe(
+          this.props.loggedInChef.id,
+          this.props.loggedInChef.auth_token,
+          this.state.newRecipeDetails.name,
+          this.state.newRecipeDetails.ingredients,
+          this.state.newRecipeDetails.instructions,
+          this.state.newRecipeDetails.instructionImages,
+          this.state.newRecipeDetails.time,
+          this.state.newRecipeDetails.difficulty,
+          this.state.newRecipeDetails.primaryImageBase64,
+          this.state.newRecipeDetails.filter_settings,
+          this.state.newRecipeDetails.cuisine,
+          this.state.newRecipeDetails.serves,
+          this.props.navigation.getParam('recipe_details').recipe.id,
+          this.state.newRecipeDetails.acknowledgement
+        )
         if (recipe) {
           this.props.clearNewRecipeDetails()
           this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
           this.props.navigation.navigate('MyRecipeBook')
         }
       }else{
-                                                        // chef_id,                         auth_token,            name,           ingredients,             instructions,            instructionsOrder,            time,            difficulty,             imageBase64,           filter_settings,          cuisine,               serves,           acknowledgement
-        const recipe = await postRecipe(this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.props.name, this.props.ingredients, this.state.instructions, this.state.instructionsOrder, this.props.time, this.props.difficulty, this.props.imageBase64, this.props.filter_settings, this.props.cuisine, this.props.serves, this.props.acknowledgement)
+        const recipe = await postRecipe(
+          this.props.loggedInChef.id,
+          this.props.loggedInChef.auth_token,
+          this.state.newRecipeDetails.name,
+          this.state.newRecipeDetails.ingredients,
+          this.state.newRecipeDetails.instructions,
+          this.state.newRecipeDetails.instructionImages,
+          this.state.newRecipeDetails.time,
+          this.state.newRecipeDetails.difficulty,
+          this.state.newRecipeDetails.primaryImageBase64,
+          this.state.newRecipeDetails.filter_settings,
+          this.state.newRecipeDetails.cuisine,
+          this.state.newRecipeDetails.serves,
+          this.state.newRecipeDetails.acknowledgement
+        )
         if (recipe) {
           this.props.clearNewRecipeDetails()
           this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
@@ -311,297 +382,306 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       this.setState({filterDisplayed: !this.state.filterDisplayed})
     }
 
-    onTimesChoiceChange = (choice) => {
-      this.handleTextInput(choice, "time")
-    }
-
-    onDifficultiesChoiceChange = (choice) => {
-      this.handleTextInput(choice, "difficulty")
-    }
-
     handleInstructionChange = async(text, index) => {
-      // if (index == this.state.instructionsOrder.length-1){
-      //   await this.setState( (state) => {
-      //     console.log('last one')
-      //     // let newInstructions = Object.assign({}, state.instructions)
-      //     // let newOrder = [...state.instructionsOrder]
-      //     // newInstructions[newOrder[index]] = text
-      //     let newInstructions = state.instructions
-      //     let newOrder = state.instructionsOrder
-      //     newInstructions[newOrder[index]] = text
-      //     return ({
-      //         instructions: newInstructions,
-      //         instructionsOrder: newOrder
-      //       })
-      //   })
-      // } else {
-        await this.setState( (state) => {
-          // console.log(' not last one')
-          // let newInstructions = Object.assign({}, state.instructions)
-          // let newOrder = [...state.instructionsOrder]
-          // newInstructions[newOrder[index]] = text
-          let newInstructions = state.instructions
-          let newOrder = state.instructionsOrder
-          newInstructions[newOrder[index]] = text
-          // console.log('test value')
-          // console.log(this.state.instructions[this.state.instructionsOrder[this.state.instructionsOrder.length-1]])
-          newRefreshTrigger = {time: new Date()}
-          newInstructions.refreshTrigger = newRefreshTrigger
-          return ({
-              instructions: newInstructions,
-              instructionsOrder: newOrder,
-            })
-        })
-      // }
+      this.setState( (state) => {
+        let newInstructions = [...state.newRecipeDetails.instructions]
+        newInstructions[index] = text
+        let newInstructionHeights = [...this.state.instructionHeights]
+        return ({
+          newRecipeDetails: {...state.newRecipeDetails, instructions: newInstructions},
+          instructionHeights: newInstructionHeights
+          })
+      })
     }
 
-    addNewInstruction = (text, index) => {
-      if (this.state.instructions[this.state.instructionsOrder[this.state.instructionsOrder.length-1]] !== ''){
-        console.log('condition met')
-        newOrder = [...this.state.instructionsOrder]
-        newOrder.push(`step_${this.state.instructionsOrder.length}`)
-        let newInstructions = Object.assign({}, this.state.instructions)
-        newInstructions[`step_${this.state.instructionsOrder.length}`] = ''
-        this.setState({
-          instructions: newInstructions,
-          instructionsOrder: newOrder
+    handleInstructionSizeChange = (index, size) => {
+      // console.log(size)
+      this.setState( (state) => {
+        let newInstructionHeights = [...state.instructionHeights]
+        newInstructionHeights[index] = size + responsiveHeight(0.5)
+        let newAverageInstructionHeight = parseFloat(newInstructionHeights.reduce( (acc, height) => acc + height, 0) / newInstructionHeights.length)
+        return ({
+            instructionHeights: newInstructionHeights,
+            averageInstructionHeight: newAverageInstructionHeight,
+          })
+      })
+    }
+
+    handleInstructionsSort = (newInstructions) => {
+      let newInstructionHeights = []
+      let newInstructionImages = []
+      newInstructions.forEach(instruction => {
+        let index = this.state.newRecipeDetails.instructions.indexOf(instruction)
+        newInstructionHeights.push(this.state.instructionHeights[index])
+        newInstructionImages.push(this.state.newRecipeDetails.instructionImages[index])
+      })
+      this.setState((state) => {
+        return ({
+          newRecipeDetails: {
+            ...state.newRecipeDetails,
+            instructions: newInstructions,
+            instructionImages: newInstructionImages
+          },
+          instructionHeights: newInstructionHeights,
+        })
+      })
+    }
+
+    addNewInstruction = () => {
+      if (this.state.newRecipeDetails.instructions[this.state.newRecipeDetails.instructions.length-1] === ''
+        && this.state.newRecipeDetails.instructions[this.state.newRecipeDetails.instructions.length-2] !== ''
+      ){
+        this.setState((state) => {
+          // console.log('adding new instruction')
+          let newInstructions = [...state.newRecipeDetails.instructions]
+          newInstructions.push('')
+          let newInstructionImages = [...state.newRecipeDetails.instructionImages, '']
+          let newInstructionHeights = [...state.instructionHeights, responsiveHeight(7.2)]
+          let newAverageInstructionHeight = newInstructionHeights.reduce((acc, h) => acc + h, 0)/newInstructionHeights.length
+          return ({
+            newRecipeDetails: {
+              ...state.newRecipeDetails,
+              instructions: newInstructions,
+              instructionImages: newInstructionImages
+            },
+            averageInstructionHeight: newAverageInstructionHeight,
+            instructionHeights: newInstructionHeights
+          })
         })
       }
     }
 
-  //  handleNewInstruction = (text) => {
-  //     let newInstructions = this.state.instructions
-  //     newInstructions.push(text)
-  //     this.setState({instructions: newInstructions})
-  //  }
-  
     removeInstruction = (index) => {
-      // const instructionToDelete = Object.keys(this.state.instructions).filter( step => this.state.instructions[step] === text)
-      let newInstructions = this.state.instructions
-      delete newInstructions[`step_${index+1}`]
-      const newOrder = this.state.instructionsOrder.filter(step => step !== `step_${index+1}`)
-      this.setState({
-        instructions: newInstructions,
-        instructionsOrder: newOrder
+      let newInstructions = [...this.state.newRecipeDetails.instructions]
+      newInstructions.splice(index, 1)
+      let newInstructionHeights = [...this.state.instructionHeights]
+      newInstructionHeights.splice(index,1)
+      let newAverageInstructionHeight = newInstructionHeights.reduce((acc,h) => acc + h, 0)/newInstructionHeights.length
+      this.setState((state) => {
+        return ({
+          newRecipeDetails: {...state.newRecipeDetails, instructions: newInstructions},
+          instructionHeights: newInstructionHeights,
+          averageInstructionHeight: newAverageInstructionHeight
+        })
       })
     }
 
-    updateInstructionsOrder = (newOrder) => {
-      this.setState({instructionsOrder: newOrder})
+    chooseInstructionPicture = (index) =>{
+      this.setState({
+        choosingInstructionPicture: true,
+        instructionImageIndex: index
+      })
+    }
+  
+    instructionSourceChosen = () =>{
+      this.setState({choosingInstructionPicture: false})
     }
 
-    handleInstructionRowRelease = () => {
-      // console.log('released')
-      // setTimeout((()=>this.setState({scrollingEnabled: true})), 2000)
-      // this.setState({scrollingEnabled: true})
-      // this.scrollView.setNativeProps({ scrollEnabled: true })
-
+    renderInstructionPictureChooser = () => {
+      let imageSource = typeof this.state.newRecipeDetails.instructionImages[this.state.instructionImageIndex] == 'object' ? this.state.newRecipeDetails.instructionImages[this.state.instructionImageIndex].image_url : `data:image/jpeg;base64,${this.state.newRecipeDetails.instructionImages[this.state.instructionImageIndex]}`
+      return (
+        <PicSourceChooser
+          saveImage={this.saveInstructionImage}
+          index={this.state.instructionImageIndex}
+          sourceChosen={this.instructionSourceChosen}
+          key={"instruction-pic-chooser"}
+          imageSource={imageSource}
+        />
+      )
     }
 
-    handleActivateRow = () => {
-      // console.log('activated')
-      // clearTimeout(sorterTimer)
-      // this.setState({scrollingEnabled: false})
-      // this.scrollView.setNativeProps({ scrollEnabled: false })
-      // sorterTimer = setTimeout((()=>this.setState({scrollingEnabled: true})), 5000)
+    saveInstructionImage = async(image, index) => {
+      console.log(index)
+      await this.setState({awaitingServer: true})
+      if (image.cancelled === false){
+        this.setState((state) => {
+          let newInstructionImages = [...state.newRecipeDetails.instructionImages]
+          newInstructionImages[index] = image.base64
+          return ({
+            choosingPicture: false,
+            newRecipeDetails: {
+              ...state.newRecipeDetails,
+              instructionImages: newInstructionImages
+            },
+            awaitingServer: false,
+            choosingInstructionPicture: false
+          })
+        })
+      }
+      else {
+        await this.setState({
+          awaitingServer: false,
+          choosingInstructionPicture: false
+        })
+      }
     }
 
-    handleRowPress = () => {
-      // console.log('pressed')
+    toggleFilterCategory = (category) => {
+      this.setState((state) => {
+        return ({
+          newRecipeDetails: {
+            ...state.newRecipeDetails,
+            filter_settings: {
+              ...state.newRecipeDetails.filter_settings,
+              [category]: !state.newRecipeDetails.filter_settings[category]
+            }
+          }
+        })
+      })
     }
 
-    toggleScrollViewEnabled = (enabled) => {
-      this.setState({scrollingEnabled: enabled})
+    clearFilerCategories = () => {
+      this.setState((state) => {
+        return ({
+          newRecipeDetails: {
+            ...state.newRecipeDetails,
+            filter_settings: clearedFilters,
+            cuisine: 'Any',
+            serves: 'Any'
+          }
+        })
+      })
     }
 
     render() {
-      // console.log('instructions')
-      // console.log(this.state.instructions)
-      // console.log('order')
-      // console.log(this.state.instructionsOrder)
-      const instructionsHeight = (this.state.instructionsOrder.length+1)*9.5
-      // console.log(instructionsHeight)
-      // console.log(RefreshControl)
+      // console.log(this.state.newRecipeDetails.imageBase64)
       return (
-        <SpinachAppContainer awaitingServer={this.state.awaitingServer} scrollingEnabled={true}>
-        {this.state.filterDisplayed ? <FilterMenu handleCategoriesButton={this.handleCategoriesButton} newRecipe={true} confirmButtonText={"Save"} title={"Select categories for your recipe"}/> : null}
-        {this.state.choosingPicture ? this.renderPictureChooser() : null}
-          {/* form */}
-          <View style={[centralStyles.formContainer, {width: responsiveWidth(100), marginLeft: 0, marginRight: 0}]}>
-            {/* recipe name */}
-            {/* <View style={centralStyles.formSection}>
-              <View style={centralStyles.formInputContainer}>
-              <TextInput style={centralStyles.formInput} value={this.props.name} placeholder="Recipe name" onChangeText={(t) => this.handleTextInput(t, "name")}/>
-              </View>
-            </View> */}
-            {/* separator */}
-            {/* <View style={centralStyles.formSectionSeparatorContainer}>
-              <View style={centralStyles.formSectionSeparator}>
-              </View>
-            </View> */}
-            {/* {[...this.renderIngredientsList(), this.renderNewIngredientItem()]} */}
-            {/* separator */}
-            {/* <View style={centralStyles.formSectionSeparatorContainer}>
-              <View style={centralStyles.formSectionSeparator}>
-              </View>
-            </View> */}
-            <View style={[centralStyles.formSection, {minHeight: 100}]}>
-              <SortableList
-                            // {...(this.panResponder ? this.panResponder.panHandlers : null)}
-                style={{ flex: 1, borderColor: 'blue', borderWidth: 3}}
-                contentContainerStyle={{borderWidth: 1, borderColor: 'yellow', flex: 1}}
-                innerContainerStyle={{borderWidth: 1, borderColor: 'red'}}
-                // sortRowStyle={{marginTop:0}}
-                data={this.state.instructions}
-                order={this.state.instructionsOrder}
-                onChangeOrder={newOrder => this.updateInstructionsOrder(newOrder)}
-                // scrollEnabled={true}
-                rowActivationTime={0}
-                onPressRow={this.handleRowPress} //does nothing currently
-                numberOfInstructionsSteps={this.state.numberOfInstructionsSteps}
-                refreshControl={
-                  <RefreshControl
-                    refreshing={false}
-                    // onRefresh={}
-                  />
-                }
-                // onPressRow={this.handleActivateRow}
-                // onPanResponderGrant={() => this.setState({scrollingEnabled: false})}
-                // onPanResponderGrant={() => console.log('granted')}
-                // onPanResponderRelease={() => this.setState({scrollingEnabled: true})}
-                // onPanResponderRelease={() => console.log('released')}
-                onActivateRow={this.handleActivateRow} //does nothing currently
-                //onReleaseRow={() => this.setState({scrollingEnabled: true})}
-                onReleaseRow={this.handleInstructionRowRelease} //does nothing currently
-                // manuallyActivateRows={true}
-                // onReleaseRow={null}
-                // renderHeader={() => this.renderNewIngredientItem()}
-                // onRowMoved={e => {
-                //   order.splice(e.to, 0, order.splice(e.from, 1)[0])
-                //   this.forceUpdate()
-                // }}
-                // onMoveStart={console.log('move started')}
-                // onMoveEnd={console.log('move finished')}
-                // onMoveActive={console.log('move active')}
-                // limitScrolling={true}
-                // moveOnPressIn={true}
-                // disableAnimatedScrolling={true}
-                renderRow={({key, index, data, disabled, active}) => {
-                  // console.log(`key: ${key}`)
-                  // console.log(`index: ${index}`)
-                  // console.log(`data: ${data}`)
-                  // console.log(`disabled: ${disabled}`)
-                  // console.log(`active: ${active}`)
-                  return (
-                  <InstructionRow
-                    data={data}
-                    removeInstruction={this.removeInstruction}
-                    handleInstructionChange={this.handleInstructionChange}
-                    key={key}
-                    index={index}
-                    disabled={disabled}
-                    active={active}
-                    // toggleScrollViewEnabled={this.toggleScrollViewEnabled}
-                    order={this.state.instructionsOrder}
-                    // panResponder={this.panResponder}
-                    // scrollView={this.scrollView}
-                    addNewInstruction={this.addNewInstruction}
-                  />)}
-                }
-                // renderFooter={() => {
-                //   // console.log(index)
-                //   return (
-                //   <InstructionRow
-                //     data={""}
-                //     removeInstruction={this.removeInstruction}
-                //     handleInstructionChange={this.handleNewInstructionChange}
-                //     key={"newRow"}
-                //     index={Object.keys(this.state.instructions).length}
-                //     // disabled={disabled}
-                //     // active={active}
-                //     toggleScrollViewEnabled={this.toggleScrollViewEnabled}
-                //     // panResponder={this.panResponder}
-                //     // scrollView={this.scrollView}
-                //   />)}
-                // }
-                // renderItem={({item}) => {
-                //   // console.log(index)
-                //   return (
-                //   <InstructionRow
-                //     data={item}
-                //     removeInstruction={this.removeInstruction}
-                //     handleInstructionChange={this.handleInstructionChange}
-                //     key={item}
-                //     // index={index}
-                //     // disabled={disabled}
-                //     // active={active}
-                //     panResponder={this.panResponder}
-                //   />)}
-                // }
-              />
-            </View>
-             {/* separator */}
-             {/* <View style={centralStyles.formSectionSeparatorContainer}>
-              <View style={centralStyles.formSectionSeparator}>
-              </View>
-            </View> */}
-            {/* acknowledgement */}
-            {/* <View style={centralStyles.formSection}>
-              <View style={centralStyles.formInputContainer}>
-              <TextInput style={centralStyles.formInput} value={this.props.acknowledgement} placeholder="Acknowledge your recipe's source if it's not yourself" onChangeText={(t) => this.handleTextInput(t, "acknowledgement")}/>
-              </View>
-            </View> */}
-            {/* time and difficulty titles */}
-            {/* <View style={[centralStyles.formSection, {width: responsiveWidth(80)}]}>
-              <View style={centralStyles.formInputContainer}>
-                <View style={styles.timeAndDifficultyTitleItem}>
-                  <Text style={styles.timeAndDifficultyTitle}>Time:</Text>
-                </View>
-                <View style={styles.timeAndDifficultyTitleItem}>
-                  <Text style={styles.timeAndDifficultyTitle}>Difficulty:</Text>
+        <SpinachAppContainer awaitingServer={this.state.awaitingServer} scrollingEnabled={false}>
+        {this.state.filterDisplayed && (
+          <FilterMenu
+          handleCategoriesButton={this.handleCategoriesButton}
+          newRecipe={true}
+          newRecipeFilterSettings={this.state.newRecipeDetails.filter_settings}
+          switchNewRecipeFilterValue={this.toggleFilterCategory}
+          newRecipeServes={this.state.newRecipeDetails.serves}
+          setNewRecipeServes={this.handleInput}
+          newRecipeCuisine={this.state.newRecipeDetails.cuisine}
+          setNewRecipeCuisine={this.handleInput}
+          clearNewRecipeFilters={this.clearFilerCategories}
+          confirmButtonText={"Save"}
+          title={"Select categories for your recipe"}
+          />
+        )}
+        {this.state.choosingPrimaryPicture && this.renderPrimaryPictureChooser()}
+        {this.state.choosingInstructionPicture && this.renderInstructionPictureChooser()}
+          <ScrollView style={centralStyles.fullPageScrollView}
+            nestedScrollEnabled={false}
+            scrollEnabled={this.state.scrollingEnabled}
+            keyboardShouldPersistTaps={'always'}
+          >
+            {/* form */}
+            <View style={[centralStyles.formContainer, {width: responsiveWidth(100), marginLeft: 0, marginRight: 0}]}>
+              {/* recipe name */}
+              <View style={centralStyles.formSection}>
+                <View style={centralStyles.formInputContainer}>
+                <TextInput style={centralStyles.formInput} value={this.state.newRecipeDetails.name} placeholder="Recipe name" onChangeText={(t) => this.handleInput(t, "name")}/>
                 </View>
               </View>
-            </View> */}
-            {/* time and difficulty dropdowns */}
-            {/* <View style={[centralStyles.formSection, {width: responsiveWidth(80)}]}>
-              <View style={centralStyles.formInputContainer}>
-                <View picker style={[styles.timeAndDifficulty, {paddingLeft: responsiveWidth(8)}]} >
-                  <DualOSPicker
-                    onChoiceChange={this.onTimesChoiceChange}
-                    options={times}
-                    selectedChoice={this.props.time}/>
-                </View>
-                <View picker style={[styles.timeAndDifficulty, {paddingLeft: responsiveWidth(12)}]}>
-                  <DualOSPicker
-                    onChoiceChange={this.onDifficultiesChoiceChange}
-                    options={difficulties}
-                    selectedChoice={this.props.difficulty}/>
+              {/* separator */}
+              <View style={centralStyles.formSectionSeparatorContainer}>
+                <View style={centralStyles.formSectionSeparator}>
                 </View>
               </View>
-            </View> */}
-            {/* add picture and select categories*/}
-            {/* <View style={[centralStyles.formSection, {width: responsiveWidth(80)}]}>
-              <View style={centralStyles.formInputContainer}>
-                <TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={this.choosePicture}>
-                  <Icon style={centralStyles.greenButtonIcon} size={25} name='camera'></Icon>
-                  <Text style={centralStyles.greenButtonText}>Add{"\n"}picture</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={this.handleCategoriesButton}>
-                  <Icon style={centralStyles.greenButtonIcon} size={25} name='filter'></Icon>
-                    <Text style={centralStyles.greenButtonText}>Select{"\n"}categories</Text>
-                </TouchableOpacity>
+              {[...this.renderIngredientsList(), this.renderNewIngredientItem()]}
+              {/* separator */}
+              <View style={centralStyles.formSectionSeparatorContainer}>
+                <View style={centralStyles.formSectionSeparator}>
+                </View>
               </View>
-            </View> */}
-            {/* submit */}
-            {/* <View style={[centralStyles.formSection, {width: responsiveWidth(80)}]}>
-              <View style={[centralStyles.formInputContainer, {justifyContent: 'center'}]}>
-                <TouchableOpacity style={[centralStyles.yellowRectangleButton]} activeOpacity={0.7} onPress={e => this.submitRecipe(e)}>
-                  <Icon style={centralStyles.greenButtonIcon} size={25} name='login'></Icon>
+              <View style={[centralStyles.formSection]}>
+                <AutoDragSortableView
+                  dataSource={this.state.newRecipeDetails.instructions}
+                  parentWidth={responsiveWidth(100)}
+                  childrenWidth= {responsiveWidth(100)}
+                  childrenHeight={this.state.averageInstructionHeight}
+                  childrenHeights={this.state.instructionHeights}
+                  marginChildrenTop={0}
+                  onDataChange = {(newInstructions)=> this.handleInstructionsSort(newInstructions)}
+                  onDragStart={this.deactivateScrollView}
+                  onDragEnd={this.activateScrollView}
+                  delayLongPress={10}
+                  keyExtractor={(item,index)=> `${index}${item}`}
+                  renderItem={(item,index)=>{
+                    return (
+                      <InstructionRow
+                        refreshSortableList={this.state.refreshSortableList}
+                        removeInstruction={this.removeInstruction}
+                        handleInstructionChange={this.handleInstructionChange}
+                        // key={`${index}${item}`}
+                        item={item}
+                        index={index}
+                        handleInstructionSizeChange={this.handleInstructionSizeChange}
+                        addNewInstruction={this.addNewInstruction}
+                        chooseInstructionPicture={this.chooseInstructionPicture}
+                        instructionImagePresent={this.state.newRecipeDetails.instructionImages[index] != ''}
+                      />
+                    )
+                  }}
+                />
+              </View>
+              {/* separator */}
+              <View style={centralStyles.formSectionSeparatorContainer}>
+                <View style={centralStyles.formSectionSeparator}>
+                </View>
+              </View>
+              {/* acknowledgement */}
+              <View style={centralStyles.formSection}>
+                <View style={centralStyles.formInputContainer}>
+                <TextInput style={centralStyles.formInput} value={this.state.newRecipeDetails.acknowledgement} placeholder="Acknowledge your recipe's source if it's not yourself" onChangeText={(t) => this.handleInput(t, "acknowledgement")}/>
+                </View>
+              </View>
+              {/* time and difficulty titles */}
+              <View style={[centralStyles.formSection, {width: responsiveWidth(80)}]}>
+                <View style={centralStyles.formInputContainer}>
+                  <View style={styles.timeAndDifficultyTitleItem}>
+                    <Text style={styles.timeAndDifficultyTitle}>Time:</Text>
+                  </View>
+                  <View style={styles.timeAndDifficultyTitleItem}>
+                    <Text style={styles.timeAndDifficultyTitle}>Difficulty:</Text>
+                  </View>
+                </View>
+              </View>
+              {/* time and difficulty dropdowns */}
+              <View style={[centralStyles.formSection, {width: responsiveWidth(80)}]}>
+                <View style={centralStyles.formInputContainer}>
+                  <View picker style={[styles.timeAndDifficulty, {paddingLeft: responsiveWidth(8)}]} >
+                    <DualOSPicker
+                      onChoiceChange={(choice) => this.handleInput(choice, "time")}
+                      options={times}
+                      selectedChoice={this.state.newRecipeDetails.time}/>
+                  </View>
+                  <View picker style={[styles.timeAndDifficulty, {paddingLeft: responsiveWidth(12)}]}>
+                    <DualOSPicker
+                      onChoiceChange={(choice) => this.handleInput(choice, "difficulty")}
+                      options={difficulties}
+                      selectedChoice={this.state.newRecipeDetails.difficulty}/>
+                  </View>
+                </View>
+              </View>
+              {/* add picture and select categories*/}
+              <View style={[centralStyles.formSection, {width: responsiveWidth(80)}]}>
+                <View style={centralStyles.formInputContainer}>
+                  <TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={this.choosePrimaryPicture}>
+                    <Icon style={centralStyles.greenButtonIcon} size={25} name='camera'></Icon>
+                    <Text style={centralStyles.greenButtonText}>Add{"\n"}picture</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={this.handleCategoriesButton}>
+                    <Icon style={centralStyles.greenButtonIcon} size={25} name='filter'></Icon>
+                      <Text style={centralStyles.greenButtonText}>Select{"\n"}categories</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+              {/* submit */}
+              <View style={[centralStyles.formSection, {width: responsiveWidth(80)}]}>
+                <View style={[centralStyles.formInputContainer, {justifyContent: 'center'}]}>
+                  <TouchableOpacity style={[centralStyles.yellowRectangleButton]} activeOpacity={0.7} onPress={e => this.submitRecipe(e)}>
+                    <Icon style={centralStyles.greenButtonIcon} size={25} name='login'></Icon>
                     <Text style={centralStyles.greenButtonText}>Submit</Text>
-                </TouchableOpacity>
+                  </TouchableOpacity>
+                </View>
               </View>
-            </View> */}
-          </View>
+            </View>
+          </ScrollView>
         </SpinachAppContainer>
       )
     }

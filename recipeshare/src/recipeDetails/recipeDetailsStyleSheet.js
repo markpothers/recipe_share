@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet } from 'react-native';
-import { responsiveWidth } from 'react-native-responsive-dimensions';
+import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
 
 export const styles = StyleSheet.create({
   mainPageContainer:{
@@ -63,20 +63,30 @@ export const styles = StyleSheet.create({
       paddingTop: '1%',
       // paddingBottom: '1%'
     },
+    detailsInstructionContainer: {
+      flexDirection: 'row',
+      width: '100%',
+      // borderWidth: 1,
+    },
+    instructionImageContainer: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      // borderWidth: 1,
+      marginRight: responsiveWidth(2)
+    },
     detailsInstructions: {
-      // borderStyle: 'solid',
+      paddingTop: responsiveHeight(0.5),
+      paddingBottom: responsiveHeight(0.5),
+      // justifyContent: 'center'
+    },
+    detailsInstructionsSeparator: {
+      width: responsiveWidth(96),
+      marginLeft: responsiveWidth(2),
+      marginRight: responsiveWidth(2),
+      marginTop: responsiveHeight(0.5),
+      marginBottom: responsiveHeight(0.5),
       borderBottomWidth: 0.5,
       borderColor: '#104e01',
-      width: '96%',
-      marginLeft: '2%',
-      marginRight: '2%',
-      // marginTop: 4,
-      // borderRadius: 5,
-      // backgroundColor: 'white',
-      // opacity: 0.9,
-      // marginBottom: '1%',
-      paddingTop: '1%',
-      paddingBottom: '1%'
     },
     detailsContainer: {
       borderStyle: 'solid',
@@ -367,5 +377,27 @@ export const styles = StyleSheet.create({
     },
     standardIcon: {
       color: '#104e01',
+    },
+    instructionImagePopupModalCover: {
+      height: responsiveHeight(100),
+      width: responsiveWidth(100),
+      backgroundColor: 'rgba(0,0,0,0.75)',
+    },
+    instructionImagePopupContainer: {
+      height: responsiveWidth(90),
+      marginTop: responsiveHeight(15),
+      width: responsiveWidth(90),
+      marginLeft: responsiveWidth(5),
+      marginRight: responsiveWidth(5),
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'rgba(256,256,256,1)',
+      borderRadius: 5,
+      overflow: 'hidden'
+    },
+    instructionPopupImage: {
+      height: responsiveWidth(85),
+      width: responsiveWidth(85),
+      borderRadius: 5,
     }
   });

@@ -45,16 +45,21 @@ class Chef < ApplicationRecord
         if type == "all_chefs"
             # byebug
             # Chef.find_by_sql(["SELECT * from chefs ORDER BY created_at DESC")
-                Chef.find_by_sql(["SELECT DISTINCT chefs.id, chefs.username, chefs.country, chefs.image_url, chefs.created_at, chefs.profile_text,
+                Chef.find_by_sql(["SELECT DISTINCT chefs.id,
+                                                MAX(chefs.username) AS username,
+                                                MAX(chefs.country) AS country,
+                                                MAX(chefs.image_url) AS image_url,
+                                                MAX(chefs.created_at) AS created_at,
+                                                MAX(chefs.profile_text) AS profile_text,
                                                 COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id), 0) AS followers,
                                                 COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id AND follows.follower_id = ?), 0) AS user_chef_following,
                                                 COALESCE((SELECT COUNT(*) FROM recipes WHERE recipes.chef_id = chefs.id), 0) AS recipe_count,
                                                 COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.chef_id = chefs.id), 0) AS recipe_likes_given,
-                                                COALESCE(liked_recipes.liked_count, 0) AS recipe_likes_received,
+                                                COALESCE(MAX(liked_recipes.liked_count), 0) AS recipe_likes_received,
                                                 COALESCE((SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.chef_id = chefs.id), 0) AS recipe_makes_given,
-                                                COALESCE(made_recipes.made_count, 0) AS recipe_makes_received,
+                                                COALESCE(MAX(made_recipes.made_count), 0) AS recipe_makes_received,
                                                 COALESCE((SELECT COUNT(*) FROM comments WHERE comments.chef_id = chefs.id), 0) AS comments_given,
-                                                COALESCE(commented_recipes.comments_count, 0) AS comments_received
+                                                COALESCE(MAX(commented_recipes.comments_count), 0) AS comments_received
                                             FROM CHEFS
                                             LEFT OUTER JOIN (
                                                 SELECT recipes.chef_id AS counter_chef_id, COUNT(*) AS liked_count FROM recipe_likes
@@ -72,22 +77,29 @@ class Chef < ApplicationRecord
                                                 WHERE recipes.hidden = false
                                                 GROUP BY recipes.chef_id) AS commented_recipes ON commented_recipes.counter_chef_id = chefs.id
                                             WHERE chefs.hidden = false
-                                            ORDER BY chefs.created_at DESC
+                                            GROUP By chefs.id
+                                            ORDER BY created_at DESC
                                             LIMIT ?
                                             OFFSET ?", userChefID, limit, offset])
 
         elsif type == "chef_followees" # chefs followed by user (chef_id)
 
-                Chef.find_by_sql(["SELECT DISTINCT chefs.id, chefs.username, chefs.country, chefs.image_url, chefs.created_at, chefs.profile_text, follows.created_at,
+                Chef.find_by_sql(["SELECT DISTINCT chefs.id,
+                                                MAX(chefs.username) AS username,
+                                                MAX(chefs.country) AS country,
+                                                MAX(chefs.image_url) AS image_url,
+                                                MAX(chefs.created_at) AS created_at,
+                                                MAX(chefs.profile_text) AS profile_text,
+                                                MAX(follows.created_at) AS follow_created,
                                                 COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id), 0) AS followers,
                                                 COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id AND follows.follower_id = ?), 0) AS user_chef_following,
                                                 COALESCE((SELECT COUNT(*) FROM recipes WHERE recipes.chef_id = chefs.id), 0) AS recipe_count,
                                                 COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.chef_id = chefs.id), 0) AS recipe_likes_given,
-                                                COALESCE(liked_recipes.liked_count, 0) AS recipe_likes_received,
+                                                COALESCE(MAX(liked_recipes.liked_count), 0) AS recipe_likes_received,
                                                 COALESCE((SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.chef_id = chefs.id), 0) AS recipe_makes_given,
-                                                COALESCE(made_recipes.made_count, 0) AS recipe_makes_received,
+                                                COALESCE(MAX(made_recipes.made_count), 0) AS recipe_makes_received,
                                                 COALESCE((SELECT COUNT(*) FROM comments WHERE comments.chef_id = chefs.id), 0) AS comments_given,
-                                                COALESCE(commented_recipes.comments_count, 0) AS comments_received
+                                                COALESCE(MAX(commented_recipes.comments_count), 0) AS comments_received
                                             FROM CHEFS
                                             LEFT OUTER JOIN (
                                                 SELECT recipes.chef_id AS counter_chef_id, COUNT(*) AS liked_count FROM recipe_likes
@@ -106,22 +118,29 @@ class Chef < ApplicationRecord
                                                 GROUP BY recipes.chef_id) AS commented_recipes ON commented_recipes.counter_chef_id = chefs.id
                                             LEFT OUTER JOIN follows ON follows.followee_id = chefs.id
                                             WHERE follows.follower_id = ? AND chefs.hidden = false
-                                            ORDER BY follows.created_at DESC
+                                            GROUP BY chefs.id
+                                            ORDER BY follow_created DESC
                                             LIMIT ?
                                             OFFSET ?", userChefID, queryChefID, limit, offset])
 
         elsif type == "chef_followers" # chefs followed by user (chef_id)
 
-            Chef.find_by_sql(["SELECT DISTINCT chefs.id, chefs.username, chefs.country, chefs.image_url, chefs.created_at, chefs.profile_text, follows.created_at,
+            Chef.find_by_sql(["SELECT DISTINCT chefs.id, 
+                                            MAX(chefs.username) AS username,
+                                            MAX(chefs.country) AS country,
+                                            MAX(chefs.image_url) AS image_url,
+                                            MAX(chefs.created_at) AS created_at,
+                                            MAX(chefs.profile_text) AS profile_text,
+                                            MAX(follows.created_at) AS follow_created,
                                             COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id), 0) AS followers,
                                             COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id AND follows.follower_id = ?), 0) AS user_chef_following,
                                             COALESCE((SELECT COUNT(*) FROM recipes WHERE recipes.chef_id = chefs.id), 0) AS recipe_count,
                                             COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.chef_id = chefs.id), 0) AS recipe_likes_given,
-                                            COALESCE(liked_recipes.liked_count, 0) AS recipe_likes_received,
+                                            COALESCE(MAX(liked_recipes.liked_count), 0) AS recipe_likes_received,
                                             COALESCE((SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.chef_id = chefs.id), 0) AS recipe_makes_given,
-                                            COALESCE(made_recipes.made_count, 0) AS recipe_makes_received,
+                                            COALESCE(MAX(made_recipes.made_count), 0) AS recipe_makes_received,
                                             COALESCE((SELECT COUNT(*) FROM comments WHERE comments.chef_id = chefs.id), 0) AS comments_given,
-                                            COALESCE(commented_recipes.comments_count, 0) AS comments_received
+                                            COALESCE(MAX(commented_recipes.comments_count), 0) AS comments_received
                                         FROM CHEFS
                                         LEFT OUTER JOIN (
                                             SELECT recipes.chef_id AS counter_chef_id, COUNT(*) AS liked_count FROM recipe_likes
@@ -140,7 +159,8 @@ class Chef < ApplicationRecord
                                             GROUP BY recipes.chef_id) AS commented_recipes ON commented_recipes.counter_chef_id = chefs.id
                                         LEFT OUTER JOIN follows ON follows.follower_id = chefs.id
                                         WHERE follows.followee_id = ? AND chefs.hidden = false
-                                        ORDER BY chefs.created_at DESC
+                                        GROUP BY chefs.id
+                                        ORDER BY follow_created DESC
                                         LIMIT ?
                                         OFFSET ?", userChefID, queryChefID, limit, offset])
 
@@ -151,16 +171,21 @@ class Chef < ApplicationRecord
             else # if ranking == "liked"
                 order = "recipe_likes_received"
             end
-            Chef.find_by_sql(["SELECT DISTINCT chefs.id, chefs.username, chefs.country, chefs.image_url, chefs.created_at, chefs.profile_text,
+            Chef.find_by_sql(["SELECT DISTINCT chefs.id, 
+                                            MAX(chefs.username) AS username,
+                                            MAX(chefs.country) AS country,
+                                            MAX(chefs.image_url) AS image_url,
+                                            MAX(chefs.created_at) AS created_at,
+                                            MAX(chefs.profile_text) AS profile_text,
                                             COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id), 0) AS followers,
                                             COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id AND follows.follower_id = ?), 0) AS user_chef_following,
                                             COALESCE((SELECT COUNT(*) FROM recipes WHERE recipes.chef_id = chefs.id), 0) AS recipe_count,
                                             COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.chef_id = chefs.id), 0) AS recipe_likes_given,
-                                            COALESCE(liked_recipes.liked_count, 0) AS recipe_likes_received,
+                                            COALESCE(MAX(liked_recipes.liked_count), 0) AS recipe_likes_received,
                                             COALESCE((SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.chef_id = chefs.id), 0) AS recipe_makes_given,
-                                            COALESCE(made_recipes.made_count, 0) AS recipe_makes_received,
+                                            COALESCE(MAX(made_recipes.made_count), 0) AS recipe_makes_received,
                                             COALESCE((SELECT COUNT(*) FROM comments WHERE comments.chef_id = chefs.id), 0) AS comments_given,
-                                            COALESCE(commented_recipes.comments_count, 0) AS comments_received
+                                            COALESCE(MAX(commented_recipes.comments_count), 0) AS comments_received
                                         FROM CHEFS
                                         LEFT OUTER JOIN (
                                             SELECT recipes.chef_id AS counter_chef_id, COUNT(*) AS liked_count FROM recipe_likes
@@ -178,6 +203,7 @@ class Chef < ApplicationRecord
                                             WHERE recipes.hidden = false
                                             GROUP BY recipes.chef_id) AS commented_recipes ON commented_recipes.counter_chef_id = chefs.id
                                         WHERE chefs.hidden = false
+                                        GROUP BY chefs.id
                                         ORDER BY #{order} DESC
                                         LIMIT ?
                                         OFFSET ?", userChefID, limit, offset])

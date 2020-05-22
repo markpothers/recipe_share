@@ -19,6 +19,8 @@ import RecipeNewComment from './recipeNewComment';
 import AppHeader from '../../navigation/appHeader'
 import PicSourceChooser from '../functionalComponents/picSourceChooser'
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
+import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
+import { InstructionImagePopup } from './instructionImagePopup'
 
 const mapStateToProps = (state) => ({
   recipe_details: state.recipe_details,
@@ -88,7 +90,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       commenting: false,
       commentText: "",
       choosingPicSource: false,
-      awaitingServer: false
+      awaitingServer: false,
+      scrollEnabled: true,
     }
 
     componentDidMount = async() => {
@@ -162,7 +165,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     renderMakePicScrollView = () => {
       return (
-        <ScrollView horizontal="true" style={styles.makePicScrollView}>
+        <ScrollView horizontal="true" style={styles.makePicScrollView} scrollEnabled={this.state.scrollEnabled}>
           {this.renderRecipeMakePics()}
         </ScrollView>
       )
@@ -172,18 +175,64 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         return this.props.recipe_details.make_pics.map(make_pic => {
           if (make_pic.chef_id === this.props.loggedInChef.id || this.props.loggedInChef.is_admin){
           return (
-            <View key={`${make_pic.id}${make_pic.image_url}`} style={styles.makePicContainer}>
+            <TouchableOpacity
+              style={styles.instructionImageContainer}
+              delayPressIn={100}
+              onPressIn={() => {
+                this.setState({
+                  scrollEnabled: false,
+                  instructionImagePopupShowing: true,
+                  instructionImagePopupURL: make_pic.image_url 
+                })
+              }}
+              onPressOut={() => {
+                this.setState({
+                  scrollEnabled: true,
+                  instructionImagePopupShowing: false,
+                })
+              }}
+              pressRetentionOffset={{
+                top: responsiveHeight(100),
+                left: responsiveWidth(100),
+                bottom: responsiveHeight(100),
+                right: responsiveWidth(100)
+              }}
+              key={`${make_pic.id}${make_pic.image_url}`} style={styles.makePicContainer}
+            >
               <Image style={[{width: '100%', height: '100%'}, styles.makePic]} source={{uri: make_pic.image_url}}></Image>
               <TouchableOpacity style={styles.makePicTrashCanButton} onPress={() => this.deleteMakePic(make_pic.id)}>
                 <Icon name='trash-can-outline' size={24} style={[styles.icon, styles.makePicTrashCan]}/>
               </TouchableOpacity>
-            </View>
+            </TouchableOpacity>
           )
           } else {
             return(
-              <View key={`${make_pic.id}${make_pic.image_url}`} style={styles.makePicContainer}>
+              <TouchableOpacity
+                style={styles.instructionImageContainer}
+                delayPressIn={100}
+                onPressIn={() => {
+                  this.setState({
+                    scrollEnabled: false,
+                    instructionImagePopupShowing: true,
+                    instructionImagePopupURL: make_pic.image_url
+                  })
+                }}
+                onPressOut={() => {
+                  this.setState({
+                    scrollEnabled: true,
+                    instructionImagePopupShowing: false,
+                  })
+                }}
+                pressRetentionOffset={{
+                  top: responsiveHeight(100),
+                  left: responsiveWidth(100),
+                  bottom: responsiveHeight(100),
+                  right: responsiveWidth(100)
+                }}
+                key={`${make_pic.id}${make_pic.image_url}`} style={styles.makePicContainer}
+              >
                 <Image style={[{width: '100%', height: '100%'}, styles.makePic]} source={{uri: make_pic.image_url}}></Image>
-              </View>
+              </TouchableOpacity>
             )
           }
         })
@@ -327,7 +376,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     handleCommentTextInput = (commentText) => {
-      console.log("mark")
       this.setState({commentText: commentText})
     }
 
@@ -372,11 +420,51 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     renderRecipeInstructions = () => {
       // console.log(this.props.recipe_details.instructions)
-      return this.props.recipe_details.instructions.map(instruction => {
+      return this.props.recipe_details.instructions.map((instruction, index) => {
+        let instructionImage = this.props.recipe_details.instruction_images.find( image => image.instruction_id === instruction.id)
         return (
-          <View style={styles.detailsInstructions} key={instruction.step}>
-            <Text style={[styles.detailsContents]}>{instruction.instruction}</Text>
-          </View>
+          <React.Fragment key={instruction.step}>
+            <View style={styles.detailsInstructionContainer}>
+              <View style={[styles.detailsInstructions, {width: (instructionImage ? responsiveWidth(73) : responsiveWidth(98))}]}>
+                <Text style={[styles.detailsContents]}>{instruction.instruction}</Text>
+              </View>
+              {instructionImage && (
+                <TouchableOpacity
+                  style={styles.instructionImageContainer}
+                  delayPressIn={100}
+                  onPressIn={() => {
+                    this.setState({
+                      scrollEnabled: false,
+                      instructionImagePopupShowing: true,
+                      instructionImagePopupURL: instructionImage.image_url 
+                    })
+                  }}
+                  onPressOut={() => {
+                    this.setState({
+                      scrollEnabled: true,
+                      instructionImagePopupShowing: false,
+                    })
+                  }}
+                  pressRetentionOffset={{
+                    top: responsiveHeight(100),
+                    left: responsiveWidth(100),
+                    bottom: responsiveHeight(100),
+                    right: responsiveWidth(100)
+                  }}
+                >
+                  <Image 
+                    style={[{width: responsiveWidth(25), height: responsiveWidth(25)}, styles.detailsImage]} 
+                    source={{uri: instructionImage.image_url}}
+                    resizeMode="cover"
+                  />
+                </TouchableOpacity>
+              )}
+            </View>
+            { index < this.props.recipe_details.instructions.length-1 && (
+              <View style={styles.detailsInstructionsSeparator}>
+              </View>
+            )}
+          </React.Fragment>
         )
       })
     }
@@ -388,6 +476,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         return (
           <SpinachAppContainer awaitingServer={this.state.awaitingServer}>
               {this.state.choosingPicSource ? this.renderPictureChooser() : null}
+              {this.state.instructionImagePopupShowing && <InstructionImagePopup imageURL={this.state.instructionImagePopupURL}/>}
               <View style={styles.detailsHeader}>
                 <View style={styles.detailsHeaderTopRow}>
                   <View style={styles.headerTextView}>
@@ -396,7 +485,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     {this.renderEditDeleteButtons()}
                 </View>
               </View>
-              <ScrollView contentContainerStyle={{flexGrow:1}} ref={(ref) =>this.myScroll = ref} >
+              <ScrollView contentContainerStyle={{flexGrow:1}} ref={(ref) =>this.myScroll = ref} scrollEnabled={this.state.scrollEnabled}>
                 <View style={styles.detailsLikesAndMakes}>
                   <View style={styles.detailsLikes}>
                     <View style={styles.buttonAndText}>

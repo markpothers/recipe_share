@@ -388,12 +388,23 @@ class Recipe < ApplicationRecord
     end
   end
 
-  def instructions=(instructions)
+  def instructions=(instructions_params)
     # byebug
     Instruction.where(recipe: self).destroy_all
-    instructions["instructionsOrder"].each_with_index do |ins, index|
-      if instructions["instructions"][ins] != ""
-        Instruction.create(instruction: instructions["instructions"][ins], step: index, recipe: self, active: true)
+    instructions_params["instructions"].each_with_index do |instruction, index|
+      if instruction != ""
+        instruction = Instruction.create(instruction: instruction, step: index, recipe: self, active: true)
+        if instructions_params["instruction_images"][index] != ''
+          instruction_image = InstructionImage.new(instruction_id: instruction.id)
+          hex = SecureRandom.hex(20)
+          until InstructionImage.find_by(hex: hex) == nil
+              hex = SecureRandom.hex(20)
+          end
+          mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:instruction_images], hex, instructions_params["instruction_images"][index])
+          instruction_image.image_url = mediaURL
+          instruction_image.hex=hex
+          instruction_image.save
+        end
       end
     end
   end
@@ -405,9 +416,9 @@ class Recipe < ApplicationRecord
       makeable = false
     end
     ingredientUses = IngredientUse.where(recipe_id: self.id)
-    ingredients_ids = ingredientUses.map do |use|
-      use = use.ingredient_id
-    end
+    ingredients_ids = ingredientUses.map {|use| use.ingredient_id}
+    instructions = Instruction.where(recipe: self).where(active: true).order(:step)
+    instructions_ids = instructions.map {|instruction| instruction.id}
     return recipe_details = {recipe: self,
         comments: Comment.find_by_sql(["SELECT comments.*, chefs.username, chefs.image_url
                                                 FROM comments
@@ -422,7 +433,8 @@ class Recipe < ApplicationRecord
         make_pics: MakePic.where(recipe_id: self.id).order('updated_at DESC'),
         ingredient_uses: ingredientUses,
         ingredients: Ingredient.where(id: ingredients_ids),
-        instructions: Instruction.where(recipe: self).where(active: true).order(:step),
+        instructions: instructions,
+        instruction_images: InstructionImage.where(instruction_id: instructions_ids),
         chef_username: self.chef.username,
         chef_id: self.chef.id,
     }

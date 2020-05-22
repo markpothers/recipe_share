@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  instruction: one
+  image_url: MyString
+  hex: MyString
+
+two:
+  name: MyString
+  instruction: two
+  image_url: MyString
+  hex: MyString

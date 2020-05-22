@@ -25,7 +25,13 @@ const initialState = {
   },
   newRecipeDetails: {
     name: "",
-    instructions: ['test', 'test2'],
+    instructions: [
+      'Pre heat oven to 450F...',
+      'Dice the chicken...',
+      'Add the onion...',
+      '',
+    ],
+    instructionImages: [],
     ingredients: {
       ingredient1 :{
         name:"",

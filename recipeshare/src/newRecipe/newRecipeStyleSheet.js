@@ -167,7 +167,7 @@ export const styles = StyleSheet.create({
     // flex: 1,
     marginTop: responsiveHeight(0.5),
     flexDirection:'row',
-    width: '100%',
+    width: responsiveWidth(100),
     // height: responsiveHeight(6),
     // borderWidth: 1
   },
@@ -270,7 +270,7 @@ export const styles = StyleSheet.create({
   },
   instructionInput:{
     // height: responsiveHeight(6),
-    width: '75%',
+    width: '67%',
     backgroundColor: 'white',
     textAlign: 'left',
     textAlignVertical: 'center',
@@ -278,8 +278,11 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#104e01',
     paddingLeft: responsiveWidth(2),
+    paddingRight: responsiveWidth(1),
     fontSize: responsiveFontSize(2),
     paddingTop: responsiveHeight(1),
     paddingBottom: responsiveHeight(1),
+    // marginLeft: '0.5%',
+    // marginRight: '0.5%',
   },
 })
