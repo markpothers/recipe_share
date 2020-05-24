@@ -18,7 +18,7 @@ import DualOSPicker from '../functionalComponents/DualOSPicker'
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions'
 import InstructionRow from './instructionRow'
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
-import { AutoDragSortableView } from 'react-native-drag-sort'
+import { AutoDragSortableView } from 'react-native-drag-sort/lib'
 import { clearedFilters } from '../dataComponents/clearedFilters'
 
 const mapStateToProps = (state) => ({
@@ -119,7 +119,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
   componentDidUpdate = () => {
     this.addNewInstruction()
-    // console.log(this.state.newRecipeDetails.primaryImageBase64)
   }
 
   activateScrollView = () => {
@@ -168,7 +167,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           "Lunch": recipe["lunch"],
           "Dinner": recipe["dinner"],
           "Chicken": recipe["chicken"],
-          "Red meat": recipe["red meat"],
+          "Red meat": recipe["red_meat"],
           "Seafood": recipe["seafood"],
           "Vegetarian": recipe["vegetarian"],
           "Salad": recipe["salad"],
@@ -176,16 +175,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           "Soup": recipe["soup"],
           "Dessert": recipe["dessert"],
           "Side": recipe["side"],
-          "Whole 30": recipe["whole 30"],
+          "Whole 30": recipe["whole_30"],
           "Paleo": recipe["paleo"],
-          "Freezer meal": recipe["freezer meal"],
+          "Freezer meal": recipe["freezer_meal"],
           "Keto": recipe["keto"],
           "Weeknight": recipe["weeknight"],
           "Weekend": recipe["weekend"],
-          "Gluten free": recipe["gluten free"],
+          "Gluten free": recipe["gluten_free"],
           "Bread": recipe["bread"],
-          "Dairy free": recipe["dairy free"],
-          "White meat": recipe["white meat"],
+          "Dairy free": recipe["dairy_free"],
+          "White meat": recipe["white_meat"],
         },
         cuisine: recipe.cuisine,
         serves: recipe.serves,
@@ -332,22 +331,23 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     submitRecipe = async() => {
       await this.setState({awaitingServer: true})
+      let newRecipeDetails = this.state
       if (this.props.navigation.getParam('recipe_details') !== undefined){
         const recipe = await patchRecipe(
           this.props.loggedInChef.id,
           this.props.loggedInChef.auth_token,
-          this.state.newRecipeDetails.name,
-          this.state.newRecipeDetails.ingredients,
-          this.state.newRecipeDetails.instructions,
-          this.state.newRecipeDetails.instructionImages,
-          this.state.newRecipeDetails.time,
-          this.state.newRecipeDetails.difficulty,
-          this.state.newRecipeDetails.primaryImageBase64,
-          this.state.newRecipeDetails.filter_settings,
-          this.state.newRecipeDetails.cuisine,
-          this.state.newRecipeDetails.serves,
+          newRecipeDetails.name,
+          newRecipeDetails.ingredients,
+          newRecipeDetails.instructions,
+          newRecipeDetails.instructionImages,
+          newRecipeDetails.time,
+          newRecipeDetails.difficulty,
+          newRecipeDetails.primaryImageBase64,
+          newRecipeDetails.filter_settings,
+          newRecipeDetails.cuisine,
+          newRecipeDetails.serves,
           this.props.navigation.getParam('recipe_details').recipe.id,
-          this.state.newRecipeDetails.acknowledgement
+          newRecipeDetails.acknowledgement
         )
         if (recipe) {
           this.props.clearNewRecipeDetails()
@@ -358,17 +358,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         const recipe = await postRecipe(
           this.props.loggedInChef.id,
           this.props.loggedInChef.auth_token,
-          this.state.newRecipeDetails.name,
-          this.state.newRecipeDetails.ingredients,
-          this.state.newRecipeDetails.instructions,
-          this.state.newRecipeDetails.instructionImages,
-          this.state.newRecipeDetails.time,
-          this.state.newRecipeDetails.difficulty,
-          this.state.newRecipeDetails.primaryImageBase64,
-          this.state.newRecipeDetails.filter_settings,
-          this.state.newRecipeDetails.cuisine,
-          this.state.newRecipeDetails.serves,
-          this.state.newRecipeDetails.acknowledgement
+          newRecipeDetails.name,
+          newRecipeDetails.ingredients,
+          newRecipeDetails.instructions,
+          newRecipeDetails.instructionImages,
+          newRecipeDetails.time,
+          newRecipeDetails.difficulty,
+          newRecipeDetails.primaryImageBase64,
+          newRecipeDetails.filter_settings,
+          newRecipeDetails.cuisine,
+          newRecipeDetails.serves,
+          newRecipeDetails.acknowledgement
         )
         if (recipe) {
           this.props.clearNewRecipeDetails()
@@ -395,7 +395,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     handleInstructionSizeChange = (index, size) => {
-      // console.log(size)
       this.setState( (state) => {
         let newInstructionHeights = [...state.instructionHeights]
         newInstructionHeights[index] = size + responsiveHeight(0.5)
@@ -607,7 +606,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                         refreshSortableList={this.state.refreshSortableList}
                         removeInstruction={this.removeInstruction}
                         handleInstructionChange={this.handleInstructionChange}
-                        // key={`${index}${item}`}
                         item={item}
                         index={index}
                         handleInstructionSizeChange={this.handleInstructionSizeChange}
