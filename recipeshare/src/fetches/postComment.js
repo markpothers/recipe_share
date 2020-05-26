@@ -1,8 +1,14 @@
 import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
+import { actionTimeout } from '../dataComponents/timeouts'
 
 export const postComment = (recipeID, chefID, auth_token, comment) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
+        
+        setTimeout(()=>{
+            reject()
+        }, actionTimeout)
+
         fetch(`${databaseURL}/comments`, {
             method: "POST",
             headers: {
@@ -22,7 +28,8 @@ export const postComment = (recipeID, chefID, auth_token, comment) => {
             if (comments) {
                 resolve(comments)
             }
-        }
-        )
+        })
+        .catch(error => {
+        })
     })
 }

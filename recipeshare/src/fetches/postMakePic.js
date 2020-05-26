@@ -1,8 +1,14 @@
 import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
+import { actionTimeout } from '../dataComponents/timeouts'
 
 export const postMakePic = (recipeID, chefID, auth_token, image) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
+        
+        setTimeout(()=>{
+            reject()
+        }, actionTimeout)
+
         fetch(`${databaseURL}/make_pics`, {
             method: "POST",
             headers: {
@@ -22,7 +28,8 @@ export const postMakePic = (recipeID, chefID, auth_token, image) => {
             if (makepic) {
                 resolve(makepic)
             }
-        }
-        )
+        })
+        .catch(error => {
+        })
     })
 }

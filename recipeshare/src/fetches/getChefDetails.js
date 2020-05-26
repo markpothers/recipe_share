@@ -1,8 +1,14 @@
 import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
+import { detailsTimeout } from '../dataComponents/timeouts'
 
 export const getChefDetails = (chef_id, auth_token) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
+        
+        setTimeout(()=>{
+            reject()
+        }, detailsTimeout)
+
         fetch(`${databaseURL}/chefs/${chef_id}`, {
             method: "GET",
             headers: {
@@ -15,6 +21,8 @@ export const getChefDetails = (chef_id, auth_token) => {
             if (chef_details) {
                 resolve(chef_details)
             }
+        })
+        .catch(error => {
         })
     })
 }

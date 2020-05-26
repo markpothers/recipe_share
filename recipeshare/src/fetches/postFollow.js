@@ -1,9 +1,15 @@
 import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
+import { actionTimeout } from '../dataComponents/timeouts'
 
 export const postFollow = (follower_id, followee_id, auth_token) => {
     // console.log("is this working")
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
+        
+        setTimeout(()=>{
+            reject()
+        }, actionTimeout)
+
         fetch(`${databaseURL}/follows`, {
             method: "POST",
             headers: {
@@ -22,7 +28,8 @@ export const postFollow = (follower_id, followee_id, auth_token) => {
             if (follow) {
                 resolve(follow)
             }
-        }
-        )
+        })
+        .catch(error => {
+        })
     })
 }

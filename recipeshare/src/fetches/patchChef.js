@@ -1,8 +1,14 @@
 import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
+import { detailsTimeout } from '../dataComponents/timeouts'
 
 export const patchChef = (chefID, auth_token, username, profile_text, country, updatingPassword, password, password_confirmation, imageBase64) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
+        
+        setTimeout(()=>{
+            reject()
+        }, detailsTimeout)
+
         fetch(`${databaseURL}/chefs/${chefID}`, {
             method: "PATCH",
             headers: {
@@ -27,7 +33,8 @@ export const patchChef = (chefID, auth_token, username, profile_text, country, u
                 // console.log(chef)
                 resolve(chef)
             }
-        }
-        )
+        })
+        .catch(error => {
+        })
     })
 }

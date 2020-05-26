@@ -6,9 +6,9 @@ const inDevelopment = false
 
 export const centralStyles = StyleSheet.create({
   activityIndicator:{
-    left: 1.25,
-    top: 1.32
-  },
+    left: 1.3,
+    top: 1.7
+    },
   activityIndicatorContainer:{
     position: 'absolute',
     top: '10%',

@@ -89,6 +89,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     state = {
       commenting: false,
       commentText: "",
+      commentsTopY: 0,
       choosingPicSource: false,
       awaitingServer: false,
       scrollEnabled: true,
@@ -105,7 +106,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       if (this.props.navigation.getParam('commenting') === true ){
         await this.setState({commenting: true})
         setTimeout( () => {
-          this.myScroll.scrollTo({x: 0, y: 1400, animated: true})
+          this.myScroll.scrollTo({x: 0, y: this.state.commentsTopY-100, animated: true})
         }, 300)
       }
       await this.setState({awaitingServer: false})
@@ -471,7 +472,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     render() {
       if (this.props.recipe_details != (undefined && null)){
-        // console.log(this.props.recipe_details.recipe)
+        // console.log(this.state.commentsTopY)
         // console.log(this.props.recipe_details.recipe.acknowledgement === "")
         return (
           <SpinachAppContainer awaitingServer={this.state.awaitingServer}>
@@ -526,7 +527,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                   {this.props.recipe_details.make_pics.length === 0 && <Text style={[styles.detailsContents]}>No other images yet.  Be the first!</Text>}
                   {this.props.recipe_details.make_pics.length !== 0 && this.renderMakePicScrollView()}
                 </View>
-                <View style={styles.detailsComments}>
+                <View style={styles.detailsComments}
+                  onLayout={(event) => this.setState({commentsTopY: event.nativeEvent.layout.y})}>
                   <View style={{flexDirection: 'row'}}>
                     <Text style={styles.detailsSubHeadings}>Comments:</Text>
                     <TouchableOpacity onPress={this.state.commenting ? (this.state.commentText === "" ? this.cancelComment : this.saveComment ) : this.newComment}>

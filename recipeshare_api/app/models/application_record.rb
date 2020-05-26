@@ -31,6 +31,7 @@ class ApplicationRecord < ActiveRecord::Base
   end
 
   def self.save_image(bucket, hex, base64)
+    # byebug
     file_path = "public/temp_image_file/#{hex}.jpg"
     File.open(file_path, 'wb') do |f|
         f.write(Base64.decode64(base64))

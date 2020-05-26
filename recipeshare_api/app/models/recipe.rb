@@ -389,18 +389,28 @@ class Recipe < ApplicationRecord
   end
 
   def instructions=(instructions_params)
+    pre_existing_instructions = Instruction.where(recipe: self)
     # byebug
-    Instruction.where(recipe: self).destroy_all
+    pre_existing_instructions_ids = pre_existing_instructions.map{|ins| ins.id}
+    InstructionImage.where(instruction_id: pre_existing_instructions_ids).destroy_all
+    pre_existing_instructions.destroy_all
     instructions_params["instructions"].each_with_index do |instruction, index|
       if instruction != ""
         instruction = Instruction.create(instruction: instruction, step: index, recipe: self, active: true)
-        if instructions_params["instruction_images"][index] != ''
+        # byebug
+        # if the respective image is an object, then re-assign the google image to a new InstructionImage
+        if instructions_params["instruction_images"][index]["image_url"] != nil
+          instruction_image = InstructionImage.create(instruction_id: instruction.id,
+                                                      image_url: instructions_params["instruction_images"][index]["image_url"],
+                                                      hex: instructions_params["instruction_images"][index]["hex"])
+        # otherwise if you have base64 string create and save new instruction image
+        elsif instructions_params["instruction_images"][index]["base64"] != nil && instructions_params["instruction_images"][index]["base64"] != ''
           instruction_image = InstructionImage.new(instruction_id: instruction.id)
           hex = SecureRandom.hex(20)
           until InstructionImage.find_by(hex: hex) == nil
               hex = SecureRandom.hex(20)
           end
-          mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:instruction_images], hex, instructions_params["instruction_images"][index])
+          mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:instruction_images], hex, instructions_params["instruction_images"][index]["base64"])
           instruction_image.image_url = mediaURL
           instruction_image.hex=hex
           instruction_image.save

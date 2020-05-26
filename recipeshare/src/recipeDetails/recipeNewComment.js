@@ -23,7 +23,7 @@ export default class RecipeNewComment extends React.PureComponent {
                 onChangeText={text => this.props.handleCommentTextInput(text)}
                 autoFocus={true}
                 onFocus={this.props.scrollToNewComment}
-                />
+              />
             </View>
           </View>
         )

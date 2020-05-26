@@ -38,6 +38,7 @@
     "redux-thunk": "^2.3.0",
     "schedule": "0.5.0",
     "sync-exec": "^0.6.2",
+    "whatwg-fetch-timeout": "^2.0.2-timeout",
     "ws": "^7.1.2"
   },
   "devDependencies": {

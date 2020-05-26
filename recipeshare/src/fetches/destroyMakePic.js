@@ -1,8 +1,14 @@
 import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
+import { actionTimeout } from '../dataComponents/timeouts'
 
 export const destroyMakePic = (chefID, auth_token, makePicID) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
+        
+        setTimeout(()=>{
+            reject()
+        }, actionTimeout)
+
         fetch(`${databaseURL}/make_pics/${makePicID}`, {
             method: "DELETE",
             headers: {
@@ -15,6 +21,8 @@ export const destroyMakePic = (chefID, auth_token, makePicID) => {
             if (destroyed == true) {
                 resolve(destroyed)
             }
+        })
+        .catch(error => {
         })
     })
 }

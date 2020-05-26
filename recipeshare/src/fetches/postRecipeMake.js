@@ -1,8 +1,14 @@
 import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
+import { actionTimeout } from '../dataComponents/timeouts'
 
 export const postRecipeMake = (recipeID, chefID, auth_token) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
+        
+        setTimeout(()=>{
+            reject()
+        }, actionTimeout)
+
         fetch(`${databaseURL}/recipe_makes`, {
             method: "POST",
             headers: {
@@ -21,7 +27,8 @@ export const postRecipeMake = (recipeID, chefID, auth_token) => {
             if (make == true) {
                 resolve(make)
             }
-        }
-        )
+        })
+        .catch(error => {
+        })
     })
 }

@@ -1,8 +1,14 @@
 import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
+import { detailsTimeout } from '../dataComponents/timeouts'
 
 export const destroyChef = (auth_token, chefID, deleteRecipes) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
+
+        setTimeout(()=>{
+            reject()
+        }, detailsTimeout)
+
         fetch(`${databaseURL}/chefs/${chefID}?deleteRecipes=${deleteRecipes}`, {
             method: "DELETE",
             headers: {
@@ -15,6 +21,8 @@ export const destroyChef = (auth_token, chefID, deleteRecipes) => {
             if (deletedChef) {
                 resolve(deletedChef)
             }
+        })
+        .catch(error => {
         })
     })
 }

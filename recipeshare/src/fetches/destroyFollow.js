@@ -1,8 +1,14 @@
 import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
+import { actionTimeout } from '../dataComponents/timeouts'
 
 export const destroyFollow = (follower_id, followee_id, auth_token) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
+        
+        setTimeout(()=>{
+            reject()
+        }, actionTimeout)
+
         fetch(`${databaseURL}/follows`, {
             method: "DELETE",
             headers: {
@@ -21,6 +27,8 @@ export const destroyFollow = (follower_id, followee_id, auth_token) => {
             if (deleted) {
                 resolve(deleted)
             }
+        })
+        .catch(error => {
         })
     })
 }

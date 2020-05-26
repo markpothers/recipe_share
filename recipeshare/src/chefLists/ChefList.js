@@ -68,18 +68,23 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
     }
 
     fetchChefList = async() => {
-      // await this.setState({awaitingServer: true})
-      const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
-      let chefs = await getChefList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.loggedInChef.auth_token)
-      this.props.storeChefList(this.props["listChoice"], chefs)
-      // await this.setState({awaitingServer: false})
+      try{
+        const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
+        let chefs = await getChefList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.loggedInChef.auth_token)
+        this.props.storeChefList(this.props["listChoice"], chefs)
+      }
+      catch(e){}
+
     }
 
     fetchAdditionalChefs = async() => {
       await this.setState({awaitingServer: true})
-      const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
-      const new_chefs = await getChefList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.loggedInChef.auth_token)
-      this.props.appendToChefList(this.props["listChoice"], new_chefs)
+      try {
+        const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
+        const new_chefs = await getChefList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.loggedInChef.auth_token)
+        this.props.appendToChefList(this.props["listChoice"], new_chefs)
+      }
+      catch(e){}
       await this.setState({awaitingServer: false})
     }
 
@@ -164,7 +169,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
             keyExtractor={(item) => item.id.toString()}
             onRefresh={this.refresh}
             refreshing={false}
-            // onEndReached={this.onEndReached}
+            onEndReached={this.onEndReached}
             onEndReachedThreshold={0.3}
           />
         </SpinachAppContainer>

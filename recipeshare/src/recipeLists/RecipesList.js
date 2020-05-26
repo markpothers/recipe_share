@@ -99,19 +99,23 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
     }
 
     fetchRecipeListThenDetails = async() => {
-      // await this.setState({awaitingServer: true})
-      const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
-      let recipes = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.cuisine, this.props.serves)
-      // console.log(recipes[0])
-      this.props.storeRecipeList(this.props["listChoice"], recipes)
-      // await this.setState({awaitingServer: false})
+      try {
+        const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
+        let recipes = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.cuisine, this.props.serves)
+        this.props.storeRecipeList(this.props["listChoice"], recipes)
+      }
+      catch (e){}
+
     }
 
     fetchAdditionalRecipesThenDetailsForList = async() => {
       await this.setState({awaitingServer: true})
-      const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
-      const new_recipes = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.cuisine, this.props.serves)
-      this.props.appendToRecipeList(this.props["listChoice"], new_recipes)
+      try{
+        const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
+        const new_recipes = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.cuisine, this.props.serves)
+        this.props.appendToRecipeList(this.props["listChoice"], new_recipes)
+      }
+      catch (e){}
       await this.setState({awaitingServer: false})
     }
 

@@ -1,8 +1,14 @@
 import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
+import { actionTimeout } from '../dataComponents/timeouts'
 
 export const destroyRecipeLike = (recipeID, chefID, auth_token) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
+        
+        setTimeout(()=>{
+            reject()
+        }, actionTimeout)
+
         fetch(`${databaseURL}/recipe_likes`, {
             method: "DELETE",
             headers: {
@@ -21,6 +27,8 @@ export const destroyRecipeLike = (recipeID, chefID, auth_token) => {
             if (unlike == true) {
                 resolve(unlike)
             }
+        })
+        .catch(error => {
         })
     })
 }

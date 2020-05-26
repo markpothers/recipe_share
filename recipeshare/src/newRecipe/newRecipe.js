@@ -74,23 +74,23 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           "Breakfast": false,
           "Lunch": false,
           "Dinner": false,
-          "Chicken": true,
-          "Red meat": true,
+          "Chicken": false,
+          "Red meat": false,
           "Seafood": false,
           "Vegetarian": false,
           "Salad": false,
           "Vegan": false,
-          "Soup": true,
+          "Soup": false,
           "Dessert": false,
-          "Side": true,
+          "Side": false,
           "Whole 30": false,
           "Paleo": false,
           "Freezer meal": false,
           "Keto": false,
-          "Weeknight": true,
+          "Weeknight": false,
           "Weekend": false,
           "Gluten free": false,
-          "Bread": true,
+          "Bread": false,
           "Dairy free": false,
           "White meat": false,
         },
@@ -119,6 +119,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
   componentDidUpdate = () => {
     this.addNewInstruction()
+    console.log(this.state.newRecipeDetails.primaryImageBase64)
   }
 
   activateScrollView = () => {
@@ -331,7 +332,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     submitRecipe = async() => {
       await this.setState({awaitingServer: true})
-      let newRecipeDetails = this.state
+      let newRecipeDetails = this.state.newRecipeDetails
       if (this.props.navigation.getParam('recipe_details') !== undefined){
         const recipe = await patchRecipe(
           this.props.loggedInChef.id,

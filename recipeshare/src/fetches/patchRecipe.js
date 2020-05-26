@@ -1,5 +1,6 @@
 import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
+import { detailsTimeout } from '../dataComponents/timeouts'
 
 export const patchRecipe = (
     chef_id,
@@ -17,7 +18,28 @@ export const patchRecipe = (
     recipeID,
     acknowledgement
     ) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
+        console.log(instructionImages)
+
+        setTimeout(()=>{
+            reject()
+        }, detailsTimeout)
+
+        //format for Rails Strong params to permit an object or base64 data
+        instructionImagesForRails = instructionImages.map((image,index) =>{
+            if (typeof image === 'string') {
+                return {
+                    index: index,
+                    base64: image,
+                }
+            } else {
+                return {
+                    index: index,
+                    ...image
+                }
+            }
+        })
+
         fetch(`${databaseURL}/recipes/${recipeID}`, {
             method: "PATCH",
             headers: {
@@ -30,7 +52,7 @@ export const patchRecipe = (
                     name: name,
                     ingredients: ingredients,
                     instructions: instructions,
-                    instruction_images, instructionImages,
+                    instruction_images: instructionImagesForRails,
                     time: time,
                     difficulty: difficulty,
                     primaryImageBase64: primaryImageBase64,
@@ -47,7 +69,8 @@ export const patchRecipe = (
                 // console.log(recipe)
                 resolve(recipe)
             }
-        }
-        )
+        })
+        .catch(error => {
+        })
     })
 }

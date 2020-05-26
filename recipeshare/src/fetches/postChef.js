@@ -1,8 +1,14 @@
 import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
+import { detailsTimeout } from '../dataComponents/timeouts'
 
 export const postChef = (username, e_mail, password, password_confirmation, country, image_url, profile_text) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
+        
+        setTimeout(()=>{
+            reject()
+        }, detailsTimeout)
+
         fetch(`${databaseURL}/chefs`, {
             method: "POST",
             headers: {
@@ -26,7 +32,8 @@ export const postChef = (username, e_mail, password, password_confirmation, coun
                 // console.log(chef)
                 resolve(chef)
             }
-        }
-        )
+        })
+        .catch(error => {
+        })
     })
 }

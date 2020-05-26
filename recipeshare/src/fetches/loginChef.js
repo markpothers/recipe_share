@@ -1,9 +1,15 @@
 import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
+import { actionTimeout } from '../dataComponents/timeouts'
 
 export const loginChef = (chef) => {
-    return new Promise((resolve) => {
-        fetch(`${databaseURL}/chefs/authenticate`, {
+    return new Promise((resolve, reject) => {
+        
+      setTimeout(()=>{
+        reject()
+      }, actionTimeout)
+
+     fetch(`${databaseURL}/chefs/authenticate`, {
             method: "POST",
             headers: {
               'Content-Type': 'application/json'
@@ -18,7 +24,8 @@ export const loginChef = (chef) => {
                 // console.log(chef)
                 resolve(chef)
             }
-        }
-        )
+        })
+        .catch(error => {
+        })
     })
 }
