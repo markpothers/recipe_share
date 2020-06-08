@@ -6,6 +6,7 @@ import ChefDetailsScreen from '../src/chefDetails/chefDetails'
 import NewRecipeScreen from '../src/newRecipe/newRecipe'
 import { NewestRecipesScreen, MostLikedRecipesScreen, MostMadeRecipesScreen, NewestChefsScreen, MostLikedChefsScreen, MostMadeChefsScreen} from './BrowseRecipesTabs'
 import AppHeader from './appHeader'
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions'
 
 const BrowseRecipesTabs = createMaterialTopTabNavigator({
   NewestRecipes:  {
@@ -46,20 +47,22 @@ const BrowseRecipesTabs = createMaterialTopTabNavigator({
   // }
 }, {
   initialLayout: {
-    height: 55,
-    width: Dimensions.get('window').width
+    height: responsiveHeight(8),
+    width: responsiveWidth(100)
   },
   lazy: true,
   tabBarOptions:{
     upperCaseLabel: false,
     scrollEnabled: true,
+    allowFontScaling: false,
+    // maxFontSizeMultiplier: 1,
     labelStyle: {
-      fontSize: 14,
-      color: '#fff59b',
+      fontSize: responsiveFontSize(2),
+      color: '#fff59b'
     },
     tabStyle: {
-      // width: 100,
-      height: 55,
+      // width: 200,
+      height: responsiveHeight(8),
       paddingTop: 0,
       paddingBottom: 0
     },

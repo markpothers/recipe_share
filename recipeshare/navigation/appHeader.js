@@ -24,9 +24,11 @@ class AppHeader extends React.PureComponent {
 
     renderNewRecipeButton = () => {
         return (
-            <TouchableOpacity style={styles.headerNewButton}>
-                <Icon name='plus' style={styles.headerIcon} size={33} onPress={() => this.props.navigation.navigate('NewRecipe')}/>
-            </TouchableOpacity>
+            <View style={styles.headerEnd}>
+                <TouchableOpacity style={styles.headerNewButton}>
+                    <Icon name='plus' style={styles.headerIcon} size={33} onPress={() => this.props.navigation.navigate('NewRecipe')}/>
+                </TouchableOpacity>
+            </View>
         )
     }
 
@@ -44,11 +46,9 @@ class AppHeader extends React.PureComponent {
                     {this.props.navigation.state.routeName !== "ChefDetails" && this.props.navigation.state.routeName !== "NewRecipe" && this.props.navigation.state.routeName !== "RecipeDetails" ? this.renderDrawerButton() : this.renderBackButton()}
                 </View>
                 <View  style={styles.headerMiddle} >
-                    <Text style={styles.headerText}>{this.props.text}</Text>
+                    <Text style={styles.headerText} maxFontSizeMultiplier={1.3}>{this.props.text}</Text>
                 </View>
-                <View style={styles.headerEnd}>
-                    { this.props.navigation.state.routeName !== "NewRecipe" ? this.renderNewRecipeButton() : null }
-                </View>
+                { this.props.navigation.state.routeName !== "NewRecipe" ? this.renderNewRecipeButton() : null }
             </View>
             )
     }

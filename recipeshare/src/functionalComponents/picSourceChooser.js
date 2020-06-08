@@ -70,8 +70,8 @@ export default class PicSourceChooser extends React.PureComponent{
                             <Text style={styles.picSourceChooserButtonText}>Delete photo</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.picSourceChooserCancelButton} activeOpacity={0.7} title="Take Photo" onPress={this.props.sourceChosen}>
-                            <Icon style={styles.cancelIcon} size={30} name='cancel' />
-                            <Text style={styles.picSourceChooserCancelButtonText}>Cancel</Text>
+                            <Icon style={styles.cancelIcon} size={30} name='check-box-outline' />
+                            <Text style={styles.picSourceChooserCancelButtonText}>Close</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

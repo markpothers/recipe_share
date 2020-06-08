@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, ScrollView, Text, Image, TextInput, TouchableOpacity, View, Platform } from 'react-native'
+import { FlatList, ScrollView, Text, Image, TextInput, TouchableOpacity, View, Keyboard, Platform } from 'react-native'
 import { connect } from 'react-redux'
 import * as Permissions from 'expo-permissions'
 import { styles } from './newRecipeStyleSheet'
@@ -18,7 +18,7 @@ import DualOSPicker from '../functionalComponents/DualOSPicker'
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions'
 import InstructionRow from './instructionRow'
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
-import { AutoDragSortableView } from 'react-native-drag-sort/lib'
+import { DragSortableView, AutoDragSortableView } from 'react-native-drag-sort/lib'
 import { clearedFilters } from '../dataComponents/clearedFilters'
 
 const mapStateToProps = (state) => ({
@@ -44,29 +44,65 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     state = {
       hasPermission: false,
       ingredientsList: [],
-      ingredient1: false,
+      autoCompleteFocused: null,
       choosingPrimaryPicture: false,
       choosingInstructionPicture: false,
       instructionImageIndex: 0,
       filterDisplayed: false,
       awaitingServer: false,
-      instructionHeights: [responsiveHeight(7.2), responsiveHeight(7.2)],
+      instructionHeights: [responsiveHeight(7.2)
+        , responsiveHeight(7.2),
+        // responsiveHeight(7.2),responsiveHeight(7.2),
+      ],
       averageInstructionHeight: responsiveHeight(7.2),
       scrollingEnabled: true,
       newRecipeDetails: {
-        name: "Test recipe",
+        name: "This is my test recipe and it's really great",
         instructions: [
             'Pre heat oven to 450F...',
-            '',
+            'Chop everything up so that it is small enough to fit into a small place',
+            // 'mix everything together with a liberal helping of mustard',
+            // 'drink all the beer you can to help you get through this pigswill',
+            // ''
           ],
-        instructionImages: ['', ''],
-        ingredients: {
-          ingredient1 :{
-            name:"Chicken breast",
-            quantity: "0.5",
+        instructionImages: ['', '', '', ''],
+        ingredients: [
+          {
+            name:"chi",
+            quantity: "2",
             unit: "each"
-          }
-        },
+          },
+          {
+            name:"Flank steak",
+            quantity: "500",
+            unit: "g"
+          },
+          {
+            name:"Filet of salmon",
+            quantity: "17",
+            unit: "fl oz"
+          },
+          {
+            name:"peas",
+            quantity: "501",
+            unit: "each"
+          },
+          {
+            name:"Boiled potatoes",
+            quantity: "3",
+            unit: "Oz"
+          },
+        //   {
+        //     name:"Chi",
+        //     quantity: "2",
+        //     unit: "each"
+        //   },
+          // {
+          //   name: "",
+          //   quantity: "",
+          //   unit: "Oz",
+          // }
+        ],
         difficulty: "0",
         time: "00:15",
         primaryImageBase64: "",
@@ -119,7 +155,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
   componentDidUpdate = () => {
     this.addNewInstruction()
-    console.log(this.state.newRecipeDetails.primaryImageBase64)
+    this.addNewIngredient()
+    // console.log(this.state.newRecipeDetails.primaryImageBase64)
   }
 
   activateScrollView = () => {
@@ -132,19 +169,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
   setRecipeParamsForEditing = () => {
     let recipeDetails = this.props.navigation.getParam('recipe_details')
-    // console.log(recipeDetails)
+    // console.log(recipeDetails.ingredient_uses)
     let recipe = recipeDetails.recipe
     // console.log(recipe)
-    let newIngredients = {}
-    const list_values = recipeDetails.ingredient_uses.map(ingredient_use => [ingredient_use.ingredient_id, ingredient_use.quantity, ingredient_use.unit])
-    const ingredientsForEdit = list_values.map(list_value => [...list_value, (recipeDetails.ingredients.find(ingredient => ingredient.id == list_value[0]).name)])
-    ingredientsForEdit.forEach( (ing, index) => {
-      newIngredients[`ingredient${index+1}`] = {
-        name: ing[3],
-        quantity: ing[1],
-        unit: ing[2]
+    let newIngredients = recipeDetails.ingredient_uses.map(ingredient_use => {
+      return {
+        ingredientId: ingredient_use.ingredient_id, 
+        quantity: ingredient_use.quantity, 
+        unit: ingredient_use.unit
       }
     })
+    newIngredients.forEach(use => use.name = recipeDetails.ingredients.find(ingredient => ingredient.id == use.ingredientId).name)
     let newInstructionImages = recipeDetails.instructions.map( i => {
       let image = recipeDetails.instruction_images.find( j => j.instruction_id == i.id)
       if (image){
@@ -222,7 +257,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           choosingPicture: false,
           newRecipeDetails: {...state.newRecipeDetails, primaryImageBase64: image.base64},
           awaitingServer: false,
-          choosingPrimaryPicture: false
+          // choosingPrimaryPicture: false
         })
       })
     }
@@ -234,8 +269,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
   }
 
-  isFocused = (ingredient, state) => {
-    this.setState({[ingredient]: state})
+  thisAutocompleteIsFocused = (index) => {
+    this.setState({
+     autoCompleteFocused: index,
+      // scrollingEnabled: !state
+    })
   }
 
   fetchIngredientsForAutoComplete = async() => {
@@ -245,77 +283,49 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
   }
 
-  renderIngredientsList = () =>{
-     return Object.keys(this.state.newRecipeDetails.ingredients).sort((a,b)=> parseInt(a.split("ingredient")[1])-parseInt(b.split("ingredient")[1])).map((ingredient, index) => {
-      return (
-          <IngredientAutoComplete
-            removeIngredient={this.removeIngredient}
-            key={ingredient}
-            ingredientIndex={ingredient}
-            ingredient={this.state.newRecipeDetails.ingredients[ingredient]}
-            ingredientsList={this.state.ingredientsList}
-            focused={this.state[ingredient]}
-            index={index}
-            ingredientsLength={Object.keys(this.state.newRecipeDetails.ingredients).length}
-            isFocused={this.isFocused}
-            addIngredientToRecipeDetails={this.addIngredientToNewRecipeDetails}
-          />
-        )
-      })
-  }
-
-  renderNewIngredientItem = () => {
-    const n = Object.keys(this.state.newRecipeDetails.ingredients).length+1
-    const newIngredient = {[`ingredient${n}`]: {
-      name: "",
-      quantity: "",
-      unit: "Oz"
-    }}
-    return (
-      <IngredientAutoComplete
-        removeIngredient={this.removeIngredient}
-        key={`ingredient${n}`}
-        ingredientIndex={`ingredient${n}`}
-        ingredient={newIngredient[`ingredient${n}`]}
-        ingredientsList={this.state.ingredientsList}
-        focused={this.state[`ingredient${n}`]}
-        index={n-1}
-        ingredientsLength={0}
-        isFocused={this.isFocused}
-        addIngredientToRecipeDetails={this.addIngredientToNewRecipeDetails}
-      />
-    )
-  }
-
-  addIngredientToNewRecipeDetails = (ingredientIndex, name, quantity, unit) => {
+  updateIngredientEntry = (index, name, quantity, unit) => {
     this.setState((state) => {
+      let newIngredients = state.newRecipeDetails.ingredients
+      newIngredients[index].name=name
+      newIngredients[index].quantity=quantity
+      newIngredients[index].unit=unit
       return ({
         newRecipeDetails: {
           ...state.newRecipeDetails,
-          ingredients: {
-            ...state.newRecipeDetails.ingredients,
-            [ingredientIndex]: {
-              name: name,
-              quantity: quantity,
-              unit: unit
-            }
-          }
+          ingredients: newIngredients
         }
       })
     })
   }
 
-    removeIngredient = (ingredientIndex) => {
-      let newIngredients = {}
-      let remainingIngredients = Object.keys(this.state.newRecipeDetails.ingredients).filter(ing => ing !== ingredientIndex && this.state.newRecipeDetails.ingredients[ing].name !== "")
-      remainingIngredients.sort((a,b)=> parseInt(a.split("ingredient")[1])-parseInt(b.split("ingredient")[1])).forEach( (ing, index) => {
-        newIngredients[`ingredient${index+1}`] = {
-          "name": this.state.newRecipeDetails.ingredients[ing].name,
-          "quantity": this.state.newRecipeDetails.ingredients[ing].quantity,
-          "unit": this.state.newRecipeDetails.ingredients[ing].unit,
-        }
+  handleIngredientSort = (newIngredients) => {
+    this.setState((state) => {
+      return ({
+        newRecipeDetails: {
+          ...state.newRecipeDetails,
+          ingredients: newIngredients,
+        },
       })
+    })
+  }
+
+  addNewIngredient = () => {
+    let ingredients = this.state.newRecipeDetails.ingredients
+    // console.log(ingredients[ingredients.length-1].unit != "Oz")
+    if (ingredients[ingredients.length-1].name != "" || ingredients[ingredients.length-1].quantity != "" || ingredients[ingredients.length-1].unit != "Oz") {
+      let newIngredients = [...ingredients, {name: "", quantity: "", unit: "Oz"}]
       this.setState((state) => {
+        return ({
+          newRecipeDetails: {...state.newRecipeDetails, ingredients: newIngredients}
+        })
+      })
+    }
+  }
+
+    removeIngredient = (index) => {
+      this.setState((state) => {
+        let newIngredients = [...state.newRecipeDetails.ingredients]
+        newIngredients.splice(index,1)
         return ({
           newRecipeDetails: {...state.newRecipeDetails, ingredients: newIngredients},
         })
@@ -428,9 +438,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     addNewInstruction = () => {
-      if (this.state.newRecipeDetails.instructions[this.state.newRecipeDetails.instructions.length-1] === ''
-        && this.state.newRecipeDetails.instructions[this.state.newRecipeDetails.instructions.length-2] !== ''
+      // console.log('here again')
+      // console.log(this.state.newRecipeDetails.instructions[this.state.newRecipeDetails.instructions.length-2] !== '')
+      if (this.state.newRecipeDetails.instructions[this.state.newRecipeDetails.instructions.length-1] !== ''
+        || this.state.newRecipeDetails.instructions[this.state.newRecipeDetails.instructions.length-2] !== ''
       ){
+        // console.log('but not here')
         this.setState((state) => {
           // console.log('adding new instruction')
           let newInstructions = [...state.newRecipeDetails.instructions]
@@ -491,7 +504,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     saveInstructionImage = async(image, index) => {
-      console.log(index)
+      // console.log(index)
       await this.setState({awaitingServer: true})
       if (image.cancelled === false){
         this.setState((state) => {
@@ -504,7 +517,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
               instructionImages: newInstructionImages
             },
             awaitingServer: false,
-            choosingInstructionPicture: false
+            // choosingInstructionPicture: false
           })
         })
       }
@@ -544,7 +557,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
-      // console.log(this.state.newRecipeDetails.imageBase64)
+      // console.log(this.state.newRecipeDetails.ingredients)
       return (
         <SpinachAppContainer awaitingServer={this.state.awaitingServer} scrollingEnabled={false}>
         {this.state.filterDisplayed && (
@@ -565,7 +578,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         {this.state.choosingPrimaryPicture && this.renderPrimaryPictureChooser()}
         {this.state.choosingInstructionPicture && this.renderInstructionPictureChooser()}
           <ScrollView style={centralStyles.fullPageScrollView}
-            nestedScrollEnabled={false}
+            nestedScrollEnabled={true}
             scrollEnabled={this.state.scrollingEnabled}
             keyboardShouldPersistTaps={'always'}
           >
@@ -574,7 +587,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
               {/* recipe name */}
               <View style={centralStyles.formSection}>
                 <View style={centralStyles.formInputContainer}>
-                <TextInput style={centralStyles.formInput} value={this.state.newRecipeDetails.name} placeholder="Recipe name" onChangeText={(t) => this.handleInput(t, "name")}/>
+                  <TextInput
+                    multiline={true}
+                    maxFontSizeMultiplier={2.5}
+                    style={centralStyles.formInput}
+                    value={this.state.newRecipeDetails.name}
+                    placeholder="Recipe name"
+                    onChangeText={(t) => this.handleInput(t, "name")}/>
                 </View>
               </View>
               {/* separator */}
@@ -582,9 +601,54 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 <View style={centralStyles.formSectionSeparator}>
                 </View>
               </View>
-              {[...this.renderIngredientsList(), this.renderNewIngredientItem()]}
+              <View
+                style={[
+                  centralStyles.formSection,
+                   this.state.autoCompleteFocused !== null && {zIndex: 1},
+                  ]}
+                >
+                <DragSortableView
+                  dataSource={this.state.newRecipeDetails.ingredients}
+                  parentWidth={responsiveWidth(100)}
+                  parentMarginBottom={125}
+                  childrenWidth={responsiveWidth(100)}
+                  childrenHeight={responsiveHeight(12.5)}
+                  reverseChildZIndexing={true}
+                  marginChildrenTop={responsiveHeight(0.5)}
+                  onDataChange = {(newIngredients)=> this.handleIngredientSort(newIngredients)}
+                  onClickItem={()=>{
+                    if (this.state.autoCompleteFocused !== null) {
+                      Keyboard.dismiss()
+                      this.setState({autoCompleteFocused: null})
+                    }
+                  }}
+                  onDragStart={this.deactivateScrollView}
+                  onDragEnd={this.activateScrollView}
+                  delayLongPress={200}
+                  keyExtractor={(item,index)=> `${index}`}
+                  renderItem={(item,index)=>{
+                    return (
+                      <IngredientAutoComplete
+                        removeIngredient={this.removeIngredient}
+                        // key={index}
+                        ingredientIndex={index}
+                        ingredient={item}
+                        ingredientsList={this.state.ingredientsList}
+                        focused={this.state.autoCompleteFocused}
+                        index={index}
+                        ingredientsLength={this.state.newRecipeDetails.ingredients.length}
+                        thisAutocompleteIsFocused={this.thisAutocompleteIsFocused}
+                        updateIngredientEntry={this.updateIngredientEntry}
+                      />
+                    )
+                  }}
+                />
+              </View>
+              {/* {[...this.renderIngredientsList(), this.renderNewIngredientItem()]} */}
               {/* separator */}
-              <View style={centralStyles.formSectionSeparatorContainer}>
+              <View style={[centralStyles.formSectionSeparatorContainer
+                , {marginTop: -125+responsiveHeight(1)}
+                ]}>
                 <View style={centralStyles.formSectionSeparator}>
                 </View>
               </View>
@@ -599,7 +663,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                   onDataChange = {(newInstructions)=> this.handleInstructionsSort(newInstructions)}
                   onDragStart={this.deactivateScrollView}
                   onDragEnd={this.activateScrollView}
-                  delayLongPress={10}
+                  delayLongPress={100}
                   keyExtractor={(item,index)=> `${index}${item}`}
                   renderItem={(item,index)=>{
                     return (
@@ -626,17 +690,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(
               {/* acknowledgement */}
               <View style={centralStyles.formSection}>
                 <View style={centralStyles.formInputContainer}>
-                <TextInput style={centralStyles.formInput} value={this.state.newRecipeDetails.acknowledgement} placeholder="Acknowledge your recipe's source if it's not yourself" onChangeText={(t) => this.handleInput(t, "acknowledgement")}/>
+                <TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.state.newRecipeDetails.acknowledgement} placeholder="Acknowledge your recipe's source if it's not yourself" onChangeText={(t) => this.handleInput(t, "acknowledgement")}/>
                 </View>
               </View>
               {/* time and difficulty titles */}
               <View style={[centralStyles.formSection, {width: responsiveWidth(80)}]}>
                 <View style={centralStyles.formInputContainer}>
                   <View style={styles.timeAndDifficultyTitleItem}>
-                    <Text style={styles.timeAndDifficultyTitle}>Time:</Text>
+                    <Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Time:</Text>
                   </View>
                   <View style={styles.timeAndDifficultyTitleItem}>
-                    <Text style={styles.timeAndDifficultyTitle}>Difficulty:</Text>
+                    <Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Difficulty:</Text>
                   </View>
                 </View>
               </View>
@@ -649,7 +713,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                       options={times}
                       selectedChoice={this.state.newRecipeDetails.time}/>
                   </View>
-                  <View picker style={[styles.timeAndDifficulty, {paddingLeft: responsiveWidth(12)}]}>
+                  <View style={[styles.timeAndDifficulty, {paddingLeft: responsiveWidth(12)}]}>
                     <DualOSPicker
                       onChoiceChange={(choice) => this.handleInput(choice, "difficulty")}
                       options={difficulties}
@@ -662,11 +726,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 <View style={centralStyles.formInputContainer}>
                   <TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={this.choosePrimaryPicture}>
                     <Icon style={centralStyles.greenButtonIcon} size={25} name='camera'></Icon>
-                    <Text style={centralStyles.greenButtonText}>Add{"\n"}picture</Text>
+                    <Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>Add{"\n"}picture</Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={this.handleCategoriesButton}>
                     <Icon style={centralStyles.greenButtonIcon} size={25} name='filter'></Icon>
-                      <Text style={centralStyles.greenButtonText}>Select{"\n"}categories</Text>
+                      <Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>Select{"\n"}categories</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -675,7 +739,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 <View style={[centralStyles.formInputContainer, {justifyContent: 'center'}]}>
                   <TouchableOpacity style={[centralStyles.yellowRectangleButton]} activeOpacity={0.7} onPress={e => this.submitRecipe(e)}>
                     <Icon style={centralStyles.greenButtonIcon} size={25} name='login'></Icon>
-                    <Text style={centralStyles.greenButtonText}>Submit</Text>
+                    <Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>Submit</Text>
                   </TouchableOpacity>
                 </View>
               </View>

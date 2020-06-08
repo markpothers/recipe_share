@@ -51,7 +51,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                             <Switch style={(Platform.OS == 'ios' ? {transform:[{scaleX:.8},{scaleY:.8}]}:null)} value={filtersList[category]} onChange={(e) => this.handleCategoryChange(category, e.nativeEvent.value)}/>
                         </View>
                         <View style={styles.categoryContainer}>
-                            <Text style={styles.categoryText}>{category}</Text>
+                            <Text maxFontSizeMultiplier={2} style={styles.categoryText}>{category}</Text>
                         </View>
                     </View>
                 )
@@ -67,7 +67,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                             <Switch style={(Platform.OS == 'ios' ? {transform:[{scaleX:.8},{scaleY:.8}]}:null)} value={filtersList[category]} onChange={(e) => this.handleCategoryChange(category, e.nativeEvent.value)}/>
                         </View>
                         <View style={styles.categoryContainer}>
-                            <Text style={styles.categoryText}>{category}</Text>
+                            <Text maxFontSizeMultiplier={2} style={styles.categoryText}>{category}</Text>
                         </View>
                     </View>
                 )
@@ -121,7 +121,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                             </View>
                             <View style={styles.bottomContainer}>
                                 <View style={styles.bottomTopContainer}>
-                                    <Text style={styles.title}>Cuisine:</Text>
+                                    <Text maxFontSizeMultiplier={2} style={styles.title}>Cuisine:</Text>
                                     <View style={styles.picker} >
                                         <DualOSPicker
                                             onChoiceChange={this.handleCuisineChange}
@@ -130,7 +130,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                                     </View>
                                 </View>
                                 <View style={styles.bottomTopContainer}>
-                                    <Text style={styles.title}>Serves: </Text>
+                                    <Text maxFontSizeMultiplier={2} style={styles.title}>Serves: </Text>
                                     <View style={styles.picker} >
                                         <DualOSPicker
                                             onChoiceChange={this.handleServesChange}
@@ -141,11 +141,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                                 <View style={styles.clearFiltersButtonContainer}>
                                     <TouchableOpacity style={styles.clearFiltersButton} activeOpacity={0.7} title="clearFilters" onPress={this.handleClearButton}>
                                         <Icon style={styles.clearFiltersIcon} size={25} name='cancel' />
-                                        <Text style={styles.clearFiltersButtonText}>Clear{"\n"}filters</Text>
+                                        <Text maxFontSizeMultiplier={2} style={styles.clearFiltersButtonText}>Clear{"\n"}filters</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity style={styles.applyFiltersButton} activeOpacity={0.7} title="applyFilters" onPress={this.handleApplyButton}>
                                         <Icon style={styles.applyFiltersIcon} size={25} name='check' />
-                                        <Text style={styles.applyFiltersButtonText}>{this.props.confirmButtonText}</Text>
+                                        <Text maxFontSizeMultiplier={2} style={styles.applyFiltersButtonText}>{this.props.confirmButtonText}</Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>

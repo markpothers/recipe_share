@@ -93,6 +93,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       choosingPicSource: false,
       awaitingServer: false,
       scrollEnabled: true,
+      makePic: {},
     }
 
     componentDidMount = async() => {
@@ -157,9 +158,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       const ingredients = list_values.map(list_value => [...list_value, (this.props.recipe_details.ingredients.find(ingredient => ingredient.id == list_value[0]).name)])
       return ingredients.map(ingredient => (
             <View style={styles.ingredientsTable} key={`${ingredient[0]}${ingredient[3]}${ingredient[1]}${ingredient[2]}`}>
-              <Text style={[styles.detailsContents, styles.ingredientName]}>{ingredient[3]}</Text>
-              <Text style={[styles.detailsContents, styles.ingredientQuantity]}>{ingredient[1]}</Text>
-              <Text style={[styles.detailsContents, styles.ingredientUnit]}>{ingredient[2]}</Text>
+              <View style={styles.ingredientsTableLeft}>
+                <Text maxFontSizeMultiplier={2} style={[styles.detailsContents, styles.ingredientName]}>{ingredient[3]}</Text>
+              </View>
+              <View style={styles.ingredientsTableRight}>
+                <Text maxFontSizeMultiplier={2} style={[styles.detailsContents, styles.ingredientQuantity]}>{ingredient[1]}</Text>
+              < Text maxFontSizeMultiplier={2} style={[styles.detailsContents, styles.ingredientUnit]}>{ingredient[2]}</Text>
+              </View>
             </View>
       ))
     }
@@ -247,7 +252,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           })
         )
       } else {
-        return <Text style={[styles.detailsContents]}>No comments yet.  Be the first!</Text>
+        return <Text maxFontSizeMultiplier={2} style={[styles.detailsContents]}>No comments yet. Be the first!</Text>
       }
     }
 
@@ -323,24 +328,38 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       this.setState({choosingPicSource: true})
     }
 
-    sourceChosen = () =>{
-      this.setState({choosingPicSource: false})
+    sourceChosen = async() =>{
+      await this.setState({
+        awaitingServer: true,
+        choosingPicSource: false})
+      if (this.state.makePic.base64) {
+        const makePic = await postMakePic(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.state.makePic)
+        if (makePic) {
+          await this.props.addMakePic(makePic)
+        }
+      }
+      await this.setState({
+        awaitingServer: false,
+      })
     }
 
     saveImage = async(image) => {
-      await this.setState({awaitingServer: true})
-      if (image.cancelled === false){
-        const makePic = await postMakePic(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token, image)
-        if (makePic) {
-            this.props.addMakePic(makePic)
-            this.setState({choosingPicSource: false})
-        }
-      }
-      await this.setState({awaitingServer: false})
+      console.log(image)
+      this.setState({makePic: image})
+      // await this.setState({awaitingServer: true})
+      // if (image.cancelled === false){
+      //   const makePic = await postMakePic(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token, image)
+      //   if (makePic) {
+      //       this.props.addMakePic(makePic)
+      //       this.setState({choosingPicSource: false})
+      //   }
+      // }
+      // await this.setState({awaitingServer: false})
     }
 
     renderPictureChooser = () => {
-      return <PicSourceChooser saveImage={this.saveImage} sourceChosen={this.sourceChosen} key={"pic-chooser"}/>
+      let imageSource = `data:image/jpeg;base64,${this.state.makePic.base64}`
+      return <PicSourceChooser saveImage={this.saveImage} sourceChosen={this.sourceChosen} key={"pic-chooser"} imageSource={imageSource}/>
     }
 
     deleteMakePic = async(makePicID) => {
@@ -392,8 +411,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       if (categories.length > 0){
         return (
           <View style={styles.detailsContainer}>
-            <Text style={styles.detailsSubHeadings}>Categories:</Text>
-            <Text style={[styles.detailsContents]}>{categories.join(",  ")}</Text>
+            <Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Categories:</Text>
+            <Text maxFontSizeMultiplier={2} style={[styles.detailsContents]}>{categories.join(",  ")}</Text>
           </View>
         )
       } else {
@@ -404,8 +423,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     renderAcknowledgement = () => {
       return (
         <View style={styles.detailsContainer}>
-          <Text style={styles.detailsSubHeadings}>Acknowledgement:</Text>
-          <Text style={[styles.detailsContents]}>{this.props.recipe_details.recipe.acknowledgement}</Text>
+          <Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Acknowledgement:</Text>
+          <Text maxFontSizeMultiplier={2} style={[styles.detailsContents]}>{this.props.recipe_details.recipe.acknowledgement}</Text>
         </View>
       )
     }
@@ -413,8 +432,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     renderCuisine = () => {
       return (
         <View style={styles.detailsContainer}>
-          <Text style={styles.detailsSubHeadings}>Cuisine:</Text>
-          <Text style={[styles.detailsContents]}>{this.props.recipe_details.recipe.cuisine}</Text>
+          <Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Cuisine:</Text>
+          <Text maxFontSizeMultiplier={2} style={[styles.detailsContents]}>{this.props.recipe_details.recipe.cuisine}</Text>
         </View>
       )
     }
@@ -427,7 +446,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           <React.Fragment key={instruction.step}>
             <View style={styles.detailsInstructionContainer}>
               <View style={[styles.detailsInstructions, {width: (instructionImage ? responsiveWidth(73) : responsiveWidth(98))}]}>
-                <Text style={[styles.detailsContents]}>{instruction.instruction}</Text>
+                <Text maxFontSizeMultiplier={2} style={[styles.detailsContents]}>{instruction.instruction}</Text>
               </View>
               {instructionImage && (
                 <TouchableOpacity
@@ -478,39 +497,39 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           <SpinachAppContainer awaitingServer={this.state.awaitingServer}>
               {this.state.choosingPicSource ? this.renderPictureChooser() : null}
               {this.state.instructionImagePopupShowing && <InstructionImagePopup imageURL={this.state.instructionImagePopupURL}/>}
-              <View style={styles.detailsHeader}>
-                <View style={styles.detailsHeaderTopRow}>
-                  <View style={styles.headerTextView}>
-                    <Text style={[styles.detailsHeaderTextBox]}>{this.props.recipe_details.recipe.name}</Text>
-                  </View>
-                    {this.renderEditDeleteButtons()}
-                </View>
-              </View>
               <ScrollView contentContainerStyle={{flexGrow:1}} ref={(ref) =>this.myScroll = ref} scrollEnabled={this.state.scrollEnabled}>
+                <View style={styles.detailsHeader}>
+                  <View style={styles.detailsHeaderTopRow}>
+                    <View style={styles.headerTextView}>
+                      <Text maxFontSizeMultiplier={2} style={[styles.detailsHeaderTextBox]}>{this.props.recipe_details.recipe.name}</Text>
+                    </View>
+                      {this.renderEditDeleteButtons()}
+                  </View>
+                </View>
                 <View style={styles.detailsLikesAndMakes}>
                   <View style={styles.detailsLikes}>
                     <View style={styles.buttonAndText}>
                       {this.renderLikeButton()}
-                      <Text style={[styles.detailsLikesAndMakesUpperContents]}>Likes: {this.props.recipe_details.recipe_likes}</Text>
+                      <Text maxFontSizeMultiplier={2} style={[styles.detailsLikesAndMakesUpperContents]}>Likes: {this.props.recipe_details.recipe_likes}</Text>
                     </View>
                     <View style={styles.buttonAndText}>
-                      <Text style={[styles.detailsLikesAndMakesLowerContents]}>Serves: {this.props.recipe_details.recipe.serves}</Text>
+                      <Text maxFontSizeMultiplier={2} style={[styles.detailsLikesAndMakesLowerContents]}>Serves: {this.props.recipe_details.recipe.serves}</Text>
                     </View>
                   </View>
                   <View style={styles.detailsLikes}>
-                    <Text style={[styles.detailsLikesAndMakesLowerContents]}>Time: {this.props.recipe_details.recipe.time}</Text>
-                    <Text style={[styles.detailsLikesAndMakesLowerContents]}>Difficulty: {this.props.recipe_details.recipe.difficulty}</Text>
+                    <Text maxFontSizeMultiplier={2} style={[styles.detailsLikesAndMakesLowerContents]}>Time: {this.props.recipe_details.recipe.time}</Text>
+                    <Text maxFontSizeMultiplier={2} style={[styles.detailsLikesAndMakesLowerContents]}>Difficulty: {this.props.recipe_details.recipe.difficulty}</Text>
                   </View>
                 </View>
                 <View style={styles.detailsImageWrapper}>
                   {this.renderRecipeImages()}
                 </View>
                 <View style={styles.detailsIngredients}>
-                  <Text style={styles.detailsSubHeadings}>Ingredients:</Text>
+                  <Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Ingredients:</Text>
                   {this.renderRecipeIngredients()}
                 </View>
                 <View style={styles.detailsContainer}>
-                  <Text style={styles.detailsSubHeadings}>Instructions:</Text>
+                  <Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Instructions:</Text>
                     {this.renderRecipeInstructions()}
                   {/* <Text style={[styles.detailsContents]}>{this.props.recipe_details.recipe.instructions}</Text> */}
                 </View>
@@ -519,18 +538,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 {(this.props.recipe_details.recipe.acknowledgement != "" && this.props.recipe_details.recipe.acknowledgement != null) && this.renderAcknowledgement()}
                 <View style={styles.detailsMakePicsContainer}>
                   <View style={{flexDirection: 'row'}}>
-                    <Text style={styles.detailsSubHeadings}>Images from other users:</Text>
+                    <Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Images from other users:</Text>
                     <TouchableOpacity onPress={this.newMakePic}>
                       <Icon name='image-plus' size={24} style={styles.addIcon}/>
                     </TouchableOpacity>
                   </View>
-                  {this.props.recipe_details.make_pics.length === 0 && <Text style={[styles.detailsContents]}>No other images yet.  Be the first!</Text>}
+                  {this.props.recipe_details.make_pics.length === 0 && <Text maxFontSizeMultiplier={2} style={[styles.detailsContents]}>No other images yet.  Be the first!</Text>}
                   {this.props.recipe_details.make_pics.length !== 0 && this.renderMakePicScrollView()}
                 </View>
                 <View style={styles.detailsComments}
                   onLayout={(event) => this.setState({commentsTopY: event.nativeEvent.layout.y})}>
                   <View style={{flexDirection: 'row'}}>
-                    <Text style={styles.detailsSubHeadings}>Comments:</Text>
+                    <Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Comments:</Text>
                     <TouchableOpacity onPress={this.state.commenting ? (this.state.commentText === "" ? this.cancelComment : this.saveComment ) : this.newComment}>
                       <Icon name={this.state.commenting ? (this.state.commentText === "" ? 'comment-remove' : 'comment-check' ) : 'comment-plus'} size={24} style={styles.addIcon}/>
                     </TouchableOpacity>

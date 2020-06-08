@@ -37,17 +37,19 @@ export const centralStyles = StyleSheet.create({
   },
   fullPageSafeAreaView: {
     flex: 1,
-    // width: '100%',
-    // height: '100%',
+    // width: responsiveWidth(100),
+    // height: responsiveHeight(100),
     borderWidth: inDevelopment ? 1 : 0,
     borderColor: 'blue',
     // justifyContent: 'flex-end'
   },
   fullPageKeyboardAvoidingView: {
     flex: 1,
+    // width: responsiveWidth(100),
+    // height: responsiveHeight(100),
     borderWidth: inDevelopment ? 1 : 0,
     borderColor: 'red',
-    position: 'absolute',
+    // position: 'absolute',
   },
   // fullPageKeyboardAvoidingViewContentContainer: {
   //   // flex: 1,
@@ -128,11 +130,12 @@ export const centralStyles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 5,
     overflow: 'hidden',
-    // height: responsiveHeight(6),
+    flexWrap: 'wrap',
+    minHeight: responsiveHeight(6),
     // backgroundColor: 'red'
   },
   formInput: {
-    height: responsiveHeight(6),
+    minHeight: responsiveHeight(6),
     width: '100%',
     backgroundColor: 'white',
     textAlign: 'left',
@@ -144,11 +147,10 @@ export const centralStyles = StyleSheet.create({
     fontSize: responsiveFontSize(2),
   },
   formTextBoxContainer: {
-    // marginTop: responsiveHeight(0.5),
-    height: responsiveHeight(6),
+    minHeight: responsiveHeight(6),
+    height: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    // width: '100%',
     backgroundColor: 'white',
     borderWidth: 1,
     borderColor: '#104e01',
@@ -156,7 +158,6 @@ export const centralStyles = StyleSheet.create({
   },
   formTextBox:{
     width: '100%',
-    // backgroundColor: 'white',
     textAlign: 'left',
     textAlignVertical: 'center',
     borderRadius: 5,
@@ -183,18 +184,23 @@ export const centralStyles = StyleSheet.create({
     paddingBottom: responsiveHeight(0.25),
   },
   yellowRectangleButton: {
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
-    width: responsiveWidth(38),
-    height: responsiveHeight(6),
+    minWidth: responsiveWidth(38),
+    maxWidth: '50%',
+    minHeight: responsiveHeight(6),
+    height: '100%',
     flexDirection:'row',
     borderRadius: 5,
     backgroundColor: '#fff59b',
     borderWidth: 1,
-    borderColor: '#104e01'
+    borderColor: '#104e01',
+    // flexGrow: 1
+    flexWrap: 'wrap',
   },
   greenButtonIcon: {
     color: '#104e01',
+    // borderWidth: 1
   },
   greenButtonText: {
     textAlign: 'center',
@@ -202,7 +208,8 @@ export const centralStyles = StyleSheet.create({
     fontSize: 14,
     color: '#104e01',
     fontSize: responsiveFontSize(1.8),
-    marginLeft: responsiveWidth(3)
+    // borderWidth: 1,
+    // marginLeft: responsiveWidth(3)
   },
   pickerContainer: {
     backgroundColor: 'white',

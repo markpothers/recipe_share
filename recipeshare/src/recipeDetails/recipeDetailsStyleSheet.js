@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet } from 'react-native';
-import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions';
 
 export const styles = StyleSheet.create({
   mainPageContainer:{
@@ -98,10 +98,8 @@ export const styles = StyleSheet.create({
       marginTop: 4,
       borderRadius: 5,
       backgroundColor: 'white',
-      // opacity: 0.9,
-      // marginBottom: '1%',
-      paddingTop: '1%',
-      paddingBottom: '1%'
+      paddingTop: responsiveHeight(0.5),
+      paddingBottom: responsiveHeight(0.5)
     },
     detailsMakePicsContainer: {
       borderStyle: 'solid',
@@ -121,6 +119,9 @@ export const styles = StyleSheet.create({
     },
     detailsLikesAndMakes:{
       // flexDirection: 'row'
+      // justifyContent: 'center',
+      // borderWidth: 1,
+      // borderColor: 'teal',
     },
     detailsLikes: {
       borderStyle: 'solid',
@@ -137,14 +138,14 @@ export const styles = StyleSheet.create({
       flexDirection: 'row',
       paddingTop: '0.5%',
       paddingBottom: '0.5%',
-      height: 30,
-      // justifyContent: 'center',
-      // alignItems: 'center',
+      // height: 30,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     buttonAndText: {
       flexDirection: 'row',
       // position: 'absolute'
-      bottom: '10%',
+      // bottom: '10%',
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
@@ -153,7 +154,8 @@ export const styles = StyleSheet.create({
       // borderWidth: 1,
     },
     icon: {
-      color: "#505050"
+      color: "#505050",
+      bottom: responsiveHeight(0.2)
     },
     addIcon: {
       color: "#505050",
@@ -206,36 +208,39 @@ export const styles = StyleSheet.create({
       marginLeft: '3%',
       marginRight: '3%',
       fontWeight: 'bold',
-      fontSize: 16,
+      fontSize: responsiveFontSize(2.2),
       color: "#505050",
       width: '80%'
     },
     detailsContents: {
       marginLeft: '3%',
       marginRight: '3%',
-      fontSize: 16,
+      fontSize: responsiveFontSize(2.2),
       color: "#505050",
-      paddingLeft: responsiveWidth(2)
+      paddingLeft: responsiveWidth(2),
+      // borderWidth: 1,
     },
     detailsContentsHeader: {
       marginLeft: '3%',
       marginRight: '3%',
       fontStyle: 'italic',
-      fontSize: 16,
+      fontSize: responsiveFontSize(2.2),
       color: "#505050",
       width: '79%'
     },
     detailsLikesAndMakesUpperContents: {
-      fontSize: 16,
+      fontSize: responsiveFontSize(2.2),
       color: "#505050",
       textAlign: 'center',
-      marginLeft: '5%'
+      marginLeft: '5%',
+      bottom: responsiveHeight(0.2)
     },
     detailsLikesAndMakesLowerContents: {
-      fontSize: 16,
+      fontSize: responsiveFontSize(2.2),
       color: "#505050",
       textAlign: 'center',
-      flex:1
+      flex:1,
+      bottom: responsiveHeight(0.2),
     },
     detailsImage:{
       borderRadius: 5,
@@ -249,24 +254,34 @@ export const styles = StyleSheet.create({
       borderBottomColor: '#104e01',
       borderBottomWidth: 0.5,
       paddingBottom: '0.25%',
-      paddingTop: '0.25%'
-
+      paddingTop: '0.25%',
+      // justifyContent: 'center',
+      // alignItems: 'center',
+    },
+    ingredientsTableLeft: {
+      flex: 1,
+    },
+    ingredientsTableRight: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
     },
     ingredientName:{
       flex: 1,
       textAlign: 'left',
-      // fontStyle: 'italic',
       fontWeight: 'normal',
-      marginLeft: '6%',
+      marginLeft: '4%',
       color: "#505050",
+      flexWrap: 'wrap',
+      // borderWidth: 1,
     },
     ingredientQuantity:{
-      flex: 0.25,
+      flex: 0.34,
       textAlign: 'left',
       color: "#505050",
     },
     ingredientUnit:{
-      flex: 0.75,
+      flex: 0.6,
       textAlign: 'left',
       color: "#505050",
     },

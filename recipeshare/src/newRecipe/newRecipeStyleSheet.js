@@ -71,17 +71,19 @@ export const styles = StyleSheet.create({
        backgroundColor: 'white',
        borderRadius: 5,
        height: responsiveHeight(6),
-       width: responsiveWidth(38),
+       minWidth: responsiveWidth(38),
        justifyContent: 'center',
        alignItems: 'center',
        borderStyle: 'solid',
        borderWidth: 1,
        borderColor: '#104e01',
+       paddingRight: responsiveWidth(1),
+       paddingLeft: responsiveWidth(1),
      },
    timeAndDifficultyTitle: {
     // marginLeft: '5%',
     // marginRight: '5%',
-    fontSize: 16,
+    fontSize: responsiveFontSize(2.25),
     color: "#505050",
     },
   timeAndDifficulty: {
@@ -97,14 +99,14 @@ export const styles = StyleSheet.create({
     borderColor: '#104e01',
     justifyContent: 'center'
   },
-  picker: {
-    height: 44,
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderColor: '#104e01',
-    justifyContent: 'center',
-    overflow: 'hidden'
-  },
+  // picker: {
+  //   height: 44,
+  //   borderStyle: 'solid',
+  //   borderWidth: 1,
+  //   borderColor: '#104e01',
+  //   justifyContent: 'center',
+  //   overflow: 'hidden'
+  // },
   pickerText: {
     // textAlign: 'center'
   },
@@ -139,10 +141,10 @@ export const styles = StyleSheet.create({
     color: '#104e01',
   },
   addIngredientQuantityInputBox: {
-     marginRight: '2%',
+     marginRight: responsiveWidth(1),
      backgroundColor: 'white',
-     height: responsiveHeight(6),
-     width: '30%',
+     minHeight: responsiveHeight(6),
+     width: responsiveWidth(46),
      borderStyle: 'solid',
      justifyContent: 'center',
      borderWidth: 1,
@@ -152,8 +154,8 @@ export const styles = StyleSheet.create({
   addIngredientUnitInputBox: {
      backgroundColor: 'white',
      justifyContent: 'center',
-     height: responsiveHeight(6),
-     width: '68%',
+     minHeight: responsiveHeight(6),
+     width: responsiveWidth(30),
      borderStyle: 'solid',
      borderWidth: 1,
      borderColor: '#104e01',
@@ -161,35 +163,63 @@ export const styles = StyleSheet.create({
      overflow: 'hidden'
   },
   ingredientTextAdjustment: {
-    marginLeft: 7,
+    marginLeft: responsiveWidth(2),
   },
   autoCompleteRowContainer: {
     // flex: 1,
-    marginTop: responsiveHeight(0.5),
+    // marginTop: responsiveHeight(0.5),
     flexDirection:'row',
     width: responsiveWidth(100),
-    // height: responsiveHeight(6),
-    // borderWidth: 1
+    // height: responsiveHeight(30),
+    // borderWidth: 1,
+    // borderColor: 'white',
+    // justifyContent: 'space-between'
+    // overflow: 'visible',
   },
   autoCompleteContainer: {
     position: 'absolute',
-    width: '49%',
+    width: '100%',
     borderRadius: 5,
-    // height: '100%',
+    // height: responsiveHeight(10),
     // justifyContent: 'center'
+    // borderWidth: 1,
+    // borderColor: 'yellow'
+  },
+  nameAndUnitsContainer: {
+    // borderWidth: 1,
+    // borderColor: 'red',
+    width: responsiveWidth(77),
+    marginLeft: responsiveWidth(1),
+    marginRight: responsiveWidth(1),
   },
   quantityAndUnitContainer: {
-    marginLeft: '1%',
-    width: '40%',
-    left: '49%',
+    // marginLeft: '1%',
+    width: '100%',
+    // justifyContent: 'space-between',
+    // left: '49%',
     flexDirection: 'row',
+    // borderWidth: 1,
+    // borderColor: 'red',
+    top: responsiveHeight(6.5),
+    height: responsiveHeight(6),
+  },
+  ingredientSortContainer: {
+    height: responsiveHeight(12.5),
+    width: responsiveWidth(12),
+    borderRadius: 5,
+    borderStyle: 'solid',
+    borderColor: '#104e01',
+    borderWidth: 1,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   deleteIngredientContainer: {
-    position: 'absolute',
-    marginLeft: '1%',
-    width: '8%',
-    height: '100%',
-    left: '90%',
+    // position: 'absolute',
+    // marginLeft: '1%',
+    width: responsiveWidth(9),
+    height: responsiveHeight(12.5),
+    // left: '90%',
     flexDirection: 'row',
     borderRadius: 5,
     borderStyle: 'solid',
@@ -216,8 +246,8 @@ export const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: '#104e01',
-    height: responsiveHeight(6),
-    paddingLeft: '4%',
+    minHeight: responsiveHeight(6),
+    paddingLeft: responsiveWidth(2),
   },
   autoCompleteList: {
     borderRadius: 5,
@@ -228,6 +258,7 @@ export const styles = StyleSheet.create({
     borderColor: '#104e01',
     marginLeft: '5%',
     marginRight: '5%',
+    // zIndex: 10
   },
   ingredientDeleteTrashCanButton: {
     // zIndex: 1,
@@ -269,7 +300,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   instructionInput:{
-    // height: responsiveHeight(6),
+    height: '100%',
     width: '67%',
     backgroundColor: 'white',
     textAlign: 'left',

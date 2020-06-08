@@ -18,15 +18,16 @@ export default class InstructionRow extends React.Component {
   render(){
     return (
         <View style={[centralStyles.formInputContainer, {width: responsiveWidth(100)}]}>
-            <View style={[styles.deleteInstructionContainer, {width: '12%'}]}>
+            <View style={[styles.deleteInstructionContainer, {width: responsiveWidth(12)}]}>
                 <Icon name='menu' size={24} style={styles.ingredientTrashCan}/>
             </View>
             <TextInput
+                maxFontSizeMultiplier={2}
                 style={styles.instructionInput}
                 multiline={true}
                 numberOfLines={1}
                 value={this.state.text}
-                placeholder={`New step`}
+                placeholder={`Step ${this.props.index+1}`}
                 ref={ref => this.textInput = ref}
                 onChangeText={(text) => {
                     this.textInput.measureInWindow((x,y,width,height) => {

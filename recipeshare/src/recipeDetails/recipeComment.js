@@ -10,8 +10,8 @@ export default class RecipeComment extends React.PureComponent {
     if (this.props.loggedInChefID == this.props.chef_id || this.props.loggedInChefID === this.props.is_admin) {
       return (
         <TouchableOpacity style={styles.commentTrashCanButton} onPress={() => this.props.deleteComment(this.props.id)}>
-        <Icon name='trash-can-outline' size={24} style={[styles.icon, styles.commentTrashCan]}/>
-      </TouchableOpacity>
+          <Icon name='trash-can-outline' size={24} style={[styles.icon, styles.commentTrashCan]}/>
+        </TouchableOpacity>
       )
     }
   }
@@ -25,11 +25,11 @@ export default class RecipeComment extends React.PureComponent {
           </View>
           <View style={styles.commentRightContainer}>
             <View style={styles.commentRightTopContainer}>
-              <Text style={[styles.detailsContentsHeader]}>{this.props.username}:</Text>
+              <Text maxFontSizeMultiplier={2} style={[styles.detailsContentsHeader]}>{this.props.username}:</Text>
               {this.renderCommentDeleteButton()}
             </View>
             <View>
-              <Text style={[styles.detailsContents, {paddingLeft: 0}]}>{this.props.comment}</Text>
+              <Text maxFontSizeMultiplier={2} style={[styles.detailsContents, {paddingLeft: 0}]}>{this.props.comment}</Text>
             </View>
           </View>
         </View>

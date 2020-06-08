@@ -94,7 +94,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     saveImage = async(image) => {
       if (image.cancelled === false){
         this.props.saveChefDetails("image_url", image.base64)
-        this.setState({choosingPicture: false})
+        // this.setState({choosingPicture: false})
       }
     }
 
@@ -115,7 +115,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       const emailErrors = this.state.errors.filter(message => message.startsWith("E mail"))
       return emailErrors.map(error => (
         <View style={centralStyles.formErrorView} key={error}>
-            <Text style={centralStyles.formErrorText}>{error}</Text>
+            <Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>{error}</Text>
         </View>
       ))
     }
@@ -124,7 +124,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       const usernameErrors = this.state.errors.filter(message => message.startsWith("Username"))
       return usernameErrors.map(error => (
         <View style={centralStyles.formErrorView} key={error}>
-            <Text style={centralStyles.formErrorText}>{error}</Text>
+            <Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>{error}</Text>
         </View>
       ))
     }
@@ -133,7 +133,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       const passwordErrors = this.state.errors.filter(message => message.startsWith("Password"))
       return passwordErrors.map(error => (
         <View style={centralStyles.formErrorView} key={error}>
-            <Text style={centralStyles.formErrorText}>{error}</Text>
+            <Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>{error}</Text>
         </View>
       ))
     }
@@ -159,20 +159,20 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             {/* title */}
             <View style={centralStyles.formSection}>
               <View style={centralStyles.formInputContainer}>
-                <Text style={centralStyles.formTitle}>Please register and click the link in your confirmation e-mail!</Text>
+                <Text maxFontSizeMultiplier={2} style={centralStyles.formTitle}>Please register and click the link in your confirmation e-mail!</Text>
               </View>
             </View>
             {/* e-mail*/}
             <View style={centralStyles.formSection}>
               <View style={centralStyles.formInputContainer}>
-                <TextInput style={centralStyles.formInput} value={this.props.e_mail} placeholder="e-mail" keyboardType="email-address" autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "e_mail")}/>
+                <TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.e_mail} placeholder="e-mail" keyboardType="email-address" autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "e_mail")}/>
               </View>
               {this.renderEmailError()}
             </View>
             {/* username*/}
             <View style={centralStyles.formSection}>
               <View style={centralStyles.formInputContainer}>
-                <TextInput style={centralStyles.formInput} value={this.props.username} placeholder="username" autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "username")}/>
+                <TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.username} placeholder="username" autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "username")}/>
               </View>
               {this.renderUsernameError()}
             </View>
@@ -190,34 +190,34 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             {/* profile*/}
             <View style={centralStyles.formSection}>
               <View style={centralStyles.formInputContainer}>
-                <TextInput style={[centralStyles.formInput, {height: responsiveHeight(12)}]} value={this.props.profile_text} placeholder="about me" multiline={true} numberOfLines={3} onChange={(e) => this.handleTextInput(e, "profile_text")}/>
+                <TextInput maxFontSizeMultiplier={2} style={[centralStyles.formInput, {minHeight: responsiveHeight(12), maxHeight: responsiveHeight(25)}]} value={this.props.profile_text} placeholder="about me" multiline={true} numberOfLines={3} onChange={(e) => this.handleTextInput(e, "profile_text")}/>
               </View>
             </View>
             {/* password*/}
             <View style={centralStyles.formSection}>
               <View style={centralStyles.formInputContainer}>
-                <TextInput style={centralStyles.formInput} value={this.props.password} placeholder="password" autoCapitalize="none" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")}/>
+                <TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.password} placeholder="password" autoCapitalize="none" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")}/>
               </View>
             </View>
             {/* password confirmation*/}
             <View style={centralStyles.formSection}>
               <View style={centralStyles.formInputContainer}>
-                <TextInput style={centralStyles.formInput} value={this.props.password_confirmation} placeholder="password confirmation" autoCapitalize="none" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password_confirmation")}/>
+                <TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.password_confirmation} placeholder="password confirmation" autoCapitalize="none" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password_confirmation")}/>
               </View>
               {this.renderPasswordError()}
             </View>
             {/* view terms and conditions*/}
             <View style={centralStyles.formSection}>
               <View style={centralStyles.formInputContainer}>
-                <TouchableOpacity style={{width: responsiveWidth(50)}} activeOpacity={0.7} onPress={() => this.setState({viewingTermsAndConditions: true})}>
-                  <View style={centralStyles.formTextBoxContainer}>
-                    <Text style={centralStyles.formTextBox}>{`View Terms & Conditions`}</Text>
-                  </View>
+                <TouchableOpacity style={[centralStyles.formTextBoxContainer, {width: responsiveWidth(48)}]} activeOpacity={0.7} onPress={() => this.setState({viewingTermsAndConditions: true})}>
+                  {/* <View style={centralStyles.formTextBoxContainer}> */}
+                    <Text maxFontSizeMultiplier={2} style={centralStyles.formTextBox}>{`View Terms & Conditions`}</Text>
+                  {/* </View> */}
                 </TouchableOpacity>
-                <View style={[centralStyles.yellowRectangleButton, {width: responsiveWidth(29)}]}>
-                  <Text style={centralStyles.greenButtonText}>I accept</Text>
-                  <Switch style={[(Platform.OS === 'ios' ? {transform:[{scaleX:.7},{scaleY:.7}]}:null),{marginLeft: responsiveWidth(1), marginRight: responsiveWidth(1)}]} value={this.state.tAndCAgreed} onChange={this.handleTandCSwitch}/>
-                </View>
+                <TouchableOpacity activeOpacity={1} style={[centralStyles.yellowRectangleButton, {minWidth: responsiveWidth(30), maxWidth: responsiveWidth(30)}]} onPress={this.handleTandCSwitch}>
+                  <Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, {marginLeft: responsiveWidth(2), marginRight: responsiveWidth(1)}]}>I accept</Text>
+                  <Switch style={[(Platform.OS === 'ios' ? {transform:[{scaleX:.7},{scaleY:.7}]}:null)]} value={this.state.tAndCAgreed} onChange={this.handleTandCSwitch}/>
+                </TouchableOpacity>
                 {this.state.viewingTermsAndConditions && (
                   <TextPopUp
                     close={() => this.setState({viewingTermsAndConditions: false})}
@@ -230,15 +230,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
               {/* view privacy policy*/}
             <View style={centralStyles.formSection}>
               <View style={centralStyles.formInputContainer}>
-                <TouchableOpacity style={{width: responsiveWidth(50)}} activeOpacity={0.7} onPress={() => this.setState({viewingPrivacyPolicy: true})}>
-                  <View style={centralStyles.formTextBoxContainer}>
-                    <Text style={centralStyles.formTextBox}>{`View Privacy Policy`}</Text>
-                  </View>
+                <TouchableOpacity style={[centralStyles.formTextBoxContainer, {width: responsiveWidth(48)}]} activeOpacity={0.7} onPress={() => this.setState({viewingPrivacyPolicy: true})}>
+                  {/* <View style={centralStyles.formTextBoxContainer}> */}
+                    <Text maxFontSizeMultiplier={2} style={centralStyles.formTextBox}>{`View Privacy Policy`}</Text>
+                  {/* </View> */}
                 </TouchableOpacity>
-                <View style={[centralStyles.yellowRectangleButton, {width: responsiveWidth(29)}]}>
-                  <Text style={centralStyles.greenButtonText}>I accept</Text>
-                  <Switch style={[(Platform.OS === 'ios' ? {transform:[{scaleX:.7},{scaleY:.7}]}:null),{marginLeft: responsiveWidth(1), marginRight: responsiveWidth(1)}]} value={this.state.privacyPolicyAgreed} onChange={this.handlePrivacyPolicySwitch}/>
-                </View>
+                <TouchableOpacity activeOpacity={1} style={[centralStyles.yellowRectangleButton, {minWidth: responsiveWidth(30), maxWidth: responsiveWidth(30)}]} onPress={this.handlePrivacyPolicySwitch}>
+                  <Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, {marginLeft: responsiveWidth(2), marginRight: responsiveWidth(1)}]}>I accept</Text>
+                  <Switch style={[(Platform.OS === 'ios' ? {transform:[{scaleX:.7},{scaleY:.7}]}:null)]} value={this.state.privacyPolicyAgreed} onChange={this.handlePrivacyPolicySwitch}/>
+                </TouchableOpacity>
                 {this.state.viewingPrivacyPolicy && (
                   <TextPopUp
                     close={() => this.setState({viewingPrivacyPolicy: false})}
@@ -251,9 +251,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             {/* choose picture */}
             <View style={centralStyles.formSection}>
               <View style={centralStyles.formInputContainer}>
-                <TouchableOpacity style={[centralStyles.yellowRectangleButton, {width: '100%'}]} activeOpacity={0.7} onPress={this.choosePicture}>
+                <TouchableOpacity style={[centralStyles.yellowRectangleButton, {justifyContent: 'center', maxWidth: '100%', width: '100%'}]} activeOpacity={0.7} onPress={this.choosePicture}>
                   <Icon style={centralStyles.greenButtonIcon} size={25} name='camera'></Icon>
-                    <Text style={centralStyles.greenButtonText}>Add profile picture</Text>
+                    <Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, {marginLeft: responsiveWidth(3)}]}>Add profile picture</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -262,11 +262,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
               <View style={centralStyles.formInputContainer}>
                 <TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={() => this.props.navigation.navigate('Login')}>
                   <Icon style={centralStyles.greenButtonIcon} size={25} name='login'></Icon>
-                  <Text style={centralStyles.greenButtonText}>Return to{"\n"} login screen</Text>
+                  <Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>Return to{"\n"} login screen</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={(this.state.tAndCAgreed && this.state.privacyPolicyAgreed ? (e) => this.submitChef(e) : null )}>
                   <Icon style={centralStyles.greenButtonIcon} size={25} name='login'></Icon>
-                    <Text style={centralStyles.greenButtonText}>{(this.state.tAndCAgreed ? (this.state.privacyPolicyAgreed ? "Submit &\n go to log in" : "Please accept\nprivacy policy" ) : "Please\naccept T&C")}</Text>
+                    <Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>{(this.state.tAndCAgreed ? (this.state.privacyPolicyAgreed ? "Submit &\n go to log in" : "Please accept\nprivacy policy" ) : "Please\naccept T&C")}</Text>
                 </TouchableOpacity>
               </View>
             </View>

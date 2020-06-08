@@ -19,7 +19,6 @@ export const patchRecipe = (
     acknowledgement
     ) => {
     return new Promise((resolve, reject) => {
-        console.log(instructionImages)
 
         setTimeout(()=>{
             reject()

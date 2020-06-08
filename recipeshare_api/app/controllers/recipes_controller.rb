@@ -130,7 +130,7 @@ class RecipesController < ApplicationController
     end
 
     def newRecipe_Ingredient_params
-        params.require(:recipe).permit(ingredients: {})
+        params.require(:recipe).permit(ingredients: [:name, :quantity, :unit])
     end
 
     def newRecipe_Instructions_params

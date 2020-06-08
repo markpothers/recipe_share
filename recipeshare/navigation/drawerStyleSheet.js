@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet } from 'react-native';
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions'
 
 export const styles = StyleSheet.create({
   mainPageContainer:{
@@ -24,11 +25,11 @@ export const styles = StyleSheet.create({
     flex: 1
   },
   userNameHeader:{
-    fontSize: 16,
+    fontSize: responsiveFontSize(2.5),
     color: "#505050",
   },
   userName:{
-    fontSize: 20,
+    fontSize: responsiveFontSize(2.9),
     marginLeft: '10%',
     color: "#505050",
     fontWeight: 'bold'
@@ -74,16 +75,21 @@ export const styles = StyleSheet.create({
   routeLink: {
     width: '100%',
     flexDirection: 'row',
-    marginBottom: '3%',
+    marginBottom: responsiveHeight(1.5),
+    alignItems: 'center',
+  },
+  routeNameContainer: {
+    width: '80%',
+    marginLeft: '5%'
   },
   routeName: {
-    fontSize: 20,
-    marginLeft: '10%',
-    color: "#505050"
+    fontSize: responsiveFontSize(2.7),
+    width: '100%',
+    color: "#505050",
   },
   icon: {
     color: "#505050",
-    marginLeft: '6%'
+    marginLeft: '5%',
   },
   logoutContainer: {
     width: '90%',

@@ -71,7 +71,7 @@ export const styles = StyleSheet.create({
     marginRight: '5%',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '40%',
+    minWidth: '40%',
     height: 44,
     flexDirection:'row',
     borderRadius: 5,

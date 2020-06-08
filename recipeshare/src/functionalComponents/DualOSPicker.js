@@ -24,7 +24,7 @@ export default class DualOSPicker extends React.PureComponent{
             return (
               <View style={styles.pickerContainer}>
                 <TouchableOpacity style={styles.IOSSelectedChoiceContainer} onPress={() => this.setState({IOSPickerShowing: true})}>
-                  <Text style={styles.IOSSelectedChoiceTextBox}>{this.props.selectedChoice}</Text>
+                  <Text maxFontSizeMultiplier={2} style={styles.IOSSelectedChoiceTextBox}>{this.props.selectedChoice}</Text>
                 </TouchableOpacity>
                 {this.state.IOSPickerShowing ? <IOSPicker choices={this.props.options} selectedChoice={this.props.selectedChoice} onChoiceChange={this.props.onChoiceChange} closeIOSPicker={this.closeIOSPicker} /> : null}
               </View>

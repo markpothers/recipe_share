@@ -115,14 +115,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     sourceChosen = () =>{
-      this.setState({choosingPicture: false,
-        editingChef: true})
+      this.setState({
+        choosingPicture: false,
+        editingChef: true
+      })
     }
 
     saveImage = async(image) => {
       if (image.cancelled === false){
           this.props.saveChefDetails("image_url", image.base64)
-          this.sourceChosen()
+          // this.sourceChosen()
       }
   }
 

@@ -13,7 +13,7 @@ export default class RecipeNewComment extends React.PureComponent {
               <Image style={styles.avatarThumbnail} source={ (this.props.image_url!==null ? ({uri: this.props.image_url}) : require("../dataComponents/peas.jpg")) }/>
             </View>
             <View style={styles.commentRightContainer}>
-              <Text style={[styles.detailsContentsHeader]}>{this.props.username}:</Text>
+              <Text maxFontSizeMultiplier={2} style={[styles.detailsContentsHeader]}>{this.props.username}:</Text>
               <TextInput
                 style={styles.detailsContents}
                 value={this.props.commentText}
@@ -23,6 +23,7 @@ export default class RecipeNewComment extends React.PureComponent {
                 onChangeText={text => this.props.handleCommentTextInput(text)}
                 autoFocus={true}
                 onFocus={this.props.scrollToNewComment}
+                maxFontSizeMultiplier={2}
               />
             </View>
           </View>

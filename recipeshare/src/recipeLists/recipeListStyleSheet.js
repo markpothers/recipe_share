@@ -1,9 +1,10 @@
 import { StyleSheet } from 'react-native';
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions'
 
 export const styles = StyleSheet.create({
     recipeCard: {
-      marginTop: 2,
-      marginBottom: 2,
+      marginTop: responsiveHeight(0.2),
+      marginBottom: responsiveHeight(0.2),
       width: '100%',
       borderStyle: 'solid',
       borderColor: '#104e01',
@@ -14,7 +15,7 @@ export const styles = StyleSheet.create({
     recipeCardTopPostedByContainer: {
       borderBottomWidth: 0.5,
       borderBottomColor: '#104e01',
-      height: 25,
+      // height: 25,
       width: '96.4%',
       marginLeft: '1.6%',
       marginRight: '2%',
@@ -30,17 +31,19 @@ export const styles = StyleSheet.create({
     },
     recipeCardTopLeftContainer: {
       flex: 8,
-      justifyContent: 'center'
+      justifyContent: 'center',
+      // borderWidth: 1,
     },
     recipeCardTopRightContainer: {
       flex: 2,
       justifyContent: 'center',
       alignItems: 'center',
       overflow: 'hidden',
+      // borderWidth: 1,
     },
     avatarThumbnail: {
-      height: 60,
-      width: '96%',
+      height: responsiveHeight(9),
+      width: responsiveHeight(9),
       marginRight: '4%',
       borderRadius: 5,
     },
@@ -53,7 +56,8 @@ export const styles = StyleSheet.create({
       width: '96%',
       marginLeft: '2%',
       marginRight: '2%',
-      flexDirection: 'row'
+      flexDirection: 'row',
+      flexWrap: 'wrap',
     },
     recipeCardTopLeftLowerContainer:{
       flexDirection: 'row',
@@ -64,7 +68,7 @@ export const styles = StyleSheet.create({
       marginRight: '2%'
     },
     recipeCardImageContainer: {
-      height: 250,
+      height: responsiveHeight(37.5),
       width: '100%'
     },
     thumbnail: {
@@ -77,7 +81,7 @@ export const styles = StyleSheet.create({
       flexDirection: 'row',
       marginTop: '1%',
       marginBottom: '1%',
-      height: 25,
+      // height: 25,
     },
     recipeCardBottomSubContainers: {
       flexDirection: 'row',
@@ -92,23 +96,23 @@ export const styles = StyleSheet.create({
     },
     recipeCardHighlighted: {
       fontWeight: 'bold',
-      fontSize: 16,
+      fontSize: responsiveFontSize(2.1),
       color: "#505050",
       textAlign: 'left'
     },
     recipeCardTopOther: {
-      fontSize: 13,
+      fontSize: responsiveFontSize(1.9),
       color: "#505050",
-      flex: 1
+      flex: 1,
     },
     recipeCardTopItalic:{
-      fontSize: 13,
+      fontSize: responsiveFontSize(1.9),
       color: "#505050",
       fontStyle: 'italic'
     },
     recipeCardBottomOther: {
       marginLeft: '5%',
-      fontSize: 16,
+      fontSize: responsiveFontSize(2.1),
       fontWeight: 'bold',
       color: "#505050",
       textAlign: 'center'
@@ -119,8 +123,8 @@ export const styles = StyleSheet.create({
       borderStyle: 'solid',
       borderWidth: 1,
       borderColor: '#104e01',
-      width: 50,
-      height: 50,
+      width: responsiveHeight(8),
+      height: responsiveHeight(8),
       justifyContent: 'center',
       alignItems: 'center',
       top: '86%',

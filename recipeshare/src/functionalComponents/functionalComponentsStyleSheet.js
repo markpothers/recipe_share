@@ -59,7 +59,7 @@ export const styles = StyleSheet.create({
       marginTop: responsiveHeight(0.5),
       flexDirection:'row',
       borderRadius: 5,
-      backgroundColor: '#720000',
+      backgroundColor: '#104e01',// red'#720000',
       borderStyle: 'solid',
       borderWidth: 1,
     },

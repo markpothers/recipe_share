@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet } from 'react-native';
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions'
 
 export const styles = StyleSheet.create({
   mainPageContainer:{
@@ -9,22 +10,22 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     width: '100%',
-    height: 55,
+    height: responsiveHeight(8),
   },
   headerEnd:{
-    width: '15%',
+    width: responsiveWidth(15),
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
   },
   headerMiddle:{
-    width: '70%',
+    minWidth: responsiveWidth(70),
     height: '100%',
     justifyContent: 'center'
   },
   headerDrawerButton: {
-    marginLeft: 15,
-    marginRight: 8,
+    marginLeft: responsiveWidth(4),
+    marginRight: responsiveWidth(2),
   },
   headerNewButton: {
 
@@ -33,9 +34,9 @@ export const styles = StyleSheet.create({
     color: '#fff59b'
   },
   headerText:{
-    fontSize: 24,
+    fontSize: responsiveFontSize(3.5),
     color: '#fff59b',
-    marginLeft: 10
+    marginLeft: responsiveWidth(2)
   },
   background: {
     width: '100%',

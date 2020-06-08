@@ -17,17 +17,17 @@ export default class RecipeCard extends React.PureComponent {
                 <View style={styles.recipeCardTopContainer}>
                     <View style={styles.recipeCardTopLeftContainer}>
                         <TouchableOpacity style={styles.recipeCardTopLeftUpperContainer} activeOpacity={0.7} onPress={() => this.props.navigateToRecipeDetails(this.props.id)}>
-                            <Text style={styles.recipeCardHighlighted}>{this.props.name}</Text>
+                            <Text maxFontSizeMultiplier={2} style={styles.recipeCardHighlighted}>{this.props.name}</Text>
                         </TouchableOpacity>
                         <View style={styles.recipeCardTopLeftMiddleContainer}>
-                            <Text style={styles.recipeCardTopItalic}>Created by: </Text>
+                            <Text maxFontSizeMultiplier={2} style={styles.recipeCardTopItalic}>Created by: </Text>
                             <TouchableOpacity onPress={() => this.props.navigateToChefDetails(this.props.chef_id)}>
-                                <Text style={styles.recipeCardTopItalic}>{this.props.username}</Text>
+                                <Text maxFontSizeMultiplier={2}style={styles.recipeCardTopItalic}>{this.props.username}</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={styles.recipeCardTopLeftLowerContainer}>
-                            <Text style={styles.recipeCardTopOther} >Prep time: {this.props.time}</Text>
-                            <Text style={styles.recipeCardTopOther} >Difficulty: {this.props.difficulty}/10</Text>
+                            <Text maxFontSizeMultiplier={2} style={styles.recipeCardTopOther}>Prep time: {this.props.time}</Text>
+                            <Text maxFontSizeMultiplier={2} style={styles.recipeCardTopOther}>Difficulty: {this.props.difficulty}/10</Text>
                         </View>
                     </View>
                     <TouchableOpacity style={styles.recipeCardTopRightContainer} onPress={() => this.props.navigateToChefDetails(this.props.chef_id)}>
@@ -38,24 +38,24 @@ export default class RecipeCard extends React.PureComponent {
                         <Image style={styles.thumbnail} source={{uri: this.props.image_url}} />
                     </TouchableOpacity>
                     <View style={styles.recipeCardBottomContainer}>
-                    <TouchableOpacity style={styles.recipeCardBottomSubContainers} onPress={this.props.chef_shared == 0 ? () => this.props.reShareRecipe(this.props.id) : () => this.props.unReShareRecipe(this.props.id) }>
-                        {this.props.chef_shared == 0 ? <Icon name='share-outline' size={24} style={styles.icon}/> : <Icon name='share' size={24} style={styles.icon}/> }
-                        <Text style={styles.recipeCardBottomOther} >{this.props.shares_count}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.recipeCardBottomSubContainers} onPress={this.props.chef_liked == 0 ? () => this.props.likeRecipe(this.props.id) : () => this.props.unlikeRecipe(this.props.id) }>
-                        {this.props.chef_liked == 0 ? <Icon name='heart-outline' size={24} style={styles.icon}/> : <Icon name='heart' size={24} style={styles.icon}/> }
-                        <Text style={styles.recipeCardBottomOther} >{this.props.likes_count}</Text>
-                    </TouchableOpacity>
-                    {/* <TouchableOpacity style={styles.recipeCardBottomSubContainers} onPress={this.props.chef_made === 0 ? () => this.props.makeRecipe(this.props.id) : null }>
-                        {this.props.chef_made === 0 ? <Icon name='food' size={24} style={styles.icon}/> : <Icon name='food-off' size={24} style={styles.icon}/> }
-                        <Text style={styles.recipeCardBottomOther} >{this.props.makes_count}</Text>
-                    </TouchableOpacity> */}
-                    <TouchableOpacity style={styles.recipeCardBottomSubContainers} onPress={() => this.props.navigateToRecipeDetailsAndComment(this.props.id)}>
-                        {this.props.chef_commented == 0 ? <Icon name='comment-outline' size={24} style={styles.icon}/> : <Icon name='comment' size={24} style={styles.icon}/> }
-                        <Text style={styles.recipeCardBottomOther} >{this.props.comments_count}</Text>
-                    </TouchableOpacity>
+                        <TouchableOpacity style={styles.recipeCardBottomSubContainers} onPress={this.props.chef_shared == 0 ? () => this.props.reShareRecipe(this.props.id) : () => this.props.unReShareRecipe(this.props.id) }>
+                            {this.props.chef_shared == 0 ? <Icon name='share-outline' size={24} style={styles.icon}/> : <Icon name='share' size={24} style={styles.icon}/> }
+                            <Text maxFontSizeMultiplier={2} style={styles.recipeCardBottomOther} >{this.props.shares_count}</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.recipeCardBottomSubContainers} onPress={this.props.chef_liked == 0 ? () => this.props.likeRecipe(this.props.id) : () => this.props.unlikeRecipe(this.props.id) }>
+                            {this.props.chef_liked == 0 ? <Icon name='heart-outline' size={24} style={styles.icon}/> : <Icon name='heart' size={24} style={styles.icon}/> }
+                            <Text maxFontSizeMultiplier={2} style={styles.recipeCardBottomOther} >{this.props.likes_count}</Text>
+                        </TouchableOpacity>
+                        {/* <TouchableOpacity style={styles.recipeCardBottomSubContainers} onPress={this.props.chef_made === 0 ? () => this.props.makeRecipe(this.props.id) : null }>
+                            {this.props.chef_made === 0 ? <Icon name='food' size={24} style={styles.icon}/> : <Icon name='food-off' size={24} style={styles.icon}/> }
+                            <Text style={styles.recipeCardBottomOther} >{this.props.makes_count}</Text>
+                        </TouchableOpacity> */}
+                        <TouchableOpacity style={styles.recipeCardBottomSubContainers} onPress={() => this.props.navigateToRecipeDetailsAndComment(this.props.id)}>
+                            {this.props.chef_commented == 0 ? <Icon name='comment-outline' size={24} style={styles.icon}/> : <Icon name='comment' size={24} style={styles.icon}/> }
+                            <Text maxFontSizeMultiplier={2} style={styles.recipeCardBottomOther} >{this.props.comments_count}</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-            </View>
         )
     }
 }
@@ -76,9 +76,9 @@ function AvatarImage(chefimage_url) {
 function PostedBy(props) {
     return (
             <View style={styles.recipeCardTopPostedByContainer}>
-                <Text style={styles.recipeCardTopItalic} >Re-shared by: </Text>
+                <Text maxFontSizeMultiplier={2} style={styles.recipeCardTopItalic}>Re-shared by: </Text>
                 <TouchableOpacity onPress={() => props.navigateToSharer(props.sharer_id)}>
-                    <Text style={styles.recipeCardTopItalic} >{props.username}</Text>
+                    <Text maxFontSizeMultiplier={2} style={styles.recipeCardTopItalic} >{props.username}</Text>
                 </TouchableOpacity>
             </View>
     )

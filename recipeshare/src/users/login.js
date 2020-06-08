@@ -6,7 +6,7 @@ import { centralStyles } from '../centralStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { getNewPassword } from '../fetches/getNewPassword'
 import { loginChef } from '../fetches/loginChef'
-import { responsiveWidth } from 'react-native-responsive-dimensions'
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions'
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 
 const mapStateToProps = (state) => ({
@@ -100,7 +100,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
-      // console.log(this.props.e_mail)
+      // console.log(this.props.stayingLoggedIn)
       return (
         <SpinachAppContainer scrollingEnabled={true} awaitingServer={this.state.awaitingServer}>
           <View style={styles.logoContainer}>
@@ -109,17 +109,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           <View style={centralStyles.formContainer}>
             <View style={centralStyles.formSection}>
               <View style={centralStyles.formInputContainer}>
-                <Text style={centralStyles.formTitle}>Welcome, chef!{"\n"} Please log in or register</Text>
+                <Text style={centralStyles.formTitle} maxFontSizeMultiplier={1.5}>Welcome, chef!{"\n"} Please log in or register</Text>
               </View>
             </View>
             <View style={centralStyles.formSection}>
               <View style={centralStyles.formInputContainer}>
-                <TextInput style={centralStyles.formInput} value={this.props.e_mail} placeholder="e-mail" keyboardType="email-address" autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "e_mail")}/>
+                <TextInput maxFontSizeMultiplier={3} style={centralStyles.formInput} value={this.props.e_mail} placeholder="e-mail" keyboardType="email-address" autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "e_mail")}/>
               </View>
             </View>
             <View style={centralStyles.formSection}>
               <View style={centralStyles.formInputContainer}>
-              <TextInput style={centralStyles.formInput} value={this.props.password} placeholder="password" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")}/>
+                <TextInput maxFontSizeMultiplier={3} style={centralStyles.formInput} value={this.props.password} placeholder="password" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")}/>
               </View>
               {this.state.loginError &&(
                 <View style={centralStyles.formErrorView}>
@@ -135,23 +135,23 @@ export default connect(mapStateToProps, mapDispatchToProps)(
               <View style={centralStyles.formInputContainer}>
                 <TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={() => this.props.navigation.navigate('CreateChef')}>
                   <Icon style={centralStyles.greenButtonIcon} size={25} name='account-plus'></Icon>
-                    <Text style={centralStyles.greenButtonText}>Register</Text>
+                    <Text style={centralStyles.greenButtonText} maxFontSizeMultiplier={2}>Register</Text>
                 </TouchableOpacity>
-                <View style={centralStyles.yellowRectangleButton}>
-                  <Text style={centralStyles.greenButtonText}>Stay{"\n"}logged in</Text>
-                  <Switch style={[(Platform.OS === 'ios' ? {transform:[{scaleX:.7},{scaleY:.7}]}:null),{marginLeft: responsiveWidth(2)}]} value={this.props.stayingLoggedIn} onChange={(e) => this.props.stayLoggedIn(e.nativeEvent.value)}/>
-                </View>
+                <TouchableOpacity activeOpacity={1} style={centralStyles.yellowRectangleButton} onPress={() => this.props.stayLoggedIn(!this.props.stayingLoggedIn)}>
+                  <Text style={centralStyles.greenButtonText} maxFontSizeMultiplier={2}>Stay{"\n"}logged in</Text>
+                  <Switch style={[(Platform.OS === 'ios' ? {transform:[{scaleX:.7},{scaleY:.7}]}:null)]} value={this.props.stayingLoggedIn} onChange={(e) => this.props.stayLoggedIn(e.nativeEvent.value)}/>
+                </TouchableOpacity>
               </View>
             </View>
             <View style={centralStyles.formSection}>
               <View style={centralStyles.formInputContainer}>
                 <TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={this.forgotPassword}>
                   <Icon style={centralStyles.greenButtonIcon} size={25} name='lock-open'></Icon>
-                  <Text style={centralStyles.greenButtonText}>Reset{"\n"}password</Text>
+                  <Text style={centralStyles.greenButtonText} maxFontSizeMultiplier={2}>Reset{"\n"}password</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={e => this.loginChef(e)}>
                   <Icon style={centralStyles.greenButtonIcon} size={25} name='login'></Icon>
-                    <Text style={centralStyles.greenButtonText}>Login</Text>
+                  <Text style={centralStyles.greenButtonText} maxFontSizeMultiplier={2}>Login</Text>
                 </TouchableOpacity>
               </View>
             </View>
