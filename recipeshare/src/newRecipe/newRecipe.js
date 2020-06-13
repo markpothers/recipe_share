@@ -72,26 +72,26 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             quantity: "2",
             unit: "each"
           },
-          {
-            name:"Flank steak",
-            quantity: "500",
-            unit: "g"
-          },
-          {
-            name:"Filet of salmon",
-            quantity: "17",
-            unit: "fl oz"
-          },
-          {
-            name:"peas",
-            quantity: "501",
-            unit: "each"
-          },
-          {
-            name:"Boiled potatoes",
-            quantity: "3",
-            unit: "Oz"
-          },
+          // {
+          //   name:"Flank steak",
+          //   quantity: "500",
+          //   unit: "g"
+          // },
+          // {
+          //   name:"Filet of salmon",
+          //   quantity: "17",
+          //   unit: "fl oz"
+          // },
+          // {
+          //   name:"peas",
+          //   quantity: "501",
+          //   unit: "each"
+          // },
+          // {
+          //   name:"Boiled potatoes",
+          //   quantity: "3",
+          //   unit: "Oz"
+          // },
         //   {
         //     name:"Chi",
         //     quantity: "2",

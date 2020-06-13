@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     marginRight: responsiveWidth(6.5),
     // top: '25%',
     // height: responsiveHeight(90),
-    width: responsiveWidth(87),
+    minWidth: responsiveWidth(87),
     backgroundColor: 'white',
     borderRadius: 5,
     borderWidth: 1,
@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
   picSourceChooserImage:{
     justifyContent: 'center',
     alignItems: 'center',
-    width: responsiveWidth(80),
+    minWidth: responsiveWidth(80),
     height: responsiveHeight(25),
     marginTop: responsiveHeight(2),
     marginLeft: responsiveWidth(3.5),
@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
     picSourceChooserButton:{
       justifyContent: 'center',
       alignItems: 'center',
-      width: responsiveWidth(80),
+      minWidth: responsiveWidth(80),
       marginLeft: responsiveWidth(3.5),
       marginRight: responsiveWidth(3.5),
       height: responsiveHeight(8),
@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
     picSourceChooserCancelButton:{
       justifyContent: 'center',
       alignItems: 'center',
-      width: responsiveWidth(80),
+      minWidth: responsiveWidth(80),
       marginLeft: responsiveWidth(3.5),
       marginRight: responsiveWidth(3.5),
       height: responsiveHeight(8),
@@ -64,7 +64,7 @@ export const styles = StyleSheet.create({
       borderWidth: 1,
     },
     picSourceChooserButtonText: {
-      marginLeft: '10%',
+      marginLeft: '5%',
       marginRight: '5%',
       textAlign: 'center',
       fontWeight: 'bold',

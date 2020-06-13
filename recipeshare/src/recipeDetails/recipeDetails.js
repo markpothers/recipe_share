@@ -136,10 +136,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         return (
           <View style={styles.detailsHeaderButtonsContainer}>
             <TouchableOpacity style={styles.headerButton} onPress={this.editRecipe}>
-              <Icon name='playlist-edit' size={24} style={styles.headerIcon}/>
+              <Icon name='playlist-edit' size={responsiveHeight(3.5)} style={styles.headerIcon}/>
             </TouchableOpacity>
             <TouchableOpacity style={styles.headerButton} onPress={this.deleteRecipe}>
-              <Icon name='trash-can-outline' size={24} style={styles.headerIcon}/>
+              <Icon name='trash-can-outline' size={responsiveHeight(3.5)} style={styles.headerIcon}/>
             </TouchableOpacity>
           </View>
         )
@@ -207,7 +207,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             >
               <Image style={[{width: '100%', height: '100%'}, styles.makePic]} source={{uri: make_pic.image_url}}></Image>
               <TouchableOpacity style={styles.makePicTrashCanButton} onPress={() => this.deleteMakePic(make_pic.id)}>
-                <Icon name='trash-can-outline' size={24} style={[styles.icon, styles.makePicTrashCan]}/>
+                <Icon name='trash-can-outline' size={responsiveHeight(3.5)} style={[styles.icon, styles.makePicTrashCan]}/>
               </TouchableOpacity>
             </TouchableOpacity>
           )
@@ -260,13 +260,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       if (this.props.recipe_details.likeable){
         return (
           <TouchableOpacity onPress={this.likeRecipe}>
-            <Icon name='heart-outline' size={24} style={styles.icon}/>
+            <Icon name='heart-outline' size={responsiveHeight(3.5)} style={styles.icon}/>
           </TouchableOpacity>
         )
       } else {
         return (
           <TouchableOpacity onPress={this.unlikeRecipe}>
-            <Icon name='heart' size={24} style={styles.icon}/>
+            <Icon name='heart' size={responsiveHeight(3.5)} style={styles.icon}/>
           </TouchableOpacity>
         )
       }
@@ -276,13 +276,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       if (this.props.recipe_details.makeable){
         return (
           <TouchableOpacity onPress={this.makeRecipe}>
-            <Icon name='food' size={24} style={styles.icon}/>
+            <Icon name='food' size={responsiveHeight(3.5)} style={styles.icon}/>
           </TouchableOpacity>
         )
       } else {
         return (
           <TouchableOpacity>
-            <Icon name='food-off' size={24} style={styles.icon}/>
+            <Icon name='food-off' size={responsiveHeight(3.5)} style={styles.icon}/>
           </TouchableOpacity>
         )
       }
@@ -540,7 +540,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                   <View style={{flexDirection: 'row'}}>
                     <Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Images from other users:</Text>
                     <TouchableOpacity onPress={this.newMakePic}>
-                      <Icon name='image-plus' size={24} style={styles.addIcon}/>
+                      <Icon name='image-plus' size={responsiveHeight(3.5)} style={styles.addIcon}/>
                     </TouchableOpacity>
                   </View>
                   {this.props.recipe_details.make_pics.length === 0 && <Text maxFontSizeMultiplier={2} style={[styles.detailsContents]}>No other images yet.  Be the first!</Text>}
@@ -551,7 +551,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                   <View style={{flexDirection: 'row'}}>
                     <Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Comments:</Text>
                     <TouchableOpacity onPress={this.state.commenting ? (this.state.commentText === "" ? this.cancelComment : this.saveComment ) : this.newComment}>
-                      <Icon name={this.state.commenting ? (this.state.commentText === "" ? 'comment-remove' : 'comment-check' ) : 'comment-plus'} size={24} style={styles.addIcon}/>
+                      <Icon name={this.state.commenting ? (this.state.commentText === "" ? 'comment-remove' : 'comment-check' ) : 'comment-plus'} size={responsiveHeight(3.5)} style={styles.addIcon}/>
                     </TouchableOpacity>
                   </View>
                   {this.state.commenting ? <RecipeNewComment scrollToLocation={this.scrollToLocation} {...this.props.loggedInChef} commentText={this.state.commentText} handleCommentTextInput={this.handleCommentTextInput} saveComment={this.saveComment} /> : null}

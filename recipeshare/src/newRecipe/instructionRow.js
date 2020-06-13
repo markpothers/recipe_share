@@ -19,7 +19,7 @@ export default class InstructionRow extends React.Component {
     return (
         <View style={[centralStyles.formInputContainer, {width: responsiveWidth(100)}]}>
             <View style={[styles.deleteInstructionContainer, {width: responsiveWidth(12)}]}>
-                <Icon name='menu' size={24} style={styles.ingredientTrashCan}/>
+                <Icon name='menu' size={responsiveHeight(3.5)} style={styles.ingredientTrashCan}/>
             </View>
             <TextInput
                 maxFontSizeMultiplier={2}
@@ -42,11 +42,14 @@ export default class InstructionRow extends React.Component {
                 }
                 onBlur={() => this.props.handleInstructionChange(this.state.text, this.props.index)}
             />
+            {/* <TouchableOpacity style={[styles.deleteInstructionContainer, {width: '9%'}]} onPress={this.voice} activeOpacity={0.7}>
+                <Icon name='microphone' size={responsiveHeight(3.5)} style={styles.ingredientTrashCan}/>
+            </TouchableOpacity> */}
             <TouchableOpacity style={[styles.deleteInstructionContainer, {width: '9%', backgroundColor: this.props.instructionImagePresent ? '#505050' : 'white'}]} activeOpacity={0.7} onPress={() => this.props.chooseInstructionPicture(this.props.index)}>
-                <Icon name='camera' size={24} style={[styles.ingredientTrashCan, {color: this.props.instructionImagePresent ? 'white' : '#505050'}]}/>
+                <Icon name='camera' size={responsiveHeight(3.5)} style={[styles.ingredientTrashCan, {color: this.props.instructionImagePresent ? 'white' : '#505050'}]}/>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.deleteInstructionContainer, {width: '9%'}]} onPress={() => this.props.removeInstruction(this.props.index)} activeOpacity={0.7}>
-                <Icon name='trash-can-outline' size={24} style={styles.ingredientTrashCan}/>
+                <Icon name='trash-can-outline' size={responsiveHeight(3.5)} style={styles.ingredientTrashCan}/>
             </TouchableOpacity>
         </View>
       )

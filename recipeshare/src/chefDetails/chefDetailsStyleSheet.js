@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet } from 'react-native';
-import { responsiveHeight } from 'react-native-responsive-dimensions';
+import { responsiveHeight, responsiveFontSize, responsiveWidth } from 'react-native-responsive-dimensions';
 
 export const styles = StyleSheet.create({
   mainPageContainer:{
@@ -40,25 +40,29 @@ export const styles = StyleSheet.create({
   chefCardTopContainer: {
     flexDirection: 'row',
     // borderStyle: 'solid',
-    // borderWidth: 2,
-    height: 100,
+    // borderWidth: 1,
+    // height: responsiveWidth(30),
     width: '100%',
-    marginTop: '1%',
-    marginBottom: '1%'
+    alignItems: 'center',
+    marginTop: responsiveHeight(0.5),
+    marginBottom: responsiveHeight(0.5)
   },
   chefCardTopLeftContainer: {
-    flex: 7,
+    // flex: 7,
+    width: responsiveWidth(70),
     // borderStyle: 'solid',
-    // borderWidth: 2,
+    // borderWidth: 1,
   },
   chefCardTopRightContainer: {
-    flex: 4,
+    // flex: 4,
+    width: responsiveWidth(30),
+    height: responsiveWidth(30),
     // borderStyle: 'solid',
-    // borderWidth: 2,
+    // borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
-    paddingBottom: '4%'
+    // paddingBottom: '4%'
   },
   avatarThumbnail: {
     // position: 'absolute',
@@ -69,7 +73,7 @@ export const styles = StyleSheet.create({
   },
   chefCardTopLeftUpperContainer:{
     // borderStyle: 'solid',
-    // borderWidth: 2,
+    // borderWidth: 1,
     width: '96%',
     // marginTop: '1%',
     // marginBottom: '1%',
@@ -78,7 +82,7 @@ export const styles = StyleSheet.create({
   },
   chefCardTopLeftMiddleContainer:{
     // borderStyle: 'solid',
-    // borderWidth: 2,
+    // borderWidth: 1,
     width: '96%',
     // marginTop: '1%',
     // marginBottom: '1%',
@@ -89,12 +93,12 @@ export const styles = StyleSheet.create({
   chefCardTopLeftLowerContainer:{
     // flexDirection: 'row',
     // borderStyle: 'solid',
-    // borderWidth: 2,
+    // borderWidth: 1,
     width: '96%',
     // justifyContent: 'center',
     // alignItems: 'center',
     // marginTop: '1%',
-    marginBottom: '2%',
+    // marginBottom: '2%',
     marginLeft: '2%',
     marginRight: '2%'
   },
@@ -117,7 +121,7 @@ export const styles = StyleSheet.create({
     marginBottom: '1%',
     height: 25,
     // borderStyle: 'solid',
-    // borderWidth: 2,
+    borderWidth: 1,
   },
   chefCardHighlighted: {
     fontWeight: 'bold',
@@ -162,52 +166,66 @@ export const styles = StyleSheet.create({
     backgroundColor: 'white',
     // opacity: 0.9,
     flexDirection: 'row',
-    paddingTop: '0.5%',
-    paddingBottom: '0.5%',
-    height: 30,
-    // justifyContent: 'center',
-    // alignItems: 'center',
+    // paddingTop: '0.5%',
+    // paddingBottom: '0.5%',
+    // height: 30,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    // flexWrap: 'wrap',
+    // flex: 1,
+
   },
   chefDetailsColumnHeaders: {
     // flex: 4,
-    fontSize: 16,
+    fontSize: responsiveFontSize(2.2),
     color: "#505050",
     fontWeight: 'bold',
-    width: '100%',
-    marginRight: '10%',
-    top: '0.3%',
-    textAlign: 'right'
+    // width: '100%',
+    // marginRight: '10%',
+    // top: '0.3%',
+    // textAlign: 'right',
+    // borderWidth: 1
   },
   icon: {
     color: "#505050",
-    marginLeft: '5%'
+    // borderWidth: 1,
+    // width: responsiveWidth(10),
+    marginLeft: '3%',
+    marginRight: '3%'
   },
   chefDetailsRowTitle: {
     // flex: 4,
-    fontSize: 16,
+    fontSize: responsiveFontSize(2.2),
+    marginTop: responsiveHeight(0.5),
+    marginBottom: responsiveHeight(0.5),
     color: "#505050",
     // textAlign: 'center',
-    width: '37%',
-    marginLeft: '5%',
-    top: '0.3%'
+    minWidth: '35%',
+    maxWidth: '55%',
+    // height: 100,
+    // marginLeft: '5%',
+    // top: '0.3%',
+    flexWrap: 'wrap',
+    // borderWidth: 1
   },
   chefDetailsRowContents: {
-    fontSize: 16,
+    fontSize: responsiveFontSize(2.2),
     color: "#505050",
     textAlign: 'center',
+    // borderWidth: 1,
     // flex: 3
-    width: '10%',
-    marginLeft: '5%',
-    top: '0.3%'
+    width: '15%',
+    // marginRight: '5%',
+    // top: '0.3%'
   },
   chefRecipesRowContents: {
-    fontSize: 16,
+    fontSize: responsiveFontSize(2.2),
     color: "#505050",
     fontWeight: 'bold',
     // flex: 3
-    width: '45%',
-    marginLeft: '5%',
-    top: '0.3%'
+    // width: '45%',
+    marginLeft: responsiveWidth(5),
+    // top: '0.3%'
   },
   chefRecipesFollowContainer: {
     flexDirection: 'row',
@@ -225,7 +243,7 @@ export const styles = StyleSheet.create({
     // flex: 3
     // width: '10%',
     marginLeft: '3%',
-    top: '0.3%'
+    // top: '0.3%'
   },
   nameContainer:{
     flexDirection: 'row',

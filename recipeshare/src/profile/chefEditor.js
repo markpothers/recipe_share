@@ -6,6 +6,8 @@ import { connect } from 'react-redux'
 import { countries } from '../dataComponents/countries'
 import { patchChef } from '../fetches/patchChef'
 import DualOSPicker from '../functionalComponents/DualOSPicker'
+import { centralStyles } from '../centralStyleSheet'
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions'
 
 const mapStateToProps = (state) => ({
     username: state.newUserDetails.username,
@@ -58,38 +60,40 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         renderPasswordError = () => {
             const passwordErrors = this.state.errors.filter(message => message.startsWith("Password"))
             return passwordErrors.map(error => (
-              <View style={styles.formRow} key={error}>
-                <View style={styles.formError}>
-                  <Text style={styles.formErrorText}>{error}</Text>
+                <View style={[centralStyles.formErrorView, {width: '90%'}]} key={error}>
+                  <Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>{error}</Text>
                 </View>
-              </View>
             ))
           }
 
         renderNewPasswordOptions = () => {
             return(
                 <React.Fragment>
-                    <View style={styles.formRow}>
-                        <View style={styles.editChefInputBox} >
-                            <TextInput style={styles.editChefTextBox} value={this.props.password} placeholder="password"  autoCapitalize="none" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")}/>
+                    <View style={[centralStyles.formSection, {width: '90%'}]}>
+                        <View style={centralStyles.formInputContainer} >
+                            <TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.password} placeholder="password"  autoCapitalize="none" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")}/>
                         </View>
                     </View>
-                    <View style={styles.formRow}>
-                        <View style={styles.editChefInputBox} >
-                            <TextInput style={styles.editChefTextBox} value={this.props.password_confirmation} placeholder="confirm password"  autoCapitalize="none" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password_confirmation")}/>
+                    <View style={[centralStyles.formSection, {width: '90%'}]}>
+                        <View style={centralStyles.formInputContainer} >
+                            <TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.password_confirmation} placeholder="confirm password"  autoCapitalize="none" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password_confirmation")}/>
                         </View>
                     </View>
                 </React.Fragment>
             )
         }
 
+
+
         renderNewPasswordButton = () => {
             return(
-                <View style={styles.formRow}>
-                    <TouchableOpacity style={styles.clearFiltersButton} activeOpacity={0.7} title="clearFilters" onPress={this.handleChangePasswordButton}>
-                        <Icon style={styles.clearFiltersIcon} size={25} name='lock-open' />
-                        <Text style={styles.clearFiltersButtonText}>Update{"\n"}password</Text>
-                    </TouchableOpacity>
+                <View style={[centralStyles.formSection, {width: '90%'}]}>
+                    <View style={[centralStyles.formInputContainer, {justifyContent: 'center'}]}>
+                        <TouchableOpacity style={[centralStyles.yellowRectangleButton]} activeOpacity={0.7} title="clearFilters" onPress={this.handleChangePasswordButton}>
+                            <Icon style={centralStyles.greenButtonIcon} size={25} name='lock-open' />
+                            <Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>Update{"\n"}password</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             )
         }
@@ -157,20 +161,20 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                             }]}>
                         <View style={styles.contentsContainer}>
                             <View style={styles.titleContainer}>
-                                <Text style={styles.title}>Update your profile & password</Text>
+                                <Text maxFontSizeMultiplier={2} style={styles.title}>Update your profile & password</Text>
                             </View>
-                            <View style={styles.formRow}>
-                                <View style={styles.editChefInputBox}>
-                                    <TextInput style={styles.editChefTextBox} value={this.props.username} placeholder="username"  autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "username")}/>
+                            <View style={[centralStyles.formSection, {width: '90%'}]}>
+                                <View style={centralStyles.formInputContainer}>
+                                    <TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.username} placeholder="username"  autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "username")}/>
                                 </View>
                             </View>
-                            <View style={styles.formRow}>
-                                <View style={styles.editChefInputAreaBox} >
-                                    <TextInput style={styles.editChefTextBox} value={this.props.profile_text} placeholder="about me" multiline={true} numberOfLines={3} onChange={(e) => this.handleTextInput(e, "profile_text")}/>
+                            <View style={[centralStyles.formSection, {width: '90%'}]}>
+                                <View style={centralStyles.formInputContainer} >
+                                    <TextInput maxFontSizeMultiplier={2} style={[centralStyles.formInput, {}]} value={this.props.profile_text} placeholder="about me" multiline={true} numberOfLines={3} onChange={(e) => this.handleTextInput(e, "profile_text")}/>
                                 </View>
                             </View>
-                            <View style={styles.formRow}>
-                                <View picker style={styles.countryPicker} >
+                            <View style={[centralStyles.formSection, {width: '90%'}]}>
+                                <View picker style={styles.countryPicker}>
                                     <DualOSPicker
                                         onChoiceChange={this.onCountryChange}
                                         options={countries}
@@ -180,25 +184,29 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                             {this.state.updatingPassword ? this.renderNewPasswordOptions() : null}
                             {!this.state.updatingPassword ? this.renderNewPasswordButton() : null}
                             {this.renderPasswordError()}
-                            <View style={styles.formRow}>
-                                <TouchableOpacity style={styles.clearFiltersButton} activeOpacity={0.7} title="change_picture" onPress={this.props.choosePicture}>
-                                    <Icon style={styles.clearFiltersIcon} size={25} name='camera' />
-                                    <Text style={styles.clearFiltersButtonText}>Update{"\n"}picture</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.clearFiltersButton} activeOpacity={0.7} title="clearFilters" onPress={this.props.showDeleteChefOption}>
-                                    <Icon style={styles.clearFiltersIcon} size={25} name='account-remove' />
-                                    <Text style={styles.clearFiltersButtonText}>Delete {"\n"} account</Text>
-                                </TouchableOpacity>
+                            <View style={[centralStyles.formSection, {width: '90%'}]}>
+                                <View style={centralStyles.formInputContainer}>
+                                    <TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} title="change_picture" onPress={this.props.choosePicture}>
+                                        <Icon style={centralStyles.greenButtonIcon} size={25} name='camera' />
+                                        <Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>Update{"\n"}picture</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} title="clearFilters" onPress={this.props.showDeleteChefOption}>
+                                        <Icon style={centralStyles.greenButtonIcon} size={25} name='account-remove' />
+                                        <Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>Delete {"\n"} account</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>
-                            <View style={styles.formRow}>
-                                <TouchableOpacity style={styles.clearFiltersButton} activeOpacity={0.7} title="clearFilters" onPress={this.cancelUpdate}>
-                                    <Icon style={styles.clearFiltersIcon} size={25} name='cancel' />
-                                    <Text style={styles.clearFiltersButtonText}>Cancel</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.applyFiltersButton} activeOpacity={0.7} title="applyFilters" onPress={this.saveUpdatedChef}>
-                                    <Icon style={styles.applyFiltersIcon} size={25} name='check' />
-                                    <Text style={styles.applyFiltersButtonText}>Save</Text>
-                                </TouchableOpacity>
+                            <View style={[centralStyles.formSection, {width: '90%'}]}>
+                            <View style={centralStyles.formInputContainer}>
+                                    <TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} title="clearFilters" onPress={this.cancelUpdate}>
+                                        <Icon style={centralStyles.greenButtonIcon} size={25} name='cancel' />
+                                        <Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>Cancel</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={centralStyles.greenRectangleButton} activeOpacity={0.7} title="applyFilters" onPress={this.saveUpdatedChef}>
+                                        <Icon style={centralStyles.yellowButtonIcon} size={25} name='check' />
+                                        <Text maxFontSizeMultiplier={2} style={centralStyles.yellowButtonText}>Save</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>
                             <View style={styles.bottomSpacer}>
                             </View>

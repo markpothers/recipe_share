@@ -123,11 +123,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
               </View>
               {this.state.loginError &&(
                 <View style={centralStyles.formErrorView}>
-                  {this.state.error === 'invalid' && <Text style={centralStyles.formErrorText}>Username and password combination not recognized</Text>}
-                  {this.state.error === 'password_expired' && <Text style={centralStyles.formErrorText}>Automatically generated password has expired.  Please reset your password.</Text>}
-                  {this.state.error === 'activation' && <Text style={centralStyles.formErrorText}>Account not yet activated.  Please click the link in your confirmation e-mail. (Don't forget to check spam!)</Text>}
-                  {this.state.error === 'deactivated' && <Text style={centralStyles.formErrorText}>This account was deactivated.  Reset your password to reactivate your account.</Text>}
-                  {this.state.error === 'forgotPassword' && <Text style={centralStyles.formErrorText}>Thanks.  If this e-mail has an account we'll send you a new password.  Please check your e-mail</Text>}
+                  {this.state.error === 'invalid' && <Text maxFontSizeMultiplier={3} style={centralStyles.formErrorText}>Username and password combination not recognized</Text>}
+                  {this.state.error === 'password_expired' && <Text maxFontSizeMultiplier={3} style={centralStyles.formErrorText}>Automatically generated password has expired.  Please reset your password.</Text>}
+                  {this.state.error === 'activation' && <Text maxFontSizeMultiplier={3} style={centralStyles.formErrorText}>Account not yet activated.  Please click the link in your confirmation e-mail. (Don't forget to check spam!)</Text>}
+                  {this.state.error === 'deactivated' && <Text maxFontSizeMultiplier={3} style={centralStyles.formErrorText}>This account was deactivated.  Reset your password to reactivate your account.</Text>}
+                  {this.state.error === 'forgotPassword' && <Text maxFontSizeMultiplier={3} style={centralStyles.formErrorText}>Thanks.  If this e-mail has an account we'll send you a new password.  Please check your e-mail</Text>}
                 </View>
               )}
             </View>
@@ -135,7 +135,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
               <View style={centralStyles.formInputContainer}>
                 <TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={() => this.props.navigation.navigate('CreateChef')}>
                   <Icon style={centralStyles.greenButtonIcon} size={25} name='account-plus'></Icon>
-                    <Text style={centralStyles.greenButtonText} maxFontSizeMultiplier={2}>Register</Text>
+                  <Text style={centralStyles.greenButtonText} maxFontSizeMultiplier={2}>Register</Text>
                 </TouchableOpacity>
                 <TouchableOpacity activeOpacity={1} style={centralStyles.yellowRectangleButton} onPress={() => this.props.stayLoggedIn(!this.props.stayingLoggedIn)}>
                   <Text style={centralStyles.greenButtonText} maxFontSizeMultiplier={2}>Stay{"\n"}logged in</Text>

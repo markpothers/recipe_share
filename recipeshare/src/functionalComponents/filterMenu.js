@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, Text, View, TouchableOpacity, Switch, Dimensions, Picker, Platform } from 'react-native'
+import { Modal, Text, View, TouchableOpacity, Switch, Dimensions, Picker, Platform, ScrollView } from 'react-native'
 import { styles } from './filterMenuStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux'
@@ -104,21 +104,21 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 transparent={true}
                 visible={true}
                 >
-                    <View style={[styles.modalFullScreenContainer, {height: Dimensions.get('window').height,
-                            width: Dimensions.get('window').width,
-                            }]}>
+                    <View style={[styles.modalFullScreenContainer]}>
                         <View style={styles.contentsContainer}>
                             <View style={styles.titleContainer}>
-                                <Text style={styles.title}>{this.props.title}</Text>
+                                <Text maxFontSizeMultiplier={2} style={styles.title}>{this.props.title}</Text>
                             </View>
-                            <View style={styles.columnsContainer}>
-                                <View style={styles.column}>
-                                    {this.renderLeftColumnCategories()}
+                            <ScrollView style={styles.categoriesScrollView}>
+                                <View style={styles.columnsContainer}>
+                                    <View style={styles.column}>
+                                        {this.renderLeftColumnCategories()}
+                                    </View>
+                                    <View style={styles.column}>
+                                        {this.renderRightColumnCategories()}
+                                    </View>
                                 </View>
-                                <View style={styles.column}>
-                                    {this.renderRightColumnCategories()}
-                                </View>
-                            </View>
+                            </ScrollView>
                             <View style={styles.bottomContainer}>
                                 <View style={styles.bottomTopContainer}>
                                     <Text maxFontSizeMultiplier={2} style={styles.title}>Cuisine:</Text>

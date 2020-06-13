@@ -198,15 +198,44 @@ export const centralStyles = StyleSheet.create({
     // flexGrow: 1
     flexWrap: 'wrap',
   },
+  greenRectangleButton: {
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    minWidth: responsiveWidth(38),
+    maxWidth: '50%',
+    minHeight: responsiveHeight(6),
+    height: '100%',
+    flexDirection:'row',
+    borderRadius: 5,
+    backgroundColor: '#104e01',
+    // borderWidth: 1,
+    borderColor: '#fff59b',
+    // flexGrow: 1
+    flexWrap: 'wrap',
+  },
   greenButtonIcon: {
     color: '#104e01',
+    // borderWidth: 1
+  },
+  yellowButtonIcon: {
+    color: '#fff59b',
     // borderWidth: 1
   },
   greenButtonText: {
     textAlign: 'center',
     fontWeight: 'bold',
-    fontSize: 14,
+    // fontSize: 14,
     color: '#104e01',
+    fontSize: responsiveFontSize(1.8),
+    // borderWidth: 1,
+    // marginLeft: responsiveWidth(3)
+    paddingHorizontal: responsiveWidth(1)
+  },
+  yellowButtonText: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    // fontSize: 14,
+    color: '#fff59b',
     fontSize: responsiveFontSize(1.8),
     // borderWidth: 1,
     // marginLeft: responsiveWidth(3)

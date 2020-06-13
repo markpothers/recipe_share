@@ -1,10 +1,13 @@
 import React from 'react'
 import { StyleSheet } from 'react-native';
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 
 export const styles = StyleSheet.create({
   modalFullScreenContainer:{
     justifyContent: 'center',
     alignItems: 'center',
+    height: responsiveHeight(100),
+    width: responsiveWidth(100)
   },
   contentsContainer:{
     borderStyle: 'solid',
@@ -13,19 +16,26 @@ export const styles = StyleSheet.create({
     backgroundColor: '#fff59b',
     width: '95%',
     borderRadius: 5,
-    alignItems: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'space-between',
+    maxHeight: '95%',
+    overflow: 'hidden'
   },
   titleContainer: {
     justifyContent: 'center',
-    marginTop: '2%',
-    height: 27 ,
+    paddingTop: responsiveHeight(1),
+    paddingBottom: responsiveHeight(1),
+    // height: 27 ,
     alignItems: 'center',
     width: '100%',
+    // borderWidth: 1,
+    borderRadius: 5,
   },
   title: {
     color: '#104e01',
-    fontSize: 16,
-    fontWeight: 'bold'
+    fontSize: responsiveFontSize(2.2),
+    fontWeight: 'bold',
+    textAlign: 'center'
   },
   filterButton: {
     position: 'absolute',
@@ -45,43 +55,65 @@ export const styles = StyleSheet.create({
   filterIcon:{
     color: '#fff59b',
   },
+  categoriesScrollView:{
+    // height: responsiveHeight(75),
+    width: '100%',
+  },
   columnsContainer: {
     flexDirection: 'row',
-  }, 
+    flex: 1,
+    // height: responsiveHeight(25),
+    // maxHeight: '25%',
+    // borderWidth: 1,
+    borderColor: 'red',
+  },
   column: {
     flex: 1,
-    marginLeft: '2%'
+    marginLeft: responsiveWidth(2),
+    // borderWidth: 1,
   },
   columnRow: {
     flexDirection: 'row',
+    // borderWidth: 1,
   },
   switchContainer: {
-    width: '20%',
+    flex: 2,
+    // width: '20%',
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: '7%',
-    marginRight: '4%',
+    marginLeft: responsiveWidth(2),
+    marginRight: responsiveWidth(1),
   },
   categoryContainer: {
     marginLeft: '4%',
-    width: '80%',
+    // width: '80%',
+    flex: 8,
     justifyContent: 'center',
+    minHeight: 1,
+    flexWrap: 'wrap',
+    // borderWidth: 1
   },
   categoryText:{
-    color: '#104e01'
+    color: '#104e01',
+    flexWrap: 'wrap'
   },
   bottomContainer: {
     alignItems: 'center',
+    justifyContent: 'space-between',
+    // borderWidth: 1,
+    borderRadius: 5,
   },
   bottomTopContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: '5%',
-    marginTop: '2%',
+    // marginRight: '5%',
+    marginTop: responsiveHeight(1),
+    // borderWidth: 1,
+    width: '100%',
   },
   picker: {
-    height: 44,
+    height: responsiveHeight(6),
     marginLeft: '3%',
     backgroundColor: 'white',
     width: '57%',
@@ -93,9 +125,14 @@ export const styles = StyleSheet.create({
     // marginTop: '2%'
   },
   clearFiltersButtonContainer: {
-    height: 53,
+    // height: 53,
+    width: '100%',
+    justifyContent: 'space-between',
     flexDirection: 'row',
-    marginTop: '2%',
+    // marginTop: '2%',
+    paddingTop: responsiveHeight(1),
+    paddingBottom: responsiveHeight(1),
+    // borderWidth: 1
   },
   clearFiltersButton:{
     marginLeft: '5%',
@@ -103,7 +140,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '40%',
-    height: 44,
+    minHeight: responsiveHeight(6),
     flexDirection:'row',
     borderRadius: 5,
     backgroundColor: '#fff59b',
@@ -128,7 +165,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '40%',
-    height: 44,
+    minHeight: responsiveHeight(6),
     flexDirection:'row',
     borderRadius: 5,
     backgroundColor: '#104e01',

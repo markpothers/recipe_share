@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet } from 'react-native';
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 
 export const styles = StyleSheet.create({
   modalFullScreenContainer:{
@@ -21,21 +22,23 @@ export const styles = StyleSheet.create({
   },
   titleContainer: {
     justifyContent: 'center',
-    marginTop: '4%',
-    height: 27,
+    // marginTop: '4%',
+    paddingTop: responsiveHeight(1),
+    paddingBottom: responsiveHeight(1),
+    // height: 27,
   },
   title: {
     color: '#104e01',
-    fontSize: 16,
+    fontSize: responsiveFontSize(2.2),
     fontWeight: 'bold'
   },
   formRow: {
     marginTop: '3%',
     flexDirection:'row',
     // justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'flex-end',
     borderRadius: 5,
-    width: '100%',
+    width: '90%',
     // borderWidth: 1
   },
   editChefInputAreaBox: {
@@ -67,12 +70,12 @@ export const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   closeButton:{
-    marginLeft: '5%',
-    marginRight: '5%',
+    // marginLeft: '5%',
+    // marginRight: '5%',
     justifyContent: 'center',
     alignItems: 'center',
     minWidth: '40%',
-    height: 44,
+    minHeight: responsiveHeight(6),
     flexDirection:'row',
     borderRadius: 5,
     backgroundColor: '#104e01',

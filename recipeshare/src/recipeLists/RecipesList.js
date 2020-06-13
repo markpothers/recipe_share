@@ -285,7 +285,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
         <SpinachAppContainer awaitingServer={this.state.awaitingServer}>
           <NavigationEvents onWillFocus={this.respondToFocus} onWillBlur={this.respondToBlur}/>
             <TouchableOpacity style={styles.filterButton} activeOpacity={0.7} onPress={this.handleFilterButton}>
-              <Icon name='filter' size={24} style={styles.filterIcon}/>
+              <Icon name='filter' size={responsiveHeight(3.5)} style={styles.filterIcon}/>
             </TouchableOpacity>
           <FlatList
             data={this.props[this.props["listChoice"] + `_Recipes`]}

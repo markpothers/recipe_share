@@ -215,7 +215,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                   {/* </View> */}
                 </TouchableOpacity>
                 <TouchableOpacity activeOpacity={1} style={[centralStyles.yellowRectangleButton, {minWidth: responsiveWidth(30), maxWidth: responsiveWidth(30)}]} onPress={this.handleTandCSwitch}>
-                  <Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, {marginLeft: responsiveWidth(2), marginRight: responsiveWidth(1)}]}>I accept</Text>
+                  <Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText]}>I accept</Text>
                   <Switch style={[(Platform.OS === 'ios' ? {transform:[{scaleX:.7},{scaleY:.7}]}:null)]} value={this.state.tAndCAgreed} onChange={this.handleTandCSwitch}/>
                 </TouchableOpacity>
                 {this.state.viewingTermsAndConditions && (
@@ -236,7 +236,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                   {/* </View> */}
                 </TouchableOpacity>
                 <TouchableOpacity activeOpacity={1} style={[centralStyles.yellowRectangleButton, {minWidth: responsiveWidth(30), maxWidth: responsiveWidth(30)}]} onPress={this.handlePrivacyPolicySwitch}>
-                  <Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, {marginLeft: responsiveWidth(2), marginRight: responsiveWidth(1)}]}>I accept</Text>
+                  <Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText]}>I accept</Text>
                   <Switch style={[(Platform.OS === 'ios' ? {transform:[{scaleX:.7},{scaleY:.7}]}:null)]} value={this.state.privacyPolicyAgreed} onChange={this.handlePrivacyPolicySwitch}/>
                 </TouchableOpacity>
                 {this.state.viewingPrivacyPolicy && (

@@ -53,25 +53,25 @@ export default class PicSourceChooser extends React.PureComponent{
                             {this.props.imageSource === 'data:image/jpeg;base64,' && (
                                 <React.Fragment>
                                     <Icon style={styles.standardIcon} size={30} name='camera' />
-                                    <Text style={styles.picSourceChooserButtonText}>No photo{"\n"}chosen</Text>
+                                    <Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>No photo{"\n"}chosen</Text>
                                 </React.Fragment>
                             )}
                         </View>
                         <TouchableOpacity style={styles.picSourceChooserButton} activeOpacity={0.7} title="Take Photo" onPress={this.openCamera}>
                             <Icon style={styles.standardIcon} size={30} name='camera' />
-                            <Text style={styles.picSourceChooserButtonText}>Take photo</Text>
+                            <Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Take photo</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.picSourceChooserButton} activeOpacity={0.7} title="Choose Photo" onPress={this.pickImage}>
                             <Icon style={styles.standardIcon} size={30} name='camera-burst' />
-                            <Text style={styles.picSourceChooserButtonText}>Choose photo</Text>
+                            <Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Choose photo</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.picSourceChooserButton} activeOpacity={0.7} title="Delete photo" onPress={this.deleteImage}>
                             <Icon style={styles.standardIcon} size={30} name='camera-burst' />
-                            <Text style={styles.picSourceChooserButtonText}>Delete photo</Text>
+                            <Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Delete photo</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.picSourceChooserCancelButton} activeOpacity={0.7} title="Take Photo" onPress={this.props.sourceChosen}>
                             <Icon style={styles.cancelIcon} size={30} name='check-box-outline' />
-                            <Text style={styles.picSourceChooserCancelButtonText}>Close</Text>
+                            <Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserCancelButtonText}>Close</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

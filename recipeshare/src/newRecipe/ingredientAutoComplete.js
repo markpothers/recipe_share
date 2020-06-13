@@ -67,7 +67,7 @@ export default class IngredientAutoComplete extends React.Component {
           ]}
         >
           <View style={[styles.ingredientSortContainer]}>
-            <Icon name='menu' size={24} style={styles.ingredientTrashCan}/>
+            <Icon name='menu' size={responsiveHeight(3.5)} style={styles.ingredientTrashCan}/>
           </View>
           <TouchableOpacity //this Touchable records touches around the list view to close it out in an intuitive way
             style={[
@@ -141,7 +141,7 @@ export default class IngredientAutoComplete extends React.Component {
               onPress={() => this.props.removeIngredient(index)}
               activeOpacity={0.7}
             >
-              <Icon name='trash-can-outline' size={24} style={styles.ingredientTrashCan}/>
+              <Icon name='trash-can-outline' size={responsiveHeight(3.5)} style={styles.ingredientTrashCan}/>
             </TouchableOpacity>
           </TouchableOpacity>
         </View>

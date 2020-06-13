@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet } from 'react-native';
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions'
 
 export const styles = StyleSheet.create({
   mainPageContainer:{
@@ -21,58 +22,63 @@ export const styles = StyleSheet.create({
     },
     chefCard: {
       // height: 319,
-      marginTop: 2,
-      marginBottom: 2,
-      width: '100%',
-      borderStyle: 'solid',
+      marginTop: responsiveHeight(0.5),
+      marginBottom: responsiveHeight(0.5),
+      // width: '100%',
+      // borderStyle: 'solid',
       borderRadius: 5,
       borderWidth: 1,
       borderColor: '#104e01',
-      backgroundColor: 'white'
+      backgroundColor: 'white',
+      overflow: 'hidden'
     },
-    chefCardTopPostedByContainer: {
-      // borderBottomStyle: 'solid 0.5',
-      borderBottomWidth: 0.5,
-      height: 25,
-      width: '96.4%',
-      marginLeft: '1.6%',
-      marginRight: '2%',
-      paddingBottom: '1%',
-      paddingTop: '1%',
-      flexDirection: 'row'
-    },
+    // chefCardTopPostedByContainer: {
+    //   // borderBottomStyle: 'solid 0.5',
+    //   borderBottomWidth: 0.5,
+    //   height: 25,
+    //   width: '96.4%',
+    //   marginLeft: '1.6%',
+    //   marginRight: '2%',
+    //   paddingBottom: '1%',
+    //   paddingTop: '1%',
+    //   flexDirection: 'row'
+    // },
     chefCardTopContainer: {
       flexDirection: 'row',
+      alignItems: 'center'
       // borderStyle: 'solid',
-      // borderWidth: 2,
-      height: 100,
-      width: '100%',
-      marginTop: '1%',
-      marginBottom: '1%'
+      // borderWidth: 1,
+      // height: 100,
+      // width: '100%',
+      // marginTop: '1%',
+      // marginBottom: '1%'
     },
     chefCardTopLeftContainer: {
-      flex: 7,
+      // flex: 7,
       // borderStyle: 'solid',
-      // borderWidth: 2,
+      width: responsiveWidth(74),
+      // borderWidth: 1,
     },
     chefCardTopRightContainer: {
-      flex: 4,
+      // flex: 4,
+      width: responsiveWidth(25),
+      height: responsiveWidth(25),
       // borderStyle: 'solid',
-      // borderWidth: 2,
+      // borderWidth: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      overflow: 'hidden',
+      // overflow: 'hidden',
     },
     avatarThumbnail: {
       // position: 'absolute',
-      height: '96%',
-      width: '96%',
-      marginRight: '4%',
+      height: '100%',
+      width: '100%',
+      // marginRight: '4%',
       borderRadius: 5,
     },
     chefCardTopLeftUpperContainer:{
       // borderStyle: 'solid',
-      // borderWidth: 2,
+      // borderWidth: 1,
       width: '96%',
       // marginTop: '1%',
       // marginBottom: '1%',
@@ -81,7 +87,7 @@ export const styles = StyleSheet.create({
     },
     chefCardTopLeftMiddleContainer:{
       // borderStyle: 'solid',
-      // borderWidth: 2,
+      // borderWidth: 1,
       width: '96%',
       // marginTop: '1%',
       // marginBottom: '1%',
@@ -92,7 +98,7 @@ export const styles = StyleSheet.create({
     chefCardTopLeftLowerContainer:{
       // flexDirection: 'row',
       // borderStyle: 'solid',
-      // borderWidth: 2,
+      // borderWidth: 1,
       width: '96%',
       // justifyContent: 'center',
       // alignItems: 'center',
@@ -103,12 +109,12 @@ export const styles = StyleSheet.create({
     },
     chefCardImageContainer: {
       // borderStyle: 'solid',
-      // borderWidth: 2,
-      height: 250,
+      // borderWidth: 1,
+      height: '100%',
       width: '100%'
     },
     thumbnail: {
-      position: 'absolute',
+      // position: 'absolute',
       height: '100%',
       width: '100%',
       borderRadius: 5
@@ -117,9 +123,9 @@ export const styles = StyleSheet.create({
       flexDirection: 'row',
       marginTop: '1%',
       marginBottom: '1%',
-      height: 25,
+      // height: 25,
       // borderStyle: 'solid',
-      // borderWidth: 2,
+      // borderWidth: 1,
     },
     chefCardBottomSubContainers: {
       flexDirection: 'row',

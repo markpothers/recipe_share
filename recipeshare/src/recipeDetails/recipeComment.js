@@ -10,7 +10,7 @@ export default class RecipeComment extends React.PureComponent {
     if (this.props.loggedInChefID == this.props.chef_id || this.props.loggedInChefID === this.props.is_admin) {
       return (
         <TouchableOpacity style={styles.commentTrashCanButton} onPress={() => this.props.deleteComment(this.props.id)}>
-          <Icon name='trash-can-outline' size={24} style={[styles.icon, styles.commentTrashCan]}/>
+          <Icon name='trash-can-outline' size={responsiveHeight(3.5)} style={[styles.icon, styles.commentTrashCan]}/>
         </TouchableOpacity>
       )
     }

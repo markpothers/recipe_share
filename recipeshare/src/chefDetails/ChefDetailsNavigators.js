@@ -41,6 +41,7 @@ export const MyRecipeBookTabs = createMaterialTopTabNavigator({
   lazy: true,
   tabBarOptions:{
     upperCaseLabel: false,
+    allowFontScaling: false,
     scrollEnabled: true,
     labelStyle: {
       fontSize: 14,

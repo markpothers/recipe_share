@@ -16,7 +16,6 @@ import { destroyChef } from '../fetches/destroyChef'
 import { NavigationEvents, withNavigation } from 'react-navigation'
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 
-
 const mapStateToProps = (state) => ({
   loggedInChef: state.loggedInChef,
   chefs_details: state.chefs_details,
@@ -185,19 +184,19 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       return (
         <React.Fragment>
             <TouchableOpacity style={styles.dbManualBackupButton} activeOpacity={0.7} onPress={this.manualBackupDatabase}>
-                <Icon name='database-plus' size={24} style={styles.filterIcon}/>
+                <Icon name='database-plus' size={responsiveHeight(3.5)} style={styles.filterIcon}/>
               </TouchableOpacity>
               <TouchableOpacity style={styles.dbAutoBackupButton} activeOpacity={0.7} onPress={this.autoBackupDatabase}>
-                <Icon name='database-refresh' size={24} style={styles.filterIcon}/>
+                <Icon name='database-refresh' size={responsiveHeight(3.5)} style={styles.filterIcon}/>
               </TouchableOpacity>
               {/* <TouchableOpacity style={styles.dbAutoBackupStopButton} activeOpacity={0.7} onPress={this.autoBackupDatabaseStop}>
-                <Icon name='database-remove' size={24} style={styles.filterIcon}/>
+                <Icon name='database-remove' size={responsiveHeight(3.5)} style={styles.filterIcon}/>
               </TouchableOpacity> */}
               <TouchableOpacity style={styles.dbPrimaryRestoreButton} activeOpacity={0.7} onPress={this.restorePrimaryDatabase}>
-                <Icon name='database-export' size={24} style={styles.filterIcon}/>
+                <Icon name='database-export' size={responsiveHeight(3.5)} style={styles.filterIcon}/>
               </TouchableOpacity>
               <TouchableOpacity style={styles.dbSecondaryRestoreButton} activeOpacity={0.7} onPress={this.restoreSecondaryDatabase}>
-                <Icon name='database-import' size={24} style={styles.filterIcon}/>
+                <Icon name='database-import' size={responsiveHeight(3.5)} style={styles.filterIcon}/>
               </TouchableOpacity>
         </React.Fragment>
 
@@ -209,7 +208,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       if(this.props.chefs_details[`chef${this.props.loggedInChef.id}`] !== undefined){
         const chef_details = this.props.chefs_details[`chef${this.props.loggedInChef.id}`]
         return (
-          <SpinachAppContainer awaitingServer={this.state.awaitingServer}>
+          <SpinachAppContainer awaitingServer={this.state.awaitingServer} scrollingEnabled={true}>
             {this.state.editingChef ? this.renderChefEditor() : null}
             <NavigationEvents onWillFocus={this.respondToFocus} onWillBlur={this.respondToBlur}/>
               {this.props.loggedInChef.is_admin ? this.renderDatabaseButtons() : null}

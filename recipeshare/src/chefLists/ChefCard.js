@@ -10,44 +10,42 @@ export default class ChefCard extends React.PureComponent {
     // console.log(this.props)
         return (
             <View style={styles.chefCard}>
-                <View style={styles.chefCardTopContainer}>
+                <TouchableOpacity style={styles.chefCardTopContainer} onPress={() => this.props.navigateToChefDetails(this.props.id)}>
                     <View style={styles.chefCardTopLeftContainer}>
                         <View style={styles.chefCardTopLeftUpperContainer}>
-                            <TouchableOpacity activeOpacity={0.7} onPress={() => this.props.navigateToChefDetails(this.props.id)}>
-                                <Text style={styles.chefCardHighlighted}>{this.props.username}</Text>
-                            </TouchableOpacity>
+                            <View activeOpacity={0.7}>
+                                <Text maxFontSizeMultiplier={2} style={styles.chefCardHighlighted}>{this.props.username}</Text>
+                            </View>
                         </View>
                         <View style={styles.chefCardTopLeftMiddleContainer}>
                             <View>
-                                <Text style={styles.chefCardTopItalic}>{this.props.country}</Text>
+                                <Text maxFontSizeMultiplier={2.5} style={styles.chefCardTopItalic}>{this.props.country}</Text>
                             </View>
                         </View>
                         <ScrollView nestedScrollEnabled={true} style={styles.chefCardTopLeftLowerContainer}>
-                            <Text style={styles.chefCardTopOther} >{this.props.profile_text}</Text>
+                            <Text maxFontSizeMultiplier={2.5} style={styles.chefCardTopOther} >{this.props.profile_text}</Text>
                         </ScrollView>
                     </View>
-                    <TouchableOpacity style={styles.chefCardTopRightContainer} onPress={() => this.props.navigateToChefDetails(this.props.id)}>
+                    <View style={styles.chefCardTopRightContainer}>
                         <AvatarImage chefimage_url={this.props.image_url}/>
-                    </TouchableOpacity>
-                </View>
+                    </View>
+                </TouchableOpacity>
                 <View style={styles.chefCardBottomContainer}>
                     <TouchableOpacity style={styles.chefCardBottomSubContainers}  onPress={(parseInt(this.props.user_chef_following) > 0 ? (e => this.props.unFollowChef(this.props.id)) : (e => this.props.followChef(this.props.id)))}>
-                        {/* <Icon name='account-multiple-plus' size={24} style={styles.icon}/> */}
-                        {parseInt(this.props.user_chef_following) > 0 ? <Icon name='account-multiple-minus' size={24} style={styles.icon}/> : <Icon name='account-multiple-plus-outline' size={24} style={styles.icon}/> }
-                        <Text style={styles.chefCardBottomOther} >{this.props.followers === null ? 0 : this.props.followers}</Text>
+                        {parseInt(this.props.user_chef_following) > 0 ? <Icon name='account-multiple-minus' size={responsiveHeight(3.5)} style={styles.icon}/> : <Icon name='account-multiple-plus-outline' size={responsiveHeight(3.5)} style={styles.icon}/> }
+                        <Text maxFontSizeMultiplier={2.5} style={styles.chefCardBottomOther} >{this.props.followers === null ? 0 : this.props.followers}</Text>
                     </TouchableOpacity>
                     <View style={styles.chefCardBottomSubContainers} >
-                        <Icon name='heart' size={24} style={styles.icon}/>
-                        <Text style={styles.chefCardBottomOther} >{this.props.recipe_likes_received === null ? 0 : this.props.recipe_likes_received}</Text>
+                        <Icon name='heart' size={responsiveHeight(3.5)} style={styles.icon}/>
+                        <Text maxFontSizeMultiplier={2.5} style={styles.chefCardBottomOther} >{this.props.recipe_likes_received === null ? 0 : this.props.recipe_likes_received}</Text>
                     </View>
                     {/* <View style={styles.chefCardBottomSubContainers} >
-                        <Icon name='food' size={24} style={styles.icon}/>
+                        <Icon name='food' size={responsiveHeight(3.5)} style={styles.icon}/>
                         <Text style={styles.chefCardBottomOther} >{this.props.recipe_makes_received === null ? 0 : this.props.recipe_makes_received}</Text>
                     </View> */}
                     <View style={styles.chefCardBottomSubContainers}>
-                        <Icon name='comment-outline' size={24} style={styles.icon}/>
-                        {/* {this.props.chef_commented === 0 ? <Icon name='comment-outline' size={24} style={styles.icon}/> : <Icon name='comment' size={24} style={styles.icon}/> } */}
-                        <Text style={styles.chefCardBottomOther} >{this.props.comments_received === null ? 0 : this.props.comments_received}</Text>
+                        <Icon name='comment' size={responsiveHeight(3.5)} style={styles.icon}/>
+                        <Text maxFontSizeMultiplier={2.5} style={styles.chefCardBottomOther} >{this.props.comments_received === null ? 0 : this.props.comments_received}</Text>
                     </View>
                 </View>
             </View>
@@ -59,13 +57,13 @@ function AvatarImage(chefimage_url) {
     const URL = chefimage_url.chefimage_url
     if (URL === null || URL === undefined) {
         return (
-            <Image style={styles.avatarThumbnail} source={require("../dataComponents/peas.jpg")} />
+            <Image style={styles.avatarThumbnail} source={require("../dataComponents/peas.jpg")} resizeMode={"contain"}/>
         )
     } else if (typeof URL === 'object'){
     return (
-        <Image style={styles.avatarThumbnail} source={URL.uri.startsWith("http") ? {uri: URL.uri} : {uri: `${databaseURL}${URL.uri}`}} />
+        <Image style={styles.avatarThumbnail} source={URL.uri.startsWith("http") ? {uri: URL.uri} : {uri: `${databaseURL}${URL.uri}`}} resizeMode={"contain"}/>
         )
     } else {
-        return <Image style={styles.avatarThumbnail} source={URL.startsWith("http") ? {uri: URL} : {uri: `${databaseURL}${URL}`}} />
+        return <Image style={styles.avatarThumbnail} source={URL.startsWith("http") ? {uri: URL} : {uri: `${databaseURL}${URL}`}} resizeMode={"contain"}/>
     }
 }

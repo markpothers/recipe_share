@@ -36,19 +36,19 @@ export default (connect(mapStateToProps, mapDispatchToProps)(
           <View style={styles.horizontalRule}></View>
           <View style={styles.routesContainer}>
             <TouchableOpacity style={styles.routeLink} onPress={e => this.props.navigation.navigate('BrowseRecipes')}>
-              <Icon name='food' size={24} style={styles.icon}/>
+              <Icon name='food' size={responsiveHeight(3.5)} style={styles.icon}/>
               <View style={styles.routeNameContainer}>
                 <Text style={styles.routeName} maxFontSizeMultiplier={2}>All recipes {"&"} chefs</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.routeLink} onPress={e => this.props.navigation.navigate('MyRecipeBook')}>
-              <Icon name='book-open-page-variant' size={24} style={styles.icon}/>
+              <Icon name='book-open-page-variant' size={responsiveHeight(3.5)} style={styles.icon}/>
               <View style={styles.routeNameContainer}>
                 <Text style={styles.routeName} maxFontSizeMultiplier={2}>My recipe book</Text>
                 </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.routeLink} onPress={e => this.props.navigation.navigate('Profile')}>
-              <Icon name='account' size={24} style={styles.icon}/>
+              <Icon name='account' size={responsiveHeight(3.5)} style={styles.icon}/>
               <View style={styles.routeNameContainer}>
                 <Text style={styles.routeName} maxFontSizeMultiplier={2}>My profile</Text>
               </View>
@@ -69,7 +69,7 @@ export default (connect(mapStateToProps, mapDispatchToProps)(
           <View style={styles.horizontalRule}></View>
           <View style={styles.logoutContainer}>
             <TouchableOpacity style={[styles.routeLink, {height: responsiveHeight(8)}]} onPress={this.logout}>
-              <Icon name='logout' size={24} style={styles.icon}/>
+              <Icon name='logout' size={responsiveHeight(3.5)} style={styles.icon}/>
               <Text style={styles.routeName} maxFontSizeMultiplier={2}>Logout</Text>
             </TouchableOpacity>
           </View>

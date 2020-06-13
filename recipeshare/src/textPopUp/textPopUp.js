@@ -18,19 +18,19 @@ export function TextPopUp(props) {
                     }]}>
                 <View style={styles.contentsContainer}>
                     <View style={styles.titleContainer}>
-                        <Text style={styles.title}>{props.title}</Text>
+                        <Text maxFontSizeMultiplier={1.5} style={styles.title}>{props.title}</Text>
                     </View>
                     <View style={[styles.editChefInputAreaBox, (Platform.OS === 'ios' ? {height: '87%'} : {height: '89%'})]} >
                         <ScrollView>
-                            <Text style={styles.tAndCText}>{props.text}</Text>
+                            <Text maxFontSizeMultiplier={2} style={styles.tAndCText}>{props.text}</Text>
                         </ScrollView>
                     </View>
                     <View style={styles.formRow}>
-                        <View style={styles.buttonPlaceholder}>
-                        </View>
+                        {/* <View style={styles.buttonPlaceholder}> */}
+                        {/* </View> */}
                         <TouchableOpacity style={styles.closeButton} activeOpacity={0.7} title="close" onPress={props.close}>
                             <Icon style={styles.closeIcon} size={25} name='check' />
-                            <Text style={styles.closeButtonText}>Close</Text>
+                            <Text maxFontSizeMultiplier={2} style={styles.closeButtonText}>Close</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
