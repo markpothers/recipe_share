@@ -3,6 +3,7 @@ import { Image, View, TouchableOpacity, Text, ScrollView } from 'react-native'
 import { styles } from './chefListStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { databaseURL } from '../dataComponents/databaseURL'
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions';
 
 export default class ChefCard extends React.PureComponent {
 

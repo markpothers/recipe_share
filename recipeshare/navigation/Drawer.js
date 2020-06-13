@@ -5,7 +5,7 @@ import { styles } from './drawerStyleSheet'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { databaseURL } from '../src/dataComponents/databaseURL'
-import { responsiveHeight } from 'react-native-responsive-dimensions';
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions';
 
 const mapStateToProps = (state) => ({
   loggedInChef: state.loggedInChef,

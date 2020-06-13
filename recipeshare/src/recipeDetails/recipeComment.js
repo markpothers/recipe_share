@@ -3,6 +3,7 @@ import { Image, View, Text, TouchableOpacity } from 'react-native';
 import { styles } from './recipeDetailsStyleSheet'
 import { databaseURL } from '../dataComponents/databaseURL'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions';
 
 export default class RecipeComment extends React.PureComponent {
 

@@ -14,7 +14,7 @@ export default MainDrawerNavigator = createDrawerNavigator({
   Profile: ProfileStack,
   },
   {
-    initialRouteName: "Profile",
+    initialRouteName: "MyRecipeBook",
     contentComponent: Drawer
   },
   {

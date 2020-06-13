@@ -15,6 +15,7 @@ import PicSourceChooser from '../functionalComponents/picSourceChooser'
 import { destroyChef } from '../fetches/destroyChef'
 import { NavigationEvents, withNavigation } from 'react-navigation'
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions';
 
 const mapStateToProps = (state) => ({
   loggedInChef: state.loggedInChef,

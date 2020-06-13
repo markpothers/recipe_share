@@ -19,7 +19,7 @@ import RecipeNewComment from './recipeNewComment';
 import AppHeader from '../../navigation/appHeader'
 import PicSourceChooser from '../functionalComponents/picSourceChooser'
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
-import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions';
 import { InstructionImagePopup } from './instructionImagePopup'
 
 const mapStateToProps = (state) => ({

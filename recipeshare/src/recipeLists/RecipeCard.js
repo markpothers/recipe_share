@@ -3,6 +3,7 @@ import { Image, View, TouchableOpacity, Text } from 'react-native'
 import { styles } from './recipeListStyleSheet'
 import { databaseURL } from '../dataComponents/databaseURL'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions';
 
 export default class RecipeCard extends React.PureComponent {
     navigateToSharer = (chefID) => {
