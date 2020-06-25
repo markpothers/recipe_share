@@ -1,12 +1,12 @@
 import React from 'react'
-import { AsyncStorage, View, ImageBackground, Image} from 'react-native'
+import { AsyncStorage, View, ImageBackground, Image, AppState} from 'react-native'
 import { connect } from 'react-redux'
 import { styles } from './usersStyleSheet'
 
 const mapStateToProps = (state) => ({
   e_mail: state.loginUserDetails.e_mail,
   password: state.loginUserDetails.password,
-  loggedInChef: state.loggedInChef
+  loggedInChef: state.loggedInChef,
 })
 
 const mapDispatchToProps = {
@@ -37,8 +37,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       })
     }
 
+    componentWillUnmount = () => {
+    }
+
     render() {
-      // console.log(this.props)
       return (
         <View style={styles.mainPageContainer}>
           <ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>

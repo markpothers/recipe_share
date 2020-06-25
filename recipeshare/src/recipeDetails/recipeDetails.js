@@ -21,6 +21,7 @@ import PicSourceChooser from '../functionalComponents/picSourceChooser'
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions';
 import { InstructionImagePopup } from './instructionImagePopup'
+import saveRecipeDetailsLocally from '../functionalComponents/saveRecipeDetailsLocally'
 
 const mapStateToProps = (state) => ({
   recipe_details: state.recipe_details,
@@ -99,10 +100,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     componentDidMount = async() => {
       await this.setState({awaitingServer: true})
       this.props.storeRecipeDetails(null)
-      const recipe_details = await getRecipeDetails(this.props.navigation.getParam('recipeID'), this.props.loggedInChef.auth_token)
-      if (recipe_details) {
-        // console.log(recipe_details)
-        this.props.storeRecipeDetails(recipe_details)
+      const recipeDetails = await getRecipeDetails(this.props.navigation.getParam('recipeID'), this.props.loggedInChef.auth_token)
+      if (recipeDetails) {
+        // console.log(recipeDetails)
+        saveRecipeDetailsLocally(recipeDetails, this.props.loggedInChef.id)
+        this.props.storeRecipeDetails(recipeDetails)
       }
       if (this.props.navigation.getParam('commenting') === true ){
         await this.setState({commenting: true})
@@ -343,9 +345,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       })
     }
 
-    saveImage = async(image) => {
-      console.log(image)
-      this.setState({makePic: image})
+    // saveImage = async(image) => {
+      // console.log(image)
+      // this.setState({makePic: image})
       // await this.setState({awaitingServer: true})
       // if (image.cancelled === false){
       //   const makePic = await postMakePic(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token, image)
@@ -355,7 +357,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       //   }
       // }
       // await this.setState({awaitingServer: false})
-    }
+    // }
 
     renderPictureChooser = () => {
       let imageSource = `data:image/jpeg;base64,${this.state.makePic.base64}`
@@ -490,7 +492,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
-      if (this.props.recipe_details != (undefined && null)){
+      if (this.props.recipe_details != undefined && this.props.recipe_details != null){
         // console.log(this.state.commentsTopY)
         // console.log(this.props.recipe_details.recipe.acknowledgement === "")
         return (

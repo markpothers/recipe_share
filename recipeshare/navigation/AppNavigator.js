@@ -6,7 +6,7 @@ import AppLoading from '../src/users/appLoading'
 
 //basically shows the loading screen which refers to Home or login.  Can move back and forth between login and new user.
 //New user logs straight in as we
-import MainDrawerNavigator from './MainDrawerNavigator'
+import MainDrawerNavigatorContainer from './MainDrawerNavigatorContainer'
 const LoginStack = createStackNavigator({Login: LoginScreen})
 const CreateChefStack = createStackNavigator({CreateChef: CreateChef})
 const AppLoadingStack = createStackNavigator({AppLoading: AppLoading})
@@ -14,7 +14,7 @@ const AppLoadingStack = createStackNavigator({AppLoading: AppLoading})
 export default createAppContainer(createSwitchNavigator(
   {
     Login: LoginStack,
-    Home: MainDrawerNavigator,
+    Home: MainDrawerNavigatorContainer,
     CreateChef: CreateChefStack,
     AppLoading: AppLoadingStack
   },

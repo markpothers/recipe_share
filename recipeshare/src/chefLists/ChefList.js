@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, ActivityIndicator, Platform, View } from 'react-native'
+import { FlatList, ActivityIndicator, Platform, View, AsyncStorage } from 'react-native'
 import ChefCard from './ChefCard'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { connect } from 'react-redux'
@@ -73,7 +73,19 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
         let chefs = await getChefList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.loggedInChef.auth_token)
         this.props.storeChefList(this.props["listChoice"], chefs)
       }
-      catch(e){}
+      catch(e){
+        if (this.props[this.props["listChoice"]].length == 0){
+          console.log('failed to get chefs. Loading from async storage.')
+          AsyncStorage.getItem('locallysavedListData', (err, res) => {
+            if (res != null) {
+              const locallysavedListData = JSON.parse(res)
+              this.props.storeChefList(this.props["listChoice"], locallysavedListData[this.props["listChoice"]])
+            } else {
+
+            }
+          })
+        }
+      }
 
     }
 

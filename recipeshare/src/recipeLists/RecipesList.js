@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, ActivityIndicator, TouchableOpacity, View, Platform } from 'react-native'
+import { FlatList, ActivityIndicator, TouchableOpacity, View, Platform, AsyncStorage } from 'react-native'
 import RecipeCard from './RecipeCard'
 import { connect } from 'react-redux'
 import { getRecipeList } from '../fetches/getRecipeList'
@@ -105,8 +105,19 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
         let recipes = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.cuisine, this.props.serves)
         this.props.storeRecipeList(this.props["listChoice"], recipes)
       }
-      catch (e){}
+      catch (e){
+        if (this.props[this.props["listChoice"] + `_Recipes`].length == 0){
+          console.log('failed to get recipes. Loading from async storage.')
+          AsyncStorage.getItem('locallysavedListData', (err, res) => {
+            if (res != null) {
+              const locallysavedListData = JSON.parse(res)
+              this.props.storeRecipeList(this.props["listChoice"], locallysavedListData[this.props["listChoice"] + `_Recipes`])
+            } else {
 
+            }
+          })
+        }
+      }
     }
 
     fetchAdditionalRecipesThenDetailsForList = async() => {
@@ -116,7 +127,9 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
         const new_recipes = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.cuisine, this.props.serves)
         this.props.appendToRecipeList(this.props["listChoice"], new_recipes)
       }
-      catch (e){}
+      catch (e){
+        console.log('failed to get ADDITIONAL recipes')
+      }
       await this.setState({awaitingServer: false})
     }
 
@@ -281,7 +294,7 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
 
     render() {
 
-      // console.log(this.props.addLikeCount)
+      // console.log(this.props[this.props["listChoice"] + `_Recipes`].length)
       return (
         <SpinachAppContainer awaitingServer={this.state.awaitingServer}>
           <NavigationEvents onWillFocus={this.respondToFocus} onWillBlur={this.respondToBlur}/>
