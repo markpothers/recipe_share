@@ -13,9 +13,11 @@ import { getDatabaseRestore } from '../fetches/getDatabaseRestore'
 import DeleteChefOption from './deleteChefOption'
 import PicSourceChooser from '../functionalComponents/picSourceChooser'
 import { destroyChef } from '../fetches/destroyChef'
-import { NavigationEvents, withNavigation } from 'react-navigation'
+// import { NavigationEvents, withNavigation } from 'react-navigation'
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions';
+import OfflineMessage from '../offlineMessage/offlineMessage'
+import NetInfo from '@react-native-community/netinfo';
 
 const mapStateToProps = (state) => ({
   loggedInChef: state.loggedInChef,
@@ -43,31 +45,34 @@ const mapDispatchToProps = {
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   class Profile extends React.Component {
-    static navigationOptions = ({ navigation }) => {
-      return {
-        headerTitle: <AppHeader text={"Profile"}/>,
-        headerLeft: null,
-      }
-    };
+    // static navigationOptions = ({ navigation }) => {
+    //   return {
+    //     headerTitle: <AppHeader text={"Profile"}/>,
+    //     headerLeft: null,
+    //   }
+    // };
 
     state = {
       awaitingServer: false,
       editingChef: false,
       choosingPicture: false,
-      deleteChefOptionVisible: false
+      deleteChefOptionVisible: false,
+      renderOfflineMessage: false,
     }
 
     componentDidMount = () => {
       this.fetchChefDetails()
+      this.props.navigation.addListener('focus', () => {
+        this.respondToFocus()
+      })
     }
 
-    respondToFocus= () => {
-      // console.log("did focus")
-      this.fetchChefDetails()
+    componentWillUnmount = () => {
+      this.props.navigation.removeListener('focus')
     }
 
-    respondToBlur= () => {
-      // console.log("did Blur")
+    respondToFocus= async() => {
+      await this.fetchChefDetails()
     }
 
     fetchChefDetails = async() => {
@@ -129,7 +134,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(
   }
 
     renderPictureChooser = () => {
-        return <PicSourceChooser saveImage={this.saveImage} sourceChosen={this.sourceChosen} key={"pic-chooser"}/>
+      let imageSource
+      if (this.props.imageBase64 != '') {
+        console.log('test 1')
+        imageSource = `data:image/jpeg;base64,${this.props.imageBase64}`
+      } else if (typeof this.props.chefs_details[`chef${this.props.loggedInChef.id}`].chef == 'object' && this.props.chefs_details[`chef${this.props.loggedInChef.id}`].chef.image_url.length > 0) {
+        console.log('test 2')
+        imageSource = this.props.chefs_details[`chef${this.props.loggedInChef.id}`].chef.image_url
+      } else {
+        console.log('test3')
+        imageSource = 'data:image/jpeg;base64,'
+      }
+      return <PicSourceChooser saveImage={this.saveImage} sourceChosen={this.sourceChosen} key={"pic-chooser"} imageSource={imageSource}/>
     }
 
     renderChefEditor = () => {
@@ -205,13 +221,19 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
-      // console.log(this.props.loggedInChef)
       if(this.props.chefs_details[`chef${this.props.loggedInChef.id}`] !== undefined){
         const chef_details = this.props.chefs_details[`chef${this.props.loggedInChef.id}`]
         return (
           <SpinachAppContainer awaitingServer={this.state.awaitingServer} scrollingEnabled={true}>
+            {this.state.renderOfflineMessage && (
+              <OfflineMessage
+                  message={`Sorry, can't do that right now.${"\n"}You appear to be offline.`}
+                  topOffset={'10%'}
+                  clearOfflineMessage={() => this.setState({renderOfflineMessage: false})}
+              />)
+            }
             {this.state.editingChef ? this.renderChefEditor() : null}
-            <NavigationEvents onWillFocus={this.respondToFocus} onWillBlur={this.respondToBlur}/>
+            {/* <NavigationEvents onWillFocus={this.respondToFocus} onWillBlur={this.respondToBlur}/> */}
               {this.props.loggedInChef.is_admin ? this.renderDatabaseButtons() : null}
               {this.state.choosingPicture ? this.renderPictureChooser() : null}
               {this.state.deleteChefOptionVisible ? this.renderDeleteChefOption() : null}

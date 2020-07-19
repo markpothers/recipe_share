@@ -162,5 +162,24 @@ export const styles = StyleSheet.create({
       fontWeight: 'bold',
       color: "#505050",
       textAlign: 'center'
+    },
+    cantGetChefMessageContainer: {
+      borderRadius: 5,
+      position: 'absolute',
+      alignSelf: 'center',
+      top: '25%',
+      zIndex: 2,
+      backgroundColor: '#104e01',
+      borderWidth: 1,
+      borderColor: '#fff59b',
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+    cantGetChefMessageText: {
+      color: '#fff59b',
+      paddingHorizontal: responsiveWidth(2),
+      paddingVertical: responsiveHeight(1),
+      textAlign: 'center',
+      fontSize: responsiveFontSize(2)
     }
   });

@@ -1,9 +1,12 @@
+import 'react-native-gesture-handler';
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Provider } from 'react-redux'
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 import { store } from './src/functionalComponents/store'
+import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 // This was requested by react Navigation although I can't see the difference in functionality
 // import { enableScreens } from 'react-native-screens';
 // enableScreens();
@@ -24,12 +27,16 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <Provider store={store}>
-          <View style={styles.container}>
-            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-            <AppNavigator />
-          </View>
-        </Provider>
+        <SafeAreaProvider>
+          <NavigationContainer>
+            <Provider store={store}>
+              <SafeAreaView style={styles.container}>
+                {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+                <AppNavigator />
+              </SafeAreaView>
+            </Provider>
+          </NavigationContainer>
+        </SafeAreaProvider>
       );
     }
   }

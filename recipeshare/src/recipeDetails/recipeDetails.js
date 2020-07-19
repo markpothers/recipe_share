@@ -22,6 +22,8 @@ import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions';
 import { InstructionImagePopup } from './instructionImagePopup'
 import saveRecipeDetailsLocally from '../functionalComponents/saveRecipeDetailsLocally'
+import OfflineMessage from '../offlineMessage/offlineMessage'
+import NetInfo from '@react-native-community/netinfo';
 
 const mapStateToProps = (state) => ({
   recipe_details: state.recipe_details,
@@ -70,22 +72,22 @@ const mapDispatchToProps = {
       dispatch({ type: 'REMOVE_RECIPE_LIKES', recipe_likes: remaining_likes, listType: listType})
     }
   },
-  storeRecipeDetails: (recipe_details) => {
-    return dispatch => {
-      dispatch({ type: 'STORE_RECIPE_DETAILS', recipe_details: recipe_details})
-    }
-  }
+  // storeRecipeDetails: (recipe_details) => {
+  //   return dispatch => {
+  //     dispatch({ type: 'STORE_RECIPE_DETAILS', recipe_details: recipe_details})
+  //   }
+  // }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   class RecipeDetails extends React.Component {
-    static navigationOptions = ({ navigation }) => {
-      return {
-        headerTitle: <AppHeader text={"Recipe Details"} />,
-        // headerRight: null
-        headerLeft: null,
-      };
-    }
+    // static navigationOptions = ({ navigation }) => {
+    //   return {
+    //     headerTitle: <AppHeader text={"Recipe Details"} />,
+    //     // headerRight: null
+    //     headerLeft: null,
+    //   };
+    // }
 
     state = {
       commenting: false,
@@ -94,23 +96,22 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       choosingPicSource: false,
       awaitingServer: false,
       scrollEnabled: true,
-      makePic: {},
+      makePicBase64: "",
+      renderOfflineMessage: false
     }
 
     componentDidMount = async() => {
       await this.setState({awaitingServer: true})
-      this.props.storeRecipeDetails(null)
-      const recipeDetails = await getRecipeDetails(this.props.navigation.getParam('recipeID'), this.props.loggedInChef.auth_token)
-      if (recipeDetails) {
-        // console.log(recipeDetails)
-        saveRecipeDetailsLocally(recipeDetails, this.props.loggedInChef.id)
-        this.props.storeRecipeDetails(recipeDetails)
-      }
-      if (this.props.navigation.getParam('commenting') === true ){
-        await this.setState({commenting: true})
-        setTimeout( () => {
-          this.myScroll.scrollTo({x: 0, y: this.state.commentsTopY-100, animated: true})
-        }, 300)
+      if (this.props.route.params.commenting === true ){
+        let netInfoState = await NetInfo.fetch()
+        if (netInfoState.isConnected) {
+          await this.setState({commenting: true})
+          setTimeout( () => {
+            this.myScroll.scrollTo({x: 0, y: this.state.commentsTopY-100, animated: true})
+          }, 300)
+        } else {
+          this.setState({renderOfflineMessage: true})
+        }
       }
       await this.setState({awaitingServer: false})
     }
@@ -120,16 +121,26 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     editRecipe = async() => {
-      await this.setState({awaitingServer: true})
-      this.props.navigation.navigate('NewRecipe', {recipe_details: this.props.recipe_details})
-      await this.setState({awaitingServer: false})
+      let netInfoState = await NetInfo.fetch()
+      if (netInfoState.isConnected) {
+        await this.setState({awaitingServer: true})
+        this.props.navigation.navigate('NewRecipe', {recipe_details: this.props.recipe_details})
+        await this.setState({awaitingServer: false})
+      } else {
+        this.setState({renderOfflineMessage: true})
+      }
     }
 
     deleteRecipe = async() => {
-      await this.setState({awaitingServer: true})
-      const deleted = await destroyRecipe(this.props.recipe_details.recipe.id, this.props.loggedInChef.auth_token)
-      if (deleted) {
-        this.props.navigation.goBack()
+      let netInfoState = await NetInfo.fetch()
+      if (netInfoState.isConnected) {
+        await this.setState({awaitingServer: true})
+        const deleted = await destroyRecipe(this.props.recipe_details.recipe.id, this.props.loggedInChef.auth_token)
+        if (deleted) {
+          this.props.navigation.goBack()
+        }
+      } else {
+        this.setState({renderOfflineMessage: true})
       }
     }
 
@@ -150,7 +161,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     renderRecipeImages = () => {
       if (this.props.recipe_details.recipe_images.length !== 0){
-          return <Image style={[{width: '100%', height: 250}, styles.detailsImage]} source={{uri: this.props.recipe_details.recipe_images[this.props.recipe_details.recipe_images.length-1].image_url}}></Image>
+        return <Image style={[{width: '100%', height: 250}, styles.detailsImage]} source={{uri: this.props.recipe_details.recipe_images[0].image_url}}></Image>
       }
     }
 
@@ -173,7 +184,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     renderMakePicScrollView = () => {
       return (
-        <ScrollView horizontal="true" style={styles.makePicScrollView} scrollEnabled={this.state.scrollEnabled}>
+        <ScrollView horizontal={true} style={styles.makePicScrollView} scrollEnabled={this.state.scrollEnabled}>
           {this.renderRecipeMakePics()}
         </ScrollView>
       )
@@ -291,90 +302,131 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     likeRecipe = async() => {
+      let netInfoState = await NetInfo.fetch()
+      if (netInfoState.isConnected) {
       await this.setState({awaitingServer: true})
-      const likePosted = await postRecipeLike(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
-      if (likePosted) {
-          this.props.addRecipeLike()
+        try {
+          const likePosted = await postRecipeLike(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
+          if (likePosted) {
+              this.props.addRecipeLike()
+          }
+        } catch {
+          await this.setState( state => ({renderOfflineMessage: true}))
+        }
+        await this.setState({awaitingServer: false})
+      } else {
+        this.setState({renderOfflineMessage: true})
       }
-      await this.setState({awaitingServer: false})
     }
 
     unlikeRecipe = async() => {
-      await this.setState({awaitingServer: true})
-      const unlikePosted = await destroyRecipeLike(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
-      if (unlikePosted) {
-        this.props.removeRecipeLike()
+      let netInfoState = await NetInfo.fetch()
+      if (netInfoState.isConnected) {
+        await this.setState({awaitingServer: true})
+        try{ 
+          const unlikePosted = await destroyRecipeLike(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
+          if (unlikePosted) {
+            this.props.removeRecipeLike()
+          }
+        } catch {
+          await this.setState( state => ({renderOfflineMessage: true}))
+        }
+        await this.setState({awaitingServer: false})
+      } else {
+        this.setState({renderOfflineMessage: true})
       }
-      await this.setState({awaitingServer: false})
     }
 
     makeRecipe = async() => {
-      await this.setState({awaitingServer: true})
-      const makePosted = await postRecipeMake(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
-      if (makePosted) {
-        this.props.addRecipeMake()
+      let netInfoState = await NetInfo.fetch()
+      if (netInfoState.isConnected) {
+        await this.setState({awaitingServer: true})
+        try {
+          const makePosted = await postRecipeMake(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
+          if (makePosted) {
+            this.props.addRecipeMake()
+          }
+        } catch {
+          await this.setState( state => ({renderOfflineMessage: true}))
+        }
+        await this.setState({awaitingServer: false})
+      } else {
+        this.setState({renderOfflineMessage: true})
       }
-      await this.setState({awaitingServer: false})
     }
 
     reShareRecipe = async() => {
-      await this.setState({awaitingServer: true})
-      const reSharePosted = await postReShare(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
-      if (reSharePosted) {
-          this.props.addReShare()
+      let netInfoState = await NetInfo.fetch()
+      if (netInfoState.isConnected) {
+        await this.setState({awaitingServer: true})
+        try {
+          const reSharePosted = await postReShare(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
+          if (reSharePosted) {
+              this.props.addReShare()
+          }
+        } catch {
+          await this.setState( state => ({renderOfflineMessage: true}))
+        }
+        await this.setState({awaitingServer: false})
+      } else {
+        this.setState({renderOfflineMessage: true})
       }
-      await this.setState({awaitingServer: false})
     }
 
-    newMakePic = () => {
-      this.setState({choosingPicSource: true})
+    newMakePic = async() => {
+      let netInfoState = await NetInfo.fetch()
+      if (netInfoState.isConnected) {
+        this.setState({choosingPicSource: true})
+      } else {
+        this.setState({renderOfflineMessage: true})
+      }
+    }
+
+    saveImage = (image) => {
+      this.setState({makePicBase64: image.base64})
     }
 
     sourceChosen = async() =>{
       await this.setState({
         awaitingServer: true,
         choosingPicSource: false})
-      if (this.state.makePic.base64) {
-        const makePic = await postMakePic(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.state.makePic)
+      if (this.state.makePicBase64) {
+        const makePic = await postMakePic(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.state.makePicBase64)
         if (makePic) {
           await this.props.addMakePic(makePic)
         }
       }
       await this.setState({
         awaitingServer: false,
+        makePicBase64: "",
       })
     }
 
-    // saveImage = async(image) => {
-      // console.log(image)
-      // this.setState({makePic: image})
-      // await this.setState({awaitingServer: true})
-      // if (image.cancelled === false){
-      //   const makePic = await postMakePic(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token, image)
-      //   if (makePic) {
-      //       this.props.addMakePic(makePic)
-      //       this.setState({choosingPicSource: false})
-      //   }
-      // }
-      // await this.setState({awaitingServer: false})
-    // }
-
-    renderPictureChooser = () => {
-      let imageSource = `data:image/jpeg;base64,${this.state.makePic.base64}`
-      return <PicSourceChooser saveImage={this.saveImage} sourceChosen={this.sourceChosen} key={"pic-chooser"} imageSource={imageSource}/>
-    }
-
     deleteMakePic = async(makePicID) => {
-      await this.setState({awaitingServer: true})
-      const destroyed = await destroyMakePic(this.props.loggedInChef.id, this.props.loggedInChef.auth_token, makePicID)
-      if (destroyed){
-        this.props.saveRemainingMakePics(this.props.recipe_details.make_pics.filter( pic => pic.id !== makePicID))
+      let netInfoState = await NetInfo.fetch()
+      if (netInfoState.isConnected) {
+        await this.setState({awaitingServer: true})
+        try {
+          const destroyed = await destroyMakePic(this.props.loggedInChef.id, this.props.loggedInChef.auth_token, makePicID)
+          if (destroyed){
+            this.props.saveRemainingMakePics(this.props.recipe_details.make_pics.filter( pic => pic.id !== makePicID))
+          }
+        } catch {
+          await this.setState( state => ({renderOfflineMessage: true}))
+        }
+        await this.setState({awaitingServer: false})
+      } else {
+        this.setState({renderOfflineMessage: true})
       }
-      await this.setState({awaitingServer: false})
     }
 
-    newComment = () => {
+    newComment = async() => {
+      let netInfoState = await NetInfo.fetch()
+      if (netInfoState.isConnected) {
         this.setState({commenting: true})
+      } else {
+        this.setState({renderOfflineMessage: true})
+      }
     }
 
     cancelComment = () => {
@@ -386,13 +438,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     saveComment = async() => {
       await this.setState({awaitingServer: true})
-      const comments = await postComment(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.state.commentText)
-      if (comments) {
-        this.props.updateComments(comments)
-        this.setState({
-          commenting: false,
-          commentText: ""
-        })
+      try {
+        const comments = await postComment(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.state.commentText)
+        if (comments) {
+          this.props.updateComments(comments)
+          this.setState({
+            commenting: false,
+            commentText: ""
+          })
+        }
+      } catch {
+        await this.setState( state => ({renderOfflineMessage: true}))
       }
       await this.setState({awaitingServer: false})
     }
@@ -402,9 +458,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     deleteComment = async(commentID) => {
-      const comments = await destroyComment(this.props.loggedInChef.auth_token, commentID)
-      if (comments) {
-        this.props.updateComments(comments)
+      let netInfoState = await NetInfo.fetch()
+      if (netInfoState.isConnected) {
+        try {
+          const comments = await destroyComment(this.props.loggedInChef.auth_token, commentID)
+          if (comments) {
+            this.props.updateComments(comments)
+          }
+        } catch {
+          await this.setState( state => ({renderOfflineMessage: true}))
+        }
+      } else {
+        this.setState({renderOfflineMessage: true})
       }
     }
 
@@ -491,13 +556,32 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       })
     }
 
+    renderPictureChooser = () => {
+      let imageSource = `data:image/jpeg;base64,${this.state.makePicBase64}`
+      return (
+        <PicSourceChooser
+          saveImage={this.saveImage}
+          sourceChosen={this.sourceChosen}
+          // key={"primary-pic-chooser"}
+          imageSource={imageSource}
+      />
+      )
+    }
+
     render() {
       if (this.props.recipe_details != undefined && this.props.recipe_details != null){
-        // console.log(this.state.commentsTopY)
+        // console.log(this.state.makePicBase64)
         // console.log(this.props.recipe_details.recipe.acknowledgement === "")
         return (
           <SpinachAppContainer awaitingServer={this.state.awaitingServer}>
-              {this.state.choosingPicSource ? this.renderPictureChooser() : null}
+              {this.state.renderOfflineMessage && (
+                <OfflineMessage
+                    message={`Sorry, can't do right now.${"\n"}You appear to be offline.`}
+                    topOffset={'10%'}
+                    clearOfflineMessage={() => this.setState({renderOfflineMessage: false})}
+                />)
+              }
+              {this.state.choosingPicSource && this.renderPictureChooser()}
               {this.state.instructionImagePopupShowing && <InstructionImagePopup imageURL={this.state.instructionImagePopupURL}/>}
               <ScrollView contentContainerStyle={{flexGrow:1}} ref={(ref) =>this.myScroll = ref} scrollEnabled={this.state.scrollEnabled}>
                 <View style={styles.detailsHeader}>
@@ -533,7 +617,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 <View style={styles.detailsContainer}>
                   <Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Instructions:</Text>
                     {this.renderRecipeInstructions()}
-                  {/* <Text style={[styles.detailsContents]}>{this.props.recipe_details.recipe.instructions}</Text> */}
                 </View>
                 {this.props.recipe_details.recipe.cuisine != "Any" ? this.renderCuisine() : null}
                 {this.renderFilterCategories()}

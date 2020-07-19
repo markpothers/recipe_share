@@ -9,8 +9,12 @@ export const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: '100%',
-    height: responsiveHeight(8),
+    width: responsiveWidth(100),
+    height: responsiveHeight(9),
+    marginTop: -responsiveHeight(3.5),
+    // borderWidth: 1,
+    // borderColor: 'red',
+    // backgroundColor: '#104e01',
   },
   headerEnd:{
     width: responsiveWidth(15),

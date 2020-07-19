@@ -14,11 +14,15 @@ class RecipeMakesController < ApplicationController
 
     def create
         # byebug
-        @recipe_make = RecipeMake.create(recipe_make_params)
-        if @recipe_make.save
-            render json: true
+        if recipe_make_params["chef_id"] === @chef.id || @chef.is_admin === true
+            @recipe_make = RecipeMake.create(recipe_make_params)
+            if @recipe_make.save
+                render json: true
+            else
+                render json: {message: false}
+            end
         else
-            render json: {message: false}
+            render json: {error: true, message: "Unauthorized"}
         end
     end
 

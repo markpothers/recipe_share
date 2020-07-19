@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     minWidth: responsiveWidth(80),
-    height: responsiveHeight(25),
+    height: responsiveHeight(34),
     marginTop: responsiveHeight(2),
     marginLeft: responsiveWidth(3.5),
     marginRight: responsiveWidth(3.5),
@@ -47,6 +47,7 @@ export const styles = StyleSheet.create({
       backgroundColor: '#fff59b',
       borderStyle: 'solid',
       borderWidth: 1,
+      borderColor: '#104e01',
     },
     picSourceChooserCancelButton:{
       justifyContent: 'center',
@@ -62,6 +63,7 @@ export const styles = StyleSheet.create({
       backgroundColor: '#104e01',// red'#720000',
       borderStyle: 'solid',
       borderWidth: 1,
+      borderColor: '#fff59b',
     },
     picSourceChooserButtonText: {
       marginLeft: '5%',

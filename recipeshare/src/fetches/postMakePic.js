@@ -2,7 +2,7 @@ import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { actionTimeout } from '../dataComponents/timeouts'
 
-export const postMakePic = (recipeID, chefID, auth_token, image) => {
+export const postMakePic = (recipeID, chefID, auth_token, makePicBase64) => {
     return new Promise((resolve, reject) => {
         
         setTimeout(()=>{
@@ -19,7 +19,7 @@ export const postMakePic = (recipeID, chefID, auth_token, image) => {
             recipe: {
                 recipe_id: recipeID,
                 chef_id: chefID,
-                base64: image.base64
+                base64: makePicBase64
             }
             })
         })

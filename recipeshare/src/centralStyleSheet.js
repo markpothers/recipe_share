@@ -196,7 +196,7 @@ export const centralStyles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#104e01',
     // flexGrow: 1
-    flexWrap: 'wrap',
+    // flexWrap: 'wrap',
   },
   greenRectangleButton: {
     justifyContent: 'space-evenly',
@@ -208,10 +208,10 @@ export const centralStyles = StyleSheet.create({
     flexDirection:'row',
     borderRadius: 5,
     backgroundColor: '#104e01',
-    // borderWidth: 1,
+    borderWidth: 1,
     borderColor: '#fff59b',
     // flexGrow: 1
-    flexWrap: 'wrap',
+    // flexWrap: 'wrap',
   },
   greenButtonIcon: {
     color: '#104e01',

@@ -36,7 +36,8 @@ export default class PicSourceChooser extends React.PureComponent{
     }
 
     render() {
-        // console.log(this.props.imageSource)
+        console.log('pic chooser rendering')
+        console.log(this.props)
         return (
             <Modal
             animationType="fade"
@@ -48,7 +49,7 @@ export default class PicSourceChooser extends React.PureComponent{
                     <View style={styles.picChooserModalContainer}>
                         <View style={styles.picSourceChooserImage}>
                             {this.props.imageSource !== 'data:image/jpeg;base64,' && (
-                                <Image style={{height: '100%', width: '100%'}} source={{uri: this.props.imageSource}}/>
+                                <Image style={{height: '100%', width: '100%'}} source={{uri: this.props.imageSource}} resizeMode={"cover"}/>
                             )}
                             {this.props.imageSource === 'data:image/jpeg;base64,' && (
                                 <React.Fragment>
@@ -71,7 +72,7 @@ export default class PicSourceChooser extends React.PureComponent{
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.picSourceChooserCancelButton} activeOpacity={0.7} title="Take Photo" onPress={this.props.sourceChosen}>
                             <Icon style={styles.cancelIcon} size={30} name='check-box-outline' />
-                            <Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserCancelButtonText}>Close</Text>
+                            <Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserCancelButtonText}>Save & Close</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

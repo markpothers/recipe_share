@@ -23,11 +23,15 @@ class FollowsController < ApplicationController
 
     def create
         # byebug
-        @follow = Follow.create(follow_params)
-        if @follow.save
-            render json: @follow
+        if follow_params["follower_id"] === @chef.id || @chef.is_admin === true
+            @follow = Follow.create(follow_params)
+            if @follow.save
+                render json: @follow
+            else
+                render json: {error: true, message: @follow.errors.full_messages}
+            end
         else
-            render json: {error: true, message: @follow.errors.full_messages}
+            render json: {error: true, message: "Unauthorized"}
         end
     end
 

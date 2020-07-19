@@ -18,31 +18,35 @@ class RecipesController < ApplicationController
 
     def create
         # byebug
-        @recipe = Recipe.new(newRecipe_params)
-        @recipe.chef_id=@chef.id
-        newRecipe_filter_settings["filter_settings"].keys.each do |category|
-            newRecipe_filter_settings["filter_settings"][category] ? @recipe[category.downcase.split(" ").join("_")] = true : @recipe[category.downcase.split(" ").join("_")] = false
-        end
-        if @recipe.save
-            # byebug
-            if newRecipe_primary_image_as_base64_params[:primaryImageBase64] != "" && newRecipe_primary_image_as_base64_params[:primaryImageBase64] != nil
-                recipe_image = RecipeImage.create(recipe_id: @recipe.id)
-                hex = SecureRandom.hex(20)
-                until RecipeImage.find_by(hex: hex) == nil
-                    hex = SecureRandom.hex(20)
-                end
-                mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:recipe_images], hex, newRecipe_primary_image_as_base64_params[:primaryImageBase64])
-                recipe_image.image_url = mediaURL
-                recipe_image.hex=hex
-                # byebug
-                recipe_image.save
+        if recipe_like_params["chef_id"] === @chef.id || @chef.is_admin === true
+            @recipe = Recipe.new(newRecipe_params)
+            @recipe.chef_id=@chef.id
+            newRecipe_filter_settings["filter_settings"].keys.each do |category|
+                newRecipe_filter_settings["filter_settings"][category] ? @recipe[category.downcase.split(" ").join("_")] = true : @recipe[category.downcase.split(" ").join("_")] = false
             end
-            @recipe.ingredients=(newRecipe_Ingredient_params)
-            @recipe.instructions=(newRecipe_Instructions_params)
-            @recipe.save
-            render json: @recipe
+            if @recipe.save
+                # byebug
+                if newRecipe_primary_image_as_base64_params[:primaryImageBase64] != "" && newRecipe_primary_image_as_base64_params[:primaryImageBase64] != nil
+                    recipe_image = RecipeImage.create(recipe_id: @recipe.id)
+                    hex = SecureRandom.hex(20)
+                    until RecipeImage.find_by(hex: hex) == nil
+                        hex = SecureRandom.hex(20)
+                    end
+                    mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:recipe_images], hex, newRecipe_primary_image_as_base64_params[:primaryImageBase64])
+                    recipe_image.image_url = mediaURL
+                    recipe_image.hex=hex
+                    # byebug
+                    recipe_image.save
+                end
+                @recipe.ingredients=(newRecipe_Ingredient_params)
+                @recipe.instructions=(newRecipe_Instructions_params)
+                @recipe.save
+                render json: @recipe
+            else
+                render json: {error: true, message: @recipe.errors.full_messages}
+            end
         else
-            render json: {error: true, message: @recipe.errors.full_messages}
+            render json: {error: true, message: "Unauthorized"}
         end
     end
 
@@ -56,7 +60,7 @@ class RecipesController < ApplicationController
 
     def update
         # byebug
-        if @recipe.chef_id === @chef.id || @chef.is_admin === true
+        if newRecipe_params.chef_id === @chef.id || @chef.is_admin === true
             @recipe.update(newRecipe_params)
             newRecipe_filter_settings["filter_settings"].keys.each do |category|
                 newRecipe_filter_settings["filter_settings"][category] ? @recipe[category.downcase.split(" ").join("_")] = true : @recipe[category.downcase.split(" ").join("_")] = false

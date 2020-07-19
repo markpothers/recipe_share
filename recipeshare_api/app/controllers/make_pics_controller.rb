@@ -4,21 +4,25 @@ class MakePicsController < ApplicationController
 
     def create
         # byebug
-        if make_pic_params[:base64] != ""
-            @make_pic = MakePic.create(recipe_id: make_pic_params[:recipe_id], chef_id: make_pic_params[:chef_id])
-            hex = SecureRandom.hex(20)
-            until MakePic.find_by(hex: hex) == nil
+        if make_pic_params["chef_id"] === @chef.id || @chef.is_admin === true
+            if make_pic_params[:base64] != ""
+                @make_pic = MakePic.create(recipe_id: make_pic_params[:recipe_id], chef_id: make_pic_params[:chef_id])
                 hex = SecureRandom.hex(20)
+                until MakePic.find_by(hex: hex) == nil
+                    hex = SecureRandom.hex(20)
+                end
+                mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:make_pics], hex, make_pic_params[:base64])
+                @make_pic.image_url = mediaURL
+                @make_pic.hex=hex
+                @make_pic.save
             end
-            mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:make_pics], hex, make_pic_params[:base64])
-            @make_pic.image_url = mediaURL
-            @make_pic.hex=hex
-            @make_pic.save
-        end
-        if @make_pic.save
-            render json: @make_pic
+            if @make_pic.save
+                render json: @make_pic
+            else
+                render json: false
+            end
         else
-            render json: false
+            render json: {error: true, message: "Unauthorized"}
         end
     end
 

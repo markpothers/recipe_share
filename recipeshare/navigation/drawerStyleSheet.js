@@ -5,19 +5,24 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-nat
 export const styles = StyleSheet.create({
   mainPageContainer:{
     width: '100%',
+    // height: responsiveHeight(60),
+    // borderWidth: 1,
   },
   headerContainer:{
-    height: '12%',
+    height: responsiveHeight(11),
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: '5%',
+    // marginTop: '-5%',
+    marginBottom: responsiveHeight(2),
+    // borderWidth: 1,
   },
   headerTopContainer:{
-    marginTop: '2%',
-    marginBottom: '3%',
+    // marginTop: '2%',
+    // marginBottom: '3%',
     height: '100%',
     width: '90%',
+    // borderWidth: 1
   },
   logo: {
     width: undefined,
@@ -40,7 +45,8 @@ export const styles = StyleSheet.create({
     width: '90%',
     marginLeft: '5%',
     marginRight: '5%',
-    alignItems: 'center'
+    alignItems: 'center',
+    // borderWidth: 1
   },
   bottomRightContainer:{
     height: '100%',
@@ -71,6 +77,7 @@ export const styles = StyleSheet.create({
     marginTop: '3%',
     marginLeft: '5%',
     marginRight: '5%',
+    // borderWidth: 1,
   },
   routeLink: {
     width: '100%',
@@ -95,6 +102,7 @@ export const styles = StyleSheet.create({
     width: '90%',
     marginTop: '5%',
     marginLeft: '5%',
-    marginRight: '5%'
+    marginRight: '5%',
+    // borderWidth: 1
   },
 });

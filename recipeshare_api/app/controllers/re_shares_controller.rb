@@ -2,11 +2,14 @@ class ReSharesController < ApplicationController
 
     def create
         # byebug
-        @re_share = ReShare.create(re_share_params)
-        if @re_share.save
-            render json: true
+        if re_share_params["chef_id"] === @chef.id || @chef.is_admin === true
+            @re_share = ReShare.create(re_share_params)
+            if @re_share.save
+                render json: true
+            else
+                render json: false
         else
-            render json: false
+            render json: {error: true, message: "Unauthorized"}
         end
     end
 

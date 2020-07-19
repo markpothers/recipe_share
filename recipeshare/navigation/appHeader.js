@@ -2,7 +2,7 @@ import React from 'react'
 import { View, TouchableOpacity, Text } from 'react-native'
 import { styles } from './navigationStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { withNavigation } from 'react-navigation'
+import { withNavigation } from '@react-navigation/compat'
 
 class AppHeader extends React.PureComponent {
 
@@ -33,6 +33,8 @@ class AppHeader extends React.PureComponent {
     }
 
     render () {
+        // console.log('mark')
+        // console.log(this.props)
         // console.log("rendering header")
         // console.log(this.props.navigation.state.routeName === "MyRecipeBook") //NB: Using this test should NOT WORK!!!!
         // you should be using this.props.navigation.dangerouslyGetParent().state.index but this doesn't POP properly after
@@ -50,8 +52,9 @@ class AppHeader extends React.PureComponent {
                 </View>
                 { this.props.navigation.state.routeName !== "NewRecipe" ? this.renderNewRecipeButton() : null }
             </View>
-            )
+        )
     }
 }
 
 export default withNavigation(AppHeader)
+// export default AppHeader

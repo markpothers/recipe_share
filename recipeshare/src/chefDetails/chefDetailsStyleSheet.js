@@ -253,5 +253,5 @@ export const styles = StyleSheet.create({
   editButton: {
     marginRight: '15%',
     marginLeft: '7%',
-  }
+  },
   });

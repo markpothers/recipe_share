@@ -1,9 +1,10 @@
 import React from 'react'
-import { Image, View, TouchableOpacity, Text, ScrollView } from 'react-native'
+import { Image, View, TouchableOpacity, Text, ScrollView, Animated } from 'react-native'
 import { styles } from './chefListStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { databaseURL } from '../dataComponents/databaseURL'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions';
+import OfflineMessage from '../offlineMessage/offlineMessage'
 
 export default class ChefCard extends React.PureComponent {
 
@@ -11,6 +12,12 @@ export default class ChefCard extends React.PureComponent {
     // console.log(this.props)
         return (
             <View style={styles.chefCard}>
+                {this.props.renderOfflineMessage.includes(this.props.id) && (
+                    <OfflineMessage
+                        message={`Sorry, can't see chef right now.${"\n"}You appear to be offline.`}
+                        topOffset={'25%'}
+                        clearOfflineMessage={() => {this.props.clearOfflineMessage(this.props.id)}}
+                    />)}
                 <TouchableOpacity style={styles.chefCardTopContainer} onPress={() => this.props.navigateToChefDetails(this.props.id)}>
                     <View style={styles.chefCardTopLeftContainer}>
                         <View style={styles.chefCardTopLeftUpperContainer}>

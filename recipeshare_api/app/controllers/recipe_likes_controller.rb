@@ -14,12 +14,16 @@ class RecipeLikesController < ApplicationController
 
     def create
         # byebug
-        @recipe_like = RecipeLike.create(recipe_like_params)
-        # byebug
-        if @recipe_like.save
-            render json: true
+        if recipe_like_params["chef_id"] === @chef.id || @chef.is_admin === true
+            @recipe_like = RecipeLike.create(recipe_like_params)
+            # byebug
+            if @recipe_like.save
+                render json: true
+            else
+                render json: false
+            end
         else
-            render json: false
+            render json: {error: true, message: "Unauthorized"}
         end
     end
 

@@ -5,7 +5,7 @@ import { detailsTimeout } from '../dataComponents/timeouts';
 
 const saveRecipeDetailsLocally = (recipeDetails, userId) => {
     // console.log(userId)
-    console.log('saving locally')
+    // console.log('saving locally')
 
     // AsyncStorage.removeItem('localRecipeDetails')
 
@@ -15,7 +15,7 @@ const saveRecipeDetailsLocally = (recipeDetails, userId) => {
             let localRecipeDetails = JSON.parse(res)
             // console.log(localRecipeDetails[0].recipe.id)
             // console.log(recipeDetails.recipe.id)
-            console.log(localRecipeDetails.length)
+            // console.log(localRecipeDetails.length)
             let newRecipesList = localRecipeDetails.filter(localRecipe => localRecipe.recipe.id !== recipeDetails.recipe.id)
             // console.log(recipeStoredLocally)
 
@@ -26,42 +26,43 @@ const saveRecipeDetailsLocally = (recipeDetails, userId) => {
             newRecipesList.push(recipeDetails)
 
             //get rid of recipes that have been saved too long
-            const oneMonth = 1000 * 60 * 60 * 24 * 30
+            const oneWeek = 1000 * 60 * 60 * 24 * 7
             const threeMonths = 1000 * 60 * 60 * 24 * 90
             newRecipesList = newRecipesList.filter(listRecipe => {
-                console.log(listRecipe.recipe.id)
+                // console.log(listRecipe.recipe.id)
                 // console.log(listRecipe)
                 if (listRecipe.recipe.chef_id == userId){ //keep user recipes forever
-                    console.log('recipe is mine')
+                    // console.log('recipe is mine')
                     return listRecipe
-                } else if (listRecipe.dateSaved >= date - oneMonth) { //keep viewed recipes for one month
-                    console.log('recipe is young')
+                } else if (listRecipe.dateSaved >= date - oneWeek) { //keep viewed recipes for one month
+                    // console.log('recipe is young')
                     return listRecipe
                 } else if (!listRecipe.likeable && listRecipe.dateSaved >= date - threeMonths){ //keep liked recipes for three months
-                    console.log('recipe is liked')
+                    // console.log('recipe is liked')
                     return listRecipe
                 } else {
-                    console.log('recipe not saved')
+                    // console.log('recipe not saved')
                     // console.log(listRecipe)
                     // console.log('chef if')
                     // console.log(listRecipe.recipe.chef_id)
                     // console.log('date saved')
                     // console.log(date.getTime())
-                    // console.log(date - oneMonth)
+                    // console.log(date - oneWeek)
                     // console.log()
                     // console.log('<1 month old?')
-                    // console.log(listRecipe.dateSaved >= date - oneMonth)
+                    // console.log(listRecipe.dateSaved >= date - oneWeek)
                 }
             })
-
             AsyncStorage.setItem('localRecipeDetails', JSON.stringify(newRecipesList), () => {
-                console.log('localRecipeDetails saved')
+                // console.log('localRecipeDetails saved')
+                // console.log('clearing?')
+                // AsyncStorage.removeItem('localRecipeDetails')
             })
         } else {
             console.log('mark')
             let newRecipesList = [recipeDetails]
             AsyncStorage.setItem('localRecipeDetails', JSON.stringify(newRecipesList), () => {
-                console.log('initial recipe  saved')
+                // console.log('initial recipe  saved')
             })
         }
     })

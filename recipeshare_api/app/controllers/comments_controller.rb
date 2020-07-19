@@ -3,7 +3,6 @@ class CommentsController < ApplicationController
     before_action :define_current_comment
     skip_before_action :define_current_comment, :only => [:index, :create]
 
-
     def index
         render json: Comment.all
     end
@@ -13,11 +12,15 @@ class CommentsController < ApplicationController
     # end
 
     def create
-        @comment = Comment.create(comment_params)
-        if @comment.save
-            render json: Comment.getRecipesComments(comment_params['recipe_id'])
+        if comment_params["chef_id"] === @chef.id || @chef.is_admin === true
+            @comment = Comment.create(comment_params)
+            if @comment.save
+                render json: Comment.getRecipesComments(comment_params['recipe_id'])
+            else
+                render json: false
+            end
         else
-            render json: false
+            render json: {error: true, message: "Unauthorized"}
         end
     end
 

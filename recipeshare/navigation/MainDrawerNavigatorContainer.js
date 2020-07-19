@@ -15,8 +15,9 @@ import { connect } from 'react-redux'
 // import FilterMenu from '../functionalComponents/filterMenu'
 // import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 // import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions';
-import {createAppContainer, createStackNavigator } from 'react-navigation'
+// import {createAppContainer, createStackNavigator } from 'react-navigation'
 import MainDrawerNavigator from './MainDrawerNavigator'
+import { runSavedActions } from '../src/functionalComponents/saveActionsLocallyForSync'
 
 const mapStateToProps = (state) => ({
     all_Recipes: state.recipes.all,
@@ -89,25 +90,30 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         }
 
         componentDidMount = async() => {
-            console.log('Main Drawer Navigator mounted')
-            AppState.addEventListener('change', this.handleAppStateChange)
+          // await runSavedActions()
+          console.log('Main Drawer Navigator mounted')
+          AppState.addEventListener('change', this.handleAppStateChange)
         }
 
         componentWillUnmount = () => {
             console.log('Main Drawer Navigator will unmount')
-            AppState.removeEventListener('change', this.handleAppStateChange)
+            AppState.removeEventListener('change')
         }
 
         handleAppStateChange = async(nextAppState) => {
-            console.log('handling app state change')
+          // AsyncStorage.removeItem('localRecipeDetails')
+          // AsyncStorage.removeItem('localChefDetails')
+          // AsyncStorage.removeItem('locallySavedListData')
+          console.log('handling app state change')
             console.log(nextAppState)
             if (nextAppState === 'active'){
               console.log('app coming into foreground')
             } else if (nextAppState === 'inactive' || nextAppState === 'background'){
               console.log('app moving into background')
+              // console.log(this.props.chef_Recipes)
               const dataToSave = {
-                all_Recipes: this.props.all_recipes,
-                chef_Recipes: this.props.chef_recipes,
+                all_Recipes: this.props.all_Recipes,
+                chef_Recipes: this.props.chef_Recipes,
                 chef_feed_Recipes: this.props.chef_feed_Recipes,
                 chef_liked_Recipes: this.props.chef_liked_Recipes,
                 chef_made_Recipes: this.props.chef_made_Recipes,
@@ -126,8 +132,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 chef_followees: this.props.chef_followees,
                 chef_followers: this.props.chef_followers
               }
-              AsyncStorage.setItem('locallysavedListData', JSON.stringify(dataToSave), () => {
-                console.log('locallysavedListData saved')
+              AsyncStorage.setItem('locallySavedListData', JSON.stringify(dataToSave), () => {
+                console.log('locallySavedListData saved')
               })
             }
           }
@@ -135,7 +141,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
         render() {
             return (
-                <MainDrawerNavigator navigation={this.props.navigation}/>
+                <MainDrawerNavigator navigation={this.props.navigation} setLoadedAndLoggedIn={this.props.setLoadedAndLoggedIn}/>
             )
         }
     }

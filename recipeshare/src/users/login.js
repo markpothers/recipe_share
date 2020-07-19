@@ -70,7 +70,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             AsyncStorage.getItem('chef', (err, res) => {
               console.log(err)
               this.props.clearLoginUserDetails()
-              this.props.navigation.navigate('AppLoading')
+              this.props.updateLoggedInChefInState(chef.id, chef.username, chef.auth_token, chef.image_url, chef.is_admin, chef.is_member)
+              this.props.setLoadedAndLoggedIn({loaded: true, loggedIn: true})
             })
           })
         }else{
@@ -79,7 +80,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           await this.setState({
             loginError: false,
             awaitingServer: false})
-          this.props.navigation.navigate('Home')
+            this.props.setLoadedAndLoggedIn({loaded: true, loggedIn: true})
         }
       } else {
         console.log(chef.message)
@@ -100,7 +101,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
-      // console.log(this.props.stayingLoggedIn)
+      // console.log(this.props)
       return (
         <SpinachAppContainer scrollingEnabled={true} awaitingServer={this.state.awaitingServer}>
           <View style={styles.logoContainer}>

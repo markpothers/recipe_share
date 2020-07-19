@@ -1,27 +1,66 @@
 import React from 'react';
 import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator, createMaterialTopTabNavigator, createDrawerNavigator } from 'react-navigation';
+// import { createStackNavigator, createBottomTabNavigator, createMaterialTopTabNavigator, createDrawerNavigator } from 'react-navigation';
 import BrowseRecipesStack from './BrowseRecipesNavigator'
 import MyRecipeBookStack from './MyRecipeBookNavigator'
 import ProfileStack from './ProfileNavigator'
-import Drawer from './Drawer'
+import CustomDrawer from './Drawer'
 import BrowseRecipesCoverStack from './BrowseRecipesCover'
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
-export default MainDrawerNavigator = createDrawerNavigator({
-  // OldBrowseRecipes: BrowseRecipesStack,
-  BrowseRecipes: BrowseRecipesStack,  //BrowseRecipesCoverStack to include the cover page instead
-  MyRecipeBook: MyRecipeBookStack,
-  Profile: ProfileStack,
-  },
-  {
-    initialRouteName: "MyRecipeBook",
-    contentComponent: Drawer
-  },
-  {
-    tabBarOptions: {
-      activeTintColor: '8d8d8d',
-      inactiveTintColor: '8d8d8d',
-    },
-  },
+const Drawer = createDrawerNavigator()
 
-);
+export default MainDrawerNavigator = (props) => {
+  const setLoadedAndLoggedIn = props.setLoadedAndLoggedIn
+  return (
+    <Drawer.Navigator
+      initialRouteName="MyRecipeBook"
+      drawerContent={(props) => <CustomDrawer {...props} setLoadedAndLoggedIn={setLoadedAndLoggedIn}/>}
+    >
+      <Drawer.Screen
+        name="MyRecipeBook"
+        options={
+          {headerShown: false}
+        }
+        component={MyRecipeBookStack}
+      />
+      <Drawer.Screen
+        name="BrowseRecipes"
+        options={
+          {headerShown: false}
+        }
+        component={BrowseRecipesStack}
+      />
+      <Drawer.Screen
+        name="Profile"
+        options={
+          {headerShown: false}
+        }
+        component={ProfileStack}
+      />
+    </Drawer.Navigator>
+  )
+}
+
+
+
+
+
+// export default MainDrawerNavigator = createDrawerNavigator({
+//   // OldBrowseRecipes: BrowseRecipesStack,
+//   BrowseRecipes: BrowseRecipesStack,  //BrowseRecipesCoverStack to include the cover page instead
+//   MyRecipeBook: MyRecipeBookStack,
+//   Profile: ProfileStack,
+//   },
+//   {
+//     initialRouteName: "MyRecipeBook",
+//     contentComponent: Drawer
+//   },
+//   {
+//     tabBarOptions: {
+//       activeTintColor: '8d8d8d',
+//       inactiveTintColor: '8d8d8d',
+//     },
+//   },
+
+// );

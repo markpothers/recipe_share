@@ -1,11 +1,15 @@
 import React from 'react';
 import { ScrollView, View, Text, TouchableOpacity, Image, Dimensions, AsyncStorage } from 'react-native'
-import { DrawerItems, SafeAreaView } from 'react-navigation';
+// import { DrawerItems, SafeAreaView } from 'react-navigation';
 import { styles } from './drawerStyleSheet'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { databaseURL } from '../src/dataComponents/databaseURL'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions';
+import {
+  DrawerContentScrollView,
+  DrawerItemList,
+} from '@react-navigation/drawer';
 
 const mapStateToProps = (state) => ({
   loggedInChef: state.loggedInChef,
@@ -15,19 +19,18 @@ const mapDispatchToProps = {
 }
 
 export default (connect(mapStateToProps, mapDispatchToProps)(
-  class Drawer extends React.PureComponent {
+  class CustomDrawer extends React.PureComponent {
 
     logout = () => {
       AsyncStorage.removeItem('chef', () => {
-        this.props.navigation.navigate('Login')
+        this.props.setLoadedAndLoggedIn({loaded: true, loggedIn: false})
       })
     }
 
     render(){
-        // console.log(this.props.loggedInChef)
       return (
-      // <ScrollView>
-        <SafeAreaView style={[styles.mainPageContainer, {height: responsiveHeight(100)}]} forceInset={{ top: 'always', horizontal: 'never' }}>
+      <DrawerContentScrollView {...this.props}>
+        <View style={[styles.mainPageContainer, {height: responsiveHeight(90)}]}>
           <View style={styles.headerContainer}>
             <View style={styles.headerTopContainer}>
               <Image style={styles.logo} resizeMode="contain" source={require('../src/dataComponents/greenLogo.png')}/>
@@ -73,8 +76,8 @@ export default (connect(mapStateToProps, mapDispatchToProps)(
               <Text style={styles.routeName} maxFontSizeMultiplier={2}>Logout</Text>
             </TouchableOpacity>
           </View>
-        </SafeAreaView>
-      // </ScrollView>
+        </View>
+      </DrawerContentScrollView>
       )
     }
   }))

@@ -88,8 +88,19 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     renderPictureChooser = () => {
-      return <PicSourceChooser saveImage={this.saveImage} sourceChosen={this.sourceChosen} key={"pic-chooser"}/>
+      let imageSource = `data:image/jpeg;base64,${this.props.image_url}`
+      return <PicSourceChooser saveImage={this.saveImage} sourceChosen={this.sourceChosen} key={"pic-chooser"} imageSource={imageSource}/>
     }
+
+    // let imageSource = typeof this.state.newRecipeDetails.primaryImageBase64 == 'object' && this.state.newRecipeDetails.primaryImageBase64.length > 0 ? this.state.newRecipeDetails.primaryImageBase64[0].image_url : `data:image/jpeg;base64,${this.state.newRecipeDetails.primaryImageBase64}`
+    // return (
+    //   <PicSourceChooser
+    //   saveImage={this.savePrimaryImage}
+    //   sourceChosen={this.primarySourceChosen}
+    //   key={"primary-pic-chooser"}
+    //   imageSource={imageSource}
+    // />
+    // )
 
     saveImage = async(image) => {
       if (image.cancelled === false){

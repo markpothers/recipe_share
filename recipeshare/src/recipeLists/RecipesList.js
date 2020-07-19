@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, ActivityIndicator, TouchableOpacity, View, Platform, AsyncStorage } from 'react-native'
+import { FlatList, ActivityIndicator, TouchableOpacity, View, Platform, AsyncStorage, Text } from 'react-native'
 import RecipeCard from './RecipeCard'
 import { connect } from 'react-redux'
 import { getRecipeList } from '../fetches/getRecipeList'
@@ -8,13 +8,22 @@ import { postReShare } from '../fetches/postReShare'
 import { postRecipeMake } from '../fetches/postRecipeMake'
 import { destroyRecipeLike } from '../fetches/destroyRecipeLike'
 import { destroyReShare } from '../fetches/destroyReShare'
-import { NavigationEvents, withNavigation } from 'react-navigation'
+// import { NavigationEvents, withNavigation } from 'react-navigation'
 import { styles } from './recipeListStyleSheet'
 import { centralStyles } from '../centralStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FilterMenu from '../functionalComponents/filterMenu'
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions';
+import { getRecipeDetails } from '../fetches/getRecipeDetails'
+import saveRecipeDetailsLocally from '../functionalComponents/saveRecipeDetailsLocally'
+import saveChefDetailsLocally from '../functionalComponents/saveChefDetailsLocally'
+import { getChefDetails } from '../fetches/getChefDetails'
+import OfflineMessage from '../offlineMessage/offlineMessage'
+import NetInfo from '@react-native-community/netinfo';
+
+// import { withNavigation } from '@react-navigation/compat'
+// import { NavigationContainer } from '@react-navigation/native';
 
 const mapStateToProps = (state) => ({
       all_Recipes: state.recipes.all,
@@ -44,11 +53,11 @@ const mapDispatchToProps = {
       dispatch({ type: 'STORE_RECIPE_LISTS', recipeType: listChoice, recipeList: recipes})
       }
   },
-  storeRecipeDetails: (listChoice, recipe_details) => {
-    return dispatch => {
-      dispatch({ type: 'STORE_RECIPES_DETAILS', recipeType: listChoice, recipesDetailsList: recipe_details})
-    }
-  },
+  // storeRecipeDetails: (listChoice, recipe_details) => {
+  //   return dispatch => {
+  //     dispatch({ type: 'STORE_RECIPES_DETAILS', recipeType: listChoice, recipesDetailsList: recipe_details})
+  //   }
+  // },
   appendToRecipeList: (listChoice, new_recipes) => {
     return dispatch => {
       dispatch({ type: 'APPEND_TO_RECIPE_LISTS', recipeType: listChoice, recipeList: new_recipes})
@@ -59,6 +68,16 @@ const mapDispatchToProps = {
       dispatch({ type: 'APPEND_TO_RECIPES_DETAILS', recipeType: listChoice, recipesDetailsList: new_recipe_details})
     }
   },
+  storeRecipeDetails: (recipe_details) => {
+    return dispatch => {
+      dispatch({ type: 'STORE_RECIPE_DETAILS', recipe_details: recipe_details})
+    }
+  },
+  storeChefDetails: (chef_details) => {
+    return dispatch => {
+      dispatch({ type: 'STORE_CHEF_DETAILS', chefID: `chef${chef_details.chef.id}`, chef_details: chef_details})
+    }
+  },
   // clearListedRecipes: (listChoice) => {
   //   return dispatch => {
   //     dispatch({ type: 'CLEAR_LISTED_RECIPES', recipeType: listChoice})
@@ -66,25 +85,35 @@ const mapDispatchToProps = {
   // },
 }
 
-export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
-  class RecipesList extends React.Component {
+export default connect(mapStateToProps, mapDispatchToProps)(
+    class RecipesList extends React.Component {
 
     state = {
       limit: 20,
       offset: 0,
       isDisplayed: true,
       filterDisplayed: false,
-      awaitingServer: false
+      awaitingServer: false,
+      dataICantGet: [],
+      renderOfflineMessage: false
     }
 
     componentDidMount = async() => {
       await this.setState({awaitingServer: true})
       await this.fetchRecipeListThenDetails()
+      this.props.navigation.addListener('focus', () => {
+        this.respondToFocus()
+      })
+      this.props.navigation.addListener('blur', () => {
+        this.respondToBlur()
+      })
       await this.setState({awaitingServer: false})
     }
 
-    // componentWillUnmount = () => {
-    // }
+    componentWillUnmount = () => {
+      this.props.navigation.removeListener('focus')
+      this.props.navigation.removeListener('blur')
+    }
 
     shouldComponentUpdate = (nextProps, nextState) => {
       return (
@@ -92,10 +121,17 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
       )
     }
 
+    respondToBlur = () =>{
+      this.setState({isDisplayed: false})
+    }
+
     respondToFocus = async() =>{
-      await this.setState({awaitingServer: true})
-      await this.setState({offset: 0})
-      await this.fetchRecipeListThenDetails()
+      await this.setState({
+        offset: 0,
+        isDisplayed: true,
+        awaitingServer: true
+      })
+      this.fetchRecipeListThenDetails()
       await this.setState({awaitingServer: false})
     }
 
@@ -106,14 +142,15 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
         this.props.storeRecipeList(this.props["listChoice"], recipes)
       }
       catch (e){
-        if (this.props[this.props["listChoice"] + `_Recipes`].length == 0){
+        if (this.props[this.props["listChoice"] + `_Recipes`]?.length == 0){
           console.log('failed to get recipes. Loading from async storage.')
-          AsyncStorage.getItem('locallysavedListData', (err, res) => {
+          AsyncStorage.getItem('locallySavedListData', (err, res) => {
             if (res != null) {
-              const locallysavedListData = JSON.parse(res)
-              this.props.storeRecipeList(this.props["listChoice"], locallysavedListData[this.props["listChoice"] + `_Recipes`])
+              const locallySavedListData = JSON.parse(res)
+              // Object.keys(locallySavedListData).forEach(list => console.log(`${list}: ${locallySavedListData[list].length}`))
+              this.props.storeRecipeList(this.props["listChoice"], locallySavedListData[this.props["listChoice"] + `_Recipes`])
             } else {
-
+              this.setState({renderOfflineMessage: true})
             }
           })
         }
@@ -133,33 +170,126 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
       await this.setState({awaitingServer: false})
     }
 
-    navigateToRecipeDetails = (recipeID) =>{
-      this.props.parentNavigator ? this.props.parentNavigator('RecipeDetails', {recipeID: recipeID}) : this.props.navigation.navigate('RecipeDetails', {recipeID: recipeID})
+    navigateToRecipeDetails = async(recipeID, commenting = false) =>{
+      await this.setState({awaitingServer: true,})
+      try{
+        const recipeDetails = await getRecipeDetails(recipeID, this.props.loggedInChef.auth_token)
+        if (recipeDetails) {
+          // console.log(recipeDetails)
+          saveRecipeDetailsLocally(recipeDetails, this.props.loggedInChef.id)
+          await this.props.storeRecipeDetails(recipeDetails)
+          await this.setState({
+            awaitingServer: false,
+            filterDisplayed: false
+          })
+          this.props.parentNavigator ? this.props.parentNavigator('RecipeDetails', {recipeID: recipeID, commenting: commenting}) : this.props.navigation.navigate('RecipeDetails', {recipeID: recipeID, commenting: commenting})
+        }
+      } catch (e) {
+        // console.log('looking for local recipes')
+        AsyncStorage.getItem('localRecipeDetails', (err, res) => {
+          if (res != null) {
+            let localRecipeDetails = JSON.parse(res)
+            let thisRecipeDetails = localRecipeDetails.find(recipeDetails => recipeDetails.recipe.id === recipeID)
+            if (thisRecipeDetails){
+              this.props.storeRecipeDetails(thisRecipeDetails)
+              this.setState({awaitingServer: false})
+              this.props.parentNavigator ? this.props.parentNavigator('RecipeDetails', {recipeID: recipeID, commenting: commenting}) : this.props.navigation.navigate('RecipeDetails', {recipeID: recipeID, commenting: commenting})
+            } else {
+              // console.log('recipe not present in saved list')
+              this.setState( state => {
+                return ({
+                  dataICantGet: [...state.dataICantGet, recipeID],
+                  awaitingServer: false
+                })
+              })
+            }
+          } else {
+            // console.log('no recipes saved')
+            this.setState( state => {
+              return ({
+                dataICantGet: [...state.dataICantGet, recipeID],
+                awaitingServer: false
+              })
+            })
+          }
+        })
+      }
+      await this.setState({awaitingServer: false})
     }
 
-    navigateToRecipeDetailsAndComment = (recipeID) =>{
-      this.props.parentNavigator ? this.props.parentNavigator('RecipeDetails', {recipeID: recipeID, commenting: true}) : this.props.navigation.navigate('RecipeDetails', {recipeID: recipeID, commenting: true})
+    // navigateToRecipeDetailsAndComment = (recipeID) =>{
+    //   this.props.parentNavigator ? this.props.parentNavigator('RecipeDetails', {recipeID: recipeID, commenting: true}) : this.props.navigation.navigate('RecipeDetails', {recipeID: recipeID, commenting: true})
+    // }
+
+    navigateToChefDetails = async(chefID, recipeID) => {
+      await this.setState({awaitingServer: true})
+      try{
+        const chefDetails = await getChefDetails(chefID, this.props.loggedInChef.auth_token)
+        if (chefDetails) {
+          this.props.storeChefDetails(chefDetails)
+          saveChefDetailsLocally(chefDetails, this.props.loggedInChef.id)
+          await this.setState({awaitingServer: false})
+          this.props.parentNavigator ? this.props.parentNavigator('ChefDetails', {chefID: chefID}) : this.props.navigation.navigate('ChefDetails', {chefID: chefID})
+        }
+      } catch (e) {
+        // console.log('looking for local chefs')
+        AsyncStorage.getItem('localChefDetails', (err, res) => {
+          if (res != null) {
+            // console.log('found some local chefs')
+            let localChefDetails = JSON.parse(res)
+            let thisChefDetails = localChefDetails.find(chefDetails => chefDetails.chef.id === chefID)
+            if (thisChefDetails){
+              this.props.storeChefDetails(thisChefDetails)
+              this.setState({awaitingServer: false})
+              this.props.parentNavigator ? this.props.parentNavigator('ChefDetails', {chefID: chefID}) : this.props.navigation.navigate('ChefDetails', {chefID: chefID})
+            } else {
+              // console.log('recipe not present in saved list')
+              this.setState( state => {
+                return ({
+                  dataICantGet: [...state.dataICantGet, recipeID],
+                  awaitingServer: false
+                })
+              })
+            }
+          } else {
+            // console.log('no recipes saved')
+            this.setState( state => {
+              return ({
+                dataICantGet: [...state.dataICantGet, recipeID],
+                awaitingServer: false
+              })
+            })
+          }
+        })
+      }
+      await this.setState({awaitingServer: false})
     }
 
-    navigateToChefDetails = (chefID) => {
-      this.props.parentNavigator ? this.props.parentNavigator('ChefDetails', {chefID: chefID}) : this.props.navigation.navigate('ChefDetails', {chefID: chefID})
+    removeDataFromCantGetList = (recipeID) => {
+      this.setState( state => {
+        let newDataICantGet = state.dataICantGet.filter(data => data != recipeID)
+        return ({
+          dataICantGet: newDataICantGet,
+        })
+      })
     }
 
     renderRecipeListItem = (item) => {
-        return (
-            <RecipeCard listChoice={this.props["listChoice"]}
-              key={item.index.toString()} 
-              {...item.item} 
-              navigateToRecipeDetails={this.navigateToRecipeDetails} 
-              navigateToRecipeDetailsAndComment={this.navigateToRecipeDetailsAndComment} 
-              navigateToChefDetails={this.navigateToChefDetails} 
-              likeRecipe={this.likeRecipe} 
-              unlikeRecipe={this.unlikeRecipe} 
-              makeRecipe={this.makeRecipe} 
-              reShareRecipe={this.reShareRecipe}
-              unReShareRecipe={this.unReShareRecipe} 
-              />
-          )
+      return (
+        <RecipeCard listChoice={this.props["listChoice"]}
+          key={item.index.toString()}
+          {...item.item}
+          navigateToRecipeDetails={this.navigateToRecipeDetails}
+          navigateToChefDetails={this.navigateToChefDetails}
+          likeRecipe={this.likeRecipe}
+          unlikeRecipe={this.unlikeRecipe}
+          makeRecipe={this.makeRecipe}
+          reShareRecipe={this.reShareRecipe}
+          unReShareRecipe={this.unReShareRecipe}
+          renderOfflineMessage={this.state.dataICantGet}
+          clearOfflineMessage={this.removeDataFromCantGetList}
+        />
+      )
     }
 
     refresh = async () => {
@@ -178,109 +308,172 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
     }
 
     likeRecipe = async(recipeID) => {
-      await this.setState({awaitingServer: true})
-      const likePosted = await postRecipeLike(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
-      if (likePosted) {
-        const recipes = this.props[this.props["listChoice"] + `_Recipes`].map( (recipe) => {
-          if (recipe['id'] === recipeID){
-            recipe['likes_count'] = parseInt(recipe['likes_count']) + 1
-            recipe['chef_liked'] = 1
-            return recipe
-          } else {
-            return recipe
+      // console.log
+      let netInfoState = await NetInfo.fetch()
+      if (netInfoState.isConnected) {
+        await this.setState({awaitingServer: true})
+        try {
+          const likePosted = await postRecipeLike(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
+          if (likePosted) {
+            const recipes = this.props[this.props["listChoice"] + `_Recipes`].map( (recipe) => {
+              if (recipe['id'] === recipeID){
+                recipe['likes_count'] = parseInt(recipe['likes_count']) + 1
+                recipe['chef_liked'] = 1
+                return recipe
+              } else {
+                return recipe
+              }
+            })
+            this.props.storeRecipeList(this.props["listChoice"], recipes)
+            this.props.fetchChefDetails && this.props.fetchChefDetails()
           }
-        })
-        this.props.storeRecipeList(this.props["listChoice"], recipes)
-        this.props.fetchChefDetails && this.props.fetchChefDetails()
+        } catch {
+          await this.setState( state => {
+            return ({
+              dataICantGet: [...state.dataICantGet, recipeID],
+              awaitingServer: false
+            })
+          })
+        }
+        await this.setState({awaitingServer: false})
+      } else {
+        this.setState({renderOfflineMessage: true})
       }
-      await this.setState({awaitingServer: false})
     }
 
     unlikeRecipe = async(recipeID) => {
-      await this.setState({awaitingServer: true})
-      const unlikePosted = await destroyRecipeLike(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
-      if (unlikePosted) {
-        const recipes = this.props[this.props["listChoice"] + `_Recipes`].map( (recipe) => {
-          if (recipe['id'] === recipeID){
-            recipe['likes_count'] = parseInt(recipe['likes_count']) - 1
-            recipe['chef_liked'] = 0
-            return recipe
-          } else {
-            return recipe
+      // console.log
+      let netInfoState = await NetInfo.fetch()
+      if (netInfoState.isConnected) {
+        await this.setState({awaitingServer: true})
+        try {
+          const unlikePosted = await destroyRecipeLike(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
+          if (unlikePosted) {
+            const recipes = this.props[this.props["listChoice"] + `_Recipes`].map( (recipe) => {
+              if (recipe['id'] === recipeID){
+                recipe['likes_count'] = parseInt(recipe['likes_count']) - 1
+                recipe['chef_liked'] = 0
+                return recipe
+              } else {
+                return recipe
+              }
+            })
+            this.props.storeRecipeList(this.props["listChoice"], recipes)
+            this.props.fetchChefDetails && this.props.fetchChefDetails()
           }
-        })
-        this.props.storeRecipeList(this.props["listChoice"], recipes)
-        this.props.fetchChefDetails && this.props.fetchChefDetails()
+        } catch {
+          await this.setState( state => {
+            return ({
+              dataICantGet: [...state.dataICantGet, recipeID],
+              awaitingServer: false
+            })
+          })
+        }
+        await this.setState({awaitingServer: false})
+      } else {
+        this.setState({renderOfflineMessage: true})
       }
-      await this.setState({awaitingServer: false})
     }
 
     makeRecipe = async(recipeID) => {
-      await this.setState({awaitingServer: true})
-      const makePosted = await postRecipeMake(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
-      if (makePosted) {
-        const recipes = this.props[this.props["listChoice"] + `_Recipes`].map( (recipe) => {
-          if (recipe['id'] === recipeID){
-            recipe['makes_count'] = parseInt(recipe['makes_count']) + 1
-            recipe['chef_made'] = 1
-            return recipe
-          } else {
-            return recipe
+      // console.log
+      let netInfoState = await NetInfo.fetch()
+      if (netInfoState.isConnected) {
+        await this.setState({awaitingServer: true})
+        try {
+          const makePosted = await postRecipeMake(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
+          if (makePosted) {
+            const recipes = this.props[this.props["listChoice"] + `_Recipes`].map( (recipe) => {
+              if (recipe['id'] === recipeID){
+                recipe['makes_count'] = parseInt(recipe['makes_count']) + 1
+                recipe['chef_made'] = 1
+                return recipe
+              } else {
+                return recipe
+              }
+            })
+            this.props.storeRecipeList(this.props["listChoice"], recipes)
           }
-        })
-        this.props.storeRecipeList(this.props["listChoice"], recipes)
+        } catch {
+          await this.setState( state => {
+            return ({
+              dataICantGet: [...state.dataICantGet, recipeID],
+              awaitingServer: false
+            })
+          })
+        }
+        await this.setState({awaitingServer: false})
+      } else {
+        this.setState({renderOfflineMessage: true})
       }
-      await this.setState({awaitingServer: false})
     }
 
     reShareRecipe = async(recipeID) => {
-      await this.setState({awaitingServer: true})
-      const reSharePosted = await postReShare(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
-      if (reSharePosted) {
-        const recipes = this.props[this.props["listChoice"] + `_Recipes`].map( (recipe) => {
-          if (recipe['id'] === recipeID){
-            recipe['shares_count'] = parseInt(recipe['shares_count']) + 1
-            recipe['chef_shared'] = 1
-            return recipe
-          } else {
-            return recipe
+      // console.log
+      let netInfoState = await NetInfo.fetch()
+      if (netInfoState.isConnected) {
+        await this.setState({awaitingServer: true})
+        try {
+          const reSharePosted = await postReShare(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
+          if (reSharePosted) {
+            const recipes = this.props[this.props["listChoice"] + `_Recipes`].map( (recipe) => {
+              if (recipe['id'] === recipeID){
+                recipe['shares_count'] = parseInt(recipe['shares_count']) + 1
+                recipe['chef_shared'] = 1
+                return recipe
+              } else {
+                return recipe
+              }
+            })
+            this.props.storeRecipeList(this.props["listChoice"], recipes)
+            this.props.fetchChefDetails && this.props.fetchChefDetails()
           }
-        })
-        this.props.storeRecipeList(this.props["listChoice"], recipes)
-        this.props.fetchChefDetails && this.props.fetchChefDetails()
+        } catch {
+          await this.setState( state => {
+            return ({
+              dataICantGet: [...state.dataICantGet, recipeID],
+              awaitingServer: false
+            })
+          })
+        }
+        await this.setState({awaitingServer: false})
+      } else {
+        this.setState({renderOfflineMessage: true})
       }
-      await this.setState({awaitingServer: false})
     }
 
     unReShareRecipe = async(recipeID) => {
-      await this.setState({awaitingServer: true})
-      const unReShared = await destroyReShare(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
-      if (unReShared) {
-        const recipes = this.props[this.props["listChoice"] + `_Recipes`].map( (recipe) => {
-          if (recipe['id'] === recipeID){
-            recipe['shares_count'] = parseInt(recipe['shares_count']) - 1
-            recipe['chef_shared'] = 0
-            return recipe
-          } else {
-            return recipe
+      // console.log
+      let netInfoState = await NetInfo.fetch()
+      if (netInfoState.isConnected) {
+        await this.setState({awaitingServer: true})
+        try{
+          const unReShared = await destroyReShare(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
+          if (unReShared) {
+            const recipes = this.props[this.props["listChoice"] + `_Recipes`].map( (recipe) => {
+              if (recipe['id'] === recipeID){
+                recipe['shares_count'] = parseInt(recipe['shares_count']) - 1
+                recipe['chef_shared'] = 0
+                return recipe
+              } else {
+                return recipe
+              }
+            })
+            this.props.storeRecipeList(this.props["listChoice"], recipes)
+            this.props.fetchChefDetails && this.props.fetchChefDetails()
           }
-        })
-        this.props.storeRecipeList(this.props["listChoice"], recipes)
-        this.props.fetchChefDetails && this.props.fetchChefDetails()
+        } catch {
+          await this.setState( state => {
+            return ({
+              dataICantGet: [...state.dataICantGet, recipeID],
+              awaitingServer: false
+            })
+          })
+        }
+        await this.setState({awaitingServer: false})
+      } else {
+        this.setState({renderOfflineMessage: true})
       }
-      await this.setState({awaitingServer: false})
-    }
-
-    respondToBlur = () =>{
-      this.setState({isDisplayed: false})
-    }
-
-    respondToFocus = async() =>{
-      await this.setState({
-        offset: 0,
-        isDisplayed: true
-      })
-      this.fetchRecipeListThenDetails()
     }
 
     handleFilterButton = () =>{
@@ -293,14 +486,20 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
-
+      // console.log(this.state.recipeICantGet)
       // console.log(this.props[this.props["listChoice"] + `_Recipes`].length)
       return (
         <SpinachAppContainer awaitingServer={this.state.awaitingServer}>
-          <NavigationEvents onWillFocus={this.respondToFocus} onWillBlur={this.respondToBlur}/>
-            <TouchableOpacity style={styles.filterButton} activeOpacity={0.7} onPress={this.handleFilterButton}>
-              <Icon name='filter' size={responsiveHeight(3.5)} style={styles.filterIcon}/>
-            </TouchableOpacity>
+          {this.state.renderOfflineMessage && (
+            <OfflineMessage
+                message={`Sorry, can't do that right now.${"\n"}You appear to be offline.`}
+                topOffset={'10%'}
+                clearOfflineMessage={() => this.setState({renderOfflineMessage: false})}
+            />)
+          }
+          <TouchableOpacity style={styles.filterButton} activeOpacity={0.7} onPress={this.handleFilterButton} testID={"filterButton"}>
+            <Icon name='filter' size={responsiveHeight(3.5)} style={styles.filterIcon}/>
+          </TouchableOpacity>
           <FlatList
             data={this.props[this.props["listChoice"] + `_Recipes`]}
             extraData={this.props.recipes_details}
@@ -314,10 +513,11 @@ export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(
             // onScroll={e => this.onScroll(e)}
             // scrollEventThrottle={16}
             nestedScrollEnabled={true}
+            listKey={this.props[this.props["listChoice"] + `_Recipes`]}
           />
           {this.state.filterDisplayed ? <FilterMenu handleFilterButton={this.handleFilterButton} refresh={this.refresh} closeFilterAndRefresh={this.closeFilterAndRefresh} confirmButtonText={"Apply"} title={"Apply filters to recipes list"}/> : null}
         </SpinachAppContainer>
       )
     }
   }
-))
+)

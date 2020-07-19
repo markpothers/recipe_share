@@ -8,9 +8,10 @@ export class ChefFeedScreen extends React.Component {
   render (){
     return (
           <RecipesList listChoice={"chef_feed"}
-            parentNavigator={this.props.screenProps.parentNavigator}
-            queryChefID={this.props.screenProps.queryChefID}
-            fetchChefDetails={this.props.screenProps.fetchChefDetails}
+            {...this.props}
+            parentNavigator={this.props.parentNavigator}
+            queryChefID={this.props.queryChefID}
+            fetchChefDetails={this.props.fetchChefDetails}
           />
     )
   }
@@ -21,9 +22,10 @@ export class MyRecipesScreen extends React.Component {
     return (
           <RecipesList
             listChoice={"chef"}
-            parentNavigator={this.props.screenProps.parentNavigator}
-            queryChefID={this.props.screenProps.queryChefID}
-            fetchChefDetails={this.props.screenProps.fetchChefDetails}
+            {...this.props}
+              parentNavigator={this.props.parentNavigator}
+            queryChefID={this.props.queryChefID}
+            fetchChefDetails={this.props.fetchChefDetails}
           />
     )
   }
@@ -33,9 +35,10 @@ export class MyLikedRecipesScreen extends React.Component {
   render (){
     return (
           <RecipesList listChoice={"chef_liked"}
-            parentNavigator={this.props.screenProps.parentNavigator}
-            queryChefID={this.props.screenProps.queryChefID}
-            fetchChefDetails={this.props.screenProps.fetchChefDetails}
+            {...this.props}
+            parentNavigator={this.props.parentNavigator}
+            queryChefID={this.props.queryChefID}
+            fetchChefDetails={this.props.fetchChefDetails}
           />
     )
   }
@@ -45,9 +48,10 @@ export class MyMadeRecipesScreen extends React.Component {
   render (){
     return (
           <RecipesList listChoice={"chef_made"}
-            parentNavigator={this.props.screenProps.parentNavigator}
-            queryChefID={this.props.screenProps.queryChefID}
-            fetchChefDetails={this.props.screenProps.fetchChefDetails}
+            {...this.props}
+            parentNavigator={this.props.parentNavigator}
+            queryChefID={this.props.queryChefID}
+            fetchChefDetails={this.props.fetchChefDetails}
           />
     )
   }
@@ -57,9 +61,10 @@ export class ChefsFollowedScreen extends React.Component {
   render (){
     return (
           <ChefList listChoice={"chef_followees"}
-            parentNavigator={this.props.screenProps.parentNavigator}
-            queryChefID={this.props.screenProps.queryChefID}
-            fetchChefDetails={this.props.screenProps.fetchChefDetails}
+            {...this.props}
+            parentNavigator={this.props.parentNavigator}
+            queryChefID={this.props.queryChefID}
+            fetchChefDetails={this.props.fetchChefDetails}
           />
     )
   }
@@ -67,12 +72,14 @@ export class ChefsFollowedScreen extends React.Component {
 
 export class ChefsFollowingScreen extends React.Component {
   render (){
-    // console.log(this.props.screenProps)
+    // console.log(this.props)
     return (
           <ChefList listChoice={"chef_followers"}
-            parentNavigator={this.props.screenProps.parentNavigator}
-            queryChefID={this.props.screenProps.queryChefID}
-            fetchChefDetails={this.props.screenProps.fetchChefDetails}
+            {...this.props}
+            parentNavigator={this.props.parentNavigator}
+            queryChefID={this.props.queryChefID}
+            fetchChefDetails={this.props.fetchChefDetails}
+            listKey={"chef_followers"}
           />
     )
   }

@@ -83,8 +83,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             )
         }
 
-
-
         renderNewPasswordButton = () => {
             return(
                 <View style={[centralStyles.formSection, {width: '90%'}]}>
