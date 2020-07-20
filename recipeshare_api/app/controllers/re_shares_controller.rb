@@ -8,6 +8,7 @@ class ReSharesController < ApplicationController
                 render json: true
             else
                 render json: false
+            end
         else
             render json: {error: true, message: "Unauthorized"}
         end

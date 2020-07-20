@@ -91,12 +91,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
         componentDidMount = async() => {
           // await runSavedActions()
-          console.log('Main Drawer Navigator mounted')
+          // console.log('Main Drawer Navigator mounted')
           AppState.addEventListener('change', this.handleAppStateChange)
         }
 
         componentWillUnmount = () => {
-            console.log('Main Drawer Navigator will unmount')
+            // console.log('Main Drawer Navigator will unmount')
             AppState.removeEventListener('change')
         }
 
@@ -104,12 +104,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           // AsyncStorage.removeItem('localRecipeDetails')
           // AsyncStorage.removeItem('localChefDetails')
           // AsyncStorage.removeItem('locallySavedListData')
-          console.log('handling app state change')
-            console.log(nextAppState)
+          // console.log('handling app state change')
+            // console.log(nextAppState)
             if (nextAppState === 'active'){
-              console.log('app coming into foreground')
+              // console.log('app coming into foreground')
             } else if (nextAppState === 'inactive' || nextAppState === 'background'){
-              console.log('app moving into background')
+              // console.log('app moving into background')
               // console.log(this.props.chef_Recipes)
               const dataToSave = {
                 all_Recipes: this.props.all_Recipes,
@@ -133,7 +133,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 chef_followers: this.props.chef_followers
               }
               AsyncStorage.setItem('locallySavedListData', JSON.stringify(dataToSave), () => {
-                console.log('locallySavedListData saved')
+                // console.log('locallySavedListData saved')
               })
             }
           }
