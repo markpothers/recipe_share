@@ -1,6 +1,7 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
+    "prestart": "node ./buildScripts/startMessage.js",
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
@@ -20,6 +21,7 @@
   "dependencies": {
     "@expo/samples": "3.0.3",
     "@react-native-community/masked-view": "0.1.10",
+    "@react-native-community/netinfo": "5.9.2",
     "@react-navigation/compat": "^5.1.28",
     "@react-navigation/drawer": "^5.8.4",
     "@react-navigation/material-top-tabs": "^5.2.12",
@@ -54,13 +56,16 @@
     "schedule": "0.5.0",
     "sync-exec": "^0.6.2",
     "whatwg-fetch-timeout": "^2.0.2-timeout",
-    "ws": "^7.1.2",
-    "@react-native-community/netinfo": "5.9.2"
+    "ws": "^7.1.2"
   },
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
     "babel-preset-expo": "^8.2.3",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
+    "eslint": "^7.5.0",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react-native": "^3.8.1",
     "jest-environment-enzyme": "^7.1.2",
     "jest-enzyme": "^7.1.2",
     "jest-expo": "^38.0.0",

@@ -42,6 +42,7 @@ class AppHeader extends React.PureComponent {
         //  However, the same bug results in the route name
         // changing back to MyRecipeBook early in the goBack sequence so testing for this displays the drawer button correctly.
         // I don't understand this at all and honestly believe it's a bug in react navigation.
+        // I think this might have been fixed with react-navigation 5 but it seems to be working as is
         return (
             <View style={styles.headerContainer}>
                 <View style={styles.headerEnd}>
@@ -57,4 +58,3 @@ class AppHeader extends React.PureComponent {
 }
 
 export default withNavigation(AppHeader)
-// export default AppHeader
