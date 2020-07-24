@@ -68,16 +68,26 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		fetchChefDetails = async () => {
-			await this.setState({ awaitingServer: true })
-			const chef_details = await getChefDetails(this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
-			if (chef_details) {
-				this.props.storeChefDetails(chef_details)
+			let netInfoState = await NetInfo.fetch()
+			if (netInfoState.isConnected) {
+				await this.setState({ awaitingServer: true })
+				const chef_details = await getChefDetails(this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
+				if (chef_details) {
+					this.props.storeChefDetails(chef_details)
+				}
+				await this.setState({ awaitingServer: false })
+			} else {
+				this.setState({ renderOfflineMessage: true })
 			}
-			await this.setState({ awaitingServer: false })
 		}
 
-		editingChef = () => {
-			this.setState({ editingChef: true })
+		editingChef = async() => {
+			let netInfoState = await NetInfo.fetch()
+			if (netInfoState.isConnected) {
+				this.setState({ editingChef: true })
+			} else {
+				this.setState({ renderOfflineMessage: true })
+			}
 		}
 
 		chefUpdated = (chefChanged) => {
@@ -158,61 +168,66 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		deleteChefAccount = async (deleteRecipes) => {
-			const chef = this.props.loggedInChef
-			const deletedChef = await destroyChef(chef.auth_token, chef.id, deleteRecipes)
-			if (deletedChef) {
-				AsyncStorage.removeItem('chef', () => { })
-				this.props.navigation.navigate('Login')
+			let netInfoState = await NetInfo.fetch()
+			if (netInfoState.isConnected) {
+				const chef = this.props.loggedInChef
+				const deletedChef = await destroyChef(chef.auth_token, chef.id, deleteRecipes)
+				if (deletedChef) {
+					AsyncStorage.removeItem('chef', () => { })
+					this.props.navigation.navigate('Login')
+				}
+			} else {
+				this.setState({ renderOfflineMessage: true })
 			}
 		}
 
-		manualBackupDatabase = async () => {
-			const confirmation = await getDatabaseBackup(this.props.loggedInChef.auth_token, "manual")
-			confirmation ? console.log("database manually backed up") : console.log("database backup failed or not permitted")
-		}
+		// manualBackupDatabase = async () => {
+		// 	const confirmation = await getDatabaseBackup(this.props.loggedInChef.auth_token, "manual")
+		// 	confirmation ? console.log("database manually backed up") : console.log("database backup failed or not permitted")
+		// }
 
-		autoBackupDatabase = async () => {
-			const confirmation = await getDatabaseBackup(this.props.loggedInChef.auth_token, "auto")
-			confirmation ? console.log("database auto backup cycle started") : console.log("database auto backup cycle failed or not permitted")
-		}
+		// autoBackupDatabase = async () => {
+		// 	const confirmation = await getDatabaseBackup(this.props.loggedInChef.auth_token, "auto")
+		// 	confirmation ? console.log("database auto backup cycle started") : console.log("database auto backup cycle failed or not permitted")
+		// }
 
 		// autoBackupDatabaseStop = async() => {
 		//   const confirmation = await getDatabaseBackup(this.props.loggedInChef.auth_token, "stop")
 		//   confirmation ? console.log("database auto backup cycle stopped") : console.log("database auto backup stop failed or not permitted")
 		// }
 
-		restorePrimaryDatabase = async () => {
-			const confirmation = await getDatabaseRestore(this.props.loggedInChef.auth_token, "primary")
-			confirmation ? console.log("database restored from primary backup") : console.log("primary backup restore failed or not permitted")
-		}
+		// restorePrimaryDatabase = async () => {
+		// 	const confirmation = await getDatabaseRestore(this.props.loggedInChef.auth_token, "primary")
+		// 	confirmation ? console.log("database restored from primary backup") : console.log("primary backup restore failed or not permitted")
+		// }
 
-		restoreSecondaryDatabase = async () => {
-			const confirmation = await getDatabaseRestore(this.props.loggedInChef.auth_token, "secondary")
-			confirmation ? console.log("database restored from secondary backup") : console.log("secondary backup restore failed or not permitted")
-		}
+		// restoreSecondaryDatabase = async () => {
+		// 	const confirmation = await getDatabaseRestore(this.props.loggedInChef.auth_token, "secondary")
+		// 	confirmation ? console.log("database restored from secondary backup") : console.log("secondary backup restore failed or not permitted")
+		// }
 
-		renderDatabaseButtons = () => {
-			return (
-				<React.Fragment>
-					<TouchableOpacity style={styles.dbManualBackupButton} activeOpacity={0.7} onPress={this.manualBackupDatabase}>
-						<Icon name='database-plus' size={responsiveHeight(3.5)} style={styles.filterIcon} />
-					</TouchableOpacity>
-					<TouchableOpacity style={styles.dbAutoBackupButton} activeOpacity={0.7} onPress={this.autoBackupDatabase}>
-						<Icon name='database-refresh' size={responsiveHeight(3.5)} style={styles.filterIcon} />
-					</TouchableOpacity>
-					{/* <TouchableOpacity style={styles.dbAutoBackupStopButton} activeOpacity={0.7} onPress={this.autoBackupDatabaseStop}>
-                <Icon name='database-remove' size={responsiveHeight(3.5)} style={styles.filterIcon}/>
-              </TouchableOpacity> */}
-					<TouchableOpacity style={styles.dbPrimaryRestoreButton} activeOpacity={0.7} onPress={this.restorePrimaryDatabase}>
-						<Icon name='database-export' size={responsiveHeight(3.5)} style={styles.filterIcon} />
-					</TouchableOpacity>
-					<TouchableOpacity style={styles.dbSecondaryRestoreButton} activeOpacity={0.7} onPress={this.restoreSecondaryDatabase}>
-						<Icon name='database-import' size={responsiveHeight(3.5)} style={styles.filterIcon} />
-					</TouchableOpacity>
-				</React.Fragment>
+		// renderDatabaseButtons = () => {
+		// 	return (
+		// 		<React.Fragment>
+		// 			<TouchableOpacity style={styles.dbManualBackupButton} activeOpacity={0.7} onPress={this.manualBackupDatabase}>
+		// 				<Icon name='database-plus' size={responsiveHeight(3.5)} style={styles.filterIcon} />
+		// 			</TouchableOpacity>
+		// 			<TouchableOpacity style={styles.dbAutoBackupButton} activeOpacity={0.7} onPress={this.autoBackupDatabase}>
+		// 				<Icon name='database-refresh' size={responsiveHeight(3.5)} style={styles.filterIcon} />
+		// 			</TouchableOpacity>
+		// 			{/* <TouchableOpacity style={styles.dbAutoBackupStopButton} activeOpacity={0.7} onPress={this.autoBackupDatabaseStop}>
+		//         <Icon name='database-remove' size={responsiveHeight(3.5)} style={styles.filterIcon}/>
+		//       </TouchableOpacity> */}
+		// 			<TouchableOpacity style={styles.dbPrimaryRestoreButton} activeOpacity={0.7} onPress={this.restorePrimaryDatabase}>
+		// 				<Icon name='database-export' size={responsiveHeight(3.5)} style={styles.filterIcon} />
+		// 			</TouchableOpacity>
+		// 			<TouchableOpacity style={styles.dbSecondaryRestoreButton} activeOpacity={0.7} onPress={this.restoreSecondaryDatabase}>
+		// 				<Icon name='database-import' size={responsiveHeight(3.5)} style={styles.filterIcon} />
+		// 			</TouchableOpacity>
+		// 		</React.Fragment>
 
-			)
-		}
+		// 	)
+		// }
 
 		render() {
 			if (this.props.chefs_details[`chef${this.props.loggedInChef.id}`] !== undefined) {
@@ -227,7 +242,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							/>)
 						}
 						{this.state.editingChef ? this.renderChefEditor() : null}
-						{this.props.loggedInChef.is_admin ? this.renderDatabaseButtons() : null}
+						{/* {this.props.loggedInChef.is_admin ? this.renderDatabaseButtons() : null} */}
 						{this.state.choosingPicture ? this.renderPictureChooser() : null}
 						{this.state.deleteChefOptionVisible ? this.renderDeleteChefOption() : null}
 						<ChefDetailsCard editChef={this.editingChef} myProfile={true} {...chef_details} image_url={chef_details.chef.image_url} />

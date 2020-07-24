@@ -65,7 +65,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				if (this.props.stayingLoggedIn) {
 					AsyncStorage.setItem('chef', JSON.stringify(chef), () => {
 						AsyncStorage.getItem('chef', (err, res) => {
-							console.log(err)
+							// console.log(err)
 							this.props.clearLoginUserDetails()
 							this.props.updateLoggedInChefInState(chef.id, chef.username, chef.auth_token, chef.image_url, chef.is_admin, chef.is_member)
 							this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: true })
@@ -81,7 +81,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: true })
 				}
 			} else {
-				console.log(chef.message)
+				// console.log(chef.message)
 				await this.setState({
 					awaitingServer: false,
 					loginError: true,

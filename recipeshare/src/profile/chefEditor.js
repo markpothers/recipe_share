@@ -114,28 +114,33 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		saveUpdatedChef = async () => {
-			const chef = this.props.loggedInChef
-			const updatedChef = await patchChef(chef.id, chef.auth_token, this.props.username, this.props.profile_text, this.props.country, this.state.updatingPassword, this.props.password, this.props.password_confirmation, this.props.imageBase64)
-			if (updatedChef) {
-				// console.log(updatedChef)
-				if (updatedChef.error) {
-					this.setState({ errors: updatedChef.message })
-				} else {
-					if (this.state.stayingLoggedIn) {
-						AsyncStorage.setItem('chef', JSON.stringify(updatedChef), () => {
-							AsyncStorage.getItem('chef', (err, res) => {
-								console.log(err)
-								this.props.updateLoggedInChefInState(updatedChef.id, updatedChef.username, updatedChef.auth_token, updatedChef.image_url, updatedChef.is_admin, updatedChef.is_member)
-								this.props.clearNewUserDetails()
-								this.props.chefUpdated()
-							})
-						})
+			let netInfoState = await NetInfo.fetch()
+			if (netInfoState.isConnected) {
+				const chef = this.props.loggedInChef
+				const updatedChef = await patchChef(chef.id, chef.auth_token, this.props.username, this.props.profile_text, this.props.country, this.state.updatingPassword, this.props.password, this.props.password_confirmation, this.props.imageBase64)
+				if (updatedChef) {
+					// console.log(updatedChef)
+					if (updatedChef.error) {
+						this.setState({ errors: updatedChef.message })
 					} else {
-						this.props.updateLoggedInChefInState(updatedChef.id, updatedChef.username, updatedChef.auth_token, updatedChef.image_url, updatedChef.is_admin, updatedChef.is_member)
-						this.props.clearNewUserDetails()
-						this.props.chefUpdated(true)
+						if (this.state.stayingLoggedIn) {
+							AsyncStorage.setItem('chef', JSON.stringify(updatedChef), () => {
+								AsyncStorage.getItem('chef', (err, res) => {
+									console.log(err)
+									this.props.updateLoggedInChefInState(updatedChef.id, updatedChef.username, updatedChef.auth_token, updatedChef.image_url, updatedChef.is_admin, updatedChef.is_member)
+									this.props.clearNewUserDetails()
+									this.props.chefUpdated()
+								})
+							})
+						} else {
+							this.props.updateLoggedInChefInState(updatedChef.id, updatedChef.username, updatedChef.auth_token, updatedChef.image_url, updatedChef.is_admin, updatedChef.is_member)
+							this.props.clearNewUserDetails()
+							this.props.chefUpdated(true)
+						}
 					}
 				}
+			} else {
+				this.setState({ renderOfflineMessage: true })
 			}
 		}
 
@@ -154,6 +159,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		renderContents = () => {
 			return (
 				<ScrollView>
+					{this.state.renderOfflineMessage && (
+						<OfflineMessage
+							message={`Sorry, can't do that right now.${"\n"}You appear to be offline.`}
+							topOffset={'10%'}
+							clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
+						/>)
+					}
 					<View style={[styles.modalFullScreenContainer, {
 						height: Dimensions.get('window').height,
 						width: Dimensions.get('window').width,

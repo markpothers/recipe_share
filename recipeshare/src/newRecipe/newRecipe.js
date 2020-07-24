@@ -1,7 +1,6 @@
 import React from 'react'
 import { FlatList, ScrollView, Text, Image, TextInput, TouchableOpacity, View, Keyboard, Platform, AsyncStorage, AppState } from 'react-native'
 import { connect } from 'react-redux'
-import * as Permissions from 'expo-permissions'
 import { styles } from './newRecipeStyleSheet'
 import { centralStyles } from '../centralStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -11,7 +10,6 @@ import { postRecipe } from '../fetches/postRecipe'
 import { patchRecipe } from '../fetches/patchRecipe'
 import { fetchIngredients } from '../fetches/fetchIngredients'
 import IngredientAutoComplete from './ingredientAutoComplete'
-import AppHeader from '../../navigation/appHeader'
 import PicSourceChooser from '../functionalComponents/picSourceChooser'
 import FilterMenu from '../functionalComponents/filterMenu'
 import DualOSPicker from '../functionalComponents/DualOSPicker'
@@ -23,7 +21,6 @@ import { clearedFilters } from '../dataComponents/clearedFilters'
 import { serves } from '../dataComponents/serves'
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo';
-import { CommonActions } from '@react-navigation/native'
 import { AlertPopUp } from '../alertPopUp/alertPopUp'
 
 const mapStateToProps = (state) => ({
@@ -139,14 +136,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		componentDidMount = async () => {
 			await this.setState({ awaitingServer: true })
 
-			Permissions.askAsync(Permissions.CAMERA_ROLL)
-				.then(permission => {
-					this.setState({ hasPermission: permission.status == 'granted' })
-				})
-			Permissions.askAsync(Permissions.CAMERA)
-				.then(permission => {
-					this.setState({ hasPermission: permission.status == 'granted' })
-				})
 			this.fetchIngredientsForAutoComplete()
 
 			this._unsubscribeFocus = this.props.navigation.addListener('focus', () => {
@@ -173,13 +162,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		componentDidUpdate = async () => {
-			this._unsubscribeFocus()
-			this._unsubscribeFocus()
+
 		}
 
 		componentWillUnmount = () => {
-			this.props.navigation.removeListener('focus')
-			this.props.navigation.removeListener('blur')
+			this._unsubscribeFocus()
+			this._unsubscribeFocus()
 			AppState.removeEventListener('change', this.handleAppStateChange)
 		}
 

@@ -9,9 +9,7 @@ export class ChefFeedScreen extends React.Component {
 		return (
 			<RecipesList listChoice={"chef_feed"}
 				{...this.props}
-				parentNavigator={this.props.parentNavigator}
 				queryChefID={this.props.queryChefID}
-				fetchChefDetails={this.props.fetchChefDetails}
 			/>
 		)
 	}
@@ -23,9 +21,7 @@ export class MyRecipesScreen extends React.Component {
 			<RecipesList
 				listChoice={"chef"}
 				{...this.props}
-				parentNavigator={this.props.parentNavigator}
 				queryChefID={this.props.queryChefID}
-				fetchChefDetails={this.props.fetchChefDetails}
 			/>
 		)
 	}
@@ -36,9 +32,7 @@ export class MyLikedRecipesScreen extends React.Component {
 		return (
 			<RecipesList listChoice={"chef_liked"}
 				{...this.props}
-				parentNavigator={this.props.parentNavigator}
 				queryChefID={this.props.queryChefID}
-				fetchChefDetails={this.props.fetchChefDetails}
 			/>
 		)
 	}
@@ -49,9 +43,7 @@ export class MyMadeRecipesScreen extends React.Component {
 		return (
 			<RecipesList listChoice={"chef_made"}
 				{...this.props}
-				parentNavigator={this.props.parentNavigator}
 				queryChefID={this.props.queryChefID}
-				fetchChefDetails={this.props.fetchChefDetails}
 			/>
 		)
 	}
@@ -62,9 +54,7 @@ export class ChefsFollowedScreen extends React.Component {
 		return (
 			<ChefList listChoice={"chef_followees"}
 				{...this.props}
-				parentNavigator={this.props.parentNavigator}
 				queryChefID={this.props.queryChefID}
-				fetchChefDetails={this.props.fetchChefDetails}
 			/>
 		)
 	}
@@ -76,9 +66,7 @@ export class ChefsFollowingScreen extends React.Component {
 		return (
 			<ChefList listChoice={"chef_followers"}
 				{...this.props}
-				parentNavigator={this.props.parentNavigator}
 				queryChefID={this.props.queryChefID}
-				fetchChefDetails={this.props.fetchChefDetails}
 				listKey={"chef_followers"}
 			/>
 		)

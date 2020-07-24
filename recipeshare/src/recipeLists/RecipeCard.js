@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, View, TouchableOpacity, Text, Animated } from 'react-native'
+import { Image, View, TouchableOpacity, Text } from 'react-native'
 import { styles } from './recipeListStyleSheet'
 import { databaseURL } from '../dataComponents/databaseURL'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';

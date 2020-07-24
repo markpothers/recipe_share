@@ -60,13 +60,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			// this.props.clearChefDetails()
 		}
 
-		fetchChefDetails = async () => {
-			// const chef_details = await getChefDetails(this.props.route.params.chefID, this.props.loggedInChef.auth_token)
-			// if (chef_details) {
-			//   this.props.storeChefDetails(chef_details)
-			// }
-		}
-
 		renderChefImage = () => {
 			const chef = this.props.chefs_details[`chef${this.props.route.params.chefID}`]
 			if (chef != undefined) {
@@ -120,13 +113,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			}
 		}
 
-		parentNavigator = (route, params) => {
-			route === "ChefDetails" ? this.props.navigation.push(route, { chefID: params.chefID }) : this.props.navigation.navigate(route, params)
-		}
-
 		render() {
+			console.disableYellowBox = true;
 			if (this.props.chefs_details[`chef${this.props.route.params.chefID}`] !== undefined) {
 				const chef_details = this.props.chefs_details[`chef${this.props.route.params.chefID}`]
+				// console.log(this.props.queryChefID)
 				return (
 					<SpinachAppContainer awaitingServer={this.state.awaitingServer}>
 						{this.state.renderOfflineMessage && (
@@ -145,9 +136,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								notProfile={true} />
 							<View style={styles.recipeBookContainer}>
 								<MyRecipeBookTabs
-									parentNavigator={this.parentNavigator}
 									queryChefID={chef_details.chef.id}
-									fetchChefDetails={this.fetchChefDetails}
 								/>
 							</View>
 						</ScrollView>

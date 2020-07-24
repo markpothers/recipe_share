@@ -35,20 +35,6 @@ export const styles = StyleSheet.create({
 		// backgroundColor: '#fff59b',
 		// opacity: 0.9,
 	},
-	detailsImageWrapper: {
-		borderStyle: 'solid',
-		borderWidth: 1,
-		borderColor: '#104e01',
-		width: '100%',
-		marginLeft: '0%',
-		marginRight: '0%',
-		marginTop: 3,
-		marginBottom: '1%',
-		// justifyContent: 'center',
-		// alignItems: 'center',
-		borderRadius: 5,
-		// overflow: 'hidden',
-	},
 	detailsIngredients: {
 		borderStyle: 'solid',
 		borderWidth: 1,
@@ -414,5 +400,56 @@ export const styles = StyleSheet.create({
 		height: responsiveWidth(85),
 		width: responsiveWidth(85),
 		borderRadius: 5,
+	},
+	primaryImagesScrollView: {
+		width: '100%',
+		height: 250,
+		borderWidth: 5,
+		borderColor: 'red'
+	},
+	detailsImageWrapper: {
+		borderStyle: 'solid',
+		borderWidth: 1,
+		borderColor: 'white',//'#104e01',
+		width: '100%',
+		marginLeft: '0%',
+		marginRight: '0%',
+		marginTop: 3,
+		marginBottom: '1%',
+		// justifyContent: 'center',
+		// alignItems: 'center',
+		borderRadius: 5,
+		overflow: 'hidden',
+	},
+	// primaryImageWrapper: {
+	// 	borderWidth: 1,
+	// 	borderColor: 'red'
+	// },
+	primaryImageFlatList: {
+		// borderWidth:1,
+		// borderColor: 'yellow',
+		width: responsiveWidth(100)-2,
+		// height: 175,
+		// left: 100
+		borderRadius: 5,
+		overflow: 'hidden'
+	},
+	primaryImageBlobsContainer: {
+		// borderWidth: 1,
+		// borderColor: 'red',
+		position: 'absolute',
+		alignSelf: 'center',
+		top: '90%',
+		// width: 100,
+		// height: 50,
+		flexDirection: 'row',
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	primaryImageBlob: {
+		color: '#fff59b',
+		// color: '#104e01',
+		marginHorizontal: responsiveWidth(1),
+		opacity: 0.75
 	}
 });

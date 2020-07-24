@@ -1,30 +1,50 @@
 import React from 'react'
 import { Modal, Text, View, TouchableOpacity, Dimensions, Image } from 'react-native'
+import * as Permissions from 'expo-permissions'
 import * as ImagePicker from 'expo-image-picker'
 import { styles } from './functionalComponentsStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class PicSourceChooser extends React.PureComponent {
 
+	state = {
+		hasCameraRollPermission: false,
+		hasCameraPermission: false
+	}
+
+	componentDidMount = () => {
+		Permissions.askAsync(Permissions.CAMERA_ROLL)
+			.then(permission => {
+				this.setState({ hasCameraRollPermission: permission.status == 'granted' })
+			})
+		Permissions.askAsync(Permissions.CAMERA)
+			.then(permission => {
+				this.setState({ hasCameraPermission: permission.status == 'granted' })
+			})
+	}
+
 	pickImage = async () => {
-		// console.log(this.props.index !== undefined)
-		let image = await ImagePicker.launchImageLibraryAsync({
-			allowsEditing: true,
-			aspect: [4, 3],
-			quality: 0.3,
-			base64: true
-		})
-		this.props.index !== undefined ? this.props.saveImage(image, this.props.index) : this.props.saveImage(image)
+		if (this.state.hasCameraRollPermission == 'granted') {
+			let image = await ImagePicker.launchImageLibraryAsync({
+				allowsEditing: true,
+				aspect: [4, 3],
+				quality: 0.3,
+				base64: true
+			})
+			this.props.index !== undefined ? this.props.saveImage(image, this.props.index) : this.props.saveImage(image)
+		}
 	}
 
 	openCamera = async () => {
-		let image = await ImagePicker.launchCameraAsync({
-			allowsEditing: true,
-			aspect: [4, 3],
-			quality: 0.3,
-			base64: true
-		})
-		this.props.index !== undefined ? this.props.saveImage(image, this.props.index) : this.props.saveImage(image)
+		if (this.state.hasCameraPermission == 'granted') {
+			let image = await ImagePicker.launchCameraAsync({
+				allowsEditing: true,
+				aspect: [4, 3],
+				quality: 0.3,
+				base64: true
+			})
+			this.props.index !== undefined ? this.props.saveImage(image, this.props.index) : this.props.saveImage(image)
+		}
 	}
 
 	deleteImage = () => {
@@ -36,8 +56,7 @@ export default class PicSourceChooser extends React.PureComponent {
 	}
 
 	render() {
-		console.log('pic chooser rendering')
-		console.log(this.props)
+		// console.log('pic chooser rendering')
 		return (
 			<Modal
 				animationType="fade"

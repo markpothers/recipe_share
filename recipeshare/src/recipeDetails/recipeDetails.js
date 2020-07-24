@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, ScrollView, View, ImageBackground, Text, TouchableOpacity, KeyboardAvoidingView, ActivityIndicator, Platform } from 'react-native';
+import { Image, ScrollView, View, ImageBackground, Text, TouchableOpacity, KeyboardAvoidingView, ActivityIndicator, Platform, FlatList } from 'react-native';
 import { connect } from 'react-redux'
 import { styles } from './recipeDetailsStyleSheet'
 import { centralStyles } from '../centralStyleSheet'
@@ -90,7 +90,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			awaitingServer: false,
 			scrollEnabled: true,
 			makePicBase64: "",
-			renderOfflineMessage: false
+			renderOfflineMessage: false,
+			primaryImageFlatListWidth: 0,
+			primaryImageDisplayedIndex: 0
 		}
 
 		componentDidMount = async () => {
@@ -114,14 +116,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		editRecipe = async () => {
-			let netInfoState = await NetInfo.fetch()
-			if (netInfoState.isConnected) {
-				await this.setState({ awaitingServer: true })
-				this.props.navigation.navigate('NewRecipe', { recipe_details: this.props.recipe_details })
-				await this.setState({ awaitingServer: false })
-			} else {
-				this.setState({ renderOfflineMessage: true })
-			}
+			await this.setState({ awaitingServer: true })
+			this.props.navigation.navigate('NewRecipe', { recipe_details: this.props.recipe_details })
+			await this.setState({ awaitingServer: false })
 		}
 
 		deleteRecipe = async () => {
@@ -149,12 +146,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						</TouchableOpacity>
 					</View>
 				)
-			}
-		}
-
-		renderRecipeImages = () => {
-			if (this.props.recipe_details.recipe_images.length !== 0) {
-				return <Image style={[{ width: '100%', height: 250 }, styles.detailsImage]} source={{ uri: this.props.recipe_details.recipe_images[0].image_url }}></Image>
 			}
 		}
 
@@ -561,6 +552,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				/>
 			)
 		}
+		
+		renderPrimaryImageBlobs = () => {
+			return this.props.recipe_details.recipe_images.map((image, index) => {
+				if (this.state.primaryImageDisplayedIndex == index){
+					return <Icon key={image.hex} name={'checkbox-blank-circle'} size={responsiveHeight(3)} style={styles.primaryImageBlob} />
+				} else {
+					return <Icon key={image.hex} name={'checkbox-blank-circle-outline'} size={responsiveHeight(3)} style={styles.primaryImageBlob} />
+				}
+			})
+		}
 
 		render() {
 			if (this.props.recipe_details != undefined && this.props.recipe_details != null) {
@@ -576,7 +577,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						}
 						{this.state.choosingPicSource && this.renderPictureChooser()}
 						{this.state.instructionImagePopupShowing && <InstructionImagePopup imageURL={this.state.instructionImagePopupURL} />}
-						<ScrollView contentContainerStyle={{ flexGrow: 1 }} ref={(ref) => this.myScroll = ref} scrollEnabled={this.state.scrollEnabled}>
+						<ScrollView
+							contentContainerStyle={{ flexGrow: 1 }}
+							ref={(ref) => this.myScroll = ref}
+							scrollEnabled={this.state.scrollEnabled}
+							nestedScrollEnabled={true}
+						>
 							<View style={styles.detailsHeader}>
 								<View style={styles.detailsHeaderTopRow}>
 									<View style={styles.headerTextView}>
@@ -601,7 +607,24 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								</View>
 							</View>
 							<View style={styles.detailsImageWrapper}>
-								{this.renderRecipeImages()}
+								<FlatList
+									data={this.props.recipe_details.recipe_images}
+									renderItem={item => <Image style={[{ width: responsiveWidth(100)-2, height: responsiveWidth(75) }]} source={{ uri: item.item.image_url }} resizeMode={"cover"}></Image>}
+									keyExtractor={(item) => item.hex}
+									horizontal={true}
+									style={styles.primaryImageFlatList}
+									pagingEnabled={true}
+									onLayout={(event) => {
+										var { x, y, width, height } = event.nativeEvent.layout
+										this.setState({primaryImageFlatListWidth: width})
+									}}
+									onMomentumScrollEnd={e => {
+										this.setState({primaryImageDisplayedIndex: e.nativeEvent.contentOffset.x/this.state.primaryImageFlatListWidth})
+									}}
+								/>
+								<View style={styles.primaryImageBlobsContainer}>
+									{this.props.recipe_details.recipe_images.length > 1 && this.renderPrimaryImageBlobs()}
+								</View>
 							</View>
 							<View style={styles.detailsIngredients}>
 								<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Ingredients:</Text>

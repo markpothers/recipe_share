@@ -167,7 +167,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						awaitingServer: false,
 						filterDisplayed: false
 					})
-					this.props.parentNavigator ? this.props.parentNavigator('RecipeDetails', { recipeID: recipeID, commenting: commenting }) : this.props.navigation.navigate('RecipeDetails', { recipeID: recipeID, commenting: commenting })
+					this.props.navigation.navigate('RecipeDetails', { recipeID: recipeID, commenting: commenting })
 				}
 			} catch (e) {
 				// console.log('looking for local recipes')
@@ -178,7 +178,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						if (thisRecipeDetails) {
 							this.props.storeRecipeDetails(thisRecipeDetails)
 							this.setState({ awaitingServer: false })
-							this.props.parentNavigator ? this.props.parentNavigator('RecipeDetails', { recipeID: recipeID, commenting: commenting }) : this.props.navigation.navigate('RecipeDetails', { recipeID: recipeID, commenting: commenting })
+							this.props.navigation.navigate('RecipeDetails', { recipeID: recipeID, commenting: commenting })
 						} else {
 							// console.log('recipe not present in saved list')
 							this.setState(state => {
@@ -210,7 +210,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					this.props.storeChefDetails(chefDetails)
 					saveChefDetailsLocally(chefDetails, this.props.loggedInChef.id)
 					await this.setState({ awaitingServer: false })
-					this.props.parentNavigator ? this.props.parentNavigator('ChefDetails', { chefID: chefID }) : this.props.navigation.navigate('ChefDetails', { chefID: chefID })
+					this.props.navigation.navigate('ChefDetails', { chefID: chefID })
 				}
 			} catch (e) {
 				// console.log('looking for local chefs')
@@ -222,7 +222,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						if (thisChefDetails) {
 							this.props.storeChefDetails(thisChefDetails)
 							this.setState({ awaitingServer: false })
-							this.props.parentNavigator ? this.props.parentNavigator('ChefDetails', { chefID: chefID }) : this.props.navigation.navigate('ChefDetails', { chefID: chefID })
+							this.props.navigation.navigate('ChefDetails', { chefID: chefID })
 						} else {
 							// console.log('recipe not present in saved list')
 							this.setState(state => {
@@ -467,7 +467,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		render() {
-			// console.log(this.state.recipeICantGet)
 			return (
 				<SpinachAppContainer awaitingServer={this.state.awaitingServer}>
 					{this.state.renderOfflineMessage && (

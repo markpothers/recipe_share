@@ -233,6 +233,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		navigateToChefDetails = async (chefID) => {
+			// console.log('parent navigator?')
+			// console.log(this.props)
 			await this.setState({ awaitingServer: true })
 			try {
 				const chefDetails = await getChefDetails(chefID, this.props.loggedInChef.auth_token)
@@ -240,7 +242,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					this.props.storeChefDetails(chefDetails)
 					saveChefDetailsLocally(chefDetails, this.props.loggedInChef.id)
 					await this.setState({ awaitingServer: false })
-					this.props.parentNavigator ? this.props.parentNavigator('ChefDetails', { chefID: chefID }) : this.props.navigation.navigate('ChefDetails', { chefID: chefID })
+					this.props.navigation.push('ChefDetails', { chefID: chefID })
 				}
 			} catch (e) {
 				console.log('looking for local chefs')
@@ -252,7 +254,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						if (thisChefDetails) {
 							this.props.storeChefDetails(thisChefDetails)
 							this.setState({ awaitingServer: false })
-							this.props.parentNavigator ? this.props.parentNavigator('ChefDetails', { chefID: chefID }) : this.props.navigation.navigate('ChefDetails', { chefID: chefID })
+							this.props.navigation.push('ChefDetails', { chefID: chefID })
 						} else {
 							// console.log('recipe not present in saved list')
 							this.setState(state => {
@@ -284,7 +286,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		render() {
-			//   console.log(this.props.parentNavigator)
+			//   console.log(this.props.route)
 			return (
 				<SpinachAppContainer awaitingServer={this.state.awaitingServer}>
 					{this.state.renderOfflineMessage && (

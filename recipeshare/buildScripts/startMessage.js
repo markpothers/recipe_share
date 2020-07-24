@@ -1,1 +1,2 @@
-console.log('Starting server for debugging!')
+
+console.log('Starting server for debugging!') //eslint-disable-line no-console

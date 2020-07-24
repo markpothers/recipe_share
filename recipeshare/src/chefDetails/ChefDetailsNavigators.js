@@ -35,54 +35,35 @@ export const MyRecipeBookTabs = (props) => {
 			}}
 		>
 			{/* <Tab.Screen
-				name="ChefFeed"
-				component={ChefFeedScreen}
-				fetchChefDetails={fwdProps.fetchChefDetails}
-				parentNavigator={fwdProps.parentNavigator}
-				queryChefId={fwdProps.queryChefId}
-			/> */}
+				name="My Feed"
+			>
+				{props => <ChefFeedScreen {...props} queryChefID={fwdProps.queryChefID} />}
+			</Tab.Screen> */}
 			<Tab.Screen
 				name="My Recipes"
-				component={MyRecipesScreen}
-				fetchChefDetails={fwdProps.fetchChefDetails}
-				parentNavigator={fwdProps.parentNavigator}
-				queryChefId={fwdProps.queryChefId}
-			/>
+			>
+				{props => <MyRecipesScreen {...props} queryChefID={fwdProps.queryChefID} />}
+			</Tab.Screen>
 			<Tab.Screen
 				name="Recipes I like"
-				component={MyLikedRecipesScreen}
-				fetchChefDetails={fwdProps.fetchChefDetails}
-				parentNavigator={fwdProps.parentNavigator}
-				queryChefId={fwdProps.queryChefId}
-			/>
+			>
+				{props => <MyLikedRecipesScreen {...props} queryChefID={fwdProps.queryChefID} />}
+			</Tab.Screen>
 			{/* <Tab.Screen
-				name="MyMadeRecipes"
-				component={MyMadeRecipesScreen}
-				fetchChefDetails={fwdProps.fetchChefDetails}
-				parentNavigator={fwdProps.parentNavigator}
-				queryChefId={fwdProps.queryChefId}
-			/> */}
+				name="Recipes I've made"
+			>
+				{props => <MyMadeRecipesScreen {...props} queryChefID={fwdProps.queryChefID} />}
+			</Tab.Screen> */}
 			<Tab.Screen
 				name="Chefs I Follow"
-				component={ChefsFollowedScreen}
-				fetchChefDetails={fwdProps.fetchChefDetails}
-				parentNavigator={fwdProps.parentNavigator}
-				queryChefId={fwdProps.queryChefId}
-			/>
+			>
+				{props => <ChefsFollowedScreen {...props} queryChefID={fwdProps.queryChefID} />}
+			</Tab.Screen>
 			<Tab.Screen
 				name="Chefs Following Me"
-				component={ChefsFollowingScreen}
-				fetchChefDetails={fwdProps.fetchChefDetails}
-				parentNavigator={fwdProps.parentNavigator}
-				queryChefId={fwdProps.queryChefId}
-			/>
-			{/* <Tab.Screen
-				name="MostMadeChefs"
-				component={MostMadeChefsScreen}
-				fetchChefDetails={fwdProps.fetchChefDetails}
-				parentNavigator={fwdProps.parentNavigator}
-				queryChefId={fwdProps.queryChefId}
-			/> */}
+			>
+				{props => <ChefsFollowingScreen {...props} queryChefID={fwdProps.queryChefID} />}
+			</Tab.Screen>
 		</Tab.Navigator>
 	)
 }

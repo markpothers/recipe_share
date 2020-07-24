@@ -1,7 +1,6 @@
 import React from 'react'
 import { Platform, Text, TouchableOpacity, TextInput, View, Switch } from 'react-native'
 import { countries } from '../dataComponents/countries'
-import * as Permissions from 'expo-permissions'
 import { connect } from 'react-redux'
 import { postChef } from '../fetches/postChef'
 import { styles } from './usersStyleSheet'
@@ -14,6 +13,8 @@ import { termsAndConditions } from '../dataComponents/termsAndConditions'
 import { privacyPolicy } from '../dataComponents/privacyPolicy'
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions'
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
+import OfflineMessage from '../offlineMessage/offlineMessage'
+import NetInfo from '@react-native-community/netinfo';
 
 const mapStateToProps = (state) => ({
 	first_name: state.newUserDetails.first_name,
@@ -61,14 +62,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		componentDidMount() {
-			Permissions.askAsync(Permissions.CAMERA_ROLL)
-				.then(permission => {
-					this.setState({ hasPermission: permission.status == 'granted' })
-				})
-			Permissions.askAsync(Permissions.CAMERA)
-				.then(permission => {
-					this.setState({ hasPermission: permission.status == 'granted' })
-				})
+
 		}
 
 		handleTextInput = (e, parameter) => {
@@ -95,15 +89,23 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		submitChef = async () => {
-			await this.setState({ awaitingServer: true })
-			console.log("sending new user details")
-			const chef = await postChef(this.props.username, this.props.e_mail, this.props.password, this.props.password_confirmation, this.props.country, this.props.image_url, this.props.profile_text)
-			if (!chef.error) {
-				this.props.clearNewUserDetails()
-				this.props.navigation.navigate('Login')
+			let netInfoState = await NetInfo.fetch()
+			if (netInfoState.isConnected) {
+				await this.setState({ awaitingServer: true })
+				// console.log("sending new user details")
+				const chef = await postChef(this.props.username, this.props.e_mail, this.props.password, this.props.password_confirmation, this.props.country, this.props.image_url, this.props.profile_text)
+				if (!chef.error) {
+					this.props.clearNewUserDetails()
+					this.props.navigation.navigate('Login')
+				} else {
+					this.setState({ errors: chef.message })
+					await this.setState({ awaitingServer: false })
+				}
 			} else {
-				this.setState({ errors: chef.message })
-				await this.setState({ awaitingServer: false })
+				this.setState({
+					renderOfflineMessage: true,
+					awaitingServer: false
+				})
 			}
 		}
 
@@ -150,6 +152,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			// console.log(this.props.saveChefDetails)
 			return (
 				<SpinachAppContainer scrollingEnabled={true} awaitingServer={this.state.awaitingServer}>
+					{this.state.renderOfflineMessage && (
+						<OfflineMessage
+							message={`Sorry, can't do right now.${"\n"}You appear to be offline.`}
+							topOffset={'10%'}
+							clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
+						/>)
+					}
 					{this.state.choosingPicture ? this.renderPictureChooser() : null}
 					<View style={[centralStyles.formContainer, { marginTop: responsiveHeight(10) }]}>
 						{/* title */}
