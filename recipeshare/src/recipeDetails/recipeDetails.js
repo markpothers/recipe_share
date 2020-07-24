@@ -552,10 +552,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				/>
 			)
 		}
-		
+
 		renderPrimaryImageBlobs = () => {
 			return this.props.recipe_details.recipe_images.map((image, index) => {
-				if (this.state.primaryImageDisplayedIndex == index){
+				if (this.state.primaryImageDisplayedIndex == index) {
 					return <Icon key={image.hex} name={'checkbox-blank-circle'} size={responsiveHeight(3)} style={styles.primaryImageBlob} />
 				} else {
 					return <Icon key={image.hex} name={'checkbox-blank-circle-outline'} size={responsiveHeight(3)} style={styles.primaryImageBlob} />
@@ -609,17 +609,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							<View style={styles.detailsImageWrapper}>
 								<FlatList
 									data={this.props.recipe_details.recipe_images}
-									renderItem={item => <Image style={[{ width: responsiveWidth(100)-2, height: responsiveWidth(75) }]} source={{ uri: item.item.image_url }} resizeMode={"cover"}></Image>}
+									renderItem={item => <Image style={[{ width: responsiveWidth(100) - 2, height: responsiveWidth(75) }]} source={{ uri: item.item.image_url }} resizeMode={"cover"}></Image>}
 									keyExtractor={(item) => item.hex}
 									horizontal={true}
 									style={styles.primaryImageFlatList}
 									pagingEnabled={true}
 									onLayout={(event) => {
 										var { x, y, width, height } = event.nativeEvent.layout
-										this.setState({primaryImageFlatListWidth: width})
+										this.setState({ primaryImageFlatListWidth: width })
 									}}
 									onMomentumScrollEnd={e => {
-										this.setState({primaryImageDisplayedIndex: e.nativeEvent.contentOffset.x/this.state.primaryImageFlatListWidth})
+										this.setState({ primaryImageDisplayedIndex: e.nativeEvent.contentOffset.x / this.state.primaryImageFlatListWidth })
 									}}
 								/>
 								<View style={styles.primaryImageBlobsContainer}>
