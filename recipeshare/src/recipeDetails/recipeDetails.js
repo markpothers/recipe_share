@@ -1,11 +1,10 @@
 import React from 'react';
-import { Image, ScrollView, View, ImageBackground, Text, TouchableOpacity, KeyboardAvoidingView, ActivityIndicator, Platform, FlatList } from 'react-native';
+import { Image, ScrollView, View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { connect } from 'react-redux'
 import { styles } from './recipeDetailsStyleSheet'
-import { centralStyles } from '../centralStyleSheet'
+// import { centralStyles } from '../centralStyleSheet'
 import { postRecipeLike } from '../fetches/postRecipeLike'
 import { postMakePic } from '../fetches/postMakePic'
-import { getRecipeDetails } from '../fetches/getRecipeDetails'
 import { postReShare } from '../fetches/postReShare'
 import { postRecipeMake } from '../fetches/postRecipeMake'
 import { postComment } from '../fetches/postComment'
@@ -16,14 +15,13 @@ import { destroyRecipe } from '../fetches/destroyRecipe'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import RecipeComment from './recipeComment'
 import RecipeNewComment from './recipeNewComment';
-import AppHeader from '../../navigation/appHeader'
 import PicSourceChooser from '../functionalComponents/picSourceChooser'
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions';
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import { InstructionImagePopup } from './instructionImagePopup'
-import saveRecipeDetailsLocally from '../functionalComponents/saveRecipeDetailsLocally'
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo';
+import { AlertPopUp } from '../alertPopUp/alertPopUp'
 
 const mapStateToProps = (state) => ({
 	recipe_details: state.recipe_details,
@@ -92,7 +90,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			makePicBase64: "",
 			renderOfflineMessage: false,
 			primaryImageFlatListWidth: 0,
-			primaryImageDisplayedIndex: 0
+			primaryImageDisplayedIndex: 0,
+			deleteMakePicPopUpShowing: false,
+			deleteCommentPopUpShowing: false,
+			editRecipePopUpShowing: false,
+			deleteRecipePopUpShowing: false,
+			makePicToDelete: 0,
+			commentToDelete: 0,
 		}
 
 		componentDidMount = async () => {
@@ -111,12 +115,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			await this.setState({ awaitingServer: false })
 		}
 
-		scrolled = (e) => {
+		scrolled = () => {
 			// console.log(e.nativeEvent)
 		}
 
 		editRecipe = async () => {
-			await this.setState({ awaitingServer: true })
+			await this.setState({
+				awaitingServer: true,
+				editRecipePopUpShowing: false
+			})
 			this.props.navigation.navigate('NewRecipe', { recipe_details: this.props.recipe_details })
 			await this.setState({ awaitingServer: false })
 		}
@@ -130,7 +137,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					this.props.navigation.goBack()
 				}
 			} else {
-				this.setState({ renderOfflineMessage: true })
+				this.setState({
+					renderOfflineMessage: true,
+					deleteRecipePopUpShowing: false
+				})
 			}
 		}
 
@@ -138,10 +148,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			if (this.props.recipe_details.recipe.chef_id === this.props.loggedInChef.id || this.props.loggedInChef.is_admin) {
 				return (
 					<View style={styles.detailsHeaderButtonsContainer}>
-						<TouchableOpacity style={styles.headerButton} onPress={this.editRecipe}>
+						<TouchableOpacity style={styles.headerButton} onPress={() => this.setState({ editRecipePopUpShowing: true })}>
 							<Icon name='playlist-edit' size={responsiveHeight(3.5)} style={styles.headerIcon} />
 						</TouchableOpacity>
-						<TouchableOpacity style={styles.headerButton} onPress={this.deleteRecipe}>
+						<TouchableOpacity style={styles.headerButton} onPress={() => this.setState({ deleteRecipePopUpShowing: true })}>
 							<Icon name='trash-can-outline' size={responsiveHeight(3.5)} style={styles.headerIcon} />
 						</TouchableOpacity>
 					</View>
@@ -153,16 +163,22 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			const ingredient_uses = this.props.recipe_details.ingredient_uses
 			const list_values = ingredient_uses.map(ingredient_use => [ingredient_use.ingredient_id, ingredient_use.quantity, ingredient_use.unit])
 			const ingredients = list_values.map(list_value => [...list_value, (this.props.recipe_details.ingredients.find(ingredient => ingredient.id == list_value[0]).name)])
-			return ingredients.map(ingredient => (
-				<View style={styles.ingredientsTable} key={`${ingredient[0]}${ingredient[3]}${ingredient[1]}${ingredient[2]}`}>
-					<View style={styles.ingredientsTableLeft}>
-						<Text maxFontSizeMultiplier={2} style={[styles.detailsContents, styles.ingredientName]}>{ingredient[3]}</Text>
+			return ingredients.map((ingredient, index) => (
+				<React.Fragment key={`${ingredient[0]}${ingredient[3]}${ingredient[1]}${ingredient[2]}`}>
+					<View style={styles.ingredientsTable}>
+						<View style={styles.ingredientsTableLeft}>
+							<Text maxFontSizeMultiplier={2} style={[styles.detailsContents, styles.ingredientName]}>{ingredient[3]}</Text>
+						</View>
+						<View style={styles.ingredientsTableRight}>
+							<Text maxFontSizeMultiplier={2} style={[styles.detailsContents, styles.ingredientQuantity]}>{ingredient[1]}</Text>
+							< Text maxFontSizeMultiplier={2} style={[styles.detailsContents, styles.ingredientUnit]}>{ingredient[2]}</Text>
+						</View>
 					</View>
-					<View style={styles.ingredientsTableRight}>
-						<Text maxFontSizeMultiplier={2} style={[styles.detailsContents, styles.ingredientQuantity]}>{ingredient[1]}</Text>
-						< Text maxFontSizeMultiplier={2} style={[styles.detailsContents, styles.ingredientUnit]}>{ingredient[2]}</Text>
-					</View>
-				</View>
+					{index < ingredients.length - 1 && (
+						<View style={styles.detailsIngredientsSeparator}>
+						</View>
+					)}
+				</React.Fragment>
 			))
 		}
 
@@ -179,7 +195,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				if (make_pic.chef_id === this.props.loggedInChef.id || this.props.loggedInChef.is_admin) {
 					return (
 						<TouchableOpacity
-							style={styles.instructionImageContainer}
 							delayPressIn={100}
 							onPressIn={() => {
 								this.setState({
@@ -200,10 +215,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								bottom: responsiveHeight(100),
 								right: responsiveWidth(100)
 							}}
-							key={`${make_pic.id}${make_pic.image_url}`} style={styles.makePicContainer}
+							key={`${make_pic.id}${make_pic.image_url}`}
+							style={styles.makePicContainer}
 						>
 							<Image style={[{ width: '100%', height: '100%' }, styles.makePic]} source={{ uri: make_pic.image_url }}></Image>
-							<TouchableOpacity style={styles.makePicTrashCanButton} onPress={() => this.deleteMakePic(make_pic.id)}>
+							<TouchableOpacity style={styles.makePicTrashCanButton} onPress={() => this.setState({ deleteMakePicPopUpShowing: true, makePicToDelete: make_pic.id })}>
 								<Icon name='trash-can-outline' size={responsiveHeight(3.5)} style={[styles.icon, styles.makePicTrashCan]} />
 							</TouchableOpacity>
 						</TouchableOpacity>
@@ -211,7 +227,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				} else {
 					return (
 						<TouchableOpacity
-							style={styles.instructionImageContainer}
 							delayPressIn={100}
 							onPressIn={() => {
 								this.setState({
@@ -232,7 +247,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								bottom: responsiveHeight(100),
 								right: responsiveWidth(100)
 							}}
-							key={`${make_pic.id}${make_pic.image_url}`} style={styles.makePicContainer}
+							key={`${make_pic.id}${make_pic.image_url}`}
+							style={styles.makePicContainer}
 						>
 							<Image style={[{ width: '100%', height: '100%' }, styles.makePic]} source={{ uri: make_pic.image_url }}></Image>
 						</TouchableOpacity>
@@ -245,11 +261,20 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			if (this.props.recipe_details.comments.length > 0 || this.state.commenting) {
 				return (
 					this.props.recipe_details.comments.map(comment => {
-						return <RecipeComment newCommentView={this.newCommentView} key={`${comment.id} ${comment.comment}`} {...comment} loggedInChefID={this.props.loggedInChef.id} is_admin={this.props.loggedInChef.is_admin} deleteComment={this.deleteComment} />
+						return (
+							<RecipeComment
+								newCommentView={this.newCommentView}
+								key={`${comment.id} ${comment.comment}`}
+								{...comment}
+								loggedInChefID={this.props.loggedInChef.id}
+								is_admin={this.props.loggedInChef.is_admin}
+								askDeleteComment={this.askDeleteComment}
+							/>
+						)
 					})
 				)
 			} else {
-				return <Text maxFontSizeMultiplier={2} style={[styles.detailsContents]}>No comments yet. Be the first!</Text>
+				return <Text maxFontSizeMultiplier={2} style={styles.detailsContents}>No comments yet. Be the first!</Text>
 			}
 		}
 
@@ -295,7 +320,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.addRecipeLike()
 					}
 				} catch {
-					await this.setState(state => ({ renderOfflineMessage: true }))
+					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({ awaitingServer: false })
 			} else {
@@ -313,7 +338,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.removeRecipeLike()
 					}
 				} catch {
-					await this.setState(state => ({ renderOfflineMessage: true }))
+					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({ awaitingServer: false })
 			} else {
@@ -331,7 +356,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.addRecipeMake()
 					}
 				} catch {
-					await this.setState(state => ({ renderOfflineMessage: true }))
+					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({ awaitingServer: false })
 			} else {
@@ -349,7 +374,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.addReShare()
 					}
 				} catch {
-					await this.setState(state => ({ renderOfflineMessage: true }))
+					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({ awaitingServer: false })
 			} else {
@@ -387,21 +412,28 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			})
 		}
 
-		deleteMakePic = async (makePicID) => {
+		deleteMakePic = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
 				await this.setState({ awaitingServer: true })
 				try {
-					const destroyed = await destroyMakePic(this.props.loggedInChef.id, this.props.loggedInChef.auth_token, makePicID)
+					const destroyed = await destroyMakePic(this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.state.makePicToDelete)
 					if (destroyed) {
-						this.props.saveRemainingMakePics(this.props.recipe_details.make_pics.filter(pic => pic.id !== makePicID))
+						this.props.saveRemainingMakePics(this.props.recipe_details.make_pics.filter(pic => pic.id !== this.state.makePicToDelete))
 					}
+					await this.setState({ deleteMakePicPopUpShowing: false })
 				} catch {
-					await this.setState(state => ({ renderOfflineMessage: true }))
+					await this.setState({ renderOfflineMessage: true })
 				}
-				await this.setState({ awaitingServer: false })
+				await this.setState({
+					awaitingServer: false,
+					deleteMakePicPopUpShowing: false
+				})
 			} else {
-				this.setState({ renderOfflineMessage: true })
+				this.setState({
+					renderOfflineMessage: true,
+					deleteMakePicPopUpShowing: false
+				})
 			}
 		}
 
@@ -433,7 +465,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					})
 				}
 			} catch {
-				await this.setState(state => ({ renderOfflineMessage: true }))
+				await this.setState({ renderOfflineMessage: true })
 			}
 			await this.setState({ awaitingServer: false })
 		}
@@ -442,19 +474,35 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			this.setState({ commentText: commentText })
 		}
 
-		deleteComment = async (commentID) => {
+		askDeleteComment = (commentID) => {
+			this.setState({
+				deleteCommentPopUpShowing: true,
+				commentToDelete: commentID
+			})
+		}
+
+		deleteComment = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
+				await this.setState({ awaitingServer: true })
 				try {
-					const comments = await destroyComment(this.props.loggedInChef.auth_token, commentID)
+					const comments = await destroyComment(this.props.loggedInChef.auth_token, this.state.commentToDelete)
 					if (comments) {
 						this.props.updateComments(comments)
 					}
+					await this.setState({ deleteCommentPopUpShowing: false })
 				} catch {
-					await this.setState(state => ({ renderOfflineMessage: true }))
+					await this.setState({ renderOfflineMessage: true })
 				}
+				await this.setState({
+					awaitingServer: false,
+					deleteCommentPopUpShowing: false,
+				})
 			} else {
-				this.setState({ renderOfflineMessage: true })
+				this.setState({
+					renderOfflineMessage: true,
+					deleteCommentPopUpShowing: false
+				})
 			}
 		}
 
@@ -464,7 +512,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				return (
 					<View style={styles.detailsContainer}>
 						<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Categories:</Text>
-						<Text maxFontSizeMultiplier={2} style={[styles.detailsContents]}>{categories.join(",  ")}</Text>
+						<Text maxFontSizeMultiplier={2} style={styles.detailsContents}>{categories.join(",  ")}</Text>
 					</View>
 				)
 			} else {
@@ -476,7 +524,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			return (
 				<View style={styles.detailsContainer}>
 					<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Acknowledgement:</Text>
-					<Text maxFontSizeMultiplier={2} style={[styles.detailsContents]}>{this.props.recipe_details.recipe.acknowledgement}</Text>
+					<Text maxFontSizeMultiplier={2} style={styles.detailsContents}>{this.props.recipe_details.recipe.acknowledgement}</Text>
+				</View>
+			)
+		}
+
+		renderDescription = () => {
+			return (
+				<View style={styles.detailsContainer}>
+					<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Description:</Text>
+					<Text maxFontSizeMultiplier={2} style={styles.detailsContents}>{this.props.recipe_details.recipe.description}</Text>
 				</View>
 			)
 		}
@@ -485,7 +542,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			return (
 				<View style={styles.detailsContainer}>
 					<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Cuisine:</Text>
-					<Text maxFontSizeMultiplier={2} style={[styles.detailsContents]}>{this.props.recipe_details.recipe.cuisine}</Text>
+					<Text maxFontSizeMultiplier={2} style={styles.detailsContents}>{this.props.recipe_details.recipe.cuisine}</Text>
 				</View>
 			)
 		}
@@ -498,7 +555,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					<React.Fragment key={instruction.step}>
 						<View style={styles.detailsInstructionContainer}>
 							<View style={[styles.detailsInstructions, { width: (instructionImage ? responsiveWidth(73) : responsiveWidth(98)) }]}>
-								<Text maxFontSizeMultiplier={2} style={[styles.detailsContents]}>{instruction.instruction}</Text>
+								<Text maxFontSizeMultiplier={2} style={styles.detailsContents}>{instruction.instruction}</Text>
 							</View>
 							{instructionImage && (
 								<TouchableOpacity
@@ -563,6 +620,46 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			})
 		}
 
+		renderDeleteMakePicAlertPopUp = () => {
+			return (
+				<AlertPopUp
+					close={() => this.setState({ deleteMakePicPopUpShowing: false })}
+					title={"Are you sure you want to delete this picture?"}
+					onYes={() => this.deleteMakePic(this.state.makePicToDelete)}
+				/>
+			)
+		}
+
+		renderDeleteCommentAlertPopUp = () => {
+			return (
+				<AlertPopUp
+					close={() => this.setState({ deleteCommentPopUpShowing: false })}
+					title={"Are you sure you want to delete this comment?"}
+					onYes={() => this.deleteComment(this.state.commentToDelete)}
+				/>
+			)
+		}
+
+		renderEditRecipeAlertPopUp = () => {
+			return (
+				<AlertPopUp
+					close={() => this.setState({ editRecipePopUpShowing: false })}
+					title={"Are you sure you want to edit this recipe?"}
+					onYes={this.editRecipe}
+				/>
+			)
+		}
+
+		renderDeleteRecipeAlertPopUp = () => {
+			return (
+				<AlertPopUp
+					close={() => this.setState({ deleteRecipePopUpShowing: false })}
+					title={"Are you sure you want to delete this recipe?"}
+					onYes={this.deleteRecipe}
+				/>
+			)
+		}
+
 		render() {
 			if (this.props.recipe_details != undefined && this.props.recipe_details != null) {
 				// console.log(this.state.makePicBase64)
@@ -575,6 +672,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
 							/>)
 						}
+						{this.state.deleteMakePicPopUpShowing && this.renderDeleteMakePicAlertPopUp()}
+						{this.state.deleteCommentPopUpShowing && this.renderDeleteCommentAlertPopUp()}
+						{this.state.editRecipePopUpShowing && this.renderEditRecipeAlertPopUp()}
+						{this.state.deleteRecipePopUpShowing && this.renderDeleteRecipeAlertPopUp()}
 						{this.state.choosingPicSource && this.renderPictureChooser()}
 						{this.state.instructionImagePopupShowing && <InstructionImagePopup imageURL={this.state.instructionImagePopupURL} />}
 						<ScrollView
@@ -586,7 +687,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							<View style={styles.detailsHeader}>
 								<View style={styles.detailsHeaderTopRow}>
 									<View style={styles.headerTextView}>
-										<Text maxFontSizeMultiplier={2} style={[styles.detailsHeaderTextBox]}>{this.props.recipe_details.recipe.name}</Text>
+										<Text maxFontSizeMultiplier={2} style={styles.detailsHeaderTextBox}>{this.props.recipe_details.recipe.name}</Text>
 									</View>
 									{this.renderEditDeleteButtons()}
 								</View>
@@ -595,45 +696,56 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								<View style={styles.detailsLikes}>
 									<View style={styles.buttonAndText}>
 										{this.renderLikeButton()}
-										<Text maxFontSizeMultiplier={2} style={[styles.detailsLikesAndMakesUpperContents]}>Likes: {this.props.recipe_details.recipe_likes}</Text>
+										<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesUpperContents}>Likes: {this.props.recipe_details.recipe_likes}</Text>
 									</View>
 									<View style={styles.buttonAndText}>
-										<Text maxFontSizeMultiplier={2} style={[styles.detailsLikesAndMakesLowerContents]}>Serves: {this.props.recipe_details.recipe.serves}</Text>
+										<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesLowerContents}>Serves: {this.props.recipe_details.recipe.serves}</Text>
 									</View>
 								</View>
 								<View style={styles.detailsLikes}>
-									<Text maxFontSizeMultiplier={2} style={[styles.detailsLikesAndMakesLowerContents]}>Time: {this.props.recipe_details.recipe.time}</Text>
-									<Text maxFontSizeMultiplier={2} style={[styles.detailsLikesAndMakesLowerContents]}>Difficulty: {this.props.recipe_details.recipe.difficulty}</Text>
+									<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesLowerContents}>Time: {this.props.recipe_details.recipe.time}</Text>
+									<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesLowerContents}>Difficulty: {this.props.recipe_details.recipe.difficulty}</Text>
 								</View>
 							</View>
-							<View style={styles.detailsImageWrapper}>
-								<FlatList
-									data={this.props.recipe_details.recipe_images}
-									renderItem={item => <Image style={[{ width: responsiveWidth(100) - 2, height: responsiveWidth(75) }]} source={{ uri: item.item.image_url }} resizeMode={"cover"}></Image>}
-									keyExtractor={(item) => item.hex}
-									horizontal={true}
-									style={styles.primaryImageFlatList}
-									pagingEnabled={true}
-									onLayout={(event) => {
-										var { x, y, width, height } = event.nativeEvent.layout
-										this.setState({ primaryImageFlatListWidth: width })
-									}}
-									onMomentumScrollEnd={e => {
-										this.setState({ primaryImageDisplayedIndex: e.nativeEvent.contentOffset.x / this.state.primaryImageFlatListWidth })
-									}}
-								/>
-								<View style={styles.primaryImageBlobsContainer}>
-									{this.props.recipe_details.recipe_images.length > 1 && this.renderPrimaryImageBlobs()}
+							{(this.props.recipe_details.recipe.description != "" && this.props.recipe_details.recipe.description != null) && this.renderDescription()}
+							{this.props.recipe_details.recipe_images?.length > 0 && (
+								<View style={styles.detailsImageWrapper}>
+									<FlatList
+										data={this.props.recipe_details.recipe_images}
+										renderItem={item => <Image style={{ width: responsiveWidth(100) - 4, height: responsiveWidth(75) - 2, borderRadius: 5, top: 1 }} source={{ uri: item.item.image_url }} resizeMode={"cover"}></Image>}
+										keyExtractor={(item) => item.hex}
+										horizontal={true}
+										style={styles.primaryImageFlatList}
+										// contentContainerStyle={styles.primaryImageFlatListContentContainer}
+										pagingEnabled={true}
+										onLayout={(event) => {
+											var { x, y, width, height } = event.nativeEvent.layout //eslint-disable-line no-unused-vars
+											this.setState({ primaryImageFlatListWidth: width })
+										}}
+										onScroll={e => {
+											let nearestIndex = Math.round(e.nativeEvent.contentOffset.x / this.state.primaryImageFlatListWidth)
+											if (nearestIndex != this.state.primaryImageDisplayedIndex) {
+												this.setState({ primaryImageDisplayedIndex: nearestIndex })
+											}
+										}}
+									/>
+									<View style={styles.primaryImageBlobsContainer}>
+										{this.props.recipe_details.recipe_images.length > 1 && this.renderPrimaryImageBlobs()}
+									</View>
 								</View>
-							</View>
-							<View style={styles.detailsIngredients}>
-								<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Ingredients:</Text>
-								{this.renderRecipeIngredients()}
-							</View>
-							<View style={styles.detailsContainer}>
-								<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Instructions:</Text>
-								{this.renderRecipeInstructions()}
-							</View>
+							)}
+							{this.props.recipe_details.ingredient_uses?.length > 0 && (
+								<View style={styles.detailsIngredients}>
+									<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Ingredients:</Text>
+									{this.renderRecipeIngredients()}
+								</View>
+							)}
+							{this.props.recipe_details.instructions?.length > 0 && (
+								<View style={styles.detailsContainer}>
+									<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Instructions:</Text>
+									{this.renderRecipeInstructions()}
+								</View>
+							)}
 							{this.props.recipe_details.recipe.cuisine != "Any" ? this.renderCuisine() : null}
 							{this.renderFilterCategories()}
 							{(this.props.recipe_details.recipe.acknowledgement != "" && this.props.recipe_details.recipe.acknowledgement != null) && this.renderAcknowledgement()}
@@ -644,7 +756,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 										<Icon name='image-plus' size={responsiveHeight(3.5)} style={styles.addIcon} />
 									</TouchableOpacity>
 								</View>
-								{this.props.recipe_details.make_pics.length === 0 && <Text maxFontSizeMultiplier={2} style={[styles.detailsContents]}>No other images yet.  Be the first!</Text>}
+								{this.props.recipe_details.make_pics.length === 0 && <Text maxFontSizeMultiplier={2} style={styles.detailsContents}>No other images yet.  Be the first!</Text>}
 								{this.props.recipe_details.make_pics.length !== 0 && this.renderMakePicScrollView()}
 							</View>
 							<View style={styles.detailsComments}

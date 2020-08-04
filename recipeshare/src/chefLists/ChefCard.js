@@ -3,7 +3,7 @@ import { Image, View, TouchableOpacity, Text, ScrollView, Animated } from 'react
 import { styles } from './chefListStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { databaseURL } from '../dataComponents/databaseURL'
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions';
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import OfflineMessage from '../offlineMessage/offlineMessage'
 
 export default class ChefCard extends React.PureComponent {

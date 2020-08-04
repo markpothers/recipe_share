@@ -3,7 +3,7 @@ import { Image, View, TouchableOpacity, Text } from 'react-native'
 import { styles } from './recipeListStyleSheet'
 import { databaseURL } from '../dataComponents/databaseURL'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions';
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import OfflineMessage from '../offlineMessage/offlineMessage'
 export default class RecipeCard extends React.PureComponent {
 

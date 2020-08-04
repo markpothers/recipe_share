@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Autocomplete from 'react-native-autocomplete-input';
 import { units } from '../dataComponents/units'
 import DualOSPicker from '../functionalComponents/DualOSPicker'
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions';
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import { centralStyles } from '../centralStyleSheet'
 
 export default class IngredientAutoComplete extends React.Component {

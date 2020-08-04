@@ -5,7 +5,6 @@ class RecipesController < ApplicationController
     before_action :define_current_recipe
     skip_before_action :define_current_recipe, :only => [:index, :create, :details]
 
-
     def index
         @recipes = Recipe.choose_list(params["listType"], params["queryChefID"], params["limit"], params["offset"], params["global_ranking"], @chef.id, params["filters"], params["cuisine"], params["serves"])
         # byebug
@@ -18,7 +17,7 @@ class RecipesController < ApplicationController
 
     def create
         # byebug
-        if recipe_like_params["chef_id"] === @chef.id || @chef.is_admin === true
+        if newRecipe_params[:chef_id] === @chef.id || @chef.is_admin === true
             @recipe = Recipe.new(newRecipe_params)
             @recipe.chef_id=@chef.id
             newRecipe_filter_settings["filter_settings"].keys.each do |category|
@@ -26,18 +25,25 @@ class RecipesController < ApplicationController
             end
             if @recipe.save
                 # byebug
-                if newRecipe_primary_image_as_base64_params[:primaryImageBase64] != "" && newRecipe_primary_image_as_base64_params[:primaryImageBase64] != nil
-                    recipe_image = RecipeImage.create(recipe_id: @recipe.id)
-                    hex = SecureRandom.hex(20)
-                    until RecipeImage.find_by(hex: hex) == nil
-                        hex = SecureRandom.hex(20)
-                    end
-                    mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:recipe_images], hex, newRecipe_primary_image_as_base64_params[:primaryImageBase64])
-                    recipe_image.image_url = mediaURL
-                    recipe_image.hex=hex
-                    # byebug
-                    recipe_image.save
+                if newRecipe_primary_images_params["primary_images"].length > 0
+                    @recipe.primary_images=(newRecipe_primary_images_params)
                 end
+
+
+
+                # if newRecipe_primary_image_as_base64_params[:primaryImageBase64] != "" && newRecipe_primary_image_as_base64_params[:primaryImageBase64] != nil
+
+                #     recipe_image = RecipeImage.create(recipe_id: @recipe.id)
+                #     hex = SecureRandom.hex(20)
+                #     until RecipeImage.find_by(hex: hex) == nil
+                #         hex = SecureRandom.hex(20)
+                #     end
+                #     mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:recipe_images], hex, newRecipe_primary_image_as_base64_params[:primaryImageBase64])
+                #     recipe_image.image_url = mediaURL
+                #     recipe_image.hex=hex
+                #     # byebug
+                #     recipe_image.save
+                # end
                 @recipe.ingredients=(newRecipe_Ingredient_params)
                 @recipe.instructions=(newRecipe_Instructions_params)
                 @recipe.save
@@ -60,24 +66,29 @@ class RecipesController < ApplicationController
 
     def update
         # byebug
-        if newRecipe_params.chef_id === @chef.id || @chef.is_admin === true
+        if newRecipe_params[:chef_id] === @chef.id || @chef.is_admin === true
             @recipe.update(newRecipe_params)
             newRecipe_filter_settings["filter_settings"].keys.each do |category|
                 newRecipe_filter_settings["filter_settings"][category] ? @recipe[category.downcase.split(" ").join("_")] = true : @recipe[category.downcase.split(" ").join("_")] = false
             end
             # byebug
-            if newRecipe_primary_image_as_base64_params[:primaryImageBase64] != "" && newRecipe_primary_image_as_base64_params[:primaryImageBase64] != nil
-                recipe_image = RecipeImage.create(recipe_id: @recipe.id)
-                hex = SecureRandom.hex(20)
-                until RecipeImage.find_by(hex: hex) == nil
-                    hex = SecureRandom.hex(20)
-                end
-                mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:recipe_images], hex, newRecipe_primary_image_as_base64_params[:primaryImageBase64])
-                recipe_image.image_url = mediaURL
-                recipe_image.hex=hex
-                # byebug
-                recipe_image.save
+            if newRecipe_primary_images_params["primary_images"].length > 0
+                @recipe.primary_images=(newRecipe_primary_images_params)
             end
+
+            # if newRecipe_primary_image_as_base64_params[:primaryImageBase64] != "" && newRecipe_primary_image_as_base64_params[:primaryImageBase64] != nil
+            #     recipe_image = RecipeImage.create(recipe_id: @recipe.id)
+            #     hex = SecureRandom.hex(20)
+            #     until RecipeImage.find_by(hex: hex) == nil
+            #         hex = SecureRandom.hex(20)
+            #     end
+            #     mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:recipe_images], hex, newRecipe_primary_image_as_base64_params[:primaryImageBase64])
+            #     recipe_image.image_url = mediaURL
+            #     recipe_image.hex=hex
+            #     # byebug
+            #     recipe_image.save
+            # end
+
             @recipe.ingredients=(newRecipe_Ingredient_params)
             @recipe.instructions=(newRecipe_Instructions_params)
             if @recipe.save
@@ -120,17 +131,17 @@ class RecipesController < ApplicationController
     end
 
     def newRecipe_params
-        params.require(:recipe).permit(:name, :time, :difficulty, :cuisine, :serves, :acknowledgement)
+        params.require(:recipe).permit(:chef_id, :name, :time, :difficulty, :cuisine, :serves, :acknowledgement, :description)
     end
 
-    def newRecipe_primary_image_as_base64_params
-        params.require(:recipe).permit(:primaryImageBase64)
-    end
+    # def newRecipe_primary_image_as_base64_params
+    #     params.require(:recipe).permit(:primaryImageBase64)
+    # end
 
     # this is not currently used as if a primary image comes back as an object, then it is unchanged and thus no actions are required
     # if you want to use the object in some way though, this will permit its id and recipe_id through
-    def newRecipe_primary_image_as_object_params
-        params.require(:recipe).permit(primaryImageBase64: [:id, :recipe_id,])
+    def newRecipe_primary_images_params
+        params.require(:recipe).permit(primary_images: [:id, :recipe_id, :base64, :hex, :image_url])
     end
 
     def newRecipe_Ingredient_params

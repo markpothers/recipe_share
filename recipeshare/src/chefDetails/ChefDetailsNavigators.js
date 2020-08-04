@@ -1,7 +1,7 @@
 import React from 'react';
 import { MyRecipesScreen, MyLikedRecipesScreen, MyMadeRecipesScreen, ChefsFollowedScreen, ChefsFollowingScreen } from './ChefDetailsTabs'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
-import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions'
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 
 const Tab = createMaterialTopTabNavigator()
 

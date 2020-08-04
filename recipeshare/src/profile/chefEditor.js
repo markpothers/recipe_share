@@ -7,7 +7,7 @@ import { countries } from '../dataComponents/countries'
 import { patchChef } from '../fetches/patchChef'
 import DualOSPicker from '../functionalComponents/DualOSPicker'
 import { centralStyles } from '../centralStyleSheet'
-import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions'
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 
 const mapStateToProps = (state) => ({
 	username: state.newUserDetails.username,

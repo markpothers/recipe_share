@@ -3,7 +3,6 @@ import { Platform, Text, TouchableOpacity, TextInput, View, Switch } from 'react
 import { countries } from '../dataComponents/countries'
 import { connect } from 'react-redux'
 import { postChef } from '../fetches/postChef'
-import { styles } from './usersStyleSheet'
 import { centralStyles } from '../centralStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import PicSourceChooser from '../functionalComponents/picSourceChooser'
@@ -11,7 +10,7 @@ import { TextPopUp } from '../textPopUp/textPopUp'
 import DualOSPicker from '../functionalComponents/DualOSPicker'
 import { termsAndConditions } from '../dataComponents/termsAndConditions'
 import { privacyPolicy } from '../dataComponents/privacyPolicy'
-import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions'
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo';
@@ -220,8 +219,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									{/* </View> */}
 								</TouchableOpacity>
 								<TouchableOpacity activeOpacity={1} style={[centralStyles.yellowRectangleButton, { minWidth: responsiveWidth(30), maxWidth: responsiveWidth(30) }]} onPress={this.handleTandCSwitch}>
-									<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText]}>I accept</Text>
-									<Switch style={[(Platform.OS === 'ios' ? { transform: [{ scaleX: .7 }, { scaleY: .7 }] } : null)]} value={this.state.tAndCAgreed} onChange={this.handleTandCSwitch} />
+									<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>I accept</Text>
+									<Switch style={(Platform.OS === 'ios' ? { transform: [{ scaleX: .7 }, { scaleY: .7 }] } : null)} value={this.state.tAndCAgreed} onChange={this.handleTandCSwitch} />
 								</TouchableOpacity>
 								{this.state.viewingTermsAndConditions && (
 									<TextPopUp
@@ -241,8 +240,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									{/* </View> */}
 								</TouchableOpacity>
 								<TouchableOpacity activeOpacity={1} style={[centralStyles.yellowRectangleButton, { minWidth: responsiveWidth(30), maxWidth: responsiveWidth(30) }]} onPress={this.handlePrivacyPolicySwitch}>
-									<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText]}>I accept</Text>
-									<Switch style={[(Platform.OS === 'ios' ? { transform: [{ scaleX: .7 }, { scaleY: .7 }] } : null)]} value={this.state.privacyPolicyAgreed} onChange={this.handlePrivacyPolicySwitch} />
+									<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>I accept</Text>
+									<Switch style={(Platform.OS === 'ios' ? { transform: [{ scaleX: .7 }, { scaleY: .7 }] } : null)} value={this.state.privacyPolicyAgreed} onChange={this.handlePrivacyPolicySwitch} />
 								</TouchableOpacity>
 								{this.state.viewingPrivacyPolicy && (
 									<TextPopUp

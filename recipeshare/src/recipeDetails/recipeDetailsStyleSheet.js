@@ -1,6 +1,5 @@
-import React from 'react'
 import { StyleSheet } from 'react-native';
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions';
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 
 export const styles = StyleSheet.create({
 	mainPageContainer: {
@@ -28,7 +27,7 @@ export const styles = StyleSheet.create({
 		alignItems: 'center',
 		marginLeft: '0%',
 		marginRight: '0%',
-		marginTop: 3,
+		marginTop: responsiveHeight(0.5),
 		borderRadius: 5,
 		backgroundColor: 'white',
 		// flexDirection: 'row'
@@ -42,7 +41,7 @@ export const styles = StyleSheet.create({
 		width: '100%',
 		marginLeft: '0%',
 		marginRight: '0%',
-		// marginTop: 4,
+		marginTop: responsiveHeight(0.5),
 		borderRadius: 5,
 		backgroundColor: 'white',
 		// opacity: 0.9,
@@ -74,6 +73,15 @@ export const styles = StyleSheet.create({
 		borderBottomWidth: 0.5,
 		borderColor: '#104e01',
 	},
+	detailsIngredientsSeparator: {
+		width: responsiveWidth(96),
+		marginLeft: responsiveWidth(2),
+		marginRight: responsiveWidth(2),
+		// marginTop: responsiveHeight(0.5),
+		// marginBottom: responsiveHeight(0.5),
+		borderBottomWidth: 0.5,
+		borderColor: '#104e01',
+	},
 	detailsContainer: {
 		borderStyle: 'solid',
 		borderWidth: 1,
@@ -81,7 +89,7 @@ export const styles = StyleSheet.create({
 		width: '100%',
 		marginLeft: '0%',
 		marginRight: '0%',
-		marginTop: 4,
+		marginTop: responsiveHeight(0.5),
 		borderRadius: 5,
 		backgroundColor: 'white',
 		paddingTop: responsiveHeight(0.5),
@@ -94,14 +102,14 @@ export const styles = StyleSheet.create({
 		// width: '100%',
 		// marginLeft: '0%',
 		// marginRight: '0%',
-		marginTop: 3,
+		marginTop: responsiveHeight(0.5),
 		borderRadius: 5,
 		backgroundColor: 'white',
 		// opacity: 0.9,
 		// marginBottom: '1%',
 		paddingTop: '1%',
 		// height: 250
-		flex: 1
+		// flex: 1
 	},
 	detailsLikesAndMakes: {
 		// flexDirection: 'row'
@@ -116,7 +124,7 @@ export const styles = StyleSheet.create({
 		width: '100%',
 		marginLeft: '0%',
 		marginRight: '0%',
-		marginTop: 3,
+		marginTop: responsiveHeight(0.5),
 		borderRadius: 5,
 		backgroundColor: 'white',
 		// opacity: 0.9,
@@ -237,8 +245,8 @@ export const styles = StyleSheet.create({
 		width: '96%',
 		marginLeft: '2%',
 		marginRight: '2%',
-		borderBottomColor: '#104e01',
-		borderBottomWidth: 0.5,
+		// borderBottomColor: '#104e01',
+		// borderBottomWidth: 0.5,
 		paddingBottom: '0.25%',
 		paddingTop: '0.25%',
 		// justifyContent: 'center',
@@ -280,8 +288,8 @@ export const styles = StyleSheet.create({
 		width: '100%',
 		marginLeft: '0%',
 		marginRight: '0%',
-		marginTop: 3,
-		marginBottom: 4,
+		marginTop: responsiveHeight(0.5),
+		marginBottom: responsiveHeight(0.5),
 		borderRadius: 5,
 		backgroundColor: 'white',
 		// opacity: 0.9,
@@ -313,9 +321,10 @@ export const styles = StyleSheet.create({
 		flexDirection: 'row'
 	},
 	makePicScrollView: {
-		height: 120,
+		// height: 120,
 		borderRadius: 5,
-		marginTop: 3,
+		marginTop: responsiveHeight(0.5),
+		paddingBottom: responsiveHeight(0.5),
 		// flex: 1  // DO NOT USE THIS IT BREAKS EVERYTHING
 	},
 	avatarThumbnail: {
@@ -410,14 +419,15 @@ export const styles = StyleSheet.create({
 	detailsImageWrapper: {
 		borderStyle: 'solid',
 		borderWidth: 1,
-		borderColor: 'white',//'#104e01',
+		borderColor: '#104e01',
+		backgroundColor: 'white',
 		width: '100%',
 		marginLeft: '0%',
 		marginRight: '0%',
-		marginTop: 3,
-		marginBottom: '1%',
-		// justifyContent: 'center',
-		// alignItems: 'center',
+		marginTop: responsiveHeight(0.5),
+		// marginBottom: '1%',
+		justifyContent: 'center',
+		alignItems: 'center',
 		borderRadius: 5,
 		overflow: 'hidden',
 	},
@@ -428,8 +438,8 @@ export const styles = StyleSheet.create({
 	primaryImageFlatList: {
 		// borderWidth:1,
 		// borderColor: 'yellow',
-		width: responsiveWidth(100)-2,
-		// height: 175,
+		width: responsiveWidth(100)-4,
+		height: responsiveWidth(75),
 		// left: 100
 		borderRadius: 5,
 		overflow: 'hidden'

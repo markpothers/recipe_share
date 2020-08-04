@@ -15,16 +15,16 @@ export default class PicSourceChooser extends React.PureComponent {
 	componentDidMount = () => {
 		Permissions.askAsync(Permissions.CAMERA_ROLL)
 			.then(permission => {
-				this.setState({ hasCameraRollPermission: permission.status == 'granted' })
+				this.setState({ hasCameraRollPermission: permission.permissions.cameraRoll.granted })
 			})
 		Permissions.askAsync(Permissions.CAMERA)
 			.then(permission => {
-				this.setState({ hasCameraPermission: permission.status == 'granted' })
+				this.setState({ hasCameraPermission: permission.permissions.camera.granted })
 			})
 	}
 
 	pickImage = async () => {
-		if (this.state.hasCameraRollPermission == 'granted') {
+		if (this.state.hasCameraRollPermission) {
 			let image = await ImagePicker.launchImageLibraryAsync({
 				allowsEditing: true,
 				aspect: [4, 3],
@@ -36,7 +36,7 @@ export default class PicSourceChooser extends React.PureComponent {
 	}
 
 	openCamera = async () => {
-		if (this.state.hasCameraPermission == 'granted') {
+		if (this.state.hasCameraPermission) {
 			let image = await ImagePicker.launchCameraAsync({
 				allowsEditing: true,
 				aspect: [4, 3],

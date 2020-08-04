@@ -2,14 +2,14 @@ import React from 'react';
 import { Image, View, Text, TouchableOpacity } from 'react-native';
 import { styles } from './recipeDetailsStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions';
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 
 export default class RecipeComment extends React.PureComponent {
 
 	renderCommentDeleteButton = () => {
 		if (this.props.loggedInChefID == this.props.chef_id || this.props.loggedInChefID === this.props.is_admin) {
 			return (
-				<TouchableOpacity style={styles.commentTrashCanButton} onPress={() => this.props.deleteComment(this.props.id)}>
+				<TouchableOpacity style={styles.commentTrashCanButton} onPress={() => this.props.askDeleteComment(this.props.id)}>
 					<Icon name='trash-can-outline' size={responsiveHeight(3.5)} style={[styles.icon, styles.commentTrashCan]} />
 				</TouchableOpacity>
 			)
@@ -25,7 +25,7 @@ export default class RecipeComment extends React.PureComponent {
 				</View>
 				<View style={styles.commentRightContainer}>
 					<View style={styles.commentRightTopContainer}>
-						<Text maxFontSizeMultiplier={2} style={[styles.detailsContentsHeader]}>{this.props.username}:</Text>
+						<Text maxFontSizeMultiplier={2} style={styles.detailsContentsHeader}>{this.props.username}:</Text>
 						{this.renderCommentDeleteButton()}
 					</View>
 					<View>

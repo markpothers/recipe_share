@@ -3,7 +3,7 @@ import { Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { styles } from './newRecipeStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { centralStyles } from '../centralStyleSheet'
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions';
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 
 export default class InstructionRow extends React.Component {
 

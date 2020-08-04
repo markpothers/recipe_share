@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, TouchableOpacity, View, AsyncStorage, Text } from 'react-native'
+import { FlatList, TouchableOpacity, AsyncStorage } from 'react-native'
 import RecipeCard from './RecipeCard'
 import { connect } from 'react-redux'
 import { getRecipeList } from '../fetches/getRecipeList'
@@ -9,11 +9,11 @@ import { postRecipeMake } from '../fetches/postRecipeMake'
 import { destroyRecipeLike } from '../fetches/destroyRecipeLike'
 import { destroyReShare } from '../fetches/destroyReShare'
 import { styles } from './recipeListStyleSheet'
-import { centralStyles } from '../centralStyleSheet'
+import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import FilterMenu from '../functionalComponents/filterMenu'
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import { getRecipeDetails } from '../fetches/getRecipeDetails'
 import saveRecipeDetailsLocally from '../functionalComponents/saveRecipeDetailsLocally'
 import saveChefDetailsLocally from '../functionalComponents/saveChefDetailsLocally'
@@ -101,7 +101,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			this._unsubscribeBlur()
 		}
 
-		shouldComponentUpdate = (nextProps, nextState) => {
+		shouldComponentUpdate = () => {
 			return (
 				this.state.isDisplayed
 			)
@@ -494,7 +494,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						nestedScrollEnabled={true}
 						listKey={this.props[this.props["listChoice"] + `_Recipes`]}
 					/>
-					{this.state.filterDisplayed ? <FilterMenu handleFilterButton={this.handleFilterButton} refresh={this.refresh} closeFilterAndRefresh={this.closeFilterAndRefresh} confirmButtonText={"Apply"} title={"Apply filters to recipes list"} /> : null}
+					{this.state.filterDisplayed ? <FilterMenu handleFilterButton={this.handleFilterButton} refresh={this.refresh} closeFilterAndRefresh={this.closeFilterAndRefresh} confirmButtonText={`Apply \n& Close`} title={"Apply filters to recipes list"} /> : null}
 				</SpinachAppContainer>
 			)
 		}

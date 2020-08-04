@@ -1,4 +1,3 @@
-import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { detailsTimeout } from '../dataComponents/timeouts'
 
@@ -11,12 +10,13 @@ export const patchRecipe = (
 	instructionImages,
 	time,
 	difficulty,
-	primaryImageBase64,
+	primaryImages,
 	filter_settings,
 	cuisine,
 	serves,
 	recipeID,
-	acknowledgement
+	acknowledgement,
+	description
 ) => {
 	return new Promise((resolve, reject) => {
 
@@ -24,8 +24,22 @@ export const patchRecipe = (
 			reject()
 		}, detailsTimeout)
 
+		let primaryImagesForRails = primaryImages.map((image, index) => {
+			if (image.base64 && image.base64 != 'data:image/jpeg;base64,'){
+				return {
+					index: index,
+					base64: image.base64
+				}
+			} else if (image.image_url) {
+				return {
+					index: index,
+					...image
+				}
+			}
+		})
+
 		//format for Rails Strong params to permit an object or base64 data
-		instructionImagesForRails = instructionImages.map((image, index) => {
+		let instructionImagesForRails = instructionImages.map((image, index) => {
 			if (typeof image === 'string') {
 				return {
 					index: index,
@@ -54,11 +68,12 @@ export const patchRecipe = (
 					instruction_images: instructionImagesForRails,
 					time: time,
 					difficulty: difficulty,
-					primaryImageBase64: primaryImageBase64,
+					primary_images: primaryImagesForRails,
 					filter_settings: filter_settings,
 					cuisine: cuisine,
 					serves: serves,
-					acknowledgement: acknowledgement
+					acknowledgement: acknowledgement,
+					description: description
 				}
 			})
 		})
@@ -68,7 +83,7 @@ export const patchRecipe = (
 					resolve(recipe)
 				}
 			})
-			.catch(error => {
+			.catch( () => {
 			})
 	})
 }

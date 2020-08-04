@@ -415,6 +415,26 @@ class Recipe < ApplicationRecord
     return recipes_results
   end
 
+  def primary_images=(newRecipe_primary_images_params)
+    RecipeImage.where(recipe_id: self.id).destroy_all
+    newRecipe_primary_images_params["primary_images"].each do |image|
+      if image["base64"] != nil && image["base64"] != ""
+        # byebug
+        recipe_image = RecipeImage.new(recipe_id: self.id)
+        hex = SecureRandom.hex(20)
+        until RecipeImage.find_by(hex: hex) == nil
+            hex = SecureRandom.hex(20)
+        end
+        mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:recipe_images], hex, image["base64"])
+        recipe_image.image_url = mediaURL
+        recipe_image.hex = hex
+        recipe_image.save
+      elsif image["id"] != 0 && image["recipe_id"] == self.id
+        RecipeImage.create(recipe_id: self.id, hex: image["hex"], image_url: image["image_url"])
+      end
+    end
+  end
+
   def ingredients=(ingredient_params)
     IngredientUse.where(recipe_id: self.id).destroy_all
     ingredient_params["ingredients"].each do |ingredient|

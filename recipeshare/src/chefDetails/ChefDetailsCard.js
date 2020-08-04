@@ -3,14 +3,14 @@ import { Image, View, TouchableOpacity, Text, ScrollView } from 'react-native'
 import { styles } from './chefDetailsStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { databaseURL } from '../dataComponents/databaseURL'
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions';
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 
 export default class ChefDetailsCard extends React.PureComponent {
 
 	renderFollowButton = () => {
 		return (
 			<React.Fragment>
-				<TouchableOpacity style={styles.chefRecipesFollowContainer} onPress={(this.props.chef_followed === true ? (e => this.props.unFollowChef(this.props.chef.id)) : (e => this.props.followChef(this.props.chef.id)))}>
+				<TouchableOpacity style={styles.chefRecipesFollowContainer} onPress={(this.props.chef_followed === true ? (() => this.props.unFollowChef(this.props.chef.id)) : (() => this.props.followChef(this.props.chef.id)))}>
 					{this.props.chef_followed === true ? <Icon name='account-multiple-minus' size={responsiveHeight(3.5)} style={styles.icon} /> : <Icon name='account-multiple-plus-outline' size={responsiveHeight(3.5)} style={styles.icon} />}
 				</TouchableOpacity>
 				<Text maxFontSizeMultiplier={2} style={styles.chefDetailsRecipesFollowNumber} >{this.props.followers.length}</Text>
@@ -56,8 +56,8 @@ export default class ChefDetailsCard extends React.PureComponent {
 				<View>
 					<View style={[styles.chefDetailsStats, { justifyContent: 'flex-start' }]}>
 						{/* <Icon name='food' size={responsiveHeight(3.5)} style={styles.icon}/> */}
-						<Text maxFontSizeMultiplier={2} style={[styles.chefRecipesRowContents]}>Recipes created:</Text>
-						<Text maxFontSizeMultiplier={2} style={[styles.chefRecipesRowContents]}>{this.props.recipes.length}</Text>
+						<Text maxFontSizeMultiplier={2} style={styles.chefRecipesRowContents}>Recipes created:</Text>
+						<Text maxFontSizeMultiplier={2} style={styles.chefRecipesRowContents}>{this.props.recipes.length}</Text>
 						{/* {this.props.notProfile ? this.renderFollowButton() : null} */}
 					</View>
 					<View style={[styles.chefDetailsStats, { justifyContent: 'flex-end' }]}>
@@ -66,15 +66,15 @@ export default class ChefDetailsCard extends React.PureComponent {
 					</View>
 					<View style={styles.chefDetailsStats}>
 						{this.props.chef_shared === true ? <Icon name='share' size={responsiveHeight(3.5)} style={styles.icon} /> : <Icon name='share-outline' size={responsiveHeight(3.5)} style={styles.icon} />}
-						<Text maxFontSizeMultiplier={2.5} style={[styles.chefDetailsRowTitle]}>Recipe re-shares:</Text>
-						<Text maxFontSizeMultiplier={2.5} style={[styles.chefDetailsRowContents]}>{this.props.re_shares.length}</Text>
-						<Text maxFontSizeMultiplier={2.5} style={[styles.chefDetailsRowContents]}>{this.props.re_shares_received.length}</Text>
+						<Text maxFontSizeMultiplier={2.5} style={styles.chefDetailsRowTitle}>Recipe re-shares:</Text>
+						<Text maxFontSizeMultiplier={2.5} style={styles.chefDetailsRowContents}>{this.props.re_shares.length}</Text>
+						<Text maxFontSizeMultiplier={2.5} style={styles.chefDetailsRowContents}>{this.props.re_shares_received.length}</Text>
 					</View>
 					<View style={styles.chefDetailsStats}>
 						{this.props.chef_liked === true ? <Icon name='heart' size={responsiveHeight(3.5)} style={styles.icon} /> : <Icon name='heart-outline' size={responsiveHeight(3.5)} style={styles.icon} />}
-						<Text maxFontSizeMultiplier={2.5} style={[styles.chefDetailsRowTitle]}>Recipe likes:</Text>
-						<Text maxFontSizeMultiplier={2.5} style={[styles.chefDetailsRowContents]}>{this.props.recipe_likes.length}</Text>
-						<Text maxFontSizeMultiplier={2.5} style={[styles.chefDetailsRowContents]}>{this.props.recipe_likes_received.length}</Text>
+						<Text maxFontSizeMultiplier={2.5} style={styles.chefDetailsRowTitle}>Recipe likes:</Text>
+						<Text maxFontSizeMultiplier={2.5} style={styles.chefDetailsRowContents}>{this.props.recipe_likes.length}</Text>
+						<Text maxFontSizeMultiplier={2.5} style={styles.chefDetailsRowContents}>{this.props.recipe_likes_received.length}</Text>
 					</View>
 					{/* <View style={styles.chefDetailsStats}>
                     {this.props.chef_made === true ? <Icon name='food-off' size={responsiveHeight(3.5)} style={styles.icon}/> : <Icon name='food' size={responsiveHeight(3.5)} style={styles.icon}/> }
@@ -84,21 +84,21 @@ export default class ChefDetailsCard extends React.PureComponent {
                   </View> */}
 					<View style={styles.chefDetailsStats}>
 						{this.props.chef_followed === true ? <Icon name='account-multiple' size={responsiveHeight(3.5)} style={styles.icon} /> : <Icon name='account-multiple-outline' size={responsiveHeight(3.5)} style={styles.icon} />}
-						<Text maxFontSizeMultiplier={2.5} style={[styles.chefDetailsRowTitle]}>Follows:</Text>
-						<Text maxFontSizeMultiplier={2.5} style={[styles.chefDetailsRowContents]}>{this.props.following.length}</Text>
-						<Text maxFontSizeMultiplier={2.5} style={[styles.chefDetailsRowContents]}>{this.props.followers.length}</Text>
+						<Text maxFontSizeMultiplier={2.5} style={styles.chefDetailsRowTitle}>Follows:</Text>
+						<Text maxFontSizeMultiplier={2.5} style={styles.chefDetailsRowContents}>{this.props.following.length}</Text>
+						<Text maxFontSizeMultiplier={2.5} style={styles.chefDetailsRowContents}>{this.props.followers.length}</Text>
 					</View>
 					<View style={styles.chefDetailsStats}>
 						{this.props.chef_commented === true ? <Icon name='comment' size={responsiveHeight(3.5)} style={styles.icon} /> : <Icon name='comment-outline' size={responsiveHeight(3.5)} style={styles.icon} />}
-						<Text maxFontSizeMultiplier={2.5} style={[styles.chefDetailsRowTitle]}>Comments:</Text>
-						<Text maxFontSizeMultiplier={2.5} style={[styles.chefDetailsRowContents]}>{this.props.comments.length}</Text>
-						<Text maxFontSizeMultiplier={2.5} style={[styles.chefDetailsRowContents]}>{this.props.comments_received.length}</Text>
+						<Text maxFontSizeMultiplier={2.5} style={styles.chefDetailsRowTitle}>Comments:</Text>
+						<Text maxFontSizeMultiplier={2.5} style={styles.chefDetailsRowContents}>{this.props.comments.length}</Text>
+						<Text maxFontSizeMultiplier={2.5} style={styles.chefDetailsRowContents}>{this.props.comments_received.length}</Text>
 					</View>
 					<View style={styles.chefDetailsStats}>
 						{this.props.chef_chef_make_piced === true ? <Icon name='image' size={responsiveHeight(3.5)} style={styles.icon} /> : <Icon name='image-outline' size={responsiveHeight(3.5)} style={styles.icon} />}
-						<Text maxFontSizeMultiplier={2.5} style={[styles.chefDetailsRowTitle]}>Pictures:</Text>
-						<Text maxFontSizeMultiplier={2.5} style={[styles.chefDetailsRowContents]}>{this.props.make_pics.length}</Text>
-						<Text maxFontSizeMultiplier={2.5} style={[styles.chefDetailsRowContents]}>{this.props.make_pics_received.length}</Text>
+						<Text maxFontSizeMultiplier={2.5} style={styles.chefDetailsRowTitle}>Pictures:</Text>
+						<Text maxFontSizeMultiplier={2.5} style={styles.chefDetailsRowContents}>{this.props.make_pics.length}</Text>
+						<Text maxFontSizeMultiplier={2.5} style={styles.chefDetailsRowContents}>{this.props.make_pics_received.length}</Text>
 					</View>
 				</View>
 			</View>

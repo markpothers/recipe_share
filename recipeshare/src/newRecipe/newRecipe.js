@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, ScrollView, Text, Image, TextInput, TouchableOpacity, View, Keyboard, Platform, AsyncStorage, AppState } from 'react-native'
+import { ScrollView, Text, TextInput, TouchableOpacity, View, Keyboard, AsyncStorage, AppState } from 'react-native'
 import { connect } from 'react-redux'
 import { styles } from './newRecipeStyleSheet'
 import { centralStyles } from '../centralStyleSheet'
@@ -11,14 +11,14 @@ import { patchRecipe } from '../fetches/patchRecipe'
 import { fetchIngredients } from '../fetches/fetchIngredients'
 import IngredientAutoComplete from './ingredientAutoComplete'
 import PicSourceChooser from '../functionalComponents/picSourceChooser'
+import MultiPicSourceChooser from '../functionalComponents/multiPicSourceChooser'
 import FilterMenu from '../functionalComponents/filterMenu'
 import DualOSPicker from '../functionalComponents/DualOSPicker'
-import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions'
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions' //eslint-disable-line no-unused-vars
 import InstructionRow from './instructionRow'
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
-import { DragSortableView, AutoDragSortableView } from 'react-native-drag-sort/lib'
+import { DragSortableView } from 'react-native-drag-sort/lib'
 import { clearedFilters } from '../dataComponents/clearedFilters'
-import { serves } from '../dataComponents/serves'
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo';
 import { AlertPopUp } from '../alertPopUp/alertPopUp'
@@ -102,7 +102,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				],
 				difficulty: "0",
 				time: "00:15",
-				primaryImageBase64: "",
+				primaryImages: [{ base64: 'data:image/jpeg;base64,' }],
 				filter_settings: {
 					"Breakfast": false,
 					"Lunch": false,
@@ -129,7 +129,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				},
 				cuisine: "Any",
 				serves: "Any",
-				acknowledgement: ""
+				acknowledgement: "",
+				description: ""
 			}
 		}
 
@@ -162,7 +163,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		componentDidUpdate = async () => {
-
+			await this.addNewIngredient()
+			await this.addNewInstruction()
 		}
 
 		componentWillUnmount = () => {
@@ -228,15 +230,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				}
 			})
 			this.setState({
-				instructionHeights: recipeDetails.instructions.map(i => responsiveHeight(7.2)),
+				instructionHeights: recipeDetails.instructions.map(() => responsiveHeight(7.2)),
 				newRecipeDetails: {
 					name: recipe.name,
-					instructions: recipeDetails.instructions.map(i => i.instruction),
-					instructionImages: newInstructionImages,
-					ingredients: newIngredients,
+					instructions: recipeDetails.instructions.length > 0 ? recipeDetails.instructions.map(i => i.instruction) : [""],
+					instructionImages: newInstructionImages.length > 0 ? newInstructionImages : [""],
+					ingredients: newIngredients.length > 0 ? newIngredients : [{ name: "", quantity: "", unit: "Oz" }],
 					difficulty: recipe.difficulty.toString(),
 					time: recipe.time,
-					primaryImageBase64: recipeDetails.recipe_images,
+					primaryImages: recipeDetails.recipe_images?.length > 0 ? recipeDetails.recipe_images : [{ base64: 'data:image/jpeg;base64,' }],
 					filter_settings: {
 						"Breakfast": recipe["breakfast"],
 						"Lunch": recipe["lunch"],
@@ -263,7 +265,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					},
 					cuisine: recipe.cuisine,
 					serves: recipe.serves,
-					acknowledgement: recipe.acknowledgement
+					acknowledgement: recipe.acknowledgement,
+					description: recipe.description
 				}
 			})
 		}
@@ -288,7 +291,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				newRecipeDetails: {
 					name: "",
 					instructions: [''],
-					instructionImages: ['', '', '', ''],
+					instructionImages: [''],
 					ingredients: [
 						{
 							name: "",
@@ -298,7 +301,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					],
 					difficulty: "0",
 					time: "00:15",
-					primaryImageBase64: "",
+					primaryImages: [{ base64: 'data:image/jpeg;base64,' }],
 					filter_settings: {
 						"Breakfast": false,
 						"Lunch": false,
@@ -325,7 +328,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					},
 					cuisine: "Any",
 					serves: "Any",
-					acknowledgement: ""
+					acknowledgement: "",
+					description: ""
 				},
 				instructionHeights: [responsiveHeight(7.2)],
 				averageInstructionHeight: responsiveHeight(7.2),
@@ -341,34 +345,29 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		renderPrimaryPictureChooser = () => {
-			let imageSource = typeof this.state.newRecipeDetails.primaryImageBase64 == 'object' && this.state.newRecipeDetails.primaryImageBase64.length > 0 ? this.state.newRecipeDetails.primaryImageBase64[0].image_url : `data:image/jpeg;base64,${this.state.newRecipeDetails.primaryImageBase64}`
 			return (
-				<PicSourceChooser
+				<MultiPicSourceChooser
 					saveImage={this.savePrimaryImage}
 					sourceChosen={this.primarySourceChosen}
 					key={"primary-pic-chooser"}
-					imageSource={imageSource}
+					imageSources={this.state.newRecipeDetails.primaryImages}
+					isMultiple={true}
 				/>
 			)
 		}
 
-		savePrimaryImage = async (image) => {
-			await this.setState({ awaitingServer: true })
-			if (image.cancelled === false) {
-				this.setState((state) => {
-					return ({
-						newRecipeDetails: { ...state.newRecipeDetails, primaryImageBase64: image.base64 },
-						awaitingServer: false,
-						//   choosingPrimaryPicture: false
-					})
+		savePrimaryImage = async (newImages) => {
+			// await this.setState({ awaitingServer: true })
+			// if (!newImages[index].cancelled) {
+			this.setState((state) => {
+				return ({
+					newRecipeDetails: { ...state.newRecipeDetails, primaryImages: newImages },
+					// awaitingServer: false,
 				})
-			}
-			else {
-				await this.setState({
-					awaitingServer: false,
-					// choosingPrimaryPicture: false
-				})
-			}
+			})
+			// } else {
+			// await this.setState({ awaitingServer: false })
+			// }
 		}
 
 		thisAutocompleteIsFocused = (index) => {
@@ -455,12 +454,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						newRecipeDetails.instructionImages,
 						newRecipeDetails.time,
 						newRecipeDetails.difficulty,
-						newRecipeDetails.primaryImageBase64,
+						newRecipeDetails.primaryImages,
 						newRecipeDetails.filter_settings,
 						newRecipeDetails.cuisine,
 						newRecipeDetails.serves,
 						this.props.route.params?.recipe_details.recipe.id,
-						newRecipeDetails.acknowledgement
+						newRecipeDetails.acknowledgement,
+						newRecipeDetails.description
 					)
 					if (recipe) {
 						this.clearNewRecipeDetails()
@@ -480,11 +480,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						newRecipeDetails.instructionImages,
 						newRecipeDetails.time,
 						newRecipeDetails.difficulty,
-						newRecipeDetails.primaryImageBase64,
+						newRecipeDetails.primaryImages,
 						newRecipeDetails.filter_settings,
 						newRecipeDetails.cuisine,
 						newRecipeDetails.serves,
-						newRecipeDetails.acknowledgement
+						newRecipeDetails.acknowledgement,
+						newRecipeDetails.description
 					)
 					if (recipe) {
 						this.clearNewRecipeDetails()
@@ -662,7 +663,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		render() {
-			// console.log(this.state.autoCompleteFocused)
+			// console.log(typeof "Mark")
 			return (
 				<SpinachAppContainer awaitingServer={this.state.awaitingServer} scrollingEnabled={false}>
 					{this.state.renderOfflineMessage && (
@@ -713,6 +714,72 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								<View style={centralStyles.formSectionSeparator}>
 								</View>
 							</View>
+							{/* time and difficulty titles */}
+							<View style={[centralStyles.formSection, { width: responsiveWidth(80) }]}>
+								<View style={centralStyles.formInputContainer}>
+									<View style={styles.timeAndDifficultyTitleItem}>
+										<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Time:</Text>
+									</View>
+									<View style={styles.timeAndDifficultyTitleItem}>
+										<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Difficulty:</Text>
+									</View>
+								</View>
+							</View>
+							{/* time and difficulty dropdowns */}
+							<View style={[centralStyles.formSection, { width: responsiveWidth(80) }]}>
+								<View style={centralStyles.formInputContainer}>
+									<View picker style={[styles.timeAndDifficulty, { paddingLeft: responsiveWidth(8) }]} >
+										<DualOSPicker
+											onChoiceChange={(choice) => this.handleInput(choice, "time")}
+											options={times}
+											selectedChoice={this.state.newRecipeDetails.time} />
+									</View>
+									<View style={[styles.timeAndDifficulty, { paddingLeft: responsiveWidth(12) }]}>
+										<DualOSPicker
+											onChoiceChange={(choice) => this.handleInput(choice, "difficulty")}
+											options={difficulties}
+											selectedChoice={this.state.newRecipeDetails.difficulty} />
+									</View>
+								</View>
+							</View>
+							{/* separator */}
+							<View style={centralStyles.formSectionSeparatorContainer}>
+								<View style={centralStyles.formSectionSeparator}>
+								</View>
+							</View>
+							{/* recipe name */}
+							<View style={centralStyles.formSection}>
+								<View style={centralStyles.formInputContainer}>
+									<TextInput
+										multiline={true}
+										numberOfLines={3}
+										maxFontSizeMultiplier={2.5}
+										style={[centralStyles.formInput, { padding: responsiveHeight(0.5) }]}
+										value={this.state.newRecipeDetails.description}
+										placeholder="Tell us about this recipe"
+										onChangeText={(t) => this.handleInput(t, "description")} />
+								</View>
+							</View>
+							{/* separator */}
+							<View style={centralStyles.formSectionSeparatorContainer}>
+								<View style={centralStyles.formSectionSeparator}>
+								</View>
+							</View>
+							{/* main pictures*/}
+							<View style={[centralStyles.formSection, { width: responsiveWidth(80) }]}>
+								<View style={[centralStyles.formInputContainer, { justifyContent: 'center' }]}>
+									<TouchableOpacity style={[centralStyles.yellowRectangleButton, { maxWidth: '75%', width: '75%', justifyContent: 'center' }]} activeOpacity={0.7} onPress={this.choosePrimaryPicture}>
+										<Icon style={centralStyles.greenButtonIcon} size={25} name='camera'></Icon>
+										<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { marginLeft: responsiveWidth(3), fontSize: responsiveFontSize(2.3) }]}>Pictures</Text>
+									</TouchableOpacity>
+								</View>
+							</View>
+							{/* separator */}
+							<View style={centralStyles.formSectionSeparatorContainer}>
+								<View style={centralStyles.formSectionSeparator}>
+								</View>
+							</View>
+							{/* ingredients */}
 							<View
 								style={[
 									centralStyles.formSection,
@@ -764,7 +831,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								<View style={centralStyles.formSectionSeparator}>
 								</View>
 							</View>
-							<View style={[centralStyles.formSection]}>
+							{/* instructions */}
+							<View style={centralStyles.formSection}>
 								<DragSortableView
 									dataSource={this.state.newRecipeDetails.instructions}
 									parentWidth={responsiveWidth(100)}
@@ -799,6 +867,20 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								<View style={centralStyles.formSectionSeparator}>
 								</View>
 							</View>
+							{/* filter categories*/}
+							<View style={[centralStyles.formSection, { width: responsiveWidth(80) }]}>
+								<View style={[centralStyles.formInputContainer, { justifyContent: 'center' }]}>
+									<TouchableOpacity style={[centralStyles.yellowRectangleButton, { maxWidth: '75%', width: '75%', justifyContent: 'center' }]} activeOpacity={0.7} onPress={this.handleCategoriesButton}>
+										<Icon style={centralStyles.greenButtonIcon} size={25} name='filter'></Icon>
+										<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { marginLeft: responsiveWidth(3), fontSize: responsiveFontSize(2.3) }]}>Filter categories</Text>
+									</TouchableOpacity>
+								</View>
+							</View>
+							{/* separator */}
+							<View style={centralStyles.formSectionSeparatorContainer}>
+								<View style={centralStyles.formSectionSeparator}>
+								</View>
+							</View>
 							{/* acknowledgement */}
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
@@ -806,7 +888,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								</View>
 							</View>
 							{/* time and difficulty titles */}
-							<View style={[centralStyles.formSection, { width: responsiveWidth(80) }]}>
+							{/* <View style={[centralStyles.formSection, { width: responsiveWidth(80) }]}>
 								<View style={centralStyles.formInputContainer}>
 									<View style={styles.timeAndDifficultyTitleItem}>
 										<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Time:</Text>
@@ -815,9 +897,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 										<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Difficulty:</Text>
 									</View>
 								</View>
-							</View>
+							</View> */}
 							{/* time and difficulty dropdowns */}
-							<View style={[centralStyles.formSection, { width: responsiveWidth(80) }]}>
+							{/* <View style={[centralStyles.formSection, { width: responsiveWidth(80) }]}>
 								<View style={centralStyles.formInputContainer}>
 									<View picker style={[styles.timeAndDifficulty, { paddingLeft: responsiveWidth(8) }]} >
 										<DualOSPicker
@@ -832,30 +914,35 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											selectedChoice={this.state.newRecipeDetails.difficulty} />
 									</View>
 								</View>
-							</View>
+							</View> */}
 							{/* add picture and select categories*/}
-							<View style={[centralStyles.formSection, { width: responsiveWidth(80) }]}>
+							{/* <View style={[centralStyles.formSection, { width: responsiveWidth(80) }]}>
 								<View style={centralStyles.formInputContainer}>
 									<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={this.choosePrimaryPicture}>
 										<Icon style={centralStyles.greenButtonIcon} size={25} name='camera'></Icon>
-										<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>Add{"\n"}picture</Text>
+										<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>Main{"\n"}pictures</Text>
 									</TouchableOpacity>
 									<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={this.handleCategoriesButton}>
 										<Icon style={centralStyles.greenButtonIcon} size={25} name='filter'></Icon>
 										<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>Select{"\n"}categories</Text>
 									</TouchableOpacity>
 								</View>
+							</View> */}
+							{/* separator */}
+							<View style={centralStyles.formSectionSeparatorContainer}>
+								<View style={centralStyles.formSectionSeparator}>
+								</View>
 							</View>
 							{/* submit */}
 							<View style={[centralStyles.formSection, { width: responsiveWidth(80) }]}>
-								<View style={[centralStyles.formInputContainer]}>
+								<View style={centralStyles.formInputContainer}>
 									<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={this.askToReset}>
 										<Icon style={centralStyles.greenButtonIcon} size={25} name='alert-circle-outline'></Icon>
-										<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>Reset</Text>
+										<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { fontSize: responsiveFontSize(2.2) }]}>Reset</Text>
 									</TouchableOpacity>
-									<TouchableOpacity style={[centralStyles.yellowRectangleButton]} activeOpacity={0.7} onPress={e => this.submitRecipe(e)}>
+									<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={e => this.submitRecipe(e)}>
 										<Icon style={centralStyles.greenButtonIcon} size={25} name='login'></Icon>
-										<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>Submit</Text>
+										<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { fontSize: responsiveFontSize(2.2) }]}>Submit</Text>
 									</TouchableOpacity>
 								</View>
 							</View>

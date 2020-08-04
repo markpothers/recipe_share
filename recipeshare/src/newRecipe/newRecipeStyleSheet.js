@@ -1,6 +1,5 @@
-import React from 'react'
 import { StyleSheet } from 'react-native';
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions';
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 
 export const styles = StyleSheet.create({
 	mainPageContainer: {
@@ -237,7 +236,6 @@ export const styles = StyleSheet.create({
 		backgroundColor: 'transparent',
 		borderStyle: 'solid',
 		borderColor: 'transparent',
-		borderRadius: 5,
 		borderWidth: 0,
 	},
 	autoCompleteInput: {

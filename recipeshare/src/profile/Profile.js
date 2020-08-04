@@ -13,7 +13,7 @@ import DeleteChefOption from './deleteChefOption'
 import PicSourceChooser from '../functionalComponents/picSourceChooser'
 import { destroyChef } from '../fetches/destroyChef'
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions';
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo';
 

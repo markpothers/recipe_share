@@ -2,7 +2,7 @@ import React from 'react'
 import { Modal, Text, View, TouchableOpacity } from 'react-native'
 import { styles } from './alertPopUpStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions'
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import { centralStyles } from '../centralStyleSheet'
 
 export function AlertPopUp(props) {
@@ -22,11 +22,11 @@ export function AlertPopUp(props) {
 					</View>
 					<View style={[centralStyles.formSection, { width: responsiveWidth(80), marginTop: responsiveHeight(2), marginBottom: responsiveHeight(2) }]}>
 						<View style={[centralStyles.formInputContainer, { justifyContent: 'space-around' }]}>
-							<TouchableOpacity style={[centralStyles.greenRectangleButton]} activeOpacity={0.7} onPress={props.close}>
+							<TouchableOpacity style={centralStyles.greenRectangleButton} activeOpacity={0.7} onPress={props.close}>
 								<Icon style={centralStyles.yellowButtonIcon} size={25} name='cancel'></Icon>
 								<Text maxFontSizeMultiplier={2} style={centralStyles.yellowButtonText}>Cancel</Text>
 							</TouchableOpacity>
-							<TouchableOpacity style={[centralStyles.greenRectangleButton]} activeOpacity={0.7} onPress={props.onYes}>
+							<TouchableOpacity style={centralStyles.greenRectangleButton} activeOpacity={0.7} onPress={props.onYes}>
 								<Icon style={centralStyles.yellowButtonIcon} size={25} name='check'></Icon>
 								<Text maxFontSizeMultiplier={2} style={centralStyles.yellowButtonText}>Yes</Text>
 							</TouchableOpacity>

@@ -1,6 +1,5 @@
-import React from 'react'
 import { StyleSheet } from 'react-native';
-import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions'
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 
 export const styles = StyleSheet.create({
 	modalFullScreenContainer: {
@@ -33,6 +32,7 @@ export const styles = StyleSheet.create({
 		backgroundColor: 'white',
 		borderStyle: 'solid',
 		borderWidth: 1,
+		overflow: 'hidden'
 	},
 	picSourceChooserButton: {
 		justifyContent: 'center',
@@ -40,6 +40,25 @@ export const styles = StyleSheet.create({
 		minWidth: responsiveWidth(80),
 		marginLeft: responsiveWidth(3.5),
 		marginRight: responsiveWidth(3.5),
+		height: responsiveHeight(8),
+		marginTop: responsiveHeight(0.5),
+		flexDirection: 'row',
+		borderRadius: 5,
+		backgroundColor: '#fff59b',
+		borderStyle: 'solid',
+		borderWidth: 1,
+		borderColor: '#104e01',
+	},
+	picSourceChooserArrowButtonContainer: {
+		flexDirection: 'row',
+		width: responsiveWidth(80),
+		alignSelf: 'center',
+		justifyContent: 'space-between'
+	},
+	picSourceChooserArrowButton: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		width: responsiveWidth(39.5),
 		height: responsiveHeight(8),
 		marginTop: responsiveHeight(0.5),
 		flexDirection: 'row',
@@ -70,8 +89,11 @@ export const styles = StyleSheet.create({
 		marginRight: '5%',
 		textAlign: 'center',
 		fontWeight: 'bold',
-		fontSize: responsiveFontSize(3),
+		fontSize: responsiveFontSize(2.5),
 		color: '#104e01',
+		// flexWrap: 'wrap',
+		// borderWidth: 1,
+		// maxWidth: responsiveWidth(25)
 	},
 	standardIcon: {
 		color: '#104e01',
@@ -84,7 +106,25 @@ export const styles = StyleSheet.create({
 		marginRight: '5%',
 		textAlign: 'center',
 		fontWeight: 'bold',
-		fontSize: responsiveFontSize(3),
+		fontSize: responsiveFontSize(2.5),
 		color: '#fff59b',
 	},
+	primaryImageBlobsContainer: {
+		// borderWidth: 1,
+		// borderColor: 'red',
+		position: 'absolute',
+		alignSelf: 'center',
+		top: '90%',
+		// width: 100,
+		// height: 50,
+		flexDirection: 'row',
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	primaryImageBlob: {
+		color: '#fff59b',
+		// color: '#104e01',
+		marginHorizontal: responsiveWidth(1),
+		opacity: 0.75
+	}
 });

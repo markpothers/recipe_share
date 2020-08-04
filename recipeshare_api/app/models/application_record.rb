@@ -39,7 +39,7 @@ class ApplicationRecord < ActiveRecord::Base
     # byebug
     save_record = ApplicationRecord.storage_bucket(bucket).create_file(file_path, "#{hex}.jpg")
     File.delete(file_path) if File.exist?(file_path)
-    puts save_record.media_url
+    # puts save_record.media_url
     return save_record.media_url
   end
 

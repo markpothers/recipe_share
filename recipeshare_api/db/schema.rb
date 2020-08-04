@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_16_170655) do
+ActiveRecord::Schema.define(version: 2020_08_04_152627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,6 +137,7 @@ ActiveRecord::Schema.define(version: 2020_05_16_170655) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "hidden", default: false
+    t.integer "index"
     t.index ["recipe_id"], name: "index_recipe_images_on_recipe_id"
   end
 
@@ -196,6 +197,7 @@ ActiveRecord::Schema.define(version: 2020_05_16_170655) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "acknowledgement"
+    t.string "description"
     t.index ["chef_id"], name: "index_recipes_on_chef_id"
   end
 
