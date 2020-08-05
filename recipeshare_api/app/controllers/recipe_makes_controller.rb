@@ -15,7 +15,8 @@ class RecipeMakesController < ApplicationController
     def create
         # byebug
         if recipe_make_params["chef_id"] === @chef.id || @chef.is_admin === true
-            @recipe_make = RecipeMake.create(recipe_make_params)
+            @recipe_make = RecipeMake.find_or_create_by(recipe_make_params)
+            @recipe_make.hidden = false
             if @recipe_make.save
                 render json: true
             else

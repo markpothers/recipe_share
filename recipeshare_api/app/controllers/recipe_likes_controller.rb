@@ -15,7 +15,8 @@ class RecipeLikesController < ApplicationController
     def create
         # byebug
         if recipe_like_params["chef_id"] === @chef.id || @chef.is_admin === true
-            @recipe_like = RecipeLike.create(recipe_like_params)
+            @recipe_like = RecipeLike.find_or_create_by(recipe_like_params)
+            @recipe_like.hidden = false
             # byebug
             if @recipe_like.save
                 render json: true
@@ -46,7 +47,7 @@ class RecipeLikesController < ApplicationController
 
     def destroy
         if recipe_like_params["chef_id"] === @chef.id || @chef.is_admin === true
-            @recipe_likes = RecipeLike.where(recipe_id: recipe_like_params["recipe_id"]).where(chef_id: recipe_like_params["chef_id"] )
+            @recipe_likes = RecipeLike.where(recipe_id: recipe_like_params["recipe_id"], chef_id: recipe_like_params["chef_id"])
             @recipe_ids = @recipe_likes.map { |like| like.id }
             if RecipeLike.find(@recipe_ids).each { |recipe_like| recipe_like.update_attribute(:hidden, true) }
                 render json: true

@@ -3,7 +3,8 @@ class ReSharesController < ApplicationController
     def create
         # byebug
         if re_share_params["chef_id"] === @chef.id || @chef.is_admin === true
-            @re_share = ReShare.create(re_share_params)
+            @re_share = ReShare.find_or_create_by(re_share_params)
+            @re_share.hidden = false
             if @re_share.save
                 render json: true
             else
@@ -16,7 +17,7 @@ class ReSharesController < ApplicationController
 
     def destroy
         if re_share_params["chef_id"] === @chef.id || @chef.is_admin === true
-            @re_shares = ReShare.where(recipe_id: re_share_params["recipe_id"]).where(chef_id: re_share_params["chef_id"] )
+            @re_shares = ReShare.where(recipe_id: re_share_params["recipe_id"], chef_id: re_share_params["chef_id"])
             @recipe_ids = @re_shares.map { |like| like.id }
             if ReShare.find(@recipe_ids).each { |re_share| re_share.update_attribute(:hidden, true) }
                 render json: true
