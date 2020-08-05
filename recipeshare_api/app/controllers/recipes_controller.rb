@@ -28,22 +28,6 @@ class RecipesController < ApplicationController
                 if newRecipe_primary_images_params["primary_images"].length > 0
                     @recipe.primary_images=(newRecipe_primary_images_params)
                 end
-
-
-
-                # if newRecipe_primary_image_as_base64_params[:primaryImageBase64] != "" && newRecipe_primary_image_as_base64_params[:primaryImageBase64] != nil
-
-                #     recipe_image = RecipeImage.create(recipe_id: @recipe.id)
-                #     hex = SecureRandom.hex(20)
-                #     until RecipeImage.find_by(hex: hex) == nil
-                #         hex = SecureRandom.hex(20)
-                #     end
-                #     mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:recipe_images], hex, newRecipe_primary_image_as_base64_params[:primaryImageBase64])
-                #     recipe_image.image_url = mediaURL
-                #     recipe_image.hex=hex
-                #     # byebug
-                #     recipe_image.save
-                # end
                 @recipe.ingredients=(newRecipe_Ingredient_params)
                 @recipe.instructions=(newRecipe_Instructions_params)
                 @recipe.save
@@ -75,20 +59,6 @@ class RecipesController < ApplicationController
             if newRecipe_primary_images_params["primary_images"].length > 0
                 @recipe.primary_images=(newRecipe_primary_images_params)
             end
-
-            # if newRecipe_primary_image_as_base64_params[:primaryImageBase64] != "" && newRecipe_primary_image_as_base64_params[:primaryImageBase64] != nil
-            #     recipe_image = RecipeImage.create(recipe_id: @recipe.id)
-            #     hex = SecureRandom.hex(20)
-            #     until RecipeImage.find_by(hex: hex) == nil
-            #         hex = SecureRandom.hex(20)
-            #     end
-            #     mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:recipe_images], hex, newRecipe_primary_image_as_base64_params[:primaryImageBase64])
-            #     recipe_image.image_url = mediaURL
-            #     recipe_image.hex=hex
-            #     # byebug
-            #     recipe_image.save
-            # end
-
             @recipe.ingredients=(newRecipe_Ingredient_params)
             @recipe.instructions=(newRecipe_Instructions_params)
             if @recipe.save
@@ -149,7 +119,7 @@ class RecipesController < ApplicationController
     end
 
     def newRecipe_Instructions_params
-        params.require(:recipe).permit(instructions: [], instruction_images: [:index, :image_url, :hex, :base64])
+        params.require(:recipe).permit(instructions: [], instruction_images: [:id, :index, :image_url, :hex, :base64])
     end
 
     def newRecipe_filter_settings

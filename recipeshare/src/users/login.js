@@ -2,7 +2,7 @@ import React from 'react'
 import { Platform, Text, AsyncStorage, Image, View, TextInput, TouchableOpacity, Switch } from 'react-native'
 import { connect } from 'react-redux'
 import { styles } from './usersStyleSheet'
-import { centralStyles } from '../centralStyleSheet'
+import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { getNewPassword } from '../fetches/getNewPassword'
 import { loginChef } from '../fetches/loginChef'

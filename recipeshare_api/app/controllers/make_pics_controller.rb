@@ -29,7 +29,7 @@ class MakePicsController < ApplicationController
     def destroy
         @make_pic = MakePic.find(params[:id])
         if @make_pic.chef_id === @chef.id || @chef.is_admin === true
-            if MakePic.destroy(params[:id])
+            if MakePic.find(params[:id]).update_attribute(:hidden, true)
                 render json: true
             else
                 render json: false

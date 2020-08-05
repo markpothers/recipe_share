@@ -3,7 +3,7 @@ import { Modal, Text, View, TouchableOpacity } from 'react-native'
 import { styles } from './alertPopUpStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
-import { centralStyles } from '../centralStyleSheet'
+import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 
 export function AlertPopUp(props) {
 	return (

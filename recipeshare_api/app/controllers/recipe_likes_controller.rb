@@ -48,7 +48,7 @@ class RecipeLikesController < ApplicationController
         if recipe_like_params["chef_id"] === @chef.id || @chef.is_admin === true
             @recipe_likes = RecipeLike.where(recipe_id: recipe_like_params["recipe_id"]).where(chef_id: recipe_like_params["chef_id"] )
             @recipe_ids = @recipe_likes.map { |like| like.id }
-            if RecipeLike.destroy(@recipe_ids)
+            if RecipeLike.find(@recipe_ids).each { |recipe_like| recipe_like.update_attribute(:hidden, true) }
                 render json: true
             else
                 render json: {message: false}

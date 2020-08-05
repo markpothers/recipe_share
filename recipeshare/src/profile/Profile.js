@@ -1,14 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { styles } from './profileStyleSheet'
-import { centralStyles } from '../centralStyleSheet'
-import { View, ImageBackground, TouchableOpacity, ActivityIndicator, AsyncStorage, Platform } from 'react-native'
+import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
+import { AsyncStorage } from 'react-native'
 import ChefDetailsCard from '../chefDetails/ChefDetailsCard'
 import { getChefDetails } from '../fetches/getChefDetails'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import ChefEditor from './chefEditor'
-import { getDatabaseBackup } from '../fetches/getDatabaseBackup'
-import { getDatabaseRestore } from '../fetches/getDatabaseRestore'
+// import { getDatabaseBackup } from '../fetches/getDatabaseBackup'
+// import { getDatabaseRestore } from '../fetches/getDatabaseRestore'
 import DeleteChefOption from './deleteChefOption'
 import PicSourceChooser from '../functionalComponents/picSourceChooser'
 import { destroyChef } from '../fetches/destroyChef'

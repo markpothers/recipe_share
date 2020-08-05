@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, ScrollView, View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { connect } from 'react-redux'
 import { styles } from './recipeDetailsStyleSheet'
-// import { centralStyles } from '../centralStyleSheet'
+// import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 import { postRecipeLike } from '../fetches/postRecipeLike'
 import { postMakePic } from '../fetches/postMakePic'
 import { postReShare } from '../fetches/postReShare'

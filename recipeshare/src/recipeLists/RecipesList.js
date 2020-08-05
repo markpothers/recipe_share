@@ -9,7 +9,7 @@ import { postRecipeMake } from '../fetches/postRecipeMake'
 import { destroyRecipeLike } from '../fetches/destroyRecipeLike'
 import { destroyReShare } from '../fetches/destroyReShare'
 import { styles } from './recipeListStyleSheet'
-import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
+import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars //eslint-disable-line no-unused-vars
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import FilterMenu from '../functionalComponents/filterMenu'
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'

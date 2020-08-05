@@ -73,9 +73,27 @@ export default class MultiPicSourceChooser extends React.Component {
 		} else {
 			let newImages = this.props.imageSources
 			newImages.splice(this.state.imageIndex, 1)
-			await this.setState({ imageIndex: this.state.imageIndex > newImages.length-1 ? newImages.length-1 : this.state.imageIndex })
+			await this.setState({ imageIndex: this.state.imageIndex > newImages.length - 1 ? newImages.length - 1 : this.state.imageIndex })
 			await this.props.saveImage(newImages)
 		}
+	}
+
+	moveLeft = async () => {
+		let thisImage = this.props.imageSources[this.state.imageIndex]
+		let newImages = [...this.props.imageSources.slice(0, this.state.imageIndex), ...this.props.imageSources.slice(this.state.imageIndex + 1)]
+		let newImageIndex = this.state.imageIndex > 0 ? this.state.imageIndex - 1 : 0
+		newImages.splice(newImageIndex, 0, thisImage)
+		await this.setState({ imageIndex: newImageIndex })
+		await this.props.saveImage(newImages)
+	}
+
+	moveRight = async () => {
+		let thisImage = this.props.imageSources[this.state.imageIndex]
+		let newImages = [...this.props.imageSources.slice(0, this.state.imageIndex), ...this.props.imageSources.slice(this.state.imageIndex + 1)]
+		let newImageIndex = this.state.imageIndex < this.props.imageSources.length-1 ? this.state.imageIndex + 1 : this.state.imageIndex
+		newImages.splice(newImageIndex, 0, thisImage)
+		await this.setState({ imageIndex: newImageIndex })
+		await this.props.saveImage(newImages)
 	}
 
 	renderPrimaryImageBlobs = () => {
@@ -104,7 +122,7 @@ export default class MultiPicSourceChooser extends React.Component {
 							{imageSources[this.state.imageIndex].base64 === 'data:image/jpeg;base64,' && (
 								<React.Fragment>
 									<Icon style={styles.standardIcon} size={30} name='image' />
-							<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>No image{"\n"}selected</Text>
+									<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>No image{"\n"}selected</Text>
 								</React.Fragment>
 							)}
 							{imageSources[this.state.imageIndex].base64 !== 'data:image/jpeg;base64,' && (
@@ -124,18 +142,28 @@ export default class MultiPicSourceChooser extends React.Component {
 								<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Previous</Text>
 							</TouchableOpacity>
 							<TouchableOpacity style={styles.picSourceChooserArrowButton} activeOpacity={0.7} title="Next" onPress={() => this.state.imageIndex < this.props.imageSources.length - 1 ? this.setState({ imageIndex: this.state.imageIndex + 1 }) : null}>
-								<Icon style={styles.standardIcon} size={30} name='arrow-right' />
 								<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Next</Text>
+								<Icon style={styles.standardIcon} size={30} name='arrow-right' />
+							</TouchableOpacity>
+						</View>
+						<View style={styles.picSourceChooserArrowButtonContainer}>
+							<TouchableOpacity style={styles.picSourceChooserArrowButton} activeOpacity={0.7} title="Move left" onPress={this.moveLeft}>
+								<Icon style={styles.standardIcon} size={30} name='arrow-collapse-left' />
+								<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Move left</Text>
+							</TouchableOpacity>
+							<TouchableOpacity style={styles.picSourceChooserArrowButton} activeOpacity={0.7} title="Move right" onPress={this.moveRight}>
+								<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Move right</Text>
+								<Icon style={styles.standardIcon} size={30} name='arrow-collapse-right' />
 							</TouchableOpacity>
 						</View>
 						<View style={styles.picSourceChooserArrowButtonContainer}>
 							<TouchableOpacity style={styles.picSourceChooserArrowButton} activeOpacity={0.7} title="Add" onPress={this.addPhoto}>
 								<Icon style={styles.standardIcon} size={30} name='image-plus' />
-								<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Add slot</Text>
+								<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Add</Text>
 							</TouchableOpacity>
 							<TouchableOpacity style={styles.picSourceChooserArrowButton} activeOpacity={0.7} title="Delete" onPress={this.deleteImage}>
-								<Icon style={styles.standardIcon} size={30} name='camera-off' />
-								<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Delete slot</Text>
+								<Icon style={styles.standardIcon} size={30} name='image-off' />
+								<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Delete</Text>
 							</TouchableOpacity>
 						</View>
 						<TouchableOpacity style={styles.picSourceChooserButton} activeOpacity={0.7} title="Take Photo" onPress={this.openCamera}>

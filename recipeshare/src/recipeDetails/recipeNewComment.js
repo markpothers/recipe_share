@@ -1,7 +1,6 @@
 import React from 'react';
-import { Image, ScrollView, View, ImageBackground, Text, TextInput } from 'react-native';
+import { Image, View, Text, TextInput } from 'react-native';
 import { styles } from './recipeDetailsStyleSheet'
-import { databaseURL } from '../dataComponents/databaseURL'
 
 export default class RecipeNewComment extends React.PureComponent {
 
@@ -13,7 +12,7 @@ export default class RecipeNewComment extends React.PureComponent {
 					<Image style={styles.avatarThumbnail} source={(this.props.image_url !== null ? ({ uri: this.props.image_url }) : require("../dataComponents/peas.jpg"))} />
 				</View>
 				<View style={styles.commentRightContainer}>
-					<Text maxFontSizeMultiplier={2} style={[styles.detailsContentsHeader]}>{this.props.username}:</Text>
+					<Text maxFontSizeMultiplier={2} style={styles.detailsContentsHeader}>{this.props.username}:</Text>
 					<TextInput
 						style={styles.detailsContents}
 						value={this.props.commentText}

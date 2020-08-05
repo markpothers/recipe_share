@@ -10,7 +10,7 @@ import { connect } from 'react-redux'
 // import { destroyReShare } from '../fetches/destroyReShare'
 // import { NavigationEvents, withNavigation } from 'react-navigation'
 // import { styles } from './recipeListStyleSheet'
-// import { centralStyles } from '../centralStyleSheet'
+// import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 // import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 // import FilterMenu from '../functionalComponents/filterMenu'
 // import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'

@@ -1,8 +1,8 @@
 import React from 'react'
-import { Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { TextInput, TouchableOpacity, View } from 'react-native'
 import { styles } from './newRecipeStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { centralStyles } from '../centralStyleSheet'
+import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 
 export default class InstructionRow extends React.Component {
@@ -36,7 +36,7 @@ export default class InstructionRow extends React.Component {
 						this.setState({ text: text })
 					}}
 					onLayout={(event) => {
-						var { x, y, width, height } = event.nativeEvent.layout
+						var { height } = event.nativeEvent.layout
 						this.props.handleInstructionSizeChange(this.props.index, height)
 					}
 					}

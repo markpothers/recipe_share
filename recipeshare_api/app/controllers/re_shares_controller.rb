@@ -18,7 +18,7 @@ class ReSharesController < ApplicationController
         if re_share_params["chef_id"] === @chef.id || @chef.is_admin === true
             @re_shares = ReShare.where(recipe_id: re_share_params["recipe_id"]).where(chef_id: re_share_params["chef_id"] )
             @recipe_ids = @re_shares.map { |like| like.id }
-            if ReShare.destroy(@recipe_ids)
+            if ReShare.find(@recipe_ids).each { |re_share| re_share.update_attribute(:hidden, true) }
                 render json: true
             else
                 render json: {message: false}

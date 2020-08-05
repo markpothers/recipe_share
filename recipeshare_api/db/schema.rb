@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_04_152627) do
+ActiveRecord::Schema.define(version: 2020_08_05_205940) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,8 @@ ActiveRecord::Schema.define(version: 2020_08_04_152627) do
     t.string "unit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "index"
+    t.boolean "hidden"
     t.index ["ingredient_id"], name: "index_ingredient_uses_on_ingredient_id"
     t.index ["recipe_id"], name: "index_ingredient_uses_on_recipe_id"
   end
@@ -94,6 +96,7 @@ ActiveRecord::Schema.define(version: 2020_08_04_152627) do
     t.string "hex"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "hidden"
     t.index ["instruction_id"], name: "index_instruction_images_on_instruction_id"
   end
 
@@ -104,6 +107,7 @@ ActiveRecord::Schema.define(version: 2020_08_04_152627) do
     t.boolean "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "hidden"
     t.index ["recipe_id"], name: "index_instructions_on_recipe_id"
   end
 
@@ -160,6 +164,7 @@ ActiveRecord::Schema.define(version: 2020_08_04_152627) do
     t.integer "tastiness"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "hidden", default: false
     t.index ["chef_id"], name: "index_recipe_makes_on_chef_id"
     t.index ["recipe_id"], name: "index_recipe_makes_on_recipe_id"
   end

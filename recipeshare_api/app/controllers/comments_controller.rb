@@ -47,7 +47,7 @@ class CommentsController < ApplicationController
 
     def destroy
         if @comment.chef_id === @chef.id || @chef.is_admin === true
-            if Comment.destroy(params[:id])
+            if Comment.find(params[:id]).update_attribute(:hidden, true)
                 render json: Comment.getRecipesComments(@comment.recipe_id)
             else
                 render json: false

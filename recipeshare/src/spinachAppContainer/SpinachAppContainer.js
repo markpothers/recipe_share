@@ -1,6 +1,6 @@
 import React from 'react'
 import { ScrollView, SafeAreaView, Image, KeyboardAvoidingView, View, ActivityIndicator, Platform } from 'react-native'
-import { centralStyles } from '../centralStyleSheet'
+import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 
 export default class SpinachAppContainer extends React.Component {
 	static navigationOptions = {

@@ -57,7 +57,7 @@ class FollowsController < ApplicationController
         if follow_params[:follower_id] === @chef.id || @chef.is_admin === true
             @follows = Follow.where(follower_id: follow_params["follower_id"]).where(followee_id: follow_params["followee_id"] )
             @follow_ids = @follows.map { |like| like.id }
-            if Follow.destroy(@follow_ids)
+            if Follow.find(@follow_ids).each { |follow| follow.update_attribute(:hidden, true) }
                 render json: true
             else
                 render json: false

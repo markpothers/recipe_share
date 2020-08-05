@@ -2,7 +2,7 @@ import React from 'react'
 import { ScrollView, Text, TextInput, TouchableOpacity, View, Keyboard, AsyncStorage, AppState } from 'react-native'
 import { connect } from 'react-redux'
 import { styles } from './newRecipeStyleSheet'
-import { centralStyles } from '../centralStyleSheet'
+import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { times } from '../dataComponents/times'
 import { difficulties } from '../dataComponents/difficulties'
@@ -279,7 +279,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			return (
 				<AlertPopUp
 					close={() => this.setState({ alertPopUpShowing: false })}
-					title={"Are you sure you want to delete this recipe?"}
+					title={"Are you sure you want to clear this form and start a new recipe?"}
 					onYes={this.clearNewRecipeDetails}
 				/>
 			)
@@ -938,7 +938,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								<View style={centralStyles.formInputContainer}>
 									<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={this.askToReset}>
 										<Icon style={centralStyles.greenButtonIcon} size={25} name='alert-circle-outline'></Icon>
-										<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { fontSize: responsiveFontSize(2.2) }]}>Reset</Text>
+										<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { fontSize: responsiveFontSize(2.2) }]}>Clear</Text>
 									</TouchableOpacity>
 									<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={e => this.submitRecipe(e)}>
 										<Icon style={centralStyles.greenButtonIcon} size={25} name='login'></Icon>

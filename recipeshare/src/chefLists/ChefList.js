@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { getChefList } from '../fetches/getChefList'
 import { postFollow } from '../fetches/postFollow'
 import { destroyFollow } from '../fetches/destroyFollow'
-import { centralStyles } from '../centralStyleSheet'
+import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 import saveChefDetailsLocally from '../functionalComponents/saveChefDetailsLocally'
 import { getChefDetails } from '../fetches/getChefDetails'

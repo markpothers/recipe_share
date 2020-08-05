@@ -3,7 +3,7 @@ import { Platform, Text, TouchableOpacity, TextInput, View, Switch } from 'react
 import { countries } from '../dataComponents/countries'
 import { connect } from 'react-redux'
 import { postChef } from '../fetches/postChef'
-import { centralStyles } from '../centralStyleSheet'
+import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import PicSourceChooser from '../functionalComponents/picSourceChooser'
 import { TextPopUp } from '../textPopUp/textPopUp'

@@ -6,7 +6,7 @@ import Autocomplete from 'react-native-autocomplete-input';
 import { units } from '../dataComponents/units'
 import DualOSPicker from '../functionalComponents/DualOSPicker'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
-import { centralStyles } from '../centralStyleSheet'
+import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 
 export default class IngredientAutoComplete extends React.Component {
 
@@ -66,7 +66,7 @@ export default class IngredientAutoComplete extends React.Component {
 					// (Platform.OS == 'ios' ? {zIndex: (ingredientsLength - index) } : null)
 				]}
 			>
-				<View style={[styles.ingredientSortContainer]}>
+				<View style={styles.ingredientSortContainer}>
 					<Icon name='menu' size={responsiveHeight(3.5)} style={styles.ingredientTrashCan} />
 				</View>
 				<TouchableOpacity //this Touchable records touches around the list view to close it out in an intuitive way

@@ -2,7 +2,7 @@ import React from 'react'
 import { Image, ScrollView, View } from 'react-native';
 import { connect } from 'react-redux'
 import { styles } from './chefDetailsStyleSheet'
-import { centralStyles } from '../centralStyleSheet'
+import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 import { getChefDetails } from '../fetches/getChefDetails'
 import ChefDetailsCard from './ChefDetailsCard'
 import { MyRecipeBookTabs } from './ChefDetailsNavigators'

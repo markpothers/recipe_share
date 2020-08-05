@@ -239,7 +239,7 @@ images = ["https://www.googleapis.com/download/storage/v1/b/5d4dd3e98f4c-recipe-
 # end
 
 Recipe.all.each do |recipe|
-    RecipeImage.create(recipe_id: recipe.id, image_url: images.sample, hex: SecureRandom.hex)
+    RecipeImage.create(recipe_id: recipe.id, image_url: images.sample, hex: SecureRandom.hex, index: 0)
 end
 
 5.times do

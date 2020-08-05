@@ -46,7 +46,7 @@ class RecipeMakesController < ApplicationController
 
     def destroy
         if @recipe_make.chef_id === @chef.id || @chef.is_admin === true
-            if @recipe_make.destroy
+            if @recipe_make.update_attribute(:hidden, true)
                 render json: {message: "recipe_make deleted!"}
             else
                 render json: {error: true, message: "Ooops.  That's embarassing.  We couldn't delete that recipe_make.  You shouldn't even be able to see this message!"}
