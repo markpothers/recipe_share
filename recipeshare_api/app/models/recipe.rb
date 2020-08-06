@@ -35,16 +35,6 @@ class Recipe < ApplicationRecord
 
     if type == "all"
 
-      # ApplicationRecord.db.exec("SELECT recipes.*, recipe_images.image_url
-      #                               FROM recipes
-      #                               JOIN recipe_images ON recipe_images.recipe_id = recipes.id
-      #                               WHERE hidden=0
-      #                               ORDER BY (recipes.updated_at) DESC
-      #                               LIMIT (?)
-      #                               OFFSET (?)", [limit, offset])
-      # sql = ""
-# byebug
-
         recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*,
                                       MAX(ri.image_url) AS image_url,
                                       MAX(chefs.username) AS username,
@@ -65,11 +55,11 @@ class Recipe < ApplicationRecord
                                       FROM recipe_images ri
                                       WHERE hidden = false
                                     ) ri ON ri.recipe_id = recipes.id AND ri.row_num = 1
-                                    LEFT OUTER JOIN chefs ON recipes.chef_id = chefs.id AND chefs.hidden = false
-                                    LEFT OUTER JOIN re_shares ON recipes.id = re_shares.recipe_id AND re_shares.hidden = false
-                                    LEFT OUTER JOIN recipe_likes ON recipes.id = recipe_likes.recipe_id AND recipe_likes.hidden = false
-                                    LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id AND recipe_makes.hidden = false
-                                    LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id AND comments.hidden = false
+                                    LEFT OUTER JOIN chefs ON recipes.chef_id = chefs.id
+                                    LEFT OUTER JOIN re_shares ON recipes.id = re_shares.recipe_id
+                                    LEFT OUTER JOIN recipe_likes ON recipes.id = recipe_likes.recipe_id
+                                    LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id
+                                    LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id
                                     WHERE recipes.hidden = false
                                     #{filter_string}
                                     #{cuisine_string}
@@ -80,14 +70,6 @@ class Recipe < ApplicationRecord
                                     OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offset])
 
     elsif type == "chef" # recipes created by me ordered most-recent first
-
-      # recipes_results = ActiveRecord::Base.connection.execute("SELECT recipes.*, recipe_images.image_url
-      #                               FROM recipes
-      #                               JOIN recipe_images ON recipe_images.recipe_id = recipes.id
-      #                               WHERE hidden=0 AND chef_id = ?
-      #                               ORDER BY (recipes.updated_at) DESC
-      #                               LIMIT (?)
-      #                               OFFSET (?)", [chef_id, limit, offset])
 
       recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*, 
                                         MAX(ri.image_url) AS image_url,
@@ -109,11 +91,11 @@ class Recipe < ApplicationRecord
                                         FROM recipe_images ri
                                         WHERE hidden = false
                                       ) ri ON ri.recipe_id = recipes.id AND ri.row_num = 1
-                                      LEFT OUTER JOIN chefs ON recipes.chef_id = chefs.id AND chefs.hidden = false
-                                      LEFT OUTER JOIN re_shares ON recipes.id = re_shares.recipe_id AND re_shares.hidden = false
-                                      LEFT OUTER JOIN recipe_likes ON recipes.id = recipe_likes.recipe_id AND recipe_likes.hidden = false
-                                      LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id AND recipe_makes.hidden = false
-                                      LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id AND comments.hidden = false
+                                      LEFT OUTER JOIN chefs ON recipes.chef_id = chefs.id
+                                      LEFT OUTER JOIN re_shares ON recipes.id = re_shares.recipe_id
+                                      LEFT OUTER JOIN recipe_likes ON recipes.id = recipe_likes.recipe_id
+                                      LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id
+                                      LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id
                                       WHERE recipes.hidden = false AND recipes.chef_id = ?
                                       #{filter_string}
                                       #{cuisine_string}
@@ -124,15 +106,6 @@ class Recipe < ApplicationRecord
                                       OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, limit, offset])
 
     elsif type == "chef_feed" # recipes by chefs I follow ordered most-recent first
-
-      # recipes_results = ActiveRecord::Base.connection.execute("SELECT recipes.id, recipes.name, recipes.chef_id, recipes.time, recipes.difficulty, recipes.instructions, recipes.updated_at, recipe_images.image_url, follows.followee_id, follows.follower_id
-      #                               FROM recipes
-      #                               JOIN recipe_images ON recipe_images.recipe_id = recipes.id
-      #                               JOIN follows ON recipes.chef_id = followee_id
-      #                               WHERE follows.follower_id = ?
-      #                               ORDER BY (recipes.updated_at) DESC
-      #                               LIMIT (?)
-      #                               OFFSET (?)", [owner_id, limit, offset])
 
       recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*,
                                     MAX(ri.image_url) AS image_url,
@@ -157,19 +130,20 @@ class Recipe < ApplicationRecord
                                       FROM recipe_images ri
                                       WHERE hidden = false
                                     ) ri ON ri.recipe_id = recipes.id AND ri.row_num = 1
-                                    LEFT OUTER JOIN chefs ON recipes.chef_id = chefs.id AND chefs.hidden = false
-                                    LEFT OUTER JOIN re_shares ON recipes.id = re_shares.recipe_id AND re_shares.hidden = false
-                                    LEFT OUTER JOIN recipe_likes ON recipes.id = recipe_likes.recipe_id AND recipe_likes.hidden = false
-                                    LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id AND recipe_makes.hidden = false
-                                    LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id AND comments.hidden = false
+                                    LEFT OUTER JOIN chefs ON recipes.chef_id = chefs.id
+                                    LEFT OUTER JOIN re_shares ON recipes.id = re_shares.recipe_id
+                                    LEFT OUTER JOIN recipe_likes ON recipes.id = recipe_likes.recipe_id
+                                    LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id
+                                    LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id
                                     LEFT OUTER JOIN (
                                         SELECT chefs.username AS sharer_username, chefs.id AS sharer_id, re_shares.recipe_id AS shared_id
                                         FROM chefs
                                         JOIN re_shares ON chefs.id = re_shares.chef_id
-                                        WHERE re_shares.chef_id IN (SELECT follows.followee_id FROM follows WHERE follower_id = ?)
+                                        WHERE re_shares.chef_id IN (SELECT follows.followee_id FROM follows WHERE follower_id = ? AND follows.hidden = false)
+                                        AND re_shares.hidden = false
                                         ) AS sharers ON recipes.id = shared_id
-                                    JOIN follows ON recipes.chef_id = followee_id
-                                    WHERE recipes.hidden = false AND ( follows.follower_id = ? OR re_shares.chef_id IN (SELECT follows.followee_id FROM follows WHERE follower_id = ?))
+                                    JOIN follows ON recipes.chef_id = follows.followee_id
+                                    WHERE recipes.hidden = false AND follows.hidden = false AND ( follows.follower_id = ? OR re_shares.chef_id IN (SELECT follows.followee_id FROM follows WHERE follower_id = ? AND follows.hidden = false))
                                     #{filter_string}
                                     #{cuisine_string}
                                     #{serves_string}
@@ -179,15 +153,6 @@ class Recipe < ApplicationRecord
                                     OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, queryChefID, queryChefID, limit, offset])
 
     elsif type == "chef_liked" # recipes liked by use_chef ordered by most-recently liked
-
-      # recipes_results = ActiveRecord::Base.connection.execute("SELECT recipes.id, recipes.name, recipes.chef_id, recipes.time, recipes.difficulty, recipes.instructions, recipe_likes.updated_at, recipe_likes.chef_id, recipe_images.image_url
-      #                               FROM recipes
-      #                               JOIN recipe_images ON recipe_images.recipe_id = recipes.id
-      #                               JOIN recipe_likes ON recipe_likes.recipe_id = recipes.id
-      #                               WHERE (recipes.hidden=0 AND recipe_likes.chef_id = ?)
-      #                               ORDER BY (recipe_likes.updated_at) DESC
-      #                               LIMIT (?)
-      #                               OFFSET (?)", [chef_id, limit, offset])
 # byebug
         recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*,
                                       MAX(ri.image_url) AS image_url,
@@ -210,12 +175,12 @@ class Recipe < ApplicationRecord
                                         FROM recipe_images ri
                                         WHERE hidden = false
                                       ) ri ON ri.recipe_id = recipes.id AND ri.row_num = 1
-                                      LEFT OUTER JOIN chefs ON recipes.chef_id = chefs.id AND chefs.hidden = false
-                                      LEFT OUTER JOIN re_shares ON recipes.id = re_shares.recipe_id AND re_shares.hidden = false
-                                      LEFT OUTER JOIN recipe_likes ON recipes.id = recipe_likes.recipe_id AND recipe_likes.hidden = false
-                                      LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id AND recipe_makes.hidden = false
-                                      LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id AND comments.hidden = false
-                                      WHERE recipes.hidden = false AND (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id AND recipe_likes.chef_id = ?)>0
+                                      LEFT OUTER JOIN chefs ON recipes.chef_id = chefs.id
+                                      LEFT OUTER JOIN re_shares ON recipes.id = re_shares.recipe_id
+                                      LEFT OUTER JOIN recipe_likes ON recipes.id = recipe_likes.recipe_id
+                                      LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id
+                                      LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id
+                                      WHERE recipes.hidden = false AND (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id AND recipe_likes.hidden = false AND recipe_likes.chef_id = ?)>0
                                       #{filter_string}
                                       #{cuisine_string}
                                       #{serves_string}
@@ -225,15 +190,6 @@ class Recipe < ApplicationRecord
                                       OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, limit, offset])
   
     elsif type == "chef_made" # recipes liked by use_chef ordered by most-recently liked
-
-      # recipes = recipes_results = ActiveRecord::Base.connection.execute("SELECT recipes.id, recipes.name, recipes.chef_id, recipes.time, recipes.difficulty, recipes.instructions, recipe_makes.updated_at, recipe_makes.chef_id, recipe_images.image_url
-      #                               FROM recipes
-      #                               JOIN recipe_images ON recipe_images.recipe_id = recipes.id
-      #                               JOIN recipe_makes ON recipe_makes.recipe_id = recipes.id
-      #                               WHERE (recipes.hidden=0 AND recipe_makes.chef_id = ?)
-      #                               ORDER BY (recipe_makes.updated_at) DESC
-      #                               LIMIT (?)
-      #                               OFFSET (?)", [chef_id, limit, offset])
 
         recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*,
                                       MAX(ri.image_url) AS image_url,
@@ -256,12 +212,12 @@ class Recipe < ApplicationRecord
                                         FROM recipe_images ri
                                         WHERE hidden = false
                                       ) ri ON ri.recipe_id = recipes.id AND ri.row_num = 1
-                                      LEFT OUTER JOIN chefs ON recipes.chef_id = chefs.id AND chefs.hidden = false
-                                      LEFT OUTER JOIN re_shares ON recipes.id = re_shares.recipe_id AND re_shares.hidden = false
-                                      LEFT OUTER JOIN recipe_likes ON recipes.id = recipe_likes.recipe_id AND recipe_likes.hidden = false
-                                      LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id AND recipe_makes.hidden = false
-                                      LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id AND comments.hidden = false
-                                      WHERE recipes.hidden = false AND (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id AND recipe_makes.chef_id = ?)>0
+                                      LEFT OUTER JOIN chefs ON recipes.chef_id = chefs.id
+                                      LEFT OUTER JOIN re_shares ON recipes.id = re_shares.recipe_id
+                                      LEFT OUTER JOIN recipe_likes ON recipes.id = recipe_likes.recipe_id
+                                      LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id
+                                      LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id
+                                      WHERE recipes.hidden = false AND (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id AND recipe_makes.hidden = false AND recipe_makes.chef_id = ?)>0
                                       #{filter_string}
                                       #{cuisine_string}
                                       #{serves_string}
@@ -274,21 +230,7 @@ class Recipe < ApplicationRecord
 
         chefFilter = ""  # "WHERE recipes.chef_id = #{chef_id}"  # stitutute this line in if needed
 
-        #insert this to add rank "ROW_NUMBER() OVER(ORDER BY COUNT(recipe_likes.recipe_id) DESC) AS Row"
-
-      # recipes_results = ActiveRecord::Base.connection.execute("SELECT
-      #                               recipes.*, recipe_images.image_url, COUNT(recipe_likes.recipe_id) AS count
-      #                               FROM recipe_likes
-      #                               JOIN recipes ON recipe_likes.recipe_id = recipes.id
-      #                               JOIN recipe_images ON recipe_images.recipe_id = recipes.id
-      #                               WHERE hidden=0
-      #                               #{chefFilter}
-      #                               GROUP BY recipe_likes.recipe_id
-      #                               ORDER BY count(recipe_likes.recipe_id) DESC
-      #                               LIMIT (?)
-      #                               OFFSET (?)", [limit, offset])
-
-        recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*, 
+     recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*, 
                                         MAX(ri.image_url) AS image_url,
                                         MAX(chefs.username) AS username,
                                         MAX(chefs.image_url) AS chefimage_url,
@@ -308,11 +250,11 @@ class Recipe < ApplicationRecord
                                         FROM recipe_images ri
                                         WHERE hidden = false
                                       ) ri ON ri.recipe_id = recipes.id AND ri.row_num = 1
-                                      LEFT OUTER JOIN chefs ON recipes.chef_id = chefs.id AND chefs.hidden = false
-                                      LEFT OUTER JOIN re_shares ON recipes.id = re_shares.recipe_id AND re_shares.hidden = false
-                                      LEFT OUTER JOIN recipe_likes ON recipes.id = recipe_likes.recipe_id AND recipe_likes.hidden = false
-                                      LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id AND recipe_makes.hidden = false
-                                      LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id AND comments.hidden = false
+                                      LEFT OUTER JOIN chefs ON recipes.chef_id = chefs.id
+                                      LEFT OUTER JOIN re_shares ON recipes.id = re_shares.recipe_id
+                                      LEFT OUTER JOIN recipe_likes ON recipes.id = recipe_likes.recipe_id
+                                      LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id
+                                      LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id
                                       WHERE recipes.hidden = false
                                       #{filter_string}
                                       #{cuisine_string}
@@ -321,35 +263,11 @@ class Recipe < ApplicationRecord
                                       ORDER BY likes_count DESC
                                       LIMIT ?
                                       OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offset])
-  
-
-            # correct SQL query:
-            # SELECT ROW_NUMBER() OVER(ORDER BY COUNT(recipe_likes.recipe_id) DESC) AS Row,
-            # recipes.*, COUNT(recipe_likes.recipe_id)
-            # FROM recipe_likes
-            # JOIN recipes ON recipe_likes.recipe_id = recipes.id
-            # GROUP BY recipe_likes.recipe_id
-            # ORDER BY count(recipe_likes.recipe_id) DESC
-            # LIMIT 50
-            # OFFSET 0
 
     elsif type =="most_made" # recipes according to their global rankings # with filter bASed on chef name working if needed
 
       chefFilter = ""  # "WHERE recipes.chef_id = #{chef_id}"  # stitutute this line in if needed
-
-    # recipes_results = ActiveRecord::Base.connection.execute("SELECT
-    #                               recipes.*, recipe_images.image_url, COUNT(recipe_makes.recipe_id) AS count
-    #                               FROM recipe_makes
-    #                               JOIN recipes ON recipe_makes.recipe_id = recipes.id
-    #                               JOIN recipe_images ON recipe_images.recipe_id = recipes.id
-    #                               WHERE hidden=0
-    #                               #{chefFilter}
-    #                               GROUP BY recipe_makes.recipe_id
-    #                               ORDER BY count(recipe_makes.recipe_id) DESC
-    #                               LIMIT (?)
-    #                               OFFSET (?)", [limit, offset])
-
-    recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*,
+      recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*,
                                   MAX(ri.image_url) AS image_url,
                                   MAX(chefs.username) AS username,
                                   MAX(chefs.image_url) AS chefimage_url,
@@ -369,11 +287,11 @@ class Recipe < ApplicationRecord
                                   FROM recipe_images ri
                                   WHERE hidden = false
                                 ) ri ON ri.recipe_id = recipes.id AND ri.row_num = 1
-                                LEFT OUTER JOIN chefs ON recipes.chef_id = chefs.id AND chefs.hidden = false
-                                LEFT OUTER JOIN re_shares ON recipes.id = re_shares.recipe_id AND re_shares.hidden = false
-                                LEFT OUTER JOIN recipe_likes ON recipes.id = recipe_likes.recipe_id AND recipe_likes.hidden = false
-                                LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id AND recipe_makes.hidden = false
-                                LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id AND comments.hidden = false
+                                LEFT OUTER JOIN chefs ON recipes.chef_id = chefs.id
+                                LEFT OUTER JOIN re_shares ON recipes.id = re_shares.recipe_id
+                                LEFT OUTER JOIN recipe_likes ON recipes.id = recipe_likes.recipe_id
+                                LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id
+                                LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id
                                 WHERE recipes.hidden = false
                                 #{filter_string}
                                 #{cuisine_string}
@@ -405,11 +323,11 @@ class Recipe < ApplicationRecord
                                   FROM recipe_images ri
                                   WHERE hidden = false
                                 ) ri ON ri.recipe_id = recipes.id AND ri.row_num = 1
-                                LEFT OUTER JOIN chefs ON recipes.chef_id = chefs.id AND chefs.hidden = false
-                                LEFT OUTER JOIN re_shares ON recipes.id = re_shares.recipe_id AND re_shares.hidden = false
-                                LEFT OUTER JOIN recipe_likes ON recipes.id = recipe_likes.recipe_id AND recipe_likes.hidden = false
-                                LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id AND recipe_makes.hidden = false
-                                LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id AND comments.hidden = false
+                                LEFT OUTER JOIN chefs ON recipes.chef_id = chefs.id
+                                LEFT OUTER JOIN re_shares ON recipes.id = re_shares.recipe_id
+                                LEFT OUTER JOIN recipe_likes ON recipes.id = recipe_likes.recipe_id
+                                LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id
+                                LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id
                                 WHERE recipes.hidden = false
                                 #{filter_string}
                                 #{cuisine_string}

@@ -24,7 +24,6 @@ class Chef < ApplicationRecord
     has_many :recipe_images
     has_many :make_pics
 
-
     validates :e_mail, presence: {message: "must be included."}
     validates :username, presence: {message: "must be included."}
     validates :username, length: {minimum: 3, message: "must be at least 3 characters."}
@@ -124,6 +123,7 @@ class Chef < ApplicationRecord
                                                 GROUP BY recipes.chef_id) AS commented_recipes ON commented_recipes.counter_chef_id = chefs.id
                                             LEFT OUTER JOIN follows ON follows.followee_id = chefs.id
                                             WHERE follows.follower_id = ? AND chefs.hidden = false
+                                            AND follows.hidden = false
                                             GROUP BY chefs.id
                                             ORDER BY follow_created DESC
                                             LIMIT ?
@@ -168,6 +168,7 @@ class Chef < ApplicationRecord
                                             GROUP BY recipes.chef_id) AS commented_recipes ON commented_recipes.counter_chef_id = chefs.id
                                         LEFT OUTER JOIN follows ON follows.follower_id = chefs.id
                                         WHERE follows.followee_id = ? AND chefs.hidden = false
+                                        AND follows.hidden = false
                                         GROUP BY chefs.id
                                         ORDER BY follow_created DESC
                                         LIMIT ?
