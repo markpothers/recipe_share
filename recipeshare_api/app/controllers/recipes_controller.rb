@@ -56,9 +56,7 @@ class RecipesController < ApplicationController
                 newRecipe_filter_settings["filter_settings"][category] ? @recipe[category.downcase.split(" ").join("_")] = true : @recipe[category.downcase.split(" ").join("_")] = false
             end
             # byebug
-            if newRecipe_primary_images_params["primary_images"].length > 0
-                @recipe.primary_images=(newRecipe_primary_images_params)
-            end
+            @recipe.primary_images=(newRecipe_primary_images_params)
             @recipe.ingredients=(newRecipe_Ingredient_params)
             @recipe.instructions=(newRecipe_Instructions_params)
             if @recipe.save

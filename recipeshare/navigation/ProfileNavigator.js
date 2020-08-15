@@ -8,35 +8,37 @@ import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-nat
 
 const Stack = createStackNavigator()
 
-ProfileStack = () => {
-  return (
-    <Stack.Navigator
-    initialRouteName="MyRecipeBook"
-    headerMode="screen"
-    screenOptions={{
-      headerStyle: {
-        backgroundColor: '#104e01',
-        height: responsiveHeight(9),
-      },
-      headerTitleStyle: {
-        marginHorizontal: 0
-      },
-      headerTitleContainerStyle: {
-        position: 'relative',
-        left: 0,
-        right: 0,
-      }
-    }}
-  >
-    <Stack.Screen
-      name="Profile"
-      options={
-        {headerTitle: props => <AppHeader {...props} text={"Profile"}/>}
-      }
-      component={Profile}
-    />
-  </Stack.Navigator>
-  )
+const ProfileStack = (props) => {
+	const fwdProps = props
+	return (
+		<Stack.Navigator
+			initialRouteName="Profile"
+			headerMode="screen"
+			screenOptions={{
+				headerStyle: {
+					backgroundColor: '#104e01',
+					height: responsiveHeight(9),
+				},
+				headerTitleStyle: {
+					marginHorizontal: 0
+				},
+				headerTitleContainerStyle: {
+					position: 'relative',
+					left: 0,
+					right: 0,
+				}
+			}}
+		>
+			<Stack.Screen
+				name="Profile"
+				options={
+					{ headerTitle: props => <AppHeader {...props} text={"Profile"} /> }
+				}
+			>
+				{props => <Profile {...props} setLoadedAndLoggedIn={fwdProps.setLoadedAndLoggedIn} />}
+			</Stack.Screen>
+		</Stack.Navigator>
+	)
 }
 
 // const ProfileStack = createStackNavigator({

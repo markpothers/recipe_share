@@ -1,4 +1,3 @@
-import React from 'react'
 import { StyleSheet } from 'react-native';
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 
@@ -12,7 +11,7 @@ export const styles = StyleSheet.create({
 		borderColor: '#104e01',
 		backgroundColor: '#fff59b',
 		width: '80%',
-		height: '85%',
+		height: responsiveHeight(85),
 		marginTop: '7.5%',
 		marginBottom: '7.5%',
 		marginLeft: '10%',
@@ -25,7 +24,7 @@ export const styles = StyleSheet.create({
 		// marginTop: '4%',
 		paddingTop: responsiveHeight(1),
 		paddingBottom: responsiveHeight(1),
-		// height: 27,
+		height: responsiveHeight(6),
 	},
 	title: {
 		color: '#104e01',

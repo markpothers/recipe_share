@@ -131,7 +131,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				serves: "Any",
 				acknowledgement: "",
 				description: ""
-			}
+			},
 		}
 
 		componentDidMount = async () => {
@@ -607,6 +607,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					sourceChosen={this.instructionSourceChosen}
 					key={"instruction-pic-chooser"}
 					imageSource={imageSource}
+					originalImage={this.state.newRecipeDetails.instructionImages[this.state.instructionImageIndex]}
+					cancelChooseInstructionImage={this.cancelChooseInstructionImage}
 				/>
 			)
 		}
@@ -628,11 +630,23 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				})
 			}
 			else {
-				await this.setState({
-					awaitingServer: false,
-					choosingInstructionPicture: false
-				})
+				await this.setState({awaitingServer: false})
 			}
+		}
+
+		cancelChooseInstructionImage = (image, index) => {
+			this.setState((state) => {
+				let newInstructionImages = [...state.newRecipeDetails.instructionImages]
+				newInstructionImages[index] = image
+				return ({
+					choosingPicture: false,
+					newRecipeDetails: {
+						...state.newRecipeDetails,
+						instructionImages: newInstructionImages
+					},
+					awaitingServer: false,
+				})
+			})
 		}
 
 		toggleFilterCategory = (category) => {
@@ -663,7 +677,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		render() {
-			// console.log(typeof "Mark")
+			// console.log(this.state.focusedInstruction)
 			return (
 				<SpinachAppContainer awaitingServer={this.state.awaitingServer} scrollingEnabled={false}>
 					{this.state.renderOfflineMessage && (
@@ -747,7 +761,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								<View style={centralStyles.formSectionSeparator}>
 								</View>
 							</View>
-							{/* recipe name */}
+							{/* description */}
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
 									<TextInput
@@ -841,7 +855,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									childrenHeights={this.state.instructionHeights}
 									marginChildrenTop={0}
 									onDataChange={(newInstructions) => this.handleInstructionsSort(newInstructions)}
-									onDragStart={this.deactivateScrollView}
+									onDragStart={() => {
+										this.deactivateScrollView()
+										Keyboard.dismiss()
+									}}
 									onDragEnd={this.activateScrollView}
 									delayLongPress={100}
 									keyExtractor={(item, index) => `${index}${item}`}
@@ -857,6 +874,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 												addNewInstruction={this.addNewInstruction}
 												chooseInstructionPicture={this.chooseInstructionPicture}
 												instructionImagePresent={this.state.newRecipeDetails.instructionImages[index] != ''}
+												setFocusedInstructionInput={this.setFocusedInstructionInput}
 											/>
 										)
 									}}

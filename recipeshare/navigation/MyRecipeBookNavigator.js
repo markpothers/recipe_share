@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, Dimensions, View } from 'react-native';
+// import { Platform, Dimensions, View } from 'react-native';
 // import { createStackNavigator, createBottomTabNavigator, createMaterialTopTabNavigator, createDrawerNavigator } from 'react-navigation';
 import RecipeDetailsScreen from '../src/recipeDetails/recipeDetails'
 import ChefDetailsScreen from '../src/chefDetails/chefDetails'
@@ -12,7 +12,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 const Tab = createMaterialTopTabNavigator()
 
-MyRecipeBookTabs = () => {
+const MyRecipeBookTabs = () => {
   return (
     <Tab.Navigator
       // lazy={true}
@@ -49,7 +49,7 @@ MyRecipeBookTabs = () => {
         component={MyRecipesScreen}
       />
       <Tab.Screen
-        name="Recipes I've Liked"
+        name="Recipes I Like"
         component={MyLikedRecipesScreen}
       />
       {/* <Tab.Screen
@@ -139,13 +139,13 @@ MyRecipeBookTabs = () => {
 
 const Stack = createStackNavigator()
 
-MyRecipeBookStack = () => {
+const MyRecipeBookStack = () => {
   // console.log(MyRecipeBookTabs)
-  const props = {}
+//   const props = {}
 
-  const screenOptions = {
+//   const screenOptions = {
 
-  }
+//   }
 
   return (
     <Stack.Navigator

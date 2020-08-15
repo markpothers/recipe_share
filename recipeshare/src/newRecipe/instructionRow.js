@@ -7,9 +7,9 @@ import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-nat
 
 export default class InstructionRow extends React.Component {
 
-	state = {
-		text: ""
-	}
+		state = {
+			text: ""
+		}
 
 	componentDidMount = () => {
 		this.setState({ text: this.props.item })
@@ -38,8 +38,7 @@ export default class InstructionRow extends React.Component {
 					onLayout={(event) => {
 						var { height } = event.nativeEvent.layout
 						this.props.handleInstructionSizeChange(this.props.index, height)
-					}
-					}
+					}}
 					onBlur={() => this.props.handleInstructionChange(this.state.text, this.props.index)}
 				/>
 				{/* <TouchableOpacity style={[styles.deleteInstructionContainer, { width: '9%' }]} onPress={this.voice} activeOpacity={0.7}>

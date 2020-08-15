@@ -1,10 +1,11 @@
 import React from 'react'
 import { Image, View, TouchableOpacity, Text } from 'react-native'
 import { styles } from './recipeListStyleSheet'
-import { databaseURL } from '../dataComponents/databaseURL'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import OfflineMessage from '../offlineMessage/offlineMessage'
+
+const peasImage = require("../dataComponents/peas.jpg")
 export default class RecipeCard extends React.PureComponent {
 
 	navigateToSharer = (chefID) => {
@@ -13,6 +14,7 @@ export default class RecipeCard extends React.PureComponent {
 
 	render() {
 		// console.log(this.props)
+		const imageSource = this.props.image_url ? {uri:this.props.image_url} : peasImage
 		return (
 			<View style={styles.recipeCard} >
 				{this.props.renderOfflineMessage.includes(this.props.id) && (
@@ -43,7 +45,7 @@ export default class RecipeCard extends React.PureComponent {
 					</TouchableOpacity>
 				</View>
 				<TouchableOpacity style={styles.recipeCardImageContainer} activeOpacity={0.7} onPress={() => this.props.navigateToRecipeDetails(this.props.id)}>
-					<Image style={styles.thumbnail} source={{ uri: this.props.image_url }} />
+					<Image style={styles.thumbnail} source={imageSource} />
 				</TouchableOpacity>
 				<View style={styles.recipeCardBottomContainer}>
 					<TouchableOpacity style={styles.recipeCardBottomSubContainers} onPress={this.props.chef_shared == 0 ? () => this.props.reShareRecipe(this.props.id) : () => this.props.unReShareRecipe(this.props.id)}>
@@ -70,13 +72,13 @@ export default class RecipeCard extends React.PureComponent {
 
 function AvatarImage(chefimage_url) {
 	const URL = chefimage_url.chefimage_url
-	if (URL == null) {
+	if (!URL) {
 		return (
 			<Image style={styles.avatarThumbnail} source={require("../dataComponents/peas.jpg")} />
 		)
 	} else {
 		return (
-			<Image style={styles.avatarThumbnail} source={URL.startsWith("http") ? { uri: URL } : { uri: `${databaseURL}${URL}` }} />
+			<Image style={styles.avatarThumbnail} source={{uri: URL}} />
 		)
 	}
 }

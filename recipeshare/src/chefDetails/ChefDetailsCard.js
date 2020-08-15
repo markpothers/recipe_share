@@ -108,15 +108,15 @@ export default class ChefDetailsCard extends React.PureComponent {
 
 function AvatarImage(chefimage_url) {
 	const URL = chefimage_url.chefimage_url
-	if (URL === null || URL === undefined) {
+	if (!URL) {
 		return (
-			<Image style={styles.avatarThumbnail} source={require("../dataComponents/peas.jpg")} resizeMode={'contain'} />
+			<Image style={styles.avatarThumbnail} source={require("../dataComponents/peas.jpg")} resizeMode={'cover'} />
 		)
 	} else if (typeof URL === 'object') {
 		return (
-			<Image style={styles.avatarThumbnail} source={URL.uri.startsWith("http") ? { uri: URL.uri } : { uri: `${databaseURL}${URL.uri}` }} resizeMode={'contain'} />
+			<Image style={styles.avatarThumbnail} source={URL.uri.startsWith("http") ? { uri: URL.uri } : { uri: `${databaseURL}${URL.uri}` }} resizeMode={'cover'} />
 		)
 	} else {
-		return <Image style={styles.avatarThumbnail} source={URL.startsWith("http") ? { uri: URL } : { uri: `${databaseURL}${URL}` }} resizeMode={'contain'} />
+		return <Image style={styles.avatarThumbnail} source={URL.startsWith("http") ? { uri: URL } : { uri: `${databaseURL}${URL}` }} resizeMode={'cover'} />
 	}
 }

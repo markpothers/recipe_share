@@ -101,8 +101,10 @@ class ChefsController < ApplicationController
         @chef.username != chef_params[:username] ? @chef.update_attribute(:username, chef_params[:username]) : nil
         @chef.profile_text != chef_params[:profile_text] ? @chef.update_attribute(:profile_text, chef_params[:profile_text]) : nil
         @chef.country != chef_params[:country] ? @chef.update_attribute(:country, chef_params[:country]) : nil
-        # byebug
-        if image_params[:image_url] != ""
+        if image_params[:image_url] == "data:image/jpeg;base64,"
+            @chef.update_attribute(:image_url, "")
+            @chef.update_attribute(:hex, "")
+        elsif image_params[:image_url] != "data:image/jpeg;base64," && image_params[:image_url] != ""
             hex = SecureRandom.hex(20)
             until Chef.find_by(hex: hex) == nil
                 hex = SecureRandom.hex(20)

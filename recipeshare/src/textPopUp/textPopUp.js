@@ -1,7 +1,8 @@
 import React from 'react'
-import { Modal, Text, View, TouchableOpacity, Dimensions, ScrollView, Platform } from 'react-native'
+import { Modal, Text, View, TouchableOpacity, Dimensions, ScrollView } from 'react-native'
 import { styles } from './textPopUpStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { responsiveHeight } from 'react-native-responsive-dimensions';
 
 export function TextPopUp(props) {
 
@@ -19,7 +20,7 @@ export function TextPopUp(props) {
 					<View style={styles.titleContainer}>
 						<Text maxFontSizeMultiplier={1.5} style={styles.title}>{props.title}</Text>
 					</View>
-					<View style={[styles.editChefInputAreaBox, (Platform.OS === 'ios' ? { height: '87%' } : { height: '89%' })]} >
+					<View style={[styles.editChefInputAreaBox, {height: responsiveHeight(70)}]} >
 						<ScrollView>
 							<Text maxFontSizeMultiplier={2} style={styles.tAndCText}>{props.text}</Text>
 						</ScrollView>

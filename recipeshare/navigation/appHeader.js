@@ -8,7 +8,7 @@ class AppHeader extends React.PureComponent {
 
     renderDrawerButton = () => {
         return (
-            <TouchableOpacity style={styles.headerDrawerButton}>
+            <TouchableOpacity style={styles.headerDrawerButton} activeOpacity={0}>
                 <Icon name='menu' style={styles.headerIcon} size={33} onPress={() => this.props.navigation.toggleDrawer()}/>
             </TouchableOpacity>
         )
@@ -16,7 +16,7 @@ class AppHeader extends React.PureComponent {
 
     renderBackButton = () => {
         return (
-            <TouchableOpacity style={styles.headerDrawerButton}>
+            <TouchableOpacity style={styles.headerDrawerButton} activeOpacity={0.7}>
                 <Icon name='arrow-left' style={styles.headerIcon} size={33} onPress={() => this.props.navigation.goBack()}/>
             </TouchableOpacity>
         )
@@ -25,7 +25,7 @@ class AppHeader extends React.PureComponent {
     renderNewRecipeButton = () => {
         return (
             <View style={styles.headerEnd}>
-                <TouchableOpacity style={styles.headerNewButton}>
+                <TouchableOpacity style={styles.headerNewButton} activeOpacity={0.7}>
                     <Icon name='plus' style={styles.headerIcon} size={33} onPress={() => this.props.navigation.navigate('NewRecipe')}/>
                 </TouchableOpacity>
             </View>

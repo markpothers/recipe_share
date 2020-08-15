@@ -31,6 +31,7 @@ RecipeMake.destroy_all
 Follow.destroy_all
 Friendship.destroy_all
 IngredientUse.destroy_all
+InstructionImage.destroy_all
 Instruction.destroy_all
 Recipe.destroy_all
 Chef.destroy_all

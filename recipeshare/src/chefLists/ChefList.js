@@ -136,19 +136,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		renderChefListItem = (item) => {
-			let image_url = null
-			if (item.item.image_url != null) {
-				if (item.item.image_url.startsWith("http")) {
-					image_url = { uri: item.item.image_url }
-				} else {
-					image_url = { uri: `${databaseURL}${item.item.image_url}` }
-				}
-			}
 			return <ChefCard
 				listChoice={this.props["listChoice"]}
 				key={item.index.toString()}
 				{...item.item}
-				image_url={image_url}
 				navigateToChefDetails={this.navigateToChefDetails}
 				followChef={this.followChef}
 				unFollowChef={this.unFollowChef}
@@ -286,7 +277,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		render() {
-			//   console.log(this.props.route)
+			//   console.log(this.props[this.props["listChoice"]])
 			return (
 				<SpinachAppContainer awaitingServer={this.state.awaitingServer}>
 					{this.state.renderOfflineMessage && (

@@ -91,10 +91,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		forgotPassword = async () => {
+			await this.setState({ awaitingServer: true })
 			const response = await getNewPassword(this.props.e_mail)
-			if (response) {
-				this.setState({ error: response.message })
+			if (!response.error) {
+				await this.setState({ 
+					loginError: true,
+					error: 'forgotPassword' 
+				})
 			}
+			await this.setState({ awaitingServer: false })
+
 		}
 
 		render() {
@@ -125,7 +131,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									{this.state.error === 'password_expired' && <Text maxFontSizeMultiplier={3} style={centralStyles.formErrorText}>Automatically generated password has expired.  Please reset your password.</Text>}
 									{this.state.error === 'activation' && <Text maxFontSizeMultiplier={3} style={centralStyles.formErrorText}>Account not yet activated.  Please click the link in your confirmation e-mail. (Don&apos;t forget to check spam!)</Text>}
 									{this.state.error === 'deactivated' && <Text maxFontSizeMultiplier={3} style={centralStyles.formErrorText}>This account was deactivated.  Reset your password to reactivate your account.</Text>}
-									{this.state.error === 'forgotPassword' && <Text maxFontSizeMultiplier={3} style={centralStyles.formErrorText}>Thanks.  If this e-mail has an account we&apos;ll send you a new password.  Please check your e-mail</Text>}
+									{this.state.error === 'forgotPassword' && <Text maxFontSizeMultiplier={3} style={centralStyles.formErrorText}>Thanks.  If this e-mail address has an account we&apos;ll send you a new password.  Please check your e-mail.</Text>}
 								</View>
 							)}
 						</View>
@@ -133,10 +139,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							<View style={centralStyles.formInputContainer}>
 								<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={() => this.props.navigation.navigate('CreateChef')}>
 									<Icon style={centralStyles.greenButtonIcon} size={25} name='account-plus'></Icon>
-									<Text style={centralStyles.greenButtonText} maxFontSizeMultiplier={2}>Register</Text>
+									<Text style={centralStyles.greenButtonText} maxFontSizeMultiplier={1.5}>Register</Text>
 								</TouchableOpacity>
 								<TouchableOpacity activeOpacity={1} style={centralStyles.yellowRectangleButton} onPress={() => this.props.stayLoggedIn(!this.props.stayingLoggedIn)}>
-									<Text style={centralStyles.greenButtonText} maxFontSizeMultiplier={2}>Stay{"\n"}logged in</Text>
+									<Text style={centralStyles.greenButtonText} maxFontSizeMultiplier={1.5}>Stay{"\n"} logged in</Text>
 									<Switch style={(Platform.OS === 'ios' ? { transform: [{ scaleX: .7 }, { scaleY: .7 }] } : null)} value={this.props.stayingLoggedIn} onChange={(e) => this.props.stayLoggedIn(e.nativeEvent.value)} />
 								</TouchableOpacity>
 							</View>
@@ -145,7 +151,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							<View style={centralStyles.formInputContainer}>
 								<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={this.forgotPassword}>
 									<Icon style={centralStyles.greenButtonIcon} size={25} name='lock-open'></Icon>
-									<Text style={centralStyles.greenButtonText} maxFontSizeMultiplier={2}>Reset{"\n"}password</Text>
+									<Text style={centralStyles.greenButtonText} maxFontSizeMultiplier={1.7}>Forgot{"\n"}password</Text>
 								</TouchableOpacity>
 								<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={e => this.loginChef(e)}>
 									<Icon style={centralStyles.greenButtonIcon} size={25} name='login'></Icon>

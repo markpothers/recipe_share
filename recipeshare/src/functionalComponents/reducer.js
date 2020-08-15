@@ -1,5 +1,3 @@
-import React from 'react'
-
 const reducer = (currentState, action) => {
 	switch (action.type) {
 		case 'STORE_RECIPE_LISTS':
@@ -152,7 +150,7 @@ const reducer = (currentState, action) => {
 		// case 'UPDATE_CHEF_IN_LIST':
 		//     return {...currentState, chefs: {...currentState.chefs, [action.chefType]: action.chefList}}
 		case 'LOG_IN_CHEF':
-			console.log("logging in chef")
+			// console.log("logging in chef")
 			return {
 				...currentState, loggedInChef: {
 					id: action.id,

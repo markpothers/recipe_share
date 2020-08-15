@@ -73,7 +73,7 @@ export const styles = StyleSheet.create({
 		height: '100%',
 		width: '100%',
 		// marginRight: '4%',
-		borderRadius: 5,
+		borderRadius: 10,
 	},
 	chefCardTopLeftUpperContainer: {
 		// borderStyle: 'solid',

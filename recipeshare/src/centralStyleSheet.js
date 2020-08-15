@@ -146,6 +146,7 @@ export const centralStyles = StyleSheet.create({
 	},
 	yellowRectangleButton: {
 		justifyContent: 'space-evenly',
+		// alignContent: 'center',
 		alignItems: 'center',
 		minWidth: responsiveWidth(38),
 		maxWidth: '50%',

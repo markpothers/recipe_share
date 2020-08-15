@@ -10,7 +10,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 const Tab = createMaterialTopTabNavigator()
 
-BrowseRecipesTabs = () => {
+const BrowseRecipesTabs = () => {
   return (
     <Tab.Navigator
       // lazy={true}
@@ -46,7 +46,7 @@ BrowseRecipesTabs = () => {
         component={NewestRecipesScreen}
       />
       <Tab.Screen 
-        name="Most Liked Recipes" 
+        name="Top Recipes" 
         options={
           {headerTitle: props => <AppHeader {...props} text={"Browse Recipes"}/>}
         }
@@ -60,7 +60,7 @@ BrowseRecipesTabs = () => {
         component={NewestChefsScreen}
       />
       <Tab.Screen 
-        name="Most Liked Chefs" 
+        name="Top Chefs" 
         options={
           {headerTitle: props => <AppHeader {...props} text={"Browse Recipes"}/>}
         }
@@ -144,7 +144,7 @@ BrowseRecipesTabs = () => {
 
 const Stack = createStackNavigator()
 
-BrowseRecipesStack = () => {
+const BrowseRecipesStack = () => {
   return (
     <Stack.Navigator
       initialRouteName="BrowseRecipes"

@@ -1,45 +1,44 @@
 import React from 'react';
-import { Platform } from 'react-native';
-// import { createStackNavigator, createBottomTabNavigator, createMaterialTopTabNavigator, createDrawerNavigator } from 'react-navigation';
 import BrowseRecipesStack from './BrowseRecipesNavigator'
 import MyRecipeBookStack from './MyRecipeBookNavigator'
 import ProfileStack from './ProfileNavigator'
 import CustomDrawer from './Drawer'
-import BrowseRecipesCoverStack from './BrowseRecipesCover'
+// import BrowseRecipesCoverStack from './BrowseRecipesCover'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 const Drawer = createDrawerNavigator()
 
 export default MainDrawerNavigator = (props) => {
-  const setLoadedAndLoggedIn = props.setLoadedAndLoggedIn
-  return (
-    <Drawer.Navigator
-      initialRouteName="MyRecipeBook"
-      drawerContent={(props) => <CustomDrawer {...props} setLoadedAndLoggedIn={setLoadedAndLoggedIn}/>}
-    >
-      <Drawer.Screen
-        name="MyRecipeBook"
-        options={
-          {headerShown: false}
-        }
-        component={MyRecipeBookStack}
-      />
-      <Drawer.Screen
-        name="BrowseRecipes"
-        options={
-          {headerShown: false}
-        }
-        component={BrowseRecipesStack}
-      />
-      <Drawer.Screen
-        name="Profile"
-        options={
-          {headerShown: false}
-        }
-        component={ProfileStack}
-      />
-    </Drawer.Navigator>
-  )
+	const setLoadedAndLoggedIn = props.setLoadedAndLoggedIn
+	return (
+		<Drawer.Navigator
+			initialRouteName="MyRecipeBook"
+			drawerContent={(props) => <CustomDrawer {...props} setLoadedAndLoggedIn={setLoadedAndLoggedIn} />}
+		>
+			<Drawer.Screen
+				name="MyRecipeBook"
+				options={
+					{ headerShown: false }
+				}
+				component={MyRecipeBookStack}
+			/>
+			<Drawer.Screen
+				name="BrowseRecipes"
+				options={
+					{ headerShown: false }
+				}
+				component={BrowseRecipesStack}
+			/>
+			<Drawer.Screen
+				name="Profile"
+				options={
+					{ headerShown: false }
+				}
+			>
+				{props => <ProfileStack {...props} setLoadedAndLoggedIn={setLoadedAndLoggedIn} />}
+			</Drawer.Screen>
+		</Drawer.Navigator >
+	)
 }
 
 

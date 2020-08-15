@@ -78,13 +78,26 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		renderPictureChooser = () => {
 			let imageSource = `data:image/jpeg;base64,${this.props.image_url}`
-			return <PicSourceChooser saveImage={this.saveImage} sourceChosen={this.sourceChosen} key={"pic-chooser"} imageSource={imageSource} />
+			return (
+				<PicSourceChooser
+					saveImage={this.saveImage}
+					sourceChosen={this.sourceChosen}
+					key={"pic-chooser"}
+					imageSource={imageSource}
+					originalImage={this.props.image_url}
+					cancelChooseInstructionImage={this.cancelChooseInstructionImage}
+				/>
+			)
 		}
 
 		saveImage = async (image) => {
 			if (image.cancelled === false) {
 				this.props.saveChefDetails("image_url", image.base64)
 			}
+		}
+
+		cancelChooseInstructionImage = (image) => {
+			this.props.saveChefDetails("image_url", image)
 		}
 
 		submitChef = async () => {
@@ -194,7 +207,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						{/* profile*/}
 						<View style={centralStyles.formSection}>
 							<View style={centralStyles.formInputContainer}>
-								<TextInput maxFontSizeMultiplier={2} style={[centralStyles.formInput, { minHeight: responsiveHeight(12), maxHeight: responsiveHeight(25) }]} value={this.props.profile_text} placeholder="about me" multiline={true} numberOfLines={3} onChange={(e) => this.handleTextInput(e, "profile_text")} />
+								<TextInput maxFontSizeMultiplier={2} style={[centralStyles.formInput, { minHeight: responsiveHeight(12) }]} value={this.props.profile_text} placeholder="about me" multiline={true} numberOfLines={3} onChange={(e) => this.handleTextInput(e, "profile_text")} />
 							</View>
 						</View>
 						{/* password*/}
@@ -214,13 +227,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						<View style={centralStyles.formSection}>
 							<View style={centralStyles.formInputContainer}>
 								<TouchableOpacity style={[centralStyles.formTextBoxContainer, { width: responsiveWidth(48) }]} activeOpacity={0.7} onPress={() => this.setState({ viewingTermsAndConditions: true })}>
-									{/* <View style={centralStyles.formTextBoxContainer}> */}
 									<Text maxFontSizeMultiplier={2} style={centralStyles.formTextBox}>{`View Terms & Conditions`}</Text>
-									{/* </View> */}
 								</TouchableOpacity>
 								<TouchableOpacity activeOpacity={1} style={[centralStyles.yellowRectangleButton, { minWidth: responsiveWidth(30), maxWidth: responsiveWidth(30) }]} onPress={this.handleTandCSwitch}>
-									<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>I accept</Text>
-									<Switch style={(Platform.OS === 'ios' ? { transform: [{ scaleX: .7 }, { scaleY: .7 }] } : null)} value={this.state.tAndCAgreed} onChange={this.handleTandCSwitch} />
+									<View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row', flexWrap: 'wrap' }}>
+										<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>I accept</Text>
+										<Switch style={(Platform.OS === 'ios' ? { transform: [{ scaleX: .7 }, { scaleY: .7 }] } : null)} value={this.state.tAndCAgreed} onChange={this.handleTandCSwitch} />
+									</View>
 								</TouchableOpacity>
 								{this.state.viewingTermsAndConditions && (
 									<TextPopUp
@@ -235,13 +248,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						<View style={centralStyles.formSection}>
 							<View style={centralStyles.formInputContainer}>
 								<TouchableOpacity style={[centralStyles.formTextBoxContainer, { width: responsiveWidth(48) }]} activeOpacity={0.7} onPress={() => this.setState({ viewingPrivacyPolicy: true })}>
-									{/* <View style={centralStyles.formTextBoxContainer}> */}
 									<Text maxFontSizeMultiplier={2} style={centralStyles.formTextBox}>{`View Privacy Policy`}</Text>
-									{/* </View> */}
 								</TouchableOpacity>
 								<TouchableOpacity activeOpacity={1} style={[centralStyles.yellowRectangleButton, { minWidth: responsiveWidth(30), maxWidth: responsiveWidth(30) }]} onPress={this.handlePrivacyPolicySwitch}>
-									<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>I accept</Text>
-									<Switch style={(Platform.OS === 'ios' ? { transform: [{ scaleX: .7 }, { scaleY: .7 }] } : null)} value={this.state.privacyPolicyAgreed} onChange={this.handlePrivacyPolicySwitch} />
+									<View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row', flexWrap: 'wrap' }}>
+										<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>I accept</Text>
+										<Switch style={(Platform.OS === 'ios' ? { transform: [{ scaleX: .7 }, { scaleY: .7 }] } : null)} value={this.state.privacyPolicyAgreed} onChange={this.handlePrivacyPolicySwitch} />
+									</View>
 								</TouchableOpacity>
 								{this.state.viewingPrivacyPolicy && (
 									<TextPopUp

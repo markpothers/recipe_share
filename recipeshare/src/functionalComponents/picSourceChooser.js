@@ -4,12 +4,14 @@ import * as Permissions from 'expo-permissions'
 import * as ImagePicker from 'expo-image-picker'
 import { styles } from './functionalComponentsStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 
 export default class PicSourceChooser extends React.PureComponent {
 
 	state = {
 		hasCameraRollPermission: false,
-		hasCameraPermission: false
+		hasCameraPermission: false,
+		originalImage: null
 	}
 
 	componentDidMount = () => {
@@ -21,6 +23,8 @@ export default class PicSourceChooser extends React.PureComponent {
 			.then(permission => {
 				this.setState({ hasCameraPermission: permission.permissions.camera.granted })
 			})
+		this.setState({ originalImage: this.props.originalImage })
+
 	}
 
 	pickImage = async () => {
@@ -55,8 +59,13 @@ export default class PicSourceChooser extends React.PureComponent {
 		this.props.index !== undefined ? this.props.saveImage(image, this.props.index) : this.props.saveImage(image)
 	}
 
+	cancel = async () => {
+		await this.props.index !== undefined ? this.props.cancelChooseInstructionImage(this.state.originalImage, this.props.index) : this.props.cancelChooseInstructionImage(this.state.originalImage)
+		await this.props.sourceChosen()
+	}
+
 	render() {
-		// console.log('pic chooser rendering')
+		// console.log('i rerendered')
 		return (
 			<Modal
 				animationType="fade"
@@ -89,10 +98,16 @@ export default class PicSourceChooser extends React.PureComponent {
 							<Icon style={styles.standardIcon} size={30} name='camera-burst' />
 							<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Delete photo</Text>
 						</TouchableOpacity>
-						<TouchableOpacity style={styles.picSourceChooserCancelButton} activeOpacity={0.7} title="Take Photo" onPress={this.props.sourceChosen}>
-							<Icon style={styles.cancelIcon} size={30} name='check-box-outline' />
-							<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserCancelButtonText}>Save & Close</Text>
-						</TouchableOpacity>
+						<View style={[styles.picSourceChooserArrowButtonContainer, {marginBottom: responsiveHeight(2)}]}>
+							<TouchableOpacity style={[styles.picSourceChooserCancelButton, {backgroundColor: '#720000'}]} activeOpacity={0.7} title="Cancel" onPress={this.cancel}>
+								<Icon style={styles.cancelIcon} size={30} name='cancel' />
+								<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserCancelButtonText}>Cancel</Text>
+							</TouchableOpacity>
+							<TouchableOpacity style={styles.picSourceChooserCancelButton} activeOpacity={0.7} title="SaveAndClose" onPress={this.props.sourceChosen}>
+								<Icon style={styles.cancelIcon} size={30} name='check-box-outline' />
+								<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserCancelButtonText}>Save &{"\n"}Close</Text>
+							</TouchableOpacity>
+						</View>
 					</View>
 				</View>
 			</Modal>

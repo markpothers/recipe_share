@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, Text, View, ScrollView, KeyboardAvoidingView, TouchableOpacity, Dimensions, TextInput, Platform } from 'react-native'
+import { Modal, Text, View, ScrollView, KeyboardAvoidingView, TouchableOpacity, TextInput, Platform, AsyncStorage } from 'react-native'
 import { styles } from './chefEditorStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux'
@@ -8,6 +8,8 @@ import { patchChef } from '../fetches/patchChef'
 import DualOSPicker from '../functionalComponents/DualOSPicker'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
+import NetInfo from '@react-native-community/netinfo';
+import OfflineMessage from '../offlineMessage/offlineMessage'
 
 const mapStateToProps = (state) => ({
 	username: state.newUserDetails.username,
@@ -87,7 +89,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			return (
 				<View style={[centralStyles.formSection, { width: '90%' }]}>
 					<View style={[centralStyles.formInputContainer, { justifyContent: 'center' }]}>
-						<TouchableOpacity style={[centralStyles.yellowRectangleButton]} activeOpacity={0.7} title="clearFilters" onPress={this.handleChangePasswordButton}>
+						<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} title="clearFilters" onPress={this.handleChangePasswordButton}>
 							<Icon style={centralStyles.greenButtonIcon} size={25} name='lock-open' />
 							<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>Update{"\n"}password</Text>
 						</TouchableOpacity>
@@ -116,6 +118,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		saveUpdatedChef = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
+				this.props.isAwaitingServer(true)
 				const chef = this.props.loggedInChef
 				const updatedChef = await patchChef(chef.id, chef.auth_token, this.props.username, this.props.profile_text, this.props.country, this.state.updatingPassword, this.props.password, this.props.password_confirmation, this.props.imageBase64)
 				if (updatedChef) {
@@ -123,14 +126,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					if (updatedChef.error) {
 						this.setState({ errors: updatedChef.message })
 					} else {
-						if (this.state.stayingLoggedIn) {
+						if (this.props.stayingLoggedIn) {
 							AsyncStorage.setItem('chef', JSON.stringify(updatedChef), () => {
-								AsyncStorage.getItem('chef', (err, res) => {
-									console.log(err)
-									this.props.updateLoggedInChefInState(updatedChef.id, updatedChef.username, updatedChef.auth_token, updatedChef.image_url, updatedChef.is_admin, updatedChef.is_member)
-									this.props.clearNewUserDetails()
-									this.props.chefUpdated()
-								})
+								this.props.updateLoggedInChefInState(updatedChef.id, updatedChef.username, updatedChef.auth_token, updatedChef.image_url, updatedChef.is_admin, updatedChef.is_member)
+								this.props.clearNewUserDetails()
+								this.props.chefUpdated(true)
 							})
 						} else {
 							this.props.updateLoggedInChefInState(updatedChef.id, updatedChef.username, updatedChef.auth_token, updatedChef.image_url, updatedChef.is_admin, updatedChef.is_member)
@@ -167,8 +167,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						/>)
 					}
 					<View style={[styles.modalFullScreenContainer, {
-						height: Dimensions.get('window').height,
-						width: Dimensions.get('window').width,
+						height: responsiveHeight(100),
+						width: responsiveWidth(100),
 					}]}>
 						<View style={styles.contentsContainer}>
 							<View style={styles.titleContainer}>
@@ -209,9 +209,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							</View>
 							<View style={[centralStyles.formSection, { width: '90%' }]}>
 								<View style={centralStyles.formInputContainer}>
-									<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} title="clearFilters" onPress={this.cancelUpdate}>
-										<Icon style={centralStyles.greenButtonIcon} size={25} name='cancel' />
-										<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>Cancel</Text>
+									<TouchableOpacity style={[centralStyles.yellowRectangleButton, { backgroundColor: '#720000' }]} activeOpacity={0.7} title="clearFilters" onPress={this.cancelUpdate}>
+										<Icon style={[centralStyles.greenButtonIcon, { color: '#fff59b' }]} size={25} name='cancel' />
+										<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { color: '#fff59b' }]}>Cancel</Text>
 									</TouchableOpacity>
 									<TouchableOpacity style={centralStyles.greenRectangleButton} activeOpacity={0.7} title="applyFilters" onPress={this.saveUpdatedChef}>
 										<Icon style={centralStyles.yellowButtonIcon} size={25} name='check' />
@@ -228,7 +228,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		render() {
-			// console.log(this.props)
 			if (Platform.OS === 'ios') {
 				return (
 					<Modal

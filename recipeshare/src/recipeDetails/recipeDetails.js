@@ -395,6 +395,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			this.setState({ makePicBase64: image.base64 })
 		}
 
+		cancelChooseInstructionImage = (image) => {
+			this.setState({ makePicBase64: image })
+		}
+
 		sourceChosen = async () => {
 			await this.setState({
 				awaitingServer: true,
@@ -606,6 +610,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					sourceChosen={this.sourceChosen}
 					// key={"primary-pic-chooser"}
 					imageSource={imageSource}
+					originalImage={this.state.makePicBase64}
+					cancelChooseInstructionImage={this.cancelChooseInstructionImage}
 				/>
 			)
 		}

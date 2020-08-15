@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, View, TouchableOpacity, Text, ScrollView, Animated } from 'react-native'
+import { Image, View, TouchableOpacity, Text, ScrollView } from 'react-native'
 import { styles } from './chefListStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { databaseURL } from '../dataComponents/databaseURL'
@@ -39,7 +39,7 @@ export default class ChefCard extends React.PureComponent {
 					</View>
 				</TouchableOpacity>
 				<View style={styles.chefCardBottomContainer}>
-					<TouchableOpacity style={styles.chefCardBottomSubContainers} onPress={(parseInt(this.props.user_chef_following) > 0 ? (e => this.props.unFollowChef(this.props.id)) : (e => this.props.followChef(this.props.id)))}>
+					<TouchableOpacity style={styles.chefCardBottomSubContainers} onPress={(parseInt(this.props.user_chef_following) > 0 ? (() => this.props.unFollowChef(this.props.id)) : (() => this.props.followChef(this.props.id)))}>
 						{parseInt(this.props.user_chef_following) > 0 ? <Icon name='account-multiple-minus' size={responsiveHeight(3.5)} style={styles.icon} /> : <Icon name='account-multiple-plus-outline' size={responsiveHeight(3.5)} style={styles.icon} />}
 						<Text maxFontSizeMultiplier={2.5} style={styles.chefCardBottomOther} >{this.props.followers === null ? 0 : this.props.followers}</Text>
 					</TouchableOpacity>
@@ -63,7 +63,8 @@ export default class ChefCard extends React.PureComponent {
 
 function AvatarImage(chefimage_url) {
 	const URL = chefimage_url.chefimage_url
-	if (URL === null || URL === undefined) {
+	// console.log(URL)
+	if (!URL) {
 		return (
 			<Image style={styles.avatarThumbnail} source={require("../dataComponents/peas.jpg")} resizeMode={"contain"} />
 		)

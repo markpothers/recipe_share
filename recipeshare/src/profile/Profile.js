@@ -14,11 +14,13 @@ import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo';
+import { AlertPopUp } from '../alertPopUp/alertPopUp'
 
 const mapStateToProps = (state) => ({
 	loggedInChef: state.loggedInChef,
 	chefs_details: state.chefs_details,
 	imageBase64: state.newUserDetails.image_url,
+	stayingLoggedIn: state.stayLoggedIn,
 })
 
 const mapDispatchToProps = {
@@ -48,6 +50,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			choosingPicture: false,
 			deleteChefOptionVisible: false,
 			renderOfflineMessage: false,
+			image: null,
+			chefUpdatedMessageShowing: false
 		}
 
 		componentDidMount = () => {
@@ -55,6 +59,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			this._unsubscribeFocus = this.props.navigation.addListener('focus', () => {
 				this.respondToFocus()
 			})
+			this.setState({ image: this.props.imageBase64 })
 		}
 
 		componentWillUnmount = () => {
@@ -79,7 +84,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			}
 		}
 
-		editingChef = async() => {
+		editingChef = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
 				this.setState({ editingChef: true })
@@ -88,9 +93,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			}
 		}
 
-		chefUpdated = (chefChanged) => {
-			this.setState({ editingChef: false })
-			chefChanged ? this.fetchChefDetails() : null
+		chefUpdated = async (chefChanged) => {
+			await this.setState({
+				editingChef: false,
+				awaitingServer: false
+			})
+			console.log('chef changed')
+			console.log(chefChanged)
+			if (chefChanged) {
+				await this.fetchChefDetails()
+				await this.setState({ chefUpdatedMessageShowing: true })
+			}
 		}
 
 		showDeleteChefOption = () => {
@@ -130,24 +143,42 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				choosingPicture: false,
 				editingChef: true
 			})
+			this.props.saveChefDetails("image_url", this.state.image)
 		}
 
 		saveImage = async (image) => {
-			if (image.cancelled === false) {
-				this.props.saveChefDetails("image_url", image.base64)
+			if (image.base64 == '') {
+				this.setState({ image: 'data:image/jpeg;base64,' })
+			} else if (image.cancelled === false) {
+				this.setState({ image: image.base64 })
 			}
+		}
+
+		cancelChooseInstructionImage = () => {
+			this.setState({ image: '' })
 		}
 
 		renderPictureChooser = () => {
 			let imageSource
-			if (this.props.imageBase64 != '') {
-				imageSource = `data:image/jpeg;base64,${this.props.imageBase64}`
-			} else if (typeof this.props.chefs_details[`chef${this.props.loggedInChef.id}`].chef == 'object' && this.props.chefs_details[`chef${this.props.loggedInChef.id}`].chef.image_url.length > 0) {
+			if (this.state.image == 'data:image/jpeg;base64,') {
+				imageSource = 'data:image/jpeg;base64,'
+			} else if (this.state.image != '' && this.state.image != 'data:image/jpeg;base64,') {
+				imageSource = `data:image/jpeg;base64,${this.state.image}`
+			} else if (typeof this.props.chefs_details[`chef${this.props.loggedInChef.id}`].chef == 'object' && this.props.chefs_details[`chef${this.props.loggedInChef.id}`].chef.image_url?.length > 0) {
 				imageSource = this.props.chefs_details[`chef${this.props.loggedInChef.id}`].chef.image_url
 			} else {
 				imageSource = 'data:image/jpeg;base64,'
 			}
-			return <PicSourceChooser saveImage={this.saveImage} sourceChosen={this.sourceChosen} key={"pic-chooser"} imageSource={imageSource} />
+			return (
+				<PicSourceChooser
+					saveImage={this.saveImage}
+					sourceChosen={this.sourceChosen}
+					key={"pic-chooser"}
+					imageSource={imageSource}
+					originalImage={imageSource}
+					cancelChooseInstructionImage={this.cancelChooseInstructionImage}
+				/>
+			)
 		}
 
 		renderChefEditor = () => {
@@ -161,9 +192,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					closeDeleteChefOption={this.closeDeleteChefOption}
 					showDeleteChefOption={this.showDeleteChefOption}
 					choosePicture={this.choosePicture}
+					isAwaitingServer={this.isAwaitingServer}
+					stayingLoggedIn={this.props.stayingLoggedIn}
 				/>
 			)
 		}
+
+		isAwaitingServer = (isAwaitingServer) => (
+			this.setState({ awaitingServer: isAwaitingServer })
+		)
 
 		deleteChefAccount = async (deleteRecipes) => {
 			let netInfoState = await NetInfo.fetch()
@@ -172,11 +209,22 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				const deletedChef = await destroyChef(chef.auth_token, chef.id, deleteRecipes)
 				if (deletedChef) {
 					AsyncStorage.removeItem('chef', () => { })
-					this.props.navigation.navigate('Login')
+					this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: false })
 				}
 			} else {
 				this.setState({ renderOfflineMessage: true })
 			}
+		}
+
+		renderChefUpdatedAlertPopUp = () => {
+			return (
+				<AlertPopUp
+					// close={() => this.setState({ chefUpdatedMessageShowing: false })}
+					title={"Your profile has been updated"}
+					yesText={"Ok"}
+					onYes={() => this.setState({ chefUpdatedMessageShowing: false })}
+				/>
+			)
 		}
 
 		// manualBackupDatabase = async () => {
@@ -230,6 +278,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		render() {
 			if (this.props.chefs_details[`chef${this.props.loggedInChef.id}`] !== undefined) {
 				const chef_details = this.props.chefs_details[`chef${this.props.loggedInChef.id}`]
+				console.log(chef_details.chef)
 				return (
 					<SpinachAppContainer awaitingServer={this.state.awaitingServer} scrollingEnabled={true}>
 						{this.state.renderOfflineMessage && (
@@ -239,11 +288,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
 							/>)
 						}
-						{this.state.editingChef ? this.renderChefEditor() : null}
+						{this.state.chefUpdatedMessageShowing && this.renderChefUpdatedAlertPopUp()}
+						{this.state.editingChef && this.renderChefEditor()}
 						{/* {this.props.loggedInChef.is_admin ? this.renderDatabaseButtons() : null} */}
-						{this.state.choosingPicture ? this.renderPictureChooser() : null}
-						{this.state.deleteChefOptionVisible ? this.renderDeleteChefOption() : null}
-						<ChefDetailsCard editChef={this.editingChef} myProfile={true} {...chef_details} image_url={chef_details.chef.image_url} />
+						{this.state.choosingPicture && this.renderPictureChooser()}
+						{this.state.deleteChefOptionVisible && this.renderDeleteChefOption()}
+						<ChefDetailsCard
+							editChef={this.editingChef}
+							myProfile={true}
+							{...chef_details}
+							image_url={chef_details.chef.image_url}
+						/>
 					</SpinachAppContainer>
 				)
 			} else {

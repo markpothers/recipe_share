@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Text, Animated } from 'react-native'
 import { styles } from './offlineMessageStyleSheet'
 
-export default OfflineMessage = (props) => {
+const OfflineMessage = (props) => {
 	const [fadeOpacity, setFadeOpacity] = useState(new Animated.Value(0))
 
 	useEffect(() => {
@@ -44,3 +44,5 @@ export default OfflineMessage = (props) => {
 		</Animated.View>
 	)
 }
+
+export default OfflineMessage

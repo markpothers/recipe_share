@@ -11,7 +11,8 @@ export default class MultiPicSourceChooser extends React.Component {
 	state = {
 		hasCameraRollPermission: false,
 		hasCameraPermission: false,
-		imageIndex: 0
+		imageIndex: 0,
+		originalImages: null,
 	}
 
 	componentDidMount = () => {
@@ -23,6 +24,7 @@ export default class MultiPicSourceChooser extends React.Component {
 			.then(permission => {
 				this.setState({ hasCameraPermission: permission.permissions.camera.granted })
 			})
+		this.setState({ originalImages: this.props.imageSources })
 	}
 
 	addPhoto = async () => {
@@ -90,7 +92,7 @@ export default class MultiPicSourceChooser extends React.Component {
 	moveRight = async () => {
 		let thisImage = this.props.imageSources[this.state.imageIndex]
 		let newImages = [...this.props.imageSources.slice(0, this.state.imageIndex), ...this.props.imageSources.slice(this.state.imageIndex + 1)]
-		let newImageIndex = this.state.imageIndex < this.props.imageSources.length-1 ? this.state.imageIndex + 1 : this.state.imageIndex
+		let newImageIndex = this.state.imageIndex < this.props.imageSources.length - 1 ? this.state.imageIndex + 1 : this.state.imageIndex
 		newImages.splice(newImageIndex, 0, thisImage)
 		await this.setState({ imageIndex: newImageIndex })
 		await this.props.saveImage(newImages)
@@ -104,6 +106,11 @@ export default class MultiPicSourceChooser extends React.Component {
 				return <Icon key={index.toString()} name={'checkbox-blank-circle-outline'} size={responsiveHeight(3)} style={styles.primaryImageBlob} />
 			}
 		})
+	}
+
+	cancel = async () => {
+		await this.props.saveImage(this.state.originalImages)
+		await this.props.sourceChosen()
 	}
 
 	render() {
@@ -149,10 +156,12 @@ export default class MultiPicSourceChooser extends React.Component {
 						<View style={styles.picSourceChooserArrowButtonContainer}>
 							<TouchableOpacity style={styles.picSourceChooserArrowButton} activeOpacity={0.7} title="Move left" onPress={this.moveLeft}>
 								<Icon style={styles.standardIcon} size={30} name='arrow-collapse-left' />
-								<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Move left</Text>
+								{/* <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', flex: 1, maxWidth: '70%'}}> */}
+								<Text maxFontSizeMultiplier={1.5} style={[styles.picSourceChooserButtonText, { maxWidth: responsiveWidth(25) }]}>Move left</Text>
+								{/* </View> */}
 							</TouchableOpacity>
 							<TouchableOpacity style={styles.picSourceChooserArrowButton} activeOpacity={0.7} title="Move right" onPress={this.moveRight}>
-								<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Move right</Text>
+								<Text maxFontSizeMultiplier={1.5} style={[styles.picSourceChooserButtonText, { maxWidth: responsiveWidth(25) }]}>Move right</Text>
 								<Icon style={styles.standardIcon} size={30} name='arrow-collapse-right' />
 							</TouchableOpacity>
 						</View>
@@ -174,10 +183,16 @@ export default class MultiPicSourceChooser extends React.Component {
 							<Icon style={styles.standardIcon} size={30} name='camera-image' />
 							<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Choose photo</Text>
 						</TouchableOpacity>
-						<TouchableOpacity style={styles.picSourceChooserCancelButton} activeOpacity={0.7} title="Take Photo" onPress={this.props.sourceChosen}>
-							<Icon style={styles.cancelIcon} size={30} name='check-box-outline' />
-							<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserCancelButtonText}>Save & Close</Text>
-						</TouchableOpacity>
+						<View style={[styles.picSourceChooserArrowButtonContainer, {marginBottom: responsiveHeight(2)}]}>
+							<TouchableOpacity style={[styles.picSourceChooserCancelButton, {backgroundColor: '#720000'}]} activeOpacity={0.7} title="Cancel" onPress={this.cancel}>
+								<Icon style={styles.cancelIcon} size={30} name='cancel' />
+								<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserCancelButtonText}>Cancel</Text>
+							</TouchableOpacity>
+							<TouchableOpacity style={styles.picSourceChooserCancelButton} activeOpacity={0.7} title="SaveAndClose" onPress={this.props.sourceChosen}>
+								<Icon style={styles.cancelIcon} size={30} name='check-box-outline' />
+								<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserCancelButtonText}>Save &{"\n"}Close</Text>
+							</TouchableOpacity>
+						</View>
 					</View>
 				</View>
 			</Modal>

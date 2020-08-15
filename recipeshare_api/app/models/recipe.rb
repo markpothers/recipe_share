@@ -230,7 +230,7 @@ class Recipe < ApplicationRecord
 
         chefFilter = ""  # "WHERE recipes.chef_id = #{chef_id}"  # stitutute this line in if needed
 
-     recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*, 
+     recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*,
                                         MAX(ri.image_url) AS image_url,
                                         MAX(chefs.username) AS username,
                                         MAX(chefs.image_url) AS chefimage_url,

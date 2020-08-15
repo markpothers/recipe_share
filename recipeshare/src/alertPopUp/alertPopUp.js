@@ -22,13 +22,19 @@ export function AlertPopUp(props) {
 					</View>
 					<View style={[centralStyles.formSection, { width: responsiveWidth(80), marginTop: responsiveHeight(2), marginBottom: responsiveHeight(2) }]}>
 						<View style={[centralStyles.formInputContainer, { justifyContent: 'space-around' }]}>
-							<TouchableOpacity style={centralStyles.greenRectangleButton} activeOpacity={0.7} onPress={props.close}>
-								<Icon style={centralStyles.yellowButtonIcon} size={25} name='cancel'></Icon>
-								<Text maxFontSizeMultiplier={2} style={centralStyles.yellowButtonText}>Cancel</Text>
-							</TouchableOpacity>
+							{props.close && (
+								<TouchableOpacity style={centralStyles.greenRectangleButton} activeOpacity={0.7} onPress={props.close}>
+									<Icon style={centralStyles.yellowButtonIcon} size={25} name='cancel'></Icon>
+									<Text maxFontSizeMultiplier={2} style={centralStyles.yellowButtonText}>{props.closeText ? props.closeText : "Cancel"}</Text>
+								</TouchableOpacity>
+							)}
+							{!props.close && (
+								<View style={[centralStyles.greenRectangleButton, {opacity: 0}]} >
+								</View>
+							)}
 							<TouchableOpacity style={centralStyles.greenRectangleButton} activeOpacity={0.7} onPress={props.onYes}>
 								<Icon style={centralStyles.yellowButtonIcon} size={25} name='check'></Icon>
-								<Text maxFontSizeMultiplier={2} style={centralStyles.yellowButtonText}>Yes</Text>
+								<Text maxFontSizeMultiplier={2} style={centralStyles.yellowButtonText}>{props.yesText ? props.yesText : "Yes"}</Text>
 							</TouchableOpacity>
 						</View>
 					</View>

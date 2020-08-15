@@ -9,7 +9,7 @@ import { postRecipeMake } from '../fetches/postRecipeMake'
 import { destroyRecipeLike } from '../fetches/destroyRecipeLike'
 import { destroyReShare } from '../fetches/destroyReShare'
 import { styles } from './recipeListStyleSheet'
-import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars //eslint-disable-line no-unused-vars
+import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import FilterMenu from '../functionalComponents/filterMenu'
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
@@ -86,7 +86,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		componentDidMount = async () => {
 			await this.setState({ awaitingServer: true })
-			await this.fetchRecipeList()
+			// await this.fetchRecipeList()
 			this._unsubscribeFocus = this.props.navigation.addListener('focus', () => {
 				this.respondToFocus()
 			})
@@ -256,6 +256,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		renderRecipeListItem = (item) => {
+			console.log(item)
 			return (
 				<RecipeCard listChoice={this.props["listChoice"]}
 					key={item.index.toString()}
