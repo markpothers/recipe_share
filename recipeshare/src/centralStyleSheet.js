@@ -202,5 +202,19 @@ export const centralStyles = StyleSheet.create({
 		borderWidth: 1,
 		borderColor: '#104e01',
 		overflow: 'hidden'
+	},
+	dynamicMenuButtonContainer: {
+		height: responsiveHeight(9),
+		marginTop: -responsiveHeight(3.5),
+		width: responsiveWidth(15),
+		justifyContent: 'center',
+		alignItems: 'center',
+		// borderWidth: 1,
+	},
+	dynamicMenuButton: {
+
+	},
+	dynamicMenuIcon: {
+		color: '#fff59b'
 	}
 });

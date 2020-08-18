@@ -1,8 +1,9 @@
 import 'react-native'
 import React from 'react';
+import { FlatList, TouchableOpacity, AsyncStorage, View, Switch } from 'react-native'
 // import { configure, shallow, mount } from 'enzyme'
 // import Adapter from 'enzyme-adapter-react-16'
-import renderer from 'react-test-renderer';
+import renderer, {create, act} from 'react-test-renderer';
 import configureStore from 'redux-mock-store'
 
 import { Provider } from 'react-redux'
@@ -16,7 +17,7 @@ const mockStore = configureStore([])
 
 describe('Recipe List', () => {
 
-    // let mountedRecipeList
+    let mountedRecipeList
     let mockCallBack
     let store
 
@@ -43,10 +44,10 @@ describe('Recipe List', () => {
         mountedRecipeList = renderer.create(<Provider store={store}><RecipeList umockCallBack={mockCallBack}/></Provider>)
     })
 
-    it('can be rendered and matches its previous image', () => {
-        const image = mountedRecipeList.toJSON()
-        expect(image).toMatchSnapshot()
-    })
+    // it('can be rendered and matches its previous image', () => {
+    //     const image = mountedRecipeList.toJSON()
+    //     expect(image).toMatchSnapshot()
+    // })
 
     // it('can be rendered shallowly', () => {
     //     mountedRecipeList = shallow((<Provider store={store}><RecipeList mockCallBack={mockCallBack}/></Provider>))
@@ -54,18 +55,50 @@ describe('Recipe List', () => {
     //     expect(image).toMatchSnapshot()
     // })
 
-    it('can be rendered shallowly', () => {
+    it('can be worked on', () => {
         // mountedRecipeList = mount((<Provider store={store}><RecipeList mockCallBack={mockCallBack}/></Provider>))
-        mountedRecipeList = renderer.create(<Provider store={store}><RecipeList mockCallBack={mockCallBack}/></Provider>)
+        act(() => {
+			mountedRecipeList = renderer.create(<Provider store={store}><RecipeList mockCallBack={mockCallBack}/></Provider>)
+		})
         // mountedRecipeList = shallow(<RecipeList mockCallBack={mockCallBack}/>, {
         //     wrappingComponent: props => <Provider store={store}>{props.children}</Provider>
         // })
         // let testButton = mountedRecipeList.findWhere((node) => node.prop('testID') === 'filterButton' )
 
-        console.log(mountedRecipeList)
-        // expect(mountedRecipeList.contains(<RecipeList/>)).toEqual(true)
-        let list = mountedRecipeList.root.findAllByProps({testID: 'filterButton'})
-        // console.log(list.length)
+        // console.log(mountedRecipeList)
+		// expect(mountedRecipeList.contains(<RecipeList/>)).toEqual(true)
+		// expect(mountedRecipeList.toJSON()).toMatchSnapshot()
+
+        let list = mountedRecipeList.root.findAllByType(TouchableOpacity)
+		// console.log(list[0].props)
+		expect(list.length).toEqual(1)
+
+
+        // let switches = mountedRecipeList.root.findAllByType(Switch)
+		// expect(switches.length).toEqual(0)
+		// console.warn(`switches: ${switches.length}`)
+
+
+		act(() => {
+			list[0].props.onPress()
+		})
+
+		let newList = mountedRecipeList.root.findAllByType(TouchableOpacity)
+		// console.log(list[0].props)
+		expect(newList.length).toEqual(5)
+
+
+		// setTimeout(() => {
+			// let newSwitches = mountedRecipeList.root.findAllByType(Switch)
+			// console.warn(`new switches: ${newSwitches.length}`)
+			// expect(mountedRecipeList.toJSON()).toMatchSnapshot()
+			// expect(newSwitches.length).toEqual(10)
+
+			// done()
+		// }, 2000)
+
+
+
         // expect(mountedRecipeList.contains('<Connect(RecipesList) mockCallBack={[Function: mockConstructor]} />')).toEqual(true)
     })
 

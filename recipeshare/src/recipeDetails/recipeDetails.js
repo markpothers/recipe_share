@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, ScrollView, View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { connect } from 'react-redux'
 import { styles } from './recipeDetailsStyleSheet'
-// import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
+import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 import { postRecipeLike } from '../fetches/postRecipeLike'
 import { postMakePic } from '../fetches/postMakePic'
 import { postReShare } from '../fetches/postReShare'
@@ -12,6 +12,7 @@ import { destroyRecipeLike } from '../fetches/destroyRecipeLike'
 import { destroyMakePic } from '../fetches/destroyMakePic'
 import { destroyComment } from '../fetches/destroyComment'
 import { destroyRecipe } from '../fetches/destroyRecipe'
+import { destroyReShare } from '../fetches/destroyReShare'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import RecipeComment from './recipeComment'
 import RecipeNewComment from './recipeNewComment';
@@ -22,6 +23,7 @@ import { InstructionImagePopup } from './instructionImagePopup'
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo';
 import { AlertPopUp } from '../alertPopUp/alertPopUp'
+import DynamicMenu from '../dynamicMenu/DynamicMenu.js'
 
 const mapStateToProps = (state) => ({
 	recipe_details: state.recipe_details,
@@ -53,6 +55,11 @@ const mapDispatchToProps = {
 	addReShare: () => {
 		return dispatch => {
 			dispatch({ type: 'ADD_RECIPE_SHARE' })
+		}
+	},
+	removeReShare: () => {
+		return dispatch => {
+			dispatch({ type: 'REMOVE_RECIPE_SHARE' })
 		}
 	},
 	addMakePic: (makePic) => {
@@ -97,10 +104,115 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			deleteRecipePopUpShowing: false,
 			makePicToDelete: 0,
 			commentToDelete: 0,
+			headerButtons: null,
+			dynamicMenuShowing: false
+		}
+
+		generateHeaderButtonList = async () => {
+			let headerButtons = [
+				{
+					icon: this.props.recipe_details.shareable ? "share-outline" : "share-off",
+					text: this.props.recipe_details.shareable ? "Share with followers" : "Remove share",
+					action: this.props.recipe_details.shareable ?
+						(() => {
+							this.setState({ dynamicMenuShowing: false });
+							this.reShareRecipe()
+						}) :
+						(() => {
+							this.setState({ dynamicMenuShowing: false });
+							this.unReShareRecipe()
+						})
+				},
+				{
+					icon: this.props.recipe_details.likeable ? "heart-outline" : "heart-off",
+					text: this.props.recipe_details.likeable ? "Like recipe" : "Unlike recipe",
+					action: this.props.recipe_details.likeable ?
+						(() => {
+							this.setState({ dynamicMenuShowing: false });
+							this.likeRecipe()
+						}) :
+						(() => {
+							this.setState({ dynamicMenuShowing: false });
+							this.unlikeRecipe()
+						})
+				},
+				{
+					icon: "image-plus",
+					text: "Add picture",
+					action: (() => {
+						this.setState({ dynamicMenuShowing: false })
+						this.newMakePic()
+					})
+				},
+				{
+					icon: "comment-plus",
+					text: "Add a comment",
+					action: (() => {
+						this.setState({ dynamicMenuShowing: false })
+						this.newComment()
+					})
+				}
+			]
+			if (this.props.recipe_details.recipe.chef_id === this.props.loggedInChef.id || this.props.loggedInChef.is_admin) {
+				headerButtons.push(
+					{
+						icon: "playlist-edit",
+						text: "Edit recipe",
+						action: () => this.setState({
+							editRecipePopUpShowing: true,
+							dynamicMenuShowing: false
+						})
+					},
+				)
+				headerButtons.push(
+					{
+						icon: "trash-can-outline",
+						text: "Delete recipe",
+						action: () => this.setState({
+							deleteRecipePopUpShowing: true,
+							dynamicMenuShowing: false
+						})
+					}
+				)
+			}
+			headerButtons.push(
+				{
+					icon: "food",
+					text: "Create new recipe",
+					action: (() => {
+						this.setState({ dynamicMenuShowing: false })
+						this.props.navigation.navigate('NewRecipe')
+					})
+				}
+			)
+			await this.setState({ headerButtons: headerButtons })
+		}
+
+		renderDynamicMenu = () => {
+			return (
+				<DynamicMenu
+					buttons={this.state.headerButtons}
+					closeDynamicMenu={() => this.setState({ dynamicMenuShowing: false })}
+				/>
+			)
+		}
+
+		addDynamicMenuButtonsToHeader = () => {
+			this.props.navigation.setOptions({
+				headerRight: () => (
+					<View style={centralStyles.dynamicMenuButtonContainer}>
+						<TouchableOpacity style={centralStyles.dynamicMenuButton} activeOpacity={0.7} onPress={() => this.setState({ dynamicMenuShowing: true })} >
+							<Icon name='dots-vertical' style={centralStyles.dynamicMenuIcon} size={33} />
+						</TouchableOpacity>
+					</View>
+				),
+			});
 		}
 
 		componentDidMount = async () => {
 			await this.setState({ awaitingServer: true })
+			await this.generateHeaderButtonList()
+			this.addDynamicMenuButtonsToHeader()
 			if (this.props.route.params.commenting === true) {
 				let netInfoState = await NetInfo.fetch()
 				if (netInfoState.isConnected) {
@@ -113,6 +225,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				}
 			}
 			await this.setState({ awaitingServer: false })
+		}
+
+		componentDidUpdate = async (prevProps) => {
+			if (prevProps.recipe_details.likeable != this.props.recipe_details.likeable
+				|| prevProps.recipe_details.shareable != this.props.recipe_details.shareable) {
+				await this.generateHeaderButtonList()
+			}
 		}
 
 		scrolled = () => {
@@ -141,21 +260,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					renderOfflineMessage: true,
 					deleteRecipePopUpShowing: false
 				})
-			}
-		}
-
-		renderEditDeleteButtons = () => {
-			if (this.props.recipe_details.recipe.chef_id === this.props.loggedInChef.id || this.props.loggedInChef.is_admin) {
-				return (
-					<View style={styles.detailsHeaderButtonsContainer}>
-						<TouchableOpacity style={styles.headerButton} onPress={() => this.setState({ editRecipePopUpShowing: true })}>
-							<Icon name='playlist-edit' size={responsiveHeight(3.5)} style={styles.headerIcon} />
-						</TouchableOpacity>
-						<TouchableOpacity style={styles.headerButton} onPress={() => this.setState({ deleteRecipePopUpShowing: true })}>
-							<Icon name='trash-can-outline' size={responsiveHeight(3.5)} style={styles.headerIcon} />
-						</TouchableOpacity>
-					</View>
-				)
 			}
 		}
 
@@ -372,6 +476,24 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					const reSharePosted = await postReShare(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
 					if (reSharePosted) {
 						this.props.addReShare()
+					}
+				} catch {
+					await this.setState({ renderOfflineMessage: true })
+				}
+				await this.setState({ awaitingServer: false })
+			} else {
+				this.setState({ renderOfflineMessage: true })
+			}
+		}
+
+		unReShareRecipe = async () => {
+			let netInfoState = await NetInfo.fetch()
+			if (netInfoState.isConnected) {
+				await this.setState({ awaitingServer: true })
+				try {
+					const unReShared = await destroyReShare(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
+					if (unReShared) {
+						this.props.removeReShare()
 					}
 				} catch {
 					await this.setState({ renderOfflineMessage: true })
@@ -684,6 +806,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						{this.state.deleteRecipePopUpShowing && this.renderDeleteRecipeAlertPopUp()}
 						{this.state.choosingPicSource && this.renderPictureChooser()}
 						{this.state.instructionImagePopupShowing && <InstructionImagePopup imageURL={this.state.instructionImagePopupURL} />}
+						{this.state.dynamicMenuShowing && this.renderDynamicMenu()}
 						<ScrollView
 							contentContainerStyle={{ flexGrow: 1 }}
 							ref={(ref) => this.myScroll = ref}
@@ -695,7 +818,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									<View style={styles.headerTextView}>
 										<Text maxFontSizeMultiplier={2} style={styles.detailsHeaderTextBox}>{this.props.recipe_details.recipe.name}</Text>
 									</View>
-									{this.renderEditDeleteButtons()}
 								</View>
 							</View>
 							<View style={styles.detailsLikesAndMakes}>

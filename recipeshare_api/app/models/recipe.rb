@@ -442,6 +442,8 @@ class Recipe < ApplicationRecord
         recipe_images: RecipeImage.where(recipe_id: self.id, hidden: false).order(:index),
         recipe_likes: RecipeLike.where(recipe_id: self.id, hidden: false).length,
         likeable: RecipeLike.where(chef_id: chef.id, hidden: false, recipe_id: self.id).empty?,
+        re_shares: ReShare.where(recipe_id: self.id, hidden: false).length,
+        shareable: ReShare.where(chef_id: chef.id, hidden: false, recipe_id: self.id).empty?,
         recipe_makes: RecipeMake.where(recipe_id: self.id, hidden: false).length,
         makeable: makeable,
         make_pics: MakePic.where(recipe_id: self.id, hidden: false).order('updated_at DESC'),

@@ -1,9 +1,9 @@
 import React from 'react'
-import { Image, ScrollView, View } from 'react-native';
+import { Image, ScrollView, View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux'
 import { styles } from './chefDetailsStyleSheet'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
-import { getChefDetails } from '../fetches/getChefDetails'
+// import { getChefDetails } from '../fetches/getChefDetails'
 import ChefDetailsCard from './ChefDetailsCard'
 import { MyRecipeBookTabs } from './ChefDetailsNavigators'
 import { postFollow } from '../fetches/postFollow'
@@ -11,6 +11,9 @@ import { destroyFollow } from '../fetches/destroyFollow'
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo';
+import DynamicMenu from '../dynamicMenu/DynamicMenu.js'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 
 const mapStateToProps = (state) => ({
 	loggedInChef: state.loggedInChef,
@@ -40,13 +43,75 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		state = {
 			awaitingServer: false,
-			renderOfflineMessage: false
+			renderOfflineMessage: false,
+			headerButtons: null,
+			dynamicMenuShowing: false
+		}
+
+		generateHeaderButtonList = async () => {
+			const chefDetails = this.props.chefs_details[`chef${this.props.route.params.chefID}`]
+			let headerButtons = [
+				{
+					icon: !chefDetails.chef_followed ? "account-multiple-plus-outline" : "account-multiple-minus",
+					text: !chefDetails.chef_followed ? "Follow chef" : "Stop following chef",
+					action: !chefDetails.chef_followed ?
+						(() => {
+							this.setState({ dynamicMenuShowing: false });
+							this.followChef()
+						}) :
+						(() => {
+							this.setState({ dynamicMenuShowing: false });
+							this.unFollowChef()
+						})
+				},
+				{
+					icon: "food",
+					text: "Create new recipe",
+					action: (() => {
+						this.setState({ dynamicMenuShowing: false })
+						this.props.navigation.navigate('NewRecipe')
+					})
+				}
+			]
+			await this.setState({ headerButtons: headerButtons })
+		}
+
+		renderDynamicMenu = () => {
+			return (
+				<DynamicMenu
+					buttons={this.state.headerButtons}
+					closeDynamicMenu={() => this.setState({ dynamicMenuShowing: false })}
+				/>
+			)
+		}
+
+		addDynamicMenuButtonsToHeader = () => {
+			this.props.navigation.setOptions({
+				headerRight: () => (
+					<View style={centralStyles.dynamicMenuButtonContainer}>
+						<TouchableOpacity style={centralStyles.dynamicMenuButton} activeOpacity={0.7} onPress={() => this.setState({ dynamicMenuShowing: true })} >
+							<Icon name='dots-vertical' style={centralStyles.dynamicMenuIcon} size={33} />
+						</TouchableOpacity>
+					</View>
+				),
+			});
 		}
 
 		componentDidMount = async () => {
-			// await this.setState({awaitingServer: true})
+			await this.setState({ awaitingServer: true })
+			await this.generateHeaderButtonList()
+			this.addDynamicMenuButtonsToHeader()
 			// await this.fetchChefDetails()
-			// await this.setState({awaitingServer: false})
+			await this.setState({ awaitingServer: false })
+		}
+
+		componentDidUpdate = async (prevProps) => {
+			const chefDetails = this.props.chefs_details[`chef${this.props.route.params.chefID}`]
+			const prevChefDetails = prevProps.chefs_details[`chef${this.props.route.params.chefID}`]
+
+			if (chefDetails.chef_followed != prevChefDetails.chef_followed) {
+				await this.generateHeaderButtonList()
+			}
 		}
 
 		respondToFocus = async () => {
@@ -75,18 +140,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			this.props.navigation.navigate('RecipeDetails', { recipeID: recipeID })
 		}
 
-		followChef = async (followee_id) => {
+		followChef = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
 				await this.setState({ awaitingServer: true })
 				try {
-					const followPosted = await postFollow(this.props.loggedInChef.id, followee_id, this.props.loggedInChef.auth_token)
+					const followPosted = await postFollow(this.props.loggedInChef.id, this.props.route.params.chefID, this.props.loggedInChef.auth_token)
 					if (followPosted) {
 						let newFollowers = [...this.props.chefs_details[`chef${this.props.route.params.chefID}`].followers, followPosted]
-						this.props.storeNewFollowers(followee_id, newFollowers)
+						this.props.storeNewFollowers(this.props.route.params.chefID, newFollowers)
 					}
 				} catch {
-					await this.setState(state => ({ renderOfflineMessage: true }))
+					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({ awaitingServer: false })
 			} else {
@@ -94,18 +159,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			}
 		}
 
-		unFollowChef = async (followee_id) => {
+		unFollowChef = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
 				await this.setState({ awaitingServer: true })
 				try {
-					const followPosted = await destroyFollow(this.props.loggedInChef.id, followee_id, this.props.loggedInChef.auth_token)
+					const followPosted = await destroyFollow(this.props.loggedInChef.id, this.props.route.params.chefID, this.props.loggedInChef.auth_token)
 					if (followPosted) {
 						let newFollowers = this.props.chefs_details[`chef${this.props.route.params.chefID}`].followers.filter(follower => follower.follower_id !== this.props.loggedInChef.id)
-						this.props.storeNewFollowers(followee_id, newFollowers)
+						this.props.storeNewFollowers(this.props.route.params.chefID, newFollowers)
 					}
 				} catch {
-					await this.setState(state => ({ renderOfflineMessage: true }))
+					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({ awaitingServer: false })
 			} else {
@@ -114,10 +179,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		render() {
-			console.disableYellowBox = true;
 			if (this.props.chefs_details[`chef${this.props.route.params.chefID}`] !== undefined) {
 				const chef_details = this.props.chefs_details[`chef${this.props.route.params.chefID}`]
-				// console.log(this.props.queryChefID)
+				// console.log(chef_details.chef_followed)
 				return (
 					<SpinachAppContainer awaitingServer={this.state.awaitingServer}>
 						{this.state.renderOfflineMessage && (
@@ -127,6 +191,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
 							/>)
 						}
+						{this.state.dynamicMenuShowing && this.renderDynamicMenu()}
 						<ScrollView contentContainerStyle={{ flexGrow: 1 }}>
 							<ChefDetailsCard
 								{...chef_details}

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Recipe List can be rendered and matches its previous image 1`] = `
+exports[`Recipe List can be worked on 1`] = `
 <RCTSafeAreaView
   emulateUnlessSupported={true}
   style={

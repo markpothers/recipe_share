@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
-import { AsyncStorage } from 'react-native'
+import { AsyncStorage, View, TouchableOpacity } from 'react-native'
 import ChefDetailsCard from '../chefDetails/ChefDetailsCard'
 import { getChefDetails } from '../fetches/getChefDetails'
 import ChefEditor from './chefEditor'
@@ -15,6 +15,8 @@ import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-nat
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo';
 import { AlertPopUp } from '../alertPopUp/alertPopUp'
+import DynamicMenu from '../dynamicMenu/DynamicMenu.js'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const mapStateToProps = (state) => ({
 	loggedInChef: state.loggedInChef,
@@ -51,10 +53,78 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			deleteChefOptionVisible: false,
 			renderOfflineMessage: false,
 			image: null,
-			chefUpdatedMessageShowing: false
+			chefUpdatedMessageShowing: false,
+			headerButtons: null,
+			dynamicMenuShowing: false
 		}
 
-		componentDidMount = () => {
+		generateHeaderButtonList = async () => {
+			let headerButtons = [
+				// {
+				// 	icon: !chefDetails.chef_followed ? "account-multiple-plus-outline" : "account-multiple-minus",
+				// 	text: !chefDetails.chef_followed ? "Follow chef" : "Stop following chef",
+				// 	action: !chefDetails.chef_followed ?
+				// 		(() => {
+				// 			this.setState({ dynamicMenuShowing: false });
+				// 			this.followChef()
+				// 		}) :
+				// 		(() => {
+				// 			this.setState({ dynamicMenuShowing: false });
+				// 			this.unFollowChef()
+				// 		})
+				// },
+				{
+					icon: "food",
+					text: "Create new recipe",
+					action: (() => {
+						this.setState({ dynamicMenuShowing: false })
+						this.props.navigation.navigate('NewRecipe')
+					})
+				},
+				{
+					icon: "playlist-edit",
+					text: "Edit Profile",
+					action: (() => {
+						this.setState({ dynamicMenuShowing: false })
+						this.editingChef()
+					})
+				},
+				{
+					icon: "trash-can-outline",
+					text: "Delete Profile",
+					action: (() => {
+						this.setState({ dynamicMenuShowing: false })
+						this.showDeleteChefOption()
+					})
+				},
+			]
+			await this.setState({ headerButtons: headerButtons })
+		}
+
+		renderDynamicMenu = () => {
+			return (
+				<DynamicMenu
+					buttons={this.state.headerButtons}
+					closeDynamicMenu={() => this.setState({ dynamicMenuShowing: false })}
+				/>
+			)
+		}
+
+		addDynamicMenuButtonsToHeader = () => {
+			this.props.navigation.setOptions({
+				headerRight: () => (
+					<View style={centralStyles.dynamicMenuButtonContainer}>
+						<TouchableOpacity style={centralStyles.dynamicMenuButton} activeOpacity={0.7} onPress={() => this.setState({ dynamicMenuShowing: true })} >
+							<Icon name='dots-vertical' style={centralStyles.dynamicMenuIcon} size={33} />
+						</TouchableOpacity>
+					</View>
+				),
+			});
+		}
+
+		componentDidMount = async () => {
+			await this.generateHeaderButtonList()
+			this.addDynamicMenuButtonsToHeader()
 			this.fetchChefDetails()
 			this._unsubscribeFocus = this.props.navigation.addListener('focus', () => {
 				this.respondToFocus()
@@ -278,7 +348,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		render() {
 			if (this.props.chefs_details[`chef${this.props.loggedInChef.id}`] !== undefined) {
 				const chef_details = this.props.chefs_details[`chef${this.props.loggedInChef.id}`]
-				console.log(chef_details.chef)
+				// console.log(chef_details.chef)
 				return (
 					<SpinachAppContainer awaitingServer={this.state.awaitingServer} scrollingEnabled={true}>
 						{this.state.renderOfflineMessage && (
@@ -288,14 +358,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
 							/>)
 						}
+						{this.state.dynamicMenuShowing && this.renderDynamicMenu()}
 						{this.state.chefUpdatedMessageShowing && this.renderChefUpdatedAlertPopUp()}
 						{this.state.editingChef && this.renderChefEditor()}
 						{/* {this.props.loggedInChef.is_admin ? this.renderDatabaseButtons() : null} */}
 						{this.state.choosingPicture && this.renderPictureChooser()}
 						{this.state.deleteChefOptionVisible && this.renderDeleteChefOption()}
 						<ChefDetailsCard
-							editChef={this.editingChef}
-							myProfile={true}
 							{...chef_details}
 							image_url={chef_details.chef.image_url}
 						/>

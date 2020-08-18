@@ -138,7 +138,9 @@ const reducer = (currentState, action) => {
 		case 'ADD_RECIPE_MAKE':
 			return { ...currentState, recipe_details: { ...currentState.recipe_details, recipe_makes: currentState.recipe_details.recipe_makes + 1, makeable: false } }
 		case 'ADD_RECIPE_SHARE':
-			return { ...currentState, recipe_details: { ...currentState.recipe_details, recipe_shares: currentState.recipe_details.recipe_shares + 1 } }
+			return { ...currentState, recipe_details: { ...currentState.recipe_details, recipe_shares: currentState.recipe_details.recipe_shares + 1, shareable: false } }
+		case 'REMOVE_RECIPE_SHARE':
+			return { ...currentState, recipe_details: { ...currentState.recipe_details, recipe_shares: currentState.recipe_details.recipe_shares - 1, shareable: true } }
 		case 'ADD_MAKE_PIC':
 			return { ...currentState, recipe_details: { ...currentState.recipe_details, make_pics: [action.makePic, ...currentState.recipe_details.make_pics] } }
 		case 'SAVE_REMAINING_MAKE_PICS':

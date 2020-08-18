@@ -70,8 +70,8 @@ export const styles = StyleSheet.create({
 	},
 	avatarThumbnail: {
 		// position: 'absolute',
-		height: '100%',
-		width: '100%',
+		height: '85%',
+		width: '85%',
 		// marginRight: '4%',
 		borderRadius: 10,
 	},

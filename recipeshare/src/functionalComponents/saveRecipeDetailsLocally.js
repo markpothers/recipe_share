@@ -35,7 +35,6 @@ const saveRecipeDetailsLocally = (recipeDetails, userId) => {
 				// console.log('localRecipeDetails saved')
 			})
 		} else {
-			console.log('mark')
 			let newRecipesList = [recipeDetails]
 			AsyncStorage.setItem('localRecipeDetails', JSON.stringify(newRecipesList), () => {
 				// console.log('initial recipe  saved')

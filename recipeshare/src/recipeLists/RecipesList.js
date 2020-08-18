@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, TouchableOpacity, AsyncStorage } from 'react-native'
+import { FlatList, TouchableOpacity, AsyncStorage, } from 'react-native'
 import RecipeCard from './RecipeCard'
 import { connect } from 'react-redux'
 import { getRecipeList } from '../fetches/getRecipeList'
@@ -81,12 +81,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			filterDisplayed: false,
 			awaitingServer: false,
 			dataICantGet: [],
-			renderOfflineMessage: false
+			renderOfflineMessage: false,
 		}
 
 		componentDidMount = async () => {
 			await this.setState({ awaitingServer: true })
-			// await this.fetchRecipeList()
+			await this.fetchRecipeList()
 			this._unsubscribeFocus = this.props.navigation.addListener('focus', () => {
 				this.respondToFocus()
 			})
@@ -100,6 +100,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			this._unsubscribeFocus()
 			this._unsubscribeBlur()
 		}
+
+		// componentDidUpdate = () => {
+		// 	// console.log(this.props.route)
+		// 	if (this.props.route.params?.name != "home"){
+		// 	this.props.navigation.setParams({
+		// 		name: 'home',
+		// 	})
+		// 	}
+		// }
 
 		shouldComponentUpdate = () => {
 			return (
@@ -256,7 +265,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		renderRecipeListItem = (item) => {
-			console.log(item)
 			return (
 				<RecipeCard listChoice={this.props["listChoice"]}
 					key={item.index.toString()}
@@ -468,6 +476,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		render() {
+			// console.log(this.props.navigation)
 			return (
 				<SpinachAppContainer awaitingServer={this.state.awaitingServer}>
 					{this.state.renderOfflineMessage && (
