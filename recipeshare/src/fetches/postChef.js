@@ -1,4 +1,3 @@
-import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { detailsTimeout } from '../dataComponents/timeouts'
 
@@ -32,7 +31,8 @@ export const postChef = (username, e_mail, password, password_confirmation, coun
 					resolve(chef)
 				}
 			})
-			.catch(error => {
+			.catch(() => {
+				reject()
 			})
 	})
 }

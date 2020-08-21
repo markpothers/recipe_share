@@ -1,4 +1,3 @@
-import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { actionTimeout } from '../dataComponents/timeouts'
 
@@ -19,9 +18,15 @@ export const getDatabaseBackup = (auth_token, method) => {
 		})
 			.then(res => res.json())
 			.then(confirmation => {
-				resolve(confirmation)
+				if (confirmation.error && confirmation.message == "Invalid authentication") {
+					reject("logout")
+				}
+				if (confirmation) {
+					resolve(confirmation)
+				}
 			})
-			.catch(error => {
+			.catch(() => {
+				reject()
 			})
 	})
 }

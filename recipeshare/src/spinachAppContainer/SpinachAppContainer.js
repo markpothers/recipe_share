@@ -19,6 +19,7 @@ export default class SpinachAppContainer extends React.Component {
 						<Image
 							source={require('../dataComponents/spinach.jpg')}
 							style={centralStyles.spinachFullBackground}
+							resizeMode={"cover"}
 						/>
 						{this.props.awaitingServer && <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={(Platform.OS === 'ios' ? centralStyles.activityIndicator : {})} size="large" color="#104e01" /></View>}
 						<ScrollView style={centralStyles.fullPageScrollView}
@@ -39,6 +40,7 @@ export default class SpinachAppContainer extends React.Component {
 					<Image
 						source={require('../dataComponents/spinach.jpg')}
 						style={centralStyles.spinachFullBackground}
+						resizeMode={"cover"}
 					/>
 					{this.props.awaitingServer && <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={(Platform.OS === 'ios' ? centralStyles.activityIndicator : {})} size="large" color="#104e01" /></View>}
 					{this.props.children}

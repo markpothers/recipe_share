@@ -1,4 +1,3 @@
-import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { listsTimeout } from '../dataComponents/timeouts'
 
@@ -19,9 +18,15 @@ export const getChefList = (listType, queryChefID, limit, offset, auth_token) =>
 		})
 			.then(res => res.json())
 			.then(chefs => {
-				resolve(chefs)
+				if (chefs.error && chefs.message == "Invalid authentication") {
+					reject("logout")
+				}
+				if (chefs) {
+					resolve(chefs)
+				}
 			})
-			.catch(error => {
+			.catch(() => {
+				reject()
 			})
 	})
 }

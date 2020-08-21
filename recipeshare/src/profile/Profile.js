@@ -123,6 +123,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		componentDidMount = async () => {
+			if (this.props.route.params.logout) {
+				AsyncStorage.removeItem('chef', () => { })
+				this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: false })
+			}
+			this.props.route.params.chefID
 			await this.generateHeaderButtonList()
 			this.addDynamicMenuButtonsToHeader()
 			this.fetchChefDetails()
@@ -168,8 +173,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				editingChef: false,
 				awaitingServer: false
 			})
-			console.log('chef changed')
-			console.log(chefChanged)
 			if (chefChanged) {
 				await this.fetchChefDetails()
 				await this.setState({ chefUpdatedMessageShowing: true })
@@ -186,7 +189,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		closeDeleteChefOption = () => {
 			this.setState({
 				deleteChefOptionVisible: false,
-				editingChef: true
+				// editingChef: true
 			})
 		}
 
@@ -366,6 +369,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						{this.state.deleteChefOptionVisible && this.renderDeleteChefOption()}
 						<ChefDetailsCard
 							{...chef_details}
+							email={chef_details.chef.email}
 							image_url={chef_details.chef.image_url}
 						/>
 					</SpinachAppContainer>

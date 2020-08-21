@@ -16,9 +16,15 @@ export const getNewPassword = (e_mail) => {
 		})
 			.then(res => res.json())
 			.then(response => {
+				if (response.error && response.message == "Invalid authentication"){
+					reject("logout")
+				}
+				if (response){
 				resolve(response)
+				}
 			})
-			.catch(error => {
+			.catch(() => {
+				reject()
 			})
 	})
 }

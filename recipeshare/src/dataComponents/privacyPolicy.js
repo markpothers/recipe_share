@@ -1,5 +1,3 @@
-import React from 'react'
-
 export const privacyPolicy = `Effective date: December 23, 2019
 
 Recipe-Share LLC ("us", "we", or "our") operates the Recipe-Share mobile
@@ -380,8 +378,4 @@ page.
 Contact Us  
 ----------
 
-If you have any questions about this Privacy Policy, please contact us:
-
-  * By email: admin@recipe-share.com
-
-`
+If you have any questions about this Privacy Policy, please contact us:`

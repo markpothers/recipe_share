@@ -1,4 +1,3 @@
-import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { actionTimeout } from '../dataComponents/timeouts'
 
@@ -24,11 +23,15 @@ export const postFollow = (follower_id, followee_id, auth_token) => {
 		})
 			.then(res => res.json())
 			.then(follow => {
+				if (follow.error && follow.message == "Invalid authentication") {
+					reject("logout")
+				}
 				if (follow) {
 					resolve(follow)
 				}
 			})
-			.catch(error => {
+			.catch(() => {
+				reject()
 			})
 	})
 }

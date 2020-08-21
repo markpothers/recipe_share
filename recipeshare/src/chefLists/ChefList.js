@@ -1,7 +1,6 @@
 import React from 'react'
-import { FlatList, View, AsyncStorage } from 'react-native'
+import { FlatList, AsyncStorage } from 'react-native'
 import ChefCard from './ChefCard'
-import { databaseURL } from '../dataComponents/databaseURL'
 import { connect } from 'react-redux'
 import { getChefList } from '../fetches/getChefList'
 import { postFollow } from '../fetches/postFollow'
@@ -81,7 +80,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			this._unsubscribeBlur()
 		}
 
-		shouldComponentUpdate = (nextProps, nextState) => {
+		shouldComponentUpdate = () => {
 			return (
 				this.state.isDisplayed
 			)
@@ -108,8 +107,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				this.props.storeChefList(this.props["listChoice"], chefs)
 			}
 			catch (e) {
+				if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
 				if (this.props[this.props["listChoice"]]?.length == 0) {
-					console.log('failed to get chefs. Loading from async storage.')
+					// console.log('failed to get chefs. Loading from async storage.')
 					AsyncStorage.getItem('locallySavedListData', (err, res) => {
 						if (res != null) {
 							const locallySavedListData = JSON.parse(res)
@@ -130,7 +130,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				this.props.appendToChefList(this.props["listChoice"], new_chefs)
 			}
 			catch (e) {
-				console.log('failed to get ADDITIONAL chefs')
+				if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
+				// console.log('failed to get ADDITIONAL chefs')
 			}
 			await this.setState({ awaitingServer: false })
 		}
@@ -166,7 +167,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						})
 						this.props.storeChefList(this.props["listChoice"], updatedChefs)
 					}
-				} catch {
+				} catch (e) {
+					if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
 					this.setState(state => {
 						return ({
 							dataICantGet: [...state.dataICantGet, recipeID],
@@ -180,7 +182,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			}
 		}
 
-		unFollowChef = async (followee_id) => {
+		unFollowChef = async (followee_id, recipeID) => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
 				await this.setState({ awaitingServer: true })
@@ -198,7 +200,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						})
 						this.props.storeChefList(this.props["listChoice"], updatedChefs)
 					}
-				} catch {
+				} catch (e) {
+					if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
 					this.setState(state => {
 						return ({
 							dataICantGet: [...state.dataICantGet, recipeID],
@@ -236,10 +239,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					this.props.navigation.push('ChefDetails', { chefID: chefID })
 				}
 			} catch (e) {
-				console.log('looking for local chefs')
+				if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
+				// console.log('looking for local chefs')
 				AsyncStorage.getItem('localChefDetails', (err, res) => {
 					if (res != null) {
-						console.log('found some local chefs')
+						// console.log('found some local chefs')
 						let localChefDetails = JSON.parse(res)
 						let thisChefDetails = localChefDetails.find(chefDetails => chefDetails.chef.id === chefID)
 						if (thisChefDetails) {

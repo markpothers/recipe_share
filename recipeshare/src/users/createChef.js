@@ -1,5 +1,5 @@
 import React from 'react'
-import { Platform, Text, TouchableOpacity, TextInput, View, Switch } from 'react-native'
+import { Platform, Text, TouchableOpacity, TextInput, View, Switch, Linking } from 'react-native'
 import { countries } from '../dataComponents/countries'
 import { connect } from 'react-redux'
 import { postChef } from '../fetches/postChef'
@@ -240,7 +240,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 										close={() => this.setState({ viewingTermsAndConditions: false })}
 										title={`Terms and Conditions`}
 										text={termsAndConditions}
-									/>
+										>
+										<View style={{ flexDirection: 'row', marginLeft: responsiveWidth(2) }}>
+											<TouchableOpacity
+												onPress={() => Linking.openURL('mailto:admin@recipe-share.com?subject=Terms%20And%20Conditions%20Question')}
+											>
+												<Text style={{color: 'blue'}}>admin@recipe-share.com{"\r\r"}</Text>
+											</TouchableOpacity>
+										</View>
+									</TextPopUp>
 								)}
 							</View>
 						</View>
@@ -261,7 +269,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 										close={() => this.setState({ viewingPrivacyPolicy: false })}
 										title={`Privacy Policy`}
 										text={privacyPolicy}
-									/>
+									>
+										<View style={{ flexDirection: 'row', marginLeft: responsiveWidth(2) }}>
+											<Text>* By email: </Text>
+											<TouchableOpacity
+												onPress={() => Linking.openURL('mailto:admin@recipe-share.com?subject=Privacy%20Policy%20Question')}
+											><Text style={{color: 'blue'}}>admin@recipe-share.com{"\r\r"}</Text>
+											</TouchableOpacity>
+										</View>
+									</TextPopUp>
 								)}
 							</View>
 						</View>

@@ -1,4 +1,3 @@
-import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { actionTimeout } from '../dataComponents/timeouts'
 
@@ -18,11 +17,15 @@ export const destroyMakePic = (chefID, auth_token, makePicID) => {
 		})
 			.then(res => res.json())
 			.then(destroyed => {
+				if (destroyed.error && destroyed.message == "Invalid authentication"){
+					reject("logout")
+				}
 				if (destroyed == true) {
 					resolve(destroyed)
 				}
 			})
-			.catch(error => {
+			.catch(() => {
+				reject()
 			})
 	})
 }

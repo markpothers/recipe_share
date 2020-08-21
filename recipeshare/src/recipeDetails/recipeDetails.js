@@ -423,7 +423,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					if (likePosted) {
 						this.props.addRecipeLike()
 					}
-				} catch {
+				} catch (e) {
+					if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
 					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({ awaitingServer: false })
@@ -441,7 +442,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					if (unlikePosted) {
 						this.props.removeRecipeLike()
 					}
-				} catch {
+				} catch (e) {
+					if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
 					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({ awaitingServer: false })
@@ -459,7 +461,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					if (makePosted) {
 						this.props.addRecipeMake()
 					}
-				} catch {
+				} catch (e) {
+					if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
 					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({ awaitingServer: false })
@@ -477,7 +480,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					if (reSharePosted) {
 						this.props.addReShare()
 					}
-				} catch {
+				} catch (e) {
+					if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
 					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({ awaitingServer: false })
@@ -495,7 +499,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					if (unReShared) {
 						this.props.removeReShare()
 					}
-				} catch {
+				} catch (e) {
+					if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
 					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({ awaitingServer: false })
@@ -548,7 +553,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.saveRemainingMakePics(this.props.recipe_details.make_pics.filter(pic => pic.id !== this.state.makePicToDelete))
 					}
 					await this.setState({ deleteMakePicPopUpShowing: false })
-				} catch {
+				} catch (e) {
+					if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
 					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({
@@ -590,7 +596,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						commentText: ""
 					})
 				}
-			} catch {
+			} catch (e) {
+				if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
 				await this.setState({ renderOfflineMessage: true })
 			}
 			await this.setState({ awaitingServer: false })
@@ -617,7 +624,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.updateComments(comments)
 					}
 					await this.setState({ deleteCommentPopUpShowing: false })
-				} catch {
+				} catch (e) {
+					if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
 					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({

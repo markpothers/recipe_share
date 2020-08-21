@@ -1,5 +1,5 @@
 import React from 'react';
-import { MyRecipesScreen, MyLikedRecipesScreen, MyMadeRecipesScreen, ChefsFollowedScreen, ChefsFollowingScreen } from './ChefDetailsTabs'
+import { MyRecipesScreen, MyLikedRecipesScreen, MyMadeRecipesScreen, ChefsFollowedScreen, ChefsFollowingScreen } from './ChefDetailsTabs'//eslint-disable-line no-unused-vars
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 

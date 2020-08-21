@@ -1,5 +1,3 @@
-import React from 'react'
-
 export const termsAndConditions = `Last updated: December 22, 2019
 
 Please read these Terms and Conditions ("Terms", "Terms and Conditions")
@@ -248,7 +246,4 @@ the new terms, you are no longer authorized to use the Service.
 Contact Us  
 ----------
 
-If you have any questions about these Terms, please contact us at admin@recipe-share.com
-
-
-`
+If you have any questions about these Terms, please contact us at:`

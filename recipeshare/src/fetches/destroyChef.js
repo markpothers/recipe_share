@@ -1,4 +1,3 @@
-import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { detailsTimeout } from '../dataComponents/timeouts'
 
@@ -18,11 +17,15 @@ export const destroyChef = (auth_token, chefID, deleteRecipes) => {
 		})
 			.then(res => res.json())
 			.then(deletedChef => {
+				if (deletedChef.error && deletedChef.message == "Invalid authentication"){
+					reject("logout")
+				}
 				if (deletedChef) {
 					resolve(deletedChef)
 				}
 			})
-			.catch(error => {
+			.catch(() => {
+				reject()
 			})
 	})
 }

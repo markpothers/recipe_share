@@ -1,4 +1,3 @@
-import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { actionTimeout } from '../dataComponents/timeouts'
 
@@ -20,10 +19,15 @@ export const getDatabaseRestore = (auth_token, databaseLevel) => {
 		})
 			.then(res => res.json())
 			.then(confirmation => {
-				// console.log(recipes)
-				resolve(confirmation)
+				if (confirmation.error && confirmation.message == "Invalid authentication") {
+					reject("logout")
+				}
+				if (confirmation) {
+					resolve(confirmation)
+				}
 			})
-			.catch(error => {
+			.catch(() => {
+				reject()
 			})
 	})
 }

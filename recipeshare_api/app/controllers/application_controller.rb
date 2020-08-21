@@ -15,7 +15,6 @@ class ApplicationController < ActionController::API
                 else
                     render json: {error: true, message: "This user is not yet active"}
                 end
-
             else # couldn't find chef in database
                 render json: {error: true, message: "Could not find user in the database"}
             end

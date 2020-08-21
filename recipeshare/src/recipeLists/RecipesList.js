@@ -137,8 +137,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				this.props.storeRecipeList(this.props["listChoice"], recipes)
 			}
 			catch (e) {
+				if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
 				if (this.props[this.props["listChoice"] + `_Recipes`]?.length == 0) {
-					console.log('failed to get recipes. Loading from async storage.')
+					// console.log('failed to get recipes. Loading from async storage.')
 					AsyncStorage.getItem('locallySavedListData', (err, res) => {
 						if (res != null) {
 							const locallySavedListData = JSON.parse(res)
@@ -159,7 +160,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				this.props.appendToRecipeList(this.props["listChoice"], new_recipes)
 			}
 			catch (e) {
-				console.log('failed to get ADDITIONAL recipes')
+				if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
+				// console.log('failed to get ADDITIONAL recipes')
 			}
 			await this.setState({ awaitingServer: false })
 		}
@@ -179,6 +181,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					this.props.navigation.navigate('RecipeDetails', { recipeID: recipeID, commenting: commenting })
 				}
 			} catch (e) {
+				if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
 				// console.log('looking for local recipes')
 				AsyncStorage.getItem('localRecipeDetails', (err, res) => {
 					if (res != null) {
@@ -222,6 +225,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					this.props.navigation.navigate('ChefDetails', { chefID: chefID })
 				}
 			} catch (e) {
+				if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true }})}
 				// console.log('looking for local chefs')
 				AsyncStorage.getItem('localChefDetails', (err, res) => {
 					if (res != null) {
@@ -317,7 +321,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.storeRecipeList(this.props["listChoice"], recipes)
 						this.props.fetchChefDetails && this.props.fetchChefDetails()
 					}
-				} catch {
+				} catch (e) {
+					if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
 					await this.setState(state => {
 						return ({
 							dataICantGet: [...state.dataICantGet, recipeID],
@@ -351,7 +356,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.storeRecipeList(this.props["listChoice"], recipes)
 						this.props.fetchChefDetails && this.props.fetchChefDetails()
 					}
-				} catch {
+				} catch (e) {
+					if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
 					await this.setState(state => {
 						return ({
 							dataICantGet: [...state.dataICantGet, recipeID],
@@ -384,7 +390,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						})
 						this.props.storeRecipeList(this.props["listChoice"], recipes)
 					}
-				} catch {
+				} catch (e) {
+					if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
 					await this.setState(state => {
 						return ({
 							dataICantGet: [...state.dataICantGet, recipeID],
@@ -418,7 +425,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.storeRecipeList(this.props["listChoice"], recipes)
 						this.props.fetchChefDetails && this.props.fetchChefDetails()
 					}
-				} catch {
+				} catch (e) {
+					if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
 					await this.setState(state => {
 						return ({
 							dataICantGet: [...state.dataICantGet, recipeID],
@@ -452,7 +460,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.storeRecipeList(this.props["listChoice"], recipes)
 						this.props.fetchChefDetails && this.props.fetchChefDetails()
 					}
-				} catch {
+				} catch (e) {
+					if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
 					await this.setState(state => {
 						return ({
 							dataICantGet: [...state.dataICantGet, recipeID],

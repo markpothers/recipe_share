@@ -9,7 +9,6 @@ import OfflineMessage from '../offlineMessage/offlineMessage'
 export default class ChefCard extends React.PureComponent {
 
 	render() {
-		// console.log(this.props)
 		return (
 			<View style={styles.chefCard}>
 				{this.props.renderOfflineMessage.includes(this.props.id) && (
@@ -27,7 +26,7 @@ export default class ChefCard extends React.PureComponent {
 						</View>
 						<View style={styles.chefCardTopLeftMiddleContainer}>
 							<View>
-								<Text maxFontSizeMultiplier={2.5} style={styles.chefCardTopItalic}>{this.props.country}</Text>
+							<Text maxFontSizeMultiplier={2.5} style={styles.chefCardTopItalic}>{this.props.country}</Text>
 							</View>
 						</View>
 						<ScrollView nestedScrollEnabled={true} style={styles.chefCardTopLeftLowerContainer}>
@@ -43,17 +42,13 @@ export default class ChefCard extends React.PureComponent {
 						{parseInt(this.props.user_chef_following) > 0 ? <Icon name='account-multiple-minus' size={responsiveHeight(3.5)} style={styles.icon} /> : <Icon name='account-multiple-plus-outline' size={responsiveHeight(3.5)} style={styles.icon} />}
 						<Text maxFontSizeMultiplier={2.5} style={styles.chefCardBottomOther} >{this.props.followers === null ? 0 : this.props.followers}</Text>
 					</TouchableOpacity>
+					<View style={styles.chefCardBottomSubContainers}>
+						<Icon name='food' size={responsiveHeight(3.5)} style={styles.icon} />
+						<Text maxFontSizeMultiplier={2.5} style={styles.chefCardBottomOther} >{this.props.recipe_count ?? 0}</Text>
+					</View>
 					<View style={styles.chefCardBottomSubContainers} >
 						<Icon name='heart' size={responsiveHeight(3.5)} style={styles.icon} />
 						<Text maxFontSizeMultiplier={2.5} style={styles.chefCardBottomOther} >{this.props.recipe_likes_received === null ? 0 : this.props.recipe_likes_received}</Text>
-					</View>
-					{/* <View style={styles.chefCardBottomSubContainers} >
-                        <Icon name='food' size={responsiveHeight(3.5)} style={styles.icon}/>
-                        <Text style={styles.chefCardBottomOther} >{this.props.recipe_makes_received === null ? 0 : this.props.recipe_makes_received}</Text>
-                    </View> */}
-					<View style={styles.chefCardBottomSubContainers}>
-						<Icon name='comment' size={responsiveHeight(3.5)} style={styles.icon} />
-						<Text maxFontSizeMultiplier={2.5} style={styles.chefCardBottomOther} >{this.props.comments_received === null ? 0 : this.props.comments_received}</Text>
 					</View>
 				</View>
 			</View>

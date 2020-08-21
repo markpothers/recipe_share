@@ -1,4 +1,3 @@
-import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { actionTimeout } from '../dataComponents/timeouts'
 
@@ -24,11 +23,15 @@ export const postReShare = (recipeID, chefID, auth_token) => {
 		})
 			.then(res => res.json())
 			.then(re_share => {
-				if (re_share == true) {
+				if (re_share.error && re_share.message == "Invalid authentication"){
+					reject("logout")
+				}
+				if (re_share) {
 					resolve(re_share)
 				}
 			})
-			.catch(error => {
+			.catch(() => {
+				reject()
 			})
 	})
 }

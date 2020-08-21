@@ -1,4 +1,3 @@
-import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { actionTimeout } from '../dataComponents/timeouts'
 
@@ -24,11 +23,15 @@ export const postRecipeLike = (recipeID, chefID, auth_token) => {
 		})
 			.then(res => res.json())
 			.then(like => {
-				if (like == true) {
+				if (like.error && like.message == "Invalid authentication"){
+					reject("logout")
+				}
+				if (like) {
 					resolve(like)
 				}
 			})
-			.catch(error => {
+			.catch(() => {
+				reject()
 			})
 	})
 }

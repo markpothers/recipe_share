@@ -24,23 +24,24 @@ export default class DeleteChefOption extends React.PureComponent {
 							<Text style={styles.paragraph}>If you leave your recipes we&apos;ll deactivate your account and you can activate it by resetting your password later. Your recipes will still be here but will be Anonymous while your account is deactivated.</Text>
 							<Text style={styles.paragraph}>If you prefer to delete everything we&apos;ll do that. You can re-register at any time but everything you put in previously will be gone.</Text>
 						</View>
+
 						<View style={styles.formRow}>
-							<TouchableOpacity style={styles.applyFiltersButton} activeOpacity={0.7} title="closeDeleteChefOption" onPress={this.props.closeDeleteChefOption}>
-								<Icon style={styles.applyFiltersIcon} size={25} name='cancel' />
-								<Text style={styles.applyFiltersButtonText}>Cancel</Text>
-							</TouchableOpacity>
-						</View>
-						<View style={styles.formRow}>
-							<TouchableOpacity style={styles.clearFiltersButton} activeOpacity={0.7} title="deleteEverything" onPress={() => this.props.deleteChefAccount(true)}>
+							<TouchableOpacity style={[styles.clearFiltersButton, {width: '45%'}]} activeOpacity={0.7} title="deleteEverything" onPress={() => this.props.deleteChefAccount(true)}>
 								<Icon style={styles.clearFiltersIcon} size={25} name='cancel' />
 								<Text style={styles.clearFiltersButtonText}>Delete {"\n"} everything</Text>
 							</TouchableOpacity>
-							<TouchableOpacity style={styles.clearFiltersButton} activeOpacity={0.7} title="leaveRecipes" onPress={() => this.props.deleteChefAccount(false)}>
+							<TouchableOpacity style={[styles.clearFiltersButton, {width: '45%'}]} activeOpacity={0.7} title="leaveRecipes" onPress={() => this.props.deleteChefAccount(false)}>
 								<Icon style={styles.clearFiltersIcon} size={25} name='check' />
 								<Text style={styles.clearFiltersButtonText}>Leave {"\n"} recipes</Text>
 							</TouchableOpacity>
 						</View>
-						<View style={styles.bottomSpacer}>
+						<View style={styles.formRow}>
+							<View style={{width: '45%'}}>
+							</View>
+							<TouchableOpacity style={[styles.applyFiltersButton, {width: '45%'}]} activeOpacity={0.7} title="closeDeleteChefOption" onPress={this.props.closeDeleteChefOption}>
+								<Icon style={styles.applyFiltersIcon} size={25} name='cancel' />
+								<Text style={styles.applyFiltersButtonText}>Cancel</Text>
+							</TouchableOpacity>
 						</View>
 						<View style={styles.bottomSpacer}>
 						</View>

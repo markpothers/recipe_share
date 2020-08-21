@@ -1,4 +1,3 @@
-import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { actionTimeout } from '../dataComponents/timeouts'
 
@@ -24,11 +23,15 @@ export const destroyFollow = (follower_id, followee_id, auth_token) => {
 		})
 			.then(res => res.json())
 			.then(deleted => {
+				if (deleted.error && deleted.message == "Invalid authentication"){
+					reject("logout")
+				}
 				if (deleted) {
 					resolve(deleted)
 				}
 			})
-			.catch(error => {
+			.catch(() => {
+				reject()
 			})
 	})
 }

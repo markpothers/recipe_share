@@ -630,7 +630,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				})
 			}
 			else {
-				await this.setState({awaitingServer: false})
+				await this.setState({ awaitingServer: false })
 			}
 		}
 
@@ -710,7 +710,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						scrollEnabled={this.state.scrollingEnabled}
 						keyboardShouldPersistTaps={'always'}
 					>
-						<View style={[centralStyles.formContainer, { width: responsiveWidth(100), marginLeft: 0, marginRight: 0 }]}>
+						<TouchableOpacity
+							style={[centralStyles.formContainer,
+							{ width: responsiveWidth(100), marginLeft: 0, marginRight: 0 }
+							]}
+							onPress={Keyboard.dismiss}
+							activeOpacity={1}
+						>
 							{/* recipe name */}
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
@@ -859,6 +865,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 										this.deactivateScrollView()
 										Keyboard.dismiss()
 									}}
+									onClickItem={Keyboard.dismiss}
 									onDragEnd={this.activateScrollView}
 									delayLongPress={100}
 									keyExtractor={(item, index) => `${index}${item}`}
@@ -964,7 +971,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									</TouchableOpacity>
 								</View>
 							</View>
-						</View>
+						</TouchableOpacity>
 					</ScrollView>
 				</SpinachAppContainer>
 			)

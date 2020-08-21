@@ -1,4 +1,3 @@
-import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { detailsTimeout } from '../dataComponents/timeouts'
 
@@ -18,11 +17,15 @@ export const getChefDetails = (chef_id, auth_token) => {
 		})
 			.then(res => res.json())
 			.then(chef_details => {
+				if (chef_details.error && chef_details.message == "Invalid authentication"){
+					reject("logout")
+				}
 				if (chef_details) {
 					resolve(chef_details)
 				}
 			})
-			.catch(error => {
+			.catch(() => {
+				reject()
 			})
 	})
 }

@@ -24,7 +24,7 @@ export const postRecipe = (
 		}, detailsTimeout)
 
 		let primaryImagesForRails = primaryImages.map((image, index) => {
-			if (image.base64 && image.base64 != 'data:image/jpeg;base64,'){
+			if (image.base64 && image.base64 != 'data:image/jpeg;base64,') {
 				return {
 					index: index,
 					base64: image.base64
@@ -78,12 +78,16 @@ export const postRecipe = (
 		})
 			.then(res => res.json())
 			.then(recipe => {
+				if (recipe.error && recipe.message == "Invalid authentication") {
+					reject("logout")
+				}
 				if (recipe) {
 					// console.log(recipe)
 					resolve(recipe)
 				}
 			})
-			.catch( () => {
+			.catch(() => {
+				reject()
 			})
 	})
 }

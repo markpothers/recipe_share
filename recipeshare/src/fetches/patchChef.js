@@ -1,4 +1,3 @@
-import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { detailsTimeout } from '../dataComponents/timeouts'
 
@@ -29,11 +28,15 @@ export const patchChef = (chefID, auth_token, username, profile_text, country, u
 		})
 			.then(res => res.json())
 			.then(chef => {
+				if (chef.error && chef.message == "Invalid authentication") {
+					reject("logout")
+				}
 				if (chef) {
 					resolve(chef)
 				}
 			})
-			.catch(error => {
+			.catch(() => {
+				reject()
 			})
 	})
 }

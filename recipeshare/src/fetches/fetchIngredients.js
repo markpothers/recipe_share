@@ -1,4 +1,3 @@
-import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { actionTimeout } from '../dataComponents/timeouts'
 
@@ -18,11 +17,15 @@ export const fetchIngredients = (auth_token) => {
 		})
 			.then(res => res.json())
 			.then(ingredients => {
+				if (ingredients.error && ingredients.message == "Invalid authentication"){
+					reject("logout")
+				}
 				if (ingredients) {
 					resolve(ingredients)
 				}
 			})
-			.catch(error => {
+			.catch(() => {
+				reject()
 			})
 	})
 }

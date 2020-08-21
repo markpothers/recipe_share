@@ -1,4 +1,3 @@
-import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { actionTimeout } from '../dataComponents/timeouts'
 
@@ -24,11 +23,15 @@ export const destroyRecipeLike = (recipeID, chefID, auth_token) => {
 		})
 			.then(res => res.json())
 			.then(unlike => {
+				if (unlike.error && unlike.message == "Invalid authentication"){
+					reject("logout")
+				}
 				if (unlike == true) {
 					resolve(unlike)
 				}
 			})
-			.catch(error => {
+			.catch(() => {
+				reject()
 			})
 	})
 }

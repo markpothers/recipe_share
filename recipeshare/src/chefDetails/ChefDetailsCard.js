@@ -32,7 +32,7 @@ export default class ChefDetailsCard extends React.PureComponent {
 							</View>
 							<View style={styles.chefCardTopLeftMiddleContainer}>
 								<View>
-									<Text maxFontSizeMultiplier={2.5} style={styles.chefCardTopItalic}>{this.props.chef.country}</Text>
+								<Text maxFontSizeMultiplier={2.5} style={styles.chefCardTopItalic}>{this.props.chef.country}</Text>
 								</View>
 							</View>
 							<ScrollView nestedScrollEnabled={true} style={styles.chefCardTopLeftLowerContainer}>

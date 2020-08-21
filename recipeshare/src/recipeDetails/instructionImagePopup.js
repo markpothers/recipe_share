@@ -12,9 +12,9 @@ export function InstructionImagePopup(props) {
 			style={{ backgroundColor: 'red' }}
 		>
 			<View style={styles.instructionImagePopupModalCover}>
-				<View style={[styles.instructionImagePopupContainer]}>
+				<View style={styles.instructionImagePopupContainer}>
 					<Image
-						style={[styles.instructionPopupImage]}
+						style={styles.instructionPopupImage}
 						source={{ uri: props.imageURL }}
 						resizeMode="cover"
 					/>

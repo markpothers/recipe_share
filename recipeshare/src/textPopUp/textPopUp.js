@@ -23,6 +23,7 @@ export function TextPopUp(props) {
 					<View style={[styles.editChefInputAreaBox, {height: responsiveHeight(70)}]} >
 						<ScrollView>
 							<Text maxFontSizeMultiplier={2} style={styles.tAndCText}>{props.text}</Text>
+							{props.children}
 						</ScrollView>
 					</View>
 					<View style={styles.formRow}>

@@ -1,4 +1,3 @@
-import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { actionTimeout } from '../dataComponents/timeouts'
 
@@ -18,11 +17,15 @@ export const destroyComment = (auth_token, commentID) => {
 		})
 			.then(res => res.json())
 			.then(comments => {
+				if (comments.error && comments.message == "Invalid authentication"){
+					reject("logout")
+				}
 				if (comments) {
 					resolve(comments)
 				}
 			})
-			.catch(error => {
+			.catch(() => {
+				reject()
 			})
 	})
 }

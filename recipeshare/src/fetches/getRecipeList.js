@@ -1,9 +1,7 @@
-import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { listsTimeout } from '../dataComponents/timeouts'
 
 export const getRecipeList = (listType, queryChefID, limit, offset, global_ranking, auth_token, filter_settings, cuisine, serves) => {
-
 	const filters = Object.keys(filter_settings).filter(category => filter_settings[category] === true).join("/").toLowerCase()
 
 	return new Promise((resolve, reject) => {
@@ -21,9 +19,13 @@ export const getRecipeList = (listType, queryChefID, limit, offset, global_ranki
 		})
 			.then(res => res.json())
 			.then(recipes => {
+				if (recipes.error && recipes.message == "Invalid authentication") {
+					reject("logout")
+				}
 				resolve(recipes)
 			})
-			.catch(error => {
+			.catch(() => {
+				reject()
 			})
 	})
 }

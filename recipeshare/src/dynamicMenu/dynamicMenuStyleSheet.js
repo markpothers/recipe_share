@@ -22,10 +22,12 @@ export const styles = StyleSheet.create({
 	buttonIcon: {
 		marginHorizontal: responsiveWidth(2),
 		color: '#104e01',
+		bottom: responsiveHeight(0.25)
 	},
 	buttonText: {
 		fontSize: responsiveFontSize(2.25),
 		marginRight: responsiveWidth(4),
-		color: "#505050"
+		color: "#505050",
+		bottom: responsiveHeight(0.25)
 	}
 });
