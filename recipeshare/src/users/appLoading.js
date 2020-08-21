@@ -31,23 +31,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		componentDidMount = () => {
 			// AsyncStorage.removeItem('chef', () => {})
-			// AsyncStorage.setItem('chef', JSON.stringify({
-			// 	"auth_token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6OTd9.JSvCrNXkn91DyRtROCR_NOC7bqxMOZoXWIhLQLEpj0sX",
-			// 	"country": "United States",
-			// 	"created_at": "2020-08-08T15:26:17.878Z",
-			// 	"deactivated": false,
-			// 	"e_mail": "markpothers@hotmail.com",
-			// 	"first_name": null,
-			// 	"hex": "d8a61ace5c6f70dd443a26f3705ae84d350e276c",
-			// 	"id": 97,
-			// 	"image_url": "https://storage.googleapis.com/download/storage/v1/b/chef-avatars-ac1cff8d11c908f3cf8613121b61683221152250/o/d8a61ace5c6f70dd443a26f3705ae84d350e276c.jpg?generation=1597808270098251&alt=media",
-			// 	"is_admin": false,
-			// 	"is_member": false,
-			// 	"last_name": null,
-			// 	"password_is_auto": false,
-			// 	"profile_text": "I like baking bread",
-			// 	"username": "pothers",
-			// }), () => { })
 			AsyncStorage.getItem('chef', (err, res) => {
 				if (res != null) {
 					const loggedInChef = JSON.parse(res)
