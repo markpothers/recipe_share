@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView, Text, TextInput, TouchableOpacity, View, Keyboard, AsyncStorage, AppState } from 'react-native'
+import { ScrollView, Text, TextInput, TouchableOpacity, View, Keyboard, AsyncStorage, AppState, Platform, KeyboardAvoidingView } from 'react-native'
 import { connect } from 'react-redux'
 import { styles } from './newRecipeStyleSheet'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
@@ -705,6 +705,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					{this.state.choosingPrimaryPicture && this.renderPrimaryPictureChooser()}
 					{this.state.choosingInstructionPicture && this.renderInstructionPictureChooser()}
 					{this.state.alertPopUpShowing && this.renderAlertPopUp()}
+					<KeyboardAvoidingView
+						style={centralStyles.fullPageKeyboardAvoidingView}
+						behavior={(Platform.OS === "ios" ? "position" : "")}
+					>
 					<ScrollView style={centralStyles.fullPageScrollView}
 						nestedScrollEnabled={true}
 						scrollEnabled={this.state.scrollingEnabled}
@@ -722,7 +726,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								<View style={centralStyles.formInputContainer}>
 									<TextInput
 										multiline={true}
-										maxFontSizeMultiplier={2.5}
+										maxFontSizeMultiplier={2}
 										style={centralStyles.formInput}
 										value={this.state.newRecipeDetails.name}
 										placeholder="Recipe name"
@@ -748,13 +752,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							{/* time and difficulty dropdowns */}
 							<View style={[centralStyles.formSection, { width: responsiveWidth(80) }]}>
 								<View style={centralStyles.formInputContainer}>
-									<View picker style={[styles.timeAndDifficulty, { paddingLeft: responsiveWidth(8) }]} >
+									<View picker style={[styles.timeAndDifficulty, { paddingLeft: (Platform.OS === 'ios' ? 0 : responsiveWidth(8)) }]} >
 										<DualOSPicker
 											onChoiceChange={(choice) => this.handleInput(choice, "time")}
 											options={times}
 											selectedChoice={this.state.newRecipeDetails.time} />
 									</View>
-									<View style={[styles.timeAndDifficulty, { paddingLeft: responsiveWidth(12) }]}>
+									<View style={[styles.timeAndDifficulty, { paddingLeft: (Platform.OS === 'ios' ? 0 : responsiveWidth(14)) }]}>
 										<DualOSPicker
 											onChoiceChange={(choice) => this.handleInput(choice, "difficulty")}
 											options={difficulties}
@@ -773,7 +777,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									<TextInput
 										multiline={true}
 										numberOfLines={3}
-										maxFontSizeMultiplier={2.5}
+										maxFontSizeMultiplier={2}
 										style={[centralStyles.formInput, { padding: responsiveHeight(0.5) }]}
 										value={this.state.newRecipeDetails.description}
 										placeholder="Tell us about this recipe"
@@ -818,9 +822,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									onDataChange={(newIngredients) => this.handleIngredientSort(newIngredients)}
 									onClickItem={() => {
 										if (this.state.autoCompleteFocused !== null) {
-											Keyboard.dismiss()
 											this.setState({ autoCompleteFocused: null })
 										}
+										Keyboard.dismiss()
 									}}
 									onDragStart={this.deactivateScrollView}
 									onDragEnd={this.activateScrollView}
@@ -971,8 +975,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									</TouchableOpacity>
 								</View>
 							</View>
+							{/* separator */}
+							<View style={[centralStyles.formSectionSeparatorContainer, {marginBottom: 0}]}>
+							</View>
 						</TouchableOpacity>
 					</ScrollView>
+					</KeyboardAvoidingView>
 				</SpinachAppContainer>
 			)
 		}

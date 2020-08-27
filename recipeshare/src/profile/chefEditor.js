@@ -194,14 +194,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									<DualOSPicker
 										onChoiceChange={this.onCountryChange}
 										options={countries}
-										selectedChoice={this.props.country} />
+										selectedChoice={this.props.country}
+										textAlignment={"flex-start"}
+									/>
 								</View>
 							</View>
 							{this.state.updatingPassword ? this.renderNewPasswordOptions() : null}
 							{this.renderPasswordError()}
 							<View style={[centralStyles.formSection, { width: '100%' }]}>
 								<View style={[centralStyles.formInputContainer, { justifyContent: 'space-evenly' }]}>
-									{!this.state.updatingPassword ? this.renderNewPasswordButton() : this.renderCancelPasswordButton() }
+									{!this.state.updatingPassword ? this.renderNewPasswordButton() : this.renderCancelPasswordButton()}
 									<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} title="change_picture" onPress={this.props.choosePicture}>
 										<Icon style={centralStyles.greenButtonIcon} size={25} name='camera' />
 										<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>Update{"\n"}picture</Text>

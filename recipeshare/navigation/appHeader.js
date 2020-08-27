@@ -3,22 +3,34 @@ import { View, TouchableOpacity, Text } from 'react-native'
 import { styles } from './navigationStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { withNavigation } from '@react-navigation/compat'
+import { centralStyles } from '../src/centralStyleSheet' //eslint-disable-line no-unused-vars
 
 class AppHeader extends React.PureComponent {
 
 	renderDrawerButton = () => {
 		return (
-			<TouchableOpacity style={styles.headerDrawerButton} activeOpacity={0.7} onPress={() => this.props.navigation.toggleDrawer()} >
-				<Icon name='menu' style={styles.headerIcon} size={33} />
-			</TouchableOpacity>
+			<View style={centralStyles.headerButtonContainer}>
+				<TouchableOpacity
+					style={styles.headerDrawerButton}
+					activeOpacity={0.7}
+					onPress={() => this.props.navigation.toggleDrawer()}
+				>
+					<Icon name='menu' style={styles.headerIcon} size={33} />
+				</TouchableOpacity>
+			</View>
 		)
 	}
 
 	renderBackButton = () => {
 		return (
-			<TouchableOpacity style={styles.headerDrawerButton} activeOpacity={0.7} onPress={() => this.props.navigation.goBack()}>
-				<Icon name='arrow-left' style={styles.headerIcon} size={33} />
-			</TouchableOpacity>
+			<View style={centralStyles.headerButtonContainer}>
+				<TouchableOpacity
+					style={styles.headerDrawerButton}
+					activeOpacity={0.7}
+					onPress={() => this.props.navigation.goBack()}>
+					<Icon name='arrow-left' style={styles.headerIcon} size={33} />
+				</TouchableOpacity>
+			</View>
 		)
 	}
 

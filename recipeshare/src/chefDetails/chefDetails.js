@@ -89,9 +89,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			this.props.navigation.setOptions({
 				headerRight: () => (
 					<View style={centralStyles.dynamicMenuButtonContainer}>
-						<TouchableOpacity style={centralStyles.dynamicMenuButton} activeOpacity={0.7} onPress={() => this.setState({ dynamicMenuShowing: true })} >
-							<Icon name='dots-vertical' style={centralStyles.dynamicMenuIcon} size={33} />
-						</TouchableOpacity>
+						<View style={centralStyles.headerButtonContainer}>
+							<TouchableOpacity style={centralStyles.dynamicMenuButton} activeOpacity={0.7} onPress={() => this.setState({ dynamicMenuShowing: true })} >
+								<Icon name='dots-vertical' style={centralStyles.dynamicMenuIcon} size={33} />
+							</TouchableOpacity>
+						</View>
 					</View>
 				),
 			});
@@ -99,8 +101,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		componentDidMount = async () => {
 			await this.setState({ awaitingServer: true })
-			await this.generateHeaderButtonList()
-			this.addDynamicMenuButtonsToHeader()
+			// await this.generateHeaderButtonList()
+			// this.addDynamicMenuButtonsToHeader()
 			// await this.fetchChefDetails()
 			await this.setState({ awaitingServer: false })
 		}
@@ -151,7 +153,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.storeNewFollowers(this.props.route.params.chefID, newFollowers)
 					}
 				} catch (e) {
-					if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
+					if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({ awaitingServer: false })
@@ -171,7 +173,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.storeNewFollowers(this.props.route.params.chefID, newFollowers)
 					}
 				} catch (e) {
-					if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
+					if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({ awaitingServer: false })

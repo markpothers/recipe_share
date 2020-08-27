@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, Text, View, TouchableOpacity, Switch, Dimensions, Picker, Platform, ScrollView } from 'react-native'
+import { Modal, Text, View, TouchableOpacity, Switch, Platform, ScrollView } from 'react-native'
 import { styles } from './filterMenuStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux'
@@ -40,15 +40,21 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(
 	class FilterMenu extends React.PureComponent {
 
-		renderLeftColumnCategories = () => {
+		renderFilterItems = () => {
 			const filtersList = this.props.newRecipe ? this.props.newRecipeFilterSettings : this.props.filter_settings
-			return Object.keys(filtersList).sort().filter((cat, index) => index % 2 === 0).map(category => {
+			return Object.keys(filtersList).sort().map(category => {
 				return (
 					<View
-						style={styles.columnRow}
+						style={styles.filterItemContainer}
 						key={category}>
 						<View style={styles.switchContainer}>
-							<Switch style={(Platform.OS == 'ios' ? { transform: [{ scaleX: .8 }, { scaleY: .8 }] } : null)} value={filtersList[category]} onChange={(e) => this.handleCategoryChange(category, e.nativeEvent.value)} />
+							<Switch
+								style={(Platform.OS == 'ios' ? { transform: [{ scaleX: .8 }, { scaleY: .8 }] } : null)}
+								value={filtersList[category]}
+								onChange={(e) => this.handleCategoryChange(category, e.nativeEvent.value)}
+								trackColor={{ true: '#4b714299' }}
+								thumbColor={filtersList[category] ? "#4b7142" : null}
+							/>
 						</View>
 						<View style={styles.categoryContainer}>
 							<Text maxFontSizeMultiplier={2} style={styles.categoryText}>{category}</Text>
@@ -58,21 +64,51 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			})
 		}
 
-		renderRightColumnCategories = () => {
-			const filtersList = this.props.newRecipe ? this.props.newRecipeFilterSettings : this.props.filter_settings
-			return Object.keys(filtersList).sort().filter((cat, index) => index % 2 !== 0).map(category => {
-				return (
-					<View style={styles.columnRow} key={category}>
-						<View style={styles.switchContainer}>
-							<Switch style={(Platform.OS == 'ios' ? { transform: [{ scaleX: .8 }, { scaleY: .8 }] } : null)} value={filtersList[category]} onChange={(e) => this.handleCategoryChange(category, e.nativeEvent.value)} />
-						</View>
-						<View style={styles.categoryContainer}>
-							<Text maxFontSizeMultiplier={2} style={styles.categoryText}>{category}</Text>
-						</View>
-					</View>
-				)
-			})
-		}
+		// renderLeftColumnCategories = () => {
+		// 	const filtersList = this.props.newRecipe ? this.props.newRecipeFilterSettings : this.props.filter_settings
+		// 	return Object.keys(filtersList).sort().filter((cat, index) => index % 2 === 0).map(category => {
+		// 		return (
+		// 			<View
+		// 				style={styles.columnRow}
+		// 				key={category}>
+		// 				<View style={styles.switchContainer}>
+		// 					<Switch
+		// 						style={(Platform.OS == 'ios' ? { transform: [{ scaleX: .8 }, { scaleY: .8 }] } : null)}
+		// 						value={filtersList[category]}
+		// 						onChange={(e) => this.handleCategoryChange(category, e.nativeEvent.value)}
+		// 						trackColor={{ true: '#4b714299' }}
+		// 						thumbColor={filtersList[category] ? "#4b7142" : null}
+		// 					/>
+		// 				</View>
+		// 				<View style={styles.categoryContainer}>
+		// 					<Text maxFontSizeMultiplier={2} style={styles.categoryText}>{category}</Text>
+		// 				</View>
+		// 			</View>
+		// 		)
+		// 	})
+		// }
+
+		// renderRightColumnCategories = () => {
+		// 	const filtersList = this.props.newRecipe ? this.props.newRecipeFilterSettings : this.props.filter_settings
+		// 	return Object.keys(filtersList).sort().filter((cat, index) => index % 2 !== 0).map(category => {
+		// 		return (
+		// 			<View style={styles.columnRow} key={category}>
+		// 				<View style={styles.switchContainer}>
+		// 					<Switch
+		// 						style={(Platform.OS == 'ios' ? { transform: [{ scaleX: .8 }, { scaleY: .8 }] } : null)}
+		// 						value={filtersList[category]}
+		// 						onChange={(e) => this.handleCategoryChange(category, e.nativeEvent.value)}
+		// 						trackColor={{ true: '#4b714299' }}
+		// 						thumbColor={filtersList[category] ? "#4b7142" : null}
+		// 					/>
+		// 				</View>
+		// 				<View style={styles.categoryContainer}>
+		// 					<Text maxFontSizeMultiplier={2} style={styles.categoryText}>{category}</Text>
+		// 				</View>
+		// 			</View>
+		// 		)
+		// 	})
+		// }
 
 		handleApplyButton = () => {
 			this.props.newRecipe ? this.props.handleCategoriesButton() : this.props.closeFilterAndRefresh()
@@ -104,19 +140,22 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					transparent={true}
 					visible={true}
 				>
-					<View style={[styles.modalFullScreenContainer]}>
+					<View style={styles.modalFullScreenContainer}>
 						<View style={styles.contentsContainer}>
 							<View style={styles.titleContainer}>
 								<Text maxFontSizeMultiplier={2} style={styles.title}>{this.props.title}</Text>
 							</View>
 							<ScrollView style={styles.categoriesScrollView}>
 								<View style={styles.columnsContainer}>
-									<View style={styles.column}>
+									{/* <View style={styles.columnsInnerContainer}> */}
+										{this.renderFilterItems()}
+									{/* </View> */}
+									{/* <View style={styles.column}>
 										{this.renderLeftColumnCategories()}
 									</View>
 									<View style={styles.column}>
 										{this.renderRightColumnCategories()}
-									</View>
+									</View> */}
 								</View>
 							</ScrollView>
 							<View style={styles.bottomContainer}>

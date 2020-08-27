@@ -5,6 +5,7 @@ import AppHeader from './appHeader'
 // import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { createStackNavigator } from '@react-navigation/stack';
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
+import NewRecipeScreen from '../src/newRecipe/newRecipe'
 
 const Stack = createStackNavigator()
 
@@ -18,15 +19,14 @@ const ProfileStack = (props) => {
 				headerStyle: {
 					backgroundColor: '#104e01',
 					height: responsiveHeight(9),
-				},
-				headerTitleStyle: {
-					marginHorizontal: 0
+					shadowOpacity: 0,
 				},
 				headerTitleContainerStyle: {
-					position: 'relative',
 					left: 0,
-					right: 0,
-				}
+					height: responsiveHeight(9),
+					width: responsiveWidth(100),
+				},
+				headerStatusBarHeight: 0,
 			}}
 		>
 			<Stack.Screen
@@ -37,6 +37,14 @@ const ProfileStack = (props) => {
 			>
 				{props => <Profile {...props} setLoadedAndLoggedIn={fwdProps.setLoadedAndLoggedIn} />}
 			</Stack.Screen>
+			<Stack.Screen
+				name="NewRecipe"
+				options={({ route }) => ({
+					headerLeft: props => null,
+					headerTitle: props => <AppHeader {...props} text={"Create a New Recipe"} route={route} />
+				})}
+				component={NewRecipeScreen}
+			/>
 		</Stack.Navigator>
 	)
 }

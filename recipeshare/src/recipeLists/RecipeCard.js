@@ -86,6 +86,7 @@ function AvatarImage(chefimage_url) {
 function PostedBy(props) {
 	return (
 		<View style={styles.recipeCardTopPostedByContainer}>
+			<Icon name='share' size={responsiveHeight(3.5)} style={styles.reSharedIcon} />
 			<Text maxFontSizeMultiplier={2} style={styles.recipeCardTopItalic}>Re-shared by: </Text>
 			<TouchableOpacity onPress={() => props.navigateToSharer(props.sharer_id)}>
 				<Text maxFontSizeMultiplier={2} style={styles.recipeCardTopItalic} >{props.username}</Text>

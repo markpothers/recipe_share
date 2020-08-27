@@ -1,5 +1,3 @@
-import React from 'react'
-
 export const times = [
 	"00:15",
 	"00:30",

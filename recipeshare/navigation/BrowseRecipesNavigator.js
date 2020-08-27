@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import RecipeDetailsScreen from '../src/recipeDetails/recipeDetails'
 import ChefDetailsScreen from '../src/chefDetails/chefDetails'
@@ -34,9 +34,11 @@ const BrowseRecipesTabs = (props) => {
 		props.navigation.setOptions({
 			headerRight: () => (
 				<View style={centralStyles.dynamicMenuButtonContainer}>
-					<TouchableOpacity style={centralStyles.dynamicMenuButton} activeOpacity={0.7} onPress={() => setDynamicMenuShowing(true)} >
-						<Icon name='dots-vertical' style={centralStyles.dynamicMenuIcon} size={33} />
-					</TouchableOpacity>
+					<View style={centralStyles.headerButtonContainer}>
+						<TouchableOpacity style={centralStyles.dynamicMenuButton} activeOpacity={0.7} onPress={() => setDynamicMenuShowing(true)} >
+							<Icon name='dots-vertical' style={centralStyles.dynamicMenuIcon} size={33} />
+						</TouchableOpacity>
+					</View>
 				</View>
 			),
 		});
@@ -58,64 +60,64 @@ const BrowseRecipesTabs = (props) => {
 	return (
 		<React.Fragment>
 			{dynamicMenuShowing && renderDynamicMenu()}
-		<Tab.Navigator
-			// lazy={true}
-			tabBarOptions={{
-				style: {
-					backgroundColor: '#104e01'
-				},
-				labelStyle: {
-					textTransform: 'none',
-					fontSize: responsiveFontSize(2)
-				},
-				activeTintColor: '#fff59b',
-				inactiveTintColor: '#fff59b',
-				tabStyle: {
-					width: responsiveWidth(35),
-					height: responsiveHeight(9),
-					paddingTop: 0,
-					paddingBottom: 0,
-				},
-				indicatorStyle: {
-					backgroundColor: '#fff59b',
-				},
-				scrollEnabled: true,
-				showIcon: false,
-				allowFontScaling: false
-			}}
-		>
-			<Tab.Screen
-				name="Newest Recipes"
-				options={
-					{ headerTitle: props => <AppHeader {...props} text={"Browse Recipes"}/> }
-				}
-				component={NewestRecipesScreen}
-			/>
-			<Tab.Screen
-				name="Top Recipes"
-				options={
-					{ headerTitle: props => <AppHeader {...props} text={"Browse Recipes"} /> }
-				}
-				component={MostLikedRecipesScreen}
-			/>
-			<Tab.Screen
-				name="Newest Chefs"
-				options={
-					{ headerTitle: props => <AppHeader {...props} text={"Browse Recipes"} /> }
-				}
-				component={NewestChefsScreen}
-			/>
-			<Tab.Screen
-				name="Top Chefs"
-				options={
-					{ headerTitle: props => <AppHeader {...props} text={"Browse Recipes"} /> }
-				}
-				component={MostLikedChefsScreen}
-			/>
-			{/* <Tab.Screen name="MostMadeRecipes" component={MostMadeRecipesScreen}/> */}
-			{/* <Tab.Screen name="MostMadeChefs" component={MostMadeChefsScreen}/> */}
-		</Tab.Navigator>
-	</React.Fragment>
+			<Tab.Navigator
+				// lazy={true}
+				tabBarOptions={{
+					style: {
+						backgroundColor: '#104e01'
+					},
+					labelStyle: {
+						textTransform: 'none',
+						fontSize: responsiveFontSize(2)
+					},
+					activeTintColor: '#fff59b',
+					inactiveTintColor: '#fff59b',
+					tabStyle: {
+						width: responsiveWidth(35),
+						height: responsiveHeight(9),
+						paddingTop: 0,
+						paddingBottom: 0,
+					},
+					indicatorStyle: {
+						backgroundColor: '#fff59b',
+					},
+					scrollEnabled: true,
+					showIcon: false,
+					allowFontScaling: false
+				}}
+			>
+				<Tab.Screen
+					name="Newest Recipes"
+					options={
+						{ headerTitle: props => <AppHeader {...props} text={"Browse Recipes"} /> }
+					}
+					component={NewestRecipesScreen}
+				/>
+				<Tab.Screen
+					name="Top Recipes"
+					options={
+						{ headerTitle: props => <AppHeader {...props} text={"Browse Recipes"} /> }
+					}
+					component={MostLikedRecipesScreen}
+				/>
+				<Tab.Screen
+					name="Newest Chefs"
+					options={
+						{ headerTitle: props => <AppHeader {...props} text={"Browse Recipes"} /> }
+					}
+					component={NewestChefsScreen}
+				/>
+				<Tab.Screen
+					name="Top Chefs"
+					options={
+						{ headerTitle: props => <AppHeader {...props} text={"Browse Recipes"} /> }
+					}
+					component={MostLikedChefsScreen}
+				/>
+				{/* <Tab.Screen name="MostMadeRecipes" component={MostMadeRecipesScreen}/> */}
+				{/* <Tab.Screen name="MostMadeChefs" component={MostMadeChefsScreen}/> */}
+			</Tab.Navigator>
+		</React.Fragment>
 	)
 }
 
@@ -200,15 +202,14 @@ const BrowseRecipesStack = () => {
 				headerStyle: {
 					backgroundColor: '#104e01',
 					height: responsiveHeight(9),
-				},
-				headerTitleStyle: {
-					marginHorizontal: 0
+					shadowOpacity: 0,
 				},
 				headerTitleContainerStyle: {
-					position: 'relative',
 					left: 0,
-					right: 0,
-				}
+					height: responsiveHeight(9),
+					width: responsiveWidth(100),
+				},
+				headerStatusBarHeight: 0,
 			}}
 		>
 			<Stack.Screen

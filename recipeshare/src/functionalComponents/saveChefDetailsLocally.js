@@ -1,6 +1,4 @@
-import React from 'react';
 import { AsyncStorage } from 'react-native';
-import { detailsTimeout } from '../dataComponents/timeouts';
 
 
 const saveChefDetailsLocally = (chefDetails, userId) => {

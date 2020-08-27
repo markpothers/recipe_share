@@ -15,7 +15,10 @@ export default class SpinachAppContainer extends React.Component {
 		if (this.props.scrollingEnabled) {
 			return (
 				<SafeAreaView style={centralStyles.fullPageSafeAreaView}>
-					<KeyboardAvoidingView style={centralStyles.fullPageKeyboardAvoidingView} behavior={(Platform.OS === "ios" ? "padding" : "")}>
+					<KeyboardAvoidingView
+						style={centralStyles.fullPageKeyboardAvoidingView}
+						behavior={(Platform.OS === "ios" ? "position" : "")}
+					>
 						<Image
 							source={require('../dataComponents/spinach.jpg')}
 							style={centralStyles.spinachFullBackground}

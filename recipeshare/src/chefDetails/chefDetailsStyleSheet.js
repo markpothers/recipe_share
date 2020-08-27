@@ -198,6 +198,7 @@ export const styles = StyleSheet.create({
 		color: "#505050",
 		// textAlign: 'center',
 		minWidth: '35%',
+		width: '50%',
 		maxWidth: '55%',
 		// height: 100,
 		// marginLeft: '5%',
@@ -211,7 +212,7 @@ export const styles = StyleSheet.create({
 		textAlign: 'center',
 		// borderWidth: 1,
 		// flex: 3
-		width: '15%',
+		width: '19%',
 		// marginRight: '5%',
 		// top: '0.3%'
 	},

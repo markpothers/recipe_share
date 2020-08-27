@@ -26,11 +26,11 @@ export default class ChefCard extends React.PureComponent {
 						</View>
 						<View style={styles.chefCardTopLeftMiddleContainer}>
 							<View>
-							<Text maxFontSizeMultiplier={2.5} style={styles.chefCardTopItalic}>{this.props.country}</Text>
+							<Text maxFontSizeMultiplier={2} style={styles.chefCardTopItalic}>{this.props.country}</Text>
 							</View>
 						</View>
 						<ScrollView nestedScrollEnabled={true} style={styles.chefCardTopLeftLowerContainer}>
-							<Text maxFontSizeMultiplier={2.5} style={styles.chefCardTopOther} >{this.props.profile_text}</Text>
+							<Text maxFontSizeMultiplier={2} style={styles.chefCardTopOther} >{this.props.profile_text}</Text>
 						</ScrollView>
 					</View>
 					<View style={styles.chefCardTopRightContainer}>
@@ -40,15 +40,15 @@ export default class ChefCard extends React.PureComponent {
 				<View style={styles.chefCardBottomContainer}>
 					<TouchableOpacity style={styles.chefCardBottomSubContainers} onPress={(parseInt(this.props.user_chef_following) > 0 ? (() => this.props.unFollowChef(this.props.id)) : (() => this.props.followChef(this.props.id)))}>
 						{parseInt(this.props.user_chef_following) > 0 ? <Icon name='account-multiple-minus' size={responsiveHeight(3.5)} style={styles.icon} /> : <Icon name='account-multiple-plus-outline' size={responsiveHeight(3.5)} style={styles.icon} />}
-						<Text maxFontSizeMultiplier={2.5} style={styles.chefCardBottomOther} >{this.props.followers === null ? 0 : this.props.followers}</Text>
+						<Text maxFontSizeMultiplier={2} style={styles.chefCardBottomOther} >{this.props.followers === null ? 0 : this.props.followers}</Text>
 					</TouchableOpacity>
 					<View style={styles.chefCardBottomSubContainers}>
 						<Icon name='food' size={responsiveHeight(3.5)} style={styles.icon} />
-						<Text maxFontSizeMultiplier={2.5} style={styles.chefCardBottomOther} >{this.props.recipe_count ?? 0}</Text>
+						<Text maxFontSizeMultiplier={2} style={styles.chefCardBottomOther} >{this.props.recipe_count ?? 0}</Text>
 					</View>
 					<View style={styles.chefCardBottomSubContainers} >
 						<Icon name='heart' size={responsiveHeight(3.5)} style={styles.icon} />
-						<Text maxFontSizeMultiplier={2.5} style={styles.chefCardBottomOther} >{this.props.recipe_likes_received === null ? 0 : this.props.recipe_likes_received}</Text>
+						<Text maxFontSizeMultiplier={2} style={styles.chefCardBottomOther} >{this.props.recipe_likes_received === null ? 0 : this.props.recipe_likes_received}</Text>
 					</View>
 				</View>
 			</View>

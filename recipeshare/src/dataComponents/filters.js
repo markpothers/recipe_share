@@ -1,5 +1,3 @@
-import React from 'react'
-
 export const filters = [
 	"Breakfast",
 	"Lunch",

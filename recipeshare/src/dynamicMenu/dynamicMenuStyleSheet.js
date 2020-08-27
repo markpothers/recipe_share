@@ -5,10 +5,13 @@ export const styles = StyleSheet.create({
 	dynamicMenuOuterContainer: {
 		height: responsiveHeight(100),
 		width: responsiveWidth(100),
-		alignItems: 'flex-end'
+		alignItems: 'flex-end',
+		// borderWidth: 1,
+		// borderColor: 'red'
 	},
 	dynamicMenuContainer: {
-		right: 10,
+		// right: 10,
+		// top: 100,
 		backgroundColor: 'white',
 		borderWidth: 1,
 		borderColor: '#104e01',

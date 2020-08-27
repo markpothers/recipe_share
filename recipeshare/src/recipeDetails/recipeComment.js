@@ -23,11 +23,21 @@ export default class RecipeComment extends React.PureComponent {
 		return (
 			<View style={styles.commentContainer}>
 				<View style={styles.commentLeftContainer}>
-					<Image style={styles.avatarThumbnail} source={imageUrl} />
+					<TouchableOpacity
+						activeOpacity={0.7}
+						onPress={() => this.props.navigation.navigate('ChefDetails', { chefID: this.props.chef_id })}
+					>
+						<Image style={styles.avatarThumbnail} source={imageUrl} />
+					</TouchableOpacity>
 				</View>
 				<View style={styles.commentRightContainer}>
 					<View style={styles.commentRightTopContainer}>
-						<Text maxFontSizeMultiplier={2} style={styles.detailsContentsHeader}>{this.props.username}:</Text>
+						<TouchableOpacity
+							onPress={() => this.props.navigation.navigate('ChefDetails', { chefID: this.props.chef_id })}
+							activeOpacity={0.7}
+						>
+							<Text maxFontSizeMultiplier={2} style={styles.detailsContentsHeader}>{this.props.username}:</Text>
+						</TouchableOpacity>
 						{this.renderCommentDeleteButton()}
 					</View>
 					<View>

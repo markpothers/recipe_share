@@ -8,7 +8,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 
 const Drawer = createDrawerNavigator()
 
-export default MainDrawerNavigator = (props) => {
+export default function MainDrawerNavigator(props){
 	const setLoadedAndLoggedIn = props.setLoadedAndLoggedIn
 	return (
 		<Drawer.Navigator

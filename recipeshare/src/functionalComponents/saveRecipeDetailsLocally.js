@@ -1,6 +1,4 @@
-import React from 'react';
 import { AsyncStorage } from 'react-native';
-import { detailsTimeout } from '../dataComponents/timeouts';
 
 
 const saveRecipeDetailsLocally = (recipeDetails, userId) => {
@@ -28,7 +26,7 @@ const saveRecipeDetailsLocally = (recipeDetails, userId) => {
 					// console.log('recipe is liked')
 					return listRecipe
 				} else {
-
+					null
 				}
 			})
 			AsyncStorage.setItem('localRecipeDetails', JSON.stringify(newRecipesList), () => {

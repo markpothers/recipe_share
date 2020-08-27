@@ -2,6 +2,8 @@ import React from 'react'
 import { Picker, Platform, TouchableOpacity, Text, View } from 'react-native'
 import { styles } from './DualOSPickerStyleSheet'
 import IOSPicker from './IOSPicker'
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions' //eslint-disable-line no-unused-vars
 
 export default class DualOSPicker extends React.PureComponent {
 
@@ -23,8 +25,9 @@ export default class DualOSPicker extends React.PureComponent {
 		if (Platform.OS === 'ios') {
 			return (
 				<View style={styles.pickerContainer}>
-					<TouchableOpacity style={styles.IOSSelectedChoiceContainer} onPress={() => this.setState({ IOSPickerShowing: true })}>
+					<TouchableOpacity style={[styles.IOSSelectedChoiceContainer, {justifyContent: this.props.textAlignment ?? "space-evenly"}]} onPress={() => this.setState({ IOSPickerShowing: true })}>
 						<Text maxFontSizeMultiplier={2} style={styles.IOSSelectedChoiceTextBox}>{this.props.selectedChoice}</Text>
+						<Icon name='caret-down' size={responsiveHeight(3.5)} style={[styles.dropDownIcon, (this.props.textAlignment ? {position: 'absolute', right: 0, marginRight: '5%'} : null)]} />
 					</TouchableOpacity>
 					{this.state.IOSPickerShowing ? <IOSPicker choices={this.props.options} selectedChoice={this.props.selectedChoice} onChoiceChange={this.props.onChoiceChange} closeIOSPicker={this.closeIOSPicker} /> : null}
 				</View>

@@ -8,7 +8,7 @@ import { ChefFeedScreen, MyRecipesScreen, MyLikedRecipesScreen, MyMadeRecipesScr
 import AppHeader from './appHeader'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, useHeaderHeight } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { centralStyles } from '../src/centralStyleSheet' //eslint-disable-line no-unused-vars
 import DynamicMenu from '../src/dynamicMenu/DynamicMenu.js'
@@ -35,9 +35,11 @@ const MyRecipeBookTabs = (props) => {
 		props.navigation.setOptions({
 			headerRight: () => (
 				<View style={centralStyles.dynamicMenuButtonContainer}>
-					<TouchableOpacity style={centralStyles.dynamicMenuButton} activeOpacity={0.7} onPress={() => setDynamicMenuShowing(true)} >
-						<Icon name='dots-vertical' style={centralStyles.dynamicMenuIcon} size={33} />
-					</TouchableOpacity>
+					<View style={centralStyles.headerButtonContainer}>
+						<TouchableOpacity style={centralStyles.dynamicMenuButton} activeOpacity={0.7} onPress={() => setDynamicMenuShowing(true)} >
+							<Icon name='dots-vertical' style={centralStyles.dynamicMenuIcon} size={33} />
+						</TouchableOpacity>
+					</View>
 				</View>
 			),
 		});
@@ -63,7 +65,8 @@ const MyRecipeBookTabs = (props) => {
 				lazy={true}
 				tabBarOptions={{
 					style: {
-						backgroundColor: '#104e01'
+						backgroundColor: '#104e01',
+						// marginTop: -headerHeight
 					},
 					labelStyle: {
 						textTransform: 'none',
@@ -201,15 +204,14 @@ const MyRecipeBookStack = () => {
 				headerStyle: {
 					backgroundColor: '#104e01',
 					height: responsiveHeight(9),
-				},
-				headerTitleStyle: {
-					marginHorizontal: 0
+					shadowOpacity: 0,
 				},
 				headerTitleContainerStyle: {
-					position: 'relative',
 					left: 0,
-					right: 0,
+					height: responsiveHeight(9),
+					width: responsiveWidth(100),
 				},
+				headerStatusBarHeight: 0,
 			}}
 			headerBackTitleVisible={false}
 		>

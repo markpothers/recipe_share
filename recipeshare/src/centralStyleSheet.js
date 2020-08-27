@@ -38,11 +38,12 @@ export const centralStyles = StyleSheet.create({
 		flex: 1,
 		borderWidth: inDevelopment ? 1 : 0,
 		borderColor: 'red',
+		alignItems: 'center'
 	},
 	fullPageScrollView: {
 		flex: 1,
 		borderWidth: inDevelopment ? 1 : 0,
-		borderColor: 'yellow'
+		borderColor: 'yellow',
 	},
 	formContainer: {
 		width: responsiveWidth(80),
@@ -105,7 +106,8 @@ export const centralStyles = StyleSheet.create({
 		borderWidth: 1,
 		borderColor: '#104e01',
 		paddingLeft: responsiveWidth(2),
-		fontSize: responsiveFontSize(2)
+		fontSize: responsiveFontSize(2),
+		paddingVertical: responsiveHeight(0.5)
 	},
 	formTextBoxContainer: {
 		minHeight: responsiveHeight(6),
@@ -205,16 +207,28 @@ export const centralStyles = StyleSheet.create({
 	},
 	dynamicMenuButtonContainer: {
 		height: responsiveHeight(9),
-		marginTop: -responsiveHeight(3.5),
 		width: responsiveWidth(15),
 		justifyContent: 'center',
 		alignItems: 'center',
-		// borderWidth: 1,
 	},
 	dynamicMenuButton: {
-
+		height: '105%',
+		width: '105%',
+		alignItems: 'center',
+		justifyContent: 'center',
+		backgroundColor: '#104e01',
+		borderRadius: 5
 	},
 	dynamicMenuIcon: {
 		color: '#fff59b'
-	}
+	},
+	headerButtonContainer: {
+		backgroundColor: '#fff59b',
+		width: '90%',
+		height: '90%',
+		borderRadius: 5,
+		overflow: 'visible',
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
 });

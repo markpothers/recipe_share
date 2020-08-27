@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, ScrollView, View, Text, TouchableOpacity, FlatList } from 'react-native';
+import { Image, ScrollView, View, Text, TouchableOpacity, FlatList, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux'
 import { styles } from './recipeDetailsStyleSheet'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
@@ -24,6 +24,8 @@ import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo';
 import { AlertPopUp } from '../alertPopUp/alertPopUp'
 import DynamicMenu from '../dynamicMenu/DynamicMenu.js'
+import saveChefDetailsLocally from '../functionalComponents/saveChefDetailsLocally'
+import { getChefDetails } from '../fetches/getChefDetails'
 
 const mapStateToProps = (state) => ({
 	recipe_details: state.recipe_details,
@@ -77,6 +79,11 @@ const mapDispatchToProps = {
 			dispatch({ type: 'REMOVE_RECIPE_LIKES', recipe_likes: remaining_likes, listType: listType })
 		}
 	},
+	storeChefDetails: (chef_details) => {
+		return dispatch => {
+			dispatch({ type: 'STORE_CHEF_DETAILS', chefID: `chef${chef_details.chef.id}`, chef_details: chef_details })
+		}
+	},
 	// storeRecipeDetails: (recipe_details) => {
 	//   return dispatch => {
 	//     dispatch({ type: 'STORE_RECIPE_DETAILS', recipe_details: recipe_details})
@@ -105,7 +112,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			makePicToDelete: 0,
 			commentToDelete: 0,
 			headerButtons: null,
-			dynamicMenuShowing: false
+			dynamicMenuShowing: false,
+			chefNameTextColor: "#505050"
 		}
 
 		generateHeaderButtonList = async () => {
@@ -201,9 +209,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			this.props.navigation.setOptions({
 				headerRight: () => (
 					<View style={centralStyles.dynamicMenuButtonContainer}>
-						<TouchableOpacity style={centralStyles.dynamicMenuButton} activeOpacity={0.7} onPress={() => this.setState({ dynamicMenuShowing: true })} >
-							<Icon name='dots-vertical' style={centralStyles.dynamicMenuIcon} size={33} />
-						</TouchableOpacity>
+						<View style={centralStyles.headerButtonContainer}>
+							<TouchableOpacity style={centralStyles.dynamicMenuButton} activeOpacity={0.7} onPress={() => this.setState({ dynamicMenuShowing: true })} >
+								<Icon name='dots-vertical' style={centralStyles.dynamicMenuIcon} size={33} />
+							</TouchableOpacity>
+						</View>
 					</View>
 				),
 			});
@@ -236,6 +246,40 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		scrolled = () => {
 			// console.log(e.nativeEvent)
+		}
+
+		navigateToChefDetails = async () => {
+			const chefID = this.props.recipe_details.recipe.chef_id
+			await this.setState({ awaitingServer: true })
+			try {
+				const chefDetails = await getChefDetails(chefID, this.props.loggedInChef.auth_token)
+				if (chefDetails) {
+					this.props.storeChefDetails(chefDetails)
+					saveChefDetailsLocally(chefDetails, this.props.loggedInChef.id)
+					await this.setState({ awaitingServer: false })
+					this.props.navigation.navigate('ChefDetails', { chefID: chefID })
+				}
+			} catch (e) {
+				if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+				// console.log('looking for local chefs')
+				AsyncStorage.getItem('localChefDetails', (err, res) => {
+					if (res != null) {
+						// console.log('found some local chefs')
+						let localChefDetails = JSON.parse(res)
+						let thisChefDetails = localChefDetails.find(chefDetails => chefDetails.chef.id === chefID)
+						if (thisChefDetails) {
+							this.props.storeChefDetails(thisChefDetails)
+							this.setState({ awaitingServer: false })
+							this.props.navigation.navigate('ChefDetails', { chefID: chefID })
+						} else {
+							this.setState({ renderOfflineMessage: true })
+						}
+					} else {
+						this.setState({ renderOfflineMessage: true })
+					}
+				})
+			}
+			await this.setState({ awaitingServer: false })
 		}
 
 		editRecipe = async () => {
@@ -373,6 +417,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								loggedInChefID={this.props.loggedInChef.id}
 								is_admin={this.props.loggedInChef.is_admin}
 								askDeleteComment={this.askDeleteComment}
+								navigation={this.props.navigation}
 							/>
 						)
 					})
@@ -424,7 +469,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.addRecipeLike()
 					}
 				} catch (e) {
-					if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
+					if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({ awaitingServer: false })
@@ -443,7 +488,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.removeRecipeLike()
 					}
 				} catch (e) {
-					if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
+					if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({ awaitingServer: false })
@@ -462,7 +507,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.addRecipeMake()
 					}
 				} catch (e) {
-					if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
+					if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({ awaitingServer: false })
@@ -481,7 +526,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.addReShare()
 					}
 				} catch (e) {
-					if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
+					if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({ awaitingServer: false })
@@ -500,7 +545,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.removeReShare()
 					}
 				} catch (e) {
-					if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
+					if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({ awaitingServer: false })
@@ -519,7 +564,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		saveImage = (image) => {
-			this.setState({ makePicBase64: image.base64 })
+			if (image.base64 != undefined) {
+				this.setState({ makePicBase64: image.base64 })
+			}
 		}
 
 		cancelChooseInstructionImage = (image) => {
@@ -554,7 +601,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					}
 					await this.setState({ deleteMakePicPopUpShowing: false })
 				} catch (e) {
-					if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
+					if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({
@@ -597,7 +644,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					})
 				}
 			} catch (e) {
-				if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
+				if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 				await this.setState({ renderOfflineMessage: true })
 			}
 			await this.setState({ awaitingServer: false })
@@ -625,7 +672,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					}
 					await this.setState({ deleteCommentPopUpShowing: false })
 				} catch (e) {
-					if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
+					if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({
@@ -798,7 +845,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		render() {
 			if (this.props.recipe_details != undefined && this.props.recipe_details != null) {
-				// console.log(this.state.makePicBase64)
+				// console.log(this.props.recipe_details)
 				return (
 					<SpinachAppContainer awaitingServer={this.state.awaitingServer}>
 						{this.state.renderOfflineMessage && (
@@ -824,7 +871,24 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							<View style={styles.detailsHeader}>
 								<View style={styles.detailsHeaderTopRow}>
 									<View style={styles.headerTextView}>
-										<Text maxFontSizeMultiplier={2} style={styles.detailsHeaderTextBox}>{this.props.recipe_details.recipe.name}</Text>
+										<Text
+											maxFontSizeMultiplier={2}
+											style={styles.detailsHeaderTextBox}
+										>
+											{this.props.recipe_details.recipe.name}
+											<Text
+												maxFontSizeMultiplier={2}
+												style={[styles.detailsChefTextBox, { color: this.state.chefNameTextColor }]}
+												onPress={() => {
+													this.setState({ chefNameTextColor: "#50505055" })
+													this.navigateToChefDetails()
+													setTimeout(()=>{this.setState({ chefNameTextColor: "#505050" })}, 300)
+												}}
+											>
+												&nbsp;by&nbsp;{this.props.recipe_details.chef_username}
+											</Text>
+										</Text>
+
 									</View>
 								</View>
 							</View>

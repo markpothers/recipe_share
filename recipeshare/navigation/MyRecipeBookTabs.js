@@ -1,12 +1,12 @@
 import React from 'react';
-import { Platform, Text, View, ImageBackground } from 'react-native';
+// import { Platform, Text, View, ImageBackground } from 'react-native';
 // import { createStackNavigator, createBottomTabNavigator, createMaterialTopTabNavigator, createDrawerNavigator } from 'react-navigation';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import ChefDetailsScreen from '../src/chefDetails/chefDetails'
-import NewRecipeScreen from '../src/newRecipe/newRecipe'
+// import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+// import ChefDetailsScreen from '../src/chefDetails/chefDetails'
+// import NewRecipeScreen from '../src/newRecipe/newRecipe'
 import RecipesList from '../src/recipeLists/RecipesList'
 import ChefList from '../src/chefLists/ChefList'
-import { styles } from './navigationStyleSheet'
+// import { styles } from './navigationStyleSheet'
 
 export class ChefFeedScreen extends React.Component {
   render (){

@@ -114,20 +114,21 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			this.props.navigation.setOptions({
 				headerRight: () => (
 					<View style={centralStyles.dynamicMenuButtonContainer}>
-						<TouchableOpacity style={centralStyles.dynamicMenuButton} activeOpacity={0.7} onPress={() => this.setState({ dynamicMenuShowing: true })} >
-							<Icon name='dots-vertical' style={centralStyles.dynamicMenuIcon} size={33} />
-						</TouchableOpacity>
+						<View style={centralStyles.headerButtonContainer}>
+							<TouchableOpacity style={centralStyles.dynamicMenuButton} activeOpacity={0.7} onPress={() => this.setState({ dynamicMenuShowing: true })} >
+								<Icon name='dots-vertical' style={centralStyles.dynamicMenuIcon} size={33} />
+							</TouchableOpacity>
+						</View>
 					</View>
 				),
 			});
 		}
 
 		componentDidMount = async () => {
-			if (this.props.route.params.logout) {
+			if (this.props.route.params?.logout) {
 				AsyncStorage.removeItem('chef', () => { })
 				this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: false })
 			}
-			this.props.route.params.chefID
 			await this.generateHeaderButtonList()
 			this.addDynamicMenuButtonsToHeader()
 			this.fetchChefDetails()

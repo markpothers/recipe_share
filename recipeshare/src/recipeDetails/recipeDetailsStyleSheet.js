@@ -167,18 +167,32 @@ export const styles = StyleSheet.create({
 		backgroundColor: 'white',
 	},
 	headerTextView: {
-		marginLeft: '2%',
-		width: '78%',
+		// marginLeft: '2%',
+		width: responsiveWidth(98),
+		flexDirection: 'row',
+		// borderWidth: 1,
+		justifyContent: 'center'
 	},
 	detailsHeaderTopRow: {
-		flexDirection: 'row'
+		flexDirection: 'row',
+		// alignItems: 'flex-end'
 	},
 	detailsHeaderTextBox: {
 		textAlign: 'center',
 		fontWeight: 'bold',
-		fontSize: 22,
+		fontSize: responsiveFontSize(2.8),
 		color: "#505050",
-		width: '100%',
+		// borderWidth: 1
+		// width: '100%',
+	},
+	detailsChefTextBox: {
+		textAlign: 'right',
+		fontWeight: 'normal',
+		fontStyle: 'italic',
+		fontSize: responsiveFontSize(2.5),
+		borderWidth: 1,
+		alignSelf: 'flex-end',
+		// width: '100%',
 	},
 	usernameContainer: {
 		width: '100%',

@@ -92,7 +92,13 @@ export default class Templates extends React.Component {
 							</TouchableOpacity>
 							<View style={centralStyles.yellowRectangleButton}>
 								<Text style={centralStyles.greenButtonText}>Stay{"\n"}logged in</Text>
-								<Switch style={[(Platform.OS === 'ios' ? { transform: [{ scaleX: .7 }, { scaleY: .7 }] } : null), { marginLeft: responsiveWidth(2) }]} value={this.props.stayingLoggedIn} onChange={(e) => this.props.stayLoggedIn(e.nativeEvent.value)} />
+								<Switch
+									style={[(Platform.OS === 'ios' ? { transform: [{ scaleX: .7 }, { scaleY: .7 }] } : null), { marginLeft: responsiveWidth(2) }]}
+									value={this.props.stayingLoggedIn}
+									onChange={(e) => this.props.stayLoggedIn(e.nativeEvent.value)}
+									trackColor={{ true: '#4b714299' }}
+								thumbColor={filtersList[category] ? "#104e01" : null}
+								/>
 							</View>
 						</View>
 					</View>
@@ -107,7 +113,13 @@ export default class Templates extends React.Component {
 							</TouchableOpacity>
 							<View style={[centralStyles.yellowRectangleButton, { width: responsiveWidth(30) }]}>
 								<Text style={centralStyles.greenButtonText}>I accept</Text>
-								<Switch style={[(Platform.OS === 'ios' ? { transform: [{ scaleX: .7 }, { scaleY: .7 }] } : null), { marginLeft: responsiveWidth(2) }]} value={this.props.stayingLoggedIn} onChange={(e) => this.props.stayLoggedIn(e.nativeEvent.value)} />
+								<Switch
+									style={[(Platform.OS === 'ios' ? { transform: [{ scaleX: .7 }, { scaleY: .7 }] } : null), { marginLeft: responsiveWidth(2) }]}
+									value={this.props.stayingLoggedIn}
+									onChange={(e) => this.props.stayLoggedIn(e.nativeEvent.value)}
+									trackColor={{ true: '#4b714299' }}
+								thumbColor={filtersList[category] ? "#104e01" : null}
+								/>
 							</View>
 						</View>
 					</View>

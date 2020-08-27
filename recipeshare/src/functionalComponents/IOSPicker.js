@@ -1,6 +1,7 @@
 import React from 'react'
-import { Modal, View, PickerIOS, Dimensions, Picker } from 'react-native'
+import { Modal, View, PickerIOS, TouchableOpacity, Picker, Text } from 'react-native'
 import { styles } from './DualOSPickerStyleSheet'
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions' //eslint-disable-line no-unused-vars
 
 let IOSPickerTimer  // this variable makes the timer available across methods
 
@@ -28,21 +29,27 @@ export default class IOSPicker extends React.PureComponent {
 				transparent={true}
 				visible={true}
 			>
-				<View style={{ height: Dimensions.get('window').height, width: Dimensions.get('window').width }}>
-					<View style={styles.contentsContainer}>
-						<View
-							style={styles.choicesPicker}
-							onTouchStart={this.touchStart}
+				<View style={styles.contentsContainer}>
+					<View
+						style={styles.choicesPicker}
+						onTouchStart={this.touchStart}
+					>
+						<PickerIOS style={styles.IOSPicker}
+							mode="dropdown"
+							onValueChange={choice => this.choose(choice)}
+							selectedValue={this.props.selectedChoice}
 						>
-							<PickerIOS style={styles.IOSPicker}
-								mode="dropdown"
-								onValueChange={choice => this.choose(choice)}
-								selectedValue={this.props.selectedChoice}
-							>
-								{this.choicesPicker()}
-							</PickerIOS>
-						</View>
+							{this.choicesPicker()}
+						</PickerIOS>
 					</View>
+					<TouchableOpacity
+						style={styles.iosCloseButton}
+						activeOpacity={0.7}
+						onPress={() => this.props.closeIOSPicker()}
+					>
+						<Text maxFontSizeMultiplier={1.5} style={styles.iosCloseButtonText}>Close</Text>
+					</TouchableOpacity>
+
 				</View>
 			</Modal>
 		)

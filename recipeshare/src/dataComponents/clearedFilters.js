@@ -1,5 +1,3 @@
-import React from 'react'
-
 export const clearedFilters = {
 	"Breakfast": false,
 	"Lunch": false,

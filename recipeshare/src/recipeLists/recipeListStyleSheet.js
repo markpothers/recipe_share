@@ -19,9 +19,10 @@ export const styles = StyleSheet.create({
 		width: '96.4%',
 		marginLeft: '1.6%',
 		marginRight: '2%',
-		paddingBottom: '1%',
-		paddingTop: '1%',
-		flexDirection: 'row'
+		paddingBottom: responsiveHeight(0.5),
+		paddingTop: responsiveHeight(0.5),
+		flexDirection: 'row',
+		alignItems: 'center'
 	},
 	recipeCardTopContainer: {
 		flexDirection: 'row',
@@ -129,7 +130,7 @@ export const styles = StyleSheet.create({
 		alignItems: 'center',
 		top: '86%',
 		left: '80%',
-		borderRadius: 100,
+		borderRadius: 5,
 		zIndex: 1
 	},
 	filterIcon: {
@@ -153,5 +154,10 @@ export const styles = StyleSheet.create({
 		paddingVertical: responsiveHeight(1),
 		textAlign: 'center',
 		fontSize: responsiveFontSize(2)
-	}
+	},
+	reSharedIcon: {
+		color: '#505050',
+		// alignSelf: 'center',
+		marginRight: responsiveWidth(2)
+	},
 });

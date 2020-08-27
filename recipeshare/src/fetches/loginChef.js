@@ -1,4 +1,3 @@
-import React from 'react'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { actionTimeout } from '../dataComponents/timeouts'
 
