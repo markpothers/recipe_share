@@ -12,7 +12,7 @@ export default function MainDrawerNavigator(props){
 	const setLoadedAndLoggedIn = props.setLoadedAndLoggedIn
 	return (
 		<Drawer.Navigator
-			initialRouteName="MyRecipeBook"
+			initialRouteName="BrowseRecipes"
 			drawerContent={(props) => <CustomDrawer {...props} setLoadedAndLoggedIn={setLoadedAndLoggedIn} />}
 		>
 			<Drawer.Screen

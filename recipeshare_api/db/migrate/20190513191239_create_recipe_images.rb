@@ -5,6 +5,8 @@ class CreateRecipeImages < ActiveRecord::Migration[5.2]
       t.belongs_to :recipe, foreign_key: true
       t.string :image_url
       t.string :hex
+      t.integer :index
+      t.boolean :hidden, :default => false
 
       t.timestamps
     end

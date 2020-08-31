@@ -113,7 +113,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			commentToDelete: 0,
 			headerButtons: null,
 			dynamicMenuShowing: false,
-			chefNameTextColor: "#505050"
+			chefNameTextColor: "#505050",
+			instructionImagePopupDetails: {},
+			instructionImagePopupShowing: false
 		}
 
 		generateHeaderButtonList = async () => {
@@ -248,9 +250,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			// console.log(e.nativeEvent)
 		}
 
-		navigateToChefDetails = async () => {
-			const chefID = this.props.recipe_details.recipe.chef_id
-			await this.setState({ awaitingServer: true })
+		navigateToChefDetails = async (chefID) => {
+			await this.setState({
+				awaitingServer: true,
+				instructionImagePopupShowing: false
+			})
 			try {
 				const chefDetails = await getChefDetails(chefID, this.props.loggedInChef.auth_token)
 				if (chefDetails) {
@@ -332,7 +336,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		renderMakePicScrollView = () => {
 			return (
-				<ScrollView horizontal={true} style={styles.makePicScrollView} scrollEnabled={this.state.scrollEnabled}>
+				<ScrollView
+					horizontal={true}
+					style={styles.makePicScrollView}
+					scrollEnabled={this.state.scrollEnabled}
+				>
 					{this.renderRecipeMakePics()}
 				</ScrollView>
 			)
@@ -340,68 +348,41 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		renderRecipeMakePics = () => {
 			return this.props.recipe_details.make_pics.map(make_pic => {
-				if (make_pic.chef_id === this.props.loggedInChef.id || this.props.loggedInChef.is_admin) {
-					return (
-						<TouchableOpacity
-							delayPressIn={100}
-							onPressIn={() => {
-								this.setState({
-									scrollEnabled: false,
-									instructionImagePopupShowing: true,
-									instructionImagePopupURL: make_pic.image_url
-								})
-							}}
-							onPressOut={() => {
-								this.setState({
-									scrollEnabled: true,
-									instructionImagePopupShowing: false,
-								})
-							}}
-							pressRetentionOffset={{
-								top: responsiveHeight(100),
-								left: responsiveWidth(100),
-								bottom: responsiveHeight(100),
-								right: responsiveWidth(100)
-							}}
-							key={`${make_pic.id}${make_pic.image_url}`}
-							style={styles.makePicContainer}
-						>
-							<Image style={[{ width: '100%', height: '100%' }, styles.makePic]} source={{ uri: make_pic.image_url }}></Image>
+				// console.log(this.props.recipe_details.make_pics_chefs)
+				return (
+					<TouchableOpacity
+						// delayPressIn={100}
+						activeOpacity={0.7}
+						onPress={() => {
+							this.setState({
+								scrollEnabled: false,
+								instructionImagePopupShowing: true,
+								instructionImagePopupDetails: make_pic
+							})
+						}}
+						// onPressOut={() => {
+						// 	this.setState({
+						// 		scrollEnabled: true,
+						// 		instructionImagePopupShowing: false,
+						// 	})
+						// }}
+						// pressRetentionOffset={{
+						// 	top: responsiveHeight(100),
+						// 	left: responsiveWidth(100),
+						// 	bottom: responsiveHeight(100),
+						// 	right: responsiveWidth(100)
+						// }}
+						key={`${make_pic.id}${make_pic.image_url}`}
+						style={styles.makePicContainer}
+					>
+						<Image style={[{ width: '100%', height: '100%' }, styles.makePic]} source={{ uri: make_pic.image_url }}></Image>
+						{(make_pic.chef_id === this.props.loggedInChef.id || this.props.loggedInChef.is_admin) && (
 							<TouchableOpacity style={styles.makePicTrashCanButton} onPress={() => this.setState({ deleteMakePicPopUpShowing: true, makePicToDelete: make_pic.id })}>
 								<Icon name='trash-can-outline' size={responsiveHeight(3.5)} style={[styles.icon, styles.makePicTrashCan]} />
 							</TouchableOpacity>
-						</TouchableOpacity>
-					)
-				} else {
-					return (
-						<TouchableOpacity
-							delayPressIn={100}
-							onPressIn={() => {
-								this.setState({
-									scrollEnabled: false,
-									instructionImagePopupShowing: true,
-									instructionImagePopupURL: make_pic.image_url
-								})
-							}}
-							onPressOut={() => {
-								this.setState({
-									scrollEnabled: true,
-									instructionImagePopupShowing: false,
-								})
-							}}
-							pressRetentionOffset={{
-								top: responsiveHeight(100),
-								left: responsiveWidth(100),
-								bottom: responsiveHeight(100),
-								right: responsiveWidth(100)
-							}}
-							key={`${make_pic.id}${make_pic.image_url}`}
-							style={styles.makePicContainer}
-						>
-							<Image style={[{ width: '100%', height: '100%' }, styles.makePic]} source={{ uri: make_pic.image_url }}></Image>
-						</TouchableOpacity>
-					)
-				}
+						)}
+					</TouchableOpacity>
+				)
 			})
 		}
 
@@ -573,7 +554,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			this.setState({ makePicBase64: image })
 		}
 
-		sourceChosen = async () => {
+		saveMakePic = async () => {
 			await this.setState({
 				awaitingServer: true,
 				choosingPicSource: false
@@ -746,7 +727,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 										this.setState({
 											scrollEnabled: false,
 											instructionImagePopupShowing: true,
-											instructionImagePopupURL: instructionImage.image_url
+											instructionImagePopupDetails: instructionImage
 										})
 									}}
 									onPressOut={() => {
@@ -784,7 +765,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			return (
 				<PicSourceChooser
 					saveImage={this.saveImage}
-					sourceChosen={this.sourceChosen}
+					sourceChosen={this.saveMakePic}
 					// key={"primary-pic-chooser"}
 					imageSource={imageSource}
 					originalImage={this.state.makePicBase64}
@@ -860,8 +841,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						{this.state.editRecipePopUpShowing && this.renderEditRecipeAlertPopUp()}
 						{this.state.deleteRecipePopUpShowing && this.renderDeleteRecipeAlertPopUp()}
 						{this.state.choosingPicSource && this.renderPictureChooser()}
-						{this.state.instructionImagePopupShowing && <InstructionImagePopup imageURL={this.state.instructionImagePopupURL} />}
 						{this.state.dynamicMenuShowing && this.renderDynamicMenu()}
+						{this.state.instructionImagePopupShowing && (
+							<InstructionImagePopup
+								makePic={this.state.instructionImagePopupDetails}
+								chef={this.props.recipe_details.make_pics_chefs.find(chef => chef.id == this.state.instructionImagePopupDetails.chef_id)}
+								navigateToChefDetails={this.navigateToChefDetails}
+								close={() => this.setState({
+									instructionImagePopupShowing: false,
+									scrollEnabled: true
+								})}
+							/>)
+						}
 						<ScrollView
 							contentContainerStyle={{ flexGrow: 1 }}
 							ref={(ref) => this.myScroll = ref}
@@ -881,8 +872,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 												style={[styles.detailsChefTextBox, { color: this.state.chefNameTextColor }]}
 												onPress={() => {
 													this.setState({ chefNameTextColor: "#50505055" })
-													this.navigateToChefDetails()
-													setTimeout(()=>{this.setState({ chefNameTextColor: "#505050" })}, 300)
+													this.navigateToChefDetails(this.props.recipe_details.recipe.chef_id)
+													setTimeout(() => { this.setState({ chefNameTextColor: "#505050" }) }, 300)
 												}}
 											>
 												&nbsp;by&nbsp;{this.props.recipe_details.chef_username}

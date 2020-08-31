@@ -36,7 +36,7 @@ class ChefsController < ApplicationController
 
     def index
         # byebug
-        @chefs = Chef.choose_list(params["listType"], params["queryChefID"], params["limit"], params["offset"], @chef.id)
+        @chefs = Chef.choose_list(params["listType"], params["queryChefID"], params["limit"], params["offset"], params["search_term"], @chef.id)
         # byebug
         render json: @chefs
     end

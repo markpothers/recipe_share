@@ -27,7 +27,7 @@ export default class InstructionRow extends React.Component {
 					multiline={true}
 					numberOfLines={1}
 					value={this.state.text}
-					placeholder={`Step ${this.props.index + 1}`}
+					placeholder={`Instructions: step ${this.props.index + 1}`}
 					ref={ref => this.textInput = ref}
 					onChangeText={(text) => {
 						this.textInput.measureInWindow((x, y, width, height) => {

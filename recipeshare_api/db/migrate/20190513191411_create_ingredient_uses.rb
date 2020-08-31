@@ -5,6 +5,8 @@ class CreateIngredientUses < ActiveRecord::Migration[5.2]
       t.belongs_to :ingredient, foreign_key: true
       t.string :quantity
       t.string :unit
+      t.integer :index
+      t.boolean :hidden, :default => false
 
       t.timestamps
     end

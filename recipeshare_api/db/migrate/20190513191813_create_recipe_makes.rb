@@ -7,6 +7,7 @@ class CreateRecipeMakes < ActiveRecord::Migration[5.2]
       t.integer :difficulty
       t.string :comment
       t.integer :tastiness
+      t.boolean :hidden, :default => false
 
       t.timestamps
     end

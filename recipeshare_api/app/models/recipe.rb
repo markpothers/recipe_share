@@ -15,7 +15,7 @@ class Recipe < ApplicationRecord
 
   accepts_nested_attributes_for :ingredient_uses
 
-  def self.choose_list(type = "all", queryChefID = 1, limit = 1, offset = 0, ranking = "liked", user_chef_id = 1, filters="", cuisine="None", serves="Any")
+  def self.choose_list(type = "all", queryChefID = 1, limit = 1, offset = 0, ranking = "liked", user_chef_id = 1, filters="", cuisine="None", serves="Any", search_term="")
     #types = "all", "chef", "chef_liked", "chef_made", "most_liked", "most_made" // "liked", "made"
 
     # pg = ApplicationRecord.db
@@ -63,11 +63,12 @@ class Recipe < ApplicationRecord
                                     WHERE recipes.hidden = false
                                     #{filter_string}
                                     #{cuisine_string}
-                                    #{serves_string}
+									#{serves_string}
+									AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
                                     GROUP BY recipes.id
                                     ORDER BY recipes.updated_at DESC
                                     LIMIT ?
-                                    OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offset])
+                                    OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, search_term.downcase(), limit, offset])
 
     elsif type == "chef" # recipes created by me ordered most-recent first
 
@@ -99,11 +100,12 @@ class Recipe < ApplicationRecord
                                       WHERE recipes.hidden = false AND recipes.chef_id = ?
                                       #{filter_string}
                                       #{cuisine_string}
-                                      #{serves_string}
+									  #{serves_string}
+									  AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
                                       GROUP BY recipes.id
                                       ORDER BY recipes.updated_at DESC
                                       LIMIT ?
-                                      OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, limit, offset])
+                                      OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, search_term.downcase(), limit, offset])
 
     elsif type == "chef_feed" # recipes by chefs I follow ordered most-recent first
 
@@ -146,11 +148,12 @@ class Recipe < ApplicationRecord
                                     WHERE recipes.hidden = false AND follows.hidden = false AND ( follows.follower_id = ? OR re_shares.chef_id IN (SELECT follows.followee_id FROM follows WHERE follower_id = ? AND follows.hidden = false))
                                     #{filter_string}
                                     #{cuisine_string}
-                                    #{serves_string}
+									#{serves_string}
+									AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
                                     GROUP BY recipes.id
                                     ORDER BY recipes.updated_at DESC
                                     LIMIT ?
-                                    OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, queryChefID, queryChefID, limit, offset])
+                                    OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, queryChefID, queryChefID, search_term.downcase(), limit, offset])
 
     elsif type == "chef_liked" # recipes liked by use_chef ordered by most-recently liked
 # byebug
@@ -183,11 +186,12 @@ class Recipe < ApplicationRecord
                                       WHERE recipes.hidden = false AND (SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.recipe_id = recipes.id AND recipe_likes.hidden = false AND recipe_likes.chef_id = ?)>0
                                       #{filter_string}
                                       #{cuisine_string}
-                                      #{serves_string}
+									  #{serves_string}
+									  AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
                                       GROUP BY recipes.id
                                       ORDER BY last_update DESC
                                       LIMIT ?
-                                      OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, limit, offset])
+                                      OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, search_term.downcase(), limit, offset])
   
     elsif type == "chef_made" # recipes liked by use_chef ordered by most-recently liked
 
@@ -220,11 +224,12 @@ class Recipe < ApplicationRecord
                                       WHERE recipes.hidden = false AND (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id AND recipe_makes.hidden = false AND recipe_makes.chef_id = ?)>0
                                       #{filter_string}
                                       #{cuisine_string}
-                                      #{serves_string}
+									  #{serves_string}
+									  AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
                                       GROUP BY recipes.id
                                       ORDER BY last_update DESC
                                       LIMIT ?
-                                      OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, limit, offset])
+                                      OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, search_term.downcase(), limit, offset])
 
     elsif type =="most_liked" # recipes according to their global rankings # with filter bASed on chef name working if needed
 
@@ -258,11 +263,12 @@ class Recipe < ApplicationRecord
                                       WHERE recipes.hidden = false
                                       #{filter_string}
                                       #{cuisine_string}
-                                      #{serves_string}
+									  #{serves_string}
+									  AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
                                       GROUP BY recipes.id
                                       ORDER BY likes_count DESC
                                       LIMIT ?
-                                      OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offset])
+                                      OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, search_term.downcase(), limit, offset])
 
     elsif type =="most_made" # recipes according to their global rankings # with filter bASed on chef name working if needed
 
@@ -295,11 +301,12 @@ class Recipe < ApplicationRecord
                                 WHERE recipes.hidden = false
                                 #{filter_string}
                                 #{cuisine_string}
-                                #{serves_string}
+								#{serves_string}
+								AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
                                 GROUP BY recipes.id
                                 ORDER BY (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id) DESC
                                 LIMIT ?
-                                OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offset])
+								OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, search_term.downcase(), limit, offset])
 
     else # if all else fails, just show all recipes ordered most recent first
 
@@ -331,11 +338,12 @@ class Recipe < ApplicationRecord
                                 WHERE recipes.hidden = false
                                 #{filter_string}
                                 #{cuisine_string}
-                                #{serves_string}
+								#{serves_string}
+								AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
                                 GROUP BY recipes.id
                                 ORDER BY recipes.updated_at DESC
                                 LIMIT ?
-                                OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, limit, offset])
+                                OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, search_term.downcase(), limit, offset])
 # byebug
     end
     return recipes_results
@@ -390,8 +398,8 @@ class Recipe < ApplicationRecord
     pre_existing_instructions.each { |use| use.save}
     pre_existing_instructions_ids = pre_existing_instructions.map{|ins| ins.id}
     pre_existing_instruction_image = InstructionImage.where(instruction_id: pre_existing_instructions_ids)
-    pre_existing_instruction_image.each { |use| use.hidden = true}
-    pre_existing_instruction_image.each { |use| use.save}
+    pre_existing_instruction_image.each { |image| image.hidden = true}
+    pre_existing_instruction_image.each { |image| image.save}
     instructions_params["instructions"].each_with_index do |instruction, index|
       if instruction != ""
         instruction = Instruction.find_or_initialize_by(instruction: instruction, recipe: self)
@@ -432,6 +440,10 @@ class Recipe < ApplicationRecord
     ingredients_ids = ingredientUses.map {|use| use.ingredient_id}
     instructions = Instruction.where(recipe: self, hidden: false).order(:step)
     instructions_ids = instructions.map {|instruction| instruction.id}
+    make_pics = MakePic.where(recipe_id: self.id, hidden: false).order('updated_at DESC')
+    make_pic_chef_ids = make_pics.map {|pic| pic.chef_id}
+    make_pic_chefs_data = Chef.where(id: make_pic_chef_ids)
+    make_pic_chefs = make_pic_chefs_data.map {|chef| {id: chef.id, profile_text: chef.profile_text, username: chef.username, image_url: chef.image_url} }
     return recipe_details = {recipe: self,
         comments: Comment.find_by_sql(["SELECT comments.*, chefs.username, chefs.image_url
                                                 FROM comments
@@ -446,7 +458,8 @@ class Recipe < ApplicationRecord
         shareable: ReShare.where(chef_id: chef.id, hidden: false, recipe_id: self.id).empty?,
         recipe_makes: RecipeMake.where(recipe_id: self.id, hidden: false).length,
         makeable: makeable,
-        make_pics: MakePic.where(recipe_id: self.id, hidden: false).order('updated_at DESC'),
+        make_pics: make_pics,
+        make_pics_chefs: make_pic_chefs,
         ingredient_uses: ingredientUses,
         ingredients: Ingredient.where(id: ingredients_ids),
         instructions: instructions,

@@ -39,7 +39,7 @@ class Chef < ApplicationRecord
         super.except('password', 'password_confirmation', 'password_digest', 'updated_at', 'hidden', 'activated', 'activation_digest', 'password_created_at', 'password_is_auto"')
     end
 
-    def self.choose_list(type = "all_chefs", queryChefID = 1, limit = 50, offset = 0, userChefID = 1)
+    def self.choose_list(type = "all_chefs", queryChefID = 1, limit = 50, offset = 0, search_term = "", userChefID = 1)
         #types = "all_chefs", "chef_followees", "chef_followers", "chef_made", "most_liked_chefs", "most_made_chefs"
         if type == "all_chefs"
             # byebug
@@ -78,11 +78,12 @@ class Chef < ApplicationRecord
                                                 WHERE recipes.hidden = false
                                                 AND comments.hidden = false
                                                 GROUP BY recipes.chef_id) AS commented_recipes ON commented_recipes.counter_chef_id = chefs.id
-                                            WHERE chefs.hidden = false
+											WHERE chefs.hidden = false
+											AND LOWER(chefs.username) LIKE CONCAT('%', ?, '%')
                                             GROUP By chefs.id
                                             ORDER BY created_at DESC
                                             LIMIT ?
-                                            OFFSET ?", userChefID, limit, offset])
+                                            OFFSET ?", userChefID, search_term.downcase(), limit, offset])
 
         elsif type == "chef_followees" # chefs followed by user (chef_id)
 
@@ -123,11 +124,12 @@ class Chef < ApplicationRecord
                                                 GROUP BY recipes.chef_id) AS commented_recipes ON commented_recipes.counter_chef_id = chefs.id
                                             LEFT OUTER JOIN follows ON follows.followee_id = chefs.id
                                             WHERE follows.follower_id = ? AND chefs.hidden = false
-                                            AND follows.hidden = false
+											AND follows.hidden = false
+											AND LOWER(chefs.username) LIKE CONCAT('%', ?, '%')
                                             GROUP BY chefs.id
                                             ORDER BY follow_created DESC
                                             LIMIT ?
-                                            OFFSET ?", userChefID, queryChefID, limit, offset])
+                                            OFFSET ?", userChefID, queryChefID, search_term.downcase(), limit, offset])
 
         elsif type == "chef_followers" # chefs followed by user (chef_id)
 
@@ -168,11 +170,12 @@ class Chef < ApplicationRecord
                                             GROUP BY recipes.chef_id) AS commented_recipes ON commented_recipes.counter_chef_id = chefs.id
                                         LEFT OUTER JOIN follows ON follows.follower_id = chefs.id
                                         WHERE follows.followee_id = ? AND chefs.hidden = false
-                                        AND follows.hidden = false
+										AND follows.hidden = false
+										AND LOWER(chefs.username) LIKE CONCAT('%', ?, '%')
                                         GROUP BY chefs.id
                                         ORDER BY follow_created DESC
                                         LIMIT ?
-                                        OFFSET ?", userChefID, queryChefID, limit, offset])
+                                        OFFSET ?", userChefID, queryChefID, search_term.downcase(), limit, offset])
 
         elsif type === "most_liked_chefs"  || type === "most_made_chefs" # chefs according to their global rankings most recipes liked, and most recipes made
 
@@ -215,11 +218,12 @@ class Chef < ApplicationRecord
                                             WHERE recipes.hidden = false
                                             AND comments.hidden = false
                                             GROUP BY recipes.chef_id) AS commented_recipes ON commented_recipes.counter_chef_id = chefs.id
-                                        WHERE chefs.hidden = false
+										WHERE chefs.hidden = false
+										AND LOWER(chefs.username) LIKE CONCAT('%', ?, '%')
                                         GROUP BY chefs.id
                                         ORDER BY #{order} DESC
                                         LIMIT ?
-                                        OFFSET ?", userChefID, limit, offset])
+                                        OFFSET ?", userChefID, search_term.downcase(), limit, offset])
         end
     end
 

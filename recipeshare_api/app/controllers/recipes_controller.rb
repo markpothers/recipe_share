@@ -6,7 +6,7 @@ class RecipesController < ApplicationController
     skip_before_action :define_current_recipe, :only => [:index, :create, :details]
 
     def index
-        @recipes = Recipe.choose_list(params["listType"], params["queryChefID"], params["limit"], params["offset"], params["global_ranking"], @chef.id, params["filters"], params["cuisine"], params["serves"])
+        @recipes = Recipe.choose_list(params["listType"], params["queryChefID"], params["limit"], params["offset"], params["global_ranking"], @chef.id, params["filters"], params["cuisine"], params["serves"], params["search_term"])
         # byebug
         render json: @recipes
     end

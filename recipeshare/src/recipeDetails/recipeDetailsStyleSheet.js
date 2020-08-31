@@ -234,7 +234,9 @@ export const styles = StyleSheet.create({
 		fontStyle: 'italic',
 		fontSize: responsiveFontSize(2.2),
 		color: "#505050",
-		width: '79%'
+		// width: '100%',
+		// borderWidth: 1,
+		// backgroundColor: 'red'
 	},
 	detailsLikesAndMakesUpperContents: {
 		fontSize: responsiveFontSize(2.2),
@@ -332,7 +334,8 @@ export const styles = StyleSheet.create({
 		flex: 8
 	},
 	commentRightTopContainer: {
-		flexDirection: 'row'
+		flexDirection: 'row',
+		// borderWidth: 1
 	},
 	makePicScrollView: {
 		// height: 120,
@@ -408,7 +411,7 @@ export const styles = StyleSheet.create({
 		backgroundColor: 'rgba(0,0,0,0.75)',
 	},
 	instructionImagePopupContainer: {
-		height: responsiveWidth(90),
+		// height: responsiveWidth(90),
 		marginTop: responsiveHeight(15),
 		width: responsiveWidth(90),
 		marginLeft: responsiveWidth(5),
@@ -420,6 +423,7 @@ export const styles = StyleSheet.create({
 		overflow: 'hidden'
 	},
 	instructionPopupImage: {
+		marginVertical: responsiveWidth(2.5),
 		height: responsiveWidth(85),
 		width: responsiveWidth(85),
 		borderRadius: 5,
@@ -475,5 +479,38 @@ export const styles = StyleSheet.create({
 		// color: '#104e01',
 		marginHorizontal: responsiveWidth(1),
 		opacity: 0.75
+	},
+	chefContainer: {
+		flexDirection: 'row',
+		// borderBottomWidth: 1,
+		width: responsiveWidth(85),
+		borderRadius: 5,
+		justifyContent: 'space-between',
+		// borderColor: '#104e01',
+		marginTop: responsiveWidth(2.5),
+		paddingBottom: responsiveWidth(2.5)
+	},
+	chefLeftContainer: {
+		// justifyContent: 'space-between',
+		// borderWidth: 1,
+		width: responsiveWidth(65)
+	},
+	popupSeparator: {
+		width: responsiveWidth(85),
+		borderBottomWidth: 1,
+		borderColor: '#104e01'
+	},
+	thumbnail: {
+		// position: 'absolute',
+		height: responsiveWidth(17.5),
+		width: responsiveWidth(17.5),
+		borderRadius: 5
+	},
+	chefUsername: {
+		fontSize: responsiveFontSize(2.25),
+		fontWeight: 'bold',
+		width: '100%',
+		color: '#505050'
+		// textAlign: 'center'
 	}
 });

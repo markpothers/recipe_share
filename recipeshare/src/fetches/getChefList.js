@@ -1,7 +1,7 @@
 import { databaseURL } from '../dataComponents/databaseURL'
 import { listsTimeout } from '../dataComponents/timeouts'
 
-export const getChefList = (listType, queryChefID, limit, offset, auth_token) => {
+export const getChefList = (listType, queryChefID, limit, offset, auth_token, searchTerm) => {
 
 	return new Promise((resolve, reject) => {
 
@@ -9,7 +9,7 @@ export const getChefList = (listType, queryChefID, limit, offset, auth_token) =>
 			reject()
 		}, listsTimeout)
 
-		fetch(`${databaseURL}/chefs?listType=${listType}&queryChefID=${queryChefID}&limit=${limit}&offset=${offset}`, {
+		fetch(`${databaseURL}/chefs?listType=${listType}&queryChefID=${queryChefID}&limit=${limit}&offset=${offset}&search_term=${searchTerm}`, {
 			method: "GET",
 			headers: {
 				Authorization: `Bearer ${auth_token}`,

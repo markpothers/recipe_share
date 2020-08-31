@@ -4,7 +4,7 @@ class CreateInstructions < ActiveRecord::Migration[5.2]
       t.string :instruction
       t.integer :step
       t.belongs_to :recipe, foreign_key: true
-      t.boolean :active
+      t.boolean :hidden, :default => false
 
       t.timestamps
     end

@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, TouchableOpacity, AsyncStorage, } from 'react-native'
+import { FlatList, TouchableOpacity, AsyncStorage, Animated } from 'react-native'
 import RecipeCard from './RecipeCard'
 import { connect } from 'react-redux'
 import { getRecipeList } from '../fetches/getRecipeList'
@@ -20,6 +20,9 @@ import saveChefDetailsLocally from '../functionalComponents/saveChefDetailsLocal
 import { getChefDetails } from '../fetches/getChefDetails'
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo'
+import SearchBar from '../searchBar/SearchBar.js'
+
+const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)
 
 const mapStateToProps = (state) => ({
 	all_Recipes: state.recipes.all,
@@ -30,6 +33,7 @@ const mapStateToProps = (state) => ({
 	global_ranks_Recipes: state.recipes.global_ranks,
 	most_liked_Recipes: state.recipes.most_liked,
 	most_made_Recipes: state.recipes.most_made,
+	search_Recipes: state.recipes.search,
 	recipes_details: state.recipes_details,
 	loggedInChef: state.loggedInChef,
 	global_ranking: state.global_ranking,
@@ -74,15 +78,24 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(
 	class RecipesList extends React.Component {
 
-		state = {
-			limit: 20,
-			offset: 0,
-			isDisplayed: true,
-			filterDisplayed: false,
-			awaitingServer: false,
-			dataICantGet: [],
-			renderOfflineMessage: false,
+		constructor(props) {
+			super(props)
+			this.searchBar = React.createRef()
+			this.state = {
+				limit: 20,
+				offset: 0,
+				isDisplayed: true,
+				filterDisplayed: false,
+				awaitingServer: false,
+				dataICantGet: [],
+				renderOfflineMessage: false,
+				searchTerm: "",
+				yOffset: new Animated.Value(0),
+				currentYTop: 0,
+				searchBarZIndex: 0
+			}
 		}
+
 
 		componentDidMount = async () => {
 			await this.setState({ awaitingServer: true })
@@ -133,17 +146,26 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		fetchRecipeList = async () => {
 			try {
 				const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
-				let recipes = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.cuisine, this.props.serves)
+				let recipes = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.cuisine, this.props.serves, this.state.searchTerm)
+				// console.log(this.props["listChoice"])
+				if (this.props.route.name === "My Feed" && recipes.length === 0) {
+					this.props.navigation.navigate('BrowseRecipes')
+				}
 				this.props.storeRecipeList(this.props["listChoice"], recipes)
 			}
 			catch (e) {
-				if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
+				if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 				if (this.props[this.props["listChoice"] + `_Recipes`]?.length == 0) {
 					// console.log('failed to get recipes. Loading from async storage.')
 					AsyncStorage.getItem('locallySavedListData', (err, res) => {
 						if (res != null) {
 							const locallySavedListData = JSON.parse(res)
-							this.props.storeRecipeList(this.props["listChoice"], locallySavedListData[this.props["listChoice"] + `_Recipes`])
+							if (locallySavedListData[this.props["listChoice"] + `_Recipes`].length > 0) {
+								this.props.storeRecipeList(this.props["listChoice"], locallySavedListData[this.props["listChoice"] + `_Recipes`])
+							}
+							else {
+								this.setState({ renderOfflineMessage: true })
+							}
 						} else {
 							this.setState({ renderOfflineMessage: true })
 						}
@@ -156,11 +178,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			await this.setState({ awaitingServer: true })
 			try {
 				const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
-				const new_recipes = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.cuisine, this.props.serves)
+				const new_recipes = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.cuisine, this.props.serves, this.state.searchTerm)
 				this.props.appendToRecipeList(this.props["listChoice"], new_recipes)
 			}
 			catch (e) {
-				if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
+				if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 				// console.log('failed to get ADDITIONAL recipes')
 			}
 			await this.setState({ awaitingServer: false })
@@ -181,7 +203,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					this.props.navigation.navigate('RecipeDetails', { recipeID: recipeID, commenting: commenting })
 				}
 			} catch (e) {
-				if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
+				if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 				// console.log('looking for local recipes')
 				AsyncStorage.getItem('localRecipeDetails', (err, res) => {
 					if (res != null) {
@@ -225,7 +247,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					this.props.navigation.navigate('ChefDetails', { chefID: chefID })
 				}
 			} catch (e) {
-				if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true }})}
+				if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 				// console.log('looking for local chefs')
 				AsyncStorage.getItem('localChefDetails', (err, res) => {
 					if (res != null) {
@@ -287,8 +309,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		refresh = async () => {
-			await this.setState({ limit: 20, offset: 0 })
-			this.fetchRecipeList()
+			await this.setState({ limit: 20, offset: 0, awaitingServer: true })
+			await this.fetchRecipeList()
+			await this.setState({ awaitingServer: false })
 		}
 
 		onEndReached = async () => {
@@ -322,7 +345,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.fetchChefDetails && this.props.fetchChefDetails()
 					}
 				} catch (e) {
-					if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
+					if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState(state => {
 						return ({
 							dataICantGet: [...state.dataICantGet, recipeID],
@@ -357,7 +380,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.fetchChefDetails && this.props.fetchChefDetails()
 					}
 				} catch (e) {
-					if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
+					if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState(state => {
 						return ({
 							dataICantGet: [...state.dataICantGet, recipeID],
@@ -391,7 +414,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.storeRecipeList(this.props["listChoice"], recipes)
 					}
 				} catch (e) {
-					if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
+					if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState(state => {
 						return ({
 							dataICantGet: [...state.dataICantGet, recipeID],
@@ -426,7 +449,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.fetchChefDetails && this.props.fetchChefDetails()
 					}
 				} catch (e) {
-					if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
+					if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState(state => {
 						return ({
 							dataICantGet: [...state.dataICantGet, recipeID],
@@ -461,7 +484,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.fetchChefDetails && this.props.fetchChefDetails()
 					}
 				} catch (e) {
-					if (e === "logout") {this.props.navigation.navigate('Profile', {screen: 'Profile', params: { logout: true } })}
+					if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState(state => {
 						return ({
 							dataICantGet: [...state.dataICantGet, recipeID],
@@ -484,8 +507,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			this.refresh()
 		}
 
+		setSearchTerm = async (searchTerm) => {
+			await this.setState({ searchTerm: searchTerm })
+			this.fetchRecipeList()
+		}
+
 		render() {
-			// console.log(this.props.navigation)
+			// console.log(this.props[this.props["listChoice"] + `_Recipes`])
+			// console.log(this.searchBar)
 			return (
 				<SpinachAppContainer awaitingServer={this.state.awaitingServer}>
 					{this.state.renderOfflineMessage && (
@@ -498,7 +527,45 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					<TouchableOpacity style={styles.filterButton} activeOpacity={0.7} onPress={this.handleFilterButton} testID={"filterButton"}>
 						<Icon name='filter' size={responsiveHeight(3.5)} style={styles.filterIcon} />
 					</TouchableOpacity>
-					<FlatList
+					<Animated.View
+						style={{
+							position: 'absolute',
+							zIndex: this.state.searchBarZIndex,
+							transform: [
+								{
+									translateY: this.state.yOffset.interpolate({
+										inputRange: [this.state.currentYTop, this.state.currentYTop + responsiveHeight(6.25)],
+										outputRange: [0, -responsiveHeight(6.25)],
+										extrapolate: "clamp"
+									})
+								},
+							]
+						}}
+					>
+						<SearchBar
+							text={"Search for Recipes"}
+							searchTerm={this.state.searchTerm}
+							setSearchTerm={this.setSearchTerm}
+							searchBar={this.searchBar}
+							onFocus={() => { this.setState({ searchBarZIndex: 1 }) }}
+							onBlur={() => {
+								if (this.state.currentYTop === 0) {
+									this.setState({ searchBarZIndex: 0 })
+								}
+							}}
+						/>
+					</Animated.View>
+					<AnimatedFlatList
+						ListHeaderComponent={() => (
+							<TouchableOpacity
+								style={{
+									height: responsiveHeight(6.75),
+									// backgroundColor: 'red'
+								}}
+								onPress={() => this.searchBar.current.focus()}
+							>
+							</TouchableOpacity>
+						)}
 						data={this.props[this.props["listChoice"] + `_Recipes`]}
 						extraData={this.props.recipes_details}
 						renderItem={this.renderRecipeListItem}
@@ -508,8 +575,36 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						onEndReached={this.onEndReached}
 						onEndReachedThreshold={1}
 						// initialNumToRender={200}
-						// onScroll={e => this.onScroll(e)}
-						// scrollEventThrottle={16}
+						onScroll={Animated.event(
+							[{ nativeEvent: { contentOffset: { y: this.state.yOffset } } }],
+							{
+								useNativeDriver: true,
+								listener: (e) => {
+									const y = e.nativeEvent.contentOffset.y
+									const isIncreasing = e.nativeEvent.velocity.y > 0
+									if (y <= 0) {
+										this.setState({
+											currentYTop: 0,
+											searchBarZIndex: 0
+										})
+									}
+									// //if bigger than max input range and getting bigger
+									if (y > this.state.currentYTop + responsiveHeight(6.25) && isIncreasing) {
+										this.setState({
+											currentYTop: y - responsiveHeight(6.25),
+											searchBarZIndex: 1
+										})
+									}
+									//if smaller than min input range and getting smaller
+									if (y < this.state.currentYTop - responsiveHeight(6.25) && !isIncreasing) {
+										this.setState({
+											currentYTop: y,
+											searchBarZIndex: 1
+										})
+									}
+								}
+							},
+						)}
 						nestedScrollEnabled={true}
 						listKey={this.props[this.props["listChoice"] + `_Recipes`]}
 					/>

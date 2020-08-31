@@ -20,6 +20,7 @@ class CreateChefs < ActiveRecord::Migration[5.2]
       t.string :activation_digest
       t.boolean :password_is_auto
       t.datetime :password_created_at
+      t.boolean :deactivated, :default => false
 
 
       t.timestamps

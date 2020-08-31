@@ -7,20 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
 require 'securerandom'
-# ActiveRecord::Migration.drop_table(:likes)
-# ActiveRecord::Migration.drop_table(:follows)
-# ActiveRecord::Migration.drop_table(:friendships)
-# ActiveRecord::Migration.drop_table(:recipes)
-# ActiveRecord::Migration.drop_table(:chefs)
-# ActiveRecord::Migration.drop_table(:ingredients)
-# ActiveRecord::Migration.drop_table(:ingredient_uses)
-# ActiveRecord::Migration.create_table(:likes)
-# ActiveRecord::Migration.create_table(:follows)
-# ActiveRecord::Migration.create_table(:friendships)
-# ActiveRecord::Migration.create_table(:recipes)
-# ActiveRecord::Migration.create_table(:chefs)
-# ActiveRecord::Migration.create_table(:ingredients)
-# ActiveRecord::Migration.create_table(:ingredient_uses)
 
 ReShare.destroy_all
 MakePic.destroy_all
@@ -36,15 +22,6 @@ Instruction.destroy_all
 Recipe.destroy_all
 Chef.destroy_all
 Ingredient.destroy_all
-
-# ActiveRecord::Base.connection.reset_pk_sequence!('RecipeLikes')
-# ActiveRecord::Base.connection.reset_pk_sequence!('Follows')
-# ActiveRecord::Base.connection.reset_pk_sequence!('Friendships')
-# ActiveRecord::Base.connection.reset_pk_sequence!('IngredientUses')
-# ActiveRecord::Base.connection.reset_pk_sequence!('Recipes')
-# ActiveRecord::Base.connection.reset_pk_sequence!('Ingredients')
-# ActiveRecord::Base.connection.reset_pk_sequence!('Chefs')
-
 
 500.times do
     Ingredient.create(name: Faker::Food.ingredient, created_at: Time.now)
@@ -131,7 +108,6 @@ serves = ['Any', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
 
 250.times do
     Recipe.create(name: Faker::Food.dish,
-        hidden: false,
         chef_id: Chef.all.sample.id,
         time: times.sample,
         difficulty: difficulties.sample,
@@ -159,7 +135,9 @@ serves = ['Any', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
         dairy_free: Faker::Boolean.boolean,
         white_meat: Faker::Boolean.boolean,
         cuisine: cuisines.sample,
-        serves: serves.sample,
+		serves: serves.sample,
+		acknowledgement: Faker::Food.description,
+		description: Faker::Food.description
         )
 end
 
@@ -197,27 +175,27 @@ end
 
 Recipe.all.each do |recipe|
     string = Faker::Food.description
-    Instruction.create(recipe_id: recipe.id, instruction: string, active: true, step: 0)
+    Instruction.create(recipe_id: recipe.id, instruction: string, step: 0)
 end
 
 Recipe.all.each do |recipe|
     string = Faker::Food.description
-    Instruction.create(recipe_id: recipe.id, instruction: string, active: true, step: 1)
+    Instruction.create(recipe_id: recipe.id, instruction: string, step: 1)
 end
 
 Recipe.all.each do |recipe|
     string = Faker::Food.description
-    Instruction.create(recipe_id: recipe.id, instruction: string, active: true, step: 2)
+    Instruction.create(recipe_id: recipe.id, instruction: string, step: 2)
 end
 
 Recipe.all.each do |recipe|
     string = Faker::Food.description
-    Instruction.create(recipe_id: recipe.id, instruction: string, active: true, step: 3)
+    Instruction.create(recipe_id: recipe.id, instruction: string, step: 3)
 end
 
 Recipe.all.each do |recipe|
     string = Faker::Food.description
-    Instruction.create(recipe_id: recipe.id, instruction: string, active: true, step: 4)
+    Instruction.create(recipe_id: recipe.id, instruction: string, step: 4)
 end
 
 
@@ -239,8 +217,24 @@ images = ["https://www.googleapis.com/download/storage/v1/b/5d4dd3e98f4c-recipe-
 #     RecipeImage.create(recipe: Recipe.all.sample, image_url: images.sample)
 # end
 
+500.times do
+    InstructionImage.create(created_at: Time.now, instruction_id: rand(1000), hex: SecureRandom.hex, image_url: images.sample)
+end
+
 Recipe.all.each do |recipe|
     RecipeImage.create(recipe_id: recipe.id, image_url: images.sample, hex: SecureRandom.hex, index: 0)
+end
+
+Recipe.all.each do |recipe|
+    RecipeImage.create(recipe_id: recipe.id, image_url: images.sample, hex: SecureRandom.hex, index: 1)
+end
+
+Recipe.all.each do |recipe|
+    RecipeImage.create(recipe_id: recipe.id, image_url: images.sample, hex: SecureRandom.hex, index: 2)
+end
+
+Recipe.all.each do |recipe|
+    RecipeImage.create(recipe_id: recipe.id, image_url: images.sample, hex: SecureRandom.hex, index: 2)
 end
 
 5.times do

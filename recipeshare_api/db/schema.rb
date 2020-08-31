@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_05_205940) do
+ActiveRecord::Schema.define(version: 2020_05_16_170655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,17 +35,17 @@ ActiveRecord::Schema.define(version: 2020_08_05_205940) do
     t.string "activation_digest"
     t.boolean "password_is_auto"
     t.datetime "password_created_at"
-    t.datetime "updated_at", null: false
     t.boolean "deactivated", default: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "comments", force: :cascade do |t|
     t.bigint "chef_id"
     t.bigint "recipe_id"
     t.string "comment"
+    t.boolean "hidden", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "hidden", default: false
     t.index ["chef_id"], name: "index_comments_on_chef_id"
     t.index ["recipe_id"], name: "index_comments_on_recipe_id"
   end
@@ -53,9 +53,9 @@ ActiveRecord::Schema.define(version: 2020_08_05_205940) do
   create_table "follows", force: :cascade do |t|
     t.bigint "followee_id"
     t.bigint "follower_id"
+    t.boolean "hidden", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "hidden", default: false
     t.index ["followee_id"], name: "index_follows_on_followee_id"
     t.index ["follower_id"], name: "index_follows_on_follower_id"
   end
@@ -63,9 +63,9 @@ ActiveRecord::Schema.define(version: 2020_08_05_205940) do
   create_table "friendships", force: :cascade do |t|
     t.bigint "requestor_id"
     t.bigint "acceptor_id"
+    t.boolean "hidden", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "hidden", default: false
     t.index ["acceptor_id"], name: "index_friendships_on_acceptor_id"
     t.index ["requestor_id"], name: "index_friendships_on_requestor_id"
   end
@@ -75,16 +75,17 @@ ActiveRecord::Schema.define(version: 2020_08_05_205940) do
     t.bigint "ingredient_id"
     t.string "quantity"
     t.string "unit"
+    t.integer "index"
+    t.boolean "hidden", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "index"
-    t.boolean "hidden"
     t.index ["ingredient_id"], name: "index_ingredient_uses_on_ingredient_id"
     t.index ["recipe_id"], name: "index_ingredient_uses_on_recipe_id"
   end
 
   create_table "ingredients", force: :cascade do |t|
     t.string "name"
+    t.boolean "hidden", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -94,9 +95,9 @@ ActiveRecord::Schema.define(version: 2020_08_05_205940) do
     t.bigint "instruction_id"
     t.string "image_url"
     t.string "hex"
+    t.boolean "hidden", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "hidden"
     t.index ["instruction_id"], name: "index_instruction_images_on_instruction_id"
   end
 
@@ -104,10 +105,9 @@ ActiveRecord::Schema.define(version: 2020_08_05_205940) do
     t.string "instruction"
     t.integer "step"
     t.bigint "recipe_id"
-    t.boolean "active"
+    t.boolean "hidden", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "hidden"
     t.index ["recipe_id"], name: "index_instructions_on_recipe_id"
   end
 
@@ -116,9 +116,10 @@ ActiveRecord::Schema.define(version: 2020_08_05_205940) do
     t.bigint "recipe_id"
     t.string "image_url"
     t.string "hex"
+    t.boolean "hidden", default: false
+    t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "hidden", default: false
     t.index ["chef_id"], name: "index_make_pics_on_chef_id"
     t.index ["recipe_id"], name: "index_make_pics_on_recipe_id"
   end
@@ -126,9 +127,9 @@ ActiveRecord::Schema.define(version: 2020_08_05_205940) do
   create_table "re_shares", force: :cascade do |t|
     t.bigint "recipe_id"
     t.bigint "chef_id"
+    t.boolean "hidden", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "hidden", default: false
     t.index ["chef_id"], name: "index_re_shares_on_chef_id"
     t.index ["recipe_id"], name: "index_re_shares_on_recipe_id"
   end
@@ -138,19 +139,19 @@ ActiveRecord::Schema.define(version: 2020_08_05_205940) do
     t.bigint "recipe_id"
     t.string "image_url"
     t.string "hex"
+    t.integer "index"
+    t.boolean "hidden", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "hidden", default: false
-    t.integer "index"
     t.index ["recipe_id"], name: "index_recipe_images_on_recipe_id"
   end
 
   create_table "recipe_likes", force: :cascade do |t|
     t.bigint "chef_id"
     t.bigint "recipe_id"
+    t.boolean "hidden", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "hidden", default: false
     t.index ["chef_id"], name: "index_recipe_likes_on_chef_id"
     t.index ["recipe_id"], name: "index_recipe_likes_on_recipe_id"
   end
@@ -162,9 +163,9 @@ ActiveRecord::Schema.define(version: 2020_08_05_205940) do
     t.integer "difficulty"
     t.string "comment"
     t.integer "tastiness"
+    t.boolean "hidden", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "hidden", default: false
     t.index ["chef_id"], name: "index_recipe_makes_on_chef_id"
     t.index ["recipe_id"], name: "index_recipe_makes_on_recipe_id"
   end
@@ -174,6 +175,8 @@ ActiveRecord::Schema.define(version: 2020_08_05_205940) do
     t.bigint "chef_id"
     t.string "time"
     t.integer "difficulty"
+    t.string "description"
+    t.string "acknowledgement"
     t.boolean "hidden", default: false
     t.boolean "breakfast"
     t.boolean "lunch"
@@ -201,8 +204,6 @@ ActiveRecord::Schema.define(version: 2020_08_05_205940) do
     t.string "serves"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "acknowledgement"
-    t.string "description"
     t.index ["chef_id"], name: "index_recipes_on_chef_id"
   end
 
