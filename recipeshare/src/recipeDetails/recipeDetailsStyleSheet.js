@@ -467,12 +467,13 @@ export const styles = StyleSheet.create({
 		// borderColor: 'red',
 		position: 'absolute',
 		alignSelf: 'center',
-		top: '90%',
+		bottom: 0,
 		// width: 100,
 		// height: 50,
 		flexDirection: 'row',
 		justifyContent: 'center',
-		alignItems: 'center'
+		alignItems: 'center',
+		flexWrap: 'wrap'
 	},
 	primaryImageBlob: {
 		color: '#fff59b',

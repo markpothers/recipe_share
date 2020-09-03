@@ -74,6 +74,8 @@ GEM
     declarative-option (0.1.0)
     digest-crc (0.5.1)
     e2mmap (0.1.0)
+    email_validator (2.0.1)
+      activemodel
     erubi (1.9.0)
     faraday (1.0.0)
       multipart-post (>= 1.2, < 3)
@@ -245,6 +247,7 @@ GEM
       unicode-display_width (>= 1.4.0, < 1.7)
     ruby-progressbar (1.10.1)
     ruby_dep (1.5.0)
+    rufo (0.12.0)
     signet (0.13.0)
       addressable (~> 2.3)
       faraday (>= 0.17.3, < 2.0)
@@ -304,6 +307,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.1.0)
   byebug
+  email_validator
   faker!
   google-cloud-storage
   jwt
@@ -314,6 +318,7 @@ DEPENDENCIES
   rails (~> 5.2.3)
   rb-readline
   rubocop
+  rufo
   solargraph
   spring
   spring-watcher-listen (~> 2.0.0)

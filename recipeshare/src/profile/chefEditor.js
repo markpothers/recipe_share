@@ -16,7 +16,7 @@ const mapStateToProps = (state) => ({
 	password: state.newUserDetails.password,
 	password_confirmation: state.newUserDetails.password_confirmation,
 	country: state.newUserDetails.country,
-	imageBase64: state.newUserDetails.image_url,
+	image_url: state.newUserDetails.image_url,
 	profile_text: state.newUserDetails.profile_text,
 	loggedInChef: state.loggedInChef,
 	stayingLoggedIn: state.stayLoggedIn,
@@ -125,7 +125,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			if (netInfoState.isConnected) {
 				this.props.isAwaitingServer(true)
 				const chef = this.props.loggedInChef
-				const updatedChef = await patchChef(chef.id, chef.auth_token, this.props.username, this.props.profile_text, this.props.country, this.state.updatingPassword, this.props.password, this.props.password_confirmation, this.props.imageBase64)
+
+
+				// const imageData = this.props.image_url == 'DELETED' ? '' : this.props.image_url
+
+
+				const updatedChef = await patchChef(chef.id, chef.auth_token, this.props.username, this.props.profile_text, this.props.country, this.state.updatingPassword, this.props.password, this.props.password_confirmation, this.props.image_url)
 				if (updatedChef) {
 					// console.log(updatedChef)
 					if (updatedChef.error) {

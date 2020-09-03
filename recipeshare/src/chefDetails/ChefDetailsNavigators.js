@@ -5,7 +5,7 @@ import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-nat
 
 const Tab = createMaterialTopTabNavigator()
 
-export const MyRecipeBookTabs = (props) => {
+export const ChefRecipeBookTabs = (props) => {
 	const fwdProps = props
 	return (
 		<Tab.Navigator

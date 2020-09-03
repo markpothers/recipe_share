@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Text, Animated } from 'react-native'
 import { styles } from './offlineMessageStyleSheet'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const OfflineMessage = (props) => {
-	const [fadeOpacity, setFadeOpacity] = useState(new Animated.Value(0))
+	const [fadeOpacity] = useState(new Animated.Value(0))
 
 	useEffect(() => {
+		const renderDuration = props.delay ? props.delay : 1000
 		Animated.timing(
 			fadeOpacity,
 			{
@@ -25,7 +27,7 @@ const OfflineMessage = (props) => {
 				).start(() => {
 					props.clearOfflineMessage()
 				})
-			}, 1000)
+			}, renderDuration)
 		})
 	})
 
@@ -36,11 +38,24 @@ const OfflineMessage = (props) => {
 				, { top: props.topOffset }
 			]}
 		>
-			<Text
-				style={styles.messageText}
-			>
-				{props.message}
-			</Text>
+			{props.action ? (
+				<TouchableOpacity
+					activeOpacity={0.7}
+					onPress={props.action}
+				>
+					<Text
+						style={styles.messageText}
+					>
+						{props.message}
+					</Text>
+				</TouchableOpacity>
+			) : (
+					<Text
+						style={styles.messageText}
+					>
+						{props.message}
+					</Text>
+				)}
 		</Animated.View>
 	)
 }

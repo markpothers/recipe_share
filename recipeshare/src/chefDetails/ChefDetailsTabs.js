@@ -1,8 +1,6 @@
 import React from 'react';
-import { ImageBackground } from 'react-native';
 import RecipesList from '../recipeLists/RecipesList'
 import ChefList from '../chefLists/ChefList'
-import { styles } from '../../navigation/navigationStyleSheet'
 
 export class ChefFeedScreen extends React.Component {
 	render() {

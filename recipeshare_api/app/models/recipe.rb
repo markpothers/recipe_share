@@ -353,7 +353,7 @@ class Recipe < ApplicationRecord
     recipe_images = RecipeImage.where(recipe_id: self.id)
     recipe_images.each { |use| use.hidden = true}
     recipe_images.each { |use| use.save}
-    newRecipe_primary_images_params["primary_images"].each_with_index do |image, index|
+	newRecipe_primary_images_params["primary_images"].each_with_index do |image, index|
       if image["base64"] != nil && image["base64"] != ""
         recipe_image = RecipeImage.new(recipe_id: self.id)
         hex = SecureRandom.hex(20)

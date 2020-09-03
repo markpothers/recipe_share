@@ -1,7 +1,11 @@
 import { databaseURL } from '../dataComponents/databaseURL'
 import { detailsTimeout } from '../dataComponents/timeouts'
+import { getBase64FromFile } from '../functionalComponents/getBase64FromFile.js'
 
-export const postChef = (username, e_mail, password, password_confirmation, country, image_url, profile_text) => {
+export const postChef = async(username, e_mail, password, password_confirmation, country, image_url, profile_text) => {
+
+	const imageBase64 = await getBase64FromFile(image_url)
+
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
@@ -15,12 +19,12 @@ export const postChef = (username, e_mail, password, password_confirmation, coun
 			},
 			body: JSON.stringify({
 				chef: {
-					username: username,
-					e_mail: e_mail,
-					password: password,
-					password_confirmation: password_confirmation,
+					username: username.toLowerCase().trim(),
+					e_mail: e_mail.toLowerCase().trim(),
+					password: password.toLowerCase().trim(),
+					password_confirmation: password_confirmation.toLowerCase().trim(),
 					country: country,
-					image_url: image_url,
+					image_url: imageBase64,
 					profile_text: profile_text
 				}
 			})

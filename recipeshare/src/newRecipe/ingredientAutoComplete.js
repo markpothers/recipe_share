@@ -46,6 +46,7 @@ export default class IngredientAutoComplete extends React.Component {
 	handlePickerChange = (ingredientIndex, name, quantity, unit) => {
 		// if(name !== ""){
 		this.props.updateIngredientEntry(ingredientIndex, name, quantity, unit)
+		Keyboard.dismiss()
 		// }
 	}
 

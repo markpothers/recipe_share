@@ -28,7 +28,7 @@ export default class MultiPicSourceChooser extends React.Component {
 	}
 
 	addPhoto = async () => {
-		let newImages = [...this.props.imageSources.slice(0, this.state.imageIndex), { base64: 'data:image/jpeg;base64,' }, ...this.props.imageSources.slice(this.state.imageIndex)]
+		let newImages = [...this.props.imageSources.slice(0, this.state.imageIndex), { uri: '' }, ...this.props.imageSources.slice(this.state.imageIndex)]
 		await this.props.saveImage(newImages)
 	}
 
@@ -37,12 +37,11 @@ export default class MultiPicSourceChooser extends React.Component {
 			let image = await ImagePicker.launchImageLibraryAsync({
 				allowsEditing: true,
 				aspect: [4, 3],
-				quality: 0.3,
-				base64: true
+				base64: false
 			})
 			let newImages = this.props.imageSources
 			if (image.cancelled) {
-				newImages[this.state.imageIndex] = { base64: 'data:image/jpeg;base64,' }
+				newImages[this.state.imageIndex] = { uri: '' }
 			} else {
 				newImages[this.state.imageIndex] = image
 			}
@@ -55,12 +54,11 @@ export default class MultiPicSourceChooser extends React.Component {
 			let image = await ImagePicker.launchCameraAsync({
 				allowsEditing: true,
 				aspect: [4, 3],
-				quality: 0.3,
-				base64: true
+				base64: false
 			})
 			let newImages = this.props.imageSources
 			if (image.cancelled) {
-				newImages[this.state.imageIndex] = { base64: 'data:image/jpeg;base64,' }
+				newImages[this.state.imageIndex] = { uri: '' }
 			} else {
 				newImages[this.state.imageIndex] = image
 			}
@@ -71,7 +69,7 @@ export default class MultiPicSourceChooser extends React.Component {
 	deleteImage = async () => {
 		if (this.props.imageSources.length == 1) { //go back to completely empty list of images
 			await this.setState({ imageIndex: 0 })
-			await this.props.saveImage([{ base64: 'data:image/jpeg;base64,' }])
+			await this.props.saveImage([{ uri: '' }])
 		} else {
 			let newImages = this.props.imageSources
 			newImages.splice(this.state.imageIndex, 1)
@@ -126,19 +124,18 @@ export default class MultiPicSourceChooser extends React.Component {
 				<View style={[styles.modalFullScreenContainer, { height: Dimensions.get('window').height, width: Dimensions.get('window').width }]}>
 					<View style={styles.picChooserModalContainer}>
 						<View style={styles.picSourceChooserImage}>
-							{imageSources[this.state.imageIndex].base64 === 'data:image/jpeg;base64,' && (
-								<React.Fragment>
-									<Icon style={styles.standardIcon} size={30} name='image' />
-									<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>No image{"\n"}selected</Text>
-								</React.Fragment>
-							)}
-							{imageSources[this.state.imageIndex].base64 !== 'data:image/jpeg;base64,' && (
+							{(imageSources[this.state.imageIndex].uri || imageSources[this.state.imageIndex].image_url) ? (
 								<Image
 									style={{ height: '100%', width: '100%' }}
-									source={{ uri: this.props.imageSources[this.state.imageIndex]?.image_url ? this.props.imageSources[this.state.imageIndex].image_url : `data:image/jpeg;base64,${this.props.imageSources[this.state.imageIndex].base64}` }}
+									source={{ uri: this.props.imageSources[this.state.imageIndex]?.image_url ? this.props.imageSources[this.state.imageIndex].image_url : this.props.imageSources[this.state.imageIndex].uri }}
 									resizeMode={"cover"}
 								/>
-							)}
+							) : (
+									<React.Fragment>
+										<Icon style={styles.standardIcon} size={30} name='image' />
+										<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>No image{"\n"}selected</Text>
+									</React.Fragment>
+								)}
 							<View style={styles.primaryImageBlobsContainer}>
 								{imageSources.length > 1 && this.renderPrimaryImageBlobs()}
 							</View>
@@ -183,8 +180,8 @@ export default class MultiPicSourceChooser extends React.Component {
 							<Icon style={styles.standardIcon} size={30} name='camera-image' />
 							<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Choose photo</Text>
 						</TouchableOpacity>
-						<View style={[styles.picSourceChooserArrowButtonContainer, {marginBottom: responsiveHeight(2)}]}>
-							<TouchableOpacity style={[styles.picSourceChooserCancelButton, {backgroundColor: '#720000'}]} activeOpacity={0.7} title="Cancel" onPress={this.cancel}>
+						<View style={[styles.picSourceChooserArrowButtonContainer, { marginBottom: responsiveHeight(2) }]}>
+							<TouchableOpacity style={[styles.picSourceChooserCancelButton, { backgroundColor: '#720000' }]} activeOpacity={0.7} title="Cancel" onPress={this.cancel}>
 								<Icon style={styles.cancelIcon} size={30} name='cancel' />
 								<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserCancelButtonText}>Cancel</Text>
 							</TouchableOpacity>

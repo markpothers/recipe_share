@@ -115,6 +115,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		fetchChefList = async () => {
 			try {
+				// console.log(this.state.offset)
 				const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
 				let chefs = await getChefList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.loggedInChef.auth_token, this.state.searchTerm)
 				this.props.storeChefList(this.props["listChoice"], chefs)
@@ -230,8 +231,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		onEndReached = async () => {
-			await this.setState({ offset: this.state.offset + 20 })
-			this.fetchAdditionalChefs()
+			if (this.props[this.props["listChoice"]].length % 20 == 0) {
+				await this.setState({ offset: this.state.offset + 20 })
+				this.fetchAdditionalChefs()
+			}
 		}
 
 		navigateToChefDetails = async (chefID) => {
@@ -293,6 +296,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			this.fetchChefList()
 		}
 
+		handleSearchBarFocus = async () => {
+			await this.setState({ searchBarZIndex: 1 })
+			this.searchBar.current.focus()
+		}
+
 		render() {
 			//   console.log(this.props[this.props["listChoice"]])
 			return (
@@ -304,34 +312,35 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
 						/>)
 					}
-					<Animated.View
-						style={{
-							position: 'absolute',
-							zIndex: this.state.searchBarZIndex,
-							transform: [
-								{
-									translateY: this.state.yOffset.interpolate({
-										inputRange: [this.state.currentYTop, this.state.currentYTop + responsiveHeight(6.25)],
-										outputRange: [0, -responsiveHeight(6.25)],
-										extrapolate: "clamp"
-									})
-								},
-							]
-						}}
-					>
-						<SearchBar
-							text={"Search for Chefs"}
-							searchTerm={this.state.searchTerm}
-							setSearchTerm={this.setSearchTerm}
-							searchBar={this.searchBar}
-							onFocus={() => { this.setState({ searchBarZIndex: 1 }) }}
-							onBlur={() => {
-								if (this.state.currentYTop === 0) {
-									this.setState({ searchBarZIndex: 0 })
-								}
+					{(this.props[this.props["listChoice"]].length > 0 || this.state.searchTerm != '') && (
+						<Animated.View
+							style={{
+								position: 'absolute',
+								zIndex: this.state.searchBarZIndex,
+								transform: [
+									{
+										translateY: this.state.yOffset.interpolate({
+											inputRange: [this.state.currentYTop, this.state.currentYTop + responsiveHeight(6.25)],
+											outputRange: [0, -responsiveHeight(6.25)],
+											extrapolate: "clamp"
+										})
+									},
+								]
 							}}
-						/>
-					</Animated.View>
+						>
+							<SearchBar
+								text={"Search for Chefs"}
+								searchTerm={this.state.searchTerm}
+								setSearchTerm={this.setSearchTerm}
+								searchBar={this.searchBar}
+								onBlur={() => {
+									if (this.state.currentYTop === 0) {
+										this.setState({ searchBarZIndex: 0 })
+									}
+								}}
+							/>
+						</Animated.View>
+					)}
 					<AnimatedFlatList
 						ListHeaderComponent={() => (
 							<TouchableOpacity
@@ -339,7 +348,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									height: responsiveHeight(6.75),
 									// backgroundColor: 'red'
 								}}
-								onPress={() => this.searchBar.current.focus()}
+								onPress={this.handleSearchBarFocus}
 							>
 							</TouchableOpacity>
 						)}

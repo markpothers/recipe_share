@@ -22,12 +22,12 @@ export const styles = StyleSheet.create({
 	picSourceChooserImage: {
 		justifyContent: 'center',
 		alignItems: 'center',
-		minWidth: responsiveWidth(80),
+		width: responsiveWidth(80),
 		height: responsiveHeight(34),
 		marginTop: responsiveHeight(2),
 		marginLeft: responsiveWidth(3.5),
 		marginRight: responsiveWidth(3.5),
-		flexDirection: 'row',
+		// flexDirection: 'row',
 		borderRadius: 5,
 		backgroundColor: 'white',
 		borderStyle: 'solid',
@@ -86,7 +86,7 @@ export const styles = StyleSheet.create({
 		marginRight: '5%',
 		textAlign: 'center',
 		fontWeight: 'bold',
-		fontSize: responsiveFontSize(2.5),
+		fontSize: responsiveFontSize(2.25),
 		color: '#104e01',
 		// flexWrap: 'wrap',
 		// borderWidth: 1,
@@ -96,14 +96,14 @@ export const styles = StyleSheet.create({
 		color: '#104e01',
 	},
 	cancelIcon: {
-		color: '#fff29b',
+		color: '#fff59b',
 	},
 	picSourceChooserCancelButtonText: {
 		marginLeft: '10%',
 		marginRight: '5%',
 		textAlign: 'center',
 		fontWeight: 'bold',
-		fontSize: responsiveFontSize(2.5),
+		fontSize: responsiveFontSize(2.25),
 		color: '#fff59b',
 	},
 	primaryImageBlobsContainer: {
@@ -111,12 +111,13 @@ export const styles = StyleSheet.create({
 		// borderColor: 'red',
 		position: 'absolute',
 		alignSelf: 'center',
-		top: '90%',
-		// width: 100,
+		bottom: 0,
+		maxWidth: '100%',
 		// height: 50,
 		flexDirection: 'row',
 		justifyContent: 'center',
-		alignItems: 'center'
+		alignItems: 'center',
+		flexWrap: 'wrap'
 	},
 	primaryImageBlob: {
 		color: '#fff59b',

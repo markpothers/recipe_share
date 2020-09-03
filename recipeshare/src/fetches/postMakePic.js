@@ -1,12 +1,16 @@
 import { databaseURL } from '../dataComponents/databaseURL'
-import { actionTimeout } from '../dataComponents/timeouts'
+import { detailsTimeout } from '../dataComponents/timeouts'
+import { getBase64FromFile } from '../functionalComponents/getBase64FromFile.js'
 
-export const postMakePic = (recipeID, chefID, auth_token, makePicBase64) => {
+export const postMakePic = async(recipeID, chefID, auth_token, makePicFileUri) => {
+
+	const imageBase64 = await getBase64FromFile(makePicFileUri)
+
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
 			reject()
-		}, actionTimeout)
+		}, detailsTimeout)
 
 		fetch(`${databaseURL}/make_pics`, {
 			method: "POST",
@@ -18,7 +22,7 @@ export const postMakePic = (recipeID, chefID, auth_token, makePicBase64) => {
 				recipe: {
 					recipe_id: recipeID,
 					chef_id: chefID,
-					base64: makePicBase64
+					base64: imageBase64
 				}
 			})
 		})

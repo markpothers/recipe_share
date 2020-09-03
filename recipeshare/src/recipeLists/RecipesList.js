@@ -89,6 +89,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				awaitingServer: false,
 				dataICantGet: [],
 				renderOfflineMessage: false,
+				renderNoRecipesMessage: false,
 				searchTerm: "",
 				yOffset: new Animated.Value(0),
 				currentYTop: 0,
@@ -147,9 +148,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			try {
 				const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
 				let recipes = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.cuisine, this.props.serves, this.state.searchTerm)
-				// console.log(this.props["listChoice"])
-				if (this.props.route.name === "My Feed" && recipes.length === 0) {
-					this.props.navigation.navigate('BrowseRecipes')
+				if (recipes.length == 0){
+					this.setState({renderNoRecipesMessage: true})
 				}
 				this.props.storeRecipeList(this.props["listChoice"], recipes)
 			}
@@ -315,8 +315,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		onEndReached = async () => {
-			await this.setState({ offset: this.state.offset + 20 })
-			this.fetchAdditionalRecipesForList()
+			if (this.props[this.props["listChoice"] + `_Recipes`].length % 20 == 0) {
+				await this.setState({ offset: this.state.offset + 20 })
+				this.fetchAdditionalRecipesForList()
+			}
 		}
 
 		// onScroll = (e) => {
@@ -512,8 +514,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			this.fetchRecipeList()
 		}
 
+		handleSearchBarFocus = async () => {
+			await this.setState({ searchBarZIndex: 1 })
+			this.searchBar.current.focus()
+		}
+
 		render() {
-			// console.log(this.props[this.props["listChoice"] + `_Recipes`])
+			// console.log(this.props[this.props["listChoice"] + `_Recipes`][0]?.image_url)
 			// console.log(this.searchBar)
 			return (
 				<SpinachAppContainer awaitingServer={this.state.awaitingServer}>
@@ -524,37 +531,50 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
 						/>)
 					}
+					{(this.props.route.name === "My Feed" 
+					&& this.props[this.props["listChoice"] + `_Recipes`].length === 0 
+					&& !this.state.renderOfflineMessage
+					&& this.state.renderNoRecipesMessage) && (
+						<OfflineMessage
+							message={`There's nothing to show here at the moment.${"\n"}Touch here to go to All Recipes &${"\n"}Chefs and find some chefs to follow.${"\n"}(or clear your filters)`}
+							topOffset={'10%'}
+							clearOfflineMessage={() => {this.setState({ renderNoRecipesMessage: false })}}
+							delay={20000}
+							action={() => this.props.navigation.navigate('BrowseRecipes')}
+						/>
+					)}
 					<TouchableOpacity style={styles.filterButton} activeOpacity={0.7} onPress={this.handleFilterButton} testID={"filterButton"}>
 						<Icon name='filter' size={responsiveHeight(3.5)} style={styles.filterIcon} />
 					</TouchableOpacity>
-					<Animated.View
-						style={{
-							position: 'absolute',
-							zIndex: this.state.searchBarZIndex,
-							transform: [
-								{
-									translateY: this.state.yOffset.interpolate({
-										inputRange: [this.state.currentYTop, this.state.currentYTop + responsiveHeight(6.25)],
-										outputRange: [0, -responsiveHeight(6.25)],
-										extrapolate: "clamp"
-									})
-								},
-							]
-						}}
-					>
-						<SearchBar
-							text={"Search for Recipes"}
-							searchTerm={this.state.searchTerm}
-							setSearchTerm={this.setSearchTerm}
-							searchBar={this.searchBar}
-							onFocus={() => { this.setState({ searchBarZIndex: 1 }) }}
-							onBlur={() => {
-								if (this.state.currentYTop === 0) {
-									this.setState({ searchBarZIndex: 0 })
-								}
+					{(this.props[this.props["listChoice"] + `_Recipes`].length > 0 || this.state.searchTerm != '') && (
+						<Animated.View
+							style={{
+								position: 'absolute',
+								zIndex: this.state.searchBarZIndex,
+								transform: [
+									{
+										translateY: this.state.yOffset.interpolate({
+											inputRange: [this.state.currentYTop, this.state.currentYTop + responsiveHeight(6.5)],
+											outputRange: [0, -responsiveHeight(6.5)],
+											extrapolate: "clamp"
+										})
+									},
+								]
 							}}
-						/>
-					</Animated.View>
+						>
+							<SearchBar
+								text={"Search for Recipes"}
+								searchTerm={this.state.searchTerm}
+								setSearchTerm={this.setSearchTerm}
+								searchBar={this.searchBar}
+								onBlur={() => {
+									if (this.state.currentYTop === 0) {
+										this.setState({ searchBarZIndex: 0 })
+									}
+								}}
+							/>
+						</Animated.View>
+					)}
 					<AnimatedFlatList
 						ListHeaderComponent={() => (
 							<TouchableOpacity
@@ -562,7 +582,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									height: responsiveHeight(6.75),
 									// backgroundColor: 'red'
 								}}
-								onPress={() => this.searchBar.current.focus()}
+								onPress={this.handleSearchBarFocus}
 							>
 							</TouchableOpacity>
 						)}
@@ -589,14 +609,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 										})
 									}
 									// //if bigger than max input range and getting bigger
-									if (y > this.state.currentYTop + responsiveHeight(6.25) && isIncreasing) {
+									if (y > this.state.currentYTop + responsiveHeight(6.5) && isIncreasing) {
 										this.setState({
-											currentYTop: y - responsiveHeight(6.25),
+											currentYTop: y - responsiveHeight(6.5),
 											searchBarZIndex: 1
 										})
 									}
 									//if smaller than min input range and getting smaller
-									if (y < this.state.currentYTop - responsiveHeight(6.25) && !isIncreasing) {
+									if (y < this.state.currentYTop - responsiveHeight(6.5) && !isIncreasing) {
 										this.setState({
 											currentYTop: y,
 											searchBarZIndex: 1

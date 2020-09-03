@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { View, TextInput, Animated } from 'react-native'
+import React from 'react'
+import { View, TextInput } from 'react-native'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 
@@ -26,7 +26,7 @@ export default function SearchBar(props) {
 						autoCapitalize="none"
 						onChangeText={(text) => props.setSearchTerm(text)}
 						ref={props.searchBar}
-						onFocus={props.onFocus}
+						// onFocus={props.onFocus}
 						onBlur={props.onBlur}
 					/>
 				</View>

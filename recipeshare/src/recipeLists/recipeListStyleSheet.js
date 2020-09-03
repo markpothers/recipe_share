@@ -70,7 +70,9 @@ export const styles = StyleSheet.create({
 	},
 	recipeCardImageContainer: {
 		height: responsiveHeight(37.5),
-		width: '100%'
+		width: responsiveWidth(100),
+		alignItems:'center',
+		alignSelf: 'center'
 	},
 	thumbnail: {
 		position: 'absolute',

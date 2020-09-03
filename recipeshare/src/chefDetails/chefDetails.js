@@ -5,7 +5,7 @@ import { styles } from './chefDetailsStyleSheet'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 // import { getChefDetails } from '../fetches/getChefDetails'
 import ChefDetailsCard from './ChefDetailsCard'
-import { MyRecipeBookTabs } from './ChefDetailsNavigators'
+import { ChefRecipeBookTabs } from './ChefDetailsNavigators'
 import { postFollow } from '../fetches/postFollow'
 import { destroyFollow } from '../fetches/destroyFollow'
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
@@ -101,8 +101,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		componentDidMount = async () => {
 			await this.setState({ awaitingServer: true })
-			// await this.generateHeaderButtonList()
-			// this.addDynamicMenuButtonsToHeader()
+			await this.generateHeaderButtonList()
+			this.addDynamicMenuButtonsToHeader()
 			// await this.fetchChefDetails()
 			await this.setState({ awaitingServer: false })
 		}
@@ -204,7 +204,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								unFollowChef={this.unFollowChef}
 								notProfile={true} />
 							<View style={styles.recipeBookContainer}>
-								<MyRecipeBookTabs
+								<ChefRecipeBookTabs
 									queryChefID={chef_details.chef.id}
 								/>
 							</View>

@@ -57,3 +57,5 @@ gem "pg", "~> 1.2"
 gem "app", "~> 1.2"
 
 gem "appengine", "~> 0.5.0"
+gem 'email_validator'
+gem 'rufo'

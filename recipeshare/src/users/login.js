@@ -63,6 +63,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				if (res) {
 					let email = { nativeEvent: { text: JSON.parse(res) } }
 					this.handleTextInput(email, "e_mail")
+					this.setState({rememberEmail: true})
 				}
 			})
 		}

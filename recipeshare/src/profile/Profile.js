@@ -52,7 +52,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			choosingPicture: false,
 			deleteChefOptionVisible: false,
 			renderOfflineMessage: false,
-			image: null,
+			imageFileUri: '',
 			chefUpdatedMessageShowing: false,
 			headerButtons: null,
 			dynamicMenuShowing: false
@@ -217,31 +217,30 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				choosingPicture: false,
 				editingChef: true
 			})
-			this.props.saveChefDetails("image_url", this.state.image)
+			this.props.saveChefDetails("image_url", this.state.imageFileUri)
 		}
 
 		saveImage = async (image) => {
-			if (image.base64 == '') {
-				this.setState({ image: 'data:image/jpeg;base64,' })
+			if (image.uri == '') {
+				this.setState({ imageFileUri: 'DELETED' })
 			} else if (image.cancelled === false) {
-				this.setState({ image: image.base64 })
+				this.setState({ imageFileUri: image.uri })
 			}
 		}
 
-		cancelChooseInstructionImage = () => {
-			this.setState({ image: '' })
+		cancelChooseImage = () => {
+			this.setState({ imageFileUri: '' })
 		}
 
 		renderPictureChooser = () => {
 			let imageSource
-			if (this.state.image == 'data:image/jpeg;base64,') {
-				imageSource = 'data:image/jpeg;base64,'
-			} else if (this.state.image != '' && this.state.image != 'data:image/jpeg;base64,') {
-				imageSource = `data:image/jpeg;base64,${this.state.image}`
-			} else if (typeof this.props.chefs_details[`chef${this.props.loggedInChef.id}`].chef == 'object' && this.props.chefs_details[`chef${this.props.loggedInChef.id}`].chef.image_url?.length > 0) {
+			if (this.state.imageFileUri == 'DELETED') {
+				imageSource = ''
+			} else if (this.state.imageFileUri != 'DELETED' && this.state.imageFileUri != '') {
+				imageSource = this.state.imageFileUri
+			}
+			else if (typeof this.props.chefs_details[`chef${this.props.loggedInChef.id}`].chef == 'object' && this.props.chefs_details[`chef${this.props.loggedInChef.id}`].chef.image_url?.length > 0) {
 				imageSource = this.props.chefs_details[`chef${this.props.loggedInChef.id}`].chef.image_url
-			} else {
-				imageSource = 'data:image/jpeg;base64,'
 			}
 			return (
 				<PicSourceChooser
@@ -250,7 +249,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					key={"pic-chooser"}
 					imageSource={imageSource}
 					originalImage={imageSource}
-					cancelChooseInstructionImage={this.cancelChooseInstructionImage}
+					cancelChooseImage={this.cancelChooseImage}
 				/>
 			)
 		}
@@ -268,6 +267,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					choosePicture={this.choosePicture}
 					isAwaitingServer={this.isAwaitingServer}
 					stayingLoggedIn={this.props.stayingLoggedIn}
+					imageFileUri={this.state.imageFileUri}
 				/>
 			)
 		}

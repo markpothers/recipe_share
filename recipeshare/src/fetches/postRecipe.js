@@ -1,7 +1,8 @@
 import { databaseURL } from '../dataComponents/databaseURL'
 import { detailsTimeout } from '../dataComponents/timeouts'
+import { getBase64FromFile } from '../functionalComponents/getBase64FromFile.js'
 
-export const postRecipe = (
+export const postRecipe = async (
 	chef_id,
 	auth_token,
 	name,
@@ -17,40 +18,41 @@ export const postRecipe = (
 	acknowledgement,
 	description
 ) => {
+
+	let primaryImagesForRails = await Promise.all(primaryImages.map(async (image, index) => {
+		if (image.uri) {
+			return {
+				index: index,
+				base64: await getBase64FromFile(image.uri)
+			}
+		} else if (image.image_url) {
+			return {
+				index: index,
+				...image
+			}
+		}
+	}))
+
+	//format for Rails Strong params to permit an object or base64 data
+	let instructionImagesForRails = await Promise.all(instructionImages.map(async (image, index) => {
+		if (typeof image === 'string') {
+			return {
+				index: index,
+				base64: await getBase64FromFile(image),
+			}
+		} else {
+			return {
+				index: index,
+				...image
+			}
+		}
+	}))
+
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
 			reject()
 		}, detailsTimeout)
-
-		let primaryImagesForRails = primaryImages.map((image, index) => {
-			if (image.base64 && image.base64 != 'data:image/jpeg;base64,') {
-				return {
-					index: index,
-					base64: image.base64
-				}
-			} else if (image.image_url) {
-				return {
-					index: index,
-					...image
-				}
-			}
-		})
-
-		//format for Rails Strong params to permit an object or base64 data
-		let instructionImagesForRails = instructionImages.map((image, index) => {
-			if (typeof image === 'string') {
-				return {
-					index: index,
-					base64: image,
-				}
-			} else {
-				return {
-					index: index,
-					...image
-				}
-			}
-		})
 
 		fetch(`${databaseURL}/recipes`, {
 			method: "POST",

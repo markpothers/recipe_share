@@ -19,7 +19,7 @@ import RecipeNewComment from './recipeNewComment';
 import PicSourceChooser from '../functionalComponents/picSourceChooser'
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
-import { InstructionImagePopup } from './instructionImagePopup'
+import { ImagePopup } from './imagePopup'
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo';
 import { AlertPopUp } from '../alertPopUp/alertPopUp'
@@ -69,6 +69,11 @@ const mapDispatchToProps = {
 			dispatch({ type: 'ADD_MAKE_PIC', makePic: makePic })
 		}
 	},
+	addMakePicChef: (makePicChef) => {
+		return dispatch => {
+			dispatch({ type: 'ADD_MAKE_PIC_CHEF', makePicChef: makePicChef })
+		}
+	},
 	saveRemainingMakePics: (makePics) => {
 		return dispatch => {
 			dispatch({ type: 'SAVE_REMAINING_MAKE_PICS', makePics: makePics })
@@ -101,7 +106,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			choosingPicSource: false,
 			awaitingServer: false,
 			scrollEnabled: true,
-			makePicBase64: "",
+			makePicFileUri: "",
 			renderOfflineMessage: false,
 			primaryImageFlatListWidth: 0,
 			primaryImageDisplayedIndex: 0,
@@ -114,8 +119,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			headerButtons: null,
 			dynamicMenuShowing: false,
 			chefNameTextColor: "#505050",
-			instructionImagePopupDetails: {},
-			instructionImagePopupShowing: false
+			imagePopupDetails: {},
+			imagePopupShowing: false
 		}
 
 		generateHeaderButtonList = async () => {
@@ -253,7 +258,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		navigateToChefDetails = async (chefID) => {
 			await this.setState({
 				awaitingServer: true,
-				instructionImagePopupShowing: false
+				imagePopupShowing: false
 			})
 			try {
 				const chefDetails = await getChefDetails(chefID, this.props.loggedInChef.auth_token)
@@ -356,14 +361,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						onPress={() => {
 							this.setState({
 								scrollEnabled: false,
-								instructionImagePopupShowing: true,
-								instructionImagePopupDetails: make_pic
+								imagePopupShowing: true,
+								imagePopupDetails: make_pic
 							})
 						}}
 						// onPressOut={() => {
 						// 	this.setState({
 						// 		scrollEnabled: true,
-						// 		instructionImagePopupShowing: false,
+						// 		imagePopupShowing: false,
 						// 	})
 						// }}
 						// pressRetentionOffset={{
@@ -545,13 +550,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		saveImage = (image) => {
-			if (image.base64 != undefined) {
-				this.setState({ makePicBase64: image.base64 })
+			if (image.uri != undefined) {
+				this.setState({ makePicFileUri: image.uri })
 			}
 		}
 
-		cancelChooseInstructionImage = (image) => {
-			this.setState({ makePicBase64: image })
+		cancelChooseImage = (image) => {
+			this.setState({ makePicFileUri: image })
 		}
 
 		saveMakePic = async () => {
@@ -559,15 +564,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				awaitingServer: true,
 				choosingPicSource: false
 			})
-			if (this.state.makePicBase64) {
-				const makePic = await postMakePic(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.state.makePicBase64)
+			if (this.state.makePicFileUri) {
+				const makePic = await postMakePic(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.state.makePicFileUri)
 				if (makePic) {
-					await this.props.addMakePic(makePic)
+					await this.props.addMakePic(makePic.make_pic)
+					await this.props.addMakePicChef(makePic.make_pic_chef)
 				}
 			}
 			await this.setState({
 				awaitingServer: false,
-				makePicBase64: "",
+				makePicFileUri: "",
 			})
 		}
 
@@ -726,14 +732,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									onPressIn={() => {
 										this.setState({
 											scrollEnabled: false,
-											instructionImagePopupShowing: true,
-											instructionImagePopupDetails: instructionImage
+											imagePopupShowing: true,
+											imagePopupDetails: instructionImage
 										})
 									}}
 									onPressOut={() => {
 										this.setState({
 											scrollEnabled: true,
-											instructionImagePopupShowing: false,
+											imagePopupShowing: false,
 										})
 									}}
 									pressRetentionOffset={{
@@ -761,15 +767,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		renderPictureChooser = () => {
-			let imageSource = `data:image/jpeg;base64,${this.state.makePicBase64}`
+			let imageSource = this.state.makePicFileUri
 			return (
 				<PicSourceChooser
 					saveImage={this.saveImage}
 					sourceChosen={this.saveMakePic}
 					// key={"primary-pic-chooser"}
 					imageSource={imageSource}
-					originalImage={this.state.makePicBase64}
-					cancelChooseInstructionImage={this.cancelChooseInstructionImage}
+					originalImage={this.state.makePicFileUri}
+					cancelChooseImage={this.cancelChooseImage}
 				/>
 			)
 		}
@@ -826,7 +832,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		render() {
 			if (this.props.recipe_details != undefined && this.props.recipe_details != null) {
-				// console.log(this.props.recipe_details)
+				// console.log(this.props.recipe_details.recipe_images)
 				return (
 					<SpinachAppContainer awaitingServer={this.state.awaitingServer}>
 						{this.state.renderOfflineMessage && (
@@ -842,13 +848,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						{this.state.deleteRecipePopUpShowing && this.renderDeleteRecipeAlertPopUp()}
 						{this.state.choosingPicSource && this.renderPictureChooser()}
 						{this.state.dynamicMenuShowing && this.renderDynamicMenu()}
-						{this.state.instructionImagePopupShowing && (
-							<InstructionImagePopup
-								makePic={this.state.instructionImagePopupDetails}
-								chef={this.props.recipe_details.make_pics_chefs.find(chef => chef.id == this.state.instructionImagePopupDetails.chef_id)}
+						{this.state.imagePopupShowing && (
+							<ImagePopup
+								imageDetails={this.state.imagePopupDetails}
+								chef={this.props.recipe_details.make_pics_chefs.find(chef => chef.id == this.state.imagePopupDetails.chef_id)}
 								navigateToChefDetails={this.navigateToChefDetails}
 								close={() => this.setState({
-									instructionImagePopupShowing: false,
+									imagePopupShowing: false,
 									scrollEnabled: true
 								})}
 							/>)

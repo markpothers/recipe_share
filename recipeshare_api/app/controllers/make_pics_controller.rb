@@ -16,8 +16,17 @@ class MakePicsController < ApplicationController
                 @make_pic.hex=hex
                 @make_pic.save
             end
-            if @make_pic.save
-                render json: @make_pic
+			if @make_pic.save
+				make_pic_data = {
+					make_pic: @make_pic,
+					make_pic_chef: {
+						id: @chef.id, 
+						profile_text: @chef.profile_text, 
+						username: @chef.username, 
+						image_url: @chef.image_url
+					}
+				}
+                render json: make_pic_data
             else
                 render json: false
             end

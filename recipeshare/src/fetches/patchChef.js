@@ -1,7 +1,11 @@
 import { databaseURL } from '../dataComponents/databaseURL'
 import { detailsTimeout } from '../dataComponents/timeouts'
+import { getBase64FromFile } from '../functionalComponents/getBase64FromFile.js'
 
-export const patchChef = (chefID, auth_token, username, profile_text, country, updatingPassword, password, password_confirmation, imageBase64) => {
+export const patchChef = async (chefID, auth_token, username, profile_text, country, updatingPassword, password, password_confirmation, imageFileUri) => {
+
+	const imageBase64 = imageFileUri === "DELETED" ? imageFileUri : await getBase64FromFile(imageFileUri)
+
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {

@@ -77,7 +77,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		renderPictureChooser = () => {
-			let imageSource = `data:image/jpeg;base64,${this.props.image_url}`
+			let imageSource = this.props.image_url
 			return (
 				<PicSourceChooser
 					saveImage={this.saveImage}
@@ -85,18 +85,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					key={"pic-chooser"}
 					imageSource={imageSource}
 					originalImage={this.props.image_url}
-					cancelChooseInstructionImage={this.cancelChooseInstructionImage}
+					cancelChooseImage={this.cancelChooseImage}
 				/>
 			)
 		}
 
 		saveImage = async (image) => {
 			if (image.cancelled === false) {
-				this.props.saveChefDetails("image_url", image.base64)
+				this.props.saveChefDetails("image_url", image.uri)
 			}
 		}
 
-		cancelChooseInstructionImage = (image) => {
+		cancelChooseImage = (image) => {
 			this.props.saveChefDetails("image_url", image)
 		}
 
