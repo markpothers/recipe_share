@@ -25,7 +25,7 @@ export default class RecipeComment extends React.PureComponent {
 				<View style={styles.commentLeftContainer}>
 					<TouchableOpacity
 						activeOpacity={0.7}
-						onPress={() => this.props.navigation.navigate('ChefDetails', { chefID: this.props.chef_id })}
+						onPress={() => this.props.navigateToChefDetails(this.props.chef_id)}
 					>
 						<Image style={styles.avatarThumbnail} source={imageUrl} />
 					</TouchableOpacity>
@@ -33,7 +33,7 @@ export default class RecipeComment extends React.PureComponent {
 				<View style={styles.commentRightContainer}>
 					<View style={styles.commentRightTopContainer}>
 						<TouchableOpacity
-							onPress={() => this.props.navigation.navigate('ChefDetails', { chefID: this.props.chef_id })}
+							onPress={() => this.props.navigateToChefDetails(this.props.chef_id)}
 							activeOpacity={0.7}
 						>
 							<Text maxFontSizeMultiplier={2} style={styles.detailsContentsHeader}>{this.props.username}:</Text>

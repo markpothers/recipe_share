@@ -59,7 +59,8 @@
     "sync-exec": "^0.6.2",
     "whatwg-fetch-timeout": "^2.0.2-timeout",
     "ws": "^7.1.2",
-    "expo-file-system": "~9.0.1"
+    "expo-file-system": "~9.0.1",
+    "expo-image-manipulator": "~8.2.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",

@@ -226,7 +226,7 @@ images = ["https://storage.googleapis.com/test-images-be4d3e05-1e77-4efd-8571-36
 instructionsLength = Instruction.all.length - Instruction.first.id
 instructionsMax = Instruction.last.id
 
-((instructionsMax/instructionsLength)*4).times do
+750.times do
     InstructionImage.create(created_at: Time.now, instruction_id: rand(instructionsMax), hex: SecureRandom.hex, image_url: images.sample)
 end
 

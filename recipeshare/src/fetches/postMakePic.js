@@ -2,7 +2,7 @@ import { databaseURL } from '../dataComponents/databaseURL'
 import { detailsTimeout } from '../dataComponents/timeouts'
 import { getBase64FromFile } from '../functionalComponents/getBase64FromFile.js'
 
-export const postMakePic = async(recipeID, chefID, auth_token, makePicFileUri) => {
+export const postMakePic = async (recipeID, chefID, auth_token, makePicFileUri) => {
 
 	const imageBase64 = await getBase64FromFile(makePicFileUri)
 

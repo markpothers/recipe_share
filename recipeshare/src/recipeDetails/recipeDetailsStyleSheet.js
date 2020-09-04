@@ -335,6 +335,8 @@ export const styles = StyleSheet.create({
 	},
 	commentRightTopContainer: {
 		flexDirection: 'row',
+		width: '93%',
+		justifyContent:'space-between',
 		// borderWidth: 1
 	},
 	makePicScrollView: {

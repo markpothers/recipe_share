@@ -1,11 +1,20 @@
 import * as FileSystem from 'expo-file-system';
+import * as ImageManipulator from "expo-image-manipulator";
 
-export function getBase64FromFile(uri) {
+export const getBase64FromFile = async (uri) => {
 	if (uri) {
-		return FileSystem.readAsStringAsync(uri, { encoding: FileSystem.EncodingType.Base64 })
-			.then(res => {
-				return res
-			});
+		try {
+			const compressedImage = await ImageManipulator.manipulateAsync(
+				uri,
+				[],
+				{ compress: 0.9, format: ImageManipulator.SaveFormat.JPEG }
+			);
+			const compressedImageBase64 = await FileSystem.readAsStringAsync(compressedImage.uri, { encoding: FileSystem.EncodingType.Base64 })
+			FileSystem.deleteAsync(compressedImage.uri, { idempotent: true })
+			return compressedImageBase64
+		} catch {
+			return ""
+		}
 	} else {
 		return ""
 	}

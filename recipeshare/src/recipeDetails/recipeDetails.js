@@ -403,7 +403,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								loggedInChefID={this.props.loggedInChef.id}
 								is_admin={this.props.loggedInChef.is_admin}
 								askDeleteComment={this.askDeleteComment}
-								navigation={this.props.navigation}
+								navigateToChefDetails={this.navigateToChefDetails}
 							/>
 						)
 					})
@@ -565,10 +565,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				choosingPicSource: false
 			})
 			if (this.state.makePicFileUri) {
-				const makePic = await postMakePic(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.state.makePicFileUri)
-				if (makePic) {
-					await this.props.addMakePic(makePic.make_pic)
-					await this.props.addMakePicChef(makePic.make_pic_chef)
+				try {
+					const makePic = await postMakePic(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.state.makePicFileUri)
+					if (makePic) {
+						await this.props.addMakePic(makePic.make_pic)
+						await this.props.addMakePicChef(makePic.make_pic_chef)
+					}
+				} catch (e) {
+					if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+					await this.setState({ renderOfflineMessage: true })
 				}
 			}
 			await this.setState({

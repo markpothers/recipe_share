@@ -211,7 +211,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			this.setState({ scrollingEnabled: false })
 		}
 
-		setRecipeParamsForEditing = async(recipeDetails) => {
+		setRecipeParamsForEditing = async (recipeDetails) => {
 			let recipe = recipeDetails.recipe
 			let newIngredients
 			let newInstructionImages
@@ -453,59 +453,62 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
 				await this.setState({ awaitingServer: true })
-				let newRecipeDetails = this.state.newRecipeDetails
-				if (this.props.route.params?.recipe_details !== undefined) {
-					const recipe = await patchRecipe(
-						this.props.loggedInChef.id,
-						this.props.loggedInChef.auth_token,
-						newRecipeDetails.name,
-						newRecipeDetails.ingredients,
-						newRecipeDetails.instructions,
-						newRecipeDetails.instructionImages,
-						newRecipeDetails.time,
-						newRecipeDetails.difficulty,
-						newRecipeDetails.primaryImages,
-						newRecipeDetails.filter_settings,
-						newRecipeDetails.cuisine,
-						newRecipeDetails.serves,
-						this.props.route.params?.recipe_details.recipe.id,
-						newRecipeDetails.acknowledgement,
-						newRecipeDetails.description
-					)
-					if (recipe) {
-						// this.clearNewRecipeDetails()
-						// AsyncStorage.removeItem('localNewRecipeDetails')
-						this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
-						this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes' })
+				try {
+					let newRecipeDetails = this.state.newRecipeDetails
+					if (this.props.route.params?.recipe_details !== undefined) {
+						const recipe = await patchRecipe(
+							this.props.loggedInChef.id,
+							this.props.loggedInChef.auth_token,
+							newRecipeDetails.name,
+							newRecipeDetails.ingredients,
+							newRecipeDetails.instructions,
+							newRecipeDetails.instructionImages,
+							newRecipeDetails.time,
+							newRecipeDetails.difficulty,
+							newRecipeDetails.primaryImages,
+							newRecipeDetails.filter_settings,
+							newRecipeDetails.cuisine,
+							newRecipeDetails.serves,
+							this.props.route.params?.recipe_details.recipe.id,
+							newRecipeDetails.acknowledgement,
+							newRecipeDetails.description
+						)
+						if (recipe) {
+							// this.clearNewRecipeDetails()
+							// AsyncStorage.removeItem('localNewRecipeDetails')
+							this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
+							this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes' })
+						}
 					} else {
-						this.setState({ renderOfflineMessage: true })
+						const recipe = await postRecipe(
+							this.props.loggedInChef.id,
+							this.props.loggedInChef.auth_token,
+							newRecipeDetails.name,
+							newRecipeDetails.ingredients,
+							newRecipeDetails.instructions,
+							newRecipeDetails.instructionImages,
+							newRecipeDetails.time,
+							newRecipeDetails.difficulty,
+							newRecipeDetails.primaryImages,
+							newRecipeDetails.filter_settings,
+							newRecipeDetails.cuisine,
+							newRecipeDetails.serves,
+							newRecipeDetails.acknowledgement,
+							newRecipeDetails.description
+						)
+						if (recipe) {
+							// this.clearNewRecipeDetails()
+							// AsyncStorage.removeItem('localNewRecipeDetails')
+							this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
+							this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes' })
+
+						}
 					}
-				} else {
-					const recipe = await postRecipe(
-						this.props.loggedInChef.id,
-						this.props.loggedInChef.auth_token,
-						newRecipeDetails.name,
-						newRecipeDetails.ingredients,
-						newRecipeDetails.instructions,
-						newRecipeDetails.instructionImages,
-						newRecipeDetails.time,
-						newRecipeDetails.difficulty,
-						newRecipeDetails.primaryImages,
-						newRecipeDetails.filter_settings,
-						newRecipeDetails.cuisine,
-						newRecipeDetails.serves,
-						newRecipeDetails.acknowledgement,
-						newRecipeDetails.description
-					)
-					if (recipe) {
-						// this.clearNewRecipeDetails()
-						// AsyncStorage.removeItem('localNewRecipeDetails')
-						this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
-						this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes' })
-					} else {
-						this.setState({ renderOfflineMessage: true })
-					}
+				} catch (e) {
+					if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+					this.setState({ renderOfflineMessage: true })
 				}
+				await this.setState({ awaitingServer: false })
 			} else {
 				this.setState({ renderOfflineMessage: true })
 			}
@@ -657,7 +660,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			}
 		}
 
-		cancelChooseInstructionImage = async(image, index) => {
+		cancelChooseInstructionImage = async (image, index) => {
 			await this.setState((state) => {
 				let newInstructionImages = [...state.newRecipeDetails.instructionImages]
 				newInstructionImages[index] = image
@@ -703,13 +706,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		render() {
 			// console.log(this.state.focusedInstruction)
 			return (
-				<SpinachAppContainer awaitingServer={this.state.awaitingServer} scrollingEnabled={false}>
-					{this.state.renderOfflineMessage && (
-						<OfflineMessage
-							message={`Sorry, can't save your recipe right now.${"\n"}You appear to be offline.${"\n"}Don't worry though, details will be saved until you can reconnect and try again.`}
-							topOffset={'10%'}
-							clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
-						/>)
+				<SpinachAppContainer awaitingServer={this.state.awaitingServer} scrollingEnabled={false} >
+					{
+						this.state.renderOfflineMessage && (
+							<OfflineMessage
+								message={`Sorry, can't save your recipe right now.${"\n"}You appear to be offline.${"\n"}Don't worry though, details will be saved until you can reconnect and try again.`}
+								topOffset={'10%'}
+								clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
+							/>)
 					}
 					{this.state.filterDisplayed && (
 						<FilterMenu
@@ -725,11 +729,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							confirmButtonText={"Save"}
 							title={"Select categories for your recipe"}
 						/>
-					)}
+					)
+					}
 					{this.state.choosingPrimaryPicture && this.renderPrimaryPictureChooser()}
 					{this.state.choosingInstructionPicture && this.renderInstructionPictureChooser()}
 					{this.state.alertPopUpShowing && this.renderAlertPopUp()}
-					<KeyboardAvoidingView
+					< KeyboardAvoidingView
 						style={centralStyles.fullPageKeyboardAvoidingView}
 						behavior={(Platform.OS === "ios" ? "position" : "")}
 					>
@@ -1004,8 +1009,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								</View>
 							</TouchableOpacity>
 						</ScrollView>
-					</KeyboardAvoidingView>
-				</SpinachAppContainer>
+					</KeyboardAvoidingView >
+				</SpinachAppContainer >
 			)
 		}
 	}
