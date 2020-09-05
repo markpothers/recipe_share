@@ -1,5 +1,5 @@
 import { databaseURL } from '../dataComponents/databaseURL'
-import { detailsTimeout } from '../dataComponents/timeouts'
+import { submitTimeout } from '../dataComponents/timeouts'
 import { getBase64FromFile } from '../auxFunctions/getBase64FromFile.js'
 
 export const postRecipe = async (
@@ -52,7 +52,7 @@ export const postRecipe = async (
 
 		setTimeout(() => {
 			reject()
-		}, detailsTimeout)
+		}, submitTimeout)
 
 		fetch(`${databaseURL}/recipes`, {
 			method: "POST",

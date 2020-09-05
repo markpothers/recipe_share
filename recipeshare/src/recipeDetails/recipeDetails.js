@@ -285,12 +285,20 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		editRecipe = async () => {
+			let netInfoState = await NetInfo.fetch()
+			if (netInfoState.isConnected) {
 			await this.setState({
 				awaitingServer: true,
 				editRecipePopUpShowing: false
 			})
 			this.props.navigation.navigate('NewRecipe', { recipe_details: this.props.recipe_details })
 			await this.setState({ awaitingServer: false })
+		} else {
+			this.setState({
+				renderOfflineMessage: true,
+				editRecipePopUpShowing: false
+			})
+		}
 		}
 
 		deleteRecipe = async () => {

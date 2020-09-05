@@ -1,5 +1,5 @@
 import { databaseURL } from '../dataComponents/databaseURL'
-import { detailsTimeout } from '../dataComponents/timeouts'
+import { submitTimeout } from '../dataComponents/timeouts'
 import { getBase64FromFile } from '../auxFunctions/getBase64FromFile.js'
 
 export const patchRecipe = async(
@@ -58,7 +58,7 @@ export const patchRecipe = async(
 
 		setTimeout(() => {
 			reject()
-		}, detailsTimeout)
+		}, submitTimeout)
 
 		fetch(`${databaseURL}/recipes/${recipeID}`, {
 			method: "PATCH",

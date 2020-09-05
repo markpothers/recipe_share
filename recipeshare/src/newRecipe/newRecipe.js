@@ -160,7 +160,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		componentDidUpdate = async () => {
 			await this.addNewIngredient()
 			await this.addNewInstruction()
-			if (this.state.newRecipeDetails.recipeId){
+			if (this.state.newRecipeDetails.recipeId) {
 				this.props.navigation.setOptions({
 					headerTitle: props => <AppHeader {...props} text={"Update Recipe"} route={this.props.route} />
 				});
@@ -437,9 +437,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
 				await this.setState({ awaitingServer: true })
-				try {
-					let newRecipeDetails = this.state.newRecipeDetails
-					if (newRecipeDetails.recipeId) {
+				let newRecipeDetails = this.state.newRecipeDetails
+				if (newRecipeDetails.recipeId) {
+					try {
 						const recipe = await patchRecipe(
 							this.props.loggedInChef.id,
 							this.props.loggedInChef.auth_token,
@@ -463,7 +463,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
 							this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes' })
 						}
-					} else {
+					} catch (e) {
+						if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						this.setState({ renderOfflineMessage: true })
+					}
+				} else {
+					try {
 						const recipe = await postRecipe(
 							this.props.loggedInChef.id,
 							this.props.loggedInChef.auth_token,
@@ -486,10 +491,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes' })
 
 						}
+					} catch (e) {
+						if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						this.setState({ renderOfflineMessage: true })
 					}
-				} catch (e) {
-					if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-					this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({ awaitingServer: false })
 			} else {
@@ -693,10 +698,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					{
 						this.state.renderOfflineMessage && (
 							<OfflineMessage
-								message={`Sorry, can't save your recipe right now.${"\n"}You appear to be offline.${"\n"}Don't worry though, details will be saved until you can reconnect and try again.`}
+								message={`Sorry, can't save your recipe right now.${"\n"}You appear to be offline.${"\n"}Don't worry though, new recipes are saved until you can reconnect and try again.`}
 								topOffset={'10%'}
 								clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
-								delay={5000}
 							/>)
 					}
 					{this.state.filterDisplayed && (
