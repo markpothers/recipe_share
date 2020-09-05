@@ -14,17 +14,12 @@ export default class PicSourceChooser extends React.PureComponent {
 		originalImage: null
 	}
 
-	componentDidMount = () => {
-		Permissions.askAsync(Permissions.CAMERA_ROLL)
-			.then(permission => {
-				this.setState({ hasCameraRollPermission: permission.permissions.cameraRoll.granted })
-			})
-		Permissions.askAsync(Permissions.CAMERA)
-			.then(permission => {
-				this.setState({ hasCameraPermission: permission.permissions.camera.granted })
-			})
-		this.setState({ originalImage: this.props.originalImage })
-
+	componentDidMount = async () => {
+		let cameraRollPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL)
+		await this.setState({ hasCameraRollPermission: cameraRollPermission.permissions.cameraRoll.granted })
+		const cameraPermission = await Permissions.askAsync(Permissions.CAMERA)
+		await this.setState({ hasCameraPermission: cameraPermission.permissions.camera.granted })
+		await this.setState({ originalImage: this.props.originalImage })
 	}
 
 	pickImage = async () => {
@@ -77,11 +72,11 @@ export default class PicSourceChooser extends React.PureComponent {
 							{this.props.imageSource !== '' ? (
 								<Image style={{ height: '100%', width: '100%' }} source={{ uri: this.props.imageSource }} resizeMode={"cover"} />
 							) : (
-								<React.Fragment>
-									<Icon style={styles.standardIcon} size={30} name='camera' />
-									<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>No photo{"\n"}chosen</Text>
-								</React.Fragment>
-							)}
+									<React.Fragment>
+										<Icon style={styles.standardIcon} size={30} name='camera' />
+										<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>No photo{"\n"}chosen</Text>
+									</React.Fragment>
+								)}
 						</View>
 						<TouchableOpacity style={styles.picSourceChooserButton} activeOpacity={0.7} title="Take Photo" onPress={this.openCamera}>
 							<Icon style={styles.standardIcon} size={30} name='camera' />
@@ -95,8 +90,8 @@ export default class PicSourceChooser extends React.PureComponent {
 							<Icon style={styles.standardIcon} size={30} name='camera-burst' />
 							<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Delete photo</Text>
 						</TouchableOpacity>
-						<View style={[styles.picSourceChooserArrowButtonContainer, {marginBottom: responsiveHeight(2)}]}>
-							<TouchableOpacity style={[styles.picSourceChooserCancelButton, {backgroundColor: '#720000'}]} activeOpacity={0.7} title="Cancel" onPress={this.cancel}>
+						<View style={[styles.picSourceChooserArrowButtonContainer, { marginBottom: responsiveHeight(2) }]}>
+							<TouchableOpacity style={[styles.picSourceChooserCancelButton, { backgroundColor: '#720000' }]} activeOpacity={0.7} title="Cancel" onPress={this.cancel}>
 								<Icon style={styles.cancelIcon} size={30} name='cancel' />
 								<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserCancelButtonText}>Cancel</Text>
 							</TouchableOpacity>

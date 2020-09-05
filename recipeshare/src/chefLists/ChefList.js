@@ -7,7 +7,7 @@ import { postFollow } from '../fetches/postFollow'
 import { destroyFollow } from '../fetches/destroyFollow'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
-import saveChefDetailsLocally from '../functionalComponents/saveChefDetailsLocally'
+import saveChefDetailsLocally from '../auxFunctions/saveChefDetailsLocally'
 import { getChefDetails } from '../fetches/getChefDetails'
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo';
@@ -15,7 +15,6 @@ import SearchBar from '../searchBar/SearchBar.js'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)
-
 
 const mapStateToProps = (state) => ({
 	all_chefs: state.chefs.all_chefs,

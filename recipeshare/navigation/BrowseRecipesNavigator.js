@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { TouchableOpacity, View } from 'react-native';
 import RecipeDetailsScreen from '../src/recipeDetails/recipeDetails'
 import ChefDetailsScreen from '../src/chefDetails/chefDetails'
 import NewRecipeScreen from '../src/newRecipe/newRecipe'
@@ -8,15 +7,15 @@ import AppHeader from './appHeader'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { createStackNavigator } from '@react-navigation/stack';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { centralStyles } from '../src/centralStyleSheet' //eslint-disable-line no-unused-vars
 import DynamicMenu from '../src/dynamicMenu/DynamicMenu.js'
+import AppHeaderRight from './appHeaderRight'
 
 const Tab = createMaterialTopTabNavigator()
 
 const BrowseRecipesTabs = (props) => {
 	const [dynamicMenuShowing, setDynamicMenuShowing] = useState(false)
-	const [headerButtons, setHeaderButtons] = useState(
+	const [headerButtons] = useState(
 		[
 			{
 				icon: "food",
@@ -32,15 +31,7 @@ const BrowseRecipesTabs = (props) => {
 	const addDynamicMenuButtonsToHeader = () => {
 		// console.log(this.props.route)
 		props.navigation.setOptions({
-			headerRight: () => (
-				<View style={centralStyles.dynamicMenuButtonContainer}>
-					<View style={centralStyles.headerButtonContainer}>
-						<TouchableOpacity style={centralStyles.dynamicMenuButton} activeOpacity={0.7} onPress={() => setDynamicMenuShowing(true)} >
-							<Icon name='dots-vertical' style={centralStyles.dynamicMenuIcon} size={33} />
-						</TouchableOpacity>
-					</View>
-				</View>
-			),
+			headerRight: Object.assign(() => <AppHeaderRight buttonAction={setDynamicMenuShowing}/>, { displayName: 'HeaderRight' }),
 		});
 	}
 
@@ -88,30 +79,18 @@ const BrowseRecipesTabs = (props) => {
 			>
 				<Tab.Screen
 					name="Newest Recipes"
-					options={
-						{ headerTitle: props => <AppHeader {...props} text={"Browse Recipes"} /> }
-					}
 					component={NewestRecipesScreen}
 				/>
 				<Tab.Screen
 					name="Top Recipes"
-					options={
-						{ headerTitle: props => <AppHeader {...props} text={"Browse Recipes"} /> }
-					}
 					component={MostLikedRecipesScreen}
 				/>
 				<Tab.Screen
 					name="Newest Chefs"
-					options={
-						{ headerTitle: props => <AppHeader {...props} text={"Browse Recipes"} /> }
-					}
 					component={NewestChefsScreen}
 				/>
 				<Tab.Screen
 					name="Top Chefs"
-					options={
-						{ headerTitle: props => <AppHeader {...props} text={"Browse Recipes"} /> }
-					}
 					component={MostLikedChefsScreen}
 				/>
 				{/* <Tab.Screen name="MostMadeRecipes" component={MostMadeRecipesScreen}/> */}
@@ -215,32 +194,32 @@ const BrowseRecipesStack = () => {
 			<Stack.Screen
 				name="BrowseRecipes"
 				options={({ route }) => ({
-					headerLeft: props => null,
-					headerTitle: props => <AppHeader {...props} text={"Browse Recipes"} route={route} />
+					headerLeft: null,
+					headerTitle: Object.assign((props) => <AppHeader {...props} text={"Browse Recipes"} route={route} />, { displayName: 'Header' })
 				})}
 				component={BrowseRecipesTabs}
 			/>
 			<Stack.Screen
 				name="RecipeDetails"
 				options={({ route }) => ({
-					headerLeft: props => null,
-					headerTitle: props => <AppHeader {...props} text={"Recipe Details"} route={route} />
+					headerLeft: null,
+					headerTitle: Object.assign((props) => <AppHeader {...props} text={"Recipe Details"} route={route} />, { displayName: 'Header' })
 				})}
 				component={RecipeDetailsScreen}
 			/>
 			<Stack.Screen
 				name="NewRecipe"
 				options={({ route }) => ({
-					headerLeft: props => null,
-					headerTitle: props => <AppHeader {...props} text={"Create a New Recipe"} route={route} />
+					headerLeft: null,
+					headerTitle: Object.assign((props) => <AppHeader {...props} text={"Create a New Recipe"} route={route} />, { displayName: 'Header' })
 				})}
 				component={NewRecipeScreen}
 			/>
 			<Stack.Screen
 				name="ChefDetails"
 				options={({ route }) => ({
-					headerLeft: props => null,
-					headerTitle: props => <AppHeader {...props} text={"Chef Details"} route={route} />
+					headerLeft: null,
+					headerTitle: Object.assign((props) => <AppHeader {...props} text={"Chef Details"} route={route} />, { displayName: 'Header' })
 				})}
 				component={ChefDetailsScreen}
 			/>

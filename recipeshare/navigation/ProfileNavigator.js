@@ -32,7 +32,8 @@ const ProfileStack = (props) => {
 			<Stack.Screen
 				name="Profile"
 				options={
-					{ headerTitle: props => <AppHeader {...props} text={"Profile"} /> }
+					{headerTitle: Object.assign((props) => <AppHeader {...props} text={"Profile"} />, { displayName: 'Header' })}
+					// { headerTitle: props => <AppHeader {...props} text={"Profile"} /> }
 				}
 			>
 				{props => <Profile {...props} setLoadedAndLoggedIn={fwdProps.setLoadedAndLoggedIn} />}
@@ -40,8 +41,8 @@ const ProfileStack = (props) => {
 			<Stack.Screen
 				name="NewRecipe"
 				options={({ route }) => ({
-					headerLeft: props => null,
-					headerTitle: props => <AppHeader {...props} text={"Create a New Recipe"} route={route} />
+					headerLeft: null,
+					headerTitle: Object.assign((props) => <AppHeader {...props} text={"Create a New Recipe"} route={route} />, { displayName: 'Header' })
 				})}
 				component={NewRecipeScreen}
 			/>

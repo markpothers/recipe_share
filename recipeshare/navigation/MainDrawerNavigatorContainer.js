@@ -1,23 +1,7 @@
 import React from 'react';
-import { FlatList, ActivityIndicator, TouchableOpacity, View, Platform, AsyncStorage, AppState } from 'react-native'
-// import RecipeCard from './RecipeCard'
+import { AsyncStorage, AppState } from 'react-native'
 import { connect } from 'react-redux'
-// import { getRecipeList } from '../fetches/getRecipeList'
-// import { postRecipeLike } from '../fetches/postRecipeLike'
-// import { postReShare } from '../fetches/postReShare'
-// import { postRecipeMake } from '../fetches/postRecipeMake'
-// import { destroyRecipeLike } from '../fetches/destroyRecipeLike'
-// import { destroyReShare } from '../fetches/destroyReShare'
-// import { NavigationEvents, withNavigation } from 'react-navigation'
-// import { styles } from './recipeListStyleSheet'
-// import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
-// import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-// import FilterMenu from '../functionalComponents/filterMenu'
-// import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
-// import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions';
-// import {createAppContainer, createStackNavigator } from 'react-navigation'
 import MainDrawerNavigator from './MainDrawerNavigator'
-import { runSavedActions } from '../src/functionalComponents/saveActionsLocallyForSync'
 
 const mapStateToProps = (state) => ({
     all_Recipes: state.recipes.all,
@@ -36,7 +20,6 @@ const mapStateToProps = (state) => ({
     serves: state.serves,
     all_chefs: state.chefs.all_chefs,
     followed_chefs: state.chefs.followed,
-    loggedInChef: state.loggedInChef,
     chefs_details: state.chefs_details,
     most_liked_chefs: state.chefs.most_liked_chefs,
     most_made_chefs: state.chefs.most_made_chefs,
@@ -45,36 +28,7 @@ const mapStateToProps = (state) => ({
   })
 
 const mapDispatchToProps = {
-  // changeRanking: () => {
-  //   return dispatch => {
-  //     dispatch({ type: 'CHANGE_GLOBAL_RANKING'})
-  //   }
-  // },
-//   storeRecipeList: (listChoice, recipes) => {
-//     return dispatch => {
-//       dispatch({ type: 'STORE_RECIPE_LISTS', recipeType: listChoice, recipeList: recipes})
-//       }
-//   },
-//   storeRecipeDetails: (listChoice, recipe_details) => {
-//     return dispatch => {
-//       dispatch({ type: 'STORE_RECIPES_DETAILS', recipeType: listChoice, recipesDetailsList: recipe_details})
-//     }
-//   },
-//   appendToRecipeList: (listChoice, new_recipes) => {
-//     return dispatch => {
-//       dispatch({ type: 'APPEND_TO_RECIPE_LISTS', recipeType: listChoice, recipeList: new_recipes})
-//       }
-//   },
-//   appendToRecipeDetails: (listChoice, new_recipe_details) => {
-//     return dispatch => {
-//       dispatch({ type: 'APPEND_TO_RECIPES_DETAILS', recipeType: listChoice, recipesDetailsList: new_recipe_details})
-//     }
-//   },
-  // clearListedRecipes: (listChoice) => {
-  //   return dispatch => {
-  //     dispatch({ type: 'CLEAR_LISTED_RECIPES', recipeType: listChoice})
-  //   }
-  // },
+	
 }
 
 

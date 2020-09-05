@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, ScrollView, View, TouchableOpacity } from 'react-native';
+import { Image, ScrollView, View } from 'react-native';
 import { connect } from 'react-redux'
 import { styles } from './chefDetailsStyleSheet'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
@@ -12,8 +12,7 @@ import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo';
 import DynamicMenu from '../dynamicMenu/DynamicMenu.js'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import AppHeaderRight from '../../navigation/appHeaderRight'
 
 const mapStateToProps = (state) => ({
 	loggedInChef: state.loggedInChef,
@@ -87,15 +86,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		addDynamicMenuButtonsToHeader = () => {
 			this.props.navigation.setOptions({
-				headerRight: () => (
-					<View style={centralStyles.dynamicMenuButtonContainer}>
-						<View style={centralStyles.headerButtonContainer}>
-							<TouchableOpacity style={centralStyles.dynamicMenuButton} activeOpacity={0.7} onPress={() => this.setState({ dynamicMenuShowing: true })} >
-								<Icon name='dots-vertical' style={centralStyles.dynamicMenuIcon} size={33} />
-							</TouchableOpacity>
-						</View>
-					</View>
-				),
+				headerRight: Object.assign(() => <AppHeaderRight buttonAction={() => this.setState({dynamicMenuShowing: true})}/>, { displayName: 'HeaderRight' }),
 			});
 		}
 

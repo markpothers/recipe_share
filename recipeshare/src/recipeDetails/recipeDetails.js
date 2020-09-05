@@ -24,8 +24,9 @@ import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo';
 import { AlertPopUp } from '../alertPopUp/alertPopUp'
 import DynamicMenu from '../dynamicMenu/DynamicMenu.js'
-import saveChefDetailsLocally from '../functionalComponents/saveChefDetailsLocally'
+import saveChefDetailsLocally from '../auxFunctions/saveChefDetailsLocally'
 import { getChefDetails } from '../fetches/getChefDetails'
+import AppHeaderRight from '../../navigation/appHeaderRight'
 
 const mapStateToProps = (state) => ({
 	recipe_details: state.recipe_details,
@@ -214,15 +215,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		addDynamicMenuButtonsToHeader = () => {
 			this.props.navigation.setOptions({
-				headerRight: () => (
-					<View style={centralStyles.dynamicMenuButtonContainer}>
-						<View style={centralStyles.headerButtonContainer}>
-							<TouchableOpacity style={centralStyles.dynamicMenuButton} activeOpacity={0.7} onPress={() => this.setState({ dynamicMenuShowing: true })} >
-								<Icon name='dots-vertical' style={centralStyles.dynamicMenuIcon} size={33} />
-							</TouchableOpacity>
-						</View>
-					</View>
-				),
+				headerRight: Object.assign(() => <AppHeaderRight buttonAction={() => this.setState({dynamicMenuShowing: true})}/>, { displayName: 'HeaderRight' }),
 			});
 		}
 

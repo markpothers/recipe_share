@@ -1,6 +1,6 @@
 import { databaseURL } from '../dataComponents/databaseURL'
 import { detailsTimeout } from '../dataComponents/timeouts'
-import { getBase64FromFile } from '../functionalComponents/getBase64FromFile.js'
+import { getBase64FromFile } from '../auxFunctions/getBase64FromFile.js'
 
 export const postChef = async(username, e_mail, password, password_confirmation, country, image_url, profile_text) => {
 

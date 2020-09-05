@@ -22,6 +22,8 @@ import { clearedFilters } from '../dataComponents/clearedFilters'
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo';
 import { AlertPopUp } from '../alertPopUp/alertPopUp';
+import AppHeader from '../../navigation/appHeader'
+
 
 const mapStateToProps = (state) => ({
 	loggedInChef: state.loggedInChef
@@ -53,6 +55,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			averageInstructionHeight: responsiveHeight(7.2),
 			scrollingEnabled: true,
 			newRecipeDetails: {
+				recipeId: null,
 				name: "",
 				instructions: [
 					'',
@@ -136,17 +139,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		componentDidMount = async () => {
 			await this.setState({ awaitingServer: true })
-
 			this.fetchIngredientsForAutoComplete()
-
-			// this._unsubscribeFocus = this.props.navigation.addListener('focus', () => {
-			// 	this.respondToFocus()
-			// })
-			// this._unsubscribeBlur = this.props.navigation.addListener('blur', () => {
-			// 	this.respondToBlur()
-			// })
-			// AppState.addEventListener('change', this.handleAppStateChange)
-
 			//if we're editing a recipe
 			if (this.props.route.params?.recipe_details !== undefined) {
 				this.setRecipeParamsForEditing(this.props.route.params.recipe_details)
@@ -167,30 +160,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		componentDidUpdate = async () => {
 			await this.addNewIngredient()
 			await this.addNewInstruction()
+			if (this.state.newRecipeDetails.recipeId){
+				this.props.navigation.setOptions({
+					headerTitle: props => <AppHeader {...props} text={"Update Recipe"} route={this.props.route} />
+				});
+			}
 		}
 
 		componentWillUnmount = () => {
-			// this._unsubscribeFocus()
-			// this._unsubscribeFocus()
-			// AppState.removeEventListener('change', this.handleAppStateChange)
+
 		}
-
-		// handleAppStateChange = (nextAppState) => {
-		// 	if (nextAppState === 'active') {
-		// 		// console.log('app coming into foreground')
-		// 	} else if (this.state.isFocused && (nextAppState === 'inactive' || nextAppState === 'background')) {
-		// 		this.saveNewRecipeDetailsLocally()
-		// 	}
-		// }
-
-		// respondToBlur = () => {
-		// 	this.setState({ isFocused: false })
-		// 	this.saveNewRecipeDetailsLocally()
-		// }
-
-		// respondToFocus = () => {
-		// 	this.setState({ isFocused: true })
-		// }
 
 		saveNewRecipeDetailsLocally = () => {
 			let dataToSave = {
@@ -234,6 +213,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			await this.setState({
 				instructionHeights: recipeDetails.instructions.map(() => responsiveHeight(7.2)),
 				newRecipeDetails: {
+					recipeId: recipe.id,
 					name: recipe.name,
 					instructions: recipeDetails.instructions.length > 0 ? recipeDetails.instructions.map(i => i.instruction) : [""],
 					instructionImages: newInstructionImages.length > 0 ? newInstructionImages : [""],
@@ -271,7 +251,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					description: recipe.description
 				}
 			})
-			this.saveNewRecipeDetailsLocally()
+			!this.state.newRecipeDetails.recipeId && this.saveNewRecipeDetailsLocally()
 		}
 
 		askToReset = () => {
@@ -292,6 +272,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			await this.setState({
 				alertPopUpShowing: false,
 				newRecipeDetails: {
+					recipeId: null,
 					name: "",
 					instructions: [''],
 					instructionImages: [''],
@@ -334,9 +315,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					acknowledgement: "",
 					description: ""
 				},
-				instructionHeights: [responsiveHeight(7.2)],
-				averageInstructionHeight: responsiveHeight(7.2),
+				instructionHeights: [responsiveHeight(6.5)],
+				averageInstructionHeight: responsiveHeight(6.5),
 			})
+			this.props.navigation.setOptions({
+				headerTitle: props => <AppHeader {...props} text={"Create a New Recipe"} route={this.props.route} />
+			});
 			AsyncStorage.removeItem('localNewRecipeDetails')
 		}
 
@@ -373,7 +357,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			// } else {
 			// await this.setState({ awaitingServer: false })
 			// }
-			this.saveNewRecipeDetailsLocally()
+			!this.state.newRecipeDetails.recipeId && this.saveNewRecipeDetailsLocally()
 		}
 
 		thisAutocompleteIsFocused = (index) => {
@@ -402,7 +386,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					}
 				})
 			})
-			this.saveNewRecipeDetailsLocally()
+			!this.state.newRecipeDetails.recipeId && this.saveNewRecipeDetailsLocally()
 		}
 
 		handleIngredientSort = async (newIngredients) => {
@@ -414,7 +398,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					},
 				})
 			})
-			this.saveNewRecipeDetailsLocally()
+			!this.state.newRecipeDetails.recipeId && this.saveNewRecipeDetailsLocally()
 		}
 
 		addNewIngredient = () => {
@@ -437,7 +421,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					newRecipeDetails: { ...state.newRecipeDetails, ingredients: newIngredients },
 				})
 			})
-			this.saveNewRecipeDetailsLocally()
+			!this.state.newRecipeDetails.recipeId && this.saveNewRecipeDetailsLocally()
 		}
 
 		handleInput = async (text, parameter) => {
@@ -446,7 +430,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					newRecipeDetails: { ...state.newRecipeDetails, [parameter]: text },
 				})
 			})
-			this.saveNewRecipeDetailsLocally()
+			!this.state.newRecipeDetails.recipeId && this.saveNewRecipeDetailsLocally()
 		}
 
 		submitRecipe = async () => {
@@ -455,7 +439,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				await this.setState({ awaitingServer: true })
 				try {
 					let newRecipeDetails = this.state.newRecipeDetails
-					if (this.props.route.params?.recipe_details !== undefined) {
+					if (newRecipeDetails.recipeId) {
 						const recipe = await patchRecipe(
 							this.props.loggedInChef.id,
 							this.props.loggedInChef.auth_token,
@@ -469,7 +453,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							newRecipeDetails.filter_settings,
 							newRecipeDetails.cuisine,
 							newRecipeDetails.serves,
-							this.props.route.params?.recipe_details.recipe.id,
+							newRecipeDetails.recipeId,
 							newRecipeDetails.acknowledgement,
 							newRecipeDetails.description
 						)
@@ -497,8 +481,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							newRecipeDetails.description
 						)
 						if (recipe) {
-							// this.clearNewRecipeDetails()
-							// AsyncStorage.removeItem('localNewRecipeDetails')
+							this.clearNewRecipeDetails()
 							this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
 							this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes' })
 
@@ -516,7 +499,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		handleCategoriesButton = async () => {
 			await this.setState({ filterDisplayed: !this.state.filterDisplayed })
-			this.saveNewRecipeDetailsLocally()
+			!this.state.newRecipeDetails.recipeId && this.saveNewRecipeDetailsLocally()
 		}
 
 		handleInstructionChange = async (text, index) => {
@@ -529,7 +512,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					instructionHeights: newInstructionHeights
 				})
 			})
-			this.saveNewRecipeDetailsLocally()
+			!this.state.newRecipeDetails.recipeId && this.saveNewRecipeDetailsLocally()
 		}
 
 		handleInstructionSizeChange = (index, size) => {
@@ -562,7 +545,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					instructionHeights: newInstructionHeights,
 				})
 			})
-			this.saveNewRecipeDetailsLocally()
+			!this.state.newRecipeDetails.recipeId && this.saveNewRecipeDetailsLocally()
 		}
 
 		addNewInstruction = () => {
@@ -607,7 +590,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					averageInstructionHeight: newAverageInstructionHeight
 				})
 			})
-			this.saveNewRecipeDetailsLocally()
+			!this.state.newRecipeDetails.recipeId && this.saveNewRecipeDetailsLocally()
 		}
 
 		chooseInstructionPicture = (index) => {
@@ -619,7 +602,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		instructionSourceChosen = async () => {
 			await this.setState({ choosingInstructionPicture: false })
-			this.saveNewRecipeDetailsLocally()
+			!this.state.newRecipeDetails.recipeId && this.saveNewRecipeDetailsLocally()
 		}
 
 		renderInstructionPictureChooser = () => {
@@ -653,7 +636,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						awaitingServer: false,
 					})
 				})
-				this.saveNewRecipeDetailsLocally()
+				!this.state.newRecipeDetails.recipeId && this.saveNewRecipeDetailsLocally()
 			}
 			else {
 				await this.setState({ awaitingServer: false })
@@ -673,7 +656,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					awaitingServer: false,
 				})
 			})
-			this.saveNewRecipeDetailsLocally()
+			!this.state.newRecipeDetails.recipeId && this.saveNewRecipeDetailsLocally()
 		}
 
 		toggleFilterCategory = (category) => {
@@ -704,7 +687,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		render() {
-			// console.log(this.state.focusedInstruction)
+			// console.log(this.state.newRecipeDetails.recipeId)
 			return (
 				<SpinachAppContainer awaitingServer={this.state.awaitingServer} scrollingEnabled={false} >
 					{
@@ -713,6 +696,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								message={`Sorry, can't save your recipe right now.${"\n"}You appear to be offline.${"\n"}Don't worry though, details will be saved until you can reconnect and try again.`}
 								topOffset={'10%'}
 								clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
+								delay={5000}
 							/>)
 					}
 					{this.state.filterDisplayed && (

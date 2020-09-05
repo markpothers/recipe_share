@@ -16,7 +16,6 @@ class RecipesController < ApplicationController
     # end
 
     def create
-        # byebug
         if newRecipe_params[:chef_id] === @chef.id || @chef.is_admin === true
             @recipe = Recipe.new(newRecipe_params)
             @recipe.chef_id=@chef.id
@@ -49,7 +48,6 @@ class RecipesController < ApplicationController
     # end
 
     def update
-        # byebug
         if newRecipe_params[:chef_id] === @chef.id || @chef.is_admin === true
             @recipe.update(newRecipe_params)
             newRecipe_filter_settings["filter_settings"].keys.each do |category|

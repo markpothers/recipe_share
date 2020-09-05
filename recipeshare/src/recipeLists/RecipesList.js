@@ -15,8 +15,8 @@ import FilterMenu from '../functionalComponents/filterMenu'
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import { getRecipeDetails } from '../fetches/getRecipeDetails'
-import saveRecipeDetailsLocally from '../functionalComponents/saveRecipeDetailsLocally'
-import saveChefDetailsLocally from '../functionalComponents/saveChefDetailsLocally'
+import saveRecipeDetailsLocally from '../auxFunctions/saveRecipeDetailsLocally'
+import saveChefDetailsLocally from '../auxFunctions/saveChefDetailsLocally'
 import { getChefDetails } from '../fetches/getChefDetails'
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo'
@@ -148,8 +148,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			try {
 				const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
 				let recipes = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.cuisine, this.props.serves, this.state.searchTerm)
-				if (recipes.length == 0){
-					this.setState({renderNoRecipesMessage: true})
+				if (recipes.length == 0) {
+					this.setState({ renderNoRecipesMessage: true })
 				}
 				this.props.storeRecipeList(this.props["listChoice"], recipes)
 			}
@@ -531,18 +531,19 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
 						/>)
 					}
-					{(this.props.route.name === "My Feed" 
-					&& this.props[this.props["listChoice"] + `_Recipes`].length === 0 
-					&& !this.state.renderOfflineMessage
-					&& this.state.renderNoRecipesMessage) && (
-						<OfflineMessage
-							message={`There's nothing to show here at the moment.${"\n"}Touch here to go to All Recipes &${"\n"}Chefs and find some chefs to follow.${"\n"}(or clear your filters)`}
-							topOffset={'10%'}
-							clearOfflineMessage={() => {this.setState({ renderNoRecipesMessage: false })}}
-							delay={20000}
-							action={() => this.props.navigation.navigate('BrowseRecipes')}
-						/>
-					)}
+					{(this.props.route.name === "My Feed"
+						&& this.props[this.props["listChoice"] + `_Recipes`].length === 0
+						&& !this.state.renderOxfflineMessage
+						&& this.state.renderNoRecipesMessage
+						&& this.state.searchTerm.length == 0) && (
+							<OfflineMessage
+								message={`There's nothing to show here at the moment.${"\n"}Touch here to go to All Recipes &${"\n"}Chefs and find some chefs to follow.${"\n"}(or clear your filters)`}
+								topOffset={'10%'}
+								clearOfflineMessage={() => { this.setState({ renderNoRecipesMessage: false }) }}
+								delay={20000}
+								action={() => this.props.navigation.navigate('BrowseRecipes')}
+							/>
+						)}
 					<TouchableOpacity style={styles.filterButton} activeOpacity={0.7} onPress={this.handleFilterButton} testID={"filterButton"}>
 						<Icon name='filter' size={responsiveHeight(3.5)} style={styles.filterIcon} />
 					</TouchableOpacity>
