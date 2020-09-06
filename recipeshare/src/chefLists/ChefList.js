@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, AsyncStorage, Animated, TouchableOpacity } from 'react-native'
+import { FlatList, AsyncStorage, Animated, TouchableOpacity, Keyboard } from 'react-native'
 import ChefCard from './ChefCard'
 import { connect } from 'react-redux'
 import { getChefList } from '../fetches/getChefList'
@@ -304,92 +304,97 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			//   console.log(this.props[this.props["listChoice"]])
 			return (
 				<SpinachAppContainer awaitingServer={this.state.awaitingServer}>
-					{this.state.renderOfflineMessage && (
-						<OfflineMessage
-							message={`Sorry, can't get recipes chefs now.${"\n"}You appear to be offline.`}
-							topOffset={'10%'}
-							clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
-						/>)
-					}
-					{(this.props[this.props["listChoice"]].length > 0 || this.state.searchTerm != '') && (
-						<Animated.View
-							style={{
-								position: 'absolute',
-								zIndex: this.state.searchBarZIndex,
-								transform: [
-									{
-										translateY: this.state.yOffset.interpolate({
-											inputRange: [this.state.currentYTop, this.state.currentYTop + responsiveHeight(6.25)],
-											outputRange: [0, -responsiveHeight(6.25)],
-											extrapolate: "clamp"
-										})
-									},
-								]
-							}}
-						>
-							<SearchBar
-								text={"Search for Chefs"}
-								searchTerm={this.state.searchTerm}
-								setSearchTerm={this.setSearchTerm}
-								searchBar={this.searchBar}
-								onBlur={() => {
-									if (this.state.currentYTop === 0) {
-										this.setState({ searchBarZIndex: 0 })
-									}
-								}}
-							/>
-						</Animated.View>
-					)}
-					<AnimatedFlatList
-						ListHeaderComponent={() => (
-							<TouchableOpacity
+					<TouchableOpacity
+						activeOpacity={1}
+						onPress={Keyboard.dismiss}
+					>
+						{this.state.renderOfflineMessage && (
+							<OfflineMessage
+								message={`Sorry, can't get recipes chefs now.${"\n"}You appear to be offline.`}
+								topOffset={'10%'}
+								clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
+							/>)
+						}
+						{(this.props[this.props["listChoice"]].length > 0 || this.state.searchTerm != '') && (
+							<Animated.View
 								style={{
-									height: responsiveHeight(6.75),
-									// backgroundColor: 'red'
+									position: 'absolute',
+									zIndex: this.state.searchBarZIndex,
+									transform: [
+										{
+											translateY: this.state.yOffset.interpolate({
+												inputRange: [this.state.currentYTop, this.state.currentYTop + responsiveHeight(6.25)],
+												outputRange: [0, -responsiveHeight(6.25)],
+												extrapolate: "clamp"
+											})
+										},
+									]
 								}}
-								onPress={this.handleSearchBarFocus}
 							>
-							</TouchableOpacity>
+								<SearchBar
+									text={"Search for Chefs"}
+									searchTerm={this.state.searchTerm}
+									setSearchTerm={this.setSearchTerm}
+									searchBar={this.searchBar}
+									onBlur={() => {
+										if (this.state.currentYTop === 0) {
+											this.setState({ searchBarZIndex: 0 })
+										}
+									}}
+								/>
+							</Animated.View>
 						)}
-						data={this.props[this.props["listChoice"]]}
-						renderItem={this.renderChefListItem}
-						keyExtractor={(item) => item.id.toString()}
-						onRefresh={this.refresh}
-						refreshing={false}
-						onEndReached={this.onEndReached}
-						onEndReachedThreshold={0.3}
-						listKey={this.props[this.props["listChoice"]]}
-						onScroll={Animated.event(
-							[{ nativeEvent: { contentOffset: { y: this.state.yOffset } } }],
-							{
-								useNativeDriver: true,
-								listener: (e) => {
-									const y = e.nativeEvent.contentOffset.y
-									const isIncreasing = e.nativeEvent.velocity.y > 0
-									if (y <= 0) {
-										this.setState({
-											currentYTop: 0,
-											searchBarZIndex: 0
-										})
+						<AnimatedFlatList
+							ListHeaderComponent={() => (
+								<TouchableOpacity
+									style={{
+										height: responsiveHeight(6.75),
+										// backgroundColor: 'red'
+									}}
+									onPress={this.handleSearchBarFocus}
+								>
+								</TouchableOpacity>
+							)}
+							data={this.props[this.props["listChoice"]]}
+							renderItem={this.renderChefListItem}
+							keyExtractor={(item) => item.id.toString()}
+							onRefresh={this.refresh}
+							refreshing={false}
+							onEndReached={this.onEndReached}
+							onEndReachedThreshold={0.3}
+							listKey={this.props[this.props["listChoice"]]}
+							onScroll={Animated.event(
+								[{ nativeEvent: { contentOffset: { y: this.state.yOffset } } }],
+								{
+									useNativeDriver: true,
+									listener: (e) => {
+										const y = e.nativeEvent.contentOffset.y
+										const isIncreasing = e.nativeEvent.velocity.y > 0
+										if (y <= 0) {
+											this.setState({
+												currentYTop: 0,
+												searchBarZIndex: 0
+											})
+										}
+										// //if bigger than max input range and getting bigger
+										if (y > this.state.currentYTop + responsiveHeight(6.25) && isIncreasing) {
+											this.setState({
+												currentYTop: y - responsiveHeight(6.25),
+												searchBarZIndex: 1
+											})
+										}
+										//if smaller than min input range and getting smaller
+										if (y < this.state.currentYTop - responsiveHeight(6.25) && !isIncreasing) {
+											this.setState({
+												currentYTop: y,
+												searchBarZIndex: 1
+											})
+										}
 									}
-									// //if bigger than max input range and getting bigger
-									if (y > this.state.currentYTop + responsiveHeight(6.25) && isIncreasing) {
-										this.setState({
-											currentYTop: y - responsiveHeight(6.25),
-											searchBarZIndex: 1
-										})
-									}
-									//if smaller than min input range and getting smaller
-									if (y < this.state.currentYTop - responsiveHeight(6.25) && !isIncreasing) {
-										this.setState({
-											currentYTop: y,
-											searchBarZIndex: 1
-										})
-									}
-								}
-							},
-						)}
-					/>
+								},
+							)}
+						/>
+					</TouchableOpacity>
 				</SpinachAppContainer>
 			)
 		}

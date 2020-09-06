@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, TouchableOpacity, AsyncStorage, Animated } from 'react-native'
+import { FlatList, TouchableOpacity, AsyncStorage, Animated, Keyboard } from 'react-native'
 import RecipeCard from './RecipeCard'
 import { connect } from 'react-redux'
 import { getRecipeList } from '../fetches/getRecipeList'
@@ -524,112 +524,118 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			// console.log(this.searchBar)
 			return (
 				<SpinachAppContainer awaitingServer={this.state.awaitingServer}>
-					{this.state.renderOfflineMessage && (
-						<OfflineMessage
-							message={`Sorry, can't do that right now.${"\n"}You appear to be offline.`}
-							topOffset={'10%'}
-							clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
-						/>)
-					}
-					{(this.props.route.name === "My Feed"
-						&& this.props[this.props["listChoice"] + `_Recipes`].length === 0
-						&& !this.state.renderOxfflineMessage
-						&& this.state.renderNoRecipesMessage
-						&& this.state.searchTerm.length == 0) && (
+					<TouchableOpacity
+						activeOpacity={1}
+						onPress={Keyboard.dismiss}
+					>
+						{this.state.renderOfflineMessage && (
 							<OfflineMessage
-								message={`There's nothing to show here at the moment.${"\n"}Touch here to go to All Recipes &${"\n"}Chefs and find some chefs to follow.${"\n"}(or clear your filters)`}
+								message={`Sorry, can't do that right now.${"\n"}You appear to be offline.`}
 								topOffset={'10%'}
-								clearOfflineMessage={() => { this.setState({ renderNoRecipesMessage: false }) }}
-								delay={20000}
-								action={() => this.props.navigation.navigate('BrowseRecipes')}
-							/>
-						)}
-					<TouchableOpacity style={styles.filterButton} activeOpacity={0.7} onPress={this.handleFilterButton} testID={"filterButton"}>
-						<Icon name='filter' size={responsiveHeight(3.5)} style={styles.filterIcon} />
-					</TouchableOpacity>
-					{(this.props[this.props["listChoice"] + `_Recipes`].length > 0 || this.state.searchTerm != '') && (
-						<Animated.View
-							style={{
-								position: 'absolute',
-								zIndex: this.state.searchBarZIndex,
-								transform: [
-									{
-										translateY: this.state.yOffset.interpolate({
-											inputRange: [this.state.currentYTop, this.state.currentYTop + responsiveHeight(6.5)],
-											outputRange: [0, -responsiveHeight(6.5)],
-											extrapolate: "clamp"
-										})
-									},
-								]
-							}}
-						>
-							<SearchBar
-								text={"Search for Recipes"}
-								searchTerm={this.state.searchTerm}
-								setSearchTerm={this.setSearchTerm}
-								searchBar={this.searchBar}
-								onBlur={() => {
-									if (this.state.currentYTop === 0) {
-										this.setState({ searchBarZIndex: 0 })
-									}
-								}}
-							/>
-						</Animated.View>
-					)}
-					<AnimatedFlatList
-						ListHeaderComponent={() => (
-							<TouchableOpacity
+								clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
+							/>)
+						}
+						{(this.props.route.name === "My Feed"
+							&& this.props[this.props["listChoice"] + `_Recipes`].length === 0
+							&& !this.state.renderOfflineMessage
+							&& this.state.renderNoRecipesMessage
+							&& this.state.searchTerm.length == 0) && (
+								<OfflineMessage
+									message={`There's nothing to show here at the moment.${"\n"}Touch here to go to All Recipes &${"\n"}Chefs and find some chefs to follow.${"\n"}(or clear your filters)`}
+									topOffset={'10%'}
+									clearOfflineMessage={() => { this.setState({ renderNoRecipesMessage: false }) }}
+									delay={20000}
+									action={() => this.props.navigation.navigate('BrowseRecipes')}
+								/>
+							)}
+
+						{(this.props[this.props["listChoice"] + `_Recipes`].length > 0 || this.state.searchTerm != '') && (
+							<Animated.View
 								style={{
-									height: responsiveHeight(6.75),
-									// backgroundColor: 'red'
+									position: 'absolute',
+									zIndex: this.state.searchBarZIndex,
+									transform: [
+										{
+											translateY: this.state.yOffset.interpolate({
+												inputRange: [this.state.currentYTop, this.state.currentYTop + responsiveHeight(6.5)],
+												outputRange: [0, -responsiveHeight(6.5)],
+												extrapolate: "clamp"
+											})
+										},
+									]
 								}}
-								onPress={this.handleSearchBarFocus}
 							>
-							</TouchableOpacity>
+								<SearchBar
+									text={"Search for Recipes"}
+									searchTerm={this.state.searchTerm}
+									setSearchTerm={this.setSearchTerm}
+									searchBar={this.searchBar}
+									onBlur={() => {
+										if (this.state.currentYTop === 0) {
+											this.setState({ searchBarZIndex: 0 })
+										}
+									}}
+								/>
+							</Animated.View>
 						)}
-						data={this.props[this.props["listChoice"] + `_Recipes`]}
-						extraData={this.props.recipes_details}
-						renderItem={this.renderRecipeListItem}
-						keyExtractor={(item) => item.id.toString()}
-						onRefresh={this.refresh}
-						refreshing={false}
-						onEndReached={this.onEndReached}
-						onEndReachedThreshold={1}
-						// initialNumToRender={200}
-						onScroll={Animated.event(
-							[{ nativeEvent: { contentOffset: { y: this.state.yOffset } } }],
-							{
-								useNativeDriver: true,
-								listener: (e) => {
-									const y = e.nativeEvent.contentOffset.y
-									const isIncreasing = e.nativeEvent.velocity.y > 0
-									if (y <= 0) {
-										this.setState({
-											currentYTop: 0,
-											searchBarZIndex: 0
-										})
+						<AnimatedFlatList
+							ListHeaderComponent={() => (
+								<TouchableOpacity
+									style={{
+										height: responsiveHeight(6.75),
+										// backgroundColor: 'red'
+									}}
+									onPress={this.handleSearchBarFocus}
+								>
+								</TouchableOpacity>
+							)}
+							data={this.props[this.props["listChoice"] + `_Recipes`]}
+							extraData={this.props.recipes_details}
+							renderItem={this.renderRecipeListItem}
+							keyExtractor={(item) => item.id.toString()}
+							onRefresh={this.refresh}
+							refreshing={false}
+							onEndReached={this.onEndReached}
+							onEndReachedThreshold={1}
+							// initialNumToRender={200}
+							onScroll={Animated.event(
+								[{ nativeEvent: { contentOffset: { y: this.state.yOffset } } }],
+								{
+									useNativeDriver: true,
+									listener: (e) => {
+										const y = e.nativeEvent.contentOffset.y
+										const isIncreasing = e.nativeEvent.velocity.y > 0
+										if (y <= 0) {
+											this.setState({
+												currentYTop: 0,
+												searchBarZIndex: 0
+											})
+										}
+										// //if bigger than max input range and getting bigger
+										if (y > this.state.currentYTop + responsiveHeight(6.5) && isIncreasing) {
+											this.setState({
+												currentYTop: y - responsiveHeight(6.5),
+												searchBarZIndex: 1
+											})
+										}
+										//if smaller than min input range and getting smaller
+										if (y < this.state.currentYTop - responsiveHeight(6.5) && !isIncreasing) {
+											this.setState({
+												currentYTop: y,
+												searchBarZIndex: 1
+											})
+										}
 									}
-									// //if bigger than max input range and getting bigger
-									if (y > this.state.currentYTop + responsiveHeight(6.5) && isIncreasing) {
-										this.setState({
-											currentYTop: y - responsiveHeight(6.5),
-											searchBarZIndex: 1
-										})
-									}
-									//if smaller than min input range and getting smaller
-									if (y < this.state.currentYTop - responsiveHeight(6.5) && !isIncreasing) {
-										this.setState({
-											currentYTop: y,
-											searchBarZIndex: 1
-										})
-									}
-								}
-							},
-						)}
-						nestedScrollEnabled={true}
-						listKey={this.props[this.props["listChoice"] + `_Recipes`]}
-					/>
-					{this.state.filterDisplayed ? <FilterMenu handleFilterButton={this.handleFilterButton} refresh={this.refresh} closeFilterAndRefresh={this.closeFilterAndRefresh} confirmButtonText={`Apply \n& Close`} title={"Apply filters to recipes list"} /> : null}
+								},
+							)}
+							nestedScrollEnabled={true}
+							listKey={this.props[this.props["listChoice"] + `_Recipes`]}
+						/>
+						{this.state.filterDisplayed ? <FilterMenu handleFilterButton={this.handleFilterButton} refresh={this.refresh} closeFilterAndRefresh={this.closeFilterAndRefresh} confirmButtonText={`Apply \n& Close`} title={"Apply filters to recipes list"} /> : null}
+					</TouchableOpacity>
+					<TouchableOpacity style={styles.filterButton} activeOpacity={0.7} onPress={this.handleFilterButton} testID={"filterButton"}>
+							<Icon name='filter' size={responsiveHeight(3.5)} style={styles.filterIcon} />
+						</TouchableOpacity>
 				</SpinachAppContainer>
 			)
 		}

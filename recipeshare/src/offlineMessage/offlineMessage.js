@@ -44,9 +44,10 @@ const OfflineMessage = (props) => {
 				<TouchableOpacity
 					activeOpacity={0.7}
 					onPress={props.action}
-					style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly'}}
+					style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}
 				>
 					<Text
+						maxFontSizeMultiplier={2.5}
 						style={styles.messageText}
 					>
 						{props.message}
@@ -54,11 +55,12 @@ const OfflineMessage = (props) => {
 					<Icon
 						name='forwardburger'
 						size={responsiveHeight(5)}
-						style={{ color: '#fff59b', marginRight: responsiveWidth(2)}}
+						style={{ color: '#fff59b', marginRight: responsiveWidth(2) }}
 					/>
 				</TouchableOpacity>
 			) : (
 					<Text
+						maxFontSizeMultiplier={2.5}
 						style={styles.messageText}
 					>
 						{props.message}
