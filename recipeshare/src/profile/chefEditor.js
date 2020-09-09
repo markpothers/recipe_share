@@ -184,11 +184,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							<View style={styles.titleContainer}>
 								<Text maxFontSizeMultiplier={2} style={styles.title}>Update your profile & password</Text>
 							</View>
-							<View style={[centralStyles.formSection, { width: '86%' }]}>
+							{/* <View style={[centralStyles.formSection, { width: '86%' }]}>
 								<View style={centralStyles.formInputContainer}>
 									<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.username} placeholder="username" autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "username")} />
 								</View>
-							</View>
+							</View> */}
 							<View style={[centralStyles.formSection, { width: '86%' }]}>
 								<View style={centralStyles.formInputContainer} >
 									<TextInput maxFontSizeMultiplier={2} style={[centralStyles.formInput, {}]} value={this.props.profile_text} placeholder="about me" multiline={true} numberOfLines={3} onChange={(e) => this.handleTextInput(e, "profile_text")} />

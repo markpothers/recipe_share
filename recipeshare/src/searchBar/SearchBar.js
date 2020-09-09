@@ -10,27 +10,38 @@ export default function SearchBar(props) {
 	// console.log(props)
 	return (
 		<View
-			style={[centralStyles.formContainer,
-			{
-				width: responsiveWidth(100),
-				marginLeft: 0,
-				marginBottom: responsiveHeight(0.25),
-				// borderWidth: 1
-			}
-			]}>
-			<View style={centralStyles.formSection}>
-				<View style={[centralStyles.formInputContainer,
+			style={
 				{
-					flexDirection: 'column',
-					backgroundColor: 'blue',
-					flexWrap: 'nowrap',
-					// borderWidth: 1,
-					alignItems: null
+					justifyContent: 'center',
+					alignItems: 'center',
+					marginLeft: 0,
+					marginBottom: responsiveHeight(0.25),
 				}
-				]}>
+			}>
+			<View style={centralStyles.formSection}>
+				<View style={
+					{
+						flexDirection: 'row',
+						marginTop: responsiveHeight(0.5),
+						width: responsiveWidth(100),
+						justifyContent: 'space-between',
+						alignItems: 'center',
+						backgroundColor: 'white',
+						borderRadius: 5,
+						borderWidth: 1,
+						borderColor: '#104e01',
+						overflow: 'hidden',
+					}
+				}>
 					<TextInput
 						maxFontSizeMultiplier={2}
-						style={[centralStyles.formInput, { position: 'absolute' }]}
+						style={{
+							minHeight: responsiveHeight(6),
+							backgroundColor: 'white',
+							textAlign: 'left',
+							textAlignVertical: 'center',
+							paddingLeft: responsiveWidth(2),
+						}}
 						value={props.searchTerm}
 						placeholder={props.text}
 						keyboardType="default"
@@ -41,17 +52,20 @@ export default function SearchBar(props) {
 						onBlur={props.onBlur}
 					/>
 					{props.searchTerm.length > 0 && (
-						<TouchableOpacity style={{
-							// backgroundColor: 'red',
-							left: responsiveWidth(87),
-							width: responsiveWidth(10),
-							height: '100%',
-							justifyContent: 'center',
-							alignItems: 'center',
-						}}
+						<TouchableOpacity
+							style={{
+								width: responsiveWidth(10),
+								height: '100%',
+								justifyContent: 'center',
+								alignItems: 'center',
+							}}
 							onPress={() => props.setSearchTerm("")}
 						>
-							<Icon name='close' size={responsiveHeight(3.5)} style={{ color: '#505050' }} />
+							<Icon
+								name='close'
+								size={responsiveHeight(3.5)}
+								style={{ color: '#505050' }}
+							/>
 						</TouchableOpacity>
 					)}
 				</View>

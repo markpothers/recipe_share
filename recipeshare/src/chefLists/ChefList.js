@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, AsyncStorage, Animated, TouchableOpacity, Keyboard } from 'react-native'
+import { FlatList, AsyncStorage, Animated, TouchableOpacity, Keyboard, Platform } from 'react-native'
 import ChefCard from './ChefCard'
 import { connect } from 'react-redux'
 import { getChefList } from '../fetches/getChefList'
@@ -54,6 +54,9 @@ const mapDispatchToProps = {
 		}
 	},
 }
+
+//variable to synchronously record FlatList y offset on ios since velocity is not available
+let previousScrollViewOffset = 0;
 
 export default connect(mapStateToProps, mapDispatchToProps)(
 	class ChefList extends React.Component {
@@ -323,8 +326,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									transform: [
 										{
 											translateY: this.state.yOffset.interpolate({
-												inputRange: [this.state.currentYTop, this.state.currentYTop + responsiveHeight(6.25)],
-												outputRange: [0, -responsiveHeight(6.25)],
+												inputRange: [this.state.currentYTop, this.state.currentYTop + responsiveHeight(7)],
+												outputRange: [0, -responsiveHeight(7)],
 												extrapolate: "clamp"
 											})
 										},
@@ -348,7 +351,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							ListHeaderComponent={() => (
 								<TouchableOpacity
 									style={{
-										height: responsiveHeight(6.75),
+										height: responsiveHeight(7),
 										// backgroundColor: 'red'
 									}}
 									onPress={this.handleSearchBarFocus}
@@ -368,28 +371,31 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								{
 									useNativeDriver: true,
 									listener: (e) => {
+										// console.log(previousScrollViewOffset)
 										const y = e.nativeEvent.contentOffset.y
-										const isIncreasing = e.nativeEvent.velocity.y > 0
+										// const isIncreasing = e.nativeEvent.velocity.y > 0
+										const isIncreasing = Platform.OS === 'ios' ? y > previousScrollViewOffset : e.nativeEvent.velocity.y > 0
 										if (y <= 0) {
 											this.setState({
 												currentYTop: 0,
-												searchBarZIndex: 0
+												searchBarZIndex: 0,
 											})
 										}
 										// //if bigger than max input range and getting bigger
-										if (y > this.state.currentYTop + responsiveHeight(6.25) && isIncreasing) {
+										if (y > this.state.currentYTop + responsiveHeight(7) && isIncreasing) {
 											this.setState({
-												currentYTop: y - responsiveHeight(6.25),
-												searchBarZIndex: 1
+												currentYTop: y - responsiveHeight(7),
+												searchBarZIndex: 1,
 											})
 										}
 										//if smaller than min input range and getting smaller
-										if (y < this.state.currentYTop - responsiveHeight(6.25) && !isIncreasing) {
+										if (y < this.state.currentYTop - responsiveHeight(7) && !isIncreasing) {
 											this.setState({
 												currentYTop: y,
-												searchBarZIndex: 1
+												searchBarZIndex: 1,
 											})
 										}
+										Platform.OS === 'ios' && (previousScrollViewOffset = y)
 									}
 								},
 							)}

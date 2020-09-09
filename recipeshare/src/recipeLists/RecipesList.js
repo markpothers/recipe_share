@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, TouchableOpacity, AsyncStorage, Animated, Keyboard } from 'react-native'
+import { FlatList, TouchableOpacity, AsyncStorage, Animated, Keyboard, Platform } from 'react-native'
 import RecipeCard from './RecipeCard'
 import { connect } from 'react-redux'
 import { getRecipeList } from '../fetches/getRecipeList'
@@ -75,6 +75,9 @@ const mapDispatchToProps = {
 	// },
 }
 
+	//variable to synchronously record FlatList y offset on ios since velocity is not available
+	let previousScrollViewOffset = 0;
+
 export default connect(mapStateToProps, mapDispatchToProps)(
 	class RecipesList extends React.Component {
 
@@ -93,10 +96,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				searchTerm: "",
 				yOffset: new Animated.Value(0),
 				currentYTop: 0,
-				searchBarZIndex: 0
+				searchBarZIndex: 0,
 			}
 		}
-
 
 		componentDidMount = async () => {
 			await this.setState({ awaitingServer: true })
@@ -107,6 +109,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			this._unsubscribeBlur = this.props.navigation.addListener('blur', () => {
 				this.respondToBlur()
 			})
+			// if (Platform.OS === 'ios'){
+			// 	this.state.yOffset.addListener(({value}) => this.setState({previousScrollViewOffset: value}))
+			// }
 			await this.setState({ awaitingServer: false })
 		}
 
@@ -557,8 +562,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									transform: [
 										{
 											translateY: this.state.yOffset.interpolate({
-												inputRange: [this.state.currentYTop, this.state.currentYTop + responsiveHeight(6.5)],
-												outputRange: [0, -responsiveHeight(6.5)],
+												inputRange: [this.state.currentYTop, this.state.currentYTop + responsiveHeight(7)],
+												outputRange: [0, -responsiveHeight(7)],
 												extrapolate: "clamp"
 											})
 										},
@@ -582,7 +587,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							ListHeaderComponent={() => (
 								<TouchableOpacity
 									style={{
-										height: responsiveHeight(6.75),
+										height: responsiveHeight(7),
 										// backgroundColor: 'red'
 									}}
 									onPress={this.handleSearchBarFocus}
@@ -603,28 +608,31 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								{
 									useNativeDriver: true,
 									listener: (e) => {
+										// console.log(e.nativeEvent)
 										const y = e.nativeEvent.contentOffset.y
-										const isIncreasing = e.nativeEvent.velocity.y > 0
+										// const isIncreasing = e.nativeEvent.velocity.y > 0
+										const isIncreasing = Platform.OS === 'ios' ? y > previousScrollViewOffset : e.nativeEvent.velocity.y > 0
 										if (y <= 0) {
 											this.setState({
 												currentYTop: 0,
-												searchBarZIndex: 0
+												searchBarZIndex: 0,
 											})
 										}
 										// //if bigger than max input range and getting bigger
-										if (y > this.state.currentYTop + responsiveHeight(6.5) && isIncreasing) {
+										if (y > this.state.currentYTop + responsiveHeight(7) && isIncreasing) {
 											this.setState({
-												currentYTop: y - responsiveHeight(6.5),
-												searchBarZIndex: 1
+												currentYTop: y - responsiveHeight(7),
+												searchBarZIndex: 1,
 											})
 										}
 										//if smaller than min input range and getting smaller
-										if (y < this.state.currentYTop - responsiveHeight(6.5) && !isIncreasing) {
+										if (y < this.state.currentYTop - responsiveHeight(7) && !isIncreasing) {
 											this.setState({
 												currentYTop: y,
-												searchBarZIndex: 1
+												searchBarZIndex: 1,
 											})
 										}
+										Platform.OS === 'ios' && (previousScrollViewOffset = y)
 									}
 								},
 							)}
@@ -634,8 +642,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						{this.state.filterDisplayed ? <FilterMenu handleFilterButton={this.handleFilterButton} refresh={this.refresh} closeFilterAndRefresh={this.closeFilterAndRefresh} confirmButtonText={`Apply \n& Close`} title={"Apply filters to recipes list"} /> : null}
 					</TouchableOpacity>
 					<TouchableOpacity style={styles.filterButton} activeOpacity={0.7} onPress={this.handleFilterButton} testID={"filterButton"}>
-							<Icon name='filter' size={responsiveHeight(3.5)} style={styles.filterIcon} />
-						</TouchableOpacity>
+						<Icon name='filter' size={responsiveHeight(3.5)} style={styles.filterIcon} />
+					</TouchableOpacity>
 				</SpinachAppContainer>
 			)
 		}

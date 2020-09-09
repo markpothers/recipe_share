@@ -105,6 +105,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			if (netInfoState.isConnected) {
 				await this.setState({ awaitingServer: true })
 				// console.log("sending new user details")
+				try{
 				const chef = await postChef(this.props.username, this.props.e_mail, this.props.password, this.props.password_confirmation, this.props.country, this.props.image_url, this.props.profile_text)
 				if (!chef.error) {
 					this.props.clearNewUserDetails()
@@ -113,11 +114,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					this.setState({ errors: chef.message })
 					await this.setState({ awaitingServer: false })
 				}
-			} else {
+			} catch (e) {
 				this.setState({
 					renderOfflineMessage: true,
 					awaitingServer: false
 				})
+			}
+			} else {
+				this.setState({renderOfflineMessage: true})
 			}
 		}
 

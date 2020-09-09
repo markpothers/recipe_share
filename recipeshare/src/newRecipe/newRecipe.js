@@ -724,7 +724,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					{this.state.alertPopUpShowing && this.renderAlertPopUp()}
 					< KeyboardAvoidingView
 						style={centralStyles.fullPageKeyboardAvoidingView}
-						behavior={(Platform.OS === "ios" ? "position" : "")}
+						behavior={(Platform.OS === "ios" ? "padding" : "")}
 					>
 						<ScrollView style={centralStyles.fullPageScrollView}
 							nestedScrollEnabled={true}

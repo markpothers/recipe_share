@@ -58,7 +58,6 @@ export default class ChefCard extends React.PureComponent {
 
 function AvatarImage(chefimage_url) {
 	const URL = chefimage_url.chefimage_url
-	// console.log(URL)
 	if (!URL) {
 		return (
 			<Image style={styles.avatarThumbnail} source={require("../dataComponents/peas.jpg")} resizeMode={"cover"} />

@@ -15,6 +15,7 @@ export class ChefFeedScreen extends React.Component {
 
 export class MyRecipesScreen extends React.Component {
 	render() {
+		// console.log(this.props)
 		return (
 			<RecipesList
 				listChoice={"chef"}

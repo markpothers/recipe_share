@@ -113,6 +113,7 @@ export const styles = StyleSheet.create({
 		alignSelf: 'center',
 		bottom: 0,
 		maxWidth: '100%',
+		// minWidth: responsiveWidth(20),
 		// height: 50,
 		flexDirection: 'row',
 		justifyContent: 'center',
@@ -122,7 +123,7 @@ export const styles = StyleSheet.create({
 	primaryImageBlob: {
 		color: '#fff59b',
 		// color: '#104e01',
-		marginHorizontal: responsiveWidth(1),
+		marginHorizontal: 2,
 		opacity: 0.75
 	}
 });

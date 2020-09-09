@@ -8,6 +8,8 @@ import { getNewPassword } from '../fetches/getNewPassword'
 import { loginChef } from '../fetches/loginChef'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
+import OfflineMessage from '../offlineMessage/offlineMessage'
+import NetInfo from '@react-native-community/netinfo'
 
 const mapStateToProps = (state) => ({
 	e_mail: state.loginUserDetails.e_mail,
@@ -52,6 +54,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			error: 'invalid ',
 			awaitingServer: false,
 			rememberEmail: false,
+			renderOfflineMessage: false,
 		}
 
 		handleTextInput = (e, parameter) => {
@@ -63,45 +66,58 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				if (res) {
 					let email = { nativeEvent: { text: JSON.parse(res) } }
 					this.handleTextInput(email, "e_mail")
-					this.setState({rememberEmail: true})
+					this.setState({ rememberEmail: true })
 				}
 			})
 		}
+
 		loginChef = async () => {
-			await this.setState({ awaitingServer: true })
-			if (this.state.rememberEmail) {
-				AsyncStorage.setItem('rememberedEmail', JSON.stringify(this.props.e_mail))
-			} else {
-				AsyncStorage.removeItem('rememberedEmail')
-			}
-			//   console.log("sending login")
-			const chef = await loginChef(this.props)
-			if (!chef.error) {
-				if (this.props.stayingLoggedIn) {
-					AsyncStorage.setItem('chef', JSON.stringify(chef), () => {
-						// AsyncStorage.getItem('chef', (err, res) => {
-						// console.log(err)
-						this.props.clearLoginUserDetails()
-						this.props.updateLoggedInChefInState(chef.id, chef.username, chef.auth_token, chef.image_url, chef.is_admin, chef.is_member)
-						this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: true })
-						// })
-					})
+			let netInfoState = await NetInfo.fetch()
+			if (netInfoState.isConnected) {
+				await this.setState({ awaitingServer: true })
+				if (this.state.rememberEmail) {
+					AsyncStorage.setItem('rememberedEmail', JSON.stringify(this.props.e_mail))
 				} else {
-					this.props.updateLoggedInChefInState(chef.id, chef.username, chef.auth_token, chef.image_url, chef.is_admin, chef.is_member)
-					this.props.clearLoginUserDetails()
-					await this.setState({
-						loginError: false,
+					AsyncStorage.removeItem('rememberedEmail')
+				}
+				//   console.log("sending login")
+				try {
+					const chef = await loginChef(this.props)
+					if (!chef.error) {
+						if (this.props.stayingLoggedIn) {
+							AsyncStorage.setItem('chef', JSON.stringify(chef), () => {
+								// AsyncStorage.getItem('chef', (err, res) => {
+								// console.log(err)
+								this.props.clearLoginUserDetails()
+								this.props.updateLoggedInChefInState(chef.id, chef.username, chef.auth_token, chef.image_url, chef.is_admin, chef.is_member)
+								this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: true })
+								// })
+							})
+						} else {
+							this.props.updateLoggedInChefInState(chef.id, chef.username, chef.auth_token, chef.image_url, chef.is_admin, chef.is_member)
+							this.props.clearLoginUserDetails()
+							await this.setState({
+								loginError: false,
+								awaitingServer: false
+							})
+							this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: true })
+						}
+					} else {
+						// console.log(chef.message)
+						await this.setState({
+							awaitingServer: false,
+							loginError: true,
+							error: chef.message
+						})
+					}
+				} catch (e) {
+					this.setState({
+						renderOfflineMessage: true,
 						awaitingServer: false
 					})
-					this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: true })
 				}
 			} else {
-				// console.log(chef.message)
-				await this.setState({
-					awaitingServer: false,
-					loginError: true,
-					error: chef.message
-				})
+				this.setState({ renderOfflineMessage: true })
 			}
 		}
 
@@ -122,10 +138,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			// console.log(this.props)
 			return (
 				<SpinachAppContainer scrollingEnabled={true} awaitingServer={this.state.awaitingServer}>
+					{this.state.renderOfflineMessage && (
+						<OfflineMessage
+							message={`Sorry, can't log in right now.${"\n"}You appear to be offline.`}
+							topOffset={'10%'}
+							clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
+						/>)
+					}
 					<TouchableOpacity
 						activeOpacity={1}
 						onPress={Keyboard.dismiss}
-						style={{flex:1}}
+						style={{ flex: 1 }}
 					>
 						<View style={styles.logoContainer}>
 							<Image style={styles.logo} resizeMode={"contain"} source={require('../dataComponents/yellowLogo.png')} />
@@ -147,7 +170,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								</View>
 								{this.state.loginError && (
 									<View style={centralStyles.formErrorView}>
-										{this.state.error === 'invalid' && <Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>Username and password combination not recognized</Text>}
+										{this.state.error === 'invalid' && <Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>E-mail and password combination not recognized</Text>}
 										{this.state.error === 'password_expired' && <Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>Automatically generated password has expired.  Please reset your password.</Text>}
 										{this.state.error === 'activation' && <Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>Account not yet activated.  Please click the link in your confirmation e-mail. (Don&apos;t forget to check spam!)</Text>}
 										{this.state.error === 'deactivated' && <Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>This account was deactivated.  Reset your password to reactivate your account.</Text>}

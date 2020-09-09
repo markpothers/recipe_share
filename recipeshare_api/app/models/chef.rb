@@ -51,15 +51,15 @@ class Chef < ApplicationRecord
                                                 MAX(chefs.image_url) AS image_url,
                                                 MAX(chefs.created_at) AS created_at,
                                                 MAX(chefs.profile_text) AS profile_text,
-                                                COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id AND follows.hidden = false), 0) AS followers,
-                                                COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id AND follows.hidden = false AND follows.follower_id = ?), 0) AS user_chef_following,
-                                                COALESCE((SELECT COUNT(*) FROM recipes WHERE recipes.chef_id = chefs.id AND recipes.hidden = false), 0) AS recipe_count,
-                                                COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.chef_id = chefs.id AND recipe_likes.hidden = false), 0) AS recipe_likes_given,
-                                                COALESCE(MAX(liked_recipes.liked_count), 0) AS recipe_likes_received,
-                                                COALESCE((SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.chef_id = chefs.id AND recipe_makes.hidden = false), 0) AS recipe_makes_given,
-                                                COALESCE(MAX(made_recipes.made_count), 0) AS recipe_makes_received,
-                                                COALESCE((SELECT COUNT(*) FROM comments WHERE comments.chef_id = chefs.id AND comments.hidden = false), 0) AS comments_given,
-                                                COALESCE(MAX(commented_recipes.comments_count), 0) AS comments_received
+												COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id AND follows.hidden = false), 0) AS followers,
+												COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id AND follows.hidden = false AND follows.follower_id = ?), 0) AS user_chef_following,
+												COALESCE((SELECT COUNT(*) FROM recipes WHERE recipes.chef_id = chefs.id AND recipes.hidden = false), 0) AS recipe_count,
+												COALESCE((SELECT COUNT(*) FROM recipe_likes JOIN recipes ON recipe_likes.recipe_id = recipes.id WHERE recipe_likes.chef_id = chefs.id AND recipe_likes.hidden = false AND recipes.hidden = false), 0) AS recipe_likes_given,
+												COALESCE(MAX(liked_recipes.liked_count), 0) AS recipe_likes_received,
+												COALESCE((SELECT COUNT(*) FROM recipe_makes JOIN recipes ON recipe_makes.recipe_id = recipes.id  WHERE recipe_makes.chef_id = chefs.id AND recipe_makes.hidden = false AND recipes.hidden = false AND recipes.hidden = false), 0) AS recipe_makes_given,
+												COALESCE(MAX(made_recipes.made_count), 0) AS recipe_makes_received,
+												COALESCE((SELECT COUNT(*) FROM comments JOIN recipes ON comments.recipe_id = recipes.id  WHERE comments.chef_id = chefs.id AND comments.hidden = false), 0) AS comments_given,
+												COALESCE(MAX(commented_recipes.comments_count), 0) AS comments_received
                                             FROM CHEFS
                                             LEFT OUTER JOIN (
                                                 SELECT recipes.chef_id AS counter_chef_id, COUNT(*) AS liked_count FROM recipe_likes
@@ -95,15 +95,15 @@ class Chef < ApplicationRecord
                                                 MAX(chefs.created_at) AS created_at,
                                                 MAX(chefs.profile_text) AS profile_text,
                                                 MAX(follows.created_at) AS follow_created,
-                                                COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id AND follows.hidden = false), 0) AS followers,
-                                                COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id AND follows.hidden = false AND follows.follower_id = ?), 0) AS user_chef_following,
-                                                COALESCE((SELECT COUNT(*) FROM recipes WHERE recipes.chef_id = chefs.id AND recipes.hidden = false), 0) AS recipe_count,
-                                                COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.chef_id = chefs.id AND recipe_likes.hidden = false), 0) AS recipe_likes_given,
-                                                COALESCE(MAX(liked_recipes.liked_count), 0) AS recipe_likes_received,
-                                                COALESCE((SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.chef_id = chefs.id AND recipe_makes.hidden = false), 0) AS recipe_makes_given,
-                                                COALESCE(MAX(made_recipes.made_count), 0) AS recipe_makes_received,
-                                                COALESCE((SELECT COUNT(*) FROM comments WHERE comments.chef_id = chefs.id AND comments.hidden = false), 0) AS comments_given,
-                                                COALESCE(MAX(commented_recipes.comments_count), 0) AS comments_received
+												COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id AND follows.hidden = false), 0) AS followers,
+												COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id AND follows.hidden = false AND follows.follower_id = ?), 0) AS user_chef_following,
+												COALESCE((SELECT COUNT(*) FROM recipes WHERE recipes.chef_id = chefs.id AND recipes.hidden = false), 0) AS recipe_count,
+												COALESCE((SELECT COUNT(*) FROM recipe_likes JOIN recipes ON recipe_likes.recipe_id = recipes.id WHERE recipe_likes.chef_id = chefs.id AND recipe_likes.hidden = false AND recipes.hidden = false), 0) AS recipe_likes_given,
+												COALESCE(MAX(liked_recipes.liked_count), 0) AS recipe_likes_received,
+												COALESCE((SELECT COUNT(*) FROM recipe_makes JOIN recipes ON recipe_makes.recipe_id = recipes.id  WHERE recipe_makes.chef_id = chefs.id AND recipe_makes.hidden = false AND recipes.hidden = false AND recipes.hidden = false), 0) AS recipe_makes_given,
+												COALESCE(MAX(made_recipes.made_count), 0) AS recipe_makes_received,
+												COALESCE((SELECT COUNT(*) FROM comments JOIN recipes ON comments.recipe_id = recipes.id  WHERE comments.chef_id = chefs.id AND comments.hidden = false), 0) AS comments_given,
+												COALESCE(MAX(commented_recipes.comments_count), 0) AS comments_received
                                             FROM CHEFS
                                             LEFT OUTER JOIN (
                                                 SELECT recipes.chef_id AS counter_chef_id, COUNT(*) AS liked_count FROM recipe_likes
@@ -144,11 +144,11 @@ class Chef < ApplicationRecord
                                             COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id AND follows.hidden = false), 0) AS followers,
                                             COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id AND follows.hidden = false AND follows.follower_id = ?), 0) AS user_chef_following,
                                             COALESCE((SELECT COUNT(*) FROM recipes WHERE recipes.chef_id = chefs.id AND recipes.hidden = false), 0) AS recipe_count,
-                                            COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.chef_id = chefs.id AND recipe_likes.hidden = false), 0) AS recipe_likes_given,
+                                            COALESCE((SELECT COUNT(*) FROM recipe_likes JOIN recipes ON recipe_likes.recipe_id = recipes.id WHERE recipe_likes.chef_id = chefs.id AND recipe_likes.hidden = false AND recipes.hidden = false), 0) AS recipe_likes_given,
                                             COALESCE(MAX(liked_recipes.liked_count), 0) AS recipe_likes_received,
-                                            COALESCE((SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.chef_id = chefs.id AND recipe_makes.hidden = false), 0) AS recipe_makes_given,
+                                            COALESCE((SELECT COUNT(*) FROM recipe_makes JOIN recipes ON recipe_makes.recipe_id = recipes.id  WHERE recipe_makes.chef_id = chefs.id AND recipe_makes.hidden = false AND recipes.hidden = false AND recipes.hidden = false), 0) AS recipe_makes_given,
                                             COALESCE(MAX(made_recipes.made_count), 0) AS recipe_makes_received,
-                                            COALESCE((SELECT COUNT(*) FROM comments WHERE comments.chef_id = chefs.id AND comments.hidden = false), 0) AS comments_given,
+                                            COALESCE((SELECT COUNT(*) FROM comments JOIN recipes ON comments.recipe_id = recipes.id  WHERE comments.chef_id = chefs.id AND comments.hidden = false), 0) AS comments_given,
                                             COALESCE(MAX(commented_recipes.comments_count), 0) AS comments_received
                                         FROM CHEFS
                                         LEFT OUTER JOIN (
@@ -194,11 +194,11 @@ class Chef < ApplicationRecord
                                             COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id AND follows.hidden = false), 0) AS followers,
                                             COALESCE((SELECT COUNT(*) FROM follows WHERE follows.followee_id = chefs.id AND follows.hidden = false AND follows.follower_id = ?), 0) AS user_chef_following,
                                             COALESCE((SELECT COUNT(*) FROM recipes WHERE recipes.chef_id = chefs.id AND recipes.hidden = false), 0) AS recipe_count,
-                                            COALESCE((SELECT COUNT(*) FROM recipe_likes WHERE recipe_likes.chef_id = chefs.id AND recipe_likes.hidden = false), 0) AS recipe_likes_given,
+                                            COALESCE((SELECT COUNT(*) FROM recipe_likes JOIN recipes ON recipe_likes.recipe_id = recipes.id WHERE recipe_likes.chef_id = chefs.id AND recipe_likes.hidden = false AND recipes.hidden = false), 0) AS recipe_likes_given,
                                             COALESCE(MAX(liked_recipes.liked_count), 0) AS recipe_likes_received,
-                                            COALESCE((SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.chef_id = chefs.id AND recipe_makes.hidden = false), 0) AS recipe_makes_given,
+                                            COALESCE((SELECT COUNT(*) FROM recipe_makes JOIN recipes ON recipe_makes.recipe_id = recipes.id  WHERE recipe_makes.chef_id = chefs.id AND recipe_makes.hidden = false AND recipes.hidden = false AND recipes.hidden = false), 0) AS recipe_makes_given,
                                             COALESCE(MAX(made_recipes.made_count), 0) AS recipe_makes_received,
-                                            COALESCE((SELECT COUNT(*) FROM comments WHERE comments.chef_id = chefs.id AND comments.hidden = false), 0) AS comments_given,
+                                            COALESCE((SELECT COUNT(*) FROM comments JOIN recipes ON comments.recipe_id = recipes.id  WHERE comments.chef_id = chefs.id AND comments.hidden = false), 0) AS comments_given,
                                             COALESCE(MAX(commented_recipes.comments_count), 0) AS comments_received
                                         FROM CHEFS
                                         LEFT OUTER JOIN (
@@ -231,7 +231,8 @@ class Chef < ApplicationRecord
     def get_details(userChef)
         # byebug
         recipes = Recipe.where(chef_id: self.id, hidden: false).order('updated_at DESC')
-        recipe_ids = recipes.map{|recipe| recipe.id}
+		recipe_ids = recipes.map{|recipe| recipe.id}
+		# byebug
         return chef_details = {
             chef: {id: self.id,
                     username: self.username,
@@ -240,10 +241,10 @@ class Chef < ApplicationRecord
                     created_at: self.created_at,
                     profile_text: self.profile_text},
             comments: Comment.where(chef_id: self.id, hidden: false).order('updated_at DESC'),
-            recipe_likes: RecipeLike.where(chef_id: self.id, hidden: false),
-            recipe_makes: RecipeMake.where(chef_id: self.id, hidden: false),
-            re_shares: ReShare.where(chef_id: self.id, hidden: false),
-            make_pics: MakePic.where(chef_id: self.id, hidden: false).order('updated_at DESC'),
+            recipe_likes: RecipeLike.joins(:recipe).where(chef_id: self.id, hidden: false, recipes: {hidden: false}),
+            recipe_makes: RecipeMake.joins(:recipe).where(chef_id: self.id, hidden: false, recipes: {hidden: false}),
+            re_shares: ReShare.joins(:recipe).where(chef_id: self.id, hidden: false, recipes: {hidden: false}),
+            make_pics: MakePic.joins(:recipe).where(chef_id: self.id, hidden: false, recipes: {hidden: false}).order('updated_at DESC'),
             recipes: recipes,
             recipe_likes_received: RecipeLike.where(recipe_id: recipe_ids, hidden: false),
             recipe_makes_received: RecipeMake.where(recipe_id: recipe_ids, hidden: false),
@@ -278,7 +279,7 @@ class Chef < ApplicationRecord
         self.update_attribute(:deactivated, true)
         self.update_attribute(:username, "Anonymous")
         self.update_attribute(:profile_text, "This chef has deactivated their profile but allowed us to keep displaying their recipes.")
-        self.update_attribute(:image_url, "/peas.jpg")
+        self.update_attribute(:image_url, "")
         self.update_attribute(:hex, "")
     end
 

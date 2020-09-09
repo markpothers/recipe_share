@@ -23,7 +23,8 @@ export const loginChef = (chef) => {
 					resolve(chef)
 				}
 			})
-			.catch(error => {
+			.catch(e => {
+				reject(e)
 			})
 	})
 }

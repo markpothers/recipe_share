@@ -82,7 +82,7 @@ const initialState = {
     profile_text: "I like baking bread"
   },
   loginUserDetails: {
-    e_mail: "markpothers@hotmail.com",
+    e_mail: "marquis.wilderman@fisher.co",
     password: "123456"
   },
   chefs: {

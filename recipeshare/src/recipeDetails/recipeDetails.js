@@ -919,6 +919,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 										keyExtractor={(item) => item.hex}
 										horizontal={true}
 										style={styles.primaryImageFlatList}
+										initialNumToRender={10}
 										// contentContainerStyle={styles.primaryImageFlatListContentContainer}
 										pagingEnabled={true}
 										onLayout={(event) => {

@@ -3,7 +3,7 @@ import { Image, ScrollView, View } from 'react-native';
 import { connect } from 'react-redux'
 import { styles } from './chefDetailsStyleSheet'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
-// import { getChefDetails } from '../fetches/getChefDetails'
+import { getChefDetails } from '../fetches/getChefDetails'
 import ChefDetailsCard from './ChefDetailsCard'
 import { ChefRecipeBookTabs } from './ChefDetailsNavigators'
 import { postFollow } from '../fetches/postFollow'
@@ -118,6 +118,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			// this.props.clearChefDetails()
 		}
 
+		fetchChefDetails = async() => {
+			const chefDetails = await getChefDetails(this.props.route.params.chefID, this.props.loggedInChef.auth_token)
+			if (chefDetails) {
+				this.props.storeChefDetails(chefDetails)
+			}
+		}
+
 		renderChefImage = () => {
 			const chef = this.props.chefs_details[`chef${this.props.route.params.chefID}`]
 			if (chef != undefined) {
@@ -197,6 +204,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							<View style={styles.recipeBookContainer}>
 								<ChefRecipeBookTabs
 									queryChefID={chef_details.chef.id}
+									fetchChefDetails={this.fetchChefDetails}
 								/>
 							</View>
 						</ScrollView>

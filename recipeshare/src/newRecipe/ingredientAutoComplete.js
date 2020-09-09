@@ -121,7 +121,7 @@ export default class IngredientAutoComplete extends React.Component {
 									maxFontSizeMultiplier={2}
 									style={styles.ingredientTextAdjustment}
 									placeholder="Qty"
-									keyboardType="phone-pad"
+									keyboardType="decimal-pad"
 									onChange={(e) => this.props.updateIngredientEntry(ingredientIndex, ingredient.name, e.nativeEvent.text, ingredient.unit)}
 									value={ingredient.quantity}
 								/>

@@ -98,7 +98,7 @@ class ChefsController < ApplicationController
     def update
         # byebug
         @chef = Chef.find(params[:id])
-        @chef.username != chef_params[:username] ? @chef.update_attribute(:username, chef_params[:username]) : nil
+        # @chef.username != chef_params[:username] ? @chef.update_attribute(:username, chef_params[:username]) : nil
         @chef.profile_text != chef_params[:profile_text] ? @chef.update_attribute(:profile_text, chef_params[:profile_text]) : nil
         @chef.country != chef_params[:country] ? @chef.update_attribute(:country, chef_params[:country]) : nil
         if image_params[:image_url] == "DELETED"
@@ -115,9 +115,10 @@ class ChefsController < ApplicationController
         end
 
         if chef_params[:updatingPassword]
-            if chef_params[:password] == chef_params[:password_confirmation]
+			if chef_params[:password] == chef_params[:password_confirmation]
+				byebug
                 @chef.password = chef_params[:password]
-                @chef.password_confirmation = chef_params[:password_conformation]
+                @chef.password_confirmation = chef_params[:password_confrmation]
                 @chef.password_is_auto = false
                 @chef.password_created_at = Time.now
                 if @chef.save

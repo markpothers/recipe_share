@@ -42,12 +42,12 @@ export const ChefRecipeBookTabs = (props) => {
 			<Tab.Screen
 				name="My Recipes"
 			>
-				{props => <MyRecipesScreen {...props} queryChefID={fwdProps.queryChefID} />}
+				{props => <MyRecipesScreen {...props} queryChefID={fwdProps.queryChefID} fetchChefDetails={fwdProps.fetchChefDetails} />}
 			</Tab.Screen>
 			<Tab.Screen
 				name="Recipes I like"
 			>
-				{props => <MyLikedRecipesScreen {...props} queryChefID={fwdProps.queryChefID} />}
+				{props => <MyLikedRecipesScreen {...props} queryChefID={fwdProps.queryChefID} fetchChefDetails={fwdProps.fetchChefDetails} />}
 			</Tab.Screen>
 			{/* <Tab.Screen
 				name="Recipes I've made"
@@ -57,12 +57,12 @@ export const ChefRecipeBookTabs = (props) => {
 			<Tab.Screen
 				name="Chefs I Follow"
 			>
-				{props => <ChefsFollowedScreen {...props} queryChefID={fwdProps.queryChefID} />}
+				{props => <ChefsFollowedScreen {...props} queryChefID={fwdProps.queryChefID} fetchChefDetails={fwdProps.fetchChefDetails} />}
 			</Tab.Screen>
 			<Tab.Screen
 				name="Chefs Following Me"
 			>
-				{props => <ChefsFollowingScreen {...props} queryChefID={fwdProps.queryChefID} />}
+				{props => <ChefsFollowingScreen {...props} queryChefID={fwdProps.queryChefID} fetchChefDetails={fwdProps.fetchChefDetails} />}
 			</Tab.Screen>
 		</Tab.Navigator>
 	)
