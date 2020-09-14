@@ -434,6 +434,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		submitRecipe = async () => {
+			// console.log('submitting')
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
 				await this.setState({ awaitingServer: true })
@@ -725,6 +726,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					< KeyboardAvoidingView
 						style={centralStyles.fullPageKeyboardAvoidingView}
 						behavior={(Platform.OS === "ios" ? "padding" : "")}
+						keyboardVerticalOffset={Platform.OS === 'ios' ? responsiveHeight(9) + 20 : 0}
 					>
 						<ScrollView style={centralStyles.fullPageScrollView}
 							nestedScrollEnabled={true}
@@ -741,13 +743,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								{/* recipe name */}
 								<View style={centralStyles.formSection}>
 									<View style={centralStyles.formInputContainer}>
-										<TextInput
-											multiline={true}
-											maxFontSizeMultiplier={2}
-											style={centralStyles.formInput}
-											value={this.state.newRecipeDetails.name}
-											placeholder="Recipe name"
-											onChangeText={(t) => this.handleInput(t, "name")} />
+										<View style={centralStyles.formInputWhiteBackground}>
+											<TextInput
+												multiline={true}
+												maxFontSizeMultiplier={2}
+												style={centralStyles.formInput}
+												value={this.state.newRecipeDetails.name}
+												placeholder="Recipe name"
+												onChangeText={(t) => this.handleInput(t, "name")} />
+										</View>
 									</View>
 								</View>
 								{/* separator */}
@@ -791,6 +795,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								{/* description */}
 								<View style={centralStyles.formSection}>
 									<View style={centralStyles.formInputContainer}>
+									<View style={centralStyles.formInputWhiteBackground}>
 										<TextInput
 											multiline={true}
 											numberOfLines={3}
@@ -799,6 +804,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											value={this.state.newRecipeDetails.description}
 											placeholder="Tell us about this recipe"
 											onChangeText={(t) => this.handleInput(t, "description")} />
+									</View>
 									</View>
 								</View>
 								{/* separator */}
@@ -811,7 +817,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									<View style={[centralStyles.formInputContainer, { justifyContent: 'center' }]}>
 										<TouchableOpacity style={[centralStyles.yellowRectangleButton, { maxWidth: '75%', width: '75%', justifyContent: 'center' }]} activeOpacity={0.7} onPress={this.choosePrimaryPicture}>
 											<Icon style={centralStyles.greenButtonIcon} size={25} name='camera'></Icon>
-											<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { marginLeft: responsiveWidth(3), fontSize: responsiveFontSize(2.3) }]}>Pictures</Text>
+											<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { marginLeft: responsiveWidth(3), fontSize: responsiveFontSize(2.3) }]}>Cover Pictures</Text>
 										</TouchableOpacity>
 									</View>
 								</View>
@@ -930,7 +936,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								{/* acknowledgement */}
 								<View style={centralStyles.formSection}>
 									<View style={centralStyles.formInputContainer}>
+									<View style={centralStyles.formInputWhiteBackground}>
 										<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.state.newRecipeDetails.acknowledgement} placeholder="Acknowledge your recipe's source if it's not yourself" onChangeText={(t) => this.handleInput(t, "acknowledgement")} />
+									</View>
 									</View>
 								</View>
 								{/* time and difficulty titles */}
@@ -982,11 +990,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								{/* submit */}
 								<View style={[centralStyles.formSection, { width: responsiveWidth(80) }]}>
 									<View style={centralStyles.formInputContainer}>
-										<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={this.askToReset}>
+										<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={this.askToReset} disabled={this.state.awaitingServer}>
 											<Icon style={centralStyles.greenButtonIcon} size={25} name='alert-circle-outline'></Icon>
 											<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { fontSize: responsiveFontSize(2.2) }]}>Clear</Text>
 										</TouchableOpacity>
-										<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={e => this.submitRecipe(e)}>
+										<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={e => this.submitRecipe(e)} disabled={this.state.awaitingServer}>
 											<Icon style={centralStyles.greenButtonIcon} size={25} name='login'></Icon>
 											<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { fontSize: responsiveFontSize(2.2) }]}>Submit</Text>
 										</TouchableOpacity>

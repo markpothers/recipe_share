@@ -18,17 +18,19 @@ exports[`Recipe Card can be rendered using different props including a really lo
   <View
     style={
       Object {
+        "alignItems": "center",
         "borderBottomColor": "#104e01",
         "borderBottomWidth": 0.5,
         "flexDirection": "row",
         "marginLeft": "1.6%",
         "marginRight": "2%",
-        "paddingBottom": "1%",
-        "paddingTop": "1%",
+        "paddingBottom": 6.67,
+        "paddingTop": 6.67,
         "width": "96.4%",
       }
     }
   >
+    <Text />
     <Text
       maxFontSizeMultiplier={2}
       style={
@@ -261,9 +263,11 @@ exports[`Recipe Card can be rendered using different props including a really lo
     onStartShouldSetResponder={[Function]}
     style={
       Object {
+        "alignItems": "center",
+        "alignSelf": "center",
         "height": 500.25,
         "opacity": 1,
-        "width": "100%",
+        "width": 750,
       }
     }
   >
@@ -418,17 +422,19 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
   <View
     style={
       Object {
+        "alignItems": "center",
         "borderBottomColor": "#104e01",
         "borderBottomWidth": 0.5,
         "flexDirection": "row",
         "marginLeft": "1.6%",
         "marginRight": "2%",
-        "paddingBottom": "1%",
-        "paddingTop": "1%",
+        "paddingBottom": 6.67,
+        "paddingTop": 6.67,
         "width": "96.4%",
       }
     }
   >
+    <Text />
     <Text
       maxFontSizeMultiplier={2}
       style={
@@ -661,9 +667,11 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     onStartShouldSetResponder={[Function]}
     style={
       Object {
+        "alignItems": "center",
+        "alignSelf": "center",
         "height": 500.25,
         "opacity": 1,
-        "width": "100%",
+        "width": 750,
       }
     }
   >

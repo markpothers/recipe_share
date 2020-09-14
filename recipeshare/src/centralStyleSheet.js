@@ -5,7 +5,7 @@ const inDevelopment = false
 
 export const centralStyles = StyleSheet.create({
 	activityIndicator: {
-		left: 1.3,
+		left: 1.25,
 		top: 1.7
 	},
 	activityIndicatorContainer: {
@@ -86,25 +86,34 @@ export const centralStyles = StyleSheet.create({
 		flexDirection: 'row',
 		marginTop: responsiveHeight(0.5),
 		width: '100%',
-		borderWidth: inDevelopment ? 1 : 0,
-		borderColor: 'red',
 		justifyContent: 'space-between',
 		alignItems: 'center',
 		borderRadius: 5,
 		overflow: 'hidden',
 		flexWrap: 'wrap',
 		minHeight: responsiveHeight(6),
-		// backgroundColor: 'red'
+		// backgroundColor: 'white'
+	},
+	formInputWhiteBackground: {
+		flexDirection: 'row',
+		backgroundColor: 'white',
+		height: '100%',
+		width: '100%',
+		alignItems: 'center',
+		borderWidth: 1,
+		borderColor: '#104e01',
+		overflow: 'hidden',
+		borderRadius: 5
 	},
 	formInput: {
-		minHeight: responsiveHeight(6),
+		// minHeight: responsiveHeight(6),
 		width: '100%',
-		backgroundColor: 'white',
+		// backgroundColor: 'white',
 		textAlign: 'left',
 		textAlignVertical: 'center',
 		borderRadius: 5,
-		borderWidth: 1,
-		borderColor: '#104e01',
+		// borderWidth: 1,
+		// borderColor: '#104e01',
 		paddingLeft: responsiveWidth(2),
 		fontSize: responsiveFontSize(2),
 		paddingVertical: responsiveHeight(0.5)

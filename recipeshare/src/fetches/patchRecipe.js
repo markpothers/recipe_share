@@ -20,12 +20,13 @@ export const patchRecipe = async(
 	description
 ) => {
 
+
 	let primaryImagesForRails = await Promise.all(primaryImages.map(async (image, index) => {
 		// if image is in a file
 		if (image.uri) {
 			return {
 				index: index,
-				base64: await getBase64FromFile(image.fileUri)
+				base64: await getBase64FromFile(image.uri)
 			}
 		// if image was already part of the recipe
 		} else if (image.image_url) {

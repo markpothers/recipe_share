@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, ScrollView, View, Text, TouchableOpacity, FlatList, AsyncStorage } from 'react-native';
+import { Image, ScrollView, View, Text, TouchableOpacity, FlatList, AsyncStorage, KeyboardAvoidingView, Platform } from 'react-native';
 import { connect } from 'react-redux'
 import { styles } from './recipeDetailsStyleSheet'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
@@ -215,7 +215,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		addDynamicMenuButtonsToHeader = () => {
 			this.props.navigation.setOptions({
-				headerRight: Object.assign(() => <AppHeaderRight buttonAction={() => this.setState({dynamicMenuShowing: true})}/>, { displayName: 'HeaderRight' }),
+				headerRight: Object.assign(() => <AppHeaderRight buttonAction={() => this.setState({ dynamicMenuShowing: true })} />, { displayName: 'HeaderRight' }),
 			});
 		}
 
@@ -287,18 +287,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		editRecipe = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-			await this.setState({
-				awaitingServer: true,
-				editRecipePopUpShowing: false
-			})
-			this.props.navigation.navigate('NewRecipe', { recipe_details: this.props.recipe_details })
-			await this.setState({ awaitingServer: false })
-		} else {
-			this.setState({
-				renderOfflineMessage: true,
-				editRecipePopUpShowing: false
-			})
-		}
+				await this.setState({
+					awaitingServer: true,
+					editRecipePopUpShowing: false
+				})
+				this.props.navigation.navigate('NewRecipe', { recipe_details: this.props.recipe_details })
+				await this.setState({ awaitingServer: false })
+			} else {
+				this.setState({
+					renderOfflineMessage: true,
+					editRecipePopUpShowing: false
+				})
+			}
 		}
 
 		deleteRecipe = async () => {
@@ -865,116 +865,122 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								})}
 							/>)
 						}
-						<ScrollView
-							contentContainerStyle={{ flexGrow: 1 }}
-							ref={(ref) => this.myScroll = ref}
-							scrollEnabled={this.state.scrollEnabled}
-							nestedScrollEnabled={true}
+						< KeyboardAvoidingView
+							style={centralStyles.fullPageKeyboardAvoidingView}
+							behavior={(Platform.OS === "ios" ? "padding" : "")}
+							keyboardVerticalOffset={Platform.OS === 'ios' ? responsiveHeight(9) + 20 : 0}
 						>
-							<View style={styles.detailsHeader}>
-								<View style={styles.detailsHeaderTopRow}>
-									<View style={styles.headerTextView}>
-										<Text
-											maxFontSizeMultiplier={2}
-											style={styles.detailsHeaderTextBox}
-										>
-											{this.props.recipe_details.recipe.name}
+							<ScrollView
+								contentContainerStyle={{ flexGrow: 1 }}
+								ref={(ref) => this.myScroll = ref}
+								scrollEnabled={this.state.scrollEnabled}
+								nestedScrollEnabled={true}
+							>
+								<View style={styles.detailsHeader}>
+									<View style={styles.detailsHeaderTopRow}>
+										<View style={styles.headerTextView}>
 											<Text
 												maxFontSizeMultiplier={2}
-												style={[styles.detailsChefTextBox, { color: this.state.chefNameTextColor }]}
-												onPress={() => {
-													this.setState({ chefNameTextColor: "#50505055" })
-													this.navigateToChefDetails(this.props.recipe_details.recipe.chef_id)
-													setTimeout(() => { this.setState({ chefNameTextColor: "#505050" }) }, 300)
-												}}
+												style={styles.detailsHeaderTextBox}
 											>
-												&nbsp;by&nbsp;{this.props.recipe_details.chef_username}
+												{this.props.recipe_details.recipe.name}
+												<Text
+													maxFontSizeMultiplier={2}
+													style={[styles.detailsChefTextBox, { color: this.state.chefNameTextColor }]}
+													onPress={() => {
+														this.setState({ chefNameTextColor: "#50505055" })
+														this.navigateToChefDetails(this.props.recipe_details.recipe.chef_id)
+														setTimeout(() => { this.setState({ chefNameTextColor: "#505050" }) }, 300)
+													}}
+												>
+													&nbsp;by&nbsp;{this.props.recipe_details.chef_username}
+												</Text>
 											</Text>
-										</Text>
 
+										</View>
 									</View>
 								</View>
-							</View>
-							<View style={styles.detailsLikesAndMakes}>
-								<View style={styles.detailsLikes}>
-									<View style={styles.buttonAndText}>
-										{this.renderLikeButton()}
-										<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesUpperContents}>Likes: {this.props.recipe_details.recipe_likes}</Text>
+								<View style={styles.detailsLikesAndMakes}>
+									<View style={styles.detailsLikes}>
+										<View style={styles.buttonAndText}>
+											{this.renderLikeButton()}
+											<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesUpperContents}>Likes: {this.props.recipe_details.recipe_likes}</Text>
+										</View>
+										<View style={styles.buttonAndText}>
+											<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesLowerContents}>Serves: {this.props.recipe_details.recipe.serves}</Text>
+										</View>
 									</View>
-									<View style={styles.buttonAndText}>
-										<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesLowerContents}>Serves: {this.props.recipe_details.recipe.serves}</Text>
-									</View>
-								</View>
-								<View style={styles.detailsLikes}>
-									<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesLowerContents}>Time: {this.props.recipe_details.recipe.time}</Text>
-									<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesLowerContents}>Difficulty: {this.props.recipe_details.recipe.difficulty}</Text>
-								</View>
-							</View>
-							{(this.props.recipe_details.recipe.description != "" && this.props.recipe_details.recipe.description != null) && this.renderDescription()}
-							{this.props.recipe_details.recipe_images?.length > 0 && (
-								<View style={styles.detailsImageWrapper}>
-									<FlatList
-										data={this.props.recipe_details.recipe_images}
-										renderItem={item => <Image style={{ width: responsiveWidth(100) - 4, height: responsiveWidth(75) - 2, borderRadius: 5, top: 1 }} source={{ uri: item.item.image_url }} resizeMode={"cover"}></Image>}
-										keyExtractor={(item) => item.hex}
-										horizontal={true}
-										style={styles.primaryImageFlatList}
-										initialNumToRender={10}
-										// contentContainerStyle={styles.primaryImageFlatListContentContainer}
-										pagingEnabled={true}
-										onLayout={(event) => {
-											var { x, y, width, height } = event.nativeEvent.layout //eslint-disable-line no-unused-vars
-											this.setState({ primaryImageFlatListWidth: width })
-										}}
-										onScroll={e => {
-											let nearestIndex = Math.round(e.nativeEvent.contentOffset.x / this.state.primaryImageFlatListWidth)
-											if (nearestIndex != this.state.primaryImageDisplayedIndex) {
-												this.setState({ primaryImageDisplayedIndex: nearestIndex })
-											}
-										}}
-									/>
-									<View style={styles.primaryImageBlobsContainer}>
-										{this.props.recipe_details.recipe_images.length > 1 && this.renderPrimaryImageBlobs()}
+									<View style={styles.detailsLikes}>
+										<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesLowerContents}>Time: {this.props.recipe_details.recipe.time}</Text>
+										<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesLowerContents}>Difficulty: {this.props.recipe_details.recipe.difficulty}</Text>
 									</View>
 								</View>
-							)}
-							{this.props.recipe_details.ingredient_uses?.length > 0 && (
-								<View style={styles.detailsIngredients}>
-									<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Ingredients:</Text>
-									{this.renderRecipeIngredients()}
+								{(this.props.recipe_details.recipe.description != "" && this.props.recipe_details.recipe.description != null) && this.renderDescription()}
+								{this.props.recipe_details.recipe_images?.length > 0 && (
+									<View style={styles.detailsImageWrapper}>
+										<FlatList
+											data={this.props.recipe_details.recipe_images}
+											renderItem={item => <Image style={{ width: responsiveWidth(100) - 3, height: responsiveWidth(75) - 2, borderRadius: 5, top: 1, marginRight: 1 }} source={{ uri: item.item.image_url }} resizeMode={"cover"}></Image>}
+											keyExtractor={(item) => item.hex}
+											horizontal={true}
+											style={styles.primaryImageFlatList}
+											initialNumToRender={10}
+											// contentContainerStyle={styles.primaryImageFlatListContentContainer}
+											pagingEnabled={true}
+											onLayout={(event) => {
+												var { x, y, width, height } = event.nativeEvent.layout //eslint-disable-line no-unused-vars
+												this.setState({ primaryImageFlatListWidth: width })
+											}}
+											onScroll={e => {
+												let nearestIndex = Math.round(e.nativeEvent.contentOffset.x / this.state.primaryImageFlatListWidth)
+												if (nearestIndex != this.state.primaryImageDisplayedIndex) {
+													this.setState({ primaryImageDisplayedIndex: nearestIndex })
+												}
+											}}
+										/>
+										<View style={styles.primaryImageBlobsContainer}>
+											{this.props.recipe_details.recipe_images.length > 1 && this.renderPrimaryImageBlobs()}
+										</View>
+									</View>
+								)}
+								{this.props.recipe_details.ingredient_uses?.length > 0 && (
+									<View style={styles.detailsIngredients}>
+										<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Ingredients:</Text>
+										{this.renderRecipeIngredients()}
+									</View>
+								)}
+								{this.props.recipe_details.instructions?.length > 0 && (
+									<View style={styles.detailsContainer}>
+										<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Instructions:</Text>
+										{this.renderRecipeInstructions()}
+									</View>
+								)}
+								{this.props.recipe_details.recipe.cuisine != "Any" ? this.renderCuisine() : null}
+								{this.renderFilterCategories()}
+								{(this.props.recipe_details.recipe.acknowledgement != "" && this.props.recipe_details.recipe.acknowledgement != null) && this.renderAcknowledgement()}
+								<View style={styles.detailsMakePicsContainer}>
+									<View style={{ flexDirection: 'row' }}>
+										<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Images from other users:</Text>
+										<TouchableOpacity onPress={this.newMakePic}>
+											<Icon name='image-plus' size={responsiveHeight(3.5)} style={styles.addIcon} />
+										</TouchableOpacity>
+									</View>
+									{this.props.recipe_details.make_pics.length === 0 && <Text maxFontSizeMultiplier={2} style={styles.detailsContents}>No other images yet.  Be the first!</Text>}
+									{this.props.recipe_details.make_pics.length !== 0 && this.renderMakePicScrollView()}
 								</View>
-							)}
-							{this.props.recipe_details.instructions?.length > 0 && (
-								<View style={styles.detailsContainer}>
-									<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Instructions:</Text>
-									{this.renderRecipeInstructions()}
+								<View style={styles.detailsComments}
+									onLayout={(event) => this.setState({ commentsTopY: event.nativeEvent.layout.y })}>
+									<View style={{ flexDirection: 'row' }}>
+										<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Comments:</Text>
+										<TouchableOpacity onPress={this.state.commenting ? (this.state.commentText === "" ? this.cancelComment : this.saveComment) : this.newComment}>
+											<Icon name={this.state.commenting ? (this.state.commentText === "" ? 'comment-remove' : 'comment-check') : 'comment-plus'} size={responsiveHeight(3.5)} style={styles.addIcon} />
+										</TouchableOpacity>
+									</View>
+									{this.state.commenting ? <RecipeNewComment scrollToLocation={this.scrollToLocation} {...this.props.loggedInChef} commentText={this.state.commentText} handleCommentTextInput={this.handleCommentTextInput} saveComment={this.saveComment} /> : null}
+									{this.renderRecipeComments()}
 								</View>
-							)}
-							{this.props.recipe_details.recipe.cuisine != "Any" ? this.renderCuisine() : null}
-							{this.renderFilterCategories()}
-							{(this.props.recipe_details.recipe.acknowledgement != "" && this.props.recipe_details.recipe.acknowledgement != null) && this.renderAcknowledgement()}
-							<View style={styles.detailsMakePicsContainer}>
-								<View style={{ flexDirection: 'row' }}>
-									<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Images from other users:</Text>
-									<TouchableOpacity onPress={this.newMakePic}>
-										<Icon name='image-plus' size={responsiveHeight(3.5)} style={styles.addIcon} />
-									</TouchableOpacity>
-								</View>
-								{this.props.recipe_details.make_pics.length === 0 && <Text maxFontSizeMultiplier={2} style={styles.detailsContents}>No other images yet.  Be the first!</Text>}
-								{this.props.recipe_details.make_pics.length !== 0 && this.renderMakePicScrollView()}
-							</View>
-							<View style={styles.detailsComments}
-								onLayout={(event) => this.setState({ commentsTopY: event.nativeEvent.layout.y })}>
-								<View style={{ flexDirection: 'row' }}>
-									<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Comments:</Text>
-									<TouchableOpacity onPress={this.state.commenting ? (this.state.commentText === "" ? this.cancelComment : this.saveComment) : this.newComment}>
-										<Icon name={this.state.commenting ? (this.state.commentText === "" ? 'comment-remove' : 'comment-check') : 'comment-plus'} size={responsiveHeight(3.5)} style={styles.addIcon} />
-									</TouchableOpacity>
-								</View>
-								{this.state.commenting ? <RecipeNewComment scrollToLocation={this.scrollToLocation} {...this.props.loggedInChef} commentText={this.state.commentText} handleCommentTextInput={this.handleCommentTextInput} saveComment={this.saveComment} /> : null}
-								{this.renderRecipeComments()}
-							</View>
-						</ScrollView>
+							</ScrollView>
+						</KeyboardAvoidingView>
 					</SpinachAppContainer>
 				);
 			} else {

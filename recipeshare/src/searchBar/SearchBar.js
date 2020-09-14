@@ -41,6 +41,7 @@ export default function SearchBar(props) {
 							textAlign: 'left',
 							textAlignVertical: 'center',
 							paddingLeft: responsiveWidth(2),
+							width: responsiveWidth(90),
 						}}
 						value={props.searchTerm}
 						placeholder={props.text}

@@ -13,6 +13,7 @@ export default class RecipeCard extends React.PureComponent {
 	}
 
 	render() {
+		// console.log(this.props.id)
 		const imageSource = this.props.image_url ? {uri:this.props.image_url} : peasImage
 		return (
 			<View style={styles.recipeCard} >

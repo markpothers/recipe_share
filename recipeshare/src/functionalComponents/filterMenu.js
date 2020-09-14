@@ -148,7 +148,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							<ScrollView style={styles.categoriesScrollView}>
 								<View style={styles.columnsContainer}>
 									{/* <View style={styles.columnsInnerContainer}> */}
-										{this.renderFilterItems()}
+									{this.renderFilterItems()}
 									{/* </View> */}
 									{/* <View style={styles.column}>
 										{this.renderLeftColumnCategories()}
@@ -165,7 +165,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 										<DualOSPicker
 											onChoiceChange={this.handleCuisineChange}
 											options={cuisines}
-											selectedChoice={selectedCuisine} />
+											selectedChoice={selectedCuisine}
+											textAlignment={"flex-start"}
+										/>
 									</View>
 								</View>
 								<View style={styles.bottomTopContainer}>
@@ -174,7 +176,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 										<DualOSPicker
 											onChoiceChange={this.handleServesChange}
 											options={serves}
-											selectedChoice={selectedServes} />
+											selectedChoice={selectedServes}
+											textAlignment={"flex-start"}
+										/>
 									</View>
 								</View>
 								<View style={styles.clearFiltersButtonContainer}>

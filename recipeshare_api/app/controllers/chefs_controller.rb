@@ -116,7 +116,7 @@ class ChefsController < ApplicationController
 
         if chef_params[:updatingPassword]
 			if chef_params[:password] == chef_params[:password_confirmation]
-				byebug
+				# byebug
                 @chef.password = chef_params[:password]
                 @chef.password_confirmation = chef_params[:password_confrmation]
                 @chef.password_is_auto = false

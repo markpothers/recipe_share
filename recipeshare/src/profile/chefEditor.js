@@ -73,12 +73,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				<React.Fragment>
 					<View style={[centralStyles.formSection, { width: '86%' }]}>
 						<View style={centralStyles.formInputContainer} >
-							<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.password} placeholder="password" autoCapitalize="none" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")} />
+							<View style={centralStyles.formInputWhiteBackground}>
+								<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.password} placeholder="password" autoCapitalize="none" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")} />
+							</View>
 						</View>
 					</View>
 					<View style={[centralStyles.formSection, { width: '86%' }]}>
 						<View style={centralStyles.formInputContainer} >
-							<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.password_confirmation} placeholder="confirm password" autoCapitalize="none" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password_confirmation")} />
+							<View style={centralStyles.formInputWhiteBackground}>
+								<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.password_confirmation} placeholder="confirm password" autoCapitalize="none" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password_confirmation")} />
+							</View>
 						</View>
 					</View>
 				</React.Fragment>
@@ -191,7 +195,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							</View> */}
 							<View style={[centralStyles.formSection, { width: '86%' }]}>
 								<View style={centralStyles.formInputContainer} >
-									<TextInput maxFontSizeMultiplier={2} style={[centralStyles.formInput, {}]} value={this.props.profile_text} placeholder="about me" multiline={true} numberOfLines={3} onChange={(e) => this.handleTextInput(e, "profile_text")} />
+									<View style={centralStyles.formInputWhiteBackground}>
+										<TextInput maxFontSizeMultiplier={2} style={[centralStyles.formInput, {}]} value={this.props.profile_text} placeholder="about me" multiline={true} numberOfLines={3} onChange={(e) => this.handleTextInput(e, "profile_text")} />
+									</View>
 								</View>
 							</View>
 							<View style={[centralStyles.formSection, { width: '86%' }]}>
@@ -244,7 +250,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						transparent={true}
 						visible={this.state.updateModalVisible}
 					>
-						<KeyboardAvoidingView>
+						<KeyboardAvoidingView
+							behavior={(Platform.OS === "ios" ? "padding" : "")}
+						>
 							{this.renderContents()}
 						</KeyboardAvoidingView>
 					</Modal>

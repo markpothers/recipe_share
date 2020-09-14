@@ -77,7 +77,7 @@ export const styles = StyleSheet.create({
 	thumbnail: {
 		position: 'absolute',
 		height: '100%',
-		width: '100%',
+		width: responsiveWidth(100)-4,
 		borderRadius: 5
 	},
 	recipeCardBottomContainer: {

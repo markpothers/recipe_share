@@ -68,25 +68,25 @@ describe('Recipe List', () => {
 	// })
 
 	it('can be rendered with all recipes', () => {
-		mountedRecipeList = renderer.create(<Provider store={store}><RecipeList listChoice={"all"} mockCallBack={mockCallBack} /></Provider>)
+		mountedRecipeList = renderer.create(<Provider store={store}><RecipeList listChoice={"all"} route={{ name: 'All Recipes'}} mockCallBack={mockCallBack} /></Provider>)
 		const image = mountedRecipeList.toJSON()
 		expect(image).toMatchSnapshot()
 	})
 
 	it('can be rendered with chef recipes', () => {
-		mountedRecipeList = renderer.create(<Provider store={store}><RecipeList listChoice={"chef"} mockCallBack={mockCallBack} /></Provider>)
+		mountedRecipeList = renderer.create(<Provider store={store}><RecipeList listChoice={"chef"} route={{name: 'My Recipes'}}  mockCallBack={mockCallBack} /></Provider>)
 		const image = mountedRecipeList.toJSON()
 		expect(image).toMatchSnapshot()
 	})
 
 	it('can be rendered with the chefs feed', () => {
-		mountedRecipeList = renderer.create(<Provider store={store}><RecipeList listChoice={"chef_feed"} mockCallBack={mockCallBack} /></Provider>)
+		mountedRecipeList = renderer.create(<Provider store={store}><RecipeList listChoice={"chef_feed"} route={{name: 'My Feed'}} mockCallBack={mockCallBack} /></Provider>)
 		const image = mountedRecipeList.toJSON()
 		expect(image).toMatchSnapshot()
 	})
 
 	it('can be rendered with the chef_liked feed', () => {
-		mountedRecipeList = renderer.create(<Provider store={store}><RecipeList listChoice={"chef_liked"} mockCallBack={mockCallBack} /></Provider>)
+		mountedRecipeList = renderer.create(<Provider store={store}><RecipeList listChoice={"chef_liked"} route={{name: 'Recipes I Like'}} mockCallBack={mockCallBack} /></Provider>)
 		const image = mountedRecipeList.toJSON()
 		expect(image).toMatchSnapshot()
 	})

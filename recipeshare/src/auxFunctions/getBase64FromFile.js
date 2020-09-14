@@ -7,7 +7,7 @@ export const getBase64FromFile = async (uri) => {
 			const compressedImage = await ImageManipulator.manipulateAsync(
 				uri,
 				[],
-				{ compress: 0.9, format: ImageManipulator.SaveFormat.JPEG }
+				{ compress: 0.75, format: ImageManipulator.SaveFormat.JPEG }
 			);
 			const compressedImageBase64 = await FileSystem.readAsStringAsync(compressedImage.uri, { encoding: FileSystem.EncodingType.Base64 })
 			FileSystem.deleteAsync(compressedImage.uri, { idempotent: true })

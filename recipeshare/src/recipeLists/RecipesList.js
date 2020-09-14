@@ -75,8 +75,8 @@ const mapDispatchToProps = {
 	// },
 }
 
-	//variable to synchronously record FlatList y offset on ios since velocity is not available
-	let previousScrollViewOffset = 0;
+//variable to synchronously record FlatList y offset on ios since velocity is not available
+let previousScrollViewOffset = 0;
 
 export default connect(mapStateToProps, mapDispatchToProps)(
 	class RecipesList extends React.Component {
@@ -136,7 +136,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		respondToBlur = () => {
-			this.setState({ isDisplayed: false })
+			this.setState({
+				isDisplayed: false,
+				filterDisplayed: false
+			})
 		}
 
 		respondToFocus = async () => {
@@ -525,8 +528,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		render() {
-			// console.log(this.props[this.props["listChoice"] + `_Recipes`][0]?.image_url)
-			// console.log(this.searchBar)
+			// console.log(this.props[this.props["listChoice"] + `_Recipes`])
+			// console.log('list start')
 			return (
 				<SpinachAppContainer awaitingServer={this.state.awaitingServer}>
 					<TouchableOpacity
@@ -603,14 +606,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							onEndReached={this.onEndReached}
 							onEndReachedThreshold={1}
 							// initialNumToRender={200}
+							scrollEventThrottle={16}
 							onScroll={Animated.event(
 								[{ nativeEvent: { contentOffset: { y: this.state.yOffset } } }],
 								{
 									useNativeDriver: true,
 									listener: (e) => {
-										// console.log(e.nativeEvent)
 										const y = e.nativeEvent.contentOffset.y
-										// const isIncreasing = e.nativeEvent.velocity.y > 0
 										const isIncreasing = Platform.OS === 'ios' ? y > previousScrollViewOffset : e.nativeEvent.velocity.y > 0
 										if (y <= 0) {
 											this.setState({

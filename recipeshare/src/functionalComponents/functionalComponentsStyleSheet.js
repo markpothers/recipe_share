@@ -29,10 +29,11 @@ export const styles = StyleSheet.create({
 		marginRight: responsiveWidth(3.5),
 		// flexDirection: 'row',
 		borderRadius: 5,
-		backgroundColor: 'white',
+		// backgroundColor: 'white',
 		borderStyle: 'solid',
 		borderWidth: 1,
-		overflow: 'hidden'
+		overflow: 'hidden',
+		borderColor: '#104e01'
 	},
 	picSourceChooserButton: {
 		justifyContent: 'center',
@@ -112,7 +113,7 @@ export const styles = StyleSheet.create({
 		position: 'absolute',
 		alignSelf: 'center',
 		bottom: 0,
-		maxWidth: '100%',
+		width: '100%',
 		// minWidth: responsiveWidth(20),
 		// height: 50,
 		flexDirection: 'row',
@@ -124,6 +125,6 @@ export const styles = StyleSheet.create({
 		color: '#fff59b',
 		// color: '#104e01',
 		marginHorizontal: 2,
-		opacity: 0.75
+		opacity: 0.85
 	}
 });

@@ -161,16 +161,20 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							</View>
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
-									<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.e_mail} placeholder="e-mail" keyboardType="email-address" autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "e_mail")} />
+									<View style={centralStyles.formInputWhiteBackground}>
+										<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.e_mail} placeholder="e-mail" keyboardType="email-address" autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "e_mail")} />
+									</View>
 								</View>
 							</View>
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
-									<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.password} placeholder="password" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")} />
+									<View style={centralStyles.formInputWhiteBackground}>
+										<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.password} placeholder="password" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")} />
+									</View>
 								</View>
 								{this.state.loginError && (
 									<View style={centralStyles.formErrorView}>
-										{this.state.error === 'invalid' && <Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>E-mail and password combination not recognized</Text>}
+										{this.state.error === 'invalid' && <Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>e-mail and password combination not recognized</Text>}
 										{this.state.error === 'password_expired' && <Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>Automatically generated password has expired.  Please reset your password.</Text>}
 										{this.state.error === 'activation' && <Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>Account not yet activated.  Please click the link in your confirmation e-mail. (Don&apos;t forget to check spam!)</Text>}
 										{this.state.error === 'deactivated' && <Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>This account was deactivated.  Reset your password to reactivate your account.</Text>}

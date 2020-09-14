@@ -105,23 +105,23 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			if (netInfoState.isConnected) {
 				await this.setState({ awaitingServer: true })
 				// console.log("sending new user details")
-				try{
-				const chef = await postChef(this.props.username, this.props.e_mail, this.props.password, this.props.password_confirmation, this.props.country, this.props.image_url, this.props.profile_text)
-				if (!chef.error) {
-					this.props.clearNewUserDetails()
-					this.props.navigation.navigate('Login')
-				} else {
-					this.setState({ errors: chef.message })
-					await this.setState({ awaitingServer: false })
+				try {
+					const chef = await postChef(this.props.username, this.props.e_mail, this.props.password, this.props.password_confirmation, this.props.country, this.props.image_url, this.props.profile_text)
+					if (!chef.error) {
+						this.props.clearNewUserDetails()
+						this.props.navigation.navigate('Login')
+					} else {
+						this.setState({ errors: chef.message })
+						await this.setState({ awaitingServer: false })
+					}
+				} catch (e) {
+					this.setState({
+						renderOfflineMessage: true,
+						awaitingServer: false
+					})
 				}
-			} catch (e) {
-				this.setState({
-					renderOfflineMessage: true,
-					awaitingServer: false
-				})
-			}
 			} else {
-				this.setState({renderOfflineMessage: true})
+				this.setState({ renderOfflineMessage: true })
 			}
 		}
 
@@ -191,14 +191,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							{/* e-mail*/}
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
-									<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.e_mail} placeholder="e-mail" keyboardType="email-address" autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "e_mail")} />
+									<View style={centralStyles.formInputWhiteBackground}>
+										<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.e_mail} placeholder="e-mail" keyboardType="email-address" autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "e_mail")} />
+									</View>
 								</View>
 								{this.renderEmailError()}
 							</View>
 							{/* username*/}
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
-									<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.username} placeholder="username" autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "username")} />
+									<View style={centralStyles.formInputWhiteBackground}>
+										<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.username} placeholder="username" autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "username")} />
+									</View>
 								</View>
 								{this.renderUsernameError()}
 							</View>
@@ -218,19 +222,25 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							{/* profile*/}
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
-									<TextInput maxFontSizeMultiplier={2} style={[centralStyles.formInput, { minHeight: responsiveHeight(12) }]} value={this.props.profile_text} placeholder="about me" multiline={true} numberOfLines={3} onChange={(e) => this.handleTextInput(e, "profile_text")} />
+									<View style={[centralStyles.formInputWhiteBackground, {minHeight: responsiveHeight(12)}]}>
+										<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.profile_text} placeholder="about me" multiline={true} numberOfLines={3} onChange={(e) => this.handleTextInput(e, "profile_text")} />
+									</View>
 								</View>
 							</View>
 							{/* password*/}
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
-									<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.password} placeholder="password" autoCapitalize="none" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")} />
+									<View style={centralStyles.formInputWhiteBackground}>
+										<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.password} placeholder="password" autoCapitalize="none" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")} />
+									</View>
 								</View>
 							</View>
 							{/* password confirmation*/}
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
-									<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.password_confirmation} placeholder="password confirmation" autoCapitalize="none" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password_confirmation")} />
+									<View style={centralStyles.formInputWhiteBackground}>
+										<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.password_confirmation} placeholder="password confirmation" autoCapitalize="none" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password_confirmation")} />
+									</View>
 								</View>
 								{this.renderPasswordError()}
 							</View>

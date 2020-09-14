@@ -7,9 +7,9 @@ import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-nat
 
 export default class InstructionRow extends React.Component {
 
-		state = {
-			text: ""
-		}
+	state = {
+		text: ""
+	}
 
 	componentDidMount = () => {
 		this.setState({ text: this.props.item })
@@ -21,26 +21,34 @@ export default class InstructionRow extends React.Component {
 				<View style={[styles.deleteInstructionContainer, { width: responsiveWidth(12) }]}>
 					<Icon name='menu' size={responsiveHeight(3.5)} style={styles.ingredientTrashCan} />
 				</View>
-				<TextInput
-					maxFontSizeMultiplier={2}
-					style={styles.instructionInput}
-					multiline={true}
-					numberOfLines={1}
-					value={this.state.text}
-					placeholder={`Instructions: step ${this.props.index + 1}`}
+				<View
+					style={[centralStyles.formInputWhiteBackground, { width: '67%' }]}
 					ref={ref => this.textInput = ref}
-					onChangeText={(text) => {
-						this.textInput.measureInWindow((x, y, width, height) => {
-							this.props.handleInstructionSizeChange(this.props.index, height)
-						})
-						this.setState({ text: text })
-					}}
 					onLayout={(event) => {
 						var { height } = event.nativeEvent.layout
 						this.props.handleInstructionSizeChange(this.props.index, height)
 					}}
-					onBlur={() => this.props.handleInstructionChange(this.state.text, this.props.index)}
-				/>
+				>
+					<TextInput
+						maxFontSizeMultiplier={2}
+						style={styles.instructionInput}
+						multiline={true}
+						numberOfLines={1}
+						value={this.state.text}
+						placeholder={`Instructions: step ${this.props.index + 1}`}
+						onChangeText={(text) => {
+							this.textInput.measureInWindow((x, y, width, height) => {
+								this.props.handleInstructionSizeChange(this.props.index, height)
+							})
+							this.setState({ text: text })
+						}}
+						// onLayout={(event) => {
+						// 	var { height } = event.nativeEvent.layout
+						// 	this.props.handleInstructionSizeChange(this.props.index, height)
+						// }}
+						onBlur={() => this.props.handleInstructionChange(this.state.text, this.props.index)}
+					/>
+				</View>
 				{/* <TouchableOpacity style={[styles.deleteInstructionContainer, { width: '9%' }]} onPress={this.voice} activeOpacity={0.7}>
 					<Icon name='microphone' size={responsiveHeight(3.5)} style={styles.ingredientTrashCan} />
 				</TouchableOpacity> */}

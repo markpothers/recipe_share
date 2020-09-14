@@ -458,7 +458,7 @@ export const styles = StyleSheet.create({
 	primaryImageFlatList: {
 		// borderWidth:1,
 		// borderColor: 'yellow',
-		width: responsiveWidth(100)-4,
+		width: responsiveWidth(100)-2,
 		height: responsiveWidth(75),
 		// left: 100
 		borderRadius: 5,

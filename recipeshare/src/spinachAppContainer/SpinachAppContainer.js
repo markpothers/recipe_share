@@ -18,6 +18,7 @@ export default class SpinachAppContainer extends React.Component {
 					<KeyboardAvoidingView
 						style={centralStyles.fullPageKeyboardAvoidingView}
 						behavior={(Platform.OS === "ios" ? "padding" : "")}
+						keyboardVerticalOffset={Platform.OS === 'ios' ? 20 : 0}
 					>
 						<Image
 							source={require('../dataComponents/spinach.jpg')}
