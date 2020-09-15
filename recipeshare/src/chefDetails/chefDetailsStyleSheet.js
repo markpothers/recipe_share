@@ -148,7 +148,7 @@ export const styles = StyleSheet.create({
 		// borderStyle: 'solid',
 		// borderWidth: 5,
 		// borderColor: 'yellow',
-		height: responsiveHeight(100) - 74
+		height: responsiveHeight(87.5)
 	},
 	chefDetailsStats: {
 		borderStyle: 'solid',
