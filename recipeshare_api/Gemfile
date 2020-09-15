@@ -19,7 +19,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
-# gem 'activestorage'
+# gem 'activestorage', ">= 5.2.4.3"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -59,3 +59,9 @@ gem "app", "~> 1.2"
 gem "appengine", "~> 0.5.0"
 gem 'email_validator'
 gem 'rufo'
+
+# git hub security alerts
+# gem "activesupport", ">= 5.2.4.3"
+# gem "actionview", ">= 5.2.4.4"
+# gem "actionpack", ">= 5.2.4.3"
+
