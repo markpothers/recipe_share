@@ -19,7 +19,7 @@ export default class MultiPicSourceChooser extends React.Component {
 	componentDidMount = async () => {
 		let cameraRollPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL)
 		await this.setState({ hasCameraRollPermission: cameraRollPermission.permissions.cameraRoll.granted })
-		const cameraPermission = await Permissions.askAsync(Permissions.CAMERA)
+		let cameraPermission = await Permissions.askAsync(Permissions.CAMERA)
 		await this.setState({ hasCameraPermission: cameraPermission.permissions.camera.granted })
 		await this.setState({ originalImages: this.props.imageSources })
 	}
@@ -30,32 +30,46 @@ export default class MultiPicSourceChooser extends React.Component {
 	}
 
 	pickImage = async () => {
-		if (this.state.hasCameraRollPermission) {
-			let image = await ImagePicker.launchImageLibraryAsync({
-				allowsEditing: true,
-				aspect: [4, 3],
-				base64: false
-			})
-			let newImages = this.props.imageSources
-			if (!image.cancelled) {
-				newImages[this.state.imageIndex] = image
+		try {
+			if (this.state.hasCameraRollPermission) {
+				let image = await ImagePicker.launchImageLibraryAsync({
+					allowsEditing: true,
+					aspect: [4, 3],
+					base64: false
+				})
+				if (image.error){
+					console.log(image.error)
+				}
+				let newImages = this.props.imageSources
+				if (!image.cancelled) {
+					newImages[this.state.imageIndex] = image
+				}
+				this.props.saveImage(newImages)
 			}
-			this.props.saveImage(newImages)
+		} catch (e) {
+			console.log(e)
 		}
 	}
 
 	openCamera = async () => {
-		if (this.state.hasCameraPermission) {
-			let image = await ImagePicker.launchCameraAsync({
-				allowsEditing: true,
-				aspect: [4, 3],
-				base64: false
-			})
-			let newImages = this.props.imageSources
-			if (!image.cancelled) {
-				newImages[this.state.imageIndex] = image
+		try {
+			if (this.state.hasCameraPermission) {
+				let image = await ImagePicker.launchCameraAsync({
+					allowsEditing: true,
+					aspect: [4, 3],
+					base64: false
+				})
+				if (image.error){
+					console.log(image.error)
+				}
+				let newImages = this.props.imageSources
+				if (!image.cancelled) {
+					newImages[this.state.imageIndex] = image
+				}
+				this.props.saveImage(newImages)
 			}
-			this.props.saveImage(newImages)
+		} catch (e) {
+			console.log(e)
 		}
 	}
 

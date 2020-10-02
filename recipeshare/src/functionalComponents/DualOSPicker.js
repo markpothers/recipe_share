@@ -1,7 +1,7 @@
 import React from 'react'
 import { Picker, Platform, TouchableOpacity, Text, View } from 'react-native'
 import { styles } from './DualOSPickerStyleSheet'
-import IOSPicker from './IOSPicker'
+import IOSPicker from './IOSPicker.ios'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions' //eslint-disable-line no-unused-vars
 

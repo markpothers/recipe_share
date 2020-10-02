@@ -17,30 +17,44 @@ export default class PicSourceChooser extends React.PureComponent {
 	componentDidMount = async () => {
 		let cameraRollPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL)
 		await this.setState({ hasCameraRollPermission: cameraRollPermission.permissions.cameraRoll.granted })
-		const cameraPermission = await Permissions.askAsync(Permissions.CAMERA)
+		let cameraPermission = await Permissions.askAsync(Permissions.CAMERA)
 		await this.setState({ hasCameraPermission: cameraPermission.permissions.camera.granted })
 		await this.setState({ originalImage: this.props.originalImage })
 	}
 
 	pickImage = async () => {
-		if (this.state.hasCameraRollPermission) {
-			let image = await ImagePicker.launchImageLibraryAsync({
-				allowsEditing: true,
-				aspect: [4, 3],
-				base64: false
-			})
-			this.props.index !== undefined ? this.props.saveImage(image, this.props.index) : this.props.saveImage(image)
+		try {
+			if (this.state.hasCameraRollPermission) {
+				let image = await ImagePicker.launchImageLibraryAsync({
+					allowsEditing: true,
+					aspect: [4, 3],
+					base64: false
+				})
+				if (image.error){
+					console.log(image.error)
+				}
+				this.props.index !== undefined ? this.props.saveImage(image, this.props.index) : this.props.saveImage(image)
+			}
+		} catch (e) {
+			console.log(e)
 		}
 	}
 
 	openCamera = async () => {
-		if (this.state.hasCameraPermission) {
-			let image = await ImagePicker.launchCameraAsync({
-				allowsEditing: true,
-				aspect: [4, 3],
-				base64: false
-			})
-			this.props.index !== undefined ? this.props.saveImage(image, this.props.index) : this.props.saveImage(image)
+		try {
+			if (this.state.hasCameraPermission) {
+				let image = await ImagePicker.launchCameraAsync({
+					allowsEditing: true,
+					aspect: [4, 3],
+					base64: false
+				})
+				if (image.error){
+					console.log(image.error)
+				}
+				this.props.index !== undefined ? this.props.saveImage(image, this.props.index) : this.props.saveImage(image)
+			}
+		} catch (e) {
+			console.log(e)
 		}
 	}
 

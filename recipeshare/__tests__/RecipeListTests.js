@@ -1,9 +1,9 @@
 import 'react-native'
 import React from 'react';
-import { FlatList, TouchableOpacity, AsyncStorage, View, Switch } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 // import { configure, shallow, mount } from 'enzyme'
 // import Adapter from 'enzyme-adapter-react-16'
-import renderer, {create, act} from 'react-test-renderer';
+import renderer, {act} from 'react-test-renderer';
 import configureStore from 'redux-mock-store'
 
 import { Provider } from 'react-redux'

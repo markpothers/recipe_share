@@ -14,6 +14,7 @@ import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-nat
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo';
+import { AlertPopUp } from '../alertPopUp/alertPopUp'
 
 const mapStateToProps = (state) => ({
 	first_name: state.newUserDetails.first_name,
@@ -58,6 +59,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			viewingTermsAndConditions: false,
 			viewingPrivacyPolicy: false,
 			awaitingServer: false,
+			thanksForRegisteringPopUpShowing: false,
 		}
 
 		componentDidMount() {
@@ -109,7 +111,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					const chef = await postChef(this.props.username, this.props.e_mail, this.props.password, this.props.password_confirmation, this.props.country, this.props.image_url, this.props.profile_text)
 					if (!chef.error) {
 						this.props.clearNewUserDetails()
-						this.props.navigation.navigate('Login')
+						this.setState({
+							awaitingServer: false,
+							thanksForRegisteringPopUpShowing: true
+						})
 					} else {
 						this.setState({ errors: chef.message })
 						await this.setState({ awaitingServer: false })
@@ -164,10 +169,25 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			this.setState({ privacyPolicyAgreed: !this.state.privacyPolicyAgreed })
 		}
 
+		renderThanksForRegisteringAlertPopUp = () => {
+			return (
+				<AlertPopUp
+					// close={() => this.setState({ thanksForRegisteringPopUpShowing: false })}
+					title={"Thanks so much for registering. Please confirm your e-mail address by clicking the link in your welcome e-mail and log in."}
+					onYes={() => {
+						this.setState({thanksForRegisteringPopUpShowing: false})
+						this.props.navigation.navigate('Login')
+					}}
+					yesText={"Ok"}
+				/>
+			)
+		}
+
 		render() {
 			// console.log(this.props.saveChefDetails)
 			return (
 				<SpinachAppContainer scrollingEnabled={true} awaitingServer={this.state.awaitingServer}>
+					{this.state.thanksForRegisteringPopUpShowing && this.renderThanksForRegisteringAlertPopUp()}
 					<TouchableOpacity
 						activeOpacity={1}
 						onPress={Keyboard.dismiss}
@@ -222,7 +242,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							{/* profile*/}
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
-									<View style={[centralStyles.formInputWhiteBackground, {minHeight: responsiveHeight(12)}]}>
+									<View style={[centralStyles.formInputWhiteBackground, { minHeight: responsiveHeight(12) }]}>
 										<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.profile_text} placeholder="about me" multiline={true} numberOfLines={3} onChange={(e) => this.handleTextInput(e, "profile_text")} />
 									</View>
 								</View>

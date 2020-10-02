@@ -26,9 +26,9 @@ const initialState = {
   newRecipeDetails: {
     name: "",
     instructions: [
-      'Pre heat oven to 450F...',
-      'Dice the chicken...',
-      'Add the onion...',
+      '',
+      '',
+      '',
       '',
     ],
     instructionImages: [],
@@ -73,17 +73,17 @@ const initialState = {
   newUserDetails: {
     first_name: "",
     last_name: "",
-    username: "pothers",
-    e_mail: "markpothers@hotmail.com",
-    password: "123456",
-    password_confirmation: "123456",
+    username: "",
+    e_mail: "",
+    password: "",
+    password_confirmation: "",
     country: "United States",
     image_url: "",
-    profile_text: "I like baking bread"
+    profile_text: ""
   },
   loginUserDetails: {
-    e_mail: "marquis.wilderman@fisher.co",
-    password: "123456"
+    e_mail: "",
+    password: ""
   },
   chefs: {
     all_chefs: [],

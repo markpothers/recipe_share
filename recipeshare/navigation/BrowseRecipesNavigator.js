@@ -52,7 +52,7 @@ const BrowseRecipesTabs = (props) => {
 		<React.Fragment>
 			{dynamicMenuShowing && renderDynamicMenu()}
 			<Tab.Navigator
-				// lazy={true}
+				lazy={true}
 				tabBarOptions={{
 					style: {
 						backgroundColor: '#104e01'
