@@ -22,7 +22,13 @@ export const styles = StyleSheet.create({
 		paddingBottom: responsiveHeight(0.5),
 		paddingTop: responsiveHeight(0.5),
 		flexDirection: 'row',
-		alignItems: 'center'
+		alignItems: 'center',
+		// borderWidth: 1,
+		// flexWrap: 'wrap'
+	},
+	recipeCardTopPostedByTouchable: {
+		// borderWidth: 1,
+		maxWidth: responsiveWidth(60)
 	},
 	recipeCardTopContainer: {
 		flexDirection: 'row',
@@ -111,7 +117,7 @@ export const styles = StyleSheet.create({
 	recipeCardTopItalic: {
 		fontSize: responsiveFontSize(1.9),
 		color: "#505050",
-		fontStyle: 'italic'
+		fontStyle: 'italic',
 	},
 	recipeCardBottomOther: {
 		marginLeft: '5%',

@@ -8,7 +8,7 @@ const peasImage = require("../dataComponents/peas.jpg")
 export default class RecipeComment extends React.PureComponent {
 
 	renderCommentDeleteButton = () => {
-		if (this.props.loggedInChefID == this.props.chef_id || this.props.loggedInChefID === this.props.is_admin) {
+		if (this.props.loggedInChefID == this.props.chef_id || this.props.is_admin) {
 			return (
 				<TouchableOpacity style={styles.commentTrashCanButton} onPress={() => this.props.askDeleteComment(this.props.id)}>
 					<Icon name='trash-can-outline' size={responsiveHeight(3.5)} style={[styles.icon, styles.commentTrashCan]} />

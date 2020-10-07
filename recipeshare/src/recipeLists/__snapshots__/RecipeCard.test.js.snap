@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Recipe Card can be rendered using different props including a really long recipe title matches its previous image 1`] = `
+exports[`Recipe Card can be rendered using typical props and matches its previous image - 1 1`] = `
 <View
   style={
     Object {
@@ -15,64 +15,6 @@ exports[`Recipe Card can be rendered using different props including a really lo
     }
   }
 >
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "borderBottomColor": "#104e01",
-        "borderBottomWidth": 0.5,
-        "flexDirection": "row",
-        "marginLeft": "1.6%",
-        "marginRight": "2%",
-        "paddingBottom": 6.67,
-        "paddingTop": 6.67,
-        "width": "96.4%",
-      }
-    }
-  >
-    <Text />
-    <Text
-      maxFontSizeMultiplier={2}
-      style={
-        Object {
-          "color": "#505050",
-          "fontSize": 29.06613627191921,
-          "fontStyle": "italic",
-        }
-      }
-    >
-      Re-shared by: 
-    </Text>
-    <View
-      accessible={true}
-      focusable={true}
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "opacity": 1,
-        }
-      }
-    >
-      <Text
-        maxFontSizeMultiplier={2}
-        style={
-          Object {
-            "color": "#505050",
-            "fontSize": 29.06613627191921,
-            "fontStyle": "italic",
-          }
-        }
-      >
-        pothers
-      </Text>
-    </View>
-  </View>
   <View
     style={
       Object {
@@ -121,7 +63,7 @@ exports[`Recipe Card can be rendered using different props including a really lo
             }
           }
         >
-          This is my test recipe with a really long title and I want to know that it renders properly when the title string is really long.
+          Recipe with no cover images - TEST:NORMAL
         </Text>
       </View>
       <View
@@ -200,7 +142,7 @@ exports[`Recipe Card can be rendered using different props including a really lo
           }
         >
           Prep time: 
-          01:00
+          06:00
         </Text>
         <Text
           maxFontSizeMultiplier={2}
@@ -213,7 +155,7 @@ exports[`Recipe Card can be rendered using different props including a really lo
           }
         >
           Difficulty: 
-          4
+          6
           /10
         </Text>
       </View>
@@ -239,7 +181,11 @@ exports[`Recipe Card can be rendered using different props including a really lo
       }
     >
       <Image
-        source={1}
+        source={
+          Object {
+            "uri": "https://storage.googleapis.com/download/storage/v1/b/chef-avatars-ac1cff8d11c908f3cf8613121b61683221152250/o/59b9a3ad9aaf1fe5f9fd5c92c62461eaa88fea89.jpg?generation=1601673323651524&alt=media",
+          }
+        }
         style={
           Object {
             "borderRadius": 5,
@@ -278,7 +224,361 @@ exports[`Recipe Card can be rendered using different props including a really lo
           "borderRadius": 5,
           "height": "100%",
           "position": "absolute",
-          "width": "100%",
+          "width": 746,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": "1%",
+        "marginTop": "1%",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        2
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        3
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        4
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Recipe Card can be rendered using typical props and matches its previous image - 2 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "white",
+      "borderColor": "#104e01",
+      "borderRadius": 5,
+      "borderStyle": "solid",
+      "borderWidth": 1,
+      "marginBottom": 2.668,
+      "marginTop": 2.668,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": "1%",
+        "marginTop": "1%",
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 8,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "opacity": 1,
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 32.12572956370018,
+              "fontWeight": "bold",
+              "textAlign": "left",
+            }
+          }
+        >
+          Poutine - TEST:NORMAL2
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 29.06613627191921,
+              "fontStyle": "italic",
+            }
+          }
+        >
+          Created by: 
+        </Text>
+        <View
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <Text
+            maxFontSizeMultiplier={2}
+            style={
+              Object {
+                "color": "#505050",
+                "fontSize": 29.06613627191921,
+                "fontStyle": "italic",
+              }
+            }
+          >
+            Xinth
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "flex": 1,
+              "fontSize": 29.06613627191921,
+            }
+          }
+        >
+          Prep time: 
+          04:15
+        </Text>
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "flex": 1,
+              "fontSize": 29.06613627191921,
+            }
+          }
+        >
+          Difficulty: 
+          5
+          /10
+        </Text>
+      </View>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 2,
+          "justifyContent": "center",
+          "opacity": 1,
+          "overflow": "hidden",
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "uri": "https://robohash.org/autquiaut.png?size=300x300&set=set1",
+          }
+        }
+        style={
+          Object {
+            "borderRadius": 5,
+            "height": 120.06,
+            "marginRight": "4%",
+            "width": 120.06,
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "center",
+        "height": 500.25,
+        "opacity": 1,
+        "width": 750,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://storage.googleapis.com/test-images-be4d3e05-1e77-4efd-8571-364e22ea7c0d/recipe39.jpg",
+        }
+      }
+      style={
+        Object {
+          "borderRadius": 5,
+          "height": "100%",
+          "position": "absolute",
+          "width": 746,
         }
       }
     />
@@ -361,7 +661,1419 @@ exports[`Recipe Card can be rendered using different props including a really lo
           }
         }
       >
+        3
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
         1
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Recipe Card can be rendered using typical props and matches its previous image - 3 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "white",
+      "borderColor": "#104e01",
+      "borderRadius": 5,
+      "borderStyle": "solid",
+      "borderWidth": 1,
+      "marginBottom": 2.668,
+      "marginTop": 2.668,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": "1%",
+        "marginTop": "1%",
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 8,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "opacity": 1,
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 32.12572956370018,
+              "fontWeight": "bold",
+              "textAlign": "left",
+            }
+          }
+        >
+          Recipe with no cover images - TEST:NORMAL
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 29.06613627191921,
+              "fontStyle": "italic",
+            }
+          }
+        >
+          Created by: 
+        </Text>
+        <View
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <Text
+            maxFontSizeMultiplier={2}
+            style={
+              Object {
+                "color": "#505050",
+                "fontSize": 29.06613627191921,
+                "fontStyle": "italic",
+              }
+            }
+          >
+            pothers
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "flex": 1,
+              "fontSize": 29.06613627191921,
+            }
+          }
+        >
+          Prep time: 
+          06:00
+        </Text>
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "flex": 1,
+              "fontSize": 29.06613627191921,
+            }
+          }
+        >
+          Difficulty: 
+          6
+          /10
+        </Text>
+      </View>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 2,
+          "justifyContent": "center",
+          "opacity": 1,
+          "overflow": "hidden",
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "uri": "https://storage.googleapis.com/download/storage/v1/b/chef-avatars-ac1cff8d11c908f3cf8613121b61683221152250/o/59b9a3ad9aaf1fe5f9fd5c92c62461eaa88fea89.jpg?generation=1601673323651524&alt=media",
+          }
+        }
+        style={
+          Object {
+            "borderRadius": 5,
+            "height": 120.06,
+            "marginRight": "4%",
+            "width": 120.06,
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "center",
+        "height": 500.25,
+        "opacity": 1,
+        "width": 750,
+      }
+    }
+  >
+    <Image
+      source={1}
+      style={
+        Object {
+          "borderRadius": 5,
+          "height": "100%",
+          "position": "absolute",
+          "width": 746,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": "1%",
+        "marginTop": "1%",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        2
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        3
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        4
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Recipe Card can be rendered using typical props and matches its previous image - 4 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "white",
+      "borderColor": "#104e01",
+      "borderRadius": 5,
+      "borderStyle": "solid",
+      "borderWidth": 1,
+      "marginBottom": 2.668,
+      "marginTop": 2.668,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": "1%",
+        "marginTop": "1%",
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 8,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "opacity": 1,
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 32.12572956370018,
+              "fontWeight": "bold",
+              "textAlign": "left",
+            }
+          }
+        >
+          Pappardelle alla Bolognese - TEST:NORMAL4
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 29.06613627191921,
+              "fontStyle": "italic",
+            }
+          }
+        >
+          Created by: 
+        </Text>
+        <View
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <Text
+            maxFontSizeMultiplier={2}
+            style={
+              Object {
+                "color": "#505050",
+                "fontSize": 29.06613627191921,
+                "fontStyle": "italic",
+              }
+            }
+          >
+            Narisca
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "flex": 1,
+              "fontSize": 29.06613627191921,
+            }
+          }
+        >
+          Prep time: 
+          03:30
+        </Text>
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "flex": 1,
+              "fontSize": 29.06613627191921,
+            }
+          }
+        >
+          Difficulty: 
+          7
+          /10
+        </Text>
+      </View>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 2,
+          "justifyContent": "center",
+          "opacity": 1,
+          "overflow": "hidden",
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "uri": "https://robohash.org/sedsuntsit.png?size=300x300&set=set1",
+          }
+        }
+        style={
+          Object {
+            "borderRadius": 5,
+            "height": 120.06,
+            "marginRight": "4%",
+            "width": 120.06,
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "center",
+        "height": 500.25,
+        "opacity": 1,
+        "width": 750,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://storage.googleapis.com/test-images-be4d3e05-1e77-4efd-8571-364e22ea7c0d/recipe15.jpg",
+        }
+      }
+      style={
+        Object {
+          "borderRadius": 5,
+          "height": "100%",
+          "position": "absolute",
+          "width": 746,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": "1%",
+        "marginTop": "1%",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        2
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        5
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        1
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Recipe Card can be rendered using typical props and matches its previous image - 5 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "white",
+      "borderColor": "#104e01",
+      "borderRadius": 5,
+      "borderStyle": "solid",
+      "borderWidth": 1,
+      "marginBottom": 2.668,
+      "marginTop": 2.668,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": "1%",
+        "marginTop": "1%",
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 8,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "opacity": 1,
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 32.12572956370018,
+              "fontWeight": "bold",
+              "textAlign": "left",
+            }
+          }
+        >
+          Pho - TEST:NORMAL5
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 29.06613627191921,
+              "fontStyle": "italic",
+            }
+          }
+        >
+          Created by: 
+        </Text>
+        <View
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <Text
+            maxFontSizeMultiplier={2}
+            style={
+              Object {
+                "color": "#505050",
+                "fontSize": 29.06613627191921,
+                "fontStyle": "italic",
+              }
+            }
+          >
+            Sichult
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "flex": 1,
+              "fontSize": 29.06613627191921,
+            }
+          }
+        >
+          Prep time: 
+          05:00
+        </Text>
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "flex": 1,
+              "fontSize": 29.06613627191921,
+            }
+          }
+        >
+          Difficulty: 
+          9
+          /10
+        </Text>
+      </View>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 2,
+          "justifyContent": "center",
+          "opacity": 1,
+          "overflow": "hidden",
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "uri": "https://robohash.org/architectoquidemqui.png?size=300x300&set=set1",
+          }
+        }
+        style={
+          Object {
+            "borderRadius": 5,
+            "height": 120.06,
+            "marginRight": "4%",
+            "width": 120.06,
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "center",
+        "height": 500.25,
+        "opacity": 1,
+        "width": 750,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://storage.googleapis.com/test-images-be4d3e05-1e77-4efd-8571-364e22ea7c0d/recipe17.jpg",
+        }
+      }
+      style={
+        Object {
+          "borderRadius": 5,
+          "height": "100%",
+          "position": "absolute",
+          "width": 746,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": "1%",
+        "marginTop": "1%",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        0
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        7
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        3
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Recipe Card can be rendered using typical props and matches its previous image - 6 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "white",
+      "borderColor": "#104e01",
+      "borderRadius": 5,
+      "borderStyle": "solid",
+      "borderWidth": 1,
+      "marginBottom": 2.668,
+      "marginTop": 2.668,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": "1%",
+        "marginTop": "1%",
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 8,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "opacity": 1,
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 32.12572956370018,
+              "fontWeight": "bold",
+              "textAlign": "left",
+            }
+          }
+        >
+          Bruschette with Tomato - TEST:NORMAL6
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 29.06613627191921,
+              "fontStyle": "italic",
+            }
+          }
+        >
+          Created by: 
+        </Text>
+        <View
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <Text
+            maxFontSizeMultiplier={2}
+            style={
+              Object {
+                "color": "#505050",
+                "fontSize": 29.06613627191921,
+                "fontStyle": "italic",
+              }
+            }
+          >
+            Chel
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "flex": 1,
+              "fontSize": 29.06613627191921,
+            }
+          }
+        >
+          Prep time: 
+          03:45
+        </Text>
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "flex": 1,
+              "fontSize": 29.06613627191921,
+            }
+          }
+        >
+          Difficulty: 
+          10
+          /10
+        </Text>
+      </View>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 2,
+          "justifyContent": "center",
+          "opacity": 1,
+          "overflow": "hidden",
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "uri": "https://robohash.org/ablaudantiumaut.png?size=300x300&set=set1",
+          }
+        }
+        style={
+          Object {
+            "borderRadius": 5,
+            "height": 120.06,
+            "marginRight": "4%",
+            "width": 120.06,
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "center",
+        "height": 500.25,
+        "opacity": 1,
+        "width": 750,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://storage.googleapis.com/test-images-be4d3e05-1e77-4efd-8571-364e22ea7c0d/recipe2.jpg",
+        }
+      }
+      style={
+        Object {
+          "borderRadius": 5,
+          "height": "100%",
+          "position": "absolute",
+          "width": 746,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": "1%",
+        "marginTop": "1%",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        0
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        5
       </Text>
     </View>
     <View
@@ -404,7 +2116,7 @@ exports[`Recipe Card can be rendered using different props including a really lo
 </View>
 `;
 
-exports[`Recipe Card can be rendered using typical props and matches its previous image 1`] = `
+exports[`Recipe Card can be rendered when the recipe has NO COVER IMAGE and matches its previous image 1`] = `
 <View
   style={
     Object {
@@ -419,64 +2131,6 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     }
   }
 >
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "borderBottomColor": "#104e01",
-        "borderBottomWidth": 0.5,
-        "flexDirection": "row",
-        "marginLeft": "1.6%",
-        "marginRight": "2%",
-        "paddingBottom": 6.67,
-        "paddingTop": 6.67,
-        "width": "96.4%",
-      }
-    }
-  >
-    <Text />
-    <Text
-      maxFontSizeMultiplier={2}
-      style={
-        Object {
-          "color": "#505050",
-          "fontSize": 29.06613627191921,
-          "fontStyle": "italic",
-        }
-      }
-    >
-      Re-shared by: 
-    </Text>
-    <View
-      accessible={true}
-      focusable={true}
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "opacity": 1,
-        }
-      }
-    >
-      <Text
-        maxFontSizeMultiplier={2}
-        style={
-          Object {
-            "color": "#505050",
-            "fontSize": 29.06613627191921,
-            "fontStyle": "italic",
-          }
-        }
-      >
-        pothers
-      </Text>
-    </View>
-  </View>
   <View
     style={
       Object {
@@ -525,7 +2179,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
             }
           }
         >
-          Test recipe
+          Caprese Salad - TEST:NOCOVERIMAGE
         </Text>
       </View>
       <View
@@ -617,7 +2271,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
           }
         >
           Difficulty: 
-          4
+          2
           /10
         </Text>
       </View>
@@ -643,7 +2297,11 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       }
     >
       <Image
-        source={1}
+        source={
+          Object {
+            "uri": "https://storage.googleapis.com/download/storage/v1/b/chef-avatars-ac1cff8d11c908f3cf8613121b61683221152250/o/59b9a3ad9aaf1fe5f9fd5c92c62461eaa88fea89.jpg?generation=1601673323651524&alt=media",
+          }
+        }
         style={
           Object {
             "borderRadius": 5,
@@ -682,7 +2340,421 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
           "borderRadius": 5,
           "height": "100%",
           "position": "absolute",
-          "width": "100%",
+          "width": 746,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": "1%",
+        "marginTop": "1%",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        0
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        6
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        3
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Recipe Card can be rendered when the recipe has a LONG RESHARER USERNAME and matches its previous image 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "white",
+      "borderColor": "#104e01",
+      "borderRadius": 5,
+      "borderStyle": "solid",
+      "borderWidth": 1,
+      "marginBottom": 2.668,
+      "marginTop": 2.668,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "borderBottomColor": "#104e01",
+        "borderBottomWidth": 0.5,
+        "flexDirection": "row",
+        "marginLeft": "1.6%",
+        "marginRight": "2%",
+        "paddingBottom": 6.67,
+        "paddingTop": 6.67,
+        "width": "96.4%",
+      }
+    }
+  >
+    <Text />
+    <Text
+      maxFontSizeMultiplier={2}
+      style={
+        Array [
+          Object {
+            "color": "#505050",
+            "fontSize": 29.06613627191921,
+            "fontStyle": "italic",
+          },
+          Object {
+            "maxWidth": 210.00000000000003,
+          },
+        ]
+      }
+    >
+      Re-shared by: 
+    </Text>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "maxWidth": 450,
+          "opacity": 1,
+        }
+      }
+    >
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 29.06613627191921,
+            "fontStyle": "italic",
+          }
+        }
+      >
+        I have a ridiculously long username just for testing how the UI handles it
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": "1%",
+        "marginTop": "1%",
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 8,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "opacity": 1,
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 32.12572956370018,
+              "fontWeight": "bold",
+              "textAlign": "left",
+            }
+          }
+        >
+          Caprese Salad - TEST:LONGRESHARERUSERNAME
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 29.06613627191921,
+              "fontStyle": "italic",
+            }
+          }
+        >
+          Created by: 
+        </Text>
+        <View
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <Text
+            maxFontSizeMultiplier={2}
+            style={
+              Object {
+                "color": "#505050",
+                "fontSize": 29.06613627191921,
+                "fontStyle": "italic",
+              }
+            }
+          >
+            I have a ridiculously long username just for testing how the UI handles it
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "flex": 1,
+              "fontSize": 29.06613627191921,
+            }
+          }
+        >
+          Prep time: 
+          01:00
+        </Text>
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "flex": 1,
+              "fontSize": 29.06613627191921,
+            }
+          }
+        >
+          Difficulty: 
+          2
+          /10
+        </Text>
+      </View>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 2,
+          "justifyContent": "center",
+          "opacity": 1,
+          "overflow": "hidden",
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "uri": "https://storage.googleapis.com/download/storage/v1/b/chef-avatars-ac1cff8d11c908f3cf8613121b61683221152250/o/59b9a3ad9aaf1fe5f9fd5c92c62461eaa88fea89.jpg?generation=1601673323651524&alt=media",
+          }
+        }
+        style={
+          Object {
+            "borderRadius": 5,
+            "height": 120.06,
+            "marginRight": "4%",
+            "width": 120.06,
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "center",
+        "height": 500.25,
+        "opacity": 1,
+        "width": 750,
+      }
+    }
+  >
+    <Image
+      source={1}
+      style={
+        Object {
+          "borderRadius": 5,
+          "height": "100%",
+          "position": "absolute",
+          "width": 746,
         }
       }
     />
@@ -765,6 +2837,324 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
           }
         }
       >
+        6
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        3
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Recipe Card can be rendered when the recipe has been COMMENTED and matches its previous image 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "white",
+      "borderColor": "#104e01",
+      "borderRadius": 5,
+      "borderStyle": "solid",
+      "borderWidth": 1,
+      "marginBottom": 2.668,
+      "marginTop": 2.668,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": "1%",
+        "marginTop": "1%",
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 8,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "opacity": 1,
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 32.12572956370018,
+              "fontWeight": "bold",
+              "textAlign": "left",
+            }
+          }
+        >
+          Chicken Fajitas - TEST:COMMENTED
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 29.06613627191921,
+              "fontStyle": "italic",
+            }
+          }
+        >
+          Created by: 
+        </Text>
+        <View
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <Text
+            maxFontSizeMultiplier={2}
+            style={
+              Object {
+                "color": "#505050",
+                "fontSize": 29.06613627191921,
+                "fontStyle": "italic",
+              }
+            }
+          >
+            Chel
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "flex": 1,
+              "fontSize": 29.06613627191921,
+            }
+          }
+        >
+          Prep time: 
+          02:45
+        </Text>
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "flex": 1,
+              "fontSize": 29.06613627191921,
+            }
+          }
+        >
+          Difficulty: 
+          4
+          /10
+        </Text>
+      </View>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 2,
+          "justifyContent": "center",
+          "opacity": 1,
+          "overflow": "hidden",
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "uri": "https://robohash.org/ablaudantiumaut.png?size=300x300&set=set1",
+          }
+        }
+        style={
+          Object {
+            "borderRadius": 5,
+            "height": 120.06,
+            "marginRight": "4%",
+            "width": 120.06,
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "center",
+        "height": 500.25,
+        "opacity": 1,
+        "width": 750,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://storage.googleapis.com/test-images-be4d3e05-1e77-4efd-8571-364e22ea7c0d/recipe56.jpg",
+        }
+      }
+      style={
+        Object {
+          "borderRadius": 5,
+          "height": "100%",
+          "position": "absolute",
+          "width": 746,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": "1%",
+        "marginTop": "1%",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
         1
       </Text>
     </View>
@@ -801,7 +3191,2581 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
           }
         }
       >
+        6
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        4
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Recipe Card can be rendered when the recipe has been LIKED and matches its previous image 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "white",
+      "borderColor": "#104e01",
+      "borderRadius": 5,
+      "borderStyle": "solid",
+      "borderWidth": 1,
+      "marginBottom": 2.668,
+      "marginTop": 2.668,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": "1%",
+        "marginTop": "1%",
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 8,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "opacity": 1,
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 32.12572956370018,
+              "fontWeight": "bold",
+              "textAlign": "left",
+            }
+          }
+        >
+          Massaman Curry - TEST:LIKED
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 29.06613627191921,
+              "fontStyle": "italic",
+            }
+          }
+        >
+          Created by: 
+        </Text>
+        <View
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <Text
+            maxFontSizeMultiplier={2}
+            style={
+              Object {
+                "color": "#505050",
+                "fontSize": 29.06613627191921,
+                "fontStyle": "italic",
+              }
+            }
+          >
+            Sichult
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "flex": 1,
+              "fontSize": 29.06613627191921,
+            }
+          }
+        >
+          Prep time: 
+          02:30
+        </Text>
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "flex": 1,
+              "fontSize": 29.06613627191921,
+            }
+          }
+        >
+          Difficulty: 
+          8
+          /10
+        </Text>
+      </View>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 2,
+          "justifyContent": "center",
+          "opacity": 1,
+          "overflow": "hidden",
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "uri": "https://robohash.org/architectoquidemqui.png?size=300x300&set=set1",
+          }
+        }
+        style={
+          Object {
+            "borderRadius": 5,
+            "height": 120.06,
+            "marginRight": "4%",
+            "width": 120.06,
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "center",
+        "height": 500.25,
+        "opacity": 1,
+        "width": 750,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://storage.googleapis.com/test-images-be4d3e05-1e77-4efd-8571-364e22ea7c0d/recipe55.jpg",
+        }
+      }
+      style={
+        Object {
+          "borderRadius": 5,
+          "height": "100%",
+          "position": "absolute",
+          "width": 746,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": "1%",
+        "marginTop": "1%",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        0
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        6
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        5
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Recipe Card can be rendered when the recipe has been LIKED, COMMENTED, and SHARED and matches its previous image 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "white",
+      "borderColor": "#104e01",
+      "borderRadius": 5,
+      "borderStyle": "solid",
+      "borderWidth": 1,
+      "marginBottom": 2.668,
+      "marginTop": 2.668,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": "1%",
+        "marginTop": "1%",
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 8,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "opacity": 1,
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 32.12572956370018,
+              "fontWeight": "bold",
+              "textAlign": "left",
+            }
+          }
+        >
+          Chicken Fajitas - TEST:ALL
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 29.06613627191921,
+              "fontStyle": "italic",
+            }
+          }
+        >
+          Created by: 
+        </Text>
+        <View
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <Text
+            maxFontSizeMultiplier={2}
+            style={
+              Object {
+                "color": "#505050",
+                "fontSize": 29.06613627191921,
+                "fontStyle": "italic",
+              }
+            }
+          >
+            Chel
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "flex": 1,
+              "fontSize": 29.06613627191921,
+            }
+          }
+        >
+          Prep time: 
+          02:45
+        </Text>
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "flex": 1,
+              "fontSize": 29.06613627191921,
+            }
+          }
+        >
+          Difficulty: 
+          4
+          /10
+        </Text>
+      </View>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 2,
+          "justifyContent": "center",
+          "opacity": 1,
+          "overflow": "hidden",
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "uri": "https://robohash.org/ablaudantiumaut.png?size=300x300&set=set1",
+          }
+        }
+        style={
+          Object {
+            "borderRadius": 5,
+            "height": 120.06,
+            "marginRight": "4%",
+            "width": 120.06,
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "center",
+        "height": 500.25,
+        "opacity": 1,
+        "width": 750,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://storage.googleapis.com/test-images-be4d3e05-1e77-4efd-8571-364e22ea7c0d/recipe56.jpg",
+        }
+      }
+      style={
+        Object {
+          "borderRadius": 5,
+          "height": "100%",
+          "position": "absolute",
+          "width": 746,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": "1%",
+        "marginTop": "1%",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
         2
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        6
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        4
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Recipe Card can be rendered when the recipe has been RE_SHARED BY SOMEONE and matches its previous image 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "white",
+      "borderColor": "#104e01",
+      "borderRadius": 5,
+      "borderStyle": "solid",
+      "borderWidth": 1,
+      "marginBottom": 2.668,
+      "marginTop": 2.668,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "borderBottomColor": "#104e01",
+        "borderBottomWidth": 0.5,
+        "flexDirection": "row",
+        "marginLeft": "1.6%",
+        "marginRight": "2%",
+        "paddingBottom": 6.67,
+        "paddingTop": 6.67,
+        "width": "96.4%",
+      }
+    }
+  >
+    <Text />
+    <Text
+      maxFontSizeMultiplier={2}
+      style={
+        Array [
+          Object {
+            "color": "#505050",
+            "fontSize": 29.06613627191921,
+            "fontStyle": "italic",
+          },
+          Object {
+            "maxWidth": 210.00000000000003,
+          },
+        ]
+      }
+    >
+      Re-shared by: 
+    </Text>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "maxWidth": 450,
+          "opacity": 1,
+        }
+      }
+    >
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 29.06613627191921,
+            "fontStyle": "italic",
+          }
+        }
+      >
+        pothers
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": "1%",
+        "marginTop": "1%",
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 8,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "opacity": 1,
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 32.12572956370018,
+              "fontWeight": "bold",
+              "textAlign": "left",
+            }
+          }
+        >
+          Massaman Curry - TEST:RESHAREDBY
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 29.06613627191921,
+              "fontStyle": "italic",
+            }
+          }
+        >
+          Created by: 
+        </Text>
+        <View
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <Text
+            maxFontSizeMultiplier={2}
+            style={
+              Object {
+                "color": "#505050",
+                "fontSize": 29.06613627191921,
+                "fontStyle": "italic",
+              }
+            }
+          >
+            Sichult
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "flex": 1,
+              "fontSize": 29.06613627191921,
+            }
+          }
+        >
+          Prep time: 
+          02:30
+        </Text>
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "flex": 1,
+              "fontSize": 29.06613627191921,
+            }
+          }
+        >
+          Difficulty: 
+          8
+          /10
+        </Text>
+      </View>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 2,
+          "justifyContent": "center",
+          "opacity": 1,
+          "overflow": "hidden",
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "uri": "https://robohash.org/architectoquidemqui.png?size=300x300&set=set1",
+          }
+        }
+        style={
+          Object {
+            "borderRadius": 5,
+            "height": 120.06,
+            "marginRight": "4%",
+            "width": 120.06,
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "center",
+        "height": 500.25,
+        "opacity": 1,
+        "width": 750,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://storage.googleapis.com/test-images-be4d3e05-1e77-4efd-8571-364e22ea7c0d/recipe55.jpg",
+        }
+      }
+      style={
+        Object {
+          "borderRadius": 5,
+          "height": "100%",
+          "position": "absolute",
+          "width": 746,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": "1%",
+        "marginTop": "1%",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        1
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        5
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        5
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Recipe Card can be rendered when the recipe has been SHARED and matches its previous image 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "white",
+      "borderColor": "#104e01",
+      "borderRadius": 5,
+      "borderStyle": "solid",
+      "borderWidth": 1,
+      "marginBottom": 2.668,
+      "marginTop": 2.668,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": "1%",
+        "marginTop": "1%",
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 8,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "opacity": 1,
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 32.12572956370018,
+              "fontWeight": "bold",
+              "textAlign": "left",
+            }
+          }
+        >
+          Massaman Curry - TEST:SHARED
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 29.06613627191921,
+              "fontStyle": "italic",
+            }
+          }
+        >
+          Created by: 
+        </Text>
+        <View
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <Text
+            maxFontSizeMultiplier={2}
+            style={
+              Object {
+                "color": "#505050",
+                "fontSize": 29.06613627191921,
+                "fontStyle": "italic",
+              }
+            }
+          >
+            Sichult
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "flex": 1,
+              "fontSize": 29.06613627191921,
+            }
+          }
+        >
+          Prep time: 
+          02:30
+        </Text>
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "flex": 1,
+              "fontSize": 29.06613627191921,
+            }
+          }
+        >
+          Difficulty: 
+          8
+          /10
+        </Text>
+      </View>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 2,
+          "justifyContent": "center",
+          "opacity": 1,
+          "overflow": "hidden",
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "uri": "https://robohash.org/architectoquidemqui.png?size=300x300&set=set1",
+          }
+        }
+        style={
+          Object {
+            "borderRadius": 5,
+            "height": 120.06,
+            "marginRight": "4%",
+            "width": 120.06,
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "center",
+        "height": 500.25,
+        "opacity": 1,
+        "width": 750,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://storage.googleapis.com/test-images-be4d3e05-1e77-4efd-8571-364e22ea7c0d/recipe55.jpg",
+        }
+      }
+      style={
+        Object {
+          "borderRadius": 5,
+          "height": "100%",
+          "position": "absolute",
+          "width": 746,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": "1%",
+        "marginTop": "1%",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        1
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        6
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        5
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Recipe Card can be rendered when the recipe has been a LONG RECIPE NAME and matches its previous image 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "white",
+      "borderColor": "#104e01",
+      "borderRadius": 5,
+      "borderStyle": "solid",
+      "borderWidth": 1,
+      "marginBottom": 2.668,
+      "marginTop": 2.668,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": "1%",
+        "marginTop": "1%",
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 8,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "opacity": 1,
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 32.12572956370018,
+              "fontWeight": "bold",
+              "textAlign": "left",
+            }
+          }
+        >
+          Recipe name with a really long name that would cover more than one line, and possibly even a couple of lines purely for the sake of seeing how it affects the ui - TEST:LONGRECIPENAME
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 29.06613627191921,
+              "fontStyle": "italic",
+            }
+          }
+        >
+          Created by: 
+        </Text>
+        <View
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <Text
+            maxFontSizeMultiplier={2}
+            style={
+              Object {
+                "color": "#505050",
+                "fontSize": 29.06613627191921,
+                "fontStyle": "italic",
+              }
+            }
+          >
+            pothers
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "flex": 1,
+              "fontSize": 29.06613627191921,
+            }
+          }
+        >
+          Prep time: 
+          01:45
+        </Text>
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "flex": 1,
+              "fontSize": 29.06613627191921,
+            }
+          }
+        >
+          Difficulty: 
+          5
+          /10
+        </Text>
+      </View>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 2,
+          "justifyContent": "center",
+          "opacity": 1,
+          "overflow": "hidden",
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "uri": "https://storage.googleapis.com/download/storage/v1/b/chef-avatars-ac1cff8d11c908f3cf8613121b61683221152250/o/59b9a3ad9aaf1fe5f9fd5c92c62461eaa88fea89.jpg?generation=1601673323651524&alt=media",
+          }
+        }
+        style={
+          Object {
+            "borderRadius": 5,
+            "height": 120.06,
+            "marginRight": "4%",
+            "width": 120.06,
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "center",
+        "height": 500.25,
+        "opacity": 1,
+        "width": 750,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://storage.googleapis.com/test-images-be4d3e05-1e77-4efd-8571-364e22ea7c0d/recipe16.jpg",
+        }
+      }
+      style={
+        Object {
+          "borderRadius": 5,
+          "height": "100%",
+          "position": "absolute",
+          "width": 746,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": "1%",
+        "marginTop": "1%",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        0
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        5
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        0
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Recipe Card can be rendered when the recipe has is from a chef with NO CHEFIMAGE and matches its previous image 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "white",
+      "borderColor": "#104e01",
+      "borderRadius": 5,
+      "borderStyle": "solid",
+      "borderWidth": 1,
+      "marginBottom": 2.668,
+      "marginTop": 2.668,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": "1%",
+        "marginTop": "1%",
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 8,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "opacity": 1,
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 32.12572956370018,
+              "fontWeight": "bold",
+              "textAlign": "left",
+            }
+          }
+        >
+          Ebiten maki - TEST:NOCHEFIMAGE
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 29.06613627191921,
+              "fontStyle": "italic",
+            }
+          }
+        >
+          Created by: 
+        </Text>
+        <View
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <Text
+            maxFontSizeMultiplier={2}
+            style={
+              Object {
+                "color": "#505050",
+                "fontSize": 29.06613627191921,
+                "fontStyle": "italic",
+              }
+            }
+          >
+            Anonymous
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "flex": 1,
+              "fontSize": 29.06613627191921,
+            }
+          }
+        >
+          Prep time: 
+          03:45
+        </Text>
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "flex": 1,
+              "fontSize": 29.06613627191921,
+            }
+          }
+        >
+          Difficulty: 
+          7
+          /10
+        </Text>
+      </View>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 2,
+          "justifyContent": "center",
+          "opacity": 1,
+          "overflow": "hidden",
+        }
+      }
+    >
+      <Image
+        source={1}
+        style={
+          Object {
+            "borderRadius": 5,
+            "height": 120.06,
+            "marginRight": "4%",
+            "width": 120.06,
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "center",
+        "height": 500.25,
+        "opacity": 1,
+        "width": 750,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://storage.googleapis.com/test-images-be4d3e05-1e77-4efd-8571-364e22ea7c0d/recipe13.jpg",
+        }
+      }
+      style={
+        Object {
+          "borderRadius": 5,
+          "height": "100%",
+          "position": "absolute",
+          "width": 746,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": "1%",
+        "marginTop": "1%",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        0
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        4
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        3
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Recipe Card can be rendered when the recipe has is from a chef with a LONG USERNAME and matches its previous image 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "white",
+      "borderColor": "#104e01",
+      "borderRadius": 5,
+      "borderStyle": "solid",
+      "borderWidth": 1,
+      "marginBottom": 2.668,
+      "marginTop": 2.668,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": "1%",
+        "marginTop": "1%",
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 8,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "opacity": 1,
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 32.12572956370018,
+              "fontWeight": "bold",
+              "textAlign": "left",
+            }
+          }
+        >
+          Spaghetti bolognaise - TEST:LONGUSERNAME
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 29.06613627191921,
+              "fontStyle": "italic",
+            }
+          }
+        >
+          Created by: 
+        </Text>
+        <View
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <Text
+            maxFontSizeMultiplier={2}
+            style={
+              Object {
+                "color": "#505050",
+                "fontSize": 29.06613627191921,
+                "fontStyle": "italic",
+              }
+            }
+          >
+            I have a ridiculously long username just for testing how the UI handles it - TEST:LONGUSERNAME
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "marginLeft": "2%",
+            "marginRight": "2%",
+            "width": "96%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "flex": 1,
+              "fontSize": 29.06613627191921,
+            }
+          }
+        >
+          Prep time: 
+          01:00
+        </Text>
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "flex": 1,
+              "fontSize": 29.06613627191921,
+            }
+          }
+        >
+          Difficulty: 
+          6
+          /10
+        </Text>
+      </View>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 2,
+          "justifyContent": "center",
+          "opacity": 1,
+          "overflow": "hidden",
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "uri": "https://storage.googleapis.com/download/storage/v1/b/chef-avatars-ac1cff8d11c908f3cf8613121b61683221152250/o/59b9a3ad9aaf1fe5f9fd5c92c62461eaa88fea89.jpg?generation=1601673323651524&alt=media",
+          }
+        }
+        style={
+          Object {
+            "borderRadius": 5,
+            "height": 120.06,
+            "marginRight": "4%",
+            "width": 120.06,
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "center",
+        "height": 500.25,
+        "opacity": 1,
+        "width": 750,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://storage.googleapis.com/test-images-be4d3e05-1e77-4efd-8571-364e22ea7c0d/recipe6.jpg",
+        }
+      }
+      style={
+        Object {
+          "borderRadius": 5,
+          "height": "100%",
+          "position": "absolute",
+          "width": 746,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": "1%",
+        "marginTop": "1%",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        0
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        5
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text />
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Object {
+            "color": "#505050",
+            "fontSize": 32.12572956370018,
+            "fontWeight": "bold",
+            "marginLeft": "5%",
+            "textAlign": "center",
+          }
+        }
+      >
+        1
       </Text>
     </View>
   </View>

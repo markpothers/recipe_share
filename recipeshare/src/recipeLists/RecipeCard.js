@@ -13,7 +13,7 @@ export default class RecipeCard extends React.PureComponent {
 	}
 
 	render() {
-		// console.log(this.props.id)
+		// console.log(this.props)
 		const imageSource = this.props.image_url ? {uri:this.props.image_url} : peasImage
 		return (
 			<View style={styles.recipeCard} >
@@ -87,8 +87,8 @@ function PostedBy(props) {
 	return (
 		<View style={styles.recipeCardTopPostedByContainer}>
 			<Icon name='share' size={responsiveHeight(3.5)} style={styles.reSharedIcon} />
-			<Text maxFontSizeMultiplier={2} style={styles.recipeCardTopItalic}>Re-shared by: </Text>
-			<TouchableOpacity onPress={() => props.navigateToSharer(props.sharer_id)}>
+			<Text maxFontSizeMultiplier={2} style={[styles.recipeCardTopItalic, {maxWidth: responsiveWidth(28)}]}>Re-shared by: </Text>
+			<TouchableOpacity style={styles.recipeCardTopPostedByTouchable} onPress={() => props.navigateToSharer(props.sharer_id)}>
 				<Text maxFontSizeMultiplier={2} style={styles.recipeCardTopItalic} >{props.username}</Text>
 			</TouchableOpacity>
 		</View>
