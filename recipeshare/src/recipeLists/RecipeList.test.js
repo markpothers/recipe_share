@@ -14,6 +14,7 @@ describe('Recipe List', () => {
 	let mountedRecipeList
 	let mockCallBack
 	let store
+	let navigation
 
 	beforeAll(() => {
 		// console.log('runs at the beginning of everything')
@@ -21,17 +22,18 @@ describe('Recipe List', () => {
 
 	beforeEach(() => {
 		// console.log('runs before every test')
+
 		mockCallBack = jest.fn()
 		store = mockStore({
 			recipes: {
-				all: listProps,
-				chef: listProps,
-				chef_feed: listProps,
-				chef_liked: listProps,
-				chef_made: listProps,
-				global_ranks: listProps,
-				most_liked: listProps,
-				most_made: listProps
+				all: [listProps[0]],
+				// chef: [listProps[0]],
+				// chef_feed: [listProps[0]],
+				// chef_liked: [listProps[0]],
+				// chef_made: [listProps[0]],
+				// global_ranks: [listProps[0]],
+				// most_liked: [listProps[0]],
+				// most_made: [listProps[0]]
 			},
 			recipes_details: {},
 			loggedInChef: {},
@@ -40,42 +42,88 @@ describe('Recipe List', () => {
 			cuisine: 'Any',
 			serves: 'Any',
 		})
+		navigation = {
+			addListener: jest.fn()
+		}
 	})
 
 	afterEach(() => {
 		// console.log('runs after each test')
+		mountedRecipeList.unmount()
 	})
 
 	afterAll(() => {
 		// console.log('runs after all tests have completed')
 	})
 
-	it('agrees that 1 = 1', () => {
-		expect(1).toEqual(1)
-	})
+	// it('agrees that 1 = 1', () => {
+	// 	expect(1).toEqual(1)
+	// })
 
 	// it('asyncly works', done => {
 	// 	setTimeout(done, 100)
 	// })
 
-	// it('asyncly works in a different manner', done => {
+	// it('asyncly works using done()', done => {
 	// 	setTimeout(() => {
-	// 		console.log('I ran after 300 ms')
+	// 		console.log('I ran within the set Timeout while waiting for done()')
 	// 		done()
 	// 	}, 3000)
 	// })
 
-	// it('asyncly works using await', async() => {
-	// 	await setTimeout(()=>{
-	// 		console.log('I ran after 100 ms')
-	// 	}, 100)
+	// function sleep(time) {
+	// 	return new Promise((resolve) => setTimeout(() => {
+	// 		console.log('waiting in the promise')
+	// 		resolve(true)
+	// 	}
+	// 	), time);
+	// }
+
+	// it('asyncly works using await', async () => {
+	// 	let bool = false
+	// 	bool = await sleep(5000)
+	// 	expect(bool).toEqual(true)
 	// })
 
-	// it('can be rendered with all recipes', () => {
-	// 	mountedRecipeList = renderer.create(<Provider store={store}><RecipeList listChoice={"all"} route={{ name: 'All Recipes'}} mockCallBack={mockCallBack} /></Provider>)
-	// 	const image = mountedRecipeList.toJSON()
-	// 	expect(image).toMatchSnapshot()
-	// })
+	it('can be rendered when all recipes are already in the store', async () => {
+		mountedRecipeList = renderer.create(
+			<Provider
+				store={store}
+			>
+				<RecipeList
+					listChoice={"all"}
+					route={{ name: 'All Recipes' }}
+					mockCallBack={mockCallBack}
+					navigation={navigation}
+				/>
+			</Provider>
+		)
+		const image = mountedRecipeList.toJSON()
+		expect(image).toMatchSnapshot()
+	})
+
+	it('has all the expected like Buttons', async () => {
+		// console.warn(listProps[0])
+		mountedRecipeList = await renderer.create(
+			<Provider
+				store={store}
+			>
+				<RecipeList
+					listChoice={"all"}
+					route={{ name: 'All Recipes' }}
+					mockCallBack={mockCallBack}
+					navigation={navigation}
+				/>
+			</Provider>
+		)
+		// console.warn(mountedRecipeList)
+		// mountedRecipeList.forceUpdate()
+		// let root = mountedRecipeList.root
+		// const instance = mountedRecipeList.getInstance()
+		// console.warn(root)
+		// const buttons = root.findAllByProps({testID: "likeButton"})
+		// expect(buttons.length).toEqual(1)
+	})
 
 	// it('can be rendered with chef recipes', () => {
 	// 	mountedRecipeList = renderer.create(<Provider store={store}><RecipeList listChoice={"chef"} route={{name: 'My Recipes'}}  mockCallBack={mockCallBack} /></Provider>)

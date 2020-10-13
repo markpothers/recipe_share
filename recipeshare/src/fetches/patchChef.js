@@ -24,8 +24,8 @@ export const patchChef = async (chefID, auth_token, username, profile_text, coun
 					profile_text: profile_text,
 					country: country,
 					updatingPassword: updatingPassword,
-					password: password,
-					password_confirmation: password_confirmation,
+					password: password.trim(),
+					password_confirmation: password_confirmation.trim(),
 					image_url: imageBase64
 				}
 			})

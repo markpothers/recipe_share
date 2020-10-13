@@ -19,10 +19,10 @@ export const postChef = async(username, e_mail, password, password_confirmation,
 			},
 			body: JSON.stringify({
 				chef: {
-					username: username.toLowerCase().trim(),
+					username: username.trim(),
 					e_mail: e_mail.toLowerCase().trim(),
-					password: password.toLowerCase().trim(),
-					password_confirmation: password_confirmation.toLowerCase().trim(),
+					password: password.trim(),
+					password_confirmation: password_confirmation.trim(),
 					country: country,
 					image_url: imageBase64,
 					profile_text: profile_text

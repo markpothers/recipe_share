@@ -116,8 +116,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		componentWillUnmount = () => {
-			this._unsubscribeFocus()
-			this._unsubscribeBlur()
+			// this._unsubscribeFocus()
+			// this._unsubscribeBlur()
 		}
 
 		// componentDidUpdate = () => {
@@ -530,6 +530,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		render() {
 			// console.log(this.props[this.props["listChoice"] + `_Recipes`])
 			// console.log('list start')
+			// console.warn('item')
 			return (
 				<SpinachAppContainer awaitingServer={this.state.awaitingServer}>
 					<TouchableOpacity

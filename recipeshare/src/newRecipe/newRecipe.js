@@ -435,6 +435,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		submitRecipe = async () => {
 			// console.log('submitting')
+			Keyboard.dismiss()
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
 				await this.setState({ awaitingServer: true })
@@ -837,7 +838,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									<DragSortableView
 										dataSource={this.state.newRecipeDetails.ingredients}
 										parentWidth={responsiveWidth(100)}
-										parentMarginBottom={125}
 										childrenWidth={responsiveWidth(100)}
 										childrenHeight={responsiveHeight(12.5)}
 										reverseChildZIndexing={true}

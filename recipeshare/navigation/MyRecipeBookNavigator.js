@@ -188,8 +188,9 @@ const MyRecipeBookStack = () => {
 
 	return (
 		<Stack.Navigator
-			initialRouteName="MyRecipeBook"
-			headerMode="screen"
+		initialRouteName="MyRecipeBook"
+		// initialRouteName="NewRecipe"
+		headerMode="screen"
 			screenOptions={{
 				headerStyle: {
 					backgroundColor: '#104e01',
