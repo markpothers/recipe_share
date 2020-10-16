@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image, AsyncStorage } from 'react-native'
+import { ScrollView, View, Text, TouchableOpacity, Image, AsyncStorage } from 'react-native'
 // import { DrawerItems, SafeAreaView } from 'react-navigation';
 import { styles } from './drawerStyleSheet'
 import { connect } from 'react-redux'
@@ -33,7 +33,7 @@ export default (connect(mapStateToProps, mapDispatchToProps)(
 							</View>
 						</View>
 						<View style={styles.horizontalRule}></View>
-						<View style={styles.routesContainer}>
+						<ScrollView style={styles.routesContainer}>
 							<TouchableOpacity style={styles.routeLink} onPress={() => this.props.navigation.navigate('BrowseRecipes')}>
 								<Icon name='food' size={responsiveHeight(3.5)} style={styles.icon} />
 								<View style={styles.routeNameContainer}>
@@ -52,13 +52,13 @@ export default (connect(mapStateToProps, mapDispatchToProps)(
 									<Text style={styles.routeName} maxFontSizeMultiplier={2}>My profile</Text>
 								</View>
 							</TouchableOpacity>
-						</View>
+						</ScrollView>
 						<View style={styles.horizontalRule}></View>
 						<View style={styles.bottomContainer}>
 							<View style={styles.bottomLeftContainer}>
 								<Text style={styles.userNameHeader} maxFontSizeMultiplier={1.5}>Logged in as:</Text>
 								<TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')}>
-									<Text style={styles.userName} maxFontSizeMultiplier={1.5}>{this.props.loggedInChef.username}</Text>
+								<Text style={styles.userName} maxFontSizeMultiplier={1.5}>{this.props.loggedInChef.username}</Text>
 								</TouchableOpacity>
 							</View>
 							<TouchableOpacity style={styles.bottomRightContainer} onPress={() => this.props.navigation.navigate('Profile')}>

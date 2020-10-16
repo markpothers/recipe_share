@@ -97,7 +97,7 @@ export default class Templates extends React.Component {
 									value={this.props.stayingLoggedIn}
 									onChange={(e) => this.props.stayLoggedIn(e.nativeEvent.value)}
 									trackColor={{ true: '#4b714299' }}
-								// thumbColor={filtersList[category] ? "#104e01" : null}
+								// thumbColor={filtersList[category] ? "#104e01" : "#ececec"}
 								/>
 							</View>
 						</View>
@@ -118,7 +118,7 @@ export default class Templates extends React.Component {
 									value={this.props.stayingLoggedIn}
 									onChange={(e) => this.props.stayLoggedIn(e.nativeEvent.value)}
 									trackColor={{ true: '#4b714299' }}
-								// thumbColor={filtersList[category] ? "#104e01" : null}
+								// thumbColor={filtersList[category] ? "#104e01" : "#ececec"}
 								/>
 							</View>
 						</View>

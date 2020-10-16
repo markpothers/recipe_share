@@ -148,7 +148,7 @@ describe('Recipe Card', () => {
 		const testProps = listProps.find(p => p.name.includes("TEST:RESHARED"))
 		mountedRecipeCard = renderer.create(<RecipeCard {...testProps} />)
 		let root = mountedRecipeCard.root
-		let element = root.findByProps({testID: "postedByElement"})
+		let element = root.findByProps({ testID: "postedByElement" })
 		expect(element).toBeTruthy()
 	})
 
@@ -156,7 +156,7 @@ describe('Recipe Card', () => {
 		const testProps = listProps.find(p => p.name.includes("TEST:NORMAL"))
 		mountedRecipeCard = renderer.create(<RecipeCard {...testProps} />)
 		let root = mountedRecipeCard.root
-		let elements = root.findAllByProps({testID: "postedByElement"})
+		let elements = root.findAllByProps({ testID: "postedByElement" })
 		expect(elements.length).toBe(0)
 	})
 
@@ -165,7 +165,7 @@ describe('Recipe Card', () => {
 		const mockFn = jest.fn()
 		mountedRecipeCard = renderer.create(<RecipeCard {...testProps} reShareRecipe={mockFn} />)
 		let root = mountedRecipeCard.root
-		let button = root.findByProps({testID: "reShareButton"})
+		let button = root.findByProps({ testID: "reShareButton" })
 		button.props.onPress()
 		expect(mockFn).toHaveBeenCalled()
 		expect(mockFn).toHaveBeenCalledWith(testProps.id)
@@ -176,7 +176,7 @@ describe('Recipe Card', () => {
 		const mockFn = jest.fn()
 		mountedRecipeCard = renderer.create(<RecipeCard {...testProps} unReShareRecipe={mockFn} />)
 		let root = mountedRecipeCard.root
-		let button = root.findByProps({testID: "reShareButton"})
+		let button = root.findByProps({ testID: "reShareButton" })
 		button.props.onPress()
 		expect(mockFn).toHaveBeenCalled()
 		expect(mockFn).toHaveBeenCalledWith(testProps.id)
@@ -187,7 +187,7 @@ describe('Recipe Card', () => {
 		const mockFn = jest.fn()
 		mountedRecipeCard = renderer.create(<RecipeCard {...testProps} likeRecipe={mockFn} />)
 		let root = mountedRecipeCard.root
-		let button = root.findByProps({testID: "likeButton"})
+		let button = root.findByProps({ testID: "likeButton" })
 		button.props.onPress()
 		expect(mockFn).toHaveBeenCalled()
 		expect(mockFn).toHaveBeenCalledWith(testProps.id)
@@ -198,7 +198,7 @@ describe('Recipe Card', () => {
 		const mockFn = jest.fn()
 		mountedRecipeCard = renderer.create(<RecipeCard {...testProps} unlikeRecipe={mockFn} />)
 		let root = mountedRecipeCard.root
-		let button = root.findByProps({testID: "likeButton"})
+		let button = root.findByProps({ testID: "likeButton" })
 		button.props.onPress()
 		expect(mockFn).toHaveBeenCalled()
 		expect(mockFn).toHaveBeenCalledWith(testProps.id)
@@ -209,7 +209,7 @@ describe('Recipe Card', () => {
 		const mockFn = jest.fn()
 		mountedRecipeCard = renderer.create(<RecipeCard {...testProps} navigateToRecipeDetails={mockFn} />)
 		let root = mountedRecipeCard.root
-		let button = root.findByProps({testID: "commentButton"})
+		let button = root.findByProps({ testID: "commentButton" })
 		button.props.onPress()
 		expect(mockFn).toHaveBeenCalled()
 		expect(mockFn).toHaveBeenCalledWith(testProps.id, true)
@@ -220,7 +220,7 @@ describe('Recipe Card', () => {
 		const mockFn = jest.fn()
 		mountedRecipeCard = renderer.create(<RecipeCard {...testProps} navigateToRecipeDetails={mockFn} />)
 		let root = mountedRecipeCard.root
-		let button = root.findByProps({testID: "commentButton"})
+		let button = root.findByProps({ testID: "commentButton" })
 		button.props.onPress()
 		expect(mockFn).toHaveBeenCalled()
 		expect(mockFn).toHaveBeenCalledWith(testProps.id, true)
@@ -231,7 +231,7 @@ describe('Recipe Card', () => {
 		const mockFn = jest.fn()
 		mountedRecipeCard = renderer.create(<RecipeCard {...testProps} navigateToChefDetails={mockFn} />)
 		let root = mountedRecipeCard.root
-		let button = root.findByProps({testID: "chefNameButton"})
+		let button = root.findByProps({ testID: "chefNameButton" })
 		button.props.onPress()
 		expect(mockFn).toHaveBeenCalled()
 		expect(mockFn).toHaveBeenCalledWith(testProps.chef_id, testProps.id)
@@ -242,7 +242,7 @@ describe('Recipe Card', () => {
 		const mockFn = jest.fn()
 		mountedRecipeCard = renderer.create(<RecipeCard {...testProps} navigateToChefDetails={mockFn} />)
 		let root = mountedRecipeCard.root
-		let button = root.findByProps({testID: "chefImageButton"})
+		let button = root.findByProps({ testID: "chefImageButton" })
 		button.props.onPress()
 		expect(mockFn).toHaveBeenCalled()
 		expect(mockFn).toHaveBeenCalledWith(testProps.chef_id, testProps.id)
@@ -253,7 +253,7 @@ describe('Recipe Card', () => {
 		const mockFn = jest.fn()
 		mountedRecipeCard = renderer.create(<RecipeCard {...testProps} navigateToChefDetails={mockFn} />)
 		let root = mountedRecipeCard.root
-		let button = root.findByProps({testID: "sharerNameButton"})
+		let button = root.findByProps({ testID: "sharerNameButton" })
 		button.props.onPress()
 		expect(mockFn).toHaveBeenCalled()
 		expect(mockFn).toHaveBeenCalledWith(testProps.sharer_id, testProps.id)
@@ -264,7 +264,7 @@ describe('Recipe Card', () => {
 		const mockFn = jest.fn()
 		mountedRecipeCard = renderer.create(<RecipeCard {...testProps} navigateToRecipeDetails={mockFn} />)
 		let root = mountedRecipeCard.root
-		let button = root.findByProps({testID: "recipeNameButton"})
+		let button = root.findByProps({ testID: "recipeNameButton" })
 		button.props.onPress()
 		expect(mockFn).toHaveBeenCalled()
 		expect(mockFn).toHaveBeenCalledWith(testProps.id)
@@ -275,7 +275,7 @@ describe('Recipe Card', () => {
 		const mockFn = jest.fn()
 		mountedRecipeCard = renderer.create(<RecipeCard {...testProps} navigateToRecipeDetails={mockFn} />)
 		let root = mountedRecipeCard.root
-		let button = root.findByProps({testID: "recipeNameButton"})
+		let button = root.findByProps({ testID: "recipeImageButton" })
 		button.props.onPress()
 		expect(mockFn).toHaveBeenCalled()
 		expect(mockFn).toHaveBeenCalledWith(testProps.id)

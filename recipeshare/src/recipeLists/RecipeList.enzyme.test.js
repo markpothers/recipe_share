@@ -1,11 +1,11 @@
-// import 'react-native'
+/**
+ * @jest-environment jsdom
+ */
 import React from 'react';
-// import Adapter from 'enzyme-adapter-react-16'
-// import { configure, shallow, mount } from 'enzyme'
-import renderer, { act } from 'react-test-renderer';
+import { configure, shallow, mount } from 'enzyme'
+
 import configureStore from 'redux-mock-store'
 import { Provider } from 'react-redux'
-// configure({adapter: new Adapter() })
 
 import RecipesList, { RecipesList as NamedRecipesList } from './RecipesList.js'
 import RecipeCard from './RecipeCard'
@@ -63,7 +63,6 @@ describe('Recipe List', () => {
 
 	afterEach(() => {
 		// console.log('runs after each test')
-		mountedRecipeList.unmount()
 	})
 
 	afterAll(() => {
@@ -99,67 +98,69 @@ describe('Recipe List', () => {
 	// 	expect(bool).toEqual(true)
 	// })
 
-	it('can be rendered when all recipes are already in the store', async () => {
-		mountedRecipeList = renderer.create(
-			<Provider
-				store={store}
-			>
-				<RecipesList
-					listChoice={"all"}
-					route={{ name: 'All Recipes' }}
-					mockCallBack={mockCallBack}
-					navigation={navigation}
-				/>
-			</Provider>
-		)
-		const image = mountedRecipeList.toJSON()
-		expect(image).toMatchSnapshot()
-	})
 
-	it('renders the expected number of RecipeCards with their associated buttons (sanity check)', async () => {
-		//using the RecipeList FlatList InitialNumToRender value
-		mountedRecipeList = await renderer.create(
-			<NamedRecipesList
-				listChoice={"all"}
-				route={{ name: 'All Recipes' }}
-				mockCallBack={mockCallBack}
-				navigation={navigation}
-				all_Recipes={listProps}
-			/>
-		)
-		let root = mountedRecipeList.root
-		const cards = root.findAllByType(RecipeCard)
-		expect(cards.length).toEqual(5)
-		buttonNames.forEach(buttonName => {
-			let button = root.findAllByType(TouchableOpacity).filter(b => b.props.testID === buttonName)
-			expect(button.length).toEqual(5)
-		})
-	})
+	// it('has a likeRecipe method which is called when likeButtons are pressed', async () => {
+	// 	//using the RecipeList FlatList InitialNumToRender value
+	// 	// mountedRecipeList = renderer.create(
+	// 	// 	<Provider
+	// 	// 		store={store}
+	// 	// 	>
+	// 	// 		<RecipesList
+	// 	// 			listChoice={"all"}
+	// 	// 			route={{ name: 'All Recipes' }}
+	// 	// 			mockCallBack={mockCallBack}
+	// 	// 			navigation={navigation}
+	// 	// 		/>
+	// 	// 	</Provider>
+	// 	// )
+	// 	act(() => {
+	// 		mountedRecipeList = renderer.create(
+	// 			<NamedRecipesList
+	// 				listChoice={"all"}
+	// 				route={{ name: 'All Recipes' }}
+	// 				// mockCallBack={mockCallBack}
+	// 				navigation={navigation}
+	// 				all_Recipes={[listProps[0]]}
+	// 			/>
+	// 		)
+	// 	})
+	// 	// console.warn(mountedRecipeList)
+	// 	let instance = mountedRecipeList.getInstance()
+	// 	// const spy = jest.spyOn(instance, 'handleFilterButton')
+	// 	const spy = jest.spyOn(instance, 'likeRecipe')
+	// 	let root = mountedRecipeList.root
 
-	it('has a likeRecipe method which is called when likeButtons are pressed', async () => {
-		act(() => {
-			mountedRecipeList = renderer.create(
-				<NamedRecipesList
-					listChoice={"all"}
-					route={{ name: 'All Recipes' }}
-					navigation={navigation}
-					all_Recipes={listProps}
-				/>
-			)
-		})
-		let instance = mountedRecipeList.getInstance()
-		const spy = jest.spyOn(instance, 'likeRecipe')
-		instance.forceUpdate()
-		instance.likeRecipe()
-		let root = mountedRecipeList.root
-		let cards = root.findAllByType(RecipeCard)
-		console.warn(cards[0].props.likeRecipe)
-		cards[0].props.likeRecipe()
-		let buttons = root.findAllByType(TouchableOpacity).filter(b => b.props.testID === 'likeButton')
-		buttons[0].props.onPress()
-		expect(cards[0].props.likeRecipe).toBe(instance.likeRecipe)
-		expect(spy).toHaveBeenCalledTimes(3)
-	})
+
+	// 	// const cards = root.findAllByType(RecipeCard)
+	// 	// expect(cards.length).toEqual(5)
+	// 	// buttonNames.forEach(buttonName => {
+	// 	console.warn(instance.likeRecipe)
+	// 	instance.likeRecipe(123)
+	// 	let cards = root.findAllByType(RecipeCard)
+	// 	console.warn(cards[0].props.likeRecipe)
+	// 	cards[0].props.likeRecipe(123)
+	// 	let buttons = root.findAllByType(TouchableOpacity).filter(b => b.props.testID === 'likeButton')
+	// 	console.warn(buttons[0].props.onPress)
+	// 	buttons[0].props.onPress(123)
+	// 	// console.warn(instance.state)
+	// 	// instance.handleFilterButton()
+	// 	// instance.setState({dataICantGet: "Mark"})
+	// 	// console.warn(instance.state)
+	// 	// instance.handleFilterButton()
+	// 	// console.warn(instance)
+	// 	// instance.likeRecipe()
+	// 	// instance.likeRecipe()
+	// 	// instance.likeRecipe()
+	// 	// instance.unlikeRecipe()
+	// 	// buttons.forEach(button => button.props.onPress())
+	// 	// expect(spy).toHaveBeenCalled()
+	// 	// expect(spy2).toHaveBeenCalled()
+	// 	expect(cards[0].props.likeRecipe).toBe(instance.likeRecipe)
+	// 	// expect(spy).toHaveBeenCalledTimes(3)
+
+	// 	// 	expect(button.length).toEqual(5)
+	// 	// })
+	// })
 
 	// it('can be rendered with chef recipes', () => {
 	// 	mountedRecipeList = renderer.create(<Provider store={store}><RecipeList listChoice={"chef"} route={{name: 'My Recipes'}}  mockCallBack={mockCallBack} /></Provider>)
@@ -179,12 +180,60 @@ describe('Recipe List', () => {
 	// 	expect(image).toMatchSnapshot()
 	// })
 
-	// it('can be rendered shallowly', () => {
-	// 	mountedRecipeList = mount((<Provider store={store}><RecipesList mockCallBack={mockCallBack} /></Provider>))
-	// 	console.warn(mountedRecipeList)
-		// const image = mountedRecipeList.toJSON()
-		// expect(image).toMatchSnapshot()
-	// })
+	it('can be rendered deeply and includes RecipeCards and those cards props are linked to the RecipeLists methods', () => {
+		mountedRecipeList = mount(
+			<NamedRecipesList
+				listChoice={"all"}
+				route={{ name: 'All Recipes' }}
+				mockCallBack={mockCallBack}
+				navigation={navigation}
+				all_Recipes={listProps}
+			/>
+		)
+		const cards = mountedRecipeList.find('RecipeCard')
+		expect(cards.length).toEqual(5)
+		expect(cards.first().props().likeRecipe).toBe(mountedRecipeList.instance().likeRecipe)
+	})
+
+
+	it('can be rendered and a spy attached to an instance method, which can then be called successfully', () => {
+		mountedRecipeList = mount(
+			<NamedRecipesList
+				listChoice={"all"}
+				route={{ name: 'All Recipes' }}
+				mockCallBack={mockCallBack}
+				navigation={navigation}
+				all_Recipes={listProps}
+			/>
+		)
+		const instance = mountedRecipeList.instance()
+		const spy = jest.spyOn(instance, 'likeRecipe')
+		instance.likeRecipe(132)
+		expect(spy).toHaveBeenCalled()
+		expect(spy).toHaveBeenCalledTimes(1)
+		expect(spy).toHaveBeenCalledWith(132)
+	})
+
+	it('can be rendered and a spy attached and called and called directly, and from the child, and from the childs Touchable', () => {
+		mountedRecipeList = mount(
+			<NamedRecipesList
+				listChoice={"all"}
+				route={{ name: 'All Recipes' }}
+				mockCallBack={mockCallBack}
+				navigation={navigation}
+				all_Recipes={listProps}
+			/>
+		)
+		const instance = mountedRecipeList.instance()
+		const spy = jest.spyOn(instance, 'likeRecipe')
+		mountedRecipeList.setProps({})
+		instance.likeRecipe() //call at the top level
+		const cards = mountedRecipeList.find(RecipeCard)
+		cards.first().props().likeRecipe() // call a recipeCard's props
+		const likeButton = cards.first().find(TouchableOpacity).filterWhere(b => b.props().testID === 'likeButton')
+		likeButton.props().onPress() // press a recipeCard's likeButton
+		expect(spy).toHaveBeenCalledTimes(3)
+	})
 
 	// it('can be rendered shallowly', () => {
 	// 	// mountedRecipeList = mount((<Provider store={store}><RecipeList mockCallBack={mockCallBack}/></Provider>))

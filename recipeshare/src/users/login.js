@@ -191,7 +191,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											value={this.state.rememberEmail}
 											onChange={(e) => this.setState({ rememberEmail: e.nativeEvent.value })}
 											trackColor={{ true: '#4b714299' }}
-											thumbColor={this.state.rememberEmail ? "#104e01" : null}
+											thumbColor={this.state.rememberEmail ? "#4b7142" : "#ececec"}
 										/>
 									</TouchableOpacity>
 									<TouchableOpacity activeOpacity={1} style={centralStyles.yellowRectangleButton} onPress={() => this.props.stayLoggedIn(!this.props.stayingLoggedIn)}>
@@ -201,7 +201,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											value={this.props.stayingLoggedIn}
 											onChange={(e) => this.props.stayLoggedIn(e.nativeEvent.value)}
 											trackColor={{ true: '#4b714299' }}
-											thumbColor={this.props.stayingLoggedIn ? "#104e01" : null}
+											thumbColor={this.props.stayingLoggedIn ? "#4b7142" : "#ececec"}
 										/>
 									</TouchableOpacity>
 								</View>

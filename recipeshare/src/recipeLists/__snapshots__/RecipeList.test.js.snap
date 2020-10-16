@@ -205,7 +205,7 @@ exports[`Recipe List can be rendered when all recipes are already in the store 1
       getItem={[Function]}
       getItemCount={[Function]}
       horizontal={false}
-      initialNumToRender={10}
+      initialNumToRender={5}
       keyExtractor={[Function]}
       listKey={
         Array [

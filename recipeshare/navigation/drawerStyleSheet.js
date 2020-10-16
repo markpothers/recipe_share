@@ -36,11 +36,12 @@ export const styles = StyleSheet.create({
 		fontSize: responsiveFontSize(2.9),
 		marginLeft: '10%',
 		color: "#505050",
-		fontWeight: 'bold'
+		fontWeight: 'bold',
+		paddingRight: 2
 	},
 	bottomContainer: {
 		flexDirection: 'row',
-		height: 75,
+		// height: 75,
 		width: '90%',
 		marginLeft: '5%',
 		marginRight: '5%',
@@ -48,14 +49,15 @@ export const styles = StyleSheet.create({
 		// borderWidth: 1
 	},
 	bottomRightContainer: {
-		height: '100%',
+		// height: '100%',
 		width: '25%',
 		overflow: 'hidden',
 		borderRadius: 5,
-		aspectRatio: 1
+		aspectRatio: 1,
+		marginVertical: responsiveHeight(1)
 	},
 	bottomLeftContainer: {
-		height: '100%',
+		// height: '100%',
 		width: '75%',
 		justifyContent: 'center',
 	},
@@ -71,7 +73,7 @@ export const styles = StyleSheet.create({
 		borderBottomWidth: 1,
 	},
 	routesContainer: {
-		height: '55%',
+		// height: '25%',
 		width: '90%',
 		marginTop: '3%',
 		marginLeft: '5%',

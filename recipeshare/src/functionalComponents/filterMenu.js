@@ -53,7 +53,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								value={filtersList[category]}
 								onChange={(e) => this.handleCategoryChange(category, e.nativeEvent.value)}
 								trackColor={{ true: '#4b714299' }}
-								thumbColor={filtersList[category] ? "#4b7142" : null}
+								thumbColor={filtersList[category] ? "#4b7142" : "#ececec"}
 							/>
 						</View>
 						<View style={styles.categoryContainer}>

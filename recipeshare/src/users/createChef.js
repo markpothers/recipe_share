@@ -274,11 +274,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 										<View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row', flexWrap: 'wrap' }}>
 											<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>I accept</Text>
 											<Switch
-												style={(Platform.OS === 'ios' ? { transform: [{ scaleX: .7 }, { scaleY: .7 }] } : null)}
+												// style={(Platform.OS === 'ios' ? { transform: [{ scaleX: .7 }, { scaleY: .7 }] } : null)}
 												value={this.state.tAndCAgreed}
 												onChange={this.handleTandCSwitch}
-												trackColor={{ true: '#4b714299' }}
-												thumbColor={this.state.tAndCAgreed ? "#104e01" : null}
+												trackColor={{ true: '#4b714299'}}
+												thumbColor={this.state.tAndCAgreed ? "#4b7142" : "#ececec"}
 											/>
 										</View>
 									</TouchableOpacity>
@@ -313,7 +313,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 												value={this.state.privacyPolicyAgreed}
 												onChange={this.handlePrivacyPolicySwitch}
 												trackColor={{ true: '#4b714299' }}
-												thumbColor={this.state.privacyPolicyAgreed ? "#104e01" : null}
+												thumbColor={this.state.privacyPolicyAgreed ? "#4b7142" : "#ececec"}
 											/>
 										</View>
 									</TouchableOpacity>

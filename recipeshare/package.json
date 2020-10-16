@@ -7,16 +7,10 @@
 		"android": "expo start --android",
 		"ios": "expo start --ios",
 		"eject": "expo eject",
-		"test:watch": "node ./node_modules/jest/bin/jest.js --watchAll --runInBand --detectOpenHandles",
-		"test": "node ./node_modules/jest/bin/jest.js",
-		"lint": "esw src navigation buildScripts __tests__ --color",
+		"test:watch": "node ./node_modules/jest/bin/jest.js --watchAll --colors --runInBand --detectOpenHandles",
+		"test": "node ./node_modules/jest/bin/jest.js --colors --runInBand --detectOpenHandles",
+		"lint": "esw src navigation buildScripts --color",
 		"lint:watch": "npm run lint -- --w --changed "
-	},
-	"jest": {
-		"preset": "jest-expo",
-		"setupFiles": [
-			"./jestSetup.js"
-		]
 	},
 	"dependencies": {
 		"@expo/samples": "3.0.3",
