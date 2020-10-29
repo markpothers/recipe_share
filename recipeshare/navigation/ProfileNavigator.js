@@ -1,6 +1,6 @@
 import React from 'react';
 // import { createStackNavigator, createBottomTabNavigator, createMaterialTopTabNavigator, createDrawerNavigator } from 'react-navigation';
-import Profile from '../src/profile/profile'
+import Profile from '../src/profile/Profile'
 import AppHeader from './appHeader'
 // import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { createStackNavigator } from '@react-navigation/stack';
