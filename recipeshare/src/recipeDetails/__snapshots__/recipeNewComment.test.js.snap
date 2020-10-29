@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RecipeNewComment renders with some text and a confirm button 1`] = `
+<View
+  style={
+    Object {
+      "borderBottomColor": "#104e01",
+      "borderBottomWidth": 0.5,
+      "flexDirection": "row",
+      "marginLeft": "2%",
+      "marginRight": "2%",
+      "marginTop": 3,
+      "paddingBottom": "1%",
+      "width": "96%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 2,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://robohash.org/utautnemo.png?size=300x300&set=set1",
+        }
+      }
+      style={
+        Object {
+          "borderRadius": 5,
+          "height": 60,
+          "marginRight": "4%",
+          "width": "96%",
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 8,
+      }
+    }
+  >
+    <Text
+      maxFontSizeMultiplier={2}
+      style={
+        Object {
+          "color": "#505050",
+          "fontSize": 33.65552620959067,
+          "fontStyle": "italic",
+          "marginLeft": "3%",
+          "marginRight": "3%",
+        }
+      }
+    >
+      pothers
+      :
+    </Text>
+    <TextInput
+      allowFontScaling={true}
+      autoFocus={true}
+      maxFontSizeMultiplier={2}
+      multiline={true}
+      numberOfLines={2}
+      onChangeText={[Function]}
+      placeholder="Type comment here..."
+      rejectResponderTermination={true}
+      style={
+        Object {
+          "color": "#505050",
+          "fontSize": 33.65552620959067,
+          "marginLeft": "3%",
+          "marginRight": "3%",
+          "paddingLeft": 15,
+        }
+      }
+      underlineColorAndroid="transparent"
+      value="Here is my test comment text"
+    />
+  </View>
+</View>
+`;

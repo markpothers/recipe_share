@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux'
 import { countries } from '../dataComponents/countries'
 import { patchChef } from '../fetches/patchChef'
-import DualOSPicker from '../functionalComponents/DualOSPicker'
+import DualOSPicker from '../dualOSPicker/DualOSPicker'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import NetInfo from '@react-native-community/netinfo';

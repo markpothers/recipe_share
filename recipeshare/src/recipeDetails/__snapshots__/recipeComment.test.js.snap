@@ -1,0 +1,874 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RecipeComment render with different comments 1`] = `
+<View
+  style={
+    Object {
+      "borderBottomColor": "#104e01",
+      "borderBottomWidth": 0.5,
+      "flexDirection": "row",
+      "marginLeft": "2%",
+      "marginRight": "2%",
+      "marginTop": 3,
+      "paddingBottom": "1%",
+      "width": "96%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 2,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "uri": "https://robohash.org/autquiaut.png?size=300x300&set=set1",
+          }
+        }
+        style={
+          Object {
+            "borderRadius": 5,
+            "height": 60,
+            "marginRight": "4%",
+            "width": "96%",
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 8,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "width": "93%",
+        }
+      }
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "fontStyle": "italic",
+              "marginLeft": "3%",
+              "marginRight": "3%",
+            }
+          }
+        >
+          Xinth
+          :
+        </Text>
+      </View>
+    </View>
+    <View>
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Array [
+            Object {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "marginLeft": "3%",
+              "marginRight": "3%",
+              "paddingLeft": 15,
+            },
+            Object {
+              "paddingLeft": 0,
+            },
+          ]
+        }
+      >
+        Beware the barrenness of a busy life.
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`RecipeComment render with different comments 2`] = `
+<View
+  style={
+    Object {
+      "borderBottomColor": "#104e01",
+      "borderBottomWidth": 0.5,
+      "flexDirection": "row",
+      "marginLeft": "2%",
+      "marginRight": "2%",
+      "marginTop": 3,
+      "paddingBottom": "1%",
+      "width": "96%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 2,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "uri": "https://robohash.org/utautnemo.png?size=300x300&set=set1",
+          }
+        }
+        style={
+          Object {
+            "borderRadius": 5,
+            "height": 60,
+            "marginRight": "4%",
+            "width": "96%",
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 8,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "width": "93%",
+        }
+      }
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "fontStyle": "italic",
+              "marginLeft": "3%",
+              "marginRight": "3%",
+            }
+          }
+        >
+          I have a very long username for ui testing purposes
+          :
+        </Text>
+      </View>
+    </View>
+    <View>
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Array [
+            Object {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "marginLeft": "3%",
+              "marginRight": "3%",
+              "paddingLeft": 15,
+            },
+            Object {
+              "paddingLeft": 0,
+            },
+          ]
+        }
+      >
+        It's not what happens to you, but how you react to it that matters.
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`RecipeComment render with different comments 3`] = `
+<View
+  style={
+    Object {
+      "borderBottomColor": "#104e01",
+      "borderBottomWidth": 0.5,
+      "flexDirection": "row",
+      "marginLeft": "2%",
+      "marginRight": "2%",
+      "marginTop": 3,
+      "paddingBottom": "1%",
+      "width": "96%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 2,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "uri": "https://robohash.org/estperferendiseum.png?size=300x300&set=set1",
+          }
+        }
+        style={
+          Object {
+            "borderRadius": 5,
+            "height": 60,
+            "marginRight": "4%",
+            "width": "96%",
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 8,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "width": "93%",
+        }
+      }
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "fontStyle": "italic",
+              "marginLeft": "3%",
+              "marginRight": "3%",
+            }
+          }
+        >
+          Zunzil Ligature
+          :
+        </Text>
+      </View>
+    </View>
+    <View>
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Array [
+            Object {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "marginLeft": "3%",
+              "marginRight": "3%",
+              "paddingLeft": 15,
+            },
+            Object {
+              "paddingLeft": 0,
+            },
+          ]
+        }
+      >
+        The unexamined life is not worth living.
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`RecipeComment render with different comments and an extra button if logged in as admin 1`] = `
+<View
+  style={
+    Object {
+      "borderBottomColor": "#104e01",
+      "borderBottomWidth": 0.5,
+      "flexDirection": "row",
+      "marginLeft": "2%",
+      "marginRight": "2%",
+      "marginTop": 3,
+      "paddingBottom": "1%",
+      "width": "96%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 2,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "uri": "https://robohash.org/autquiaut.png?size=300x300&set=set1",
+          }
+        }
+        style={
+          Object {
+            "borderRadius": 5,
+            "height": 60,
+            "marginRight": "4%",
+            "width": "96%",
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 8,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "width": "93%",
+        }
+      }
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "fontStyle": "italic",
+              "marginLeft": "3%",
+              "marginRight": "3%",
+            }
+          }
+        >
+          Xinth
+          :
+        </Text>
+      </View>
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+            "zIndex": 1,
+          }
+        }
+      >
+        <Icon
+          name="trash-can-outline"
+          size={46.690000000000005}
+          style={
+            Array [
+              Object {
+                "bottom": 2.668,
+                "color": "#505050",
+              },
+              Object {
+                "color": "#505050",
+              },
+            ]
+          }
+        />
+      </View>
+    </View>
+    <View>
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Array [
+            Object {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "marginLeft": "3%",
+              "marginRight": "3%",
+              "paddingLeft": 15,
+            },
+            Object {
+              "paddingLeft": 0,
+            },
+          ]
+        }
+      >
+        Beware the barrenness of a busy life.
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`RecipeComment render with different comments and an extra button if logged in as admin 2`] = `
+<View
+  style={
+    Object {
+      "borderBottomColor": "#104e01",
+      "borderBottomWidth": 0.5,
+      "flexDirection": "row",
+      "marginLeft": "2%",
+      "marginRight": "2%",
+      "marginTop": 3,
+      "paddingBottom": "1%",
+      "width": "96%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 2,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "uri": "https://robohash.org/utautnemo.png?size=300x300&set=set1",
+          }
+        }
+        style={
+          Object {
+            "borderRadius": 5,
+            "height": 60,
+            "marginRight": "4%",
+            "width": "96%",
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 8,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "width": "93%",
+        }
+      }
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "fontStyle": "italic",
+              "marginLeft": "3%",
+              "marginRight": "3%",
+            }
+          }
+        >
+          I have a very long username for ui testing purposes
+          :
+        </Text>
+      </View>
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+            "zIndex": 1,
+          }
+        }
+      >
+        <Icon
+          name="trash-can-outline"
+          size={46.690000000000005}
+          style={
+            Array [
+              Object {
+                "bottom": 2.668,
+                "color": "#505050",
+              },
+              Object {
+                "color": "#505050",
+              },
+            ]
+          }
+        />
+      </View>
+    </View>
+    <View>
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Array [
+            Object {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "marginLeft": "3%",
+              "marginRight": "3%",
+              "paddingLeft": 15,
+            },
+            Object {
+              "paddingLeft": 0,
+            },
+          ]
+        }
+      >
+        It's not what happens to you, but how you react to it that matters.
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`RecipeComment render with different comments and an extra button if logged in as admin 3`] = `
+<View
+  style={
+    Object {
+      "borderBottomColor": "#104e01",
+      "borderBottomWidth": 0.5,
+      "flexDirection": "row",
+      "marginLeft": "2%",
+      "marginRight": "2%",
+      "marginTop": 3,
+      "paddingBottom": "1%",
+      "width": "96%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 2,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "uri": "https://robohash.org/estperferendiseum.png?size=300x300&set=set1",
+          }
+        }
+        style={
+          Object {
+            "borderRadius": 5,
+            "height": 60,
+            "marginRight": "4%",
+            "width": "96%",
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 8,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "width": "93%",
+        }
+      }
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            Object {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "fontStyle": "italic",
+              "marginLeft": "3%",
+              "marginRight": "3%",
+            }
+          }
+        >
+          Zunzil Ligature
+          :
+        </Text>
+      </View>
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+            "zIndex": 1,
+          }
+        }
+      >
+        <Icon
+          name="trash-can-outline"
+          size={46.690000000000005}
+          style={
+            Array [
+              Object {
+                "bottom": 2.668,
+                "color": "#505050",
+              },
+              Object {
+                "color": "#505050",
+              },
+            ]
+          }
+        />
+      </View>
+    </View>
+    <View>
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          Array [
+            Object {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "marginLeft": "3%",
+              "marginRight": "3%",
+              "paddingLeft": 15,
+            },
+            Object {
+              "paddingLeft": 0,
+            },
+          ]
+        }
+      >
+        The unexamined life is not worth living.
+      </Text>
+    </View>
+  </View>
+</View>
+`;

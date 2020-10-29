@@ -8,7 +8,7 @@ import ChefEditor from './chefEditor'
 // import { getDatabaseBackup } from '../fetches/getDatabaseBackup'
 // import { getDatabaseRestore } from '../fetches/getDatabaseRestore'
 import DeleteChefOption from './deleteChefOption'
-import PicSourceChooser from '../functionalComponents/picSourceChooser'
+import PicSourceChooser from '../picSourceChooser/picSourceChooser'
 import { destroyChef } from '../fetches/destroyChef'
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars

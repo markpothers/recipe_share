@@ -11,7 +11,7 @@ import { destroyReShare } from '../fetches/destroyReShare'
 import { styles } from './recipeListStyleSheet'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import FilterMenu from '../functionalComponents/filterMenu'
+import FilterMenu from '../filterMenu/filterMenu'
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import { getRecipeDetails } from '../fetches/getRecipeDetails'
@@ -21,6 +21,7 @@ import { getChefDetails } from '../fetches/getChefDetails'
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo'
 import SearchBar from '../searchBar/SearchBar.js'
+// import Constants from 'expo-constants';
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)
 
@@ -530,6 +531,7 @@ export class RecipesList extends React.Component {
 		// console.log(this.props[this.props["listChoice"] + `_Recipes`].length)
 		// console.log('list start')
 		// console.warn('item')
+		// console.log(Constants.nativeBuildVersion)
 		return (
 			<SpinachAppContainer awaitingServer={this.state.awaitingServer}>
 				<TouchableOpacity

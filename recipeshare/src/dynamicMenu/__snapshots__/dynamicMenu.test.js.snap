@@ -1,0 +1,376 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DynamicMenu renders with an outer close container and as many buttons as in list 1`] = `
+<Modal
+  animationType="none"
+  hardwareAccelerated={false}
+  transparent={true}
+  visible={true}
+>
+  <RCTSafeAreaView
+    emulateUnlessSupported={true}
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "flex-end",
+          "height": 1334,
+          "opacity": 1,
+          "width": 750,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "backgroundColor": "white",
+            "borderColor": "#104e01",
+            "borderRadius": 5,
+            "borderWidth": 1,
+            "height": 653.6600000000001,
+            "left": 187.5,
+            "top": -331.83000000000004,
+            "transform": Array [
+              Object {
+                "scaleY": 0,
+              },
+              Object {
+                "translateY": 0,
+              },
+              Object {
+                "scaleX": 0,
+              },
+              Object {
+                "translateX": 0,
+              },
+            ],
+          }
+        }
+      >
+        <View
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "height": 93.38000000000001,
+              "opacity": 1,
+            }
+          }
+        >
+          <Icon
+            name="share-off"
+            size={25}
+            style={
+              Object {
+                "bottom": 3.335,
+                "color": "#104e01",
+                "marginHorizontal": 15,
+              }
+            }
+          />
+          <Text
+            maxFontSizeMultiplier={2}
+            style={
+              Object {
+                "bottom": 3.335,
+                "color": "#505050",
+                "fontSize": 34.420424532535904,
+                "marginRight": 30,
+              }
+            }
+          >
+            Remove share
+          </Text>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "height": 93.38000000000001,
+              "opacity": 1,
+            }
+          }
+        >
+          <Icon
+            name="heart-outline"
+            size={25}
+            style={
+              Object {
+                "bottom": 3.335,
+                "color": "#104e01",
+                "marginHorizontal": 15,
+              }
+            }
+          />
+          <Text
+            maxFontSizeMultiplier={2}
+            style={
+              Object {
+                "bottom": 3.335,
+                "color": "#505050",
+                "fontSize": 34.420424532535904,
+                "marginRight": 30,
+              }
+            }
+          >
+            Like recipe
+          </Text>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "height": 93.38000000000001,
+              "opacity": 1,
+            }
+          }
+        >
+          <Icon
+            name="image-plus"
+            size={25}
+            style={
+              Object {
+                "bottom": 3.335,
+                "color": "#104e01",
+                "marginHorizontal": 15,
+              }
+            }
+          />
+          <Text
+            maxFontSizeMultiplier={2}
+            style={
+              Object {
+                "bottom": 3.335,
+                "color": "#505050",
+                "fontSize": 34.420424532535904,
+                "marginRight": 30,
+              }
+            }
+          >
+            Add picture
+          </Text>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "height": 93.38000000000001,
+              "opacity": 1,
+            }
+          }
+        >
+          <Icon
+            name="comment-plus"
+            size={25}
+            style={
+              Object {
+                "bottom": 3.335,
+                "color": "#104e01",
+                "marginHorizontal": 15,
+              }
+            }
+          />
+          <Text
+            maxFontSizeMultiplier={2}
+            style={
+              Object {
+                "bottom": 3.335,
+                "color": "#505050",
+                "fontSize": 34.420424532535904,
+                "marginRight": 30,
+              }
+            }
+          >
+            Add a comment
+          </Text>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "height": 93.38000000000001,
+              "opacity": 1,
+            }
+          }
+        >
+          <Icon
+            name="playlist-edit"
+            size={25}
+            style={
+              Object {
+                "bottom": 3.335,
+                "color": "#104e01",
+                "marginHorizontal": 15,
+              }
+            }
+          />
+          <Text
+            maxFontSizeMultiplier={2}
+            style={
+              Object {
+                "bottom": 3.335,
+                "color": "#505050",
+                "fontSize": 34.420424532535904,
+                "marginRight": 30,
+              }
+            }
+          >
+            Edit recipe
+          </Text>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "height": 93.38000000000001,
+              "opacity": 1,
+            }
+          }
+        >
+          <Icon
+            name="trash-can-outline"
+            size={25}
+            style={
+              Object {
+                "bottom": 3.335,
+                "color": "#104e01",
+                "marginHorizontal": 15,
+              }
+            }
+          />
+          <Text
+            maxFontSizeMultiplier={2}
+            style={
+              Object {
+                "bottom": 3.335,
+                "color": "#505050",
+                "fontSize": 34.420424532535904,
+                "marginRight": 30,
+              }
+            }
+          >
+            Delete recipe
+          </Text>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "height": 93.38000000000001,
+              "opacity": 1,
+            }
+          }
+        >
+          <Icon
+            name="food"
+            size={25}
+            style={
+              Object {
+                "bottom": 3.335,
+                "color": "#104e01",
+                "marginHorizontal": 15,
+              }
+            }
+          />
+          <Text
+            maxFontSizeMultiplier={2}
+            style={
+              Object {
+                "bottom": 3.335,
+                "color": "#505050",
+                "fontSize": 34.420424532535904,
+                "marginRight": 30,
+              }
+            }
+          >
+            Create new recipe
+          </Text>
+        </View>
+      </View>
+    </View>
+  </RCTSafeAreaView>
+</Modal>
+`;

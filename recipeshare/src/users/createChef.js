@@ -5,9 +5,9 @@ import { connect } from 'react-redux'
 import { postChef } from '../fetches/postChef'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import PicSourceChooser from '../functionalComponents/picSourceChooser'
+import PicSourceChooser from '../picSourceChooser/picSourceChooser'
 import { TextPopUp } from '../textPopUp/textPopUp'
-import DualOSPicker from '../functionalComponents/DualOSPicker'
+import DualOSPicker from '../dualOSPicker/DualOSPicker'
 import { termsAndConditions } from '../dataComponents/termsAndConditions'
 import { privacyPolicy } from '../dataComponents/privacyPolicy'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
