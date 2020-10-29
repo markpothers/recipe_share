@@ -16,7 +16,7 @@ import { destroyReShare } from '../fetches/destroyReShare'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import RecipeComment from './recipeComment'
 import RecipeNewComment from './recipeNewComment';
-import PicSourceChooser from '../functionalComponents/picSourceChooser'
+import PicSourceChooser from '../picSourceChooser/picSourceChooser'
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import { ImagePopup } from './imagePopup'

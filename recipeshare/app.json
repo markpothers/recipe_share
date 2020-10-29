@@ -7,7 +7,7 @@
 			"ios",
 			"android"
 		],
-		"version": "0.0.001",
+		"version": "0.0.002",
 		"orientation": "portrait",
 		"icon": "./assets/images/icon.png",
 		"splash": {
@@ -25,7 +25,8 @@
 			"supportsTablet": true
 		},
 		"android": {
-			"package": "com.recipe_share.recipe_share"
+			"package": "com.recipe_share.recipe_share",
+			"versionCode": 2
 		}
 	}
 }

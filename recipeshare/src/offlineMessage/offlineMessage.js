@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Text, Animated } from 'react-native'
+import { Text, Animated, TouchableOpacity } from 'react-native'
 import { styles } from './offlineMessageStyleSheet'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 

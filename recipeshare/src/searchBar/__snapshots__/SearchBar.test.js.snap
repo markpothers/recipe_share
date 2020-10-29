@@ -1,0 +1,160 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search Bar can be rendered (with the delete button) matches its previous image 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+      "marginBottom": 3.335,
+      "marginLeft": 0,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderColor": "yellow",
+        "borderWidth": 0,
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "white",
+          "borderColor": "#104e01",
+          "borderRadius": 5,
+          "borderWidth": 1,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "marginTop": 6.67,
+          "overflow": "hidden",
+          "width": 750,
+        }
+      }
+    >
+      <TextInput
+        allowFontScaling={true}
+        autoCapitalize="none"
+        keyboardType="default"
+        maxFontSizeMultiplier={2}
+        onBlur={[MockFunction]}
+        onChangeText={[Function]}
+        placeholder="SearchBar placeholder text"
+        rejectResponderTermination={true}
+        style={
+          Object {
+            "backgroundColor": "white",
+            "minHeight": 80.03999999999999,
+            "paddingLeft": 15,
+            "textAlign": "left",
+            "textAlignVertical": "center",
+            "width": 675,
+          }
+        }
+        testID="searchTermInput"
+        underlineColorAndroid="transparent"
+        value="spaghetti"
+      />
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "height": "100%",
+            "justifyContent": "center",
+            "opacity": 1,
+            "width": 75,
+          }
+        }
+        testID="deleteSearchTermButton"
+      >
+        <Icon
+          name="close"
+          size={46.690000000000005}
+          style={
+            Object {
+              "color": "#505050",
+            }
+          }
+        />
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Search Bar can be rendered (without the delete button) matches its previous image 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+      "marginBottom": 3.335,
+      "marginLeft": 0,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderColor": "yellow",
+        "borderWidth": 0,
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "white",
+          "borderColor": "#104e01",
+          "borderRadius": 5,
+          "borderWidth": 1,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "marginTop": 6.67,
+          "overflow": "hidden",
+          "width": 750,
+        }
+      }
+    >
+      <TextInput
+        allowFontScaling={true}
+        autoCapitalize="none"
+        keyboardType="default"
+        maxFontSizeMultiplier={2}
+        onBlur={[MockFunction]}
+        onChangeText={[Function]}
+        placeholder="SearchBar placeholder text"
+        rejectResponderTermination={true}
+        style={
+          Object {
+            "backgroundColor": "white",
+            "minHeight": 80.03999999999999,
+            "paddingLeft": 15,
+            "textAlign": "left",
+            "textAlignVertical": "center",
+            "width": 675,
+          }
+        }
+        testID="searchTermInput"
+        underlineColorAndroid="transparent"
+        value=""
+      />
+    </View>
+  </View>
+</View>
+`;

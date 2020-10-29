@@ -1,0 +1,233 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SpinachAppContainer renders with scrollView 1`] = `
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  style={
+    Object {
+      "borderColor": "blue",
+      "borderWidth": 0,
+      "flex": 1,
+    }
+  }
+>
+  <View
+    onLayout={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "borderColor": "red",
+          "borderWidth": 0,
+          "flex": 1,
+        },
+        Object {
+          "paddingBottom": 0,
+        },
+      ]
+    }
+  >
+    <Image
+      resizeMode="cover"
+      source={1}
+      style={
+        Object {
+          "borderColor": "black",
+          "borderWidth": 0,
+          "height": 1334,
+          "position": "absolute",
+          "width": 750,
+        }
+      }
+    />
+    <RCTScrollView
+      keyboardShouldPersistTaps="always"
+      nestedScrollEnabled={true}
+      scrollEnabled={true}
+      style={
+        Object {
+          "borderColor": "yellow",
+          "borderWidth": 0,
+          "flex": 1,
+        }
+      }
+    >
+      <View />
+    </RCTScrollView>
+  </View>
+</RCTSafeAreaView>
+`;
+
+exports[`SpinachAppContainer renders with scrollView and activityIndicator 1`] = `
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  style={
+    Object {
+      "borderColor": "blue",
+      "borderWidth": 0,
+      "flex": 1,
+    }
+  }
+>
+  <View
+    onLayout={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "borderColor": "red",
+          "borderWidth": 0,
+          "flex": 1,
+        },
+        Object {
+          "paddingBottom": 0,
+        },
+      ]
+    }
+  >
+    <Image
+      resizeMode="cover"
+      source={1}
+      style={
+        Object {
+          "borderColor": "black",
+          "borderWidth": 0,
+          "height": 1334,
+          "position": "absolute",
+          "width": 750,
+        }
+      }
+    />
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#fff59b",
+          "borderColor": "#104e01",
+          "borderRadius": 100,
+          "borderWidth": 1,
+          "height": 47,
+          "justifyContent": "center",
+          "left": "45%",
+          "position": "absolute",
+          "top": "10%",
+          "width": 47,
+          "zIndex": 1,
+        }
+      }
+    >
+      <ActivityIndicator
+        animating={true}
+        color="#104e01"
+        hidesWhenStopped={true}
+        size="large"
+        style={
+          Object {
+            "left": 1.25,
+            "top": 1.7,
+          }
+        }
+      />
+    </View>
+    <RCTScrollView
+      keyboardShouldPersistTaps="always"
+      nestedScrollEnabled={true}
+      scrollEnabled={true}
+      style={
+        Object {
+          "borderColor": "yellow",
+          "borderWidth": 0,
+          "flex": 1,
+        }
+      }
+    >
+      <View />
+    </RCTScrollView>
+  </View>
+</RCTSafeAreaView>
+`;
+
+exports[`SpinachAppContainer renders without scrollView 1`] = `
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  style={
+    Object {
+      "borderColor": "blue",
+      "borderWidth": 0,
+      "flex": 1,
+    }
+  }
+>
+  <Image
+    resizeMode="cover"
+    source={1}
+    style={
+      Object {
+        "borderColor": "black",
+        "borderWidth": 0,
+        "height": 1334,
+        "position": "absolute",
+        "width": 750,
+      }
+    }
+  />
+</RCTSafeAreaView>
+`;
+
+exports[`SpinachAppContainer renders without scrollView and with ActivityIndicator 1`] = `
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  style={
+    Object {
+      "borderColor": "blue",
+      "borderWidth": 0,
+      "flex": 1,
+    }
+  }
+>
+  <Image
+    resizeMode="cover"
+    source={1}
+    style={
+      Object {
+        "borderColor": "black",
+        "borderWidth": 0,
+        "height": 1334,
+        "position": "absolute",
+        "width": 750,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#fff59b",
+        "borderColor": "#104e01",
+        "borderRadius": 100,
+        "borderWidth": 1,
+        "height": 47,
+        "justifyContent": "center",
+        "left": "45%",
+        "position": "absolute",
+        "top": "10%",
+        "width": 47,
+        "zIndex": 1,
+      }
+    }
+  >
+    <ActivityIndicator
+      animating={true}
+      color="#104e01"
+      hidesWhenStopped={true}
+      size="large"
+      style={
+        Object {
+          "left": 1.25,
+          "top": 1.7,
+        }
+      }
+    />
+  </View>
+</RCTSafeAreaView>
+`;

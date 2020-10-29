@@ -1,9 +1,8 @@
 import React from 'react'
-import { View, TextInput } from 'react-native'
+import { View, TextInput, TouchableOpacity } from 'react-native'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function SearchBar(props) {
 
@@ -51,6 +50,7 @@ export default function SearchBar(props) {
 						ref={props.searchBar}
 						// onFocus={props.onFocus}
 						onBlur={props.onBlur}
+						testID={'searchTermInput'}
 					/>
 					{props.searchTerm.length > 0 && (
 						<TouchableOpacity
@@ -61,6 +61,7 @@ export default function SearchBar(props) {
 								alignItems: 'center',
 							}}
 							onPress={() => props.setSearchTerm("")}
+							testID={'deleteSearchTermButton'}
 						>
 							<Icon
 								name='close'

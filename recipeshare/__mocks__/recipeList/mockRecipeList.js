@@ -1,4 +1,4 @@
-export const listProps = [
+export const mockRecipeList = [
 	{
 		"acknowledgement": "Creamy mascarpone cheese and custard layered between espresso and rum soaked house-made ladyfingers, topped with Valrhona cocoa powder.",
 		"bread": false,

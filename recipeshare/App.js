@@ -4,7 +4,7 @@ import { Platform, StatusBar, StyleSheet, View, LogBox } from 'react-native';
 import { Provider } from 'react-redux'
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
-import { store } from './src/functionalComponents/store'
+import { store } from './src/redux/store'
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 // This was requested by react Navigation although I can't see the difference in functionality

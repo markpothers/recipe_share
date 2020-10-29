@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { cuisines } from '../dataComponents/cuisines'
 import { serves } from '../dataComponents/serves'
 import { clearedFilters } from '../dataComponents/clearedFilters'
-import DualOSPicker from '../functionalComponents/DualOSPicker'
+import DualOSPicker from '../dualOSPicker/DualOSPicker'
 
 const mapStateToProps = (state) => ({
 	filter_settings: state.filter_settings,
