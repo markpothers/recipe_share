@@ -22,12 +22,12 @@
 			"**/*"
 		],
 		"ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.recipe-share.recipe-share"
+			"supportsTablet": true,
+			"bundleIdentifier": "com.recipe-share.recipe-share"
 		},
 		"android": {
 			"package": "com.recipe_share.recipe_share",
-			"versionCode": 2
+			"versionCode": 3
 		}
 	}
 }

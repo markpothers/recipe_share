@@ -27,10 +27,14 @@ class Chef < ApplicationRecord
     validates :e_mail, presence: {message: "must be included."}
     validates :username, presence: {message: "must be included."}
     validates :username, length: {minimum: 3, message: "must be at least 3 characters."}
-    validates :username, uniqueness: {message: "must be unique"}
+    validates :username, uniqueness: {message: "must be unique"}, unless: :anonymous?
 	validates :e_mail, uniqueness: {message: "must be unique"}
 	validates :e_mail, email: true
     validates :password, length: {minimum: 6, message: "must be at least 6 characters."}
+
+    def anonymous?
+        username == "Anonymous"
+    end
 
     def auth_token
         JWT.encode({id: self.id}, Rails.application.credentials.JWT[:secret_key])
