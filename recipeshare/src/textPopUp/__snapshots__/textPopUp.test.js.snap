@@ -24,7 +24,7 @@ exports[`TextPopUp renders with some mock props 1`] = `
           "alignItems": "center",
           "backgroundColor": "#fff59b",
           "borderColor": "#104e01",
-          "borderRadius": 5,
+          "borderRadius": 11.25,
           "borderStyle": "solid",
           "borderWidth": 1,
           "height": 1133.8999999999999,
@@ -65,7 +65,7 @@ exports[`TextPopUp renders with some mock props 1`] = `
             Object {
               "backgroundColor": "white",
               "borderColor": "#104e01",
-              "borderRadius": 5,
+              "borderRadius": 11.25,
               "borderStyle": "solid",
               "borderWidth": 1,
               "marginLeft": "5%",
@@ -345,7 +345,7 @@ If you have any questions about these Terms, please contact us at:
       <View
         style={
           Object {
-            "borderRadius": 5,
+            "borderRadius": 11.25,
             "flexDirection": "row",
             "justifyContent": "flex-end",
             "marginTop": "3%",
@@ -367,7 +367,7 @@ If you have any questions about these Terms, please contact us at:
             Object {
               "alignItems": "center",
               "backgroundColor": "#104e01",
-              "borderRadius": 5,
+              "borderRadius": 11.25,
               "flexDirection": "row",
               "justifyContent": "center",
               "minHeight": 80.03999999999999,
@@ -378,7 +378,7 @@ If you have any questions about these Terms, please contact us at:
         >
           <Icon
             name="check"
-            size={25}
+            size={53.36}
             style={
               Object {
                 "color": "#fff59b",

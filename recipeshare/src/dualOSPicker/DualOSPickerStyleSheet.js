@@ -9,16 +9,16 @@ export const styles = StyleSheet.create({
 		borderColor: '#104e01',
 		backgroundColor: '#fff59b',
 		bottom: 0,
-		height: responsiveHeight(35),
+		height: responsiveHeight(25),
 		width: responsiveWidth(100),
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
 	choicesPicker: {
 		width: '100%',
 		height: '100%',
-		top: 15,
+		// top: 15,
 		zIndex: 2,
 		// borderWidth: 1,
 		// borderColor: 'blue'
@@ -28,14 +28,17 @@ export const styles = StyleSheet.create({
 		width: '100%',
 		justifyContent: 'center',
 	},
-	IOSPicker: {
-		height: '100%',
-		width: '100%',
-		bottom: '8%',
-		justifyContent: 'center',
-	},
+	// IOSPicker: {
+	// 	height: '100%',
+	// 	width: '100%',
+	// 	bottom: '8%',
+	// 	justifyContent: 'center',
+	// 	marginLeft: responsiveWidth(2),
+	// 	fontSize: responsiveFontSize(2)
+	// },
 	IOSSelectedChoiceTextBox: {
 		marginLeft: responsiveWidth(2),
+		fontSize: responsiveFontSize(2),
 	},
 	pickerContainer: {
 		height: '100%',
@@ -60,14 +63,24 @@ export const styles = StyleSheet.create({
 		right: 0,
 		marginTop: responsiveHeight(1),
 		marginRight: responsiveWidth(3),
-		zIndex: 3
+		paddingVertical: responsiveHeight(1),
+		paddingHorizontal: responsiveWidth(3),
+		zIndex: 3,
+		// borderWidth: 1
 	},
 	iosCloseButtonText: {
-		fontSize: responsiveFontSize(3),
+		fontSize: responsiveFontSize(2),
 		color: '#104e01'
 	},
 	pickerText: {
 		color: '#104e01',
-		borderWidth:1
+		// borderWidth: 1
+	},
+	iosPickerText: {
+		fontSize: responsiveFontSize(2),
+		// color: '#104e01',
+		// borderWidth: 1,
+		height: '100%',
+		// borderColor: 'red'
 	}
 })

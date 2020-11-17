@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
 		borderColor: '#104e01',
 		backgroundColor: '#fff59b',
 		width: '95%',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		// alignItems: 'center',
 		// justifyContent: 'space-between',
 		maxHeight: '95%',
@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
 		alignItems: 'center',
 		width: '100%',
 		// borderWidth: 1,
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 	},
 	title: {
 		color: '#104e01',
@@ -105,13 +105,14 @@ export const styles = StyleSheet.create({
 	},
 	categoryText: {
 		color: '#104e01',
-		flexWrap: 'wrap'
+		flexWrap: 'wrap',
+		fontSize: responsiveFontSize(2),
 	},
 	bottomContainer: {
 		alignItems: 'center',
 		justifyContent: 'space-between',
 		// borderWidth: 1,
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 	},
 	bottomTopContainer: {
 		flexDirection: 'row',
@@ -127,7 +128,7 @@ export const styles = StyleSheet.create({
 		marginLeft: '3%',
 		backgroundColor: 'white',
 		width: '57%',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		justifyContent: 'center',
 		borderStyle: 'solid',
 		borderColor: '#104e01',
@@ -152,7 +153,7 @@ export const styles = StyleSheet.create({
 		width: '40%',
 		minHeight: responsiveHeight(6),
 		flexDirection: 'row',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		backgroundColor: '#fff59b',
 		borderStyle: 'solid',
 		borderWidth: 1,
@@ -163,7 +164,7 @@ export const styles = StyleSheet.create({
 		marginRight: '5%',
 		textAlign: 'center',
 		fontWeight: 'bold',
-		fontSize: 14,
+		fontSize: responsiveFontSize(1.5),
 		color: '#104e01',
 	},
 	clearFiltersIcon: {
@@ -178,7 +179,7 @@ export const styles = StyleSheet.create({
 		maxWidth: '60%',
 		minHeight: responsiveHeight(6),
 		flexDirection: 'row',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		backgroundColor: '#104e01',
 	},
 	applyFiltersButtonText: {
@@ -186,7 +187,7 @@ export const styles = StyleSheet.create({
 		marginRight: '5%',
 		textAlign: 'center',
 		fontWeight: 'bold',
-		fontSize: 14,
+		fontSize: responsiveFontSize(1.5),
 		color: '#fff59b',
 	},
 	applyFiltersIcon: {

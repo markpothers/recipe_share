@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
 		width: responsiveWidth(85),
 		marginLeft: '7.5%',
 		marginRight: '7.5%',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		alignItems: 'center'
 	},
 	titleContainer: {

@@ -3,7 +3,7 @@ import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-nat
 
 export const styles = StyleSheet.create({
 	messageContainer: {
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		position: 'absolute',
 		alignSelf: 'center',
 		top: '25%',

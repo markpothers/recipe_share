@@ -15,6 +15,7 @@ import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo';
 import { AlertPopUp } from '../alertPopUp/alertPopUp'
+import SwitchSized from '../switchSized/switchSized'
 
 const mapStateToProps = (state) => ({
 	first_name: state.newUserDetails.first_name,
@@ -229,7 +230,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							{/* country */}
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
-									<View style={[centralStyles.pickerContainer, (this.state.pickerFocused ? { height: 170 } : { height: 44 })]}>
+									<View style={centralStyles.pickerContainer}>
 										<DualOSPicker
 											onChoiceChange={this.onCountryChange}
 											options={countries}
@@ -273,12 +274,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									<TouchableOpacity activeOpacity={1} style={[centralStyles.yellowRectangleButton, { minWidth: responsiveWidth(30), maxWidth: responsiveWidth(30) }]} onPress={this.handleTandCSwitch}>
 										<View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row', flexWrap: 'wrap' }}>
 											<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>I accept</Text>
-											<Switch
-												// style={(Platform.OS === 'ios' ? { transform: [{ scaleX: .7 }, { scaleY: .7 }] } : null)}
+											<SwitchSized
 												value={this.state.tAndCAgreed}
 												onChange={this.handleTandCSwitch}
-												trackColor={{ true: '#4b714299'}}
-												thumbColor={this.state.tAndCAgreed ? "#4b7142" : "#ececec"}
 											/>
 										</View>
 									</TouchableOpacity>
@@ -308,12 +306,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									<TouchableOpacity activeOpacity={1} style={[centralStyles.yellowRectangleButton, { minWidth: responsiveWidth(30), maxWidth: responsiveWidth(30) }]} onPress={this.handlePrivacyPolicySwitch}>
 										<View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row', flexWrap: 'wrap' }}>
 											<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>I accept</Text>
-											<Switch
-												style={(Platform.OS === 'ios' ? { transform: [{ scaleX: .7 }, { scaleY: .7 }] } : null)}
+											<SwitchSized
 												value={this.state.privacyPolicyAgreed}
 												onChange={this.handlePrivacyPolicySwitch}
-												trackColor={{ true: '#4b714299' }}
-												thumbColor={this.state.privacyPolicyAgreed ? "#4b7142" : "#ececec"}
 											/>
 										</View>
 									</TouchableOpacity>
@@ -338,7 +333,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
 									<TouchableOpacity style={[centralStyles.yellowRectangleButton, { justifyContent: 'center', maxWidth: '100%', width: '100%' }]} activeOpacity={0.7} onPress={this.choosePicture}>
-										<Icon style={centralStyles.greenButtonIcon} size={25} name='camera'></Icon>
+										<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='camera'></Icon>
 										<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { marginLeft: responsiveWidth(3) }]}>Add profile picture</Text>
 									</TouchableOpacity>
 								</View>
@@ -347,11 +342,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
 									<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={() => this.props.navigation.navigate('Login')}>
-										<Icon style={centralStyles.greenButtonIcon} size={25} name='login'></Icon>
+										<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='login'></Icon>
 										<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>Return to{"\n"} login screen</Text>
 									</TouchableOpacity>
 									<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={(this.state.tAndCAgreed && this.state.privacyPolicyAgreed ? (e) => this.submitChef(e) : null)}>
-										<Icon style={centralStyles.greenButtonIcon} size={25} name='login'></Icon>
+										<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='login'></Icon>
 										<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>{(this.state.tAndCAgreed ? (this.state.privacyPolicyAgreed ? "Submit &\n go to log in" : "Please accept\nprivacy policy") : "Please\naccept T&C")}</Text>
 									</TouchableOpacity>
 								</View>

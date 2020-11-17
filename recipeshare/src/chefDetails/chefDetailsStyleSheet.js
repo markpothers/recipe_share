@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
 		marginBottom: 1,
 		width: '100%',
 		borderStyle: 'solid',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		borderWidth: 1,
 		borderColor: '#104e01',
 		backgroundColor: 'white'
@@ -66,7 +66,7 @@ export const styles = StyleSheet.create({
 		height: '96%',
 		width: '96%',
 		// marginRight: '4%',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 	},
 	chefCardTopLeftUpperContainer: {
 		// borderStyle: 'solid',
@@ -110,7 +110,7 @@ export const styles = StyleSheet.create({
 		position: 'absolute',
 		height: '100%',
 		width: '100%',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 	},
 	chefCardBottomContainer: {
 		flexDirection: 'row',
@@ -122,17 +122,17 @@ export const styles = StyleSheet.create({
 	},
 	chefCardHighlighted: {
 		fontWeight: 'bold',
-		fontSize: 16,
+		fontSize: responsiveFontSize(2),
 		color: "#505050",
 		textAlign: 'center'
 	},
 	chefCardTopOther: {
-		fontSize: 13,
+		fontSize: responsiveFontSize(1.8),
 		color: "#505050",
 		flex: 1
 	},
 	chefCardTopItalic: {
-		fontSize: 13,
+		fontSize: responsiveFontSize(1.8),
 		color: "#505050",
 		fontStyle: 'italic'
 	},
@@ -159,7 +159,7 @@ export const styles = StyleSheet.create({
 		marginRight: '0%',
 		marginTop: 1,
 		marginBottom: 1,
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		backgroundColor: 'white',
 		// opacity: 0.9,
 		flexDirection: 'row',
@@ -175,6 +175,8 @@ export const styles = StyleSheet.create({
 	chefDetailsColumnHeaders: {
 		// flex: 4,
 		fontSize: responsiveFontSize(2.2),
+		marginTop: responsiveHeight(0.5),
+		marginBottom: responsiveHeight(0.5),
 		color: "#505050",
 		fontWeight: 'bold',
 		// width: '100%',
@@ -220,6 +222,8 @@ export const styles = StyleSheet.create({
 		fontSize: responsiveFontSize(2.2),
 		color: "#505050",
 		fontWeight: 'bold',
+		marginTop: responsiveHeight(0.5),
+		marginBottom: responsiveHeight(0.5),
 		// flex: 3
 		// width: '45%',
 		marginLeft: responsiveWidth(5),

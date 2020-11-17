@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
 		backgroundColor: 'white',
 		borderWidth: 1,
 		borderColor: '#104e01',
-		borderRadius: 5
+		borderRadius:responsiveWidth(1.5)
 	},
 	buttonContainer: {
 		flexDirection: 'row',

@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
 		marginBottom: responsiveHeight(0.5),
 		// width: '100%',
 		// borderStyle: 'solid',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		borderWidth: 1,
 		borderColor: '#104e01',
 		backgroundColor: 'white',
@@ -116,7 +116,7 @@ export const styles = StyleSheet.create({
 		// position: 'absolute',
 		height: '100%',
 		width: '100%',
-		borderRadius: 5
+		borderRadius:responsiveWidth(1.5)
 	},
 	chefCardBottomContainer: {
 		flexDirection: 'row',
@@ -141,29 +141,29 @@ export const styles = StyleSheet.create({
 	},
 	chefCardHighlighted: {
 		fontWeight: 'bold',
-		fontSize: 16,
+		fontSize: responsiveFontSize(2),
 		color: "#505050",
 		textAlign: 'center'
 	},
 	chefCardTopOther: {
-		fontSize: 13,
+		fontSize: responsiveFontSize(1.8),
 		color: "#505050",
 		flex: 1
 	},
 	chefCardTopItalic: {
-		fontSize: 13,
+		fontSize: responsiveFontSize(1.8),
 		color: "#505050",
 		fontStyle: 'italic'
 	},
 	chefCardBottomOther: {
 		marginLeft: '5%',
-		fontSize: 16,
+		fontSize: responsiveFontSize(2),
 		fontWeight: 'bold',
 		color: "#505050",
 		textAlign: 'center'
 	},
 	cantGetChefMessageContainer: {
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		position: 'absolute',
 		alignSelf: 'center',
 		top: '25%',

@@ -16,7 +16,7 @@ export default class IngredientAutoComplete extends React.Component {
 				key={item.item.id.toString()}
 				onPress={() => this.handleListItemTouch(ingredientIndex, item.item.name, ingredient.quantity, ingredient.unit)}
 			>
-				<Text>{item.item.name}</Text>
+				<Text style={styles.autocompleteListText}>{item.item.name}</Text>
 			</TouchableOpacity>
 		)
 	}
@@ -107,7 +107,7 @@ export default class IngredientAutoComplete extends React.Component {
 								hideResults={expandBackgroundTouchCollector && ingredient.name.length > 1 ? false : true}
 								containerStyle={styles.autoCompleteOuterContainerStyle}
 								inputContainerStyle={styles.autoCompleteInputContainerStyle}
-								listStyle={[styles.autoCompleteList]}
+								listStyle={styles.autoCompleteList}
 								// style={styles.autoCompleteInput}
 								// onFocus={() => this.props.thisAutocompleteIsFocused(index)}
 								// onBlur={() => this.props.thisAutocompleteIsFocused(null)}

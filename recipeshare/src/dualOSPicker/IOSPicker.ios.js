@@ -34,10 +34,12 @@ export default class IOSPicker extends React.PureComponent {
 						style={styles.choicesPicker}
 						onTouchStart={this.touchStart}
 					>
-						<PickerIOS style={styles.IOSPicker}
+						<PickerIOS 
 							mode="dropdown"
 							onValueChange={choice => this.choose(choice)}
 							selectedValue={this.props.selectedChoice}
+							itemStyle={styles.iosPickerText}
+							style={styles.IOSSelectedChoiceTextBox}
 						>
 							{this.choicesPicker()}
 						</PickerIOS>

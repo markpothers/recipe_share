@@ -10,6 +10,7 @@ import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-nat
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo'
+import SwitchSized from '../switchSized/switchSized'
 
 const mapStateToProps = (state) => ({
 	e_mail: state.loginUserDetails.e_mail,
@@ -122,20 +123,31 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		forgotPassword = async () => {
-			await this.setState({ awaitingServer: true })
-			const response = await getNewPassword(this.props.e_mail)
-			if (!response.error) {
-				await this.setState({
-					loginError: true,
-					error: 'forgotPassword'
-				})
+			let netInfoState = await NetInfo.fetch()
+			if (netInfoState.isConnected) {
+				try {
+					await this.setState({ awaitingServer: true })
+					const response = await getNewPassword(this.props.e_mail)
+					if (!response.error) {
+						await this.setState({
+							loginError: true,
+							error: 'forgotPassword'
+						})
+					}
+					await this.setState({ awaitingServer: false })
+				} catch (e) {
+					this.setState({
+						renderOfflineMessage: true,
+						awaitingServer: false
+					})
+				}
+			} else {
+				this.setState({ renderOfflineMessage: true })
 			}
-			await this.setState({ awaitingServer: false })
-
 		}
 
 		render() {
-			// console.log(this.props)
+			// console.log(responsiveWidth(1.5))
 			return (
 				<SpinachAppContainer scrollingEnabled={true} awaitingServer={this.state.awaitingServer}>
 					{this.state.renderOfflineMessage && (
@@ -153,7 +165,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						<View style={styles.logoContainer}>
 							<Image style={styles.logo} resizeMode={"contain"} source={require('../dataComponents/yellowLogo.png')} />
 						</View>
-						<View style={centralStyles.formContainer}>
+						<View style={[centralStyles.formContainer, { marginTop: responsiveHeight(15) }]}>
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
 									<Text style={centralStyles.formTitle} maxFontSizeMultiplier={1.5}>Welcome, chef!{"\n"} Please log in or register</Text>
@@ -186,22 +198,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								<View style={centralStyles.formInputContainer}>
 									<TouchableOpacity activeOpacity={1} style={centralStyles.yellowRectangleButton} onPress={() => this.setState({ rememberEmail: !this.state.rememberEmail })}>
 										<Text style={centralStyles.greenButtonText} maxFontSizeMultiplier={1.25}>Remember{"\n"}email</Text>
-										<Switch
-											style={(Platform.OS === 'ios' ? { transform: [{ scaleX: .7 }, { scaleY: .7 }] } : null)}
+										<SwitchSized
 											value={this.state.rememberEmail}
 											onChange={(e) => this.setState({ rememberEmail: e.nativeEvent.value })}
-											trackColor={{ true: '#4b714299' }}
-											thumbColor={this.state.rememberEmail ? "#4b7142" : "#ececec"}
 										/>
 									</TouchableOpacity>
 									<TouchableOpacity activeOpacity={1} style={centralStyles.yellowRectangleButton} onPress={() => this.props.stayLoggedIn(!this.props.stayingLoggedIn)}>
 										<Text style={centralStyles.greenButtonText} maxFontSizeMultiplier={1.5}>Stay{"\n"} logged in</Text>
-										<Switch
-											style={(Platform.OS === 'ios' ? { transform: [{ scaleX: .7 }, { scaleY: .7 }] } : null)}
+										<SwitchSized
 											value={this.props.stayingLoggedIn}
 											onChange={(e) => this.props.stayLoggedIn(e.nativeEvent.value)}
-											trackColor={{ true: '#4b714299' }}
-											thumbColor={this.props.stayingLoggedIn ? "#4b7142" : "#ececec"}
 										/>
 									</TouchableOpacity>
 								</View>
@@ -209,11 +215,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
 									<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={() => this.props.navigation.navigate('CreateChef')}>
-										<Icon style={centralStyles.greenButtonIcon} size={25} name='account-plus'></Icon>
+										<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='account-plus'></Icon>
 										<Text style={centralStyles.greenButtonText} maxFontSizeMultiplier={1.5}>Register</Text>
 									</TouchableOpacity>
 									<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={this.forgotPassword}>
-										<Icon style={centralStyles.greenButtonIcon} size={25} name='lock-open'></Icon>
+										<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='lock-open'></Icon>
 										<Text style={centralStyles.greenButtonText} maxFontSizeMultiplier={1.7}>Forgot{"\n"}password</Text>
 									</TouchableOpacity>
 								</View>
@@ -221,7 +227,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
 									<TouchableOpacity style={[centralStyles.yellowRectangleButton, { maxWidth: '100%', width: '100%', justifyContent: 'center' }]} activeOpacity={0.7} onPress={e => this.loginChef(e)}>
-										<Icon style={centralStyles.greenButtonIcon} size={25} name='login'></Icon>
+										<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='login'></Icon>
 										<Text style={[centralStyles.greenButtonText, { marginLeft: responsiveWidth(4) }]} maxFontSizeMultiplier={2}>Login</Text>
 									</TouchableOpacity>
 								</View>

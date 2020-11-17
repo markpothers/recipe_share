@@ -6,7 +6,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     Object {
       "backgroundColor": "white",
       "borderColor": "#104e01",
-      "borderRadius": 5,
+      "borderRadius": 11.25,
       "borderStyle": "solid",
       "borderWidth": 1,
       "marginBottom": 2.668,
@@ -191,7 +191,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         }
         style={
           Object {
-            "borderRadius": 5,
+            "borderRadius": 11.25,
             "height": 120.06,
             "marginRight": "4%",
             "width": 120.06,
@@ -225,7 +225,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       source={1}
       style={
         Object {
-          "borderRadius": 5,
+          "borderRadius": 11.25,
           "height": "100%",
           "position": "absolute",
           "width": 746,
@@ -393,7 +393,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     Object {
       "backgroundColor": "white",
       "borderColor": "#104e01",
-      "borderRadius": 5,
+      "borderRadius": 11.25,
       "borderStyle": "solid",
       "borderWidth": 1,
       "marginBottom": 2.668,
@@ -578,7 +578,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         }
         style={
           Object {
-            "borderRadius": 5,
+            "borderRadius": 11.25,
             "height": 120.06,
             "marginRight": "4%",
             "width": 120.06,
@@ -616,7 +616,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       }
       style={
         Object {
-          "borderRadius": 5,
+          "borderRadius": 11.25,
           "height": "100%",
           "position": "absolute",
           "width": 746,
@@ -784,7 +784,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     Object {
       "backgroundColor": "white",
       "borderColor": "#104e01",
-      "borderRadius": 5,
+      "borderRadius": 11.25,
       "borderStyle": "solid",
       "borderWidth": 1,
       "marginBottom": 2.668,
@@ -969,7 +969,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         }
         style={
           Object {
-            "borderRadius": 5,
+            "borderRadius": 11.25,
             "height": 120.06,
             "marginRight": "4%",
             "width": 120.06,
@@ -1003,7 +1003,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       source={1}
       style={
         Object {
-          "borderRadius": 5,
+          "borderRadius": 11.25,
           "height": "100%",
           "position": "absolute",
           "width": 746,
@@ -1171,7 +1171,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     Object {
       "backgroundColor": "white",
       "borderColor": "#104e01",
-      "borderRadius": 5,
+      "borderRadius": 11.25,
       "borderStyle": "solid",
       "borderWidth": 1,
       "marginBottom": 2.668,
@@ -1356,7 +1356,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         }
         style={
           Object {
-            "borderRadius": 5,
+            "borderRadius": 11.25,
             "height": 120.06,
             "marginRight": "4%",
             "width": 120.06,
@@ -1394,7 +1394,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       }
       style={
         Object {
-          "borderRadius": 5,
+          "borderRadius": 11.25,
           "height": "100%",
           "position": "absolute",
           "width": 746,
@@ -1562,7 +1562,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     Object {
       "backgroundColor": "white",
       "borderColor": "#104e01",
-      "borderRadius": 5,
+      "borderRadius": 11.25,
       "borderStyle": "solid",
       "borderWidth": 1,
       "marginBottom": 2.668,
@@ -1747,7 +1747,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         }
         style={
           Object {
-            "borderRadius": 5,
+            "borderRadius": 11.25,
             "height": 120.06,
             "marginRight": "4%",
             "width": 120.06,
@@ -1785,7 +1785,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       }
       style={
         Object {
-          "borderRadius": 5,
+          "borderRadius": 11.25,
           "height": "100%",
           "position": "absolute",
           "width": 746,
@@ -1953,7 +1953,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     Object {
       "backgroundColor": "white",
       "borderColor": "#104e01",
-      "borderRadius": 5,
+      "borderRadius": 11.25,
       "borderStyle": "solid",
       "borderWidth": 1,
       "marginBottom": 2.668,
@@ -2138,7 +2138,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         }
         style={
           Object {
-            "borderRadius": 5,
+            "borderRadius": 11.25,
             "height": 120.06,
             "marginRight": "4%",
             "width": 120.06,
@@ -2176,7 +2176,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       }
       style={
         Object {
-          "borderRadius": 5,
+          "borderRadius": 11.25,
           "height": "100%",
           "position": "absolute",
           "width": 746,
@@ -2344,7 +2344,7 @@ exports[`Recipe Card can be rendered when the recipe has NO COVER IMAGE and matc
     Object {
       "backgroundColor": "white",
       "borderColor": "#104e01",
-      "borderRadius": 5,
+      "borderRadius": 11.25,
       "borderStyle": "solid",
       "borderWidth": 1,
       "marginBottom": 2.668,
@@ -2529,7 +2529,7 @@ exports[`Recipe Card can be rendered when the recipe has NO COVER IMAGE and matc
         }
         style={
           Object {
-            "borderRadius": 5,
+            "borderRadius": 11.25,
             "height": 120.06,
             "marginRight": "4%",
             "width": 120.06,
@@ -2563,7 +2563,7 @@ exports[`Recipe Card can be rendered when the recipe has NO COVER IMAGE and matc
       source={1}
       style={
         Object {
-          "borderRadius": 5,
+          "borderRadius": 11.25,
           "height": "100%",
           "position": "absolute",
           "width": 746,
@@ -2731,7 +2731,7 @@ exports[`Recipe Card can be rendered when the recipe has a LONG RESHARER USERNAM
     Object {
       "backgroundColor": "white",
       "borderColor": "#104e01",
-      "borderRadius": 5,
+      "borderRadius": 11.25,
       "borderStyle": "solid",
       "borderWidth": 1,
       "marginBottom": 2.668,
@@ -2991,7 +2991,7 @@ exports[`Recipe Card can be rendered when the recipe has a LONG RESHARER USERNAM
         }
         style={
           Object {
-            "borderRadius": 5,
+            "borderRadius": 11.25,
             "height": 120.06,
             "marginRight": "4%",
             "width": 120.06,
@@ -3025,7 +3025,7 @@ exports[`Recipe Card can be rendered when the recipe has a LONG RESHARER USERNAM
       source={1}
       style={
         Object {
-          "borderRadius": 5,
+          "borderRadius": 11.25,
           "height": "100%",
           "position": "absolute",
           "width": 746,
@@ -3193,7 +3193,7 @@ exports[`Recipe Card can be rendered when the recipe has been COMMENTED and matc
     Object {
       "backgroundColor": "white",
       "borderColor": "#104e01",
-      "borderRadius": 5,
+      "borderRadius": 11.25,
       "borderStyle": "solid",
       "borderWidth": 1,
       "marginBottom": 2.668,
@@ -3378,7 +3378,7 @@ exports[`Recipe Card can be rendered when the recipe has been COMMENTED and matc
         }
         style={
           Object {
-            "borderRadius": 5,
+            "borderRadius": 11.25,
             "height": 120.06,
             "marginRight": "4%",
             "width": 120.06,
@@ -3416,7 +3416,7 @@ exports[`Recipe Card can be rendered when the recipe has been COMMENTED and matc
       }
       style={
         Object {
-          "borderRadius": 5,
+          "borderRadius": 11.25,
           "height": "100%",
           "position": "absolute",
           "width": 746,
@@ -3584,7 +3584,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED and matches 
     Object {
       "backgroundColor": "white",
       "borderColor": "#104e01",
-      "borderRadius": 5,
+      "borderRadius": 11.25,
       "borderStyle": "solid",
       "borderWidth": 1,
       "marginBottom": 2.668,
@@ -3769,7 +3769,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED and matches 
         }
         style={
           Object {
-            "borderRadius": 5,
+            "borderRadius": 11.25,
             "height": 120.06,
             "marginRight": "4%",
             "width": 120.06,
@@ -3807,7 +3807,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED and matches 
       }
       style={
         Object {
-          "borderRadius": 5,
+          "borderRadius": 11.25,
           "height": "100%",
           "position": "absolute",
           "width": 746,
@@ -3975,7 +3975,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED, COMMENTED, 
     Object {
       "backgroundColor": "white",
       "borderColor": "#104e01",
-      "borderRadius": 5,
+      "borderRadius": 11.25,
       "borderStyle": "solid",
       "borderWidth": 1,
       "marginBottom": 2.668,
@@ -4160,7 +4160,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED, COMMENTED, 
         }
         style={
           Object {
-            "borderRadius": 5,
+            "borderRadius": 11.25,
             "height": 120.06,
             "marginRight": "4%",
             "width": 120.06,
@@ -4198,7 +4198,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED, COMMENTED, 
       }
       style={
         Object {
-          "borderRadius": 5,
+          "borderRadius": 11.25,
           "height": "100%",
           "position": "absolute",
           "width": 746,
@@ -4366,7 +4366,7 @@ exports[`Recipe Card can be rendered when the recipe has been RE_SHARED BY SOMEO
     Object {
       "backgroundColor": "white",
       "borderColor": "#104e01",
-      "borderRadius": 5,
+      "borderRadius": 11.25,
       "borderStyle": "solid",
       "borderWidth": 1,
       "marginBottom": 2.668,
@@ -4626,7 +4626,7 @@ exports[`Recipe Card can be rendered when the recipe has been RE_SHARED BY SOMEO
         }
         style={
           Object {
-            "borderRadius": 5,
+            "borderRadius": 11.25,
             "height": 120.06,
             "marginRight": "4%",
             "width": 120.06,
@@ -4664,7 +4664,7 @@ exports[`Recipe Card can be rendered when the recipe has been RE_SHARED BY SOMEO
       }
       style={
         Object {
-          "borderRadius": 5,
+          "borderRadius": 11.25,
           "height": "100%",
           "position": "absolute",
           "width": 746,
@@ -4832,7 +4832,7 @@ exports[`Recipe Card can be rendered when the recipe has been SHARED and matches
     Object {
       "backgroundColor": "white",
       "borderColor": "#104e01",
-      "borderRadius": 5,
+      "borderRadius": 11.25,
       "borderStyle": "solid",
       "borderWidth": 1,
       "marginBottom": 2.668,
@@ -5017,7 +5017,7 @@ exports[`Recipe Card can be rendered when the recipe has been SHARED and matches
         }
         style={
           Object {
-            "borderRadius": 5,
+            "borderRadius": 11.25,
             "height": 120.06,
             "marginRight": "4%",
             "width": 120.06,
@@ -5055,7 +5055,7 @@ exports[`Recipe Card can be rendered when the recipe has been SHARED and matches
       }
       style={
         Object {
-          "borderRadius": 5,
+          "borderRadius": 11.25,
           "height": "100%",
           "position": "absolute",
           "width": 746,
@@ -5223,7 +5223,7 @@ exports[`Recipe Card can be rendered when the recipe has been a LONG RECIPE NAME
     Object {
       "backgroundColor": "white",
       "borderColor": "#104e01",
-      "borderRadius": 5,
+      "borderRadius": 11.25,
       "borderStyle": "solid",
       "borderWidth": 1,
       "marginBottom": 2.668,
@@ -5408,7 +5408,7 @@ exports[`Recipe Card can be rendered when the recipe has been a LONG RECIPE NAME
         }
         style={
           Object {
-            "borderRadius": 5,
+            "borderRadius": 11.25,
             "height": 120.06,
             "marginRight": "4%",
             "width": 120.06,
@@ -5446,7 +5446,7 @@ exports[`Recipe Card can be rendered when the recipe has been a LONG RECIPE NAME
       }
       style={
         Object {
-          "borderRadius": 5,
+          "borderRadius": 11.25,
           "height": "100%",
           "position": "absolute",
           "width": 746,
@@ -5614,7 +5614,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with NO 
     Object {
       "backgroundColor": "white",
       "borderColor": "#104e01",
-      "borderRadius": 5,
+      "borderRadius": 11.25,
       "borderStyle": "solid",
       "borderWidth": 1,
       "marginBottom": 2.668,
@@ -5795,7 +5795,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with NO 
         source={1}
         style={
           Object {
-            "borderRadius": 5,
+            "borderRadius": 11.25,
             "height": 120.06,
             "marginRight": "4%",
             "width": 120.06,
@@ -5833,7 +5833,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with NO 
       }
       style={
         Object {
-          "borderRadius": 5,
+          "borderRadius": 11.25,
           "height": "100%",
           "position": "absolute",
           "width": 746,
@@ -6001,7 +6001,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with a L
     Object {
       "backgroundColor": "white",
       "borderColor": "#104e01",
-      "borderRadius": 5,
+      "borderRadius": 11.25,
       "borderStyle": "solid",
       "borderWidth": 1,
       "marginBottom": 2.668,
@@ -6186,7 +6186,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with a L
         }
         style={
           Object {
-            "borderRadius": 5,
+            "borderRadius": 11.25,
             "height": 120.06,
             "marginRight": "4%",
             "width": 120.06,
@@ -6224,7 +6224,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with a L
       }
       style={
         Object {
-          "borderRadius": 5,
+          "borderRadius": 11.25,
           "height": "100%",
           "position": "absolute",
           "width": 746,

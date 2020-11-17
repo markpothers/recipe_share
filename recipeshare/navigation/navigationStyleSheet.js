@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		backgroundColor: '#104e01',
-		borderRadius: 5
+		borderRadius:responsiveWidth(1.5)
 	},
 	headerIcon: {
 		color: '#fff59b'

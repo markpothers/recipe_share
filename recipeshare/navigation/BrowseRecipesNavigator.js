@@ -65,7 +65,7 @@ const BrowseRecipesTabs = (props) => {
 					inactiveTintColor: '#fff59b',
 					tabStyle: {
 						width: responsiveWidth(35),
-						height: responsiveHeight(9),
+						height: responsiveHeight(8),
 						paddingTop: 0,
 						paddingBottom: 0,
 					},
@@ -185,7 +185,7 @@ const BrowseRecipesStack = () => {
 				},
 				headerTitleContainerStyle: {
 					left: 0,
-					height: responsiveHeight(9),
+					height: responsiveHeight(8),
 					width: responsiveWidth(100),
 				},
 				headerStatusBarHeight: 0,
@@ -255,7 +255,7 @@ const BrowseRecipesStack = () => {
 // BrowseRecipesStack.navigationOptions = {
 //   tabBarLabel: 'Browse recipes',
 //   tabBarIcon: ({ focused }) => (
-//     <Icon size={25} color="#8d8d8d"
+//     <Icon size={responsiveHeight(4)} color="#8d8d8d"
 //       focused={focused}
 //       name={
 //         Platform.OS === 'ios'

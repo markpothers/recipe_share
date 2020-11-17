@@ -24,7 +24,7 @@ export function AlertPopUp(props) {
 						<View style={[centralStyles.formInputContainer, { justifyContent: 'space-around' }]}>
 							{props.close && (
 								<TouchableOpacity style={centralStyles.greenRectangleButton} activeOpacity={0.7} onPress={props.close}>
-									<Icon style={centralStyles.yellowButtonIcon} size={25} name='cancel'></Icon>
+									<Icon style={centralStyles.yellowButtonIcon} size={responsiveHeight(4)} name='cancel'></Icon>
 									<Text maxFontSizeMultiplier={2} style={centralStyles.yellowButtonText}>{props.closeText ? props.closeText : "Cancel"}</Text>
 								</TouchableOpacity>
 							)}
@@ -33,7 +33,7 @@ export function AlertPopUp(props) {
 								</View>
 							)}
 							<TouchableOpacity style={centralStyles.greenRectangleButton} activeOpacity={0.7} onPress={props.onYes}>
-								<Icon style={centralStyles.yellowButtonIcon} size={25} name='check'></Icon>
+								<Icon style={centralStyles.yellowButtonIcon} size={responsiveHeight(4)} name='check'></Icon>
 								<Text maxFontSizeMultiplier={2} style={centralStyles.yellowButtonText}>{props.yesText ? props.yesText : "Yes"}</Text>
 							</TouchableOpacity>
 						</View>

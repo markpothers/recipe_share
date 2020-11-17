@@ -5,6 +5,7 @@ import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-un
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import SpinachAppContainer from './spinachAppContainer/SpinachAppContainer'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
+import SwitchSized from '../switchSized/switchSized'
 
 export default class Templates extends React.Component {
 	static navigationOptions = {
@@ -63,7 +64,7 @@ export default class Templates extends React.Component {
 					<View style={centralStyles.formSection}>
 						<View style={centralStyles.formInputContainer}>
 							<TouchableOpacity style={[centralStyles.yellowRectangleButton, { width: '100%' }]} activeOpacity={0.7} onPress={this.choosePicture}>
-								<Icon style={centralStyles.greenButtonIcon} size={25} name='camera'></Icon>
+								<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='camera'></Icon>
 								<Text style={centralStyles.greenButtonText}>Add profile picture</Text>
 							</TouchableOpacity>
 						</View>
@@ -73,11 +74,11 @@ export default class Templates extends React.Component {
 					<View style={centralStyles.formSection}>
 						<View style={centralStyles.formInputContainer}>
 							<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={this.forgotPassword}>
-								<Icon style={centralStyles.greenButtonIcon} size={25} name='lock-open'></Icon>
+								<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='lock-open'></Icon>
 								<Text style={centralStyles.greenButtonText}>Reset{"\n"}password</Text>
 							</TouchableOpacity>
 							<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={e => this.loginChef(e)}>
-								<Icon style={centralStyles.greenButtonIcon} size={25} name='login'></Icon>
+								<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='login'></Icon>
 								<Text style={centralStyles.greenButtonText}>Login</Text>
 							</TouchableOpacity>
 						</View>
@@ -87,17 +88,14 @@ export default class Templates extends React.Component {
 					<View style={centralStyles.formSection}>
 						<View style={centralStyles.formInputContainer}>
 							<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={() => this.props.navigation.navigate('CreateChef')}>
-								<Icon style={centralStyles.greenButtonIcon} size={25} name='account-plus'></Icon>
+								<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='account-plus'></Icon>
 								<Text style={centralStyles.greenButtonText}>Register</Text>
 							</TouchableOpacity>
 							<View style={centralStyles.yellowRectangleButton}>
 								<Text style={centralStyles.greenButtonText}>Stay{"\n"}logged in</Text>
-								<Switch
-									style={[(Platform.OS === 'ios' ? { transform: [{ scaleX: .7 }, { scaleY: .7 }] } : null), { marginLeft: responsiveWidth(2) }]}
+								<SwitchSized
 									value={this.props.stayingLoggedIn}
 									onChange={(e) => this.props.stayLoggedIn(e.nativeEvent.value)}
-									trackColor={{ true: '#4b714299' }}
-								// thumbColor={filtersList[category] ? "#104e01" : "#ececec"}
 								/>
 							</View>
 						</View>
@@ -113,12 +111,9 @@ export default class Templates extends React.Component {
 							</TouchableOpacity>
 							<View style={[centralStyles.yellowRectangleButton, { width: responsiveWidth(30) }]}>
 								<Text style={centralStyles.greenButtonText}>I accept</Text>
-								<Switch
-									style={[(Platform.OS === 'ios' ? { transform: [{ scaleX: .7 }, { scaleY: .7 }] } : null), { marginLeft: responsiveWidth(2) }]}
+								<SwitchSized
 									value={this.props.stayingLoggedIn}
 									onChange={(e) => this.props.stayLoggedIn(e.nativeEvent.value)}
-									trackColor={{ true: '#4b714299' }}
-								// thumbColor={filtersList[category] ? "#104e01" : "#ececec"}
 								/>
 							</View>
 						</View>

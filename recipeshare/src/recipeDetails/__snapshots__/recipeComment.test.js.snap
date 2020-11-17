@@ -46,7 +46,7 @@ exports[`RecipeComment render with different comments 1`] = `
         }
         style={
           Object {
-            "borderRadius": 5,
+            "borderRadius": 11.25,
             "height": 60,
             "marginRight": "4%",
             "width": "96%",
@@ -175,7 +175,7 @@ exports[`RecipeComment render with different comments 2`] = `
         }
         style={
           Object {
-            "borderRadius": 5,
+            "borderRadius": 11.25,
             "height": 60,
             "marginRight": "4%",
             "width": "96%",
@@ -304,7 +304,7 @@ exports[`RecipeComment render with different comments 3`] = `
         }
         style={
           Object {
-            "borderRadius": 5,
+            "borderRadius": 11.25,
             "height": 60,
             "marginRight": "4%",
             "width": "96%",
@@ -433,7 +433,7 @@ exports[`RecipeComment render with different comments and an extra button if log
         }
         style={
           Object {
-            "borderRadius": 5,
+            "borderRadius": 11.25,
             "height": 60,
             "marginRight": "4%",
             "width": "96%",
@@ -595,7 +595,7 @@ exports[`RecipeComment render with different comments and an extra button if log
         }
         style={
           Object {
-            "borderRadius": 5,
+            "borderRadius": 11.25,
             "height": 60,
             "marginRight": "4%",
             "width": "96%",
@@ -757,7 +757,7 @@ exports[`RecipeComment render with different comments and an extra button if log
         }
         style={
           Object {
-            "borderRadius": 5,
+            "borderRadius": 11.25,
             "height": 60,
             "marginRight": "4%",
             "width": "96%",

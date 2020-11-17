@@ -4,6 +4,7 @@ import { styles } from './navigationStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { withNavigation } from '@react-navigation/compat'
 import { centralStyles } from '../src/centralStyleSheet' //eslint-disable-line no-unused-vars
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 
 class AppHeader extends React.PureComponent {
 
@@ -15,7 +16,7 @@ class AppHeader extends React.PureComponent {
 					activeOpacity={0.7}
 					onPress={() => this.props.navigation.toggleDrawer()}
 				>
-					<Icon name='menu' style={styles.headerIcon} size={33} />
+					<Icon name='menu' style={styles.headerIcon} size={responsiveWidth(9)} />
 				</TouchableOpacity>
 			</View>
 		)
@@ -28,7 +29,7 @@ class AppHeader extends React.PureComponent {
 					style={styles.headerDrawerButton}
 					activeOpacity={0.7}
 					onPress={() => this.props.navigation.goBack()}>
-					<Icon name='arrow-left' style={styles.headerIcon} size={33} />
+					<Icon name='arrow-left' style={styles.headerIcon} size={responsiveWidth(9)} />
 				</TouchableOpacity>
 			</View>
 		)

@@ -56,7 +56,7 @@ export default function DynamicMenu(props) {
 			return props.buttons.map((button, index) => {
 				return (
 					<TouchableOpacity style={styles.buttonContainer} onPress={() => handleButtonPress(button.action)} key={index.toString()}>
-						<Icon style={styles.buttonIcon} name={button.icon} size={25} />
+						<Icon style={styles.buttonIcon} name={button.icon} size={responsiveHeight(4)} />
 						<Text
 							style={styles.buttonText}
 							maxFontSizeMultiplier={2}

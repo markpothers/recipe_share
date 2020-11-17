@@ -16,6 +16,7 @@ exports[`Search Bar can be rendered (with the delete button) matches its previou
       Object {
         "borderColor": "yellow",
         "borderWidth": 0,
+        "overflow": "hidden",
         "width": "100%",
       }
     }
@@ -26,7 +27,7 @@ exports[`Search Bar can be rendered (with the delete button) matches its previou
           "alignItems": "center",
           "backgroundColor": "white",
           "borderColor": "#104e01",
-          "borderRadius": 5,
+          "borderRadius": 11.25,
           "borderWidth": 1,
           "flexDirection": "row",
           "justifyContent": "space-between",
@@ -48,6 +49,7 @@ exports[`Search Bar can be rendered (with the delete button) matches its previou
         style={
           Object {
             "backgroundColor": "white",
+            "fontSize": 30.595932917809698,
             "minHeight": 80.03999999999999,
             "paddingLeft": 15,
             "textAlign": "left",
@@ -111,6 +113,7 @@ exports[`Search Bar can be rendered (without the delete button) matches its prev
       Object {
         "borderColor": "yellow",
         "borderWidth": 0,
+        "overflow": "hidden",
         "width": "100%",
       }
     }
@@ -121,7 +124,7 @@ exports[`Search Bar can be rendered (without the delete button) matches its prev
           "alignItems": "center",
           "backgroundColor": "white",
           "borderColor": "#104e01",
-          "borderRadius": 5,
+          "borderRadius": 11.25,
           "borderWidth": 1,
           "flexDirection": "row",
           "justifyContent": "space-between",
@@ -143,6 +146,7 @@ exports[`Search Bar can be rendered (without the delete button) matches its prev
         style={
           Object {
             "backgroundColor": "white",
+            "fontSize": 30.595932917809698,
             "minHeight": 80.03999999999999,
             "paddingLeft": 15,
             "textAlign": "left",
