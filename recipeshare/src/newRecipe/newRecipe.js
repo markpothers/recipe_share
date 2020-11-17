@@ -817,7 +817,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								<View style={[centralStyles.formSection, { width: responsiveWidth(80) }]}>
 									<View style={[centralStyles.formInputContainer, { justifyContent: 'center' }]}>
 										<TouchableOpacity style={[centralStyles.yellowRectangleButton, { maxWidth: '75%', width: '75%', justifyContent: 'center' }]} activeOpacity={0.7} onPress={this.choosePrimaryPicture}>
-											<Icon style={centralStyles.greenButtonIcon} size={25} name='camera'></Icon>
+											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='camera'></Icon>
 											<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { marginLeft: responsiveWidth(3), fontSize: responsiveFontSize(2.3) }]}>Cover Pictures</Text>
 										</TouchableOpacity>
 									</View>
@@ -832,7 +832,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									style={[
 										centralStyles.formSection,
 										this.state.autoCompleteFocused !== null && { zIndex: 1 },
-										{ paddingBottom: responsiveHeight(4) }
+										{ paddingBottom: responsiveHeight(3.5) }
 									]}
 								>
 									<DragSortableView
@@ -923,7 +923,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								<View style={[centralStyles.formSection, { width: responsiveWidth(80) }]}>
 									<View style={[centralStyles.formInputContainer, { justifyContent: 'center' }]}>
 										<TouchableOpacity style={[centralStyles.yellowRectangleButton, { maxWidth: '75%', width: '75%', justifyContent: 'center' }]} activeOpacity={0.7} onPress={this.handleCategoriesButton}>
-											<Icon style={centralStyles.greenButtonIcon} size={25} name='filter'></Icon>
+											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='filter'></Icon>
 											<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { marginLeft: responsiveWidth(3), fontSize: responsiveFontSize(2.3) }]}>Filter categories</Text>
 										</TouchableOpacity>
 									</View>
@@ -973,11 +973,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								{/* <View style={[centralStyles.formSection, { width: responsiveWidth(80) }]}>
 								<View style={centralStyles.formInputContainer}>
 									<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={this.choosePrimaryPicture}>
-										<Icon style={centralStyles.greenButtonIcon} size={25} name='camera'></Icon>
+										<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='camera'></Icon>
 										<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>Main{"\n"}pictures</Text>
 									</TouchableOpacity>
 									<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={this.handleCategoriesButton}>
-										<Icon style={centralStyles.greenButtonIcon} size={25} name='filter'></Icon>
+										<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='filter'></Icon>
 										<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>Select{"\n"}categories</Text>
 									</TouchableOpacity>
 								</View>
@@ -991,11 +991,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								<View style={[centralStyles.formSection, { width: responsiveWidth(80) }]}>
 									<View style={centralStyles.formInputContainer}>
 										<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={this.askToReset} disabled={this.state.awaitingServer}>
-											<Icon style={centralStyles.greenButtonIcon} size={25} name='alert-circle-outline'></Icon>
+											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='alert-circle-outline'></Icon>
 											<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { fontSize: responsiveFontSize(2.2) }]}>Clear</Text>
 										</TouchableOpacity>
 										<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={e => this.submitRecipe(e)} disabled={this.state.awaitingServer}>
-											<Icon style={centralStyles.greenButtonIcon} size={25} name='login'></Icon>
+											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='login'></Icon>
 											<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { fontSize: responsiveFontSize(2.2) }]}>Submit</Text>
 										</TouchableOpacity>
 									</View>

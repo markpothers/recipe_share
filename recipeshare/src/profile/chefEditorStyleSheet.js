@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
 		width: '95%',
 		// marginTop: '12%',
 		// marginLeft: '10%',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
 		height: responsiveHeight(6),
 		width: '90%',
 		// justifyContent: 'center',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		borderStyle: 'solid',
 		borderWidth: 1,
 		borderColor: '#104e01'
@@ -55,7 +55,7 @@ export const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-evenly',
 		alignItems: 'center',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		width: '100%',
 	},
 	bottomSpacer: {
@@ -73,7 +73,7 @@ export const styles = StyleSheet.create({
 		height: responsiveHeight(12),
 		width: '90%',
 		// justifyContent: 'center',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		borderStyle: 'solid',
 		borderWidth: 1,
 		borderColor: '#104e01'
@@ -84,7 +84,7 @@ export const styles = StyleSheet.create({
 		// marginRight: '7.5%',
 		backgroundColor: 'white',
 		width: '100%',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		// justifyContent: 'center',
 		// alignItems: 'center',
 		borderStyle: 'solid',
@@ -107,7 +107,7 @@ export const styles = StyleSheet.create({
 		backgroundColor: 'white',
 		justifyContent: 'center',
 		alignItems: 'center',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		height: responsiveHeight(5),
 		width: '90%',
 		borderStyle: 'solid',
@@ -138,23 +138,25 @@ export const styles = StyleSheet.create({
 		minWidth: '40%',
 		minHeight: responsiveHeight(6),
 		flexDirection: 'row',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		backgroundColor: '#720000',
 		borderStyle: 'solid',
 		borderWidth: 1,
 		borderColor: '#104e01',
-		flexWrap: 'wrap'
+		// flexWrap: 'wrap'
 	},
 	clearFiltersButtonText: {
 		marginLeft: '5%',
 		marginRight: '5%',
 		textAlign: 'center',
 		fontWeight: 'bold',
-		fontSize: 14,
+		fontSize: responsiveFontSize(1.5),
 		color: '#fff59b',
+		// borderWidth: 1
 	},
 	clearFiltersIcon: {
 		color: '#fff59b',
+		// borderWidth: 1
 	},
 	applyFiltersButton: {
 		// marginLeft: '2.5%',
@@ -164,7 +166,7 @@ export const styles = StyleSheet.create({
 		minWidth: '40%',
 		minHeight: responsiveHeight(6),
 		flexDirection: 'row',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		backgroundColor: '#104e01',
 	},
 	applyFiltersButtonText: {
@@ -172,7 +174,7 @@ export const styles = StyleSheet.create({
 		marginRight: '5%',
 		textAlign: 'center',
 		fontWeight: 'bold',
-		fontSize: 14,
+		fontSize: responsiveFontSize(1.5),
 		color: '#fff59b',
 	},
 	applyFiltersIcon: {
@@ -199,7 +201,7 @@ export const styles = StyleSheet.create({
 		width: '80%',
 		// marginTop: '50%',
 		// marginLeft: '12.5%',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		justifyContent: 'center',
 		alignItems: 'center',
 		// paddingBottom: '1%'

@@ -92,7 +92,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		renderNewPasswordButton = () => {
 			return (
 				<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} title="clearFilters" onPress={() => this.handleChangePasswordButton(true)}>
-					<Icon style={centralStyles.greenButtonIcon} size={25} name='lock-open' />
+					<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='lock-open' />
 					<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>Update{"\n"}password</Text>
 				</TouchableOpacity>
 			)
@@ -101,7 +101,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		renderCancelPasswordButton = () => {
 			return (
 				<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} title="clearFilters" onPress={() => this.handleChangePasswordButton(false)}>
-					<Icon style={centralStyles.greenButtonIcon} size={25} name='lock' />
+					<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='lock' />
 					<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>Keep current{"\n"}password</Text>
 				</TouchableOpacity>
 			)
@@ -216,7 +216,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								<View style={[centralStyles.formInputContainer, { justifyContent: 'space-evenly' }]}>
 									{!this.state.updatingPassword ? this.renderNewPasswordButton() : this.renderCancelPasswordButton()}
 									<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} title="change_picture" onPress={this.props.choosePicture}>
-										<Icon style={centralStyles.greenButtonIcon} size={25} name='camera' />
+										<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='camera' />
 										<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>Update{"\n"}picture</Text>
 									</TouchableOpacity>
 
@@ -225,11 +225,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							<View style={[centralStyles.formSection, { width: '100%' }]}>
 								<View style={[centralStyles.formInputContainer, { justifyContent: 'space-evenly' }]}>
 									<TouchableOpacity style={[centralStyles.yellowRectangleButton, { backgroundColor: '#720000' }]} activeOpacity={0.7} title="clearFilters" onPress={this.cancelUpdate}>
-										<Icon style={[centralStyles.greenButtonIcon, { color: '#fff59b' }]} size={25} name='cancel' />
+										<Icon style={[centralStyles.greenButtonIcon, { color: '#fff59b' }]} size={responsiveHeight(4)} name='cancel' />
 										<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { color: '#fff59b' }]}>Cancel</Text>
 									</TouchableOpacity>
 									<TouchableOpacity style={centralStyles.greenRectangleButton} activeOpacity={0.7} title="applyFilters" onPress={this.saveUpdatedChef}>
-										<Icon style={centralStyles.yellowButtonIcon} size={25} name='check' />
+										<Icon style={centralStyles.yellowButtonIcon} size={responsiveHeight(4)} name='check' />
 										<Text maxFontSizeMultiplier={2} style={centralStyles.yellowButtonText}>Save</Text>
 									</TouchableOpacity>
 								</View>

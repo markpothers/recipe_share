@@ -26,7 +26,7 @@ export default function SearchBar(props) {
 						justifyContent: 'space-between',
 						alignItems: 'center',
 						backgroundColor: 'white',
-						borderRadius: 5,
+						borderRadius:responsiveWidth(1.5),
 						borderWidth: 1,
 						borderColor: '#104e01',
 						overflow: 'hidden',
@@ -41,6 +41,7 @@ export default function SearchBar(props) {
 							textAlignVertical: 'center',
 							paddingLeft: responsiveWidth(2),
 							width: responsiveWidth(90),
+							fontSize: responsiveFontSize(2)
 						}}
 						value={props.searchTerm}
 						placeholder={props.text}

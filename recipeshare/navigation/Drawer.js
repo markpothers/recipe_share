@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import { DrawerContentScrollView } from '@react-navigation/drawer';
+import * as Device from 'expo-device';
 
 const mapStateToProps = (state) => ({
 	loggedInChef: state.loggedInChef,
@@ -16,6 +17,17 @@ const mapDispatchToProps = {
 
 export default (connect(mapStateToProps, mapDispatchToProps)(
 	class CustomDrawer extends React.PureComponent {
+		
+		state = {
+			isTablet: false
+		}
+
+		componentDidMount = async() => {
+			let deviceType = await Device.getDeviceTypeAsync()
+			if (deviceType === 2){
+				this.setState({isTablet: true})
+			}
+		}
 
 		logout = () => {
 			AsyncStorage.removeItem('chef', () => {
@@ -37,28 +49,28 @@ export default (connect(mapStateToProps, mapDispatchToProps)(
 							<TouchableOpacity style={styles.routeLink} onPress={() => this.props.navigation.navigate('BrowseRecipes')}>
 								<Icon name='food' size={responsiveHeight(3.5)} style={styles.icon} />
 								<View style={styles.routeNameContainer}>
-									<Text style={styles.routeName} maxFontSizeMultiplier={2}>All recipes {"&"} chefs</Text>
+									<Text style={[styles.routeName, {fontSize: this.state.isTablet ? responsiveFontSize(2) : responsiveFontSize(2.7)}]} maxFontSizeMultiplier={2}>All recipes {"&"} chefs</Text>
 								</View>
 							</TouchableOpacity>
 							<TouchableOpacity style={styles.routeLink} onPress={() => this.props.navigation.navigate('MyRecipeBook')}>
 								<Icon name='book-open-page-variant' size={responsiveHeight(3.5)} style={styles.icon} />
 								<View style={styles.routeNameContainer}>
-									<Text style={styles.routeName} maxFontSizeMultiplier={2}>My recipe book</Text>
+									<Text style={[styles.routeName, {fontSize: this.state.isTablet ? responsiveFontSize(2) : responsiveFontSize(2.7)}]} maxFontSizeMultiplier={2}>My recipe book</Text>
 								</View>
 							</TouchableOpacity>
 							<TouchableOpacity style={styles.routeLink} onPress={() => this.props.navigation.navigate('Profile')}>
 								<Icon name='account' size={responsiveHeight(3.5)} style={styles.icon} />
 								<View style={styles.routeNameContainer}>
-									<Text style={styles.routeName} maxFontSizeMultiplier={2}>My profile</Text>
+									<Text style={[styles.routeName, {fontSize: this.state.isTablet ? responsiveFontSize(2) : responsiveFontSize(2.7)}]} maxFontSizeMultiplier={2}>My profile</Text>
 								</View>
 							</TouchableOpacity>
 						</ScrollView>
 						<View style={styles.horizontalRule}></View>
 						<View style={styles.bottomContainer}>
 							<View style={styles.bottomLeftContainer}>
-								<Text style={styles.userNameHeader} maxFontSizeMultiplier={1.5}>Logged in as:</Text>
+								<Text style={[styles.userNameHeader, {fontSize: this.state.isTablet ? responsiveFontSize(1.7) : responsiveFontSize(2.5)}]} maxFontSizeMultiplier={1.5}>Logged in as:</Text>
 								<TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')}>
-								<Text style={styles.userName} maxFontSizeMultiplier={1.5}>{this.props.loggedInChef.username}</Text>
+								<Text style={[styles.userName, {fontSize: this.state.isTablet ? responsiveFontSize(1.9) : responsiveFontSize(2.9)}]} maxFontSizeMultiplier={1.5}>{this.props.loggedInChef.username}</Text>
 								</TouchableOpacity>
 							</View>
 							<TouchableOpacity style={styles.bottomRightContainer} onPress={() => this.props.navigation.navigate('Profile')}>
@@ -70,7 +82,7 @@ export default (connect(mapStateToProps, mapDispatchToProps)(
 							<TouchableOpacity style={[styles.routeLink, { height: responsiveHeight(8) }]} onPress={this.logout}>
 								<Icon name='logout' size={responsiveHeight(3.5)} style={styles.icon} />
 								<View style={styles.routeNameContainer}>
-									<Text style={styles.routeName} maxFontSizeMultiplier={2}>Logout</Text>
+									<Text style={[styles.routeName, {fontSize: this.state.isTablet ? responsiveFontSize(2) : responsiveFontSize(2.7)}]} maxFontSizeMultiplier={2}>Logout</Text>
 								</View>
 							</TouchableOpacity>
 						</View>

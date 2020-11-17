@@ -920,7 +920,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									<View style={styles.detailsImageWrapper}>
 										<FlatList
 											data={this.props.recipe_details.recipe_images}
-											renderItem={item => <Image style={{ width: responsiveWidth(100) - 3, height: responsiveWidth(75) - 2, borderRadius: 5, top: 1, marginRight: 1 }} source={{ uri: item.item.image_url }} resizeMode={"cover"}></Image>}
+											renderItem={item => <Image style={{ width: responsiveWidth(100) - 3, height: responsiveWidth(75) - 2, borderRadius:responsiveWidth(1.5), top: 1, marginRight: 1 }} source={{ uri: item.item.image_url }} resizeMode={"cover"}></Image>}
 											keyExtractor={(item) => item.hex}
 											horizontal={true}
 											style={styles.primaryImageFlatList}

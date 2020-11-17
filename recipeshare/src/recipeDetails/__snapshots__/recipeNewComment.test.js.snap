@@ -30,7 +30,7 @@ exports[`RecipeNewComment renders with some text and a confirm button 1`] = `
       }
       style={
         Object {
-          "borderRadius": 5,
+          "borderRadius": 11.25,
           "height": 60,
           "marginRight": "4%",
           "width": "96%",

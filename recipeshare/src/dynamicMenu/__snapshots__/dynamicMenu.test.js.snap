@@ -39,7 +39,7 @@ exports[`DynamicMenu renders with an outer close container and as many buttons a
           Object {
             "backgroundColor": "white",
             "borderColor": "#104e01",
-            "borderRadius": 5,
+            "borderRadius": 11.25,
             "borderWidth": 1,
             "height": 653.6600000000001,
             "left": 187.5,
@@ -82,7 +82,7 @@ exports[`DynamicMenu renders with an outer close container and as many buttons a
         >
           <Icon
             name="share-off"
-            size={25}
+            size={53.36}
             style={
               Object {
                 "bottom": 3.335,
@@ -126,7 +126,7 @@ exports[`DynamicMenu renders with an outer close container and as many buttons a
         >
           <Icon
             name="heart-outline"
-            size={25}
+            size={53.36}
             style={
               Object {
                 "bottom": 3.335,
@@ -170,7 +170,7 @@ exports[`DynamicMenu renders with an outer close container and as many buttons a
         >
           <Icon
             name="image-plus"
-            size={25}
+            size={53.36}
             style={
               Object {
                 "bottom": 3.335,
@@ -214,7 +214,7 @@ exports[`DynamicMenu renders with an outer close container and as many buttons a
         >
           <Icon
             name="comment-plus"
-            size={25}
+            size={53.36}
             style={
               Object {
                 "bottom": 3.335,
@@ -258,7 +258,7 @@ exports[`DynamicMenu renders with an outer close container and as many buttons a
         >
           <Icon
             name="playlist-edit"
-            size={25}
+            size={53.36}
             style={
               Object {
                 "bottom": 3.335,
@@ -302,7 +302,7 @@ exports[`DynamicMenu renders with an outer close container and as many buttons a
         >
           <Icon
             name="trash-can-outline"
-            size={25}
+            size={53.36}
             style={
               Object {
                 "bottom": 3.335,
@@ -346,7 +346,7 @@ exports[`DynamicMenu renders with an outer close container and as many buttons a
         >
           <Icon
             name="food"
-            size={25}
+            size={53.36}
             style={
               Object {
                 "bottom": 3.335,

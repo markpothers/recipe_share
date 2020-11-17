@@ -132,7 +132,7 @@ export default class MultiPicSourceChooser extends React.Component {
 		} else {
 			return (
 				<View style={{ height: responsiveHeight(34), width: responsiveWidth(80) - 2, justifyContent: 'center', alignItems: 'center' }}>
-					<Icon style={styles.standardIcon} size={30} name='image' />
+					<Icon style={styles.standardIcon} size={responsiveHeight(4)} name='image' />
 					<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>No image{"\n"}selected</Text>
 				</View>
 			)
@@ -186,7 +186,7 @@ export default class MultiPicSourceChooser extends React.Component {
 											]
 										}
 									]}
-									size={30}
+									size={responsiveHeight(4)}
 									name='shuffle'
 								/>
 								<Text maxFontSizeMultiplier={1.5} style={[styles.picSourceChooserButtonText, { maxWidth: responsiveWidth(25) }]}>Sort left</Text>
@@ -203,36 +203,36 @@ export default class MultiPicSourceChooser extends React.Component {
 											]
 										}
 									]}
-									size={30}
+									size={responsiveHeight(4)}
 									name='shuffle'
 								/>
 							</TouchableOpacity>
 						</View>
 						<View style={styles.picSourceChooserArrowButtonContainer}>
 							<TouchableOpacity style={styles.picSourceChooserArrowButton} activeOpacity={0.7} title="Add slot" onPress={this.addPhoto}>
-								<Icon style={styles.standardIcon} size={30} name='image-plus' />
+								<Icon style={styles.standardIcon} size={responsiveHeight(4)} name='image-plus' />
 								<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Add slot</Text>
 							</TouchableOpacity>
 							<TouchableOpacity style={styles.picSourceChooserArrowButton} activeOpacity={0.7} title="Delete" onPress={this.deleteImage}>
-								<Icon style={styles.standardIcon} size={30} name='image-off' />
+								<Icon style={styles.standardIcon} size={responsiveHeight(4)} name='image-off' />
 								<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Delete</Text>
 							</TouchableOpacity>
 						</View>
 						<TouchableOpacity style={styles.picSourceChooserButton} activeOpacity={0.7} title="Take Photo" onPress={this.openCamera}>
-							<Icon style={styles.standardIcon} size={30} name='camera' />
+							<Icon style={styles.standardIcon} size={responsiveHeight(4)} name='camera' />
 							<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Take photo</Text>
 						</TouchableOpacity>
 						<TouchableOpacity style={styles.picSourceChooserButton} activeOpacity={0.7} title="Choose Photo" onPress={this.pickImage}>
-							<Icon style={styles.standardIcon} size={30} name='camera-image' />
+							<Icon style={styles.standardIcon} size={responsiveHeight(4)} name='camera-image' />
 							<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Choose photo</Text>
 						</TouchableOpacity>
 						<View style={[styles.picSourceChooserArrowButtonContainer, { marginBottom: responsiveHeight(2) }]}>
 							<TouchableOpacity style={[styles.picSourceChooserCancelButton, { backgroundColor: '#720000' }]} activeOpacity={0.7} title="Cancel" onPress={this.cancel}>
-								<Icon style={styles.cancelIcon} size={30} name='cancel' />
+								<Icon style={styles.cancelIcon} size={responsiveHeight(4)} name='cancel' />
 								<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserCancelButtonText}>Cancel</Text>
 							</TouchableOpacity>
 							<TouchableOpacity style={styles.picSourceChooserCancelButton} activeOpacity={0.7} title="SaveAndClose" onPress={this.props.sourceChosen}>
-								<Icon style={styles.cancelIcon} size={30} name='check-box-outline' />
+								<Icon style={styles.cancelIcon} size={responsiveHeight(4)} name='check-box-outline' />
 								<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserCancelButtonText}>Save &{"\n"}Close</Text>
 							</TouchableOpacity>
 						</View>

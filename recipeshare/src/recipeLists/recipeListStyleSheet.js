@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
 		width: '100%',
 		borderStyle: 'solid',
 		borderColor: '#104e01',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		borderWidth: 1,
 		backgroundColor: 'white'
 	},
@@ -52,7 +52,7 @@ export const styles = StyleSheet.create({
 		height: responsiveHeight(9),
 		width: responsiveHeight(9),
 		marginRight: '4%',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 	},
 	recipeCardTopLeftUpperContainer: {
 		width: '96%',
@@ -84,7 +84,7 @@ export const styles = StyleSheet.create({
 		position: 'absolute',
 		height: '100%',
 		width: responsiveWidth(100)-4,
-		borderRadius: 5
+		borderRadius:responsiveWidth(1.5)
 	},
 	recipeCardBottomContainer: {
 		flexDirection: 'row',
@@ -136,16 +136,16 @@ export const styles = StyleSheet.create({
 		height: responsiveHeight(8),
 		justifyContent: 'center',
 		alignItems: 'center',
-		top: '86%',
-		left: '80%',
-		borderRadius: 5,
+		bottom: responsiveHeight(4),
+		right: responsiveHeight(4),
+		borderRadius:responsiveWidth(1.5),
 		zIndex: 1
 	},
 	filterIcon: {
 		color: '#104e01',
 	},
 	cantNavigateMessageContainer: {
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		position: 'absolute',
 		alignSelf: 'center',
 		top: '35%',

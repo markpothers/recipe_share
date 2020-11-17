@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
 		marginBottom: '7.5%',
 		marginLeft: '10%',
 		marginRight: '10%',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		alignItems: 'center',
 	},
 	titleContainer: {
@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
 		flexDirection: 'row',
 		// justifyContent: 'center',
 		justifyContent: 'flex-end',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		width: '90%',
 		// borderWidth: 1
 	},
@@ -48,7 +48,7 @@ export const styles = StyleSheet.create({
 		// height: '86%',
 		width: '90%',
 		// justifyContent: 'center',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		borderStyle: 'solid',
 		borderWidth: 1,
 		borderColor: '#104e01',
@@ -65,7 +65,7 @@ export const styles = StyleSheet.create({
 		width: '40%',
 		height: 44,
 		flexDirection: 'row',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		backgroundColor: 'transparent',
 	},
 	closeButton: {
@@ -76,7 +76,7 @@ export const styles = StyleSheet.create({
 		minWidth: '40%',
 		minHeight: responsiveHeight(6),
 		flexDirection: 'row',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		backgroundColor: '#104e01',
 	},
 	closeButtonText: {

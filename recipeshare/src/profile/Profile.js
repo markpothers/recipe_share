@@ -55,7 +55,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			imageFileUri: '',
 			chefUpdatedMessageShowing: false,
 			headerButtons: null,
-			dynamicMenuShowing: false
+			dynamicMenuShowing: false,
+			areYouSureDeleteEverythingMessageShowing: false,
+			areYouSureLeaveRecipesMessageShowing: false
 		}
 
 		generateHeaderButtonList = async () => {
@@ -190,9 +192,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			return (
 				<DeleteChefOption
 					// deleteAndLeaveRecipes={this.deleteAndLeaveRecipes}
-					deleteChefAccount={this.deleteChefAccount}
-					closeDeleteChefOptions={this.closeDeleteChefOption}
-					closeDeleteChefOption={this.closeDeleteChefOption}
+					deleteEverything={() => this.setState({
+						deleteChefOptionVisible: false,
+						areYouSureDeleteEverythingMessageShowing: true
+					})}
+					leaveRecipes={() => this.setState({
+						deleteChefOptionVisible: false,
+						areYouSureLeaveRecipesMessageShowing: true
+					})}
+					closeDeleteChefOption={() => this.setState({deleteChefOptionVisible: false})}
 				/>
 			)
 		}
@@ -293,6 +301,26 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			)
 		}
 
+		renderAreYouSureDeleteEverythingAlertPopUp = () => {
+			return (
+				<AlertPopUp
+					close={() => this.setState({ areYouSureDeleteEverythingMessageShowing: false })}
+					title={"Last Chance! Are you sure you close your account?"}
+					onYes={() => this.deleteChefAccount(true)}
+				/>
+			)
+		}
+
+		renderAreYouSureLeaveRecipesAlertPopUp = () => {
+			return (
+				<AlertPopUp
+					close={() => this.setState({ areYouSureLeaveRecipesMessageShowing: false })}
+					title={"Last Chance! Are you sure you close your account?"}
+					onYes={() => this.deleteChefAccount(false)}
+				/>
+			)
+		}
+
 		// manualBackupDatabase = async () => {
 		// 	const confirmation = await getDatabaseBackup(this.props.loggedInChef.auth_token, "manual")
 		// 	confirmation ? console.log("database manually backed up") : console.log("database backup failed or not permitted")
@@ -360,6 +388,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						{/* {this.props.loggedInChef.is_admin ? this.renderDatabaseButtons() : null} */}
 						{this.state.choosingPicture && this.renderPictureChooser()}
 						{this.state.deleteChefOptionVisible && this.renderDeleteChefOption()}
+						{this.state.areYouSureDeleteEverythingMessageShowing && this.renderAreYouSureDeleteEverythingAlertPopUp()}
+						{this.state.areYouSureLeaveRecipesMessageShowing && this.renderAreYouSureLeaveRecipesAlertPopUp()}
 						<ChefDetailsCard
 							{...chef_details}
 							email={chef_details.chef.email}

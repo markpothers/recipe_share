@@ -7,6 +7,8 @@ import { cuisines } from '../dataComponents/cuisines'
 import { serves } from '../dataComponents/serves'
 import { clearedFilters } from '../dataComponents/clearedFilters'
 import DualOSPicker from '../dualOSPicker/DualOSPicker'
+import SwitchSized from '../switchSized/switchSized'
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 
 const mapStateToProps = (state) => ({
 	filter_settings: state.filter_settings,
@@ -48,12 +50,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						style={styles.filterItemContainer}
 						key={category}>
 						<View style={styles.switchContainer}>
-							<Switch
-								style={(Platform.OS == 'ios' ? { transform: [{ scaleX: .8 }, { scaleY: .8 }] } : null)}
+							<SwitchSized
 								value={filtersList[category]}
 								onChange={(e) => this.handleCategoryChange(category, e.nativeEvent.value)}
-								trackColor={{ true: '#4b714299' }}
-								thumbColor={filtersList[category] ? "#4b7142" : "#ececec"}
 							/>
 						</View>
 						<View style={styles.categoryContainer}>
@@ -183,11 +182,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								</View>
 								<View style={styles.clearFiltersButtonContainer}>
 									<TouchableOpacity style={styles.clearFiltersButton} activeOpacity={0.7} title="clearFilters" onPress={this.handleClearButton}>
-										<Icon style={styles.clearFiltersIcon} size={25} name='cancel' />
+										<Icon style={styles.clearFiltersIcon} size={responsiveHeight(4)} name='cancel' />
 										<Text maxFontSizeMultiplier={2} style={styles.clearFiltersButtonText}>Clear{"\n"}filters</Text>
 									</TouchableOpacity>
 									<TouchableOpacity style={styles.applyFiltersButton} activeOpacity={0.7} title="applyFilters" onPress={this.handleApplyButton}>
-										<Icon style={styles.applyFiltersIcon} size={25} name='check' />
+										<Icon style={styles.applyFiltersIcon} size={responsiveHeight(4)} name='check' />
 										<Text maxFontSizeMultiplier={2} style={styles.applyFiltersButtonText}>{this.props.confirmButtonText}</Text>
 									</TouchableOpacity>
 								</View>

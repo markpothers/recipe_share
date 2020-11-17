@@ -66,9 +66,11 @@ const MyRecipeBookTabs = (props) => {
 					inactiveTintColor: '#fff59b',
 					tabStyle: {
 						width: responsiveWidth(35),
-						height: responsiveHeight(9),
+						height: responsiveHeight(8),
 						paddingTop: 0,
 						paddingBottom: 0,
+						// borderWidth: 1,
+						// borderColor: 'orange'
 					},
 					indicatorStyle: {
 						backgroundColor: '#fff59b',
@@ -199,8 +201,10 @@ const MyRecipeBookStack = () => {
 				},
 				headerTitleContainerStyle: {
 					left: 0,
-					height: responsiveHeight(9),
+					height: responsiveHeight(8),
 					width: responsiveWidth(100),
+					// borderWidth: 1,
+					// borderColor: 'red'
 				},
 				headerStatusBarHeight: 0,
 			}}
@@ -269,7 +273,7 @@ const MyRecipeBookStack = () => {
 // MyRecipeBookStack.navigationOptions = {
 //   tabBarLabel: 'My recipe book',
 //   tabBarIcon: ({ focused }) => (
-//     <Icon size={25} color="#8d8d8d"
+//     <Icon size={responsiveHeight(4)} color="#8d8d8d"
 //       focused={focused}
 //       name={
 //         Platform.OS === 'ios'

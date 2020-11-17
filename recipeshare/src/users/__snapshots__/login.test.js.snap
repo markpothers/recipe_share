@@ -74,8 +74,8 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
             style={
               Object {
                 "alignItems": "center",
-                "height": 275,
                 "justifyContent": "center",
+                "top": 133.4,
               }
             }
           >
@@ -84,7 +84,7 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
               source={1}
               style={
                 Object {
-                  "height": "100%",
+                  "height": 266.8,
                   "width": "75%",
                 }
               }
@@ -92,14 +92,19 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
           </View>
           <View
             style={
-              Object {
-                "alignItems": "center",
-                "borderWidth": 0,
-                "justifyContent": "center",
-                "marginLeft": 75,
-                "marginRight": 75,
-                "width": 600,
-              }
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "borderWidth": 0,
+                  "justifyContent": "center",
+                  "marginLeft": 75,
+                  "marginRight": 75,
+                  "width": 600,
+                },
+                Object {
+                  "marginTop": 200.1,
+                },
+              ]
             }
           >
             <View
@@ -107,6 +112,7 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                 Object {
                   "borderColor": "yellow",
                   "borderWidth": 0,
+                  "overflow": "hidden",
                   "width": "100%",
                 }
               }
@@ -115,7 +121,7 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                 style={
                   Object {
                     "alignItems": "center",
-                    "borderRadius": 5,
+                    "borderRadius": 11.25,
                     "flexDirection": "row",
                     "flexWrap": "wrap",
                     "justifyContent": "space-between",
@@ -132,11 +138,12 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                     Object {
                       "backgroundColor": "white",
                       "borderColor": "#104e01",
-                      "borderRadius": 5,
+                      "borderRadius": 11.25,
                       "borderWidth": 1,
                       "color": "#505050",
                       "fontSize": 33.35,
                       "fontWeight": "bold",
+                      "overflow": "hidden",
                       "paddingLeft": 15,
                       "paddingRight": 15,
                       "textAlign": "center",
@@ -156,6 +163,7 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                 Object {
                   "borderColor": "yellow",
                   "borderWidth": 0,
+                  "overflow": "hidden",
                   "width": "100%",
                 }
               }
@@ -164,7 +172,7 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                 style={
                   Object {
                     "alignItems": "center",
-                    "borderRadius": 5,
+                    "borderRadius": 11.25,
                     "flexDirection": "row",
                     "flexWrap": "wrap",
                     "justifyContent": "space-between",
@@ -181,7 +189,7 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                       "alignItems": "center",
                       "backgroundColor": "white",
                       "borderColor": "#104e01",
-                      "borderRadius": 5,
+                      "borderRadius": 11.25,
                       "borderWidth": 1,
                       "flexDirection": "row",
                       "height": "100%",
@@ -200,7 +208,6 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                     rejectResponderTermination={true}
                     style={
                       Object {
-                        "borderRadius": 5,
                         "fontSize": 30.595932917809698,
                         "paddingLeft": 15,
                         "paddingVertical": 6.67,
@@ -220,6 +227,7 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                 Object {
                   "borderColor": "yellow",
                   "borderWidth": 0,
+                  "overflow": "hidden",
                   "width": "100%",
                 }
               }
@@ -228,7 +236,7 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                 style={
                   Object {
                     "alignItems": "center",
-                    "borderRadius": 5,
+                    "borderRadius": 11.25,
                     "flexDirection": "row",
                     "flexWrap": "wrap",
                     "justifyContent": "space-between",
@@ -245,7 +253,7 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                       "alignItems": "center",
                       "backgroundColor": "white",
                       "borderColor": "#104e01",
-                      "borderRadius": 5,
+                      "borderRadius": 11.25,
                       "borderWidth": 1,
                       "flexDirection": "row",
                       "height": "100%",
@@ -263,7 +271,6 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                     secureTextEntry={true}
                     style={
                       Object {
-                        "borderRadius": 5,
                         "fontSize": 30.595932917809698,
                         "paddingLeft": 15,
                         "paddingVertical": 6.67,
@@ -283,6 +290,7 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                 Object {
                   "borderColor": "yellow",
                   "borderWidth": 0,
+                  "overflow": "hidden",
                   "width": "100%",
                 }
               }
@@ -291,7 +299,7 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                 style={
                   Object {
                     "alignItems": "center",
-                    "borderRadius": 5,
+                    "borderRadius": 11.25,
                     "flexDirection": "row",
                     "flexWrap": "wrap",
                     "justifyContent": "space-between",
@@ -317,7 +325,7 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
-                      "borderRadius": 5,
+                      "borderRadius": 11.25,
                       "borderWidth": 1,
                       "flexDirection": "row",
                       "height": "100%",
@@ -353,22 +361,10 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                     onStartShouldSetResponder={[Function]}
                     onTintColor="#4b714299"
                     style={
-                      Array [
-                        Object {
-                          "height": 31,
-                          "width": 51,
-                        },
-                        Object {
-                          "transform": Array [
-                            Object {
-                              "scaleX": 0.7,
-                            },
-                            Object {
-                              "scaleY": 0.7,
-                            },
-                          ],
-                        },
-                      ]
+                      Object {
+                        "height": 31,
+                        "width": 51,
+                      }
                     }
                     thumbTintColor="#ececec"
                     value={false}
@@ -389,7 +385,7 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
-                      "borderRadius": 5,
+                      "borderRadius": 11.25,
                       "borderWidth": 1,
                       "flexDirection": "row",
                       "height": "100%",
@@ -425,22 +421,10 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                     onStartShouldSetResponder={[Function]}
                     onTintColor="#4b714299"
                     style={
-                      Array [
-                        Object {
-                          "height": 31,
-                          "width": 51,
-                        },
-                        Object {
-                          "transform": Array [
-                            Object {
-                              "scaleX": 0.7,
-                            },
-                            Object {
-                              "scaleY": 0.7,
-                            },
-                          ],
-                        },
-                      ]
+                      Object {
+                        "height": 31,
+                        "width": 51,
+                      }
                     }
                     thumbTintColor="#ececec"
                     value={false}
@@ -453,6 +437,7 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                 Object {
                   "borderColor": "yellow",
                   "borderWidth": 0,
+                  "overflow": "hidden",
                   "width": "100%",
                 }
               }
@@ -461,7 +446,7 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                 style={
                   Object {
                     "alignItems": "center",
-                    "borderRadius": 5,
+                    "borderRadius": 11.25,
                     "flexDirection": "row",
                     "flexWrap": "wrap",
                     "justifyContent": "space-between",
@@ -487,7 +472,7 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
-                      "borderRadius": 5,
+                      "borderRadius": 11.25,
                       "borderWidth": 1,
                       "flexDirection": "row",
                       "height": "100%",
@@ -501,7 +486,7 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                 >
                   <Icon
                     name="account-plus"
-                    size={25}
+                    size={53.36}
                     style={
                       Object {
                         "color": "#104e01",
@@ -538,7 +523,7 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
-                      "borderRadius": 5,
+                      "borderRadius": 11.25,
                       "borderWidth": 1,
                       "flexDirection": "row",
                       "height": "100%",
@@ -552,7 +537,7 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                 >
                   <Icon
                     name="lock-open"
-                    size={25}
+                    size={53.36}
                     style={
                       Object {
                         "color": "#104e01",
@@ -584,6 +569,7 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                 Object {
                   "borderColor": "yellow",
                   "borderWidth": 0,
+                  "overflow": "hidden",
                   "width": "100%",
                 }
               }
@@ -592,7 +578,7 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                 style={
                   Object {
                     "alignItems": "center",
-                    "borderRadius": 5,
+                    "borderRadius": 11.25,
                     "flexDirection": "row",
                     "flexWrap": "wrap",
                     "justifyContent": "space-between",
@@ -618,7 +604,7 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
-                      "borderRadius": 5,
+                      "borderRadius": 11.25,
                       "borderWidth": 1,
                       "flexDirection": "row",
                       "height": "100%",
@@ -633,7 +619,7 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                 >
                   <Icon
                     name="login"
-                    size={25}
+                    size={53.36}
                     style={
                       Object {
                         "color": "#104e01",

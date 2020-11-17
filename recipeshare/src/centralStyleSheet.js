@@ -18,8 +18,8 @@ export const centralStyles = StyleSheet.create({
 		backgroundColor: '#fff59b',
 		borderColor: '#104e01',
 		borderWidth: 1,
-		width: 47,
-		height: 47,
+		width: 50,
+		height: 50,
 		zIndex: 1
 	},
 	spinachFullBackground: {
@@ -55,7 +55,7 @@ export const centralStyles = StyleSheet.create({
 	},
 	formTitle: {
 		width: '100%',
-		borderRadius: 5,
+		borderRadius: responsiveWidth(1.5),
 		textAlign: 'center',
 		fontWeight: 'bold',
 		fontSize: responsiveHeight(2.5),
@@ -64,12 +64,14 @@ export const centralStyles = StyleSheet.create({
 		borderWidth: 1,
 		borderColor: '#104e01',
 		paddingLeft: responsiveWidth(2),
-		paddingRight: responsiveWidth(2)
+		paddingRight: responsiveWidth(2),
+		overflow: 'hidden',
 	},
 	formSection: {
 		width: '100%',
 		borderWidth: inDevelopment ? 1 : 0,
-		borderColor: 'yellow'
+		borderColor: 'yellow',
+		overflow: 'hidden',
 	},
 	formSectionSeparatorContainer: {
 		borderWidth: 1,
@@ -88,7 +90,7 @@ export const centralStyles = StyleSheet.create({
 		width: '100%',
 		justifyContent: 'space-between',
 		alignItems: 'center',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		overflow: 'hidden',
 		flexWrap: 'wrap',
 		minHeight: responsiveHeight(6),
@@ -103,7 +105,7 @@ export const centralStyles = StyleSheet.create({
 		borderWidth: 1,
 		borderColor: '#104e01',
 		overflow: 'hidden',
-		borderRadius: 5
+		borderRadius: responsiveWidth(1.5),
 	},
 	formInput: {
 		// minHeight: responsiveHeight(6),
@@ -111,7 +113,7 @@ export const centralStyles = StyleSheet.create({
 		// backgroundColor: 'white',
 		textAlign: 'left',
 		textAlignVertical: 'center',
-		borderRadius: 5,
+		// borderRadius: responsiveHeight(100),
 		// borderWidth: 1,
 		// borderColor: '#104e01',
 		paddingLeft: responsiveWidth(2),
@@ -126,13 +128,13 @@ export const centralStyles = StyleSheet.create({
 		backgroundColor: 'white',
 		borderWidth: 1,
 		borderColor: '#104e01',
-		borderRadius: 5
+		borderRadius:responsiveWidth(1.5)
 	},
 	formTextBox: {
 		width: '100%',
 		textAlign: 'left',
 		textAlignVertical: 'center',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		paddingLeft: responsiveWidth(2),
 		fontSize: responsiveFontSize(2)
 	},
@@ -143,7 +145,7 @@ export const centralStyles = StyleSheet.create({
 		backgroundColor: 'white',
 		justifyContent: 'center',
 		// alignItems: 'center',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		borderWidth: 1,
 		borderColor: '#104e01'
 	},
@@ -164,7 +166,7 @@ export const centralStyles = StyleSheet.create({
 		minHeight: responsiveHeight(6),
 		height: '100%',
 		flexDirection: 'row',
-		borderRadius: 5,
+		borderRadius: responsiveWidth(1.5),
 		backgroundColor: '#fff59b',
 		borderWidth: 1,
 		borderColor: '#104e01',
@@ -179,7 +181,7 @@ export const centralStyles = StyleSheet.create({
 		minHeight: responsiveHeight(6),
 		height: '100%',
 		flexDirection: 'row',
-		borderRadius: 5,
+		borderRadius: responsiveWidth(1.5),
 		backgroundColor: '#104e01',
 		borderWidth: 1,
 		borderColor: '#fff59b',
@@ -207,15 +209,16 @@ export const centralStyles = StyleSheet.create({
 	},
 	pickerContainer: {
 		backgroundColor: 'white',
+		height: responsiveHeight(6),
 		width: '100%',
 		justifyContent: 'center',
-		borderRadius: 5,
+		borderRadius: responsiveWidth(1.5),
 		borderWidth: 1,
 		borderColor: '#104e01',
-		overflow: 'hidden'
+		overflow: 'hidden',
+		// backgroundColor: 'yellow',
 	},
 	dynamicMenuButtonContainer: {
-		height: responsiveHeight(9),
 		width: responsiveWidth(15),
 		justifyContent: 'center',
 		alignItems: 'center',
@@ -226,7 +229,7 @@ export const centralStyles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		backgroundColor: '#104e01',
-		borderRadius: 5
+		borderRadius:responsiveWidth(1.5),
 	},
 	dynamicMenuIcon: {
 		color: '#fff59b'
@@ -235,9 +238,9 @@ export const centralStyles = StyleSheet.create({
 		backgroundColor: '#fff59b',
 		width: '90%',
 		height: '90%',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		overflow: 'visible',
 		justifyContent: 'center',
-		alignItems: 'center'
+		alignItems: 'center',
 	},
 });

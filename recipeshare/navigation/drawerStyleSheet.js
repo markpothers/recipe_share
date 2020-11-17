@@ -52,7 +52,7 @@ export const styles = StyleSheet.create({
 		// height: '100%',
 		width: '25%',
 		overflow: 'hidden',
-		borderRadius: 5,
+		borderRadius:responsiveWidth(1.5),
 		aspectRatio: 1,
 		marginVertical: responsiveHeight(1)
 	},
@@ -85,10 +85,13 @@ export const styles = StyleSheet.create({
 		flexDirection: 'row',
 		marginBottom: responsiveHeight(1.5),
 		alignItems: 'center',
+		// borderWidth: 1
 	},
 	routeNameContainer: {
-		width: '80%',
-		marginLeft: responsiveWidth(3)
+		minWidth: '50%',
+		maxWidth: '70%',
+		marginLeft: responsiveWidth(2),
+		// borderWidth: 1
 	},
 	routeName: {
 		fontSize: responsiveFontSize(2.7),

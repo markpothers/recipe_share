@@ -22,7 +22,7 @@ export const ChefRecipeBookTabs = (props) => {
 				inactiveTintColor: '#fff59b',
 				tabStyle: {
 					width: responsiveWidth(35),
-					height: responsiveHeight(9),
+					height: responsiveHeight(8),
 					paddingTop: 0,
 					paddingBottom: 0,
 				},

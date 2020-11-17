@@ -7,7 +7,7 @@
 			"ios",
 			"android"
 		],
-		"version": "0.0.002",
+		"version": "0.0.004",
 		"orientation": "portrait",
 		"icon": "./assets/images/icon.png",
 		"splash": {
@@ -23,11 +23,12 @@
 		],
 		"ios": {
 			"supportsTablet": true,
-			"bundleIdentifier": "com.recipe-share.recipe-share"
+			"bundleIdentifier": "com.recipe-share.recipe-share",
+			"buildNumber": "2.0.0"
 		},
 		"android": {
 			"package": "com.recipe_share.recipe_share",
-			"versionCode": 3
+			"versionCode": 4
 		}
 	}
 }

@@ -106,12 +106,12 @@ exports[`SpinachAppContainer renders with scrollView and activityIndicator 1`] =
           "borderColor": "#104e01",
           "borderRadius": 100,
           "borderWidth": 1,
-          "height": 47,
+          "height": 50,
           "justifyContent": "center",
           "left": "45%",
           "position": "absolute",
           "top": "10%",
-          "width": 47,
+          "width": 50,
           "zIndex": 1,
         }
       }
@@ -206,12 +206,12 @@ exports[`SpinachAppContainer renders without scrollView and with ActivityIndicat
         "borderColor": "#104e01",
         "borderRadius": 100,
         "borderWidth": 1,
-        "height": 47,
+        "height": 50,
         "justifyContent": "center",
         "left": "45%",
         "position": "absolute",
         "top": "10%",
-        "width": 47,
+        "width": 50,
         "zIndex": 1,
       }
     }

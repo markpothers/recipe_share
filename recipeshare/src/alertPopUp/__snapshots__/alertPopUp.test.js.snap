@@ -27,7 +27,7 @@ exports[`AlertPopUp renders with 2 buttons and customizable text 1`] = `
           "alignItems": "center",
           "backgroundColor": "#fff59b",
           "borderColor": "#104e01",
-          "borderRadius": 5,
+          "borderRadius": 11.25,
           "borderStyle": "solid",
           "borderWidth": 1,
           "marginLeft": "7.5%",
@@ -64,6 +64,7 @@ exports[`AlertPopUp renders with 2 buttons and customizable text 1`] = `
             Object {
               "borderColor": "yellow",
               "borderWidth": 0,
+              "overflow": "hidden",
               "width": "100%",
             },
             Object {
@@ -79,7 +80,7 @@ exports[`AlertPopUp renders with 2 buttons and customizable text 1`] = `
             Array [
               Object {
                 "alignItems": "center",
-                "borderRadius": 5,
+                "borderRadius": 11.25,
                 "flexDirection": "row",
                 "flexWrap": "wrap",
                 "justifyContent": "space-between",
@@ -109,7 +110,7 @@ exports[`AlertPopUp renders with 2 buttons and customizable text 1`] = `
                 "alignItems": "center",
                 "backgroundColor": "#104e01",
                 "borderColor": "#fff59b",
-                "borderRadius": 5,
+                "borderRadius": 11.25,
                 "borderWidth": 1,
                 "flexDirection": "row",
                 "height": "100%",
@@ -123,7 +124,7 @@ exports[`AlertPopUp renders with 2 buttons and customizable text 1`] = `
           >
             <Icon
               name="cancel"
-              size={25}
+              size={53.36}
               style={
                 Object {
                   "color": "#fff59b",
@@ -159,7 +160,7 @@ exports[`AlertPopUp renders with 2 buttons and customizable text 1`] = `
                 "alignItems": "center",
                 "backgroundColor": "#104e01",
                 "borderColor": "#fff59b",
-                "borderRadius": 5,
+                "borderRadius": 11.25,
                 "borderWidth": 1,
                 "flexDirection": "row",
                 "height": "100%",
@@ -173,7 +174,7 @@ exports[`AlertPopUp renders with 2 buttons and customizable text 1`] = `
           >
             <Icon
               name="check"
-              size={25}
+              size={53.36}
               style={
                 Object {
                   "color": "#fff59b",

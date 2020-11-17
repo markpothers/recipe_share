@@ -28,7 +28,7 @@ export function TextPopUp(props) {
 					</View>
 					<View style={styles.formRow}>
 						<TouchableOpacity style={styles.closeButton} activeOpacity={0.7} title="close" onPress={props.close}>
-							<Icon style={styles.closeIcon} size={25} name='check' />
+							<Icon style={styles.closeIcon} size={responsiveHeight(4)} name='check' />
 							<Text maxFontSizeMultiplier={2} style={styles.closeButtonText}>Close</Text>
 						</TouchableOpacity>
 					</View>
