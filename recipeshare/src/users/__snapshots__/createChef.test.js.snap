@@ -492,6 +492,38 @@ exports[`CreateChef renders; has 5 TextInputs and 9 TouchableOpacities 1`] = `
                     underlineColorAndroid="transparent"
                     value=""
                   />
+                  <View
+                    accessible={true}
+                    focusable={true}
+                    onClick={[Function]}
+                    onResponderGrant={[Function]}
+                    onResponderMove={[Function]}
+                    onResponderRelease={[Function]}
+                    onResponderTerminate={[Function]}
+                    onResponderTerminationRequest={[Function]}
+                    onStartShouldSetResponder={[Function]}
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "height": "100%",
+                        "justifyContent": "center",
+                        "opacity": 1,
+                        "position": "absolute",
+                        "right": 0,
+                        "width": 112.5,
+                      }
+                    }
+                  >
+                    <Icon
+                      name="eye"
+                      size={53.36}
+                      style={
+                        Object {
+                          "color": "#505050",
+                        }
+                      }
+                    />
+                  </View>
                 </View>
               </View>
             </View>

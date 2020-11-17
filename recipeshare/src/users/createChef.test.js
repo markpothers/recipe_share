@@ -43,7 +43,7 @@ describe('CreateChef', () => {
 		const inputs = root.findAllByType(TextInput)
 		expect(inputs.length).toEqual(5)
 		const buttons = root.findAllByType(TouchableOpacity)
-		expect(buttons.length).toEqual(9)
+		expect(buttons.length).toEqual(10)
 	})
 
 });

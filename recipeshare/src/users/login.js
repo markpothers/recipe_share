@@ -56,6 +56,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			awaitingServer: false,
 			rememberEmail: false,
 			renderOfflineMessage: false,
+			passwordVisible: false,
 		}
 
 		handleTextInput = (e, parameter) => {
@@ -147,7 +148,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		render() {
-			// console.log(responsiveWidth(1.5))
+			// console.log(this.state.passwordVisible)
 			return (
 				<SpinachAppContainer scrollingEnabled={true} awaitingServer={this.state.awaitingServer}>
 					{this.state.renderOfflineMessage && (
@@ -174,14 +175,43 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
 									<View style={centralStyles.formInputWhiteBackground}>
-										<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.e_mail} placeholder="e-mail" keyboardType="email-address" autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "e_mail")} />
+										<TextInput
+											maxFontSizeMultiplier={2}
+											style={centralStyles.formInput}
+											value={this.props.e_mail}
+											placeholder="e-mail"
+											keyboardType="email-address"
+											autoCapitalize="none"
+											autoCompleteType="email"
+											onChange={(e) => this.handleTextInput(e, "e_mail")}
+										/>
 									</View>
 								</View>
 							</View>
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
 									<View style={centralStyles.formInputWhiteBackground}>
-										<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.password} placeholder="password" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")} />
+										<TextInput
+											maxFontSizeMultiplier={2}
+											style={centralStyles.formInput}
+											value={this.props.password}
+											placeholder="password"
+											autoCapitalize="none"
+											autoCompleteType="password"
+											secureTextEntry={!this.state.passwordVisible}
+											onChange={(e) => this.handleTextInput(e, "password")}
+										/>
+										<TouchableOpacity
+											style={centralStyles.hiddenToggle}
+											onPress={() => this.setState({ passwordVisible: !this.state.passwordVisible })}
+										>
+											<Icon
+												style={centralStyles.hiddenToggleIcon}
+												size={responsiveHeight(4)}
+												name={this.state.passwordVisible ? "eye-off" : "eye"}
+											>
+											</Icon>
+										</TouchableOpacity>
 									</View>
 								</View>
 								{this.state.loginError && (

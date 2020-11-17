@@ -243,4 +243,16 @@ export const centralStyles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
+	hiddenToggle: {
+		position: 'absolute',
+		right: responsiveWidth(0),
+		// borderWidth: 1,
+		height: '100%',
+		width: responsiveWidth(15),
+		justifyContent: 'center',
+		alignItems:'center',
+	},
+	hiddenToggleIcon: {
+		color: '#505050'
+	}
 });

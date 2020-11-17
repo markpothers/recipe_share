@@ -42,7 +42,7 @@ describe('Login', () => {
 		const inputs = root.findAllByType(TextInput)
 		expect(inputs.length).toEqual(2)
 		const buttons = root.findAllByType(TouchableOpacity)
-		expect(buttons.length).toEqual(6)
+		expect(buttons.length).toEqual(7)
 	})
 
 });

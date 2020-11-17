@@ -201,6 +201,7 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                   <TextInput
                     allowFontScaling={true}
                     autoCapitalize="none"
+                    autoCompleteType="email"
                     keyboardType="email-address"
                     maxFontSizeMultiplier={2}
                     onChange={[Function]}
@@ -264,6 +265,8 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                 >
                   <TextInput
                     allowFontScaling={true}
+                    autoCapitalize="none"
+                    autoCompleteType="password"
                     maxFontSizeMultiplier={2}
                     onChange={[Function]}
                     placeholder="password"
@@ -282,6 +285,38 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                     underlineColorAndroid="transparent"
                     value=""
                   />
+                  <View
+                    accessible={true}
+                    focusable={true}
+                    onClick={[Function]}
+                    onResponderGrant={[Function]}
+                    onResponderMove={[Function]}
+                    onResponderRelease={[Function]}
+                    onResponderTerminate={[Function]}
+                    onResponderTerminationRequest={[Function]}
+                    onStartShouldSetResponder={[Function]}
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "height": "100%",
+                        "justifyContent": "center",
+                        "opacity": 1,
+                        "position": "absolute",
+                        "right": 0,
+                        "width": 112.5,
+                      }
+                    }
+                  >
+                    <Icon
+                      name="eye"
+                      size={53.36}
+                      style={
+                        Object {
+                          "color": "#505050",
+                        }
+                      }
+                    />
+                  </View>
                 </View>
               </View>
             </View>

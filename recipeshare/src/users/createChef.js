@@ -61,6 +61,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			viewingPrivacyPolicy: false,
 			awaitingServer: false,
 			thanksForRegisteringPopUpShowing: false,
+			passwordVisible: false
 		}
 
 		componentDidMount() {
@@ -252,7 +253,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
 									<View style={centralStyles.formInputWhiteBackground}>
-										<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.password} placeholder="password" autoCapitalize="none" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password")} />
+										<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.password} placeholder="password" autoCapitalize="none" secureTextEntry={!this.state.passwordVisible} onChange={(e) => this.handleTextInput(e, "password")} />
+										<TouchableOpacity
+											style={centralStyles.hiddenToggle}
+											onPress={() => this.setState({ passwordVisible: !this.state.passwordVisible })}
+										>
+											<Icon
+												style={centralStyles.hiddenToggleIcon}
+												size={responsiveHeight(4)}
+												name={this.state.passwordVisible ? "eye-off" : "eye"}
+											>
+											</Icon>
+										</TouchableOpacity>
 									</View>
 								</View>
 							</View>
@@ -260,7 +272,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
 									<View style={centralStyles.formInputWhiteBackground}>
-										<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.password_confirmation} placeholder="password confirmation" autoCapitalize="none" secureTextEntry={true} onChange={(e) => this.handleTextInput(e, "password_confirmation")} />
+										<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.password_confirmation} placeholder="password confirmation" autoCapitalize="none" secureTextEntry={!this.state.passwordVisible} onChange={(e) => this.handleTextInput(e, "password_confirmation")} />
 									</View>
 								</View>
 								{this.renderPasswordError()}
