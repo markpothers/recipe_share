@@ -688,7 +688,7 @@ exports[`CreateChef renders; has 5 TextInputs and 9 TouchableOpacities 1`] = `
                           "width": 51,
                         }
                       }
-                      thumbTintColor="#ececec"
+                      thumbTintColor={null}
                       value={false}
                     />
                   </View>
@@ -824,7 +824,7 @@ exports[`CreateChef renders; has 5 TextInputs and 9 TouchableOpacities 1`] = `
                           "width": 51,
                         }
                       }
-                      thumbTintColor="#ececec"
+                      thumbTintColor={null}
                       value={false}
                     />
                   </View>

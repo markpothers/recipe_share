@@ -1,5 +1,5 @@
 import React from 'react'
-import { Platform, Text, Image, View, TextInput, TouchableOpacity, Switch } from 'react-native'
+import { Text, Image, View, TextInput, TouchableOpacity } from 'react-native'
 import { styles } from './usersStyleSheet'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';

@@ -366,7 +366,7 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                         "width": 51,
                       }
                     }
-                    thumbTintColor="#ececec"
+                    thumbTintColor={null}
                     value={false}
                   />
                 </View>
@@ -426,7 +426,7 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                         "width": 51,
                       }
                     }
-                    thumbTintColor="#ececec"
+                    thumbTintColor={null}
                     value={false}
                   />
                 </View>

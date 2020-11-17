@@ -1,5 +1,5 @@
 import React from 'react'
-import { Platform, Text, AsyncStorage, Image, View, TextInput, TouchableOpacity, Switch, Keyboard } from 'react-native'
+import { Text, AsyncStorage, Image, View, TextInput, TouchableOpacity, Keyboard } from 'react-native'
 import { connect } from 'react-redux'
 import { styles } from './usersStyleSheet'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars

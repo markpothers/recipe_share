@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, Text, View, TouchableOpacity, Switch, Platform, ScrollView } from 'react-native'
+import { Modal, Text, View, TouchableOpacity, ScrollView } from 'react-native'
 import { styles } from './filterMenuStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux'

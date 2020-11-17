@@ -1,5 +1,5 @@
 import React from 'react'
-import { Platform, Text, TouchableOpacity, TextInput, View, Switch, Linking, Keyboard } from 'react-native'
+import { Text, TouchableOpacity, TextInput, View, Linking, Keyboard } from 'react-native'
 import { countries } from '../dataComponents/countries'
 import { connect } from 'react-redux'
 import { postChef } from '../fetches/postChef'
