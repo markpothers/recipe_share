@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import OfflineMessage from '../offlineMessage/offlineMessage'
 
-const peasImage = require("../dataComponents/peas.jpg")
+const spinachLowImage = require("../dataComponents/spinach-low.jpg")
 export default class RecipeCard extends React.PureComponent {
 
 	navigateToSharer = (chefID) => {
@@ -14,7 +14,7 @@ export default class RecipeCard extends React.PureComponent {
 
 	render() {
 		// console.log(this.props)
-		const imageSource = this.props.image_url ? {uri:this.props.image_url} : peasImage
+		const imageSource = this.props.image_url ? {uri:this.props.image_url} : spinachLowImage
 		return (
 			<View style={styles.recipeCard} >
 				{this.props.renderOfflineMessage.includes(this.props.id) && (
@@ -74,7 +74,7 @@ function AvatarImage(chefimage_url) {
 	const URL = chefimage_url.chefimage_url
 	if (!URL) {
 		return (
-			<Image style={styles.avatarThumbnail} source={require("../dataComponents/peas.jpg")} />
+			<Image style={styles.avatarThumbnail} source={require("../dataComponents/spinach-low.jpg")} />
 		)
 	} else {
 		return (

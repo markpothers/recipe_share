@@ -97,7 +97,7 @@ function AvatarImage(props) {
 	const URL = props.image_url
 	if (!URL) {
 		return (
-			<Image style={styles.avatarThumbnail} source={require("../src/dataComponents/peas.jpg")} />
+			<Image style={styles.avatarThumbnail} source={require("../src/dataComponents/spinach-low.jpg")} />
 		)
 	} else {
 		return (

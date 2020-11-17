@@ -131,7 +131,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				if (chef.image_url != null) {
 					return <Image style={{ width: '100%', height: '100%' }} source={{ uri: chef.image_url }}></Image>
 				} else {
-					return <Image style={{ width: '100%', height: '100%' }} source={require("../dataComponents/peas.jpg")}></Image>
+					return <Image style={{ width: '100%', height: '100%' }} source={require("../dataComponents/spinach-low.jpg")}></Image>
 				}
 			}
 		}

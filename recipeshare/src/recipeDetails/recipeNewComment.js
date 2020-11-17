@@ -2,13 +2,13 @@ import React from 'react';
 import { Image, View, Text, TextInput } from 'react-native';
 import { styles } from './recipeDetailsStyleSheet'
 
-const peasImage = require("../dataComponents/peas.jpg")
+const spinachLowImage = require("../dataComponents/spinach-low.jpg")
 
 export default class RecipeNewComment extends React.PureComponent {
 
 	render() {
 		// console.log(this.props)
-		const imageUrl = this.props.image_url ? { uri: this.props.image_url } : peasImage
+		const imageUrl = this.props.image_url ? { uri: this.props.image_url } : spinachLowImage
 		return (
 			<View style={styles.commentContainer}>
 				<View style={styles.commentLeftContainer}>
