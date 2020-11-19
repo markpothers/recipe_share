@@ -178,6 +178,7 @@ exports[`CreateChef renders; has 5 TextInputs and 9 TouchableOpacities 1`] = `
                   <TextInput
                     allowFontScaling={true}
                     autoCapitalize="none"
+                    autoCompleteType="email"
                     keyboardType="email-address"
                     maxFontSizeMultiplier={2}
                     onChange={[Function]}
@@ -193,6 +194,7 @@ exports[`CreateChef renders; has 5 TextInputs and 9 TouchableOpacities 1`] = `
                         "width": "100%",
                       }
                     }
+                    textContentType="emailAddress"
                     underlineColorAndroid="transparent"
                     value=""
                   />
@@ -256,6 +258,7 @@ exports[`CreateChef renders; has 5 TextInputs and 9 TouchableOpacities 1`] = `
                         "width": "100%",
                       }
                     }
+                    textContentType="username"
                     underlineColorAndroid="transparent"
                     value=""
                   />
@@ -489,6 +492,7 @@ exports[`CreateChef renders; has 5 TextInputs and 9 TouchableOpacities 1`] = `
                         "width": "100%",
                       }
                     }
+                    textContentType="newPassword"
                     underlineColorAndroid="transparent"
                     value=""
                   />
@@ -585,6 +589,7 @@ exports[`CreateChef renders; has 5 TextInputs and 9 TouchableOpacities 1`] = `
                         "width": "100%",
                       }
                     }
+                    textContentType="newPassword"
                     underlineColorAndroid="transparent"
                     value=""
                   />

@@ -217,6 +217,7 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                         "width": "100%",
                       }
                     }
+                    textContentType="emailAddress"
                     underlineColorAndroid="transparent"
                     value=""
                   />
@@ -282,6 +283,7 @@ exports[`Login renders; has 2 TextInputs and 5 TouchableOpacities 1`] = `
                         "width": "100%",
                       }
                     }
+                    textContentType="password"
                     underlineColorAndroid="transparent"
                     value=""
                   />
