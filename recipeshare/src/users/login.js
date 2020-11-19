@@ -183,6 +183,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											keyboardType="email-address"
 											autoCapitalize="none"
 											autoCompleteType="email"
+											textContentType="emailAddress"
 											onChange={(e) => this.handleTextInput(e, "e_mail")}
 										/>
 									</View>
@@ -198,6 +199,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											placeholder="password"
 											autoCapitalize="none"
 											autoCompleteType="password"
+											textContentType="password"
 											secureTextEntry={!this.state.passwordVisible}
 											onChange={(e) => this.handleTextInput(e, "password")}
 										/>

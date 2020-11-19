@@ -24,7 +24,8 @@
 		"ios": {
 			"supportsTablet": true,
 			"bundleIdentifier": "com.recipe-share.recipe-share",
-			"buildNumber": "2.0.0"
+			"buildNumber": "2.0.1",
+			"associatedDomains": ["webcredentials:www.recipe-share.com"]
 		},
 		"android": {
 			"package": "com.recipe_share.recipe_share",

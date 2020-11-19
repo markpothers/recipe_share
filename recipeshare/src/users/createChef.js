@@ -177,7 +177,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					// close={() => this.setState({ thanksForRegisteringPopUpShowing: false })}
 					title={"Thanks so much for registering. Please confirm your e-mail address by clicking the link in your welcome e-mail and log in."}
 					onYes={() => {
-						this.setState({thanksForRegisteringPopUpShowing: false})
+						this.setState({ thanksForRegisteringPopUpShowing: false })
 						this.props.navigation.navigate('Login')
 					}}
 					yesText={"Ok"}
@@ -214,7 +214,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
 									<View style={centralStyles.formInputWhiteBackground}>
-										<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.e_mail} placeholder="e-mail" keyboardType="email-address" autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "e_mail")} />
+										<TextInput
+											maxFontSizeMultiplier={2}
+											style={centralStyles.formInput}
+											value={this.props.e_mail}
+											placeholder="e-mail"
+											autoCompleteType="email"
+											textContentType="emailAddress"
+											keyboardType="email-address"
+											autoCapitalize="none"
+											onChange={(e) => this.handleTextInput(e, "e_mail")} />
 									</View>
 								</View>
 								{this.renderEmailError()}
@@ -223,7 +232,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
 									<View style={centralStyles.formInputWhiteBackground}>
-										<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.username} placeholder="username" autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "username")} />
+										<TextInput
+											maxFontSizeMultiplier={2}
+											style={centralStyles.formInput}
+											value={this.props.username}
+											placeholder="username"
+											textContentType="username"
+											autoCapitalize="none"
+											onChange={(e) => this.handleTextInput(e, "username")} />
 									</View>
 								</View>
 								{this.renderUsernameError()}
@@ -253,7 +269,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
 									<View style={centralStyles.formInputWhiteBackground}>
-										<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.password} placeholder="password" autoCapitalize="none" secureTextEntry={!this.state.passwordVisible} onChange={(e) => this.handleTextInput(e, "password")} />
+										<TextInput
+											maxFontSizeMultiplier={2}
+											style={centralStyles.formInput}
+											value={this.props.password}
+											placeholder="password"
+											textContentType="newPassword"
+											autoCapitalize="none"
+											secureTextEntry={!this.state.passwordVisible}
+											onChange={(e) => this.handleTextInput(e, "password")} />
 										<TouchableOpacity
 											style={centralStyles.hiddenToggle}
 											onPress={() => this.setState({ passwordVisible: !this.state.passwordVisible })}
@@ -272,7 +296,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
 									<View style={centralStyles.formInputWhiteBackground}>
-										<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.password_confirmation} placeholder="password confirmation" autoCapitalize="none" secureTextEntry={!this.state.passwordVisible} onChange={(e) => this.handleTextInput(e, "password_confirmation")} />
+										<TextInput maxFontSizeMultiplier={2}
+											style={centralStyles.formInput}
+											value={this.props.password_confirmation}
+											placeholder="password confirmation"
+											textContentType="newPassword"
+											autoCapitalize="none"
+											secureTextEntry={!this.state.passwordVisible}
+											onChange={(e) => this.handleTextInput(e, "password_confirmation")} />
 									</View>
 								</View>
 								{this.renderPasswordError()}
