@@ -64,8 +64,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			passwordVisible: false
 		}
 
-		componentDidMount() {
+		componentDidMount = () => {
+			if (this.props.route.params?.successfulLogin == true) {
+				this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: true })
+			}
+		}
 
+		componentDidUpdate = () => {
+			if (this.props.route.params?.successfulLogin == true) {
+				this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: true })
+			}
 		}
 
 		handleTextInput = (e, parameter) => {

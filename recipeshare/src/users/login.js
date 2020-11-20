@@ -57,6 +57,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			rememberEmail: false,
 			renderOfflineMessage: false,
 			passwordVisible: false,
+			isFocused: true,
 		}
 
 		handleTextInput = (e, parameter) => {
@@ -71,6 +72,25 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					this.setState({ rememberEmail: true })
 				}
 			})
+			this._unsubscribeFocus = this.props.navigation.addListener('focus', () => {
+				this.respondToFocus()
+			})
+			this._unsubscribeBlur = this.props.navigation.addListener('blur', () => {
+				this.respondToBlur()
+			})
+		}
+
+		respondToFocus = () => {
+			this.setState({isFocused: true})
+		}
+
+		respondToBlur = () => {
+			this.setState({isFocused: false})
+		}
+
+		componentWillUnmount = () => {
+			this._unsubscribeFocus()
+			this._unsubscribeBlur()
 		}
 
 		loginChef = async () => {
@@ -102,7 +122,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								loginError: false,
 								awaitingServer: false
 							})
-							this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: true })
+							// this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: true })
+							this.props.navigation.navigate("CreateChef", { successfulLogin: true })
 						}
 					} else {
 						// console.log(chef.message)
@@ -148,7 +169,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		render() {
-			// console.log(this.state.passwordVisible)
+			// console.log(this.state.isFocused)
 			return (
 				<SpinachAppContainer scrollingEnabled={true} awaitingServer={this.state.awaitingServer}>
 					{this.state.renderOfflineMessage && (
@@ -175,34 +196,38 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
 									<View style={centralStyles.formInputWhiteBackground}>
-										<TextInput
-											maxFontSizeMultiplier={2}
-											style={centralStyles.formInput}
-											value={this.props.e_mail}
-											placeholder="e-mail"
-											keyboardType="email-address"
-											autoCapitalize="none"
-											autoCompleteType="email"
-											textContentType="emailAddress"
-											onChange={(e) => this.handleTextInput(e, "e_mail")}
-										/>
+										{this.state.isFocused && (
+											<TextInput
+												maxFontSizeMultiplier={2}
+												style={centralStyles.formInput}
+												value={this.props.e_mail}
+												placeholder="e-mail"
+												keyboardType="email-address"
+												autoCapitalize="none"
+												autoCompleteType="email"
+												textContentType="emailAddress"
+												onChange={(e) => this.handleTextInput(e, "e_mail")}
+											/>
+										)}
 									</View>
 								</View>
 							</View>
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
 									<View style={centralStyles.formInputWhiteBackground}>
-										<TextInput
-											maxFontSizeMultiplier={2}
-											style={centralStyles.formInput}
-											value={this.props.password}
-											placeholder="password"
-											autoCapitalize="none"
-											autoCompleteType="password"
-											textContentType="password"
-											secureTextEntry={!this.state.passwordVisible}
-											onChange={(e) => this.handleTextInput(e, "password")}
-										/>
+										{this.state.isFocused && ( //this conditional helps ios properly recognise both password fields in the createchef form
+											<TextInput
+												maxFontSizeMultiplier={2}
+												style={centralStyles.formInput}
+												value={this.props.password}
+												placeholder="password"
+												autoCapitalize="none"
+												autoCompleteType="password"
+												textContentType="password"
+												secureTextEntry={!this.state.passwordVisible}
+												onChange={(e) => this.handleTextInput(e, "password")}
+											/>
+										)}
 										<TouchableOpacity
 											style={centralStyles.hiddenToggle}
 											onPress={() => this.setState({ passwordVisible: !this.state.passwordVisible })}

@@ -116,8 +116,8 @@ export class RecipesList extends React.Component {
 	}
 
 	componentWillUnmount = () => {
-		// this._unsubscribeFocus()
-		// this._unsubscribeBlur()
+		this._unsubscribeFocus()
+		this._unsubscribeBlur()
 	}
 
 	// componentDidUpdate = () => {
