@@ -112,27 +112,41 @@ exports[`CreateChef renders; has 5 TextInputs and 9 TouchableOpacities 1`] = `
                   }
                 }
               >
-                <Text
-                  maxFontSizeMultiplier={2}
+                <View
                   style={
                     Object {
+                      "alignItems": "center",
                       "backgroundColor": "white",
                       "borderColor": "#104e01",
                       "borderRadius": 11.25,
                       "borderWidth": 1,
-                      "color": "#505050",
-                      "fontSize": 33.35,
-                      "fontWeight": "bold",
+                      "flexDirection": "row",
+                      "height": "100%",
                       "overflow": "hidden",
-                      "paddingLeft": 15,
-                      "paddingRight": 15,
-                      "textAlign": "center",
                       "width": "100%",
                     }
                   }
                 >
-                  Please register and click the link in your confirmation e-mail!
-                </Text>
+                  <Text
+                    maxFontSizeMultiplier={2}
+                    style={
+                      Object {
+                        "borderRadius": 11.25,
+                        "color": "#505050",
+                        "fontSize": 33.35,
+                        "fontWeight": "bold",
+                        "height": "100%",
+                        "overflow": "hidden",
+                        "paddingHorizontal": 15,
+                        "paddingVertical": 7.5,
+                        "textAlign": "center",
+                        "width": "100%",
+                      }
+                    }
+                  >
+                    Please register and click the link in your confirmation e-mail!
+                  </Text>
+                </View>
               </View>
             </View>
             <View
@@ -194,7 +208,7 @@ exports[`CreateChef renders; has 5 TextInputs and 9 TouchableOpacities 1`] = `
                         "width": "100%",
                       }
                     }
-                    textContentType="emailAddress"
+                    textContentType="username"
                     underlineColorAndroid="transparent"
                     value=""
                   />
@@ -258,7 +272,6 @@ exports[`CreateChef renders; has 5 TextInputs and 9 TouchableOpacities 1`] = `
                         "width": "100%",
                       }
                     }
-                    textContentType="username"
                     underlineColorAndroid="transparent"
                     value=""
                   />
@@ -477,6 +490,7 @@ exports[`CreateChef renders; has 5 TextInputs and 9 TouchableOpacities 1`] = `
                   <TextInput
                     allowFontScaling={true}
                     autoCapitalize="none"
+                    autoCompleteType="password"
                     maxFontSizeMultiplier={2}
                     onChange={[Function]}
                     placeholder="password"
@@ -515,6 +529,7 @@ exports[`CreateChef renders; has 5 TextInputs and 9 TouchableOpacities 1`] = `
                         "position": "absolute",
                         "right": 0,
                         "width": 112.5,
+                        "zIndex": 0,
                       }
                     }
                   >
@@ -523,7 +538,7 @@ exports[`CreateChef renders; has 5 TextInputs and 9 TouchableOpacities 1`] = `
                       size={53.36}
                       style={
                         Object {
-                          "color": "#505050",
+                          "color": "#50505055",
                         }
                       }
                     />
@@ -574,6 +589,7 @@ exports[`CreateChef renders; has 5 TextInputs and 9 TouchableOpacities 1`] = `
                   <TextInput
                     allowFontScaling={true}
                     autoCapitalize="none"
+                    autoCompleteType="password"
                     maxFontSizeMultiplier={2}
                     onChange={[Function]}
                     placeholder="password confirmation"

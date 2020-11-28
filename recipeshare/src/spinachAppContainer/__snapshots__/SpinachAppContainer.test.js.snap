@@ -112,7 +112,7 @@ exports[`SpinachAppContainer renders with scrollView and activityIndicator 1`] =
           "position": "absolute",
           "top": "10%",
           "width": 50,
-          "zIndex": 1,
+          "zIndex": 5,
         }
       }
     >
@@ -212,7 +212,7 @@ exports[`SpinachAppContainer renders without scrollView and with ActivityIndicat
         "position": "absolute",
         "top": "10%",
         "width": 50,
-        "zIndex": 1,
+        "zIndex": 5,
       }
     }
   >

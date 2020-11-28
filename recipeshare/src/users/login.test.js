@@ -9,6 +9,7 @@ import { TouchableOpacity, TextInput } from 'react-native';
 describe('Login', () => {
 
 	let component
+	let navigation
 
 	beforeAll(() => {
 		// console.log('runs at the beginning of everything')
@@ -16,6 +17,10 @@ describe('Login', () => {
 
 	beforeEach(() => {
 		// console.log('runs before every test')
+
+		navigation = {
+			addListener: jest.fn()
+		}
 	})
 
 	afterEach(() => {
@@ -32,7 +37,9 @@ describe('Login', () => {
 				<Provider
 					store={store}
 				>
-					<LoginScreen/>
+					<LoginScreen
+						navigation={navigation}
+					/>
 				</Provider>
 			)
 		})

@@ -10,6 +10,7 @@ import { TouchableOpacity, TextInput } from 'react-native';
 describe('CreateChef', () => {
 
 	let component
+	let route
 
 	beforeAll(() => {
 		// console.log('runs at the beginning of everything')
@@ -17,6 +18,12 @@ describe('CreateChef', () => {
 
 	beforeEach(() => {
 		// console.log('runs before every test')
+
+		route = {
+			params: {
+				successfulLogin: false
+			}
+		}
 	})
 
 	afterEach(() => {
@@ -33,7 +40,9 @@ describe('CreateChef', () => {
 				<Provider
 					store={store}
 				>
-					<CreateChef/>
+					<CreateChef
+						route={route}
+					/>
 				</Provider>
 			)
 		})

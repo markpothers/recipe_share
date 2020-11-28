@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SwitchSized can be rendered 1`] = `
+<RCTSwitch
+  accessibilityRole="switch"
+  onChange={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  onTintColor="#4b714299"
+  style={
+    Object {
+      "height": 31,
+      "width": 51,
+    }
+  }
+  thumbTintColor="#4b7142"
+  value={true}
+/>
+`;
