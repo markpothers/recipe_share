@@ -36,16 +36,16 @@ const mapDispatchToProps = {
 			dispatch({ type: 'UPDATE_NEW_USER_DETAILS', parameter: parameter, content: content })
 		}
 	},
-	clearNewUserDetails: () => {
-		return dispatch => {
-			dispatch({ type: 'CLEAR_NEW_USER_DETAILS' })
-		}
-	},
 	loginChefToSTate: (id, username) => {
 		return dispatch => {
 			dispatch({ type: 'LOG_IN_CHEF', id: id, username: username })
 		}
-	}
+	},
+	saveLoginChefDetails: (parameter, content) => {
+		return dispatch => {
+			dispatch({ type: 'UPDATE_LOGIN_USER_DETAILS', parameter: parameter, content: content })
+		}
+	},
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
@@ -61,7 +61,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			viewingPrivacyPolicy: false,
 			awaitingServer: false,
 			thanksForRegisteringPopUpShowing: false,
-			passwordVisible: false
+			passwordVisible: false,
 		}
 
 		componentDidMount = () => {
@@ -78,6 +78,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		handleTextInput = (e, parameter) => {
 			this.props.saveChefDetails(parameter, e.nativeEvent.text)
+			if (parameter == 'e_mail'){
+				this.props.saveLoginChefDetails(parameter, e.nativeEvent.text)
+			}
 		}
 
 		choosePicture = () => {
@@ -120,11 +123,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				try {
 					const chef = await postChef(this.props.username, this.props.e_mail, this.props.password, this.props.password_confirmation, this.props.country, this.props.image_url, this.props.profile_text)
 					if (!chef.error) {
-						this.props.clearNewUserDetails()
 						this.setState({
 							awaitingServer: false,
-							thanksForRegisteringPopUpShowing: true
 						})
+						this.props.navigation.navigate('Login', { successfulRegistration: true })
 					} else {
 						this.setState({ errors: chef.message })
 						await this.setState({ awaitingServer: false })
@@ -197,7 +199,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			// console.log(this.props.saveChefDetails)
 			return (
 				<SpinachAppContainer scrollingEnabled={true} awaitingServer={this.state.awaitingServer}>
-					{this.state.thanksForRegisteringPopUpShowing && this.renderThanksForRegisteringAlertPopUp()}
+					{/* {this.state.thanksForRegisteringPopUpShowing && this.renderThanksForRegisteringAlertPopUp()} */}
 					<TouchableOpacity
 						activeOpacity={1}
 						onPress={Keyboard.dismiss}
@@ -215,7 +217,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							{/* title */}
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
-									<Text maxFontSizeMultiplier={2} style={centralStyles.formTitle}>Please register and click the link in your confirmation e-mail!</Text>
+									<View style={centralStyles.formInputWhiteBackground}>
+										<Text maxFontSizeMultiplier={2} style={centralStyles.formTitle}>Please register and click the link in your confirmation e-mail!</Text>
+									</View>
 								</View>
 							</View>
 							{/* e-mail*/}
@@ -227,10 +231,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											style={centralStyles.formInput}
 											value={this.props.e_mail}
 											placeholder="e-mail"
-											autoCompleteType="email"
-											textContentType="emailAddress"
 											keyboardType="email-address"
 											autoCapitalize="none"
+											autoCompleteType="email"
+											textContentType="username"
 											onChange={(e) => this.handleTextInput(e, "e_mail")} />
 									</View>
 								</View>
@@ -245,7 +249,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											style={centralStyles.formInput}
 											value={this.props.username}
 											placeholder="username"
-											textContentType="username"
 											autoCapitalize="none"
 											onChange={(e) => this.handleTextInput(e, "username")} />
 									</View>
@@ -284,6 +287,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											placeholder="password"
 											textContentType="newPassword"
 											autoCapitalize="none"
+											autoCompleteType="password"
 											secureTextEntry={!this.state.passwordVisible}
 											onChange={(e) => this.handleTextInput(e, "password")} />
 										<TouchableOpacity
@@ -308,6 +312,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											style={centralStyles.formInput}
 											value={this.props.password_confirmation}
 											placeholder="password confirmation"
+											autoCompleteType="password"
 											textContentType="newPassword"
 											autoCapitalize="none"
 											secureTextEntry={!this.state.passwordVisible}

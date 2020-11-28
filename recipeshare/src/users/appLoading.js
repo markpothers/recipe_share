@@ -11,9 +11,9 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-	updateLoggedInChefInState: (id, username, auth_token, image_url, is_admin) => {
+	updateLoggedInChefInState: (id, e_mail, username, auth_token, image_url, is_admin) => {
 		return dispatch => {
-			dispatch({ type: 'UPDATE_LOGGED_IN_CHEF', id: id, username: username, auth_token: auth_token, image_url: image_url, is_admin: is_admin })
+			dispatch({ type: 'UPDATE_LOGGED_IN_CHEF', id: id, e_mail: e_mail, username: username, auth_token: auth_token, image_url: image_url, is_admin: is_admin })
 		}
 	},
 	stayLoggedIn: (value) => {
@@ -36,7 +36,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					const loggedInChef = JSON.parse(res)
 					// console.log(loggedInChef)
 					this.props.stayLoggedIn(true)
-					this.props.updateLoggedInChefInState(loggedInChef.id, loggedInChef.username, loggedInChef.auth_token, loggedInChef.image_url, loggedInChef.is_admin, loggedInChef.is_member)
+					this.props.updateLoggedInChefInState(loggedInChef.id, loggedInChef.e_mail, loggedInChef.username, loggedInChef.auth_token, loggedInChef.image_url, loggedInChef.is_admin, loggedInChef.is_member)
 					this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: true })
 				} else {
 					this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: false })

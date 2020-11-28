@@ -20,7 +20,7 @@ export const centralStyles = StyleSheet.create({
 		borderWidth: 1,
 		width: 50,
 		height: 50,
-		zIndex: 1
+		zIndex: 5
 	},
 	spinachFullBackground: {
 		width: responsiveWidth(100),
@@ -55,16 +55,17 @@ export const centralStyles = StyleSheet.create({
 	},
 	formTitle: {
 		width: '100%',
+		height: '100%',
 		borderRadius: responsiveWidth(1.5),
 		textAlign: 'center',
 		fontWeight: 'bold',
 		fontSize: responsiveHeight(2.5),
 		color: "#505050",
-		backgroundColor: 'white',
-		borderWidth: 1,
-		borderColor: '#104e01',
-		paddingLeft: responsiveWidth(2),
-		paddingRight: responsiveWidth(2),
+		// backgroundColor: 'white',
+		// borderWidth: 1,
+		// borderColor: '#104e01',
+		paddingHorizontal: responsiveWidth(2),
+		paddingVertical: responsiveWidth(1),
 		overflow: 'hidden',
 	},
 	formSection: {

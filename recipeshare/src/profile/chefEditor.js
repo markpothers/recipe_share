@@ -12,6 +12,7 @@ import NetInfo from '@react-native-community/netinfo';
 import OfflineMessage from '../offlineMessage/offlineMessage'
 
 const mapStateToProps = (state) => ({
+	e_mail: state.newUserDetails.e_mail,
 	username: state.newUserDetails.username,
 	password: state.newUserDetails.password,
 	password_confirmation: state.newUserDetails.password_confirmation,
@@ -33,9 +34,9 @@ const mapDispatchToProps = {
 			dispatch({ type: 'CLEAR_NEW_USER_DETAILS' })
 		}
 	},
-	updateLoggedInChefInState: (id, username, auth_token, image_url, is_admin) => {
+	updateLoggedInChefInState: (id, e_mail, username, auth_token, image_url, is_admin) => {
 		return dispatch => {
-			dispatch({ type: 'UPDATE_LOGGED_IN_CHEF', id: id, username: username, auth_token: auth_token, image_url: image_url, is_admin: is_admin })
+			dispatch({ type: 'UPDATE_LOGGED_IN_CHEF', id: id, e_mail: e_mail, username: username, auth_token: auth_token, image_url: image_url, is_admin: is_admin })
 		}
 	}
 }
@@ -47,7 +48,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			errors: [],
 			updatingPassword: false,
 			updateModalVisible: true,
-			passwordVisible: false
+			passwordVisible: false,
+			profileEditable: false,
+			profileEditableButtonZIndex: 1
 		}
 
 		componentDidMount = () => {
@@ -56,6 +59,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		populateBoxes = () => {
 			this.props.username == "" ? this.updateChef(this.props.chef.username, "username") : null
+			this.props.e_mail == "" ? this.updateChef(this.props.loggedInChef.e_mail, "e_mail") : null
 			this.props.profile_text == "" ? this.updateChef(this.props.chef.profile_text, "profile_text") : null
 			this.props.country == "United States" ? this.updateChef(this.props.chef.country, "country") : null
 		}
@@ -75,7 +79,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					<View style={[centralStyles.formSection, { width: '86%' }]}>
 						<View style={centralStyles.formInputContainer} >
 							<View style={centralStyles.formInputWhiteBackground}>
-								<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.password} placeholder="password" autoCapitalize="none" secureTextEntry={!this.state.passwordVisible} onChange={(e) => this.handleTextInput(e, "password")} />
+								<TextInput
+									maxFontSizeMultiplier={2}
+									style={centralStyles.formInput}
+									value={this.props.password}
+									placeholder="password"
+									autoCapitalize="none"
+									autoCompleteType="password"
+									textContentType="password"
+									secureTextEntry={!this.state.passwordVisible}
+									onChange={(e) => this.handleTextInput(e, "password")} />
 								<TouchableOpacity
 									style={centralStyles.hiddenToggle}
 									onPress={() => this.setState({ passwordVisible: !this.state.passwordVisible })}
@@ -93,7 +106,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					<View style={[centralStyles.formSection, { width: '86%' }]}>
 						<View style={centralStyles.formInputContainer} >
 							<View style={centralStyles.formInputWhiteBackground}>
-								<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.password_confirmation} placeholder="confirm password" autoCapitalize="none" secureTextEntry={!this.state.passwordVisible} onChange={(e) => this.handleTextInput(e, "password_confirmation")} />
+								<TextInput
+									maxFontSizeMultiplier={2}
+									style={centralStyles.formInput}
+									value={this.props.password_confirmation}
+									placeholder="confirm password"
+									autoCapitalize="none"
+									autoCompleteType="password"
+									textContentType="password"
+									secureTextEntry={!this.state.passwordVisible}
+									onChange={(e) => this.handleTextInput(e, "password_confirmation")}
+								/>
 							</View>
 						</View>
 					</View>
@@ -139,14 +162,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		saveUpdatedChef = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
+				await this.setState({ updateModalVisible: false })
 				this.props.isAwaitingServer(true)
 				const chef = this.props.loggedInChef
-
-
-				// const imageData = this.props.image_url == 'DELETED' ? '' : this.props.image_url
-
-
-				const updatedChef = await patchChef(chef.id, chef.auth_token, this.props.username, this.props.profile_text, this.props.country, this.state.updatingPassword, this.props.password, this.props.password_confirmation, this.props.image_url)
+				const updatedChef = await patchChef(chef.id, chef.auth_token, this.props.e_mail, this.props.username, this.props.profile_text, this.props.country, this.state.updatingPassword, this.props.password, this.props.password_confirmation, this.props.image_url)
 				if (updatedChef) {
 					// console.log(updatedChef)
 					if (updatedChef.error) {
@@ -154,19 +173,24 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					} else {
 						if (this.props.stayingLoggedIn) {
 							AsyncStorage.setItem('chef', JSON.stringify(updatedChef), () => {
-								this.props.updateLoggedInChefInState(updatedChef.id, updatedChef.username, updatedChef.auth_token, updatedChef.image_url, updatedChef.is_admin, updatedChef.is_member)
+								this.props.updateLoggedInChefInState(updatedChef.id, chef.e_mail, updatedChef.username, updatedChef.auth_token, updatedChef.image_url, updatedChef.is_admin, updatedChef.is_member)
 								this.props.clearNewUserDetails()
 								this.props.chefUpdated(true)
 							})
 						} else {
-							this.props.updateLoggedInChefInState(updatedChef.id, updatedChef.username, updatedChef.auth_token, updatedChef.image_url, updatedChef.is_admin, updatedChef.is_member)
+							this.props.updateLoggedInChefInState(updatedChef.id, chef.e_mail, updatedChef.username, updatedChef.auth_token, updatedChef.image_url, updatedChef.is_admin, updatedChef.is_member)
 							this.props.clearNewUserDetails()
 							this.props.chefUpdated(true)
 						}
 					}
+				} else {
+					this.setState({ updateModalVisible: true })
 				}
 			} else {
-				this.setState({ renderOfflineMessage: true })
+				this.setState({ 
+					renderOfflineMessage: true,
+					updateModalVisible: true
+				})
 			}
 		}
 
@@ -183,6 +207,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		renderContents = () => {
+			// console.log(this.state.profileEditable)
 			return (
 				<ScrollView>
 					{this.state.renderOfflineMessage && (
@@ -200,15 +225,91 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							<View style={styles.titleContainer}>
 								<Text maxFontSizeMultiplier={2} style={styles.title}>Update your profile & password</Text>
 							</View>
-							{/* <View style={[centralStyles.formSection, { width: '86%' }]}>
+							<View style={[centralStyles.formSection, { width: '86%' }]}>
 								<View style={centralStyles.formInputContainer}>
-									<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.username} placeholder="username" autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "username")} />
+									<View style={[centralStyles.formInputWhiteBackground, { backgroundColor: '#dadada' }]}>
+										<TextInput //this textInput is present for ios autofill.  Disabling it breaks autofill so the covering text field is there to prevent it being focused
+											maxFontSizeMultiplier={2}
+											style={centralStyles.formInput}
+											value={this.props.e_mail}
+											// editable={false}
+											ref={ref => this.emailInput = ref}
+											placeholder="e-mail"
+											keyboardType="email-address"
+											autoCapitalize="none"
+											autoCompleteType="email"
+											textContentType="username"
+											caretHidden={true}
+										// onChange={(e) => this.handleTextInput(e, "e_mail")}
+										/>
+										<Text //this field covers the above input to prevent it being focused since directly disabling it breaks ios autofill
+											style={[
+												centralStyles.formInput,
+												{
+													position: 'absolute',
+													height: '100%'
+												}
+											]}
+										>
+										</Text>
+									</View>
 								</View>
-							</View> */}
+							</View>
+							<View style={[centralStyles.formSection, { width: '86%' }]}>
+								<View style={centralStyles.formInputContainer}>
+									<View style={[centralStyles.formInputWhiteBackground, { backgroundColor: '#dadada' }]}>
+										<TextInput
+											maxFontSizeMultiplier={2}
+											style={centralStyles.formInput}
+											value={this.props.username}
+											editable={false}
+											placeholder="username"
+											autoCapitalize="none"
+											onChange={(e) => this.handleTextInput(e, "username")}
+										/>
+									</View>
+								</View>
+							</View>
 							<View style={[centralStyles.formSection, { width: '86%' }]}>
 								<View style={centralStyles.formInputContainer} >
 									<View style={centralStyles.formInputWhiteBackground}>
-										<TextInput maxFontSizeMultiplier={2} style={[centralStyles.formInput, {}]} value={this.props.profile_text} placeholder="about me" multiline={true} numberOfLines={3} onChange={(e) => this.handleTextInput(e, "profile_text")} />
+										<TextInput
+											maxFontSizeMultiplier={2}
+											style={centralStyles.formInput}
+											value={this.props.profile_text}
+											ref={ref => this.profileInput = ref}
+											placeholder="about me"
+											autoCompleteType="off"
+											textContentType="none"
+											// autoCapitalize="none"
+											multiline={true}
+											numberOfLines={3}
+											// onFocus={()=> this.setState({profileEditable: true})}
+											onBlur={async () => {
+												await this.setState({
+													profileEditable: false,
+													profileEditableButtonZIndex: 1
+												})
+												await this.emailInput.focus()
+												await this.emailInput.blur()
+											}}
+											editable={this.state.profileEditable}
+											onChange={(e) => this.handleTextInput(e, "profile_text")}
+										/>
+										<TouchableOpacity //this button covers the profile input.  The trick here is that the profile input must be disabled else it breaks ios autofill
+											//this button therefore enables and focuses on the input which upone completion disables itself and focuses briefly on the email
+											//all of this gives priority to the email input for ios autofill to make strong password generate and save properly
+											style={{ position: 'absolute', height: '100%', width: '100%', zIndex: this.state.profileEditableButtonZIndex }}
+											activeOpacity={1}
+											onPress={async () => {
+												await this.setState({
+													profileEditable: true,
+													profileEditableButtonZIndex: -1
+												})
+												this.profileInput.focus()
+											}}
+										>
+										</TouchableOpacity>
 									</View>
 								</View>
 							</View>
@@ -231,7 +332,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 										<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='camera' />
 										<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>Update{"\n"}picture</Text>
 									</TouchableOpacity>
-
 								</View>
 							</View>
 							<View style={[centralStyles.formSection, { width: '100%' }]}>
@@ -255,6 +355,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		render() {
+			// console.log(this.props.loggedInChef)
 			if (Platform.OS === 'ios') {
 				return (
 					<Modal

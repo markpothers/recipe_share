@@ -166,6 +166,7 @@ const reducer = (currentState, action) => {
 			return {
 				...currentState, loggedInChef: {
 					id: action.id,
+					e_mail: action.e_mail,
 					username: action.username,
 					auth_token: action.auth_token,
 					image_url: action.image_url,

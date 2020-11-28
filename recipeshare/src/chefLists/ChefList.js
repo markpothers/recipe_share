@@ -91,8 +91,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		componentWillUnmount = () => {
-			this._unsubscribeFocus()
-			this._unsubscribeBlur()
+			this._unsubscribeFocus && this._unsubscribeFocus()
+			this._unsubscribeBlur && this._unsubscribeBlur()
 		}
 
 		shouldComponentUpdate = () => {

@@ -11,6 +11,7 @@ import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo'
 import SwitchSized from '../switchSized/switchSized'
+import { AlertPopUp } from '../alertPopUp/alertPopUp'
 
 const mapStateToProps = (state) => ({
 	e_mail: state.loginUserDetails.e_mail,
@@ -40,11 +41,16 @@ const mapDispatchToProps = {
 			dispatch({ type: 'STAY_LOGGED_IN', value: value })
 		}
 	},
-	updateLoggedInChefInState: (id, username, auth_token, image_url, is_admin) => {
+	updateLoggedInChefInState: (id, e_mail, username, auth_token, image_url, is_admin) => {
 		return dispatch => {
-			dispatch({ type: 'UPDATE_LOGGED_IN_CHEF', id: id, username: username, auth_token: auth_token, image_url: image_url, is_admin: is_admin })
+			dispatch({ type: 'UPDATE_LOGGED_IN_CHEF', id: id, e_mail: e_mail, username: username, auth_token: auth_token, image_url: image_url, is_admin: is_admin })
 		}
-	}
+	},
+	clearNewUserDetails: () => {
+		return dispatch => {
+			dispatch({ type: 'CLEAR_NEW_USER_DETAILS' })
+		}
+	},
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
@@ -58,6 +64,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			renderOfflineMessage: false,
 			passwordVisible: false,
 			isFocused: true,
+			thanksForRegisteringPopUpShowing: false,
+			thanksForRegisteringPopUpCleared: false,
 		}
 
 		handleTextInput = (e, parameter) => {
@@ -79,18 +87,27 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				this.respondToBlur()
 			})
 		}
+		componentDidUpdate = () => {
+			if (!this.state.thanksForRegisteringPopUpShowing && !this.state.thanksForRegisteringPopUpCleared
+				&& this.props.route.params?.successfulRegistration === true) {
+				this.setState({ thanksForRegisteringPopUpShowing: true })
+			}
+			// if (this.props.route.params?.successfulRegistration === true) {
+			// 	this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: true })
+			// }
+		}
 
 		respondToFocus = () => {
-			this.setState({isFocused: true})
+			this.setState({ isFocused: true })
 		}
 
 		respondToBlur = () => {
-			this.setState({isFocused: false})
+			this.setState({ isFocused: false })
 		}
 
 		componentWillUnmount = () => {
-			this._unsubscribeFocus()
-			this._unsubscribeBlur()
+			this._unsubscribeFocus && this._unsubscribeFocus()
+			this._unsubscribeBlur && this._unsubscribeBlur()
 		}
 
 		loginChef = async () => {
@@ -111,12 +128,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								// AsyncStorage.getItem('chef', (err, res) => {
 								// console.log(err)
 								this.props.clearLoginUserDetails()
-								this.props.updateLoggedInChefInState(chef.id, chef.username, chef.auth_token, chef.image_url, chef.is_admin, chef.is_member)
+								this.props.updateLoggedInChefInState(chef.id, chef.e_mail, chef.username, chef.auth_token, chef.image_url, chef.is_admin, chef.is_member)
 								this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: true })
 								// })
 							})
 						} else {
-							this.props.updateLoggedInChefInState(chef.id, chef.username, chef.auth_token, chef.image_url, chef.is_admin, chef.is_member)
+							this.props.updateLoggedInChefInState(chef.id, chef.e_mail, chef.username, chef.auth_token, chef.image_url, chef.is_admin, chef.is_member)
 							this.props.clearLoginUserDetails()
 							await this.setState({
 								loginError: false,
@@ -168,6 +185,22 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			}
 		}
 
+		renderThanksForRegisteringAlertPopUp = () => {
+			return (
+				<AlertPopUp
+					title={"Thanks so much for registering. Please confirm your e-mail address by clicking the link in your welcome e-mail and log in."}
+					onYes={() => {
+						this.setState({
+							thanksForRegisteringPopUpShowing: false,
+							thanksForRegisteringPopUpCleared: true
+						})
+						this.props.clearNewUserDetails()
+					}}
+					yesText={"Ok"}
+				/>
+			)
+		}
+
 		render() {
 			// console.log(this.state.isFocused)
 			return (
@@ -179,6 +212,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
 						/>)
 					}
+					{this.state.thanksForRegisteringPopUpShowing && this.renderThanksForRegisteringAlertPopUp()}
 					<TouchableOpacity
 						activeOpacity={1}
 						onPress={Keyboard.dismiss}
@@ -190,25 +224,25 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						<View style={[centralStyles.formContainer, { marginTop: responsiveHeight(15) }]}>
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
-									<Text style={centralStyles.formTitle} maxFontSizeMultiplier={1.5}>Welcome, chef!{"\n"} Please log in or register</Text>
+									<View style={centralStyles.formInputWhiteBackground}>
+										<Text style={centralStyles.formTitle} maxFontSizeMultiplier={1.5}>Welcome, chef!{"\n"} Please log in or register</Text>
+									</View>
 								</View>
 							</View>
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
 									<View style={centralStyles.formInputWhiteBackground}>
-										{this.state.isFocused && (
-											<TextInput
-												maxFontSizeMultiplier={2}
-												style={centralStyles.formInput}
-												value={this.props.e_mail}
-												placeholder="e-mail"
-												keyboardType="email-address"
-												autoCapitalize="none"
-												autoCompleteType="email"
-												textContentType="emailAddress"
-												onChange={(e) => this.handleTextInput(e, "e_mail")}
-											/>
-										)}
+										<TextInput
+											maxFontSizeMultiplier={2}
+											style={centralStyles.formInput}
+											value={this.props.e_mail}
+											placeholder="e-mail"
+											keyboardType="email-address"
+											autoCapitalize="none"
+											autoCompleteType="email"
+											textContentType="username"
+											onChange={(e) => this.handleTextInput(e, "e_mail")}
+										/>
 									</View>
 								</View>
 							</View>
