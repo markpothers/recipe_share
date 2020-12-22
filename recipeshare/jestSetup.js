@@ -1,4 +1,4 @@
-const { getDeviceTypeAsync } = require("expo-device")
+// const { getDeviceTypeAsync } = require("expo-device")
 
 //stops random warnings about Animated.useNativeDriver
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper')
@@ -8,9 +8,7 @@ jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon')
 jest.mock('react-native-vector-icons/FontAwesome', () => 'Icon')
 
 // jest.mock('expo-device', () => {
-//     Device: () => {
-//         getDeviceTypeAsync: () => {
-//             return 1
-//         }
+//     getDeviceTypeAsync = () => {
+//         return 1
 //     }
 // })

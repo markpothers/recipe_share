@@ -25,7 +25,7 @@ Enzyme.configure({ adapter: new Adapter() });
 // }); 
 
 function suppressDomErrors() {
-    const suppressedErrors = /(AsyncStorage has been extracted|Received `%s` for a non-boolean attribute `%s`|React does not recognize the.*prop on a DOM element|Unknown event handler property|is using uppercase HTML|Received `true` for a non-boolean attribute `accessible`|The tag.*is unrecognized in this browser|PascalCase)/;
+    const suppressedErrors = /(dispatchCommand was called with a ref that isn't a native component|AsyncStorage has been extracted|Received `%s` for a non-boolean attribute `%s`|React does not recognize the.*prop on a DOM element|Unknown event handler property|is using uppercase HTML|Received `true` for a non-boolean attribute `accessible`|The tag.*is unrecognized in this browser|PascalCase)/;
     // eslint-disable-next-line no-console
     const realConsoleError = console.error;
     // eslint-disable-next-line no-console

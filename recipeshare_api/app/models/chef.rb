@@ -36,6 +36,15 @@ class Chef < ApplicationRecord
         username == "Anonymous"
     end
 
+    def self.valid_attribute?(attr, value)
+        mock = self.new(attr => value)
+        if mock.valid?
+            true
+        else
+            !mock.errors.has_key?(attr)
+        end
+    end
+
     def auth_token
         JWT.encode({id: self.id}, Rails.application.credentials.JWT[:secret_key])
     end
@@ -232,29 +241,49 @@ class Chef < ApplicationRecord
         end
     end
 
+    def self.get_signed_urls(chefs_list)
+        # chef_images_bucket = ApplicationRecord.storage_bucket(Rails.application.credentials.buckets[:chef_images])
+        # test_images_bucket = ApplicationRecord.storage_bucket(Rails.application.credentials.buckets[:test_images])
+        # chefs_list.each do |chef|
+          # chef.image_url = ApplicationRecord.get_signed_url(chef.image_url)
+          # image_name = chef.image_url.split('/').last
+          # if chef.image_url.include? "test-images"
+            # chef.image_url = test_images_bucket.signed_url image_name, expires: 300
+          # else
+            # chef.image_url = chef_images_bucket.signed_url image_name, expires: 300
+          # end
+        # end
+        chefs_list.each { |chef| chef.image_url = ApplicationRecord.get_signed_url(chef.image_url) }
+        return chefs_list
+      end
+
     def get_details(userChef)
         # byebug
         recipes = Recipe.where(chef_id: self.id, hidden: false).order('updated_at DESC')
 		recipe_ids = recipes.map{|recipe| recipe.id}
-		# byebug
+        # byebug
+        make_pics = MakePic.joins(:recipe).where(chef_id: self.id, hidden: false, recipes: {hidden: false}).order('updated_at DESC')
+        make_pics.each { |image| image.image_url = ApplicationRecord.get_signed_url(image.image_url)}
+        make_pics_received = MakePic.where(recipe_id: recipe_ids, hidden: false)
+        make_pics_received.each { |image| image.image_url = ApplicationRecord.get_signed_url(image.image_url)}
         return chef_details = {
             chef: {id: self.id,
                     username: self.username,
                     country: self.country,
-                    image_url: self.image_url,
+                    image_url: ApplicationRecord.get_signed_url(self.image_url),
                     created_at: self.created_at,
                     profile_text: self.profile_text},
             comments: Comment.where(chef_id: self.id, hidden: false).order('updated_at DESC'),
             recipe_likes: RecipeLike.joins(:recipe).where(chef_id: self.id, hidden: false, recipes: {hidden: false}),
             recipe_makes: RecipeMake.joins(:recipe).where(chef_id: self.id, hidden: false, recipes: {hidden: false}),
             re_shares: ReShare.joins(:recipe).where(chef_id: self.id, hidden: false, recipes: {hidden: false}),
-            make_pics: MakePic.joins(:recipe).where(chef_id: self.id, hidden: false, recipes: {hidden: false}).order('updated_at DESC'),
+            make_pics: make_pics,
             recipes: recipes,
             recipe_likes_received: RecipeLike.where(recipe_id: recipe_ids, hidden: false),
             recipe_makes_received: RecipeMake.where(recipe_id: recipe_ids, hidden: false),
             comments_received: Comment.where(recipe_id: recipe_ids, hidden: false),
             re_shares_received: ReShare.where(recipe_id: recipe_ids, hidden: false),
-            make_pics_received: MakePic.where(recipe_id: recipe_ids, hidden: false),
+            make_pics_received: make_pics_received,
             followers: Follow.where(followee_id: self.id, hidden: false),
             following: Follow.where(follower_id: self.id, hidden: false),
             chef_followed: Follow.where(followee_id: self.id, follower_id: userChef.id, hidden: false).length>0,

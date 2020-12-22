@@ -1,19 +1,138 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SwitchSized can be rendered 1`] = `
-<RCTSwitch
-  accessibilityRole="switch"
-  onChange={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
-  onTintColor="#4b714299"
-  style={
-    Object {
-      "height": 31,
-      "width": 51,
-    }
-  }
-  thumbTintColor="#4b7142"
+exports[`SwitchSized can be rendered on an iPhone with reduced size switches 1`] = `
+<SwitchSized
+  onChange={[MockFunction]}
   value={true}
-/>
+>
+  <Switch
+    onChange={[MockFunction]}
+    style={
+      Object {
+        "transform": Array [
+          Object {
+            "scaleX": 0.7,
+          },
+          Object {
+            "scaleY": 0.7,
+          },
+        ],
+      }
+    }
+    thumbColor="#4b7142"
+    trackColor={
+      Object {
+        "true": "#4b714299",
+      }
+    }
+    value={true}
+  >
+    <RCTSwitch
+      accessibilityRole="switch"
+      onChange={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      onTintColor="#4b714299"
+      style={
+        Array [
+          Object {
+            "height": 31,
+            "width": 51,
+          },
+          Object {
+            "transform": Array [
+              Object {
+                "scaleX": 0.7,
+              },
+              Object {
+                "scaleY": 0.7,
+              },
+            ],
+          },
+        ]
+      }
+      thumbTintColor="#4b7142"
+      value={true}
+    >
+      <RCTSwitch
+        accessibilityRole="switch"
+        onChange={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        onTintColor="#4b714299"
+        style={
+          Array [
+            Object {
+              "height": 31,
+              "width": 51,
+            },
+            Object {
+              "transform": Array [
+                Object {
+                  "scaleX": 0.7,
+                },
+                Object {
+                  "scaleY": 0.7,
+                },
+              ],
+            },
+          ]
+        }
+        thumbTintColor="#4b7142"
+        value={true}
+      />
+    </RCTSwitch>
+  </Switch>
+</SwitchSized>
+`;
+
+exports[`SwitchSized can be rendered on non-iPhone with regular switch 1`] = `
+<SwitchSized
+  onChange={[MockFunction]}
+  value={true}
+>
+  <Switch
+    onChange={[MockFunction]}
+    style={null}
+    thumbColor="#4b7142"
+    trackColor={
+      Object {
+        "true": "#4b714299",
+      }
+    }
+    value={true}
+  >
+    <RCTSwitch
+      accessibilityRole="switch"
+      onChange={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      onTintColor="#4b714299"
+      style={
+        Object {
+          "height": 31,
+          "width": 51,
+        }
+      }
+      thumbTintColor="#4b7142"
+      value={true}
+    >
+      <RCTSwitch
+        accessibilityRole="switch"
+        onChange={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        onTintColor="#4b714299"
+        style={
+          Object {
+            "height": 31,
+            "width": 51,
+          }
+        }
+        thumbTintColor="#4b7142"
+        value={true}
+      />
+    </RCTSwitch>
+  </Switch>
+</SwitchSized>
 `;

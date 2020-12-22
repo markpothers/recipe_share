@@ -166,14 +166,21 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			if (netInfoState.isConnected) {
 				try {
 					await this.setState({ awaitingServer: true })
-					const response = await getNewPassword(this.props.e_mail)
-					if (!response.error) {
+					if (this.props.e_mail.length > 0) {
+						const response = await getNewPassword(this.props.e_mail)
+						if (!response.error) {
+							await this.setState({
+								loginError: true,
+								error: 'forgotPassword'
+							})
+						}
+						await this.setState({ awaitingServer: false })
+					} else {
 						await this.setState({
 							loginError: true,
 							error: 'forgotPassword'
 						})
 					}
-					await this.setState({ awaitingServer: false })
 				} catch (e) {
 					this.setState({
 						renderOfflineMessage: true,
@@ -202,7 +209,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		render() {
-			// console.log(this.state.isFocused)
+			// console.log(this.props.e_mail.length)
 			return (
 				<SpinachAppContainer scrollingEnabled={true} awaitingServer={this.state.awaitingServer}>
 					{this.state.renderOfflineMessage && (
@@ -281,7 +288,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 										{this.state.error === 'password_expired' && <Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>Automatically generated password has expired.  Please reset your password.</Text>}
 										{this.state.error === 'activation' && <Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>Account not yet activated.  Please click the link in your confirmation e-mail. (Don&apos;t forget to check spam!)</Text>}
 										{this.state.error === 'deactivated' && <Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>This account was deactivated.  Reset your password to reactivate your account.</Text>}
-										{this.state.error === 'forgotPassword' && <Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>Thanks.  If this e-mail address has an account we&apos;ll send you a new password.  Please check your e-mail.</Text>}
+										{this.state.error === 'forgotPassword' && this.props.e_mail.length > 0 && <Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>Thanks.  If this e-mail address has an account we&apos;ll send you a new password.  Please check your e-mail.</Text>}
+										{this.state.error === 'forgotPassword' && this.props.e_mail.length == 0 && <Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>Please enter your e-mail and hit the &apos;Forgot Password&apos; button again.</Text>}
 									</View>
 								)}
 							</View>

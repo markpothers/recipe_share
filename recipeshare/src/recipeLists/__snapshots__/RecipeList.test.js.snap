@@ -38,7 +38,7 @@ exports[`Recipe List can be rendered when all recipes are already in the store, 
         "position": "absolute",
         "top": "10%",
         "width": 50,
-        "zIndex": 1,
+        "zIndex": 5,
       }
     }
   >

@@ -349,6 +349,130 @@ class Recipe < ApplicationRecord
     return recipes_results
   end
 
+  def self.get_cuisines(type = "all", user_chef_id = 1, queryChefID = 1, filters="", serves="Any", search_term="")
+
+    filter_string=filters.split("/").map{|filter| filter.split(" ").join("_")}.map{|filter| "AND recipes.#{filter} = 't' "}.join("")
+
+    serves_string = ""
+    if serves != "Any"
+      serves_string ="AND recipes.serves = '#{serves}'"
+    end
+
+    if type == "chef" # recipes created by me ordered most-recent first
+
+      cuisines = Recipe.find_by_sql([
+          "SELECT DISTINCT recipes.cuisine
+          FROM recipes
+          WHERE recipes.hidden = false
+          AND recipes.chef_id = ?
+          #{filter_string}
+          #{serves_string}
+          AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
+          ORDER BY recipes.cuisine",
+          user_chef_id,
+          search_term.downcase()
+        ])
+
+      elsif type == "chef_liked"  # recipes created by me ordered most-recent first
+
+          # byebug
+          cuisines = Recipe.find_by_sql([
+              "SELECT DISTINCT recipes.cuisine
+              FROM recipes
+              JOIN recipe_likes ON recipes.id = recipe_likes.recipe_id
+              WHERE recipes.hidden = false
+              AND recipe_likes.hidden = false
+              AND recipe_likes.chef_id = ?
+              #{filter_string}
+              #{serves_string}
+              AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
+              ORDER BY recipes.cuisine",
+              queryChefID,
+              search_term.downcase()
+            ])
+
+            # byebug
+
+          elsif type == "chef_made"  # recipes created by me ordered most-recent first
+
+            cuisines = Recipe.find_by_sql([
+                "SELECT DISTINCT recipes.cuisine
+                FROM recipes
+                JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id
+                WHERE recipes.hidden = false
+                AND recipe_makes.hidden = false
+                AND recipe_makes.chef_id = ?
+                #{filter_string}
+                #{serves_string}
+                AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
+                ORDER BY recipes.cuisine",
+                queryChefID,
+                search_term.downcase()
+              ])
+
+    elsif type == "chef_feed" # recipes by chefs I follow ordered most-recent first
+
+      cuisines = Recipe.find_by_sql([
+        "SELECT DISTINCT recipes.cuisine
+        FROM recipes
+        LEFT OUTER JOIN re_shares ON recipes.id = re_shares.recipe_id
+        LEFT OUTER JOIN (
+        SELECT chefs.username AS sharer_username, chefs.id AS sharer_id, re_shares.recipe_id AS shared_id
+        FROM chefs
+        JOIN re_shares ON chefs.id = re_shares.chef_id
+        WHERE re_shares.chef_id IN (SELECT follows.followee_id FROM follows WHERE follower_id = ? AND follows.hidden = false)
+        AND re_shares.hidden = false
+        ) AS sharers ON recipes.id = shared_id
+        JOIN follows ON recipes.chef_id = follows.followee_id
+        WHERE recipes.hidden = false AND follows.hidden = false AND ( follows.follower_id = ? OR re_shares.chef_id IN (SELECT follows.followee_id FROM follows WHERE follower_id = ? AND follows.hidden = false))
+        #{filter_string}
+        #{serves_string}
+        AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
+        GROUP BY recipes.id
+        ORDER BY recipes.cuisine",
+        user_chef_id,
+        user_chef_id,
+        user_chef_id,
+        search_term.downcase()
+      ])
+
+    else # if all else fails, just show all recipes ordered most recent first
+
+      cuisines = Recipe.find_by_sql([
+        "SELECT DISTINCT recipes.cuisine
+        FROM recipes
+        WHERE recipes.hidden = false
+        #{filter_string}
+        #{serves_string}
+        AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
+        ORDER BY recipes.cuisine",
+        search_term.downcase()
+      ])
+
+    end
+    cuisines = cuisines.map{|recipe| recipe.cuisine}
+    cuisines = cuisines.filter{|cuisine| cuisine != "Any"}
+    cuisines.insert(0, "Any")
+    # byebug
+    return cuisines
+  end
+
+  def self.get_signed_urls(recipes_list)
+    # recipe_images_bucket = ApplicationRecord.storage_bucket(Rails.application.credentials.buckets[:recipe_images])
+    # test_images_bucket = ApplicationRecord.storage_bucket(Rails.application.credentials.buckets[:test_images])
+    # recipes_list.each do |recipe|
+      # recipe.image_url = ApplicationRecord.get_signed_url(recipe.image_url)
+      # image_name = recipe.image_url.split('/').last
+      # if recipe.image_url.include? "test-images"
+        # recipe.image_url = test_images_bucket.signed_url image_name, expires: 300
+      # else
+        # recipe.image_url = recipe_images_bucket.signed_url image_name, expires: 300
+      # end
+    # end
+    recipes_list.each { |recipe| recipe.image_url = ApplicationRecord.get_signed_url(recipe.image_url) }
+    return recipes_list
+  end
+
   def primary_images=(newRecipe_primary_images_params)
     recipe_images = RecipeImage.where(recipe_id: self.id)
     recipe_images.each { |use| use.hidden = true}
@@ -441,18 +565,24 @@ class Recipe < ApplicationRecord
     ingredients_ids = ingredientUses.map {|use| use.ingredient_id}
     instructions = Instruction.where(recipe: self, hidden: false).order(:step)
     instructions_ids = instructions.map {|instruction| instruction.id}
+    instruction_images = InstructionImage.where(instruction_id: instructions_ids, hidden: false)
+    instruction_images.each { |image| image.image_url = ApplicationRecord.get_signed_url(image.image_url)}
     make_pics = MakePic.where(recipe_id: self.id, hidden: false).order('updated_at DESC')
+    make_pics.each { |image| image.image_url = ApplicationRecord.get_signed_url(image.image_url)}
     make_pic_chef_ids = make_pics.map {|pic| pic.chef_id}
     make_pic_chefs_data = Chef.where(id: make_pic_chef_ids)
-    make_pic_chefs = make_pic_chefs_data.map {|chef| {id: chef.id, profile_text: chef.profile_text, username: chef.username, image_url: chef.image_url} }
-    return recipe_details = {recipe: self,
+    make_pic_chefs_data = make_pic_chefs_data.map {|chef| {id: chef.id, profile_text: chef.profile_text, username: chef.username, image_url: ApplicationRecord.get_signed_url(chef.image_url)} }
+    recipe_images = RecipeImage.where(recipe_id: self.id, hidden: false).order(:index)
+    recipe_images.each{ |image | image.image_url = ApplicationRecord.get_signed_url(image.image_url) }
+    return recipe_details = {
+        recipe: self,
         comments: Comment.find_by_sql(["SELECT comments.*, chefs.username, chefs.image_url
                                                 FROM comments
                                                 JOIN chefs ON chefs.id = comments.chef_id
                                                 WHERE comments.recipe_id = ?
                                                 AND comments.hidden = false
                                                 ORDER BY comments.updated_at DESC", self.id]),
-        recipe_images: RecipeImage.where(recipe_id: self.id, hidden: false).order(:index),
+        recipe_images: recipe_images,
         recipe_likes: RecipeLike.where(recipe_id: self.id, hidden: false).length,
         likeable: RecipeLike.where(chef_id: chef.id, hidden: false, recipe_id: self.id).empty?,
         re_shares: ReShare.where(recipe_id: self.id, hidden: false).length,
@@ -460,11 +590,11 @@ class Recipe < ApplicationRecord
         recipe_makes: RecipeMake.where(recipe_id: self.id, hidden: false).length,
         makeable: makeable,
         make_pics: make_pics,
-        make_pics_chefs: make_pic_chefs,
+        make_pics_chefs: make_pic_chefs_data,
         ingredient_uses: ingredientUses,
         ingredients: Ingredient.where(id: ingredients_ids),
         instructions: instructions,
-        instruction_images: InstructionImage.where(instruction_id: instructions_ids, hidden: false),
+        instruction_images: instruction_images,
         chef_username: self.chef.username,
         chef_id: self.chef.id,
     }

@@ -4,7 +4,7 @@ import { styles } from './recipeDetailsStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 
-const spinachLowImage = require("../dataComponents/spinach-low.jpg")
+const defaultChefImage = require("../dataComponents/default-chef.jpg")
 export default class RecipeComment extends React.PureComponent {
 
 	renderCommentDeleteButton = () => {
@@ -19,7 +19,7 @@ export default class RecipeComment extends React.PureComponent {
 
 	render() {
 		// console.log(this.props)
-		const imageUrl = this.props.image_url ? { uri: this.props.image_url } : spinachLowImage
+		const imageUrl = this.props.image_url ? { uri: this.props.image_url } : defaultChefImage
 		return (
 			<View style={styles.commentContainer}>
 				<View style={styles.commentLeftContainer}>

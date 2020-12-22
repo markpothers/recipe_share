@@ -3,10 +3,14 @@ import { Switch, Platform } from 'react-native'
 import * as Device from 'expo-device';
 
 export default function SwitchSized(props) {
-    let [deviceType, setDeviceType] = useState('')
+    let [deviceType, setDeviceType] = useState(0)
 
     useEffect(() => {
-        Device.getDeviceTypeAsync().then(deviceType => setDeviceType(deviceType))
+        const getDeviceType = async() => {
+            let deviceType = await Device.getDeviceTypeAsync()
+            setDeviceType(deviceType)
+        }
+        getDeviceType()
     }, [])
 
     return (

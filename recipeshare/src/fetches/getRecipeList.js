@@ -3,7 +3,6 @@ import { listsTimeout } from '../dataComponents/timeouts'
 
 export const getRecipeList = (listType, queryChefID, limit, offset, global_ranking, auth_token, filter_settings, cuisine, serves, searchTerm) => {
 	const filters = Object.keys(filter_settings).filter(category => filter_settings[category] === true).join("/").toLowerCase()
-
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
@@ -18,11 +17,12 @@ export const getRecipeList = (listType, queryChefID, limit, offset, global_ranki
 			},
 		})
 			.then(res => res.json())
-			.then(recipes => {
-				if (recipes.error && recipes.message == "Invalid authentication") {
+			.then(result => {
+				// console.log(result.cuisines)
+				if (result.error && result.message == "Invalid authentication") {
 					reject("logout")
 				}
-				resolve(recipes)
+				resolve(result)
 			})
 			.catch(() => {
 				reject()

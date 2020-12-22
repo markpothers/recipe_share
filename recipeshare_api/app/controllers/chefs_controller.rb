@@ -38,6 +38,7 @@ class ChefsController < ApplicationController
         # byebug
         @chefs = Chef.choose_list(params["listType"], params["queryChefID"], params["limit"], params["offset"], params["search_term"], @chef.id)
         # byebug
+        @chefs = Chef.get_signed_urls(@chefs)
         render json: @chefs
     end
 
@@ -98,7 +99,14 @@ class ChefsController < ApplicationController
     def update
         # byebug
         @chef = Chef.find(params[:id])
-        # @chef.username != chef_params[:username] ? @chef.update_attribute(:username, chef_params[:username]) : nil
+        if @chef.username != chef_params[:username]
+            if !Chef.valid_attribute?(:username, chef_params[:username])
+                render json: {error: true, message: ["Username must be unique and at least 3 characters"]}
+                return
+            else
+                @chef.update_attribute(:username, chef_params[:username])
+            end
+        end
         @chef.profile_text != chef_params[:profile_text] ? @chef.update_attribute(:profile_text, chef_params[:profile_text]) : nil
         @chef.country != chef_params[:country] ? @chef.update_attribute(:country, chef_params[:country]) : nil
         if image_params[:image_url] == "DELETED"

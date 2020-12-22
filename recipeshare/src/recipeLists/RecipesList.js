@@ -39,7 +39,7 @@ const mapStateToProps = (state) => ({
 	loggedInChef: state.loggedInChef,
 	global_ranking: state.global_ranking,
 	filter_settings: state.filter_settings,
-	cuisine: state.cuisine,
+	filterCuisines: state.filterCuisines,
 	serves: state.serves,
 })
 
@@ -69,6 +69,12 @@ const mapDispatchToProps = {
 			dispatch({ type: 'STORE_CHEF_DETAILS', chefID: `chef${chef_details.chef.id}`, chef_details: chef_details })
 		}
 	},
+	storeCuisinesChoices: (listChoice, cuisines) => {
+		// console.log(cuisines)
+		return dispatch => {
+			dispatch({ type: 'STORE_CUISINES_CHOICES', listChoice: listChoice, cuisines: cuisines })
+		}
+	}
 	// clearListedRecipes: (listChoice) => {
 	//   return dispatch => {
 	//     dispatch({ type: 'CLEAR_LISTED_RECIPES', recipeType: listChoice})
@@ -155,11 +161,12 @@ export class RecipesList extends React.Component {
 	fetchRecipeList = async () => {
 		try {
 			const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
-			let recipes = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.cuisine, this.props.serves, this.state.searchTerm)
-			if (recipes.length == 0) {
+			let result = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.filterCuisines[this.props.listChoice], this.props.serves, this.state.searchTerm)
+			if (result.recipes.length == 0) {
 				this.setState({ renderNoRecipesMessage: true })
 			}
-			this.props.storeRecipeList(this.props["listChoice"], recipes)
+			this.props.storeRecipeList(this.props["listChoice"], result.recipes)
+			this.props.storeCuisinesChoices(this.props["listChoice"], result.cuisines)
 		}
 		catch (e) {
 			if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
@@ -186,8 +193,9 @@ export class RecipesList extends React.Component {
 		await this.setState({ awaitingServer: true })
 		try {
 			const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
-			const new_recipes = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.cuisine, this.props.serves, this.state.searchTerm)
-			this.props.appendToRecipeList(this.props["listChoice"], new_recipes)
+			const result = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.filterCuisines[this.props.listChoice], this.props.serves, this.state.searchTerm)
+			this.props.appendToRecipeList(this.props["listChoice"], result.recipes)
+			this.props.storeCuisinesChoices(this.props["listChoice"], result.cuisines)
 		}
 		catch (e) {
 			if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
@@ -528,7 +536,7 @@ export class RecipesList extends React.Component {
 	}
 
 	render() {
-		// console.log(this.props[this.props["listChoice"] + `_Recipes`].length)
+		// console.log(this.props[this.props["listChoice"] + `_Recipes`][0].image_url)
 		// console.log('list start')
 		// console.warn('item')
 		// console.log(Constants.nativeBuildVersion)
@@ -643,7 +651,16 @@ export class RecipesList extends React.Component {
 						nestedScrollEnabled={true}
 						listKey={this.props[this.props["listChoice"] + `_Recipes`]}
 					/>
-					{this.state.filterDisplayed ? <FilterMenu handleFilterButton={this.handleFilterButton} refresh={this.refresh} closeFilterAndRefresh={this.closeFilterAndRefresh} confirmButtonText={`Apply \n& Close`} title={"Apply filters to recipes list"} /> : null}
+					{this.state.filterDisplayed && (
+						<FilterMenu
+							handleFilterButton={this.handleFilterButton}
+							refresh={this.refresh}
+							closeFilterAndRefresh={this.closeFilterAndRefresh}
+							confirmButtonText={`Apply \n& Close`}
+							title={"Apply filters to recipes list"}
+							listChoice={this.props["listChoice"]}
+						/>
+					)}
 				</TouchableOpacity>
 				<TouchableOpacity style={styles.filterButton} activeOpacity={0.7} onPress={this.handleFilterButton} testID={"filterButton"}>
 					<Icon name='filter' size={responsiveHeight(3.5)} style={styles.filterIcon} />

@@ -64,6 +64,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			this.props.country == "United States" ? this.updateChef(this.props.chef.country, "country") : null
 		}
 
+		renderUsernameError = () => {
+			const usernameError = this.state.errors.filter(message => message.startsWith("Username"))
+			return usernameError.map(error => (
+				<View style={[centralStyles.formErrorView, { width: '86%' }]} key={error}>
+					<Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>{error}</Text>
+				</View>
+			))
+		}
+
 		renderPasswordError = () => {
 			const passwordErrors = this.state.errors.filter(message => message.startsWith("Password"))
 			return passwordErrors.map(error => (
@@ -169,7 +178,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				if (updatedChef) {
 					// console.log(updatedChef)
 					if (updatedChef.error) {
-						this.setState({ errors: updatedChef.message })
+						this.props.isAwaitingServer(false)
+						this.setState({
+							updateModalVisible: true,
+							errors: updatedChef.message
+						})
 					} else {
 						if (this.props.stayingLoggedIn) {
 							AsyncStorage.setItem('chef', JSON.stringify(updatedChef), () => {
@@ -187,7 +200,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					this.setState({ updateModalVisible: true })
 				}
 			} else {
-				this.setState({ 
+				this.setState({
 					renderOfflineMessage: true,
 					updateModalVisible: true
 				})
@@ -207,7 +220,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		renderContents = () => {
-			// console.log(this.state.profileEditable)
+			// console.log(this.props.loggedInChef.username)
 			return (
 				<ScrollView>
 					{this.state.renderOfflineMessage && (
@@ -232,7 +245,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											maxFontSizeMultiplier={2}
 											style={centralStyles.formInput}
 											value={this.props.e_mail}
-											// editable={false}
+											editable={Platform.OS == 'ios' ? true : false}
 											ref={ref => this.emailInput = ref}
 											placeholder="e-mail"
 											keyboardType="email-address"
@@ -257,12 +270,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							</View>
 							<View style={[centralStyles.formSection, { width: '86%' }]}>
 								<View style={centralStyles.formInputContainer}>
-									<View style={[centralStyles.formInputWhiteBackground, { backgroundColor: '#dadada' }]}>
+									<View style={centralStyles.formInputWhiteBackground}>
 										<TextInput
 											maxFontSizeMultiplier={2}
 											style={centralStyles.formInput}
 											value={this.props.username}
-											editable={false}
 											placeholder="username"
 											autoCapitalize="none"
 											onChange={(e) => this.handleTextInput(e, "username")}
@@ -270,6 +282,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									</View>
 								</View>
 							</View>
+							{this.renderUsernameError()}
 							<View style={[centralStyles.formSection, { width: '86%' }]}>
 								<View style={centralStyles.formInputContainer} >
 									<View style={centralStyles.formInputWhiteBackground}>
@@ -293,7 +306,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 												await this.emailInput.focus()
 												await this.emailInput.blur()
 											}}
-											editable={this.state.profileEditable}
+											editable={Platform.OS == 'ios' ? this.state.profileEditable : true}
 											onChange={(e) => this.handleTextInput(e, "profile_text")}
 										/>
 										<TouchableOpacity //this button covers the profile input.  The trick here is that the profile input must be disabled else it breaks ios autofill
@@ -323,8 +336,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									/>
 								</View>
 							</View>
-							{this.state.updatingPassword ? this.renderNewPasswordOptions() : null}
-							{this.renderPasswordError()}
+							{this.state.updatingPassword && this.renderNewPasswordOptions()}
+							{this.state.updatingPassword && this.renderPasswordError()}
 							<View style={[centralStyles.formSection, { width: '100%' }]}>
 								<View style={[centralStyles.formInputContainer, { justifyContent: 'space-evenly' }]}>
 									{!this.state.updatingPassword ? this.renderNewPasswordButton() : this.renderCancelPasswordButton()}

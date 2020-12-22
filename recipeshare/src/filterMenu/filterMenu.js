@@ -12,8 +12,9 @@ import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-nat
 
 const mapStateToProps = (state) => ({
 	filter_settings: state.filter_settings,
-	cuisine: state.cuisine,
+	filterCuisines: state.filterCuisines,
 	serves: state.serves,
+	cuisineChoices: state.cuisineChoices
 })
 
 const mapDispatchToProps = {
@@ -27,9 +28,9 @@ const mapDispatchToProps = {
 			dispatch({ type: 'CLEAR_RECIPES_LIST_FILTERS', clearedFilters: clearedFilters })
 		}
 	},
-	setRecipesListCuisine: (cuisine) => {
+	setRecipesListCuisine: (cuisine, listChoice) => {
 		return dispatch => {
-			dispatch({ type: 'SET_RECIPES_LIST_CUISINE', cuisine: cuisine })
+			dispatch({ type: 'SET_RECIPES_LIST_CUISINE', cuisine: cuisine, listChoice: listChoice })
 		}
 	},
 	setRecipesListServes: (serves) => {
@@ -63,52 +64,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			})
 		}
 
-		// renderLeftColumnCategories = () => {
-		// 	const filtersList = this.props.newRecipe ? this.props.newRecipeFilterSettings : this.props.filter_settings
-		// 	return Object.keys(filtersList).sort().filter((cat, index) => index % 2 === 0).map(category => {
-		// 		return (
-		// 			<View
-		// 				style={styles.columnRow}
-		// 				key={category}>
-		// 				<View style={styles.switchContainer}>
-		// 					<Switch
-		// 						style={(Platform.OS == 'ios' ? { transform: [{ scaleX: .8 }, { scaleY: .8 }] } : null)}
-		// 						value={filtersList[category]}
-		// 						onChange={(e) => this.handleCategoryChange(category, e.nativeEvent.value)}
-		// 						trackColor={{ true: '#4b714299' }}
-		// 						thumbColor={filtersList[category] ? "#4b7142" : null}
-		// 					/>
-		// 				</View>
-		// 				<View style={styles.categoryContainer}>
-		// 					<Text maxFontSizeMultiplier={2} style={styles.categoryText}>{category}</Text>
-		// 				</View>
-		// 			</View>
-		// 		)
-		// 	})
-		// }
-
-		// renderRightColumnCategories = () => {
-		// 	const filtersList = this.props.newRecipe ? this.props.newRecipeFilterSettings : this.props.filter_settings
-		// 	return Object.keys(filtersList).sort().filter((cat, index) => index % 2 !== 0).map(category => {
-		// 		return (
-		// 			<View style={styles.columnRow} key={category}>
-		// 				<View style={styles.switchContainer}>
-		// 					<Switch
-		// 						style={(Platform.OS == 'ios' ? { transform: [{ scaleX: .8 }, { scaleY: .8 }] } : null)}
-		// 						value={filtersList[category]}
-		// 						onChange={(e) => this.handleCategoryChange(category, e.nativeEvent.value)}
-		// 						trackColor={{ true: '#4b714299' }}
-		// 						thumbColor={filtersList[category] ? "#4b7142" : null}
-		// 					/>
-		// 				</View>
-		// 				<View style={styles.categoryContainer}>
-		// 					<Text maxFontSizeMultiplier={2} style={styles.categoryText}>{category}</Text>
-		// 				</View>
-		// 			</View>
-		// 		)
-		// 	})
-		// }
-
 		handleApplyButton = () => {
 			this.props.newRecipe ? this.props.handleCategoriesButton() : this.props.closeFilterAndRefresh()
 		}
@@ -118,7 +73,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		handleCuisineChange = (cuisine) => {
-			this.props.newRecipe ? this.props.setNewRecipeCuisine(cuisine, "cuisine") : this.props.setRecipesListCuisine(cuisine)
+			this.props.newRecipe ? this.props.setNewRecipeCuisine(cuisine, "cuisine") : this.props.setRecipesListCuisine(cuisine, this.props.listChoice)
 		}
 
 		handleServesChange = (serves) => {
@@ -130,9 +85,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		render() {
-			// console.log(Platform)
-			let selectedCuisine = this.props.newRecipe ? this.props.newRecipeCuisine : this.props.cuisine
+			// console.log(this.props.cuisineChoices)
+			let selectedCuisine = this.props.newRecipe ? this.props.newRecipeCuisine : this.props.filterCuisines[this.props.listChoice]
 			let selectedServes = this.props.newRecipe ? this.props.newRecipeServes : this.props.serves
+
+			let availableCuisines = this.props.cuisineChoices[this.props.listChoice]
+			if (!availableCuisines || availableCuisines.length == 0){
+				availableCuisines = ["Any"]
+			}
+
 			return (
 				<Modal
 					animationType="fade"
@@ -146,15 +107,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							</View>
 							<ScrollView style={styles.categoriesScrollView}>
 								<View style={styles.columnsContainer}>
-									{/* <View style={styles.columnsInnerContainer}> */}
 									{this.renderFilterItems()}
-									{/* </View> */}
-									{/* <View style={styles.column}>
-										{this.renderLeftColumnCategories()}
-									</View>
-									<View style={styles.column}>
-										{this.renderRightColumnCategories()}
-									</View> */}
 								</View>
 							</ScrollView>
 							<View style={styles.bottomContainer}>
@@ -163,7 +116,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									<View style={styles.picker} >
 										<DualOSPicker
 											onChoiceChange={this.handleCuisineChange}
-											options={cuisines}
+											options={this.props.newRecipe ? cuisines : availableCuisines}
 											selectedChoice={selectedCuisine}
 											textAlignment={"flex-start"}
 										/>

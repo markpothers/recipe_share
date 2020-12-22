@@ -3,6 +3,11 @@ require "google/cloud/storage"
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
+  def self.storage()
+    storage = Google::Cloud::Storage.new project_id: Rails.application.credentials.Google[:project_id],
+                                        credentials: Rails.application.credentials.Google[:image_storage_handler_credentials]
+  end
+
   def self.storage_bucket(bucket)
     storage = Google::Cloud::Storage.new project_id: Rails.application.credentials.Google[:project_id],
                                         credentials: Rails.application.credentials.Google[:image_storage_handler_credentials]
@@ -18,6 +23,27 @@ class ApplicationRecord < ActiveRecord::Base
 	File.delete(file_path) if File.exist?(file_path)
     # puts save_record.media_url
     return save_record.media_url
+  end
+
+  def self.get_signed_url(url)
+    begin
+      if url.blank?
+        return ""
+      elsif url.include?("robohash") # for testing
+        return url
+      else
+        puts url
+        split_url = url.split('/')
+        file_name = split_url.last.partition("?").first
+        bucket = split_url[-2]
+        storage = ApplicationRecord.storage_bucket(bucket)
+        signed_url = storage.signed_url file_name, expires: 300
+        puts signed_url
+        return signed_url
+      end
+    rescue
+      return ""
+    end
   end
 
 end

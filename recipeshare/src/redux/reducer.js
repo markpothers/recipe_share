@@ -3,6 +3,9 @@ const reducer = (currentState, action) => {
 		case 'STORE_RECIPE_LISTS':
 			// console.log("saving recipes list")
 			return { ...currentState, recipes: { ...currentState.recipes, [action.recipeType]: action.recipeList } }
+		case 'STORE_CUISINES_CHOICES':
+			// console.log("saving recipes list")
+			return { ...currentState, cuisineChoices: { ...currentState.cuisineChoices, [action.listChoice]: action.cuisines } }
 		// case 'CLEAR_LISTED_RECIPES':
 		//     // console.log("clearing listed recipes")
 		//     return {...currentState, recipes: {...currentState.recipes, [action.recipeType]: []}}
@@ -201,7 +204,8 @@ const reducer = (currentState, action) => {
 		case 'CLEAR_RECIPES_LIST_FILTERS':
 			return { ...currentState, filter_settings: action.clearedFilters, cuisine: "Any", serves: "Any" }
 		case 'SET_RECIPES_LIST_CUISINE':
-			return { ...currentState, cuisine: action.cuisine }
+			// return { ...currentState, cuisine: action.cuisine }
+			return { ...currentState, filterCuisines: { ...currentState.filterCuisines, [action.listChoice]: action.cuisine } }
 		case 'SET_RECIPES_LIST_SERVES':
 			return { ...currentState, serves: action.serves }
 		case 'TOGGLE_NEW_RECIPE_FILTER_CATEGORY':

@@ -8,7 +8,7 @@ export const getNewPassword = (e_mail) => {
 			reject()
 		}, actionTimeout)
 
-		fetch(`${databaseURL}/password_reset?email=${e_mail}`, {
+		fetch(`${databaseURL}/password_reset?email=${e_mail.toLowerCase().trim()}`, {
 			method: "GET",
 			headers: {
 				'Content-Type': 'application/json'

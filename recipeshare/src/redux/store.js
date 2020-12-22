@@ -20,6 +20,16 @@ const initialState = {
     most_liked: [],
     most_made: []
   },
+  cuisineChoices: {
+    all: [],
+    chef: [],
+    chef_feed: [],
+    chef_liked: [],
+    chef_made: [],
+    global_ranks: [],
+    most_liked: [],
+    most_made: []
+  },
   recipes_details: {
 
   },
@@ -118,7 +128,16 @@ const initialState = {
     "Dairy free": false,
     "White meat": false,
   },
-  cuisine: "Any",
+  filterCuisines: {
+    all: "Any",
+    chef: "Any",
+    chef_feed: "Any",
+    chef_liked: "Any",
+    chef_made: "Any",
+    global_ranks: "Any",
+    most_liked: "Any",
+    most_made: "Any"
+  },
   serves: "Any",
   stayLoggedIn: false,
 }

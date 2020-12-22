@@ -1,7 +1,9 @@
+import saveChefDetailsLocally from '../auxFunctions/saveChefDetailsLocally'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { actionTimeout } from '../dataComponents/timeouts'
 
 export const loginChef = (chef) => {
+	// console.log(chef)
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
@@ -14,7 +16,10 @@ export const loginChef = (chef) => {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				chef: chef
+				chef: {
+					e_mail: chef.e_mail.toLowerCase().trim(),
+					password: chef.password.trim()
+				}
 			})
 		})
 			.then(res => res.json())

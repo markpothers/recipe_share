@@ -54,7 +54,7 @@ function AvatarImage(chefimage_url) {
 	const URL = chefimage_url.chefimage_url
 	if (!URL) {
 		return (
-			<Image style={styles.thumbnail} source={require("../dataComponents/spinach-low.jpg")} />
+			<Image style={styles.thumbnail} source={require("../dataComponents/default-chef.jpg")} />
 		)
 	} else {
 		return (
