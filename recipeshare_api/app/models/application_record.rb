@@ -32,13 +32,28 @@ class ApplicationRecord < ActiveRecord::Base
       elsif url.include?("robohash") # for testing
         return url
       else
-        puts url
+        # puts url
         split_url = url.split('/')
         file_name = split_url.last.partition("?").first
-        bucket = split_url[-2]
-        storage = ApplicationRecord.storage_bucket(bucket)
-        signed_url = storage.signed_url file_name, expires: 300
-        puts signed_url
+        chosen_bucket = ""
+        all_buckets = Rails.application.credentials.buckets.keys
+        split_url.each do |url_component|
+          all_buckets.each do |bucket|
+            if url_component == Rails.application.credentials.buckets[bucket]
+              chosen_bucket =  Rails.application.credentials.buckets[bucket]
+            end
+          end
+        end
+        storage = ApplicationRecord.storage_bucket(chosen_bucket)
+
+        # calculate a good expiration date at the beginning of next month to ensure that signed_urls are the same and images can be cached
+        today = DateTime.now()
+        next_reset_date = Date.today.at_beginning_of_month.next_month
+        next_next_reset_date = Date.today.at_beginning_of_month.next_month.next_month
+        days_until_reset = (next_reset_date - today).to_i
+
+        signed_url = storage.signed_url file_name, expires: (days_until_reset < 5 ? next_next_reset_date.to_time.to_i - DateTime.now().to_time.to_i : next_reset_date.to_time.to_i - DateTime.now().to_time.to_i)
+        # puts signed_url
         return signed_url
       end
     rescue

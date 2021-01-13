@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SpinachAppContainer renders with scrollView 1`] = `
+exports[`SpinachAppContainer renders with scrollView and activityIndicator on Android 1`] = `
 <RCTSafeAreaView
   emulateUnlessSupported={true}
   style={
@@ -14,17 +14,12 @@ exports[`SpinachAppContainer renders with scrollView 1`] = `
   <View
     onLayout={[Function]}
     style={
-      Array [
-        Object {
-          "alignItems": "center",
-          "borderColor": "red",
-          "borderWidth": 0,
-          "flex": 1,
-        },
-        Object {
-          "paddingBottom": 0,
-        },
-      ]
+      Object {
+        "alignItems": "center",
+        "borderColor": "red",
+        "borderWidth": 0,
+        "flex": 1,
+      }
     }
   >
     <Image
@@ -40,6 +35,32 @@ exports[`SpinachAppContainer renders with scrollView 1`] = `
         }
       }
     />
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#fff59b",
+          "borderColor": "#104e01",
+          "borderRadius": 100,
+          "borderWidth": 1,
+          "height": 50,
+          "justifyContent": "center",
+          "left": "45%",
+          "position": "absolute",
+          "top": "10%",
+          "width": 50,
+          "zIndex": 5,
+        }
+      }
+    >
+      <ActivityIndicator
+        animating={true}
+        color="#104e01"
+        hidesWhenStopped={true}
+        size="large"
+        style={Object {}}
+      />
+    </View>
     <RCTScrollView
       keyboardShouldPersistTaps="always"
       nestedScrollEnabled={true}
@@ -58,7 +79,7 @@ exports[`SpinachAppContainer renders with scrollView 1`] = `
 </RCTSafeAreaView>
 `;
 
-exports[`SpinachAppContainer renders with scrollView and activityIndicator 1`] = `
+exports[`SpinachAppContainer renders with scrollView and activityIndicator on IOS 1`] = `
 <RCTSafeAreaView
   emulateUnlessSupported={true}
   style={
@@ -147,7 +168,118 @@ exports[`SpinachAppContainer renders with scrollView and activityIndicator 1`] =
 </RCTSafeAreaView>
 `;
 
-exports[`SpinachAppContainer renders without scrollView 1`] = `
+exports[`SpinachAppContainer renders with scrollView on Android 1`] = `
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  style={
+    Object {
+      "borderColor": "blue",
+      "borderWidth": 0,
+      "flex": 1,
+    }
+  }
+>
+  <View
+    onLayout={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "borderColor": "red",
+        "borderWidth": 0,
+        "flex": 1,
+      }
+    }
+  >
+    <Image
+      resizeMode="cover"
+      source={1}
+      style={
+        Object {
+          "borderColor": "black",
+          "borderWidth": 0,
+          "height": 1334,
+          "position": "absolute",
+          "width": 750,
+        }
+      }
+    />
+    <RCTScrollView
+      keyboardShouldPersistTaps="always"
+      nestedScrollEnabled={true}
+      scrollEnabled={true}
+      style={
+        Object {
+          "borderColor": "yellow",
+          "borderWidth": 0,
+          "flex": 1,
+        }
+      }
+    >
+      <View />
+    </RCTScrollView>
+  </View>
+</RCTSafeAreaView>
+`;
+
+exports[`SpinachAppContainer renders with scrollView on IOS 1`] = `
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  style={
+    Object {
+      "borderColor": "blue",
+      "borderWidth": 0,
+      "flex": 1,
+    }
+  }
+>
+  <View
+    onLayout={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "borderColor": "red",
+          "borderWidth": 0,
+          "flex": 1,
+        },
+        Object {
+          "paddingBottom": 0,
+        },
+      ]
+    }
+  >
+    <Image
+      resizeMode="cover"
+      source={1}
+      style={
+        Object {
+          "borderColor": "black",
+          "borderWidth": 0,
+          "height": 1334,
+          "position": "absolute",
+          "width": 750,
+        }
+      }
+    />
+    <RCTScrollView
+      keyboardShouldPersistTaps="always"
+      nestedScrollEnabled={true}
+      scrollEnabled={true}
+      style={
+        Object {
+          "borderColor": "yellow",
+          "borderWidth": 0,
+          "flex": 1,
+        }
+      }
+    >
+      <View />
+    </RCTScrollView>
+  </View>
+</RCTSafeAreaView>
+`;
+
+exports[`SpinachAppContainer renders without scrollView and with ActivityIndicator on Android 1`] = `
 <RCTSafeAreaView
   emulateUnlessSupported={true}
   style={
@@ -171,10 +303,36 @@ exports[`SpinachAppContainer renders without scrollView 1`] = `
       }
     }
   />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#fff59b",
+        "borderColor": "#104e01",
+        "borderRadius": 100,
+        "borderWidth": 1,
+        "height": 50,
+        "justifyContent": "center",
+        "left": "45%",
+        "position": "absolute",
+        "top": "10%",
+        "width": 50,
+        "zIndex": 5,
+      }
+    }
+  >
+    <ActivityIndicator
+      animating={true}
+      color="#104e01"
+      hidesWhenStopped={true}
+      size="large"
+      style={Object {}}
+    />
+  </View>
 </RCTSafeAreaView>
 `;
 
-exports[`SpinachAppContainer renders without scrollView and with ActivityIndicator 1`] = `
+exports[`SpinachAppContainer renders without scrollView and with ActivityIndicator on IOS 1`] = `
 <RCTSafeAreaView
   emulateUnlessSupported={true}
   style={
@@ -229,5 +387,59 @@ exports[`SpinachAppContainer renders without scrollView and with ActivityIndicat
       }
     />
   </View>
+</RCTSafeAreaView>
+`;
+
+exports[`SpinachAppContainer renders without scrollView on Android 1`] = `
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  style={
+    Object {
+      "borderColor": "blue",
+      "borderWidth": 0,
+      "flex": 1,
+    }
+  }
+>
+  <Image
+    resizeMode="cover"
+    source={1}
+    style={
+      Object {
+        "borderColor": "black",
+        "borderWidth": 0,
+        "height": 1334,
+        "position": "absolute",
+        "width": 750,
+      }
+    }
+  />
+</RCTSafeAreaView>
+`;
+
+exports[`SpinachAppContainer renders without scrollView on IOS 1`] = `
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  style={
+    Object {
+      "borderColor": "blue",
+      "borderWidth": 0,
+      "flex": 1,
+    }
+  }
+>
+  <Image
+    resizeMode="cover"
+    source={1}
+    style={
+      Object {
+        "borderColor": "black",
+        "borderWidth": 0,
+        "height": 1334,
+        "position": "absolute",
+        "width": 750,
+      }
+    }
+  />
 </RCTSafeAreaView>
 `;

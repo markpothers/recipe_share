@@ -9,13 +9,16 @@ export const postRecipe = async (
 	ingredients,
 	instructions,
 	instructionImages,
-	time,
+	prep_time,
+	cook_time,
+	total_time,
 	difficulty,
 	primaryImages,
 	filter_settings,
 	cuisine,
 	serves,
 	acknowledgement,
+	acknowledgementLink,
 	description
 ) => {
 
@@ -67,13 +70,16 @@ export const postRecipe = async (
 					ingredients: ingredients,
 					instructions: instructions,
 					instruction_images: instructionImagesForRails,
-					time: time,
+					prep_time: prep_time,
+					cook_time: cook_time,
+					total_time: total_time,
 					difficulty: difficulty,
 					primary_images: primaryImagesForRails,
 					filter_settings: filter_settings,
 					cuisine: cuisine,
 					serves: serves,
 					acknowledgement: acknowledgement,
+					acknowledgement_link: acknowledgementLink,
 					description: description
 				}
 			})

@@ -262,10 +262,8 @@ class Chef < ApplicationRecord
         recipes = Recipe.where(chef_id: self.id, hidden: false).order('updated_at DESC')
 		recipe_ids = recipes.map{|recipe| recipe.id}
         # byebug
-        make_pics = MakePic.joins(:recipe).where(chef_id: self.id, hidden: false, recipes: {hidden: false}).order('updated_at DESC')
-        make_pics.each { |image| image.image_url = ApplicationRecord.get_signed_url(image.image_url)}
-        make_pics_received = MakePic.where(recipe_id: recipe_ids, hidden: false)
-        make_pics_received.each { |image| image.image_url = ApplicationRecord.get_signed_url(image.image_url)}
+        make_pics = MakePic.joins(:recipe).where(chef_id: self.id, hidden: false, recipes: {hidden: false}).order('updated_at DESC').length
+        make_pics_received = MakePic.where(recipe_id: recipe_ids, hidden: false).length
         return chef_details = {
             chef: {id: self.id,
                     username: self.username,
@@ -273,19 +271,19 @@ class Chef < ApplicationRecord
                     image_url: ApplicationRecord.get_signed_url(self.image_url),
                     created_at: self.created_at,
                     profile_text: self.profile_text},
-            comments: Comment.where(chef_id: self.id, hidden: false).order('updated_at DESC'),
-            recipe_likes: RecipeLike.joins(:recipe).where(chef_id: self.id, hidden: false, recipes: {hidden: false}),
-            recipe_makes: RecipeMake.joins(:recipe).where(chef_id: self.id, hidden: false, recipes: {hidden: false}),
-            re_shares: ReShare.joins(:recipe).where(chef_id: self.id, hidden: false, recipes: {hidden: false}),
+            comments: Comment.where(chef_id: self.id, hidden: false).order('updated_at DESC').length,
+            recipe_likes: RecipeLike.joins(:recipe).where(chef_id: self.id, hidden: false, recipes: {hidden: false}).length,
+            # recipe_makes: RecipeMake.joins(:recipe).where(chef_id: self.id, hidden: false, recipes: {hidden: false}),
+            re_shares: ReShare.joins(:recipe).where(chef_id: self.id, hidden: false, recipes: {hidden: false}).length,
             make_pics: make_pics,
-            recipes: recipes,
-            recipe_likes_received: RecipeLike.where(recipe_id: recipe_ids, hidden: false),
-            recipe_makes_received: RecipeMake.where(recipe_id: recipe_ids, hidden: false),
-            comments_received: Comment.where(recipe_id: recipe_ids, hidden: false),
-            re_shares_received: ReShare.where(recipe_id: recipe_ids, hidden: false),
+            recipes: recipes.length,
+            recipe_likes_received: RecipeLike.where(recipe_id: recipe_ids, hidden: false).length,
+            # recipe_makes_received: RecipeMake.where(recipe_id: recipe_ids, hidden: false),
+            comments_received: Comment.where(recipe_id: recipe_ids, hidden: false).length,
+            re_shares_received: ReShare.where(recipe_id: recipe_ids, hidden: false).length,
             make_pics_received: make_pics_received,
-            followers: Follow.where(followee_id: self.id, hidden: false),
-            following: Follow.where(follower_id: self.id, hidden: false),
+            followers: Follow.where(followee_id: self.id, hidden: false).length,
+            following: Follow.where(follower_id: self.id, hidden: false).length,
             chef_followed: Follow.where(followee_id: self.id, follower_id: userChef.id, hidden: false).length>0,
             chef_commented: Comment.where(recipe_id: recipe_ids, chef_id: userChef.id, hidden: false).length>0,
             chef_liked: RecipeLike.where(recipe_id: recipe_ids, chef_id: userChef.id, hidden: false).length>0,

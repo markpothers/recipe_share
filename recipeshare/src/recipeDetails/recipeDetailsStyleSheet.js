@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
 		borderStyle: 'solid',
 		borderWidth: 1,
 		borderColor: '#104e01',
-		width: '100%',
+		width: responsiveWidth(100),
 		justifyContent: 'center',
 		alignItems: 'center',
 		marginLeft: '0%',
@@ -38,7 +38,7 @@ export const styles = StyleSheet.create({
 		borderStyle: 'solid',
 		borderWidth: 1,
 		borderColor: '#104e01',
-		width: '100%',
+		width: responsiveWidth(100),
 		marginLeft: '0%',
 		marginRight: '0%',
 		marginTop: responsiveHeight(0.5),
@@ -86,7 +86,7 @@ export const styles = StyleSheet.create({
 		borderStyle: 'solid',
 		borderWidth: 1,
 		borderColor: '#104e01',
-		width: '100%',
+		width: responsiveWidth(100),
 		marginLeft: '0%',
 		marginRight: '0%',
 		marginTop: responsiveHeight(0.5),
@@ -99,7 +99,7 @@ export const styles = StyleSheet.create({
 		borderStyle: 'solid',
 		borderWidth: 1,
 		borderColor: '#104e01',
-		// width: '100%',
+		width: responsiveWidth(100),
 		// marginLeft: '0%',
 		// marginRight: '0%',
 		marginTop: responsiveHeight(0.5),
@@ -116,6 +116,7 @@ export const styles = StyleSheet.create({
 		// justifyContent: 'center',
 		// borderWidth: 1,
 		// borderColor: 'teal',
+		width: responsiveWidth(100),
 	},
 	detailsLikes: {
 		borderStyle: 'solid',
@@ -133,7 +134,13 @@ export const styles = StyleSheet.create({
 		paddingTop: '0.5%',
 		paddingBottom: '0.5%',
 		// height: 30,
-		justifyContent: 'center',
+		justifyContent: 'space-evenly',
+		alignItems: 'center',
+	},
+	detailsTimings: {
+		width: '100%',
+		flexDirection: 'row',
+		justifyContent: 'space-evenly',
 		alignItems: 'center',
 	},
 	buttonAndText: {
@@ -149,7 +156,7 @@ export const styles = StyleSheet.create({
 	},
 	icon: {
 		color: "#505050",
-		bottom: responsiveHeight(0.2)
+		// bottom: responsiveHeight(0.2)
 	},
 	addIcon: {
 		color: "#505050",
@@ -245,12 +252,20 @@ export const styles = StyleSheet.create({
 		marginLeft: '5%',
 		bottom: responsiveHeight(0.2)
 	},
-	detailsLikesAndMakesLowerContents: {
+	detailsLikesAndMakesLowerContentsAllTimings: {
 		fontSize: responsiveFontSize(2.2),
 		color: "#505050",
 		textAlign: 'center',
-		flex: 1,
-		bottom: responsiveHeight(0.2),
+		// borderWidth: 1,
+		maxWidth: responsiveWidth(30)
+	},
+	detailsLikesAndMakesLowerContentsLimitedTimings: {
+		fontSize: responsiveFontSize(2.2),
+		color: "#505050",
+		textAlign: 'left',
+		maxWidth: '100%',
+		width: '100%',
+		// borderWidth: 1
 	},
 	detailsImage: {
 		borderRadius:responsiveWidth(1.5),
@@ -301,7 +316,7 @@ export const styles = StyleSheet.create({
 		paddingTop: '1%',
 		borderColor: '#104e01',
 		// height: 500,
-		width: '100%',
+		width: responsiveWidth(100),
 		marginLeft: '0%',
 		marginRight: '0%',
 		marginTop: responsiveHeight(0.5),
@@ -441,7 +456,7 @@ export const styles = StyleSheet.create({
 		borderWidth: 1,
 		borderColor: '#104e01',
 		backgroundColor: 'white',
-		width: '100%',
+		width: responsiveWidth(100),
 		marginLeft: '0%',
 		marginRight: '0%',
 		marginTop: responsiveHeight(0.5),

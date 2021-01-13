@@ -6,11 +6,11 @@ class RecipesController < ApplicationController
     skip_before_action :define_current_recipe, :only => [:index, :create, :details]
 
     def index
-        puts "getting recipe list: #{params["listType"]}"
+        # puts "getting recipe list: #{params["listType"]}"
         @recipes = Recipe.choose_list(params["listType"], params["queryChefID"], params["limit"], params["offset"], params["global_ranking"], @chef.id, params["filters"], params["cuisine"], params["serves"], params["search_term"])
         @recipes = Recipe.get_signed_urls(@recipes)
         @cuisines = Recipe.get_cuisines(params["listType"], @chef.id, params["queryChefID"], params["filters"], params["serves"], params["search_term"])
-        puts "rendering"
+        # puts "rendering"
         render json: {recipes: @recipes, cuisines: @cuisines}
     end
 
@@ -21,7 +21,7 @@ class RecipesController < ApplicationController
     def create
         if newRecipe_params[:chef_id] === @chef.id || @chef.is_admin === true
             @recipe = Recipe.new(newRecipe_params)
-            @recipe.chef_id=@chef.id
+            @recipe.chef_id = @chef.id
             newRecipe_filter_settings["filter_settings"].keys.each do |category|
                 newRecipe_filter_settings["filter_settings"][category] ? @recipe[category.downcase.split(" ").join("_")] = true : @recipe[category.downcase.split(" ").join("_")] = false
             end
@@ -100,7 +100,7 @@ class RecipesController < ApplicationController
     end
 
     def newRecipe_params
-        params.require(:recipe).permit(:chef_id, :name, :time, :difficulty, :cuisine, :serves, :acknowledgement, :description)
+        params.require(:recipe).permit(:name, :prep_time, :cook_time, :total_time, :difficulty, :cuisine, :serves, :acknowledgement, :acknowledgement_link, :description)
     end
 
     # def newRecipe_primary_image_as_base64_params

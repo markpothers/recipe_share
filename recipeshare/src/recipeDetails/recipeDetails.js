@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, ScrollView, View, Text, TouchableOpacity, FlatList, AsyncStorage, KeyboardAvoidingView, Platform } from 'react-native';
+import { Image, ScrollView, View, Text, TouchableOpacity, FlatList, AsyncStorage, KeyboardAvoidingView, Platform, Linking } from 'react-native';
 import { connect } from 'react-redux'
 import { styles } from './recipeDetailsStyleSheet'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
@@ -25,8 +25,11 @@ import NetInfo from '@react-native-community/netinfo';
 import { AlertPopUp } from '../alertPopUp/alertPopUp'
 import DynamicMenu from '../dynamicMenu/DynamicMenu.js'
 import saveChefDetailsLocally from '../auxFunctions/saveChefDetailsLocally'
+import { getTimeStringFromMinutes } from '../auxFunctions/getTimeStringFromMinutes'
 import { getChefDetails } from '../fetches/getChefDetails'
 import AppHeaderRight from '../../navigation/appHeaderRight'
+
+const defaultRecipeImage = require("../dataComponents/default-recipe.jpg")
 
 const mapStateToProps = (state) => ({
 	recipe_details: state.recipe_details,
@@ -381,7 +384,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						key={`${make_pic.id}${make_pic.image_url}`}
 						style={styles.makePicContainer}
 					>
-						<Image style={[{ width: '100%', height: '100%' }, styles.makePic]} source={{ uri: make_pic.image_url }}></Image>
+						<Image style={[{ width: '100%', height: '100%', marginHorizontal: 1 }, styles.makePic]} source={{ uri: make_pic.image_url }}></Image>
 						{(make_pic.chef_id === this.props.loggedInChef.id || this.props.loggedInChef.is_admin) && (
 							<TouchableOpacity style={styles.makePicTrashCanButton} onPress={() => this.setState({ deleteMakePicPopUpShowing: true, makePicToDelete: make_pic.id })}>
 								<Icon name='trash-can-outline' size={responsiveHeight(3.5)} style={[styles.icon, styles.makePicTrashCan]} />
@@ -695,9 +698,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		renderAcknowledgement = () => {
+			let displayLink = this.props.recipe_details.recipe.acknowledgement_link && this.props.recipe_details.recipe.acknowledgement_link.length > 0
 			return (
 				<View style={styles.detailsContainer}>
-					<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Acknowledgement:</Text>
+					<View style={{ flexDirection: 'row' }}>
+						<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Acknowledgement:</Text>
+						{displayLink ? ( //using && here creates a bug about text strings. no idea why
+							<TouchableOpacity onPress={() => Linking.openURL(this.props.recipe_details.recipe.acknowledgement_link)}>
+								<Icon name='link' size={responsiveHeight(3.5)} style={styles.addIcon} />
+							</TouchableOpacity>
+						) : null}
+					</View>
 					<Text maxFontSizeMultiplier={2} style={styles.detailsContents}>{this.props.recipe_details.recipe.acknowledgement}</Text>
 				</View>
 			)
@@ -838,7 +849,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		render() {
 			if (this.props.recipe_details != undefined && this.props.recipe_details != null) {
-				// console.log(this.props.recipe_details.recipe_images)
+				let notShowingAllTimes = this.props.recipe_details.recipe.prep_time == 0 || this.props.recipe_details.recipe.cook_time == 0
+				// console.log(this.props.recipe_details)
 				return (
 					<SpinachAppContainer awaitingServer={this.state.awaitingServer}>
 						{this.state.renderOfflineMessage && (
@@ -904,15 +916,42 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									<View style={styles.detailsLikes}>
 										<View style={styles.buttonAndText}>
 											{this.renderLikeButton()}
-											<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesUpperContents}>Likes: {this.props.recipe_details.recipe_likes}</Text>
+											<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesLowerContentsAllTimings}>&nbsp;{this.props.recipe_details.recipe_likes}</Text>
 										</View>
 										<View style={styles.buttonAndText}>
-											<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesLowerContents}>Serves: {this.props.recipe_details.recipe.serves}</Text>
+											<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesLowerContentsAllTimings}>Serves: {this.props.recipe_details.recipe.serves}</Text>
+										</View>
+										<View style={styles.buttonAndText}>
+											<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesLowerContentsAllTimings}>Difficulty: {this.props.recipe_details.recipe.difficulty}</Text>
 										</View>
 									</View>
-									<View style={styles.detailsLikes}>
-										<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesLowerContents}>Time: {this.props.recipe_details.recipe.time}</Text>
-										<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesLowerContents}>Difficulty: {this.props.recipe_details.recipe.difficulty}</Text>
+								</View>
+								<View style={styles.detailsContainer}>
+									<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Timings:</Text>
+									<View style={[
+										styles.detailsTimings,
+										(notShowingAllTimes ? { justifyContent: 'flex-start', marginLeft: responsiveWidth(5), width: responsiveWidth(93), flexDirection: 'column' } : null)
+									]}>
+										{this.props.recipe_details.recipe.prep_time > 0 && <Text maxFontSizeMultiplier={2} style={notShowingAllTimes ? styles.detailsLikesAndMakesLowerContentsLimitedTimings : styles.detailsLikesAndMakesLowerContentsAllTimings}>Prep Time: {getTimeStringFromMinutes(this.props.recipe_details.recipe.prep_time)}</Text>}
+										{this.props.recipe_details.recipe.prep_time > 0 && this.props.recipe_details.recipe.cook_time > 0 && (
+											<Text maxFontSizeMultiplier={2} style={notShowingAllTimes ? styles.detailsLikesAndMakesLowerContentsLimitedTimings : styles.detailsLikesAndMakesLowerContentsAllTimings}> + </Text>
+										)}
+										{this.props.recipe_details.recipe.cook_time > 0 && <Text maxFontSizeMultiplier={2} style={notShowingAllTimes ? styles.detailsLikesAndMakesLowerContentsLimitedTimings : styles.detailsLikesAndMakesLowerContentsAllTimings}>Cook Time: {getTimeStringFromMinutes(this.props.recipe_details.recipe.cook_time)}</Text>}
+										{this.props.recipe_details.recipe.prep_time > 0 && this.props.recipe_details.recipe.cook_time > 0 && (
+											<Text maxFontSizeMultiplier={2} style={notShowingAllTimes ? styles.detailsLikesAndMakesLowerContentsLimitedTimings : styles.detailsLikesAndMakesLowerContentsAllTimings}>&asymp;</Text>
+										)}
+										{/* {!(this.props.recipe_details.recipe.prep_time > 0 && this.props.recipe_details.recipe.cook_time > 0)
+											&& (notShowingAllTimes)
+											&& (
+												<Text maxFontSizeMultiplier={2} style={notShowingAllTimes ? styles.detailsLikesAndMakesLowerContentsLimitedTimings : styles.detailsLikesAndMakesLowerContentsAllTimings}> / </Text>
+											)
+										} */}
+										<Text
+											maxFontSizeMultiplier={2}
+											style={notShowingAllTimes ? styles.detailsLikesAndMakesLowerContentsLimitedTimings : styles.detailsLikesAndMakesLowerContentsAllTimings}
+										>
+											Total Time: {getTimeStringFromMinutes(this.props.recipe_details.recipe.total_time)}
+										</Text>
 									</View>
 								</View>
 								{(this.props.recipe_details.recipe.description != "" && this.props.recipe_details.recipe.description != null) && this.renderDescription()}
@@ -920,7 +959,20 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									<View style={styles.detailsImageWrapper}>
 										<FlatList
 											data={this.props.recipe_details.recipe_images}
-											renderItem={item => <Image style={{ width: responsiveWidth(100) - 3, height: responsiveWidth(75) - 2, borderRadius:responsiveWidth(1.5), top: 1, marginRight: 1 }} source={{ uri: item.item.image_url }} resizeMode={"cover"}></Image>}
+											renderItem={item => (
+												<Image
+													style={{
+														width: responsiveWidth(100) - 4,
+														height: responsiveWidth(75) - 2,
+														borderRadius: responsiveWidth(1.5),
+														top: 1,
+														left: 1,
+														marginRight: 2
+													}}
+													source={item.item.image_url ? { uri: item.item.image_url } : defaultRecipeImage}
+													resizeMode={"cover"}
+												/>
+											)}
 											keyExtractor={(item) => item.hex}
 											horizontal={true}
 											style={styles.primaryImageFlatList}
@@ -976,7 +1028,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											<Icon name={this.state.commenting ? (this.state.commentText === "" ? 'comment-remove' : 'comment-check') : 'comment-plus'} size={responsiveHeight(3.5)} style={styles.addIcon} />
 										</TouchableOpacity>
 									</View>
-									{this.state.commenting ? <RecipeNewComment scrollToLocation={this.scrollToLocation} {...this.props.loggedInChef} commentText={this.state.commentText} handleCommentTextInput={this.handleCommentTextInput} saveComment={this.saveComment} /> : null}
+									{this.state.commenting ? <RecipeNewComment scrollToLocation={this.scrollToLocation} {...this.props.loggedInChef} commentText={this.state.commentText} handleCommentTextInput={this.handleCommentTextInput} /> : null}
 									{this.renderRecipeComments()}
 								</View>
 							</ScrollView>

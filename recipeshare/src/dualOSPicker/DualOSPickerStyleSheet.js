@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
 	androidPicker: {
 		height: '100%',
 		width: '100%',
-		justifyContent: 'center',
+		justifyContent: 'flex-end',
 	},
 	// IOSPicker: {
 	// 	height: '100%',
@@ -44,6 +44,8 @@ export const styles = StyleSheet.create({
 		height: '100%',
 		width: '100%',
 		// borderWidth: 1,
+		// borderColor: 'red',
+		borderRadius:responsiveWidth(1.5),
 	},
 	IOSSelectedChoiceContainer: {
 		width: '100%',

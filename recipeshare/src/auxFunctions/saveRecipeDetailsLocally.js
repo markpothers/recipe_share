@@ -1,6 +1,5 @@
 import { AsyncStorage } from 'react-native';
 
-
 const saveRecipeDetailsLocally = (recipeDetails, userId) => {
 	AsyncStorage.getItem('localRecipeDetails', (err, res) => {
 		if (res != null) {
@@ -14,29 +13,20 @@ const saveRecipeDetailsLocally = (recipeDetails, userId) => {
 			const oneWeek = 1000 * 60 * 60 * 24 * 7
 			const threeMonths = 1000 * 60 * 60 * 24 * 90
 			newRecipesList = newRecipesList.filter(listRecipe => {
-				// console.log(listRecipe.recipe.id)
-				// console.log(listRecipe)
 				if (listRecipe.recipe.chef_id == userId) { //keep user recipes forever
-					// console.log('recipe is mine')
 					return listRecipe
 				} else if (listRecipe.dateSaved >= date - oneWeek) { //keep viewed recipes for one month
-					// console.log('recipe is young')
 					return listRecipe
 				} else if (!listRecipe.likeable && listRecipe.dateSaved >= date - threeMonths) { //keep liked recipes for three months
-					// console.log('recipe is liked')
 					return listRecipe
 				} else {
-					null
+					return
 				}
 			})
-			AsyncStorage.setItem('localRecipeDetails', JSON.stringify(newRecipesList), () => {
-				// console.log('localRecipeDetails saved')
-			})
+			AsyncStorage.setItem('localRecipeDetails', JSON.stringify(newRecipesList), () => {})
 		} else {
 			let newRecipesList = [recipeDetails]
-			AsyncStorage.setItem('localRecipeDetails', JSON.stringify(newRecipesList), () => {
-				// console.log('initial recipe  saved')
-			})
+			AsyncStorage.setItem('localRecipeDetails', JSON.stringify(newRecipesList), () => {})
 		}
 	})
 }

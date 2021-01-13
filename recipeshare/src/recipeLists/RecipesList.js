@@ -209,7 +209,7 @@ export class RecipesList extends React.Component {
 		try {
 			const recipeDetails = await getRecipeDetails(recipeID, this.props.loggedInChef.auth_token)
 			if (recipeDetails) {
-				// console.log(recipeDetails)
+				// console.log(recipeDetails.recipe)
 				saveRecipeDetailsLocally(recipeDetails, this.props.loggedInChef.id)
 				await this.props.storeRecipeDetails(recipeDetails)
 				await this.setState({
@@ -536,7 +536,7 @@ export class RecipesList extends React.Component {
 	}
 
 	render() {
-		// console.log(this.props[this.props["listChoice"] + `_Recipes`][0].image_url)
+		// console.log(this.props[this.props["listChoice"] + `_Recipes`][0])
 		// console.log('list start')
 		// console.warn('item')
 		// console.log(Constants.nativeBuildVersion)

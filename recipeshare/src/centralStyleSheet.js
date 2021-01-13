@@ -95,6 +95,7 @@ export const centralStyles = StyleSheet.create({
 		overflow: 'hidden',
 		flexWrap: 'wrap',
 		minHeight: responsiveHeight(6),
+		borderWidth: inDevelopment ? 1 : 0,
 		// backgroundColor: 'white'
 	},
 	formInputWhiteBackground: {

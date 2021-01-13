@@ -9,7 +9,9 @@ export const patchRecipe = async(
 	ingredients,
 	instructions,
 	instructionImages,
-	time,
+	prep_time,
+	cook_time,
+	total_time,
 	difficulty,
 	primaryImages,
 	filter_settings,
@@ -17,6 +19,7 @@ export const patchRecipe = async(
 	serves,
 	recipeID,
 	acknowledgement,
+	acknowledgementLink,
 	description
 ) => {
 
@@ -74,13 +77,16 @@ export const patchRecipe = async(
 					ingredients: ingredients,
 					instructions: instructions,
 					instruction_images: instructionImagesForRails,
-					time: time,
+					prep_time: prep_time,
+					cook_time: cook_time,
+					total_time: total_time,
 					difficulty: difficulty,
 					primary_images: primaryImagesForRails,
 					filter_settings: filter_settings,
 					cuisine: cuisine,
 					serves: serves,
 					acknowledgement: acknowledgement,
+					acknowledgement_link: acknowledgementLink,
 					description: description
 				}
 			})

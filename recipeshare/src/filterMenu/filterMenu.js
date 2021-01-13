@@ -1,6 +1,7 @@
 import React from 'react'
 import { Modal, Text, View, TouchableOpacity, ScrollView } from 'react-native'
 import { styles } from './filterMenuStyleSheet'
+import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux'
 import { cuisines } from '../dataComponents/cuisines'
@@ -134,13 +135,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									</View>
 								</View>
 								<View style={styles.clearFiltersButtonContainer}>
-									<TouchableOpacity style={styles.clearFiltersButton} activeOpacity={0.7} title="clearFilters" onPress={this.handleClearButton}>
-										<Icon style={styles.clearFiltersIcon} size={responsiveHeight(4)} name='cancel' />
-										<Text maxFontSizeMultiplier={2} style={styles.clearFiltersButtonText}>Clear{"\n"}filters</Text>
+									<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} title="clearFilters" onPress={this.handleClearButton}>
+										<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='cancel' />
+										<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>Clear{"\n"}filters</Text>
 									</TouchableOpacity>
-									<TouchableOpacity style={styles.applyFiltersButton} activeOpacity={0.7} title="applyFilters" onPress={this.handleApplyButton}>
-										<Icon style={styles.applyFiltersIcon} size={responsiveHeight(4)} name='check' />
-										<Text maxFontSizeMultiplier={2} style={styles.applyFiltersButtonText}>{this.props.confirmButtonText}</Text>
+									<TouchableOpacity style={centralStyles.greenRectangleButton} activeOpacity={0.7} title="applyFilters" onPress={this.handleApplyButton}>
+										<Icon style={centralStyles.yellowButtonIcon} size={responsiveHeight(4)} name='check' />
+										<Text maxFontSizeMultiplier={2} style={centralStyles.yellowButtonText}>{this.props.confirmButtonText}</Text>
 									</TouchableOpacity>
 								</View>
 							</View>

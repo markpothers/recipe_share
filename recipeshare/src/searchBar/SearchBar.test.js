@@ -72,7 +72,7 @@ describe('Search Bar', () => {
 		expect(mockSetFunction).toHaveBeenCalledWith('spaghetti')
 	})
 
-	test('the delete button clears the clears the searchTerm of text', () => {
+	test('renders with text and the delete button clears the clears the searchTerm of text', () => {
 		act(() => {
 			component.update(
 				<SearchBar

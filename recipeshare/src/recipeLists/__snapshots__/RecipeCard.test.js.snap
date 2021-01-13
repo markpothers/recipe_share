@@ -143,7 +143,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
             }
           }
         >
-          Prep time: 
+          Total time: 
           06:00
         </Text>
         <Text
@@ -530,7 +530,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
             }
           }
         >
-          Prep time: 
+          Total time: 
           04:15
         </Text>
         <Text
@@ -921,7 +921,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
             }
           }
         >
-          Prep time: 
+          Total time: 
           06:00
         </Text>
         <Text
@@ -1308,7 +1308,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
             }
           }
         >
-          Prep time: 
+          Total time: 
           03:30
         </Text>
         <Text
@@ -1699,7 +1699,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
             }
           }
         >
-          Prep time: 
+          Total time: 
           05:00
         </Text>
         <Text
@@ -2090,7 +2090,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
             }
           }
         >
-          Prep time: 
+          Total time: 
           03:45
         </Text>
         <Text
@@ -2481,7 +2481,7 @@ exports[`Recipe Card can be rendered when the recipe has NO COVER IMAGE and matc
             }
           }
         >
-          Prep time: 
+          Total time: 
           01:00
         </Text>
         <Text
@@ -2943,7 +2943,7 @@ exports[`Recipe Card can be rendered when the recipe has a LONG RESHARER USERNAM
             }
           }
         >
-          Prep time: 
+          Total time: 
           01:00
         </Text>
         <Text
@@ -3330,7 +3330,7 @@ exports[`Recipe Card can be rendered when the recipe has been COMMENTED and matc
             }
           }
         >
-          Prep time: 
+          Total time: 
           02:45
         </Text>
         <Text
@@ -3721,7 +3721,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED and matches 
             }
           }
         >
-          Prep time: 
+          Total time: 
           02:30
         </Text>
         <Text
@@ -4112,7 +4112,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED, COMMENTED, 
             }
           }
         >
-          Prep time: 
+          Total time: 
           02:45
         </Text>
         <Text
@@ -4578,7 +4578,7 @@ exports[`Recipe Card can be rendered when the recipe has been RE_SHARED BY SOMEO
             }
           }
         >
-          Prep time: 
+          Total time: 
           02:30
         </Text>
         <Text
@@ -4969,7 +4969,7 @@ exports[`Recipe Card can be rendered when the recipe has been SHARED and matches
             }
           }
         >
-          Prep time: 
+          Total time: 
           02:30
         </Text>
         <Text
@@ -5360,7 +5360,7 @@ exports[`Recipe Card can be rendered when the recipe has been a LONG RECIPE NAME
             }
           }
         >
-          Prep time: 
+          Total time: 
           01:45
         </Text>
         <Text
@@ -5751,7 +5751,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with NO 
             }
           }
         >
-          Prep time: 
+          Total time: 
           03:45
         </Text>
         <Text
@@ -6138,7 +6138,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with a L
             }
           }
         >
-          Prep time: 
+          Total time: 
           01:00
         </Text>
         <Text

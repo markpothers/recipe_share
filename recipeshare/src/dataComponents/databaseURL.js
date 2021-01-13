@@ -1,8 +1,8 @@
 // export const databaseURL = 'http://73.166.74.229:3000'
 
-// export const databaseURL = 'http://10.0.0.145:3000/api'
+export const databaseURL = 'http://10.0.0.145:3000/api'
 
-export const databaseURL = 'http://192.168.1.150:3000/api'
+// export const databaseURL = 'http://192.168.1.150:3000/api'
 
 // export const databaseURL = 'http://34.68.157.148'
 

@@ -15,7 +15,7 @@ export default function SwitchSized(props) {
 
     return (
         <Switch
-            //reduce size on iPhones (deviceType == 1 ) but not on anything elseiPads
+            //reduce size on iPhones (deviceType == 1 ) but not on anything else
             style={(Platform.OS === 'ios' && deviceType == 1 ? { transform: [{ scaleX: .7 }, { scaleY: .7 }] } : null)}
             value={props.value}
             onChange={props.onChange}

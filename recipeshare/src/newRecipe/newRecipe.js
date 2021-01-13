@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { styles } from './newRecipeStyleSheet'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { times } from '../dataComponents/times'
+import { times, doubleTimes } from '../dataComponents/times'
 import { difficulties } from '../dataComponents/difficulties'
 import { postRecipe } from '../fetches/postRecipe'
 import { patchRecipe } from '../fetches/patchRecipe'
@@ -23,7 +23,7 @@ import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo';
 import { AlertPopUp } from '../alertPopUp/alertPopUp';
 import AppHeader from '../../navigation/appHeader'
-
+import { getTimeStringFromMinutes, getMinutesFromTimeString } from '../auxFunctions/getTimeStringFromMinutes'
 
 const mapStateToProps = (state) => ({
 	loggedInChef: state.loggedInChef
@@ -104,7 +104,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					// }
 				],
 				difficulty: "0",
-				time: "00:15",
+				times: {
+					prepTime: 0,
+					cookTime: 0,
+					totalTime: 0,
+				},
 				primaryImages: [{ uri: '' }],
 				filter_settings: {
 					"Breakfast": false,
@@ -133,6 +137,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				cuisine: "Any",
 				serves: "Any",
 				acknowledgement: "",
+				acknowledgementLink: "",
 				description: ""
 			},
 		}
@@ -219,7 +224,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					instructionImages: newInstructionImages.length > 0 ? newInstructionImages : [""],
 					ingredients: newIngredients.length > 0 ? newIngredients : [{ name: "", quantity: "", unit: "Oz" }],
 					difficulty: recipe.difficulty.toString(),
-					time: recipe.time,
+					times: {
+						prepTime: recipe.prep_time > 0 ? recipe.prep_time : 0,
+						cookTime: recipe.cook_time > 0 ? recipe.cook_time : 0,
+						totalTime: recipe.total_time > 0 ? recipe.total_time : (recipe.time ? getMinutesFromTimeString(recipe.time) : 0),
+					},
 					primaryImages: recipeDetails.recipe_images?.length > 0 ? recipeDetails.recipe_images : [{ uri: '' }],
 					filter_settings: {
 						"Breakfast": recipe["breakfast"],
@@ -248,6 +257,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					cuisine: recipe.cuisine,
 					serves: recipe.serves,
 					acknowledgement: recipe.acknowledgement,
+					acknowledgementLink: recipe.acknowledgement_link,
 					description: recipe.description
 				}
 			})
@@ -284,7 +294,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						},
 					],
 					difficulty: "0",
-					time: "00:15",
+					times: {
+						prepTime: 0,
+						cookTime: 0,
+						totalTime: 0,
+					},
 					primaryImages: [{ uri: '' }],
 					filter_settings: {
 						"Breakfast": false,
@@ -313,6 +327,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					cuisine: "Any",
 					serves: "Any",
 					acknowledgement: "",
+					acknowledgementLink: "",
 					description: ""
 				},
 				instructionHeights: [responsiveHeight(6.5)],
@@ -449,7 +464,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							newRecipeDetails.ingredients,
 							newRecipeDetails.instructions,
 							newRecipeDetails.instructionImages,
-							newRecipeDetails.time,
+							newRecipeDetails.times.prepTime,
+							newRecipeDetails.times.cookTime,
+							newRecipeDetails.times.totalTime,
 							newRecipeDetails.difficulty,
 							newRecipeDetails.primaryImages,
 							newRecipeDetails.filter_settings,
@@ -457,6 +474,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							newRecipeDetails.serves,
 							newRecipeDetails.recipeId,
 							newRecipeDetails.acknowledgement,
+							newRecipeDetails.acknowledgementLink,
 							newRecipeDetails.description
 						)
 						if (recipe) {
@@ -479,12 +497,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							newRecipeDetails.instructions,
 							newRecipeDetails.instructionImages,
 							newRecipeDetails.time,
+							newRecipeDetails.times.prepTime,
+							newRecipeDetails.times.cookTime,
+							newRecipeDetails.times.totalTime,
 							newRecipeDetails.difficulty,
 							newRecipeDetails.primaryImages,
 							newRecipeDetails.filter_settings,
 							newRecipeDetails.cuisine,
 							newRecipeDetails.serves,
 							newRecipeDetails.acknowledgement,
+							newRecipeDetails.acknowledgementLink,
 							newRecipeDetails.description
 						)
 						if (recipe) {
@@ -694,7 +716,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		render() {
-			// console.log(this.state.newRecipeDetails.recipeId)
+			// console.log(getTimeStringFromMinutes(this.state.newRecipeDetails.times?.totalTime))
 			return (
 				<SpinachAppContainer awaitingServer={this.state.awaitingServer} scrollingEnabled={false} >
 					{
@@ -760,27 +782,78 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									<View style={centralStyles.formSectionSeparator}>
 									</View>
 								</View>
-								{/* time and difficulty titles */}
-								<View style={[centralStyles.formSection, { width: responsiveWidth(80) }]}>
-									<View style={centralStyles.formInputContainer}>
+								{/* times */}
+								<View style={centralStyles.formSection}>
+									<View style={[centralStyles.formInputContainer, { justifyContent: 'flex-start' }]}>
 										<View style={styles.timeAndDifficultyTitleItem}>
-											<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Time:</Text>
+											<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Prep Time:</Text>
 										</View>
+										<View picker style={[styles.timeAndDifficulty, { paddingLeft: (Platform.OS === 'ios' ? 0 : responsiveWidth(2)) }]} >
+											<DualOSPicker
+												onChoiceChange={(choice) => {
+													let newTimes = {
+														prepTime: getMinutesFromTimeString(choice),
+														cookTime: this.state.newRecipeDetails.times?.cookTime ?? 0,
+														totalTime: getMinutesFromTimeString(choice) + (this.state.newRecipeDetails.times?.cookTime ?? 0)
+													}
+													this.handleInput(newTimes, "times")
+												}}
+												options={times}
+												selectedChoice={getTimeStringFromMinutes(this.state.newRecipeDetails.times?.prepTime)}
+											/>
+										</View>
+									</View>
+									<View style={[centralStyles.formInputContainer, { justifyContent: 'flex-start' }]}>
 										<View style={styles.timeAndDifficultyTitleItem}>
-											<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Difficulty:</Text>
+											<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Cook Time:</Text>
+										</View>
+										<View picker style={[styles.timeAndDifficulty, { paddingLeft: (Platform.OS === 'ios' ? 0 : responsiveWidth(2)) }]} >
+											<DualOSPicker
+												onChoiceChange={(choice) => {
+													let newTimes = {
+														prepTime: this.state.newRecipeDetails.times?.prepTime ?? 0,
+														cookTime: getMinutesFromTimeString(choice),
+														totalTime: getMinutesFromTimeString(choice) + (this.state.newRecipeDetails.times?.prepTime ?? 0)
+													}
+													this.handleInput(newTimes, "times")
+												}}
+												options={times}
+												selectedChoice={getTimeStringFromMinutes(this.state.newRecipeDetails.times?.cookTime)}
+											/>
+										</View>
+									</View>
+									<View style={[centralStyles.formInputContainer, { justifyContent: 'flex-start' }]}>
+										<View style={styles.timeAndDifficultyTitleItem}>
+											<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Total Time:</Text>
+										</View>
+										<View picker style={[styles.timeAndDifficulty, { paddingLeft: (Platform.OS === 'ios' ? 0 : responsiveWidth(2)) }]} >
+											<DualOSPicker
+												onChoiceChange={(choice) => {
+													let newTimes = {
+														prepTime: this.state.newRecipeDetails.times?.prepTime ?? 0,
+														cookTime: this.state.newRecipeDetails.times?.cookTime ?? 0,
+														totalTime: getMinutesFromTimeString(choice)
+													}
+													this.handleInput(newTimes, "times")
+												}}
+												options={[...times, ...doubleTimes]}
+												selectedChoice={getTimeStringFromMinutes(this.state.newRecipeDetails.times?.totalTime)}
+											/>
 										</View>
 									</View>
 								</View>
-								{/* time and difficulty dropdowns */}
-								<View style={[centralStyles.formSection, { width: responsiveWidth(80) }]}>
-									<View style={centralStyles.formInputContainer}>
-										<View picker style={[styles.timeAndDifficulty, { paddingLeft: (Platform.OS === 'ios' ? 0 : responsiveWidth(8)) }]} >
-											<DualOSPicker
-												onChoiceChange={(choice) => this.handleInput(choice, "time")}
-												options={times}
-												selectedChoice={this.state.newRecipeDetails.time} />
+								{/* separator */}
+								<View style={centralStyles.formSectionSeparatorContainer}>
+									<View style={centralStyles.formSectionSeparator}>
+									</View>
+								</View>
+								{/* difficulty */}
+								<View style={centralStyles.formSection}>
+									<View style={[centralStyles.formInputContainer, { justifyContent: 'flex-start' }]}>
+										<View style={styles.timeAndDifficultyTitleItem}>
+											<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Difficulty:</Text>
 										</View>
-										<View style={[styles.timeAndDifficulty, { paddingLeft: (Platform.OS === 'ios' ? 0 : responsiveWidth(14)) }]}>
+										<View style={[styles.timeAndDifficulty, { paddingLeft: (Platform.OS === 'ios' ? 0 : responsiveWidth(2)) }]}>
 											<DualOSPicker
 												onChoiceChange={(choice) => this.handleInput(choice, "difficulty")}
 												options={difficulties}
@@ -796,16 +869,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								{/* description */}
 								<View style={centralStyles.formSection}>
 									<View style={centralStyles.formInputContainer}>
-									<View style={centralStyles.formInputWhiteBackground}>
-										<TextInput
-											multiline={true}
-											numberOfLines={3}
-											maxFontSizeMultiplier={2}
-											style={[centralStyles.formInput, { padding: responsiveHeight(0.5) }]}
-											value={this.state.newRecipeDetails.description}
-											placeholder="Tell us about this recipe"
-											onChangeText={(t) => this.handleInput(t, "description")} />
-									</View>
+										<View style={centralStyles.formInputWhiteBackground}>
+											<TextInput
+												multiline={true}
+												numberOfLines={3}
+												maxFontSizeMultiplier={2}
+												style={[centralStyles.formInput, { padding: responsiveHeight(0.5) }]}
+												value={this.state.newRecipeDetails.description}
+												placeholder="Tell us about this recipe"
+												onChangeText={(t) => this.handleInput(t, "description")} />
+										</View>
 									</View>
 								</View>
 								{/* separator */}
@@ -936,52 +1009,30 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								{/* acknowledgement */}
 								<View style={centralStyles.formSection}>
 									<View style={centralStyles.formInputContainer}>
-									<View style={centralStyles.formInputWhiteBackground}>
-										<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.state.newRecipeDetails.acknowledgement} placeholder="Acknowledge your recipe's source if it's not yourself" onChangeText={(t) => this.handleInput(t, "acknowledgement")} />
-									</View>
-									</View>
-								</View>
-								{/* time and difficulty titles */}
-								{/* <View style={[centralStyles.formSection, { width: responsiveWidth(80) }]}>
-								<View style={centralStyles.formInputContainer}>
-									<View style={styles.timeAndDifficultyTitleItem}>
-										<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Time:</Text>
-									</View>
-									<View style={styles.timeAndDifficultyTitleItem}>
-										<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Difficulty:</Text>
+										<View style={centralStyles.formInputWhiteBackground}>
+											<TextInput
+												maxFontSizeMultiplier={2}
+												style={centralStyles.formInput}
+												value={this.state.newRecipeDetails.acknowledgement}
+												placeholder="Acknowledge your recipe's source if it's not yourself"
+												onChangeText={(t) => this.handleInput(t, "acknowledgement")}
+											/>
+										</View>
 									</View>
 								</View>
-							</View> */}
-								{/* time and difficulty dropdowns */}
-								{/* <View style={[centralStyles.formSection, { width: responsiveWidth(80) }]}>
-								<View style={centralStyles.formInputContainer}>
-									<View picker style={[styles.timeAndDifficulty, { paddingLeft: responsiveWidth(8) }]} >
-										<DualOSPicker
-											onChoiceChange={(choice) => this.handleInput(choice, "time")}
-											options={times}
-											selectedChoice={this.state.newRecipeDetails.time} />
-									</View>
-									<View style={[styles.timeAndDifficulty, { paddingLeft: responsiveWidth(12) }]}>
-										<DualOSPicker
-											onChoiceChange={(choice) => this.handleInput(choice, "difficulty")}
-											options={difficulties}
-											selectedChoice={this.state.newRecipeDetails.difficulty} />
+								{/* acknowledgement link */}
+								<View style={centralStyles.formSection}>
+									<View style={centralStyles.formInputContainer}>
+										<View style={centralStyles.formInputWhiteBackground}>
+											<TextInput
+												maxFontSizeMultiplier={2}
+												style={centralStyles.formInput}
+												value={this.state.newRecipeDetails.acknowledgementLink}
+												placeholder="Include a link to the original book or blog"
+												onChangeText={(t) => this.handleInput(t, "acknowledgementLink")} />
+										</View>
 									</View>
 								</View>
-							</View> */}
-								{/* add picture and select categories*/}
-								{/* <View style={[centralStyles.formSection, { width: responsiveWidth(80) }]}>
-								<View style={centralStyles.formInputContainer}>
-									<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={this.choosePrimaryPicture}>
-										<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='camera'></Icon>
-										<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>Main{"\n"}pictures</Text>
-									</TouchableOpacity>
-									<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={this.handleCategoriesButton}>
-										<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='filter'></Icon>
-										<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>Select{"\n"}categories</Text>
-									</TouchableOpacity>
-								</View>
-							</View> */}
 								{/* separator */}
 								<View style={centralStyles.formSectionSeparatorContainer}>
 									<View style={centralStyles.formSectionSeparator}>

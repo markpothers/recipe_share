@@ -1,3 +1,5 @@
+require 'net/http'
+
 class Recipe < ApplicationRecord
 
   belongs_to :chef
@@ -12,8 +14,26 @@ class Recipe < ApplicationRecord
   has_many :makers, :through => :recipe_makes, :source => :chef
   has_many :re_shares
   has_many :sharers, :through => :re_shares, :source => :chef
+  has_many :recipe_images
 
   accepts_nested_attributes_for :ingredient_uses
+
+  validates :acknowledgement_link, url: { allow_blank: true }
+  validate :acknowledgement_link_must_be_safe
+
+  def acknowledgement_link_must_be_safe
+    if acknowledgement_link.present?
+      # byebug
+
+      # NOTE that the below would be a good test however, since many links will be to amazon, it won't work
+      # because amazon blocks automated links
+      # I'll leave this out for now but if I can stop amazon doing that, I may do so
+      # response = Net::HTTP.get_response(URI(self.acknowledgement_link)).code
+      # if response != "200"
+      #   errors.add(:acknowledgement_link, "does not work")
+      # end
+    end
+  end
 
   def self.choose_list(type = "all", queryChefID = 1, limit = 1, offset = 0, ranking = "liked", user_chef_id = 1, filters="", cuisine="None", serves="Any", search_term="")
     #types = "all", "chef", "chef_liked", "chef_made", "most_liked", "most_made" // "liked", "made"

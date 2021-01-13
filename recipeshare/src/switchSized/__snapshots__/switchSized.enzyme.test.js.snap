@@ -1,0 +1,349 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SwitchSized can be rendered on an android switch is off 1`] = `
+<SwitchSized
+  onChange={[MockFunction]}
+  value={false}
+>
+  <Switch
+    onChange={[MockFunction]}
+    style={null}
+    thumbColor="#ececec"
+    trackColor={
+      Object {
+        "true": "#4b714299",
+      }
+    }
+    value={false}
+  >
+    <AndroidSwitch
+      accessibilityRole="switch"
+      enabled={true}
+      on={false}
+      onChange={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={null}
+      thumbTintColor="#ececec"
+      trackColorForTrue="#4b714299"
+    >
+      <AndroidSwitch
+        accessibilityRole="switch"
+        enabled={true}
+        on={false}
+        onChange={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={null}
+        thumbTintColor="#ececec"
+        trackColorForTrue="#4b714299"
+      />
+    </AndroidSwitch>
+  </Switch>
+</SwitchSized>
+`;
+
+exports[`SwitchSized can be rendered on an android where switch is on 1`] = `
+<SwitchSized
+  onChange={[MockFunction]}
+  value={true}
+>
+  <Switch
+    onChange={[MockFunction]}
+    style={null}
+    thumbColor="#4b7142"
+    trackColor={
+      Object {
+        "true": "#4b714299",
+      }
+    }
+    value={true}
+  >
+    <AndroidSwitch
+      accessibilityRole="switch"
+      enabled={true}
+      on={true}
+      onChange={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={null}
+      thumbTintColor="#4b7142"
+      trackColorForTrue="#4b714299"
+      trackTintColor="#4b714299"
+    >
+      <AndroidSwitch
+        accessibilityRole="switch"
+        enabled={true}
+        on={true}
+        onChange={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={null}
+        thumbTintColor="#4b7142"
+        trackColorForTrue="#4b714299"
+        trackTintColor="#4b714299"
+      />
+    </AndroidSwitch>
+  </Switch>
+</SwitchSized>
+`;
+
+exports[`SwitchSized can be rendered on an iPhone with reduced size switches where switch is off 1`] = `
+<SwitchSized
+  onChange={[MockFunction]}
+  value={false}
+>
+  <Switch
+    onChange={[MockFunction]}
+    style={
+      Object {
+        "transform": Array [
+          Object {
+            "scaleX": 0.7,
+          },
+          Object {
+            "scaleY": 0.7,
+          },
+        ],
+      }
+    }
+    thumbColor={null}
+    trackColor={
+      Object {
+        "true": "#4b714299",
+      }
+    }
+    value={false}
+  >
+    <RCTSwitch
+      accessibilityRole="switch"
+      onChange={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      onTintColor="#4b714299"
+      style={
+        Array [
+          Object {
+            "height": 31,
+            "width": 51,
+          },
+          Object {
+            "transform": Array [
+              Object {
+                "scaleX": 0.7,
+              },
+              Object {
+                "scaleY": 0.7,
+              },
+            ],
+          },
+        ]
+      }
+      thumbTintColor={null}
+      value={false}
+    >
+      <RCTSwitch
+        accessibilityRole="switch"
+        onChange={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        onTintColor="#4b714299"
+        style={
+          Array [
+            Object {
+              "height": 31,
+              "width": 51,
+            },
+            Object {
+              "transform": Array [
+                Object {
+                  "scaleX": 0.7,
+                },
+                Object {
+                  "scaleY": 0.7,
+                },
+              ],
+            },
+          ]
+        }
+        thumbTintColor={null}
+        value={false}
+      />
+    </RCTSwitch>
+  </Switch>
+</SwitchSized>
+`;
+
+exports[`SwitchSized can be rendered on an iPhone with reduced size switches where switch is on 1`] = `
+<SwitchSized
+  onChange={[MockFunction]}
+  value={true}
+>
+  <Switch
+    onChange={[MockFunction]}
+    style={
+      Object {
+        "transform": Array [
+          Object {
+            "scaleX": 0.7,
+          },
+          Object {
+            "scaleY": 0.7,
+          },
+        ],
+      }
+    }
+    thumbColor="#4b7142"
+    trackColor={
+      Object {
+        "true": "#4b714299",
+      }
+    }
+    value={true}
+  >
+    <RCTSwitch
+      accessibilityRole="switch"
+      onChange={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      onTintColor="#4b714299"
+      style={
+        Array [
+          Object {
+            "height": 31,
+            "width": 51,
+          },
+          Object {
+            "transform": Array [
+              Object {
+                "scaleX": 0.7,
+              },
+              Object {
+                "scaleY": 0.7,
+              },
+            ],
+          },
+        ]
+      }
+      thumbTintColor="#4b7142"
+      value={true}
+    >
+      <RCTSwitch
+        accessibilityRole="switch"
+        onChange={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        onTintColor="#4b714299"
+        style={
+          Array [
+            Object {
+              "height": 31,
+              "width": 51,
+            },
+            Object {
+              "transform": Array [
+                Object {
+                  "scaleX": 0.7,
+                },
+                Object {
+                  "scaleY": 0.7,
+                },
+              ],
+            },
+          ]
+        }
+        thumbTintColor="#4b7142"
+        value={true}
+      />
+    </RCTSwitch>
+  </Switch>
+</SwitchSized>
+`;
+
+exports[`SwitchSized can be rendered on iPad with regular switch where switch is off 1`] = `
+<SwitchSized
+  onChange={[MockFunction]}
+  value={false}
+>
+  <Switch
+    onChange={[MockFunction]}
+    style={null}
+    thumbColor="#ececec"
+    trackColor={
+      Object {
+        "true": "#4b714299",
+      }
+    }
+    value={false}
+  >
+    <AndroidSwitch
+      accessibilityRole="switch"
+      enabled={true}
+      on={false}
+      onChange={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={null}
+      thumbTintColor="#ececec"
+      trackColorForTrue="#4b714299"
+    >
+      <AndroidSwitch
+        accessibilityRole="switch"
+        enabled={true}
+        on={false}
+        onChange={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={null}
+        thumbTintColor="#ececec"
+        trackColorForTrue="#4b714299"
+      />
+    </AndroidSwitch>
+  </Switch>
+</SwitchSized>
+`;
+
+exports[`SwitchSized can be rendered on iPad with regular switch where switch is on 1`] = `
+<SwitchSized
+  onChange={[MockFunction]}
+  value={true}
+>
+  <Switch
+    onChange={[MockFunction]}
+    style={null}
+    thumbColor="#4b7142"
+    trackColor={
+      Object {
+        "true": "#4b714299",
+      }
+    }
+    value={true}
+  >
+    <AndroidSwitch
+      accessibilityRole="switch"
+      enabled={true}
+      on={true}
+      onChange={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={null}
+      thumbTintColor="#4b7142"
+      trackColorForTrue="#4b714299"
+      trackTintColor="#4b714299"
+    >
+      <AndroidSwitch
+        accessibilityRole="switch"
+        enabled={true}
+        on={true}
+        onChange={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={null}
+        thumbTintColor="#4b7142"
+        trackColorForTrue="#4b714299"
+        trackTintColor="#4b714299"
+      />
+    </AndroidSwitch>
+  </Switch>
+</SwitchSized>
+`;

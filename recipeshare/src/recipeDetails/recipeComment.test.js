@@ -7,7 +7,6 @@ import { TouchableOpacity } from 'react-native';
 describe('RecipeComment', () => {
 
 	let component
-	let mockNewCommentView
 	let mockAskDeleteComment
 	let mockNavigateToChefDetails
 	let comments
@@ -19,9 +18,8 @@ describe('RecipeComment', () => {
 
 	beforeEach(() => {
 		// console.log('runs before every test')
-		mockNewCommentView = jest.mock()
-		mockAskDeleteComment = jest.mock()
-		mockNavigateToChefDetails = jest.mock()
+		mockAskDeleteComment = jest.fn()
+		mockNavigateToChefDetails = jest.fn()
 		comments = [
 			{
 				"chef_id": 9,
@@ -72,7 +70,6 @@ describe('RecipeComment', () => {
 			act(() => {
 				component = renderer.create(
 					<RecipeComment
-						newCommentView={mockNewCommentView}
 						key={'comment key'}
 						{...comment}
 						loggedInChefID={22}
@@ -95,7 +92,6 @@ describe('RecipeComment', () => {
 			act(() => {
 				component = renderer.create(
 					<RecipeComment
-						newCommentView={mockNewCommentView}
 						key={'comment key'}
 						{...comment}
 						loggedInChefID={22}
@@ -111,6 +107,77 @@ describe('RecipeComment', () => {
 			const buttons = root.findAllByType(TouchableOpacity)
 			expect(buttons.length).toEqual(3)
 		})
+	})
+
+	test('render with the first comment with no image_url', () => {
+		let comment = comments[0]
+		comment.imageUrl = ""
+		act(() => {
+			component = renderer.create(
+				<RecipeComment
+					key={'comment key'}
+					{...comment}
+					loggedInChefID={22}
+					is_admin={false}
+					askDeleteComment={mockAskDeleteComment}
+					navigateToChefDetails={mockNavigateToChefDetails}
+				/>
+			)
+		})
+		const image = component.toJSON()
+		expect(image).toMatchSnapshot()
+		let root = component.root
+		const buttons = root.findAllByType(TouchableOpacity)
+		expect(buttons.length).toEqual(2)
+	})
+
+	test('render first comment and navigate to chef from both buttons', () => {
+		let comment = comments[0]
+		comment.image_url = ""
+		act(() => {
+			component = renderer.create(
+				<RecipeComment
+					key={'comment key'}
+					{...comment}
+					loggedInChefID={22}
+					is_admin={false}
+					askDeleteComment={mockAskDeleteComment}
+					navigateToChefDetails={mockNavigateToChefDetails}
+				/>
+			)
+		})
+		const image = component.toJSON()
+		expect(image).toMatchSnapshot()
+		let root = component.root
+		let imageButton = root.findByProps({ testID: "navigateToChefImageButton" })
+		imageButton.props.onPress()
+		let usernameButton = root.findByProps({ testID: "navigateToChefUsernameButton" })
+		usernameButton.props.onPress()
+		expect(mockNavigateToChefDetails).toHaveBeenCalled()
+		expect(mockNavigateToChefDetails).toHaveBeenCalledTimes(2)
+	})
+
+	test('render first comment and the delete comment button calls to delete the comment', () => {
+		let comment = comments[0]
+		act(() => {
+			component = renderer.create(
+				<RecipeComment
+					key={'comment key'}
+					{...comment}
+					loggedInChefID={22}
+					is_admin={true}
+					askDeleteComment={mockAskDeleteComment}
+					navigateToChefDetails={mockNavigateToChefDetails}
+				/>
+			)
+		})
+		const image = component.toJSON()
+		expect(image).toMatchSnapshot()
+		let root = component.root
+		let imageButton = root.findByProps({ testID: "deleteCommentButton" })
+		imageButton.props.onPress()
+		expect(mockAskDeleteComment).toHaveBeenCalled()
+		expect(mockAskDeleteComment).toHaveBeenCalledTimes(1)
 	})
 
 });

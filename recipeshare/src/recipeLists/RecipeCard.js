@@ -4,6 +4,7 @@ import { styles } from './recipeListStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import OfflineMessage from '../offlineMessage/offlineMessage'
+import { getTimeStringFromMinutes } from '../auxFunctions/getTimeStringFromMinutes'
 
 const defaultRecipeImage = require("../dataComponents/default-recipe.jpg")
 export default class RecipeCard extends React.PureComponent {
@@ -36,7 +37,7 @@ export default class RecipeCard extends React.PureComponent {
 							</TouchableOpacity>
 						</View>
 						<View style={styles.recipeCardTopLeftLowerContainer}>
-							<Text maxFontSizeMultiplier={2} style={styles.recipeCardTopOther}>Prep time: {this.props.time}</Text>
+							<Text maxFontSizeMultiplier={2} style={styles.recipeCardTopOther}>Total time: {getTimeStringFromMinutes(this.props.total_time)}</Text>
 							<Text maxFontSizeMultiplier={2} style={styles.recipeCardTopOther}>Difficulty: {this.props.difficulty}/10</Text>
 						</View>
 					</View>

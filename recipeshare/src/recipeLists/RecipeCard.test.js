@@ -152,7 +152,7 @@ describe('Recipe Card', () => {
 		expect(element).toBeTruthy()
 	})
 
-	test('has does not show the Re-shared section if the recipe is not re-shared', () => {
+	test('does not show the Re-shared section if the recipe is not re-shared', () => {
 		const testProps = mockRecipeList.find(p => p.name.includes("TEST:NORMAL"))
 		component = renderer.create(<RecipeCard {...testProps} />)
 		let root = component.root

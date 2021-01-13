@@ -26,7 +26,7 @@ describe('TextPopUp', () => {
 	})
 
 	test('renders with some mock props', () => {
-		let mockCallback = jest.fn
+		let mockCallback = jest.fn()
 		act(() => {
 			component = renderer.create(
 				<TextPopUp
@@ -41,6 +41,9 @@ describe('TextPopUp', () => {
 		let root = component.root
 		const buttons = root.findAllByType(TouchableOpacity)
 		expect(buttons.length).toEqual(1)
+		buttons[0].props.onPress()
+		expect(mockCallback).toHaveBeenCalled()
+		expect(mockCallback).toHaveBeenCalledTimes(1)
 	})
 
 });
