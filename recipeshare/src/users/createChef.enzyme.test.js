@@ -25,10 +25,10 @@ import { termsAndConditions } from '../dataComponents/termsAndConditions'
 import { privacyPolicy } from '../dataComponents/privacyPolicy'
 import PicSourceChooser from '../picSourceChooser/picSourceChooser'
 import DualOSPicker from '../dualOSPicker/DualOSPicker'
-import { postChef } from '../fetches/postChef'
+import { apiCall } from '../auxFunctions/apiCall'
 
 // manual mocks
-jest.mock('../fetches/postChef.js')
+jest.mock('../auxFunctions/apiCall')
 
 describe('CreateChef', () => {
 
@@ -441,7 +441,7 @@ describe('CreateChef', () => {
 		})
 
 		test('creates chef successfully and navigates to login', async () => {
-			postChef.mockImplementation(() => new Promise.resolve(true))
+			apiCall.mockImplementation(() => new Promise.resolve(true))
 			await act(async () => await submitButton.onPress())
 			component.update()
 			expect(mockNavigate).toHaveBeenCalled()
@@ -450,7 +450,7 @@ describe('CreateChef', () => {
 
 		test('create chef fails with network call and navigates to login', async () => {
 			jest.useFakeTimers()
-			postChef.mockImplementation(() => new Promise.resolve({fail: true}))
+			apiCall.mockImplementation(() => new Promise.resolve({fail: true}))
 			await act(async () => await submitButton.onPress())
 			component.update()
 			let offlineMessage = component.find(OfflineMessage)
@@ -462,7 +462,7 @@ describe('CreateChef', () => {
 		})
 
 		test('create chef gets some kin of error', async () => {
-			postChef.mockImplementation(() => new Promise.resolve({
+			apiCall.mockImplementation(() => new Promise.resolve({
 				error: true,
 				messages: ['Passwords do not match']
 			}))

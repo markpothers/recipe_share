@@ -179,8 +179,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
 							/>)
 					}
-					{ this.state.thanksForRegisteringPopUpShowing && this.renderThanksForRegisteringAlertPopUp()
-					}
+					{ this.state.thanksForRegisteringPopUpShowing && this.renderThanksForRegisteringAlertPopUp()}
 					< TouchableOpacity
 						activeOpacity={1}
 						onPress={Keyboard.dismiss}

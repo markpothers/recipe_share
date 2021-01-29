@@ -21,13 +21,11 @@ import { TouchableOpacity, TextInput, Text } from 'react-native'
 import SwitchSized from '../switchSized/switchSized'
 import { AlertPopUp } from '../alertPopUp/alertPopUp'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { getNewPassword } from '../fetches/getNewPassword';
-import { loginChef } from '../fetches/loginChef';
 import OfflineMessage from '../offlineMessage/offlineMessage';
+import { apiCall } from '../auxFunctions/apiCall'
 
 // manual mocks
-jest.mock('../fetches/getNewPassword.js')
-jest.mock('../fetches/loginChef.js')
+jest.mock('../auxFunctions/apiCall.js')
 
 describe('Login', () => {
 
@@ -304,7 +302,7 @@ describe('Login', () => {
 	describe('forgotPassword function', () => {
 
 		test('correctly handles the ForgotPassword button when it works', async () => {
-			getNewPassword.mockImplementation(() => {
+			apiCall.mockImplementation(() => {
 				return new Promise((resolve) => {
 					resolve({
 						error: false,
@@ -325,7 +323,7 @@ describe('Login', () => {
 		})
 
 		test('correctly handles the ForgotPassword button when theres no username', async () => {
-			getNewPassword.mockImplementation(() => {
+			apiCall.mockImplementation(() => {
 				return new Promise((resolve) => {
 					resolve({
 						error: false,
@@ -346,7 +344,7 @@ describe('Login', () => {
 		})
 
 		test('correctly handles the ForgotPassword button with an error', async () => {
-			getNewPassword.mockImplementation(() => {
+			apiCall.mockImplementation(() => {
 				return new Promise((resolve) => {
 					resolve({
 						error: true,
@@ -367,7 +365,7 @@ describe('Login', () => {
 		})
 
 		test('correctly handles the ForgotPassword button with a call fail', async () => {
-			getNewPassword.mockImplementation(() => (new Promise.resolve({ fail: true })))
+			apiCall.mockImplementation(() => (new Promise.resolve({ fail: true })))
 			let input = findByTestID(component, TextInput, 'usernameInput')
 			act(() => input.onChangeText('username@email.com'))
 			component.update()
@@ -412,7 +410,7 @@ describe('Login', () => {
 		})
 
 		test('logs in successfully and remembers email address', async () => {
-			loginChef.mockImplementation(() => new Promise.resolve(loginResponse))
+			apiCall.mockImplementation(() => new Promise.resolve(loginResponse))
 			let email = instance.props.e_mail
 			let rememberEmailToggle = findByTestID(component, SwitchSized, 'rememberEmailToggle')
 			act(() => rememberEmailToggle.onValueChange(true))
@@ -436,7 +434,7 @@ describe('Login', () => {
 		})
 
 		test('logs in successfully and doesnt remember email address', async () => {
-			loginChef.mockImplementation(() => new Promise.resolve(loginResponse))
+			apiCall.mockImplementation(() => new Promise.resolve(loginResponse))
 			await act(async () => await loginButton.onPress())
 			component.update()
 			expect(AsyncStorage.removeItem).toBeCalledWith('rememberedEmail')
@@ -455,7 +453,7 @@ describe('Login', () => {
 		})
 
 		test('logs in successfully staying logged in', async () => {
-			loginChef.mockImplementation(() => new Promise.resolve(loginResponse))
+			apiCall.mockImplementation(() => new Promise.resolve(loginResponse))
 			let stayLoggedInToggle = findByTestID(component, SwitchSized, 'stayLoggedInToggle')
 			act(() => stayLoggedInToggle.onValueChange(true))
 			component.update()
@@ -479,7 +477,7 @@ describe('Login', () => {
 		})
 
 		test('logs in successfully and not staying logged in', async () => {
-			loginChef.mockImplementation(() => new Promise.resolve(loginResponse))
+			apiCall.mockImplementation(() => new Promise.resolve(loginResponse))
 			await act(async () => await loginButton.onPress())
 			component.update()
 			expect(instance.props.stayingLoggedIn).toEqual(false)
@@ -499,7 +497,7 @@ describe('Login', () => {
 		})
 
 		test('logs in attempt with invalid credentials (with error)', async () => {
-			loginChef.mockImplementation(() => {
+			apiCall.mockImplementation(() => {
 				return new Promise((resolve) => {
 					resolve({
 						error: true,
@@ -515,7 +513,7 @@ describe('Login', () => {
 
 		test('logs in attempt with connection or api error (fail) and the error clears after the default seconds', async () => {
 			jest.useFakeTimers()
-			loginChef.mockImplementation(() => new Promise.resolve({ fail: true }))
+			apiCall.mockImplementation(() => new Promise.resolve({ fail: true }))
 			await act(async () => await loginButton.onPress())
 			component.update()
 			let offlineMessage = component.find(OfflineMessage)
@@ -527,7 +525,7 @@ describe('Login', () => {
 		})
 
 		test('logs in attempt with expired password', async () => {
-			loginChef.mockImplementation(() => {
+			apiCall.mockImplementation(() => {
 				return new Promise((resolve) => {
 					resolve({
 						error: true,
@@ -543,7 +541,7 @@ describe('Login', () => {
 		})
 
 		test('logs in attempt on deactivated account', async () => {
-			loginChef.mockImplementation(() => {
+			apiCall.mockImplementation(() => {
 				return new Promise((resolve) => {
 					resolve({
 						error: true,
@@ -559,7 +557,7 @@ describe('Login', () => {
 		})
 
 		test('logs in attempt on not yet confirmed email', async () => {
-			loginChef.mockImplementation(() => {
+			apiCall.mockImplementation(() => {
 				return new Promise((resolve) => {
 					resolve({
 						error: true,
@@ -575,7 +573,7 @@ describe('Login', () => {
 		})
 
 		test('logs in attempt on reactivation email sent', async () => {
-			loginChef.mockImplementation(() => {
+			apiCall.mockImplementation(() => {
 				return new Promise((resolve) => {
 					resolve({
 						error: true,
