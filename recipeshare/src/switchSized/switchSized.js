@@ -18,7 +18,7 @@ export default function SwitchSized(props) {
             //reduce size on iPhones (deviceType == 1 ) but not on anything else
             style={(Platform.OS === 'ios' && deviceType == 1 ? { transform: [{ scaleX: .7 }, { scaleY: .7 }] } : null)}
             value={props.value}
-            onChange={props.onChange}
+            onValueChange={props.onValueChange}
             trackColor={{ true: '#4b714299' }}
             thumbColor={(Platform.OS === 'ios' ? (props.value ? "#4b7142" : null) : (props.value ? "#4b7142" : '#ececec'))}
         />

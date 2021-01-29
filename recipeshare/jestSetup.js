@@ -1,4 +1,3 @@
-// const { getDeviceTypeAsync } = require("expo-device")
 
 //stops random warnings about Animated.useNativeDriver
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper')
@@ -7,8 +6,7 @@ jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper')
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon')
 jest.mock('react-native-vector-icons/FontAwesome', () => 'Icon')
 
-// jest.mock('expo-device', () => {
-//     getDeviceTypeAsync = () => {
-//         return 1
-//     }
-// })
+// imports stcok AsyncStorage + any modifications I've made in the file
+// also allows you to specify some return value in there
+// import mockAsyncStorage from './__mocks__/@react-native-async-storage/async-storage';
+// jest.mock('@react-native-async-storage/async-storage', () => mockAsyncStorage);

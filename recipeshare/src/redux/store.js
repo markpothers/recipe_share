@@ -2,7 +2,8 @@ import { createStore, compose, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk'
 import reducer from './reducer'
 
-const initialState = {
+//exported ONLY for unit testing
+export const initialState = {
   loggedInChef: {
     id: "",
     username: "",
@@ -142,7 +143,7 @@ const initialState = {
   stayLoggedIn: false,
 }
 
-  const middleware = compose(
+  export const middleware = compose( //exported ONLY for unit testing
     applyMiddleware(ReduxThunk)
   )
 

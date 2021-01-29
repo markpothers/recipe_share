@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import SpinachAppContainer from './spinachAppContainer/SpinachAppContainer'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import SwitchSized from '../switchSized/switchSized'
+import { apiCall } from '../auxFunctions/apiCall'
 
 export default class Templates extends React.Component {
 	static navigationOptions = {
@@ -20,6 +21,22 @@ export default class Templates extends React.Component {
 
 	handleTextInput = (e, parameter) => {
 		this.props.saveLoginChefDetails(parameter, e.nativeEvent.text)
+	}
+
+	makeAnAPICall = async () => {
+		await this.setState({ awaitingServer: true })
+		let response = await apiCall(getNewPassword, this.props.e_mail)
+		if (response.fail) {
+			this.setState({ renderOfflineMessage: true })
+		} else if (response.error) {
+			await this.setState({
+				loginError: true,
+				error: response.message
+			})
+		} else { 
+			//do whatever you should do when things work out.
+		}
+		await this.setState({ awaitingServer: false })
 	}
 
 	render() {
@@ -95,7 +112,7 @@ export default class Templates extends React.Component {
 								<Text style={centralStyles.greenButtonText}>Stay{"\n"}logged in</Text>
 								<SwitchSized
 									value={this.props.stayingLoggedIn}
-									onChange={(e) => this.props.stayLoggedIn(e.nativeEvent.value)}
+									onValueChange={(value) => this.props.stayLoggedIn(value)}
 								/>
 							</View>
 						</View>
@@ -113,7 +130,7 @@ export default class Templates extends React.Component {
 								<Text style={centralStyles.greenButtonText}>I accept</Text>
 								<SwitchSized
 									value={this.props.stayingLoggedIn}
-									onChange={(e) => this.props.stayLoggedIn(e.nativeEvent.value)}
+									onValueChange={(value) => this.props.stayLoggedIn(value)}
 								/>
 							</View>
 						</View>

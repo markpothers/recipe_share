@@ -68,10 +68,10 @@ class ChefsController < ApplicationController
                 render json: true
             else
                 puts @chef.errors.full_messages
-                render json: {error: true, message: @chef.errors.full_messages}
+                render json: {error: true, messages: @chef.errors.full_messages}
             end
         else
-            render json: {error: true, message: ["Passwords do not match"] }
+            render json: {error: true, messages: ["Passwords do not match"] }
         end
     end
 
@@ -144,10 +144,12 @@ class ChefsController < ApplicationController
 
     def password_reset
         @chef = Chef.find_by(e_mail: params[:email])
-        if @chef.deactivated  # reactivate chef
+        if @chef == nil
+            render json: {error: true, message: "forgotPassword"}
+        elsif @chef.deactivated  # reactivate chef
             @chef.update_attribute(:activation_digest, JWT.encode({id: @chef.id}, Rails.application.credentials.JWT[:secret_key]))
             ChefMailer.with(chef: @chef).reactivate_account.deliver_now
-            render json: {error: false, message: "We've e-mailed you a link to re-activate your account."}
+            render json: {error: true, message: "reactivate"}
         else
             if @chef
                 newHex = SecureRandom.hex(6)
@@ -157,9 +159,9 @@ class ChefsController < ApplicationController
                 @chef.password_created_at = Time.now
                 @chef.save
                 ChefMailer.with(chef: @chef, password: newHex).password_reset.deliver_now
-                render json: {error: false, message: "We've sent you a new password.  Please check your e-mail"}
+                render json: {error: true, message: "forgotPassword"}
             else
-                render json: {error: true, message: "Please enter your registered e-mail address to receive a new password."}
+                render json: {error: true, message: "forgotPassword"}
             end
         end
     end

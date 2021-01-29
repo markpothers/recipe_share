@@ -40,7 +40,7 @@ describe('SwitchSized', () => {
 			component = await mount(
 				<SwitchSized
 					value={true}
-					onChange={mockChangeFunction}
+					onValueChange={mockChangeFunction}
 				/>
 			)
 		})
@@ -55,7 +55,7 @@ describe('SwitchSized', () => {
 			component = await mount(
 				<SwitchSized
 					value={false}
-					onChange={mockChangeFunction}
+					onValueChange={mockChangeFunction}
 				/>
 			)
 		})
@@ -71,7 +71,7 @@ describe('SwitchSized', () => {
 			component = await mount(
 				<SwitchSized
 					value={false}
-					onChange={mockChangeFunction}
+					onValueChange={mockChangeFunction}
 				/>
 			)
 		})
@@ -87,7 +87,7 @@ describe('SwitchSized', () => {
 			component = await mount(
 				<SwitchSized
 					value={true}
-					onChange={mockChangeFunction}
+					onValueChange={mockChangeFunction}
 				/>
 			)
 		})
@@ -102,7 +102,7 @@ describe('SwitchSized', () => {
 			component = await mount(
 				<SwitchSized
 					value={true}
-					onChange={mockChangeFunction}
+					onValueChange={mockChangeFunction}
 				/>
 			)
 		})
@@ -117,7 +117,7 @@ describe('SwitchSized', () => {
 			component = await mount(
 				<SwitchSized
 					value={false}
-					onChange={mockChangeFunction}
+					onValueChange={mockChangeFunction}
 				/>
 			)
 		})
@@ -131,14 +131,14 @@ describe('SwitchSized', () => {
 			component = await mount(
 				<SwitchSized
 					value={true}
-					onChange={mockChangeFunction}
+					onValueChange={mockChangeFunction}
 				/>
 			)
 		})
 		component.setProps({})
 		let testSwitch = component.find(Switch)
 		expect(testSwitch.length).toEqual(1)
-		testSwitch.props().onChange()
+		testSwitch.props().onValueChange()
 		expect(mockChangeFunction).toHaveBeenCalled()
 		expect(mockChangeFunction).toHaveBeenCalledTimes(1)
 	})
@@ -148,14 +148,14 @@ describe('SwitchSized', () => {
 			component = await mount(
 				<SwitchSized
 					value={false}
-					onChange={mockChangeFunction}
+					onValueChange={mockChangeFunction}
 				/>
 			)
 		})
 		component.setProps({})
 		let testSwitch = component.find(Switch)
 		expect(testSwitch.length).toEqual(1)
-		testSwitch.props().onChange()
+		testSwitch.props().onValueChange()
 		expect(mockChangeFunction).toHaveBeenCalled()
 		expect(mockChangeFunction).toHaveBeenCalledTimes(1)
 	})
@@ -165,15 +165,15 @@ describe('SwitchSized', () => {
 			component = await mount(
 				<SwitchSized
 					value={false}
-					onChange={mockChangeFunction}
+					onValueChange={mockChangeFunction}
 				/>
 			)
 		})
 		component.setProps({})
 		let testSwitch = component.find(Switch)
 		expect(testSwitch.length).toEqual(1)
-		testSwitch.props().onChange()
-		testSwitch.props().onChange()
+		testSwitch.props().onValueChange()
+		testSwitch.props().onValueChange()
 		expect(mockChangeFunction).toHaveBeenCalled()
 		expect(mockChangeFunction).toHaveBeenCalledTimes(2)
 	})

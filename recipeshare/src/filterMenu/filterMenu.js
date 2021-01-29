@@ -54,7 +54,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						<View style={styles.switchContainer}>
 							<SwitchSized
 								value={filtersList[category]}
-								onChange={(e) => this.handleCategoryChange(category, e.nativeEvent.value)}
+								onValueChange={(value) => this.handleCategoryChange(category, value)}
 							/>
 						</View>
 						<View style={styles.categoryContainer}>

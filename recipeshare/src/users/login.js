@@ -1,5 +1,6 @@
 import React from 'react'
-import { Text, AsyncStorage, Image, View, TextInput, TouchableOpacity, Keyboard } from 'react-native'
+import { Text, Image, View, TextInput, TouchableOpacity, Keyboard } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { connect } from 'react-redux'
 import { styles } from './usersStyleSheet'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
@@ -9,9 +10,9 @@ import { loginChef } from '../fetches/loginChef'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 import OfflineMessage from '../offlineMessage/offlineMessage'
-import NetInfo from '@react-native-community/netinfo'
 import SwitchSized from '../switchSized/switchSized'
 import { AlertPopUp } from '../alertPopUp/alertPopUp'
+import { apiCall } from '../auxFunctions/apiCall'
 
 const mapStateToProps = (state) => ({
 	e_mail: state.loginUserDetails.e_mail,
@@ -29,11 +30,6 @@ const mapDispatchToProps = {
 	clearLoginUserDetails: () => {
 		return dispatch => {
 			dispatch({ type: 'CLEAR_LOGIN_USER_DETAILS' })
-		}
-	},
-	loginChefToState: (id, username) => {
-		return dispatch => {
-			dispatch({ type: 'LOG_IN_CHEF', id: id, username: username })
 		}
 	},
 	stayLoggedIn: (value) => {
@@ -68,33 +64,25 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			thanksForRegisteringPopUpCleared: false,
 		}
 
-		handleTextInput = (e, parameter) => {
-			this.props.saveLoginChefDetails(parameter, e.nativeEvent.text)
+		handleTextInput = (text, parameter) => {
+			this.props.saveLoginChefDetails(parameter, text)
 		}
 
-		componentDidMount = () => {
-			AsyncStorage.getItem('rememberedEmail', (err, res) => {
-				if (res) {
-					let email = { nativeEvent: { text: JSON.parse(res) } }
-					this.handleTextInput(email, "e_mail")
-					this.setState({ rememberEmail: true })
-				}
-			})
-			this._unsubscribeFocus = this.props.navigation.addListener('focus', () => {
-				this.respondToFocus()
-			})
-			this._unsubscribeBlur = this.props.navigation.addListener('blur', () => {
-				this.respondToBlur()
-			})
+		componentDidMount = async () => {
+			let storedEmail = await AsyncStorage.getItem('rememberedEmail')
+			if (storedEmail) {
+				await this.handleTextInput(storedEmail, "e_mail")
+				this.setState({ rememberEmail: true })
+			}
+			this.props.navigation.addListener('focus', this.respondToFocus)
+			this.props.navigation.addListener('blur', this.respondToBlur)
 		}
+
 		componentDidUpdate = () => {
 			if (!this.state.thanksForRegisteringPopUpShowing && !this.state.thanksForRegisteringPopUpCleared
 				&& this.props.route.params?.successfulRegistration === true) {
 				this.setState({ thanksForRegisteringPopUpShowing: true })
 			}
-			// if (this.props.route.params?.successfulRegistration === true) {
-			// 	this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: true })
-			// }
 		}
 
 		respondToFocus = () => {
@@ -106,90 +94,61 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		componentWillUnmount = () => {
-			this._unsubscribeFocus && this._unsubscribeFocus()
-			this._unsubscribeBlur && this._unsubscribeBlur()
+			this.props.navigation.removeListener('focus', this.respondToFocus)
+			this.props.navigation.removeListener('blur', this.respondToBlur)
 		}
 
 		loginChef = async () => {
-			let netInfoState = await NetInfo.fetch()
-			if (netInfoState.isConnected) {
-				await this.setState({ awaitingServer: true })
-				if (this.state.rememberEmail) {
-					AsyncStorage.setItem('rememberedEmail', JSON.stringify(this.props.e_mail))
-				} else {
-					AsyncStorage.removeItem('rememberedEmail')
-				}
-				//   console.log("sending login")
-				try {
-					const chef = await loginChef(this.props)
-					if (!chef.error) {
-						if (this.props.stayingLoggedIn) {
-							AsyncStorage.setItem('chef', JSON.stringify(chef), () => {
-								// AsyncStorage.getItem('chef', (err, res) => {
-								// console.log(err)
-								this.props.clearLoginUserDetails()
-								this.props.updateLoggedInChefInState(chef.id, chef.e_mail, chef.username, chef.auth_token, chef.image_url, chef.is_admin, chef.is_member)
-								this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: true })
-								// })
-							})
-						} else {
-							this.props.updateLoggedInChefInState(chef.id, chef.e_mail, chef.username, chef.auth_token, chef.image_url, chef.is_admin, chef.is_member)
-							this.props.clearLoginUserDetails()
-							await this.setState({
-								loginError: false,
-								awaitingServer: false
-							})
-							// this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: true })
-							this.props.navigation.navigate("CreateChef", { successfulLogin: true })
-						}
-					} else {
-						// console.log(chef.message)
-						await this.setState({
-							awaitingServer: false,
-							loginError: true,
-							error: chef.message
-						})
-					}
-				} catch (e) {
-					this.setState({
-						renderOfflineMessage: true,
-						awaitingServer: false
-					})
-				}
+			await this.setState({ awaitingServer: true })
+			if (this.state.rememberEmail) {
+				AsyncStorage.setItem('rememberedEmail', this.props.e_mail)
 			} else {
-				this.setState({ renderOfflineMessage: true })
+				AsyncStorage.removeItem('rememberedEmail')
 			}
+			let response = await apiCall(loginChef, this.props)
+			if (response.fail) {
+				this.setState({ renderOfflineMessage: true })
+			} else if (response.error) {
+				await this.setState({
+					loginError: true,
+					error: response.message
+				})
+			} else { // we don't want to differentiate between response and response.error for security reasons
+				if (this.props.stayingLoggedIn) {
+					AsyncStorage.setItem('chef', JSON.stringify(response), () => {
+						this.props.clearLoginUserDetails()
+						this.props.updateLoggedInChefInState(response.id, response.e_mail, response.username, response.auth_token, response.image_url, response.is_admin, response.is_member)
+						this.props.navigation.navigate("CreateChef", { successfulLogin: true }) //thisnavigate command is used to trigger Apple Keychain.  CreateChef will immediately perform the required actions to login.
+
+					})
+				} else {
+					this.props.updateLoggedInChefInState(response.id, response.e_mail, response.username, response.auth_token, response.image_url, response.is_admin, response.is_member)
+					this.props.clearLoginUserDetails()
+					this.props.navigation.navigate("CreateChef", { successfulLogin: true }) //thisnavigate command is used to trigger Apple Keychain.  CreateChef will immediately perform the required actions to login.
+				}
+			}
+			await this.setState({ awaitingServer: false })
 		}
 
 		forgotPassword = async () => {
-			let netInfoState = await NetInfo.fetch()
-			if (netInfoState.isConnected) {
-				try {
-					await this.setState({ awaitingServer: true })
-					if (this.props.e_mail.length > 0) {
-						const response = await getNewPassword(this.props.e_mail)
-						if (!response.error) {
-							await this.setState({
-								loginError: true,
-								error: 'forgotPassword'
-							})
-						}
-						await this.setState({ awaitingServer: false })
-					} else {
-						await this.setState({
-							loginError: true,
-							error: 'forgotPassword'
-						})
-					}
-				} catch (e) {
-					this.setState({
-						renderOfflineMessage: true,
-						awaitingServer: false
+			await this.setState({ awaitingServer: true })
+			if (this.props.e_mail.length > 0) {
+				let response = await apiCall(getNewPassword, this.props.e_mail)
+				if (response.fail) {
+					await this.setState({ renderOfflineMessage: true })
+				} else { // we don't want to differentiate between response and response.error for security reasons
+					await this.setState({
+						loginError: true,
+						error: response.message
 					})
 				}
 			} else {
-				this.setState({ renderOfflineMessage: true })
+				await this.setState({
+					loginError: true,
+					error: 'forgotPassword'
+				})
 			}
+			await this.setState({ awaitingServer: false })
 		}
 
 		renderThanksForRegisteringAlertPopUp = () => {
@@ -209,18 +168,20 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		render() {
-			// console.log(this.props.e_mail.length)
+			// console.log(this.state)
 			return (
-				<SpinachAppContainer scrollingEnabled={true} awaitingServer={this.state.awaitingServer}>
-					{this.state.renderOfflineMessage && (
-						<OfflineMessage
-							message={`Sorry, can't log in right now.${"\n"}You appear to be offline.`}
-							topOffset={'10%'}
-							clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
-						/>)
+				<SpinachAppContainer scrollingEnabled={true} awaitingServer={this.state.awaitingServer} >
+					{
+						this.state.renderOfflineMessage && (
+							<OfflineMessage
+								message={`Sorry, can't log in right now.${"\n"}You appear to be offline.`}
+								topOffset={'10%'}
+								clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
+							/>)
 					}
-					{this.state.thanksForRegisteringPopUpShowing && this.renderThanksForRegisteringAlertPopUp()}
-					<TouchableOpacity
+					{ this.state.thanksForRegisteringPopUpShowing && this.renderThanksForRegisteringAlertPopUp()
+					}
+					< TouchableOpacity
 						activeOpacity={1}
 						onPress={Keyboard.dismiss}
 						style={{ flex: 1 }}
@@ -248,7 +209,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											autoCapitalize="none"
 											autoCompleteType="email"
 											textContentType="username"
-											onChange={(e) => this.handleTextInput(e, "e_mail")}
+											onChangeText={(text) => this.handleTextInput(text, "e_mail")}
+											testID={"usernameInput"}
 										/>
 									</View>
 								</View>
@@ -266,12 +228,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 												autoCompleteType="password"
 												textContentType="password"
 												secureTextEntry={!this.state.passwordVisible}
-												onChange={(e) => this.handleTextInput(e, "password")}
+												onChangeText={(text) => this.handleTextInput(text, "password")}
+												testID={"passwordInput"}
 											/>
 										)}
 										<TouchableOpacity
 											style={centralStyles.hiddenToggle}
 											onPress={() => this.setState({ passwordVisible: !this.state.passwordVisible })}
+											testID={'visibilityButton'}
 										>
 											<Icon
 												style={centralStyles.hiddenToggleIcon}
@@ -284,40 +248,63 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								</View>
 								{this.state.loginError && (
 									<View style={centralStyles.formErrorView}>
-										{this.state.error === 'invalid' && <Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>e-mail and password combination not recognized</Text>}
-										{this.state.error === 'password_expired' && <Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>Automatically generated password has expired.  Please reset your password.</Text>}
-										{this.state.error === 'activation' && <Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>Account not yet activated.  Please click the link in your confirmation e-mail. (Don&apos;t forget to check spam!)</Text>}
-										{this.state.error === 'deactivated' && <Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>This account was deactivated.  Reset your password to reactivate your account.</Text>}
-										{this.state.error === 'forgotPassword' && this.props.e_mail.length > 0 && <Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>Thanks.  If this e-mail address has an account we&apos;ll send you a new password.  Please check your e-mail.</Text>}
-										{this.state.error === 'forgotPassword' && this.props.e_mail.length == 0 && <Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>Please enter your e-mail and hit the &apos;Forgot Password&apos; button again.</Text>}
+										{this.state.error === 'invalid' && <Text testID={'invalidErrorMessage'} maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>e-mail and password combination not recognized</Text>}
+										{this.state.error === 'password_expired' && <Text testID={'passwordExpiredErrorMessage'} maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>Automatically generated password has expired.  Please reset your password.</Text>}
+										{this.state.error === 'activation' && <Text testID={'activationErrorMessage'} maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>Account not yet activated.  Please click the link in your confirmation e-mail. (Don&apos;t forget to check spam!)</Text>}
+										{this.state.error === 'deactivated' && <Text testID={'deactivatedErrorMessage'} maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>This account was deactivated.  Reset your password to reactivate your account.</Text>}
+										{this.state.error === 'forgotPassword' && this.props.e_mail.length > 0 && <Text testID={'forgotPasswordErrorMessage'} maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>Thanks.  If this e-mail address has an account we&apos;ll send you a new password.  Please check your e-mail.</Text>}
+										{this.state.error === 'forgotPassword' && this.props.e_mail.length == 0 && <Text testID={'noUsernameForgotPasswordErrorMessage'} maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>Please enter your e-mail and hit the &apos;Forgot Password&apos; button again.</Text>}
+										{this.state.error === 'reactivate' && <Text testID={'reactivateErrorMessage'} maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>We&apos;ve e-mailed you a link to re-activate your account.</Text>}
 									</View>
 								)}
 							</View>
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
-									<TouchableOpacity activeOpacity={1} style={centralStyles.yellowRectangleButton} onPress={() => this.setState({ rememberEmail: !this.state.rememberEmail })}>
+									<TouchableOpacity
+										activeOpacity={1}
+										style={centralStyles.yellowRectangleButton}
+										onPress={() => this.setState({ rememberEmail: !this.state.rememberEmail })}
+										testID={'rememberEmailButton'}
+									>
 										<Text style={centralStyles.greenButtonText} maxFontSizeMultiplier={1.25}>Remember{"\n"}email</Text>
 										<SwitchSized
 											value={this.state.rememberEmail}
-											onChange={(e) => this.setState({ rememberEmail: e.nativeEvent.value })}
+											onValueChange={(value) => this.setState({ rememberEmail: value })}
+											testID={'rememberEmailToggle'}
 										/>
 									</TouchableOpacity>
-									<TouchableOpacity activeOpacity={1} style={centralStyles.yellowRectangleButton} onPress={() => this.props.stayLoggedIn(!this.props.stayingLoggedIn)}>
+									<TouchableOpacity
+										activeOpacity={1}
+										style={centralStyles.yellowRectangleButton}
+										onPress={() => this.props.stayLoggedIn(!this.props.stayingLoggedIn)}
+										testID={'stayLoggedInButton'}
+									>
 										<Text style={centralStyles.greenButtonText} maxFontSizeMultiplier={1.5}>Stay{"\n"} logged in</Text>
 										<SwitchSized
 											value={this.props.stayingLoggedIn}
-											onChange={(e) => this.props.stayLoggedIn(e.nativeEvent.value)}
+											onValueChange={(value) => this.props.stayLoggedIn(value)}
+											testID={'stayLoggedInToggle'}
 										/>
 									</TouchableOpacity>
 								</View>
 							</View>
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
-									<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={() => this.props.navigation.navigate('CreateChef')}>
+									<TouchableOpacity
+										style={centralStyles.yellowRectangleButton}
+										activeOpacity={0.7}
+										onPress={() => this.props.navigation.navigate('CreateChef')}
+										testID={'registerButton'}
+									>
 										<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='account-plus'></Icon>
 										<Text style={centralStyles.greenButtonText} maxFontSizeMultiplier={1.5}>Register</Text>
 									</TouchableOpacity>
-									<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={this.forgotPassword}>
+									<TouchableOpacity
+										style={centralStyles.yellowRectangleButton}
+										activeOpacity={0.7}
+										onPress={this.forgotPassword}
+										testID={'forgotPasswordButton'}
+									>
 										<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='lock-open'></Icon>
 										<Text style={centralStyles.greenButtonText} maxFontSizeMultiplier={1.7}>Forgot{"\n"}password</Text>
 									</TouchableOpacity>
@@ -325,15 +312,20 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							</View>
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
-									<TouchableOpacity style={[centralStyles.yellowRectangleButton, { maxWidth: '100%', width: '100%', justifyContent: 'center' }]} activeOpacity={0.7} onPress={e => this.loginChef(e)}>
+									<TouchableOpacity
+										style={[centralStyles.yellowRectangleButton, { maxWidth: '100%', width: '100%', justifyContent: 'center' }]}
+										activeOpacity={0.7}
+										onPress={e => this.loginChef(e)}
+										testID={'loginButton'}
+									>
 										<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='login'></Icon>
 										<Text style={[centralStyles.greenButtonText, { marginLeft: responsiveWidth(4) }]} maxFontSizeMultiplier={2}>Login</Text>
 									</TouchableOpacity>
 								</View>
 							</View>
 						</View>
-					</TouchableOpacity>
-				</SpinachAppContainer>
+					</TouchableOpacity >
+				</SpinachAppContainer >
 			)
 		}
 	}

@@ -1,5 +1,6 @@
 import React from 'react'
-import { AsyncStorage, View, ImageBackground, Image } from 'react-native'
+import { View, ImageBackground, Image } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { connect } from 'react-redux'
 import { styles } from './usersStyleSheet'
 
@@ -29,23 +30,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			header: null,
 		};
 
-		componentDidMount = () => {
-			// AsyncStorage.removeItem('chef', () => {})
-			AsyncStorage.getItem('chef', (err, res) => {
-				if (res != null) {
-					const loggedInChef = JSON.parse(res)
-					// console.log(loggedInChef)
-					this.props.stayLoggedIn(true)
-					this.props.updateLoggedInChefInState(loggedInChef.id, loggedInChef.e_mail, loggedInChef.username, loggedInChef.auth_token, loggedInChef.image_url, loggedInChef.is_admin, loggedInChef.is_member)
-					this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: true })
-				} else {
-					this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: false })
-
-				}
-			})
-		}
-
-		componentWillUnmount = () => {
+		componentDidMount = async () => {
+			let storedChef = await AsyncStorage.getItem('chef')
+			if (storedChef != null) {
+				await this.props.stayLoggedIn(true)
+				this.props.updateLoggedInChefInState(storedChef.id, storedChef.e_mail, storedChef.username, storedChef.auth_token, storedChef.image_url, storedChef.is_admin, storedChef.is_member)
+				await this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: true })
+			} else {
+				await this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: false })
+			}
 		}
 
 		render() {
@@ -53,7 +46,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				<View style={styles.mainPageContainer}>
 					<ImageBackground source={require('../dataComponents/spinach.jpg')} style={styles.background} imageStyle={styles.backgroundImageStyle}>
 						<View style={styles.logoContainer}>
-							<Image style={styles.logo} resizeMode={"contain"} source={require('../dataComponents/yellowLogo.png')} />
+							<Image
+								style={styles.logo}
+								resizeMode={"contain"}
+								source={require('../dataComponents/yellowLogo.png')}
+								testID={'yellowLogo'}
+							/>
 						</View>
 					</ImageBackground>
 				</View>

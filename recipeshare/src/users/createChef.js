@@ -4,18 +4,17 @@ import { countries } from '../dataComponents/countries'
 import { connect } from 'react-redux'
 import { postChef } from '../fetches/postChef'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import PicSourceChooser from '../picSourceChooser/picSourceChooser'
 import { TextPopUp } from '../textPopUp/textPopUp'
 import DualOSPicker from '../dualOSPicker/DualOSPicker'
 import { termsAndConditions } from '../dataComponents/termsAndConditions'
 import { privacyPolicy } from '../dataComponents/privacyPolicy'
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions' //eslint-disable-line no-unused-vars
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 import OfflineMessage from '../offlineMessage/offlineMessage'
-import NetInfo from '@react-native-community/netinfo';
-import { AlertPopUp } from '../alertPopUp/alertPopUp'
 import SwitchSized from '../switchSized/switchSized'
+import { apiCall } from '../auxFunctions/apiCall'
 
 const mapStateToProps = (state) => ({
 	first_name: state.newUserDetails.first_name,
@@ -34,11 +33,6 @@ const mapDispatchToProps = {
 	saveChefDetails: (parameter, content) => {
 		return dispatch => {
 			dispatch({ type: 'UPDATE_NEW_USER_DETAILS', parameter: parameter, content: content })
-		}
-	},
-	loginChefToSTate: (id, username) => {
-		return dispatch => {
-			dispatch({ type: 'LOG_IN_CHEF', id: id, username: username })
 		}
 	},
 	saveLoginChefDetails: (parameter, content) => {
@@ -76,10 +70,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			}
 		}
 
-		handleTextInput = (e, parameter) => {
-			this.props.saveChefDetails(parameter, e.nativeEvent.text)
-			if (parameter == 'e_mail'){
-				this.props.saveLoginChefDetails(parameter, e.nativeEvent.text)
+		handleTextInput = (text, parameter) => {
+			this.props.saveChefDetails(parameter, text)
+			if (parameter == 'e_mail') {
+				this.props.saveLoginChefDetails(parameter, text)
 			}
 		}
 
@@ -116,37 +110,27 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		submitChef = async () => {
-			let netInfoState = await NetInfo.fetch()
-			if (netInfoState.isConnected) {
-				await this.setState({ awaitingServer: true })
-				// console.log("sending new user details")
-				try {
-					const chef = await postChef(this.props.username, this.props.e_mail, this.props.password, this.props.password_confirmation, this.props.country, this.props.image_url, this.props.profile_text)
-					if (!chef.error) {
-						this.setState({
-							awaitingServer: false,
-						})
-						this.props.navigation.navigate('Login', { successfulRegistration: true })
-					} else {
-						this.setState({ errors: chef.message })
-						await this.setState({ awaitingServer: false })
-					}
-				} catch (e) {
-					this.setState({
-						renderOfflineMessage: true,
-						awaitingServer: false
-					})
-				}
-			} else {
+			await this.setState({ awaitingServer: true })
+			let response = await apiCall(postChef, this.props.username, this.props.e_mail, this.props.password, this.props.password_confirmation, this.props.country, this.props.image_url, this.props.profile_text)
+			if (response.fail) {
 				this.setState({ renderOfflineMessage: true })
+			} else if (response.error) {
+				this.setState({ errors: response.messages })
+			} else {
+				this.props.navigation.navigate('Login', { successfulRegistration: true })
 			}
+			await this.setState({ awaitingServer: false })
 		}
 
 		renderEmailError = () => {
 			const emailErrors = this.state.errors.filter(message => message.startsWith("E mail"))
 			return emailErrors.map(error => (
 				<View style={centralStyles.formErrorView} key={error}>
-					<Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>{error}</Text>
+					<Text
+						maxFontSizeMultiplier={2}
+						style={centralStyles.formErrorText}
+						testID={'emailError'}
+					>{error}</Text>
 				</View>
 			))
 		}
@@ -155,7 +139,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			const usernameErrors = this.state.errors.filter(message => message.startsWith("Username"))
 			return usernameErrors.map(error => (
 				<View style={centralStyles.formErrorView} key={error}>
-					<Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>{error}</Text>
+					<Text
+						maxFontSizeMultiplier={2}
+						style={centralStyles.formErrorText}
+						testID={'usernameError'}
+					>{error}</Text>
 				</View>
 			))
 		}
@@ -164,7 +152,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			const passwordErrors = this.state.errors.filter(message => message.startsWith("Password"))
 			return passwordErrors.map(error => (
 				<View style={centralStyles.formErrorView} key={error}>
-					<Text maxFontSizeMultiplier={2} style={centralStyles.formErrorText}>{error}</Text>
+					<Text
+						maxFontSizeMultiplier={2}
+						style={centralStyles.formErrorText}
+						testID={'passwordError'}
+					>{error}</Text>
 				</View>
 			))
 		}
@@ -181,25 +173,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			this.setState({ privacyPolicyAgreed: !this.state.privacyPolicyAgreed })
 		}
 
-		renderThanksForRegisteringAlertPopUp = () => {
-			return (
-				<AlertPopUp
-					// close={() => this.setState({ thanksForRegisteringPopUpShowing: false })}
-					title={"Thanks so much for registering. Please confirm your e-mail address by clicking the link in your welcome e-mail and log in."}
-					onYes={() => {
-						this.setState({ thanksForRegisteringPopUpShowing: false })
-						this.props.navigation.navigate('Login')
-					}}
-					yesText={"Ok"}
-				/>
-			)
-		}
-
 		render() {
 			// console.log(this.props.saveChefDetails)
 			return (
 				<SpinachAppContainer scrollingEnabled={true} awaitingServer={this.state.awaitingServer}>
-					{/* {this.state.thanksForRegisteringPopUpShowing && this.renderThanksForRegisteringAlertPopUp()} */}
 					<TouchableOpacity
 						activeOpacity={1}
 						onPress={Keyboard.dismiss}
@@ -235,7 +212,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											autoCapitalize="none"
 											autoCompleteType="email"
 											textContentType="username"
-											onChange={(e) => this.handleTextInput(e, "e_mail")} />
+											onChangeText={text => this.handleTextInput(text, "e_mail")}
+											testID={'emailInput'}
+										/>
 									</View>
 								</View>
 								{this.renderEmailError()}
@@ -250,7 +229,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											value={this.props.username}
 											placeholder="username"
 											autoCapitalize="none"
-											onChange={(e) => this.handleTextInput(e, "username")} />
+											onChangeText={text => this.handleTextInput(text, "username")}
+											testID={'usernameInput'}
+										/>
 									</View>
 								</View>
 								{this.renderUsernameError()}
@@ -264,6 +245,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											options={countries}
 											selectedChoice={this.props.country}
 											textAlignment={"flex-start"}
+											testID={'countryPicker'}
 										/>
 									</View>
 								</View>
@@ -272,7 +254,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
 									<View style={[centralStyles.formInputWhiteBackground, { minHeight: responsiveHeight(12) }]}>
-										<TextInput maxFontSizeMultiplier={2} style={centralStyles.formInput} value={this.props.profile_text} placeholder="about me" multiline={true} numberOfLines={3} onChange={(e) => this.handleTextInput(e, "profile_text")} />
+										<TextInput
+											maxFontSizeMultiplier={2}
+											style={centralStyles.formInput}
+											value={this.props.profile_text}
+											placeholder="about me"
+											multiline={true}
+											numberOfLines={3}
+											onChangeText={text => this.handleTextInput(text, "profile_text")}
+											testID={'profileInput'}
+										/>
 									</View>
 								</View>
 							</View>
@@ -289,10 +280,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											autoCapitalize="none"
 											autoCompleteType="password"
 											secureTextEntry={!this.state.passwordVisible}
-											onChange={(e) => this.handleTextInput(e, "password")} />
+											onChangeText={text => this.handleTextInput(text, "password")}
+											testID={'passwordInput'}
+										/>
 										<TouchableOpacity
 											style={centralStyles.hiddenToggle}
 											onPress={() => this.setState({ passwordVisible: !this.state.passwordVisible })}
+											testID={'visibilityButton'}
 										>
 											<Icon
 												style={centralStyles.hiddenToggleIcon}
@@ -316,7 +310,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											textContentType="newPassword"
 											autoCapitalize="none"
 											secureTextEntry={!this.state.passwordVisible}
-											onChange={(e) => this.handleTextInput(e, "password_confirmation")} />
+											onChangeText={text => this.handleTextInput(text, "password_confirmation")}
+											testID={'passwordConfirmationInput'}
+										/>
 									</View>
 								</View>
 								{this.renderPasswordError()}
@@ -324,15 +320,26 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							{/* view terms and conditions*/}
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
-									<TouchableOpacity style={[centralStyles.formTextBoxContainer, { width: responsiveWidth(48) }]} activeOpacity={0.7} onPress={() => this.setState({ viewingTermsAndConditions: true })}>
+									<TouchableOpacity
+										style={[centralStyles.formTextBoxContainer, { width: responsiveWidth(48) }]}
+										activeOpacity={0.7}
+										onPress={() => this.setState({ viewingTermsAndConditions: true })}
+										testID={'viewTAndCButton'}
+									>
 										<Text maxFontSizeMultiplier={2} style={centralStyles.formTextBox}>{`View Terms & Conditions`}</Text>
 									</TouchableOpacity>
-									<TouchableOpacity activeOpacity={1} style={[centralStyles.yellowRectangleButton, { minWidth: responsiveWidth(30), maxWidth: responsiveWidth(30) }]} onPress={this.handleTandCSwitch}>
+									<TouchableOpacity
+										activeOpacity={1}
+										style={[centralStyles.yellowRectangleButton, { minWidth: responsiveWidth(30), maxWidth: responsiveWidth(30) }]}
+										onPress={this.handleTandCSwitch}
+										testID={'tAndCAgreedButton'}
+									>
 										<View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row', flexWrap: 'wrap' }}>
 											<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>I accept</Text>
 											<SwitchSized
 												value={this.state.tAndCAgreed}
-												onChange={this.handleTandCSwitch}
+												onValueChange={this.handleTandCSwitch}
+												testID={'tAndCAgreedToggle'}
 											/>
 										</View>
 									</TouchableOpacity>
@@ -345,6 +352,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											<View style={{ flexDirection: 'row', marginLeft: responsiveWidth(2) }}>
 												<TouchableOpacity
 													onPress={() => Linking.openURL('mailto:admin@recipe-share.com?subject=Terms%20And%20Conditions%20Question')}
+													testID={'emailTAndCButton'}
 												>
 													<Text style={{ color: 'blue' }}>admin@recipe-share.com{"\r\r"}</Text>
 												</TouchableOpacity>
@@ -356,15 +364,26 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							{/* view privacy policy*/}
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
-									<TouchableOpacity style={[centralStyles.formTextBoxContainer, { width: responsiveWidth(48) }]} activeOpacity={0.7} onPress={() => this.setState({ viewingPrivacyPolicy: true })}>
+									<TouchableOpacity
+										style={[centralStyles.formTextBoxContainer, { width: responsiveWidth(48) }]}
+										activeOpacity={0.7}
+										onPress={() => this.setState({ viewingPrivacyPolicy: true })}
+										testID={'viewPrivacyPolicyButton'}
+									>
 										<Text maxFontSizeMultiplier={2} style={centralStyles.formTextBox}>{`View Privacy Policy`}</Text>
 									</TouchableOpacity>
-									<TouchableOpacity activeOpacity={1} style={[centralStyles.yellowRectangleButton, { minWidth: responsiveWidth(30), maxWidth: responsiveWidth(30) }]} onPress={this.handlePrivacyPolicySwitch}>
+									<TouchableOpacity
+										activeOpacity={1}
+										style={[centralStyles.yellowRectangleButton, { minWidth: responsiveWidth(30), maxWidth: responsiveWidth(30) }]}
+										onPress={this.handlePrivacyPolicySwitch}
+										testID={'privacyPolicyAgreedButton'}
+									>
 										<View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row', flexWrap: 'wrap' }}>
 											<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>I accept</Text>
 											<SwitchSized
 												value={this.state.privacyPolicyAgreed}
-												onChange={this.handlePrivacyPolicySwitch}
+												onValueChange={this.handlePrivacyPolicySwitch}
+												testID={'privacyPolicyAgreedToggle'}
 											/>
 										</View>
 									</TouchableOpacity>
@@ -378,6 +397,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 												<Text>* By email: </Text>
 												<TouchableOpacity
 													onPress={() => Linking.openURL('mailto:admin@recipe-share.com?subject=Privacy%20Policy%20Question')}
+													testID={'emailPrivacyPolicyButton'}
 												><Text style={{ color: 'blue' }}>admin@recipe-share.com{"\r\r"}</Text>
 												</TouchableOpacity>
 											</View>
@@ -388,7 +408,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							{/* choose picture */}
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
-									<TouchableOpacity style={[centralStyles.yellowRectangleButton, { justifyContent: 'center', maxWidth: '100%', width: '100%' }]} activeOpacity={0.7} onPress={this.choosePicture}>
+									<TouchableOpacity
+										style={[centralStyles.yellowRectangleButton, { justifyContent: 'center', maxWidth: '100%', width: '100%' }]}
+										activeOpacity={0.7}
+										onPress={this.choosePicture}
+										testID={'pictureButton'}
+									>
 										<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='camera'></Icon>
 										<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { marginLeft: responsiveWidth(3) }]}>Add profile picture</Text>
 									</TouchableOpacity>
@@ -397,11 +422,21 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							{/* return / log in */}
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
-									<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={() => this.props.navigation.navigate('Login')}>
+									<TouchableOpacity
+										style={centralStyles.yellowRectangleButton}
+										activeOpacity={0.7}
+										onPress={() => this.props.navigation.navigate('Login')}
+										testID={'loginButton'}
+									>
 										<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='login'></Icon>
 										<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>Return to{"\n"} login screen</Text>
 									</TouchableOpacity>
-									<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={(this.state.tAndCAgreed && this.state.privacyPolicyAgreed ? (e) => this.submitChef(e) : null)}>
+									<TouchableOpacity
+										style={centralStyles.yellowRectangleButton}
+										activeOpacity={(this.state.tAndCAgreed && this.state.privacyPolicyAgreed ? 0.7 : 1)}
+										onPress={(this.state.tAndCAgreed && this.state.privacyPolicyAgreed ? this.submitChef : null)}
+										testID='submitButton'
+									>
 										<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='login'></Icon>
 										<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>{(this.state.tAndCAgreed ? (this.state.privacyPolicyAgreed ? "Submit &\n go to log in" : "Please accept\nprivacy policy") : "Please\naccept T&C")}</Text>
 									</TouchableOpacity>

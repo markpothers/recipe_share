@@ -2,11 +2,11 @@
 
 exports[`SwitchSized can be rendered on an android switch is off 1`] = `
 <SwitchSized
-  onChange={[MockFunction]}
+  onValueChange={[MockFunction]}
   value={false}
 >
   <Switch
-    onChange={[MockFunction]}
+    onValueChange={[MockFunction]}
     style={null}
     thumbColor="#ececec"
     trackColor={
@@ -45,11 +45,11 @@ exports[`SwitchSized can be rendered on an android switch is off 1`] = `
 
 exports[`SwitchSized can be rendered on an android where switch is on 1`] = `
 <SwitchSized
-  onChange={[MockFunction]}
+  onValueChange={[MockFunction]}
   value={true}
 >
   <Switch
-    onChange={[MockFunction]}
+    onValueChange={[MockFunction]}
     style={null}
     thumbColor="#4b7142"
     trackColor={
@@ -90,11 +90,11 @@ exports[`SwitchSized can be rendered on an android where switch is on 1`] = `
 
 exports[`SwitchSized can be rendered on an iPhone with reduced size switches where switch is off 1`] = `
 <SwitchSized
-  onChange={[MockFunction]}
+  onValueChange={[MockFunction]}
   value={false}
 >
   <Switch
-    onChange={[MockFunction]}
+    onValueChange={[MockFunction]}
     style={
       Object {
         "transform": Array [
@@ -176,11 +176,11 @@ exports[`SwitchSized can be rendered on an iPhone with reduced size switches whe
 
 exports[`SwitchSized can be rendered on an iPhone with reduced size switches where switch is on 1`] = `
 <SwitchSized
-  onChange={[MockFunction]}
+  onValueChange={[MockFunction]}
   value={true}
 >
   <Switch
-    onChange={[MockFunction]}
+    onValueChange={[MockFunction]}
     style={
       Object {
         "transform": Array [
@@ -262,11 +262,11 @@ exports[`SwitchSized can be rendered on an iPhone with reduced size switches whe
 
 exports[`SwitchSized can be rendered on iPad with regular switch where switch is off 1`] = `
 <SwitchSized
-  onChange={[MockFunction]}
+  onValueChange={[MockFunction]}
   value={false}
 >
   <Switch
-    onChange={[MockFunction]}
+    onValueChange={[MockFunction]}
     style={null}
     thumbColor="#ececec"
     trackColor={
@@ -305,11 +305,11 @@ exports[`SwitchSized can be rendered on iPad with regular switch where switch is
 
 exports[`SwitchSized can be rendered on iPad with regular switch where switch is on 1`] = `
 <SwitchSized
-  onChange={[MockFunction]}
+  onValueChange={[MockFunction]}
   value={true}
 >
   <Switch
-    onChange={[MockFunction]}
+    onValueChange={[MockFunction]}
     style={null}
     thumbColor="#4b7142"
     trackColor={
