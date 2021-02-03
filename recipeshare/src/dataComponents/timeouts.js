@@ -1,5 +1,5 @@
 
-export const listsTimeout = 10000
+export const listsTimeout = 20000
 export const actionTimeout = 5000
-export const detailsTimeout = 15000
+export const detailsTimeout = 45000
 export const submitTimeout = 60000

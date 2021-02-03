@@ -457,7 +457,7 @@ describe('CreateChef', () => {
 			expect(offlineMessage.length).toEqual(1)
 			expect(mockNavigate).not.toHaveBeenCalled()
 			expect(instance.state.renderOfflineMessage).toEqual(true)
-			setTimeout(() => { expect(instance.state.renderOfflineMessage).toEqual(false) }, 5000)
+			setTimeout(() => { expect(instance.state.renderOfflineMessage).toEqual(false) }, 6000)
 			jest.runAllTimers()
 		})
 

@@ -5,7 +5,7 @@ export const getChefDetails = (chef_id, auth_token) => {
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
-			reject()
+			reject({name: 'Timeout'})
 		}, detailsTimeout)
 
 		fetch(`${databaseURL}/chefs/${chef_id}`, {
@@ -18,14 +18,14 @@ export const getChefDetails = (chef_id, auth_token) => {
 			.then(res => res.json())
 			.then(chef_details => {
 				if (chef_details.error && chef_details.message == "Invalid authentication"){
-					reject("logout")
+					reject({name: 'Logout'})
 				}
 				if (chef_details) {
 					resolve(chef_details)
 				}
 			})
-			.catch(() => {
-				reject()
+			.catch(e => {
+				reject(e)
 			})
 	})
 }

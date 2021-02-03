@@ -5,7 +5,7 @@ export const destroyMakePic = (chefID, auth_token, makePicID) => {
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
-			reject()
+			reject({name: 'Timeout'})
 		}, actionTimeout)
 
 		fetch(`${databaseURL}/make_pics/${makePicID}`, {
@@ -18,14 +18,14 @@ export const destroyMakePic = (chefID, auth_token, makePicID) => {
 			.then(res => res.json())
 			.then(destroyed => {
 				if (destroyed.error && destroyed.message == "Invalid authentication"){
-					reject("logout")
+					reject({name: 'Logout'})
 				}
 				if (destroyed == true) {
 					resolve(destroyed)
 				}
 			})
-			.catch(() => {
-				reject()
+			.catch(e => {
+				reject(e)
 			})
 	})
 }

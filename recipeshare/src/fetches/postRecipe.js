@@ -54,7 +54,7 @@ export const postRecipe = async (
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
-			reject()
+			reject({name: 'Timeout'})
 		}, submitTimeout)
 
 		fetch(`${databaseURL}/recipes`, {
@@ -87,15 +87,15 @@ export const postRecipe = async (
 			.then(res => res.json())
 			.then(recipe => {
 				if (recipe.error && recipe.message == "Invalid authentication") {
-					reject("logout")
+					reject({name: 'Logout'})
 				}
 				if (recipe) {
 					// console.log(recipe)
 					resolve(recipe)
 				}
 			})
-			.catch(() => {
-				reject()
+			.catch(e => {
+				reject(e)
 			})
 	})
 }

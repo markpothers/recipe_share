@@ -5,7 +5,7 @@ export const fetchIngredients = (auth_token) => {
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
-			reject()
+			reject({name: 'Timeout'})
 		}, actionTimeout)
 
 		fetch(`${databaseURL}/ingredients`, {
@@ -18,14 +18,14 @@ export const fetchIngredients = (auth_token) => {
 			.then(res => res.json())
 			.then(ingredients => {
 				if (ingredients.error && ingredients.message == "Invalid authentication"){
-					reject("logout")
+					reject({name: 'Logout'})
 				}
 				if (ingredients) {
 					resolve(ingredients)
 				}
 			})
-			.catch(() => {
-				reject()
+			.catch(e => {
+				reject(e)
 			})
 	})
 }

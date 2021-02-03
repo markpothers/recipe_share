@@ -5,7 +5,7 @@ export const destroyRecipeLike = (recipeID, chefID, auth_token) => {
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
-			reject()
+			reject({name: 'Timeout'})
 		}, actionTimeout)
 
 		fetch(`${databaseURL}/recipe_likes`, {
@@ -24,14 +24,14 @@ export const destroyRecipeLike = (recipeID, chefID, auth_token) => {
 			.then(res => res.json())
 			.then(unlike => {
 				if (unlike.error && unlike.message == "Invalid authentication"){
-					reject("logout")
+					reject({name: 'Logout'})
 				}
 				if (unlike == true) {
 					resolve(unlike)
 				}
 			})
-			.catch(() => {
-				reject()
+			.catch(e => {
+				reject(e)
 			})
 	})
 }

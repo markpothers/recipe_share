@@ -74,6 +74,11 @@ const mapDispatchToProps = {
 		return dispatch => {
 			dispatch({ type: 'STORE_CUISINES_CHOICES', listChoice: listChoice, cuisines: cuisines })
 		}
+	},
+	storeServesChoices: (listChoice, serves) => {
+		return dispatch => {
+			dispatch({ type: 'STORE_SERVES_CHOICES', listChoice: listChoice, serves: serves })
+		}
 	}
 	// clearListedRecipes: (listChoice) => {
 	//   return dispatch => {
@@ -90,6 +95,7 @@ export class RecipesList extends React.Component {
 	constructor(props) {
 		super(props)
 		this.searchBar = React.createRef()
+		this.abortController = new AbortController()
 		this.state = {
 			limit: 20,
 			offset: 0,
@@ -107,23 +113,19 @@ export class RecipesList extends React.Component {
 	}
 
 	componentDidMount = async () => {
-		await this.setState({ awaitingServer: true })
 		await this.fetchRecipeList()
-		this._unsubscribeFocus = this.props.navigation.addListener('focus', () => {
-			this.respondToFocus()
-		})
-		this._unsubscribeBlur = this.props.navigation.addListener('blur', () => {
-			this.respondToBlur()
-		})
+		this.props.navigation.addListener('focus', this.respondToFocus)
+		this.props.navigation.addListener('blur', this.respondToBlur)
 		// if (Platform.OS === 'ios'){
 		// 	this.state.yOffset.addListener(({value}) => this.setState({previousScrollViewOffset: value}))
 		// }
-		await this.setState({ awaitingServer: false })
 	}
 
 	componentWillUnmount = () => {
-		this._unsubscribeFocus && this._unsubscribeFocus()
-		this._unsubscribeBlur && this._unsubscribeBlur()
+		// console.log(this.abortController)
+		this.abortController.abort('aborted')
+		this.props.navigation.removeListener('focus', this.respondToFocus)
+		this.props.navigation.removeListener('blur', this.respondToBlur)
 	}
 
 	// componentDidUpdate = () => {
@@ -159,32 +161,42 @@ export class RecipesList extends React.Component {
 	}
 
 	fetchRecipeList = async () => {
+		await this.setState({ awaitingServer: true })
 		try {
 			const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
-			let result = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.filterCuisines[this.props.listChoice], this.props.serves, this.state.searchTerm)
+			let result = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.filterCuisines[this.props.listChoice], this.props.serves, this.state.searchTerm, this.abortController)
 			if (result.recipes.length == 0) {
 				this.setState({ renderNoRecipesMessage: true })
 			}
 			this.props.storeRecipeList(this.props["listChoice"], result.recipes)
 			this.props.storeCuisinesChoices(this.props["listChoice"], result.cuisines)
+			this.props.storeServesChoices(this.props["listChoice"], result.serves)
+			await this.setState({ awaitingServer: false })
 		}
 		catch (e) {
-			if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-			if (this.props[this.props["listChoice"] + `_Recipes`]?.length == 0) {
-				// console.log('failed to get recipes. Loading from async storage.')
-				AsyncStorage.getItem('locallySavedListData', (err, res) => {
-					if (res != null) {
-						const locallySavedListData = JSON.parse(res)
-						if (locallySavedListData[this.props["listChoice"] + `_Recipes`].length > 0) {
-							this.props.storeRecipeList(this.props["listChoice"], locallySavedListData[this.props["listChoice"] + `_Recipes`])
-						}
-						else {
-							this.setState({ renderOfflineMessage: true })
-						}
-					} else {
-						this.setState({ renderOfflineMessage: true })
+			switch (e.name) {
+				case 'Logout': { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) } break
+				case 'AbortError': break
+				case 'Timeout':
+					if (this.props[this.props["listChoice"] + `_Recipes`]?.length == 0) {
+						// console.log('failed to get recipes. Loading from async storage.')
+						AsyncStorage.getItem('locallySavedListData', async (err, res) => {
+							if (res != null) {
+								const locallySavedListData = JSON.parse(res)
+								if (locallySavedListData[this.props["listChoice"] + `_Recipes`].length > 0) {
+									this.props.storeRecipeList(this.props["listChoice"], locallySavedListData[this.props["listChoice"] + `_Recipes`])
+								}
+								else {
+									await this.setState({ renderOfflineMessage: true })
+								}
+							} else {
+								await this.setState({ renderOfflineMessage: true })
+							}
+						})
 					}
-				})
+					await this.setState({ awaitingServer: false })
+					break
+				default: break
 			}
 		}
 	}
@@ -198,7 +210,7 @@ export class RecipesList extends React.Component {
 			this.props.storeCuisinesChoices(this.props["listChoice"], result.cuisines)
 		}
 		catch (e) {
-			if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+			if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 			// console.log('failed to get ADDITIONAL recipes')
 		}
 		await this.setState({ awaitingServer: false })
@@ -219,7 +231,7 @@ export class RecipesList extends React.Component {
 				this.props.navigation.navigate('RecipeDetails', { recipeID: recipeID, commenting: commenting })
 			}
 		} catch (e) {
-			if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+			if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 			// console.log('looking for local recipes')
 			AsyncStorage.getItem('localRecipeDetails', (err, res) => {
 				if (res != null) {
@@ -263,7 +275,7 @@ export class RecipesList extends React.Component {
 				this.props.navigation.navigate('ChefDetails', { chefID: chefID })
 			}
 		} catch (e) {
-			if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+			if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 			// console.log('looking for local chefs')
 			AsyncStorage.getItem('localChefDetails', (err, res) => {
 				if (res != null) {
@@ -343,7 +355,6 @@ export class RecipesList extends React.Component {
 	// }
 
 	likeRecipe = async (recipeID) => {
-		// console.log
 		let netInfoState = await NetInfo.fetch()
 		if (netInfoState.isConnected) {
 			await this.setState({ awaitingServer: true })
@@ -363,7 +374,7 @@ export class RecipesList extends React.Component {
 					this.props.fetchChefDetails && this.props.fetchChefDetails()
 				}
 			} catch (e) {
-				if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+				if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 				await this.setState(state => {
 					return ({
 						dataICantGet: [...state.dataICantGet, recipeID],
@@ -398,7 +409,7 @@ export class RecipesList extends React.Component {
 					this.props.fetchChefDetails && this.props.fetchChefDetails()
 				}
 			} catch (e) {
-				if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+				if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 				await this.setState(state => {
 					return ({
 						dataICantGet: [...state.dataICantGet, recipeID],
@@ -432,7 +443,7 @@ export class RecipesList extends React.Component {
 					this.props.storeRecipeList(this.props["listChoice"], recipes)
 				}
 			} catch (e) {
-				if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+				if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 				await this.setState(state => {
 					return ({
 						dataICantGet: [...state.dataICantGet, recipeID],
@@ -467,7 +478,7 @@ export class RecipesList extends React.Component {
 					this.props.fetchChefDetails && this.props.fetchChefDetails()
 				}
 			} catch (e) {
-				if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+				if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 				await this.setState(state => {
 					return ({
 						dataICantGet: [...state.dataICantGet, recipeID],
@@ -502,7 +513,7 @@ export class RecipesList extends React.Component {
 					this.props.fetchChefDetails && this.props.fetchChefDetails()
 				}
 			} catch (e) {
-				if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+				if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 				await this.setState(state => {
 					return ({
 						dataICantGet: [...state.dataICantGet, recipeID],

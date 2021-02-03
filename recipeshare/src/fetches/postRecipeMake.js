@@ -5,7 +5,7 @@ export const postRecipeMake = (recipeID, chefID, auth_token) => {
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
-			reject()
+			reject({name: 'Timeout'})
 		}, actionTimeout)
 
 		fetch(`${databaseURL}/recipe_makes`, {
@@ -24,14 +24,14 @@ export const postRecipeMake = (recipeID, chefID, auth_token) => {
 			.then(res => res.json())
 			.then(make => {
 				if (make.error && make.message == "Invalid authentication") {
-					reject("logout")
+					reject({name: 'Logout'})
 				}
 				if (make == true) {
 					resolve(make)
 				}
 			})
-			.catch(() => {
-				reject()
+			.catch(e => {
+				reject(e)
 			})
 	})
 }

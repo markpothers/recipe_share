@@ -65,7 +65,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					// 'drink all the beer you can to help you get through this pigswill',
 					// ''
 				],
-				instructionImages: ['', '', '', ''],
+				instructionImages: [''],
 				ingredients: [
 					{
 						name: "",
@@ -163,8 +163,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		componentDidUpdate = async () => {
-			await this.addNewIngredient()
-			await this.addNewInstruction()
+			// await this.addNewIngredient()
+			// await this.addNewInstruction()
 			if (this.state.newRecipeDetails.recipeId) {
 				this.props.navigation.setOptions({
 					headerTitle: props => <AppHeader {...props} text={"Update Recipe"} route={this.props.route} />
@@ -418,14 +418,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		addNewIngredient = () => {
 			let ingredients = this.state.newRecipeDetails.ingredients
-			if (ingredients[ingredients.length - 1].name != "" || ingredients[ingredients.length - 1].quantity != "" || ingredients[ingredients.length - 1].unit != "Oz") {
-				let newIngredients = [...ingredients, { name: "", quantity: "", unit: "Oz" }]
-				this.setState((state) => {
-					return ({
-						newRecipeDetails: { ...state.newRecipeDetails, ingredients: newIngredients }
-					})
+			// if (ingredients[ingredients.length - 1].name != "" || ingredients[ingredients.length - 1].quantity != "" || ingredients[ingredients.length - 1].unit != "Oz") {
+			let newIngredients = [...ingredients, { name: "", quantity: "", unit: "Oz" }]
+			this.setState((state) => {
+				return ({
+					newRecipeDetails: { ...state.newRecipeDetails, ingredients: newIngredients }
 				})
-			}
+			})
+			// }
+			!this.state.newRecipeDetails.recipeId && this.saveNewRecipeDetailsLocally()
 		}
 
 		removeIngredient = async (index) => {
@@ -455,7 +456,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			if (netInfoState.isConnected) {
 				await this.setState({ awaitingServer: true })
 				let newRecipeDetails = this.state.newRecipeDetails
-				if (newRecipeDetails.recipeId) {
+				if (newRecipeDetails.recipeId) { // it's an existing recipe we're updating
 					try {
 						const recipe = await patchRecipe(
 							this.props.loggedInChef.id,
@@ -484,10 +485,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes' })
 						}
 					} catch (e) {
-						if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 						this.setState({ renderOfflineMessage: true })
 					}
-				} else {
+				} else { // it's a new recipe
 					try {
 						const recipe = await postRecipe(
 							this.props.loggedInChef.id,
@@ -496,7 +497,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							newRecipeDetails.ingredients,
 							newRecipeDetails.instructions,
 							newRecipeDetails.instructionImages,
-							newRecipeDetails.time,
 							newRecipeDetails.times.prepTime,
 							newRecipeDetails.times.cookTime,
 							newRecipeDetails.times.totalTime,
@@ -516,7 +516,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 						}
 					} catch (e) {
-						if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 						this.setState({ renderOfflineMessage: true })
 					}
 				}
@@ -531,8 +531,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			!this.state.newRecipeDetails.recipeId && this.saveNewRecipeDetailsLocally()
 		}
 
-		handleInstructionChange = async (text, index) => {
-			await this.setState((state) => {
+		handleInstructionChange = (text, index) => {
+			this.setState((state) => {
 				let newInstructions = [...state.newRecipeDetails.instructions]
 				newInstructions[index] = text
 				let newInstructionHeights = [...this.state.instructionHeights]
@@ -556,7 +556,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			})
 		}
 
-		handleInstructionsSort = async (newInstructions) => {
+		handleInstructionsSort = (newInstructions) => {
 			let newInstructionHeights = []
 			let newInstructionImages = []
 			newInstructions.forEach(instruction => {
@@ -564,7 +564,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				newInstructionHeights.push(this.state.instructionHeights[index])
 				newInstructionImages.push(this.state.newRecipeDetails.instructionImages[index])
 			})
-			await this.setState((state) => {
+			this.setState((state) => {
 				return ({
 					newRecipeDetails: {
 						...state.newRecipeDetails,
@@ -578,37 +578,37 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		addNewInstruction = () => {
-			if (this.state.newRecipeDetails.instructions[this.state.newRecipeDetails.instructions.length - 1] !== ''
-				|| this.state.newRecipeDetails.instructions[this.state.newRecipeDetails.instructions.length - 2] !== ''
-			) {
-				this.setState((state) => {
-					let newInstructions = [...state.newRecipeDetails.instructions]
-					newInstructions.push('')
-					let newInstructionImages = [...state.newRecipeDetails.instructionImages, '']
-					let newInstructionHeights = [...state.instructionHeights, responsiveHeight(7.2)]
-					let newAverageInstructionHeight = newInstructionHeights.reduce((acc, h) => acc + h, 0) / newInstructionHeights.length
-					return ({
-						newRecipeDetails: {
-							...state.newRecipeDetails,
-							instructions: newInstructions,
-							instructionImages: newInstructionImages
-						},
-						averageInstructionHeight: newAverageInstructionHeight,
-						instructionHeights: newInstructionHeights
-					})
+			// if (this.state.newRecipeDetails.instructions[this.state.newRecipeDetails.instructions.length - 1] !== ''
+			// 	|| this.state.newRecipeDetails.instructions[this.state.newRecipeDetails.instructions.length - 2] !== ''
+			// ) {
+			this.setState((state) => {
+				let newInstructions = [...state.newRecipeDetails.instructions]
+				newInstructions.push('')
+				let newInstructionImages = [...state.newRecipeDetails.instructionImages, '']
+				let newInstructionHeights = [...state.instructionHeights, responsiveHeight(7.2)]
+				let newAverageInstructionHeight = newInstructionHeights.reduce((acc, h) => acc + h, 0) / newInstructionHeights.length
+				return ({
+					newRecipeDetails: {
+						...state.newRecipeDetails,
+						instructions: newInstructions,
+						instructionImages: newInstructionImages
+					},
+					averageInstructionHeight: newAverageInstructionHeight,
+					instructionHeights: newInstructionHeights
 				})
-			}
+			})
+			// }
 		}
 
-		removeInstruction = async (index) => {
-			let newInstructions = [...this.state.newRecipeDetails.instructions]
-			newInstructions.splice(index, 1)
-			let newInstructionHeights = [...this.state.instructionHeights]
-			newInstructionHeights.splice(index, 1)
-			let newInstructionImages = [...this.state.newRecipeDetails.instructionImages]
-			newInstructionImages.splice(index, 1)
-			let newAverageInstructionHeight = newInstructionHeights.reduce((acc, h) => acc + h, 0) / newInstructionHeights.length
-			await this.setState((state) => {
+		removeInstruction = (index) => {
+			this.setState((state) => {
+				let newInstructions = [...state.newRecipeDetails.instructions]
+				newInstructions.splice(index, 1)
+				let newInstructionHeights = [...state.instructionHeights]
+				newInstructionHeights.splice(index, 1)
+				let newInstructionImages = [...state.newRecipeDetails.instructionImages]
+				newInstructionImages.splice(index, 1)
+				let newAverageInstructionHeight = newInstructionHeights.reduce((acc, h) => acc + h, 0) / newInstructionHeights.length
 				return ({
 					newRecipeDetails: {
 						...state.newRecipeDetails,
@@ -943,6 +943,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											)
 										}}
 									/>
+									<View style={styles.plusButtonContainer}>
+										<TouchableOpacity style={styles.plusButton} onPress={this.addNewIngredient}>
+											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(5)} name='plus'></Icon>
+										</TouchableOpacity>
+									</View>
 								</View>
 								{/* separator */}
 								<View style={[centralStyles.formSectionSeparatorContainer
@@ -986,6 +991,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											)
 										}}
 									/>
+									<View style={styles.plusButtonContainer}>
+										<TouchableOpacity style={styles.plusButton} onPress={this.addNewInstruction}>
+											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(5)} name='plus'></Icon>
+										</TouchableOpacity>
+									</View>
 								</View>
 								{/* separator */}
 								<View style={centralStyles.formSectionSeparatorContainer}>

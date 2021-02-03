@@ -5,7 +5,7 @@ export const postRecipeLike = (recipeID, chefID, auth_token) => {
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
-			reject()
+			reject({name: 'Timeout'})
 		}, actionTimeout)
 
 		fetch(`${databaseURL}/recipe_likes`, {
@@ -24,14 +24,14 @@ export const postRecipeLike = (recipeID, chefID, auth_token) => {
 			.then(res => res.json())
 			.then(like => {
 				if (like.error && like.message == "Invalid authentication"){
-					reject("logout")
+					reject({name: 'Logout'})
 				}
 				if (like) {
 					resolve(like)
 				}
 			})
-			.catch(() => {
-				reject()
+			.catch(e => {
+				reject(e)
 			})
 	})
 }

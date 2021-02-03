@@ -5,7 +5,7 @@ export const postComment = (recipeID, chefID, auth_token, comment) => {
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
-			reject()
+			reject({name: 'Timeout'})
 		}, actionTimeout)
 
 		fetch(`${databaseURL}/comments`, {
@@ -25,14 +25,14 @@ export const postComment = (recipeID, chefID, auth_token, comment) => {
 			.then(res => res.json())
 			.then(comments => {
 				if (comments.error && comments.message == "Invalid authentication"){
-					reject("logout")
+					reject({name: 'Logout'})
 				}
 				if (comments) {
 					resolve(comments)
 				}
 			})
-			.catch(() => {
-				reject()
+			.catch(e => {
+				reject(e)
 			})
 	})
 }

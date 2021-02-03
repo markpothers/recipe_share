@@ -6,12 +6,14 @@ class RecipesController < ApplicationController
     skip_before_action :define_current_recipe, :only => [:index, :create, :details]
 
     def index
+
         # puts "getting recipe list: #{params["listType"]}"
         @recipes = Recipe.choose_list(params["listType"], params["queryChefID"], params["limit"], params["offset"], params["global_ranking"], @chef.id, params["filters"], params["cuisine"], params["serves"], params["search_term"])
         @recipes = Recipe.get_signed_urls(@recipes)
         @cuisines = Recipe.get_cuisines(params["listType"], @chef.id, params["queryChefID"], params["filters"], params["serves"], params["search_term"])
+        @serves = Recipe.get_serves(params["listType"], @chef.id, params["queryChefID"], params["filters"], params["serves"], params["search_term"])
         # puts "rendering"
-        render json: {recipes: @recipes, cuisines: @cuisines}
+        render json: {recipes: @recipes, cuisines: @cuisines, serves: @serves}
     end
 
     # def new

@@ -53,7 +53,7 @@ class ApplicationRecord < ActiveRecord::Base
         days_until_reset = (next_reset_date - today).to_i
 
         signed_url = storage.signed_url file_name, expires: (days_until_reset < 5 ? next_next_reset_date.to_time.to_i - DateTime.now().to_time.to_i : next_reset_date.to_time.to_i - DateTime.now().to_time.to_i)
-        # puts signed_url
+        puts signed_url
         return signed_url
       end
     rescue

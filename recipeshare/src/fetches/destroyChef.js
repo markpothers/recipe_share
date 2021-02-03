@@ -5,7 +5,7 @@ export const destroyChef = (auth_token, chefID, deleteRecipes) => {
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
-			reject()
+			reject({name: 'Timeout'})
 		}, detailsTimeout)
 
 		fetch(`${databaseURL}/chefs/${chefID}?deleteRecipes=${deleteRecipes}`, {
@@ -18,14 +18,14 @@ export const destroyChef = (auth_token, chefID, deleteRecipes) => {
 			.then(res => res.json())
 			.then(deletedChef => {
 				if (deletedChef.error && deletedChef.message == "Invalid authentication"){
-					reject("logout")
+					reject({name: 'Logout'})
 				}
 				if (deletedChef) {
 					resolve(deletedChef)
 				}
 			})
-			.catch(() => {
-				reject()
+			.catch(e => {
+				reject(e)
 			})
 	})
 }

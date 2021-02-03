@@ -5,7 +5,7 @@ export const destroyComment = (auth_token, commentID) => {
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
-			reject()
+			reject({name: 'Timeout'})
 		}, actionTimeout)
 
 		fetch(`${databaseURL}/comments/${commentID}`, {
@@ -18,14 +18,14 @@ export const destroyComment = (auth_token, commentID) => {
 			.then(res => res.json())
 			.then(comments => {
 				if (comments.error && comments.message == "Invalid authentication"){
-					reject("logout")
+					reject({name: 'Logout'})
 				}
 				if (comments) {
 					resolve(comments)
 				}
 			})
-			.catch(() => {
-				reject()
+			.catch(e => {
+				reject(e)
 			})
 	})
 }

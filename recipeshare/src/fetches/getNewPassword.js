@@ -5,7 +5,7 @@ export const getNewPassword = (e_mail) => {
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
-			reject()
+			reject({name: 'Timeout'})
 		}, actionTimeout)
 
 		fetch(`${databaseURL}/password_reset?email=${e_mail.toLowerCase().trim()}`, {
@@ -17,14 +17,14 @@ export const getNewPassword = (e_mail) => {
 			.then(res => res.json())
 			.then(response => {
 				if (response.error && response.message == "Invalid authentication"){
-					reject("logout")
+					reject({name: 'Logout'})
 				}
 				if (response){
 				resolve(response)
 				}
 			})
-			.catch(() => {
-				reject()
+			.catch(e => {
+				reject(e)
 			})
 	})
 }

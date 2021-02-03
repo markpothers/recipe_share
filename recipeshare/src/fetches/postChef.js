@@ -9,7 +9,7 @@ export const postChef = async(username, e_mail, password, password_confirmation,
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
-			reject()
+			reject({name: 'Timeout'})
 		}, detailsTimeout)
 
 		fetch(`${databaseURL}/chefs`, {
@@ -35,8 +35,8 @@ export const postChef = async(username, e_mail, password, password_confirmation,
 					resolve(chef)
 				}
 			})
-			.catch(() => {
-				reject()
+			.catch(e => {
+				reject(e)
 			})
 	})
 }

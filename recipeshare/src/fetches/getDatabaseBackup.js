@@ -6,7 +6,7 @@ export const getDatabaseBackup = (auth_token, method) => {
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
-			reject()
+			reject({name: 'Timeout'})
 		}, actionTimeout)
 
 		fetch(`${databaseURL}/database/${method}backup`, {
@@ -19,14 +19,14 @@ export const getDatabaseBackup = (auth_token, method) => {
 			.then(res => res.json())
 			.then(confirmation => {
 				if (confirmation.error && confirmation.message == "Invalid authentication") {
-					reject("logout")
+					reject({name: 'Logout'})
 				}
 				if (confirmation) {
 					resolve(confirmation)
 				}
 			})
-			.catch(() => {
-				reject()
+			.catch(e => {
+				reject(e)
 			})
 	})
 }

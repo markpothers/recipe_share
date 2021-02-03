@@ -1,4 +1,4 @@
-import saveChefDetailsLocally from '../auxFunctions/saveChefDetailsLocally'
+// import saveChefDetailsLocally from '../auxFunctions/saveChefDetailsLocally'
 import { databaseURL } from '../dataComponents/databaseURL'
 import { actionTimeout } from '../dataComponents/timeouts'
 
@@ -7,7 +7,7 @@ export const loginChef = (chef) => {
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
-			reject()
+			reject({name: 'Timeout'})
 		}, actionTimeout)
 
 		fetch(`${databaseURL}/chefs/authenticate`, {

@@ -82,17 +82,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			await this.setState({ awaitingServer: true })
 			await this.fetchChefList()
 			await this.setState({ awaitingServer: false })
-			this._unsubscribeFocus = this.props.navigation.addListener('focus', () => {
-				this.respondToFocus()
-			})
-			this._unsubscribeBlur = this.props.navigation.addListener('blur', () => {
-				this.respondToBlur()
-			})
+			this.props.navigation.addListener('focus', this.respondToFocus)
+			this.props.navigation.addListener('blur', this.respondToBlur)
 		}
 
 		componentWillUnmount = () => {
-			this._unsubscribeFocus && this._unsubscribeFocus()
-			this._unsubscribeBlur && this._unsubscribeBlur()
+			this.props.navigation.removeListener('focus', this.respondToFocus)
+			this.props.navigation.removeListener('blur', this.respondToBlur)
 		}
 
 		shouldComponentUpdate = () => {
@@ -123,7 +119,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				this.props.storeChefList(this.props["listChoice"], chefs)
 			}
 			catch (e) {
-				if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+				if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 				if (this.props[this.props["listChoice"]]?.length == 0) {
 					// console.log('failed to get chefs. Loading from async storage.')
 					AsyncStorage.getItem('locallySavedListData', (err, res) => {
@@ -151,7 +147,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				this.props.appendToChefList(this.props["listChoice"], new_chefs)
 			}
 			catch (e) {
-				if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+				if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 				// console.log('failed to get ADDITIONAL chefs')
 			}
 			await this.setState({ awaitingServer: false })
@@ -189,7 +185,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.storeChefList(this.props["listChoice"], updatedChefs)
 					}
 				} catch (e) {
-					if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					this.setState({ awaitingServer: false })
 				}
 				await this.setState({ awaitingServer: false })
@@ -217,7 +213,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.storeChefList(this.props["listChoice"], updatedChefs)
 					}
 				} catch (e) {
-					if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					this.setState({ awaitingServer: false })
 				}
 				await this.setState({ awaitingServer: false })
@@ -252,7 +248,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					this.props.navigation.push('ChefDetails', { chefID: chefID })
 				}
 			} catch (e) {
-				if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+				if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 				// console.log('looking for local chefs')
 				AsyncStorage.getItem('localChefDetails', (err, res) => {
 					if (res != null) {

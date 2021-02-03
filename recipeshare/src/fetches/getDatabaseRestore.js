@@ -7,7 +7,7 @@ export const getDatabaseRestore = (auth_token, databaseLevel) => {
 		// console.log(databaseURL)
 
 		setTimeout(() => {
-			reject()
+			reject({name: 'Timeout'})
 		}, actionTimeout)
 
 		fetch(`${databaseURL}/database/${databaseLevel}restore`, {
@@ -20,14 +20,14 @@ export const getDatabaseRestore = (auth_token, databaseLevel) => {
 			.then(res => res.json())
 			.then(confirmation => {
 				if (confirmation.error && confirmation.message == "Invalid authentication") {
-					reject("logout")
+					reject({name: 'Logout'})
 				}
 				if (confirmation) {
 					resolve(confirmation)
 				}
 			})
-			.catch(() => {
-				reject()
+			.catch(e => {
+				reject(e)
 			})
 	})
 }

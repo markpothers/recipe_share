@@ -15,7 +15,8 @@ const mapStateToProps = (state) => ({
 	filter_settings: state.filter_settings,
 	filterCuisines: state.filterCuisines,
 	serves: state.serves,
-	cuisineChoices: state.cuisineChoices
+	cuisineChoices: state.cuisineChoices,
+	servesChoices: state.servesChoices,
 })
 
 const mapDispatchToProps = {
@@ -95,6 +96,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				availableCuisines = ["Any"]
 			}
 
+			let availableServes = this.props.servesChoices[this.props.listChoice]
+			availableServes = availableServes.map(serve => serve.toString())
+			availableServes = ["Any", ...availableServes]
+
 			return (
 				<Modal
 					animationType="fade"
@@ -128,7 +133,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									<View style={styles.picker} >
 										<DualOSPicker
 											onChoiceChange={this.handleServesChange}
-											options={serves}
+											options={this.props.newRecipe ? serves : availableServes}
 											selectedChoice={selectedServes}
 											textAlignment={"flex-start"}
 										/>

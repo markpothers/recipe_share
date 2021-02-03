@@ -5,7 +5,7 @@ export const postFollow = (follower_id, followee_id, auth_token) => {
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
-			reject()
+			reject({name: 'Timeout'})
 		}, actionTimeout)
 
 		fetch(`${databaseURL}/follows`, {
@@ -24,14 +24,14 @@ export const postFollow = (follower_id, followee_id, auth_token) => {
 			.then(res => res.json())
 			.then(follow => {
 				if (follow.error && follow.message == "Invalid authentication") {
-					reject("logout")
+					reject({name: 'Logout'})
 				}
 				if (follow) {
 					resolve(follow)
 				}
 			})
-			.catch(() => {
-				reject()
+			.catch(e => {
+				reject(e)
 			})
 	})
 }

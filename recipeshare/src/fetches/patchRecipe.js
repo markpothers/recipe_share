@@ -61,7 +61,7 @@ export const patchRecipe = async(
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
-			reject()
+			reject({name: 'Timeout'})
 		}, submitTimeout)
 
 		fetch(`${databaseURL}/recipes/${recipeID}`, {
@@ -94,14 +94,14 @@ export const patchRecipe = async(
 			.then(res => res.json())
 			.then(recipe => {
 				if (recipe.error && recipe.message == "Invalid authentication") {
-					reject("logout")
+					reject({name: 'Logout'})
 				}
 				if (recipe) {
 					resolve(recipe)
 				}
 			})
-			.catch(() => {
-				reject()
+			.catch(e => {
+				reject(e)
 			})
 	})
 }

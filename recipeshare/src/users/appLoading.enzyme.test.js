@@ -110,7 +110,7 @@ describe('AppLoading', () => {
 				"profile_text": "mock profile text",
 				"username": "my test username",
 			}
-			await AsyncStorage.getItem.mockResolvedValueOnce(chef)
+			await AsyncStorage.getItem.mockResolvedValueOnce(JSON.stringify(chef))
 			await act(async () => {
 				component = await mount(
 					<AppLoading

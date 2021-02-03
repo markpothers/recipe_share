@@ -4,9 +4,12 @@ const reducer = (currentState, action) => {
 			// console.log("saving recipes list")
 			return { ...currentState, recipes: { ...currentState.recipes, [action.recipeType]: action.recipeList } }
 		case 'STORE_CUISINES_CHOICES':
-			// console.log("saving recipes list")
+			// console.log("saving cuisines choices")
 			return { ...currentState, cuisineChoices: { ...currentState.cuisineChoices, [action.listChoice]: action.cuisines } }
-		// case 'CLEAR_LISTED_RECIPES':
+			case 'STORE_SERVES_CHOICES':
+				// console.log("saving serves choices")
+				return { ...currentState, servesChoices: { ...currentState.servesChoices, [action.listChoice]: action.serves } }
+			// case 'CLEAR_LISTED_RECIPES':
 		//     // console.log("clearing listed recipes")
 		//     return {...currentState, recipes: {...currentState.recipes, [action.recipeType]: []}}
 		case 'STORE_RECIPE_DETAILS':

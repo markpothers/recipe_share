@@ -18,10 +18,12 @@ export default class MultiPicSourceChooser extends React.Component {
 
 	componentDidMount = async () => {
 		let cameraRollPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL)
-		await this.setState({ hasCameraRollPermission: cameraRollPermission.permissions.cameraRoll.granted })
 		let cameraPermission = await Permissions.askAsync(Permissions.CAMERA)
-		await this.setState({ hasCameraPermission: cameraPermission.permissions.camera.granted })
-		await this.setState({ originalImages: this.props.imageSources })
+		await this.setState({
+			hasCameraRollPermission: cameraRollPermission.permissions.cameraRoll.granted,
+			hasCameraPermission: cameraPermission.permissions.camera.granted,
+			originalImages: [...this.props.imageSources]
+		})
 	}
 
 	addPhoto = async () => {
@@ -37,7 +39,7 @@ export default class MultiPicSourceChooser extends React.Component {
 					aspect: [4, 3],
 					base64: false
 				})
-				if (image.error){
+				if (image.error) {
 					console.log(image.error)
 				}
 				let newImages = this.props.imageSources
@@ -59,7 +61,7 @@ export default class MultiPicSourceChooser extends React.Component {
 					aspect: [4, 3],
 					base64: false
 				})
-				if (image.error){
+				if (image.error) {
 					console.log(image.error)
 				}
 				let newImages = this.props.imageSources
@@ -141,7 +143,6 @@ export default class MultiPicSourceChooser extends React.Component {
 
 	render() {
 		let imageSources = this.props.imageSources
-		// console.log(this.props.imageSources)
 		return (
 			<Modal
 				animationType="fade"

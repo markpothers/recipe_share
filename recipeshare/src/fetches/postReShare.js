@@ -5,7 +5,7 @@ export const postReShare = (recipeID, chefID, auth_token) => {
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
-			reject()
+			reject({name: 'Timeout'})
 		}, actionTimeout)
 
 		fetch(`${databaseURL}/re_shares`, {
@@ -24,14 +24,14 @@ export const postReShare = (recipeID, chefID, auth_token) => {
 			.then(res => res.json())
 			.then(re_share => {
 				if (re_share.error && re_share.message == "Invalid authentication"){
-					reject("logout")
+					reject({name: 'Logout'})
 				}
 				if (re_share) {
 					resolve(re_share)
 				}
 			})
-			.catch(() => {
-				reject()
+			.catch(e => {
+				reject(e)
 			})
 	})
 }

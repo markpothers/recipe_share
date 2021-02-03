@@ -6,7 +6,7 @@ export const getChefList = (listType, queryChefID, limit, offset, auth_token, se
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
-			reject()
+			reject({name: 'Timeout'})
 		}, listsTimeout)
 
 		fetch(`${databaseURL}/chefs?listType=${listType}&queryChefID=${queryChefID}&limit=${limit}&offset=${offset}&search_term=${searchTerm}`, {
@@ -19,14 +19,14 @@ export const getChefList = (listType, queryChefID, limit, offset, auth_token, se
 			.then(res => res.json())
 			.then(chefs => {
 				if (chefs.error && chefs.message == "Invalid authentication") {
-					reject("logout")
+					reject({name: 'Logout'})
 				}
 				if (chefs) {
 					resolve(chefs)
 				}
 			})
-			.catch(() => {
-				reject()
+			.catch(e => {
+				reject(e)
 			})
 	})
 }

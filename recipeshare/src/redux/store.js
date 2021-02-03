@@ -31,6 +31,16 @@ export const initialState = {
     most_liked: [],
     most_made: []
   },
+  servesChoices: {
+    all: [],
+    chef: [],
+    chef_feed: [],
+    chef_liked: [],
+    chef_made: [],
+    global_ranks: [],
+    most_liked: [],
+    most_made: []
+  },
   recipes_details: {
 
   },

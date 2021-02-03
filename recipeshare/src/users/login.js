@@ -107,11 +107,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			}
 			let response = await apiCall(loginChef, this.props)
 			if (response.fail) {
-				this.setState({ renderOfflineMessage: true })
+				this.setState({
+					renderOfflineMessage: true,
+					awaitingServer: false
+				})
 			} else if (response.error) {
 				await this.setState({
 					loginError: true,
-					error: response.message
+					error: response.message,
+					awaitingServer: false
 				})
 			} else { // we don't want to differentiate between response and response.error for security reasons
 				if (this.props.stayingLoggedIn) {
@@ -127,7 +131,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					this.props.navigation.navigate("CreateChef", { successfulLogin: true }) //thisnavigate command is used to trigger Apple Keychain.  CreateChef will immediately perform the required actions to login.
 				}
 			}
-			await this.setState({ awaitingServer: false })
 		}
 
 		forgotPassword = async () => {

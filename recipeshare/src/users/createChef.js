@@ -113,13 +113,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			await this.setState({ awaitingServer: true })
 			let response = await apiCall(postChef, this.props.username, this.props.e_mail, this.props.password, this.props.password_confirmation, this.props.country, this.props.image_url, this.props.profile_text)
 			if (response.fail) {
-				this.setState({ renderOfflineMessage: true })
+				this.setState({
+					renderOfflineMessage: true,
+					awaitingServer: false
+				})
 			} else if (response.error) {
-				this.setState({ errors: response.messages })
+				this.setState({
+					errors: response.messages,
+					awaitingServer: false
+				})
 			} else {
 				this.props.navigation.navigate('Login', { successfulRegistration: true })
 			}
-			await this.setState({ awaitingServer: false })
 		}
 
 		renderEmailError = () => {

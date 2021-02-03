@@ -151,7 +151,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.storeNewFollowers(this.props.route.params.chefID, newFollowers)
 					}
 				} catch (e) {
-					if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({ awaitingServer: false })
@@ -171,7 +171,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.storeNewFollowers(this.props.route.params.chefID, newFollowers)
 					}
 				} catch (e) {
-					if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({ awaitingServer: false })

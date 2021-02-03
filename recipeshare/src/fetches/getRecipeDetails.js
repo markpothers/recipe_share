@@ -5,7 +5,7 @@ export const getRecipeDetails = (recipe_id, auth_token) => {
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
-			reject()
+			reject({name: 'Timeout'})
 		}, detailsTimeout)
 
 		fetch(`${databaseURL}/recipes/${recipe_id}`, {
@@ -18,14 +18,14 @@ export const getRecipeDetails = (recipe_id, auth_token) => {
 			.then(res => res.json())
 			.then(recipe_details => {
 				if (recipe_details.error && recipe_details.message == "Invalid authentication"){
-					reject("logout")
+					reject({name: 'Logout'})
 				}
 				if (recipe_details) {
 					resolve(recipe_details)
 				}
 			})
-			.catch(() => {
-				reject()
+			.catch(e => {
+				reject(e)
 			})
 	})
 }

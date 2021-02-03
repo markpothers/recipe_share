@@ -9,7 +9,7 @@ export const postMakePic = async (recipeID, chefID, auth_token, makePicFileUri) 
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
-			reject()
+			reject({name: 'Timeout'})
 		}, detailsTimeout)
 
 		fetch(`${databaseURL}/make_pics`, {
@@ -29,14 +29,14 @@ export const postMakePic = async (recipeID, chefID, auth_token, makePicFileUri) 
 			.then(res => res.json())
 			.then(makepic => {
 				if (makepic.error && makepic.message == "Invalid authentication") {
-					reject("logout")
+					reject({name: 'Logout'})
 				}
 				if (makepic) {
 					resolve(makepic)
 				}
 			})
-			.catch(() => {
-				reject()
+			.catch(e => {
+				reject(e)
 			})
 	})
 }

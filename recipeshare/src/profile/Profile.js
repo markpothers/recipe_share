@@ -126,14 +126,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			await this.generateHeaderButtonList()
 			this.addDynamicMenuButtonsToHeader()
 			this.fetchChefDetails()
-			this._unsubscribeFocus = this.props.navigation.addListener('focus', () => {
-				this.respondToFocus()
-			})
+			this.props.navigation.addListener('focus', this.respondToFocus)
 			this.setState({ image: this.props.imageBase64 })
 		}
 
 		componentWillUnmount = () => {
-			this._unsubscribeFocus()
+			this.props.navigation.removeListener('focus', this.respondToFocus)
 		}
 
 		respondToFocus = async () => {

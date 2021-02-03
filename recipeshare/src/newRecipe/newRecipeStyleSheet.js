@@ -71,7 +71,7 @@ export const styles = StyleSheet.create({
 		borderRadius:responsiveWidth(1.5),
 		height: responsiveHeight(6),
 		// minWidth: responsiveWidth(25),
-		width: responsiveWidth(55),
+		width: responsiveWidth(59),
 		justifyContent: 'center',
 		// alignItems: 'center',
 		borderStyle: 'solid',
@@ -97,7 +97,7 @@ export const styles = StyleSheet.create({
 		borderWidth: 1,
 		borderColor: '#104e01',
 		justifyContent: 'center',
-		marginLeft: responsiveWidth(5)
+		marginLeft: responsiveWidth(1)
 	},
 	// picker: {
 	//   height: 44,
@@ -319,5 +319,17 @@ export const styles = StyleSheet.create({
 	},
 	autocompleteListText: {
 		fontSize: responsiveFontSize(1.8)
+	},
+	plusButtonContainer: {
+		marginTop: responsiveHeight(1),
+		width: responsiveWidth(100),
+		justifyContent: 'center',
+		alignItems:'center'
+	},
+	plusButton:{
+		backgroundColor: '#fff59b',
+		borderRadius: responsiveWidth(1.5),
+		borderColor: '#104e01',
+		borderWidth: 1
 	}
 })

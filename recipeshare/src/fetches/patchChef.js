@@ -9,7 +9,7 @@ export const patchChef = async (chefID, auth_token, e_mail, username, profile_te
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
-			reject()
+			reject({name: 'Timeout'})
 		}, detailsTimeout)
 
 		fetch(`${databaseURL}/chefs/${chefID}`, {
@@ -34,14 +34,14 @@ export const patchChef = async (chefID, auth_token, e_mail, username, profile_te
 			.then(res => res.json())
 			.then(chef => {
 				if (chef.error && chef.message == "Invalid authentication") {
-					reject("logout")
+					reject({name: 'Logout'})
 				}
 				if (chef) {
 					resolve(chef)
 				}
 			})
-			.catch(() => {
-				reject()
+			.catch(e => {
+				reject(e)
 			})
 	})
 }

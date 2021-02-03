@@ -265,7 +265,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					this.props.navigation.navigate('ChefDetails', { chefID: chefID })
 				}
 			} catch (e) {
-				if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+				if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 				// console.log('looking for local chefs')
 				AsyncStorage.getItem('localChefDetails', (err, res) => {
 					if (res != null) {
@@ -459,7 +459,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.addRecipeLike()
 					}
 				} catch (e) {
-					if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({ awaitingServer: false })
@@ -478,7 +478,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.removeRecipeLike()
 					}
 				} catch (e) {
-					if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({ awaitingServer: false })
@@ -497,7 +497,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.addRecipeMake()
 					}
 				} catch (e) {
-					if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({ awaitingServer: false })
@@ -516,7 +516,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.addReShare()
 					}
 				} catch (e) {
-					if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({ awaitingServer: false })
@@ -535,7 +535,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.removeReShare()
 					}
 				} catch (e) {
-					if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({ awaitingServer: false })
@@ -576,7 +576,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						await this.props.addMakePicChef(makePic.make_pic_chef)
 					}
 				} catch (e) {
-					if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState({ renderOfflineMessage: true })
 				}
 			}
@@ -597,7 +597,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					}
 					await this.setState({ deleteMakePicPopUpShowing: false })
 				} catch (e) {
-					if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({
@@ -640,7 +640,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					})
 				}
 			} catch (e) {
-				if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+				if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 				await this.setState({ renderOfflineMessage: true })
 			}
 			await this.setState({ awaitingServer: false })
@@ -668,7 +668,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					}
 					await this.setState({ deleteCommentPopUpShowing: false })
 				} catch (e) {
-					if (e === "logout") { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState({ renderOfflineMessage: true })
 				}
 				await this.setState({
