@@ -167,7 +167,11 @@ exports[`RecipeComment render first comment and the delete comment button calls 
       testID="navigateToChefImageButton"
     >
       <Image
-        source={1}
+        source={
+          Object {
+            "uri": "https://robohash.org/autquiaut.png?size=300x300&set=set1",
+          }
+        }
         style={
           Object {
             "borderRadius": 11.25,

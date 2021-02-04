@@ -1,0 +1,1745 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Recipe List rendering renders correctly when empty with an empty list and a filter button and adds appropriate listeners, then removes listeners when unmounted 1`] = `
+<Connect(RecipesList)
+  listChoice="all"
+  navigation={
+    Object {
+      "addListener": [MockFunction] {
+        "calls": Array [
+          Array [
+            "focus",
+            [Function],
+          ],
+          Array [
+            "blur",
+            [Function],
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": undefined,
+          },
+          Object {
+            "type": "return",
+            "value": undefined,
+          },
+        ],
+      },
+      "navigate": [MockFunction],
+      "removeListener": [MockFunction],
+    }
+  }
+  route={
+    Object {
+      "name": "All Recipes",
+    }
+  }
+>
+  <RecipesList
+    all_Recipes={Array []}
+    appendToRecipeList={[Function]}
+    chef_Recipes={Array []}
+    chef_feed_Recipes={Array []}
+    chef_liked_Recipes={Array []}
+    chef_made_Recipes={Array []}
+    filterCuisines={
+      Object {
+        "all": "Any",
+        "chef": "Any",
+        "chef_feed": "Any",
+        "chef_liked": "Any",
+        "chef_made": "Any",
+        "global_ranks": "Any",
+        "most_liked": "Any",
+        "most_made": "Any",
+      }
+    }
+    filter_settings={
+      Object {
+        "Bread": false,
+        "Breakfast": false,
+        "Chicken": false,
+        "Dairy free": false,
+        "Dessert": false,
+        "Dinner": false,
+        "Freezer meal": false,
+        "Gluten free": false,
+        "Keto": false,
+        "Lunch": false,
+        "Paleo": false,
+        "Red meat": false,
+        "Salad": false,
+        "Seafood": false,
+        "Side": false,
+        "Soup": false,
+        "Vegan": false,
+        "Vegetarian": false,
+        "Weekend": false,
+        "Weeknight": false,
+        "White meat": false,
+        "Whole 30": false,
+      }
+    }
+    global_ranks_Recipes={Array []}
+    listChoice="all"
+    loggedInChef={
+      Object {
+        "auth_token": "",
+        "id": "",
+        "image_url": "",
+        "is_admin": false,
+        "username": "",
+      }
+    }
+    most_liked_Recipes={Array []}
+    most_made_Recipes={Array []}
+    navigation={
+      Object {
+        "addListener": [MockFunction] {
+          "calls": Array [
+            Array [
+              "focus",
+              [Function],
+            ],
+            Array [
+              "blur",
+              [Function],
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        },
+        "navigate": [MockFunction],
+        "removeListener": [MockFunction],
+      }
+    }
+    recipes_details={Object {}}
+    route={
+      Object {
+        "name": "All Recipes",
+      }
+    }
+    serves="Any"
+    storeChefDetails={[Function]}
+    storeCuisinesChoices={[Function]}
+    storeRecipeDetails={[Function]}
+    storeRecipeList={[Function]}
+    storeServesChoices={[Function]}
+  >
+    <SpinachAppContainer
+      awaitingServer={true}
+    >
+      <ForwardRef(SafeAreaView)
+        style={
+          Object {
+            "borderColor": "blue",
+            "borderWidth": 0,
+            "flex": 1,
+          }
+        }
+      >
+        <RCTSafeAreaView
+          emulateUnlessSupported={true}
+          style={
+            Object {
+              "borderColor": "blue",
+              "borderWidth": 0,
+              "flex": 1,
+            }
+          }
+        >
+          <RCTSafeAreaView
+            emulateUnlessSupported={true}
+            style={
+              Object {
+                "borderColor": "blue",
+                "borderWidth": 0,
+                "flex": 1,
+              }
+            }
+          >
+            <Image
+              resizeMode="cover"
+              source={1}
+              style={
+                Object {
+                  "borderColor": "black",
+                  "borderWidth": 0,
+                  "height": 1334,
+                  "position": "absolute",
+                  "width": 750,
+                }
+              }
+            >
+              <Image
+                resizeMode="cover"
+                source={1}
+                style={
+                  Object {
+                    "borderColor": "black",
+                    "borderWidth": 0,
+                    "height": 1334,
+                    "position": "absolute",
+                    "width": 750,
+                  }
+                }
+              />
+            </Image>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#fff59b",
+                  "borderColor": "#104e01",
+                  "borderRadius": 100,
+                  "borderWidth": 1,
+                  "height": 50,
+                  "justifyContent": "center",
+                  "left": "45%",
+                  "position": "absolute",
+                  "top": "10%",
+                  "width": 50,
+                  "zIndex": 5,
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#fff59b",
+                    "borderColor": "#104e01",
+                    "borderRadius": 100,
+                    "borderWidth": 1,
+                    "height": 50,
+                    "justifyContent": "center",
+                    "left": "45%",
+                    "position": "absolute",
+                    "top": "10%",
+                    "width": 50,
+                    "zIndex": 5,
+                  }
+                }
+              >
+                <ActivityIndicator
+                  animating={true}
+                  color="#104e01"
+                  hidesWhenStopped={true}
+                  size="large"
+                  style={
+                    Object {
+                      "left": 1.25,
+                      "top": 1.7,
+                    }
+                  }
+                >
+                  <ActivityIndicator
+                    animating={true}
+                    color="#104e01"
+                    hidesWhenStopped={true}
+                    size="large"
+                    style={
+                      Object {
+                        "left": 1.25,
+                        "top": 1.7,
+                      }
+                    }
+                  />
+                </ActivityIndicator>
+              </View>
+            </View>
+            <ForwardRef
+              activeOpacity={1}
+              onPress={[Function]}
+            >
+              <TouchableOpacity
+                activeOpacity={1}
+                hostRef={null}
+                onPress={[Function]}
+              >
+                <ForwardRef(AnimatedComponentWrapper)
+                  accessible={true}
+                  focusable={true}
+                  onClick={[Function]}
+                  onResponderGrant={[Function]}
+                  onResponderMove={[Function]}
+                  onResponderRelease={[Function]}
+                  onResponderTerminate={[Function]}
+                  onResponderTerminationRequest={[Function]}
+                  onStartShouldSetResponder={[Function]}
+                  style={
+                    Array [
+                      undefined,
+                      Object {
+                        "opacity": 1,
+                      },
+                    ]
+                  }
+                >
+                  <AnimatedComponent
+                    accessible={true}
+                    focusable={true}
+                    onClick={[Function]}
+                    onResponderGrant={[Function]}
+                    onResponderMove={[Function]}
+                    onResponderRelease={[Function]}
+                    onResponderTerminate={[Function]}
+                    onResponderTerminationRequest={[Function]}
+                    onStartShouldSetResponder={[Function]}
+                    style={
+                      Array [
+                        undefined,
+                        Object {
+                          "opacity": 1,
+                        },
+                      ]
+                    }
+                  >
+                    <View
+                      accessible={true}
+                      focusable={true}
+                      onClick={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      style={
+                        Object {
+                          "opacity": 1,
+                        }
+                      }
+                    >
+                      <View
+                        accessible={true}
+                        focusable={true}
+                        onClick={[Function]}
+                        onResponderGrant={[Function]}
+                        onResponderMove={[Function]}
+                        onResponderRelease={[Function]}
+                        onResponderTerminate={[Function]}
+                        onResponderTerminationRequest={[Function]}
+                        onStartShouldSetResponder={[Function]}
+                        style={
+                          Object {
+                            "opacity": 1,
+                          }
+                        }
+                      >
+                        <ForwardRef(AnimatedComponentWrapper)
+                          ListHeaderComponent={[Function]}
+                          data={Array []}
+                          extraData={Object {}}
+                          initialNumToRender={5}
+                          keyExtractor={[Function]}
+                          listKey={Array []}
+                          nestedScrollEnabled={true}
+                          onEndReached={[Function]}
+                          onEndReachedThreshold={1}
+                          onRefresh={[Function]}
+                          onScroll={[Function]}
+                          refreshing={false}
+                          renderItem={[Function]}
+                          scrollEventThrottle={16}
+                        >
+                          <AnimatedComponent
+                            ListHeaderComponent={[Function]}
+                            data={Array []}
+                            extraData={Object {}}
+                            initialNumToRender={5}
+                            keyExtractor={[Function]}
+                            listKey={Array []}
+                            nestedScrollEnabled={true}
+                            onEndReached={[Function]}
+                            onEndReachedThreshold={1}
+                            onRefresh={[Function]}
+                            onScroll={[Function]}
+                            refreshing={false}
+                            renderItem={[Function]}
+                            scrollEventThrottle={16}
+                          >
+                            <FlatList
+                              ListHeaderComponent={[Function]}
+                              data={Array []}
+                              disableVirtualization={false}
+                              extraData={Object {}}
+                              horizontal={false}
+                              initialNumToRender={5}
+                              keyExtractor={[Function]}
+                              listKey={Array []}
+                              maxToRenderPerBatch={10}
+                              nestedScrollEnabled={true}
+                              numColumns={1}
+                              onEndReached={[Function]}
+                              onEndReachedThreshold={1}
+                              onRefresh={[Function]}
+                              onScroll={[Function]}
+                              refreshing={false}
+                              removeClippedSubviews={false}
+                              renderItem={[Function]}
+                              scrollEventThrottle={16}
+                              updateCellsBatchingPeriod={50}
+                              windowSize={21}
+                            >
+                              <VirtualizedList
+                                ListHeaderComponent={[Function]}
+                                data={Array []}
+                                disableVirtualization={false}
+                                extraData={Object {}}
+                                getItem={[Function]}
+                                getItemCount={[Function]}
+                                horizontal={false}
+                                initialNumToRender={5}
+                                keyExtractor={[Function]}
+                                listKey={Array []}
+                                maxToRenderPerBatch={10}
+                                nestedScrollEnabled={true}
+                                onEndReached={[Function]}
+                                onEndReachedThreshold={1}
+                                onRefresh={[Function]}
+                                onScroll={[Function]}
+                                refreshing={false}
+                                removeClippedSubviews={false}
+                                renderItem={[Function]}
+                                scrollEventThrottle={16}
+                                updateCellsBatchingPeriod={50}
+                                viewabilityConfigCallbackPairs={Array []}
+                                windowSize={21}
+                              >
+                                <ScrollView
+                                  ListHeaderComponent={[Function]}
+                                  data={Array []}
+                                  disableVirtualization={false}
+                                  extraData={Object {}}
+                                  getItem={[Function]}
+                                  getItemCount={[Function]}
+                                  horizontal={false}
+                                  initialNumToRender={5}
+                                  keyExtractor={[Function]}
+                                  listKey={Array []}
+                                  maxToRenderPerBatch={10}
+                                  nestedScrollEnabled={true}
+                                  onContentSizeChange={[Function]}
+                                  onEndReached={[Function]}
+                                  onEndReachedThreshold={1}
+                                  onLayout={[Function]}
+                                  onMomentumScrollEnd={[Function]}
+                                  onRefresh={[Function]}
+                                  onScroll={[Function]}
+                                  onScrollBeginDrag={[Function]}
+                                  onScrollEndDrag={[Function]}
+                                  refreshControl={
+                                    <RefreshControlMock
+                                      onRefresh={[Function]}
+                                      refreshing={false}
+                                    />
+                                  }
+                                  refreshing={false}
+                                  removeClippedSubviews={false}
+                                  renderItem={[Function]}
+                                  scrollEventThrottle={16}
+                                  stickyHeaderIndices={Array []}
+                                  updateCellsBatchingPeriod={50}
+                                  viewabilityConfigCallbackPairs={Array []}
+                                  windowSize={21}
+                                >
+                                  <RCTScrollView
+                                    ListHeaderComponent={[Function]}
+                                    data={Array []}
+                                    disableVirtualization={false}
+                                    extraData={Object {}}
+                                    getItem={[Function]}
+                                    getItemCount={[Function]}
+                                    horizontal={false}
+                                    initialNumToRender={5}
+                                    keyExtractor={[Function]}
+                                    listKey={Array []}
+                                    maxToRenderPerBatch={10}
+                                    nestedScrollEnabled={true}
+                                    onContentSizeChange={[Function]}
+                                    onEndReached={[Function]}
+                                    onEndReachedThreshold={1}
+                                    onLayout={[Function]}
+                                    onMomentumScrollEnd={[Function]}
+                                    onRefresh={[Function]}
+                                    onScroll={[Function]}
+                                    onScrollBeginDrag={[Function]}
+                                    onScrollEndDrag={[Function]}
+                                    refreshControl={
+                                      <RefreshControlMock
+                                        onRefresh={[Function]}
+                                        refreshing={false}
+                                      />
+                                    }
+                                    refreshing={false}
+                                    removeClippedSubviews={false}
+                                    renderItem={[Function]}
+                                    scrollEventThrottle={16}
+                                    stickyHeaderIndices={Array []}
+                                    updateCellsBatchingPeriod={50}
+                                    viewabilityConfigCallbackPairs={Array []}
+                                    windowSize={21}
+                                  >
+                                    <RCTScrollView
+                                      ListHeaderComponent={[Function]}
+                                      data={Array []}
+                                      disableVirtualization={false}
+                                      extraData={Object {}}
+                                      getItem={[Function]}
+                                      getItemCount={[Function]}
+                                      horizontal={false}
+                                      initialNumToRender={5}
+                                      keyExtractor={[Function]}
+                                      listKey={Array []}
+                                      maxToRenderPerBatch={10}
+                                      nestedScrollEnabled={true}
+                                      onContentSizeChange={[Function]}
+                                      onEndReached={[Function]}
+                                      onEndReachedThreshold={1}
+                                      onLayout={[Function]}
+                                      onMomentumScrollEnd={[Function]}
+                                      onRefresh={[Function]}
+                                      onScroll={[Function]}
+                                      onScrollBeginDrag={[Function]}
+                                      onScrollEndDrag={[Function]}
+                                      refreshControl={
+                                        <RefreshControlMock
+                                          onRefresh={[Function]}
+                                          refreshing={false}
+                                        />
+                                      }
+                                      refreshing={false}
+                                      removeClippedSubviews={false}
+                                      renderItem={[Function]}
+                                      scrollEventThrottle={16}
+                                      stickyHeaderIndices={Array []}
+                                      updateCellsBatchingPeriod={50}
+                                      viewabilityConfigCallbackPairs={Array []}
+                                      windowSize={21}
+                                    >
+                                      <RefreshControlMock
+                                        onRefresh={[Function]}
+                                        refreshing={false}
+                                      >
+                                        <RCTRefreshControl>
+                                          <RCTRefreshControl />
+                                        </RCTRefreshControl>
+                                      </RefreshControlMock>
+                                      <View>
+                                        <View>
+                                          <VirtualizedCellWrapper
+                                            cellKey="rootList-header"
+                                            key="$header"
+                                          >
+                                            <View
+                                              onLayout={[Function]}
+                                            >
+                                              <View
+                                                onLayout={[Function]}
+                                              >
+                                                <ListHeaderComponent>
+                                                  <ForwardRef
+                                                    onPress={[Function]}
+                                                    style={
+                                                      Object {
+                                                        "height": 93.38000000000001,
+                                                      }
+                                                    }
+                                                  >
+                                                    <TouchableOpacity
+                                                      hostRef={null}
+                                                      onPress={[Function]}
+                                                      style={
+                                                        Object {
+                                                          "height": 93.38000000000001,
+                                                        }
+                                                      }
+                                                    >
+                                                      <ForwardRef(AnimatedComponentWrapper)
+                                                        accessible={true}
+                                                        focusable={true}
+                                                        onClick={[Function]}
+                                                        onResponderGrant={[Function]}
+                                                        onResponderMove={[Function]}
+                                                        onResponderRelease={[Function]}
+                                                        onResponderTerminate={[Function]}
+                                                        onResponderTerminationRequest={[Function]}
+                                                        onStartShouldSetResponder={[Function]}
+                                                        style={
+                                                          Array [
+                                                            Object {
+                                                              "height": 93.38000000000001,
+                                                            },
+                                                            Object {
+                                                              "opacity": 1,
+                                                            },
+                                                          ]
+                                                        }
+                                                      >
+                                                        <AnimatedComponent
+                                                          accessible={true}
+                                                          focusable={true}
+                                                          onClick={[Function]}
+                                                          onResponderGrant={[Function]}
+                                                          onResponderMove={[Function]}
+                                                          onResponderRelease={[Function]}
+                                                          onResponderTerminate={[Function]}
+                                                          onResponderTerminationRequest={[Function]}
+                                                          onStartShouldSetResponder={[Function]}
+                                                          style={
+                                                            Array [
+                                                              Object {
+                                                                "height": 93.38000000000001,
+                                                              },
+                                                              Object {
+                                                                "opacity": 1,
+                                                              },
+                                                            ]
+                                                          }
+                                                        >
+                                                          <View
+                                                            accessible={true}
+                                                            focusable={true}
+                                                            onClick={[Function]}
+                                                            onResponderGrant={[Function]}
+                                                            onResponderMove={[Function]}
+                                                            onResponderRelease={[Function]}
+                                                            onResponderTerminate={[Function]}
+                                                            onResponderTerminationRequest={[Function]}
+                                                            onStartShouldSetResponder={[Function]}
+                                                            style={
+                                                              Object {
+                                                                "height": 93.38000000000001,
+                                                                "opacity": 1,
+                                                              }
+                                                            }
+                                                          >
+                                                            <View
+                                                              accessible={true}
+                                                              focusable={true}
+                                                              onClick={[Function]}
+                                                              onResponderGrant={[Function]}
+                                                              onResponderMove={[Function]}
+                                                              onResponderRelease={[Function]}
+                                                              onResponderTerminate={[Function]}
+                                                              onResponderTerminationRequest={[Function]}
+                                                              onStartShouldSetResponder={[Function]}
+                                                              style={
+                                                                Object {
+                                                                  "height": 93.38000000000001,
+                                                                  "opacity": 1,
+                                                                }
+                                                              }
+                                                            >
+                                                              <PressabilityDebugView
+                                                                color="cyan"
+                                                              />
+                                                            </View>
+                                                          </View>
+                                                        </AnimatedComponent>
+                                                      </ForwardRef(AnimatedComponentWrapper)>
+                                                    </TouchableOpacity>
+                                                  </ForwardRef>
+                                                </ListHeaderComponent>
+                                              </View>
+                                            </View>
+                                          </VirtualizedCellWrapper>
+                                        </View>
+                                      </View>
+                                    </RCTScrollView>
+                                  </RCTScrollView>
+                                </ScrollView>
+                              </VirtualizedList>
+                            </FlatList>
+                          </AnimatedComponent>
+                        </ForwardRef(AnimatedComponentWrapper)>
+                        <PressabilityDebugView
+                          color="cyan"
+                        />
+                      </View>
+                    </View>
+                  </AnimatedComponent>
+                </ForwardRef(AnimatedComponentWrapper)>
+              </TouchableOpacity>
+            </ForwardRef>
+            <ForwardRef
+              activeOpacity={0.7}
+              onPress={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#fff59b",
+                  "borderColor": "#104e01",
+                  "borderRadius": 11.25,
+                  "borderStyle": "solid",
+                  "borderWidth": 1,
+                  "bottom": 53.36,
+                  "height": 106.72,
+                  "justifyContent": "center",
+                  "position": "absolute",
+                  "right": 53.36,
+                  "width": 106.72,
+                  "zIndex": 1,
+                }
+              }
+              testID="filterButton"
+            >
+              <TouchableOpacity
+                activeOpacity={0.7}
+                hostRef={null}
+                onPress={[Function]}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#fff59b",
+                    "borderColor": "#104e01",
+                    "borderRadius": 11.25,
+                    "borderStyle": "solid",
+                    "borderWidth": 1,
+                    "bottom": 53.36,
+                    "height": 106.72,
+                    "justifyContent": "center",
+                    "position": "absolute",
+                    "right": 53.36,
+                    "width": 106.72,
+                    "zIndex": 1,
+                  }
+                }
+                testID="filterButton"
+              >
+                <ForwardRef(AnimatedComponentWrapper)
+                  accessible={true}
+                  focusable={true}
+                  onClick={[Function]}
+                  onResponderGrant={[Function]}
+                  onResponderMove={[Function]}
+                  onResponderRelease={[Function]}
+                  onResponderTerminate={[Function]}
+                  onResponderTerminationRequest={[Function]}
+                  onStartShouldSetResponder={[Function]}
+                  style={
+                    Array [
+                      Object {
+                        "alignItems": "center",
+                        "backgroundColor": "#fff59b",
+                        "borderColor": "#104e01",
+                        "borderRadius": 11.25,
+                        "borderStyle": "solid",
+                        "borderWidth": 1,
+                        "bottom": 53.36,
+                        "height": 106.72,
+                        "justifyContent": "center",
+                        "position": "absolute",
+                        "right": 53.36,
+                        "width": 106.72,
+                        "zIndex": 1,
+                      },
+                      Object {
+                        "opacity": 1,
+                      },
+                    ]
+                  }
+                  testID="filterButton"
+                >
+                  <AnimatedComponent
+                    accessible={true}
+                    focusable={true}
+                    onClick={[Function]}
+                    onResponderGrant={[Function]}
+                    onResponderMove={[Function]}
+                    onResponderRelease={[Function]}
+                    onResponderTerminate={[Function]}
+                    onResponderTerminationRequest={[Function]}
+                    onStartShouldSetResponder={[Function]}
+                    style={
+                      Array [
+                        Object {
+                          "alignItems": "center",
+                          "backgroundColor": "#fff59b",
+                          "borderColor": "#104e01",
+                          "borderRadius": 11.25,
+                          "borderStyle": "solid",
+                          "borderWidth": 1,
+                          "bottom": 53.36,
+                          "height": 106.72,
+                          "justifyContent": "center",
+                          "position": "absolute",
+                          "right": 53.36,
+                          "width": 106.72,
+                          "zIndex": 1,
+                        },
+                        Object {
+                          "opacity": 1,
+                        },
+                      ]
+                    }
+                    testID="filterButton"
+                  >
+                    <View
+                      accessible={true}
+                      focusable={true}
+                      onClick={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      style={
+                        Object {
+                          "alignItems": "center",
+                          "backgroundColor": "#fff59b",
+                          "borderColor": "#104e01",
+                          "borderRadius": 11.25,
+                          "borderStyle": "solid",
+                          "borderWidth": 1,
+                          "bottom": 53.36,
+                          "height": 106.72,
+                          "justifyContent": "center",
+                          "opacity": 1,
+                          "position": "absolute",
+                          "right": 53.36,
+                          "width": 106.72,
+                          "zIndex": 1,
+                        }
+                      }
+                      testID="filterButton"
+                    >
+                      <View
+                        accessible={true}
+                        focusable={true}
+                        onClick={[Function]}
+                        onResponderGrant={[Function]}
+                        onResponderMove={[Function]}
+                        onResponderRelease={[Function]}
+                        onResponderTerminate={[Function]}
+                        onResponderTerminationRequest={[Function]}
+                        onStartShouldSetResponder={[Function]}
+                        style={
+                          Object {
+                            "alignItems": "center",
+                            "backgroundColor": "#fff59b",
+                            "borderColor": "#104e01",
+                            "borderRadius": 11.25,
+                            "borderStyle": "solid",
+                            "borderWidth": 1,
+                            "bottom": 53.36,
+                            "height": 106.72,
+                            "justifyContent": "center",
+                            "opacity": 1,
+                            "position": "absolute",
+                            "right": 53.36,
+                            "width": 106.72,
+                            "zIndex": 1,
+                          }
+                        }
+                        testID="filterButton"
+                      >
+                        <Icon
+                          name="filter"
+                          size={46.690000000000005}
+                          style={
+                            Object {
+                              "color": "#104e01",
+                            }
+                          }
+                        />
+                        <PressabilityDebugView
+                          color="cyan"
+                        />
+                      </View>
+                    </View>
+                  </AnimatedComponent>
+                </ForwardRef(AnimatedComponentWrapper)>
+              </TouchableOpacity>
+            </ForwardRef>
+          </RCTSafeAreaView>
+        </RCTSafeAreaView>
+      </ForwardRef(SafeAreaView)>
+    </SpinachAppContainer>
+  </RecipesList>
+</Connect(RecipesList)>
+`;
+
+exports[`Recipe List rendering renders correctly with the My Feed Message when it's my feed and empty 1`] = `
+<Connect(RecipesList)
+  listChoice="all"
+  navigation={
+    Object {
+      "addListener": [MockFunction] {
+        "calls": Array [
+          Array [
+            "focus",
+            [Function],
+          ],
+          Array [
+            "blur",
+            [Function],
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": undefined,
+          },
+          Object {
+            "type": "return",
+            "value": undefined,
+          },
+        ],
+      },
+      "navigate": [MockFunction],
+      "removeListener": [MockFunction],
+    }
+  }
+  route={
+    Object {
+      "name": "My Feed",
+    }
+  }
+>
+  <RecipesList
+    all_Recipes={Array []}
+    appendToRecipeList={[Function]}
+    chef_Recipes={Array []}
+    chef_feed_Recipes={Array []}
+    chef_liked_Recipes={Array []}
+    chef_made_Recipes={Array []}
+    filterCuisines={
+      Object {
+        "all": "Any",
+        "chef": "Any",
+        "chef_feed": "Any",
+        "chef_liked": "Any",
+        "chef_made": "Any",
+        "global_ranks": "Any",
+        "most_liked": "Any",
+        "most_made": "Any",
+      }
+    }
+    filter_settings={
+      Object {
+        "Bread": false,
+        "Breakfast": false,
+        "Chicken": false,
+        "Dairy free": false,
+        "Dessert": false,
+        "Dinner": false,
+        "Freezer meal": false,
+        "Gluten free": false,
+        "Keto": false,
+        "Lunch": false,
+        "Paleo": false,
+        "Red meat": false,
+        "Salad": false,
+        "Seafood": false,
+        "Side": false,
+        "Soup": false,
+        "Vegan": false,
+        "Vegetarian": false,
+        "Weekend": false,
+        "Weeknight": false,
+        "White meat": false,
+        "Whole 30": false,
+      }
+    }
+    global_ranks_Recipes={Array []}
+    listChoice="all"
+    loggedInChef={
+      Object {
+        "auth_token": "",
+        "id": "",
+        "image_url": "",
+        "is_admin": false,
+        "username": "",
+      }
+    }
+    most_liked_Recipes={Array []}
+    most_made_Recipes={Array []}
+    navigation={
+      Object {
+        "addListener": [MockFunction] {
+          "calls": Array [
+            Array [
+              "focus",
+              [Function],
+            ],
+            Array [
+              "blur",
+              [Function],
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        },
+        "navigate": [MockFunction],
+        "removeListener": [MockFunction],
+      }
+    }
+    recipes_details={Object {}}
+    route={
+      Object {
+        "name": "My Feed",
+      }
+    }
+    serves="Any"
+    storeChefDetails={[Function]}
+    storeCuisinesChoices={[Function]}
+    storeRecipeDetails={[Function]}
+    storeRecipeList={[Function]}
+    storeServesChoices={[Function]}
+  >
+    <SpinachAppContainer
+      awaitingServer={true}
+    >
+      <ForwardRef(SafeAreaView)
+        style={
+          Object {
+            "borderColor": "blue",
+            "borderWidth": 0,
+            "flex": 1,
+          }
+        }
+      >
+        <RCTSafeAreaView
+          emulateUnlessSupported={true}
+          style={
+            Object {
+              "borderColor": "blue",
+              "borderWidth": 0,
+              "flex": 1,
+            }
+          }
+        >
+          <RCTSafeAreaView
+            emulateUnlessSupported={true}
+            style={
+              Object {
+                "borderColor": "blue",
+                "borderWidth": 0,
+                "flex": 1,
+              }
+            }
+          >
+            <Image
+              resizeMode="cover"
+              source={1}
+              style={
+                Object {
+                  "borderColor": "black",
+                  "borderWidth": 0,
+                  "height": 1334,
+                  "position": "absolute",
+                  "width": 750,
+                }
+              }
+            >
+              <Image
+                resizeMode="cover"
+                source={1}
+                style={
+                  Object {
+                    "borderColor": "black",
+                    "borderWidth": 0,
+                    "height": 1334,
+                    "position": "absolute",
+                    "width": 750,
+                  }
+                }
+              />
+            </Image>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#fff59b",
+                  "borderColor": "#104e01",
+                  "borderRadius": 100,
+                  "borderWidth": 1,
+                  "height": 50,
+                  "justifyContent": "center",
+                  "left": "45%",
+                  "position": "absolute",
+                  "top": "10%",
+                  "width": 50,
+                  "zIndex": 5,
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#fff59b",
+                    "borderColor": "#104e01",
+                    "borderRadius": 100,
+                    "borderWidth": 1,
+                    "height": 50,
+                    "justifyContent": "center",
+                    "left": "45%",
+                    "position": "absolute",
+                    "top": "10%",
+                    "width": 50,
+                    "zIndex": 5,
+                  }
+                }
+              >
+                <ActivityIndicator
+                  animating={true}
+                  color="#104e01"
+                  hidesWhenStopped={true}
+                  size="large"
+                  style={
+                    Object {
+                      "left": 1.25,
+                      "top": 1.7,
+                    }
+                  }
+                >
+                  <ActivityIndicator
+                    animating={true}
+                    color="#104e01"
+                    hidesWhenStopped={true}
+                    size="large"
+                    style={
+                      Object {
+                        "left": 1.25,
+                        "top": 1.7,
+                      }
+                    }
+                  />
+                </ActivityIndicator>
+              </View>
+            </View>
+            <ForwardRef
+              activeOpacity={1}
+              onPress={[Function]}
+            >
+              <TouchableOpacity
+                activeOpacity={1}
+                hostRef={null}
+                onPress={[Function]}
+              >
+                <ForwardRef(AnimatedComponentWrapper)
+                  accessible={true}
+                  focusable={true}
+                  onClick={[Function]}
+                  onResponderGrant={[Function]}
+                  onResponderMove={[Function]}
+                  onResponderRelease={[Function]}
+                  onResponderTerminate={[Function]}
+                  onResponderTerminationRequest={[Function]}
+                  onStartShouldSetResponder={[Function]}
+                  style={
+                    Array [
+                      undefined,
+                      Object {
+                        "opacity": 1,
+                      },
+                    ]
+                  }
+                >
+                  <AnimatedComponent
+                    accessible={true}
+                    focusable={true}
+                    onClick={[Function]}
+                    onResponderGrant={[Function]}
+                    onResponderMove={[Function]}
+                    onResponderRelease={[Function]}
+                    onResponderTerminate={[Function]}
+                    onResponderTerminationRequest={[Function]}
+                    onStartShouldSetResponder={[Function]}
+                    style={
+                      Array [
+                        undefined,
+                        Object {
+                          "opacity": 1,
+                        },
+                      ]
+                    }
+                  >
+                    <View
+                      accessible={true}
+                      focusable={true}
+                      onClick={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      style={
+                        Object {
+                          "opacity": 1,
+                        }
+                      }
+                    >
+                      <View
+                        accessible={true}
+                        focusable={true}
+                        onClick={[Function]}
+                        onResponderGrant={[Function]}
+                        onResponderMove={[Function]}
+                        onResponderRelease={[Function]}
+                        onResponderTerminate={[Function]}
+                        onResponderTerminationRequest={[Function]}
+                        onStartShouldSetResponder={[Function]}
+                        style={
+                          Object {
+                            "opacity": 1,
+                          }
+                        }
+                      >
+                        <ForwardRef(AnimatedComponentWrapper)
+                          ListHeaderComponent={[Function]}
+                          data={Array []}
+                          extraData={Object {}}
+                          initialNumToRender={5}
+                          keyExtractor={[Function]}
+                          listKey={Array []}
+                          nestedScrollEnabled={true}
+                          onEndReached={[Function]}
+                          onEndReachedThreshold={1}
+                          onRefresh={[Function]}
+                          onScroll={[Function]}
+                          refreshing={false}
+                          renderItem={[Function]}
+                          scrollEventThrottle={16}
+                        >
+                          <AnimatedComponent
+                            ListHeaderComponent={[Function]}
+                            data={Array []}
+                            extraData={Object {}}
+                            initialNumToRender={5}
+                            keyExtractor={[Function]}
+                            listKey={Array []}
+                            nestedScrollEnabled={true}
+                            onEndReached={[Function]}
+                            onEndReachedThreshold={1}
+                            onRefresh={[Function]}
+                            onScroll={[Function]}
+                            refreshing={false}
+                            renderItem={[Function]}
+                            scrollEventThrottle={16}
+                          >
+                            <FlatList
+                              ListHeaderComponent={[Function]}
+                              data={Array []}
+                              disableVirtualization={false}
+                              extraData={Object {}}
+                              horizontal={false}
+                              initialNumToRender={5}
+                              keyExtractor={[Function]}
+                              listKey={Array []}
+                              maxToRenderPerBatch={10}
+                              nestedScrollEnabled={true}
+                              numColumns={1}
+                              onEndReached={[Function]}
+                              onEndReachedThreshold={1}
+                              onRefresh={[Function]}
+                              onScroll={[Function]}
+                              refreshing={false}
+                              removeClippedSubviews={false}
+                              renderItem={[Function]}
+                              scrollEventThrottle={16}
+                              updateCellsBatchingPeriod={50}
+                              windowSize={21}
+                            >
+                              <VirtualizedList
+                                ListHeaderComponent={[Function]}
+                                data={Array []}
+                                disableVirtualization={false}
+                                extraData={Object {}}
+                                getItem={[Function]}
+                                getItemCount={[Function]}
+                                horizontal={false}
+                                initialNumToRender={5}
+                                keyExtractor={[Function]}
+                                listKey={Array []}
+                                maxToRenderPerBatch={10}
+                                nestedScrollEnabled={true}
+                                onEndReached={[Function]}
+                                onEndReachedThreshold={1}
+                                onRefresh={[Function]}
+                                onScroll={[Function]}
+                                refreshing={false}
+                                removeClippedSubviews={false}
+                                renderItem={[Function]}
+                                scrollEventThrottle={16}
+                                updateCellsBatchingPeriod={50}
+                                viewabilityConfigCallbackPairs={Array []}
+                                windowSize={21}
+                              >
+                                <ScrollView
+                                  ListHeaderComponent={[Function]}
+                                  data={Array []}
+                                  disableVirtualization={false}
+                                  extraData={Object {}}
+                                  getItem={[Function]}
+                                  getItemCount={[Function]}
+                                  horizontal={false}
+                                  initialNumToRender={5}
+                                  keyExtractor={[Function]}
+                                  listKey={Array []}
+                                  maxToRenderPerBatch={10}
+                                  nestedScrollEnabled={true}
+                                  onContentSizeChange={[Function]}
+                                  onEndReached={[Function]}
+                                  onEndReachedThreshold={1}
+                                  onLayout={[Function]}
+                                  onMomentumScrollEnd={[Function]}
+                                  onRefresh={[Function]}
+                                  onScroll={[Function]}
+                                  onScrollBeginDrag={[Function]}
+                                  onScrollEndDrag={[Function]}
+                                  refreshControl={
+                                    <RefreshControlMock
+                                      onRefresh={[Function]}
+                                      refreshing={false}
+                                    />
+                                  }
+                                  refreshing={false}
+                                  removeClippedSubviews={false}
+                                  renderItem={[Function]}
+                                  scrollEventThrottle={16}
+                                  stickyHeaderIndices={Array []}
+                                  updateCellsBatchingPeriod={50}
+                                  viewabilityConfigCallbackPairs={Array []}
+                                  windowSize={21}
+                                >
+                                  <RCTScrollView
+                                    ListHeaderComponent={[Function]}
+                                    data={Array []}
+                                    disableVirtualization={false}
+                                    extraData={Object {}}
+                                    getItem={[Function]}
+                                    getItemCount={[Function]}
+                                    horizontal={false}
+                                    initialNumToRender={5}
+                                    keyExtractor={[Function]}
+                                    listKey={Array []}
+                                    maxToRenderPerBatch={10}
+                                    nestedScrollEnabled={true}
+                                    onContentSizeChange={[Function]}
+                                    onEndReached={[Function]}
+                                    onEndReachedThreshold={1}
+                                    onLayout={[Function]}
+                                    onMomentumScrollEnd={[Function]}
+                                    onRefresh={[Function]}
+                                    onScroll={[Function]}
+                                    onScrollBeginDrag={[Function]}
+                                    onScrollEndDrag={[Function]}
+                                    refreshControl={
+                                      <RefreshControlMock
+                                        onRefresh={[Function]}
+                                        refreshing={false}
+                                      />
+                                    }
+                                    refreshing={false}
+                                    removeClippedSubviews={false}
+                                    renderItem={[Function]}
+                                    scrollEventThrottle={16}
+                                    stickyHeaderIndices={Array []}
+                                    updateCellsBatchingPeriod={50}
+                                    viewabilityConfigCallbackPairs={Array []}
+                                    windowSize={21}
+                                  >
+                                    <RCTScrollView
+                                      ListHeaderComponent={[Function]}
+                                      data={Array []}
+                                      disableVirtualization={false}
+                                      extraData={Object {}}
+                                      getItem={[Function]}
+                                      getItemCount={[Function]}
+                                      horizontal={false}
+                                      initialNumToRender={5}
+                                      keyExtractor={[Function]}
+                                      listKey={Array []}
+                                      maxToRenderPerBatch={10}
+                                      nestedScrollEnabled={true}
+                                      onContentSizeChange={[Function]}
+                                      onEndReached={[Function]}
+                                      onEndReachedThreshold={1}
+                                      onLayout={[Function]}
+                                      onMomentumScrollEnd={[Function]}
+                                      onRefresh={[Function]}
+                                      onScroll={[Function]}
+                                      onScrollBeginDrag={[Function]}
+                                      onScrollEndDrag={[Function]}
+                                      refreshControl={
+                                        <RefreshControlMock
+                                          onRefresh={[Function]}
+                                          refreshing={false}
+                                        />
+                                      }
+                                      refreshing={false}
+                                      removeClippedSubviews={false}
+                                      renderItem={[Function]}
+                                      scrollEventThrottle={16}
+                                      stickyHeaderIndices={Array []}
+                                      updateCellsBatchingPeriod={50}
+                                      viewabilityConfigCallbackPairs={Array []}
+                                      windowSize={21}
+                                    >
+                                      <RefreshControlMock
+                                        onRefresh={[Function]}
+                                        refreshing={false}
+                                      >
+                                        <RCTRefreshControl>
+                                          <RCTRefreshControl />
+                                        </RCTRefreshControl>
+                                      </RefreshControlMock>
+                                      <View>
+                                        <View>
+                                          <VirtualizedCellWrapper
+                                            cellKey="rootList-header"
+                                            key="$header"
+                                          >
+                                            <View
+                                              onLayout={[Function]}
+                                            >
+                                              <View
+                                                onLayout={[Function]}
+                                              >
+                                                <ListHeaderComponent>
+                                                  <ForwardRef
+                                                    onPress={[Function]}
+                                                    style={
+                                                      Object {
+                                                        "height": 93.38000000000001,
+                                                      }
+                                                    }
+                                                  >
+                                                    <TouchableOpacity
+                                                      hostRef={null}
+                                                      onPress={[Function]}
+                                                      style={
+                                                        Object {
+                                                          "height": 93.38000000000001,
+                                                        }
+                                                      }
+                                                    >
+                                                      <ForwardRef(AnimatedComponentWrapper)
+                                                        accessible={true}
+                                                        focusable={true}
+                                                        onClick={[Function]}
+                                                        onResponderGrant={[Function]}
+                                                        onResponderMove={[Function]}
+                                                        onResponderRelease={[Function]}
+                                                        onResponderTerminate={[Function]}
+                                                        onResponderTerminationRequest={[Function]}
+                                                        onStartShouldSetResponder={[Function]}
+                                                        style={
+                                                          Array [
+                                                            Object {
+                                                              "height": 93.38000000000001,
+                                                            },
+                                                            Object {
+                                                              "opacity": 1,
+                                                            },
+                                                          ]
+                                                        }
+                                                      >
+                                                        <AnimatedComponent
+                                                          accessible={true}
+                                                          focusable={true}
+                                                          onClick={[Function]}
+                                                          onResponderGrant={[Function]}
+                                                          onResponderMove={[Function]}
+                                                          onResponderRelease={[Function]}
+                                                          onResponderTerminate={[Function]}
+                                                          onResponderTerminationRequest={[Function]}
+                                                          onStartShouldSetResponder={[Function]}
+                                                          style={
+                                                            Array [
+                                                              Object {
+                                                                "height": 93.38000000000001,
+                                                              },
+                                                              Object {
+                                                                "opacity": 1,
+                                                              },
+                                                            ]
+                                                          }
+                                                        >
+                                                          <View
+                                                            accessible={true}
+                                                            focusable={true}
+                                                            onClick={[Function]}
+                                                            onResponderGrant={[Function]}
+                                                            onResponderMove={[Function]}
+                                                            onResponderRelease={[Function]}
+                                                            onResponderTerminate={[Function]}
+                                                            onResponderTerminationRequest={[Function]}
+                                                            onStartShouldSetResponder={[Function]}
+                                                            style={
+                                                              Object {
+                                                                "height": 93.38000000000001,
+                                                                "opacity": 1,
+                                                              }
+                                                            }
+                                                          >
+                                                            <View
+                                                              accessible={true}
+                                                              focusable={true}
+                                                              onClick={[Function]}
+                                                              onResponderGrant={[Function]}
+                                                              onResponderMove={[Function]}
+                                                              onResponderRelease={[Function]}
+                                                              onResponderTerminate={[Function]}
+                                                              onResponderTerminationRequest={[Function]}
+                                                              onStartShouldSetResponder={[Function]}
+                                                              style={
+                                                                Object {
+                                                                  "height": 93.38000000000001,
+                                                                  "opacity": 1,
+                                                                }
+                                                              }
+                                                            >
+                                                              <PressabilityDebugView
+                                                                color="cyan"
+                                                              />
+                                                            </View>
+                                                          </View>
+                                                        </AnimatedComponent>
+                                                      </ForwardRef(AnimatedComponentWrapper)>
+                                                    </TouchableOpacity>
+                                                  </ForwardRef>
+                                                </ListHeaderComponent>
+                                              </View>
+                                            </View>
+                                          </VirtualizedCellWrapper>
+                                        </View>
+                                      </View>
+                                    </RCTScrollView>
+                                  </RCTScrollView>
+                                </ScrollView>
+                              </VirtualizedList>
+                            </FlatList>
+                          </AnimatedComponent>
+                        </ForwardRef(AnimatedComponentWrapper)>
+                        <PressabilityDebugView
+                          color="cyan"
+                        />
+                      </View>
+                    </View>
+                  </AnimatedComponent>
+                </ForwardRef(AnimatedComponentWrapper)>
+              </TouchableOpacity>
+            </ForwardRef>
+            <ForwardRef
+              activeOpacity={0.7}
+              onPress={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#fff59b",
+                  "borderColor": "#104e01",
+                  "borderRadius": 11.25,
+                  "borderStyle": "solid",
+                  "borderWidth": 1,
+                  "bottom": 53.36,
+                  "height": 106.72,
+                  "justifyContent": "center",
+                  "position": "absolute",
+                  "right": 53.36,
+                  "width": 106.72,
+                  "zIndex": 1,
+                }
+              }
+              testID="filterButton"
+            >
+              <TouchableOpacity
+                activeOpacity={0.7}
+                hostRef={null}
+                onPress={[Function]}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#fff59b",
+                    "borderColor": "#104e01",
+                    "borderRadius": 11.25,
+                    "borderStyle": "solid",
+                    "borderWidth": 1,
+                    "bottom": 53.36,
+                    "height": 106.72,
+                    "justifyContent": "center",
+                    "position": "absolute",
+                    "right": 53.36,
+                    "width": 106.72,
+                    "zIndex": 1,
+                  }
+                }
+                testID="filterButton"
+              >
+                <ForwardRef(AnimatedComponentWrapper)
+                  accessible={true}
+                  focusable={true}
+                  onClick={[Function]}
+                  onResponderGrant={[Function]}
+                  onResponderMove={[Function]}
+                  onResponderRelease={[Function]}
+                  onResponderTerminate={[Function]}
+                  onResponderTerminationRequest={[Function]}
+                  onStartShouldSetResponder={[Function]}
+                  style={
+                    Array [
+                      Object {
+                        "alignItems": "center",
+                        "backgroundColor": "#fff59b",
+                        "borderColor": "#104e01",
+                        "borderRadius": 11.25,
+                        "borderStyle": "solid",
+                        "borderWidth": 1,
+                        "bottom": 53.36,
+                        "height": 106.72,
+                        "justifyContent": "center",
+                        "position": "absolute",
+                        "right": 53.36,
+                        "width": 106.72,
+                        "zIndex": 1,
+                      },
+                      Object {
+                        "opacity": 1,
+                      },
+                    ]
+                  }
+                  testID="filterButton"
+                >
+                  <AnimatedComponent
+                    accessible={true}
+                    focusable={true}
+                    onClick={[Function]}
+                    onResponderGrant={[Function]}
+                    onResponderMove={[Function]}
+                    onResponderRelease={[Function]}
+                    onResponderTerminate={[Function]}
+                    onResponderTerminationRequest={[Function]}
+                    onStartShouldSetResponder={[Function]}
+                    style={
+                      Array [
+                        Object {
+                          "alignItems": "center",
+                          "backgroundColor": "#fff59b",
+                          "borderColor": "#104e01",
+                          "borderRadius": 11.25,
+                          "borderStyle": "solid",
+                          "borderWidth": 1,
+                          "bottom": 53.36,
+                          "height": 106.72,
+                          "justifyContent": "center",
+                          "position": "absolute",
+                          "right": 53.36,
+                          "width": 106.72,
+                          "zIndex": 1,
+                        },
+                        Object {
+                          "opacity": 1,
+                        },
+                      ]
+                    }
+                    testID="filterButton"
+                  >
+                    <View
+                      accessible={true}
+                      focusable={true}
+                      onClick={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      style={
+                        Object {
+                          "alignItems": "center",
+                          "backgroundColor": "#fff59b",
+                          "borderColor": "#104e01",
+                          "borderRadius": 11.25,
+                          "borderStyle": "solid",
+                          "borderWidth": 1,
+                          "bottom": 53.36,
+                          "height": 106.72,
+                          "justifyContent": "center",
+                          "opacity": 1,
+                          "position": "absolute",
+                          "right": 53.36,
+                          "width": 106.72,
+                          "zIndex": 1,
+                        }
+                      }
+                      testID="filterButton"
+                    >
+                      <View
+                        accessible={true}
+                        focusable={true}
+                        onClick={[Function]}
+                        onResponderGrant={[Function]}
+                        onResponderMove={[Function]}
+                        onResponderRelease={[Function]}
+                        onResponderTerminate={[Function]}
+                        onResponderTerminationRequest={[Function]}
+                        onStartShouldSetResponder={[Function]}
+                        style={
+                          Object {
+                            "alignItems": "center",
+                            "backgroundColor": "#fff59b",
+                            "borderColor": "#104e01",
+                            "borderRadius": 11.25,
+                            "borderStyle": "solid",
+                            "borderWidth": 1,
+                            "bottom": 53.36,
+                            "height": 106.72,
+                            "justifyContent": "center",
+                            "opacity": 1,
+                            "position": "absolute",
+                            "right": 53.36,
+                            "width": 106.72,
+                            "zIndex": 1,
+                          }
+                        }
+                        testID="filterButton"
+                      >
+                        <Icon
+                          name="filter"
+                          size={46.690000000000005}
+                          style={
+                            Object {
+                              "color": "#104e01",
+                            }
+                          }
+                        />
+                        <PressabilityDebugView
+                          color="cyan"
+                        />
+                      </View>
+                    </View>
+                  </AnimatedComponent>
+                </ForwardRef(AnimatedComponentWrapper)>
+              </TouchableOpacity>
+            </ForwardRef>
+          </RCTSafeAreaView>
+        </RCTSafeAreaView>
+      </ForwardRef(SafeAreaView)>
+    </SpinachAppContainer>
+  </RecipesList>
+</Connect(RecipesList)>
+`;

@@ -4,6 +4,8 @@ import renderer from 'react-test-renderer';
 
 import RecipeCard from './RecipeCard.js'
 import { mockRecipeList } from '../../__mocks__/recipeList/mockRecipeList.js'
+// import OfflineMessage from '../offlineMessage/offlineMessage';
+
 
 describe('Recipe Card', () => {
 
@@ -280,4 +282,22 @@ describe('Recipe Card', () => {
 		expect(mockFn).toHaveBeenCalled()
 		expect(mockFn).toHaveBeenCalledWith(testProps.id)
 	})
+
+	//this test doesn't work.  I think it needs reatDOM, not react-test-renderer
+	// test('renders the offline message and clears it', () => {
+	// 	jest.useFakeTimers()
+	// 	const testProps = mockRecipeList.find(p => p.name.includes("TEST:OFFLINEMESSAGE"))
+	// 	const mockFn = jest.fn()
+	// 	component = renderer.create(<RecipeCard {...testProps} clearOfflineMessage={mockFn} />)
+	// 	const image = component.toJSON()
+	// 	expect(image).toMatchSnapshot()
+	// 	let root = component.root
+	// 	let offlineMessage = root.findAllByType(OfflineMessage)
+	// 	expect(offlineMessage.length).toEqual(1)
+	// 	setTimeout(() => {
+	// 		expect(mockFn).toHaveBeenCalled()
+	// 		expect(mockFn).toHaveBeenCalledWith(testProps.id)
+	// 	}, 10000)
+	// 	jest.runAllTimers()
+	// })
 });

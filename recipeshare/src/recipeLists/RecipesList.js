@@ -547,7 +547,8 @@ export class RecipesList extends React.Component {
 	}
 
 	render() {
-		// console.log(this.props[this.props["listChoice"] + `_Recipes`][0])
+		// console.log(this.props[this.props["listChoice"] + `_Recipes`])
+		// console.log(this.props)
 		// console.log('list start')
 		// console.warn('item')
 		// console.log(Constants.nativeBuildVersion)
@@ -575,6 +576,7 @@ export class RecipesList extends React.Component {
 								clearOfflineMessage={() => { this.setState({ renderNoRecipesMessage: false }) }}
 								delay={20000}
 								action={() => this.props.navigation.navigate('BrowseRecipes')}
+								testID={'myFeedMessage'}
 							/>
 						)}
 

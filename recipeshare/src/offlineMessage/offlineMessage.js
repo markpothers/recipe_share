@@ -30,7 +30,7 @@ const OfflineMessage = (props) => {
 				})
 			}, renderDuration)
 		})
-	})
+	}, [])
 
 	return (
 		<Animated.View

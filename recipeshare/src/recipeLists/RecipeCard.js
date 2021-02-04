@@ -14,16 +14,20 @@ export default class RecipeCard extends React.PureComponent {
 	}
 
 	render() {
-		// console.log(this.props)
-		const imageSource = this.props.image_url ? {uri:this.props.image_url} : defaultRecipeImage
+		// console.log('OVER HERE!')
+		const imageSource = this.props.image_url ? { uri: this.props.image_url } : defaultRecipeImage
 		return (
 			<View style={styles.recipeCard} >
 				{this.props.renderOfflineMessage.includes(this.props.id) && (
 					<OfflineMessage
 						message={`Sorry, can't do that right now.${"\n"}You appear to be offline.`}
 						topOffset={'35%'}
-						clearOfflineMessage={() => { this.props.clearOfflineMessage(this.props.id) }}
-					/>)}
+						clearOfflineMessage={() => {
+							console.log('HERE!')
+							this.props.clearOfflineMessage(this.props.id)
+						}}
+					/>
+				)}
 				{this.props.sharer_id && <PostedBy navigateToSharer={this.navigateToSharer} username={this.props.sharer_username} sharer_id={this.props.sharer_id} />}
 				<View style={styles.recipeCardTopContainer}>
 					<View style={styles.recipeCardTopLeftContainer}>
@@ -79,7 +83,7 @@ function AvatarImage(chefimage_url) {
 		)
 	} else {
 		return (
-			<Image style={styles.avatarThumbnail} source={{uri: URL}} />
+			<Image style={styles.avatarThumbnail} source={{ uri: URL }} />
 		)
 	}
 }
@@ -88,7 +92,7 @@ function PostedBy(props) {
 	return (
 		<View testID={"postedByElement"} style={styles.recipeCardTopPostedByContainer}>
 			<Icon name='share' size={responsiveHeight(3.5)} style={styles.reSharedIcon} />
-			<Text maxFontSizeMultiplier={2} style={[styles.recipeCardTopItalic, {maxWidth: responsiveWidth(28)}]}>Re-shared by: </Text>
+			<Text maxFontSizeMultiplier={2} style={[styles.recipeCardTopItalic, { maxWidth: responsiveWidth(28) }]}>Re-shared by: </Text>
 			<TouchableOpacity testID={"sharerNameButton"} style={styles.recipeCardTopPostedByTouchable} onPress={() => props.navigateToSharer(props.sharer_id)}>
 				<Text maxFontSizeMultiplier={2} style={styles.recipeCardTopItalic} >{props.username}</Text>
 			</TouchableOpacity>
