@@ -23,7 +23,11 @@ class RecipesController < ApplicationController
     def create
         if newRecipe_params[:chef_id] === @chef.id || @chef.is_admin === true
             @recipe = Recipe.new(newRecipe_params)
-            @recipe.chef_id = @chef.id
+            # byebug
+            if newRecipe_params["time"] != nil #to accept input from older app version (pre-release)
+                @recipe.total_time = newRecipe_params["time"]
+            end
+                @recipe.chef_id = @chef.id
             newRecipe_filter_settings["filter_settings"].keys.each do |category|
                 newRecipe_filter_settings["filter_settings"][category] ? @recipe[category.downcase.split(" ").join("_")] = true : @recipe[category.downcase.split(" ").join("_")] = false
             end
@@ -102,7 +106,7 @@ class RecipesController < ApplicationController
     end
 
     def newRecipe_params
-        params.require(:recipe).permit(:name, :prep_time, :cook_time, :total_time, :difficulty, :cuisine, :serves, :acknowledgement, :acknowledgement_link, :description)
+        params.require(:recipe).permit(:name, :prep_time, :cook_time, :total_time, :time, :difficulty, :cuisine, :serves, :acknowledgement, :acknowledgement_link, :description)
     end
 
     # def newRecipe_primary_image_as_base64_params

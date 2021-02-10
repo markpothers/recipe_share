@@ -242,17 +242,6 @@ class Chef < ApplicationRecord
     end
 
     def self.get_signed_urls(chefs_list)
-        # chef_images_bucket = ApplicationRecord.storage_bucket(Rails.application.credentials.buckets[:chef_images])
-        # test_images_bucket = ApplicationRecord.storage_bucket(Rails.application.credentials.buckets[:test_images])
-        # chefs_list.each do |chef|
-          # chef.image_url = ApplicationRecord.get_signed_url(chef.image_url)
-          # image_name = chef.image_url.split('/').last
-          # if chef.image_url.include? "test-images"
-            # chef.image_url = test_images_bucket.signed_url image_name, expires: 300
-          # else
-            # chef.image_url = chef_images_bucket.signed_url image_name, expires: 300
-          # end
-        # end
         chefs_list.each { |chef| chef.image_url = ApplicationRecord.get_signed_url(chef.image_url) }
         return chefs_list
       end

@@ -6,7 +6,7 @@ env_variables:
   SECRET_KEY_BASE: <%= Rails.application.credentials[:secret_key_base] %>
 
 beta_settings:
-  cloud_sql_instances: <%= Rails.application.credentials.Google[:postgres_instance] %>
+  cloud_sql_instances: "recipe-share-272202:us-central1:recipe-share"
 
 manual_scaling:
   instances: 1

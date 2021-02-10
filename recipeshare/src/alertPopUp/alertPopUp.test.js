@@ -34,7 +34,7 @@ describe('AlertPopUp', () => {
 				<AlertPopUp
 					close={mockClose}
 					closeText={"mock text"}
-					title={"Here is a mock alert qusetion that's being asked"}
+					title={"Here is a mock alert question that's being asked"}
 					onYes={mockYes}
 					yesText={"mock text"}
 				/>
@@ -53,7 +53,7 @@ describe('AlertPopUp', () => {
 				<AlertPopUp
 					close={mockClose}
 					// closeText={"mock text"}
-					title={"Here is a mock alert qusetion that's being asked"}
+					title={"Here is a mock alert question that's being asked"}
 					onYes={mockYes}
 				// yesText={"Yes button text"}
 				/>
@@ -72,7 +72,7 @@ describe('AlertPopUp', () => {
 				<AlertPopUp
 					// close={mockClose}
 					// closeText={"mock text"}
-					title={"Here is a mock alert qusetion that's being asked"}
+					title={"Here is a mock alert question that's being asked"}
 					onYes={mockYes}
 					yesText={"Yes button text"}
 				/>
@@ -91,7 +91,7 @@ describe('AlertPopUp', () => {
 				<AlertPopUp
 					close={mockClose}
 					closeText={"mock text"}
-					title={"Here is a mock alert qusetion that's being asked"}
+					title={"Here is a mock alert question that's being asked"}
 					onYes={mockYes}
 					yesText={"Yes button text"}
 				/>
@@ -112,7 +112,7 @@ describe('AlertPopUp', () => {
 				<AlertPopUp
 					close={mockClose}
 					closeText={"mock text"}
-					title={"Here is a mock alert qusetion that's being asked"}
+					title={"Here is a mock alert question that's being asked"}
 					onYes={mockYes}
 					yesText={"Yes button text"}
 				/>

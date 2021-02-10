@@ -587,17 +587,6 @@ class Recipe < ApplicationRecord
   end
 
   def self.get_signed_urls(recipes_list)
-    # recipe_images_bucket = ApplicationRecord.storage_bucket(Rails.application.credentials.buckets[:recipe_images])
-    # test_images_bucket = ApplicationRecord.storage_bucket(Rails.application.credentials.buckets[:test_images])
-    # recipes_list.each do |recipe|
-      # recipe.image_url = ApplicationRecord.get_signed_url(recipe.image_url)
-      # image_name = recipe.image_url.split('/').last
-      # if recipe.image_url.include? "test-images"
-        # recipe.image_url = test_images_bucket.signed_url image_name, expires: 300
-      # else
-        # recipe.image_url = recipe_images_bucket.signed_url image_name, expires: 300
-      # end
-    # end
     recipes_list.each { |recipe| recipe.image_url = ApplicationRecord.get_signed_url(recipe.image_url) }
     return recipes_list
   end
@@ -606,7 +595,7 @@ class Recipe < ApplicationRecord
     recipe_images = RecipeImage.where(recipe_id: self.id)
     recipe_images.each { |use| use.hidden = true}
     recipe_images.each { |use| use.save}
-	newRecipe_primary_images_params["primary_images"].each_with_index do |image, index|
+	  newRecipe_primary_images_params["primary_images"].each_with_index do |image, index|
 		# byebug
       if image["base64"] != nil && image["base64"] != ""
         recipe_image = RecipeImage.new(recipe_id: self.id)
