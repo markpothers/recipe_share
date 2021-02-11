@@ -1,27 +1,29 @@
 require "google/cloud/storage"
+require "tempfile"
 
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
   def self.storage()
-    storage = Google::Cloud::Storage.new project_id: Rails.application.credentials.Google[:project_id],
-                                        credentials: Rails.application.credentials.Google[:image_storage_handler_credentials]
+    Google::Cloud::Storage.new project_id: Rails.application.credentials.Google[:project_id],
+                               credentials: Rails.application.credentials.Google[:image_storage_handler_credentials]
   end
 
   def self.storage_bucket(bucket)
     storage = Google::Cloud::Storage.new project_id: Rails.application.credentials.Google[:project_id],
-                                        credentials: Rails.application.credentials.Google[:image_storage_handler_credentials]
-	storage.bucket bucket
+                                         credentials: Rails.application.credentials.Google[:image_storage_handler_credentials]
+    storage.bucket bucket
   end
 
   def self.save_image(bucket, hex, base64)
-    file_path = "public/temp_image_file/#{hex}.jpg"
-    File.open(file_path, 'wb') do |f|
-        f.write(Base64.decode64(base64))
-    end
-	save_record = ApplicationRecord.storage_bucket(bucket).create_file(file_path, "#{hex}.jpg")
-	File.delete(file_path) if File.exist?(file_path)
-    # puts save_record.media_url
+    temp_file = Tempfile.new(['tempFile', '.jpg'], '/tmp')
+    temp_file.binmode
+    temp_file.write(Base64.decode64(base64))
+    # byebug
+    save_record = ApplicationRecord.storage_bucket(bucket).create_file(temp_file, "#{hex}.jpg")
+    temp_file.close
+    temp_file.unlink
+    # File.delete(file_path) if File.exist?(file_path)
     return save_record.media_url
   end
 
@@ -33,14 +35,14 @@ class ApplicationRecord < ActiveRecord::Base
         return url
       else
         # puts url
-        split_url = url.split('/')
+        split_url = url.split("/")
         file_name = split_url.last.partition("?").first
         chosen_bucket = ""
         all_buckets = Rails.application.credentials.buckets.keys
         split_url.each do |url_component|
           all_buckets.each do |bucket|
             if url_component == Rails.application.credentials.buckets[bucket]
-              chosen_bucket =  Rails.application.credentials.buckets[bucket]
+              chosen_bucket = Rails.application.credentials.buckets[bucket]
             end
           end
         end
@@ -60,5 +62,4 @@ class ApplicationRecord < ActiveRecord::Base
       return ""
     end
   end
-
 end

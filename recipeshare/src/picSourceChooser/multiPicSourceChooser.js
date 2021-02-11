@@ -17,10 +17,10 @@ export default class MultiPicSourceChooser extends React.Component {
 	}
 
 	componentDidMount = async () => {
-		let cameraRollPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL)
+		let cameraRollPermission = await Permissions.askAsync(Permissions.MEDIA_LIBRARY)
 		let cameraPermission = await Permissions.askAsync(Permissions.CAMERA)
 		await this.setState({
-			hasCameraRollPermission: cameraRollPermission.permissions.cameraRoll.granted,
+			hasCameraRollPermission: cameraRollPermission.permissions.mediaLibrary.granted,
 			hasCameraPermission: cameraPermission.permissions.camera.granted,
 			originalImages: [...this.props.imageSources]
 		})

@@ -5,7 +5,6 @@ import { getBase64FromFile } from '../auxFunctions/getBase64FromFile.js'
 export const postMakePic = async (recipeID, chefID, auth_token, makePicFileUri) => {
 
 	const imageBase64 = await getBase64FromFile(makePicFileUri)
-
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
@@ -36,6 +35,7 @@ export const postMakePic = async (recipeID, chefID, auth_token, makePicFileUri) 
 				}
 			})
 			.catch(e => {
+				console.log(e)
 				reject(e)
 			})
 	})

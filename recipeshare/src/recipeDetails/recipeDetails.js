@@ -358,40 +358,42 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		renderRecipeMakePics = () => {
 			return this.props.recipe_details.make_pics.map(make_pic => {
 				// console.log(this.props.recipe_details.make_pics_chefs)
-				return (
-					<TouchableOpacity
-						// delayPressIn={100}
-						activeOpacity={0.7}
-						onPress={() => {
-							this.setState({
-								scrollEnabled: false,
-								imagePopupShowing: true,
-								imagePopupDetails: make_pic
-							})
-						}}
-						// onPressOut={() => {
-						// 	this.setState({
-						// 		scrollEnabled: true,
-						// 		imagePopupShowing: false,
-						// 	})
-						// }}
-						// pressRetentionOffset={{
-						// 	top: responsiveHeight(100),
-						// 	left: responsiveWidth(100),
-						// 	bottom: responsiveHeight(100),
-						// 	right: responsiveWidth(100)
-						// }}
-						key={`${make_pic.id}${make_pic.image_url}`}
-						style={styles.makePicContainer}
-					>
-						<Image style={[{ width: '100%', height: '100%', marginHorizontal: 1 }, styles.makePic]} source={{ uri: make_pic.image_url }}></Image>
-						{(make_pic.chef_id === this.props.loggedInChef.id || this.props.loggedInChef.is_admin) && (
-							<TouchableOpacity style={styles.makePicTrashCanButton} onPress={() => this.setState({ deleteMakePicPopUpShowing: true, makePicToDelete: make_pic.id })}>
-								<Icon name='trash-can-outline' size={responsiveHeight(3.5)} style={[styles.icon, styles.makePicTrashCan]} />
-							</TouchableOpacity>
-						)}
-					</TouchableOpacity>
-				)
+				if (make_pic.image_url) {
+					return (
+						<TouchableOpacity
+							// delayPressIn={100}
+							activeOpacity={0.7}
+							onPress={() => {
+								this.setState({
+									scrollEnabled: false,
+									imagePopupShowing: true,
+									imagePopupDetails: make_pic
+								})
+							}}
+							// onPressOut={() => {
+							// 	this.setState({
+							// 		scrollEnabled: true,
+							// 		imagePopupShowing: false,
+							// 	})
+							// }}
+							// pressRetentionOffset={{
+							// 	top: responsiveHeight(100),
+							// 	left: responsiveWidth(100),
+							// 	bottom: responsiveHeight(100),
+							// 	right: responsiveWidth(100)
+							// }}
+							key={`${make_pic.id}${make_pic.image_url}`}
+							style={styles.makePicContainer}
+						>
+							<Image style={[{ width: '100%', height: '100%', marginHorizontal: 1 }, styles.makePic]} source={{ uri: make_pic.image_url }}></Image>
+							{(make_pic.chef_id === this.props.loggedInChef.id || this.props.loggedInChef.is_admin) && (
+								<TouchableOpacity style={styles.makePicTrashCanButton} onPress={() => this.setState({ deleteMakePicPopUpShowing: true, makePicToDelete: make_pic.id })}>
+									<Icon name='trash-can-outline' size={responsiveHeight(3.5)} style={[styles.icon, styles.makePicTrashCan]} />
+								</TouchableOpacity>
+							)}
+						</TouchableOpacity>
+					)
+				}
 			})
 		}
 
@@ -577,6 +579,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					}
 				} catch (e) {
 					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+					// console.log(e)
 					await this.setState({ renderOfflineMessage: true })
 				}
 			}
