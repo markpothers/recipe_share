@@ -36,7 +36,7 @@
 		},
 		"android": {
 			"package": "com.recipe_share.recipe_share",
-			"versionCode": 6,
+			"versionCode": 7,
 			"permissions": ["CAMERA", "READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE"]
 		}
 	}
