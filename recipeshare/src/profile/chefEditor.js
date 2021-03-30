@@ -122,7 +122,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									placeholder="confirm password"
 									autoCapitalize="none"
 									autoCompleteType="password"
-									textContentType="password"
+									textContentType="newPassword"
 									secureTextEntry={!this.state.passwordVisible}
 									onChange={(e) => this.handleTextInput(e, "password_confirmation")}
 								/>
