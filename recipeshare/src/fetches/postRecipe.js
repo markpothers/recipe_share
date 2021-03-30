@@ -19,7 +19,8 @@ export const postRecipe = async (
 	serves,
 	acknowledgement,
 	acknowledgementLink,
-	description
+	description,
+	showBlogPreview
 ) => {
 
 	let primaryImagesForRails = await Promise.all(primaryImages.map(async (image, index) => {
@@ -57,6 +58,16 @@ export const postRecipe = async (
 			reject({name: 'Timeout'})
 		}, submitTimeout)
 
+		// had to add this validation in here because doing it in rails doesn't work
+		// you end up rejecting everything because you don't save instructions and ingredients
+		// until you've already saved the recipe once
+		if (!showBlogPreview && (ingredients.length == 0 || instructions.length == 0)) {
+			resolve({
+				error: true,
+				message: ["If not showing blog preview, a recipe must contain at least one ingredient and one instruction step. Add one of each or check 'Show blog preview'."]
+			})
+		}
+
 		fetch(`${databaseURL}/recipes`, {
 			method: "POST",
 			headers: {
@@ -79,8 +90,9 @@ export const postRecipe = async (
 					cuisine: cuisine,
 					serves: serves,
 					acknowledgement: acknowledgement,
-					acknowledgement_link: acknowledgementLink,
-					description: description
+					acknowledgement_link: acknowledgementLink.toLowerCase(),
+					description: description,
+					show_blog_preview: showBlogPreview,
 				}
 			})
 		})

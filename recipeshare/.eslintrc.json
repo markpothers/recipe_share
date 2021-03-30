@@ -8,7 +8,8 @@
 	},
 	"plugins": [
 		"react",
-		"react-native"
+		"react-native",
+		"react-hooks",
 	],
 	"parserOptions": {
 		"sourceType": "module",
@@ -31,6 +32,8 @@
 		// "react-native/no-color-literals": 2,
 		// "react-native/no-raw-text": 2,
 		"react-native/no-single-element-style-arrays": 2,
-		"react/prop-types": 0
+		"react/prop-types": 0,
+		"react-hooks/rules-of-hooks": 1,
+		"react-hooks/exhaustive-deps": 2
 	}
 }

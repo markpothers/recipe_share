@@ -28,6 +28,8 @@ import saveChefDetailsLocally from '../auxFunctions/saveChefDetailsLocally'
 import { getTimeStringFromMinutes } from '../auxFunctions/getTimeStringFromMinutes'
 import { getChefDetails } from '../fetches/getChefDetails'
 import AppHeaderRight from '../../navigation/appHeaderRight'
+import { WebView } from 'react-native-webview';
+// import MyWebView from 'react-native-webview-autoheight';
 
 const defaultRecipeImage = require("../dataComponents/default-recipe.jpg")
 
@@ -124,7 +126,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			dynamicMenuShowing: false,
 			chefNameTextColor: "#505050",
 			imagePopupDetails: {},
-			imagePopupShowing: false
+			imagePopupShowing: false,
+			webviewHeight: responsiveHeight(60)
 		}
 
 		generateHeaderButtonList = async () => {
@@ -701,19 +704,53 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		renderAcknowledgement = () => {
+			// console.log(this.props.recipe_details.recipe)
 			let displayLink = this.props.recipe_details.recipe.acknowledgement_link && this.props.recipe_details.recipe.acknowledgement_link.length > 0
+			let displayBlog = this.props.recipe_details.recipe.show_blog_preview && this.props.recipe_details.recipe.acknowledgement_link.length > 0
 			return (
-				<View style={styles.detailsContainer}>
-					<View style={{ flexDirection: 'row' }}>
-						<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Acknowledgement:</Text>
-						{displayLink ? ( //using && here creates a bug about text strings. no idea why
-							<TouchableOpacity onPress={() => Linking.openURL(this.props.recipe_details.recipe.acknowledgement_link)}>
-								<Icon name='link' size={responsiveHeight(3.5)} style={styles.addIcon} />
-							</TouchableOpacity>
-						) : null}
+				<React.Fragment>
+					<View style={styles.detailsContainer}>
+						<View style={{ flexDirection: 'row' }}>
+							<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Acknowledgement:</Text>
+							{displayLink ? ( //using && here creates a bug about text strings. no idea why
+								<TouchableOpacity onPress={() => Linking.openURL(this.props.recipe_details.recipe.acknowledgement_link)}>
+									<Icon name='link' size={responsiveHeight(3.5)} style={styles.addIcon} />
+								</TouchableOpacity>
+							) : null}
+						</View>
+						<Text maxFontSizeMultiplier={2} style={styles.detailsContents}>{this.props.recipe_details.recipe.acknowledgement}</Text>
 					</View>
-					<Text maxFontSizeMultiplier={2} style={styles.detailsContents}>{this.props.recipe_details.recipe.acknowledgement}</Text>
-				</View>
+					{displayBlog && (
+						<View style={styles.detailsContainer}>
+							<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>The blog:</Text>
+							<View style={styles.webviewContainer}>
+								<ScrollView nestedScrollEnabled={true}>
+									<WebView
+										source={{ uri: this.props.recipe_details.recipe.acknowledgement_link }}
+										injectedJavaScript={
+											`window.ReactNativeWebView.postMessage(
+										Math.max(document.body.offsetHeight, document.body.scrollHeight)
+										)`
+										}
+										onMessage={(e) => {
+											let newHeight = parseInt(e.nativeEvent.data)
+											if (newHeight > 0) {
+												this.setState({ webviewHeight: newHeight })
+											}
+										}}
+										// onShouldStartLoadWithRequest={() => (false)} //activate to prevent navigation within the webview
+										contentContainerStyle={{ borderRadius: responsiveWidth(1.5) }}
+										style={{
+											borderRadius: responsiveWidth(1.5),
+											height: this.state.webviewHeight,
+											width: '100%',
+										}}
+									/>
+								</ScrollView>
+							</View>
+						</View>
+					)}
+				</React.Fragment >
 			)
 		}
 
@@ -921,42 +958,47 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											{this.renderLikeButton()}
 											<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesLowerContentsAllTimings}>&nbsp;{this.props.recipe_details.recipe_likes}</Text>
 										</View>
-										<View style={styles.buttonAndText}>
+										{this.props.recipe_details.recipe.serves != 'Any' && (<View style={styles.buttonAndText}>
 											<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesLowerContentsAllTimings}>Serves: {this.props.recipe_details.recipe.serves}</Text>
-										</View>
-										<View style={styles.buttonAndText}>
+										</View>)}
+										{this.props.recipe_details.recipe.difficulty != 0 && (<View style={styles.buttonAndText}>
 											<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesLowerContentsAllTimings}>Difficulty: {this.props.recipe_details.recipe.difficulty}</Text>
+										</View>)}
+									</View>
+								</View>
+								{
+									this.props.recipe_details.recipe.prep_time != 0 &&
+									this.props.recipe_details.recipe.cook_time != 0 &&
+									this.props.recipe_details.recipe.total_time != 0 && (
+										<View style={styles.detailsContainer}>
+											<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Timings:</Text>
+											<View style={[
+												styles.detailsTimings,
+												(notShowingAllTimes ? { justifyContent: 'flex-start', marginLeft: responsiveWidth(5), width: responsiveWidth(93), flexDirection: 'column' } : null)
+											]}>
+												{this.props.recipe_details.recipe.prep_time > 0 && <Text maxFontSizeMultiplier={2} style={notShowingAllTimes ? styles.detailsLikesAndMakesLowerContentsLimitedTimings : styles.detailsLikesAndMakesLowerContentsAllTimings}>Prep Time: {getTimeStringFromMinutes(this.props.recipe_details.recipe.prep_time)}</Text>}
+												{this.props.recipe_details.recipe.prep_time > 0 && this.props.recipe_details.recipe.cook_time > 0 && (
+													<Text maxFontSizeMultiplier={2} style={notShowingAllTimes ? styles.detailsLikesAndMakesLowerContentsLimitedTimings : styles.detailsLikesAndMakesLowerContentsAllTimings}> + </Text>
+												)}
+												{this.props.recipe_details.recipe.cook_time > 0 && <Text maxFontSizeMultiplier={2} style={notShowingAllTimes ? styles.detailsLikesAndMakesLowerContentsLimitedTimings : styles.detailsLikesAndMakesLowerContentsAllTimings}>Cook Time: {getTimeStringFromMinutes(this.props.recipe_details.recipe.cook_time)}</Text>}
+												{this.props.recipe_details.recipe.prep_time > 0 && this.props.recipe_details.recipe.cook_time > 0 && (
+													<Text maxFontSizeMultiplier={2} style={notShowingAllTimes ? styles.detailsLikesAndMakesLowerContentsLimitedTimings : styles.detailsLikesAndMakesLowerContentsAllTimings}>&asymp;</Text>
+												)}
+												{/* {!(this.props.recipe_details.recipe.prep_time > 0 && this.props.recipe_details.recipe.cook_time > 0)
+													&& (notShowingAllTimes)
+													&& (
+														<Text maxFontSizeMultiplier={2} style={notShowingAllTimes ? styles.detailsLikesAndMakesLowerContentsLimitedTimings : styles.detailsLikesAndMakesLowerContentsAllTimings}> / </Text>
+													)
+												} */}
+												<Text
+													maxFontSizeMultiplier={2}
+													style={notShowingAllTimes ? styles.detailsLikesAndMakesLowerContentsLimitedTimings : styles.detailsLikesAndMakesLowerContentsAllTimings}
+												>
+													Total Time: {getTimeStringFromMinutes(this.props.recipe_details.recipe.total_time)}
+												</Text>
+											</View>
 										</View>
-									</View>
-								</View>
-								<View style={styles.detailsContainer}>
-									<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Timings:</Text>
-									<View style={[
-										styles.detailsTimings,
-										(notShowingAllTimes ? { justifyContent: 'flex-start', marginLeft: responsiveWidth(5), width: responsiveWidth(93), flexDirection: 'column' } : null)
-									]}>
-										{this.props.recipe_details.recipe.prep_time > 0 && <Text maxFontSizeMultiplier={2} style={notShowingAllTimes ? styles.detailsLikesAndMakesLowerContentsLimitedTimings : styles.detailsLikesAndMakesLowerContentsAllTimings}>Prep Time: {getTimeStringFromMinutes(this.props.recipe_details.recipe.prep_time)}</Text>}
-										{this.props.recipe_details.recipe.prep_time > 0 && this.props.recipe_details.recipe.cook_time > 0 && (
-											<Text maxFontSizeMultiplier={2} style={notShowingAllTimes ? styles.detailsLikesAndMakesLowerContentsLimitedTimings : styles.detailsLikesAndMakesLowerContentsAllTimings}> + </Text>
-										)}
-										{this.props.recipe_details.recipe.cook_time > 0 && <Text maxFontSizeMultiplier={2} style={notShowingAllTimes ? styles.detailsLikesAndMakesLowerContentsLimitedTimings : styles.detailsLikesAndMakesLowerContentsAllTimings}>Cook Time: {getTimeStringFromMinutes(this.props.recipe_details.recipe.cook_time)}</Text>}
-										{this.props.recipe_details.recipe.prep_time > 0 && this.props.recipe_details.recipe.cook_time > 0 && (
-											<Text maxFontSizeMultiplier={2} style={notShowingAllTimes ? styles.detailsLikesAndMakesLowerContentsLimitedTimings : styles.detailsLikesAndMakesLowerContentsAllTimings}>&asymp;</Text>
-										)}
-										{/* {!(this.props.recipe_details.recipe.prep_time > 0 && this.props.recipe_details.recipe.cook_time > 0)
-											&& (notShowingAllTimes)
-											&& (
-												<Text maxFontSizeMultiplier={2} style={notShowingAllTimes ? styles.detailsLikesAndMakesLowerContentsLimitedTimings : styles.detailsLikesAndMakesLowerContentsAllTimings}> / </Text>
-											)
-										} */}
-										<Text
-											maxFontSizeMultiplier={2}
-											style={notShowingAllTimes ? styles.detailsLikesAndMakesLowerContentsLimitedTimings : styles.detailsLikesAndMakesLowerContentsAllTimings}
-										>
-											Total Time: {getTimeStringFromMinutes(this.props.recipe_details.recipe.total_time)}
-										</Text>
-									</View>
-								</View>
+									)}
 								{(this.props.recipe_details.recipe.description != "" && this.props.recipe_details.recipe.description != null) && this.renderDescription()}
 								{this.props.recipe_details.recipe_images?.length > 0 && (
 									<View style={styles.detailsImageWrapper}>

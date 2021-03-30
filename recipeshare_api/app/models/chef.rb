@@ -24,16 +24,16 @@ class Chef < ApplicationRecord
     has_many :recipe_images
     has_many :make_pics
 
-    validates :e_mail, presence: {message: "must be included."}
-    validates :username, presence: {message: "must be included."}
-    validates :username, length: {minimum: 3, message: "must be at least 3 characters."}
-    validates :username, uniqueness: {message: "must be unique"}, unless: :anonymous?
-	validates :e_mail, uniqueness: {message: "must be unique"}
+    validates :e_mail, presence: { message: 'must be included.' }
+    validates :username, presence: { message: 'must be included.' }
+    validates :username, length: { minimum: 3, message: 'must be at least 3 characters.' }
+    validates :username, uniqueness: { message: 'must be unique' }, unless: :anonymous?
+	validates :e_mail, uniqueness: { message: 'must be unique' }
 	validates :e_mail, email: true
-    validates :password, length: {minimum: 6, message: "must be at least 6 characters."}
+    validates :password, length: { minimum: 6, message: 'must be at least 6 characters.' }
 
     def anonymous?
-        username == "Anonymous"
+        username == 'Anonymous'
     end
 
     def self.valid_attribute?(attr, value)

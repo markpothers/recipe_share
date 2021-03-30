@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
 		marginLeft: '0%',
 		marginRight: '0%',
 		marginTop: responsiveHeight(0.5),
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		backgroundColor: 'white',
 		// flexDirection: 'row'
 		// backgroundColor: '#fff59b',
@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
 		marginLeft: '0%',
 		marginRight: '0%',
 		marginTop: responsiveHeight(0.5),
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		backgroundColor: 'white',
 		// opacity: 0.9,
 		paddingTop: '1%',
@@ -90,7 +90,7 @@ export const styles = StyleSheet.create({
 		marginLeft: '0%',
 		marginRight: '0%',
 		marginTop: responsiveHeight(0.5),
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		backgroundColor: 'white',
 		paddingTop: responsiveHeight(0.5),
 		paddingBottom: responsiveHeight(0.5)
@@ -103,7 +103,7 @@ export const styles = StyleSheet.create({
 		// marginLeft: '0%',
 		// marginRight: '0%',
 		marginTop: responsiveHeight(0.5),
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		backgroundColor: 'white',
 		// opacity: 0.9,
 		// marginBottom: '1%',
@@ -126,7 +126,7 @@ export const styles = StyleSheet.create({
 		marginLeft: '0%',
 		marginRight: '0%',
 		marginTop: responsiveHeight(0.5),
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		backgroundColor: 'white',
 		// opacity: 0.9,
 		flex: 1,
@@ -170,7 +170,7 @@ export const styles = StyleSheet.create({
 		marginRight: '0%',
 		marginTop: 3,
 		flexDirection: 'row',
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		backgroundColor: 'white',
 	},
 	headerTextView: {
@@ -268,7 +268,7 @@ export const styles = StyleSheet.create({
 		// borderWidth: 1
 	},
 	detailsImage: {
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 	},
 	ingredientsTable: {
 		flexDirection: 'row',
@@ -321,7 +321,7 @@ export const styles = StyleSheet.create({
 		marginRight: '0%',
 		marginTop: responsiveHeight(0.5),
 		marginBottom: responsiveHeight(0.5),
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		backgroundColor: 'white',
 		// opacity: 0.9,
 	},
@@ -351,12 +351,12 @@ export const styles = StyleSheet.create({
 	commentRightTopContainer: {
 		flexDirection: 'row',
 		width: '93%',
-		justifyContent:'space-between',
+		justifyContent: 'space-between',
 		// borderWidth: 1
 	},
 	makePicScrollView: {
 		// height: 120,
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		marginTop: responsiveHeight(0.5),
 		paddingBottom: responsiveHeight(0.5),
 		// flex: 1  // DO NOT USE THIS IT BREAKS EVERYTHING
@@ -365,12 +365,12 @@ export const styles = StyleSheet.create({
 		height: 60,
 		width: '96%',
 		marginRight: '4%',
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 	},
 	makePicContainer: {
 		height: 115,
 		width: 115,
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		overflow: 'hidden'
 	},
 	// makePic: {
@@ -406,7 +406,7 @@ export const styles = StyleSheet.create({
 		width: '35%',
 		height: 44,
 		flexDirection: 'row',
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		backgroundColor: '#fff59b',
 		borderStyle: 'solid',
 		borderWidth: 1,
@@ -436,14 +436,14 @@ export const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		backgroundColor: 'rgba(256,256,256,1)',
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		overflow: 'hidden'
 	},
 	instructionPopupImage: {
 		marginVertical: responsiveWidth(2.5),
 		height: responsiveWidth(85),
 		width: responsiveWidth(85),
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 	},
 	primaryImagesScrollView: {
 		width: '100%',
@@ -463,7 +463,7 @@ export const styles = StyleSheet.create({
 		// marginBottom: '1%',
 		justifyContent: 'center',
 		alignItems: 'center',
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		overflow: 'hidden',
 	},
 	// primaryImageWrapper: {
@@ -473,10 +473,10 @@ export const styles = StyleSheet.create({
 	primaryImageFlatList: {
 		// borderWidth:1,
 		// borderColor: 'yellow',
-		width: responsiveWidth(100)-2,
+		width: responsiveWidth(100) - 2,
 		height: responsiveWidth(75),
 		// left: 100
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		overflow: 'hidden'
 	},
 	primaryImageBlobsContainer: {
@@ -502,7 +502,7 @@ export const styles = StyleSheet.create({
 		flexDirection: 'row',
 		// borderBottomWidth: 1,
 		width: responsiveWidth(85),
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		justifyContent: 'space-between',
 		// borderColor: '#104e01',
 		marginTop: responsiveWidth(2.5),
@@ -522,7 +522,7 @@ export const styles = StyleSheet.create({
 		// position: 'absolute',
 		height: responsiveWidth(17.5),
 		width: responsiveWidth(17.5),
-		borderRadius:responsiveWidth(1.5)
+		borderRadius: responsiveWidth(1.5)
 	},
 	chefUsername: {
 		fontSize: responsiveFontSize(2.25),
@@ -530,5 +530,18 @@ export const styles = StyleSheet.create({
 		width: '100%',
 		color: '#505050'
 		// textAlign: 'center'
+	},
+	webviewContainer: {
+		justifyContent: 'center',
+		borderWidth: 1,
+		borderColor: '#104e01',
+		borderRadius: responsiveWidth(1.5),
+		overflow: 'hidden',
+		height: responsiveHeight(65),
+		width: responsiveWidth(92),
+		marginLeft: responsiveWidth(4),
+		marginRight: responsiveWidth(4),
+		marginTop: responsiveHeight(0.75),
+		marginBottom: responsiveHeight(0.75)
 	}
 });

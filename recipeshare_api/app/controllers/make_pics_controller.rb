@@ -15,12 +15,9 @@ class MakePicsController < ApplicationController
         @make_pic.hex = hex
         @make_pic.save
       end
-      puts "about to save again"
       if @make_pic.save
-        puts "saved again"
         puts @make_pic.errors.full_messages
         @make_pic.image_url = ApplicationRecord.get_signed_url(@make_pic.image_url)
-        puts "safe image_url"
         @make_pic.image_url
         make_pic_data = {
           make_pic: @make_pic,

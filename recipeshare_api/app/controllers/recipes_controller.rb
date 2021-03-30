@@ -21,31 +21,32 @@ class RecipesController < ApplicationController
     # end
 
     def create
-        if newRecipe_params[:chef_id] === @chef.id || @chef.is_admin === true
+        # if newRecipe_params[:chef_id] === @chef.id || @chef.is_admin === true
             @recipe = Recipe.new(newRecipe_params)
             # byebug
             if newRecipe_params["time"] != nil #to accept input from older app version (pre-release)
                 @recipe.total_time = newRecipe_params["time"]
             end
                 @recipe.chef_id = @chef.id
-            newRecipe_filter_settings["filter_settings"].keys.each do |category|
+                newRecipe_filter_settings["filter_settings"].keys.each do |category|
                 newRecipe_filter_settings["filter_settings"][category] ? @recipe[category.downcase.split(" ").join("_")] = true : @recipe[category.downcase.split(" ").join("_")] = false
             end
+            # byebug
             if @recipe.save
                 # byebug
-                if newRecipe_primary_images_params["primary_images"].length > 0
-                    @recipe.primary_images=(newRecipe_primary_images_params)
+                if newRecipe_primary_images_params["primary_images"].length.positive?
+                    @recipe.primary_images = (newRecipe_primary_images_params)
                 end
-                @recipe.ingredients=(newRecipe_Ingredient_params)
-                @recipe.instructions=(newRecipe_Instructions_params)
+                @recipe.ingredients = (newRecipe_Ingredient_params)
+                @recipe.instructions = (newRecipe_Instructions_params)
                 @recipe.save
                 render json: @recipe
             else
-                render json: {error: true, message: @recipe.errors.full_messages}
+                render json: { error: true, message: @recipe.errors.full_messages }
             end
-        else
-            render json: {error: true, message: "Unauthorized"}
-        end
+        # else
+        #     render json: {error: true, message: "Unauthorized"}
+        # end
     end
 
     def show
@@ -57,7 +58,7 @@ class RecipesController < ApplicationController
     # end
 
     def update
-        if newRecipe_params[:chef_id] === @chef.id || @chef.is_admin === true
+        if @recipe.chef_id === @chef.id || @chef.is_admin === true
             @recipe.update(newRecipe_params)
             newRecipe_filter_settings["filter_settings"].keys.each do |category|
                 newRecipe_filter_settings["filter_settings"][category] ? @recipe[category.downcase.split(" ").join("_")] = true : @recipe[category.downcase.split(" ").join("_")] = false
@@ -69,6 +70,7 @@ class RecipesController < ApplicationController
             if @recipe.save
                 render json: @recipe
             else
+                # byebug
                 render json: {error: true, message: @recipe.errors.full_messages}
             end
         else
@@ -102,11 +104,11 @@ class RecipesController < ApplicationController
     end
 
     def details_params
-        params.require(:details).permit(:listed_recipes => [])
+        params.require(:details).permit(listed_recipes: [])
     end
 
     def newRecipe_params
-        params.require(:recipe).permit(:name, :prep_time, :cook_time, :total_time, :time, :difficulty, :cuisine, :serves, :acknowledgement, :acknowledgement_link, :description)
+        params.require(:recipe).permit(:name, :prep_time, :cook_time, :total_time, :time, :difficulty, :cuisine, :serves, :acknowledgement, :acknowledgement_link, :description, :show_blog_preview)
     end
 
     # def newRecipe_primary_image_as_base64_params

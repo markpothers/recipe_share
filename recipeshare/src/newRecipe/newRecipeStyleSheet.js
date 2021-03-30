@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
 		alignItems: 'center',
 		borderStyle: 'solid',
 		borderWidth: 1,
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		borderColor: '#104e01',
 		width: '100%',
 		backgroundColor: 'white',
@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'center',
 		alignItems: 'center',
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		width: '100%',
 	},
 	createRecipeInputBox: {
@@ -54,6 +54,10 @@ export const styles = StyleSheet.create({
 		height: 130,
 		marginTop: 4,
 	},
+	sectionTitle: {
+		width: responsiveWidth(60),
+		alignItems: 'center'
+	},
 	timeAndDifficultyWrapper: {
 		borderStyle: 'solid',
 		borderWidth: 2,
@@ -68,7 +72,7 @@ export const styles = StyleSheet.create({
 		//  marginLeft: '5%',
 		//  marginRight: '5%',
 		backgroundColor: 'white',
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		height: responsiveHeight(6),
 		// minWidth: responsiveWidth(25),
 		width: responsiveWidth(59),
@@ -90,14 +94,14 @@ export const styles = StyleSheet.create({
 		// marginRight: '5%',
 		backgroundColor: 'white',
 		height: responsiveHeight(6),
-		width: responsiveWidth(40),
+		width: responsiveWidth(40.5),
 		// marginRight: responsiveWidth(0.5),
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		borderStyle: 'solid',
 		borderWidth: 1,
 		borderColor: '#104e01',
 		justifyContent: 'center',
-		marginLeft: responsiveWidth(1)
+		// marginLeft: responsiveWidth(1)
 	},
 	// picker: {
 	//   height: 44,
@@ -118,7 +122,7 @@ export const styles = StyleSheet.create({
 		width: '35%',
 		height: 44,
 		flexDirection: 'row',
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		backgroundColor: '#fff59b',
 		borderStyle: 'solid',
 		borderWidth: 1,
@@ -149,7 +153,7 @@ export const styles = StyleSheet.create({
 		justifyContent: 'center',
 		borderWidth: 1,
 		borderColor: '#104e01',
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 	},
 	addIngredientUnitInputBox: {
 		backgroundColor: 'white',
@@ -159,7 +163,7 @@ export const styles = StyleSheet.create({
 		borderStyle: 'solid',
 		borderWidth: 1,
 		borderColor: '#104e01',
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		overflow: 'hidden'
 	},
 	ingredientTextAdjustment: {
@@ -180,7 +184,7 @@ export const styles = StyleSheet.create({
 	autoCompleteContainer: {
 		position: 'absolute',
 		width: '100%',
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		// height: responsiveHeight(10),
 		// justifyContent: 'center'
 		// borderWidth: 1,
@@ -207,7 +211,7 @@ export const styles = StyleSheet.create({
 	ingredientSortContainer: {
 		height: responsiveHeight(12.5),
 		width: responsiveWidth(12),
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		borderStyle: 'solid',
 		borderColor: '#104e01',
 		borderWidth: 1,
@@ -222,7 +226,7 @@ export const styles = StyleSheet.create({
 		height: responsiveHeight(12.5),
 		// left: '90%',
 		flexDirection: 'row',
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		borderStyle: 'solid',
 		borderColor: '#104e01',
 		borderWidth: 1,
@@ -231,17 +235,17 @@ export const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	autoCompleteOuterContainerStyle: {
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 	},
 	autoCompleteInputContainerStyle: {
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		backgroundColor: 'transparent',
 		borderStyle: 'solid',
 		borderColor: 'transparent',
 		borderWidth: 0,
 	},
 	autoCompleteInput: {
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		backgroundColor: 'white',
 		borderStyle: 'solid',
 		borderWidth: 1,
@@ -251,7 +255,7 @@ export const styles = StyleSheet.create({
 		fontSize: responsiveFontSize(2),
 	},
 	autoCompleteList: {
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		height: responsiveHeight(23),
 		width: '90%',
 		borderStyle: 'solid',
@@ -292,7 +296,7 @@ export const styles = StyleSheet.create({
 		height: '100%',
 		// left: '90%',
 		flexDirection: 'row',
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		borderStyle: 'solid',
 		borderColor: '#104e01',
 		borderWidth: 1,
@@ -306,7 +310,7 @@ export const styles = StyleSheet.create({
 		backgroundColor: 'white',
 		textAlign: 'left',
 		textAlignVertical: 'center',
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		// borderWidth: 1,
 		// borderColor: '#104e01',
 		paddingLeft: responsiveWidth(2),
@@ -320,16 +324,42 @@ export const styles = StyleSheet.create({
 	autocompleteListText: {
 		fontSize: responsiveFontSize(1.8)
 	},
+	addButton: {
+		maxWidth: responsiveWidth(60),
+		width: responsiveWidth(60),
+		justifyContent: 'center'
+	},
 	plusButtonContainer: {
-		marginTop: responsiveHeight(1),
+		marginTop: responsiveHeight(0.5),
 		width: responsiveWidth(100),
 		justifyContent: 'center',
-		alignItems:'center'
+		alignItems: 'center',
+		flexDirection: 'row',
+		// borderWidth: 1,
+		// borderColor: 'red'
 	},
-	plusButton:{
+	plusButton: {
 		backgroundColor: '#fff59b',
 		borderRadius: responsiveWidth(1.5),
 		borderColor: '#104e01',
-		borderWidth: 1
+		borderWidth: 1,
+		width: responsiveWidth(60),
+		justifyContent: 'center',
+		alignItems: 'center',
+		flexDirection: 'row',
+		minHeight: responsiveHeight(6),
+	},
+	switchContainer:{
+		backgroundColor: '#fff59b',
+		borderRadius: responsiveWidth(1.5),
+		borderColor: '#104e01',
+		borderWidth: 1,
+		width: responsiveWidth(20),
+		// marginHorizontal: responsiveWidth(10),
+		justifyContent: 'center',
+		alignItems: 'center',
+		flexDirection: 'row',
+		minHeight: responsiveHeight(6),
+		
 	}
 })

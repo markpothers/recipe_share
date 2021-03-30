@@ -14,7 +14,6 @@ export default class RecipeCard extends React.PureComponent {
 	}
 
 	render() {
-		// console.log('OVER HERE!')
 		const imageSource = this.props.image_url ? { uri: this.props.image_url } : defaultRecipeImage
 		return (
 			<View style={styles.recipeCard} >
@@ -23,7 +22,6 @@ export default class RecipeCard extends React.PureComponent {
 						message={`Sorry, can't do that right now.${"\n"}You appear to be offline.`}
 						topOffset={'35%'}
 						clearOfflineMessage={() => {
-							console.log('HERE!')
 							this.props.clearOfflineMessage(this.props.id)
 						}}
 					/>

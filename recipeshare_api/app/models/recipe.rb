@@ -1,61 +1,75 @@
 require 'net/http'
+require 'google/cloud/web_risk'
 
 class Recipe < ApplicationRecord
-
   belongs_to :chef
   has_many :ingredient_uses
   has_many :ingredients, through: :ingredient_uses
   has_many :instructions
   has_many :recipe_likes
-  has_many :likers, :through => :recipe_likes, :source => :chef
+  has_many :likers, through: :recipe_likes, source: :chef
   has_many :comments
-  has_many :commenters, :through => :comments, :source => :chef
+  has_many :commenters, through: :comments, source: :chef
   has_many :recipe_makes
-  has_many :makers, :through => :recipe_makes, :source => :chef
+  has_many :makers, through: :recipe_makes, source: :chef
   has_many :re_shares
-  has_many :sharers, :through => :re_shares, :source => :chef
+  has_many :sharers, through: :re_shares, source: :chef
   has_many :recipe_images
 
   accepts_nested_attributes_for :ingredient_uses
 
+  validates :name, presence: { message: 'is required.' }
+  # validates :total_time, numericality: { greater_than: 0, message: 'is required.' }
   validates :acknowledgement_link, url: { allow_blank: true }
   validate :acknowledgement_link_must_be_safe
+  validate :show_blog_preview_must_have_a_link
 
   def acknowledgement_link_must_be_safe
-    if acknowledgement_link.present?
-      # byebug
+    return unless acknowledgement_link.present?
 
-      # NOTE that the below would be a good test however, since many links will be to amazon, it won't work
-      # because amazon blocks automated links
-      # I'll leave this out for now but if I can stop amazon doing that, I may do so
-      # response = Net::HTTP.get_response(URI(self.acknowledgement_link)).code
-      # if response != "200"
-      #   errors.add(:acknowledgement_link, "does not work")
-      # end
-    end
+    risk = Google::Cloud::WebRisk
+    risk.configure.credentials = Rails.application.credentials.Google[:image_storage_handler_credentials]
+    risk_response = risk.web_risk_service.search_uris(uri: acknowledgement_link, threat_types: [1, 2, 3])
+    return if risk_response.threat.nil?
+
+    puts 'risky web address'
+    errors.add(:acknowledgement_link, 'appears to be malicious.')
+    # byebug
+    # NOTE that the below would be a good test however, since many links will be to amazon, it won't work
+    # because amazon blocks automated links
+    # I'll leave this out for now but if I can stop amazon doing that, I may do so
+    # response = Net::HTTP.get_response(URI(self.acknowledgement_link)).code
+    # if response != "200"
+    #   errors.add(:acknowledgement_link, "does not work")
+    # end
   end
 
-  def self.choose_list(type = "all", queryChefID = 1, limit = 1, offset = 0, ranking = "liked", user_chef_id = 1, filters="", cuisine="None", serves="Any", search_term="")
+  def show_blog_preview_must_have_a_link
+    return unless show_blog_preview && acknowledgement_link.strip.empty?
+
+    errors.add(:base, "We can't show a blog preview unless you provide a link.")
+  end
+
+  def self.choose_list(type = "all", queryChefID = 1, limit = 1, offset = 0, ranking = "liked", user_chef_id = 1, filters = "", cuisine = "None", serves = "Any", search_term = "")
     #types = "all", "chef", "chef_liked", "chef_made", "most_liked", "most_made" // "liked", "made"
 
     # pg = ApplicationRecord.db
 
-    filter_string=filters.split("/").map{|filter| filter.split(" ").join("_")}.map{|filter| "AND recipes.#{filter} = 't' "}.join("")
+    filter_string = filters.split("/").map { |filter| filter.split(" ").join("_") }.map { |filter| "AND recipes.#{filter} = 't' " }.join("")
 
     if cuisine != "Any"
-      cuisine_string="AND recipes.cuisine = '#{cuisine.split(" ").join("_")}' "
+      cuisine_string = "AND recipes.cuisine = '#{cuisine.split(" ").join("_")}' "
     else
-      cuisine_string=""
+      cuisine_string = ""
     end
 
     serves_string = ""
     if serves != "Any"
-      serves_string ="AND recipes.serves = '#{serves}'"
+      serves_string = "AND recipes.serves = '#{serves}'"
     end
 
     if type == "all"
-
-        recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*,
+      recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*,
                                       MAX(ri.image_url) AS image_url,
                                       MAX(chefs.username) AS username,
                                       MAX(chefs.image_url) AS chefimage_url,
@@ -89,9 +103,7 @@ class Recipe < ApplicationRecord
                                     ORDER BY recipes.updated_at DESC
                                     LIMIT ?
                                     OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, search_term.downcase(), limit, offset])
-
     elsif type == "chef" # recipes created by me ordered most-recent first
-
       recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*, 
                                         MAX(ri.image_url) AS image_url,
                                         MAX(chefs.username) AS username,
@@ -126,9 +138,7 @@ class Recipe < ApplicationRecord
                                       ORDER BY recipes.updated_at DESC
                                       LIMIT ?
                                       OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, search_term.downcase(), limit, offset])
-
     elsif type == "chef_feed" # recipes by chefs I follow ordered most-recent first
-
       recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*,
                                     MAX(ri.image_url) AS image_url,
                                     MAX(chefs.username) AS username,
@@ -174,10 +184,9 @@ class Recipe < ApplicationRecord
                                     ORDER BY recipes.updated_at DESC
                                     LIMIT ?
                                     OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, queryChefID, queryChefID, search_term.downcase(), limit, offset])
-
     elsif type == "chef_liked" # recipes liked by use_chef ordered by most-recently liked
-# byebug
-        recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*,
+      # byebug
+      recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*,
                                       MAX(ri.image_url) AS image_url,
                                       MAX(chefs.username) AS username,
                                       MAX(chefs.image_url) AS chefimage_url,
@@ -212,10 +221,8 @@ class Recipe < ApplicationRecord
                                       ORDER BY last_update DESC
                                       LIMIT ?
                                       OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, search_term.downcase(), limit, offset])
-  
     elsif type == "chef_made" # recipes liked by use_chef ordered by most-recently liked
-
-        recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*,
+      recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*,
                                       MAX(ri.image_url) AS image_url,
                                       MAX(chefs.username) AS username,
                                       MAX(chefs.image_url) AS chefimage_url,
@@ -250,12 +257,10 @@ class Recipe < ApplicationRecord
                                       ORDER BY last_update DESC
                                       LIMIT ?
                                       OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, search_term.downcase(), limit, offset])
+    elsif type == "most_liked" # recipes according to their global rankings # with filter bASed on chef name working if needed
+      chefFilter = ""  # "WHERE recipes.chef_id = #{chef_id}"  # stitutute this line in if needed
 
-    elsif type =="most_liked" # recipes according to their global rankings # with filter bASed on chef name working if needed
-
-        chefFilter = ""  # "WHERE recipes.chef_id = #{chef_id}"  # stitutute this line in if needed
-
-     recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*,
+      recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*,
                                         MAX(ri.image_url) AS image_url,
                                         MAX(chefs.username) AS username,
                                         MAX(chefs.image_url) AS chefimage_url,
@@ -289,9 +294,7 @@ class Recipe < ApplicationRecord
                                       ORDER BY likes_count DESC
                                       LIMIT ?
                                       OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, search_term.downcase(), limit, offset])
-
-    elsif type =="most_made" # recipes according to their global rankings # with filter bASed on chef name working if needed
-
+    elsif type == "most_made" # recipes according to their global rankings # with filter bASed on chef name working if needed
       chefFilter = ""  # "WHERE recipes.chef_id = #{chef_id}"  # stitutute this line in if needed
       recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*,
                                   MAX(ri.image_url) AS image_url,
@@ -327,10 +330,8 @@ class Recipe < ApplicationRecord
                                 ORDER BY (SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id) DESC
                                 LIMIT ?
 								OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, search_term.downcase(), limit, offset])
-
     else # if all else fails, just show all recipes ordered most recent first
-
-    recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*,
+      recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*,
                                   MAX(ri.image_url) AS image_url,
                                   MAX(chefs.username) AS username,
                                   MAX(chefs.image_url) AS chefimage_url,
@@ -364,24 +365,22 @@ class Recipe < ApplicationRecord
                                 ORDER BY recipes.updated_at DESC
                                 LIMIT ?
                                 OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, search_term.downcase(), limit, offset])
-# byebug
+      # byebug
     end
     return recipes_results
   end
 
-  def self.get_cuisines(type = "all", user_chef_id = 1, queryChefID = 1, filters="", serves="Any", search_term="")
-
-    filter_string=filters.split("/").map{|filter| filter.split(" ").join("_")}.map{|filter| "AND recipes.#{filter} = 't' "}.join("")
+  def self.get_cuisines(type = "all", user_chef_id = 1, queryChefID = 1, filters = "", serves = "Any", search_term = "")
+    filter_string = filters.split("/").map { |filter| filter.split(" ").join("_") }.map { |filter| "AND recipes.#{filter} = 't' " }.join("")
 
     serves_string = ""
     if serves != "Any"
-      serves_string ="AND recipes.serves = '#{serves}'"
+      serves_string = "AND recipes.serves = '#{serves}'"
     end
 
     if type == "chef" # recipes created by me ordered most-recent first
-
       cuisines = Recipe.find_by_sql([
-          "SELECT DISTINCT recipes.cuisine
+        "SELECT DISTINCT recipes.cuisine
           FROM recipes
           WHERE recipes.hidden = false
           AND recipes.chef_id = ?
@@ -389,15 +388,14 @@ class Recipe < ApplicationRecord
           #{serves_string}
           AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
           ORDER BY recipes.cuisine",
-          user_chef_id,
-          search_term.downcase()
-        ])
+        user_chef_id,
+        search_term.downcase(),
+      ])
+    elsif type == "chef_liked" # recipes created by me ordered most-recent first
 
-      elsif type == "chef_liked"  # recipes created by me ordered most-recent first
-
-          # byebug
-          cuisines = Recipe.find_by_sql([
-              "SELECT DISTINCT recipes.cuisine
+      # byebug
+      cuisines = Recipe.find_by_sql([
+        "SELECT DISTINCT recipes.cuisine
               FROM recipes
               JOIN recipe_likes ON recipes.id = recipe_likes.recipe_id
               WHERE recipes.hidden = false
@@ -407,16 +405,15 @@ class Recipe < ApplicationRecord
               #{serves_string}
               AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
               ORDER BY recipes.cuisine",
-              queryChefID,
-              search_term.downcase()
-            ])
+        queryChefID,
+        search_term.downcase(),
+      ])
 
-            # byebug
+      # byebug
 
-          elsif type == "chef_made"  # recipes created by me ordered most-recent first
-
-            cuisines = Recipe.find_by_sql([
-                "SELECT DISTINCT recipes.cuisine
+    elsif type == "chef_made" # recipes created by me ordered most-recent first
+      cuisines = Recipe.find_by_sql([
+        "SELECT DISTINCT recipes.cuisine
                 FROM recipes
                 JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id
                 WHERE recipes.hidden = false
@@ -426,12 +423,10 @@ class Recipe < ApplicationRecord
                 #{serves_string}
                 AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
                 ORDER BY recipes.cuisine",
-                queryChefID,
-                search_term.downcase()
-              ])
-
+        queryChefID,
+        search_term.downcase(),
+      ])
     elsif type == "chef_feed" # recipes by chefs I follow ordered most-recent first
-
       cuisines = Recipe.find_by_sql([
         "SELECT DISTINCT recipes.cuisine
         FROM recipes
@@ -453,11 +448,9 @@ class Recipe < ApplicationRecord
         user_chef_id,
         user_chef_id,
         user_chef_id,
-        search_term.downcase()
+        search_term.downcase(),
       ])
-
     else # if all else fails, just show all recipes ordered most recent first
-
       cuisines = Recipe.find_by_sql([
         "SELECT DISTINCT recipes.cuisine
         FROM recipes
@@ -466,30 +459,27 @@ class Recipe < ApplicationRecord
         #{serves_string}
         AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
         ORDER BY recipes.cuisine",
-        search_term.downcase()
+        search_term.downcase(),
       ])
-
     end
-    cuisines = cuisines.map{|recipe| recipe.cuisine}
-    cuisines = cuisines.filter{|cuisine| cuisine != "Any"}
+    cuisines = cuisines.map { |recipe| recipe.cuisine }
+    cuisines = cuisines.filter { |cuisine| cuisine != "Any" }
     cuisines.insert(0, "Any")
     # byebug
     return cuisines
   end
 
-  def self.get_serves(type = "all", user_chef_id = 1, queryChefID = 1, filters="", serves="Any", search_term="")
-
-    filter_string=filters.split("/").map{|filter| filter.split(" ").join("_")}.map{|filter| "AND recipes.#{filter} = 't' "}.join("")
+  def self.get_serves(type = "all", user_chef_id = 1, queryChefID = 1, filters = "", serves = "Any", search_term = "")
+    filter_string = filters.split("/").map { |filter| filter.split(" ").join("_") }.map { |filter| "AND recipes.#{filter} = 't' " }.join("")
 
     serves_string = ""
     if serves != "Any"
-      serves_string ="AND recipes.serves = '#{serves}'"
+      serves_string = "AND recipes.serves = '#{serves}'"
     end
 
     if type == "chef" # recipes created by me ordered most-recent first
-
       serves = Recipe.find_by_sql([
-          "SELECT DISTINCT recipes.serves
+        "SELECT DISTINCT recipes.serves
           FROM recipes
           WHERE recipes.hidden = false
           AND recipes.chef_id = ?
@@ -497,15 +487,14 @@ class Recipe < ApplicationRecord
           #{serves_string}
           AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
           ORDER BY recipes.serves",
-          user_chef_id,
-          search_term.downcase()
-        ])
+        user_chef_id,
+        search_term.downcase(),
+      ])
+    elsif type == "chef_liked" # recipes created by me ordered most-recent first
 
-      elsif type == "chef_liked"  # recipes created by me ordered most-recent first
-
-          # byebug
-          serves = Recipe.find_by_sql([
-              "SELECT DISTINCT recipes.serves
+      # byebug
+      serves = Recipe.find_by_sql([
+        "SELECT DISTINCT recipes.serves
               FROM recipes
               JOIN recipe_likes ON recipes.id = recipe_likes.recipe_id
               WHERE recipes.hidden = false
@@ -515,16 +504,15 @@ class Recipe < ApplicationRecord
               #{serves_string}
               AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
               ORDER BY recipes.serves",
-              queryChefID,
-              search_term.downcase()
-            ])
+        queryChefID,
+        search_term.downcase(),
+      ])
 
-            # byebug
+      # byebug
 
-          elsif type == "chef_made"  # recipes created by me ordered most-recent first
-
-            serves = Recipe.find_by_sql([
-                "SELECT DISTINCT recipes.serves
+    elsif type == "chef_made" # recipes created by me ordered most-recent first
+      serves = Recipe.find_by_sql([
+        "SELECT DISTINCT recipes.serves
                 FROM recipes
                 JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id
                 WHERE recipes.hidden = false
@@ -534,12 +522,10 @@ class Recipe < ApplicationRecord
                 #{serves_string}
                 AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
                 ORDER BY recipes.serves",
-                queryChefID,
-                search_term.downcase()
-              ])
-
+        queryChefID,
+        search_term.downcase(),
+      ])
     elsif type == "chef_feed" # recipes by chefs I follow ordered most-recent first
-
       serves = Recipe.find_by_sql([
         "SELECT DISTINCT recipes.serves
         FROM recipes
@@ -561,11 +547,9 @@ class Recipe < ApplicationRecord
         user_chef_id,
         user_chef_id,
         user_chef_id,
-        search_term.downcase()
+        search_term.downcase(),
       ])
-
     else # if all else fails, just show all recipes ordered most recent first
-
       serves = Recipe.find_by_sql([
         "SELECT DISTINCT recipes.serves
         FROM recipes
@@ -574,13 +558,12 @@ class Recipe < ApplicationRecord
         #{serves_string}
         AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
         ORDER BY recipes.serves",
-        search_term.downcase()
+        search_term.downcase(),
       ])
-
     end
-    serves = serves.map{|recipe| recipe.serves}
-    serves = serves.filter{|serve| serve != "Any"}
-    serves = serves.map{|serve| serve.to_i}.sort()
+    serves = serves.map { |recipe| recipe.serves }
+    serves = serves.filter { |serve| serve != "Any" }
+    serves = serves.map { |serve| serve.to_i }.sort()
     # serves.insert(0, "Any")
     # byebug
     return serves
@@ -593,15 +576,15 @@ class Recipe < ApplicationRecord
 
   def primary_images=(newRecipe_primary_images_params)
     recipe_images = RecipeImage.where(recipe_id: self.id)
-    recipe_images.each { |use| use.hidden = true}
-    recipe_images.each { |use| use.save}
-	  newRecipe_primary_images_params["primary_images"].each_with_index do |image, index|
-		# byebug
+    recipe_images.each { |use| use.hidden = true }
+    recipe_images.each { |use| use.save }
+    newRecipe_primary_images_params["primary_images"].each_with_index do |image, index|
+      # byebug
       if image["base64"] != nil && image["base64"] != ""
         recipe_image = RecipeImage.new(recipe_id: self.id)
         hex = SecureRandom.hex(20)
         until RecipeImage.find_by(hex: hex) == nil
-            hex = SecureRandom.hex(20)
+          hex = SecureRandom.hex(20)
         end
         mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:recipe_images], hex, image["base64"])
         recipe_image.image_url = mediaURL
@@ -617,8 +600,8 @@ class Recipe < ApplicationRecord
 
   def ingredients=(ingredient_params)
     recipe_images = IngredientUse.where(recipe_id: self.id)
-    ingredient_uses.each { |use| use.hidden = true}
-    ingredient_uses.each { |use| use.save}
+    ingredient_uses.each { |use| use.hidden = true }
+    ingredient_uses.each { |use| use.save }
     ingredient_params["ingredients"].each_with_index do |ingredient, index|
       if ingredient["name"] != ""
         ing_name = ingredient["name"].downcase
@@ -637,12 +620,12 @@ class Recipe < ApplicationRecord
 
   def instructions=(instructions_params)
     pre_existing_instructions = Instruction.where(recipe: self)
-    pre_existing_instructions.each { |use| use.hidden = true}
-    pre_existing_instructions.each { |use| use.save}
-    pre_existing_instructions_ids = pre_existing_instructions.map{|ins| ins.id}
+    pre_existing_instructions.each { |use| use.hidden = true }
+    pre_existing_instructions.each { |use| use.save }
+    pre_existing_instructions_ids = pre_existing_instructions.map { |ins| ins.id }
     pre_existing_instruction_image = InstructionImage.where(instruction_id: pre_existing_instructions_ids)
-    pre_existing_instruction_image.each { |image| image.hidden = true}
-    pre_existing_instruction_image.each { |image| image.save}
+    pre_existing_instruction_image.each { |image| image.hidden = true }
+    pre_existing_instruction_image.each { |image| image.save }
     instructions_params["instructions"].each_with_index do |instruction, index|
       if instruction != ""
         instruction = Instruction.find_or_initialize_by(instruction: instruction, recipe: self)
@@ -655,16 +638,16 @@ class Recipe < ApplicationRecord
           instruction_image.hidden = false
           instruction_image.instruction_id = instruction.id
           instruction_image.save
-        # otherwise if you have base64 string create and save new instruction image
-        elsif instructions_params["instruction_images"][index]["base64"] != nil && instructions_params["instruction_images"][index]["base64"] != ''
+          # otherwise if you have base64 string create and save new instruction image
+        elsif instructions_params["instruction_images"][index]["base64"] != nil && instructions_params["instruction_images"][index]["base64"] != ""
           instruction_image = InstructionImage.new(instruction_id: instruction.id)
           hex = SecureRandom.hex(20)
           until InstructionImage.find_by(hex: hex) == nil
-              hex = SecureRandom.hex(20)
+            hex = SecureRandom.hex(20)
           end
           mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:instruction_images], hex, instructions_params["instruction_images"][index]["base64"])
           instruction_image.image_url = mediaURL
-          instruction_image.hex=hex
+          instruction_image.hex = hex
           instruction_image.hidden = false
           instruction_image.instruction_id = instruction.id
           instruction_image.save
@@ -680,42 +663,41 @@ class Recipe < ApplicationRecord
       makeable = false
     end
     ingredientUses = IngredientUse.where(recipe_id: self.id, hidden: false).order(:index)
-    ingredients_ids = ingredientUses.map {|use| use.ingredient_id}
+    ingredients_ids = ingredientUses.map { |use| use.ingredient_id }
     instructions = Instruction.where(recipe: self, hidden: false).order(:step)
-    instructions_ids = instructions.map {|instruction| instruction.id}
+    instructions_ids = instructions.map { |instruction| instruction.id }
     instruction_images = InstructionImage.where(instruction_id: instructions_ids, hidden: false)
-    instruction_images.each { |image| image.image_url = ApplicationRecord.get_signed_url(image.image_url)}
-    make_pics = MakePic.where(recipe_id: self.id, hidden: false).order('updated_at DESC')
-    make_pics.each { |image| image.image_url = ApplicationRecord.get_signed_url(image.image_url)}
-    make_pic_chef_ids = make_pics.map {|pic| pic.chef_id}
+    instruction_images.each { |image| image.image_url = ApplicationRecord.get_signed_url(image.image_url) }
+    make_pics = MakePic.where(recipe_id: self.id, hidden: false).order("updated_at DESC")
+    make_pics.each { |image| image.image_url = ApplicationRecord.get_signed_url(image.image_url) }
+    make_pic_chef_ids = make_pics.map { |pic| pic.chef_id }
     make_pic_chefs_data = Chef.where(id: make_pic_chef_ids)
-    make_pic_chefs_data = make_pic_chefs_data.map {|chef| {id: chef.id, profile_text: chef.profile_text, username: chef.username, image_url: ApplicationRecord.get_signed_url(chef.image_url)} }
+    make_pic_chefs_data = make_pic_chefs_data.map { |chef| { id: chef.id, profile_text: chef.profile_text, username: chef.username, image_url: ApplicationRecord.get_signed_url(chef.image_url) } }
     recipe_images = RecipeImage.where(recipe_id: self.id, hidden: false).order(:index)
-    recipe_images.each{ |image | image.image_url = ApplicationRecord.get_signed_url(image.image_url) }
+    recipe_images.each { |image| image.image_url = ApplicationRecord.get_signed_url(image.image_url) }
     return recipe_details = {
-        recipe: self,
-        comments: Comment.find_by_sql(["SELECT comments.*, chefs.username, chefs.image_url
+             recipe: self,
+             comments: Comment.find_by_sql(["SELECT comments.*, chefs.username, chefs.image_url
                                                 FROM comments
                                                 JOIN chefs ON chefs.id = comments.chef_id
                                                 WHERE comments.recipe_id = ?
                                                 AND comments.hidden = false
                                                 ORDER BY comments.updated_at DESC", self.id]),
-        recipe_images: recipe_images,
-        recipe_likes: RecipeLike.where(recipe_id: self.id, hidden: false).length,
-        likeable: RecipeLike.where(chef_id: chef.id, hidden: false, recipe_id: self.id).empty?,
-        re_shares: ReShare.where(recipe_id: self.id, hidden: false).length,
-        shareable: ReShare.where(chef_id: chef.id, hidden: false, recipe_id: self.id).empty?,
-        recipe_makes: RecipeMake.where(recipe_id: self.id, hidden: false).length,
-        makeable: makeable,
-        make_pics: make_pics,
-        make_pics_chefs: make_pic_chefs_data,
-        ingredient_uses: ingredientUses,
-        ingredients: Ingredient.where(id: ingredients_ids),
-        instructions: instructions,
-        instruction_images: instruction_images,
-        chef_username: self.chef.username,
-        chef_id: self.chef.id,
-    }
+             recipe_images: recipe_images,
+             recipe_likes: RecipeLike.where(recipe_id: self.id, hidden: false).length,
+             likeable: RecipeLike.where(chef_id: chef.id, hidden: false, recipe_id: self.id).empty?,
+             re_shares: ReShare.where(recipe_id: self.id, hidden: false).length,
+             shareable: ReShare.where(chef_id: chef.id, hidden: false, recipe_id: self.id).empty?,
+             recipe_makes: RecipeMake.where(recipe_id: self.id, hidden: false).length,
+             makeable: makeable,
+             make_pics: make_pics,
+             make_pics_chefs: make_pic_chefs_data,
+             ingredient_uses: ingredientUses,
+             ingredients: Ingredient.where(id: ingredients_ids),
+             instructions: instructions,
+             instruction_images: instruction_images,
+             chef_username: self.chef.username,
+             chef_id: self.chef.id,
+           }
   end
-
 end

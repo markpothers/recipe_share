@@ -60,43 +60,9 @@ gem "appengine", "~> 0.5.0"
 gem "email_validator"
 gem "rufo"
 gem "validate_url"
+gem 'google-cloud-web_risk', '~> 1.1', '>= 1.1.3'
 
 # git hub security alerts
 # gem "activesupport", ">= 5.2.4.3"
 # gem "actionview", ">= 5.2.4.4"
 # gem "actionpack", ">= 5.2.4.3"
-
-# rails generate rspec:model application_record
-# rails generate rspec:model chef
-# rails generate rspec:model comment
-# rails generate rspec:model database
-# rails generate rspec:model follow
-# rails generate rspec:model friendship
-# rails generate rspec:model ingredient_use
-# rails generate rspec:model ingredient
-# rails generate rspec:model instruction_image
-# rails generate rspec:model instruction
-# rails generate rspec:model make_pic
-# rails generate rspec:model re_share
-# rails generate rspec:model recipe_image
-# rails generate rspec:model recipe_like
-# rails generate rspec:model recipe_make
-# rails generate rspec:model recipe
-# rails generate rspec:controller application_controller
-# rails generate rspec:controller chefs_controller
-# rails generate rspec:controller comments_controller
-# rails generate rspec:controller databases_controller
-# rails generate rspec:controller follows_controller
-# rails generate rspec:controller friendships_controller
-# rails generate rspec:controller ingredient_uses_controller
-# rails generate rspec:controller ingredients_controller
-# rails generate rspec:controller instruction_images_controller
-# rails generate rspec:controller instructions_controller
-# rails generate rspec:controller make_pics_controller
-# rails generate rspec:controller re_shares_controller
-# rails generate rspec:controller recipe_images_controller
-# rails generate rspec:controller recipe_likes_controller
-# rails generate rspec:controller recipe_makes_controller
-# rails generate rspec:controller recipes_controller
-
-# rails generate rspec:scaffold chefs_controller

@@ -12,15 +12,12 @@ export function TextPopUp(props) {
 			transparent={true}
 			visible={true}
 		>
-			<View style={[styles.modalFullScreenContainer, {
-				height: responsiveHeight(100),
-				width: responsiveWidth(100),
-			}]}>
+			<View style={styles.modalFullScreenContainer}>
 				<View style={styles.contentsContainer}>
 					<View style={styles.titleContainer}>
 						<Text maxFontSizeMultiplier={1.5} style={styles.title}>{props.title}</Text>
 					</View>
-					<View style={[styles.editChefInputAreaBox, {height: responsiveHeight(70)}]} >
+					<View style={[styles.editChefInputAreaBox, {maxHeight: responsiveHeight(70)}]} >
 						<ScrollView>
 							<Text maxFontSizeMultiplier={2} style={styles.tAndCText}>{props.text}</Text>
 							{props.children}

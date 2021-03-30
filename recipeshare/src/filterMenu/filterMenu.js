@@ -91,14 +91,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			let selectedCuisine = this.props.newRecipe ? this.props.newRecipeCuisine : this.props.filterCuisines[this.props.listChoice]
 			let selectedServes = this.props.newRecipe ? this.props.newRecipeServes : this.props.serves
 
-			let availableCuisines = this.props.cuisineChoices[this.props.listChoice]
-			if (!availableCuisines || availableCuisines.length == 0){
-				availableCuisines = ["Any"]
-			}
+			let cuisineOptions = cuisines
+			let servesOptions = serves
+			if (!this.props.newRecipe) {
+				cuisineOptions = this.props.cuisineChoices[this.props.listChoice]
+				if (!cuisineOptions || cuisineOptions.length == 0) {
+					cuisineOptions = ["Any"]
+				}
 
-			let availableServes = this.props.servesChoices[this.props.listChoice]
-			availableServes = availableServes.map(serve => serve.toString())
-			availableServes = ["Any", ...availableServes]
+				servesOptions = this.props.servesChoices[this.props.listChoice].map(serve => serve.toString())
+				servesOptions = ["Any", ...servesOptions]
+			}
 
 			return (
 				<Modal
@@ -122,7 +125,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									<View style={styles.picker} >
 										<DualOSPicker
 											onChoiceChange={this.handleCuisineChange}
-											options={this.props.newRecipe ? cuisines : availableCuisines}
+											options={cuisineOptions}
 											selectedChoice={selectedCuisine}
 											textAlignment={"flex-start"}
 										/>
@@ -133,7 +136,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									<View style={styles.picker} >
 										<DualOSPicker
 											onChoiceChange={this.handleServesChange}
-											options={this.props.newRecipe ? serves : availableServes}
+											options={servesOptions}
 											selectedChoice={selectedServes}
 											textAlignment={"flex-start"}
 										/>

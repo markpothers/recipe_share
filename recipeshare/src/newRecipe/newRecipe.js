@@ -5,6 +5,7 @@ import { styles } from './newRecipeStyleSheet'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { times, doubleTimes } from '../dataComponents/times'
+import helpTexts from '../dataComponents/helpTexts'
 import { difficulties } from '../dataComponents/difficulties'
 import { postRecipe } from '../fetches/postRecipe'
 import { patchRecipe } from '../fetches/patchRecipe'
@@ -24,6 +25,9 @@ import NetInfo from '@react-native-community/netinfo';
 import { AlertPopUp } from '../alertPopUp/alertPopUp';
 import AppHeader from '../../navigation/appHeader'
 import { getTimeStringFromMinutes, getMinutesFromTimeString } from '../auxFunctions/getTimeStringFromMinutes'
+import SwitchSized from '../switchSized/switchSized'
+import { TextPopUp } from '../textPopUp/textPopUp'
+
 
 const mapStateToProps = (state) => ({
 	loggedInChef: state.loggedInChef
@@ -41,6 +45,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			renderOfflineMessage: false,
 			isFocused: true,
 			alertPopUpShowing: false,
+			helpShowing: false,
+			helpText: "",
 			ingredientsList: [],
 			autoCompleteFocused: null,
 			choosingPrimaryPicture: false,
@@ -48,30 +54,31 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			instructionImageIndex: 0,
 			filterDisplayed: false,
 			awaitingServer: false,
-			instructionHeights: [responsiveHeight(7.2)
+			instructionHeights: [
+				// responsiveHeight(7.2)
 				// , responsiveHeight(7.2),
 				// responsiveHeight(7.2),responsiveHeight(7.2),
 			],
-			averageInstructionHeight: responsiveHeight(7.2),
+			averageInstructionHeight: 0,
 			scrollingEnabled: true,
 			newRecipeDetails: {
 				recipeId: null,
 				name: "",
 				instructions: [
-					'',
+					// '',
 					// 'Pre heat oven to 450F...',
 					// 'Chop everything up so that it is small enough to fit into a small place',
 					// 'mix everything together with a liberal helping of mustard',
 					// 'drink all the beer you can to help you get through this pigswill',
 					// ''
 				],
-				instructionImages: [''],
+				instructionImages: [],
 				ingredients: [
-					{
-						name: "",
-						quantity: "",
-						unit: "Oz"
-					},
+					// {
+					// 	name: "",
+					// 	quantity: "",
+					// 	unit: "Oz"
+					// },
 					// {
 					//   name:"Flank steak",
 					//   quantity: "500",
@@ -138,8 +145,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				serves: "Any",
 				acknowledgement: "",
 				acknowledgementLink: "",
-				description: ""
+				description: "",
+				showBlogPreview: false
 			},
+			errors: []
 		}
 
 		componentDidMount = async () => {
@@ -147,8 +156,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			this.fetchIngredientsForAutoComplete()
 			//if we're editing a recipe
 			if (this.props.route.params?.recipe_details !== undefined) {
-				this.setRecipeParamsForEditing(this.props.route.params.recipe_details)
-				await this.setState({ awaitingServer: false })
+				// console.log(this.props.route.params?.recipe_details.recipe.id)
+				let savedEditingRecipe = JSON.parse(await AsyncStorage.getItem('localEditRecipeDetails'))
+				if (savedEditingRecipe && savedEditingRecipe.newRecipeDetails.recipeId == this.props.route.params?.recipe_details.recipe.id) {
+					// console.log(savedEditingRecipe.newRecipeDetails.recipeId)
+					this.setState({
+						...savedEditingRecipe,
+						awaitingServer: false
+					})
+				} else {
+					this.setRecipeParamsForEditing(this.props.route.params.recipe_details)
+					await this.setState({ awaitingServer: false })
+				}
 			} else {
 				//look to see if we're half way through creating a recipe
 				// AsyncStorage.removeItem('localNewRecipeDetails')
@@ -182,9 +201,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				instructionHeights: this.state.instructionHeights,
 				averageInstructionHeight: this.state.averageInstructionHeight
 			}
-			AsyncStorage.setItem('localNewRecipeDetails', JSON.stringify(dataToSave), () => {
-				// console.log('localNewRecipeDetails saved')
-			})
+			if (this.state.newRecipeDetails.recipeId) {
+				AsyncStorage.setItem('localEditRecipeDetails', JSON.stringify(dataToSave), () => {
+					// console.log('localEditRecipeDetails saved')
+				})
+			} else {
+				AsyncStorage.setItem('localNewRecipeDetails', JSON.stringify(dataToSave), () => {
+					// console.log('localNewRecipeDetails saved')
+				})
+			}
 		}
 
 		activateScrollView = () => {
@@ -220,9 +245,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				newRecipeDetails: {
 					recipeId: recipe.id,
 					name: recipe.name,
-					instructions: recipeDetails.instructions.length > 0 ? recipeDetails.instructions.map(i => i.instruction) : [""],
-					instructionImages: newInstructionImages.length > 0 ? newInstructionImages : [""],
-					ingredients: newIngredients.length > 0 ? newIngredients : [{ name: "", quantity: "", unit: "Oz" }],
+					instructions: recipeDetails.instructions.length > 0 ? recipeDetails.instructions.map(i => i.instruction) : [],
+					instructionImages: newInstructionImages.length > 0 ? newInstructionImages : [],
+					ingredients: newIngredients.length > 0 ? newIngredients : [],
 					difficulty: recipe.difficulty.toString(),
 					times: {
 						prepTime: recipe.prep_time > 0 ? recipe.prep_time : 0,
@@ -258,10 +283,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					serves: recipe.serves,
 					acknowledgement: recipe.acknowledgement,
 					acknowledgementLink: recipe.acknowledgement_link,
-					description: recipe.description
+					description: recipe.description,
+					showBlogPreview: recipe.show_blog_preview,
 				}
 			})
-			!this.state.newRecipeDetails.recipeId && this.saveNewRecipeDetailsLocally()
+			this.saveNewRecipeDetailsLocally()
 		}
 
 		askToReset = () => {
@@ -272,71 +298,80 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			return (
 				<AlertPopUp
 					close={() => this.setState({ alertPopUpShowing: false })}
-					title={"Are you sure you want to clear this form and start a new recipe?"}
+					title={(this.props.route.params?.recipe_details !== undefined ?
+						"Are you sure you want to clear your changes and revert to the original recipe" :
+						"Are you sure you want to clear this form and start a new recipe?"
+					)}
 					onYes={this.clearNewRecipeDetails}
 				/>
 			)
 		}
 
-		clearNewRecipeDetails = async () => {
-			await this.setState({
-				alertPopUpShowing: false,
-				newRecipeDetails: {
-					recipeId: null,
-					name: "",
-					instructions: [''],
-					instructionImages: [''],
-					ingredients: [
-						{
-							name: "",
-							quantity: "",
-							unit: "Oz"
+		clearNewRecipeDetails = async (resetToNewRecipe = false) => {
+			AsyncStorage.multiRemove(['localNewRecipeDetails', 'localEditRecipeDetails'])
+			if (resetToNewRecipe !== true && this.props.route.params?.recipe_details !== undefined) {
+				await this.setRecipeParamsForEditing(this.props.route.params.recipe_details)
+				this.setState({ alertPopUpShowing: false })
+			} else {
+				await this.setState({
+					alertPopUpShowing: false,
+					newRecipeDetails: {
+						recipeId: null,
+						name: "",
+						instructions: [],
+						instructionImages: [],
+						ingredients: [
+							// {
+							// 	name: "",
+							// 	quantity: "",
+							// 	unit: "Oz"
+							// },
+						],
+						difficulty: "0",
+						times: {
+							prepTime: 0,
+							cookTime: 0,
+							totalTime: 0,
 						},
-					],
-					difficulty: "0",
-					times: {
-						prepTime: 0,
-						cookTime: 0,
-						totalTime: 0,
+						primaryImages: [{ uri: '' }],
+						filter_settings: {
+							"Breakfast": false,
+							"Lunch": false,
+							"Dinner": false,
+							"Chicken": false,
+							"Red meat": false,
+							"Seafood": false,
+							"Vegetarian": false,
+							"Salad": false,
+							"Vegan": false,
+							"Soup": false,
+							"Dessert": false,
+							"Side": false,
+							"Whole 30": false,
+							"Paleo": false,
+							"Freezer meal": false,
+							"Keto": false,
+							"Weeknight": false,
+							"Weekend": false,
+							"Gluten free": false,
+							"Bread": false,
+							"Dairy free": false,
+							"White meat": false,
+						},
+						cuisine: "Any",
+						serves: "Any",
+						acknowledgement: "",
+						acknowledgementLink: "",
+						description: "",
+						showBlogPreview: false
 					},
-					primaryImages: [{ uri: '' }],
-					filter_settings: {
-						"Breakfast": false,
-						"Lunch": false,
-						"Dinner": false,
-						"Chicken": false,
-						"Red meat": false,
-						"Seafood": false,
-						"Vegetarian": false,
-						"Salad": false,
-						"Vegan": false,
-						"Soup": false,
-						"Dessert": false,
-						"Side": false,
-						"Whole 30": false,
-						"Paleo": false,
-						"Freezer meal": false,
-						"Keto": false,
-						"Weeknight": false,
-						"Weekend": false,
-						"Gluten free": false,
-						"Bread": false,
-						"Dairy free": false,
-						"White meat": false,
-					},
-					cuisine: "Any",
-					serves: "Any",
-					acknowledgement: "",
-					acknowledgementLink: "",
-					description: ""
-				},
-				instructionHeights: [responsiveHeight(6.5)],
-				averageInstructionHeight: responsiveHeight(6.5),
-			})
-			this.props.navigation.setOptions({
-				headerTitle: props => <AppHeader {...props} text={"Create a New Recipe"} route={this.props.route} />
-			});
-			AsyncStorage.removeItem('localNewRecipeDetails')
+					instructionHeights: [], //responsiveHeight(6.5)],
+					averageInstructionHeight: 0, //responsiveHeight(6.5),
+				})
+				this.props.navigation.setOptions({
+					headerTitle: props => <AppHeader {...props} text={"Create a New Recipe"} route={this.props.route} />
+				});
+			}
 		}
 
 		choosePrimaryPicture = () => {
@@ -372,7 +407,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			// } else {
 			// await this.setState({ awaitingServer: false })
 			// }
-			!this.state.newRecipeDetails.recipeId && this.saveNewRecipeDetailsLocally()
+			this.saveNewRecipeDetailsLocally()
 		}
 
 		thisAutocompleteIsFocused = (index) => {
@@ -401,7 +436,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					}
 				})
 			})
-			!this.state.newRecipeDetails.recipeId && this.saveNewRecipeDetailsLocally()
+			this.saveNewRecipeDetailsLocally()
 		}
 
 		handleIngredientSort = async (newIngredients) => {
@@ -413,7 +448,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					},
 				})
 			})
-			!this.state.newRecipeDetails.recipeId && this.saveNewRecipeDetailsLocally()
+			this.saveNewRecipeDetailsLocally()
 		}
 
 		addNewIngredient = () => {
@@ -426,7 +461,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				})
 			})
 			// }
-			!this.state.newRecipeDetails.recipeId && this.saveNewRecipeDetailsLocally()
+			this.saveNewRecipeDetailsLocally()
 		}
 
 		removeIngredient = async (index) => {
@@ -437,7 +472,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					newRecipeDetails: { ...state.newRecipeDetails, ingredients: newIngredients },
 				})
 			})
-			!this.state.newRecipeDetails.recipeId && this.saveNewRecipeDetailsLocally()
+			this.saveNewRecipeDetailsLocally()
 		}
 
 		handleInput = async (text, parameter) => {
@@ -446,7 +481,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					newRecipeDetails: { ...state.newRecipeDetails, [parameter]: text },
 				})
 			})
-			!this.state.newRecipeDetails.recipeId && this.saveNewRecipeDetailsLocally()
+			this.saveNewRecipeDetailsLocally()
 		}
 
 		submitRecipe = async () => {
@@ -476,13 +511,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							newRecipeDetails.recipeId,
 							newRecipeDetails.acknowledgement,
 							newRecipeDetails.acknowledgementLink,
-							newRecipeDetails.description
+							newRecipeDetails.description,
+							newRecipeDetails.showBlogPreview,
 						)
 						if (recipe) {
-							// this.clearNewRecipeDetails()
-							// AsyncStorage.removeItem('localNewRecipeDetails')
-							this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
-							this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes' })
+							if (recipe.error) {
+								this.setState({ errors: recipe.message })
+							} else {
+								this.clearNewRecipeDetails(true)
+								this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
+								this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes' })
+							}
 						}
 					} catch (e) {
 						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
@@ -507,13 +546,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							newRecipeDetails.serves,
 							newRecipeDetails.acknowledgement,
 							newRecipeDetails.acknowledgementLink,
-							newRecipeDetails.description
+							newRecipeDetails.description,
+							newRecipeDetails.showBlogPreview,
 						)
 						if (recipe) {
-							this.clearNewRecipeDetails()
-							this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
-							this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes' })
-
+							if (recipe.error) {
+								this.setState({ errors: recipe.message })
+							} else {
+								this.clearNewRecipeDetails()
+								this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
+								this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes' })
+							}
 						}
 					} catch (e) {
 						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
@@ -528,7 +571,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		handleCategoriesButton = async () => {
 			await this.setState({ filterDisplayed: !this.state.filterDisplayed })
-			!this.state.newRecipeDetails.recipeId && this.saveNewRecipeDetailsLocally()
+			this.saveNewRecipeDetailsLocally()
 		}
 
 		handleInstructionChange = (text, index) => {
@@ -541,7 +584,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					instructionHeights: newInstructionHeights
 				})
 			})
-			!this.state.newRecipeDetails.recipeId && this.saveNewRecipeDetailsLocally()
+			this.saveNewRecipeDetailsLocally()
 		}
 
 		handleInstructionSizeChange = (index, size) => {
@@ -574,7 +617,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					instructionHeights: newInstructionHeights,
 				})
 			})
-			!this.state.newRecipeDetails.recipeId && this.saveNewRecipeDetailsLocally()
+			this.saveNewRecipeDetailsLocally()
 		}
 
 		addNewInstruction = () => {
@@ -608,7 +651,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				newInstructionHeights.splice(index, 1)
 				let newInstructionImages = [...state.newRecipeDetails.instructionImages]
 				newInstructionImages.splice(index, 1)
-				let newAverageInstructionHeight = newInstructionHeights.reduce((acc, h) => acc + h, 0) / newInstructionHeights.length
+				let newAverageInstructionHeight = newInstructionHeights.length > 0 ? newInstructionHeights.reduce((acc, h) => acc + h, 0) / newInstructionHeights.length : 0
 				return ({
 					newRecipeDetails: {
 						...state.newRecipeDetails,
@@ -619,7 +662,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					averageInstructionHeight: newAverageInstructionHeight
 				})
 			})
-			!this.state.newRecipeDetails.recipeId && this.saveNewRecipeDetailsLocally()
+			this.saveNewRecipeDetailsLocally()
 		}
 
 		chooseInstructionPicture = (index) => {
@@ -631,7 +674,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		instructionSourceChosen = async () => {
 			await this.setState({ choosingInstructionPicture: false })
-			!this.state.newRecipeDetails.recipeId && this.saveNewRecipeDetailsLocally()
+			this.saveNewRecipeDetailsLocally()
 		}
 
 		renderInstructionPictureChooser = () => {
@@ -665,7 +708,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						awaitingServer: false,
 					})
 				})
-				!this.state.newRecipeDetails.recipeId && this.saveNewRecipeDetailsLocally()
+				this.saveNewRecipeDetailsLocally()
 			}
 			else {
 				await this.setState({ awaitingServer: false })
@@ -685,7 +728,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					awaitingServer: false,
 				})
 			})
-			!this.state.newRecipeDetails.recipeId && this.saveNewRecipeDetailsLocally()
+			this.saveNewRecipeDetailsLocally()
 		}
 
 		toggleFilterCategory = (category) => {
@@ -715,8 +758,48 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			})
 		}
 
+		renderErrors = () => {
+			if (typeof this.state.errors == 'string') {
+				return (
+					<View style={centralStyles.formErrorView}>
+						<Text
+							testID={'invalidErrorMessage'}
+							maxFontSizeMultiplier={2}
+							style={centralStyles.formErrorText}
+						>
+							{this.state.errors}
+						</Text>
+					</View>
+				)
+			} else {
+				return (
+					this.state.errors.map(errorMessage => (
+						<View style={centralStyles.formErrorView} key={errorMessage}>
+							<Text
+								testID={'invalidErrorMessage'}
+								maxFontSizeMultiplier={2}
+								style={centralStyles.formErrorText}
+							>
+								{errorMessage}
+							</Text>
+						</View>
+					))
+				)
+			}
+		}
+
+		renderHelp = () => {
+			return (
+				<TextPopUp
+					close={() => this.setState({ helpShowing: false })}
+					title={`Help - ${this.state.helpText.title}`}
+					text={this.state.helpText.text}
+				/>
+			)
+		}
+
 		render() {
-			// console.log(getTimeStringFromMinutes(this.state.newRecipeDetails.times?.totalTime))
+			// console.log(this.state.errors)
 			return (
 				<SpinachAppContainer awaitingServer={this.state.awaitingServer} scrollingEnabled={false} >
 					{
@@ -746,6 +829,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					{this.state.choosingPrimaryPicture && this.renderPrimaryPictureChooser()}
 					{this.state.choosingInstructionPicture && this.renderInstructionPictureChooser()}
 					{this.state.alertPopUpShowing && this.renderAlertPopUp()}
+					{this.state.helpShowing && this.renderHelp()}
 					< KeyboardAvoidingView
 						style={centralStyles.fullPageKeyboardAvoidingView}
 						behavior={(Platform.OS === "ios" ? "padding" : "")}
@@ -765,6 +849,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							>
 								{/* recipe name */}
 								<View style={centralStyles.formSection}>
+									<View style={[centralStyles.formInputContainer, { justifyContent: 'center', marginTop: responsiveHeight(1) }]}>
+										<View style={[styles.timeAndDifficultyTitleItem, styles.sectionTitle]}>
+											<Text maxFontSizeMultiplier={1.7} style={[styles.timeAndDifficultyTitle, { fontWeight: 'bold' }]}>Recipe Name</Text>
+										</View>
+										<TouchableOpacity
+											style={[centralStyles.helpButton, { right: responsiveWidth(10) }]}
+											activeOpacity={0.7}
+											onPress={() => this.setState({ helpShowing: true, helpText: helpTexts.recipeName })}
+										>
+											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(3)} name='help'></Icon>
+										</TouchableOpacity>
+									</View>
 									<View style={centralStyles.formInputContainer}>
 										<View style={centralStyles.formInputWhiteBackground}>
 											<TextInput
@@ -784,11 +880,23 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								</View>
 								{/* times */}
 								<View style={centralStyles.formSection}>
-									<View style={[centralStyles.formInputContainer, { justifyContent: 'flex-start' }]}>
-										<View style={styles.timeAndDifficultyTitleItem}>
-											<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Prep Time:</Text>
+									<View style={[centralStyles.formInputContainer, { justifyContent: 'center' }]}>
+										<View style={[styles.timeAndDifficultyTitleItem, styles.sectionTitle]}>
+											<Text maxFontSizeMultiplier={1.7} style={[styles.timeAndDifficultyTitle, { fontWeight: 'bold' }]}>Timings</Text>
 										</View>
-										<View picker style={[styles.timeAndDifficulty, { paddingLeft: (Platform.OS === 'ios' ? 0 : responsiveWidth(2)) }]} >
+										<TouchableOpacity
+											style={[centralStyles.helpButton, { right: responsiveWidth(10) }]}
+											activeOpacity={0.7}
+											onPress={() => this.setState({ helpShowing: true, helpText: helpTexts.timings })}
+										>
+											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(3)} name='help'></Icon>
+										</TouchableOpacity>
+									</View>
+									<View style={[centralStyles.formInputContainer]}>
+										<View style={styles.timeAndDifficultyTitleItem}>
+											<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Prep Time (optional):</Text>
+										</View>
+										<View picker style={styles.timeAndDifficulty} >
 											<DualOSPicker
 												onChoiceChange={(choice) => {
 													let newTimes = {
@@ -803,11 +911,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											/>
 										</View>
 									</View>
-									<View style={[centralStyles.formInputContainer, { justifyContent: 'flex-start' }]}>
+									<View style={[centralStyles.formInputContainer]}>
 										<View style={styles.timeAndDifficultyTitleItem}>
-											<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Cook Time:</Text>
+											<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Cook Time (optional):</Text>
 										</View>
-										<View picker style={[styles.timeAndDifficulty, { paddingLeft: (Platform.OS === 'ios' ? 0 : responsiveWidth(2)) }]} >
+										<View picker style={styles.timeAndDifficulty} >
 											<DualOSPicker
 												onChoiceChange={(choice) => {
 													let newTimes = {
@@ -822,11 +930,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											/>
 										</View>
 									</View>
-									<View style={[centralStyles.formInputContainer, { justifyContent: 'flex-start' }]}>
+									<View style={[centralStyles.formInputContainer]}>
 										<View style={styles.timeAndDifficultyTitleItem}>
 											<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Total Time:</Text>
 										</View>
-										<View picker style={[styles.timeAndDifficulty, { paddingLeft: (Platform.OS === 'ios' ? 0 : responsiveWidth(2)) }]} >
+										<View picker style={styles.timeAndDifficulty} >
 											<DualOSPicker
 												onChoiceChange={(choice) => {
 													let newTimes = {
@@ -849,11 +957,23 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								</View>
 								{/* difficulty */}
 								<View style={centralStyles.formSection}>
-									<View style={[centralStyles.formInputContainer, { justifyContent: 'flex-start' }]}>
-										<View style={styles.timeAndDifficultyTitleItem}>
-											<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Difficulty:</Text>
+									<View style={[centralStyles.formInputContainer, { justifyContent: 'center' }]}>
+										<View style={[styles.timeAndDifficultyTitleItem, styles.sectionTitle]}>
+											<Text maxFontSizeMultiplier={1.7} style={[styles.timeAndDifficultyTitle, { fontWeight: 'bold' }]}>Difficulty</Text>
 										</View>
-										<View style={[styles.timeAndDifficulty, { paddingLeft: (Platform.OS === 'ios' ? 0 : responsiveWidth(2)) }]}>
+										<TouchableOpacity
+											style={[centralStyles.helpButton, { right: responsiveWidth(10) }]}
+											activeOpacity={0.7}
+											onPress={() => this.setState({ helpShowing: true, helpText: helpTexts.difficulty })}
+										>
+											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(3)} name='help'></Icon>
+										</TouchableOpacity>
+									</View>
+									<View style={[centralStyles.formInputContainer]}>
+										<View style={styles.timeAndDifficultyTitleItem}>
+											<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Difficulty (optional):</Text>
+										</View>
+										<View style={styles.timeAndDifficulty}>
 											<DualOSPicker
 												onChoiceChange={(choice) => this.handleInput(choice, "difficulty")}
 												options={difficulties}
@@ -867,6 +987,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									</View>
 								</View>
 								{/* description */}
+								<View style={[centralStyles.formInputContainer, { justifyContent: 'center' }]}>
+									<View style={[styles.timeAndDifficultyTitleItem, styles.sectionTitle]}>
+										<Text maxFontSizeMultiplier={1.7} style={[styles.timeAndDifficultyTitle, { fontWeight: 'bold' }]}>About</Text>
+									</View>
+									<TouchableOpacity
+										style={[centralStyles.helpButton, { right: responsiveWidth(10) }]}
+										activeOpacity={0.7}
+										onPress={() => this.setState({ helpShowing: true, helpText: helpTexts.about })}
+									>
+										<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(3)} name='help'></Icon>
+									</TouchableOpacity>
+								</View>
 								<View style={centralStyles.formSection}>
 									<View style={centralStyles.formInputContainer}>
 										<View style={centralStyles.formInputWhiteBackground}>
@@ -876,7 +1008,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 												maxFontSizeMultiplier={2}
 												style={[centralStyles.formInput, { padding: responsiveHeight(0.5) }]}
 												value={this.state.newRecipeDetails.description}
-												placeholder="Tell us about this recipe"
+												placeholder="Tell us about this recipe (optional; if you leave this section blank, it won't be displayed)"
 												onChangeText={(t) => this.handleInput(t, "description")} />
 										</View>
 									</View>
@@ -887,11 +1019,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									</View>
 								</View>
 								{/* main pictures*/}
-								<View style={[centralStyles.formSection, { width: responsiveWidth(80) }]}>
+								<View style={centralStyles.formSection}>
 									<View style={[centralStyles.formInputContainer, { justifyContent: 'center' }]}>
-										<TouchableOpacity style={[centralStyles.yellowRectangleButton, { maxWidth: '75%', width: '75%', justifyContent: 'center' }]} activeOpacity={0.7} onPress={this.choosePrimaryPicture}>
+										<TouchableOpacity style={[centralStyles.yellowRectangleButton, styles.addButton]} activeOpacity={0.7} onPress={this.choosePrimaryPicture}>
 											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='camera'></Icon>
 											<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { marginLeft: responsiveWidth(3), fontSize: responsiveFontSize(2.3) }]}>Cover Pictures</Text>
+										</TouchableOpacity>
+										<TouchableOpacity
+											style={[centralStyles.helpButton, { right: responsiveWidth(10) }]}
+											activeOpacity={0.7}
+											onPress={() => this.setState({ helpShowing: true, helpText: helpTexts.coverPictures })}
+										>
+											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(3)} name='help'></Icon>
 										</TouchableOpacity>
 									</View>
 								</View>
@@ -905,7 +1044,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									style={[
 										centralStyles.formSection,
 										this.state.autoCompleteFocused !== null && { zIndex: 1 },
-										{ paddingBottom: responsiveHeight(3.5) }
+										{ paddingBottom: responsiveHeight(10) }
 									]}
 								>
 									<DragSortableView
@@ -944,14 +1083,22 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 										}}
 									/>
 									<View style={styles.plusButtonContainer}>
-										<TouchableOpacity style={styles.plusButton} onPress={this.addNewIngredient}>
+										<TouchableOpacity style={[centralStyles.yellowRectangleButton, styles.addButton]} activeOpacity={0.7} onPress={this.addNewIngredient}>
 											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(5)} name='plus'></Icon>
+											<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { marginLeft: responsiveWidth(3), fontSize: responsiveFontSize(2.3) }]}>Add ingredient</Text>
+										</TouchableOpacity>
+										<TouchableOpacity
+											style={[centralStyles.helpButton, { right: responsiveWidth(10) }]}
+											activeOpacity={0.7}
+											onPress={() => this.setState({ helpShowing: true, helpText: helpTexts.ingredients })}
+										>
+											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(3)} name='help'></Icon>
 										</TouchableOpacity>
 									</View>
 								</View>
 								{/* separator */}
 								<View style={[centralStyles.formSectionSeparatorContainer
-									, { marginTop: -responsiveHeight(2.7) }
+									, { marginTop: -responsiveHeight(9.2) }
 								]}>
 									<View style={centralStyles.formSectionSeparator}>
 									</View>
@@ -992,8 +1139,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 										}}
 									/>
 									<View style={styles.plusButtonContainer}>
-										<TouchableOpacity style={styles.plusButton} onPress={this.addNewInstruction}>
+										<TouchableOpacity style={[centralStyles.yellowRectangleButton, styles.addButton]} activeOpacity={0.7} onPress={this.addNewInstruction}>
 											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(5)} name='plus'></Icon>
+											<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { marginLeft: responsiveWidth(3), fontSize: responsiveFontSize(2.3) }]}>Add instruction</Text>
+										</TouchableOpacity>
+										<TouchableOpacity
+											style={[centralStyles.helpButton, { right: responsiveWidth(10) }]}
+											activeOpacity={0.7}
+											onPress={() => this.setState({ helpShowing: true, helpText: helpTexts.instructions })}
+										>
+											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(3)} name='help'></Icon>
 										</TouchableOpacity>
 									</View>
 								</View>
@@ -1003,11 +1158,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									</View>
 								</View>
 								{/* filter categories*/}
-								<View style={[centralStyles.formSection, { width: responsiveWidth(80) }]}>
+								<View style={centralStyles.formSection}>
 									<View style={[centralStyles.formInputContainer, { justifyContent: 'center' }]}>
-										<TouchableOpacity style={[centralStyles.yellowRectangleButton, { maxWidth: '75%', width: '75%', justifyContent: 'center' }]} activeOpacity={0.7} onPress={this.handleCategoriesButton}>
+										<TouchableOpacity style={[centralStyles.yellowRectangleButton, styles.addButton]} activeOpacity={0.7} onPress={this.handleCategoriesButton}>
 											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='filter'></Icon>
 											<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { marginLeft: responsiveWidth(3), fontSize: responsiveFontSize(2.3) }]}>Filter categories</Text>
+										</TouchableOpacity>
+										<TouchableOpacity
+											style={[centralStyles.helpButton, { right: responsiveWidth(10) }]}
+											activeOpacity={0.7}
+											onPress={() => this.setState({ helpShowing: true, helpText: helpTexts.filterCategories })}
+										>
+											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(3)} name='help'></Icon>
 										</TouchableOpacity>
 									</View>
 								</View>
@@ -1018,6 +1180,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								</View>
 								{/* acknowledgement */}
 								<View style={centralStyles.formSection}>
+									<View style={[centralStyles.formInputContainer, { justifyContent: 'center' }]}>
+										<View style={[styles.timeAndDifficultyTitleItem, styles.sectionTitle]}>
+											<Text maxFontSizeMultiplier={1.7} style={[styles.timeAndDifficultyTitle, { fontWeight: 'bold' }]}>Acknowledgement</Text>
+										</View>
+										<TouchableOpacity
+											style={[centralStyles.helpButton, { right: responsiveWidth(10) }]}
+											activeOpacity={0.7}
+											onPress={() => this.setState({ helpShowing: true, helpText: helpTexts.acknowledgement })}
+										>
+											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(3)} name='help'></Icon>
+										</TouchableOpacity>
+									</View>
 									<View style={centralStyles.formInputContainer}>
 										<View style={centralStyles.formInputWhiteBackground}>
 											<TextInput
@@ -1039,8 +1213,28 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 												style={centralStyles.formInput}
 												value={this.state.newRecipeDetails.acknowledgementLink}
 												placeholder="Include a link to the original book or blog"
-												onChangeText={(t) => this.handleInput(t, "acknowledgementLink")} />
+												onChangeText={(t) => this.handleInput(t, "acknowledgementLink")}
+												autoCapitalize={"none"}
+											/>
 										</View>
+									</View>
+									<View style={centralStyles.formInputContainer}>
+										<View style={[styles.timeAndDifficultyTitleItem, { width: responsiveWidth(79) - responsiveHeight(4) }]}>
+											<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Show blog preview:</Text>
+										</View>
+										<View style={styles.switchContainer}>
+											<SwitchSized
+												value={this.state.newRecipeDetails.showBlogPreview}
+												onValueChange={(value) => this.handleInput(value, "showBlogPreview")}
+											/>
+										</View>
+										<TouchableOpacity
+											style={[centralStyles.helpButton, { right: responsiveWidth(0), position: 'relative' }]}
+											activeOpacity={0.7}
+											onPress={() => this.setState({ helpShowing: true, helpText: helpTexts.acknowledgementLink })}
+										>
+											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(3)} name='help'></Icon>
+										</TouchableOpacity>
 									</View>
 								</View>
 								{/* separator */}
@@ -1048,12 +1242,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									<View style={centralStyles.formSectionSeparator}>
 									</View>
 								</View>
+								{/* errors */}
+								{this.state.errors.length > 0 && this.renderErrors()}
 								{/* submit */}
 								<View style={[centralStyles.formSection, { width: responsiveWidth(80) }]}>
 									<View style={centralStyles.formInputContainer}>
 										<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={this.askToReset} disabled={this.state.awaitingServer}>
 											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='alert-circle-outline'></Icon>
-											<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { fontSize: responsiveFontSize(2.2) }]}>Clear</Text>
+											<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { fontSize: responsiveFontSize(2.2) }]}>{(this.props.route.params?.recipe_details !== undefined ? 'Reset' : 'Clear')}</Text>
 										</TouchableOpacity>
 										<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={e => this.submitRecipe(e)} disabled={this.state.awaitingServer}>
 											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='login'></Icon>
