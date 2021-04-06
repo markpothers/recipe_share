@@ -79,9 +79,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		componentDidMount = async () => {
-			await this.setState({ awaitingServer: true })
+			this.setState(state => ({awaitingServer: true }))
 			await this.fetchChefList()
-			await this.setState({ awaitingServer: false })
+			this.setState(state => ({awaitingServer: false}))
 			this.props.navigation.addListener('focus', this.respondToFocus)
 			this.props.navigation.addListener('blur', this.respondToBlur)
 		}
@@ -104,7 +104,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				isDisplayed: true
 			})
 			await this.fetchChefList()
-			await this.setState({ awaitingServer: false })
+			this.setState(state => ({awaitingServer: false}))
 		}
 
 		respondToBlur = () => {
@@ -140,7 +140,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		fetchAdditionalChefs = async () => {
-			await this.setState({ awaitingServer: true })
+			this.setState(state => ({awaitingServer: true }))
 			try {
 				const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
 				const new_chefs = await getChefList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.loggedInChef.auth_token, this.state.searchTerm)
@@ -150,7 +150,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 				// console.log('failed to get ADDITIONAL chefs')
 			}
-			await this.setState({ awaitingServer: false })
+			this.setState(state => ({awaitingServer: false}))
 		}
 
 		renderChefListItem = (item) => {
@@ -169,7 +169,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		followChef = async (followee_id) => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				await this.setState({ awaitingServer: true })
+				this.setState(state => ({awaitingServer: true }))
 				try {
 					const followPosted = await postFollow(this.props.loggedInChef.id, followee_id, this.props.loggedInChef.auth_token)
 					if (followPosted) {
@@ -188,7 +188,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					this.setState({ awaitingServer: false })
 				}
-				await this.setState({ awaitingServer: false })
+				this.setState(state => ({awaitingServer: false}))
 			} else {
 				this.setState({ renderOfflineMessage: true })
 			}
@@ -197,7 +197,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		unFollowChef = async (followee_id) => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				await this.setState({ awaitingServer: true })
+				this.setState(state => ({awaitingServer: true }))
 				try {
 					const followPosted = await destroyFollow(this.props.loggedInChef.id, followee_id, this.props.loggedInChef.auth_token)
 					if (followPosted) {
@@ -216,7 +216,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					this.setState({ awaitingServer: false })
 				}
-				await this.setState({ awaitingServer: false })
+				this.setState(state => ({awaitingServer: false}))
 			} else {
 				this.setState({ renderOfflineMessage: true })
 			}
@@ -238,13 +238,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		navigateToChefDetails = async (chefID) => {
 			// console.log('parent navigator?')
 			// console.log(this.props)
-			await this.setState({ awaitingServer: true })
+			this.setState(state => ({awaitingServer: true }))
 			try {
 				const chefDetails = await getChefDetails(chefID, this.props.loggedInChef.auth_token)
 				if (chefDetails) {
 					this.props.storeChefDetails(chefDetails)
 					saveChefDetailsLocally(chefDetails, this.props.loggedInChef.id)
-					await this.setState({ awaitingServer: false })
+					this.setState(state => ({awaitingServer: false}))
 					this.props.navigation.push('ChefDetails', { chefID: chefID })
 				}
 			} catch (e) {
@@ -278,7 +278,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						})
 					}
 				})
-				await this.setState({ awaitingServer: false })
+				this.setState(state => ({awaitingServer: false}))
 			}
 		}
 

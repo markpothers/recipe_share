@@ -152,7 +152,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		componentDidMount = async () => {
-			await this.setState({ awaitingServer: true })
+			this.setState(() => ({ awaitingServer: true }))
 			this.fetchIngredientsForAutoComplete()
 			//if we're editing a recipe
 			if (this.props.route.params?.recipe_details !== undefined) {
@@ -166,7 +166,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					})
 				} else {
 					this.setRecipeParamsForEditing(this.props.route.params.recipe_details)
-					await this.setState({ awaitingServer: false })
+					this.setState(() => ({ awaitingServer: false }))
 				}
 			} else {
 				//look to see if we're half way through creating a recipe
@@ -396,7 +396,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		savePrimaryImage = async (newImages) => {
-			// await this.setState({ awaitingServer: true })
+			// this.setState(state => ({awaitingServer: true }))
 			// if (!newImages[index].cancelled) {
 			await this.setState((state) => {
 				return ({
@@ -405,7 +405,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				})
 			})
 			// } else {
-			// await this.setState({ awaitingServer: false })
+			// this.setState(state => ({awaitingServer: false}))
 			// }
 			this.saveNewRecipeDetailsLocally()
 		}
@@ -489,7 +489,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			Keyboard.dismiss()
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				await this.setState({ awaitingServer: true })
+				this.setState(() => ({ awaitingServer: true }))
 				let newRecipeDetails = this.state.newRecipeDetails
 				if (newRecipeDetails.recipeId) { // it's an existing recipe we're updating
 					try {
@@ -563,7 +563,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.setState({ renderOfflineMessage: true })
 					}
 				}
-				await this.setState({ awaitingServer: false })
+				this.setState(() => ({ awaitingServer: false }))
 			} else {
 				this.setState({ renderOfflineMessage: true })
 			}
@@ -694,7 +694,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		saveInstructionImage = async (image, index) => {
-			await this.setState({ awaitingServer: true })
+			this.setState(() => ({ awaitingServer: true }))
 			if (image.cancelled === false) {
 				await this.setState((state) => {
 					let newInstructionImages = [...state.newRecipeDetails.instructionImages]
@@ -711,7 +711,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				this.saveNewRecipeDetailsLocally()
 			}
 			else {
-				await this.setState({ awaitingServer: false })
+				this.setState(() => ({ awaitingServer: false }))
 			}
 		}
 
@@ -878,114 +878,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									<View style={centralStyles.formSectionSeparator}>
 									</View>
 								</View>
-								{/* times */}
-								<View style={centralStyles.formSection}>
-									<View style={[centralStyles.formInputContainer, { justifyContent: 'center' }]}>
-										<View style={[styles.timeAndDifficultyTitleItem, styles.sectionTitle]}>
-											<Text maxFontSizeMultiplier={1.7} style={[styles.timeAndDifficultyTitle, { fontWeight: 'bold' }]}>Timings</Text>
-										</View>
-										<TouchableOpacity
-											style={[centralStyles.helpButton, { right: responsiveWidth(10) }]}
-											activeOpacity={0.7}
-											onPress={() => this.setState({ helpShowing: true, helpText: helpTexts.timings })}
-										>
-											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(3)} name='help'></Icon>
-										</TouchableOpacity>
-									</View>
-									<View style={[centralStyles.formInputContainer]}>
-										<View style={styles.timeAndDifficultyTitleItem}>
-											<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Prep Time (optional):</Text>
-										</View>
-										<View picker style={styles.timeAndDifficulty} >
-											<DualOSPicker
-												onChoiceChange={(choice) => {
-													let newTimes = {
-														prepTime: getMinutesFromTimeString(choice),
-														cookTime: this.state.newRecipeDetails.times?.cookTime ?? 0,
-														totalTime: getMinutesFromTimeString(choice) + (this.state.newRecipeDetails.times?.cookTime ?? 0)
-													}
-													this.handleInput(newTimes, "times")
-												}}
-												options={times}
-												selectedChoice={getTimeStringFromMinutes(this.state.newRecipeDetails.times?.prepTime)}
-											/>
-										</View>
-									</View>
-									<View style={[centralStyles.formInputContainer]}>
-										<View style={styles.timeAndDifficultyTitleItem}>
-											<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Cook Time (optional):</Text>
-										</View>
-										<View picker style={styles.timeAndDifficulty} >
-											<DualOSPicker
-												onChoiceChange={(choice) => {
-													let newTimes = {
-														prepTime: this.state.newRecipeDetails.times?.prepTime ?? 0,
-														cookTime: getMinutesFromTimeString(choice),
-														totalTime: getMinutesFromTimeString(choice) + (this.state.newRecipeDetails.times?.prepTime ?? 0)
-													}
-													this.handleInput(newTimes, "times")
-												}}
-												options={times}
-												selectedChoice={getTimeStringFromMinutes(this.state.newRecipeDetails.times?.cookTime)}
-											/>
-										</View>
-									</View>
-									<View style={[centralStyles.formInputContainer]}>
-										<View style={styles.timeAndDifficultyTitleItem}>
-											<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Total Time:</Text>
-										</View>
-										<View picker style={styles.timeAndDifficulty} >
-											<DualOSPicker
-												onChoiceChange={(choice) => {
-													let newTimes = {
-														prepTime: this.state.newRecipeDetails.times?.prepTime ?? 0,
-														cookTime: this.state.newRecipeDetails.times?.cookTime ?? 0,
-														totalTime: getMinutesFromTimeString(choice)
-													}
-													this.handleInput(newTimes, "times")
-												}}
-												options={[...times, ...doubleTimes]}
-												selectedChoice={getTimeStringFromMinutes(this.state.newRecipeDetails.times?.totalTime)}
-											/>
-										</View>
-									</View>
-								</View>
-								{/* separator */}
-								<View style={centralStyles.formSectionSeparatorContainer}>
-									<View style={centralStyles.formSectionSeparator}>
-									</View>
-								</View>
-								{/* difficulty */}
-								<View style={centralStyles.formSection}>
-									<View style={[centralStyles.formInputContainer, { justifyContent: 'center' }]}>
-										<View style={[styles.timeAndDifficultyTitleItem, styles.sectionTitle]}>
-											<Text maxFontSizeMultiplier={1.7} style={[styles.timeAndDifficultyTitle, { fontWeight: 'bold' }]}>Difficulty</Text>
-										</View>
-										<TouchableOpacity
-											style={[centralStyles.helpButton, { right: responsiveWidth(10) }]}
-											activeOpacity={0.7}
-											onPress={() => this.setState({ helpShowing: true, helpText: helpTexts.difficulty })}
-										>
-											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(3)} name='help'></Icon>
-										</TouchableOpacity>
-									</View>
-									<View style={[centralStyles.formInputContainer]}>
-										<View style={styles.timeAndDifficultyTitleItem}>
-											<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Difficulty (optional):</Text>
-										</View>
-										<View style={styles.timeAndDifficulty}>
-											<DualOSPicker
-												onChoiceChange={(choice) => this.handleInput(choice, "difficulty")}
-												options={difficulties}
-												selectedChoice={this.state.newRecipeDetails.difficulty} />
-										</View>
-									</View>
-								</View>
-								{/* separator */}
-								<View style={centralStyles.formSectionSeparatorContainer}>
-									<View style={centralStyles.formSectionSeparator}>
-									</View>
-								</View>
 								{/* description */}
 								<View style={[centralStyles.formInputContainer, { justifyContent: 'center' }]}>
 									<View style={[styles.timeAndDifficultyTitleItem, styles.sectionTitle]}>
@@ -1039,117 +931,107 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									<View style={centralStyles.formSectionSeparator}>
 									</View>
 								</View>
-								{/* ingredients */}
-								<View
-									style={[
-										centralStyles.formSection,
-										this.state.autoCompleteFocused !== null && { zIndex: 1 },
-										{ paddingBottom: responsiveHeight(10) }
-									]}
-								>
-									<DragSortableView
-										dataSource={this.state.newRecipeDetails.ingredients}
-										parentWidth={responsiveWidth(100)}
-										childrenWidth={responsiveWidth(100)}
-										childrenHeight={responsiveHeight(12.5)}
-										reverseChildZIndexing={true}
-										marginChildrenTop={responsiveHeight(0.5)}
-										onDataChange={(newIngredients) => this.handleIngredientSort(newIngredients)}
-										onClickItem={() => {
-											if (this.state.autoCompleteFocused !== null) {
-												this.setState({ autoCompleteFocused: null })
-											}
-											Keyboard.dismiss()
-										}}
-										onDragStart={this.deactivateScrollView}
-										onDragEnd={this.activateScrollView}
-										delayLongPress={200}
-										keyExtractor={(item, index) => `${index}`}
-										renderItem={(item, index) => {
-											return (
-												<IngredientAutoComplete
-													removeIngredient={this.removeIngredient}
-													// key={index}
-													ingredientIndex={index}
-													ingredient={item}
-													ingredientsList={this.state.ingredientsList}
-													focused={this.state.autoCompleteFocused}
-													index={index}
-													ingredientsLength={this.state.newRecipeDetails.ingredients.length}
-													thisAutocompleteIsFocused={this.thisAutocompleteIsFocused}
-													updateIngredientEntry={this.updateIngredientEntry}
-												/>
-											)
-										}}
-									/>
-									<View style={styles.plusButtonContainer}>
-										<TouchableOpacity style={[centralStyles.yellowRectangleButton, styles.addButton]} activeOpacity={0.7} onPress={this.addNewIngredient}>
-											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(5)} name='plus'></Icon>
-											<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { marginLeft: responsiveWidth(3), fontSize: responsiveFontSize(2.3) }]}>Add ingredient</Text>
-										</TouchableOpacity>
+								{/* times */}
+								<View style={centralStyles.formSection}>
+									<View style={[centralStyles.formInputContainer, { justifyContent: 'center' }]}>
+										<View style={[styles.timeAndDifficultyTitleItem, styles.sectionTitle]}>
+											<Text maxFontSizeMultiplier={1.7} style={[styles.timeAndDifficultyTitle, { fontWeight: 'bold' }]}>Timings</Text>
+										</View>
 										<TouchableOpacity
 											style={[centralStyles.helpButton, { right: responsiveWidth(10) }]}
 											activeOpacity={0.7}
-											onPress={() => this.setState({ helpShowing: true, helpText: helpTexts.ingredients })}
+											onPress={() => this.setState({ helpShowing: true, helpText: helpTexts.timings })}
 										>
 											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(3)} name='help'></Icon>
 										</TouchableOpacity>
+									</View>
+									<View style={centralStyles.formInputContainer}>
+										<View style={styles.timeAndDifficultyTitleItem}>
+											<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Prep Time (optional):</Text>
+										</View>
+										<View picker style={styles.timeAndDifficulty} >
+											<DualOSPicker
+												onChoiceChange={(choice) => {
+													let newTimes = {
+														prepTime: getMinutesFromTimeString(choice),
+														cookTime: this.state.newRecipeDetails.times?.cookTime ?? 0,
+														totalTime: getMinutesFromTimeString(choice) + (this.state.newRecipeDetails.times?.cookTime ?? 0)
+													}
+													this.handleInput(newTimes, "times")
+												}}
+												options={times}
+												selectedChoice={getTimeStringFromMinutes(this.state.newRecipeDetails.times?.prepTime)}
+											/>
+										</View>
+									</View>
+									<View style={centralStyles.formInputContainer}>
+										<View style={styles.timeAndDifficultyTitleItem}>
+											<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Cook Time (optional):</Text>
+										</View>
+										<View picker style={styles.timeAndDifficulty} >
+											<DualOSPicker
+												onChoiceChange={(choice) => {
+													let newTimes = {
+														prepTime: this.state.newRecipeDetails.times?.prepTime ?? 0,
+														cookTime: getMinutesFromTimeString(choice),
+														totalTime: getMinutesFromTimeString(choice) + (this.state.newRecipeDetails.times?.prepTime ?? 0)
+													}
+													this.handleInput(newTimes, "times")
+												}}
+												options={times}
+												selectedChoice={getTimeStringFromMinutes(this.state.newRecipeDetails.times?.cookTime)}
+											/>
+										</View>
+									</View>
+									<View style={centralStyles.formInputContainer}>
+										<View style={styles.timeAndDifficultyTitleItem}>
+											<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Total Time:</Text>
+										</View>
+										<View picker style={styles.timeAndDifficulty} >
+											<DualOSPicker
+												onChoiceChange={(choice) => {
+													let newTimes = {
+														prepTime: this.state.newRecipeDetails.times?.prepTime ?? 0,
+														cookTime: this.state.newRecipeDetails.times?.cookTime ?? 0,
+														totalTime: getMinutesFromTimeString(choice)
+													}
+													this.handleInput(newTimes, "times")
+												}}
+												options={[...times, ...doubleTimes]}
+												selectedChoice={getTimeStringFromMinutes(this.state.newRecipeDetails.times?.totalTime)}
+											/>
+										</View>
 									</View>
 								</View>
 								{/* separator */}
-								<View style={[centralStyles.formSectionSeparatorContainer
-									, { marginTop: -responsiveHeight(9.2) }
-								]}>
+								<View style={centralStyles.formSectionSeparatorContainer}>
 									<View style={centralStyles.formSectionSeparator}>
 									</View>
 								</View>
-								{/* instructions */}
+								{/* difficulty */}
 								<View style={centralStyles.formSection}>
-									<DragSortableView
-										dataSource={this.state.newRecipeDetails.instructions}
-										parentWidth={responsiveWidth(100)}
-										childrenWidth={responsiveWidth(100)}
-										childrenHeight={this.state.averageInstructionHeight}
-										childrenHeights={this.state.instructionHeights}
-										marginChildrenTop={0}
-										onDataChange={(newInstructions) => this.handleInstructionsSort(newInstructions)}
-										onDragStart={() => {
-											this.deactivateScrollView()
-											Keyboard.dismiss()
-										}}
-										onClickItem={Keyboard.dismiss}
-										onDragEnd={this.activateScrollView}
-										delayLongPress={100}
-										keyExtractor={(item, index) => `${index}${item}`}
-										renderItem={(item, index) => {
-											return (
-												<InstructionRow
-													refreshSortableList={this.state.refreshSortableList}
-													removeInstruction={this.removeInstruction}
-													handleInstructionChange={this.handleInstructionChange}
-													item={item}
-													index={index}
-													handleInstructionSizeChange={this.handleInstructionSizeChange}
-													addNewInstruction={this.addNewInstruction}
-													chooseInstructionPicture={this.chooseInstructionPicture}
-													instructionImagePresent={this.state.newRecipeDetails.instructionImages[index] != ''}
-													setFocusedInstructionInput={this.setFocusedInstructionInput}
-												/>
-											)
-										}}
-									/>
-									<View style={styles.plusButtonContainer}>
-										<TouchableOpacity style={[centralStyles.yellowRectangleButton, styles.addButton]} activeOpacity={0.7} onPress={this.addNewInstruction}>
-											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(5)} name='plus'></Icon>
-											<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { marginLeft: responsiveWidth(3), fontSize: responsiveFontSize(2.3) }]}>Add instruction</Text>
-										</TouchableOpacity>
+									<View style={[centralStyles.formInputContainer, { justifyContent: 'center' }]}>
+										<View style={[styles.timeAndDifficultyTitleItem, styles.sectionTitle]}>
+											<Text maxFontSizeMultiplier={1.7} style={[styles.timeAndDifficultyTitle, { fontWeight: 'bold' }]}>Difficulty</Text>
+										</View>
 										<TouchableOpacity
 											style={[centralStyles.helpButton, { right: responsiveWidth(10) }]}
 											activeOpacity={0.7}
-											onPress={() => this.setState({ helpShowing: true, helpText: helpTexts.instructions })}
+											onPress={() => this.setState({ helpShowing: true, helpText: helpTexts.difficulty })}
 										>
 											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(3)} name='help'></Icon>
 										</TouchableOpacity>
+									</View>
+									<View style={centralStyles.formInputContainer}>
+										<View style={styles.timeAndDifficultyTitleItem}>
+											<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Difficulty (optional):</Text>
+										</View>
+										<View style={styles.timeAndDifficulty}>
+											<DualOSPicker
+												onChoiceChange={(choice) => this.handleInput(choice, "difficulty")}
+												options={difficulties}
+												selectedChoice={this.state.newRecipeDetails.difficulty} />
+										</View>
 									</View>
 								</View>
 								{/* separator */}
@@ -1198,7 +1080,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 												maxFontSizeMultiplier={2}
 												style={centralStyles.formInput}
 												value={this.state.newRecipeDetails.acknowledgement}
-												placeholder="Acknowledge your recipe's source if it's not yourself"
+												placeholder={`Acknowledge your recipe's source${(this.state.newRecipeDetails.showBlogPreview ? "" : " (optional)")}`}
 												onChangeText={(t) => this.handleInput(t, "acknowledgement")}
 											/>
 										</View>
@@ -1212,31 +1094,177 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 												maxFontSizeMultiplier={2}
 												style={centralStyles.formInput}
 												value={this.state.newRecipeDetails.acknowledgementLink}
-												placeholder="Include a link to the original book or blog"
+												placeholder={`Link to the original book or blog${(this.state.newRecipeDetails.showBlogPreview ? "" : " (optional)")}`}
 												onChangeText={(t) => this.handleInput(t, "acknowledgementLink")}
 												autoCapitalize={"none"}
 											/>
 										</View>
 									</View>
-									<View style={centralStyles.formInputContainer}>
-										<View style={[styles.timeAndDifficultyTitleItem, { width: responsiveWidth(79) - responsiveHeight(4) }]}>
-											<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Show blog preview:</Text>
-										</View>
-										<View style={styles.switchContainer}>
-											<SwitchSized
-												value={this.state.newRecipeDetails.showBlogPreview}
-												onValueChange={(value) => this.handleInput(value, "showBlogPreview")}
-											/>
+								</View>
+								{/* separator */}
+								<View style={centralStyles.formSectionSeparatorContainer}>
+									<View style={centralStyles.formSectionSeparator}>
+									</View>
+								</View>
+								{/* display toggle */}
+								<View style={centralStyles.formSection}>
+									<View style={[centralStyles.formInputContainer, { justifyContent: 'center' }]}>
+										<View style={[styles.timeAndDifficultyTitleItem, styles.sectionTitle]}>
+											<Text maxFontSizeMultiplier={1.7} style={[styles.timeAndDifficultyTitle, { fontWeight: 'bold' }]}>Display as...</Text>
 										</View>
 										<TouchableOpacity
-											style={[centralStyles.helpButton, { right: responsiveWidth(0), position: 'relative' }]}
+											style={[centralStyles.helpButton, { right: responsiveWidth(10) }]}
 											activeOpacity={0.7}
 											onPress={() => this.setState({ helpShowing: true, helpText: helpTexts.acknowledgementLink })}
 										>
 											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(3)} name='help'></Icon>
 										</TouchableOpacity>
 									</View>
+									<View style={centralStyles.formInputContainer}>
+										<View style={[styles.timeAndDifficultyTitleItem, { width: responsiveWidth(39) }]}>
+											<Text maxFontSizeMultiplier={1.7} style={[styles.timeAndDifficultyTitle, { textAlign: 'center', fontWeight: 'bold', paddingVertical: responsiveHeight(0.5) }]}>Full recipe</Text>
+										</View>
+										<View style={styles.switchContainer}>
+											<SwitchSized
+												value={this.state.newRecipeDetails.showBlogPreview}
+												onValueChange={(value) => this.handleInput(value, "showBlogPreview")}
+												trackColor={({ true: '#5c8a5199', false: '#5c8a5199' })}
+												thumbColor={"#4b7142"}
+											/>
+										</View>
+										<View style={[styles.timeAndDifficultyTitleItem, { width: responsiveWidth(39) }]}>
+											<Text maxFontSizeMultiplier={1.7} style={[styles.timeAndDifficultyTitle, { textAlign: 'center', fontWeight: 'bold', paddingVertical: responsiveHeight(0.5) }]}>Blog view</Text>
+										</View>
+									</View>
 								</View>
+								{!this.state.newRecipeDetails.showBlogPreview && (
+									<>
+										<View style={centralStyles.formSectionSeparatorContainer}>
+											<View style={centralStyles.formSectionSeparator}>
+											</View>
+										</View>
+										<View style={[centralStyles.formInputContainer, { justifyContent: 'center' }]}>
+											<View style={[styles.timeAndDifficultyTitleItem, styles.sectionTitle]}>
+												<Text maxFontSizeMultiplier={1.7} style={[styles.timeAndDifficultyTitle, { fontWeight: 'bold' }]}>Ingredients</Text>
+											</View>
+											<TouchableOpacity
+												style={[centralStyles.helpButton, { right: responsiveWidth(10) }]}
+												activeOpacity={0.7}
+												onPress={() => this.setState({ helpShowing: true, helpText: helpTexts.ingredients })}
+											>
+												<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(3)} name='help'></Icon>
+											</TouchableOpacity>
+										</View>
+										<View
+											style={[
+												centralStyles.formSection,
+												this.state.autoCompleteFocused !== null && { zIndex: 1 },
+												{ paddingBottom: responsiveHeight(10) }
+											]}
+										>
+											<DragSortableView
+												dataSource={this.state.newRecipeDetails.ingredients}
+												parentWidth={responsiveWidth(100)}
+												childrenWidth={responsiveWidth(100)}
+												childrenHeight={responsiveHeight(12.5)}
+												reverseChildZIndexing={true}
+												marginChildrenTop={responsiveHeight(0.5)}
+												onDataChange={(newIngredients) => this.handleIngredientSort(newIngredients)}
+												onClickItem={() => {
+													if (this.state.autoCompleteFocused !== null) {
+														this.setState({ autoCompleteFocused: null })
+													}
+													Keyboard.dismiss()
+												}}
+												onDragStart={this.deactivateScrollView}
+												onDragEnd={this.activateScrollView}
+												delayLongPress={200}
+												keyExtractor={(item, index) => `${index}`}
+												renderItem={(item, index) => {
+													return (
+														<IngredientAutoComplete
+															removeIngredient={this.removeIngredient}
+															// key={index}
+															ingredientIndex={index}
+															ingredient={item}
+															ingredientsList={this.state.ingredientsList}
+															focused={this.state.autoCompleteFocused}
+															index={index}
+															ingredientsLength={this.state.newRecipeDetails.ingredients.length}
+															thisAutocompleteIsFocused={this.thisAutocompleteIsFocused}
+															updateIngredientEntry={this.updateIngredientEntry}
+														/>
+													)
+												}}
+											/>
+											<View style={styles.plusButtonContainer}>
+												<TouchableOpacity style={[centralStyles.yellowRectangleButton, styles.addButton]} activeOpacity={0.7} onPress={this.addNewIngredient}>
+													<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(5)} name='plus'></Icon>
+													<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { marginLeft: responsiveWidth(3), fontSize: responsiveFontSize(2.3) }]}>Add ingredient</Text>
+												</TouchableOpacity>
+											</View>
+										</View>
+										<View style={[centralStyles.formSectionSeparatorContainer
+											, { marginTop: -responsiveHeight(9.2) }
+										]}>
+											<View style={centralStyles.formSectionSeparator}>
+											</View>
+										</View>
+										<View style={[centralStyles.formInputContainer, { justifyContent: 'center' }]}>
+											<View style={[styles.timeAndDifficultyTitleItem, styles.sectionTitle]}>
+												<Text maxFontSizeMultiplier={1.7} style={[styles.timeAndDifficultyTitle, { fontWeight: 'bold' }]}>Instructions</Text>
+											</View>
+											<TouchableOpacity
+												style={[centralStyles.helpButton, { right: responsiveWidth(10) }]}
+												activeOpacity={0.7}
+												onPress={() => this.setState({ helpShowing: true, helpText: helpTexts.instructions })}
+											>
+												<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(3)} name='help'></Icon>
+											</TouchableOpacity>
+										</View>
+										<View style={centralStyles.formSection}>
+											<DragSortableView
+												dataSource={this.state.newRecipeDetails.instructions}
+												parentWidth={responsiveWidth(100)}
+												childrenWidth={responsiveWidth(100)}
+												childrenHeight={this.state.averageInstructionHeight}
+												childrenHeights={this.state.instructionHeights}
+												marginChildrenTop={0}
+												onDataChange={(newInstructions) => this.handleInstructionsSort(newInstructions)}
+												onDragStart={() => {
+													this.deactivateScrollView()
+													Keyboard.dismiss()
+												}}
+												onClickItem={Keyboard.dismiss}
+												onDragEnd={this.activateScrollView}
+												delayLongPress={100}
+												keyExtractor={(item, index) => `${index}${item}`}
+												renderItem={(item, index) => {
+													return (
+														<InstructionRow
+															refreshSortableList={this.state.refreshSortableList}
+															removeInstruction={this.removeInstruction}
+															handleInstructionChange={this.handleInstructionChange}
+															item={item}
+															index={index}
+															handleInstructionSizeChange={this.handleInstructionSizeChange}
+															addNewInstruction={this.addNewInstruction}
+															chooseInstructionPicture={this.chooseInstructionPicture}
+															instructionImagePresent={this.state.newRecipeDetails.instructionImages[index] != ''}
+															setFocusedInstructionInput={this.setFocusedInstructionInput}
+														/>
+													)
+												}}
+											/>
+											<View style={styles.plusButtonContainer}>
+												<TouchableOpacity style={[centralStyles.yellowRectangleButton, styles.addButton]} activeOpacity={0.7} onPress={this.addNewInstruction}>
+													<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(5)} name='plus'></Icon>
+													<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { marginLeft: responsiveWidth(3), fontSize: responsiveFontSize(2.3) }]}>Add instruction</Text>
+												</TouchableOpacity>
+											</View>
+										</View>
+									</>
+								)}
 								{/* separator */}
 								<View style={centralStyles.formSectionSeparatorContainer}>
 									<View style={centralStyles.formSectionSeparator}>

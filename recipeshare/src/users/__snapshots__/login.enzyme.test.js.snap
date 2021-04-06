@@ -1266,21 +1266,25 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                   <Switch
                                                                     onValueChange={[Function]}
                                                                     style={
-                                                                      Object {
-                                                                        "transform": Array [
-                                                                          Object {
-                                                                            "scaleX": 0.7,
-                                                                          },
-                                                                          Object {
-                                                                            "scaleY": 0.7,
-                                                                          },
-                                                                        ],
-                                                                      }
+                                                                      Array [
+                                                                        Object {
+                                                                          "transform": Array [
+                                                                            Object {
+                                                                              "scaleX": 0.7,
+                                                                            },
+                                                                            Object {
+                                                                              "scaleY": 0.7,
+                                                                            },
+                                                                          ],
+                                                                        },
+                                                                        null,
+                                                                      ]
                                                                     }
                                                                     thumbColor={null}
                                                                     trackColor={
                                                                       Object {
-                                                                        "true": "#4b714299",
+                                                                        "false": "#fbfbfb",
+                                                                        "true": "#5c8a5199",
                                                                       }
                                                                     }
                                                                     value={false}
@@ -1290,40 +1294,14 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                       onChange={[Function]}
                                                                       onResponderTerminationRequest={[Function]}
                                                                       onStartShouldSetResponder={[Function]}
-                                                                      onTintColor="#4b714299"
+                                                                      onTintColor="#5c8a5199"
                                                                       style={
                                                                         Array [
                                                                           Object {
                                                                             "height": 31,
                                                                             "width": 51,
                                                                           },
-                                                                          Object {
-                                                                            "transform": Array [
-                                                                              Object {
-                                                                                "scaleX": 0.7,
-                                                                              },
-                                                                              Object {
-                                                                                "scaleY": 0.7,
-                                                                              },
-                                                                            ],
-                                                                          },
-                                                                        ]
-                                                                      }
-                                                                      thumbTintColor={null}
-                                                                      value={false}
-                                                                    >
-                                                                      <RCTSwitch
-                                                                        accessibilityRole="switch"
-                                                                        onChange={[Function]}
-                                                                        onResponderTerminationRequest={[Function]}
-                                                                        onStartShouldSetResponder={[Function]}
-                                                                        onTintColor="#4b714299"
-                                                                        style={
                                                                           Array [
-                                                                            Object {
-                                                                              "height": 31,
-                                                                              "width": 51,
-                                                                            },
                                                                             Object {
                                                                               "transform": Array [
                                                                                 Object {
@@ -1334,9 +1312,43 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                                 },
                                                                               ],
                                                                             },
+                                                                            null,
+                                                                          ],
+                                                                        ]
+                                                                      }
+                                                                      thumbTintColor={null}
+                                                                      tintColor="#fbfbfb"
+                                                                      value={false}
+                                                                    >
+                                                                      <RCTSwitch
+                                                                        accessibilityRole="switch"
+                                                                        onChange={[Function]}
+                                                                        onResponderTerminationRequest={[Function]}
+                                                                        onStartShouldSetResponder={[Function]}
+                                                                        onTintColor="#5c8a5199"
+                                                                        style={
+                                                                          Array [
+                                                                            Object {
+                                                                              "height": 31,
+                                                                              "width": 51,
+                                                                            },
+                                                                            Array [
+                                                                              Object {
+                                                                                "transform": Array [
+                                                                                  Object {
+                                                                                    "scaleX": 0.7,
+                                                                                  },
+                                                                                  Object {
+                                                                                    "scaleY": 0.7,
+                                                                                  },
+                                                                                ],
+                                                                              },
+                                                                              null,
+                                                                            ],
                                                                           ]
                                                                         }
                                                                         thumbTintColor={null}
+                                                                        tintColor="#fbfbfb"
                                                                         value={false}
                                                                       />
                                                                     </RCTSwitch>
@@ -1550,21 +1562,25 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                   <Switch
                                                                     onValueChange={[Function]}
                                                                     style={
-                                                                      Object {
-                                                                        "transform": Array [
-                                                                          Object {
-                                                                            "scaleX": 0.7,
-                                                                          },
-                                                                          Object {
-                                                                            "scaleY": 0.7,
-                                                                          },
-                                                                        ],
-                                                                      }
+                                                                      Array [
+                                                                        Object {
+                                                                          "transform": Array [
+                                                                            Object {
+                                                                              "scaleX": 0.7,
+                                                                            },
+                                                                            Object {
+                                                                              "scaleY": 0.7,
+                                                                            },
+                                                                          ],
+                                                                        },
+                                                                        null,
+                                                                      ]
                                                                     }
                                                                     thumbColor={null}
                                                                     trackColor={
                                                                       Object {
-                                                                        "true": "#4b714299",
+                                                                        "false": "#fbfbfb",
+                                                                        "true": "#5c8a5199",
                                                                       }
                                                                     }
                                                                     value={false}
@@ -1574,40 +1590,14 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                       onChange={[Function]}
                                                                       onResponderTerminationRequest={[Function]}
                                                                       onStartShouldSetResponder={[Function]}
-                                                                      onTintColor="#4b714299"
+                                                                      onTintColor="#5c8a5199"
                                                                       style={
                                                                         Array [
                                                                           Object {
                                                                             "height": 31,
                                                                             "width": 51,
                                                                           },
-                                                                          Object {
-                                                                            "transform": Array [
-                                                                              Object {
-                                                                                "scaleX": 0.7,
-                                                                              },
-                                                                              Object {
-                                                                                "scaleY": 0.7,
-                                                                              },
-                                                                            ],
-                                                                          },
-                                                                        ]
-                                                                      }
-                                                                      thumbTintColor={null}
-                                                                      value={false}
-                                                                    >
-                                                                      <RCTSwitch
-                                                                        accessibilityRole="switch"
-                                                                        onChange={[Function]}
-                                                                        onResponderTerminationRequest={[Function]}
-                                                                        onStartShouldSetResponder={[Function]}
-                                                                        onTintColor="#4b714299"
-                                                                        style={
                                                                           Array [
-                                                                            Object {
-                                                                              "height": 31,
-                                                                              "width": 51,
-                                                                            },
                                                                             Object {
                                                                               "transform": Array [
                                                                                 Object {
@@ -1618,9 +1608,43 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                                 },
                                                                               ],
                                                                             },
+                                                                            null,
+                                                                          ],
+                                                                        ]
+                                                                      }
+                                                                      thumbTintColor={null}
+                                                                      tintColor="#fbfbfb"
+                                                                      value={false}
+                                                                    >
+                                                                      <RCTSwitch
+                                                                        accessibilityRole="switch"
+                                                                        onChange={[Function]}
+                                                                        onResponderTerminationRequest={[Function]}
+                                                                        onStartShouldSetResponder={[Function]}
+                                                                        onTintColor="#5c8a5199"
+                                                                        style={
+                                                                          Array [
+                                                                            Object {
+                                                                              "height": 31,
+                                                                              "width": 51,
+                                                                            },
+                                                                            Array [
+                                                                              Object {
+                                                                                "transform": Array [
+                                                                                  Object {
+                                                                                    "scaleX": 0.7,
+                                                                                  },
+                                                                                  Object {
+                                                                                    "scaleY": 0.7,
+                                                                                  },
+                                                                                ],
+                                                                              },
+                                                                              null,
+                                                                            ],
                                                                           ]
                                                                         }
                                                                         thumbTintColor={null}
+                                                                        tintColor="#fbfbfb"
                                                                         value={false}
                                                                       />
                                                                     </RCTSwitch>
@@ -3705,21 +3729,25 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                   <Switch
                                                                     onValueChange={[Function]}
                                                                     style={
-                                                                      Object {
-                                                                        "transform": Array [
-                                                                          Object {
-                                                                            "scaleX": 0.7,
-                                                                          },
-                                                                          Object {
-                                                                            "scaleY": 0.7,
-                                                                          },
-                                                                        ],
-                                                                      }
+                                                                      Array [
+                                                                        Object {
+                                                                          "transform": Array [
+                                                                            Object {
+                                                                              "scaleX": 0.7,
+                                                                            },
+                                                                            Object {
+                                                                              "scaleY": 0.7,
+                                                                            },
+                                                                          ],
+                                                                        },
+                                                                        null,
+                                                                      ]
                                                                     }
                                                                     thumbColor={null}
                                                                     trackColor={
                                                                       Object {
-                                                                        "true": "#4b714299",
+                                                                        "false": "#fbfbfb",
+                                                                        "true": "#5c8a5199",
                                                                       }
                                                                     }
                                                                     value={false}
@@ -3729,40 +3757,14 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                       onChange={[Function]}
                                                                       onResponderTerminationRequest={[Function]}
                                                                       onStartShouldSetResponder={[Function]}
-                                                                      onTintColor="#4b714299"
+                                                                      onTintColor="#5c8a5199"
                                                                       style={
                                                                         Array [
                                                                           Object {
                                                                             "height": 31,
                                                                             "width": 51,
                                                                           },
-                                                                          Object {
-                                                                            "transform": Array [
-                                                                              Object {
-                                                                                "scaleX": 0.7,
-                                                                              },
-                                                                              Object {
-                                                                                "scaleY": 0.7,
-                                                                              },
-                                                                            ],
-                                                                          },
-                                                                        ]
-                                                                      }
-                                                                      thumbTintColor={null}
-                                                                      value={false}
-                                                                    >
-                                                                      <RCTSwitch
-                                                                        accessibilityRole="switch"
-                                                                        onChange={[Function]}
-                                                                        onResponderTerminationRequest={[Function]}
-                                                                        onStartShouldSetResponder={[Function]}
-                                                                        onTintColor="#4b714299"
-                                                                        style={
                                                                           Array [
-                                                                            Object {
-                                                                              "height": 31,
-                                                                              "width": 51,
-                                                                            },
                                                                             Object {
                                                                               "transform": Array [
                                                                                 Object {
@@ -3773,9 +3775,43 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                                 },
                                                                               ],
                                                                             },
+                                                                            null,
+                                                                          ],
+                                                                        ]
+                                                                      }
+                                                                      thumbTintColor={null}
+                                                                      tintColor="#fbfbfb"
+                                                                      value={false}
+                                                                    >
+                                                                      <RCTSwitch
+                                                                        accessibilityRole="switch"
+                                                                        onChange={[Function]}
+                                                                        onResponderTerminationRequest={[Function]}
+                                                                        onStartShouldSetResponder={[Function]}
+                                                                        onTintColor="#5c8a5199"
+                                                                        style={
+                                                                          Array [
+                                                                            Object {
+                                                                              "height": 31,
+                                                                              "width": 51,
+                                                                            },
+                                                                            Array [
+                                                                              Object {
+                                                                                "transform": Array [
+                                                                                  Object {
+                                                                                    "scaleX": 0.7,
+                                                                                  },
+                                                                                  Object {
+                                                                                    "scaleY": 0.7,
+                                                                                  },
+                                                                                ],
+                                                                              },
+                                                                              null,
+                                                                            ],
                                                                           ]
                                                                         }
                                                                         thumbTintColor={null}
+                                                                        tintColor="#fbfbfb"
                                                                         value={false}
                                                                       />
                                                                     </RCTSwitch>
@@ -3989,21 +4025,25 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                   <Switch
                                                                     onValueChange={[Function]}
                                                                     style={
-                                                                      Object {
-                                                                        "transform": Array [
-                                                                          Object {
-                                                                            "scaleX": 0.7,
-                                                                          },
-                                                                          Object {
-                                                                            "scaleY": 0.7,
-                                                                          },
-                                                                        ],
-                                                                      }
+                                                                      Array [
+                                                                        Object {
+                                                                          "transform": Array [
+                                                                            Object {
+                                                                              "scaleX": 0.7,
+                                                                            },
+                                                                            Object {
+                                                                              "scaleY": 0.7,
+                                                                            },
+                                                                          ],
+                                                                        },
+                                                                        null,
+                                                                      ]
                                                                     }
                                                                     thumbColor={null}
                                                                     trackColor={
                                                                       Object {
-                                                                        "true": "#4b714299",
+                                                                        "false": "#fbfbfb",
+                                                                        "true": "#5c8a5199",
                                                                       }
                                                                     }
                                                                     value={false}
@@ -4013,40 +4053,14 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                       onChange={[Function]}
                                                                       onResponderTerminationRequest={[Function]}
                                                                       onStartShouldSetResponder={[Function]}
-                                                                      onTintColor="#4b714299"
+                                                                      onTintColor="#5c8a5199"
                                                                       style={
                                                                         Array [
                                                                           Object {
                                                                             "height": 31,
                                                                             "width": 51,
                                                                           },
-                                                                          Object {
-                                                                            "transform": Array [
-                                                                              Object {
-                                                                                "scaleX": 0.7,
-                                                                              },
-                                                                              Object {
-                                                                                "scaleY": 0.7,
-                                                                              },
-                                                                            ],
-                                                                          },
-                                                                        ]
-                                                                      }
-                                                                      thumbTintColor={null}
-                                                                      value={false}
-                                                                    >
-                                                                      <RCTSwitch
-                                                                        accessibilityRole="switch"
-                                                                        onChange={[Function]}
-                                                                        onResponderTerminationRequest={[Function]}
-                                                                        onStartShouldSetResponder={[Function]}
-                                                                        onTintColor="#4b714299"
-                                                                        style={
                                                                           Array [
-                                                                            Object {
-                                                                              "height": 31,
-                                                                              "width": 51,
-                                                                            },
                                                                             Object {
                                                                               "transform": Array [
                                                                                 Object {
@@ -4057,9 +4071,43 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                                 },
                                                                               ],
                                                                             },
+                                                                            null,
+                                                                          ],
+                                                                        ]
+                                                                      }
+                                                                      thumbTintColor={null}
+                                                                      tintColor="#fbfbfb"
+                                                                      value={false}
+                                                                    >
+                                                                      <RCTSwitch
+                                                                        accessibilityRole="switch"
+                                                                        onChange={[Function]}
+                                                                        onResponderTerminationRequest={[Function]}
+                                                                        onStartShouldSetResponder={[Function]}
+                                                                        onTintColor="#5c8a5199"
+                                                                        style={
+                                                                          Array [
+                                                                            Object {
+                                                                              "height": 31,
+                                                                              "width": 51,
+                                                                            },
+                                                                            Array [
+                                                                              Object {
+                                                                                "transform": Array [
+                                                                                  Object {
+                                                                                    "scaleX": 0.7,
+                                                                                  },
+                                                                                  Object {
+                                                                                    "scaleY": 0.7,
+                                                                                  },
+                                                                                ],
+                                                                              },
+                                                                              null,
+                                                                            ],
                                                                           ]
                                                                         }
                                                                         thumbTintColor={null}
+                                                                        tintColor="#fbfbfb"
                                                                         value={false}
                                                                       />
                                                                     </RCTSwitch>
@@ -6144,21 +6192,25 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                   <Switch
                                                                     onValueChange={[Function]}
                                                                     style={
-                                                                      Object {
-                                                                        "transform": Array [
-                                                                          Object {
-                                                                            "scaleX": 0.7,
-                                                                          },
-                                                                          Object {
-                                                                            "scaleY": 0.7,
-                                                                          },
-                                                                        ],
-                                                                      }
+                                                                      Array [
+                                                                        Object {
+                                                                          "transform": Array [
+                                                                            Object {
+                                                                              "scaleX": 0.7,
+                                                                            },
+                                                                            Object {
+                                                                              "scaleY": 0.7,
+                                                                            },
+                                                                          ],
+                                                                        },
+                                                                        null,
+                                                                      ]
                                                                     }
                                                                     thumbColor={null}
                                                                     trackColor={
                                                                       Object {
-                                                                        "true": "#4b714299",
+                                                                        "false": "#fbfbfb",
+                                                                        "true": "#5c8a5199",
                                                                       }
                                                                     }
                                                                     value={false}
@@ -6168,40 +6220,14 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                       onChange={[Function]}
                                                                       onResponderTerminationRequest={[Function]}
                                                                       onStartShouldSetResponder={[Function]}
-                                                                      onTintColor="#4b714299"
+                                                                      onTintColor="#5c8a5199"
                                                                       style={
                                                                         Array [
                                                                           Object {
                                                                             "height": 31,
                                                                             "width": 51,
                                                                           },
-                                                                          Object {
-                                                                            "transform": Array [
-                                                                              Object {
-                                                                                "scaleX": 0.7,
-                                                                              },
-                                                                              Object {
-                                                                                "scaleY": 0.7,
-                                                                              },
-                                                                            ],
-                                                                          },
-                                                                        ]
-                                                                      }
-                                                                      thumbTintColor={null}
-                                                                      value={false}
-                                                                    >
-                                                                      <RCTSwitch
-                                                                        accessibilityRole="switch"
-                                                                        onChange={[Function]}
-                                                                        onResponderTerminationRequest={[Function]}
-                                                                        onStartShouldSetResponder={[Function]}
-                                                                        onTintColor="#4b714299"
-                                                                        style={
                                                                           Array [
-                                                                            Object {
-                                                                              "height": 31,
-                                                                              "width": 51,
-                                                                            },
                                                                             Object {
                                                                               "transform": Array [
                                                                                 Object {
@@ -6212,9 +6238,43 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                                 },
                                                                               ],
                                                                             },
+                                                                            null,
+                                                                          ],
+                                                                        ]
+                                                                      }
+                                                                      thumbTintColor={null}
+                                                                      tintColor="#fbfbfb"
+                                                                      value={false}
+                                                                    >
+                                                                      <RCTSwitch
+                                                                        accessibilityRole="switch"
+                                                                        onChange={[Function]}
+                                                                        onResponderTerminationRequest={[Function]}
+                                                                        onStartShouldSetResponder={[Function]}
+                                                                        onTintColor="#5c8a5199"
+                                                                        style={
+                                                                          Array [
+                                                                            Object {
+                                                                              "height": 31,
+                                                                              "width": 51,
+                                                                            },
+                                                                            Array [
+                                                                              Object {
+                                                                                "transform": Array [
+                                                                                  Object {
+                                                                                    "scaleX": 0.7,
+                                                                                  },
+                                                                                  Object {
+                                                                                    "scaleY": 0.7,
+                                                                                  },
+                                                                                ],
+                                                                              },
+                                                                              null,
+                                                                            ],
                                                                           ]
                                                                         }
                                                                         thumbTintColor={null}
+                                                                        tintColor="#fbfbfb"
                                                                         value={false}
                                                                       />
                                                                     </RCTSwitch>
@@ -6428,21 +6488,25 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                   <Switch
                                                                     onValueChange={[Function]}
                                                                     style={
-                                                                      Object {
-                                                                        "transform": Array [
-                                                                          Object {
-                                                                            "scaleX": 0.7,
-                                                                          },
-                                                                          Object {
-                                                                            "scaleY": 0.7,
-                                                                          },
-                                                                        ],
-                                                                      }
+                                                                      Array [
+                                                                        Object {
+                                                                          "transform": Array [
+                                                                            Object {
+                                                                              "scaleX": 0.7,
+                                                                            },
+                                                                            Object {
+                                                                              "scaleY": 0.7,
+                                                                            },
+                                                                          ],
+                                                                        },
+                                                                        null,
+                                                                      ]
                                                                     }
                                                                     thumbColor={null}
                                                                     trackColor={
                                                                       Object {
-                                                                        "true": "#4b714299",
+                                                                        "false": "#fbfbfb",
+                                                                        "true": "#5c8a5199",
                                                                       }
                                                                     }
                                                                     value={false}
@@ -6452,40 +6516,14 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                       onChange={[Function]}
                                                                       onResponderTerminationRequest={[Function]}
                                                                       onStartShouldSetResponder={[Function]}
-                                                                      onTintColor="#4b714299"
+                                                                      onTintColor="#5c8a5199"
                                                                       style={
                                                                         Array [
                                                                           Object {
                                                                             "height": 31,
                                                                             "width": 51,
                                                                           },
-                                                                          Object {
-                                                                            "transform": Array [
-                                                                              Object {
-                                                                                "scaleX": 0.7,
-                                                                              },
-                                                                              Object {
-                                                                                "scaleY": 0.7,
-                                                                              },
-                                                                            ],
-                                                                          },
-                                                                        ]
-                                                                      }
-                                                                      thumbTintColor={null}
-                                                                      value={false}
-                                                                    >
-                                                                      <RCTSwitch
-                                                                        accessibilityRole="switch"
-                                                                        onChange={[Function]}
-                                                                        onResponderTerminationRequest={[Function]}
-                                                                        onStartShouldSetResponder={[Function]}
-                                                                        onTintColor="#4b714299"
-                                                                        style={
                                                                           Array [
-                                                                            Object {
-                                                                              "height": 31,
-                                                                              "width": 51,
-                                                                            },
                                                                             Object {
                                                                               "transform": Array [
                                                                                 Object {
@@ -6496,9 +6534,43 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                                 },
                                                                               ],
                                                                             },
+                                                                            null,
+                                                                          ],
+                                                                        ]
+                                                                      }
+                                                                      thumbTintColor={null}
+                                                                      tintColor="#fbfbfb"
+                                                                      value={false}
+                                                                    >
+                                                                      <RCTSwitch
+                                                                        accessibilityRole="switch"
+                                                                        onChange={[Function]}
+                                                                        onResponderTerminationRequest={[Function]}
+                                                                        onStartShouldSetResponder={[Function]}
+                                                                        onTintColor="#5c8a5199"
+                                                                        style={
+                                                                          Array [
+                                                                            Object {
+                                                                              "height": 31,
+                                                                              "width": 51,
+                                                                            },
+                                                                            Array [
+                                                                              Object {
+                                                                                "transform": Array [
+                                                                                  Object {
+                                                                                    "scaleX": 0.7,
+                                                                                  },
+                                                                                  Object {
+                                                                                    "scaleY": 0.7,
+                                                                                  },
+                                                                                ],
+                                                                              },
+                                                                              null,
+                                                                            ],
                                                                           ]
                                                                         }
                                                                         thumbTintColor={null}
+                                                                        tintColor="#fbfbfb"
                                                                         value={false}
                                                                       />
                                                                     </RCTSwitch>
@@ -8583,21 +8655,25 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                                   <Switch
                                                                     onValueChange={[Function]}
                                                                     style={
-                                                                      Object {
-                                                                        "transform": Array [
-                                                                          Object {
-                                                                            "scaleX": 0.7,
-                                                                          },
-                                                                          Object {
-                                                                            "scaleY": 0.7,
-                                                                          },
-                                                                        ],
-                                                                      }
+                                                                      Array [
+                                                                        Object {
+                                                                          "transform": Array [
+                                                                            Object {
+                                                                              "scaleX": 0.7,
+                                                                            },
+                                                                            Object {
+                                                                              "scaleY": 0.7,
+                                                                            },
+                                                                          ],
+                                                                        },
+                                                                        null,
+                                                                      ]
                                                                     }
                                                                     thumbColor={null}
                                                                     trackColor={
                                                                       Object {
-                                                                        "true": "#4b714299",
+                                                                        "false": "#fbfbfb",
+                                                                        "true": "#5c8a5199",
                                                                       }
                                                                     }
                                                                     value={false}
@@ -8607,40 +8683,14 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                                       onChange={[Function]}
                                                                       onResponderTerminationRequest={[Function]}
                                                                       onStartShouldSetResponder={[Function]}
-                                                                      onTintColor="#4b714299"
+                                                                      onTintColor="#5c8a5199"
                                                                       style={
                                                                         Array [
                                                                           Object {
                                                                             "height": 31,
                                                                             "width": 51,
                                                                           },
-                                                                          Object {
-                                                                            "transform": Array [
-                                                                              Object {
-                                                                                "scaleX": 0.7,
-                                                                              },
-                                                                              Object {
-                                                                                "scaleY": 0.7,
-                                                                              },
-                                                                            ],
-                                                                          },
-                                                                        ]
-                                                                      }
-                                                                      thumbTintColor={null}
-                                                                      value={false}
-                                                                    >
-                                                                      <RCTSwitch
-                                                                        accessibilityRole="switch"
-                                                                        onChange={[Function]}
-                                                                        onResponderTerminationRequest={[Function]}
-                                                                        onStartShouldSetResponder={[Function]}
-                                                                        onTintColor="#4b714299"
-                                                                        style={
                                                                           Array [
-                                                                            Object {
-                                                                              "height": 31,
-                                                                              "width": 51,
-                                                                            },
                                                                             Object {
                                                                               "transform": Array [
                                                                                 Object {
@@ -8651,9 +8701,43 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                                                 },
                                                                               ],
                                                                             },
+                                                                            null,
+                                                                          ],
+                                                                        ]
+                                                                      }
+                                                                      thumbTintColor={null}
+                                                                      tintColor="#fbfbfb"
+                                                                      value={false}
+                                                                    >
+                                                                      <RCTSwitch
+                                                                        accessibilityRole="switch"
+                                                                        onChange={[Function]}
+                                                                        onResponderTerminationRequest={[Function]}
+                                                                        onStartShouldSetResponder={[Function]}
+                                                                        onTintColor="#5c8a5199"
+                                                                        style={
+                                                                          Array [
+                                                                            Object {
+                                                                              "height": 31,
+                                                                              "width": 51,
+                                                                            },
+                                                                            Array [
+                                                                              Object {
+                                                                                "transform": Array [
+                                                                                  Object {
+                                                                                    "scaleX": 0.7,
+                                                                                  },
+                                                                                  Object {
+                                                                                    "scaleY": 0.7,
+                                                                                  },
+                                                                                ],
+                                                                              },
+                                                                              null,
+                                                                            ],
                                                                           ]
                                                                         }
                                                                         thumbTintColor={null}
+                                                                        tintColor="#fbfbfb"
                                                                         value={false}
                                                                       />
                                                                     </RCTSwitch>
@@ -8867,21 +8951,25 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                                   <Switch
                                                                     onValueChange={[Function]}
                                                                     style={
-                                                                      Object {
-                                                                        "transform": Array [
-                                                                          Object {
-                                                                            "scaleX": 0.7,
-                                                                          },
-                                                                          Object {
-                                                                            "scaleY": 0.7,
-                                                                          },
-                                                                        ],
-                                                                      }
+                                                                      Array [
+                                                                        Object {
+                                                                          "transform": Array [
+                                                                            Object {
+                                                                              "scaleX": 0.7,
+                                                                            },
+                                                                            Object {
+                                                                              "scaleY": 0.7,
+                                                                            },
+                                                                          ],
+                                                                        },
+                                                                        null,
+                                                                      ]
                                                                     }
                                                                     thumbColor={null}
                                                                     trackColor={
                                                                       Object {
-                                                                        "true": "#4b714299",
+                                                                        "false": "#fbfbfb",
+                                                                        "true": "#5c8a5199",
                                                                       }
                                                                     }
                                                                     value={false}
@@ -8891,40 +8979,14 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                                       onChange={[Function]}
                                                                       onResponderTerminationRequest={[Function]}
                                                                       onStartShouldSetResponder={[Function]}
-                                                                      onTintColor="#4b714299"
+                                                                      onTintColor="#5c8a5199"
                                                                       style={
                                                                         Array [
                                                                           Object {
                                                                             "height": 31,
                                                                             "width": 51,
                                                                           },
-                                                                          Object {
-                                                                            "transform": Array [
-                                                                              Object {
-                                                                                "scaleX": 0.7,
-                                                                              },
-                                                                              Object {
-                                                                                "scaleY": 0.7,
-                                                                              },
-                                                                            ],
-                                                                          },
-                                                                        ]
-                                                                      }
-                                                                      thumbTintColor={null}
-                                                                      value={false}
-                                                                    >
-                                                                      <RCTSwitch
-                                                                        accessibilityRole="switch"
-                                                                        onChange={[Function]}
-                                                                        onResponderTerminationRequest={[Function]}
-                                                                        onStartShouldSetResponder={[Function]}
-                                                                        onTintColor="#4b714299"
-                                                                        style={
                                                                           Array [
-                                                                            Object {
-                                                                              "height": 31,
-                                                                              "width": 51,
-                                                                            },
                                                                             Object {
                                                                               "transform": Array [
                                                                                 Object {
@@ -8935,9 +8997,43 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                                                 },
                                                                               ],
                                                                             },
+                                                                            null,
+                                                                          ],
+                                                                        ]
+                                                                      }
+                                                                      thumbTintColor={null}
+                                                                      tintColor="#fbfbfb"
+                                                                      value={false}
+                                                                    >
+                                                                      <RCTSwitch
+                                                                        accessibilityRole="switch"
+                                                                        onChange={[Function]}
+                                                                        onResponderTerminationRequest={[Function]}
+                                                                        onStartShouldSetResponder={[Function]}
+                                                                        onTintColor="#5c8a5199"
+                                                                        style={
+                                                                          Array [
+                                                                            Object {
+                                                                              "height": 31,
+                                                                              "width": 51,
+                                                                            },
+                                                                            Array [
+                                                                              Object {
+                                                                                "transform": Array [
+                                                                                  Object {
+                                                                                    "scaleX": 0.7,
+                                                                                  },
+                                                                                  Object {
+                                                                                    "scaleY": 0.7,
+                                                                                  },
+                                                                                ],
+                                                                              },
+                                                                              null,
+                                                                            ],
                                                                           ]
                                                                         }
                                                                         thumbTintColor={null}
+                                                                        tintColor="#fbfbfb"
                                                                         value={false}
                                                                       />
                                                                     </RCTSwitch>
@@ -11421,21 +11517,25 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                                   <Switch
                                                                     onValueChange={[Function]}
                                                                     style={
-                                                                      Object {
-                                                                        "transform": Array [
-                                                                          Object {
-                                                                            "scaleX": 0.7,
-                                                                          },
-                                                                          Object {
-                                                                            "scaleY": 0.7,
-                                                                          },
-                                                                        ],
-                                                                      }
+                                                                      Array [
+                                                                        Object {
+                                                                          "transform": Array [
+                                                                            Object {
+                                                                              "scaleX": 0.7,
+                                                                            },
+                                                                            Object {
+                                                                              "scaleY": 0.7,
+                                                                            },
+                                                                          ],
+                                                                        },
+                                                                        null,
+                                                                      ]
                                                                     }
                                                                     thumbColor={null}
                                                                     trackColor={
                                                                       Object {
-                                                                        "true": "#4b714299",
+                                                                        "false": "#fbfbfb",
+                                                                        "true": "#5c8a5199",
                                                                       }
                                                                     }
                                                                     value={false}
@@ -11445,40 +11545,14 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                                       onChange={[Function]}
                                                                       onResponderTerminationRequest={[Function]}
                                                                       onStartShouldSetResponder={[Function]}
-                                                                      onTintColor="#4b714299"
+                                                                      onTintColor="#5c8a5199"
                                                                       style={
                                                                         Array [
                                                                           Object {
                                                                             "height": 31,
                                                                             "width": 51,
                                                                           },
-                                                                          Object {
-                                                                            "transform": Array [
-                                                                              Object {
-                                                                                "scaleX": 0.7,
-                                                                              },
-                                                                              Object {
-                                                                                "scaleY": 0.7,
-                                                                              },
-                                                                            ],
-                                                                          },
-                                                                        ]
-                                                                      }
-                                                                      thumbTintColor={null}
-                                                                      value={false}
-                                                                    >
-                                                                      <RCTSwitch
-                                                                        accessibilityRole="switch"
-                                                                        onChange={[Function]}
-                                                                        onResponderTerminationRequest={[Function]}
-                                                                        onStartShouldSetResponder={[Function]}
-                                                                        onTintColor="#4b714299"
-                                                                        style={
                                                                           Array [
-                                                                            Object {
-                                                                              "height": 31,
-                                                                              "width": 51,
-                                                                            },
                                                                             Object {
                                                                               "transform": Array [
                                                                                 Object {
@@ -11489,9 +11563,43 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                                                 },
                                                                               ],
                                                                             },
+                                                                            null,
+                                                                          ],
+                                                                        ]
+                                                                      }
+                                                                      thumbTintColor={null}
+                                                                      tintColor="#fbfbfb"
+                                                                      value={false}
+                                                                    >
+                                                                      <RCTSwitch
+                                                                        accessibilityRole="switch"
+                                                                        onChange={[Function]}
+                                                                        onResponderTerminationRequest={[Function]}
+                                                                        onStartShouldSetResponder={[Function]}
+                                                                        onTintColor="#5c8a5199"
+                                                                        style={
+                                                                          Array [
+                                                                            Object {
+                                                                              "height": 31,
+                                                                              "width": 51,
+                                                                            },
+                                                                            Array [
+                                                                              Object {
+                                                                                "transform": Array [
+                                                                                  Object {
+                                                                                    "scaleX": 0.7,
+                                                                                  },
+                                                                                  Object {
+                                                                                    "scaleY": 0.7,
+                                                                                  },
+                                                                                ],
+                                                                              },
+                                                                              null,
+                                                                            ],
                                                                           ]
                                                                         }
                                                                         thumbTintColor={null}
+                                                                        tintColor="#fbfbfb"
                                                                         value={false}
                                                                       />
                                                                     </RCTSwitch>
@@ -11705,21 +11813,25 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                                   <Switch
                                                                     onValueChange={[Function]}
                                                                     style={
-                                                                      Object {
-                                                                        "transform": Array [
-                                                                          Object {
-                                                                            "scaleX": 0.7,
-                                                                          },
-                                                                          Object {
-                                                                            "scaleY": 0.7,
-                                                                          },
-                                                                        ],
-                                                                      }
+                                                                      Array [
+                                                                        Object {
+                                                                          "transform": Array [
+                                                                            Object {
+                                                                              "scaleX": 0.7,
+                                                                            },
+                                                                            Object {
+                                                                              "scaleY": 0.7,
+                                                                            },
+                                                                          ],
+                                                                        },
+                                                                        null,
+                                                                      ]
                                                                     }
                                                                     thumbColor={null}
                                                                     trackColor={
                                                                       Object {
-                                                                        "true": "#4b714299",
+                                                                        "false": "#fbfbfb",
+                                                                        "true": "#5c8a5199",
                                                                       }
                                                                     }
                                                                     value={false}
@@ -11729,40 +11841,14 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                                       onChange={[Function]}
                                                                       onResponderTerminationRequest={[Function]}
                                                                       onStartShouldSetResponder={[Function]}
-                                                                      onTintColor="#4b714299"
+                                                                      onTintColor="#5c8a5199"
                                                                       style={
                                                                         Array [
                                                                           Object {
                                                                             "height": 31,
                                                                             "width": 51,
                                                                           },
-                                                                          Object {
-                                                                            "transform": Array [
-                                                                              Object {
-                                                                                "scaleX": 0.7,
-                                                                              },
-                                                                              Object {
-                                                                                "scaleY": 0.7,
-                                                                              },
-                                                                            ],
-                                                                          },
-                                                                        ]
-                                                                      }
-                                                                      thumbTintColor={null}
-                                                                      value={false}
-                                                                    >
-                                                                      <RCTSwitch
-                                                                        accessibilityRole="switch"
-                                                                        onChange={[Function]}
-                                                                        onResponderTerminationRequest={[Function]}
-                                                                        onStartShouldSetResponder={[Function]}
-                                                                        onTintColor="#4b714299"
-                                                                        style={
                                                                           Array [
-                                                                            Object {
-                                                                              "height": 31,
-                                                                              "width": 51,
-                                                                            },
                                                                             Object {
                                                                               "transform": Array [
                                                                                 Object {
@@ -11773,9 +11859,43 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                                                 },
                                                                               ],
                                                                             },
+                                                                            null,
+                                                                          ],
+                                                                        ]
+                                                                      }
+                                                                      thumbTintColor={null}
+                                                                      tintColor="#fbfbfb"
+                                                                      value={false}
+                                                                    >
+                                                                      <RCTSwitch
+                                                                        accessibilityRole="switch"
+                                                                        onChange={[Function]}
+                                                                        onResponderTerminationRequest={[Function]}
+                                                                        onStartShouldSetResponder={[Function]}
+                                                                        onTintColor="#5c8a5199"
+                                                                        style={
+                                                                          Array [
+                                                                            Object {
+                                                                              "height": 31,
+                                                                              "width": 51,
+                                                                            },
+                                                                            Array [
+                                                                              Object {
+                                                                                "transform": Array [
+                                                                                  Object {
+                                                                                    "scaleX": 0.7,
+                                                                                  },
+                                                                                  Object {
+                                                                                    "scaleY": 0.7,
+                                                                                  },
+                                                                                ],
+                                                                              },
+                                                                              null,
+                                                                            ],
                                                                           ]
                                                                         }
                                                                         thumbTintColor={null}
+                                                                        tintColor="#fbfbfb"
                                                                         value={false}
                                                                       />
                                                                     </RCTSwitch>
@@ -13801,21 +13921,25 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                                   <Switch
                                                                     onValueChange={[Function]}
                                                                     style={
-                                                                      Object {
-                                                                        "transform": Array [
-                                                                          Object {
-                                                                            "scaleX": 0.7,
-                                                                          },
-                                                                          Object {
-                                                                            "scaleY": 0.7,
-                                                                          },
-                                                                        ],
-                                                                      }
+                                                                      Array [
+                                                                        Object {
+                                                                          "transform": Array [
+                                                                            Object {
+                                                                              "scaleX": 0.7,
+                                                                            },
+                                                                            Object {
+                                                                              "scaleY": 0.7,
+                                                                            },
+                                                                          ],
+                                                                        },
+                                                                        null,
+                                                                      ]
                                                                     }
                                                                     thumbColor={null}
                                                                     trackColor={
                                                                       Object {
-                                                                        "true": "#4b714299",
+                                                                        "false": "#fbfbfb",
+                                                                        "true": "#5c8a5199",
                                                                       }
                                                                     }
                                                                     value={false}
@@ -13825,40 +13949,14 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                                       onChange={[Function]}
                                                                       onResponderTerminationRequest={[Function]}
                                                                       onStartShouldSetResponder={[Function]}
-                                                                      onTintColor="#4b714299"
+                                                                      onTintColor="#5c8a5199"
                                                                       style={
                                                                         Array [
                                                                           Object {
                                                                             "height": 31,
                                                                             "width": 51,
                                                                           },
-                                                                          Object {
-                                                                            "transform": Array [
-                                                                              Object {
-                                                                                "scaleX": 0.7,
-                                                                              },
-                                                                              Object {
-                                                                                "scaleY": 0.7,
-                                                                              },
-                                                                            ],
-                                                                          },
-                                                                        ]
-                                                                      }
-                                                                      thumbTintColor={null}
-                                                                      value={false}
-                                                                    >
-                                                                      <RCTSwitch
-                                                                        accessibilityRole="switch"
-                                                                        onChange={[Function]}
-                                                                        onResponderTerminationRequest={[Function]}
-                                                                        onStartShouldSetResponder={[Function]}
-                                                                        onTintColor="#4b714299"
-                                                                        style={
                                                                           Array [
-                                                                            Object {
-                                                                              "height": 31,
-                                                                              "width": 51,
-                                                                            },
                                                                             Object {
                                                                               "transform": Array [
                                                                                 Object {
@@ -13869,9 +13967,43 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                                                 },
                                                                               ],
                                                                             },
+                                                                            null,
+                                                                          ],
+                                                                        ]
+                                                                      }
+                                                                      thumbTintColor={null}
+                                                                      tintColor="#fbfbfb"
+                                                                      value={false}
+                                                                    >
+                                                                      <RCTSwitch
+                                                                        accessibilityRole="switch"
+                                                                        onChange={[Function]}
+                                                                        onResponderTerminationRequest={[Function]}
+                                                                        onStartShouldSetResponder={[Function]}
+                                                                        onTintColor="#5c8a5199"
+                                                                        style={
+                                                                          Array [
+                                                                            Object {
+                                                                              "height": 31,
+                                                                              "width": 51,
+                                                                            },
+                                                                            Array [
+                                                                              Object {
+                                                                                "transform": Array [
+                                                                                  Object {
+                                                                                    "scaleX": 0.7,
+                                                                                  },
+                                                                                  Object {
+                                                                                    "scaleY": 0.7,
+                                                                                  },
+                                                                                ],
+                                                                              },
+                                                                              null,
+                                                                            ],
                                                                           ]
                                                                         }
                                                                         thumbTintColor={null}
+                                                                        tintColor="#fbfbfb"
                                                                         value={false}
                                                                       />
                                                                     </RCTSwitch>
@@ -14085,21 +14217,25 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                                   <Switch
                                                                     onValueChange={[Function]}
                                                                     style={
-                                                                      Object {
-                                                                        "transform": Array [
-                                                                          Object {
-                                                                            "scaleX": 0.7,
-                                                                          },
-                                                                          Object {
-                                                                            "scaleY": 0.7,
-                                                                          },
-                                                                        ],
-                                                                      }
+                                                                      Array [
+                                                                        Object {
+                                                                          "transform": Array [
+                                                                            Object {
+                                                                              "scaleX": 0.7,
+                                                                            },
+                                                                            Object {
+                                                                              "scaleY": 0.7,
+                                                                            },
+                                                                          ],
+                                                                        },
+                                                                        null,
+                                                                      ]
                                                                     }
                                                                     thumbColor={null}
                                                                     trackColor={
                                                                       Object {
-                                                                        "true": "#4b714299",
+                                                                        "false": "#fbfbfb",
+                                                                        "true": "#5c8a5199",
                                                                       }
                                                                     }
                                                                     value={false}
@@ -14109,40 +14245,14 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                                       onChange={[Function]}
                                                                       onResponderTerminationRequest={[Function]}
                                                                       onStartShouldSetResponder={[Function]}
-                                                                      onTintColor="#4b714299"
+                                                                      onTintColor="#5c8a5199"
                                                                       style={
                                                                         Array [
                                                                           Object {
                                                                             "height": 31,
                                                                             "width": 51,
                                                                           },
-                                                                          Object {
-                                                                            "transform": Array [
-                                                                              Object {
-                                                                                "scaleX": 0.7,
-                                                                              },
-                                                                              Object {
-                                                                                "scaleY": 0.7,
-                                                                              },
-                                                                            ],
-                                                                          },
-                                                                        ]
-                                                                      }
-                                                                      thumbTintColor={null}
-                                                                      value={false}
-                                                                    >
-                                                                      <RCTSwitch
-                                                                        accessibilityRole="switch"
-                                                                        onChange={[Function]}
-                                                                        onResponderTerminationRequest={[Function]}
-                                                                        onStartShouldSetResponder={[Function]}
-                                                                        onTintColor="#4b714299"
-                                                                        style={
                                                                           Array [
-                                                                            Object {
-                                                                              "height": 31,
-                                                                              "width": 51,
-                                                                            },
                                                                             Object {
                                                                               "transform": Array [
                                                                                 Object {
@@ -14153,9 +14263,43 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                                                 },
                                                                               ],
                                                                             },
+                                                                            null,
+                                                                          ],
+                                                                        ]
+                                                                      }
+                                                                      thumbTintColor={null}
+                                                                      tintColor="#fbfbfb"
+                                                                      value={false}
+                                                                    >
+                                                                      <RCTSwitch
+                                                                        accessibilityRole="switch"
+                                                                        onChange={[Function]}
+                                                                        onResponderTerminationRequest={[Function]}
+                                                                        onStartShouldSetResponder={[Function]}
+                                                                        onTintColor="#5c8a5199"
+                                                                        style={
+                                                                          Array [
+                                                                            Object {
+                                                                              "height": 31,
+                                                                              "width": 51,
+                                                                            },
+                                                                            Array [
+                                                                              Object {
+                                                                                "transform": Array [
+                                                                                  Object {
+                                                                                    "scaleX": 0.7,
+                                                                                  },
+                                                                                  Object {
+                                                                                    "scaleY": 0.7,
+                                                                                  },
+                                                                                ],
+                                                                              },
+                                                                              null,
+                                                                            ],
                                                                           ]
                                                                         }
                                                                         thumbTintColor={null}
+                                                                        tintColor="#fbfbfb"
                                                                         value={false}
                                                                       />
                                                                     </RCTSwitch>

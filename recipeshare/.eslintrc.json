@@ -9,7 +9,7 @@
 	"plugins": [
 		"react",
 		"react-native",
-		"react-hooks",
+		"react-hooks"
 	],
 	"parserOptions": {
 		"sourceType": "module",

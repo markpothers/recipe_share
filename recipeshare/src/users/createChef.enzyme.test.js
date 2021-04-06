@@ -26,9 +26,12 @@ import { privacyPolicy } from '../dataComponents/privacyPolicy'
 import PicSourceChooser from '../picSourceChooser/picSourceChooser'
 import DualOSPicker from '../dualOSPicker/DualOSPicker'
 import { apiCall } from '../auxFunctions/apiCall'
+import { postChef } from '../fetches/postChef'
+
 
 // manual mocks
 jest.mock('../auxFunctions/apiCall')
+jest.mock('../fetches/postChef')
 
 describe('CreateChef', () => {
 

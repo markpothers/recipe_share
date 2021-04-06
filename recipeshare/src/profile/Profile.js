@@ -141,12 +141,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		fetchChefDetails = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				await this.setState({ awaitingServer: true })
+				this.setState(state => ({awaitingServer: true }))
 				const chef_details = await getChefDetails(this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
 				if (chef_details) {
 					this.props.storeChefDetails(chef_details)
 				}
-				await this.setState({ awaitingServer: false })
+				this.setState(state => ({awaitingServer: false}))
 			} else {
 				this.setState({ renderOfflineMessage: true })
 			}

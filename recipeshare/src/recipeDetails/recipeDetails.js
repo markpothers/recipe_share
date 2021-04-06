@@ -226,7 +226,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		componentDidMount = async () => {
-			await this.setState({ awaitingServer: true })
+			this.setState(state => ({awaitingServer: true }))
 			await this.generateHeaderButtonList()
 			this.addDynamicMenuButtonsToHeader()
 			if (this.props.route.params.commenting === true) {
@@ -240,7 +240,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					this.setState({ renderOfflineMessage: true })
 				}
 			}
-			await this.setState({ awaitingServer: false })
+			this.setState(state => ({awaitingServer: false}))
 		}
 
 		componentDidUpdate = async (prevProps) => {
@@ -264,7 +264,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				if (chefDetails) {
 					this.props.storeChefDetails(chefDetails)
 					saveChefDetailsLocally(chefDetails, this.props.loggedInChef.id)
-					await this.setState({ awaitingServer: false })
+					this.setState(state => ({awaitingServer: false}))
 					this.props.navigation.navigate('ChefDetails', { chefID: chefID })
 				}
 			} catch (e) {
@@ -287,7 +287,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					}
 				})
 			}
-			await this.setState({ awaitingServer: false })
+			this.setState(state => ({awaitingServer: false}))
 		}
 
 		editRecipe = async () => {
@@ -298,7 +298,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					editRecipePopUpShowing: false
 				})
 				this.props.navigation.navigate('NewRecipe', { recipe_details: this.props.recipe_details })
-				await this.setState({ awaitingServer: false })
+				this.setState(state => ({awaitingServer: false}))
 			} else {
 				this.setState({
 					renderOfflineMessage: true,
@@ -310,7 +310,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		deleteRecipe = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				await this.setState({ awaitingServer: true })
+				this.setState(state => ({awaitingServer: true }))
 				const deleted = await destroyRecipe(this.props.recipe_details.recipe.id, this.props.loggedInChef.auth_token)
 				if (deleted) {
 					this.props.navigation.goBack()
@@ -457,7 +457,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		likeRecipe = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				await this.setState({ awaitingServer: true })
+				this.setState(state => ({awaitingServer: true }))
 				try {
 					const likePosted = await postRecipeLike(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
 					if (likePosted) {
@@ -467,7 +467,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState({ renderOfflineMessage: true })
 				}
-				await this.setState({ awaitingServer: false })
+				this.setState(state => ({awaitingServer: false}))
 			} else {
 				this.setState({ renderOfflineMessage: true })
 			}
@@ -476,7 +476,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		unlikeRecipe = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				await this.setState({ awaitingServer: true })
+				this.setState(state => ({awaitingServer: true }))
 				try {
 					const unlikePosted = await destroyRecipeLike(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
 					if (unlikePosted) {
@@ -486,7 +486,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState({ renderOfflineMessage: true })
 				}
-				await this.setState({ awaitingServer: false })
+				this.setState(state => ({awaitingServer: false}))
 			} else {
 				this.setState({ renderOfflineMessage: true })
 			}
@@ -495,7 +495,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		makeRecipe = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				await this.setState({ awaitingServer: true })
+				this.setState(state => ({awaitingServer: true }))
 				try {
 					const makePosted = await postRecipeMake(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
 					if (makePosted) {
@@ -505,7 +505,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState({ renderOfflineMessage: true })
 				}
-				await this.setState({ awaitingServer: false })
+				this.setState(state => ({awaitingServer: false}))
 			} else {
 				this.setState({ renderOfflineMessage: true })
 			}
@@ -514,7 +514,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		reShareRecipe = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				await this.setState({ awaitingServer: true })
+				this.setState(state => ({awaitingServer: true }))
 				try {
 					const reSharePosted = await postReShare(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
 					if (reSharePosted) {
@@ -524,7 +524,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState({ renderOfflineMessage: true })
 				}
-				await this.setState({ awaitingServer: false })
+				this.setState(state => ({awaitingServer: false}))
 			} else {
 				this.setState({ renderOfflineMessage: true })
 			}
@@ -533,7 +533,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		unReShareRecipe = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				await this.setState({ awaitingServer: true })
+				this.setState(state => ({awaitingServer: true }))
 				try {
 					const unReShared = await destroyReShare(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
 					if (unReShared) {
@@ -543,7 +543,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState({ renderOfflineMessage: true })
 				}
-				await this.setState({ awaitingServer: false })
+				this.setState(state => ({awaitingServer: false}))
 			} else {
 				this.setState({ renderOfflineMessage: true })
 			}
@@ -595,7 +595,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		deleteMakePic = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				await this.setState({ awaitingServer: true })
+				this.setState(state => ({awaitingServer: true }))
 				try {
 					const destroyed = await destroyMakePic(this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.state.makePicToDelete)
 					if (destroyed) {
@@ -635,7 +635,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		saveComment = async () => {
-			await this.setState({ awaitingServer: true })
+			this.setState(state => ({awaitingServer: true }))
 			try {
 				const comments = await postComment(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.state.commentText)
 				if (comments) {
@@ -649,7 +649,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 				await this.setState({ renderOfflineMessage: true })
 			}
-			await this.setState({ awaitingServer: false })
+			this.setState(state => ({awaitingServer: false}))
 		}
 
 		handleCommentTextInput = (commentText) => {
@@ -666,7 +666,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		deleteComment = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				await this.setState({ awaitingServer: true })
+				this.setState(state => ({awaitingServer: true }))
 				try {
 					const comments = await destroyComment(this.props.loggedInChef.auth_token, this.state.commentToDelete)
 					if (comments) {
@@ -890,7 +890,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		render() {
 			if (this.props.recipe_details != undefined && this.props.recipe_details != null) {
 				let notShowingAllTimes = this.props.recipe_details.recipe.prep_time == 0 || this.props.recipe_details.recipe.cook_time == 0
-				// console.log(this.props.recipe_details)
+				// console.log(notShowingAllTimes)
 				return (
 					<SpinachAppContainer awaitingServer={this.state.awaitingServer}>
 						{this.state.renderOfflineMessage && (
@@ -967,9 +967,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									</View>
 								</View>
 								{
-									this.props.recipe_details.recipe.prep_time != 0 &&
-									this.props.recipe_details.recipe.cook_time != 0 &&
-									this.props.recipe_details.recipe.total_time != 0 && (
+									(this.props.recipe_details.recipe.prep_time != 0 ||
+									this.props.recipe_details.recipe.cook_time != 0 ||
+									this.props.recipe_details.recipe.total_time != 0) && (
 										<View style={styles.detailsContainer}>
 											<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Timings:</Text>
 											<View style={[

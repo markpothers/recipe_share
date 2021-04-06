@@ -73,7 +73,7 @@ export const styles = StyleSheet.create({
 		//  marginRight: '5%',
 		backgroundColor: 'white',
 		borderRadius: responsiveWidth(1.5),
-		height: responsiveHeight(6),
+		minHeight: responsiveHeight(6),
 		// minWidth: responsiveWidth(25),
 		width: responsiveWidth(59),
 		justifyContent: 'center',
@@ -360,6 +360,6 @@ export const styles = StyleSheet.create({
 		alignItems: 'center',
 		flexDirection: 'row',
 		minHeight: responsiveHeight(6),
-		
+		height: '100%'
 	}
 })

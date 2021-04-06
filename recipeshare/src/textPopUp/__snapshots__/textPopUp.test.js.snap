@@ -9,13 +9,11 @@ exports[`TextPopUp renders with some mock props 1`] = `
 >
   <View
     style={
-      Array [
-        Object {},
-        Object {
-          "height": 1334,
-          "width": 750,
-        },
-      ]
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      }
     }
   >
     <View
@@ -27,19 +25,14 @@ exports[`TextPopUp renders with some mock props 1`] = `
           "borderRadius": 11.25,
           "borderStyle": "solid",
           "borderWidth": 1,
-          "height": 1133.8999999999999,
-          "marginBottom": "7.5%",
-          "marginLeft": "10%",
-          "marginRight": "10%",
-          "marginTop": "7.5%",
-          "width": "80%",
+          "maxHeight": 1133.8999999999999,
+          "width": 600,
         }
       }
     >
       <View
         style={
           Object {
-            "height": 80.03999999999999,
             "justifyContent": "center",
             "paddingBottom": 13.34,
             "paddingTop": 13.34,
@@ -68,13 +61,11 @@ exports[`TextPopUp renders with some mock props 1`] = `
               "borderRadius": 11.25,
               "borderStyle": "solid",
               "borderWidth": 1,
-              "marginLeft": "5%",
-              "marginRight": "5%",
               "overflow": "hidden",
-              "width": "90%",
+              "width": 573.32,
             },
             Object {
-              "height": 933.8,
+              "maxHeight": 933.8,
             },
           ]
         }
@@ -348,8 +339,8 @@ If you have any questions about these Terms, please contact us at:
             "borderRadius": 11.25,
             "flexDirection": "row",
             "justifyContent": "flex-end",
-            "marginTop": "3%",
-            "width": "90%",
+            "marginTop": 13.34,
+            "width": 573.32,
           }
         }
       >
@@ -370,6 +361,7 @@ If you have any questions about these Terms, please contact us at:
               "borderRadius": 11.25,
               "flexDirection": "row",
               "justifyContent": "center",
+              "marginBottom": 13.34,
               "minHeight": 80.03999999999999,
               "minWidth": "40%",
               "opacity": 1,

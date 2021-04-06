@@ -24,7 +24,7 @@ export default class Templates extends React.Component {
 	}
 
 	makeAnAPICall = async () => {
-		await this.setState({ awaitingServer: true })
+		this.setState(state => ({awaitingServer: true }))
 		let response = await apiCall(getNewPassword, this.props.e_mail)
 		if (response.fail) {
 			this.setState({ renderOfflineMessage: true })
@@ -36,7 +36,7 @@ export default class Templates extends React.Component {
 		} else { 
 			//do whatever you should do when things work out.
 		}
-		await this.setState({ awaitingServer: false })
+		this.setState(state => ({awaitingServer: false}))
 	}
 
 	render() {

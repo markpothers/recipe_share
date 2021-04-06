@@ -6,6 +6,7 @@ export const apiCall = async (callback, ...args) => {
     if (netInfoState.isConnected) {
         try {
             response = await callback(...args)
+			// console.log(response)
         } catch (e) {
             response.fail = true
         }

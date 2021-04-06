@@ -17,6 +17,7 @@ const mapStateToProps = (state) => ({
 	serves: state.serves,
 	cuisineChoices: state.cuisineChoices,
 	servesChoices: state.servesChoices,
+	filterChoices: state.filterChoices
 })
 
 const mapDispatchToProps = {
@@ -47,6 +48,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		renderFilterItems = () => {
 			const filtersList = this.props.newRecipe ? this.props.newRecipeFilterSettings : this.props.filter_settings
+			const filterChoices = this.props.filterChoices[this.props.listChoice].map(choice => (choice.charAt(0).toUpperCase() + choice.slice(1)).replace("_", " "))
 			return Object.keys(filtersList).sort().map(category => {
 				return (
 					<View
@@ -56,6 +58,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							<SwitchSized
 								value={filtersList[category]}
 								onValueChange={(value) => this.handleCategoryChange(category, value)}
+								disabled={!filterChoices.includes(category)}
 							/>
 						</View>
 						<View style={styles.categoryContainer}>
@@ -70,20 +73,27 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			this.props.newRecipe ? this.props.handleCategoriesButton() : this.props.closeFilterAndRefresh()
 		}
 
-		handleCategoryChange = (category, value) => {
-			this.props.newRecipe ? this.props.switchNewRecipeFilterValue(category) : this.props.switchRecipesListFilterValue(category, value)
+		handleCategoryChange = async(category, value) => {
+			await this.props.newRecipe ? this.props.switchNewRecipeFilterValue(category) : this.props.switchRecipesListFilterValue(category, value)
+			await this.props.fetchFilterChoices()
 		}
 
-		handleCuisineChange = (cuisine) => {
-			this.props.newRecipe ? this.props.setNewRecipeCuisine(cuisine, "cuisine") : this.props.setRecipesListCuisine(cuisine, this.props.listChoice)
+		handleCuisineChange = async(cuisine) => {
+			await this.props.newRecipe ? this.props.setNewRecipeCuisine(cuisine, "cuisine") : this.props.setRecipesListCuisine(cuisine, this.props.listChoice)
+			await this.props.fetchFilterChoices()
 		}
 
-		handleServesChange = (serves) => {
-			this.props.newRecipe ? this.props.setNewRecipeServes(serves, "serves") : this.props.setRecipesListServes(serves)
+		handleServesChange = async(serves) => {
+			await this.props.newRecipe ? this.props.setNewRecipeServes(serves, "serves") : this.props.setRecipesListServes(serves)
+			await this.props.fetchFilterChoices()
 		}
 
-		handleClearButton = () => {
-			this.props.newRecipe ? this.props.clearNewRecipeFilters() : this.props.clearRecipesListFilters()
+		handleClearButton = async() => {
+			await this.props.newRecipe ? this.props.clearNewRecipeFilters() : this.props.clearRecipesListFilters()
+			await this.handleCuisineChange("Any")
+			await this.handleServesChange("Any")
+			await this.props.clearSearchTerm()
+			await this.props.fetchFilterChoices()
 		}
 
 		render() {

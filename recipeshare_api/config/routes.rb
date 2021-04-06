@@ -24,6 +24,7 @@ end
   delete '/api/recipe_likes', to: 'recipe_likes#destroy'
   delete '/api/re_shares', to: 're_shares#destroy'
   delete '/api/follows', to: 'follows#destroy'
+  get '/api/get_available_filters', to: 'recipes#get_available_filters'
   get '/api/database/manualbackup', to: 'databases#manualBackup'
   get '/api/database/autobackup', to: 'databases#autoBackup'
   get '/api/database/stopautobackup', to: 'databases#stopAutoBackup'

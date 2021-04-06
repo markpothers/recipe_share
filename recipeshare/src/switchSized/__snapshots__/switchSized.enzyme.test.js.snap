@@ -7,11 +7,17 @@ exports[`SwitchSized can be rendered on an android switch is off 1`] = `
 >
   <Switch
     onValueChange={[MockFunction]}
-    style={null}
-    thumbColor="#ececec"
+    style={
+      Array [
+        null,
+        null,
+      ]
+    }
+    thumbColor="#eaeaea"
     trackColor={
       Object {
-        "true": "#4b714299",
+        "false": "#64715599",
+        "true": "#5c8a5199",
       }
     }
     value={false}
@@ -23,9 +29,16 @@ exports[`SwitchSized can be rendered on an android switch is off 1`] = `
       onChange={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      style={null}
-      thumbTintColor="#ececec"
-      trackColorForTrue="#4b714299"
+      style={
+        Array [
+          null,
+          null,
+        ]
+      }
+      thumbTintColor="#eaeaea"
+      trackColorForFalse="#64715599"
+      trackColorForTrue="#5c8a5199"
+      trackTintColor="#64715599"
     >
       <AndroidSwitch
         accessibilityRole="switch"
@@ -34,9 +47,16 @@ exports[`SwitchSized can be rendered on an android switch is off 1`] = `
         onChange={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        style={null}
-        thumbTintColor="#ececec"
-        trackColorForTrue="#4b714299"
+        style={
+          Array [
+            null,
+            null,
+          ]
+        }
+        thumbTintColor="#eaeaea"
+        trackColorForFalse="#64715599"
+        trackColorForTrue="#5c8a5199"
+        trackTintColor="#64715599"
       />
     </AndroidSwitch>
   </Switch>
@@ -50,11 +70,17 @@ exports[`SwitchSized can be rendered on an android where switch is on 1`] = `
 >
   <Switch
     onValueChange={[MockFunction]}
-    style={null}
+    style={
+      Array [
+        null,
+        null,
+      ]
+    }
     thumbColor="#4b7142"
     trackColor={
       Object {
-        "true": "#4b714299",
+        "false": "#64715599",
+        "true": "#5c8a5199",
       }
     }
     value={true}
@@ -66,10 +92,16 @@ exports[`SwitchSized can be rendered on an android where switch is on 1`] = `
       onChange={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      style={null}
+      style={
+        Array [
+          null,
+          null,
+        ]
+      }
       thumbTintColor="#4b7142"
-      trackColorForTrue="#4b714299"
-      trackTintColor="#4b714299"
+      trackColorForFalse="#64715599"
+      trackColorForTrue="#5c8a5199"
+      trackTintColor="#5c8a5199"
     >
       <AndroidSwitch
         accessibilityRole="switch"
@@ -78,10 +110,16 @@ exports[`SwitchSized can be rendered on an android where switch is on 1`] = `
         onChange={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        style={null}
+        style={
+          Array [
+            null,
+            null,
+          ]
+        }
         thumbTintColor="#4b7142"
-        trackColorForTrue="#4b714299"
-        trackTintColor="#4b714299"
+        trackColorForFalse="#64715599"
+        trackColorForTrue="#5c8a5199"
+        trackTintColor="#5c8a5199"
       />
     </AndroidSwitch>
   </Switch>
@@ -96,21 +134,25 @@ exports[`SwitchSized can be rendered on an iPhone with reduced size switches whe
   <Switch
     onValueChange={[MockFunction]}
     style={
-      Object {
-        "transform": Array [
-          Object {
-            "scaleX": 0.7,
-          },
-          Object {
-            "scaleY": 0.7,
-          },
-        ],
-      }
+      Array [
+        Object {
+          "transform": Array [
+            Object {
+              "scaleX": 0.7,
+            },
+            Object {
+              "scaleY": 0.7,
+            },
+          ],
+        },
+        null,
+      ]
     }
     thumbColor={null}
     trackColor={
       Object {
-        "true": "#4b714299",
+        "false": "#fbfbfb",
+        "true": "#5c8a5199",
       }
     }
     value={false}
@@ -120,40 +162,14 @@ exports[`SwitchSized can be rendered on an iPhone with reduced size switches whe
       onChange={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      onTintColor="#4b714299"
+      onTintColor="#5c8a5199"
       style={
         Array [
           Object {
             "height": 31,
             "width": 51,
           },
-          Object {
-            "transform": Array [
-              Object {
-                "scaleX": 0.7,
-              },
-              Object {
-                "scaleY": 0.7,
-              },
-            ],
-          },
-        ]
-      }
-      thumbTintColor={null}
-      value={false}
-    >
-      <RCTSwitch
-        accessibilityRole="switch"
-        onChange={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        onTintColor="#4b714299"
-        style={
           Array [
-            Object {
-              "height": 31,
-              "width": 51,
-            },
             Object {
               "transform": Array [
                 Object {
@@ -164,9 +180,43 @@ exports[`SwitchSized can be rendered on an iPhone with reduced size switches whe
                 },
               ],
             },
+            null,
+          ],
+        ]
+      }
+      thumbTintColor={null}
+      tintColor="#fbfbfb"
+      value={false}
+    >
+      <RCTSwitch
+        accessibilityRole="switch"
+        onChange={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        onTintColor="#5c8a5199"
+        style={
+          Array [
+            Object {
+              "height": 31,
+              "width": 51,
+            },
+            Array [
+              Object {
+                "transform": Array [
+                  Object {
+                    "scaleX": 0.7,
+                  },
+                  Object {
+                    "scaleY": 0.7,
+                  },
+                ],
+              },
+              null,
+            ],
           ]
         }
         thumbTintColor={null}
+        tintColor="#fbfbfb"
         value={false}
       />
     </RCTSwitch>
@@ -182,21 +232,25 @@ exports[`SwitchSized can be rendered on an iPhone with reduced size switches whe
   <Switch
     onValueChange={[MockFunction]}
     style={
-      Object {
-        "transform": Array [
-          Object {
-            "scaleX": 0.7,
-          },
-          Object {
-            "scaleY": 0.7,
-          },
-        ],
-      }
+      Array [
+        Object {
+          "transform": Array [
+            Object {
+              "scaleX": 0.7,
+            },
+            Object {
+              "scaleY": 0.7,
+            },
+          ],
+        },
+        null,
+      ]
     }
     thumbColor="#4b7142"
     trackColor={
       Object {
-        "true": "#4b714299",
+        "false": "#fbfbfb",
+        "true": "#5c8a5199",
       }
     }
     value={true}
@@ -206,40 +260,14 @@ exports[`SwitchSized can be rendered on an iPhone with reduced size switches whe
       onChange={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      onTintColor="#4b714299"
+      onTintColor="#5c8a5199"
       style={
         Array [
           Object {
             "height": 31,
             "width": 51,
           },
-          Object {
-            "transform": Array [
-              Object {
-                "scaleX": 0.7,
-              },
-              Object {
-                "scaleY": 0.7,
-              },
-            ],
-          },
-        ]
-      }
-      thumbTintColor="#4b7142"
-      value={true}
-    >
-      <RCTSwitch
-        accessibilityRole="switch"
-        onChange={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        onTintColor="#4b714299"
-        style={
           Array [
-            Object {
-              "height": 31,
-              "width": 51,
-            },
             Object {
               "transform": Array [
                 Object {
@@ -250,9 +278,43 @@ exports[`SwitchSized can be rendered on an iPhone with reduced size switches whe
                 },
               ],
             },
+            null,
+          ],
+        ]
+      }
+      thumbTintColor="#4b7142"
+      tintColor="#fbfbfb"
+      value={true}
+    >
+      <RCTSwitch
+        accessibilityRole="switch"
+        onChange={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        onTintColor="#5c8a5199"
+        style={
+          Array [
+            Object {
+              "height": 31,
+              "width": 51,
+            },
+            Array [
+              Object {
+                "transform": Array [
+                  Object {
+                    "scaleX": 0.7,
+                  },
+                  Object {
+                    "scaleY": 0.7,
+                  },
+                ],
+              },
+              null,
+            ],
           ]
         }
         thumbTintColor="#4b7142"
+        tintColor="#fbfbfb"
         value={true}
       />
     </RCTSwitch>
@@ -267,11 +329,17 @@ exports[`SwitchSized can be rendered on iPad with regular switch where switch is
 >
   <Switch
     onValueChange={[MockFunction]}
-    style={null}
-    thumbColor="#ececec"
+    style={
+      Array [
+        null,
+        null,
+      ]
+    }
+    thumbColor="#eaeaea"
     trackColor={
       Object {
-        "true": "#4b714299",
+        "false": "#64715599",
+        "true": "#5c8a5199",
       }
     }
     value={false}
@@ -283,9 +351,16 @@ exports[`SwitchSized can be rendered on iPad with regular switch where switch is
       onChange={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      style={null}
-      thumbTintColor="#ececec"
-      trackColorForTrue="#4b714299"
+      style={
+        Array [
+          null,
+          null,
+        ]
+      }
+      thumbTintColor="#eaeaea"
+      trackColorForFalse="#64715599"
+      trackColorForTrue="#5c8a5199"
+      trackTintColor="#64715599"
     >
       <AndroidSwitch
         accessibilityRole="switch"
@@ -294,9 +369,16 @@ exports[`SwitchSized can be rendered on iPad with regular switch where switch is
         onChange={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        style={null}
-        thumbTintColor="#ececec"
-        trackColorForTrue="#4b714299"
+        style={
+          Array [
+            null,
+            null,
+          ]
+        }
+        thumbTintColor="#eaeaea"
+        trackColorForFalse="#64715599"
+        trackColorForTrue="#5c8a5199"
+        trackTintColor="#64715599"
       />
     </AndroidSwitch>
   </Switch>
@@ -310,11 +392,17 @@ exports[`SwitchSized can be rendered on iPad with regular switch where switch is
 >
   <Switch
     onValueChange={[MockFunction]}
-    style={null}
+    style={
+      Array [
+        null,
+        null,
+      ]
+    }
     thumbColor="#4b7142"
     trackColor={
       Object {
-        "true": "#4b714299",
+        "false": "#64715599",
+        "true": "#5c8a5199",
       }
     }
     value={true}
@@ -326,10 +414,16 @@ exports[`SwitchSized can be rendered on iPad with regular switch where switch is
       onChange={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      style={null}
+      style={
+        Array [
+          null,
+          null,
+        ]
+      }
       thumbTintColor="#4b7142"
-      trackColorForTrue="#4b714299"
-      trackTintColor="#4b714299"
+      trackColorForFalse="#64715599"
+      trackColorForTrue="#5c8a5199"
+      trackTintColor="#5c8a5199"
     >
       <AndroidSwitch
         accessibilityRole="switch"
@@ -338,10 +432,16 @@ exports[`SwitchSized can be rendered on iPad with regular switch where switch is
         onChange={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        style={null}
+        style={
+          Array [
+            null,
+            null,
+          ]
+        }
         thumbTintColor="#4b7142"
-        trackColorForTrue="#4b714299"
-        trackTintColor="#4b714299"
+        trackColorForFalse="#64715599"
+        trackColorForTrue="#5c8a5199"
+        trackTintColor="#5c8a5199"
       />
     </AndroidSwitch>
   </Switch>

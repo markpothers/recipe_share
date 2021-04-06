@@ -3,17 +3,19 @@ require 'securerandom'
 class RecipesController < ApplicationController
 
     before_action :define_current_recipe
-    skip_before_action :define_current_recipe, :only => [:index, :create, :details]
+    skip_before_action :define_current_recipe, :only => [:index, :create, :details, :get_available_filters]
 
     def index
-
+        # byebug
         # puts "getting recipe list: #{params["listType"]}"
         @recipes = Recipe.choose_list(params["listType"], params["queryChefID"], params["limit"], params["offset"], params["global_ranking"], @chef.id, params["filters"], params["cuisine"], params["serves"], params["search_term"])
         @recipes = Recipe.get_signed_urls(@recipes)
         @cuisines = Recipe.get_cuisines(params["listType"], @chef.id, params["queryChefID"], params["filters"], params["serves"], params["search_term"])
-        @serves = Recipe.get_serves(params["listType"], @chef.id, params["queryChefID"], params["filters"], params["serves"], params["search_term"])
+        @serves = Recipe.get_serves(params["listType"], @chef.id, params["queryChefID"], params["filters"], params["cuisine"], params["search_term"])
+        @filters = Recipe.get_filters(params["listType"], @chef.id, params["queryChefID"], params["filters"], params["serves"], params["cuisine"], params["search_term"])
         # puts "rendering"
-        render json: {recipes: @recipes, cuisines: @cuisines, serves: @serves}
+        # byebug
+        render json: {recipes: @recipes, cuisines: @cuisines, serves: @serves, filters: @filters}
     end
 
     # def new
@@ -91,6 +93,13 @@ class RecipesController < ApplicationController
         else
             render json: {error: true, message: "Unauthorized"}
         end
+    end
+
+    def get_available_filters
+        @filters = Recipe.get_filters(params["listType"], @chef.id, params["queryChefID"], params["filters"], params["serves"], params["cuisine"], params["search_term"])
+        @cuisines = Recipe.get_cuisines(params["listType"], @chef.id, params["queryChefID"], params["filters"], params["serves"], params["search_term"])
+        @serves = Recipe.get_serves(params["listType"], @chef.id, params["queryChefID"], params["filters"], params["cuisine"], params["search_term"])
+        render json: {filters: @filters, cuisines: @cuisines, serves: @serves}
     end
 
     private

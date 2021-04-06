@@ -1,9 +1,9 @@
-require 'securerandom'
+require "securerandom"
 
 class MakePicsController < ApplicationController
   def create
     # byebug
-    if make_pic_params['chef_id'] == @chef.id || @chef.is_admin == true
+    if make_pic_params["chef_id"] == @chef.id || @chef.is_admin == true
       if make_pic_params[:base64] != ""
         @make_pic = MakePic.new(recipe_id: make_pic_params[:recipe_id], chef_id: make_pic_params[:chef_id])
         hex = SecureRandom.hex(20)

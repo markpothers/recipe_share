@@ -99,7 +99,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		loginChef = async () => {
-			await this.setState({ awaitingServer: true })
+			this.setState(state => ({awaitingServer: true }))
 			if (this.state.rememberEmail) {
 				AsyncStorage.setItem('rememberedEmail', this.props.e_mail)
 			} else {
@@ -134,7 +134,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		forgotPassword = async () => {
-			await this.setState({ awaitingServer: true })
+			this.setState(state => ({awaitingServer: true }))
 			if (this.props.e_mail.length > 0) {
 				let response = await apiCall(getNewPassword, this.props.e_mail)
 				if (response.fail) {
@@ -151,7 +151,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					error: 'forgotPassword'
 				})
 			}
-			await this.setState({ awaitingServer: false })
+			this.setState(state => ({awaitingServer: false}))
 		}
 
 		renderThanksForRegisteringAlertPopUp = () => {

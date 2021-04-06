@@ -110,7 +110,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		submitChef = async () => {
-			await this.setState({ awaitingServer: true })
+			this.setState(state => ({awaitingServer: true }))
 			let response = await apiCall(postChef, this.props.username, this.props.e_mail, this.props.password, this.props.password_confirmation, this.props.country, this.props.image_url, this.props.profile_text)
 			if (response.fail) {
 				this.setState({

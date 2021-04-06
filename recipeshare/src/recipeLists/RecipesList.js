@@ -3,6 +3,7 @@ import { FlatList, TouchableOpacity, AsyncStorage, Animated, Keyboard, Platform 
 import RecipeCard from './RecipeCard'
 import { connect } from 'react-redux'
 import { getRecipeList } from '../fetches/getRecipeList'
+import { getAvailableFilters } from '../fetches/getAvailableFilters'
 import { postRecipeLike } from '../fetches/postRecipeLike'
 import { postReShare } from '../fetches/postReShare'
 import { postRecipeMake } from '../fetches/postRecipeMake'
@@ -21,6 +22,8 @@ import { getChefDetails } from '../fetches/getChefDetails'
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo'
 import SearchBar from '../searchBar/SearchBar.js'
+import { apiCall } from '../auxFunctions/apiCall'
+
 // import Constants from 'expo-constants';
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)
@@ -78,6 +81,11 @@ const mapDispatchToProps = {
 	storeServesChoices: (listChoice, serves) => {
 		return dispatch => {
 			dispatch({ type: 'STORE_SERVES_CHOICES', listChoice: listChoice, serves: serves })
+		}
+	},
+	storeFilterChoices: (listChoice, filters) => {
+		return dispatch => {
+			dispatch({ type: 'STORE_FILTER_CHOICES', listChoice: listChoice, filters: filters })
 		}
 	}
 	// clearListedRecipes: (listChoice) => {
@@ -157,11 +165,11 @@ export class RecipesList extends React.Component {
 			awaitingServer: true
 		})
 		this.fetchRecipeList()
-		await this.setState({ awaitingServer: false })
+		this.setState(() => ({ awaitingServer: false }))
 	}
 
 	fetchRecipeList = async () => {
-		await this.setState({ awaitingServer: true })
+		this.setState(() => ({ awaitingServer: true }))
 		try {
 			const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
 			let result = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.filterCuisines[this.props.listChoice], this.props.serves, this.state.searchTerm, this.abortController)
@@ -171,7 +179,8 @@ export class RecipesList extends React.Component {
 			this.props.storeRecipeList(this.props["listChoice"], result.recipes)
 			this.props.storeCuisinesChoices(this.props["listChoice"], result.cuisines)
 			this.props.storeServesChoices(this.props["listChoice"], result.serves)
-			await this.setState({ awaitingServer: false })
+			this.props.storeFilterChoices(this.props["listChoice"], result.filters)
+			this.setState(() => ({ awaitingServer: false }))
 		}
 		catch (e) {
 			switch (e.name) {
@@ -194,15 +203,31 @@ export class RecipesList extends React.Component {
 							}
 						})
 					}
-					await this.setState({ awaitingServer: false })
+					this.setState(() => ({ awaitingServer: false }))
 					break
 				default: break
 			}
 		}
 	}
 
+	fetchFilterChoices = async () => {
+		try {
+			const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
+			let result = await getAvailableFilters(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.filterCuisines[this.props.listChoice], this.props.serves, this.state.searchTerm, this.abortController)
+			this.props.storeCuisinesChoices(this.props["listChoice"], result.cuisines)
+			this.props.storeServesChoices(this.props["listChoice"], result.serves)
+			this.props.storeFilterChoices(this.props["listChoice"], result.filters)
+		}
+		catch (e) {
+			switch (e.name) {
+				case 'Logout': { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) } break
+				default: break
+			}
+		}
+	}
+
 	fetchAdditionalRecipesForList = async () => {
-		await this.setState({ awaitingServer: true })
+		this.setState(() => ({ awaitingServer: true }))
 		try {
 			const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
 			const result = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.filterCuisines[this.props.listChoice], this.props.serves, this.state.searchTerm)
@@ -213,7 +238,7 @@ export class RecipesList extends React.Component {
 			if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 			// console.log('failed to get ADDITIONAL recipes')
 		}
-		await this.setState({ awaitingServer: false })
+		this.setState(() => ({ awaitingServer: false }))
 	}
 
 	navigateToRecipeDetails = async (recipeID, commenting = false) => {
@@ -261,17 +286,17 @@ export class RecipesList extends React.Component {
 				}
 			})
 		}
-		await this.setState({ awaitingServer: false })
+		this.setState(() => ({ awaitingServer: false }))
 	}
 
 	navigateToChefDetails = async (chefID, recipeID) => {
-		await this.setState({ awaitingServer: true })
+		this.setState(() => ({ awaitingServer: true }))
 		try {
 			const chefDetails = await getChefDetails(chefID, this.props.loggedInChef.auth_token)
 			if (chefDetails) {
 				this.props.storeChefDetails(chefDetails)
 				saveChefDetailsLocally(chefDetails, this.props.loggedInChef.id)
-				await this.setState({ awaitingServer: false })
+				this.setState(() => ({ awaitingServer: false }))
 				this.props.navigation.navigate('ChefDetails', { chefID: chefID })
 			}
 		} catch (e) {
@@ -306,7 +331,7 @@ export class RecipesList extends React.Component {
 				}
 			})
 		}
-		await this.setState({ awaitingServer: false })
+		this.setState(() => ({ awaitingServer: false }))
 	}
 
 	removeDataFromCantGetList = (recipeID) => {
@@ -339,7 +364,7 @@ export class RecipesList extends React.Component {
 	refresh = async () => {
 		await this.setState({ limit: 20, offset: 0, awaitingServer: true })
 		await this.fetchRecipeList()
-		await this.setState({ awaitingServer: false })
+		this.setState(() => ({ awaitingServer: false }))
 	}
 
 	onEndReached = async () => {
@@ -354,10 +379,41 @@ export class RecipesList extends React.Component {
 	//   this.props.respondToListScroll(e)
 	// }
 
+	likeRecipe2 = async () => {
+		this.setState(() => ({ awaitingServer: true }))
+		let response = await apiCall(postRecipeLike, recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
+		if (response.fail) { //internet connection or timeout
+			this.setState({
+				renderOfflineMessage: true,
+				awaitingServer: false
+			})
+		} else if (response.error) { //error from api
+			if (response.error.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+			await this.setState(state => {
+				return ({
+					dataICantGet: [...state.dataICantGet, recipeID],
+					awaitingServer: false
+				})
+			})
+		} else { //success
+			const recipes = this.props[this.props["listChoice"] + `_Recipes`].map((recipe) => {
+				if (recipe['id'] === recipeID) {
+					recipe['likes_count'] = parseInt(recipe['likes_count']) + 1
+					recipe['chef_liked'] = 1
+					return recipe
+				} else {
+					return recipe
+				}
+			})
+			this.props.storeRecipeList(this.props["listChoice"], recipes)
+			this.props.fetchChefDetails && this.props.fetchChefDetails()
+		}
+	}
+
 	likeRecipe = async (recipeID) => {
 		let netInfoState = await NetInfo.fetch()
 		if (netInfoState.isConnected) {
-			await this.setState({ awaitingServer: true })
+			this.setState(() => ({ awaitingServer: true }))
 			try {
 				const likePosted = await postRecipeLike(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
 				if (likePosted) {
@@ -370,29 +426,28 @@ export class RecipesList extends React.Component {
 							return recipe
 						}
 					})
-					this.props.storeRecipeList(this.props["listChoice"], recipes)
-					this.props.fetchChefDetails && this.props.fetchChefDetails()
+					await this.props.storeRecipeList(this.props["listChoice"], recipes)
+					this.props.fetchChefDetails && await this.props.fetchChefDetails()
 				}
 			} catch (e) {
 				if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-				await this.setState(state => {
-					return ({
-						dataICantGet: [...state.dataICantGet, recipeID],
-						awaitingServer: false
-					})
-				})
+				this.setState(state => ({ dataICantGet: [...state.dataICantGet, recipeID] }))
 			}
-			await this.setState({ awaitingServer: false })
+			this.setState(() => ({ awaitingServer: false }))
 		} else {
 			this.setState({ renderOfflineMessage: true })
 		}
+	}
+
+	updateRecipePropCounts = (currentRecipes, property, add) => {
+
 	}
 
 	unlikeRecipe = async (recipeID) => {
 		// console.log
 		let netInfoState = await NetInfo.fetch()
 		if (netInfoState.isConnected) {
-			await this.setState({ awaitingServer: true })
+			this.setState(() => ({ awaitingServer: true }))
 			try {
 				const unlikePosted = await destroyRecipeLike(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
 				if (unlikePosted) {
@@ -410,14 +465,9 @@ export class RecipesList extends React.Component {
 				}
 			} catch (e) {
 				if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-				await this.setState(state => {
-					return ({
-						dataICantGet: [...state.dataICantGet, recipeID],
-						awaitingServer: false
-					})
-				})
+				await this.setState(state => ({ dataICantGet: [...state.dataICantGet, recipeID] }))
 			}
-			await this.setState({ awaitingServer: false })
+			this.setState(() => ({ awaitingServer: false }))
 		} else {
 			this.setState({ renderOfflineMessage: true })
 		}
@@ -427,7 +477,7 @@ export class RecipesList extends React.Component {
 		// console.log
 		let netInfoState = await NetInfo.fetch()
 		if (netInfoState.isConnected) {
-			await this.setState({ awaitingServer: true })
+			this.setState(() => ({ awaitingServer: true }))
 			try {
 				const makePosted = await postRecipeMake(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
 				if (makePosted) {
@@ -444,14 +494,9 @@ export class RecipesList extends React.Component {
 				}
 			} catch (e) {
 				if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-				await this.setState(state => {
-					return ({
-						dataICantGet: [...state.dataICantGet, recipeID],
-						awaitingServer: false
-					})
-				})
+				await this.setState(state => ({ dataICantGet: [...state.dataICantGet, recipeID] }))
 			}
-			await this.setState({ awaitingServer: false })
+			this.setState(() => ({ awaitingServer: false }))
 		} else {
 			this.setState({ renderOfflineMessage: true })
 		}
@@ -461,7 +506,7 @@ export class RecipesList extends React.Component {
 		// console.log
 		let netInfoState = await NetInfo.fetch()
 		if (netInfoState.isConnected) {
-			await this.setState({ awaitingServer: true })
+			this.setState(() => ({ awaitingServer: true }))
 			try {
 				const reSharePosted = await postReShare(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
 				if (reSharePosted) {
@@ -479,24 +524,18 @@ export class RecipesList extends React.Component {
 				}
 			} catch (e) {
 				if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-				await this.setState(state => {
-					return ({
-						dataICantGet: [...state.dataICantGet, recipeID],
-						awaitingServer: false
-					})
-				})
+				await this.setState(state => ({ dataICantGet: [...state.dataICantGet, recipeID] }))
 			}
-			await this.setState({ awaitingServer: false })
+			this.setState(() => ({ awaitingServer: false }))
 		} else {
 			this.setState({ renderOfflineMessage: true })
 		}
 	}
 
 	unReShareRecipe = async (recipeID) => {
-		// console.log
 		let netInfoState = await NetInfo.fetch()
 		if (netInfoState.isConnected) {
-			await this.setState({ awaitingServer: true })
+			this.setState(() => ({ awaitingServer: true }))
 			try {
 				const unReShared = await destroyReShare(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
 				if (unReShared) {
@@ -514,14 +553,9 @@ export class RecipesList extends React.Component {
 				}
 			} catch (e) {
 				if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-				await this.setState(state => {
-					return ({
-						dataICantGet: [...state.dataICantGet, recipeID],
-						awaitingServer: false
-					})
-				})
+				await this.setState(state => ({ dataICantGet: [...state.dataICantGet, recipeID] }))
 			}
-			await this.setState({ awaitingServer: false })
+			this.setState(() => ({ awaitingServer: false }))
 		} else {
 			this.setState({ renderOfflineMessage: true })
 		}
@@ -672,6 +706,8 @@ export class RecipesList extends React.Component {
 							confirmButtonText={`Apply \n& Close`}
 							title={"Apply filters to recipes list"}
 							listChoice={this.props["listChoice"]}
+							fetchFilterChoices={this.fetchFilterChoices}
+							clearSearchTerm={async() => this.setState({ searchTerm: "" })}
 						/>
 					)}
 				</TouchableOpacity>

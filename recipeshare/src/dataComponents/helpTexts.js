@@ -23,11 +23,11 @@ const helpTexts = {
 	},
 	ingredients: {
 		title: "Ingredients",
-		text: "Provide the ingredients needed to make this recipe.\n\nIf you want, you can add an image at each step.\n\nType a few letters and autocomplete should provide you with some options. If your ingredient isn't present, just type it in and it'll be available next time.\n\nSort ingredients by holding the button on the left and dragging each step to re-order the list.\n\nIf you got this recipe from a blog or other web site you can leave out the ingredients and just put a link below so we can just display that page.",
+		text: "Provide the ingredients needed to make this recipe.\n\nType a few letters and autocomplete should provide you with some options. If your ingredient isn't present, just type it in and it'll be available next time.\n\nSort ingredients by holding the button on the left and dragging each step to re-order the list.",
 	},
 	instructions: {
 		title: "Instructions",
-		text: "Provide step-by-step instructions to make this recipe. If you want, you can add an image at each step.\n\nSort steps by holding the button on the left and dragging each step to re-order the list.\n\nIf you got this recipe from a blog or other web site you can leave this blank and just put a link below so we can just display that page."
+		text: "Provide step-by-step instructions to make this recipe.\n\nIf you want, you can add an image at each step.\n\nSort steps by holding the button on the left and dragging each step to re-order the list."
 	},
 	filterCategories: {
 		title: "Filter Categories",
@@ -39,7 +39,7 @@ const helpTexts = {
 	},
 	acknowledgementLink: {
 		title: "Show blog preview",
-		text: "Turn this on to see a preview of the blog you're linking.\n\nIf you do this, you don't need to worry about adding ingredients and instructions as you'll be able to see them directly on the blog page."
+		text: `Display as full recipe: tell us ingredients and instructions and we'll generate a whole recipe to view.\n\nDisplay as blog preview: just give us the link to the blog the recipe came from and we'll display a preview of that so you don't need to input the ingredients and instructions yourself.`
 	}
 }
 

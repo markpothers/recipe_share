@@ -91,11 +91,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		componentDidMount = async () => {
-			await this.setState({ awaitingServer: true })
+			this.setState(state => ({awaitingServer: true }))
 			await this.generateHeaderButtonList()
 			this.addDynamicMenuButtonsToHeader()
 			// await this.fetchChefDetails()
-			await this.setState({ awaitingServer: false })
+			this.setState(state => ({awaitingServer: false}))
 		}
 
 		componentDidUpdate = async (prevProps) => {
@@ -143,7 +143,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		followChef = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				await this.setState({ awaitingServer: true })
+				this.setState(state => ({awaitingServer: true }))
 				try {
 					const followPosted = await postFollow(this.props.loggedInChef.id, this.props.route.params.chefID, this.props.loggedInChef.auth_token)
 					if (followPosted) {
@@ -154,7 +154,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState({ renderOfflineMessage: true })
 				}
-				await this.setState({ awaitingServer: false })
+				this.setState(state => ({awaitingServer: false}))
 			} else {
 				this.setState({ renderOfflineMessage: true })
 			}
@@ -163,7 +163,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		unFollowChef = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				await this.setState({ awaitingServer: true })
+				this.setState(state => ({awaitingServer: true }))
 				try {
 					const followPosted = await destroyFollow(this.props.loggedInChef.id, this.props.route.params.chefID, this.props.loggedInChef.auth_token)
 					if (followPosted) {
@@ -174,7 +174,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					await this.setState({ renderOfflineMessage: true })
 				}
-				await this.setState({ awaitingServer: false })
+				this.setState(state => ({awaitingServer: false}))
 			} else {
 				this.setState({ renderOfflineMessage: true })
 			}

@@ -3,12 +3,12 @@ import NetInfo from '../../__mocks__/@react-native-community/netinfo'
 
 describe('apiCall', () => {
 
-    let mockSuccessfullCallback
+    let mockSuccessfulCallback
     let mockFailingCallback
     let mockErrorCallback
 
     beforeEach(() => {
-        mockSuccessfullCallback = jest.fn(() => {
+        mockSuccessfulCallback = jest.fn(() => {
             return {mockResult: true}
         })
 
@@ -25,30 +25,30 @@ describe('apiCall', () => {
     })
 
     test('callback is called with no arguments', async() => {
-        let response = await apiCall(mockSuccessfullCallback)
-        expect(mockSuccessfullCallback).toHaveBeenCalled()
-        expect(mockSuccessfullCallback).toHaveBeenCalledWith()
+        let response = await apiCall(mockSuccessfulCallback)
+        expect(mockSuccessfulCallback).toHaveBeenCalled()
+        expect(mockSuccessfulCallback).toHaveBeenCalledWith()
         expect(response).toEqual({mockResult: true})
     })
 
     test('callback is called with 1 argument', async() => {
-        let response = await apiCall(mockSuccessfullCallback, 22)
-        expect(mockSuccessfullCallback).toHaveBeenCalled()
-        expect(mockSuccessfullCallback).toHaveBeenCalledWith(22)
+        let response = await apiCall(mockSuccessfulCallback, 22)
+        expect(mockSuccessfulCallback).toHaveBeenCalled()
+        expect(mockSuccessfulCallback).toHaveBeenCalledWith(22)
         expect(response).toEqual({mockResult: true})
     })
 
     test('callback is called with 2 arguments', async() => {
-        let response = await apiCall(mockSuccessfullCallback, 22, "test")
-        expect(mockSuccessfullCallback).toHaveBeenCalled()
-        expect(mockSuccessfullCallback).toHaveBeenCalledWith(22, "test")
+        let response = await apiCall(mockSuccessfulCallback, 22, "test")
+        expect(mockSuccessfulCallback).toHaveBeenCalled()
+        expect(mockSuccessfulCallback).toHaveBeenCalledWith(22, "test")
         expect(response).toEqual({mockResult: true})
     })
 
     test('callback is called with 3 arguments', async() => {
-        let response = await apiCall(mockSuccessfullCallback, 22, "test", true)
-        expect(mockSuccessfullCallback).toHaveBeenCalled()
-        expect(mockSuccessfullCallback).toHaveBeenCalledWith(22, "test", true)
+        let response = await apiCall(mockSuccessfulCallback, 22, "test", true)
+        expect(mockSuccessfulCallback).toHaveBeenCalled()
+        expect(mockSuccessfulCallback).toHaveBeenCalledWith(22, "test", true)
         expect(response).toEqual({mockResult: true})
     })
 
@@ -61,8 +61,8 @@ describe('apiCall', () => {
 
     test('response fails if internet not connected', async() => {
         NetInfo.setReturnValue({isConnected: false})
-        let response = await apiCall(mockSuccessfullCallback, 22)
-        expect(mockSuccessfullCallback).not.toHaveBeenCalled()
+        let response = await apiCall(mockSuccessfulCallback, 22)
+        expect(mockSuccessfulCallback).not.toHaveBeenCalled()
         expect(response).toEqual({fail: true})
     })
     test('response has an error key if the call returns an error', async() => {

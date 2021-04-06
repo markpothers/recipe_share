@@ -16,11 +16,15 @@ export default function SwitchSized(props) {
 	return (
 		<Switch
 			//reduce size on iPhones (deviceType == 1 ) but not on anything else
-			style={(Platform.OS === 'ios' && deviceType == 1 ? { transform: [{ scaleX: .7 }, { scaleY: .7 }] } : null)}
+			style={[
+				(Platform.OS === 'ios' && deviceType == 1 ? { transform: [{ scaleX: .7 }, { scaleY: .7 }] } : null),
+				(props.disabled ? {opacity: 0.3} : null)
+			]}
 			value={props.value}
 			onValueChange={props.onValueChange}
-			trackColor={{ true: '#4b714299', false: Platform.OS == 'android' ? '#d3d3d3' : '#fbfbfb' }}
-			thumbColor={(Platform.OS === 'ios' ? (props.value ? "#4b7142" : null) : (props.value ? "#4b7142" : '#ececec'))}
+			trackColor={props.trackColor ? props.trackColor : ({true: '#5c8a5199', false: Platform.OS == 'android' ? '#64715599' : '#fbfbfb' })}
+			thumbColor={props.thumbColor ? props.thumbColor : (Platform.OS === 'ios' ? (props.value ? "#4b7142" : null) : (props.value ? "#4b7142" : '#eaeaea'))}
+			disabled={props.disabled}
 		/>
 	)
 }
