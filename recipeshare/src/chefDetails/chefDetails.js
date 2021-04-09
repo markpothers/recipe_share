@@ -72,7 +72,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					})
 				}
 			]
-			await this.setState({ headerButtons: headerButtons })
+			this.setState(()=>({ headerButtons: headerButtons }))
 		}
 
 		renderDynamicMenu = () => {
@@ -91,11 +91,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		componentDidMount = async () => {
-			this.setState(state => ({awaitingServer: true }))
+			this.setState(() => ({awaitingServer: true }))
 			await this.generateHeaderButtonList()
 			this.addDynamicMenuButtonsToHeader()
 			// await this.fetchChefDetails()
-			this.setState(state => ({awaitingServer: false}))
+			this.setState(() => ({awaitingServer: false}))
 		}
 
 		componentDidUpdate = async (prevProps) => {
@@ -108,9 +108,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		respondToFocus = async () => {
-			// await this.setState({awaitingServer: true})
+			// this.setState(() => ({awaitingServer: true }))
 			// await this.fetchChefDetails()
-			// await this.setState({awaitingServer: false})
+			// this.setState(() => ({awaitingServer: false}))
 		}
 
 		componentWillUnmount = () => {
@@ -143,7 +143,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		followChef = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				this.setState(state => ({awaitingServer: true }))
+				this.setState(() => ({awaitingServer: true }))
 				try {
 					const followPosted = await postFollow(this.props.loggedInChef.id, this.props.route.params.chefID, this.props.loggedInChef.auth_token)
 					if (followPosted) {
@@ -152,9 +152,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					}
 				} catch (e) {
 					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-					await this.setState({ renderOfflineMessage: true })
+					this.setState(()=>({ renderOfflineMessage: true }))
 				}
-				this.setState(state => ({awaitingServer: false}))
+				this.setState(() => ({awaitingServer: false}))
 			} else {
 				this.setState({ renderOfflineMessage: true })
 			}
@@ -163,7 +163,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		unFollowChef = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				this.setState(state => ({awaitingServer: true }))
+				this.setState(() => ({awaitingServer: true }))
 				try {
 					const followPosted = await destroyFollow(this.props.loggedInChef.id, this.props.route.params.chefID, this.props.loggedInChef.auth_token)
 					if (followPosted) {
@@ -172,9 +172,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					}
 				} catch (e) {
 					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-					await this.setState({ renderOfflineMessage: true })
+					this.setState(()=>({ renderOfflineMessage: true }))
 				}
-				this.setState(state => ({awaitingServer: false}))
+				this.setState(() => ({awaitingServer: false}))
 			} else {
 				this.setState({ renderOfflineMessage: true })
 			}
@@ -183,7 +183,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		render() {
 			if (this.props.chefs_details[`chef${this.props.route.params.chefID}`] !== undefined) {
 				const chef_details = this.props.chefs_details[`chef${this.props.route.params.chefID}`]
-				// console.log(chef_details.chef_followed)
+				// console.log(chef_details)
 				return (
 					<SpinachAppContainer awaitingServer={this.state.awaitingServer}>
 						{this.state.renderOfflineMessage && (

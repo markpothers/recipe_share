@@ -159,11 +159,11 @@ export class RecipesList extends React.Component {
 	}
 
 	respondToFocus = async () => {
-		await this.setState({
+		this.setState(()=>({
 			offset: 0,
 			isDisplayed: true,
 			awaitingServer: true
-		})
+		}))
 		this.fetchRecipeList()
 		this.setState(() => ({ awaitingServer: false }))
 	}
@@ -196,10 +196,10 @@ export class RecipesList extends React.Component {
 									this.props.storeRecipeList(this.props["listChoice"], locallySavedListData[this.props["listChoice"] + `_Recipes`])
 								}
 								else {
-									await this.setState({ renderOfflineMessage: true })
+									this.setState(()=>({ renderOfflineMessage: true }))
 								}
 							} else {
-								await this.setState({ renderOfflineMessage: true })
+								this.setState(()=>({ renderOfflineMessage: true }))
 							}
 						})
 					}
@@ -242,17 +242,17 @@ export class RecipesList extends React.Component {
 	}
 
 	navigateToRecipeDetails = async (recipeID, commenting = false) => {
-		await this.setState({ awaitingServer: true, })
+		this.setState(()=>({ awaitingServer: true }))
 		try {
 			const recipeDetails = await getRecipeDetails(recipeID, this.props.loggedInChef.auth_token)
 			if (recipeDetails) {
 				// console.log(recipeDetails.recipe)
 				saveRecipeDetailsLocally(recipeDetails, this.props.loggedInChef.id)
 				await this.props.storeRecipeDetails(recipeDetails)
-				await this.setState({
+				this.setState(()=>({
 					awaitingServer: false,
 					filterDisplayed: false
-				})
+				}))
 				this.props.navigation.navigate('RecipeDetails', { recipeID: recipeID, commenting: commenting })
 			}
 		} catch (e) {
@@ -362,14 +362,14 @@ export class RecipesList extends React.Component {
 	}
 
 	refresh = async () => {
-		await this.setState({ limit: 20, offset: 0, awaitingServer: true })
+		this.setState(()=>({ limit: 20, offset: 0, awaitingServer: true }))
 		await this.fetchRecipeList()
 		this.setState(() => ({ awaitingServer: false }))
 	}
 
 	onEndReached = async () => {
 		if (this.props[this.props["listChoice"] + `_Recipes`].length % 20 == 0) {
-			await this.setState({ offset: this.state.offset + 20 })
+			this.setState(()=>({ offset: this.state.offset + 20 }))
 			this.fetchAdditionalRecipesForList()
 		}
 	}
@@ -571,12 +571,12 @@ export class RecipesList extends React.Component {
 	}
 
 	setSearchTerm = async (searchTerm) => {
-		await this.setState({ searchTerm: searchTerm })
+		this.setState(()=>({ searchTerm: searchTerm }))
 		this.fetchRecipeList()
 	}
 
 	handleSearchBarFocus = async () => {
-		await this.setState({ searchBarZIndex: 1 })
+		this.setState(()=>({ searchBarZIndex: 1 }))
 		this.searchBar.current.focus()
 	}
 

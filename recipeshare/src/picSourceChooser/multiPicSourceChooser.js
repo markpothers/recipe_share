@@ -19,11 +19,11 @@ export default class MultiPicSourceChooser extends React.Component {
 	componentDidMount = async () => {
 		let cameraRollPermission = await Permissions.askAsync(Permissions.MEDIA_LIBRARY)
 		let cameraPermission = await Permissions.askAsync(Permissions.CAMERA)
-		await this.setState({
+		this.setState(()=>({
 			hasCameraRollPermission: cameraRollPermission.permissions.mediaLibrary.granted,
 			hasCameraPermission: cameraPermission.permissions.camera.granted,
 			originalImages: [...this.props.imageSources]
-		})
+		}))
 	}
 
 	addPhoto = async () => {
@@ -77,12 +77,12 @@ export default class MultiPicSourceChooser extends React.Component {
 
 	deleteImage = async () => {
 		if (this.props.imageSources.length == 1) { //go back to completely empty list of images
-			await this.setState({ imageIndex: 0 })
+			this.setState(()=>({ imageIndex: 0 }))
 			await this.props.saveImage([{ uri: '' }])
 		} else {
 			let newImages = this.props.imageSources
 			newImages.splice(this.state.imageIndex, 1)
-			await this.setState({ imageIndex: this.state.imageIndex > newImages.length - 1 ? newImages.length - 1 : this.state.imageIndex })
+			this.setState(()=>({ imageIndex: this.state.imageIndex > newImages.length - 1 ? newImages.length - 1 : this.state.imageIndex }))
 			await this.props.saveImage(newImages)
 		}
 	}
@@ -92,7 +92,7 @@ export default class MultiPicSourceChooser extends React.Component {
 		let newImages = [...this.props.imageSources.slice(0, this.state.imageIndex), ...this.props.imageSources.slice(this.state.imageIndex + 1)]
 		let newImageIndex = this.state.imageIndex > 0 ? this.state.imageIndex - 1 : 0
 		newImages.splice(newImageIndex, 0, thisImage)
-		await this.setState({ imageIndex: newImageIndex })
+		this.setState(()=>({ imageIndex: newImageIndex }))
 		await this.props.saveImage(newImages)
 		this.flatList.scrollToIndex({ index: newImageIndex })
 	}
@@ -102,7 +102,7 @@ export default class MultiPicSourceChooser extends React.Component {
 		let newImages = [...this.props.imageSources.slice(0, this.state.imageIndex), ...this.props.imageSources.slice(this.state.imageIndex + 1)]
 		let newImageIndex = this.state.imageIndex < this.props.imageSources.length - 1 ? this.state.imageIndex + 1 : this.state.imageIndex
 		newImages.splice(newImageIndex, 0, thisImage)
-		await this.setState({ imageIndex: newImageIndex })
+		this.setState(()=>({ imageIndex: newImageIndex }))
 		await this.props.saveImage(newImages)
 		this.flatList.scrollToIndex({ index: newImageIndex })
 	}

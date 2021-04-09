@@ -62,6 +62,7 @@ class Recipe < ApplicationRecord
 
   def self.get_signed_urls(recipes_list)
     recipes_list.each { |recipe| recipe.image_url = ApplicationRecord.get_signed_url(recipe.image_url) }
+    recipes_list.each { |recipe| recipe.chefimage_url = ApplicationRecord.get_signed_url(recipe.chefimage_url) }
     return recipes_list
   end
 

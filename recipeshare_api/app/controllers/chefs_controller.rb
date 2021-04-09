@@ -10,6 +10,7 @@ class ChefsController < ApplicationController
                 if @chef.activated
                     if (!@chef.password_is_auto) || (@chef.password_is_auto && (Time.now - @chef.password_created_at <= 86400))
                         if (@chef.authenticate(chef_params[:password]))
+                            @chef.image_url = ApplicationRecord.get_signed_url(@chef.image_url)
                             puts "logging in!"
                             render json: @chef, methods: [:auth_token]
                         else

@@ -16,10 +16,10 @@ export default class PicSourceChooser extends React.PureComponent {
 
 	componentDidMount = async () => {
 		let cameraRollPermission = await Permissions.askAsync(Permissions.MEDIA_LIBRARY)
-		await this.setState({ hasCameraRollPermission: cameraRollPermission.permissions.mediaLibrary.granted })
+		this.setState(()=>({ hasCameraRollPermission: cameraRollPermission.permissions.mediaLibrary.granted }))
 		let cameraPermission = await Permissions.askAsync(Permissions.CAMERA)
-		await this.setState({ hasCameraPermission: cameraPermission.permissions.camera.granted })
-		await this.setState({ originalImage: this.props.originalImage })
+		this.setState(()=>({ hasCameraPermission: cameraPermission.permissions.camera.granted }))
+		this.setState(()=>({ originalImage: this.props.originalImage }))
 	}
 
 	pickImage = async () => {

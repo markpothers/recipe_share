@@ -99,7 +99,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		loginChef = async () => {
-			this.setState(state => ({awaitingServer: true }))
+			this.setState(() => ({awaitingServer: true }))
 			if (this.state.rememberEmail) {
 				AsyncStorage.setItem('rememberedEmail', this.props.e_mail)
 			} else {
@@ -112,11 +112,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					awaitingServer: false
 				})
 			} else if (response.error) {
-				await this.setState({
+				this.setState(()=>({
 					loginError: true,
 					error: response.message,
 					awaitingServer: false
-				})
+				}))
 			} else { // we don't want to differentiate between response and response.error for security reasons
 				if (this.props.stayingLoggedIn) {
 					AsyncStorage.setItem('chef', JSON.stringify(response), () => {
@@ -134,24 +134,24 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		forgotPassword = async () => {
-			this.setState(state => ({awaitingServer: true }))
+			this.setState(() => ({awaitingServer: true }))
 			if (this.props.e_mail.length > 0) {
 				let response = await apiCall(getNewPassword, this.props.e_mail)
 				if (response.fail) {
-					await this.setState({ renderOfflineMessage: true })
+					this.setState(()=>({ renderOfflineMessage: true }))
 				} else { // we don't want to differentiate between response and response.error for security reasons
-					await this.setState({
+					this.setState(()=>({
 						loginError: true,
 						error: response.message
-					})
+					}))
 				}
 			} else {
-				await this.setState({
+				this.setState(()=>({
 					loginError: true,
 					error: 'forgotPassword'
-				})
+				}))
 			}
-			this.setState(state => ({awaitingServer: false}))
+			this.setState(() => ({awaitingServer: false}))
 		}
 
 		renderThanksForRegisteringAlertPopUp = () => {

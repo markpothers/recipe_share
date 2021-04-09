@@ -240,7 +240,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					return ''
 				}
 			})
-			await this.setState({
+			this.setState(()=>({
 				instructionHeights: recipeDetails.instructions.map(() => responsiveHeight(7.2)),
 				newRecipeDetails: {
 					recipeId: recipe.id,
@@ -286,7 +286,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					description: recipe.description,
 					showBlogPreview: recipe.show_blog_preview,
 				}
-			})
+			}))
 			this.saveNewRecipeDetailsLocally()
 		}
 
@@ -313,7 +313,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				await this.setRecipeParamsForEditing(this.props.route.params.recipe_details)
 				this.setState({ alertPopUpShowing: false })
 			} else {
-				await this.setState({
+				this.setState(()=>({
 					alertPopUpShowing: false,
 					newRecipeDetails: {
 						recipeId: null,
@@ -367,10 +367,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					},
 					instructionHeights: [], //responsiveHeight(6.5)],
 					averageInstructionHeight: 0, //responsiveHeight(6.5),
-				})
+				}))
 				this.props.navigation.setOptions({
 					headerTitle: props => <AppHeader {...props} text={"Create a New Recipe"} route={this.props.route} />
-				});
+				})
 			}
 		}
 
@@ -379,7 +379,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		primarySourceChosen = async () => {
-			await this.setState({ choosingPrimaryPicture: false })
+			this.setState(()=>({ choosingPrimaryPicture: false }))
 		}
 
 		renderPrimaryPictureChooser = () => {
@@ -570,7 +570,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		handleCategoriesButton = async () => {
-			await this.setState({ filterDisplayed: !this.state.filterDisplayed })
+			this.setState(()=>({ filterDisplayed: !this.state.filterDisplayed }))
 			this.saveNewRecipeDetailsLocally()
 		}
 
@@ -673,7 +673,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		instructionSourceChosen = async () => {
-			await this.setState({ choosingInstructionPicture: false })
+			this.setState(()=>({ choosingInstructionPicture: false }))
 			this.saveNewRecipeDetailsLocally()
 		}
 

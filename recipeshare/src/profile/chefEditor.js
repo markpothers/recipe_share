@@ -171,7 +171,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		saveUpdatedChef = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				await this.setState({ updateModalVisible: false })
+				this.setState(()=>({ updateModalVisible: false }))
 				this.props.isAwaitingServer(true)
 				const chef = this.props.loggedInChef
 				const updatedChef = await patchChef(chef.id, chef.auth_token, this.props.e_mail, this.props.username, this.props.profile_text, this.props.country, this.state.updatingPassword, this.props.password, this.props.password_confirmation, this.props.image_url)
@@ -299,10 +299,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											numberOfLines={3}
 											// onFocus={()=> this.setState({profileEditable: true})}
 											onBlur={async () => {
-												await this.setState({
+												this.setState(()=>({
 													profileEditable: false,
 													profileEditableButtonZIndex: 1
-												})
+												}))
 												await this.emailInput.focus()
 												await this.emailInput.blur()
 											}}
@@ -315,10 +315,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											style={{ position: 'absolute', height: '100%', width: '100%', zIndex: this.state.profileEditableButtonZIndex }}
 											activeOpacity={1}
 											onPress={async () => {
-												await this.setState({
+												this.setState(()=>({
 													profileEditable: true,
 													profileEditableButtonZIndex: -1
-												})
+												}))
 												this.profileInput.focus()
 											}}
 										>

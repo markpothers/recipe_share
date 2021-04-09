@@ -100,7 +100,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					})
 				},
 			]
-			await this.setState({ headerButtons: headerButtons })
+			this.setState(()=>({ headerButtons: headerButtons }))
 		}
 
 		renderDynamicMenu = () => {
@@ -141,12 +141,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		fetchChefDetails = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				this.setState(state => ({awaitingServer: true }))
+				this.setState(() => ({awaitingServer: true }))
 				const chef_details = await getChefDetails(this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
 				if (chef_details) {
 					this.props.storeChefDetails(chef_details)
 				}
-				this.setState(state => ({awaitingServer: false}))
+				this.setState(() => ({awaitingServer: false}))
 			} else {
 				this.setState({ renderOfflineMessage: true })
 			}
@@ -162,13 +162,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		chefUpdated = async (chefChanged) => {
-			await this.setState({
+			this.setState(()=>({
 				editingChef: false,
 				awaitingServer: false
-			})
+			}))
 			if (chefChanged) {
 				await this.fetchChefDetails()
-				await this.setState({ chefUpdatedMessageShowing: true })
+				this.setState(()=>({ chefUpdatedMessageShowing: true }))
 			}
 		}
 
