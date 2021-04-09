@@ -18,8 +18,8 @@ export const getRecipeList = (listType, queryChefID, limit, offset, global_ranki
 			signal: abortController.signal
 		})
 			.then(res => {
-				console.log(res.status)
-				res.json()
+				// console.log(res.status)
+				return res.json()
 			})
 			.then(result => {
 				if (result.error && result.message == "Invalid authentication") {
