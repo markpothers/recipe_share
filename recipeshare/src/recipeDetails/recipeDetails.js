@@ -136,43 +136,25 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					icon: this.props.recipe_details.shareable ? "share-outline" : "share-off",
 					text: this.props.recipe_details.shareable ? "Share with followers" : "Remove share",
 					action: this.props.recipe_details.shareable ?
-						(() => {
-							this.setState({ dynamicMenuShowing: false });
-							this.reShareRecipe()
-						}) :
-						(() => {
-							this.setState({ dynamicMenuShowing: false });
-							this.unReShareRecipe()
-						})
+						(() => { this.setState({ dynamicMenuShowing: false }, this.reShareRecipe) }) :
+						(() => { this.setState({ dynamicMenuShowing: false }, this.unReShareRecipe) })
 				},
 				{
 					icon: this.props.recipe_details.likeable ? "heart-outline" : "heart-off",
 					text: this.props.recipe_details.likeable ? "Like recipe" : "Unlike recipe",
 					action: this.props.recipe_details.likeable ?
-						(() => {
-							this.setState({ dynamicMenuShowing: false });
-							this.likeRecipe()
-						}) :
-						(() => {
-							this.setState({ dynamicMenuShowing: false });
-							this.unlikeRecipe()
-						})
+						(() => { this.setState({ dynamicMenuShowing: false }, this.likeRecipe) }) :
+						(() => { this.setState({ dynamicMenuShowing: false }, this.unlikeRecipe) })
 				},
 				{
 					icon: "image-plus",
 					text: "Add picture",
-					action: (() => {
-						this.setState({ dynamicMenuShowing: false })
-						this.newMakePic()
-					})
+					action: (() => { this.setState({ dynamicMenuShowing: false }, this.newMakePic) })
 				},
 				{
 					icon: "comment-plus",
 					text: "Add a comment",
-					action: (() => {
-						this.setState({ dynamicMenuShowing: false })
-						this.newComment()
-					})
+					action: (() => { this.setState({ dynamicMenuShowing: false }, this.newComment) })
 				}
 			]
 			if (this.props.recipe_details.recipe.chef_id === this.props.loggedInChef.id || this.props.loggedInChef.is_admin) {
@@ -202,12 +184,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					icon: "food",
 					text: "Create new recipe",
 					action: (() => {
-						this.setState({ dynamicMenuShowing: false })
-						this.props.navigation.navigate('NewRecipe')
+						this.setState({ dynamicMenuShowing: false }, () => {
+							this.props.navigation.navigate('NewRecipe')
+						})
 					})
 				}
 			)
-			this.setState(()=>({ headerButtons: headerButtons }))
+			this.setState({ headerButtons: headerButtons })
 		}
 
 		renderDynamicMenu = () => {
@@ -225,22 +208,24 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			});
 		}
 
-		componentDidMount = async () => {
-			this.setState(() => ({awaitingServer: true }))
-			await this.generateHeaderButtonList()
-			this.addDynamicMenuButtonsToHeader()
-			if (this.props.route.params.commenting === true) {
-				let netInfoState = await NetInfo.fetch()
-				if (netInfoState.isConnected) {
-					this.setState(()=>({ commenting: true }))
-					setTimeout(() => {
-						this.myScroll.scrollTo({ x: 0, y: this.state.commentsTopY - 100, animated: true })
-					}, 300)
-				} else {
-					this.setState(()=>({ renderOfflineMessage: true }))
+		componentDidMount = () => {
+			this.setState({ awaitingServer: true }, async () => {
+				await this.generateHeaderButtonList()
+				this.addDynamicMenuButtonsToHeader()
+				if (this.props.route.params.commenting === true) {
+					let netInfoState = await NetInfo.fetch()
+					if (netInfoState.isConnected) {
+						this.setState({ commenting: true }, () => {
+							setTimeout(() => {
+								this.myScroll.scrollTo({ x: 0, y: this.state.commentsTopY - 100, animated: true })
+							}, 300)
+						})
+					} else {
+						this.setState({ renderOfflineMessage: true })
+					}
 				}
-			}
-			this.setState(() => ({awaitingServer: false}))
+				this.setState({ awaitingServer: false })
+			})
 		}
 
 		componentDidUpdate = async (prevProps) => {
@@ -254,51 +239,55 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			// console.log(e.nativeEvent)
 		}
 
-		navigateToChefDetails = async (chefID) => {
-			this.setState(()=>({
+		navigateToChefDetails = (chefID) => {
+			this.setState({
 				awaitingServer: true,
 				imagePopupShowing: false
-			}))
-			try {
-				const chefDetails = await getChefDetails(chefID, this.props.loggedInChef.auth_token)
-				if (chefDetails) {
-					this.props.storeChefDetails(chefDetails)
-					saveChefDetailsLocally(chefDetails, this.props.loggedInChef.id)
-					this.setState(() => ({awaitingServer: false}))
-					this.props.navigation.navigate('ChefDetails', { chefID: chefID })
-				}
-			} catch (e) {
-				if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-				// console.log('looking for local chefs')
-				AsyncStorage.getItem('localChefDetails', (err, res) => {
-					if (res != null) {
-						// console.log('found some local chefs')
-						let localChefDetails = JSON.parse(res)
-						let thisChefDetails = localChefDetails.find(chefDetails => chefDetails.chef.id === chefID)
-						if (thisChefDetails) {
-							this.props.storeChefDetails(thisChefDetails)
-							this.setState({ awaitingServer: false })
+			}, async () => {
+				try {
+					const chefDetails = await getChefDetails(chefID, this.props.loggedInChef.auth_token)
+					if (chefDetails) {
+						this.props.storeChefDetails(chefDetails)
+						saveChefDetailsLocally(chefDetails, this.props.loggedInChef.id)
+						this.setState({ awaitingServer: false }, () => {
 							this.props.navigation.navigate('ChefDetails', { chefID: chefID })
-						} else {
-							this.setState(()=>({ renderOfflineMessage: true }))
-						}
-					} else {
-						this.setState(()=>({ renderOfflineMessage: true }))
+						})
 					}
-				})
-			}
-			this.setState(() => ({awaitingServer: false}))
+				} catch (e) {
+					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+					// console.log('looking for local chefs')
+					AsyncStorage.getItem('localChefDetails', (err, res) => {
+						if (res != null) {
+							// console.log('found some local chefs')
+							let localChefDetails = JSON.parse(res)
+							let thisChefDetails = localChefDetails.find(chefDetails => chefDetails.chef.id === chefID)
+							if (thisChefDetails) {
+								this.props.storeChefDetails(thisChefDetails)
+								this.setState({ awaitingServer: false }, () => {
+									this.props.navigation.navigate('ChefDetails', { chefID: chefID })
+								})
+							} else {
+								this.setState({ renderOfflineMessage: true })
+							}
+						} else {
+							this.setState({ renderOfflineMessage: true })
+						}
+					})
+				}
+				this.setState({ awaitingServer: false })
+			})
 		}
 
 		editRecipe = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				this.setState(()=>({
+				this.setState({
 					awaitingServer: true,
 					editRecipePopUpShowing: false
-				}))
-				this.props.navigation.navigate('NewRecipe', { recipe_details: this.props.recipe_details })
-				this.setState(() => ({awaitingServer: false}))
+				}, () => {
+					this.props.navigation.navigate('NewRecipe', { recipe_details: this.props.recipe_details })
+					this.setState({ awaitingServer: false })
+				})
 			} else {
 				this.setState({
 					renderOfflineMessage: true,
@@ -310,11 +299,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		deleteRecipe = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				this.setState(() => ({awaitingServer: true }))
-				const deleted = await destroyRecipe(this.props.recipe_details.recipe.id, this.props.loggedInChef.auth_token)
-				if (deleted) {
-					this.props.navigation.goBack()
-				}
+				this.setState({ awaitingServer: true }, async () => {
+					const deleted = await destroyRecipe(this.props.recipe_details.recipe.id, this.props.loggedInChef.auth_token)
+					if (deleted) {
+						this.props.navigation.goBack()
+					}
+				})
 			} else {
 				this.setState({
 					renderOfflineMessage: true,
@@ -457,95 +447,100 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		likeRecipe = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				this.setState(() => ({awaitingServer: true }))
-				try {
-					const likePosted = await postRecipeLike(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
-					if (likePosted) {
-						this.props.addRecipeLike()
+				this.setState({ awaitingServer: true }, async () => {
+					try {
+						const likePosted = await postRecipeLike(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
+						if (likePosted) {
+							this.props.addRecipeLike()
+						}
+					} catch (e) {
+						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						this.setState({ renderOfflineMessage: true })
 					}
-				} catch (e) {
-					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-					this.setState(()=>({ renderOfflineMessage: true }))
-				}
-				this.setState(() => ({awaitingServer: false}))
+					this.setState({ awaitingServer: false })
+				})
 			} else {
-				this.setState(()=>({ renderOfflineMessage: true }))
+				this.setState({ renderOfflineMessage: true })
 			}
 		}
 
 		unlikeRecipe = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				this.setState(() => ({awaitingServer: true }))
-				try {
-					const unlikePosted = await destroyRecipeLike(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
-					if (unlikePosted) {
-						this.props.removeRecipeLike()
+				this.setState({ awaitingServer: true }, async () => {
+					try {
+						const unlikePosted = await destroyRecipeLike(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
+						if (unlikePosted) {
+							this.props.removeRecipeLike()
+						}
+					} catch (e) {
+						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						this.setState({ renderOfflineMessage: true })
 					}
-				} catch (e) {
-					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-					this.setState(()=>({ renderOfflineMessage: true }))
-				}
-				this.setState(() => ({awaitingServer: false}))
+					this.setState({ awaitingServer: false })
+				})
 			} else {
-				this.setState(()=>({ renderOfflineMessage: true }))
+				this.setState({ renderOfflineMessage: true })
 			}
 		}
 
 		makeRecipe = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				this.setState(() => ({awaitingServer: true }))
-				try {
-					const makePosted = await postRecipeMake(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
-					if (makePosted) {
-						this.props.addRecipeMake()
+				this.setState({ awaitingServer: true }, async () => {
+					try {
+						const makePosted = await postRecipeMake(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
+						if (makePosted) {
+							this.props.addRecipeMake()
+						}
+					} catch (e) {
+						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						this.setState({ renderOfflineMessage: true })
 					}
-				} catch (e) {
-					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-					this.setState(()=>({ renderOfflineMessage: true }))
-				}
-				this.setState(() => ({awaitingServer: false}))
+					this.setState({ awaitingServer: false })
+				})
 			} else {
-				this.setState(()=>({ renderOfflineMessage: true }))
+				this.setState({ renderOfflineMessage: true })
 			}
 		}
 
 		reShareRecipe = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				this.setState(() => ({awaitingServer: true }))
-				try {
-					const reSharePosted = await postReShare(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
-					if (reSharePosted) {
-						this.props.addReShare()
+				this.setState({ awaitingServer: true }, async () => {
+					try {
+						const reSharePosted = await postReShare(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
+						if (reSharePosted) {
+							this.props.addReShare()
+						}
+					} catch (e) {
+						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						this.setState({ renderOfflineMessage: true })
 					}
-				} catch (e) {
-					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-					this.setState(()=>({ renderOfflineMessage: true }))
-				}
-				this.setState(() => ({awaitingServer: false}))
+					this.setState({ awaitingServer: false })
+				})
 			} else {
-				this.setState(()=>({ renderOfflineMessage: true }))
+				this.setState({ renderOfflineMessage: true })
 			}
 		}
 
 		unReShareRecipe = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				this.setState(() => ({awaitingServer: true }))
-				try {
-					const unReShared = await destroyReShare(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
-					if (unReShared) {
-						this.props.removeReShare()
+				this.setState({ awaitingServer: true }, async () => {
+					try {
+						const unReShared = await destroyReShare(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
+						if (unReShared) {
+							this.props.removeReShare()
+						}
+					} catch (e) {
+						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						this.setState({ renderOfflineMessage: true })
 					}
-				} catch (e) {
-					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-					this.setState(()=>({ renderOfflineMessage: true }))
-				}
-				this.setState(() => ({awaitingServer: false}))
+					this.setState({ awaitingServer: false })
+				})
 			} else {
-				this.setState(()=>({ renderOfflineMessage: true }))
+				this.setState({ renderOfflineMessage: true })
 			}
 		}
 
@@ -554,7 +549,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			if (netInfoState.isConnected) {
 				this.setState({ choosingPicSource: true })
 			} else {
-				this.setState(()=>({ renderOfflineMessage: true }))
+				this.setState({ renderOfflineMessage: true })
 			}
 		}
 
@@ -569,47 +564,49 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		saveMakePic = async () => {
-			this.setState(()=>({
+			this.setState({
 				awaitingServer: true,
 				choosingPicSource: false
-			}))
-			if (this.state.makePicFileUri) {
-				try {
-					const makePic = await postMakePic(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.state.makePicFileUri)
-					if (makePic) {
-						await this.props.addMakePic(makePic.make_pic)
-						await this.props.addMakePicChef(makePic.make_pic_chef)
+			}, async () => {
+				if (this.state.makePicFileUri) {
+					try {
+						const makePic = await postMakePic(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.state.makePicFileUri)
+						if (makePic) {
+							await this.props.addMakePic(makePic.make_pic)
+							await this.props.addMakePicChef(makePic.make_pic_chef)
+						}
+					} catch (e) {
+						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						// console.log(e)
+						this.setState({ renderOfflineMessage: true })
 					}
-				} catch (e) {
-					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-					// console.log(e)
-					this.setState(()=>({ renderOfflineMessage: true }))
 				}
-			}
-			this.setState(()=>({
-				awaitingServer: false,
-				makePicFileUri: "",
-			}))
+				this.setState({
+					awaitingServer: false,
+					makePicFileUri: "",
+				})
+			})
 		}
 
 		deleteMakePic = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				this.setState(() => ({awaitingServer: true }))
-				try {
-					const destroyed = await destroyMakePic(this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.state.makePicToDelete)
-					if (destroyed) {
-						this.props.saveRemainingMakePics(this.props.recipe_details.make_pics.filter(pic => pic.id !== this.state.makePicToDelete))
+				this.setState({ awaitingServer: true }, async () => {
+					try {
+						const destroyed = await destroyMakePic(this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.state.makePicToDelete)
+						if (destroyed) {
+							this.props.saveRemainingMakePics(this.props.recipe_details.make_pics.filter(pic => pic.id !== this.state.makePicToDelete))
+						}
+						this.setState({ deleteMakePicPopUpShowing: false })
+					} catch (e) {
+						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						this.setState({ renderOfflineMessage: true })
 					}
-					this.setState(()=>({ deleteMakePicPopUpShowing: false }))
-				} catch (e) {
-					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-					this.setState(()=>({ renderOfflineMessage: true }))
-				}
-				this.setState(()=>({
-					awaitingServer: false,
-					deleteMakePicPopUpShowing: false
-				}))
+					this.setState({
+						awaitingServer: false,
+						deleteMakePicPopUpShowing: false
+					})
+				})
 			} else {
 				this.setState({
 					renderOfflineMessage: true,
@@ -623,7 +620,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			if (netInfoState.isConnected) {
 				this.setState({ commenting: true })
 			} else {
-				this.setState(()=>({ renderOfflineMessage: true }))
+				this.setState({ renderOfflineMessage: true })
 			}
 		}
 
@@ -635,21 +632,22 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		saveComment = async () => {
-			this.setState(() => ({awaitingServer: true }))
-			try {
-				const comments = await postComment(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.state.commentText)
-				if (comments) {
-					this.props.updateComments(comments)
-					this.setState({
-						commenting: false,
-						commentText: ""
-					})
+			this.setState({ awaitingServer: true }, async () => {
+				try {
+					const comments = await postComment(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.state.commentText)
+					if (comments) {
+						this.props.updateComments(comments)
+						this.setState({
+							commenting: false,
+							commentText: ""
+						})
+					}
+				} catch (e) {
+					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+					this.setState({ renderOfflineMessage: true })
 				}
-			} catch (e) {
-				if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-				this.setState(()=>({ renderOfflineMessage: true }))
-			}
-			this.setState(() => ({awaitingServer: false}))
+				this.setState({ awaitingServer: false })
+			})
 		}
 
 		handleCommentTextInput = (commentText) => {
@@ -666,21 +664,22 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		deleteComment = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				this.setState(() => ({awaitingServer: true }))
-				try {
-					const comments = await destroyComment(this.props.loggedInChef.auth_token, this.state.commentToDelete)
-					if (comments) {
-						this.props.updateComments(comments)
+				this.setState({ awaitingServer: true }, async () => {
+					try {
+						const comments = await destroyComment(this.props.loggedInChef.auth_token, this.state.commentToDelete)
+						if (comments) {
+							this.props.updateComments(comments)
+						}
+						this.setState({ deleteCommentPopUpShowing: false })
+					} catch (e) {
+						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						this.setState({ renderOfflineMessage: true })
 					}
-					this.setState(()=>({ deleteCommentPopUpShowing: false }))
-				} catch (e) {
-					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-					this.setState(()=>({ renderOfflineMessage: true }))
-				}
-				this.setState(()=>({
-					awaitingServer: false,
-					deleteCommentPopUpShowing: false,
-				}))
+					this.setState({
+						awaitingServer: false,
+						deleteCommentPopUpShowing: false,
+					})
+				})
 			} else {
 				this.setState({
 					renderOfflineMessage: true,
@@ -968,8 +967,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								</View>
 								{
 									(this.props.recipe_details.recipe.prep_time != 0 ||
-									this.props.recipe_details.recipe.cook_time != 0 ||
-									this.props.recipe_details.recipe.total_time != 0) && (
+										this.props.recipe_details.recipe.cook_time != 0 ||
+										this.props.recipe_details.recipe.total_time != 0) && (
 										<View style={styles.detailsContainer}>
 											<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Timings:</Text>
 											<View style={[

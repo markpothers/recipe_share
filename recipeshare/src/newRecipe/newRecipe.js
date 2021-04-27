@@ -28,6 +28,121 @@ import { getTimeStringFromMinutes, getMinutesFromTimeString } from '../auxFuncti
 import SwitchSized from '../switchSized/switchSized'
 import { TextPopUp } from '../textPopUp/textPopUp'
 
+const testing = true
+
+const emptyRecipe = {
+	alertPopUpShowing: false,
+	errors: [],
+	newRecipeDetails: {
+		recipeId: null,
+		name: "",
+		instructions: [],
+		instructionImages: [],
+		ingredients: [],
+		difficulty: "0",
+		times: {
+			prepTime: 0,
+			cookTime: 0,
+			totalTime: 0,
+		},
+		primaryImages: [{ uri: '' }],
+		filter_settings: {
+			"Breakfast": false,
+			"Lunch": false,
+			"Dinner": false,
+			"Chicken": false,
+			"Red meat": false,
+			"Seafood": false,
+			"Vegetarian": false,
+			"Salad": false,
+			"Vegan": false,
+			"Soup": false,
+			"Dessert": false,
+			"Side": false,
+			"Whole 30": false,
+			"Paleo": false,
+			"Freezer meal": false,
+			"Keto": false,
+			"Weeknight": false,
+			"Weekend": false,
+			"Gluten free": false,
+			"Bread": false,
+			"Dairy free": false,
+			"White meat": false,
+		},
+		cuisine: "Any",
+		serves: "Any",
+		acknowledgement: "",
+		acknowledgementLink: "",
+		description: "",
+		showBlogPreview: false
+	},
+	instructionHeights: [], //responsiveHeight(6.5)],
+	averageInstructionHeight: 0, //responsiveHeight(6.5),
+}
+
+const testRecipe = {
+	alertPopUpShowing: false,
+	errors: [],
+	newRecipeDetails: {
+		recipeId: null,
+		name: "My test recipe",
+		instructions: ['test step 1', 'test step 2'],
+		instructionImages: ['', ''],
+		ingredients: [
+			{
+				name: "Chicken",
+				quantity: "1",
+				unit: "Oz"
+			},
+			{
+				name: "Brown rice",
+				quantity: "1",
+				unit: "cup"
+			},
+		],
+		difficulty: "1",
+		times: {
+			prepTime: 15,
+			cookTime: 75,
+			totalTime: 90,
+		},
+		primaryImages: [{ uri: '' }],
+		filter_settings: {
+			"Breakfast": false,
+			"Lunch": true,
+			"Dinner": false,
+			"Chicken": true,
+			"Red meat": false,
+			"Seafood": false,
+			"Vegetarian": false,
+			"Salad": false,
+			"Vegan": false,
+			"Soup": true,
+			"Dessert": false,
+			"Side": true,
+			"Whole 30": false,
+			"Paleo": true,
+			"Freezer meal": false,
+			"Keto": false,
+			"Weeknight": false,
+			"Weekend": true,
+			"Gluten free": false,
+			"Bread": true,
+			"Dairy free": false,
+			"White meat": false,
+		},
+		cuisine: "American",
+		serves: "3",
+		acknowledgement: "The food lab",
+		acknowledgementLink: "https://www.amazon.com/Food-Lab-Cooking-Through-Science/dp/0393081087/ref=sr_1_2?dchild=1&keywords=the+food+lab&qid=1618170711&sr=8-2",
+		description: "I love this recipe",
+		showBlogPreview: false
+	},
+	instructionHeights: [responsiveHeight(6.5), responsiveHeight(6.5)],
+	averageInstructionHeight: responsiveHeight(6.5),
+}
+
 
 const mapStateToProps = (state) => ({
 	loggedInChef: state.loggedInChef
@@ -54,131 +169,40 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			instructionImageIndex: 0,
 			filterDisplayed: false,
 			awaitingServer: false,
-			instructionHeights: [
-				// responsiveHeight(7.2)
-				// , responsiveHeight(7.2),
-				// responsiveHeight(7.2),responsiveHeight(7.2),
-			],
-			averageInstructionHeight: 0,
 			scrollingEnabled: true,
-			newRecipeDetails: {
-				recipeId: null,
-				name: "",
-				instructions: [
-					// '',
-					// 'Pre heat oven to 450F...',
-					// 'Chop everything up so that it is small enough to fit into a small place',
-					// 'mix everything together with a liberal helping of mustard',
-					// 'drink all the beer you can to help you get through this pigswill',
-					// ''
-				],
-				instructionImages: [],
-				ingredients: [
-					// {
-					// 	name: "",
-					// 	quantity: "",
-					// 	unit: "Oz"
-					// },
-					// {
-					//   name:"Flank steak",
-					//   quantity: "500",
-					//   unit: "g"
-					// },
-					// {
-					//   name:"Filet of salmon",
-					//   quantity: "17",
-					//   unit: "fl oz"
-					// },
-					// {
-					//   name:"peas",
-					//   quantity: "501",
-					//   unit: "each"
-					// },
-					// {
-					//   name:"Boiled potatoes",
-					//   quantity: "3",
-					//   unit: "Oz"
-					// },
-					//   {
-					//     name:"Chi",
-					//     quantity: "2",
-					//     unit: "each"
-					//   },
-					// {
-					//   name: "",
-					//   quantity: "",
-					//   unit: "Oz",
-					// }
-				],
-				difficulty: "0",
-				times: {
-					prepTime: 0,
-					cookTime: 0,
-					totalTime: 0,
-				},
-				primaryImages: [{ uri: '' }],
-				filter_settings: {
-					"Breakfast": false,
-					"Lunch": false,
-					"Dinner": false,
-					"Chicken": false,
-					"Red meat": false,
-					"Seafood": false,
-					"Vegetarian": false,
-					"Salad": false,
-					"Vegan": false,
-					"Soup": false,
-					"Dessert": false,
-					"Side": false,
-					"Whole 30": false,
-					"Paleo": false,
-					"Freezer meal": false,
-					"Keto": false,
-					"Weeknight": false,
-					"Weekend": false,
-					"Gluten free": false,
-					"Bread": false,
-					"Dairy free": false,
-					"White meat": false,
-				},
-				cuisine: "Any",
-				serves: "Any",
-				acknowledgement: "",
-				acknowledgementLink: "",
-				description: "",
-				showBlogPreview: false
-			},
-			errors: []
+			errors: [],
+			...(testing ? testRecipe : emptyRecipe)
 		}
 
 		componentDidMount = async () => {
-			this.setState(() => ({ awaitingServer: true }))
-			this.fetchIngredientsForAutoComplete()
-			//if we're editing a recipe
-			if (this.props.route.params?.recipe_details !== undefined) {
-				// console.log(this.props.route.params?.recipe_details.recipe.id)
-				let savedEditingRecipe = JSON.parse(await AsyncStorage.getItem('localEditRecipeDetails'))
-				if (savedEditingRecipe && savedEditingRecipe.newRecipeDetails.recipeId == this.props.route.params?.recipe_details.recipe.id) {
-					// console.log(savedEditingRecipe.newRecipeDetails.recipeId)
-					this.setState({
-						...savedEditingRecipe,
-						awaitingServer: false
-					})
-				} else {
-					this.setRecipeParamsForEditing(this.props.route.params.recipe_details)
-					this.setState(() => ({ awaitingServer: false }))
-				}
-			} else {
-				//look to see if we're half way through creating a recipe
-				// AsyncStorage.removeItem('localNewRecipeDetails')
-				AsyncStorage.getItem('localNewRecipeDetails', (err, res) => {
-					if (res != null) {
-						let savedData = JSON.parse(res)
-						this.setState({ ...savedData })
+			this.setState({ awaitingServer: true }, async () => {
+				await this.fetchIngredientsForAutoComplete()
+				//if we're editing a recipe
+				if (this.props.route.params?.recipe_details !== undefined) {
+					// console.log(this.props.route.params?.recipe_details.recipe.id)
+					let savedEditingRecipe = JSON.parse(await AsyncStorage.getItem('localEditRecipeDetails'))
+					if (savedEditingRecipe && savedEditingRecipe.newRecipeDetails.recipeId == this.props.route.params?.recipe_details.recipe.id) {
+						// console.log(savedEditingRecipe.newRecipeDetails.recipeId)
+						this.setState({
+							...savedEditingRecipe,
+							awaitingServer: false
+						})
+					} else {
+						this.setRecipeParamsForEditing(this.props.route.params.recipe_details)
+						this.setState({ awaitingServer: false })
 					}
-					this.setState({ awaitingServer: false })
-				})
-			}
+				} else {
+					//look to see if we're half way through creating a recipe
+					// AsyncStorage.removeItem('localNewRecipeDetails')
+					AsyncStorage.getItem('localNewRecipeDetails', (err, res) => {
+						if (res != null) {
+							let savedData = JSON.parse(res)
+							this.setState({ ...savedData })
+						}
+						this.setState({ awaitingServer: false })
+					})
+				}
+			})
 		}
 
 		componentDidUpdate = async () => {
@@ -212,13 +236,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			}
 		}
 
-		activateScrollView = () => {
-			this.setState({ scrollingEnabled: true })
-		}
+		activateScrollView = () => { this.setState({ scrollingEnabled: true }) }
 
-		deactivateScrollView = () => {
-			this.setState({ scrollingEnabled: false })
-		}
+		deactivateScrollView = () => { this.setState({ scrollingEnabled: false }) }
 
 		setRecipeParamsForEditing = async (recipeDetails) => {
 			let recipe = recipeDetails.recipe
@@ -240,8 +260,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					return ''
 				}
 			})
-			this.setState(()=>({
-				instructionHeights: recipeDetails.instructions.map(() => responsiveHeight(7.2)),
+			this.setState({
+				instructionHeights: recipeDetails.instructions.map(() => responsiveHeight(6.5)),
+				averageInstructionHeight: responsiveHeight(6.5),
+				errors: [],
 				newRecipeDetails: {
 					recipeId: recipe.id,
 					name: recipe.name,
@@ -286,13 +308,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					description: recipe.description,
 					showBlogPreview: recipe.show_blog_preview,
 				}
-			}))
-			this.saveNewRecipeDetailsLocally()
+			}, this.saveNewRecipeDetailsLocally)
 		}
 
-		askToReset = () => {
-			this.setState({ alertPopUpShowing: true })
-		}
+		askToReset = () => { this.setState({ alertPopUpShowing: true }) }
 
 		renderAlertPopUp = () => {
 			return (
@@ -313,74 +332,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				await this.setRecipeParamsForEditing(this.props.route.params.recipe_details)
 				this.setState({ alertPopUpShowing: false })
 			} else {
-				this.setState(()=>({
-					alertPopUpShowing: false,
-					newRecipeDetails: {
-						recipeId: null,
-						name: "",
-						instructions: [],
-						instructionImages: [],
-						ingredients: [
-							// {
-							// 	name: "",
-							// 	quantity: "",
-							// 	unit: "Oz"
-							// },
-						],
-						difficulty: "0",
-						times: {
-							prepTime: 0,
-							cookTime: 0,
-							totalTime: 0,
-						},
-						primaryImages: [{ uri: '' }],
-						filter_settings: {
-							"Breakfast": false,
-							"Lunch": false,
-							"Dinner": false,
-							"Chicken": false,
-							"Red meat": false,
-							"Seafood": false,
-							"Vegetarian": false,
-							"Salad": false,
-							"Vegan": false,
-							"Soup": false,
-							"Dessert": false,
-							"Side": false,
-							"Whole 30": false,
-							"Paleo": false,
-							"Freezer meal": false,
-							"Keto": false,
-							"Weeknight": false,
-							"Weekend": false,
-							"Gluten free": false,
-							"Bread": false,
-							"Dairy free": false,
-							"White meat": false,
-						},
-						cuisine: "Any",
-						serves: "Any",
-						acknowledgement: "",
-						acknowledgementLink: "",
-						description: "",
-						showBlogPreview: false
-					},
-					instructionHeights: [], //responsiveHeight(6.5)],
-					averageInstructionHeight: 0, //responsiveHeight(6.5),
-				}))
+				this.setState(() => (testing ? testRecipe : emptyRecipe))
 				this.props.navigation.setOptions({
 					headerTitle: props => <AppHeader {...props} text={"Create a New Recipe"} route={this.props.route} />
 				})
 			}
 		}
 
-		choosePrimaryPicture = () => {
-			this.setState({ choosingPrimaryPicture: true })
-		}
+		choosePrimaryPicture = () => { this.setState({ choosingPrimaryPicture: true }) }
 
-		primarySourceChosen = async () => {
-			this.setState(()=>({ choosingPrimaryPicture: false }))
-		}
+		primarySourceChosen = async () => { this.setState({ choosingPrimaryPicture: false }) }
 
 		renderPrimaryPictureChooser = () => {
 			Keyboard.dismiss()
@@ -395,26 +356,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			)
 		}
 
-		savePrimaryImage = async (newImages) => {
-			// this.setState(state => ({awaitingServer: true }))
-			// if (!newImages[index].cancelled) {
-			await this.setState((state) => {
+		savePrimaryImage = (newImages) => {
+			this.setState((state) => {
 				return ({
 					newRecipeDetails: { ...state.newRecipeDetails, primaryImages: newImages },
-					// awaitingServer: false,
 				})
-			})
-			// } else {
-			// this.setState(state => ({awaitingServer: false}))
-			// }
-			this.saveNewRecipeDetailsLocally()
+			}, this.saveNewRecipeDetailsLocally)
 		}
 
-		thisAutocompleteIsFocused = (index) => {
-			this.setState({
-				autoCompleteFocused: index,
-			})
-		}
+		thisAutocompleteIsFocused = (index) => { this.setState({ autoCompleteFocused: index }) }
 
 		fetchIngredientsForAutoComplete = async () => {
 			const ingredients = await fetchIngredients(this.props.loggedInChef.auth_token)
@@ -423,8 +373,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			}
 		}
 
-		updateIngredientEntry = async (index, name, quantity, unit) => {
-			await this.setState((state) => {
+		updateIngredientEntry = (index, name, quantity, unit) => {
+			this.setState((state) => {
 				let newIngredients = state.newRecipeDetails.ingredients
 				newIngredients[index].name = name
 				newIngredients[index].quantity = quantity
@@ -435,53 +385,47 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						ingredients: newIngredients
 					}
 				})
-			})
-			this.saveNewRecipeDetailsLocally()
+			}, this.saveNewRecipeDetailsLocally)
 		}
 
 		handleIngredientSort = async (newIngredients) => {
-			await this.setState((state) => {
+			this.setState((state) => {
 				return ({
 					newRecipeDetails: {
 						...state.newRecipeDetails,
 						ingredients: newIngredients,
 					},
 				})
-			})
-			this.saveNewRecipeDetailsLocally()
+			}, this.saveNewRecipeDetailsLocally)
 		}
 
 		addNewIngredient = () => {
 			let ingredients = this.state.newRecipeDetails.ingredients
-			// if (ingredients[ingredients.length - 1].name != "" || ingredients[ingredients.length - 1].quantity != "" || ingredients[ingredients.length - 1].unit != "Oz") {
 			let newIngredients = [...ingredients, { name: "", quantity: "", unit: "Oz" }]
 			this.setState((state) => {
 				return ({
 					newRecipeDetails: { ...state.newRecipeDetails, ingredients: newIngredients }
 				})
-			})
-			// }
-			this.saveNewRecipeDetailsLocally()
+			}, this.saveNewRecipeDetailsLocally)
 		}
 
-		removeIngredient = async (index) => {
-			await this.setState((state) => {
+		removeIngredient = (index) => {
+			this.setState((state) => {
 				let newIngredients = [...state.newRecipeDetails.ingredients]
 				newIngredients.splice(index, 1)
 				return ({
 					newRecipeDetails: { ...state.newRecipeDetails, ingredients: newIngredients },
 				})
-			})
-			this.saveNewRecipeDetailsLocally()
+			}, this.saveNewRecipeDetailsLocally)
 		}
 
-		handleInput = async (text, parameter) => {
-			await this.setState((state) => {
+		handleInput = (text, parameter) => {
+			this.setState((state) => {
 				return ({
 					newRecipeDetails: { ...state.newRecipeDetails, [parameter]: text },
+					errors: []
 				})
-			})
-			this.saveNewRecipeDetailsLocally()
+			}, this.saveNewRecipeDetailsLocally)
 		}
 
 		submitRecipe = async () => {
@@ -489,89 +433,91 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			Keyboard.dismiss()
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				this.setState(() => ({ awaitingServer: true }))
-				let newRecipeDetails = this.state.newRecipeDetails
-				if (newRecipeDetails.recipeId) { // it's an existing recipe we're updating
-					try {
-						const recipe = await patchRecipe(
-							this.props.loggedInChef.id,
-							this.props.loggedInChef.auth_token,
-							newRecipeDetails.name,
-							newRecipeDetails.ingredients,
-							newRecipeDetails.instructions,
-							newRecipeDetails.instructionImages,
-							newRecipeDetails.times.prepTime,
-							newRecipeDetails.times.cookTime,
-							newRecipeDetails.times.totalTime,
-							newRecipeDetails.difficulty,
-							newRecipeDetails.primaryImages,
-							newRecipeDetails.filter_settings,
-							newRecipeDetails.cuisine,
-							newRecipeDetails.serves,
-							newRecipeDetails.recipeId,
-							newRecipeDetails.acknowledgement,
-							newRecipeDetails.acknowledgementLink,
-							newRecipeDetails.description,
-							newRecipeDetails.showBlogPreview,
-						)
-						if (recipe) {
-							if (recipe.error) {
-								this.setState({ errors: recipe.message })
-							} else {
-								this.clearNewRecipeDetails(true)
-								this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
-								this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes' })
+				this.setState({ awaitingServer: true }, async () => {
+					let newRecipeDetails = this.state.newRecipeDetails
+					if (newRecipeDetails.recipeId) { // it's an existing recipe we're updating
+						try {
+							const recipe = await patchRecipe(
+								this.props.loggedInChef.id,
+								this.props.loggedInChef.auth_token,
+								newRecipeDetails.name,
+								newRecipeDetails.ingredients,
+								newRecipeDetails.instructions,
+								newRecipeDetails.instructionImages,
+								newRecipeDetails.times.prepTime,
+								newRecipeDetails.times.cookTime,
+								newRecipeDetails.times.totalTime,
+								newRecipeDetails.difficulty,
+								newRecipeDetails.primaryImages,
+								newRecipeDetails.filter_settings,
+								newRecipeDetails.cuisine,
+								newRecipeDetails.serves,
+								newRecipeDetails.recipeId,
+								newRecipeDetails.acknowledgement,
+								newRecipeDetails.acknowledgementLink,
+								newRecipeDetails.description,
+								newRecipeDetails.showBlogPreview,
+							)
+							if (recipe) {
+								if (recipe.error) {
+									this.setState({ errors: recipe.message })
+								} else {
+									this.clearNewRecipeDetails(true)
+									this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
+									this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes' })
+								}
 							}
+						} catch (e) {
+							if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+							this.setState({ renderOfflineMessage: true })
 						}
-					} catch (e) {
-						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-						this.setState({ renderOfflineMessage: true })
-					}
-				} else { // it's a new recipe
-					try {
-						const recipe = await postRecipe(
-							this.props.loggedInChef.id,
-							this.props.loggedInChef.auth_token,
-							newRecipeDetails.name,
-							newRecipeDetails.ingredients,
-							newRecipeDetails.instructions,
-							newRecipeDetails.instructionImages,
-							newRecipeDetails.times.prepTime,
-							newRecipeDetails.times.cookTime,
-							newRecipeDetails.times.totalTime,
-							newRecipeDetails.difficulty,
-							newRecipeDetails.primaryImages,
-							newRecipeDetails.filter_settings,
-							newRecipeDetails.cuisine,
-							newRecipeDetails.serves,
-							newRecipeDetails.acknowledgement,
-							newRecipeDetails.acknowledgementLink,
-							newRecipeDetails.description,
-							newRecipeDetails.showBlogPreview,
-						)
-						if (recipe) {
-							if (recipe.error) {
-								this.setState({ errors: recipe.message })
-							} else {
-								this.clearNewRecipeDetails()
-								this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
-								this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes' })
+					} else { // it's a new recipe
+						try {
+							const recipe = await postRecipe(
+								this.props.loggedInChef.id,
+								this.props.loggedInChef.auth_token,
+								newRecipeDetails.name,
+								newRecipeDetails.ingredients,
+								newRecipeDetails.instructions,
+								newRecipeDetails.instructionImages,
+								newRecipeDetails.times.prepTime,
+								newRecipeDetails.times.cookTime,
+								newRecipeDetails.times.totalTime,
+								newRecipeDetails.difficulty,
+								newRecipeDetails.primaryImages,
+								newRecipeDetails.filter_settings,
+								newRecipeDetails.cuisine,
+								newRecipeDetails.serves,
+								newRecipeDetails.acknowledgement,
+								newRecipeDetails.acknowledgementLink,
+								newRecipeDetails.description,
+								newRecipeDetails.showBlogPreview,
+							)
+							if (recipe) {
+								if (recipe.error) {
+									this.setState({ errors: recipe.message })
+								} else {
+									this.clearNewRecipeDetails()
+									this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
+									this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes' })
+								}
 							}
+						} catch (e) {
+							if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+							this.setState({ renderOfflineMessage: true })
 						}
-					} catch (e) {
-						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-						this.setState({ renderOfflineMessage: true })
 					}
-				}
-				this.setState(() => ({ awaitingServer: false }))
+					this.setState({ awaitingServer: false })
+				})
 			} else {
 				this.setState({ renderOfflineMessage: true })
 			}
 		}
 
-		handleCategoriesButton = async () => {
-			this.setState(()=>({ filterDisplayed: !this.state.filterDisplayed }))
-			this.saveNewRecipeDetailsLocally()
+		handleCategoriesButton = () => {
+			this.setState(() => ({ filterDisplayed: !this.state.filterDisplayed }),
+				this.saveNewRecipeDetailsLocally
+			)
 		}
 
 		handleInstructionChange = (text, index) => {
@@ -583,8 +529,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					newRecipeDetails: { ...state.newRecipeDetails, instructions: newInstructions },
 					instructionHeights: newInstructionHeights
 				})
-			})
-			this.saveNewRecipeDetailsLocally()
+			}, this.saveNewRecipeDetailsLocally)
 		}
 
 		handleInstructionSizeChange = (index, size) => {
@@ -600,14 +545,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		handleInstructionsSort = (newInstructions) => {
-			let newInstructionHeights = []
-			let newInstructionImages = []
-			newInstructions.forEach(instruction => {
-				let index = this.state.newRecipeDetails.instructions.indexOf(instruction)
-				newInstructionHeights.push(this.state.instructionHeights[index])
-				newInstructionImages.push(this.state.newRecipeDetails.instructionImages[index])
-			})
 			this.setState((state) => {
+				let newInstructionHeights = []
+				let newInstructionImages = []
+				newInstructions.forEach(instruction => {
+					let index = this.state.newRecipeDetails.instructions.indexOf(instruction)
+					newInstructionHeights.push(state.instructionHeights[index])
+					newInstructionImages.push(state.newRecipeDetails.instructionImages[index])
+				})
 				return ({
 					newRecipeDetails: {
 						...state.newRecipeDetails,
@@ -616,8 +561,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					},
 					instructionHeights: newInstructionHeights,
 				})
-			})
-			this.saveNewRecipeDetailsLocally()
+			}, this.saveNewRecipeDetailsLocally)
 		}
 
 		addNewInstruction = () => {
@@ -628,7 +572,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				let newInstructions = [...state.newRecipeDetails.instructions]
 				newInstructions.push('')
 				let newInstructionImages = [...state.newRecipeDetails.instructionImages, '']
-				let newInstructionHeights = [...state.instructionHeights, responsiveHeight(7.2)]
+				let newInstructionHeights = [...state.instructionHeights, responsiveHeight(6.5)]
 				let newAverageInstructionHeight = newInstructionHeights.reduce((acc, h) => acc + h, 0) / newInstructionHeights.length
 				return ({
 					newRecipeDetails: {
@@ -639,7 +583,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					averageInstructionHeight: newAverageInstructionHeight,
 					instructionHeights: newInstructionHeights
 				})
-			})
+			}, this.saveNewRecipeDetailsLocally)
 			// }
 		}
 
@@ -661,8 +605,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					instructionHeights: newInstructionHeights,
 					averageInstructionHeight: newAverageInstructionHeight
 				})
-			})
-			this.saveNewRecipeDetailsLocally()
+			}, this.saveNewRecipeDetailsLocally)
 		}
 
 		chooseInstructionPicture = (index) => {
@@ -673,8 +616,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		instructionSourceChosen = async () => {
-			this.setState(()=>({ choosingInstructionPicture: false }))
-			this.saveNewRecipeDetailsLocally()
+			this.setState({ choosingInstructionPicture: false }, this.saveNewRecipeDetailsLocally)
 		}
 
 		renderInstructionPictureChooser = () => {
@@ -693,30 +635,30 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			)
 		}
 
-		saveInstructionImage = async (image, index) => {
-			this.setState(() => ({ awaitingServer: true }))
-			if (image.cancelled === false) {
-				await this.setState((state) => {
-					let newInstructionImages = [...state.newRecipeDetails.instructionImages]
-					newInstructionImages[index] = image.uri
-					return ({
-						choosingPicture: false,
-						newRecipeDetails: {
-							...state.newRecipeDetails,
-							instructionImages: newInstructionImages
-						},
-						awaitingServer: false,
-					})
-				})
-				this.saveNewRecipeDetailsLocally()
-			}
-			else {
-				this.setState(() => ({ awaitingServer: false }))
-			}
+		saveInstructionImage = (image, index) => {
+			this.setState({ awaitingServer: true }, async () => {
+				if (image.cancelled === false) {
+					this.setState((state) => {
+						let newInstructionImages = [...state.newRecipeDetails.instructionImages]
+						newInstructionImages[index] = image.uri
+						return ({
+							choosingPicture: false,
+							newRecipeDetails: {
+								...state.newRecipeDetails,
+								instructionImages: newInstructionImages
+							},
+							awaitingServer: false,
+						})
+					}, this.saveNewRecipeDetailsLocally)
+				}
+				else {
+					this.setState({ awaitingServer: false })
+				}
+			})
 		}
 
-		cancelChooseInstructionImage = async (image, index) => {
-			await this.setState((state) => {
+		cancelChooseInstructionImage = (image, index) => {
+			this.setState((state) => {
 				let newInstructionImages = [...state.newRecipeDetails.instructionImages]
 				newInstructionImages[index] = image
 				return ({
@@ -727,8 +669,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					},
 					awaitingServer: false,
 				})
-			})
-			this.saveNewRecipeDetailsLocally()
+			}, this.saveNewRecipeDetailsLocally)
 		}
 
 		toggleFilterCategory = (category) => {
@@ -742,7 +683,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						}
 					}
 				})
-			})
+			}, this.saveNewRecipeDetailsLocally)
 		}
 
 		clearFilerCategories = () => {
@@ -755,7 +696,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						serves: 'Any'
 					}
 				})
-			})
+			}, this.saveNewRecipeDetailsLocally)
 		}
 
 		renderErrors = () => {
@@ -1137,12 +1078,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 										</View>
 									</View>
 								</View>
+
 								{!this.state.newRecipeDetails.showBlogPreview && (
 									<>
+										{/* separator */}
 										<View style={centralStyles.formSectionSeparatorContainer}>
 											<View style={centralStyles.formSectionSeparator}>
 											</View>
 										</View>
+										{/* ingredients */}
 										<View style={[centralStyles.formInputContainer, { justifyContent: 'center' }]}>
 											<View style={[styles.timeAndDifficultyTitleItem, styles.sectionTitle]}>
 												<Text maxFontSizeMultiplier={1.7} style={[styles.timeAndDifficultyTitle, { fontWeight: 'bold' }]}>Ingredients</Text>
@@ -1204,12 +1148,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 												</TouchableOpacity>
 											</View>
 										</View>
+										{/* separator */}
 										<View style={[centralStyles.formSectionSeparatorContainer
 											, { marginTop: -responsiveHeight(9.2) }
 										]}>
 											<View style={centralStyles.formSectionSeparator}>
 											</View>
 										</View>
+										{/* instructions */}
 										<View style={[centralStyles.formInputContainer, { justifyContent: 'center' }]}>
 											<View style={[styles.timeAndDifficultyTitleItem, styles.sectionTitle]}>
 												<Text maxFontSizeMultiplier={1.7} style={[styles.timeAndDifficultyTitle, { fontWeight: 'bold' }]}>Instructions</Text>
@@ -1256,13 +1202,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 													)
 												}}
 											/>
-											<View style={styles.plusButtonContainer}>
+											
+										</View>
+										<View style={styles.plusButtonContainer}>
 												<TouchableOpacity style={[centralStyles.yellowRectangleButton, styles.addButton]} activeOpacity={0.7} onPress={this.addNewInstruction}>
 													<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(5)} name='plus'></Icon>
 													<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { marginLeft: responsiveWidth(3), fontSize: responsiveFontSize(2.3) }]}>Add instruction</Text>
 												</TouchableOpacity>
 											</View>
-										</View>
 									</>
 								)}
 								{/* separator */}

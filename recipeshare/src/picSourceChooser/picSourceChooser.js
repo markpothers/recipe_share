@@ -16,10 +16,12 @@ export default class PicSourceChooser extends React.PureComponent {
 
 	componentDidMount = async () => {
 		let cameraRollPermission = await Permissions.askAsync(Permissions.MEDIA_LIBRARY)
-		this.setState(()=>({ hasCameraRollPermission: cameraRollPermission.permissions.mediaLibrary.granted }))
 		let cameraPermission = await Permissions.askAsync(Permissions.CAMERA)
-		this.setState(()=>({ hasCameraPermission: cameraPermission.permissions.camera.granted }))
-		this.setState(()=>({ originalImage: this.props.originalImage }))
+		this.setState({
+			hasCameraRollPermission: cameraRollPermission.permissions.mediaLibrary.granted,
+			hasCameraPermission: cameraPermission.permissions.camera.granted,
+			originalImage: this.props.originalImage
+		})
 	}
 
 	pickImage = async () => {
@@ -30,7 +32,7 @@ export default class PicSourceChooser extends React.PureComponent {
 					aspect: [4, 3],
 					base64: false
 				})
-				if (image.error){
+				if (image.error) {
 					console.log(image.error)
 				}
 				this.props.index !== undefined ? this.props.saveImage(image, this.props.index) : this.props.saveImage(image)
@@ -48,7 +50,7 @@ export default class PicSourceChooser extends React.PureComponent {
 					aspect: [4, 3],
 					base64: false
 				})
-				if (image.error){
+				if (image.error) {
 					console.log(image.error)
 				}
 				this.props.index !== undefined ? this.props.saveImage(image, this.props.index) : this.props.saveImage(image)
@@ -86,11 +88,11 @@ export default class PicSourceChooser extends React.PureComponent {
 							{this.props.imageSource !== '' ? (
 								<Image style={{ height: '100%', width: '100%' }} source={{ uri: this.props.imageSource }} resizeMode={"cover"} />
 							) : (
-									<React.Fragment>
-										<Icon style={styles.standardIcon} size={responsiveHeight(4)} name='camera' />
-										<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>No photo{"\n"}chosen</Text>
-									</React.Fragment>
-								)}
+								<React.Fragment>
+									<Icon style={styles.standardIcon} size={responsiveHeight(4)} name='camera' />
+									<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>No photo{"\n"}chosen</Text>
+								</React.Fragment>
+							)}
 						</View>
 						<TouchableOpacity style={styles.picSourceChooserButton} activeOpacity={0.7} title="Take Photo" onPress={this.openCamera}>
 							<Icon style={styles.standardIcon} size={responsiveHeight(4)} name='camera' />

@@ -171,34 +171,35 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		saveUpdatedChef = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				this.setState(()=>({ updateModalVisible: false }))
-				this.props.isAwaitingServer(true)
-				const chef = this.props.loggedInChef
-				const updatedChef = await patchChef(chef.id, chef.auth_token, this.props.e_mail, this.props.username, this.props.profile_text, this.props.country, this.state.updatingPassword, this.props.password, this.props.password_confirmation, this.props.image_url)
-				if (updatedChef) {
-					// console.log(updatedChef)
-					if (updatedChef.error) {
-						this.props.isAwaitingServer(false)
-						this.setState({
-							updateModalVisible: true,
-							errors: updatedChef.message
-						})
-					} else {
-						if (this.props.stayingLoggedIn) {
-							AsyncStorage.setItem('chef', JSON.stringify(updatedChef), () => {
+				this.setState({ updateModalVisible: false }, async () => {
+					this.props.isAwaitingServer(true)
+					const chef = this.props.loggedInChef
+					const updatedChef = await patchChef(chef.id, chef.auth_token, this.props.e_mail, this.props.username, this.props.profile_text, this.props.country, this.state.updatingPassword, this.props.password, this.props.password_confirmation, this.props.image_url)
+					if (updatedChef) {
+						// console.log(updatedChef)
+						if (updatedChef.error) {
+							this.props.isAwaitingServer(false)
+							this.setState({
+								updateModalVisible: true,
+								errors: updatedChef.message
+							})
+						} else {
+							if (this.props.stayingLoggedIn) {
+								AsyncStorage.setItem('chef', JSON.stringify(updatedChef), () => {
+									this.props.updateLoggedInChefInState(updatedChef.id, chef.e_mail, updatedChef.username, updatedChef.auth_token, updatedChef.image_url, updatedChef.is_admin, updatedChef.is_member)
+									this.props.clearNewUserDetails()
+									this.props.chefUpdated(true)
+								})
+							} else {
 								this.props.updateLoggedInChefInState(updatedChef.id, chef.e_mail, updatedChef.username, updatedChef.auth_token, updatedChef.image_url, updatedChef.is_admin, updatedChef.is_member)
 								this.props.clearNewUserDetails()
 								this.props.chefUpdated(true)
-							})
-						} else {
-							this.props.updateLoggedInChefInState(updatedChef.id, chef.e_mail, updatedChef.username, updatedChef.auth_token, updatedChef.image_url, updatedChef.is_admin, updatedChef.is_member)
-							this.props.clearNewUserDetails()
-							this.props.chefUpdated(true)
+							}
 						}
+					} else {
+						this.setState({ updateModalVisible: true })
 					}
-				} else {
-					this.setState({ updateModalVisible: true })
-				}
+				})
 			} else {
 				this.setState({
 					renderOfflineMessage: true,
@@ -299,7 +300,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											numberOfLines={3}
 											// onFocus={()=> this.setState({profileEditable: true})}
 											onBlur={async () => {
-												this.setState(()=>({
+												this.setState(() => ({
 													profileEditable: false,
 													profileEditableButtonZIndex: 1
 												}))
@@ -315,7 +316,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											style={{ position: 'absolute', height: '100%', width: '100%', zIndex: this.state.profileEditableButtonZIndex }}
 											activeOpacity={1}
 											onPress={async () => {
-												this.setState(()=>({
+												this.setState(() => ({
 													profileEditable: true,
 													profileEditableButtonZIndex: -1
 												}))

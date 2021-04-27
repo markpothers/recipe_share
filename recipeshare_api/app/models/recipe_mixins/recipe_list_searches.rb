@@ -102,7 +102,8 @@ module RecipeMixins::RecipeListSearches
                                         COALESCE((SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id AND recipe_makes.hidden = false), 0) AS makes_count,
                                         COALESCE((SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id AND recipe_makes.hidden = false AND recipe_makes.chef_id = ?), 0) AS chef_made,
                                         COALESCE((SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id AND comments.hidden = false), 0) AS comments_count,
-                                        COALESCE((SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id AND comments.hidden = false AND comments.chef_id = ?), 0) AS chef_commented
+                                        COALESCE((SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id AND comments.hidden = false AND comments.chef_id = ?), 0) AS chef_commented,
+                                        MAX(CASE WHEN recipes.updated_at > COALESCE(sharers.created_at, TIMESTAMP '2000-01-01') THEN recipes.updated_at ELSE sharers.created_at END ) AS ordering_param
                                         FROM recipes
                                         LEFT OUTER JOIN (
                                           SELECT
@@ -117,7 +118,10 @@ module RecipeMixins::RecipeListSearches
                                         LEFT OUTER JOIN recipe_makes ON recipes.id = recipe_makes.recipe_id
                                         LEFT OUTER JOIN comments ON recipes.id = comments.recipe_id
                                         LEFT OUTER JOIN (
-                                            SELECT chefs.username AS sharer_username, chefs.id AS sharer_id, re_shares.recipe_id AS shared_id
+                                            SELECT chefs.username AS sharer_username, 
+                                                    chefs.id AS sharer_id, 
+                                                    re_shares.recipe_id AS shared_id,
+                                                    re_shares.created_at AS created_at
                                             FROM chefs
                                             JOIN re_shares ON chefs.id = re_shares.chef_id
                                             WHERE re_shares.chef_id IN (SELECT follows.followee_id FROM follows WHERE follower_id = ? AND follows.hidden = false)
@@ -130,7 +134,7 @@ module RecipeMixins::RecipeListSearches
                                         #{serves_string}
                                         AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
                                         GROUP BY recipes.id
-                                        ORDER BY recipes.updated_at DESC
+                                        ORDER BY MAX(CASE WHEN recipes.updated_at > COALESCE(sharers.created_at, TIMESTAMP '2000-01-01') THEN recipes.updated_at ELSE sharers.created_at END ) DESC
                                         LIMIT ?
                                         OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, queryChefID, queryChefID, search_term.downcase(), limit, offset])
     elsif type == "chef_liked" # recipes liked by use_chef ordered by most-recently liked

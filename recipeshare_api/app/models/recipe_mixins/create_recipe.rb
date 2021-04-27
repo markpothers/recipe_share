@@ -7,10 +7,7 @@ module RecipeMixins::CreateRecipe
       # byebug
       if image["base64"] != nil && image["base64"] != ""
         recipe_image = RecipeImage.new(recipe_id: self.id)
-        hex = SecureRandom.hex(20)
-        until RecipeImage.find_by(hex: hex) == nil
-          hex = SecureRandom.hex(20)
-        end
+        hex = ApplicationRecord.get_file_name()
         mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:recipe_images], hex, image["base64"])
         recipe_image.image_url = mediaURL
         recipe_image.hex = hex
@@ -65,10 +62,7 @@ module RecipeMixins::CreateRecipe
           # otherwise if you have base64 string create and save new instruction image
         elsif instructions_params["instruction_images"][index]["base64"] != nil && instructions_params["instruction_images"][index]["base64"] != ""
           instruction_image = InstructionImage.new(instruction_id: instruction.id)
-          hex = SecureRandom.hex(20)
-          until InstructionImage.find_by(hex: hex) == nil
-            hex = SecureRandom.hex(20)
-          end
+          hex = ApplicationRecord.get_file_name()
           mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:instruction_images], hex, instructions_params["instruction_images"][index]["base64"])
           instruction_image.image_url = mediaURL
           instruction_image.hex = hex

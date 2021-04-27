@@ -18,7 +18,11 @@ export const getRecipeList = (listType, queryChefID, limit, offset, global_ranki
 			signal: abortController.signal
 		})
 			.then(res => {
+				// console.log('MARK')
+				// console.log(res.type)
 				// console.log(res.status)
+				// console.log(res.statusText)
+				// console.log(res.ok)
 				return res.json()
 			})
 			.then(result => {

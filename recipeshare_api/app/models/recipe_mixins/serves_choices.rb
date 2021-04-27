@@ -86,7 +86,7 @@ module RecipeMixins::ServesChoices
         FROM recipes
         WHERE recipes.hidden = false
         #{filter_string}
-        #{serves_string}
+        #{cuisine_string}
         AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
         ORDER BY recipes.serves",
         search_term.downcase(),

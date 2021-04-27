@@ -347,7 +347,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                           listKey={Array []}
                           nestedScrollEnabled={true}
                           onEndReached={[Function]}
-                          onEndReachedThreshold={1}
+                          onEndReachedThreshold={7}
                           onRefresh={[Function]}
                           onScroll={[Function]}
                           refreshing={false}
@@ -358,12 +358,13 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                             ListHeaderComponent={[Function]}
                             data={Array []}
                             extraData={Object {}}
+                            forwardedRef={[Function]}
                             initialNumToRender={5}
                             keyExtractor={[Function]}
                             listKey={Array []}
                             nestedScrollEnabled={true}
                             onEndReached={[Function]}
-                            onEndReachedThreshold={1}
+                            onEndReachedThreshold={7}
                             onRefresh={[Function]}
                             onScroll={[Function]}
                             refreshing={false}
@@ -375,6 +376,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                               data={Array []}
                               disableVirtualization={false}
                               extraData={Object {}}
+                              forwardedRef={[Function]}
                               horizontal={false}
                               initialNumToRender={5}
                               keyExtractor={[Function]}
@@ -383,7 +385,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                               nestedScrollEnabled={true}
                               numColumns={1}
                               onEndReached={[Function]}
-                              onEndReachedThreshold={1}
+                              onEndReachedThreshold={7}
                               onRefresh={[Function]}
                               onScroll={[Function]}
                               refreshing={false}
@@ -398,6 +400,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                 data={Array []}
                                 disableVirtualization={false}
                                 extraData={Object {}}
+                                forwardedRef={[Function]}
                                 getItem={[Function]}
                                 getItemCount={[Function]}
                                 horizontal={false}
@@ -407,7 +410,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                 maxToRenderPerBatch={10}
                                 nestedScrollEnabled={true}
                                 onEndReached={[Function]}
-                                onEndReachedThreshold={1}
+                                onEndReachedThreshold={7}
                                 onRefresh={[Function]}
                                 onScroll={[Function]}
                                 refreshing={false}
@@ -423,6 +426,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                   data={Array []}
                                   disableVirtualization={false}
                                   extraData={Object {}}
+                                  forwardedRef={[Function]}
                                   getItem={[Function]}
                                   getItemCount={[Function]}
                                   horizontal={false}
@@ -433,7 +437,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                   nestedScrollEnabled={true}
                                   onContentSizeChange={[Function]}
                                   onEndReached={[Function]}
-                                  onEndReachedThreshold={1}
+                                  onEndReachedThreshold={7}
                                   onLayout={[Function]}
                                   onMomentumScrollEnd={[Function]}
                                   onRefresh={[Function]}
@@ -460,6 +464,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                     data={Array []}
                                     disableVirtualization={false}
                                     extraData={Object {}}
+                                    forwardedRef={[Function]}
                                     getItem={[Function]}
                                     getItemCount={[Function]}
                                     horizontal={false}
@@ -470,7 +475,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                     nestedScrollEnabled={true}
                                     onContentSizeChange={[Function]}
                                     onEndReached={[Function]}
-                                    onEndReachedThreshold={1}
+                                    onEndReachedThreshold={7}
                                     onLayout={[Function]}
                                     onMomentumScrollEnd={[Function]}
                                     onRefresh={[Function]}
@@ -497,6 +502,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                       data={Array []}
                                       disableVirtualization={false}
                                       extraData={Object {}}
+                                      forwardedRef={[Function]}
                                       getItem={[Function]}
                                       getItemCount={[Function]}
                                       horizontal={false}
@@ -507,7 +513,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                       nestedScrollEnabled={true}
                                       onContentSizeChange={[Function]}
                                       onEndReached={[Function]}
-                                      onEndReachedThreshold={1}
+                                      onEndReachedThreshold={7}
                                       onLayout={[Function]}
                                       onMomentumScrollEnd={[Function]}
                                       onRefresh={[Function]}

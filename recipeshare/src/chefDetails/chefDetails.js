@@ -54,25 +54,20 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					icon: !chefDetails.chef_followed ? "account-multiple-plus-outline" : "account-multiple-minus",
 					text: !chefDetails.chef_followed ? "Follow chef" : "Stop following chef",
 					action: !chefDetails.chef_followed ?
-						(() => {
-							this.setState({ dynamicMenuShowing: false });
-							this.followChef()
-						}) :
-						(() => {
-							this.setState({ dynamicMenuShowing: false });
-							this.unFollowChef()
-						})
+						(() => this.setState({ dynamicMenuShowing: false }, this.followChef)) :
+						(() => this.setState({ dynamicMenuShowing: false }, this.unFollowChef))
 				},
 				{
 					icon: "food",
 					text: "Create new recipe",
 					action: (() => {
-						this.setState({ dynamicMenuShowing: false })
-						this.props.navigation.navigate('NewRecipe')
+						this.setState({ dynamicMenuShowing: false }, () => {
+							this.props.navigation.navigate('NewRecipe')
+						})
 					})
 				}
 			]
-			this.setState(()=>({ headerButtons: headerButtons }))
+			this.setState({ headerButtons: headerButtons })
 		}
 
 		renderDynamicMenu = () => {
@@ -86,16 +81,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		addDynamicMenuButtonsToHeader = () => {
 			this.props.navigation.setOptions({
-				headerRight: Object.assign(() => <AppHeaderRight buttonAction={() => this.setState({dynamicMenuShowing: true})}/>, { displayName: 'HeaderRight' }),
+				headerRight: Object.assign(() => <AppHeaderRight buttonAction={() => this.setState({ dynamicMenuShowing: true })} />, { displayName: 'HeaderRight' }),
 			});
 		}
 
 		componentDidMount = async () => {
-			this.setState(() => ({awaitingServer: true }))
-			await this.generateHeaderButtonList()
-			this.addDynamicMenuButtonsToHeader()
-			// await this.fetchChefDetails()
-			this.setState(() => ({awaitingServer: false}))
+			this.setState({ awaitingServer: true }, async () => {
+				await this.generateHeaderButtonList()
+				this.addDynamicMenuButtonsToHeader()
+				// await this.fetchChefDetails()
+				this.setState({ awaitingServer: false })
+			})
 		}
 
 		componentDidUpdate = async (prevProps) => {
@@ -118,7 +114,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			// this.props.clearChefDetails()
 		}
 
-		fetchChefDetails = async() => {
+		fetchChefDetails = async () => {
 			const chefDetails = await getChefDetails(this.props.route.params.chefID, this.props.loggedInChef.auth_token)
 			if (chefDetails) {
 				this.props.storeChefDetails(chefDetails)
@@ -143,18 +139,19 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		followChef = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				this.setState(() => ({awaitingServer: true }))
-				try {
-					const followPosted = await postFollow(this.props.loggedInChef.id, this.props.route.params.chefID, this.props.loggedInChef.auth_token)
-					if (followPosted) {
-						let newFollowers = [...this.props.chefs_details[`chef${this.props.route.params.chefID}`].followers, followPosted]
-						this.props.storeNewFollowers(this.props.route.params.chefID, newFollowers)
+				this.setState({ awaitingServer: true }, async () => {
+					try {
+						const followPosted = await postFollow(this.props.loggedInChef.id, this.props.route.params.chefID, this.props.loggedInChef.auth_token)
+						if (followPosted) {
+							let newFollowers = this.props.chefs_details[`chef${this.props.route.params.chefID}`].followers + 1
+							this.props.storeNewFollowers(this.props.route.params.chefID, newFollowers)
+						}
+					} catch (e) {
+						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						this.setState({ renderOfflineMessage: true })
 					}
-				} catch (e) {
-					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-					this.setState(()=>({ renderOfflineMessage: true }))
-				}
-				this.setState(() => ({awaitingServer: false}))
+					this.setState({ awaitingServer: false })
+				})
 			} else {
 				this.setState({ renderOfflineMessage: true })
 			}
@@ -163,18 +160,19 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		unFollowChef = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				this.setState(() => ({awaitingServer: true }))
-				try {
-					const followPosted = await destroyFollow(this.props.loggedInChef.id, this.props.route.params.chefID, this.props.loggedInChef.auth_token)
-					if (followPosted) {
-						let newFollowers = this.props.chefs_details[`chef${this.props.route.params.chefID}`].followers.filter(follower => follower.follower_id !== this.props.loggedInChef.id)
-						this.props.storeNewFollowers(this.props.route.params.chefID, newFollowers)
+				this.setState({ awaitingServer: true }, async () => {
+					try {
+						const followPosted = await destroyFollow(this.props.loggedInChef.id, this.props.route.params.chefID, this.props.loggedInChef.auth_token)
+						if (followPosted) {
+							let newFollowers = this.props.chefs_details[`chef${this.props.route.params.chefID}`].followers - 1
+							this.props.storeNewFollowers(this.props.route.params.chefID, newFollowers)
+						}
+					} catch (e) {
+						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						this.setState({ renderOfflineMessage: true })
 					}
-				} catch (e) {
-					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-					this.setState(()=>({ renderOfflineMessage: true }))
-				}
-				this.setState(() => ({awaitingServer: false}))
+					this.setState({ awaitingServer: false })
+				})
 			} else {
 				this.setState({ renderOfflineMessage: true })
 			}

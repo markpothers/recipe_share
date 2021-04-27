@@ -69,13 +69,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		componentDidMount = async () => {
+			this.props.navigation.addListener('focus', this.respondToFocus)
+			this.props.navigation.addListener('blur', this.respondToBlur)
 			let storedEmail = await AsyncStorage.getItem('rememberedEmail')
 			if (storedEmail) {
 				await this.handleTextInput(storedEmail, "e_mail")
 				this.setState({ rememberEmail: true })
 			}
-			this.props.navigation.addListener('focus', this.respondToFocus)
-			this.props.navigation.addListener('blur', this.respondToBlur)
 		}
 
 		componentDidUpdate = () => {
@@ -85,13 +85,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			}
 		}
 
-		respondToFocus = () => {
-			this.setState({ isFocused: true })
-		}
+		respondToFocus = () => {this.setState({ isFocused: true })}
 
-		respondToBlur = () => {
-			this.setState({ isFocused: false })
-		}
+		respondToBlur = () => {this.setState({ isFocused: false })}
 
 		componentWillUnmount = () => {
 			this.props.navigation.removeListener('focus', this.respondToFocus)
@@ -99,7 +95,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		loginChef = async () => {
-			this.setState(() => ({awaitingServer: true }))
+			this.setState({awaitingServer: true }, async() => {
 			if (this.state.rememberEmail) {
 				AsyncStorage.setItem('rememberedEmail', this.props.e_mail)
 			} else {
@@ -112,18 +108,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					awaitingServer: false
 				})
 			} else if (response.error) {
-				this.setState(()=>({
+				this.setState({
 					loginError: true,
 					error: response.message,
 					awaitingServer: false
-				}))
+				})
 			} else { // we don't want to differentiate between response and response.error for security reasons
 				if (this.props.stayingLoggedIn) {
 					AsyncStorage.setItem('chef', JSON.stringify(response), () => {
 						this.props.clearLoginUserDetails()
 						this.props.updateLoggedInChefInState(response.id, response.e_mail, response.username, response.auth_token, response.image_url, response.is_admin, response.is_member)
 						this.props.navigation.navigate("CreateChef", { successfulLogin: true }) //thisnavigate command is used to trigger Apple Keychain.  CreateChef will immediately perform the required actions to login.
-
 					})
 				} else {
 					this.props.updateLoggedInChefInState(response.id, response.e_mail, response.username, response.auth_token, response.image_url, response.is_admin, response.is_member)
@@ -131,27 +126,29 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					this.props.navigation.navigate("CreateChef", { successfulLogin: true }) //thisnavigate command is used to trigger Apple Keychain.  CreateChef will immediately perform the required actions to login.
 				}
 			}
+		})
 		}
 
-		forgotPassword = async () => {
-			this.setState(() => ({awaitingServer: true }))
+		forgotPassword = () => {
+			this.setState({awaitingServer: true }, async()=>{
 			if (this.props.e_mail.length > 0) {
 				let response = await apiCall(getNewPassword, this.props.e_mail)
 				if (response.fail) {
-					this.setState(()=>({ renderOfflineMessage: true }))
+					this.setState({ renderOfflineMessage: true })
 				} else { // we don't want to differentiate between response and response.error for security reasons
-					this.setState(()=>({
+					this.setState({
 						loginError: true,
 						error: response.message
-					}))
+					})
 				}
 			} else {
-				this.setState(()=>({
+				this.setState({
 					loginError: true,
 					error: 'forgotPassword'
-				}))
+				})
 			}
-			this.setState(() => ({awaitingServer: false}))
+			this.setState({awaitingServer: false})
+		})
 		}
 
 		renderThanksForRegisteringAlertPopUp = () => {

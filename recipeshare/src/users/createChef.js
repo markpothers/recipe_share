@@ -77,13 +77,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			}
 		}
 
-		choosePicture = () => {
-			this.setState({ choosingPicture: true })
-		}
+		choosePicture = () => { this.setState({ choosingPicture: true }) }
 
-		sourceChosen = () => {
-			this.setState({ choosingPicture: false })
-		}
+		sourceChosen = () => { this.setState({ choosingPicture: false }) }
 
 		renderPictureChooser = () => {
 			let imageSource = this.props.image_url
@@ -110,21 +106,24 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		submitChef = async () => {
-			this.setState(state => ({awaitingServer: true }))
-			let response = await apiCall(postChef, this.props.username, this.props.e_mail, this.props.password, this.props.password_confirmation, this.props.country, this.props.image_url, this.props.profile_text)
-			if (response.fail) {
-				this.setState({
-					renderOfflineMessage: true,
-					awaitingServer: false
-				})
-			} else if (response.error) {
-				this.setState({
-					errors: response.messages,
-					awaitingServer: false
-				})
-			} else {
-				this.props.navigation.navigate('Login', { successfulRegistration: true })
-			}
+			this.setState({ awaitingServer: true }, async () => {
+				let response = await apiCall(postChef, this.props.username, this.props.e_mail, this.props.password, this.props.password_confirmation, this.props.country, this.props.image_url, this.props.profile_text)
+				if (response.fail) {
+					this.setState({
+						renderOfflineMessage: true,
+						awaitingServer: false
+					})
+				} else if (response.error) {
+					this.setState({
+						errors: response.messages,
+						awaitingServer: false
+					})
+				} else {
+					this.setState({ awaitingServer: false }, () => {
+						this.props.navigation.navigate('Login', { successfulRegistration: true })
+					})
+				}
+			})
 		}
 
 		renderEmailError = () => {
@@ -171,11 +170,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		handleTandCSwitch = () => {
-			this.setState({ tAndCAgreed: !this.state.tAndCAgreed })
+			this.setState(state => ({ tAndCAgreed: !state.tAndCAgreed }))
 		}
 
 		handlePrivacyPolicySwitch = () => {
-			this.setState({ privacyPolicyAgreed: !this.state.privacyPolicyAgreed })
+			this.setState(state => ({ privacyPolicyAgreed: !state.privacyPolicyAgreed }))
 		}
 
 		render() {

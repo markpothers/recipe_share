@@ -15,12 +15,16 @@ class ApplicationRecord < ActiveRecord::Base
     storage.bucket bucket
   end
 
+  def self.get_file_name()
+    return "#{SecureRandom.hex(20)}-#{Time.now.strftime("%Y%m%d:%k%M%S")}"
+  end
+
   def self.save_image(bucket, hex, base64)
-    temp_file = Tempfile.new(['tempFile', '.jpg'], '/tmp')
+    temp_file = Tempfile.new(["tempFile", ".jpg"], "/tmp")
     temp_file.binmode
     temp_file.write(Base64.decode64(base64))
-    # byebug
-    save_record = ApplicationRecord.storage_bucket(bucket).create_file(temp_file, "#{hex}.jpg")
+    gcstorage = ApplicationRecord.storage_bucket(bucket)
+    save_record = gcstorage.create_file(temp_file, "#{hex}.jpg")
     temp_file.close
     temp_file.unlink
     # File.delete(file_path) if File.exist?(file_path)
@@ -55,7 +59,7 @@ class ApplicationRecord < ActiveRecord::Base
         days_until_reset = (next_reset_date - today).to_i
 
         signed_url = storage.signed_url file_name, expires: (days_until_reset < 5 ? next_next_reset_date.to_time.to_i - DateTime.now().to_time.to_i : next_reset_date.to_time.to_i - DateTime.now().to_time.to_i)
-        puts signed_url
+        # puts signed_url
         return signed_url
       end
     rescue

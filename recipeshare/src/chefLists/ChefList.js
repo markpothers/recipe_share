@@ -65,7 +65,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			super(props)
 			this.searchBar = React.createRef()
 			this.state = {
-				limit: 20,
+				limit: 10,
 				offset: 0,
 				awaitingServer: false,
 				isDisplayed: true,
@@ -79,11 +79,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		componentDidMount = async () => {
-			this.setState(() => ({awaitingServer: true }))
-			await this.fetchChefList()
-			this.setState(() => ({awaitingServer: false}))
-			this.props.navigation.addListener('focus', this.respondToFocus)
-			this.props.navigation.addListener('blur', this.respondToBlur)
+			this.setState({ awaitingServer: true }, async () => {
+				this.props.navigation.addListener('focus', this.respondToFocus)
+				this.props.navigation.addListener('blur', this.respondToBlur)
+				await this.fetchChefList()
+				this.setState({ awaitingServer: false })
+			})
 		}
 
 		componentWillUnmount = () => {
@@ -91,25 +92,20 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			this.props.navigation.removeListener('blur', this.respondToBlur)
 		}
 
-		shouldComponentUpdate = () => {
-			return (
-				this.state.isDisplayed
-			)
-		}
+		shouldComponentUpdate = () => { return this.state.isDisplayed }
 
 		respondToFocus = async () => {
-			this.setState(()=>({
+			this.setState({
 				awaitingServer: true,
 				offset: 0,
 				isDisplayed: true
-			}))
-			await this.fetchChefList()
-			this.setState(() => ({awaitingServer: false}))
+			}, async () => {
+				await this.fetchChefList()
+				this.setState({ awaitingServer: false })
+			})
 		}
 
-		respondToBlur = () => {
-			this.setState({ isDisplayed: false })
-		}
+		respondToBlur = () => { this.setState({ isDisplayed: false }) }
 
 		fetchChefList = async () => {
 			try {
@@ -140,7 +136,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		fetchAdditionalChefs = async () => {
-			this.setState(() => ({awaitingServer: true }))
 			try {
 				const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
 				const new_chefs = await getChefList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.loggedInChef.auth_token, this.state.searchTerm)
@@ -150,7 +145,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 				// console.log('failed to get ADDITIONAL chefs')
 			}
-			this.setState(() => ({awaitingServer: false}))
 		}
 
 		renderChefListItem = (item) => {
@@ -169,26 +163,27 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		followChef = async (followee_id) => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				this.setState(() => ({awaitingServer: true }))
-				try {
-					const followPosted = await postFollow(this.props.loggedInChef.id, followee_id, this.props.loggedInChef.auth_token)
-					if (followPosted) {
-						let updatedChefs = this.props[this.props["listChoice"]].map(chef => {
-							if (chef['id'] === followee_id) {
-								chef['followers'] = parseInt(chef['followers']) + 1
-								chef['user_chef_following'] = 1
-								return chef
-							} else {
-								return chef
-							}
-						})
-						this.props.storeChefList(this.props["listChoice"], updatedChefs)
+				this.setState({ awaitingServer: true }, async () => {
+					try {
+						const followPosted = await postFollow(this.props.loggedInChef.id, followee_id, this.props.loggedInChef.auth_token)
+						if (followPosted) {
+							let updatedChefs = this.props[this.props["listChoice"]].map(chef => {
+								if (chef['id'] === followee_id) {
+									chef['followers'] = parseInt(chef['followers']) + 1
+									chef['user_chef_following'] = 1
+									return chef
+								} else {
+									return chef
+								}
+							})
+							this.props.storeChefList(this.props["listChoice"], updatedChefs)
+						}
+					} catch (e) {
+						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						this.setState({ awaitingServer: false })
 					}
-				} catch (e) {
-					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					this.setState({ awaitingServer: false })
-				}
-				this.setState(() => ({awaitingServer: false}))
+				})
 			} else {
 				this.setState({ renderOfflineMessage: true })
 			}
@@ -197,70 +192,81 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		unFollowChef = async (followee_id) => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				this.setState(() => ({awaitingServer: true }))
-				try {
-					const followPosted = await destroyFollow(this.props.loggedInChef.id, followee_id, this.props.loggedInChef.auth_token)
-					if (followPosted) {
-						let updatedChefs = this.props[this.props["listChoice"]].map(chef => {
-							if (chef['id'] === followee_id) {
-								chef['followers'] = parseInt(chef['followers']) - 1
-								chef['user_chef_following'] = 0
-								return chef
-							} else {
-								return chef
-							}
-						})
-						this.props.storeChefList(this.props["listChoice"], updatedChefs)
+				this.setState({ awaitingServer: true }, async () => {
+					try {
+						const followPosted = await destroyFollow(this.props.loggedInChef.id, followee_id, this.props.loggedInChef.auth_token)
+						if (followPosted) {
+							let updatedChefs = this.props[this.props["listChoice"]].map(chef => {
+								if (chef['id'] === followee_id) {
+									chef['followers'] = parseInt(chef['followers']) - 1
+									chef['user_chef_following'] = 0
+									return chef
+								} else {
+									return chef
+								}
+							})
+							this.props.storeChefList(this.props["listChoice"], updatedChefs)
+						}
+					} catch (e) {
+						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						this.setState({ awaitingServer: false })
 					}
-				} catch (e) {
-					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					this.setState({ awaitingServer: false })
-				}
-				this.setState(() => ({awaitingServer: false}))
+				})
 			} else {
 				this.setState({ renderOfflineMessage: true })
 			}
 		}
 
-		refresh = async () => {
-			this.setState(()=>({ limit: 20, offset: 0 }))
-			this.props.clearListedChefs(this.props["listChoice"])
-			this.fetchChefList()
+		refresh = () => {
+			this.setState({ limit: 20, offset: 0 }, () => {
+				this.props.clearListedChefs(this.props["listChoice"])
+				this.fetchChefList()
+			})
 		}
 
 		onEndReached = async () => {
-			if (this.props[this.props["listChoice"]].length % 20 == 0) {
-				this.setState(()=>({ offset: this.state.offset + 20 }))
-				this.fetchAdditionalChefs()
+			if (this.props[this.props["listChoice"]].length % 10 == 0) {
+				this.setState({ offset: this.state.offset + 10 }, this.fetchAdditionalChefs)
 			}
 		}
 
 		navigateToChefDetails = async (chefID) => {
 			// console.log('parent navigator?')
 			// console.log(this.props)
-			this.setState(() => ({awaitingServer: true }))
-			try {
-				const chefDetails = await getChefDetails(chefID, this.props.loggedInChef.auth_token)
-				if (chefDetails) {
-					this.props.storeChefDetails(chefDetails)
-					saveChefDetailsLocally(chefDetails, this.props.loggedInChef.id)
-					this.setState(() => ({awaitingServer: false}))
-					this.props.navigation.push('ChefDetails', { chefID: chefID })
-				}
-			} catch (e) {
-				if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-				// console.log('looking for local chefs')
-				AsyncStorage.getItem('localChefDetails', (err, res) => {
-					if (res != null) {
-						// console.log('found some local chefs')
-						let localChefDetails = JSON.parse(res)
-						let thisChefDetails = localChefDetails.find(chefDetails => chefDetails.chef.id === chefID)
-						if (thisChefDetails) {
-							this.props.storeChefDetails(thisChefDetails)
-							this.setState({ awaitingServer: false })
-							this.props.navigation.push('ChefDetails', { chefID: chefID })
+			this.setState({ awaitingServer: true }, async () => {
+				try {
+					const chefDetails = await getChefDetails(chefID, this.props.loggedInChef.auth_token)
+					if (chefDetails) {
+						this.props.storeChefDetails(chefDetails)
+						saveChefDetailsLocally(chefDetails, this.props.loggedInChef.id)
+						this.setState(() => ({ awaitingServer: false }))
+						this.props.navigation.push('ChefDetails', { chefID: chefID })
+					}
+				} catch (e) {
+					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+					// console.log('looking for local chefs')
+					AsyncStorage.getItem('localChefDetails', (err, res) => {
+						if (res != null) {
+							// console.log('found some local chefs')
+							let localChefDetails = JSON.parse(res)
+							let thisChefDetails = localChefDetails.find(chefDetails => chefDetails.chef.id === chefID)
+							if (thisChefDetails) {
+								this.props.storeChefDetails(thisChefDetails)
+								this.setState({ awaitingServer: false }, () => {
+									this.props.navigation.push('ChefDetails', { chefID: chefID })
+								})
+							} else {
+								// console.log('recipe not present in saved list')
+								this.setState(state => {
+									return ({
+										chefsICantGet: [...state.chefsICantGet, chefID],
+										awaitingServer: false
+									})
+								})
+							}
 						} else {
-							// console.log('recipe not present in saved list')
+							// console.log('no chefs saved')
 							this.setState(state => {
 								return ({
 									chefsICantGet: [...state.chefsICantGet, chefID],
@@ -268,18 +274,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								})
 							})
 						}
-					} else {
-						// console.log('no chefs saved')
-						this.setState(state => {
-							return ({
-								chefsICantGet: [...state.chefsICantGet, chefID],
-								awaitingServer: false
-							})
-						})
-					}
-				})
-				this.setState(() => ({awaitingServer: false}))
-			}
+					})
+					this.setState({ awaitingServer: false })
+				}
+			})
 		}
 
 		removeChefFromCantGetList = (chefID) => {
@@ -289,14 +287,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			})
 		}
 
-		setSearchTerm = async (searchTerm) => {
-			this.setState(()=>({ searchTerm: searchTerm }))
-			this.fetchChefList()
+		setSearchTerm = (searchTerm) => {
+			this.setState({ searchTerm: searchTerm }, this.fetchChefList)
 		}
 
-		handleSearchBarFocus = async () => {
-			this.setState(()=>({ searchBarZIndex: 1 }))
-			this.searchBar.current.focus()
+		handleSearchBarFocus = () => {
+			this.setState({ searchBarZIndex: 1 }, () => {
+				this.searchBar.current.focus()
+			})
 		}
 
 		render() {

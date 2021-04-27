@@ -15,7 +15,7 @@ class RecipesController < ApplicationController
         @filters = Recipe.get_filters(params["listType"], @chef.id, params["queryChefID"], params["filters"], params["serves"], params["cuisine"], params["search_term"])
         # puts "rendering"
         # byebug
-        render json: {recipes: @recipes, cuisines: @cuisines, serves: @serves, filters: @filters}
+        render json: {recipes: @recipes, cuisines: @cuisines, serves: @serves, filters: @filters}, status: :unauthorized
     end
 
     # def new

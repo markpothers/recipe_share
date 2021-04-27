@@ -244,7 +244,7 @@ class Chef < ApplicationRecord
     def self.get_signed_urls(chefs_list)
         chefs_list.each { |chef| chef.image_url = ApplicationRecord.get_signed_url(chef.image_url) }
         return chefs_list
-      end
+    end
 
     def get_details(userChef)
         # byebug

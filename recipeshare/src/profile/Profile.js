@@ -62,45 +62,31 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		generateHeaderButtonList = async () => {
 			let headerButtons = [
-				// {
-				// 	icon: !chefDetails.chef_followed ? "account-multiple-plus-outline" : "account-multiple-minus",
-				// 	text: !chefDetails.chef_followed ? "Follow chef" : "Stop following chef",
-				// 	action: !chefDetails.chef_followed ?
-				// 		(() => {
-				// 			this.setState({ dynamicMenuShowing: false });
-				// 			this.followChef()
-				// 		}) :
-				// 		(() => {
-				// 			this.setState({ dynamicMenuShowing: false });
-				// 			this.unFollowChef()
-				// 		})
-				// },
 				{
 					icon: "food",
 					text: "Create new recipe",
 					action: (() => {
-						this.setState({ dynamicMenuShowing: false })
-						this.props.navigation.navigate('NewRecipe')
+						this.setState({ dynamicMenuShowing: false }, () => {
+							this.props.navigation.navigate('NewRecipe')
+						})
 					})
 				},
 				{
 					icon: "playlist-edit",
 					text: "Edit Profile",
 					action: (() => {
-						this.setState({ dynamicMenuShowing: false })
-						this.editingChef()
+						this.setState({ dynamicMenuShowing: false }, this.editingChef)
 					})
 				},
 				{
 					icon: "trash-can-outline",
 					text: "Delete Profile",
 					action: (() => {
-						this.setState({ dynamicMenuShowing: false })
-						this.showDeleteChefOption()
+						this.setState({ dynamicMenuShowing: false }, this.showDeleteChefOption)
 					})
 				},
 			]
-			this.setState(()=>({ headerButtons: headerButtons }))
+			this.setState({ headerButtons: headerButtons })
 		}
 
 		renderDynamicMenu = () => {
@@ -114,7 +100,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		addDynamicMenuButtonsToHeader = () => {
 			this.props.navigation.setOptions({
-				headerRight: Object.assign(() => <AppHeaderRight buttonAction={() => this.setState({dynamicMenuShowing: true})}/>, { displayName: 'HeaderRight' }),
+				headerRight: Object.assign(() => <AppHeaderRight buttonAction={() => this.setState({ dynamicMenuShowing: true })} />, { displayName: 'HeaderRight' }),
 			});
 		}
 
@@ -141,12 +127,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		fetchChefDetails = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				this.setState(() => ({awaitingServer: true }))
-				const chef_details = await getChefDetails(this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
-				if (chef_details) {
-					this.props.storeChefDetails(chef_details)
-				}
-				this.setState(() => ({awaitingServer: false}))
+				this.setState({ awaitingServer: true }, async () => {
+					const chef_details = await getChefDetails(this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
+					if (chef_details) {
+						this.props.storeChefDetails(chef_details)
+					}
+					this.setState({ awaitingServer: false })
+				})
 			} else {
 				this.setState({ renderOfflineMessage: true })
 			}
@@ -161,15 +148,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			}
 		}
 
-		chefUpdated = async (chefChanged) => {
-			this.setState(()=>({
+		chefUpdated = (chefChanged) => {
+			this.setState({
 				editingChef: false,
 				awaitingServer: false
-			}))
-			if (chefChanged) {
-				await this.fetchChefDetails()
-				this.setState(()=>({ chefUpdatedMessageShowing: true }))
-			}
+			}, async () => {
+				if (chefChanged) {
+					await this.fetchChefDetails()
+					this.setState({ chefUpdatedMessageShowing: true })
+				}
+			})
 		}
 
 		showDeleteChefOption = () => {
@@ -198,7 +186,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						deleteChefOptionVisible: false,
 						areYouSureLeaveRecipesMessageShowing: true
 					})}
-					closeDeleteChefOption={() => this.setState({deleteChefOptionVisible: false})}
+					closeDeleteChefOption={() => this.setState({ deleteChefOptionVisible: false })}
 				/>
 			)
 		}
@@ -214,8 +202,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			this.setState({
 				choosingPicture: false,
 				editingChef: true
+			}, () => {
+				this.props.saveChefDetails("image_url", this.state.imageFileUri)
 			})
-			this.props.saveChefDetails("image_url", this.state.imageFileUri)
 		}
 
 		saveImage = async (image) => {
