@@ -8,6 +8,7 @@ export const apiCall = async (callback, ...args) => {
             response = await callback(...args)
 			// console.log(response)
         } catch (e) {
+			// console.log(e)
             response.fail = true
         }
     } else {

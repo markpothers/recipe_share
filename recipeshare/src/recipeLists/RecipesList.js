@@ -26,7 +26,7 @@ import SearchBar from '../searchBar/SearchBar.js'
 
 // import Constants from 'expo-constants';
 
-const startingLimit = 2
+const startingLimit = 5
 const startingOffset = 0
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)
 
@@ -607,7 +607,7 @@ export class RecipesList extends React.Component {
 	}
 
 	render() {
-		// console.log(this.props[this.props["listChoice"] + `_Recipes`])
+		// console.log(this.props[this.props["listChoice"] + `_Recipes`][0])
 		// console.log(this.props)
 		// console.log('list start')
 		// console.log('rendering')

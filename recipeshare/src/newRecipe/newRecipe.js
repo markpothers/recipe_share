@@ -28,7 +28,7 @@ import { getTimeStringFromMinutes, getMinutesFromTimeString } from '../auxFuncti
 import SwitchSized from '../switchSized/switchSized'
 import { TextPopUp } from '../textPopUp/textPopUp'
 
-const testing = true
+const testing = false
 
 const emptyRecipe = {
 	alertPopUpShowing: false,

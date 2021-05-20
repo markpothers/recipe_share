@@ -16,7 +16,7 @@ class ApplicationRecord < ActiveRecord::Base
   end
 
   def self.get_file_name()
-    return "#{SecureRandom.hex(20)}-#{Time.now.strftime("%Y%m%d:%k%M%S")}"
+    return "#{SecureRandom.hex(20)}-#{Time.now.strftime("%Y%m%d_%0k%M%S")}"
   end
 
   def self.save_image(bucket, hex, base64)

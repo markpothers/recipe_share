@@ -5,6 +5,7 @@ class ChefsController < ApplicationController
     skip_before_action :logged_in?, :only => [:authenticate, :create, :activate, :password_reset, :reactivate]
 
     def authenticate
+        # byebug
         if @chef = Chef.find_by(e_mail: chef_params[:e_mail])
             if !@chef.deactivated
                 if @chef.activated
@@ -118,7 +119,7 @@ class ChefsController < ApplicationController
         end
 
         if chef_params[:updatingPassword]
-			if chef_params[:password] == chef_params[:password_confirmation]
+            if chef_params[:password] == chef_params[:password_confirmation]
 				# byebug
                 @chef.password = chef_params[:password]
                 @chef.password_confirmation = chef_params[:password_confrmation]

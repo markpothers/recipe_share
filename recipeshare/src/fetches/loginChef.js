@@ -3,7 +3,7 @@ import { databaseURL } from '../dataComponents/databaseURL'
 import { actionTimeout } from '../dataComponents/timeouts'
 
 export const loginChef = (chef) => {
-	// console.log(chef)
+	// console.log(chef.password.trim())
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
