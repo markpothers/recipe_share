@@ -42,11 +42,11 @@ class ApplicationRecord < ActiveRecord::Base
         split_url = url.split("/")
         file_name = split_url.last.partition("?").first
         chosen_bucket = ""
-        all_buckets = Rails.application.credentials.buckets.keys
+        all_buckets = Rails.application.credentials.buckets[Rails.env.to_sym].keys
         split_url.each do |url_component|
           all_buckets.each do |bucket|
-            if url_component == Rails.application.credentials.buckets[bucket]
-              chosen_bucket = Rails.application.credentials.buckets[bucket]
+            if url_component == Rails.application.credentials.buckets[Rails.env.to_sym][bucket]
+              chosen_bucket = Rails.application.credentials.buckets[Rails.env.to_sym][bucket]
             end
           end
         end

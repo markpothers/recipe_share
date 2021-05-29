@@ -57,7 +57,7 @@ class ChefsController < ApplicationController
                 @chef.activation_digest = JWT.encode({id: @chef.id},  Rails.application.credentials.JWT[:secret_key])
                     if image_params[:image_url] != ""
                         hex = ApplicationRecord.get_file_name()
-                        mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:chef_avatars], hex, image_params[:image_url])
+                        mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[Rails.env.to_sym][:chef_avatars], hex, image_params[:image_url])
                         @chef.image_url = mediaURL
                         @chef.hex=hex
                         @chef.save
@@ -113,7 +113,7 @@ class ChefsController < ApplicationController
             @chef.update_attribute(:hex, "")
         elsif image_params[:image_url] != ""
             hex = ApplicationRecord.get_file_name()
-            mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:chef_avatars], hex, image_params[:image_url])
+            mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[Rails.env.to_sym][:chef_avatars], hex, image_params[:image_url])
             @chef.update_attribute(:image_url, mediaURL)
             @chef.update_attribute(:hex, hex)
         end

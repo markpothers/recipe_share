@@ -8,6 +8,8 @@ import { times, doubleTimes } from '../dataComponents/times'
 import helpTexts from '../dataComponents/helpTexts'
 import { difficulties } from '../dataComponents/difficulties'
 import { postRecipe } from '../fetches/postRecipe'
+import { postRecipeImage } from '../fetches/postRecipeImage'
+import { postInstructionImage } from '../fetches/postInstructionImage'
 import { patchRecipe } from '../fetches/patchRecipe'
 import { fetchIngredients } from '../fetches/fetchIngredients'
 import IngredientAutoComplete from './ingredientAutoComplete'
@@ -27,122 +29,12 @@ import AppHeader from '../../navigation/appHeader'
 import { getTimeStringFromMinutes, getMinutesFromTimeString } from '../auxFunctions/getTimeStringFromMinutes'
 import SwitchSized from '../switchSized/switchSized'
 import { TextPopUp } from '../textPopUp/textPopUp'
+import { emptyRecipe } from './recipeTemplates/emptyRecipe'
+import { longTestRecipe } from './recipeTemplates/longTestRecipe' //eslint-disable-line no-unused-vars
+import { shortTestRecipe } from './recipeTemplates/shortTestRecipe' //eslint-disable-line no-unused-vars
 
 const testing = false
-
-const emptyRecipe = {
-	alertPopUpShowing: false,
-	errors: [],
-	newRecipeDetails: {
-		recipeId: null,
-		name: "",
-		instructions: [],
-		instructionImages: [],
-		ingredients: [],
-		difficulty: "0",
-		times: {
-			prepTime: 0,
-			cookTime: 0,
-			totalTime: 0,
-		},
-		primaryImages: [{ uri: '' }],
-		filter_settings: {
-			"Breakfast": false,
-			"Lunch": false,
-			"Dinner": false,
-			"Chicken": false,
-			"Red meat": false,
-			"Seafood": false,
-			"Vegetarian": false,
-			"Salad": false,
-			"Vegan": false,
-			"Soup": false,
-			"Dessert": false,
-			"Side": false,
-			"Whole 30": false,
-			"Paleo": false,
-			"Freezer meal": false,
-			"Keto": false,
-			"Weeknight": false,
-			"Weekend": false,
-			"Gluten free": false,
-			"Bread": false,
-			"Dairy free": false,
-			"White meat": false,
-		},
-		cuisine: "Any",
-		serves: "Any",
-		acknowledgement: "",
-		acknowledgementLink: "",
-		description: "",
-		showBlogPreview: false
-	},
-	instructionHeights: [], //responsiveHeight(6.5)],
-	averageInstructionHeight: 0, //responsiveHeight(6.5),
-}
-
-const testRecipe = {
-	alertPopUpShowing: false,
-	errors: [],
-	newRecipeDetails: {
-		recipeId: null,
-		name: "My test recipe",
-		instructions: ['test step 1', 'test step 2'],
-		instructionImages: ['', ''],
-		ingredients: [
-			{
-				name: "Chicken",
-				quantity: "1",
-				unit: "Oz"
-			},
-			{
-				name: "Brown rice",
-				quantity: "1",
-				unit: "cup"
-			},
-		],
-		difficulty: "1",
-		times: {
-			prepTime: 15,
-			cookTime: 75,
-			totalTime: 90,
-		},
-		primaryImages: [{ uri: '' }],
-		filter_settings: {
-			"Breakfast": false,
-			"Lunch": true,
-			"Dinner": false,
-			"Chicken": true,
-			"Red meat": false,
-			"Seafood": false,
-			"Vegetarian": false,
-			"Salad": false,
-			"Vegan": false,
-			"Soup": true,
-			"Dessert": false,
-			"Side": true,
-			"Whole 30": false,
-			"Paleo": true,
-			"Freezer meal": false,
-			"Keto": false,
-			"Weeknight": false,
-			"Weekend": true,
-			"Gluten free": false,
-			"Bread": true,
-			"Dairy free": false,
-			"White meat": false,
-		},
-		cuisine: "American",
-		serves: "3",
-		acknowledgement: "The food lab",
-		acknowledgementLink: "https://www.amazon.com/Food-Lab-Cooking-Through-Science/dp/0393081087/ref=sr_1_2?dchild=1&keywords=the+food+lab&qid=1618170711&sr=8-2",
-		description: "I love this recipe",
-		showBlogPreview: false
-	},
-	instructionHeights: [responsiveHeight(6.5), responsiveHeight(6.5)],
-	averageInstructionHeight: responsiveHeight(6.5),
-}
-
+const testRecipe = longTestRecipe
 
 const mapStateToProps = (state) => ({
 	loggedInChef: state.loggedInChef
@@ -177,12 +69,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		componentDidMount = async () => {
 			this.setState({ awaitingServer: true }, async () => {
 				await this.fetchIngredientsForAutoComplete()
+				this.setState({ awaitingServer: false })
 				//if we're editing a recipe
 				if (this.props.route.params?.recipe_details !== undefined) {
-					// console.log(this.props.route.params?.recipe_details.recipe.id)
 					let savedEditingRecipe = JSON.parse(await AsyncStorage.getItem('localEditRecipeDetails'))
 					if (savedEditingRecipe && savedEditingRecipe.newRecipeDetails.recipeId == this.props.route.params?.recipe_details.recipe.id) {
-						// console.log(savedEditingRecipe.newRecipeDetails.recipeId)
 						this.setState({
 							...savedEditingRecipe,
 							awaitingServer: false
@@ -208,24 +99,37 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		componentDidUpdate = async () => {
 			// await this.addNewIngredient()
 			// await this.addNewInstruction()
+			// if (this.state.newRecipeDetails.recipeId && !prevState.state.newRecipeDetails.recipeId) {
 			if (this.state.newRecipeDetails.recipeId) {
+				if (this.props.route.params?.recipe_details?.recipe?.id) {
+					this.props.navigation.setOptions({
+						headerTitle: props => <AppHeader {...props} text={"Update Recipe"} route={this.props.route} />
+					})
+				} else {
+					this.props.navigation.setOptions({
+						headerTitle: props => <AppHeader {...props} text={"Finish Recipe"} route={this.props.route} />
+					})
+				}
+			} else {
 				this.props.navigation.setOptions({
-					headerTitle: props => <AppHeader {...props} text={"Update Recipe"} route={this.props.route} />
-				});
+					headerTitle: props => <AppHeader {...props} text={"Create a New Recipe"} route={this.props.route} />
+				})
 			}
+			// }
+			// console.log(this.state.newRecipeDetails.recipeId)
 		}
 
 		componentWillUnmount = () => {
 
 		}
 
-		saveNewRecipeDetailsLocally = () => {
+		saveNewRecipeDetailsLocally = (forceNew) => {
 			let dataToSave = {
 				newRecipeDetails: this.state.newRecipeDetails,
 				instructionHeights: this.state.instructionHeights,
 				averageInstructionHeight: this.state.averageInstructionHeight
 			}
-			if (this.state.newRecipeDetails.recipeId) {
+			if (!forceNew && this.state.newRecipeDetails.recipeId) {
 				AsyncStorage.setItem('localEditRecipeDetails', JSON.stringify(dataToSave), () => {
 					// console.log('localEditRecipeDetails saved')
 				})
@@ -367,9 +271,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		thisAutocompleteIsFocused = (index) => { this.setState({ autoCompleteFocused: index }) }
 
 		fetchIngredientsForAutoComplete = async () => {
-			const ingredients = await fetchIngredients(this.props.loggedInChef.auth_token)
-			if (ingredients) {
-				this.setState({ ingredientsList: ingredients })
+			try {
+				const ingredients = await fetchIngredients(this.props.loggedInChef.auth_token)
+				if (ingredients) {
+					this.setState({ ingredientsList: ingredients })
+				}
+			} catch {
+				this.setState({ awaitingServer: false })
 			}
 		}
 
@@ -435,20 +343,22 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			if (netInfoState.isConnected) {
 				this.setState({ awaitingServer: true }, async () => {
 					let newRecipeDetails = this.state.newRecipeDetails
+					// console.log(newRecipeDetails)
 					if (newRecipeDetails.recipeId) { // it's an existing recipe we're updating
 						try {
+							// console.log('editing recipe')
 							const recipe = await patchRecipe(
 								this.props.loggedInChef.id,
 								this.props.loggedInChef.auth_token,
 								newRecipeDetails.name,
 								newRecipeDetails.ingredients,
 								newRecipeDetails.instructions,
-								newRecipeDetails.instructionImages,
+								// newRecipeDetails.instructionImages,
 								newRecipeDetails.times.prepTime,
 								newRecipeDetails.times.cookTime,
 								newRecipeDetails.times.totalTime,
 								newRecipeDetails.difficulty,
-								newRecipeDetails.primaryImages,
+								// newRecipeDetails.primaryImages,
 								newRecipeDetails.filter_settings,
 								newRecipeDetails.cuisine,
 								newRecipeDetails.serves,
@@ -462,29 +372,37 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								if (recipe.error) {
 									this.setState({ errors: recipe.message })
 								} else {
-									this.clearNewRecipeDetails(true)
-									this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
-									this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes' })
+									let success = await this.postImages(newRecipeDetails, recipe)
+									if (success) {
+										this.clearNewRecipeDetails()
+										this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
+										this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes' })
+									}
 								}
 							}
 						} catch (e) {
 							if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-							this.setState({ renderOfflineMessage: true })
+							// console.log(e)
+							this.setState({
+								renderOfflineMessage: true,
+								awaitingServer: false
+							})
 						}
 					} else { // it's a new recipe
 						try {
+							// console.log('new recipe')
 							const recipe = await postRecipe(
 								this.props.loggedInChef.id,
 								this.props.loggedInChef.auth_token,
 								newRecipeDetails.name,
 								newRecipeDetails.ingredients,
 								newRecipeDetails.instructions,
-								newRecipeDetails.instructionImages,
+								// newRecipeDetails.instructionImages,
 								newRecipeDetails.times.prepTime,
 								newRecipeDetails.times.cookTime,
 								newRecipeDetails.times.totalTime,
 								newRecipeDetails.difficulty,
-								newRecipeDetails.primaryImages,
+								// newRecipeDetails.primaryImages,
 								newRecipeDetails.filter_settings,
 								newRecipeDetails.cuisine,
 								newRecipeDetails.serves,
@@ -494,24 +412,75 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								newRecipeDetails.showBlogPreview,
 							)
 							if (recipe) {
+								// console.log('recipe succeeded')
 								if (recipe.error) {
 									this.setState({ errors: recipe.message })
 								} else {
-									this.clearNewRecipeDetails()
-									this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
-									this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes' })
+									this.setState({
+										newRecipeDetails: {
+											...newRecipeDetails,
+											recipeId: recipe.recipe.id
+										}
+									}, async () => {
+										// save the recipe locally with its new id to make sure resubmissions don't submit duplicates (as often as possible)
+										this.saveNewRecipeDetailsLocally(true)
+										this.props.navigation.setParams({ recipeDetails: { recipe: { id: recipe.recipe.id } } })
+										let success = await this.postImages(newRecipeDetails, recipe)
+										if (success) {
+											this.clearNewRecipeDetails()
+											this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
+											this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes' })
+										}
+									})
 								}
 							}
 						} catch (e) {
 							if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-							this.setState({ renderOfflineMessage: true })
+							// console.log(e)
+							this.setState({
+								renderOfflineMessage: true,
+								awaitingServer: false
+							})
 						}
 					}
-					this.setState({ awaitingServer: false })
+					// this.setState({ awaitingServer: false })
 				})
 			} else {
 				this.setState({ renderOfflineMessage: true })
 			}
+		}
+
+		postImages = async (newRecipeDetails, recipe) => {
+			try {
+				await Promise.all(newRecipeDetails.primaryImages.map((image, index) => {
+					return postRecipeImage(
+						this.props.loggedInChef.id,
+						this.props.loggedInChef.auth_token,
+						recipe.recipe.id,
+						image.id || 0,
+						index,
+						image.uri
+					)
+				}))
+				await Promise.all(newRecipeDetails.instructionImages.map((image, index) => {
+					if (image) {
+						return postInstructionImage(
+							this.props.loggedInChef.id,
+							this.props.loggedInChef.auth_token,
+							recipe.instructions.sort((a, b) => (a.step > b.step) ? 1 : -1)[index].id,
+							image.id || 0,
+							image
+						)
+					}
+				}))
+				return true
+			} catch {
+				this.setState({
+					errors: "The recipe saved successfully but not all the images could be saved. Please finish submission now or later to try again. Your recipe will be visible without those images that failed already.",
+					awaitingServer: false
+				})
+			}
+			return false
 		}
 
 		handleCategoriesButton = () => {
@@ -740,7 +709,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		render() {
-			// console.log(this.state.errors)
+			// console.log(this.state.newRecipeDetails.recipeId)
 			return (
 				<SpinachAppContainer awaitingServer={this.state.awaitingServer} scrollingEnabled={false} >
 					{
@@ -1202,14 +1171,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 													)
 												}}
 											/>
-											
+
 										</View>
 										<View style={styles.plusButtonContainer}>
-												<TouchableOpacity style={[centralStyles.yellowRectangleButton, styles.addButton]} activeOpacity={0.7} onPress={this.addNewInstruction}>
-													<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(5)} name='plus'></Icon>
-													<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { marginLeft: responsiveWidth(3), fontSize: responsiveFontSize(2.3) }]}>Add instruction</Text>
-												</TouchableOpacity>
-											</View>
+											<TouchableOpacity style={[centralStyles.yellowRectangleButton, styles.addButton]} activeOpacity={0.7} onPress={this.addNewInstruction}>
+												<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(5)} name='plus'></Icon>
+												<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { marginLeft: responsiveWidth(3), fontSize: responsiveFontSize(2.3) }]}>Add instruction</Text>
+											</TouchableOpacity>
+										</View>
 									</>
 								)}
 								{/* separator */}

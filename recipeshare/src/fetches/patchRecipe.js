@@ -8,12 +8,12 @@ export const patchRecipe = async(
 	name,
 	ingredients,
 	instructions,
-	instructionImages,
+	// instructionImages,
 	prep_time,
 	cook_time,
 	total_time,
 	difficulty,
-	primaryImages,
+	// primaryImages,
 	filter_settings,
 	cuisine,
 	serves,
@@ -25,39 +25,39 @@ export const patchRecipe = async(
 ) => {
 
 
-	let primaryImagesForRails = await Promise.all(primaryImages.map(async (image, index) => {
-		// if image is in a file
-		if (image.uri) {
-			return {
-				index: index,
-				base64: await getBase64FromFile(image.uri)
-			}
-		// if image was already part of the recipe
-		} else if (image.image_url) {
-			return {
-				index: index,
-				...image
-			}
-		}
-	}))
+	// let primaryImagesForRails = await Promise.all(primaryImages.map(async (image, index) => {
+	// 	// if image is in a file
+	// 	if (image.uri) {
+	// 		return {
+	// 			index: index,
+	// 			base64: await getBase64FromFile(image.uri)
+	// 		}
+	// 	// if image was already part of the recipe
+	// 	} else if (image.image_url) {
+	// 		return {
+	// 			index: index,
+	// 			...image
+	// 		}
+	// 	}
+	// }))
 
 	//format for Rails Strong params to permit an object or base64 data
-	let instructionImagesForRails = await Promise.all(instructionImages.map(async (image, index) => {
-		// if image is a file
-		if (typeof image === 'string') {
-			return {
-				index: index,
-				base64: await getBase64FromFile(image),
-			}
+	// let instructionImagesForRails = await Promise.all(instructionImages.map(async (image, index) => {
+	// 	// if image is a file
+	// 	if (typeof image === 'string') {
+	// 		return {
+	// 			index: index,
+	// 			base64: await getBase64FromFile(image),
+	// 		}
 			
-		// if image was already part of the recipe
-		} else {
-			return {
-				index: index,
-				...image
-			}
-		}
-	}))
+	// 	// if image was already part of the recipe
+	// 	} else {
+	// 		return {
+	// 			index: index,
+	// 			...image
+	// 		}
+	// 	}
+	// }))
 
 	return new Promise((resolve, reject) => {
 
@@ -87,12 +87,12 @@ export const patchRecipe = async(
 					name: name,
 					ingredients: ingredients,
 					instructions: instructions,
-					instruction_images: instructionImagesForRails,
+					// instruction_images: instructionImagesForRails,
 					prep_time: prep_time,
 					cook_time: cook_time,
 					total_time: total_time,
 					difficulty: difficulty,
-					primary_images: primaryImagesForRails,
+					// primary_images: primaryImagesForRails,
 					filter_settings: filter_settings,
 					cuisine: cuisine,
 					serves: serves,

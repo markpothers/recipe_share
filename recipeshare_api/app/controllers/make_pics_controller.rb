@@ -7,7 +7,7 @@ class MakePicsController < ApplicationController
       if make_pic_params[:base64] != ""
         @make_pic = MakePic.new(recipe_id: make_pic_params[:recipe_id], chef_id: make_pic_params[:chef_id])
         hex = ApplicationRecord.get_file_name()
-        mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[:make_pics], hex, make_pic_params[:base64])
+        mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[Rails.env.to_sym][:make_pics], hex, make_pic_params[:base64])
         @make_pic.image_url = mediaURL
         @make_pic.hex = hex
         @make_pic.save

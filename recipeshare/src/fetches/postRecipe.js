@@ -1,6 +1,6 @@
 import { databaseURL } from '../dataComponents/databaseURL'
 import { submitTimeout } from '../dataComponents/timeouts'
-import { getBase64FromFile } from '../auxFunctions/getBase64FromFile.js'
+// import { getBase64FromFile } from '../auxFunctions/getBase64FromFile.js'
 
 export const postRecipe = async (
 	chef_id,
@@ -8,12 +8,12 @@ export const postRecipe = async (
 	name,
 	ingredients,
 	instructions,
-	instructionImages,
+	// instructionImages,
 	prep_time,
 	cook_time,
 	total_time,
 	difficulty,
-	primaryImages,
+	// primaryImages,
 	filter_settings,
 	cuisine,
 	serves,
@@ -23,34 +23,34 @@ export const postRecipe = async (
 	showBlogPreview
 ) => {
 
-	let primaryImagesForRails = await Promise.all(primaryImages.map(async (image, index) => {
-		if (image.uri) {
-			return {
-				index: index,
-				base64: await getBase64FromFile(image.uri)
-			}
-		} else if (image.image_url) {
-			return {
-				index: index,
-				...image
-			}
-		}
-	}))
+	// let primaryImagesForRails = await Promise.all(primaryImages.map(async (image, index) => {
+	// 	if (image.uri) {
+	// 		return {
+	// 			index: index,
+	// 			base64: await getBase64FromFile(image.uri)
+	// 		}
+	// 	} else if (image.image_url) {
+	// 		return {
+	// 			index: index,
+	// 			...image
+	// 		}
+	// 	}
+	// }))
 
 	//format for Rails Strong params to permit an object or base64 data
-	let instructionImagesForRails = await Promise.all(instructionImages.map(async (image, index) => {
-		if (typeof image === 'string') {
-			return {
-				index: index,
-				base64: await getBase64FromFile(image),
-			}
-		} else {
-			return {
-				index: index,
-				...image
-			}
-		}
-	}))
+	// let instructionImagesForRails = await Promise.all(instructionImages.map(async (image, index) => {
+	// 	if (typeof image === 'string') {
+	// 		return {
+	// 			index: index,
+	// 			base64: await getBase64FromFile(image),
+	// 		}
+	// 	} else {
+	// 		return {
+	// 			index: index,
+	// 			...image
+	// 		}
+	// 	}
+	// }))
 
 	return new Promise((resolve, reject) => {
 
@@ -80,12 +80,12 @@ export const postRecipe = async (
 					name: name,
 					ingredients: ingredients,
 					instructions: instructions,
-					instruction_images: instructionImagesForRails,
+					// instruction_images: instructionImagesForRails,
 					prep_time: prep_time,
 					cook_time: cook_time,
 					total_time: total_time,
 					difficulty: difficulty,
-					primary_images: primaryImagesForRails,
+					// primary_images: primaryImagesForRails,
 					filter_settings: filter_settings,
 					cuisine: cuisine,
 					serves: serves,

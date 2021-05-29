@@ -15,7 +15,7 @@ class RecipesController < ApplicationController
         @filters = Recipe.get_filters(params["listType"], @chef.id, params["queryChefID"], params["filters"], params["serves"], params["cuisine"], params["search_term"])
         # puts "rendering"
         # byebug
-        render json: {recipes: @recipes, cuisines: @cuisines, serves: @serves, filters: @filters}, status: :unauthorized
+        render json: {recipes: @recipes, cuisines: @cuisines, serves: @serves, filters: @filters}
     end
 
     # def new
@@ -36,13 +36,13 @@ class RecipesController < ApplicationController
             # byebug
             if @recipe.save
                 # byebug
-                if newRecipe_primary_images_params["primary_images"].length.positive?
-                    @recipe.primary_images = (newRecipe_primary_images_params)
-                end
+                # if newRecipe_primary_images_params["primary_images"].length.positive?
+                    @recipe.primary_images
+                # end
                 @recipe.ingredients = (newRecipe_Ingredient_params)
                 @recipe.instructions = (newRecipe_Instructions_params)
                 @recipe.save
-                render json: @recipe
+                render json: { recipe: @recipe, instructions: @recipe.instructions }
             else
                 render json: { error: true, message: @recipe.errors.full_messages }
             end
@@ -66,11 +66,11 @@ class RecipesController < ApplicationController
                 newRecipe_filter_settings["filter_settings"][category] ? @recipe[category.downcase.split(" ").join("_")] = true : @recipe[category.downcase.split(" ").join("_")] = false
             end
             # byebug
-            @recipe.primary_images=(newRecipe_primary_images_params)
+            @recipe.primary_images
             @recipe.ingredients=(newRecipe_Ingredient_params)
             @recipe.instructions=(newRecipe_Instructions_params)
             if @recipe.save
-                render json: @recipe
+                render json: { recipe: @recipe, instructions: @recipe.instructions }
             else
                 # byebug
                 render json: {error: true, message: @recipe.errors.full_messages}
