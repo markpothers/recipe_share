@@ -384,6 +384,7 @@ export class RecipesList extends React.Component {
 	}
 
 	onEndReached = () => {
+		// console.log('end reached')
 		if (this.props[this.props["listChoice"] + `_Recipes`].length % startingLimit == 0) {
 			this.setState((state) => ({ offset: state.offset + startingLimit }),
 				this.fetchAdditionalRecipesForList
@@ -688,7 +689,7 @@ export class RecipesList extends React.Component {
 						onRefresh={this.refresh}
 						refreshing={false}
 						onEndReached={this.onEndReached}
-						onEndReachedThreshold={7}
+						onEndReachedThreshold={2.5}
 						initialNumToRender={5}
 						scrollEventThrottle={16}
 						onScroll={Animated.event(
