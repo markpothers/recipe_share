@@ -33,8 +33,8 @@ import { emptyRecipe } from './recipeTemplates/emptyRecipe'
 import { longTestRecipe } from './recipeTemplates/longTestRecipe' //eslint-disable-line no-unused-vars
 import { shortTestRecipe } from './recipeTemplates/shortTestRecipe' //eslint-disable-line no-unused-vars
 
-const testing = false
-const testRecipe = longTestRecipe
+const testing = true
+const testRecipe = shortTestRecipe
 
 const mapStateToProps = (state) => ({
 	loggedInChef: state.loggedInChef
@@ -375,8 +375,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									let success = await this.postImages(newRecipeDetails, recipe)
 									if (success) {
 										this.clearNewRecipeDetails()
-										this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
-										this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes' })
+										// this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
+										this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes', params: { refresh: true }  })
 									}
 								}
 							}
@@ -428,8 +428,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 										let success = await this.postImages(newRecipeDetails, recipe)
 										if (success) {
 											this.clearNewRecipeDetails()
-											this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
-											this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes' })
+											// this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
+											this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes', params: { refresh: true }  })
 										}
 									})
 								}

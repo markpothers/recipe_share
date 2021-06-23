@@ -139,16 +139,43 @@ export class RecipesList extends React.Component {
 		this.props.navigation.removeListener('blur', this.respondToBlur)
 	}
 
-	// componentDidUpdate = () => {
-	// 	// console.log(this.props.route)
-	// 	if (this.props.route.params?.name != "home"){
-	// 	this.props.navigation.setParams({
-	// 		name: 'home',
-	// 	})
-	// 	}
-	// }
+	componentDidUpdate = async () => {
+		// console.log(this.props.navigation.dangerouslyGetState())
+		// console.log(this.props.route)
+		// if (this.props.route.params?.name != "home"){
+		// this.props.navigation.setParams({
+		// 	name: 'home',
+		// })
+		// }
+		// if (this.props.route.params?.refresh){
+		// 	this.props.navigation.setParams({refresh: false})
+		// 	this.setState({
+		// 		offset: startingOffset,
+		// 		limit: startingLimit,
+		// 		awaitingServer: true
+		// 	}, async () => {
+		// 		await this.fetchRecipeList()
+		// 		this.recipeFlatList.scrollTo({ x: 0, y: 0, animated: true })
+		if (this.state.awaitingServer) {
+			this.setState({ awaitingServer: false })
+		}
+		// 	})
+		// }
+	}
 
-	shouldComponentUpdate = () => { return this.state.isDisplayed }
+	shouldComponentUpdate = (nextProps, nextState) => {
+		// console.log('LIST')
+		// // console.log(nextProps.navigation.dangerouslyGetParent().dangerouslyGetState())
+
+		// let thisRoutes = this.props.navigation.dangerouslyGetParent().dangerouslyGetState().routes
+		// let thisRouteName = thisRoutes[thisRoutes.length-1].name
+		// let nextRoutes = nextProps.navigation.dangerouslyGetParent().dangerouslyGetState().routes
+		// let nextRouteName = nextRoutes[nextRoutes.length-1].name
+		// console.log(thisRouteName)
+		// console.log(nextRouteName)
+		// console.log(`updating ${this.state.isDisplayed}`)
+		return this.state.isDisplayed
+	}
 
 	respondToBlur = () => {
 		this.setState({
@@ -158,13 +185,62 @@ export class RecipesList extends React.Component {
 	}
 
 	respondToFocus = async () => {
+		// console.log('focused')
+		// console.log(this.props.route)
+		// console.log(this.recipeFlatList.scrollToOffset)
+		// console.log(`offset: ${this.state.offset}`)
+		// console.log(`limit: ${this.state.limit}`)
 		this.setState({
-			offset: startingOffset,
+			// offset: startingOffset,
+			// limit: this.state.offset + 5,
 			isDisplayed: true,
 			awaitingServer: true
 		}, async () => {
-			await this.fetchRecipeList()
-			this.setState({ awaitingServer: false })
+			if (this.props.route.params?.deleteId) {
+				this.props.navigation.setParams({ deleteId: null })
+				// console.log('deleting')
+				// console.log(this.props.route.params?.deleteId)
+				let recipeLists = [
+					'all_Recipes',
+					'chef_Recipes',
+					'chef_feed_Recipes',
+					'chef_liked_Recipes',
+					'chef_made_Recipes',
+					'global_ranks_Recipes',
+					'most_liked_Recipes',
+					'most_made_Recipes'
+				]
+				recipeLists.forEach(listName => {
+					// console.log(listName)
+					// console.log('old')
+					// console.log(this.props[listName].map(r => r.id))
+					let newRecipeList = this.props[listName].filter(recipe => {
+						// if (listName == 'chef_Recipes'){
+						// 	console.log(recipe.id != this.props.route.params?.deleteId)
+						// }
+						return recipe.id != this.props.route.params?.deleteId
+					})
+					// console.log('new')
+					// console.log(newRecipeList.map(r => r.id))
+					// console.log('list name for saving')
+					// console.log(listName)
+					// console.log(listName.replace("_Recipes", ""))
+					this.props.storeRecipeList(listName.replace("_Recipes", ""), newRecipeList)
+				})
+			} else if (this.props.route.params?.refresh) {
+				// console.log('refreshing')
+				this.props.navigation.setParams({ refresh: false })
+				this.setState({
+					offset: startingOffset,
+					limit: startingLimit,
+					awaitingServer: true,
+					isDisplayed: true,
+				}, async () => {
+					await this.fetchRecipeList()
+					this.recipeFlatList.scrollToOffset({ x: 0, y: 0, animated: true })
+					this.setState({ awaitingServer: false })
+				})
+			}
 		})
 	}
 
@@ -232,19 +308,19 @@ export class RecipesList extends React.Component {
 
 	fetchAdditionalRecipesForList = async () => {
 		// this.setState({ awaitingServer: true }, async() => {
-			try {
-				const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
-				const result = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.filterCuisines[this.props.listChoice], this.props.serves, this.state.searchTerm, this.abortController)
-				this.props.appendToRecipeList(this.props["listChoice"], result.recipes)
-				this.props.storeCuisinesChoices(this.props["listChoice"], result.cuisines)
-				// this.setState({ awaitingServer: false })
-			}
-			catch (e) {
-				if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-				// console.log('failed to get ADDITIONAL recipes')
-				// console.log(e)
-				// this.setState({ awaitingServer: false })
-			}
+		try {
+			const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
+			const result = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.filterCuisines[this.props.listChoice], this.props.serves, this.state.searchTerm, this.abortController)
+			this.props.appendToRecipeList(this.props["listChoice"], result.recipes)
+			this.props.storeCuisinesChoices(this.props["listChoice"], result.cuisines)
+			// this.setState({ awaitingServer: false })
+		}
+		catch (e) {
+			if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+			// console.log('failed to get ADDITIONAL recipes')
+			// console.log(e)
+			// this.setState({ awaitingServer: false })
+		}
 		// })
 	}
 

@@ -23,8 +23,8 @@ module RecipeshareApi
 	config.load_defaults 5.2
 
 	# configure logging level to :warn if you want to stop base64 logging
-	# config.log_level = :debug
-	config.log_level = :info
+	config.log_level = :debug
+	# config.log_level = :info
 	# config.log_level = :warn
 
 

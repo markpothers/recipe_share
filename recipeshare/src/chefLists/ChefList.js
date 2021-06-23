@@ -96,12 +96,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		respondToFocus = async () => {
 			this.setState({
-				awaitingServer: true,
-				offset: 0,
+				awaitingServer: false,
+				// offset: 0,
 				isDisplayed: true
 			}, async () => {
-				await this.fetchChefList()
-				this.setState({ awaitingServer: false })
+				// await this.fetchChefList()
+				// this.setState({ awaitingServer: false })
 			})
 		}
 

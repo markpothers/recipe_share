@@ -10,12 +10,12 @@ export const shortTestRecipe = {
 			'step 1', 'step 2', 'step 3', 'step 4', 'step 5', 'step 6'
 		],
 		instructionImages: [
-			"file:/data/user/0/host.exp.exponent/cache/ExperienceData/%2540pothers%252Frecipe-share/ImagePicker/9e1a154e-78a5-43b4-be24-44a76d2bc1cd.jpg",
+			"",//"file:/data/user/0/host.exp.exponent/cache/ExperienceData/%2540pothers%252Frecipe-share/ImagePicker/9e1a154e-78a5-43b4-be24-44a76d2bc1cd.jpg",
 			"",
 			"",
-			"file:/data/user/0/host.exp.exponent/cache/ExperienceData/%2540pothers%252Frecipe-share/ImagePicker/1b283d05-c6db-47ac-87fc-d90f5b9e7f3b.jpg",
-			"file:/data/user/0/host.exp.exponent/cache/ExperienceData/%2540pothers%252Frecipe-share/ImagePicker/4e975761-8632-48eb-834d-8eac1c7a726f.jpg",
-			"file:/data/user/0/host.exp.exponent/cache/ExperienceData/%2540pothers%252Frecipe-share/ImagePicker/ce5af60e-7f85-4b67-bc17-95450cbda5b0.jpg"
+			"",//"file:/data/user/0/host.exp.exponent/cache/ExperienceData/%2540pothers%252Frecipe-share/ImagePicker/1b283d05-c6db-47ac-87fc-d90f5b9e7f3b.jpg",
+			"",//"file:/data/user/0/host.exp.exponent/cache/ExperienceData/%2540pothers%252Frecipe-share/ImagePicker/4e975761-8632-48eb-834d-8eac1c7a726f.jpg",
+			"",//"file:/data/user/0/host.exp.exponent/cache/ExperienceData/%2540pothers%252Frecipe-share/ImagePicker/ce5af60e-7f85-4b67-bc17-95450cbda5b0.jpg"
 		],
 		ingredients: [
 			{

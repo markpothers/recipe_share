@@ -233,6 +233,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				|| prevProps.recipe_details.shareable != this.props.recipe_details.shareable) {
 				await this.generateHeaderButtonList()
 			}
+		// console.log('DETAILS')
+		// console.log(this.props.navigation.dangerouslyGetState().routes)
 		}
 
 		scrolled = () => {
@@ -302,7 +304,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				this.setState({ awaitingServer: true }, async () => {
 					const deleted = await destroyRecipe(this.props.recipe_details.recipe.id, this.props.loggedInChef.auth_token)
 					if (deleted) {
-						this.props.navigation.goBack()
+						// this.props.navigation.goBack()
+						this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes', params: { deleteId: this.props.recipe_details.recipe.id }  })
 					}
 				})
 			} else {
