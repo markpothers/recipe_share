@@ -14,6 +14,7 @@ export default class MultiPicSourceChooser extends React.Component {
 		imageIndex: 0,
 		originalImages: null,
 		primaryImageFlatListWidth: 0,
+		visible: true,
 	}
 
 	componentDidMount = async () => {
@@ -34,21 +35,28 @@ export default class MultiPicSourceChooser extends React.Component {
 	pickImage = async () => {
 		try {
 			if (this.state.hasCameraRollPermission) {
-				let image = await ImagePicker.launchImageLibraryAsync({
-					allowsEditing: true,
-					aspect: [4, 3],
-					base64: false
-				})
-				if (image.error) {
-					console.log(image.error)
-				}
-				let newImages = this.props.imageSources
-				if (!image.cancelled) {
-					newImages[this.state.imageIndex] = image
-				}
-				this.props.saveImage(newImages)
+				// this.setState({ visible: false }, async() => {
+					let image = await ImagePicker.launchImageLibraryAsync({
+						allowsEditing: true,
+						aspect: [4, 3],
+						base64: false
+					})
+					// this.setState({ visible: true }, async() => {
+						if (image.error) {
+							console.log(image.error)
+						}
+						let newImages = this.props.imageSources
+						if (!image.cancelled) {
+							newImages[this.state.imageIndex] = image
+						}
+						this.props.saveImage(newImages)
+					// })
+					console.log('about to set visible')
+					// this.setState({ visible: true })
+				// })
 			}
 		} catch (e) {
+			console.log('fail')
 			console.log(e)
 		}
 	}
@@ -151,7 +159,7 @@ export default class MultiPicSourceChooser extends React.Component {
 			<Modal
 				animationType="fade"
 				transparent={true}
-				visible={true}
+				visible={this.state.visible}
 				onRequestClose={this.props.sourceChosen}
 			>
 				<View style={[styles.modalFullScreenContainer, { height: Dimensions.get('window').height, width: Dimensions.get('window').width }]}>

@@ -258,7 +258,6 @@ export class RecipesList extends React.Component {
 				this.props.storeCuisinesChoices(this.props["listChoice"], result.cuisines)
 				this.props.storeServesChoices(this.props["listChoice"], result.serves)
 				this.props.storeFilterChoices(this.props["listChoice"], result.filters)
-				// console.log('here')
 				this.setState({ awaitingServer: false })
 			}
 			catch (e) {
