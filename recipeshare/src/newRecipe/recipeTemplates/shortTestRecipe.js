@@ -36,20 +36,21 @@ export const shortTestRecipe = {
 			totalTime: 90,
 		},
 		primaryImages: [
-			{
-				"cancelled": false,
-				"height": 2250,
-				"type": "image",
-				"uri": "file:/data/user/0/host.exp.exponent/cache/ExperienceData/%2540pothers%252Frecipe-share/ImagePicker/0219c735-ea10-4437-aba0-8de39d4121e9.jpg",
-				"width": 3000,
-			},
-			{
-				"cancelled": false,
-				"height": 2250,
-				"type": "image",
-				"uri": "file:/data/user/0/host.exp.exponent/cache/ExperienceData/%2540pothers%252Frecipe-share/ImagePicker/9f82b809-276c-40bb-8a7e-55a9b650a49d.jpg",
-				"width": 3000,
-			}
+			{ uri: '' }
+			// {
+			// 	"cancelled": false,
+			// 	"height": 2250,
+			// 	"type": "image",
+			// 	"uri": "file:/data/user/0/host.exp.exponent/cache/ExperienceData/%2540pothers%252Frecipe-share/ImagePicker/0219c735-ea10-4437-aba0-8de39d4121e9.jpg",
+			// 	"width": 3000,
+			// },
+			// {
+			// 	"cancelled": false,
+			// 	"height": 2250,
+			// 	"type": "image",
+			// 	"uri": "file:/data/user/0/host.exp.exponent/cache/ExperienceData/%2540pothers%252Frecipe-share/ImagePicker/9f82b809-276c-40bb-8a7e-55a9b650a49d.jpg",
+			// 	"width": 3000,
+			// }
 		],
 		filter_settings: {
 			"Breakfast": false,

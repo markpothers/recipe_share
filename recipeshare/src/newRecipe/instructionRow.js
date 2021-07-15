@@ -47,6 +47,7 @@ export default class InstructionRow extends React.Component {
 						// 	this.props.handleInstructionSizeChange(this.props.index, height)
 						// }}
 						onBlur={() => this.props.handleInstructionChange(this.state.text, this.props.index)}
+						ref={(element) => this.props.inputToFocus && this.props.setNextInstructionInput(element)}
 					/>
 				</View>
 				{/* <TouchableOpacity style={[styles.deleteInstructionContainer, { width: '9%' }]} onPress={this.voice} activeOpacity={0.7}>

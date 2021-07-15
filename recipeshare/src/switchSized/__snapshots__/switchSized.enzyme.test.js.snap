@@ -148,10 +148,10 @@ exports[`SwitchSized can be rendered on an iPhone with reduced size switches whe
         null,
       ]
     }
-    thumbColor={null}
+    thumbColor="#eaeaea"
     trackColor={
       Object {
-        "false": "#fbfbfb",
+        "false": "#d8dcd7",
         "true": "#5c8a5199",
       }
     }
@@ -184,8 +184,8 @@ exports[`SwitchSized can be rendered on an iPhone with reduced size switches whe
           ],
         ]
       }
-      thumbTintColor={null}
-      tintColor="#fbfbfb"
+      thumbTintColor="#eaeaea"
+      tintColor="#d8dcd7"
       value={false}
     >
       <RCTSwitch
@@ -215,8 +215,8 @@ exports[`SwitchSized can be rendered on an iPhone with reduced size switches whe
             ],
           ]
         }
-        thumbTintColor={null}
-        tintColor="#fbfbfb"
+        thumbTintColor="#eaeaea"
+        tintColor="#d8dcd7"
         value={false}
       />
     </RCTSwitch>
@@ -249,7 +249,7 @@ exports[`SwitchSized can be rendered on an iPhone with reduced size switches whe
     thumbColor="#4b7142"
     trackColor={
       Object {
-        "false": "#fbfbfb",
+        "false": "#d8dcd7",
         "true": "#5c8a5199",
       }
     }
@@ -283,7 +283,7 @@ exports[`SwitchSized can be rendered on an iPhone with reduced size switches whe
         ]
       }
       thumbTintColor="#4b7142"
-      tintColor="#fbfbfb"
+      tintColor="#d8dcd7"
       value={true}
     >
       <RCTSwitch
@@ -314,7 +314,7 @@ exports[`SwitchSized can be rendered on an iPhone with reduced size switches whe
           ]
         }
         thumbTintColor="#4b7142"
-        tintColor="#fbfbfb"
+        tintColor="#d8dcd7"
         value={true}
       />
     </RCTSwitch>

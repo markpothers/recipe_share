@@ -32,6 +32,7 @@ export default class IngredientAutoComplete extends React.Component {
 				onChangeText={(text) => this.props.updateIngredientEntry(this.props.index, text, this.props.ingredient.quantity, this.props.ingredient.unit)}
 				onFocus={() => this.props.thisAutocompleteIsFocused(this.props.index)}
 				onBlur={() => this.props.thisAutocompleteIsFocused(null)}
+				ref={(element) => this.props.inputToFocus && this.props.setNextIngredientInput(element)}
 			>
 			</TextInput>
 		)

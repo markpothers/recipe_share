@@ -2283,10 +2283,10 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                                             null,
                                                                           ]
                                                                         }
-                                                                        thumbColor={null}
+                                                                        thumbColor="#eaeaea"
                                                                         trackColor={
                                                                           Object {
-                                                                            "false": "#fbfbfb",
+                                                                            "false": "#d8dcd7",
                                                                             "true": "#5c8a5199",
                                                                           }
                                                                         }
@@ -2319,8 +2319,8 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                                               ],
                                                                             ]
                                                                           }
-                                                                          thumbTintColor={null}
-                                                                          tintColor="#fbfbfb"
+                                                                          thumbTintColor="#eaeaea"
+                                                                          tintColor="#d8dcd7"
                                                                           value={false}
                                                                         >
                                                                           <RCTSwitch
@@ -2350,8 +2350,8 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                                                 ],
                                                                               ]
                                                                             }
-                                                                            thumbTintColor={null}
-                                                                            tintColor="#fbfbfb"
+                                                                            thumbTintColor="#eaeaea"
+                                                                            tintColor="#d8dcd7"
                                                                             value={false}
                                                                           />
                                                                         </RCTSwitch>
@@ -2881,10 +2881,10 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                                             null,
                                                                           ]
                                                                         }
-                                                                        thumbColor={null}
+                                                                        thumbColor="#eaeaea"
                                                                         trackColor={
                                                                           Object {
-                                                                            "false": "#fbfbfb",
+                                                                            "false": "#d8dcd7",
                                                                             "true": "#5c8a5199",
                                                                           }
                                                                         }
@@ -2917,8 +2917,8 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                                               ],
                                                                             ]
                                                                           }
-                                                                          thumbTintColor={null}
-                                                                          tintColor="#fbfbfb"
+                                                                          thumbTintColor="#eaeaea"
+                                                                          tintColor="#d8dcd7"
                                                                           value={false}
                                                                         >
                                                                           <RCTSwitch
@@ -2948,8 +2948,8 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                                                 ],
                                                                               ]
                                                                             }
-                                                                            thumbTintColor={null}
-                                                                            tintColor="#fbfbfb"
+                                                                            thumbTintColor="#eaeaea"
+                                                                            tintColor="#d8dcd7"
                                                                             value={false}
                                                                           />
                                                                         </RCTSwitch>
@@ -7338,10 +7338,10 @@ exports[`CreateChef buttons view terms and conditions button brings up the textP
                                                                             null,
                                                                           ]
                                                                         }
-                                                                        thumbColor={null}
+                                                                        thumbColor="#eaeaea"
                                                                         trackColor={
                                                                           Object {
-                                                                            "false": "#fbfbfb",
+                                                                            "false": "#d8dcd7",
                                                                             "true": "#5c8a5199",
                                                                           }
                                                                         }
@@ -7374,8 +7374,8 @@ exports[`CreateChef buttons view terms and conditions button brings up the textP
                                                                               ],
                                                                             ]
                                                                           }
-                                                                          thumbTintColor={null}
-                                                                          tintColor="#fbfbfb"
+                                                                          thumbTintColor="#eaeaea"
+                                                                          tintColor="#d8dcd7"
                                                                           value={false}
                                                                         >
                                                                           <RCTSwitch
@@ -7405,8 +7405,8 @@ exports[`CreateChef buttons view terms and conditions button brings up the textP
                                                                                 ],
                                                                               ]
                                                                             }
-                                                                            thumbTintColor={null}
-                                                                            tintColor="#fbfbfb"
+                                                                            thumbTintColor="#eaeaea"
+                                                                            tintColor="#d8dcd7"
                                                                             value={false}
                                                                           />
                                                                         </RCTSwitch>
@@ -8951,10 +8951,10 @@ If you have any questions about these Terms, please contact us at:
                                                                             null,
                                                                           ]
                                                                         }
-                                                                        thumbColor={null}
+                                                                        thumbColor="#eaeaea"
                                                                         trackColor={
                                                                           Object {
-                                                                            "false": "#fbfbfb",
+                                                                            "false": "#d8dcd7",
                                                                             "true": "#5c8a5199",
                                                                           }
                                                                         }
@@ -8987,8 +8987,8 @@ If you have any questions about these Terms, please contact us at:
                                                                               ],
                                                                             ]
                                                                           }
-                                                                          thumbTintColor={null}
-                                                                          tintColor="#fbfbfb"
+                                                                          thumbTintColor="#eaeaea"
+                                                                          tintColor="#d8dcd7"
                                                                           value={false}
                                                                         >
                                                                           <RCTSwitch
@@ -9018,8 +9018,8 @@ If you have any questions about these Terms, please contact us at:
                                                                                 ],
                                                                               ]
                                                                             }
-                                                                            thumbTintColor={null}
-                                                                            tintColor="#fbfbfb"
+                                                                            thumbTintColor="#eaeaea"
+                                                                            tintColor="#d8dcd7"
                                                                             value={false}
                                                                           />
                                                                         </RCTSwitch>
@@ -13399,10 +13399,10 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                                             null,
                                                                           ]
                                                                         }
-                                                                        thumbColor={null}
+                                                                        thumbColor="#eaeaea"
                                                                         trackColor={
                                                                           Object {
-                                                                            "false": "#fbfbfb",
+                                                                            "false": "#d8dcd7",
                                                                             "true": "#5c8a5199",
                                                                           }
                                                                         }
@@ -13435,8 +13435,8 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                                               ],
                                                                             ]
                                                                           }
-                                                                          thumbTintColor={null}
-                                                                          tintColor="#fbfbfb"
+                                                                          thumbTintColor="#eaeaea"
+                                                                          tintColor="#d8dcd7"
                                                                           value={false}
                                                                         >
                                                                           <RCTSwitch
@@ -13466,8 +13466,8 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                                                 ],
                                                                               ]
                                                                             }
-                                                                            thumbTintColor={null}
-                                                                            tintColor="#fbfbfb"
+                                                                            thumbTintColor="#eaeaea"
+                                                                            tintColor="#d8dcd7"
                                                                             value={false}
                                                                           />
                                                                         </RCTSwitch>
@@ -13997,10 +13997,10 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                                             null,
                                                                           ]
                                                                         }
-                                                                        thumbColor={null}
+                                                                        thumbColor="#eaeaea"
                                                                         trackColor={
                                                                           Object {
-                                                                            "false": "#fbfbfb",
+                                                                            "false": "#d8dcd7",
                                                                             "true": "#5c8a5199",
                                                                           }
                                                                         }
@@ -14033,8 +14033,8 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                                               ],
                                                                             ]
                                                                           }
-                                                                          thumbTintColor={null}
-                                                                          tintColor="#fbfbfb"
+                                                                          thumbTintColor="#eaeaea"
+                                                                          tintColor="#d8dcd7"
                                                                           value={false}
                                                                         >
                                                                           <RCTSwitch
@@ -14064,8 +14064,8 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                                                 ],
                                                                               ]
                                                                             }
-                                                                            thumbTintColor={null}
-                                                                            tintColor="#fbfbfb"
+                                                                            thumbTintColor="#eaeaea"
+                                                                            tintColor="#d8dcd7"
                                                                             value={false}
                                                                           />
                                                                         </RCTSwitch>
@@ -16691,7 +16691,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                       style={
                                                         Object {
                                                           "color": "#9e0000f8",
-                                                          "fontSize": 22.94694968835727,
+                                                          "fontSize": 30.595932917809698,
                                                           "paddingBottom": 3.335,
                                                           "paddingLeft": 15,
                                                           "paddingRight": 15,
@@ -16705,7 +16705,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                         style={
                                                           Object {
                                                             "color": "#9e0000f8",
-                                                            "fontSize": 22.94694968835727,
+                                                            "fontSize": 30.595932917809698,
                                                             "paddingBottom": 3.335,
                                                             "paddingLeft": 15,
                                                             "paddingRight": 15,
@@ -17233,7 +17233,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                                         thumbColor="#4b7142"
                                                                         trackColor={
                                                                           Object {
-                                                                            "false": "#fbfbfb",
+                                                                            "false": "#d8dcd7",
                                                                             "true": "#5c8a5199",
                                                                           }
                                                                         }
@@ -17267,7 +17267,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                                             ]
                                                                           }
                                                                           thumbTintColor="#4b7142"
-                                                                          tintColor="#fbfbfb"
+                                                                          tintColor="#d8dcd7"
                                                                           value={true}
                                                                         >
                                                                           <RCTSwitch
@@ -17298,7 +17298,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                                               ]
                                                                             }
                                                                             thumbTintColor="#4b7142"
-                                                                            tintColor="#fbfbfb"
+                                                                            tintColor="#d8dcd7"
                                                                             value={true}
                                                                           />
                                                                         </RCTSwitch>
@@ -17831,7 +17831,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                                         thumbColor="#4b7142"
                                                                         trackColor={
                                                                           Object {
-                                                                            "false": "#fbfbfb",
+                                                                            "false": "#d8dcd7",
                                                                             "true": "#5c8a5199",
                                                                           }
                                                                         }
@@ -17865,7 +17865,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                                             ]
                                                                           }
                                                                           thumbTintColor="#4b7142"
-                                                                          tintColor="#fbfbfb"
+                                                                          tintColor="#d8dcd7"
                                                                           value={true}
                                                                         >
                                                                           <RCTSwitch
@@ -17896,7 +17896,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                                               ]
                                                                             }
                                                                             thumbTintColor="#4b7142"
-                                                                            tintColor="#fbfbfb"
+                                                                            tintColor="#d8dcd7"
                                                                             value={true}
                                                                           />
                                                                         </RCTSwitch>
@@ -21001,10 +21001,10 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                                             null,
                                                                           ]
                                                                         }
-                                                                        thumbColor={null}
+                                                                        thumbColor="#eaeaea"
                                                                         trackColor={
                                                                           Object {
-                                                                            "false": "#fbfbfb",
+                                                                            "false": "#d8dcd7",
                                                                             "true": "#5c8a5199",
                                                                           }
                                                                         }
@@ -21037,8 +21037,8 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                                               ],
                                                                             ]
                                                                           }
-                                                                          thumbTintColor={null}
-                                                                          tintColor="#fbfbfb"
+                                                                          thumbTintColor="#eaeaea"
+                                                                          tintColor="#d8dcd7"
                                                                           value={false}
                                                                         >
                                                                           <RCTSwitch
@@ -21068,8 +21068,8 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                                                 ],
                                                                               ]
                                                                             }
-                                                                            thumbTintColor={null}
-                                                                            tintColor="#fbfbfb"
+                                                                            thumbTintColor="#eaeaea"
+                                                                            tintColor="#d8dcd7"
                                                                             value={false}
                                                                           />
                                                                         </RCTSwitch>
@@ -21599,10 +21599,10 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                                             null,
                                                                           ]
                                                                         }
-                                                                        thumbColor={null}
+                                                                        thumbColor="#eaeaea"
                                                                         trackColor={
                                                                           Object {
-                                                                            "false": "#fbfbfb",
+                                                                            "false": "#d8dcd7",
                                                                             "true": "#5c8a5199",
                                                                           }
                                                                         }
@@ -21635,8 +21635,8 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                                               ],
                                                                             ]
                                                                           }
-                                                                          thumbTintColor={null}
-                                                                          tintColor="#fbfbfb"
+                                                                          thumbTintColor="#eaeaea"
+                                                                          tintColor="#d8dcd7"
                                                                           value={false}
                                                                         >
                                                                           <RCTSwitch
@@ -21666,8 +21666,8 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                                                 ],
                                                                               ]
                                                                             }
-                                                                            thumbTintColor={null}
-                                                                            tintColor="#fbfbfb"
+                                                                            thumbTintColor="#eaeaea"
+                                                                            tintColor="#d8dcd7"
                                                                             value={false}
                                                                           />
                                                                         </RCTSwitch>
@@ -24775,7 +24775,7 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                                         thumbColor="#4b7142"
                                                                         trackColor={
                                                                           Object {
-                                                                            "false": "#fbfbfb",
+                                                                            "false": "#d8dcd7",
                                                                             "true": "#5c8a5199",
                                                                           }
                                                                         }
@@ -24809,7 +24809,7 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                                             ]
                                                                           }
                                                                           thumbTintColor="#4b7142"
-                                                                          tintColor="#fbfbfb"
+                                                                          tintColor="#d8dcd7"
                                                                           value={true}
                                                                         >
                                                                           <RCTSwitch
@@ -24840,7 +24840,7 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                                               ]
                                                                             }
                                                                             thumbTintColor="#4b7142"
-                                                                            tintColor="#fbfbfb"
+                                                                            tintColor="#d8dcd7"
                                                                             value={true}
                                                                           />
                                                                         </RCTSwitch>
@@ -25370,10 +25370,10 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                                             null,
                                                                           ]
                                                                         }
-                                                                        thumbColor={null}
+                                                                        thumbColor="#eaeaea"
                                                                         trackColor={
                                                                           Object {
-                                                                            "false": "#fbfbfb",
+                                                                            "false": "#d8dcd7",
                                                                             "true": "#5c8a5199",
                                                                           }
                                                                         }
@@ -25406,8 +25406,8 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                                               ],
                                                                             ]
                                                                           }
-                                                                          thumbTintColor={null}
-                                                                          tintColor="#fbfbfb"
+                                                                          thumbTintColor="#eaeaea"
+                                                                          tintColor="#d8dcd7"
                                                                           value={false}
                                                                         >
                                                                           <RCTSwitch
@@ -25437,8 +25437,8 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                                                 ],
                                                                               ]
                                                                             }
-                                                                            thumbTintColor={null}
-                                                                            tintColor="#fbfbfb"
+                                                                            thumbTintColor="#eaeaea"
+                                                                            tintColor="#d8dcd7"
                                                                             value={false}
                                                                           />
                                                                         </RCTSwitch>
@@ -28546,7 +28546,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                                         thumbColor="#4b7142"
                                                                         trackColor={
                                                                           Object {
-                                                                            "false": "#fbfbfb",
+                                                                            "false": "#d8dcd7",
                                                                             "true": "#5c8a5199",
                                                                           }
                                                                         }
@@ -28580,7 +28580,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                                             ]
                                                                           }
                                                                           thumbTintColor="#4b7142"
-                                                                          tintColor="#fbfbfb"
+                                                                          tintColor="#d8dcd7"
                                                                           value={true}
                                                                         >
                                                                           <RCTSwitch
@@ -28611,7 +28611,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                                               ]
                                                                             }
                                                                             thumbTintColor="#4b7142"
-                                                                            tintColor="#fbfbfb"
+                                                                            tintColor="#d8dcd7"
                                                                             value={true}
                                                                           />
                                                                         </RCTSwitch>
@@ -29144,7 +29144,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                                         thumbColor="#4b7142"
                                                                         trackColor={
                                                                           Object {
-                                                                            "false": "#fbfbfb",
+                                                                            "false": "#d8dcd7",
                                                                             "true": "#5c8a5199",
                                                                           }
                                                                         }
@@ -29178,7 +29178,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                                             ]
                                                                           }
                                                                           thumbTintColor="#4b7142"
-                                                                          tintColor="#fbfbfb"
+                                                                          tintColor="#d8dcd7"
                                                                           value={true}
                                                                         >
                                                                           <RCTSwitch
@@ -29209,7 +29209,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                                               ]
                                                                             }
                                                                             thumbTintColor="#4b7142"
-                                                                            tintColor="#fbfbfb"
+                                                                            tintColor="#d8dcd7"
                                                                             value={true}
                                                                           />
                                                                         </RCTSwitch>
@@ -30642,7 +30642,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                       style={
                                                         Object {
                                                           "color": "#9e0000f8",
-                                                          "fontSize": 22.94694968835727,
+                                                          "fontSize": 30.595932917809698,
                                                           "paddingBottom": 3.335,
                                                           "paddingLeft": 15,
                                                           "paddingRight": 15,
@@ -30656,7 +30656,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                         style={
                                                           Object {
                                                             "color": "#9e0000f8",
-                                                            "fontSize": 22.94694968835727,
+                                                            "fontSize": 30.595932917809698,
                                                             "paddingBottom": 3.335,
                                                             "paddingLeft": 15,
                                                             "paddingRight": 15,
@@ -30833,7 +30833,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                       style={
                                                         Object {
                                                           "color": "#9e0000f8",
-                                                          "fontSize": 22.94694968835727,
+                                                          "fontSize": 30.595932917809698,
                                                           "paddingBottom": 3.335,
                                                           "paddingLeft": 15,
                                                           "paddingRight": 15,
@@ -30847,7 +30847,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                         style={
                                                           Object {
                                                             "color": "#9e0000f8",
-                                                            "fontSize": 22.94694968835727,
+                                                            "fontSize": 30.595932917809698,
                                                             "paddingBottom": 3.335,
                                                             "paddingLeft": 15,
                                                             "paddingRight": 15,
@@ -31955,7 +31955,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                       style={
                                                         Object {
                                                           "color": "#9e0000f8",
-                                                          "fontSize": 22.94694968835727,
+                                                          "fontSize": 30.595932917809698,
                                                           "paddingBottom": 3.335,
                                                           "paddingLeft": 15,
                                                           "paddingRight": 15,
@@ -31969,7 +31969,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                         style={
                                                           Object {
                                                             "color": "#9e0000f8",
-                                                            "fontSize": 22.94694968835727,
+                                                            "fontSize": 30.595932917809698,
                                                             "paddingBottom": 3.335,
                                                             "paddingLeft": 15,
                                                             "paddingRight": 15,
@@ -32494,10 +32494,10 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                                             null,
                                                                           ]
                                                                         }
-                                                                        thumbColor={null}
+                                                                        thumbColor="#eaeaea"
                                                                         trackColor={
                                                                           Object {
-                                                                            "false": "#fbfbfb",
+                                                                            "false": "#d8dcd7",
                                                                             "true": "#5c8a5199",
                                                                           }
                                                                         }
@@ -32530,8 +32530,8 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                                               ],
                                                                             ]
                                                                           }
-                                                                          thumbTintColor={null}
-                                                                          tintColor="#fbfbfb"
+                                                                          thumbTintColor="#eaeaea"
+                                                                          tintColor="#d8dcd7"
                                                                           value={false}
                                                                         >
                                                                           <RCTSwitch
@@ -32561,8 +32561,8 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                                                 ],
                                                                               ]
                                                                             }
-                                                                            thumbTintColor={null}
-                                                                            tintColor="#fbfbfb"
+                                                                            thumbTintColor="#eaeaea"
+                                                                            tintColor="#d8dcd7"
                                                                             value={false}
                                                                           />
                                                                         </RCTSwitch>
@@ -33092,10 +33092,10 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                                             null,
                                                                           ]
                                                                         }
-                                                                        thumbColor={null}
+                                                                        thumbColor="#eaeaea"
                                                                         trackColor={
                                                                           Object {
-                                                                            "false": "#fbfbfb",
+                                                                            "false": "#d8dcd7",
                                                                             "true": "#5c8a5199",
                                                                           }
                                                                         }
@@ -33128,8 +33128,8 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                                               ],
                                                                             ]
                                                                           }
-                                                                          thumbTintColor={null}
-                                                                          tintColor="#fbfbfb"
+                                                                          thumbTintColor="#eaeaea"
+                                                                          tintColor="#d8dcd7"
                                                                           value={false}
                                                                         >
                                                                           <RCTSwitch
@@ -33159,8 +33159,8 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                                                 ],
                                                                               ]
                                                                             }
-                                                                            thumbTintColor={null}
-                                                                            tintColor="#fbfbfb"
+                                                                            thumbTintColor="#eaeaea"
+                                                                            tintColor="#d8dcd7"
                                                                             value={false}
                                                                           />
                                                                         </RCTSwitch>

@@ -153,7 +153,7 @@ export const centralStyles = StyleSheet.create({
 	},
 	formErrorText: {
 		color: "#9e0000f8",
-		fontSize: responsiveFontSize(1.5),
+		fontSize: responsiveFontSize(2),
 		paddingLeft: responsiveWidth(2),
 		paddingRight: responsiveWidth(2),
 		paddingTop: responsiveHeight(0.25),

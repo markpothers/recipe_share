@@ -138,7 +138,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
     storeServesChoices={[Function]}
   >
     <SpinachAppContainer
-      awaitingServer={true}
+      awaitingServer={false}
     >
       <ForwardRef(SafeAreaView)
         style={
@@ -196,69 +196,6 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                 }
               />
             </Image>
-            <View
-              style={
-                Object {
-                  "alignItems": "center",
-                  "backgroundColor": "#fff59b",
-                  "borderColor": "#104e01",
-                  "borderRadius": 11.25,
-                  "borderWidth": 1,
-                  "height": 50,
-                  "justifyContent": "center",
-                  "left": "45%",
-                  "position": "absolute",
-                  "top": "10%",
-                  "width": 50,
-                  "zIndex": 5,
-                }
-              }
-            >
-              <View
-                style={
-                  Object {
-                    "alignItems": "center",
-                    "backgroundColor": "#fff59b",
-                    "borderColor": "#104e01",
-                    "borderRadius": 11.25,
-                    "borderWidth": 1,
-                    "height": 50,
-                    "justifyContent": "center",
-                    "left": "45%",
-                    "position": "absolute",
-                    "top": "10%",
-                    "width": 50,
-                    "zIndex": 5,
-                  }
-                }
-              >
-                <ActivityIndicator
-                  animating={true}
-                  color="#104e01"
-                  hidesWhenStopped={true}
-                  size="large"
-                  style={
-                    Object {
-                      "left": 1.25,
-                      "top": 1.7,
-                    }
-                  }
-                >
-                  <ActivityIndicator
-                    animating={true}
-                    color="#104e01"
-                    hidesWhenStopped={true}
-                    size="large"
-                    style={
-                      Object {
-                        "left": 1.25,
-                        "top": 1.7,
-                      }
-                    }
-                  />
-                </ActivityIndicator>
-              </View>
-            </View>
             <ForwardRef
               activeOpacity={1}
               onPress={[Function]}
@@ -347,7 +284,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                           listKey={Array []}
                           nestedScrollEnabled={true}
                           onEndReached={[Function]}
-                          onEndReachedThreshold={7}
+                          onEndReachedThreshold={2.5}
                           onRefresh={[Function]}
                           onScroll={[Function]}
                           refreshing={false}
@@ -364,7 +301,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                             listKey={Array []}
                             nestedScrollEnabled={true}
                             onEndReached={[Function]}
-                            onEndReachedThreshold={7}
+                            onEndReachedThreshold={2.5}
                             onRefresh={[Function]}
                             onScroll={[Function]}
                             refreshing={false}
@@ -385,7 +322,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                               nestedScrollEnabled={true}
                               numColumns={1}
                               onEndReached={[Function]}
-                              onEndReachedThreshold={7}
+                              onEndReachedThreshold={2.5}
                               onRefresh={[Function]}
                               onScroll={[Function]}
                               refreshing={false}
@@ -410,7 +347,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                 maxToRenderPerBatch={10}
                                 nestedScrollEnabled={true}
                                 onEndReached={[Function]}
-                                onEndReachedThreshold={7}
+                                onEndReachedThreshold={2.5}
                                 onRefresh={[Function]}
                                 onScroll={[Function]}
                                 refreshing={false}
@@ -437,7 +374,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                   nestedScrollEnabled={true}
                                   onContentSizeChange={[Function]}
                                   onEndReached={[Function]}
-                                  onEndReachedThreshold={7}
+                                  onEndReachedThreshold={2.5}
                                   onLayout={[Function]}
                                   onMomentumScrollEnd={[Function]}
                                   onRefresh={[Function]}
@@ -475,7 +412,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                     nestedScrollEnabled={true}
                                     onContentSizeChange={[Function]}
                                     onEndReached={[Function]}
-                                    onEndReachedThreshold={7}
+                                    onEndReachedThreshold={2.5}
                                     onLayout={[Function]}
                                     onMomentumScrollEnd={[Function]}
                                     onRefresh={[Function]}
@@ -513,7 +450,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                       nestedScrollEnabled={true}
                                       onContentSizeChange={[Function]}
                                       onEndReached={[Function]}
-                                      onEndReachedThreshold={7}
+                                      onEndReachedThreshold={2.5}
                                       onLayout={[Function]}
                                       onMomentumScrollEnd={[Function]}
                                       onRefresh={[Function]}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
-import { AsyncStorage } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import ChefDetailsCard from '../chefDetails/ChefDetailsCard'
 import { getChefDetails } from '../fetches/getChefDetails'
 import ChefEditor from './chefEditor'

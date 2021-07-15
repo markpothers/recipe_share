@@ -1,5 +1,6 @@
 import React from 'react'
-import { Modal, Text, View, ScrollView, KeyboardAvoidingView, TouchableOpacity, TextInput, Platform, AsyncStorage } from 'react-native'
+import { Modal, Text, View, ScrollView, KeyboardAvoidingView, TouchableOpacity, TextInput, Platform } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { styles } from './chefEditorStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux'
@@ -241,6 +242,22 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							</View>
 							<View style={[centralStyles.formSection, { width: '86%' }]}>
 								<View style={centralStyles.formInputContainer}>
+									<View style={centralStyles.formInputWhiteBackground}>
+										<TextInput
+											maxFontSizeMultiplier={2}
+											style={centralStyles.formInput}
+											value={this.props.username}
+											placeholder="username"
+											autoCapitalize="none"
+											textContentType="none"
+											onChange={(e) => this.handleTextInput(e, "username")}
+										/>
+									</View>
+								</View>
+							</View>
+							{this.renderUsernameError()}
+							<View style={[centralStyles.formSection, { width: '86%' }]}>
+								<View style={centralStyles.formInputContainer}>
 									<View style={[centralStyles.formInputWhiteBackground, { backgroundColor: '#dadada' }]}>
 										<TextInput //this textInput is present for ios autofill.  Disabling it breaks autofill so the covering text field is there to prevent it being focused
 											maxFontSizeMultiplier={2}
@@ -269,21 +286,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									</View>
 								</View>
 							</View>
-							<View style={[centralStyles.formSection, { width: '86%' }]}>
-								<View style={centralStyles.formInputContainer}>
-									<View style={centralStyles.formInputWhiteBackground}>
-										<TextInput
-											maxFontSizeMultiplier={2}
-											style={centralStyles.formInput}
-											value={this.props.username}
-											placeholder="username"
-											autoCapitalize="none"
-											onChange={(e) => this.handleTextInput(e, "username")}
-										/>
-									</View>
-								</View>
-							</View>
-							{this.renderUsernameError()}
 							<View style={[centralStyles.formSection, { width: '86%' }]}>
 								<View style={centralStyles.formInputContainer} >
 									<View style={centralStyles.formInputWhiteBackground}>

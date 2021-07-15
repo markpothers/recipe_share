@@ -1,9 +1,10 @@
 import React from 'react'
-import { ScrollView, Text, TextInput, TouchableOpacity, View, Keyboard, AsyncStorage, Platform, KeyboardAvoidingView } from 'react-native'
+import { ScrollView, Text, TextInput, TouchableOpacity, View, Keyboard, Platform, KeyboardAvoidingView } from 'react-native'
 import { connect } from 'react-redux'
 import { styles } from './newRecipeStyleSheet'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { times, doubleTimes } from '../dataComponents/times'
 import helpTexts from '../dataComponents/helpTexts'
 import { difficulties } from '../dataComponents/difficulties'
@@ -47,23 +48,28 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(
 	class NewRecipe extends React.Component {
 
-		state = {
-			hasPermission: false,
-			renderOfflineMessage: false,
-			isFocused: true,
-			alertPopUpShowing: false,
-			helpShowing: false,
-			helpText: "",
-			ingredientsList: [],
-			autoCompleteFocused: null,
-			choosingPrimaryPicture: false,
-			choosingInstructionPicture: false,
-			instructionImageIndex: 0,
-			filterDisplayed: false,
-			awaitingServer: false,
-			scrollingEnabled: true,
-			errors: [],
-			...(testing ? testRecipe : emptyRecipe)
+		constructor(props) {
+			super(props)
+			this.nextInstructionInput = React.createRef()
+			this.nextIngredientInput = React.createRef()
+			this.state = {
+				hasPermission: false,
+				renderOfflineMessage: false,
+				isFocused: true,
+				alertPopUpShowing: false,
+				helpShowing: false,
+				helpText: "",
+				ingredientsList: [],
+				autoCompleteFocused: null,
+				choosingPrimaryPicture: false,
+				choosingInstructionPicture: false,
+				instructionImageIndex: 0,
+				filterDisplayed: false,
+				awaitingServer: false,
+				scrollingEnabled: true,
+				errors: [],
+				...(testing ? testRecipe : emptyRecipe)
+			}
 		}
 
 		componentDidMount = async () => {
@@ -231,16 +237,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		clearNewRecipeDetails = async (resetToNewRecipe = false) => {
-			AsyncStorage.multiRemove(['localNewRecipeDetails', 'localEditRecipeDetails'])
-			if (resetToNewRecipe !== true && this.props.route.params?.recipe_details !== undefined) {
-				await this.setRecipeParamsForEditing(this.props.route.params.recipe_details)
-				this.setState({ alertPopUpShowing: false })
-			} else {
-				this.setState(() => (testing ? testRecipe : emptyRecipe))
-				this.props.navigation.setOptions({
-					headerTitle: props => <AppHeader {...props} text={"Create a New Recipe"} route={this.props.route} />
-				})
-			}
+			await AsyncStorage.multiRemove(['localNewRecipeDetails', 'localEditRecipeDetails'], async () => {
+				if (resetToNewRecipe !== true && this.props.route.params?.recipe_details !== undefined) {
+					await this.setRecipeParamsForEditing(this.props.route.params.recipe_details)
+					this.setState({ alertPopUpShowing: false })
+				} else {
+					this.setState(() => (testing ? testRecipe : emptyRecipe))
+					this.props.navigation.setOptions({
+						headerTitle: props => <AppHeader {...props} text={"Create a New Recipe"} route={this.props.route} />
+					})
+				}
+			})
 		}
 
 		choosePrimaryPicture = () => { this.setState({ choosingPrimaryPicture: true }) }
@@ -314,7 +321,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				return ({
 					newRecipeDetails: { ...state.newRecipeDetails, ingredients: newIngredients }
 				})
-			}, this.saveNewRecipeDetailsLocally)
+			}, () => {
+				this.saveNewRecipeDetailsLocally()
+				this.nextIngredientInput.focus()
+			})
 		}
 
 		removeIngredient = (index) => {
@@ -374,9 +384,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								} else {
 									let success = await this.postImages(newRecipeDetails, recipe)
 									if (success) {
-										this.clearNewRecipeDetails()
-										// this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
-										this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes', params: { refresh: true }  })
+										this.setState({ awaitingServer: false }, async () => {
+											this.clearNewRecipeDetails(true)
+											// this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
+											this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes', params: { refresh: true } })
+										})
 									}
 								}
 							}
@@ -427,9 +439,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 										this.props.navigation.setParams({ recipeDetails: { recipe: { id: recipe.recipe.id } } })
 										let success = await this.postImages(newRecipeDetails, recipe)
 										if (success) {
-											this.clearNewRecipeDetails()
-											// this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
-											this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes', params: { refresh: true }  })
+											this.setState({ awaitingServer: false }, async () => {
+												this.clearNewRecipeDetails(true)
+												// this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
+												this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes', params: { refresh: true } })
+											})
 										}
 									})
 								}
@@ -443,7 +457,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							})
 						}
 					}
-					// this.setState({ awaitingServer: false })
 				})
 			} else {
 				this.setState({ renderOfflineMessage: true })
@@ -552,7 +565,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					averageInstructionHeight: newAverageInstructionHeight,
 					instructionHeights: newInstructionHeights
 				})
-			}, this.saveNewRecipeDetailsLocally)
+			}, () => {
+				this.saveNewRecipeDetailsLocally()
+				this.nextInstructionInput.focus()
+			})
 			// }
 		}
 
@@ -709,7 +725,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		render() {
-			// console.log(this.state.newRecipeDetails.recipeId)
+			// console.log(this.state.newRecipeDetails.primaryImages)
 			return (
 				<SpinachAppContainer awaitingServer={this.state.awaitingServer} scrollingEnabled={false} >
 					{
@@ -1106,6 +1122,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 															ingredientsLength={this.state.newRecipeDetails.ingredients.length}
 															thisAutocompleteIsFocused={this.thisAutocompleteIsFocused}
 															updateIngredientEntry={this.updateIngredientEntry}
+															setNextIngredientInput={(element) => { this.nextIngredientInput = element }}
+															inputToFocus={index == this.state.newRecipeDetails.ingredients.length - 1}
 														/>
 													)
 												}}
@@ -1167,6 +1185,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 															chooseInstructionPicture={this.chooseInstructionPicture}
 															instructionImagePresent={this.state.newRecipeDetails.instructionImages[index] != ''}
 															setFocusedInstructionInput={this.setFocusedInstructionInput}
+															setNextInstructionInput={(element) => { this.nextInstructionInput = element }}
+															inputToFocus={index == this.state.newRecipeDetails.instructions.length - 1}
 														/>
 													)
 												}}

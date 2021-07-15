@@ -1,5 +1,6 @@
 import React from 'react';
-import { AsyncStorage, AppState } from 'react-native'
+import { AppState } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { connect } from 'react-redux'
 import MainDrawerNavigator from './MainDrawerNavigator'
 

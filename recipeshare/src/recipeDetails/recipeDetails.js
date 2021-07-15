@@ -1,6 +1,8 @@
 import React from 'react';
-import { Image, ScrollView, View, Text, TouchableOpacity, FlatList, AsyncStorage, KeyboardAvoidingView, Platform, Linking } from 'react-native';
+import { Image, ScrollView, View, Text, TouchableOpacity, FlatList, KeyboardAvoidingView, Platform, Linking, AppState } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { connect } from 'react-redux'
+import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake'
 import { styles } from './recipeDetailsStyleSheet'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 import { postRecipeLike } from '../fetches/postRecipeLike'
@@ -32,6 +34,7 @@ import { WebView } from 'react-native-webview';
 // import MyWebView from 'react-native-webview-autoheight';
 
 const defaultRecipeImage = require("../dataComponents/default-recipe.jpg")
+let keepAwakeTimer
 
 const mapStateToProps = (state) => ({
 	recipe_details: state.recipe_details,
@@ -106,6 +109,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 	class RecipeDetails extends React.Component {
 
 		state = {
+			appState: 'active',
 			commenting: false,
 			commentText: "",
 			commentsTopY: 0,
@@ -226,6 +230,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				}
 				this.setState({ awaitingServer: false })
 			})
+			AppState.addEventListener('change', this.handleAppStateChange)
+			this.enableKeepAwake()
 		}
 
 		componentDidUpdate = async (prevProps) => {
@@ -233,8 +239,42 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				|| prevProps.recipe_details.shareable != this.props.recipe_details.shareable) {
 				await this.generateHeaderButtonList()
 			}
-		// console.log('DETAILS')
-		// console.log(this.props.navigation.dangerouslyGetState().routes)
+			// console.log('DETAILS')
+			// console.log(this.props.navigation.dangerouslyGetState().routes)
+		}
+
+		componentWillUnmount = () => {
+			AppState.removeEventListener('change', this.handleAppStateChange)
+			this.disableKeepAwake()
+		}
+
+		handleAppStateChange = (nextAppState) => {
+			if (
+				this.state.appState.match(/inactive|background/) &&
+				nextAppState === 'active'
+			) {
+				// console.log('App has come to the foreground!');
+				this.enableKeepAwake()
+			} else if (
+				this.state.appState === 'active' &&
+				nextAppState.match(/inactive|background/)
+			) {
+				// console.log('App is going into background!');
+				this.disableKeepAwake()
+			}
+			this.setState({ appState: nextAppState })
+		}
+
+		enableKeepAwake = () => {
+				activateKeepAwake()
+				keepAwakeTimer = setTimeout(() => {
+					deactivateKeepAwake()
+				}, 300000)
+		}
+
+		disableKeepAwake = () => {
+			deactivateKeepAwake()
+			clearTimeout(keepAwakeTimer)
 		}
 
 		scrolled = () => {
@@ -305,7 +345,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					const deleted = await destroyRecipe(this.props.recipe_details.recipe.id, this.props.loggedInChef.auth_token)
 					if (deleted) {
 						// this.props.navigation.goBack()
-						this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes', params: { deleteId: this.props.recipe_details.recipe.id }  })
+						this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes', params: { deleteId: this.props.recipe_details.recipe.id } })
 					}
 				})
 			} else {

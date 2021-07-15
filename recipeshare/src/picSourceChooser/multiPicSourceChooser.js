@@ -1,6 +1,8 @@
 import React from 'react'
 import { Modal, Text, View, TouchableOpacity, Dimensions, Image, FlatList } from 'react-native'
-import * as Permissions from 'expo-permissions'
+import { Camera } from 'expo-camera';
+import * as MediaLibrary from 'expo-media-library';
+
 import * as ImagePicker from 'expo-image-picker'
 import { styles } from './functionalComponentsStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -18,11 +20,11 @@ export default class MultiPicSourceChooser extends React.Component {
 	}
 
 	componentDidMount = async () => {
-		let cameraRollPermission = await Permissions.askAsync(Permissions.MEDIA_LIBRARY)
-		let cameraPermission = await Permissions.askAsync(Permissions.CAMERA)
+		let cameraRollPermission = await MediaLibrary.requestPermissionsAsync()
+		let cameraPermission = await Camera.requestCameraPermissionsAsync()
 		this.setState({
-			hasCameraRollPermission: cameraRollPermission.permissions.mediaLibrary.granted,
-			hasCameraPermission: cameraPermission.permissions.camera.granted,
+			hasCameraRollPermission: cameraRollPermission.granted,
+			hasCameraPermission: cameraPermission.granted,
 			originalImages: [...this.props.imageSources]
 		})
 	}
@@ -35,13 +37,11 @@ export default class MultiPicSourceChooser extends React.Component {
 	pickImage = async () => {
 		try {
 			if (this.state.hasCameraRollPermission) {
-				// this.setState({ visible: false }, async() => {
 					let image = await ImagePicker.launchImageLibraryAsync({
 						allowsEditing: true,
 						aspect: [4, 3],
 						base64: false
 					})
-					// this.setState({ visible: true }, async() => {
 						if (image.error) {
 							console.log(image.error)
 						}
@@ -50,10 +50,6 @@ export default class MultiPicSourceChooser extends React.Component {
 							newImages[this.state.imageIndex] = image
 						}
 						this.props.saveImage(newImages)
-					// })
-					console.log('about to set visible')
-					// this.setState({ visible: true })
-				// })
 			}
 		} catch (e) {
 			console.log('fail')

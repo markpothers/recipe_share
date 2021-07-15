@@ -1,5 +1,6 @@
 import React from 'react'
-import { FlatList, AsyncStorage, Animated, TouchableOpacity, Keyboard, Platform } from 'react-native'
+import { FlatList, Animated, TouchableOpacity, Keyboard, Platform } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import ChefCard from './ChefCard'
 import { connect } from 'react-redux'
 import { getChefList } from '../fetches/getChefList'

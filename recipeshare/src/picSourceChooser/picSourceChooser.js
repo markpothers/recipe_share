@@ -1,6 +1,7 @@
 import React from 'react'
 import { Modal, Text, View, TouchableOpacity, Dimensions, Image } from 'react-native'
-import * as Permissions from 'expo-permissions'
+import { Camera } from 'expo-camera';
+import * as MediaLibrary from 'expo-media-library';
 import * as ImagePicker from 'expo-image-picker'
 import { styles } from './functionalComponentsStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -15,11 +16,11 @@ export default class PicSourceChooser extends React.PureComponent {
 	}
 
 	componentDidMount = async () => {
-		let cameraRollPermission = await Permissions.askAsync(Permissions.MEDIA_LIBRARY)
-		let cameraPermission = await Permissions.askAsync(Permissions.CAMERA)
+		let cameraRollPermission = await MediaLibrary.requestPermissionsAsync()
+		let cameraPermission = await Camera.requestCameraPermissionsAsync()
 		this.setState({
-			hasCameraRollPermission: cameraRollPermission.permissions.mediaLibrary.granted,
-			hasCameraPermission: cameraPermission.permissions.camera.granted,
+			hasCameraRollPermission: cameraRollPermission.granted,
+			hasCameraPermission: cameraPermission.granted,
 			originalImage: this.props.originalImage
 		})
 	}

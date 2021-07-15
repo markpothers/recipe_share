@@ -1,5 +1,6 @@
 import React from 'react'
-import { FlatList, TouchableOpacity, AsyncStorage, Animated, Keyboard, Platform } from 'react-native'
+import { FlatList, TouchableOpacity, Animated, Keyboard, Platform } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import RecipeCard from './RecipeCard'
 import { connect } from 'react-redux'
 import { getRecipeList } from '../fetches/getRecipeList'
@@ -156,9 +157,6 @@ export class RecipesList extends React.Component {
 		// 	}, async () => {
 		// 		await this.fetchRecipeList()
 		// 		this.recipeFlatList.scrollTo({ x: 0, y: 0, animated: true })
-		if (this.state.awaitingServer) {
-			this.setState({ awaitingServer: false })
-		}
 		// 	})
 		// }
 	}
@@ -198,8 +196,6 @@ export class RecipesList extends React.Component {
 		}, async () => {
 			if (this.props.route.params?.deleteId) {
 				this.props.navigation.setParams({ deleteId: null })
-				// console.log('deleting')
-				// console.log(this.props.route.params?.deleteId)
 				let recipeLists = [
 					'all_Recipes',
 					'chef_Recipes',
@@ -211,24 +207,13 @@ export class RecipesList extends React.Component {
 					'most_made_Recipes'
 				]
 				recipeLists.forEach(listName => {
-					// console.log(listName)
-					// console.log('old')
-					// console.log(this.props[listName].map(r => r.id))
 					let newRecipeList = this.props[listName].filter(recipe => {
-						// if (listName == 'chef_Recipes'){
-						// 	console.log(recipe.id != this.props.route.params?.deleteId)
-						// }
 						return recipe.id != this.props.route.params?.deleteId
 					})
-					// console.log('new')
-					// console.log(newRecipeList.map(r => r.id))
-					// console.log('list name for saving')
-					// console.log(listName)
-					// console.log(listName.replace("_Recipes", ""))
 					this.props.storeRecipeList(listName.replace("_Recipes", ""), newRecipeList)
 				})
+				this.setState({ awaitingServer: false })
 			} else if (this.props.route.params?.refresh) {
-				// console.log('refreshing')
 				this.props.navigation.setParams({ refresh: false })
 				this.setState({
 					offset: startingOffset,
@@ -240,6 +225,8 @@ export class RecipesList extends React.Component {
 					this.recipeFlatList.scrollToOffset({ x: 0, y: 0, animated: true })
 					this.setState({ awaitingServer: false })
 				})
+			} else {
+				this.setState({ awaitingServer: false })
 			}
 		})
 	}
@@ -272,6 +259,7 @@ export class RecipesList extends React.Component {
 									const locallySavedListData = JSON.parse(res)
 									if (locallySavedListData[this.props["listChoice"] + `_Recipes`].length > 0) {
 										this.props.storeRecipeList(this.props["listChoice"], locallySavedListData[this.props["listChoice"] + `_Recipes`])
+										this.setState({ awaitingServer: false })
 									}
 									else {
 										this.setState({ renderOfflineMessage: true })
@@ -281,9 +269,8 @@ export class RecipesList extends React.Component {
 								}
 							})
 						}
-						this.setState({ awaitingServer: false })
 						break
-					default: break
+					default: this.setState({ awaitingServer: false })
 				}
 			}
 		})
@@ -472,37 +459,6 @@ export class RecipesList extends React.Component {
 	//   this.props.respondToListScroll(e)
 	// }
 
-	// likeRecipe2 = async () => {
-	// 	this.setState(() => ({ awaitingServer: true }))
-	// 	let response = await apiCall(postRecipeLike, recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
-	// 	if (response.fail) { //internet connection or timeout
-	// 		this.setState({
-	// 			renderOfflineMessage: true,
-	// 			awaitingServer: false
-	// 		})
-	// 	} else if (response.error) { //error from api
-	// 		if (response.error.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-	// 		await this.setState(state => {
-	// 			return ({
-	// 				dataICantGet: [...state.dataICantGet, recipeID],
-	// 				awaitingServer: false
-	// 			})
-	// 		})
-	// 	} else { //success
-	// 		const recipes = this.props[this.props["listChoice"] + `_Recipes`].map((recipe) => {
-	// 			if (recipe['id'] === recipeID) {
-	// 				recipe['likes_count'] = parseInt(recipe['likes_count']) + 1
-	// 				recipe['chef_liked'] = 1
-	// 				return recipe
-	// 			} else {
-	// 				return recipe
-	// 			}
-	// 		})
-	// 		this.props.storeRecipeList(this.props["listChoice"], recipes)
-	// 		this.props.fetchChefDetails && this.props.fetchChefDetails()
-	// 	}
-	// }
-
 	likeRecipe = async (recipeID) => {
 		let netInfoState = await NetInfo.fetch()
 		if (netInfoState.isConnected) {
@@ -533,12 +489,7 @@ export class RecipesList extends React.Component {
 		}
 	}
 
-	// updateRecipePropCounts = (currentRecipes, property, add) => {
-
-	// }
-
 	unlikeRecipe = async (recipeID) => {
-		// console.log
 		let netInfoState = await NetInfo.fetch()
 		if (netInfoState.isConnected) {
 			this.setState({ awaitingServer: true }, async () => {
@@ -569,7 +520,6 @@ export class RecipesList extends React.Component {
 	}
 
 	makeRecipe = async (recipeID) => {
-		// console.log
 		let netInfoState = await NetInfo.fetch()
 		if (netInfoState.isConnected) {
 			this.setState({ awaitingServer: true }, async () => {
@@ -599,7 +549,6 @@ export class RecipesList extends React.Component {
 	}
 
 	reShareRecipe = async (recipeID) => {
-		// console.log
 		let netInfoState = await NetInfo.fetch()
 		if (netInfoState.isConnected) {
 			this.setState({ awaitingServer: true }, async () => {
