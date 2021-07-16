@@ -159,6 +159,7 @@ export class RecipesList extends React.Component {
 		// 		this.recipeFlatList.scrollTo({ x: 0, y: 0, animated: true })
 		// 	})
 		// }
+		// this.setState({awaitingServer: true})
 	}
 
 	shouldComponentUpdate = (nextProps, nextState) => {

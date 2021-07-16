@@ -4,24 +4,6 @@ import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-nat
 const inDevelopment = false
 
 export const centralStyles = StyleSheet.create({
-	activityIndicator: {
-		left: 1.25,
-		top: 1.7
-	},
-	activityIndicatorContainer: {
-		position: 'absolute',
-		top: '10%',
-		left: '45%',
-		justifyContent: 'center',
-		alignItems: 'center',
-		borderRadius: responsiveWidth(1.5),
-		backgroundColor: '#fff59b',
-		borderColor: '#104e01',
-		borderWidth: 1,
-		width: 50,
-		height: 50,
-		zIndex: 5
-	},
 	spinachFullBackground: {
 		width: responsiveWidth(100),
 		height: responsiveHeight(100),
