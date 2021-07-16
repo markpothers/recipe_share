@@ -32,7 +32,6 @@ import { getTimeStringFromMinutes } from '../auxFunctions/getTimeStringFromMinut
 import { getChefDetails } from '../fetches/getChefDetails'
 import AppHeaderRight from '../../navigation/appHeaderRight'
 import { WebView } from 'react-native-webview';
-// import MyWebView from 'react-native-webview-autoheight';
 
 const defaultRecipeImage = require("../dataComponents/default-recipe.jpg")
 let keepAwakeTimer
@@ -789,16 +788,28 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											width: '100%',
 										}}
 										onShouldStartLoadWithRequest={event => {
-											if (event.url !== this.props.recipe_details.recipe.acknowledgement_link) {
-												Linking.openURL(event.url)
-												return false
+											if (Platform.OS === 'ios') {
+												if (event.mainDocumentURL !== this.props.recipe_details.recipe.acknowledgement_link) {
+													Linking.openURL(event.mainDocumentURL)
+													return false
+												}
+											} else {
+												if (event.url !== this.props.recipe_details.recipe.acknowledgement_link) {
+													Linking.openURL(event.url)
+													return false
+												}
 											}
 											return true
 										}}
-										onLoad={() => this.setState({webviewLoading: false})}
+										// onNavigationStateChange={(event) => {
+										// 	if (event.url !== this.props.recipe_details.recipe.acknowledgement_link) {
+										// 		Linking.openURL(event.url)
+										// 	}
+										// }}
+										onLoad={() => this.setState({ webviewLoading: false })}
 									/>
 								</ScrollView>
-								{this.state.webviewLoading && <StyledActivityIndicator/>}
+								{this.state.webviewLoading && <StyledActivityIndicator />}
 							</View>
 						</View>
 					)}
