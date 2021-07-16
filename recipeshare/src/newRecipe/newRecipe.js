@@ -28,7 +28,7 @@ import NetInfo from '@react-native-community/netinfo';
 import { AlertPopUp } from '../alertPopUp/alertPopUp';
 import AppHeader from '../../navigation/appHeader'
 import { getTimeStringFromMinutes, getMinutesFromTimeString } from '../auxFunctions/getTimeStringFromMinutes'
-import SwitchSized from '../switchSized/switchSized'
+import SwitchSized from '../customComponents/switchSized/switchSized'
 import { TextPopUp } from '../textPopUp/textPopUp'
 import { emptyRecipe } from './recipeTemplates/emptyRecipe'
 import { longTestRecipe } from './recipeTemplates/longTestRecipe' //eslint-disable-line no-unused-vars

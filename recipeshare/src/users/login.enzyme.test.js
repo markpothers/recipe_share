@@ -18,7 +18,7 @@ import { initialState, middleware } from '../redux/store'
 import reducer from '../redux/reducer.js'
 import LoginScreen from './login.js'
 import { TouchableOpacity, TextInput, Text } from 'react-native'
-import SwitchSized from '../switchSized/switchSized'
+import SwitchSized from '../customComponents/switchSized/switchSized'
 import { AlertPopUp } from '../alertPopUp/alertPopUp'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import OfflineMessage from '../offlineMessage/offlineMessage';

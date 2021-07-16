@@ -10,7 +10,7 @@ import toJson from 'enzyme-to-json';
 
 import { Switch, Platform } from 'react-native'
 import SwitchSized from './switchSized.js'
-import { setMockDeviceType } from '../../__mocks__/expo-device'
+import { setMockDeviceType } from '../../../__mocks__/expo-device'
 
 describe('SwitchSized', () => {
 

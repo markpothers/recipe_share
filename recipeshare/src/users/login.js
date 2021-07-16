@@ -10,7 +10,7 @@ import { loginChef } from '../fetches/loginChef'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 import OfflineMessage from '../offlineMessage/offlineMessage'
-import SwitchSized from '../switchSized/switchSized'
+import SwitchSized from '../customComponents/switchSized/switchSized'
 import { AlertPopUp } from '../alertPopUp/alertPopUp'
 import { apiCall } from '../auxFunctions/apiCall'
 

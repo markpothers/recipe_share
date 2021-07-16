@@ -1,7 +1,7 @@
 import React from 'react'
-import { ScrollView, SafeAreaView, Image, KeyboardAvoidingView, View, ActivityIndicator, Platform } from 'react-native'
+import { ScrollView, SafeAreaView, Image, KeyboardAvoidingView, Platform } from 'react-native'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
-
+import StyledActivityIndicator from '../customComponents/StyledActivityIndicator'
 export default class SpinachAppContainer extends React.Component {
 	static navigationOptions = {
 
@@ -25,7 +25,7 @@ export default class SpinachAppContainer extends React.Component {
 							style={centralStyles.spinachFullBackground}
 							resizeMode={"cover"}
 						/>
-						{this.props.awaitingServer && <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={(Platform.OS === 'ios' ? centralStyles.activityIndicator : {})} size="large" color="#104e01" /></View>}
+						{this.props.awaitingServer && <StyledActivityIndicator/>}
 						<ScrollView style={centralStyles.fullPageScrollView}
 							nestedScrollEnabled={true}
 							scrollEnabled={this.state.scrollingEnabled}
@@ -46,7 +46,7 @@ export default class SpinachAppContainer extends React.Component {
 						style={centralStyles.spinachFullBackground}
 						resizeMode={"cover"}
 					/>
-					{this.props.awaitingServer && <View style={centralStyles.activityIndicatorContainer}><ActivityIndicator style={(Platform.OS === 'ios' ? centralStyles.activityIndicator : {})} size="large" color="#104e01" /></View>}
+					{this.props.awaitingServer && <StyledActivityIndicator/>}
 					{this.props.children}
 				</SafeAreaView>
 			)

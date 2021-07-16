@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image, ScrollView, View, Text, TouchableOpacity, FlatList, KeyboardAvoidingView, Platform, Linking, AppState } from 'react-native';
+import StyledActivityIndicator from '../customComponents/StyledActivityIndicator'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { connect } from 'react-redux'
 import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake'
@@ -131,7 +132,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			chefNameTextColor: "#505050",
 			imagePopupDetails: {},
 			imagePopupShowing: false,
-			webviewHeight: responsiveHeight(60)
+			webviewHeight: responsiveHeight(60),
+			webviewLoading: true
 		}
 
 		generateHeaderButtonList = async () => {
@@ -266,10 +268,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		enableKeepAwake = () => {
-				activateKeepAwake()
-				keepAwakeTimer = setTimeout(() => {
-					deactivateKeepAwake()
-				}, 300000)
+			activateKeepAwake()
+			keepAwakeTimer = setTimeout(() => {
+				deactivateKeepAwake()
+			}, 600000)
 		}
 
 		disableKeepAwake = () => {
@@ -780,15 +782,23 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 												this.setState({ webviewHeight: newHeight })
 											}
 										}}
-										// onShouldStartLoadWithRequest={() => (false)} //activate to prevent navigation within the webview
 										contentContainerStyle={{ borderRadius: responsiveWidth(1.5) }}
 										style={{
 											borderRadius: responsiveWidth(1.5),
 											height: this.state.webviewHeight,
 											width: '100%',
 										}}
+										onShouldStartLoadWithRequest={event => {
+											if (event.url !== this.props.recipe_details.recipe.acknowledgement_link) {
+												Linking.openURL(event.url)
+												return false
+											}
+											return true
+										}}
+										onLoad={() => this.setState({webviewLoading: false})}
 									/>
 								</ScrollView>
+								{this.state.webviewLoading && <StyledActivityIndicator/>}
 							</View>
 						</View>
 					)}

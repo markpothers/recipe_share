@@ -5,7 +5,7 @@ import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-un
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import SpinachAppContainer from './spinachAppContainer/SpinachAppContainer'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
-import SwitchSized from '../switchSized/switchSized'
+import SwitchSized from '../customComponents/switchSized/switchSized'
 import { apiCall } from '../auxFunctions/apiCall'
 
 export default class Templates extends React.Component {

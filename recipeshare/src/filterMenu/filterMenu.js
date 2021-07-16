@@ -8,7 +8,7 @@ import { cuisines } from '../dataComponents/cuisines'
 import { serves } from '../dataComponents/serves'
 import { clearedFilters } from '../dataComponents/clearedFilters'
 import DualOSPicker from '../dualOSPicker/DualOSPicker'
-import SwitchSized from '../switchSized/switchSized'
+import SwitchSized from '../customComponents/switchSized/switchSized'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 
 const mapStateToProps = (state) => ({

@@ -13,7 +13,7 @@ import { privacyPolicy } from '../dataComponents/privacyPolicy'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions' //eslint-disable-line no-unused-vars
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 import OfflineMessage from '../offlineMessage/offlineMessage'
-import SwitchSized from '../switchSized/switchSized'
+import SwitchSized from '../customComponents/switchSized/switchSized'
 import { apiCall } from '../auxFunctions/apiCall'
 
 const mapStateToProps = (state) => ({
