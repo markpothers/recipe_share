@@ -37,19 +37,19 @@ export default class MultiPicSourceChooser extends React.Component {
 	pickImage = async () => {
 		try {
 			if (this.state.hasCameraRollPermission) {
-					let image = await ImagePicker.launchImageLibraryAsync({
-						allowsEditing: true,
-						aspect: [4, 3],
-						base64: false
-					})
-						if (image.error) {
-							console.log(image.error)
-						}
-						let newImages = this.props.imageSources
-						if (!image.cancelled) {
-							newImages[this.state.imageIndex] = image
-						}
-						this.props.saveImage(newImages)
+				let image = await ImagePicker.launchImageLibraryAsync({
+					allowsEditing: true,
+					aspect: [4, 3],
+					base64: false
+				})
+				if (image.error) {
+					console.log(image.error)
+				}
+				let newImages = this.props.imageSources
+				if (!image.cancelled) {
+					newImages[this.state.imageIndex] = image
+				}
+				this.props.saveImage(newImages)
 			}
 		} catch (e) {
 			console.log('fail')
@@ -151,6 +151,7 @@ export default class MultiPicSourceChooser extends React.Component {
 
 	render() {
 		let imageSources = this.props.imageSources
+		// console.log(imageSources)
 		return (
 			<Modal
 				animationType="fade"
@@ -161,25 +162,42 @@ export default class MultiPicSourceChooser extends React.Component {
 				<View style={[styles.modalFullScreenContainer, { height: Dimensions.get('window').height, width: Dimensions.get('window').width }]}>
 					<View style={styles.picChooserModalContainer}>
 						<View style={styles.picSourceChooserImage}>
-							<FlatList
-								ref={ref => this.flatList = ref}
-								style={{ flex: 1 }}
-								horizontal={true}
-								data={imageSources}
-								renderItem={this.renderPrimaryImage}
-								keyExtractor={(item, index) => index.toString()}
-								pagingEnabled={true}
-								onLayout={(event) => {
-									var { x, y, width, height } = event.nativeEvent.layout //eslint-disable-line no-unused-vars
-									this.setState({ primaryImageFlatListWidth: width })
-								}}
-								onScroll={e => {
-									let nearestIndex = Math.round(e.nativeEvent.contentOffset.x / this.state.primaryImageFlatListWidth)
-									if (nearestIndex != this.state.primaryImageDisplayedIndex) {
-										this.setState({ imageIndex: nearestIndex })
-									}
-								}}
-							/>
+							{imageSources.length > 0 ? (
+								<FlatList
+									ref={ref => this.flatList = ref}
+									style={{ flex: 1 }}
+									horizontal={true}
+									data={imageSources}
+									renderItem={() => {
+										if (imageSources.length > 0) {
+											this.renderPrimaryImage()
+										} else {
+											return (
+												<View style={{ height: responsiveHeight(34), width: responsiveWidth(80) - 2, justifyContent: 'center', alignItems: 'center' }}>
+													<Icon style={styles.standardIcon} size={responsiveHeight(4)} name='image' />
+													<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>No image{"\n"}selected</Text>
+												</View>
+											)
+										}
+									}}
+									keyExtractor={(item, index) => index.toString()}
+									pagingEnabled={true}
+									onLayout={(event) => {
+										var { x, y, width, height } = event.nativeEvent.layout //eslint-disable-line no-unused-vars
+										this.setState({ primaryImageFlatListWidth: width })
+									}}
+									onScroll={e => {
+										let nearestIndex = Math.round(e.nativeEvent.contentOffset.x / this.state.primaryImageFlatListWidth)
+										if (nearestIndex != this.state.primaryImageDisplayedIndex) {
+											this.setState({ imageIndex: nearestIndex })
+										}
+									}}
+								/>) : (
+								<View style={{ height: responsiveHeight(34), width: responsiveWidth(80) - 2, justifyContent: 'center', alignItems: 'center' }}>
+									<Icon style={styles.standardIcon} size={responsiveHeight(4)} name='image' />
+									<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>No image{"\n"}selected</Text>
+								</View>
+							)}
 							<View style={styles.primaryImageBlobsContainer}>
 								{imageSources.length > 1 && this.renderPrimaryImageBlobs()}
 							</View>

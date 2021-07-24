@@ -13,7 +13,7 @@ export const emptyRecipe = {
 			cookTime: 0,
 			totalTime: 0,
 		},
-		primaryImages: [{ uri: '' }],
+		primaryImages: [],
 		filter_settings: {
 			"Breakfast": false,
 			"Lunch": false,

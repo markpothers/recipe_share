@@ -380,7 +380,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							)
 							if (recipe) {
 								if (recipe.error) {
-									this.setState({ errors: recipe.message })
+									this.setState({
+										errors: recipe.message,
+										awaitingServer: false
+									})
 								} else {
 									let success = await this.postImages(newRecipeDetails, recipe)
 									if (success) {
@@ -426,7 +429,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							if (recipe) {
 								// console.log('recipe succeeded')
 								if (recipe.error) {
-									this.setState({ errors: recipe.message })
+									this.setState({
+										errors: recipe.message,
+										awaitingServer: false
+									})
 								} else {
 									this.setState({
 										newRecipeDetails: {
