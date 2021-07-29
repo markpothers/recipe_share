@@ -404,7 +404,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -414,7 +414,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -425,6 +425,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -441,6 +442,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -532,7 +534,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -542,7 +544,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -553,6 +555,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -569,6 +572,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -669,7 +673,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -679,7 +683,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -690,6 +694,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -706,6 +711,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -1018,7 +1024,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -1028,7 +1034,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -1039,6 +1045,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -1055,6 +1062,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -1666,7 +1674,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -1676,7 +1684,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -1687,6 +1695,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -1703,6 +1712,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -2137,7 +2147,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -2147,7 +2157,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -2158,6 +2168,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -2174,6 +2185,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -2867,7 +2879,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -2877,7 +2889,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -2888,6 +2900,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -2904,6 +2917,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -2995,7 +3009,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -3005,7 +3019,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -3016,6 +3030,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -3032,6 +3047,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -3132,7 +3148,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -3142,7 +3158,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -3153,6 +3169,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -3169,6 +3186,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -3481,7 +3499,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -3491,7 +3509,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -3502,6 +3520,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -3518,6 +3537,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -4129,7 +4149,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -4139,7 +4159,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -4150,6 +4170,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -4166,6 +4187,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -4600,7 +4622,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -4610,7 +4632,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -4621,6 +4643,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -4637,6 +4660,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -5330,7 +5354,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -5340,7 +5364,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -5351,6 +5375,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -5367,6 +5392,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -5458,7 +5484,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -5468,7 +5494,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -5479,6 +5505,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -5495,6 +5522,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -5595,7 +5623,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -5605,7 +5633,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -5616,6 +5644,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -5632,6 +5661,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -5944,7 +5974,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -5954,7 +5984,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -5965,6 +5995,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -5981,6 +6012,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -6592,7 +6624,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -6602,7 +6634,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -6613,6 +6645,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -6629,6 +6662,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -7063,7 +7097,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -7073,7 +7107,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -7084,6 +7118,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -7100,6 +7135,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -7793,7 +7829,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -7803,7 +7839,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -7814,6 +7850,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -7830,6 +7867,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -7921,7 +7959,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -7931,7 +7969,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -7942,6 +7980,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -7958,6 +7997,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -8058,7 +8098,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -8068,7 +8108,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -8079,6 +8119,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -8095,6 +8136,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -8407,7 +8449,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -8417,7 +8459,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -8428,6 +8470,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -8444,6 +8487,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -9055,7 +9099,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -9065,7 +9109,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -9076,6 +9120,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -9092,6 +9137,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -9526,7 +9572,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -9536,7 +9582,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -9547,6 +9593,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -9563,6 +9610,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -10209,7 +10257,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                             style={
                                               Array [
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -10226,7 +10274,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                               style={
                                                 Array [
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -10244,6 +10292,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                   Array [
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -10265,6 +10314,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                     Array [
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -10503,6 +10553,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                                     "color": "#fff59b",
                                                                     "fontSize": 27.53633962602873,
                                                                     "fontWeight": "bold",
+                                                                    "paddingHorizontal": 7.5,
                                                                     "textAlign": "center",
                                                                   }
                                                                 }
@@ -10514,6 +10565,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                                       "color": "#fff59b",
                                                                       "fontSize": 27.53633962602873,
                                                                       "fontWeight": "bold",
+                                                                      "paddingHorizontal": 7.5,
                                                                       "textAlign": "center",
                                                                     }
                                                                   }
@@ -10714,7 +10766,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -10724,7 +10776,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -10735,6 +10787,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -10751,6 +10804,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -10842,7 +10896,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -10852,7 +10906,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -10863,6 +10917,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -10879,6 +10934,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -10979,7 +11035,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -10989,7 +11045,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -11000,6 +11056,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -11016,6 +11073,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -11269,7 +11327,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -11279,7 +11337,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -11290,6 +11348,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -11306,6 +11365,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -11917,7 +11977,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -11927,7 +11987,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -11938,6 +11998,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -11954,6 +12015,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -12388,7 +12450,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -12398,7 +12460,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -12409,6 +12471,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -12425,6 +12488,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -13118,7 +13182,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -13128,7 +13192,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -13139,6 +13203,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -13155,6 +13220,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -13246,7 +13312,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -13256,7 +13322,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -13267,6 +13333,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -13283,6 +13350,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -13383,7 +13451,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -13393,7 +13461,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -13404,6 +13472,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -13420,6 +13489,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -13673,7 +13743,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -13683,7 +13753,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -13694,6 +13764,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -13710,6 +13781,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -14321,7 +14393,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -14331,7 +14403,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -14342,6 +14414,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -14358,6 +14431,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",
@@ -14792,7 +14866,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                             <View
                                               style={
                                                 Object {
-                                                  "borderColor": "yellow",
+                                                  "borderColor": "red",
                                                   "borderWidth": 0,
                                                   "overflow": "hidden",
                                                   "width": "100%",
@@ -14802,7 +14876,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                               <View
                                                 style={
                                                   Object {
-                                                    "borderColor": "yellow",
+                                                    "borderColor": "red",
                                                     "borderWidth": 0,
                                                     "overflow": "hidden",
                                                     "width": "100%",
@@ -14813,6 +14887,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                   style={
                                                     Object {
                                                       "alignItems": "center",
+                                                      "borderColor": "purple",
                                                       "borderRadius": 11.25,
                                                       "borderWidth": 0,
                                                       "flexDirection": "row",
@@ -14829,6 +14904,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                     style={
                                                       Object {
                                                         "alignItems": "center",
+                                                        "borderColor": "purple",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 0,
                                                         "flexDirection": "row",

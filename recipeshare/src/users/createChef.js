@@ -325,12 +325,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
 									<TouchableOpacity
-										style={[centralStyles.formTextBoxContainer, { width: responsiveWidth(48) }]}
+										style={[centralStyles.yellowRectangleButton, { maxWidth: responsiveWidth(49), width:responsiveWidth(49), justifyContent: 'flex-start', paddingHorizontal: responsiveWidth(1) }]}
 										activeOpacity={0.7}
 										onPress={() => this.setState({ viewingTermsAndConditions: true })}
 										testID={'viewTAndCButton'}
 									>
-										<Text maxFontSizeMultiplier={2} style={centralStyles.formTextBox}>{`View Terms & Conditions`}</Text>
+										<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>{`View Terms & Conditions`}</Text>
 									</TouchableOpacity>
 									<TouchableOpacity
 										activeOpacity={1}
@@ -369,12 +369,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
 									<TouchableOpacity
-										style={[centralStyles.formTextBoxContainer, { width: responsiveWidth(48) }]}
+										style={[centralStyles.yellowRectangleButton, { maxWidth: responsiveWidth(49), width:responsiveWidth(49), justifyContent: 'flex-start', paddingHorizontal: responsiveWidth(1) }]}
 										activeOpacity={0.7}
 										onPress={() => this.setState({ viewingPrivacyPolicy: true })}
 										testID={'viewPrivacyPolicyButton'}
 									>
-										<Text maxFontSizeMultiplier={2} style={centralStyles.formTextBox}>{`View Privacy Policy`}</Text>
+										<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>{`View Privacy Policy`}</Text>
 									</TouchableOpacity>
 									<TouchableOpacity
 										activeOpacity={1}

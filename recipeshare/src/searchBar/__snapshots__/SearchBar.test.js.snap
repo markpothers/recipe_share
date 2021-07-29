@@ -14,7 +14,7 @@ exports[`Search Bar can be rendered (with the delete button) matches its previou
   <View
     style={
       Object {
-        "borderColor": "yellow",
+        "borderColor": "red",
         "borderWidth": 0,
         "overflow": "hidden",
         "width": "100%",
@@ -111,7 +111,7 @@ exports[`Search Bar can be rendered (without the delete button) matches its prev
   <View
     style={
       Object {
-        "borderColor": "yellow",
+        "borderColor": "red",
         "borderWidth": 0,
         "overflow": "hidden",
         "width": "100%",

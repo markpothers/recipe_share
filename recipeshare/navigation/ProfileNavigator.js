@@ -6,6 +6,7 @@ import AppHeader from './appHeader'
 import { createStackNavigator } from '@react-navigation/stack';
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import NewRecipeScreen from '../src/newRecipe/newRecipe'
+import About from '../src/about/about'
 
 const Stack = createStackNavigator()
 
@@ -32,7 +33,7 @@ const ProfileStack = (props) => {
 			<Stack.Screen
 				name="Profile"
 				options={
-					{headerTitle: Object.assign((props) => <AppHeader {...props} text={"Profile"} />, { displayName: 'Header' })}
+					{ headerTitle: Object.assign((props) => <AppHeader {...props} text={"Profile"} />, { displayName: 'Header' }) }
 					// { headerTitle: props => <AppHeader {...props} text={"Profile"} /> }
 				}
 			>
@@ -45,6 +46,14 @@ const ProfileStack = (props) => {
 					headerTitle: Object.assign((props) => <AppHeader {...props} text={"Create a New Recipe"} route={route} />, { displayName: 'Header' })
 				})}
 				component={NewRecipeScreen}
+			/>
+			<Stack.Screen
+				name="About"
+				options={({ route }) => ({
+					headerLeft: null,
+					headerTitle: Object.assign((props) => <AppHeader {...props} text={"About"} route={route} />, { displayName: 'Header' })
+				})}
+				component={About}
 			/>
 		</Stack.Navigator>
 	)

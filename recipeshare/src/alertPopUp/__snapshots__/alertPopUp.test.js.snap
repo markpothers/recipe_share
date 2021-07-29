@@ -62,7 +62,7 @@ exports[`AlertPopUp calls the close function when button pressed 1`] = `
         style={
           Array [
             Object {
-              "borderColor": "yellow",
+              "borderColor": "red",
               "borderWidth": 0,
               "overflow": "hidden",
               "width": "100%",
@@ -80,6 +80,7 @@ exports[`AlertPopUp calls the close function when button pressed 1`] = `
             Array [
               Object {
                 "alignItems": "center",
+                "borderColor": "purple",
                 "borderRadius": 11.25,
                 "borderWidth": 0,
                 "flexDirection": "row",
@@ -140,6 +141,7 @@ exports[`AlertPopUp calls the close function when button pressed 1`] = `
                   "color": "#fff59b",
                   "fontSize": 27.53633962602873,
                   "fontWeight": "bold",
+                  "paddingHorizontal": 7.5,
                   "textAlign": "center",
                 }
               }
@@ -191,6 +193,7 @@ exports[`AlertPopUp calls the close function when button pressed 1`] = `
                   "color": "#fff59b",
                   "fontSize": 27.53633962602873,
                   "fontWeight": "bold",
+                  "paddingHorizontal": 7.5,
                   "textAlign": "center",
                 }
               }
@@ -267,7 +270,7 @@ exports[`AlertPopUp calls the yes function when button pressed 1`] = `
         style={
           Array [
             Object {
-              "borderColor": "yellow",
+              "borderColor": "red",
               "borderWidth": 0,
               "overflow": "hidden",
               "width": "100%",
@@ -285,6 +288,7 @@ exports[`AlertPopUp calls the yes function when button pressed 1`] = `
             Array [
               Object {
                 "alignItems": "center",
+                "borderColor": "purple",
                 "borderRadius": 11.25,
                 "borderWidth": 0,
                 "flexDirection": "row",
@@ -345,6 +349,7 @@ exports[`AlertPopUp calls the yes function when button pressed 1`] = `
                   "color": "#fff59b",
                   "fontSize": 27.53633962602873,
                   "fontWeight": "bold",
+                  "paddingHorizontal": 7.5,
                   "textAlign": "center",
                 }
               }
@@ -396,6 +401,7 @@ exports[`AlertPopUp calls the yes function when button pressed 1`] = `
                   "color": "#fff59b",
                   "fontSize": 27.53633962602873,
                   "fontWeight": "bold",
+                  "paddingHorizontal": 7.5,
                   "textAlign": "center",
                 }
               }
@@ -472,7 +478,7 @@ exports[`AlertPopUp renders with 1 button when no close button and customizable 
         style={
           Array [
             Object {
-              "borderColor": "yellow",
+              "borderColor": "red",
               "borderWidth": 0,
               "overflow": "hidden",
               "width": "100%",
@@ -490,6 +496,7 @@ exports[`AlertPopUp renders with 1 button when no close button and customizable 
             Array [
               Object {
                 "alignItems": "center",
+                "borderColor": "purple",
                 "borderRadius": 11.25,
                 "borderWidth": 0,
                 "flexDirection": "row",
@@ -572,6 +579,7 @@ exports[`AlertPopUp renders with 1 button when no close button and customizable 
                   "color": "#fff59b",
                   "fontSize": 27.53633962602873,
                   "fontWeight": "bold",
+                  "paddingHorizontal": 7.5,
                   "textAlign": "center",
                 }
               }
@@ -648,7 +656,7 @@ exports[`AlertPopUp renders with 2 buttons and customizable text 1`] = `
         style={
           Array [
             Object {
-              "borderColor": "yellow",
+              "borderColor": "red",
               "borderWidth": 0,
               "overflow": "hidden",
               "width": "100%",
@@ -666,6 +674,7 @@ exports[`AlertPopUp renders with 2 buttons and customizable text 1`] = `
             Array [
               Object {
                 "alignItems": "center",
+                "borderColor": "purple",
                 "borderRadius": 11.25,
                 "borderWidth": 0,
                 "flexDirection": "row",
@@ -726,6 +735,7 @@ exports[`AlertPopUp renders with 2 buttons and customizable text 1`] = `
                   "color": "#fff59b",
                   "fontSize": 27.53633962602873,
                   "fontWeight": "bold",
+                  "paddingHorizontal": 7.5,
                   "textAlign": "center",
                 }
               }
@@ -777,6 +787,7 @@ exports[`AlertPopUp renders with 2 buttons and customizable text 1`] = `
                   "color": "#fff59b",
                   "fontSize": 27.53633962602873,
                   "fontWeight": "bold",
+                  "paddingHorizontal": 7.5,
                   "textAlign": "center",
                 }
               }
@@ -853,7 +864,7 @@ exports[`AlertPopUp renders with 2 buttons and default text 1`] = `
         style={
           Array [
             Object {
-              "borderColor": "yellow",
+              "borderColor": "red",
               "borderWidth": 0,
               "overflow": "hidden",
               "width": "100%",
@@ -871,6 +882,7 @@ exports[`AlertPopUp renders with 2 buttons and default text 1`] = `
             Array [
               Object {
                 "alignItems": "center",
+                "borderColor": "purple",
                 "borderRadius": 11.25,
                 "borderWidth": 0,
                 "flexDirection": "row",
@@ -931,6 +943,7 @@ exports[`AlertPopUp renders with 2 buttons and default text 1`] = `
                   "color": "#fff59b",
                   "fontSize": 27.53633962602873,
                   "fontWeight": "bold",
+                  "paddingHorizontal": 7.5,
                   "textAlign": "center",
                 }
               }
@@ -982,6 +995,7 @@ exports[`AlertPopUp renders with 2 buttons and default text 1`] = `
                   "color": "#fff59b",
                   "fontSize": 27.53633962602873,
                   "fontWeight": "bold",
+                  "paddingHorizontal": 7.5,
                   "textAlign": "center",
                 }
               }

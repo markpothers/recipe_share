@@ -53,7 +53,7 @@ export const centralStyles = StyleSheet.create({
 	formSection: {
 		width: '100%',
 		borderWidth: inDevelopment ? 1 : 0,
-		borderColor: 'yellow',
+		borderColor: 'red',
 		overflow: 'hidden',
 	},
 	formSectionSeparatorContainer: {
@@ -78,6 +78,7 @@ export const centralStyles = StyleSheet.create({
 		flexWrap: 'wrap',
 		minHeight: responsiveHeight(6),
 		borderWidth: inDevelopment ? 1 : 0,
+		borderColor: 'purple',
 		// backgroundColor: 'white'
 	},
 	formInputWhiteBackground: {
@@ -190,6 +191,7 @@ export const centralStyles = StyleSheet.create({
 		fontWeight: 'bold',
 		color: '#fff59b',
 		fontSize: responsiveFontSize(1.8),
+		paddingHorizontal: responsiveWidth(1)
 	},
 	helpButton: {
 		alignSelf: 'flex-start',

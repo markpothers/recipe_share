@@ -48,7 +48,7 @@ class AppHeader extends React.PureComponent {
 		return (
 			<View style={styles.headerContainer}>
 				<View style={styles.headerEnd}>
-					{this.props.navigation.state.routeName !== "ChefDetails" && this.props.navigation.state.routeName !== "NewRecipe" && this.props.navigation.state.routeName !== "RecipeDetails" ? this.renderDrawerButton() : this.renderBackButton()}
+				{!["ChefDetails", "NewRecipe", "RecipeDetails", "About"].includes(this.props.navigation.state.routeName) ? this.renderDrawerButton() : this.renderBackButton()}
 				</View>
 				<View style={styles.headerMiddle} >
 					<Text style={styles.headerText} maxFontSizeMultiplier={1.3}>{this.props.text}</Text>

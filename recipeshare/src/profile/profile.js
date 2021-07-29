@@ -85,6 +85,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.setState({ dynamicMenuShowing: false }, this.showDeleteChefOption)
 					})
 				},
+				{
+					icon: "information-outline",
+					text: "About",
+					action: (() => {
+						this.setState({ dynamicMenuShowing: false }, () => {
+							this.props.navigation.navigate('About')
+						})
+					})
+				},
 			]
 			this.setState({ headerButtons: headerButtons })
 		}
