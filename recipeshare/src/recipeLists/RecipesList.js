@@ -135,7 +135,7 @@ export class RecipesList extends React.Component {
 
 	componentWillUnmount = () => {
 		// console.log(this.abortController)
-		this.abortController.abort('aborted')
+		this.abortController.abort()
 		this.props.navigation.removeListener('focus', this.respondToFocus)
 		this.props.navigation.removeListener('blur', this.respondToBlur)
 	}
@@ -233,7 +233,7 @@ export class RecipesList extends React.Component {
 	}
 
 	fetchRecipeList = async () => {
-		// console.log('refrshing')
+		// console.log('refreshing')
 		// console.log(this.state.awaitingServer)
 		this.setState({ awaitingServer: true }, async () => {
 			try {
@@ -623,6 +623,8 @@ export class RecipesList extends React.Component {
 			limit: startingLimit,
 			offset: startingOffset
 		}, () => {
+			this.abortController.abort()
+			this.abortController = new AbortController()
 			this.recipeFlatList.scrollToOffset({ animated: true, offset: 0 })
 			this.fetchRecipeList()
 		})

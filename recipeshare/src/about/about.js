@@ -12,6 +12,7 @@ import Constants from 'expo-constants';
 
 export default class About extends React.Component {
 
+	scrollView = React.createRef()
 	state = {
 		awaitingServer: false,
 		displayingTermsAndConditions: true,
@@ -33,6 +34,7 @@ export default class About extends React.Component {
 			displayingPrivacyPolicy: false,
 			displayingLicenses: false
 		})
+		this.scrollView.scrollTo({y: 0, animated: false})
 	}
 
 	viewPrivacyPolicy = () => {
@@ -41,6 +43,7 @@ export default class About extends React.Component {
 			displayingPrivacyPolicy: true,
 			displayingLicenses: false
 		})
+		this.scrollView.scrollTo({y: 0, animated: false})
 	}
 
 	viewLicenses = () => {
@@ -49,6 +52,7 @@ export default class About extends React.Component {
 			displayingPrivacyPolicy: false,
 			displayingLicenses: true
 		})
+		this.scrollView.scrollTo({y: 0, animated: false})
 	}
 
 
@@ -112,9 +116,19 @@ export default class About extends React.Component {
 						)}
 					</View>
 				</View>
-				<View style={[centralStyles.formSection, {flex:1}]}>
-					<View style={[centralStyles.formInputContainer, {flex:1}]}>
-						<ScrollView style={{ backgroundColor: 'white',borderWidth:1, borderColor: '#104e01', borderRadius: responsiveWidth(1.5), flexDirection: 'column', flex: 1 }}>
+				<View style={[centralStyles.formSection, { flex: 1 }]}>
+					<View style={[centralStyles.formInputContainer, { flex: 1 }]}>
+						<ScrollView
+							ref={(ref) => this.scrollView = ref}
+							style={{
+								backgroundColor: 'white',
+								borderWidth: 1,
+								borderColor: '#104e01',
+								borderRadius: responsiveWidth(1.5),
+								flexDirection: 'column',
+								flex: 1
+							}}
+						>
 							{this.state.displayingTermsAndConditions && (
 								<View>
 									<Text maxFontSizeMultiplier={2} style={styles.text}>{termsAndConditions}</Text>
@@ -139,7 +153,7 @@ export default class About extends React.Component {
 									</View>
 								</View>
 							)}
-							{this.state.displayingLicenses && (<SoftwareLicenses/>)}
+							{this.state.displayingLicenses && (<SoftwareLicenses />)}
 						</ScrollView>
 					</View>
 				</View>

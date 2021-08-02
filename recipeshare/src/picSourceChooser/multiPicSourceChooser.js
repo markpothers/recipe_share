@@ -52,7 +52,7 @@ export default class MultiPicSourceChooser extends React.Component {
 				this.props.saveImage(newImages)
 			}
 		} catch (e) {
-			console.log('fail')
+			// console.log('fail')
 			console.log(e)
 		}
 	}
@@ -168,9 +168,9 @@ export default class MultiPicSourceChooser extends React.Component {
 									style={{ flex: 1 }}
 									horizontal={true}
 									data={imageSources}
-									renderItem={() => {
+									renderItem={(image) => {
 										if (imageSources.length > 0) {
-											this.renderPrimaryImage()
+											return this.renderPrimaryImage(image)
 										} else {
 											return (
 												<View style={{ height: responsiveHeight(34), width: responsiveWidth(80) - 2, justifyContent: 'center', alignItems: 'center' }}>

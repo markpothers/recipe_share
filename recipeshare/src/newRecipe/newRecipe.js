@@ -231,7 +231,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						"Are you sure you want to clear your changes and revert to the original recipe" :
 						"Are you sure you want to clear this form and start a new recipe?"
 					)}
-					onYes={this.clearNewRecipeDetails}
+					onYes={(this.props.route.params?.recipe_details !== undefined ?
+						() => this.clearNewRecipeDetails(false) :
+						() => this.clearNewRecipeDetails(true)
+					)}
 				/>
 			)
 		}
