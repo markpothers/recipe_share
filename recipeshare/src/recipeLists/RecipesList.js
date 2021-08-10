@@ -116,6 +116,7 @@ export class RecipesList extends React.Component {
 			awaitingServer: false,
 			dataICantGet: [],
 			renderOfflineMessage: false,
+			offlineDiagnostics: '',
 			renderNoRecipesMessage: false,
 			searchTerm: "",
 			yOffset: new Animated.Value(0),
@@ -486,7 +487,7 @@ export class RecipesList extends React.Component {
 				this.setState({ awaitingServer: false })
 			})
 		} else {
-			this.setState({ renderOfflineMessage: true })
+			this.setState({ renderOfflineMessage: true, offlineDiagnostics: netInfoState })
 		}
 	}
 
@@ -516,7 +517,7 @@ export class RecipesList extends React.Component {
 				this.setState({ awaitingServer: false })
 			})
 		} else {
-			this.setState({ renderOfflineMessage: true })
+			this.setState({ renderOfflineMessage: true, offlineDiagnostics: netInfoState })
 		}
 	}
 
@@ -545,7 +546,7 @@ export class RecipesList extends React.Component {
 				this.setState({ awaitingServer: false })
 			})
 		} else {
-			this.setState({ renderOfflineMessage: true })
+			this.setState({ renderOfflineMessage: true, offlineDiagnostics: netInfoState })
 		}
 	}
 
@@ -575,7 +576,7 @@ export class RecipesList extends React.Component {
 				this.setState({ awaitingServer: false })
 			})
 		} else {
-			this.setState({ renderOfflineMessage: true })
+			this.setState({ renderOfflineMessage: true, offlineDiagnostics: netInfoState })
 		}
 	}
 
@@ -605,7 +606,7 @@ export class RecipesList extends React.Component {
 				this.setState({ awaitingServer: false })
 			})
 		} else {
-			this.setState({ renderOfflineMessage: true })
+			this.setState({ renderOfflineMessage: true, offlineDiagnostics: netInfoState })
 		}
 	}
 
@@ -636,7 +637,7 @@ export class RecipesList extends React.Component {
 
 	render() {
 		// console.log(this.props[this.props["listChoice"] + `_Recipes`][0])
-		// console.log(this.props)
+		//console.log(this.props.loggedInChef.is_admin)
 		// console.log('list start')
 		// console.log('rendering')
 		// console.log(this.recipeFlatList.scrollToOffset({ animated: true, offset: 0 }))
@@ -651,6 +652,7 @@ export class RecipesList extends React.Component {
 							message={`Sorry, can't do that right now.${"\n"}You appear to be offline.`}
 							topOffset={'10%'}
 							clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
+							diagnostics={this.props.loggedInChef.is_admin ? this.state.offlineDiagnostics : null}
 						/>)
 					}
 					{(this.props.route.name === "My Feed"

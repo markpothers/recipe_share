@@ -51,7 +51,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			updateModalVisible: true,
 			passwordVisible: false,
 			profileEditable: false,
-			profileEditableButtonZIndex: 1
+			profileEditableButtonZIndex: 1,
+			offlineDiagnostics: '',
 		}
 
 		componentDidMount = () => {
@@ -204,6 +205,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			} else {
 				this.setState({
 					renderOfflineMessage: true,
+					offlineDiagnostics: netInfoState,
 					updateModalVisible: true
 				})
 			}
@@ -230,6 +232,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							message={`Sorry, can't do that right now.${"\n"}You appear to be offline.`}
 							topOffset={'10%'}
 							clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
+							diagnostics={this.props.loggedInChef.is_admin ? this.state.offlineDiagnostics : null}
 						/>)
 					}
 					<View style={[styles.modalFullScreenContainer, {

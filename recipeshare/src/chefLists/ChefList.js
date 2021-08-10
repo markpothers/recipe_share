@@ -75,7 +75,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				searchTerm: "",
 				yOffset: new Animated.Value(0),
 				currentYTop: 0,
-				searchBarZIndex: 0
+				searchBarZIndex: 0,
+				offlineDiagnostics: '',
 			}
 		}
 
@@ -181,12 +182,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						}
 					} catch (e) {
 						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-						this.setState({ awaitingServer: false })
+						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e })
 					}
 					this.setState({ awaitingServer: false })
 				})
 			} else {
-				this.setState({ renderOfflineMessage: true })
+				this.setState({ renderOfflineMessage: true, offlineDiagnostics: netInfoState })
 			}
 		}
 
@@ -210,12 +211,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						}
 					} catch (e) {
 						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-						this.setState({ awaitingServer: false })
+						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e })
 					}
 					this.setState({ awaitingServer: false })
 				})
 			} else {
-				this.setState({ renderOfflineMessage: true })
+				this.setState({ renderOfflineMessage: true, offlineDiagnostics: netInfoState })
 			}
 		}
 
@@ -311,6 +312,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								message={`Sorry, can't get recipes chefs now.${"\n"}You appear to be offline.`}
 								topOffset={'10%'}
 								clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
+								diagnostics={this.props.loggedInChef.is_admin ? this.state.offlineDiagnostics : null}
 							/>)
 						}
 						{(this.props[this.props["listChoice"]].length > 0 || this.state.searchTerm != '') && (

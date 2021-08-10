@@ -44,7 +44,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			awaitingServer: false,
 			renderOfflineMessage: false,
 			headerButtons: null,
-			dynamicMenuShowing: false
+			dynamicMenuShowing: false,
+			offlineDiagnostics: '',
 		}
 
 		generateHeaderButtonList = async () => {
@@ -148,12 +149,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						}
 					} catch (e) {
 						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-						this.setState({ renderOfflineMessage: true })
+						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e })
 					}
 					this.setState({ awaitingServer: false })
 				})
 			} else {
-				this.setState({ renderOfflineMessage: true })
+				this.setState({ renderOfflineMessage: true, offlineDiagnostics: netInfoState })
 			}
 		}
 
@@ -169,12 +170,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						}
 					} catch (e) {
 						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-						this.setState({ renderOfflineMessage: true })
+						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e })
 					}
 					this.setState({ awaitingServer: false })
 				})
 			} else {
-				this.setState({ renderOfflineMessage: true })
+				this.setState({ renderOfflineMessage: true, offlineDiagnostics: netInfoState })
 			}
 		}
 
@@ -189,6 +190,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								message={`Sorry, can't do that right now.${"\n"}You appear to be offline.`}
 								topOffset={'10%'}
 								clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
+								
+								
 							/>)
 						}
 						{this.state.dynamicMenuShowing && this.renderDynamicMenu()}

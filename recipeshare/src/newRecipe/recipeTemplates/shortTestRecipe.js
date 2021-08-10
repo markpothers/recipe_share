@@ -36,7 +36,7 @@ export const shortTestRecipe = {
 			totalTime: 90,
 		},
 		primaryImages: [
-			{ uri: '' }
+			//{ uri: '' }
 			// {
 			// 	"cancelled": false,
 			// 	"height": 2250,

@@ -4,6 +4,8 @@ import { styles } from './offlineMessageStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 
+let diagnosingConnectivityIssues = true
+
 const OfflineMessage = (props) => {
 	const [fadeOpacity] = useState(new Animated.Value(0))
 
@@ -58,12 +60,17 @@ const OfflineMessage = (props) => {
 					/>
 				</TouchableOpacity>
 			) : (
+					<>
 					<Text
 						maxFontSizeMultiplier={2.5}
 						style={styles.messageText}
 					>
 						{props.message}
 					</Text>
+					{diagnosingConnectivityIssues && props.diagnostics && (typeof props.diagnostics == 'object' || typeof props.diagnostics == 'string') && (
+						<Text style={styles.messageText}>{JSON.stringify(props.diagnostics)}</Text>
+					)}
+					</>
 				)}
 		</Animated.View>
 	)

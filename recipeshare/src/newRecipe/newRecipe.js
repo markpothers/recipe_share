@@ -68,6 +68,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				awaitingServer: false,
 				scrollingEnabled: true,
 				errors: [],
+				offlineDiagnostics: '',
 				...(testing ? testRecipe : emptyRecipe)
 			}
 		}
@@ -186,7 +187,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						cookTime: recipe.cook_time > 0 ? recipe.cook_time : 0,
 						totalTime: recipe.total_time > 0 ? recipe.total_time : (recipe.time ? getMinutesFromTimeString(recipe.time) : 0),
 					},
-					primaryImages: recipeDetails.recipe_images?.length > 0 ? recipeDetails.recipe_images : [{ uri: '' }],
+					primaryImages: recipeDetails.recipe_images?.length > 0 ? recipeDetails.recipe_images : [],
 					filter_settings: {
 						"Breakfast": recipe["breakfast"],
 						"Lunch": recipe["lunch"],
@@ -403,6 +404,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							// console.log(e)
 							this.setState({
 								renderOfflineMessage: true,
+								offlineDiagnostics: e,
 								awaitingServer: false
 							})
 						}
@@ -462,6 +464,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							// console.log(e)
 							this.setState({
 								renderOfflineMessage: true,
+								offlineDiagnostics: e,
 								awaitingServer: false
 							})
 						}
@@ -743,6 +746,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								message={`Sorry, can't save your recipe right now.${"\n"}You appear to be offline.${"\n"}Don't worry though, new recipes are saved until you can reconnect and try again.`}
 								topOffset={'10%'}
 								clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
+								diagnostics={this.props.loggedInChef.is_admin ? this.state.offlineDiagnostics : null}
 							/>)
 					}
 					{this.state.filterDisplayed && (

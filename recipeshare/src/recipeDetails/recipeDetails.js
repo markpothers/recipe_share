@@ -118,6 +118,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			scrollEnabled: true,
 			makePicFileUri: "",
 			renderOfflineMessage: false,
+			offlineDiagnostics: '',
 			primaryImageFlatListWidth: 0,
 			primaryImageDisplayedIndex: 0,
 			deleteMakePicPopUpShowing: false,
@@ -226,7 +227,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							}, 300)
 						})
 					} else {
-						this.setState({ renderOfflineMessage: true })
+						this.setState({ renderOfflineMessage: true, offlineDiagnostics: netInfoState })
 					}
 				}
 				this.setState({ awaitingServer: false })
@@ -310,10 +311,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									this.props.navigation.navigate('ChefDetails', { chefID: chefID })
 								})
 							} else {
-								this.setState({ renderOfflineMessage: true })
+								this.setState({ renderOfflineMessage: true, offlineDiagnostics: res })
 							}
 						} else {
-							this.setState({ renderOfflineMessage: true })
+							this.setState({ renderOfflineMessage: true, offlineDiagnostics: err })
 						}
 					})
 				}
@@ -334,6 +335,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			} else {
 				this.setState({
 					renderOfflineMessage: true,
+					offlineDiagnostics: netInfoState,
 					editRecipePopUpShowing: false
 				})
 			}
@@ -352,6 +354,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			} else {
 				this.setState({
 					renderOfflineMessage: true,
+					offlineDiagnostics: netInfoState,
 					deleteRecipePopUpShowing: false
 				})
 			}
@@ -499,12 +502,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						}
 					} catch (e) {
 						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-						this.setState({ renderOfflineMessage: true })
+						console.log(e)
+						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e })
 					}
 					this.setState({ awaitingServer: false })
 				})
 			} else {
-				this.setState({ renderOfflineMessage: true })
+				this.setState({ renderOfflineMessage: true, offlineDiagnostics: netInfoState })
 			}
 		}
 
@@ -519,12 +523,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						}
 					} catch (e) {
 						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-						this.setState({ renderOfflineMessage: true })
+						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e })
 					}
 					this.setState({ awaitingServer: false })
 				})
 			} else {
-				this.setState({ renderOfflineMessage: true })
+				this.setState({ renderOfflineMessage: true, offlineDiagnostics: netInfoState })
 			}
 		}
 
@@ -539,12 +543,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						}
 					} catch (e) {
 						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-						this.setState({ renderOfflineMessage: true })
+						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e })
 					}
 					this.setState({ awaitingServer: false })
 				})
 			} else {
-				this.setState({ renderOfflineMessage: true })
+				this.setState({ renderOfflineMessage: true, offlineDiagnostics: netInfoState })
 			}
 		}
 
@@ -559,12 +563,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						}
 					} catch (e) {
 						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-						this.setState({ renderOfflineMessage: true })
+						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e })
 					}
 					this.setState({ awaitingServer: false })
 				})
 			} else {
-				this.setState({ renderOfflineMessage: true })
+				this.setState({ renderOfflineMessage: true, offlineDiagnostics: netInfoState })
 			}
 		}
 
@@ -579,12 +583,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						}
 					} catch (e) {
 						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-						this.setState({ renderOfflineMessage: true })
+						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e })
 					}
 					this.setState({ awaitingServer: false })
 				})
 			} else {
-				this.setState({ renderOfflineMessage: true })
+				this.setState({ renderOfflineMessage: true, offlineDiagnostics: netInfoState })
 			}
 		}
 
@@ -593,7 +597,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			if (netInfoState.isConnected) {
 				this.setState({ choosingPicSource: true })
 			} else {
-				this.setState({ renderOfflineMessage: true })
+				this.setState({ renderOfflineMessage: true, offlineDiagnostics: netInfoState })
 			}
 		}
 
@@ -622,7 +626,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					} catch (e) {
 						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 						// console.log(e)
-						this.setState({ renderOfflineMessage: true })
+						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e })
 					}
 				}
 				this.setState({
@@ -644,7 +648,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.setState({ deleteMakePicPopUpShowing: false })
 					} catch (e) {
 						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-						this.setState({ renderOfflineMessage: true })
+						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e })
 					}
 					this.setState({
 						awaitingServer: false,
@@ -654,6 +658,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			} else {
 				this.setState({
 					renderOfflineMessage: true,
+					offlineDiagnostics: netInfoState,
 					deleteMakePicPopUpShowing: false
 				})
 			}
@@ -664,7 +669,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			if (netInfoState.isConnected) {
 				this.setState({ commenting: true })
 			} else {
-				this.setState({ renderOfflineMessage: true })
+				this.setState({ renderOfflineMessage: true, offlineDiagnostics: netInfoState })
 			}
 		}
 
@@ -688,7 +693,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					}
 				} catch (e) {
 					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-					this.setState({ renderOfflineMessage: true })
+					this.setState({ renderOfflineMessage: true, offlineDiagnostics: e })
 				}
 				this.setState({ awaitingServer: false })
 			})
@@ -717,7 +722,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.setState({ deleteCommentPopUpShowing: false })
 					} catch (e) {
 						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-						this.setState({ renderOfflineMessage: true })
+						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e })
 					}
 					this.setState({
 						awaitingServer: false,
@@ -727,6 +732,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			} else {
 				this.setState({
 					renderOfflineMessage: true,
+					offlineDiagnostics: netInfoState,
 					deleteCommentPopUpShowing: false
 				})
 			}
@@ -961,6 +967,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								message={`Sorry, can't do right now.${"\n"}You appear to be offline.`}
 								topOffset={'10%'}
 								clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
+								diagnostics={this.props.loggedInChef.is_admin ? this.state.offlineDiagnostics : null}
 							/>)
 						}
 						{this.state.deleteMakePicPopUpShowing && this.renderDeleteMakePicAlertPopUp()}

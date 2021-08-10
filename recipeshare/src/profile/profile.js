@@ -52,6 +52,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			choosingPicture: false,
 			deleteChefOptionVisible: false,
 			renderOfflineMessage: false,
+			offlineDiagnostics: '',
 			imageFileUri: '',
 			chefUpdatedMessageShowing: false,
 			headerButtons: null,
@@ -144,7 +145,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					this.setState({ awaitingServer: false })
 				})
 			} else {
-				this.setState({ renderOfflineMessage: true })
+				this.setState({ renderOfflineMessage: true, offlineDiagnostics: netInfoState })
 			}
 		}
 
@@ -153,7 +154,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			if (netInfoState.isConnected) {
 				this.setState({ editingChef: true })
 			} else {
-				this.setState({ renderOfflineMessage: true })
+				this.setState({ renderOfflineMessage: true, offlineDiagnostics: netInfoState })
 			}
 		}
 
@@ -282,7 +283,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: false })
 				}
 			} else {
-				this.setState({ renderOfflineMessage: true })
+				this.setState({ renderOfflineMessage: true, offlineDiagnostics: netInfoState })
 			}
 		}
 
@@ -376,6 +377,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								message={`Sorry, can't do that right now.${"\n"}You appear to be offline.`}
 								topOffset={'10%'}
 								clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
+								diagnostics={this.props.loggedInChef.is_admin ? this.state.offlineDiagnostics : null}
 							/>)
 						}
 						{this.state.dynamicMenuShowing && this.renderDynamicMenu()}

@@ -56,6 +56,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			awaitingServer: false,
 			thanksForRegisteringPopUpShowing: false,
 			passwordVisible: false,
+			renderOfflineMessage: false,
+			offlineDiagnostics: '',
 		}
 
 		componentDidMount = () => {
@@ -111,6 +113,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				if (response.fail) {
 					this.setState({
 						renderOfflineMessage: true,
+						offlineDiagnostics: response,
 						awaitingServer: false
 					})
 				} else if (response.error) {
@@ -191,6 +194,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								message={`Sorry, can't do right now.${"\n"}You appear to be offline.`}
 								topOffset={'10%'}
 								clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
+								//diagnostics={this.state.offlineDiagnostics}
 							/>)
 						}
 						{this.state.choosingPicture ? this.renderPictureChooser() : null}
