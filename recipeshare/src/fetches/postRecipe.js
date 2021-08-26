@@ -66,6 +66,7 @@ export const postRecipe = async (
 				error: true,
 				message: ["If not showing blog preview, a recipe must contain at least one ingredient and one instruction step. Add one of each or check 'Show blog preview'."]
 			})
+			return
 		}
 
 		fetch(`${databaseURL}/recipes`, {
@@ -90,7 +91,7 @@ export const postRecipe = async (
 					cuisine: cuisine,
 					serves: serves,
 					acknowledgement: acknowledgement,
-					acknowledgement_link: acknowledgementLink.toLowerCase(),
+					acknowledgement_link: acknowledgementLink.toLowerCase().trim(),
 					description: description,
 					show_blog_preview: showBlogPreview,
 				}

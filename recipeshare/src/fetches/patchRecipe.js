@@ -1,6 +1,6 @@
 import { databaseURL } from '../dataComponents/databaseURL'
 import { submitTimeout } from '../dataComponents/timeouts'
-import { getBase64FromFile } from '../auxFunctions/getBase64FromFile.js'
+//import { getBase64FromFile } from '../auxFunctions/getBase64FromFile.js'
 
 export const patchRecipe = async(
 	chef_id,
@@ -73,6 +73,7 @@ export const patchRecipe = async(
 				error: true,
 				message: ["If not showing blog preview, a recipe must contain at least one ingredient AND one instruction step. Add one of each or check 'Show blog preview'."]
 			})
+			return
 		}
 
 		fetch(`${databaseURL}/recipes/${recipeID}`, {
@@ -97,7 +98,7 @@ export const patchRecipe = async(
 					cuisine: cuisine,
 					serves: serves,
 					acknowledgement: acknowledgement,
-					acknowledgement_link: acknowledgementLink.toLowerCase(),
+					acknowledgement_link: acknowledgementLink.toLowerCase().trim(),
 					description: description,
 					show_blog_preview: showBlogPreview
 				}
