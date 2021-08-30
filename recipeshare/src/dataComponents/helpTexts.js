@@ -23,7 +23,7 @@ const helpTexts = {
 	},
 	ingredients: {
 		title: "Ingredients",
-		text: "Provide the ingredients needed to make this recipe.\n\nType a few letters and autocomplete should provide you with some options. If your ingredient isn't present, just type it in and it'll be available next time.\n\nSort ingredients by holding the button on the left and dragging each step to re-order the list.",
+		text: "Provide the ingredients needed to make this recipe.\n\nType a few letters and autocomplete should provide you with some options. If your ingredient isn't present, just type it in and it'll be available next time.\n\nSort ingredients by holding the button on the left and dragging it to re-order the list.",
 	},
 	instructions: {
 		title: "Instructions",
