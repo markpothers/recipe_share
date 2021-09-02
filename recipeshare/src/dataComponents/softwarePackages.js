@@ -105,16 +105,6 @@ export const softwarePackages = [
 		url: "https://github.com/software-mansion/react-native-gesture-handler/blob/master/LICENSE"
 	},
 	{
-		name: "react-native-image-crop-picker",
-		copyright: "Copyright (c) 2017 Ivan Pusic",
-		url: "https://github.com/ivpusic/react-native-image-crop-picker/blob/master/LICENSE"
-	},
-	{
-		name: "react-native-image-picker",
-		copyright: "Copyright (c) 2015-present, Facebook, Inc.",
-		url: "https://github.com/react-native-image-picker/react-native-image-picker/blob/main/LICENSE.md"
-	},
-	{
 		name: "react-native-reanimated",
 		copyright: "Copyright (c) 2016 Krzysztof Magiera",
 		url: "https://github.com/software-mansion/react-native-reanimated/blob/master/LICENSE"

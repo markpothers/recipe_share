@@ -75,7 +75,7 @@ export const styles = StyleSheet.create({
 		marginRight: '2%'
 	},
 	recipeCardImageContainer: {
-		height: responsiveHeight(37.5),
+		height: responsiveWidth(75),
 		width: responsiveWidth(100),
 		alignItems:'center',
 		alignSelf: 'center'

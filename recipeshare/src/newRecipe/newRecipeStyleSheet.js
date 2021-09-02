@@ -335,6 +335,7 @@ export const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		flexDirection: 'row',
+		zIndex: -1,
 		// borderWidth: 1,
 		// borderColor: 'red'
 	},
