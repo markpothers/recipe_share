@@ -50,6 +50,11 @@ export const softwarePackages = [
 		url: "https://github.com/expo/expo/blob/master/LICENSE"
 	},
 	{
+		name: "expo-image-editor",
+		copyright: "Copyright (c)  Thomas Coldwell",
+		url: "https://github.com/thomas-coldwell/expo-image-editor"
+	},
+	{
 		name: "gradle",
 		copyright: "",
 		url: "https://github.com/xudafeng/gradle#readme"

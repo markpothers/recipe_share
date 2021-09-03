@@ -485,12 +485,13 @@ export const styles = StyleSheet.create({
 		position: 'absolute',
 		alignSelf: 'center',
 		bottom: 0,
-		// width: 100,
+		width: responsiveWidth(95),
 		// height: 50,
 		flexDirection: 'row',
 		justifyContent: 'center',
 		alignItems: 'center',
-		flexWrap: 'wrap'
+		flexWrap: 'wrap',
+		// paddingHorizontal: responsiveWidth(1)
 	},
 	primaryImageBlob: {
 		color: '#fff59b',

@@ -37,7 +37,8 @@ class AppHeader extends React.PureComponent {
 
 	render() {
 		// console.log(this.props.route?.params?.buttons)
-		// console.log("rendering header")
+		//console.log("rendering header")
+		//console.log(this.props)
 		// console.log(this.props.navigation.state.routeName === "MyRecipeBook") //NB: Using this test should NOT WORK!!!!
 		// you should be using this.props.navigation.dangerouslyGetParent().state.index but this doesn't POP properly after
 		// the stack height gets higher than 3 for reasons I can't figure out (once it gets higher than 3 it never goes below 1!).
@@ -48,9 +49,11 @@ class AppHeader extends React.PureComponent {
 		return (
 			<View style={styles.headerContainer}>
 				<View style={styles.headerEnd}>
-				{!["ChefDetails", "NewRecipe", "RecipeDetails", "About"].includes(this.props.navigation.state.routeName) ? this.renderDrawerButton() : this.renderBackButton()}
+					{!["ChefDetails", "NewRecipe", "RecipeDetails", "About"].includes(this.props.navigation.state.routeName) ? this.renderDrawerButton() : this.renderBackButton()}
 				</View>
-				<View style={styles.headerMiddle} >
+				<View
+					style={styles.headerMiddle}
+				>
 					<Text style={styles.headerText} maxFontSizeMultiplier={1.3}>{this.props.text}</Text>
 				</View>
 			</View>

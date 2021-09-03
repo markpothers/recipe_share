@@ -262,16 +262,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			Keyboard.dismiss()
 			return (
 				<MultiPicSourceChooser
-					saveImage={this.savePrimaryImage}
+					saveImages={this.savePrimaryImages}
 					sourceChosen={this.primarySourceChosen}
 					key={"primary-pic-chooser"}
 					imageSources={this.state.newRecipeDetails.primaryImages}
-					isMultiple={true}
 				/>
 			)
 		}
 
-		savePrimaryImage = (newImages) => {
+		savePrimaryImages = (newImages) => {
 			this.setState((state) => {
 				return ({
 					newRecipeDetails: { ...state.newRecipeDetails, primaryImages: newImages },

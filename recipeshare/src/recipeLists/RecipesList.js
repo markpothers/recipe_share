@@ -23,6 +23,7 @@ import { getChefDetails } from '../fetches/getChefDetails'
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo'
 import SearchBar from '../searchBar/SearchBar.js'
+import AppHeaderActionButton from '../../navigation/appHeaderActionButton'
 // import { apiCall } from '../auxFunctions/apiCall'
 
 // import Constants from 'expo-constants';
@@ -132,6 +133,13 @@ export class RecipesList extends React.Component {
 		// if (Platform.OS === 'ios'){
 		// 	this.state.yOffset.addListener(({value}) => this.setState({previousScrollViewOffset: value}))
 		// }
+
+		//console.log('setting options')
+		//console.log(this.props.navigation.dangerouslyGetParent().route)
+		//console.log(this.recipeFlatList.scrollToOffset)
+		//this.recipeFlatList.scrollToOffset({ offset: 0, animated: true })
+		this.setupHeaderScrollTopTopButton()
+		
 	}
 
 	componentWillUnmount = () => {
@@ -142,6 +150,8 @@ export class RecipesList extends React.Component {
 	}
 
 	componentDidUpdate = async () => {
+		//this.recipeFlatList.scrollToOffset({ offset: 50, animated: true })
+		//this.recipeFlatList.scrollTo({ x: 0, y: 50, animated: true })
 		// console.log(this.props.navigation.dangerouslyGetState())
 		// console.log(this.props.route)
 		// if (this.props.route.params?.name != "home"){
@@ -190,6 +200,7 @@ export class RecipesList extends React.Component {
 		// console.log(this.recipeFlatList.scrollToOffset)
 		// console.log(`offset: ${this.state.offset}`)
 		// console.log(`limit: ${this.state.limit}`)
+		this.setupHeaderScrollTopTopButton()
 		this.setState({
 			// offset: startingOffset,
 			// limit: this.state.offset + 5,
@@ -230,6 +241,12 @@ export class RecipesList extends React.Component {
 			} else {
 				this.setState({ awaitingServer: false })
 			}
+		})
+	}
+
+	setupHeaderScrollTopTopButton = () => {
+		this.props.navigation.dangerouslyGetParent().setOptions({
+			headerLeft: () => <AppHeaderActionButton buttonAction={() => this.recipeFlatList.scrollToOffset({ offset: 0, animated: true })} />
 		})
 	}
 
@@ -637,7 +654,7 @@ export class RecipesList extends React.Component {
 
 	render() {
 		// console.log(this.props[this.props["listChoice"] + `_Recipes`][0])
-		//console.log(this.props.loggedInChef.is_admin)
+		// console.log(this.props.route)
 		// console.log('list start')
 		// console.log('rendering')
 		// console.log(this.recipeFlatList.scrollToOffset({ animated: true, offset: 0 }))

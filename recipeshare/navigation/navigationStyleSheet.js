@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
 		height: '100%',
 		justifyContent: 'center',
 		alignItems: 'center',
-		// borderWidth: 1,
+		//borderWidth: 1,
 	},
 	headerMiddle: {
 		// minWidth: responsiveWidth(70),
@@ -50,4 +50,14 @@ export const styles = StyleSheet.create({
 		width: '100%',
 		height: '100%',
 	},
+	headerActionButton: {
+		//backgroundColor: '#fff59b30',
+		//borderWidth: 1,
+		//borderColor: 'blue',
+		width: responsiveWidth(68),
+		height: '80%',
+		zIndex: 1,
+		borderRadius:responsiveWidth(1.5),
+		marginLeft: responsiveWidth(16)
+	}
 });

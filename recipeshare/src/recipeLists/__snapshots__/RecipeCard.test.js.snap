@@ -214,7 +214,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       Object {
         "alignItems": "center",
         "alignSelf": "center",
-        "height": 500.25,
+        "height": 562.5,
         "opacity": 1,
         "width": 750,
       }
@@ -601,7 +601,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       Object {
         "alignItems": "center",
         "alignSelf": "center",
-        "height": 500.25,
+        "height": 562.5,
         "opacity": 1,
         "width": 750,
       }
@@ -992,7 +992,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       Object {
         "alignItems": "center",
         "alignSelf": "center",
-        "height": 500.25,
+        "height": 562.5,
         "opacity": 1,
         "width": 750,
       }
@@ -1379,7 +1379,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       Object {
         "alignItems": "center",
         "alignSelf": "center",
-        "height": 500.25,
+        "height": 562.5,
         "opacity": 1,
         "width": 750,
       }
@@ -1770,7 +1770,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       Object {
         "alignItems": "center",
         "alignSelf": "center",
-        "height": 500.25,
+        "height": 562.5,
         "opacity": 1,
         "width": 750,
       }
@@ -2161,7 +2161,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       Object {
         "alignItems": "center",
         "alignSelf": "center",
-        "height": 500.25,
+        "height": 562.5,
         "opacity": 1,
         "width": 750,
       }
@@ -2552,7 +2552,7 @@ exports[`Recipe Card can be rendered when the recipe has NO COVER IMAGE and matc
       Object {
         "alignItems": "center",
         "alignSelf": "center",
-        "height": 500.25,
+        "height": 562.5,
         "opacity": 1,
         "width": 750,
       }
@@ -3014,7 +3014,7 @@ exports[`Recipe Card can be rendered when the recipe has a LONG RESHARER USERNAM
       Object {
         "alignItems": "center",
         "alignSelf": "center",
-        "height": 500.25,
+        "height": 562.5,
         "opacity": 1,
         "width": 750,
       }
@@ -3401,7 +3401,7 @@ exports[`Recipe Card can be rendered when the recipe has been COMMENTED and matc
       Object {
         "alignItems": "center",
         "alignSelf": "center",
-        "height": 500.25,
+        "height": 562.5,
         "opacity": 1,
         "width": 750,
       }
@@ -3792,7 +3792,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED and matches 
       Object {
         "alignItems": "center",
         "alignSelf": "center",
-        "height": 500.25,
+        "height": 562.5,
         "opacity": 1,
         "width": 750,
       }
@@ -4183,7 +4183,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED, COMMENTED, 
       Object {
         "alignItems": "center",
         "alignSelf": "center",
-        "height": 500.25,
+        "height": 562.5,
         "opacity": 1,
         "width": 750,
       }
@@ -4649,7 +4649,7 @@ exports[`Recipe Card can be rendered when the recipe has been RE_SHARED BY SOMEO
       Object {
         "alignItems": "center",
         "alignSelf": "center",
-        "height": 500.25,
+        "height": 562.5,
         "opacity": 1,
         "width": 750,
       }
@@ -5040,7 +5040,7 @@ exports[`Recipe Card can be rendered when the recipe has been SHARED and matches
       Object {
         "alignItems": "center",
         "alignSelf": "center",
-        "height": 500.25,
+        "height": 562.5,
         "opacity": 1,
         "width": 750,
       }
@@ -5431,7 +5431,7 @@ exports[`Recipe Card can be rendered when the recipe has been a LONG RECIPE NAME
       Object {
         "alignItems": "center",
         "alignSelf": "center",
-        "height": 500.25,
+        "height": 562.5,
         "opacity": 1,
         "width": 750,
       }
@@ -5818,7 +5818,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with NO 
       Object {
         "alignItems": "center",
         "alignSelf": "center",
-        "height": 500.25,
+        "height": 562.5,
         "opacity": 1,
         "width": 750,
       }
@@ -6209,7 +6209,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with a L
       Object {
         "alignItems": "center",
         "alignSelf": "center",
-        "height": 500.25,
+        "height": 562.5,
         "opacity": 1,
         "width": 750,
       }

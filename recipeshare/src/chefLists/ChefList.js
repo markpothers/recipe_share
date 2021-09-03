@@ -14,6 +14,7 @@ import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo';
 import SearchBar from '../searchBar/SearchBar.js'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
+import AppHeaderActionButton from '../../navigation/appHeaderActionButton'
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)
 
@@ -65,6 +66,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		constructor(props) {
 			super(props)
 			this.searchBar = React.createRef()
+			this.chefFlatList = React.createRef()
 			this.state = {
 				limit: 10,
 				offset: 0,
@@ -87,6 +89,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				await this.fetchChefList()
 				this.setState({ awaitingServer: false })
 			})
+			this.setupHeaderScrollTopTopButton()
 		}
 
 		componentWillUnmount = () => {
@@ -97,6 +100,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		shouldComponentUpdate = () => { return this.state.isDisplayed }
 
 		respondToFocus = async () => {
+			this.setupHeaderScrollTopTopButton()
 			this.setState({
 				awaitingServer: false,
 				// offset: 0,
@@ -108,6 +112,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		respondToBlur = () => { this.setState({ isDisplayed: false }) }
+
+		setupHeaderScrollTopTopButton = () => {
+			this.props.navigation.dangerouslyGetParent().setOptions({
+				headerLeft: () => <AppHeaderActionButton buttonAction={() => this.chefFlatList.scrollToOffset({ offset: 0, animated: true })} />
+			})
+		}
 
 		fetchChefList = async () => {
 			try {
@@ -355,6 +365,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								>
 								</TouchableOpacity>
 							)}
+							ref={(list) => this.chefFlatList = list}
 							data={this.props[this.props["listChoice"]]}
 							renderItem={this.renderChefListItem}
 							keyExtractor={(item) => item.id.toString()}

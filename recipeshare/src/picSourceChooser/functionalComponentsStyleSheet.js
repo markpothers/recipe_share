@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		width: responsiveWidth(80),
-		height: responsiveHeight(34),
+		height: responsiveWidth(80),
 		marginTop: responsiveHeight(2),
 		marginLeft: responsiveWidth(3.5),
 		marginRight: responsiveWidth(3.5),

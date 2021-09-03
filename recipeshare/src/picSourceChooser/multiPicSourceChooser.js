@@ -1,55 +1,48 @@
-import React from 'react'
-import { Modal, Text, View, TouchableOpacity, Dimensions, Image, FlatList } from 'react-native'
+import React, { useState, useEffect, useRef } from 'react'
+import { Modal, Text, View, TouchableOpacity, Dimensions, Image, FlatList, Platform } from 'react-native'
 import { Camera } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
-
 import * as ImagePicker from 'expo-image-picker'
 import { styles } from './functionalComponentsStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
+import { ImageEditor } from "expo-image-editor";
 
-export default class MultiPicSourceChooser extends React.Component {
+export default function MultiPicSourceChooser(props) {
+	const [hasCameraRollPermission, setHasCameraRollPermission] = useState(false)
+	const [hasCameraPermission, setHasCameraPermission] = useState(false)
+	const [originalImages, setOriginalImages] = useState(null)
+	const [imageEditorShowing, setImageEditorShowing] = useState(false)
+	const [tempImageUri, setTempImageUri] = useState(null)
+	const [imageIndex, setImageIndex] = useState(0)
+	const [primaryImageFlatListWidth, setPrimaryImageFlatListWidth] = useState(0)
+	const primaryImageFlatList = useRef(null)
 
-	state = {
-		hasCameraRollPermission: false,
-		hasCameraPermission: false,
-		imageIndex: 0,
-		originalImages: null,
-		primaryImageFlatListWidth: 0,
-		visible: true,
+	useEffect(() => {
+		async function checkPermissions() {
+			let cameraRollPermission = await MediaLibrary.requestPermissionsAsync()
+			let cameraPermission = await Camera.requestCameraPermissionsAsync()
+			setHasCameraRollPermission(cameraRollPermission.granted)
+			setHasCameraPermission(cameraPermission.granted)
+		}
+		checkPermissions()
+		console.log('setting original images')
+		setOriginalImages([...props.imageSources])
+	}, [])
+
+	const addPhoto = async () => {
+		let newImages = [...props.imageSources.slice(0, imageIndex), { uri: '' }, ...props.imageSources.slice(imageIndex)]
+		await props.saveImages(newImages)
 	}
-
-	componentDidMount = async () => {
-		let cameraRollPermission = await MediaLibrary.requestPermissionsAsync()
-		let cameraPermission = await Camera.requestCameraPermissionsAsync()
-		this.setState({
-			hasCameraRollPermission: cameraRollPermission.granted,
-			hasCameraPermission: cameraPermission.granted,
-			originalImages: [...this.props.imageSources]
-		})
-	}
-
-	addPhoto = async () => {
-		let newImages = [...this.props.imageSources.slice(0, this.state.imageIndex), { uri: '' }, ...this.props.imageSources.slice(this.state.imageIndex)]
-		await this.props.saveImage(newImages)
-	}
-
-	pickImage = async () => {
+	const pickImage = async () => {
 		try {
-			if (this.state.hasCameraRollPermission) {
+			if (hasCameraRollPermission) {
 				let image = await ImagePicker.launchImageLibraryAsync({
-					allowsEditing: true,
+					allowsEditing: Platform.OS == 'android',
 					aspect: [4, 3],
 					base64: false
 				})
-				if (image.error) {
-					console.log(image.error)
-				}
-				let newImages = this.props.imageSources
-				if (!image.cancelled) {
-					newImages[this.state.imageIndex] = image
-				}
-				this.props.saveImage(newImages)
+				handleChosenImage(image)
 			}
 		} catch (e) {
 			// console.log('fail')
@@ -57,67 +50,73 @@ export default class MultiPicSourceChooser extends React.Component {
 		}
 	}
 
-	openCamera = async () => {
+	const openCamera = async () => {
 		try {
-			if (this.state.hasCameraPermission) {
+			if (hasCameraPermission) {
 				let image = await ImagePicker.launchCameraAsync({
-					allowsEditing: true,
+					allowsEditing: Platform.OS == 'android',
 					aspect: [4, 3],
 					base64: false
 				})
-				if (image.error) {
-					console.log(image.error)
-				}
-				let newImages = this.props.imageSources
-				if (!image.cancelled) {
-					newImages[this.state.imageIndex] = image
-				}
-				this.props.saveImage(newImages)
+				handleChosenImage(image)
 			}
 		} catch (e) {
 			console.log(e)
 		}
 	}
 
-	deleteImage = () => {
-		if (this.props.imageSources.length == 1) { //go back to completely empty list of images
-			this.setState({ imageIndex: 0 }, () => {
-				this.props.saveImage([{ uri: '' }])
-			})
+	const handleChosenImage = (image) => {
+		if (image.error) {
+			console.log(image.error)
 		} else {
-			let newImages = this.props.imageSources
-			newImages.splice(this.state.imageIndex, 1)
-			this.setState({ imageIndex: this.state.imageIndex > newImages.length - 1 ? newImages.length - 1 : this.state.imageIndex }, () => {
-				this.props.saveImage(newImages)
-			})
+			if (Platform.OS == 'ios' && image.cancelled == false) {
+				setTempImageUri(image.uri)
+				setImageEditorShowing(true)
+			} else {
+				let newImages = [...props.imageSources]
+				if (!image.cancelled) {
+					newImages[imageIndex] = image
+				}
+				props.saveImages(newImages)
+			}
 		}
 	}
 
-	moveLeft = () => {
-		let thisImage = this.props.imageSources[this.state.imageIndex]
-		let newImages = [...this.props.imageSources.slice(0, this.state.imageIndex), ...this.props.imageSources.slice(this.state.imageIndex + 1)]
-		let newImageIndex = this.state.imageIndex > 0 ? this.state.imageIndex - 1 : 0
-		newImages.splice(newImageIndex, 0, thisImage)
-		this.setState({ imageIndex: newImageIndex }, async () => {
-			await this.props.saveImage(newImages)
-			this.flatList.scrollToIndex({ index: newImageIndex })
-		})
+	const deleteImage = () => {
+		if (props.imageSources.length == 1) { //go back to completely empty list of images
+			setImageIndex(0)
+			props.saveImages([{ uri: '' }])
+		} else {
+			let newImages = [...props.imageSources]
+			newImages.splice(imageIndex, 1)
+			setImageIndex(imageIndex > newImages.length - 1 ? newImages.length - 1 : imageIndex)
+			props.saveImages(newImages)
+		}
 	}
 
-	moveRight = () => {
-		let thisImage = this.props.imageSources[this.state.imageIndex]
-		let newImages = [...this.props.imageSources.slice(0, this.state.imageIndex), ...this.props.imageSources.slice(this.state.imageIndex + 1)]
-		let newImageIndex = this.state.imageIndex < this.props.imageSources.length - 1 ? this.state.imageIndex + 1 : this.state.imageIndex
+	const moveLeft = async () => {
+		let thisImage = props.imageSources[imageIndex]
+		let newImages = [...props.imageSources.slice(0, imageIndex), ...props.imageSources.slice(imageIndex + 1)]
+		let newImageIndex = imageIndex > 0 ? imageIndex - 1 : 0
 		newImages.splice(newImageIndex, 0, thisImage)
-		this.setState({ imageIndex: newImageIndex }, async () => {
-			await this.props.saveImage(newImages)
-			this.flatList.scrollToIndex({ index: newImageIndex })
-		})
+		setImageIndex(newImageIndex)
+		await props.saveImages(newImages)
+		primaryImageFlatList.current.scrollToIndex({ index: newImageIndex })
 	}
 
-	renderPrimaryImageBlobs = () => {
-		return this.props.imageSources.map((image, index) => {
-			if (this.state.imageIndex == index) {
+	const moveRight = async () => {
+		let thisImage = props.imageSources[imageIndex]
+		let newImages = [...props.imageSources.slice(0, imageIndex), ...props.imageSources.slice(imageIndex + 1)]
+		let newImageIndex = imageIndex < props.imageSources.length - 1 ? imageIndex + 1 : imageIndex
+		newImages.splice(newImageIndex, 0, thisImage)
+		setImageIndex(newImageIndex)
+		await props.saveImages(newImages)
+		primaryImageFlatList.current.scrollToIndex({ index: newImageIndex })
+	}
+
+	const renderPrimaryImageBlobs = () => {
+		return props.imageSources.map((image, index) => {
+			if (imageIndex == index) {
 				return <Icon key={index.toString()} name={'checkbox-blank-circle'} size={responsiveHeight(3)} style={styles.primaryImageBlob} />
 			} else {
 				return <Icon key={index.toString()} name={'checkbox-blank-circle-outline'} size={responsiveHeight(3)} style={styles.primaryImageBlob} />
@@ -125,23 +124,23 @@ export default class MultiPicSourceChooser extends React.Component {
 		})
 	}
 
-	cancel = async () => {
-		await this.props.saveImage(this.state.originalImages)
-		await this.props.sourceChosen()
+	const cancel = async () => {
+		await props.saveImages(originalImages)
+		props.sourceChosen()
 	}
 
-	renderPrimaryImage = (image) => {
+	const renderPrimaryImage = (image) => {
 		if (image.item.uri || image.item.image_url) {
 			return (
 				<Image
-					style={{ height: responsiveHeight(34), width: responsiveWidth(80) - 2 }}
+					style={{ height: '100%', width: responsiveWidth(80) - 2 }}
 					source={{ uri: image.item.image_url ? image.item.image_url : image.item.uri }}
 					resizeMode={"cover"}
 				/>
 			)
 		} else {
 			return (
-				<View style={{ height: responsiveHeight(34), width: responsiveWidth(80) - 2, justifyContent: 'center', alignItems: 'center' }}>
+				<View style={{ height: '100%', width: responsiveWidth(80) - 2, justifyContent: 'center', alignItems: 'center' }}>
 					<Icon style={styles.standardIcon} size={responsiveHeight(4)} name='image' />
 					<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>No image{"\n"}selected</Text>
 				</View>
@@ -149,123 +148,152 @@ export default class MultiPicSourceChooser extends React.Component {
 		}
 	}
 
-	render() {
-		let imageSources = this.props.imageSources
-		// console.log(imageSources)
-		return (
-			<Modal
-				animationType="fade"
-				transparent={true}
-				visible={this.state.visible}
-				onRequestClose={this.props.sourceChosen}
-			>
-				<View style={[styles.modalFullScreenContainer, { height: Dimensions.get('window').height, width: Dimensions.get('window').width }]}>
-					<View style={styles.picChooserModalContainer}>
-						<View style={styles.picSourceChooserImage}>
-							{imageSources.length > 0 ? (
-								<FlatList
-									ref={ref => this.flatList = ref}
-									style={{ flex: 1 }}
-									horizontal={true}
-									data={imageSources}
-									renderItem={(image) => {
-										if (imageSources.length > 0) {
-											return this.renderPrimaryImage(image)
-										} else {
-											return (
-												<View style={{ height: responsiveHeight(34), width: responsiveWidth(80) - 2, justifyContent: 'center', alignItems: 'center' }}>
-													<Icon style={styles.standardIcon} size={responsiveHeight(4)} name='image' />
-													<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>No image{"\n"}selected</Text>
-												</View>
-											)
-										}
-									}}
-									keyExtractor={(item, index) => index.toString()}
-									pagingEnabled={true}
-									onLayout={(event) => {
-										var { x, y, width, height } = event.nativeEvent.layout //eslint-disable-line no-unused-vars
-										this.setState({ primaryImageFlatListWidth: width })
-									}}
-									onScroll={e => {
-										let nearestIndex = Math.round(e.nativeEvent.contentOffset.x / this.state.primaryImageFlatListWidth)
-										if (nearestIndex != this.state.primaryImageDisplayedIndex) {
-											this.setState({ imageIndex: nearestIndex })
-										}
-									}}
-								/>) : (
-								<View style={{ height: responsiveHeight(34), width: responsiveWidth(80) - 2, justifyContent: 'center', alignItems: 'center' }}>
-									<Icon style={styles.standardIcon} size={responsiveHeight(4)} name='image' />
-									<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>No image{"\n"}selected</Text>
-								</View>
-							)}
-							<View style={styles.primaryImageBlobsContainer}>
-								{imageSources.length > 1 && this.renderPrimaryImageBlobs()}
+	const photoCropped = () => {
+		setImageEditorShowing(false)
+	}
+
+	const saveCroppedImage = (image) => {
+		image = {
+			...image,
+			cancelled: false
+		}
+		let newImages = props.imageSources
+		newImages[imageIndex] = image
+		props.saveImages(newImages)
+	}
+
+	let imageSources = props.imageSources
+	return (
+		<Modal
+			animationType="fade"
+			transparent={true}
+			visible={true}
+			onRequestClose={props.sourceChosen}
+		>
+			{imageEditorShowing && (
+				<ImageEditor
+					visible={true}
+					onCloseEditor={() => photoCropped()}
+					imageUri={tempImageUri}
+					fixedCropAspectRatio={4 / 3}
+					lockAspectRatio={true}
+					minimumCropDimensions={{
+						width: 100,
+						height: 75,
+					}}
+					onEditingComplete={(result) => saveCroppedImage(result)}
+					//allowedTransformOperations={['crop', 'rotate', 'flip']}
+					//allowedAdjustmentOperations={[]}
+					//mode={"full"}
+					mode={'crop-only'}
+				/>
+			)}
+			<View style={[styles.modalFullScreenContainer, { height: Dimensions.get('window').height, width: Dimensions.get('window').width }]}>
+				<View style={styles.picChooserModalContainer}>
+					<View style={[styles.picSourceChooserImage, {height: responsiveWidth(60)}]}>
+						{imageSources.length > 0 ? (
+							<FlatList
+								ref={primaryImageFlatList}
+								style={{ flex: 1 }}
+								horizontal={true}
+								data={imageSources}
+								renderItem={(image) => {
+									if (imageSources.length > 0) {
+										return renderPrimaryImage(image)
+									} else {
+										return (
+											<View style={{ height: responsiveHeight(60), width: responsiveWidth(80) - 2, justifyContent: 'center', alignItems: 'center' }}>
+												<Icon style={styles.standardIcon} size={responsiveHeight(4)} name='image' />
+												<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>No image{"\n"}selected</Text>
+											</View>
+										)
+									}
+								}}
+								keyExtractor={(item, index) => index.toString()}
+								pagingEnabled={true}
+								onLayout={(event) => {
+									var { x, y, width, height } = event.nativeEvent.layout //eslint-disable-line no-unused-vars
+									setPrimaryImageFlatListWidth(width)
+								}}
+								onScroll={e => {
+									let nearestIndex = Math.round(e.nativeEvent.contentOffset.x / primaryImageFlatListWidth)
+									//if (nearestIndex != primaryImageDisplayedIndex) {
+									setImageIndex(nearestIndex)
+									//}
+								}}
+							/>) : (
+							<View style={{ height: '100%', width: responsiveWidth(80) - 2, justifyContent: 'center', alignItems: 'center' }}>
+								<Icon style={styles.standardIcon} size={responsiveHeight(4)} name='image' />
+								<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>No image{"\n"}selected</Text>
 							</View>
-						</View>
-						<View style={styles.picSourceChooserArrowButtonContainer}>
-							<TouchableOpacity style={styles.picSourceChooserArrowButton} activeOpacity={0.7} title="Sort left" onPress={this.moveLeft}>
-								<Icon
-									style={[
-										styles.standardIcon,
-										{
-											transform: [
-												{ rotateZ: "270deg" },
-											]
-										}
-									]}
-									size={responsiveHeight(4)}
-									name='shuffle'
-								/>
-								<Text maxFontSizeMultiplier={1.5} style={[styles.picSourceChooserButtonText, { maxWidth: responsiveWidth(25) }]}>Sort left</Text>
-							</TouchableOpacity>
-							<TouchableOpacity style={styles.picSourceChooserArrowButton} activeOpacity={0.7} title="Sort right" onPress={this.moveRight}>
-								<Text maxFontSizeMultiplier={1.5} style={[styles.picSourceChooserButtonText, { maxWidth: responsiveWidth(25) }]}>Sort right</Text>
-								<Icon
-									style={[
-										styles.standardIcon,
-										{
-											transform: [
-												{ rotateZ: "270deg" },
-												{ rotateX: "180deg" },
-											]
-										}
-									]}
-									size={responsiveHeight(4)}
-									name='shuffle'
-								/>
-							</TouchableOpacity>
-						</View>
-						<View style={styles.picSourceChooserArrowButtonContainer}>
-							<TouchableOpacity style={styles.picSourceChooserArrowButton} activeOpacity={0.7} title="Add slot" onPress={this.addPhoto}>
-								<Icon style={styles.standardIcon} size={responsiveHeight(4)} name='image-plus' />
-								<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Add slot</Text>
-							</TouchableOpacity>
-							<TouchableOpacity style={styles.picSourceChooserArrowButton} activeOpacity={0.7} title="Delete" onPress={this.deleteImage}>
-								<Icon style={styles.standardIcon} size={responsiveHeight(4)} name='image-off' />
-								<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Delete</Text>
-							</TouchableOpacity>
-						</View>
-						<TouchableOpacity style={styles.picSourceChooserButton} activeOpacity={0.7} title="Take Photo" onPress={this.openCamera}>
-							<Icon style={styles.standardIcon} size={responsiveHeight(4)} name='camera' />
-							<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Take photo</Text>
-						</TouchableOpacity>
-						<TouchableOpacity style={styles.picSourceChooserButton} activeOpacity={0.7} title="Choose Photo" onPress={this.pickImage}>
-							<Icon style={styles.standardIcon} size={responsiveHeight(4)} name='camera-image' />
-							<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Choose photo</Text>
-						</TouchableOpacity>
-						<View style={[styles.picSourceChooserArrowButtonContainer, { marginBottom: responsiveHeight(2) }]}>
-							<TouchableOpacity style={[styles.picSourceChooserCancelButton, { backgroundColor: '#720000' }]} activeOpacity={0.7} title="Cancel" onPress={this.cancel}>
-								<Icon style={styles.cancelIcon} size={responsiveHeight(4)} name='cancel' />
-								<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserCancelButtonText}>Cancel</Text>
-							</TouchableOpacity>
-							<TouchableOpacity style={styles.picSourceChooserCancelButton} activeOpacity={0.7} title="SaveAndClose" onPress={this.props.sourceChosen}>
-								<Icon style={styles.cancelIcon} size={responsiveHeight(4)} name='check-box-outline' />
-								<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserCancelButtonText}>Save &{"\n"}Close</Text>
-							</TouchableOpacity>
+						)}
+						<View style={styles.primaryImageBlobsContainer}>
+							{imageSources.length > 1 && renderPrimaryImageBlobs()}
 						</View>
 					</View>
+					<View style={styles.picSourceChooserArrowButtonContainer}>
+						<TouchableOpacity style={styles.picSourceChooserArrowButton} activeOpacity={0.7} title="Sort left" onPress={moveLeft}>
+							<Icon
+								style={[
+									styles.standardIcon,
+									{
+										transform: [
+											{ rotateZ: "270deg" },
+										]
+									}
+								]}
+								size={responsiveHeight(4)}
+								name='shuffle'
+							/>
+							<Text maxFontSizeMultiplier={1.5} style={[styles.picSourceChooserButtonText, { maxWidth: responsiveWidth(25) }]}>Sort left</Text>
+						</TouchableOpacity>
+						<TouchableOpacity style={styles.picSourceChooserArrowButton} activeOpacity={0.7} title="Sort right" onPress={moveRight}>
+							<Text maxFontSizeMultiplier={1.5} style={[styles.picSourceChooserButtonText, { maxWidth: responsiveWidth(25) }]}>Sort right</Text>
+							<Icon
+								style={[
+									styles.standardIcon,
+									{
+										transform: [
+											{ rotateZ: "270deg" },
+											{ rotateX: "180deg" },
+										]
+									}
+								]}
+								size={responsiveHeight(4)}
+								name='shuffle'
+							/>
+						</TouchableOpacity>
+					</View>
+					<View style={styles.picSourceChooserArrowButtonContainer}>
+						<TouchableOpacity style={styles.picSourceChooserArrowButton} activeOpacity={0.7} title="Add slot" onPress={addPhoto}>
+							<Icon style={styles.standardIcon} size={responsiveHeight(4)} name='image-plus' />
+							<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Add slot</Text>
+						</TouchableOpacity>
+						<TouchableOpacity style={styles.picSourceChooserArrowButton} activeOpacity={0.7} title="Delete" onPress={deleteImage}>
+							<Icon style={styles.standardIcon} size={responsiveHeight(4)} name='image-off' />
+							<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Delete</Text>
+						</TouchableOpacity>
+					</View>
+					<TouchableOpacity style={styles.picSourceChooserButton} activeOpacity={0.7} title="Take Photo" onPress={openCamera}>
+						<Icon style={styles.standardIcon} size={responsiveHeight(4)} name='camera' />
+						<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Take photo</Text>
+					</TouchableOpacity>
+					<TouchableOpacity style={styles.picSourceChooserButton} activeOpacity={0.7} title="Choose Photo" onPress={pickImage}>
+						<Icon style={styles.standardIcon} size={responsiveHeight(4)} name='camera-image' />
+						<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Choose photo</Text>
+					</TouchableOpacity>
+					<View style={[styles.picSourceChooserArrowButtonContainer, { marginBottom: responsiveHeight(2) }]}>
+						<TouchableOpacity style={[styles.picSourceChooserCancelButton, { backgroundColor: '#720000' }]} activeOpacity={0.7} title="Cancel" onPress={cancel}>
+							<Icon style={styles.cancelIcon} size={responsiveHeight(4)} name='cancel' />
+							<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserCancelButtonText}>Cancel</Text>
+						</TouchableOpacity>
+						<TouchableOpacity style={styles.picSourceChooserCancelButton} activeOpacity={0.7} title="SaveAndClose" onPress={props.sourceChosen}>
+							<Icon style={styles.cancelIcon} size={responsiveHeight(4)} name='check-box-outline' />
+							<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserCancelButtonText}>Save &{"\n"}Close</Text>
+						</TouchableOpacity>
+					</View>
 				</View>
-			</Modal>
-		)
-	}
+			</View>
+		</Modal>
+	)
 }
