@@ -26,6 +26,7 @@ const ProfileStack = (props) => {
 					left: 0,
 					height: responsiveHeight(8),
 					width: responsiveWidth(100),
+					zIndex: -1
 				},
 				headerStatusBarHeight: 0,
 			}}

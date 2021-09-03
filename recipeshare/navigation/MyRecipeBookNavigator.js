@@ -203,6 +203,7 @@ const MyRecipeBookStack = () => {
 					left: 0,
 					height: responsiveHeight(8),
 					width: responsiveWidth(100),
+					zIndex: -1
 					// borderWidth: 1,
 					// borderColor: 'red'
 				},
