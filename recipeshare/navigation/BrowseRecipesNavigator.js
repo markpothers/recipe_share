@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Platform } from 'react-native'
 import RecipeDetailsScreen from '../src/recipeDetails/recipeDetails'
 import ChefDetailsScreen from '../src/chefDetails/chefDetails'
 import NewRecipeScreen from '../src/newRecipe/newRecipe'
@@ -187,7 +188,7 @@ const BrowseRecipesStack = () => {
 					left: 0,
 					height: responsiveHeight(8),
 					width: responsiveWidth(100),
-					zIndex: -1
+					zIndex: Platform.OS == 'ios' ? -1 : null
 				},
 				headerStatusBarHeight: 0,
 			}}

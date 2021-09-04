@@ -1,4 +1,5 @@
 import React from 'react';
+import { Platform } from 'react-native'
 // import { createStackNavigator, createBottomTabNavigator, createMaterialTopTabNavigator, createDrawerNavigator } from 'react-navigation';
 import Profile from '../src/profile/profile'
 import AppHeader from './appHeader'
@@ -26,7 +27,7 @@ const ProfileStack = (props) => {
 					left: 0,
 					height: responsiveHeight(8),
 					width: responsiveWidth(100),
-					zIndex: -1
+					zIndex: Platform.OS == 'ios' ? -1 : null
 				},
 				headerStatusBarHeight: 0,
 			}}

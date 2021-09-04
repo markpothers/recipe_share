@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Platform } from 'react-native'
 // import { createStackNavigator, createBottomTabNavigator, createMaterialTopTabNavigator, createDrawerNavigator } from 'react-navigation';
 import RecipeDetailsScreen from '../src/recipeDetails/recipeDetails'
 import ChefDetailsScreen from '../src/chefDetails/chefDetails'
@@ -203,7 +204,7 @@ const MyRecipeBookStack = () => {
 					left: 0,
 					height: responsiveHeight(8),
 					width: responsiveWidth(100),
-					zIndex: -1
+					zIndex: Platform.OS == 'ios' ? -1 : null
 					// borderWidth: 1,
 					// borderColor: 'red'
 				},
