@@ -22,13 +22,14 @@ import saveChefDetailsLocally from '../auxFunctions/saveChefDetailsLocally'
 import { getChefDetails } from '../fetches/getChefDetails'
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo'
+NetInfo.configure({reachabilityShortTimeout: 5}) //5ms
 import SearchBar from '../searchBar/SearchBar.js'
 import AppHeaderActionButton from '../../navigation/appHeaderActionButton'
 // import { apiCall } from '../auxFunctions/apiCall'
 
 // import Constants from 'expo-constants';
 
-const startingLimit = 5
+const startingLimit = 10
 const startingOffset = 0
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)
 
@@ -139,7 +140,7 @@ export class RecipesList extends React.Component {
 		//console.log(this.recipeFlatList.scrollToOffset)
 		//this.recipeFlatList.scrollToOffset({ offset: 0, animated: true })
 		this.setupHeaderScrollTopTopButton()
-		
+
 	}
 
 	componentWillUnmount = () => {
@@ -652,12 +653,23 @@ export class RecipesList extends React.Component {
 		this.setState({ searchBarZIndex: 1 }, () => { this.searchBar.current.focus() })
 	}
 
+	checkFilterSetting = (element) => {
+		return this.props.filter_settings[element] == true
+	}
+
 	render() {
 		// console.log(this.props[this.props["listChoice"] + `_Recipes`][0])
 		// console.log(this.props.route)
 		// console.log('list start')
 		// console.log('rendering')
 		// console.log(this.recipeFlatList.scrollToOffset({ animated: true, offset: 0 }))
+
+		//console.log(this.props.serves)
+
+		let anyFilterActive = Object.keys(this.props.filter_settings).some(this.checkFilterSetting) ||
+			this.props.filterCuisines[this.props.listChoice] != "Any" ||
+			this.props.serves != "Any"
+		//console.log(Object.keys(this.props.filter_settings).some(this.checkFilterSetting))
 		return (
 			<SpinachAppContainer awaitingServer={this.state.awaitingServer}>
 				<TouchableOpacity
@@ -786,6 +798,7 @@ export class RecipesList extends React.Component {
 					)}
 				</TouchableOpacity>
 				<TouchableOpacity style={styles.filterButton} activeOpacity={0.7} onPress={this.handleFilterButton} testID={"filterButton"}>
+					{anyFilterActive && <Icon name='checkbox-blank-circle' size={responsiveHeight(3.5)} style={styles.filterActiveIcon} />}
 					<Icon name='filter' size={responsiveHeight(3.5)} style={styles.filterIcon} />
 				</TouchableOpacity>
 			</SpinachAppContainer>

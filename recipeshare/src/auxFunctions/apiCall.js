@@ -1,4 +1,6 @@
 import NetInfo from '@react-native-community/netinfo'
+NetInfo.configure({reachabilityShortTimeout: 5}) //5ms
+
 
 export const apiCall = async (callback, ...args) => {
     let netInfoState = await NetInfo.fetch()

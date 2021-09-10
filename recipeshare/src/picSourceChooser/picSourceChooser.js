@@ -118,8 +118,8 @@ export default function PicSourceChooser(props) {
 					onEditingComplete={(result) => saveCroppedImage(result)}
 					//allowedTransformOperations={['crop', 'rotate', 'flip']}
 					//allowedAdjustmentOperations={[]}
-					//mode={"full"}
-					mode={'crop-only'}
+					mode={"full"}
+					//mode={'crop-only'}
 				/>
 			)}
 			<View style={[styles.modalFullScreenContainer, { height: responsiveHeight(100), width: responsiveWidth(100) }]}>

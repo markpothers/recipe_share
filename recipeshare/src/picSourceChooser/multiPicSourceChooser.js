@@ -26,7 +26,6 @@ export default function MultiPicSourceChooser(props) {
 			setHasCameraPermission(cameraPermission.granted)
 		}
 		checkPermissions()
-		console.log('setting original images')
 		setOriginalImages([...props.imageSources])
 	}, [])
 
@@ -184,13 +183,13 @@ export default function MultiPicSourceChooser(props) {
 					onEditingComplete={(result) => saveCroppedImage(result)}
 					//allowedTransformOperations={['crop', 'rotate', 'flip']}
 					//allowedAdjustmentOperations={[]}
-					//mode={"full"}
-					mode={'crop-only'}
+					mode={"full"}
+					//mode={'crop-only'}
 				/>
 			)}
 			<View style={[styles.modalFullScreenContainer, { height: Dimensions.get('window').height, width: Dimensions.get('window').width }]}>
 				<View style={styles.picChooserModalContainer}>
-					<View style={[styles.picSourceChooserImage, {height: responsiveWidth(60)}]}>
+					<View style={[styles.picSourceChooserImage, { height: responsiveWidth(60) }]}>
 						{imageSources.length > 0 ? (
 							<FlatList
 								ref={primaryImageFlatList}

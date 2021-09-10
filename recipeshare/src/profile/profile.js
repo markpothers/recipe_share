@@ -14,6 +14,7 @@ import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo';
+NetInfo.configure({reachabilityShortTimeout: 5}) //5ms
 import { AlertPopUp } from '../alertPopUp/alertPopUp'
 import DynamicMenu from '../dynamicMenu/DynamicMenu.js'
 import AppHeaderRight from '../../navigation/appHeaderRight'

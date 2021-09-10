@@ -25,6 +25,7 @@ import { DragSortableView } from 'react-native-drag-sort/lib'
 import { clearedFilters } from '../dataComponents/clearedFilters'
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo';
+NetInfo.configure({reachabilityShortTimeout: 5}) //5ms
 import { AlertPopUp } from '../alertPopUp/alertPopUp';
 import AppHeader from '../../navigation/appHeader'
 import { getTimeStringFromMinutes, getMinutesFromTimeString } from '../auxFunctions/getTimeStringFromMinutes'
@@ -34,7 +35,7 @@ import { emptyRecipe } from './recipeTemplates/emptyRecipe'
 import { longTestRecipe } from './recipeTemplates/longTestRecipe' //eslint-disable-line no-unused-vars
 import { shortTestRecipe } from './recipeTemplates/shortTestRecipe' //eslint-disable-line no-unused-vars
 
-const testing = false
+const testing = true
 const testRecipe = shortTestRecipe
 
 const mapStateToProps = (state) => ({
@@ -350,7 +351,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		submitRecipe = async () => {
-			// console.log('submitting')
 			Keyboard.dismiss()
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
@@ -1227,7 +1227,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='alert-circle-outline'></Icon>
 											<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { fontSize: responsiveFontSize(2.2) }]}>{(this.props.route.params?.recipe_details !== undefined ? 'Reset' : 'Clear')}</Text>
 										</TouchableOpacity>
-										<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={e => this.submitRecipe(e)} disabled={this.state.awaitingServer}>
+										<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={this.submitRecipe} disabled={this.state.awaitingServer}>
 											<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='login'></Icon>
 											<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { fontSize: responsiveFontSize(2.2) }]}>Submit</Text>
 										</TouchableOpacity>

@@ -21,6 +21,8 @@ export const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		height: responsiveHeight(7),
+		//backgroundColor: '#fff59b30',
+
 	},
 	buttonIcon: {
 		marginHorizontal: responsiveWidth(2),

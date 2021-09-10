@@ -23,7 +23,7 @@ export default function SwitchSized(props) {
 			value={props.value}
 			onValueChange={props.onValueChange}
 			trackColor={props.trackColor ? props.trackColor : ({true: '#5c8a5199', false: Platform.OS == 'android' ? '#64715599' : '#d8dcd7' })}
-			thumbColor={props.thumbColor ? props.thumbColor : (Platform.OS === 'ios' ? (props.value ? "#4b7142" : "#eaeaea") : (props.value ? "#4b7142" : '#eaeaea'))}
+			thumbColor={props.thumbColor ? props.thumbColor : (Platform.OS === 'ios' ? (props.value ? "#4b7142" : "#b0b0b0") : (props.value ? "#4b7142" : '#eaeaea'))}
 			disabled={props.disabled}
 		/>
 	)

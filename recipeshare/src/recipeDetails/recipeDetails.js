@@ -25,6 +25,7 @@ import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-nat
 import { ImagePopup } from './imagePopup'
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo';
+NetInfo.configure({reachabilityShortTimeout: 5}) //5ms
 import { AlertPopUp } from '../alertPopUp/alertPopUp'
 import DynamicMenu from '../dynamicMenu/DynamicMenu.js'
 import saveChefDetailsLocally from '../auxFunctions/saveChefDetailsLocally'
@@ -32,6 +33,7 @@ import { getTimeStringFromMinutes } from '../auxFunctions/getTimeStringFromMinut
 import { getChefDetails } from '../fetches/getChefDetails'
 import AppHeaderRight from '../../navigation/appHeaderRight'
 import { WebView } from 'react-native-webview';
+import UpdateAttributeCounts from '../auxFunctions/updateAttributeCounts'
 
 const defaultRecipeImage = require("../dataComponents/default-recipe.jpg")
 let keepAwakeTimer
@@ -499,9 +501,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						const likePosted = await postRecipeLike(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
 						if (likePosted) {
 							this.props.addRecipeLike()
+							//UpdateAttributeCounts(this.props.recipe_details.recipe.id, "recipeLike", 1)
 						}
 					} catch (e) {
 						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						console.log(e)
 						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e })
 					}
 					this.setState({ awaitingServer: false })
@@ -519,9 +523,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						const unlikePosted = await destroyRecipeLike(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
 						if (unlikePosted) {
 							this.props.removeRecipeLike()
+							//UpdateAttributeCounts(this.props.recipe_details.recipe.id, "recipeLike", -1)
 						}
 					} catch (e) {
 						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						console.log(e)
 						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e })
 					}
 					this.setState({ awaitingServer: false })

@@ -10,6 +10,7 @@ import DualOSPicker from '../dualOSPicker/DualOSPicker'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import NetInfo from '@react-native-community/netinfo';
+NetInfo.configure({reachabilityShortTimeout: 5}) //5ms
 import OfflineMessage from '../offlineMessage/offlineMessage'
 
 const mapStateToProps = (state) => ({

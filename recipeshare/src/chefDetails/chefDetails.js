@@ -11,6 +11,8 @@ import { destroyFollow } from '../fetches/destroyFollow'
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo';
+NetInfo.configure({reachabilityShortTimeout: 5}) //5ms
+
 import DynamicMenu from '../dynamicMenu/DynamicMenu.js'
 import AppHeaderRight from '../../navigation/appHeaderRight'
 

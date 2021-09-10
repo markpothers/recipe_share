@@ -5,7 +5,7 @@ class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
   @@gcstorage = Google::Cloud::Storage.new project_id: Rails.application.credentials.Google[:project_id],
-                  credentials: Rails.application.credentials.Google[:image_storage_handler_credentials]
+    credentials: Rails.application.credentials.Google[:image_storage_handler_credentials]
 
   # def initialize()
   #   self.gcstorage = Google::Cloud::Storage.new project_id: Rails.application.credentials.Google[:project_id],
@@ -54,18 +54,41 @@ class ApplicationRecord < ActiveRecord::Base
         chosen_bucket = ""
         all_buckets = Rails.application.credentials.buckets[Rails.env.to_sym].keys
         split_url.each do |url_component|
-          all_buckets.each do |bucket|
-            if url_component == Rails.application.credentials.buckets[Rails.env.to_sym][bucket]
-              chosen_bucket = Rails.application.credentials.buckets[Rails.env.to_sym][bucket]
+          if !["https:", "", "storage.googleapis.com", "download", "storage", "v1", "b", "o"].include? url_component # exclude url_components which we don't want to look at
+            all_buckets.each do |bucket|
+              if url_component == Rails.application.credentials.buckets[Rails.env.to_sym][bucket]
+                chosen_bucket = Rails.application.credentials.buckets[Rails.env.to_sym][bucket]
+                break
+              end
             end
           end
         end
+
+        # for testing, some images were stored in different folders e.g. created in prod but stored in dev
+        # if you haven't founda bucket yet, look for matching buckets in other environments
+        if chosen_bucket == ""
+          split_url.each do |url_component|
+            if !["https:", "", "storage.googleapis.com", "download", "storage", "v1", "b", "o"].include? url_component # exclude url_components which we don't want to look at
+              environments = ActiveRecord::Base.configurations.to_h.keys
+              environments.each do |env|
+                buckets = Rails.application.credentials.buckets[env.to_sym].keys
+                buckets.each do |bucket|
+                  if url_component == Rails.application.credentials.buckets[env.to_sym][bucket]
+                    chosen_bucket = Rails.application.credentials.buckets[env.to_sym][bucket]
+                    break
+                  end
+                end
+              end
+            end
+          end
+        end
+
         # calculate a good expiration date at the beginning of next month to ensure that signed_urls are the same and images can be cached
         today = DateTime.now()
         next_reset_date = Date.today.at_beginning_of_month.next_month
         next_next_reset_date = Date.today.at_beginning_of_month.next_month.next_month
         days_until_reset = (next_reset_date - today).to_i
-
+        # byebug
         # return url
         # storage = ApplicationRecord.storage_bucket(chosen_bucket)
         bucket = @@gcstorage.bucket chosen_bucket

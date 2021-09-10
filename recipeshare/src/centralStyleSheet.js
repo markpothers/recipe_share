@@ -220,6 +220,8 @@ export const centralStyles = StyleSheet.create({
 		width: responsiveWidth(15),
 		justifyContent: 'center',
 		alignItems: 'center',
+		//backgroundColor: '#fff59b30',
+
 	},
 	dynamicMenuButton: {
 		height: '105%',

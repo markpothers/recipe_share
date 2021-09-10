@@ -144,6 +144,12 @@ export const styles = StyleSheet.create({
 	filterIcon: {
 		color: '#104e01',
 	},
+	filterActiveIcon: {
+		color: '#990000',
+		position: 'absolute',
+		right: -responsiveHeight(1.2),
+		top: -responsiveHeight(1.2)
+	},
 	cantNavigateMessageContainer: {
 		borderRadius:responsiveWidth(1.5),
 		position: 'absolute',

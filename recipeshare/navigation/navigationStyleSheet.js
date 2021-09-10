@@ -22,6 +22,7 @@ export const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		//borderWidth: 1,
+		//backgroundColor: '#fff59b30',
 	},
 	headerMiddle: {
 		// minWidth: responsiveWidth(70),
@@ -44,7 +45,7 @@ export const styles = StyleSheet.create({
 	headerText: {
 		fontSize: responsiveFontSize(3.5),
 		color: '#fff59b',
-		marginLeft: responsiveWidth(2)
+		marginLeft: responsiveWidth(3)
 	},
 	background: {
 		width: '100%',
