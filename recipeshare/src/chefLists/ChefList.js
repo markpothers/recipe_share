@@ -12,7 +12,7 @@ import saveChefDetailsLocally from '../auxFunctions/saveChefDetailsLocally'
 import { getChefDetails } from '../fetches/getChefDetails'
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo';
-NetInfo.configure({reachabilityShortTimeout: 5}) //5ms
+NetInfo.configure({ reachabilityShortTimeout: 5 }) //5ms
 import SearchBar from '../searchBar/SearchBar.js'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import AppHeaderActionButton from '../../navigation/appHeaderActionButton'
@@ -20,6 +20,7 @@ import AppHeaderActionButton from '../../navigation/appHeaderActionButton'
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)
 
 const mapStateToProps = (state) => ({
+	allChefLists: state.chefs,
 	all_chefs: state.chefs.all_chefs,
 	followed_chefs: state.chefs.followed,
 	loggedInChef: state.loggedInChef,
@@ -103,12 +104,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		respondToFocus = async () => {
 			this.setupHeaderScrollTopTopButton()
 			this.setState({
-				awaitingServer: false,
+				//awaitingServer: false,
 				// offset: 0,
 				isDisplayed: true
 			}, async () => {
 				// await this.fetchChefList()
-				// this.setState({ awaitingServer: false })
+				this.setState({ awaitingServer: false })
 			})
 		}
 
@@ -173,6 +174,21 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			/>
 		}
 
+		updateAttributeCountInChefLists = (chefId, attribute, toggle, diff) => {
+			Object.keys(this.props.allChefLists).forEach(list => {
+				let newList = this.props.allChefLists[list].map(chef => {
+					if (chef.id == chefId) {
+						chef[attribute] += diff
+						chef[toggle] = diff > 0 ? 1 : 0
+						return chef
+					} else {
+						return chef
+					}
+				})
+				this.props.storeChefList(list, newList)
+			})
+		}
+
 		followChef = async (followee_id) => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
@@ -180,16 +196,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					try {
 						const followPosted = await postFollow(this.props.loggedInChef.id, followee_id, this.props.loggedInChef.auth_token)
 						if (followPosted) {
-							let updatedChefs = this.props[this.props["listChoice"]].map(chef => {
-								if (chef['id'] === followee_id) {
-									chef['followers'] = parseInt(chef['followers']) + 1
-									chef['user_chef_following'] = 1
-									return chef
-								} else {
-									return chef
-								}
-							})
-							this.props.storeChefList(this.props["listChoice"], updatedChefs)
+							this.updateAttributeCountInChefLists(followee_id, "followers", "user_chef_following", 1)
 						}
 					} catch (e) {
 						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
@@ -209,16 +216,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					try {
 						const followPosted = await destroyFollow(this.props.loggedInChef.id, followee_id, this.props.loggedInChef.auth_token)
 						if (followPosted) {
-							let updatedChefs = this.props[this.props["listChoice"]].map(chef => {
-								if (chef['id'] === followee_id) {
-									chef['followers'] = parseInt(chef['followers']) - 1
-									chef['user_chef_following'] = 0
-									return chef
-								} else {
-									return chef
-								}
-							})
-							this.props.storeChefList(this.props["listChoice"], updatedChefs)
+							this.updateAttributeCountInChefLists(followee_id, "followers", "user_chef_following", -1)
 						}
 					} catch (e) {
 						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
@@ -311,7 +309,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		render() {
-			//   console.log(this.props[this.props["listChoice"]])
+			//console.log(this.props["listChoice"])
 			return (
 				<SpinachAppContainer awaitingServer={this.state.awaitingServer}>
 					<TouchableOpacity

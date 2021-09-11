@@ -18,6 +18,7 @@ import AppHeaderRight from '../../navigation/appHeaderRight'
 
 const mapStateToProps = (state) => ({
 	loggedInChef: state.loggedInChef,
+	allChefLists: state.chefs,
 	chefs_details: state.chefs_details,
 })
 
@@ -36,7 +37,12 @@ const mapDispatchToProps = {
 		return dispatch => {
 			dispatch({ type: 'CLEAR_CHEF_DETAILS' })
 		}
-	}
+	},
+	storeChefList: (listChoice, chefs) => {
+		return dispatch => {
+			dispatch({ type: 'STORE_CHEF_LIST', chefType: listChoice, chefList: chefs })
+		}
+	},
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
@@ -139,6 +145,21 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			this.props.navigation.navigate('RecipeDetails', { recipeID: recipeID })
 		}
 
+		updateAttributeCountInChefLists = (chefId, attribute, toggle, diff) => {
+			Object.keys(this.props.allChefLists).forEach(list => {
+				let newList = this.props.allChefLists[list].map(chef => {
+					if (chef.id == chefId) {
+						chef[attribute] += diff
+						chef[toggle] = diff > 0 ? 1 : 0
+						return chef
+					} else {
+						return chef
+					}
+				})
+				this.props.storeChefList(list, newList)
+			})
+		}
+
 		followChef = async () => {
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
@@ -146,6 +167,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					try {
 						const followPosted = await postFollow(this.props.loggedInChef.id, this.props.route.params.chefID, this.props.loggedInChef.auth_token)
 						if (followPosted) {
+							this.updateAttributeCountInChefLists(this.props.route.params.chefID, "followers", "user_chef_following", 1)
 							let newFollowers = this.props.chefs_details[`chef${this.props.route.params.chefID}`].followers + 1
 							this.props.storeNewFollowers(this.props.route.params.chefID, newFollowers)
 						}
@@ -167,6 +189,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					try {
 						const followPosted = await destroyFollow(this.props.loggedInChef.id, this.props.route.params.chefID, this.props.loggedInChef.auth_token)
 						if (followPosted) {
+							this.updateAttributeCountInChefLists(this.props.route.params.chefID, "followers", "user_chef_following", -1)
 							let newFollowers = this.props.chefs_details[`chef${this.props.route.params.chefID}`].followers - 1
 							this.props.storeNewFollowers(this.props.route.params.chefID, newFollowers)
 						}

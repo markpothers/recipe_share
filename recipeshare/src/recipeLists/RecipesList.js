@@ -34,6 +34,7 @@ const startingOffset = 0
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)
 
 const mapStateToProps = (state) => ({
+	allRecipeLists: state.recipes,
 	all_Recipes: state.recipes.all,
 	chef_Recipes: state.recipes.chef,
 	chef_feed_Recipes: state.recipes.chef_feed,
@@ -479,6 +480,21 @@ export class RecipesList extends React.Component {
 	//   this.props.respondToListScroll(e)
 	// }
 
+	updateAttributeCountInRecipeLists = (recipeId, attribute, toggle, diff) => {
+		Object.keys(this.props.allRecipeLists).forEach(list =>{
+			let newList = this.props.allRecipeLists[list].map(recipe => {
+				if (recipe.id == recipeId){
+					recipe[attribute] += diff
+					recipe[toggle] = diff > 0 ? 1 : 0
+					return recipe
+				} else {
+					return recipe
+				}
+			})
+			this.props.storeRecipeList(list, newList)
+		})
+	}
+
 	likeRecipe = async (recipeID) => {
 		let netInfoState = await NetInfo.fetch()
 		if (netInfoState.isConnected) {
@@ -486,16 +502,7 @@ export class RecipesList extends React.Component {
 				try {
 					const likePosted = await postRecipeLike(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
 					if (likePosted) {
-						const recipes = this.props[this.props["listChoice"] + `_Recipes`].map((recipe) => {
-							if (recipe['id'] === recipeID) {
-								recipe['likes_count'] = parseInt(recipe['likes_count']) + 1
-								recipe['chef_liked'] = 1
-								return recipe
-							} else {
-								return recipe
-							}
-						})
-						await this.props.storeRecipeList(this.props["listChoice"], recipes)
+						this.updateAttributeCountInRecipeLists(recipeID, "likes_count", "chef_liked", 1)
 						this.props.fetchChefDetails && await this.props.fetchChefDetails()
 					}
 				} catch (e) {
@@ -516,16 +523,7 @@ export class RecipesList extends React.Component {
 				try {
 					const unlikePosted = await destroyRecipeLike(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
 					if (unlikePosted) {
-						const recipes = this.props[this.props["listChoice"] + `_Recipes`].map((recipe) => {
-							if (recipe['id'] === recipeID) {
-								recipe['likes_count'] = parseInt(recipe['likes_count']) - 1
-								recipe['chef_liked'] = 0
-								return recipe
-							} else {
-								return recipe
-							}
-						})
-						this.props.storeRecipeList(this.props["listChoice"], recipes)
+						this.updateAttributeCountInRecipeLists(recipeID, "likes_count", "chef_liked", -1)
 						this.props.fetchChefDetails && this.props.fetchChefDetails()
 					}
 				} catch (e) {
@@ -546,16 +544,7 @@ export class RecipesList extends React.Component {
 				try {
 					const makePosted = await postRecipeMake(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
 					if (makePosted) {
-						const recipes = this.props[this.props["listChoice"] + `_Recipes`].map((recipe) => {
-							if (recipe['id'] === recipeID) {
-								recipe['makes_count'] = parseInt(recipe['makes_count']) + 1
-								recipe['chef_made'] = 1
-								return recipe
-							} else {
-								return recipe
-							}
-						})
-						this.props.storeRecipeList(this.props["listChoice"], recipes)
+						this.updateAttributeCountInRecipeLists(recipeID, "makes_count", "chef_made", 1)
 					}
 				} catch (e) {
 					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
@@ -575,16 +564,7 @@ export class RecipesList extends React.Component {
 				try {
 					const reSharePosted = await postReShare(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
 					if (reSharePosted) {
-						const recipes = this.props[this.props["listChoice"] + `_Recipes`].map((recipe) => {
-							if (recipe['id'] === recipeID) {
-								recipe['shares_count'] = parseInt(recipe['shares_count']) + 1
-								recipe['chef_shared'] = 1
-								return recipe
-							} else {
-								return recipe
-							}
-						})
-						this.props.storeRecipeList(this.props["listChoice"], recipes)
+						this.updateAttributeCountInRecipeLists(recipeID, "shares_count", "chef_shared", 1)
 						this.props.fetchChefDetails && this.props.fetchChefDetails()
 					}
 				} catch (e) {
@@ -605,16 +585,7 @@ export class RecipesList extends React.Component {
 				try {
 					const unReShared = await destroyReShare(recipeID, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
 					if (unReShared) {
-						const recipes = this.props[this.props["listChoice"] + `_Recipes`].map((recipe) => {
-							if (recipe['id'] === recipeID) {
-								recipe['shares_count'] = parseInt(recipe['shares_count']) - 1
-								recipe['chef_shared'] = 0
-								return recipe
-							} else {
-								return recipe
-							}
-						})
-						this.props.storeRecipeList(this.props["listChoice"], recipes)
+						this.updateAttributeCountInRecipeLists(recipeID, "shares_count", "chef_shared", -1)
 						this.props.fetchChefDetails && this.props.fetchChefDetails()
 					}
 				} catch (e) {
@@ -658,18 +629,15 @@ export class RecipesList extends React.Component {
 	}
 
 	render() {
-		// console.log(this.props[this.props["listChoice"] + `_Recipes`][0])
+		//console.log(this.props[this.props["listChoice"] + `_Recipes`][0])
 		// console.log(this.props.route)
 		// console.log('list start')
-		// console.log('rendering')
+		//console.log('recipe list re-rendering')
 		// console.log(this.recipeFlatList.scrollToOffset({ animated: true, offset: 0 }))
-
 		//console.log(this.props.serves)
-
 		let anyFilterActive = Object.keys(this.props.filter_settings).some(this.checkFilterSetting) ||
 			this.props.filterCuisines[this.props.listChoice] != "Any" ||
 			this.props.serves != "Any"
-		//console.log(Object.keys(this.props.filter_settings).some(this.checkFilterSetting))
 		return (
 			<SpinachAppContainer awaitingServer={this.state.awaitingServer}>
 				<TouchableOpacity
@@ -798,7 +766,7 @@ export class RecipesList extends React.Component {
 					)}
 				</TouchableOpacity>
 				<TouchableOpacity style={styles.filterButton} activeOpacity={0.7} onPress={this.handleFilterButton} testID={"filterButton"}>
-					{anyFilterActive && <Icon name='checkbox-blank-circle' size={responsiveHeight(3.5)} style={styles.filterActiveIcon} />}
+					{anyFilterActive && <Icon name='checkbox-blank-circle' size={responsiveHeight(2.5)} style={styles.filterActiveIcon} />}
 					<Icon name='filter' size={responsiveHeight(3.5)} style={styles.filterIcon} />
 				</TouchableOpacity>
 			</SpinachAppContainer>
