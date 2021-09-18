@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, TouchableOpacity, Animated, Keyboard, Platform } from 'react-native'
+import { FlatList, TouchableOpacity, Animated, Keyboard, Platform, View, Text, RefreshControl } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import RecipeCard from './RecipeCard'
 import { connect } from 'react-redux'
@@ -22,9 +22,10 @@ import saveChefDetailsLocally from '../auxFunctions/saveChefDetailsLocally'
 import { getChefDetails } from '../fetches/getChefDetails'
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo'
-NetInfo.configure({reachabilityShortTimeout: 5}) //5ms
+NetInfo.configure({ reachabilityShortTimeout: 5 }) //5ms
 import SearchBar from '../searchBar/SearchBar.js'
 import AppHeaderActionButton from '../../navigation/appHeaderActionButton'
+
 // import { apiCall } from '../auxFunctions/apiCall'
 
 // import Constants from 'expo-constants';
@@ -283,10 +284,16 @@ export class RecipesList extends React.Component {
 										this.setState({ awaitingServer: false })
 									}
 									else {
-										this.setState({ renderOfflineMessage: true })
+										this.setState({
+											renderOfflineMessage: true,
+											awaitingServer: false
+										})
 									}
 								} else {
-									this.setState({ renderOfflineMessage: true })
+									this.setState({
+										renderOfflineMessage: true,
+										awaitingServer: false
+									})
 								}
 							})
 						}
@@ -481,9 +488,9 @@ export class RecipesList extends React.Component {
 	// }
 
 	updateAttributeCountInRecipeLists = (recipeId, attribute, toggle, diff) => {
-		Object.keys(this.props.allRecipeLists).forEach(list =>{
+		Object.keys(this.props.allRecipeLists).forEach(list => {
 			let newList = this.props.allRecipeLists[list].map(recipe => {
-				if (recipe.id == recipeId){
+				if (recipe.id == recipeId) {
 					recipe[attribute] += diff
 					recipe[toggle] = diff > 0 ? 1 : 0
 					return recipe
@@ -631,7 +638,6 @@ export class RecipesList extends React.Component {
 	render() {
 		//console.log(this.props[this.props["listChoice"] + `_Recipes`][0])
 		// console.log(this.props.route)
-		// console.log('list start')
 		//console.log('recipe list re-rendering')
 		// console.log(this.recipeFlatList.scrollToOffset({ animated: true, offset: 0 }))
 		//console.log(this.props.serves)
@@ -666,7 +672,19 @@ export class RecipesList extends React.Component {
 								testID={'myFeedMessage'}
 							/>
 						)}
-
+					{this.props[this.props["listChoice"] + `_Recipes`].length == 0 && (
+						<View
+							style={centralStyles.swipeDownContainer}
+						>
+							<Icon
+								name='gesture-swipe-down'
+								size={responsiveHeight(5)}
+								style={centralStyles.swipeDownIcon} />
+							<Text
+								style={centralStyles.swipeDownText}
+							>Swipe down to refresh</Text>
+						</View>
+					)}
 					{(this.props[this.props["listChoice"] + `_Recipes`].length > 0 || this.state.searchTerm != '') && (
 						<Animated.View
 							style={{
@@ -697,23 +715,34 @@ export class RecipesList extends React.Component {
 						</Animated.View>
 					)}
 					<AnimatedFlatList
-						ListHeaderComponent={() => (
-							<TouchableOpacity
-								style={{
-									height: responsiveHeight(7),
-									// backgroundColor: 'red'
-								}}
-								onPress={this.handleSearchBarFocus}
-							>
-							</TouchableOpacity>
-						)}
+						ListHeaderComponent={() => {
+							let searchBarIsDisplayed = this.props[this.props["listChoice"] + `_Recipes`].length > 0 || this.state.searchTerm != ''
+							return (
+								<TouchableOpacity
+									style={{ height: searchBarIsDisplayed ? responsiveHeight(7) : responsiveHeight(70) }}
+									onPress={searchBarIsDisplayed ? this.handleSearchBarFocus : this.refresh}
+								>
+								</TouchableOpacity>
+							)
+						}}
+						//stickyHeaderIndices={[0]}
 						data={this.props[this.props["listChoice"] + `_Recipes`]}
 						ref={(list) => this.recipeFlatList = list}
 						extraData={this.props.recipes_details}
+						style={{ minHeight: responsiveHeight(70) }}
 						renderItem={this.renderRecipeListItem}
 						keyExtractor={(item) => item.id.toString()}
-						onRefresh={this.refresh}
-						refreshing={false}
+						//onRefresh={this.refresh}
+						//refreshing={false}
+						refreshControl={
+							<RefreshControl
+								refreshing={false}
+								onRefresh={this.refresh}
+								colors={['#104e01']}
+								progressBackgroundColor={'#fff59b'}
+								tintColor={'#fff59b'}
+							/>
+						}
 						onEndReached={this.onEndReached}
 						onEndReachedThreshold={2.5}
 						initialNumToRender={5}
@@ -732,14 +761,14 @@ export class RecipesList extends React.Component {
 										})
 									}
 									// //if bigger than max input range and getting bigger
-									if (y > this.state.currentYTop + responsiveHeight(7) && isIncreasing) {
+									if (y > 0 && y > this.state.currentYTop + responsiveHeight(7) && isIncreasing) {
 										this.setState({
 											currentYTop: y - responsiveHeight(7),
 											searchBarZIndex: 1,
 										})
 									}
 									//if smaller than min input range and getting smaller
-									if (y < this.state.currentYTop - responsiveHeight(7) && !isIncreasing) {
+									if (y > 0 && y < this.state.currentYTop - responsiveHeight(7) && !isIncreasing) {
 										this.setState({
 											currentYTop: y,
 											searchBarZIndex: 1,

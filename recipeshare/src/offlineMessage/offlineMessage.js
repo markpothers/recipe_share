@@ -34,6 +34,7 @@ const OfflineMessage = (props) => {
 		})
 	}, [])
 
+	const displayDiagnostics = diagnosingConnectivityIssues && props.diagnostics && (typeof props.diagnostics == 'object' || typeof props.diagnostics == 'string') ? true : false
 	return (
 		<Animated.View
 			style={[styles.messageContainer
@@ -60,18 +61,18 @@ const OfflineMessage = (props) => {
 					/>
 				</TouchableOpacity>
 			) : (
-					<>
+				<>
 					<Text
 						maxFontSizeMultiplier={2.5}
 						style={styles.messageText}
 					>
 						{props.message}
 					</Text>
-					{diagnosingConnectivityIssues && props.diagnostics && (typeof props.diagnostics == 'object' || typeof props.diagnostics == 'string') && (
+					{displayDiagnostics && (
 						<Text style={styles.messageText}>{JSON.stringify(props.diagnostics)}</Text>
 					)}
-					</>
-				)}
+				</>
+			)}
 		</Animated.View>
 	)
 }

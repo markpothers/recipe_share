@@ -77,7 +77,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		componentDidMount = async () => {
 			this.setState({ awaitingServer: true }, async () => {
 				await this.fetchIngredientsForAutoComplete()
-				this.setState({ awaitingServer: false })
 				//if we're editing a recipe
 				if (this.props.route.params?.recipe_details !== undefined) {
 					let savedEditingRecipe = JSON.parse(await AsyncStorage.getItem('localEditRecipeDetails'))

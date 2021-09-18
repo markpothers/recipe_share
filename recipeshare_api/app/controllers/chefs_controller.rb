@@ -117,6 +117,7 @@ class ChefsController < ApplicationController
             @chef.update_attribute(:image_url, mediaURL)
             @chef.update_attribute(:hex, hex)
         end
+        @chef.image_url = ApplicationRecord.get_signed_url(@chef.image_url)
 
         if chef_params[:updatingPassword]
             if chef_params[:password] == chef_params[:password_confirmation]
@@ -148,13 +149,13 @@ class ChefsController < ApplicationController
             render json: {error: true, message: "reactivate"}
         else
             if @chef
-                newHex = SecureRandom.hex(6)
-                @chef.password = newHex
-                @chef.password_confirmation = newHex
+                newPassword = SecureRandom.base64(8)
+                @chef.password = newPassword
+                @chef.password_confirmation = newPassword
                 @chef.password_is_auto = true
                 @chef.password_created_at = Time.now
                 @chef.save
-                ChefMailer.with(chef: @chef, password: newHex).password_reset.deliver_now
+                ChefMailer.with(chef: @chef, password: newPassword).password_reset.deliver_now
                 render json: {error: true, message: "forgotPassword"}
             else
                 render json: {error: true, message: "forgotPassword"}
@@ -167,13 +168,13 @@ class ChefsController < ApplicationController
         if @chef.activation_digest == params[:token]
             @chef.update_attribute(:deactivated, false)
             @chef.update_attribute(:activation_digest, "")
-            newHex = SecureRandom.hex(6)
-            @chef.password = newHex
-            @chef.password_confirmation = newHex
+            newPassword = SecureRandom.base64(8)
+            @chef.password = newPassword
+            @chef.password_confirmation = newPassword
             @chef.password_is_auto = true
             @chef.password_created_at = Time.now
             @chef.save
-            ChefMailer.with(chef: @chef, password: newHex).password_reset.deliver_now
+            ChefMailer.with(chef: @chef, password: newPassword).password_reset.deliver_now
             redirect_to '/account_confirmation/reactivation_confirmed.html'
         else
             redirect_to '/account_confirmation/reactivation_rejected.html'

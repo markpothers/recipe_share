@@ -46,7 +46,7 @@ export default class ChefDetailsCard extends React.PureComponent {
 				</View>
 				<View>
 					<View style={[styles.chefDetailsStats, { justifyContent: 'flex-start' }]}>
-						{/* <Icon name='food' size={responsiveHeight(3.5)} style={styles.icon}/> */}
+						<Icon name='food' size={responsiveHeight(3.5)} style={styles.icon}/>
 						<Text maxFontSizeMultiplier={2} style={styles.chefRecipesRowContents}>Recipes created:</Text>
 						<Text maxFontSizeMultiplier={2} style={styles.chefRecipesRowContents}>{this.props.recipes}</Text>
 						{/* {this.props.notProfile ? this.renderFollowButton() : null} */}

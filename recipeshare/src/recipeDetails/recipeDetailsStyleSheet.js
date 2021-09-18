@@ -30,6 +30,7 @@ export const styles = StyleSheet.create({
 		marginTop: responsiveHeight(0.5),
 		borderRadius: responsiveWidth(1.5),
 		backgroundColor: 'white',
+		paddingVertical: responsiveHeight(0.5),
 		// flexDirection: 'row'
 		// backgroundColor: '#fff59b',
 		// opacity: 0.9,
@@ -45,7 +46,7 @@ export const styles = StyleSheet.create({
 		borderRadius: responsiveWidth(1.5),
 		backgroundColor: 'white',
 		// opacity: 0.9,
-		paddingTop: '1%',
+		paddingVertical: responsiveHeight(0.5),
 		// paddingBottom: '1%'
 	},
 	detailsInstructionContainer: {
@@ -92,8 +93,7 @@ export const styles = StyleSheet.create({
 		marginTop: responsiveHeight(0.5),
 		borderRadius: responsiveWidth(1.5),
 		backgroundColor: 'white',
-		paddingTop: responsiveHeight(0.5),
-		paddingBottom: responsiveHeight(0.5)
+		paddingVertical: responsiveHeight(0.5)
 	},
 	detailsMakePicsContainer: {
 		borderStyle: 'solid',
@@ -107,7 +107,7 @@ export const styles = StyleSheet.create({
 		backgroundColor: 'white',
 		// opacity: 0.9,
 		// marginBottom: '1%',
-		paddingTop: '1%',
+		paddingVertical: responsiveHeight(0.5),
 		// height: 250
 		// flex: 1
 	},
@@ -131,8 +131,7 @@ export const styles = StyleSheet.create({
 		// opacity: 0.9,
 		flex: 1,
 		flexDirection: 'row',
-		paddingTop: '0.5%',
-		paddingBottom: '0.5%',
+		paddingVertical: responsiveHeight(0.5),
 		// height: 30,
 		justifyContent: 'space-evenly',
 		alignItems: 'center',
@@ -313,7 +312,7 @@ export const styles = StyleSheet.create({
 	detailsComments: {
 		borderStyle: 'solid',
 		borderWidth: 1,
-		paddingTop: '1%',
+		paddingVertical: responsiveHeight(0.5),
 		borderColor: '#104e01',
 		// height: 500,
 		width: responsiveWidth(100),

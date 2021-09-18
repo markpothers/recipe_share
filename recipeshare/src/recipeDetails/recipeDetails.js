@@ -1056,13 +1056,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									<View style={styles.detailsLikes}>
 										<View style={styles.buttonAndText}>
 											{this.renderLikeButton()}
-											<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesLowerContentsAllTimings}>&nbsp;{this.props.recipe_details.recipe_likes}</Text>
+											<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesLowerContentsAllTimings}>&nbsp;Likes:&nbsp;{this.props.recipe_details.recipe_likes}</Text>
 										</View>
 										{this.props.recipe_details.recipe.serves != 'Any' && (<View style={styles.buttonAndText}>
-											<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesLowerContentsAllTimings}>Serves: {this.props.recipe_details.recipe.serves}</Text>
+											<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesLowerContentsAllTimings}>Serves:&nbsp;{this.props.recipe_details.recipe.serves}</Text>
 										</View>)}
 										{this.props.recipe_details.recipe.difficulty != 0 && (<View style={styles.buttonAndText}>
-											<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesLowerContentsAllTimings}>Difficulty: {this.props.recipe_details.recipe.difficulty}</Text>
+											<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesLowerContentsAllTimings}>Difficulty:&nbsp;{this.props.recipe_details.recipe.difficulty}</Text>
 										</View>)}
 									</View>
 								</View>

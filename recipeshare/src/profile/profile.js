@@ -231,7 +231,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		renderPictureChooser = () => {
-			let imageSource
+			let imageSource = ''
 			if (this.state.imageFileUri == 'DELETED') {
 				imageSource = ''
 			} else if (this.state.imageFileUri != 'DELETED' && this.state.imageFileUri != '') {

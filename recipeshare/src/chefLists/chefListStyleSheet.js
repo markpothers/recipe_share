@@ -44,9 +44,9 @@ export const styles = StyleSheet.create({
 	// },
 	chefCardTopContainer: {
 		flexDirection: 'row',
-		alignItems: 'center'
+		alignItems: 'center',
 		// borderStyle: 'solid',
-		// borderWidth: 1,
+		//borderWidth: 1,
 		// height: 100,
 		// width: '100%',
 		// marginTop: '1%',
@@ -77,10 +77,11 @@ export const styles = StyleSheet.create({
 	},
 	chefCardTopLeftUpperContainer: {
 		// borderStyle: 'solid',
-		// borderWidth: 1,
+		//borderWidth: 1,
 		width: '96%',
 		// marginTop: '1%',
 		// marginBottom: '1%',
+		paddingVertical: responsiveHeight(0.5),
 		marginLeft: '2%',
 		marginRight: '2%'
 	},

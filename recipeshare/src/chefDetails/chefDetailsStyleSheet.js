@@ -170,6 +170,7 @@ export const styles = StyleSheet.create({
 		alignItems: 'center',
 		// flexWrap: 'wrap',
 		// flex: 1,
+		//paddingVertical: responsiveHeight(0.1),
 
 	},
 	chefDetailsColumnHeaders: {
@@ -226,7 +227,7 @@ export const styles = StyleSheet.create({
 		marginBottom: responsiveHeight(0.5),
 		// flex: 3
 		// width: '45%',
-		marginLeft: responsiveWidth(5),
+		marginRight: responsiveWidth(5),
 		// top: '0.3%'
 	},
 	chefRecipesFollowContainer: {

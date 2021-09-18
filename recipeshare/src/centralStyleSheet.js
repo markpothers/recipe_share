@@ -73,7 +73,7 @@ export const centralStyles = StyleSheet.create({
 		width: '100%',
 		justifyContent: 'space-between',
 		alignItems: 'center',
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		overflow: 'hidden',
 		flexWrap: 'wrap',
 		minHeight: responsiveHeight(6),
@@ -113,13 +113,13 @@ export const centralStyles = StyleSheet.create({
 		backgroundColor: 'white',
 		borderWidth: 1,
 		borderColor: '#104e01',
-		borderRadius:responsiveWidth(1.5)
+		borderRadius: responsiveWidth(1.5)
 	},
 	formTextBox: {
 		width: '100%',
 		textAlign: 'left',
 		textAlignVertical: 'center',
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		paddingLeft: responsiveWidth(2),
 		fontSize: responsiveFontSize(2)
 	},
@@ -130,7 +130,7 @@ export const centralStyles = StyleSheet.create({
 		backgroundColor: 'white',
 		justifyContent: 'center',
 		// alignItems: 'center',
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		borderWidth: 1,
 		borderColor: '#104e01'
 	},
@@ -229,7 +229,7 @@ export const centralStyles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		backgroundColor: '#104e01',
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 	},
 	dynamicMenuIcon: {
 		color: '#fff59b'
@@ -238,7 +238,7 @@ export const centralStyles = StyleSheet.create({
 		backgroundColor: '#fff59b',
 		width: '90%',
 		height: '90%',
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		overflow: 'visible',
 		justifyContent: 'center',
 		alignItems: 'center',
@@ -251,10 +251,29 @@ export const centralStyles = StyleSheet.create({
 		height: '100%',
 		width: responsiveWidth(15),
 		justifyContent: 'center',
-		alignItems:'center',
+		alignItems: 'center',
 		zIndex: 0
 	},
 	hiddenToggleIcon: {
 		color: '#50505055'
+	},
+	swipeDownContainer: {
+		//borderWidth: 1,
+		//borderColor: 'yellow',
+		justifyContent: 'center',
+		alignItems: 'center',
+		marginTop: responsiveHeight(20),
+		width: '100%',
+		//marginLeft: 'auto',
+		position: 'absolute'
+	},
+	swipeDownIcon: {
+		color: '#fff59b',
+	},
+	swipeDownText: {
+		color: '#fff59b',
+		fontWeight: 'bold',
+		fontSize: responsiveFontSize(2.5),
+		textAlign: 'center'
 	}
 });

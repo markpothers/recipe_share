@@ -85,14 +85,17 @@ class Recipe < ApplicationRecord
     make_pic_chefs_data = make_pic_chefs_data.map { |chef| { id: chef.id, profile_text: chef.profile_text, username: chef.username, image_url: ApplicationRecord.get_signed_url(chef.image_url) } }
     recipe_images = RecipeImage.where(recipe_id: self.id, hidden: false).order(:index)
     recipe_images.each { |image| image.image_url = ApplicationRecord.get_signed_url(image.image_url) }
+    comments = Comment.find_by_sql(["SELECT comments.*, chefs.username, chefs.image_url
+                                    FROM comments
+                                    JOIN chefs ON chefs.id = comments.chef_id
+                                    WHERE comments.recipe_id = ?
+                                    AND comments.hidden = false
+                                    ORDER BY comments.updated_at DESC", self.id])
+    comments.each { |comment| comment.image_url = ApplicationRecord.get_signed_url(comment.image_url) }
+
     return recipe_details = {
              recipe: self,
-             comments: Comment.find_by_sql(["SELECT comments.*, chefs.username, chefs.image_url
-                                                FROM comments
-                                                JOIN chefs ON chefs.id = comments.chef_id
-                                                WHERE comments.recipe_id = ?
-                                                AND comments.hidden = false
-                                                ORDER BY comments.updated_at DESC", self.id]),
+             comments: comments,
              recipe_images: recipe_images,
              recipe_likes: RecipeLike.where(recipe_id: self.id, hidden: false).length,
              likeable: RecipeLike.where(chef_id: chef.id, hidden: false, recipe_id: self.id).empty?,

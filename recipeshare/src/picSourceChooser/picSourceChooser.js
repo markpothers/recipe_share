@@ -126,7 +126,7 @@ export default function PicSourceChooser(props) {
 				<View style={styles.picChooserModalContainer}>
 					<View style={styles.picSourceChooserImage}>
 						{props.imageSource !== '' ? (
-							<Image style={{ height: '100%', width: '100%' }} source={{ uri: props.imageSource }} resizeMode={"contain"} />
+							<Image style={{ height: '100%', width: '100%' }} source={{ uri: props.imageSource }} resizeMode={"cover"} />
 						) : (
 							<React.Fragment>
 								<Icon style={styles.standardIcon} size={responsiveHeight(4)} name='camera' />

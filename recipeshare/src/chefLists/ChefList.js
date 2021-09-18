@@ -1,6 +1,7 @@
 import React from 'react'
-import { FlatList, Animated, TouchableOpacity, Keyboard, Platform } from 'react-native'
+import { FlatList, Animated, TouchableOpacity, Keyboard, Platform, View, Text, RefreshControl } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import ChefCard from './ChefCard'
 import { connect } from 'react-redux'
 import { getChefList } from '../fetches/getChefList'
@@ -231,7 +232,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		refresh = () => {
 			this.setState({ limit: 20, offset: 0 }, () => {
-				this.props.clearListedChefs(this.props["listChoice"])
+				//this.props.clearListedChefs(this.props["listChoice"])
 				this.fetchChefList()
 			})
 		}
@@ -324,6 +325,19 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								diagnostics={this.props.loggedInChef.is_admin ? this.state.offlineDiagnostics : null}
 							/>)
 						}
+						{this.props[this.props["listChoice"]].length == 0 && (
+							<View
+								style={centralStyles.swipeDownContainer}
+							>
+								<Icon
+									name='gesture-swipe-down'
+									size={responsiveHeight(5)}
+									style={centralStyles.swipeDownIcon} />
+								<Text
+									style={centralStyles.swipeDownText}
+								>Swipe down to refresh</Text>
+							</View>
+						)}
 						{(this.props[this.props["listChoice"]].length > 0 || this.state.searchTerm != '') && (
 							<Animated.View
 								style={{
@@ -354,24 +368,35 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							</Animated.View>
 						)}
 						<AnimatedFlatList
-							ListHeaderComponent={() => (
-								<TouchableOpacity
-									style={{
-										height: responsiveHeight(7),
-										// backgroundColor: 'red'
-									}}
-									onPress={this.handleSearchBarFocus}
-								>
-								</TouchableOpacity>
-							)}
+							ListHeaderComponent={() => {
+								let searchBarIsDisplayed = this.props[this.props["listChoice"]].length > 0 || this.state.searchTerm != ''
+								return (
+									<TouchableOpacity
+										style={{ height: searchBarIsDisplayed ? responsiveHeight(7) : responsiveHeight(70) }}
+										onPress={searchBarIsDisplayed ? this.handleSearchBarFocus : this.refresh}
+									>
+									</TouchableOpacity>
+								)
+							}}
 							ref={(list) => this.chefFlatList = list}
 							data={this.props[this.props["listChoice"]]}
 							renderItem={this.renderChefListItem}
+							style={{ minHeight: responsiveHeight(70) }}
 							keyExtractor={(item) => item.id.toString()}
-							onRefresh={this.refresh}
-							refreshing={false}
+							//onRefresh={this.refresh}
+							//refreshing={false}
+							refreshControl={
+								<RefreshControl
+									refreshing={false}
+									onRefresh={this.refresh}
+									colors={['#104e01']}
+									progressBackgroundColor={'#fff59b'}
+									tintColor={'#fff59b'}
+								/>
+							}
 							onEndReached={this.onEndReached}
 							onEndReachedThreshold={0.3}
+							scrollEventThrottle={16}
 							listKey={this.props[this.props["listChoice"]]}
 							onScroll={Animated.event(
 								[{ nativeEvent: { contentOffset: { y: this.state.yOffset } } }],
@@ -389,14 +414,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											})
 										}
 										// //if bigger than max input range and getting bigger
-										if (y > this.state.currentYTop + responsiveHeight(7) && isIncreasing) {
+										if (y > 0 && y > this.state.currentYTop + responsiveHeight(7) && isIncreasing) {
 											this.setState({
 												currentYTop: y - responsiveHeight(7),
 												searchBarZIndex: 1,
 											})
 										}
 										//if smaller than min input range and getting smaller
-										if (y < this.state.currentYTop - responsiveHeight(7) && !isIncreasing) {
+										if (y > 0 && y < this.state.currentYTop - responsiveHeight(7) && !isIncreasing) {
 											this.setState({
 												currentYTop: y,
 												searchBarZIndex: 1,

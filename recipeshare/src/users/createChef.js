@@ -284,7 +284,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											style={centralStyles.formInput}
 											value={this.props.password}
 											placeholder="password"
-											textContentType="newPassword"
+											textContentType="password"
 											autoCapitalize="none"
 											autoCompleteType="password"
 											secureTextEntry={!this.state.passwordVisible}
