@@ -4,65 +4,69 @@ import { styles } from './filterMenuStyleSheet'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux'
-import { cuisines } from '../dataComponents/cuisines'
-import { serves } from '../dataComponents/serves'
+// import { cuisines } from '../dataComponents/cuisines'
+// import { serves } from '../dataComponents/serves'
 import { clearedFilters } from '../dataComponents/clearedFilters'
 import DualOSPicker from '../dualOSPicker/DualOSPicker'
 import SwitchSized from '../customComponents/switchSized/switchSized'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 
 const mapStateToProps = (state) => ({
-	filter_settings: state.filter_settings,
-	filterCuisines: state.filterCuisines,
-	serves: state.serves,
-	cuisineChoices: state.cuisineChoices,
-	servesChoices: state.servesChoices,
-	filterChoices: state.filterChoices
+	// filter_settings: state.filter_settings,
+	// filterCuisines: state.filterCuisines,
+	// serves: state.serves,
+	// cuisineChoices: state.cuisineChoices,
+	// servesChoices: state.servesChoices,
+	// filterChoices: state.filterChoices
 })
 
 const mapDispatchToProps = {
-	switchRecipesListFilterValue: (category, value) => {
-		return dispatch => {
-			dispatch({ type: 'TOGGLE_RECIPES_LIST_FILTER_CATEGORY', category: category, value: value })
-		}
-	},
-	clearRecipesListFilters: () => {
-		return dispatch => {
-			dispatch({ type: 'CLEAR_RECIPES_LIST_FILTERS', clearedFilters: clearedFilters })
-		}
-	},
-	setRecipesListCuisine: (cuisine, listChoice) => {
-		return dispatch => {
-			dispatch({ type: 'SET_RECIPES_LIST_CUISINE', cuisine: cuisine, listChoice: listChoice })
-		}
-	},
-	setRecipesListServes: (serves) => {
-		return dispatch => {
-			dispatch({ type: 'SET_RECIPES_LIST_SERVES', serves: serves })
-		}
-	},
+	// switchRecipesListFilterValue: (category, value) => {
+	// 	return dispatch => {
+	// 		dispatch({ type: 'TOGGLE_RECIPES_LIST_FILTER_CATEGORY', category: category, value: value })
+	// 	}
+	// },
+	// clearRecipesListFilters: () => {
+	// 	return dispatch => {
+	// 		dispatch({ type: 'CLEAR_RECIPES_LIST_FILTERS', clearedFilters: clearedFilters })
+	// 	}
+	// },
+	// setRecipesListCuisine: (cuisine, listChoice) => {
+	// 	return dispatch => {
+	// 		dispatch({ type: 'SET_RECIPES_LIST_CUISINE', cuisine: cuisine, listChoice: listChoice })
+	// 	}
+	// },
+	// setRecipesListServes: (serves) => {
+	// 	return dispatch => {
+	// 		dispatch({ type: 'SET_RECIPES_LIST_SERVES', serves: serves })
+	// 	}
+	// },
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
 	class FilterMenu extends React.PureComponent {
 
 		renderFilterItems = () => {
-			const filtersList = this.props.newRecipe ? this.props.newRecipeFilterSettings : this.props.filter_settings
-			const filterChoices = this.props.newRecipe ? null : this.props.filterChoices[this.props.listChoice].map(choice => (choice.charAt(0).toUpperCase() + choice.slice(1)).replace("_", " "))
-			return Object.keys(filtersList).sort().map(category => {
+			// const filterOptions = this.props.newRecipe ? this.props.newRecipeFilterSettings : this.props.filterOptions
+			// const filterChoices = this.props.newRecipe ? null : this.props.filterChoices[this.props.listChoice].map(choice => (choice.charAt(0).toUpperCase() + choice.slice(1)).replace("_", " "))
+			let filterSettings = this.props.filterSettings // the value of each filter currently
+			let filterOptions = this.props.filterOptions // the available filters to select
+				.map(choice => (choice.charAt(0).toUpperCase() + choice.slice(1)).replace("_", " ")) // modified to match to way they are displayed
+			//console.log(this.props.filterOptions)
+			return Object.keys(clearedFilters).sort().map(filter => {
 				return (
 					<View
 						style={styles.filterItemContainer}
-						key={category}>
+						key={filter}>
 						<View style={styles.switchContainer}>
 							<SwitchSized
-								value={filtersList[category]}
-								onValueChange={(value) => this.handleCategoryChange(category, value)}
-								disabled={!this.props.newRecipe && !filterChoices.includes(category)}
+								value={filterSettings[filter]}
+								onValueChange={(value) => this.handleCategoryChange(filter, value)}
+								disabled={!this.props.newRecipe && !filterOptions.includes(filter)}
 							/>
 						</View>
 						<View style={styles.categoryContainer}>
-							<Text maxFontSizeMultiplier={2} style={styles.categoryText}>{category}</Text>
+							<Text maxFontSizeMultiplier={2} style={styles.categoryText}>{filter}</Text>
 						</View>
 					</View>
 				)
@@ -73,46 +77,53 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			this.props.newRecipe ? this.props.handleCategoriesButton() : this.props.closeFilterAndRefresh()
 		}
 
-		handleCategoryChange = async (category, value) => {
-			await this.props.newRecipe ? this.props.switchNewRecipeFilterValue(category) : this.props.switchRecipesListFilterValue(category, value)
+		handleCategoryChange = async (filter, value) => {
+			//await this.props.newRecipe ? this.props.switchNewRecipeFilterValue(filter) : this.props.switchRecipesListFilterValue(filter, value)
+			await this.props.newRecipe ? this.props.switchNewRecipeFilterValue(filter) : this.props.setFilterSetting(filter, value)
 			await !this.props.newRecipe && this.props.fetchFilterChoices()
 		}
 
 		handleCuisineChange = async (cuisine) => {
-			await this.props.newRecipe ? this.props.setNewRecipeCuisine(cuisine, "cuisine") : this.props.setRecipesListCuisine(cuisine, this.props.listChoice)
+			//await this.props.newRecipe ? this.props.setNewRecipeCuisine(cuisine, "cuisine") : this.props.setRecipesListCuisine(cuisine, this.props.listChoice)
+			await this.props.newRecipe ? this.props.setNewRecipeCuisine(cuisine, "cuisine") : this.props.setSelectedCuisine(cuisine)
 			await !this.props.newRecipe && this.props.fetchFilterChoices()
 		}
 
 		handleServesChange = async (serves) => {
-			await this.props.newRecipe ? this.props.setNewRecipeServes(serves, "serves") : this.props.setRecipesListServes(serves)
+			//await this.props.newRecipe ? this.props.setNewRecipeServes(serves, "serves") : this.props.setRecipesListServes(serves)
+			await this.props.newRecipe ? this.props.setNewRecipeServes(serves, "serves") : this.props.setSelectedServes(serves)
 			await !this.props.newRecipe && this.props.fetchFilterChoices()
 		}
 
 		handleClearButton = async () => {
-			await this.props.newRecipe ? this.props.clearNewRecipeFilters() : this.props.clearRecipesListFilters()
-			await this.handleCuisineChange("Any")
-			await this.handleServesChange("Any")
+			//await this.props.newRecipe ? this.props.clearNewRecipeFilters() : this.props.clearRecipesListFilters()
+			await this.props.clearFilterSettings()
+			//await this.handleCuisineChange("Any")
+			//await this.handleServesChange("Any")
 			await !this.props.newRecipe && this.props.clearSearchTerm()
 			await !this.props.newRecipe && this.props.fetchFilterChoices()
 		}
 
 		render() {
 			// console.log(this.props.cuisineChoices)
-			let selectedCuisine = this.props.newRecipe ? this.props.newRecipeCuisine : this.props.filterCuisines[this.props.listChoice]
-			let selectedServes = this.props.newRecipe ? this.props.newRecipeServes : this.props.serves
+			// let selectedCuisine = this.props.newRecipe ? this.props.newRecipeCuisine : this.props.filterCuisines[this.props.listChoice]
+			// let selectedServes = this.props.newRecipe ? this.props.newRecipeServes : this.props.serves
+			// let selectedCuisine = this.props.selectedCuisine
+			// let selectedServes = this.props.selectedServes
 
-			let cuisineOptions = cuisines
-			let servesOptions = serves
-			if (!this.props.newRecipe) {
-				cuisineOptions = this.props.cuisineChoices[this.props.listChoice]
-				if (!cuisineOptions || cuisineOptions.length == 0) {
-					cuisineOptions = ["Any"]
-				}
+			// let cuisineOptions = this.props.cuisineOptions
+			// let servesOptions = this.props.servesOptions
 
-				servesOptions = this.props.servesChoices[this.props.listChoice].map(serve => serve.toString())
-				servesOptions = ["Any", ...servesOptions]
+			let { selectedCuisine, selectedServes, cuisineOptions, servesOptions } = this.props
+			//console.log(cuisineOptions)
+
+			// if (!this.props.newRecipe) {
+			//cuisineOptions = this.props.cuisineChoices[this.props.listChoice]
+			if (!cuisineOptions || cuisineOptions.length == 0) {
+				cuisineOptions = ["Any"]
 			}
-
+			servesOptions = servesOptions.map(serve => serve.toString())
+			servesOptions = ["Any", ...servesOptions]
 			return (
 				<Modal
 					animationType="fade"

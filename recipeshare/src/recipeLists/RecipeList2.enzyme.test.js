@@ -207,7 +207,7 @@ describe('Recipe List', () => {
 			let cards = component.find(RecipeCard)
 			expect(cards.length).toEqual(0)
 			instance = component.children().instance()
-			instance.setState({renderOfflineMessage: true})
+			instance.setState({ renderOfflineMessage: true })
 			let offlineMessage = component.find(OfflineMessage)
 			expect(offlineMessage.length).toEqual(1)
 		})
@@ -226,7 +226,10 @@ describe('Recipe List', () => {
 				component = await mount(
 					<RecipesList
 						navigation={navigation}
-						route={{ name: 'My Feed' }}
+						route={{
+							name: 'My Feed',
+							key: 'my_feed_1234'
+						}}
 						listChoice={"chef_feed"}
 					/>,
 					{
@@ -240,7 +243,7 @@ describe('Recipe List', () => {
 			component.setProps({})
 			instance = component.children().instance()
 			card = component.find(RecipeCard).first().props()
-			recipe = instance.props.chef_feed_Recipes[0]
+			recipe = instance.props.allRecipeLists[instance.props.route.key][0]
 		})
 
 		test('a RecipeCards likeRecipe is this.likeRecipe', async () => {
@@ -265,15 +268,16 @@ describe('Recipe List', () => {
 
 		test('liking a recipe calls to server and if successful adds a like count', async () => {
 			postRecipeLike.mockImplementation(() => new Promise.resolve(true))
-			let otherLikes = instance.props.chef_feed_Recipes.slice(1).map(r => r.likes_count)
-			let otherChefLikes = instance.props.chef_feed_Recipes.slice(1).map(r => r.chef_liked)
+			//console.log(instance.props.allRecipeLists[instance.props.route.key])
+			let otherLikes = instance.props.allRecipeLists[instance.props.route.key].slice(1).map(r => r.likes_count)
+			let otherChefLikes = instance.props.allRecipeLists[instance.props.route.key].slice(1).map(r => r.chef_liked)
 			expect(recipe.likes_count).toEqual(3) //starting number for this recipe
 			expect(recipe.chef_liked).toEqual(0) //starting number for this recipe
 			await act(async () => { await card.likeRecipe(recipe.id) })
 			expect(recipe.likes_count).toEqual(4) // add one to the recipe
 			expect(recipe.chef_liked).toEqual(1) //change to recipe
-			expect(instance.props.chef_feed_Recipes.slice(1).map(r => r.likes_count)).toEqual(otherLikes) //expect no changes to other likes
-			expect(instance.props.chef_feed_Recipes.slice(1).map(r => r.chef_liked)).toEqual(otherChefLikes) //expect no changes to other likes
+			expect(instance.props.allRecipeLists[instance.props.route.key].slice(1).map(r => r.likes_count)).toEqual(otherLikes) //expect no changes to other likes
+			expect(instance.props.allRecipeLists[instance.props.route.key].slice(1).map(r => r.chef_liked)).toEqual(otherChefLikes) //expect no changes to other likes
 		})
 
 		test('liking a recipe with incorrect access token', async () => {
@@ -297,17 +301,17 @@ describe('Recipe List', () => {
 		})
 
 		test('unliking a liked recipe calls to server and if successful subtracts a like count', async () => {
-			recipe = instance.props.chef_feed_Recipes[1] // recipe is now a recipe liked by this chef
+			recipe = instance.props.allRecipeLists[instance.props.route.key][1] // recipe is now a recipe liked by this chef
 			destroyRecipeLike.mockImplementation(() => new Promise.resolve(true))
-			let otherLikes = [...instance.props.chef_feed_Recipes.slice(0, 1), ...instance.props.chef_feed_Recipes.slice(2)].map(r => r.likes_count)
-			let otherChefLikes = [...instance.props.chef_feed_Recipes.slice(0, 1), ...instance.props.chef_feed_Recipes.slice(2)].map(r => r.chef_liked)
+			let otherLikes = [...instance.props.allRecipeLists[instance.props.route.key].slice(0, 1), ...instance.props.allRecipeLists[instance.props.route.key].slice(2)].map(r => r.likes_count)
+			let otherChefLikes = [...instance.props.allRecipeLists[instance.props.route.key].slice(0, 1), ...instance.props.allRecipeLists[instance.props.route.key].slice(2)].map(r => r.chef_liked)
 			expect(recipe.likes_count).toEqual(6) //starting number for this recipe
 			expect(recipe.chef_liked).toEqual(1) //starting number for this recipe
 			await act(async () => { await card.unlikeRecipe(recipe.id) })
 			expect(recipe.likes_count).toEqual(5) // add one to the recipe
 			expect(recipe.chef_liked).toEqual(0) //change to recipe
-			expect([...instance.props.chef_feed_Recipes.slice(0, 1), ...instance.props.chef_feed_Recipes.slice(2)].map(r => r.likes_count)).toEqual(otherLikes) //expect no changes to other likes
-			expect([...instance.props.chef_feed_Recipes.slice(0, 1), ...instance.props.chef_feed_Recipes.slice(2)].map(r => r.chef_liked)).toEqual(otherChefLikes) //expect no changes to other likes
+			expect([...instance.props.allRecipeLists[instance.props.route.key].slice(0, 1), ...instance.props.allRecipeLists[instance.props.route.key].slice(2)].map(r => r.likes_count)).toEqual(otherLikes) //expect no changes to other likes
+			expect([...instance.props.allRecipeLists[instance.props.route.key].slice(0, 1), ...instance.props.allRecipeLists[instance.props.route.key].slice(2)].map(r => r.chef_liked)).toEqual(otherChefLikes) //expect no changes to other likes
 		})
 
 		test('unliking a recipe with incorrect access token', async () => {
@@ -332,15 +336,15 @@ describe('Recipe List', () => {
 
 		test('resharing a recipe calls to server and if successful adds a share count', async () => {
 			postReShare.mockImplementation(() => new Promise.resolve(true))
-			let otherShares = instance.props.chef_feed_Recipes.slice(1).map(r => r.shares_count)
-			let otherChefShares = instance.props.chef_feed_Recipes.slice(1).map(r => r.chef_shared)
+			let otherShares = instance.props.allRecipeLists[instance.props.route.key].slice(1).map(r => r.shares_count)
+			let otherChefShares = instance.props.allRecipeLists[instance.props.route.key].slice(1).map(r => r.chef_shared)
 			expect(recipe.shares_count).toEqual(2) //starting number for this recipe
 			expect(recipe.chef_shared).toEqual(0) //starting number for this recipe
 			await act(async () => { await card.reShareRecipe(recipe.id) })
 			expect(recipe.shares_count).toEqual(3) // add one to the recipe
 			expect(recipe.chef_shared).toEqual(1) //change to recipe
-			expect(instance.props.chef_feed_Recipes.slice(1).map(r => r.shares_count)).toEqual(otherShares) //expect no changes to other likes
-			expect(instance.props.chef_feed_Recipes.slice(1).map(r => r.chef_shared)).toEqual(otherChefShares) //expect no changes to other likes
+			expect(instance.props.allRecipeLists[instance.props.route.key].slice(1).map(r => r.shares_count)).toEqual(otherShares) //expect no changes to other likes
+			expect(instance.props.allRecipeLists[instance.props.route.key].slice(1).map(r => r.chef_shared)).toEqual(otherChefShares) //expect no changes to other likes
 		})
 
 		test('resharing a recipe with incorrect access token', async () => {
@@ -364,17 +368,17 @@ describe('Recipe List', () => {
 		})
 
 		test('unReSharing a liked recipe calls to server and if successful subtracts a share count', async () => {
-			recipe = instance.props.chef_feed_Recipes[2] // recipe is now a recipe liked by this chef
+			recipe = instance.props.allRecipeLists[instance.props.route.key][2] // recipe is now a recipe liked by this chef
 			destroyReShare.mockImplementation(() => new Promise.resolve(true))
-			let otherLikes = [...instance.props.chef_feed_Recipes.slice(0, 2), ...instance.props.chef_feed_Recipes.slice(3)].map(r => r.shares_count)
-			let otherChefLikes = [...instance.props.chef_feed_Recipes.slice(0, 2), ...instance.props.chef_feed_Recipes.slice(3)].map(r => r.chef_shared)
+			let otherLikes = [...instance.props.allRecipeLists[instance.props.route.key].slice(0, 2), ...instance.props.allRecipeLists[instance.props.route.key].slice(3)].map(r => r.shares_count)
+			let otherChefLikes = [...instance.props.allRecipeLists[instance.props.route.key].slice(0, 2), ...instance.props.allRecipeLists[instance.props.route.key].slice(3)].map(r => r.chef_shared)
 			expect(recipe.shares_count).toEqual(1) //starting number for this recipe
 			expect(recipe.chef_shared).toEqual(1) //starting number for this recipe
 			await act(async () => { await card.unReShareRecipe(recipe.id) })
 			expect(recipe.shares_count).toEqual(0) // add one to the recipe
 			expect(recipe.chef_shared).toEqual(0) //change to recipe
-			expect([...instance.props.chef_feed_Recipes.slice(0, 2), ...instance.props.chef_feed_Recipes.slice(3)].map(r => r.shares_count)).toEqual(otherLikes) //expect no changes to other likes
-			expect([...instance.props.chef_feed_Recipes.slice(0, 2), ...instance.props.chef_feed_Recipes.slice(3)].map(r => r.chef_shared)).toEqual(otherChefLikes) //expect no changes to other likes
+			expect([...instance.props.allRecipeLists[instance.props.route.key].slice(0, 2), ...instance.props.allRecipeLists[instance.props.route.key].slice(3)].map(r => r.shares_count)).toEqual(otherLikes) //expect no changes to other likes
+			expect([...instance.props.allRecipeLists[instance.props.route.key].slice(0, 2), ...instance.props.allRecipeLists[instance.props.route.key].slice(3)].map(r => r.chef_shared)).toEqual(otherChefLikes) //expect no changes to other likes
 		})
 
 		test('unReSharing a recipe with incorrect access token', async () => {
@@ -400,15 +404,15 @@ describe('Recipe List', () => {
 
 		test('making a recipe calls to server and if successful adds a make count', async () => {
 			postRecipeMake.mockImplementation(() => new Promise.resolve(true))
-			let otherMakes = instance.props.chef_feed_Recipes.slice(1).map(r => r.makes_count)
-			let otherChefMakes = instance.props.chef_feed_Recipes.slice(1).map(r => r.chef_made)
+			let otherMakes = instance.props.allRecipeLists[instance.props.route.key].slice(1).map(r => r.makes_count)
+			let otherChefMakes = instance.props.allRecipeLists[instance.props.route.key].slice(1).map(r => r.chef_made)
 			expect(recipe.makes_count).toEqual(1) //starting number for this recipe
 			expect(recipe.chef_made).toEqual(0) //starting number for this recipe
 			await act(async () => { await card.makeRecipe(recipe.id) })
 			expect(recipe.makes_count).toEqual(2) // add one to the recipe
 			expect(recipe.chef_made).toEqual(1) //change to recipe
-			expect(instance.props.chef_feed_Recipes.slice(1).map(r => r.makes_count)).toEqual(otherMakes) //expect no changes to other likes
-			expect(instance.props.chef_feed_Recipes.slice(1).map(r => r.chef_made)).toEqual(otherChefMakes) //expect no changes to other likes
+			expect(instance.props.allRecipeLists[instance.props.route.key].slice(1).map(r => r.makes_count)).toEqual(otherMakes) //expect no changes to other likes
+			expect(instance.props.allRecipeLists[instance.props.route.key].slice(1).map(r => r.chef_made)).toEqual(otherChefMakes) //expect no changes to other likes
 		})
 
 		test('making a recipe with incorrect access token', async () => {

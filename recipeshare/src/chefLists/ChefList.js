@@ -9,6 +9,7 @@ import { postFollow } from '../fetches/postFollow'
 import { destroyFollow } from '../fetches/destroyFollow'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
+import { saveChefListsLocally, loadLocalChefLists } from '../auxFunctions/saveChefListsLocally'
 import saveChefDetailsLocally from '../auxFunctions/saveChefDetailsLocally'
 import { getChefDetails } from '../fetches/getChefDetails'
 import OfflineMessage from '../offlineMessage/offlineMessage'
@@ -21,15 +22,15 @@ import AppHeaderActionButton from '../../navigation/appHeaderActionButton'
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)
 
 const mapStateToProps = (state) => ({
-	allChefLists: state.chefs,
-	all_chefs: state.chefs.all_chefs,
-	followed_chefs: state.chefs.followed,
+	allChefLists: state.allChefLists,
+	// all_chefs: state.chefs.all_chefs,
+	// followed_chefs: state.chefs.followed,
 	loggedInChef: state.loggedInChef,
 	chefs_details: state.chefs_details,
-	most_liked_chefs: state.chefs.most_liked_chefs,
-	most_made_chefs: state.chefs.most_made_chefs,
-	chef_followees: state.chefs.chef_followees,
-	chef_followers: state.chefs.chef_followers
+	// most_liked_chefs: state.chefs.most_liked_chefs,
+	// most_made_chefs: state.chefs.most_made_chefs,
+	// chef_followees: state.chefs.chef_followees,
+	// chef_followers: state.chefs.chef_followers
 })
 
 const mapDispatchToProps = {
@@ -38,21 +39,31 @@ const mapDispatchToProps = {
 	//     dispatch({ type: 'CHANGE_GLOBAL_RANKING'})
 	//   }
 	// },
-	storeChefList: (listChoice, chefs) => {
+	updateSingleChefList: (listKey, chefList) => {
 		return dispatch => {
-			dispatch({ type: 'STORE_CHEF_LIST', chefType: listChoice, chefList: chefs })
+			dispatch({ type: 'UPDATE_SINGLE_CHEF_LIST', listKey: listKey, chefList: chefList })
 		}
 	},
-	appendToChefList: (listChoice, new_chefs) => {
+	updateAllChefLists: (allChefLists) => {
 		return dispatch => {
-			dispatch({ type: 'APPEND_TO_CHEF_LISTS', chefType: listChoice, chefList: new_chefs })
+			dispatch({ type: 'UPDATE_ALL_CHEF_LISTS', allChefLists: allChefLists })
 		}
 	},
-	clearListedChefs: (listChoice) => {
-		return dispatch => {
-			dispatch({ type: 'CLEAR_LISTED_CHEFS', chefType: listChoice })
-		}
-	},
+	// storeChefList: (listChoice, chefs) => {
+	// 	return dispatch => {
+	// 		dispatch({ type: 'STORE_CHEF_LIST', chefType: listChoice, chefList: chefs })
+	// 	}
+	// },
+	// appendToChefList: (listChoice, new_chefs) => {
+	// 	return dispatch => {
+	// 		dispatch({ type: 'APPEND_TO_CHEF_LISTS', chefType: listChoice, chefList: new_chefs })
+	// 	}
+	// },
+	// clearListedChefs: (listChoice) => {
+	// 	return dispatch => {
+	// 		dispatch({ type: 'CLEAR_LISTED_CHEFS', chefType: listChoice })
+	// 	}
+	// },
 	storeChefDetails: (chef_details) => {
 		return dispatch => {
 			dispatch({ type: 'STORE_CHEF_DETAILS', chefID: `chef${chef_details.chef.id}`, chef_details: chef_details })
@@ -98,23 +109,26 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		componentWillUnmount = () => {
 			this.props.navigation.removeListener('focus', this.respondToFocus)
 			this.props.navigation.removeListener('blur', this.respondToBlur)
+			this.deleteChefList()
 		}
 
-		shouldComponentUpdate = () => { return this.state.isDisplayed }
+		// shouldComponentUpdate = () => { return this.state.isDisplayed }
 
 		respondToFocus = async () => {
 			this.setupHeaderScrollTopTopButton()
-			this.setState({
-				//awaitingServer: false,
-				// offset: 0,
-				isDisplayed: true
-			}, async () => {
-				// await this.fetchChefList()
-				this.setState({ awaitingServer: false })
-			})
+			// this.setState({
+			//awaitingServer: false,
+			// offset: 0,
+			// isDisplayed: true
+			// }, async () => {
+			// await this.fetchChefList()
+			this.setState({ awaitingServer: false })
+			// })
 		}
 
-		respondToBlur = () => { this.setState({ isDisplayed: false }) }
+		respondToBlur = () => {
+			// this.setState({ isDisplayed: false })
+		}
 
 		setupHeaderScrollTopTopButton = () => {
 			this.props.navigation.dangerouslyGetParent().setOptions({
@@ -122,39 +136,68 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			})
 		}
 
+		getQueryChefId = () => {
+			let queryChefId = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
+			return queryChefId
+		}
+
+		getChefListName = () => {
+			return this.props["listChoice"]
+			//return this.props.allRecipeLists[this.props.route.key]
+		}
+
+		getChefList = () => {
+			//return this.props[this.getRecipeListName() + `_Recipes`]
+			// return this.state.recipeList
+			// console.log(this.props.allRecipeLists)
+			return this.props.allChefLists[this.props.route.key] || []
+		}
+
 		fetchChefList = async () => {
-			try {
-				// console.log(this.state.offset)
-				const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
-				let chefs = await getChefList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.loggedInChef.auth_token, this.state.searchTerm)
-				this.props.storeChefList(this.props["listChoice"], chefs)
-			}
-			catch (e) {
-				if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-				if (this.props[this.props["listChoice"]]?.length == 0) {
-					// console.log('failed to get chefs. Loading from async storage.')
-					AsyncStorage.getItem('locallySavedListData', (err, res) => {
-						if (res != null) {
-							const locallySavedListData = JSON.parse(res)
-							if (locallySavedListData[this.props["listChoice"]].length > 0) {
-								this.props.storeChefList(this.props["listChoice"], locallySavedListData[this.props["listChoice"]])
-							}
-							else {
-								this.setState({ renderOfflineMessage: true })
-							}
-						} else {
-							this.setState({ renderOfflineMessage: true })
-						}
-					})
+			let netInfoState = await NetInfo.fetch()
+			if (netInfoState.isConnected) {
+				try {
+					// console.log(this.state.offset)
+					// const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
+					let chefs = await getChefList(this.getChefListName(), this.getQueryChefId(), this.state.limit, this.state.offset, this.props.loggedInChef.auth_token, this.state.searchTerm)
+					// this.props.updateSingleRecipeList(this.props["listChoice"], chefs)
+					this.props.updateSingleChefList(this.props.route.key, chefs)
+					saveChefListsLocally(this.getQueryChefId(), this.props.loggedInChef.id, this.getChefListName(), this.getChefList())
+
 				}
+				catch (e) {
+					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+					if (this.getChefList()?.length == 0) {
+						this.loadChefsLocally()
+
+						// console.log('failed to get chefs. Loading from async storage.')
+						// AsyncStorage.getItem('locallySavedListData', (err, res) => {
+						// 	if (res != null) {
+						// 		const locallySavedListData = JSON.parse(res)
+						// 		if (locallySavedListData[this.props["listChoice"]].length > 0) {
+						// 			this.props.storeChefList(this.props["listChoice"], locallySavedListData[this.props["listChoice"]])
+						// 		}
+						// 		else {
+						// 			this.setState({ renderOfflineMessage: true })
+						// 		}
+						// 	} else {
+						// 		this.setState({ renderOfflineMessage: true })
+						// 	}
+						// })
+					}
+				}
+			} else {
+				this.setState({ renderOfflineMessage: true, offlineDiagnostics: netInfoState })
 			}
 		}
 
 		fetchAdditionalChefs = async () => {
 			try {
-				const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
-				const new_chefs = await getChefList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.loggedInChef.auth_token, this.state.searchTerm)
-				this.props.appendToChefList(this.props["listChoice"], new_chefs)
+				// const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
+				const additionalChefs = await getChefList(this.getChefListName(), this.getQueryChefId(), this.state.limit, this.state.offset, this.props.loggedInChef.auth_token, this.state.searchTerm)
+				this.props.updateSingleChefList(this.props.route.key, [...this.getChefList(), ...additionalChefs])
+				// this.props.appendToChefList(this.getChefListName(), [...this.getChefList(), ,... newChefs])
+				saveChefListsLocally(this.getQueryChefId(), this.props.loggedInChef.id, this.getChefListName(), [...this.getChefList(), ...additionalChefs])
 			}
 			catch (e) {
 				if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
@@ -162,9 +205,24 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			}
 		}
 
+		loadChefsLocally = async () => {
+			let localChefList = await loadLocalChefLists(this.getQueryChefId(), this.getChefListName())
+			//console.log(localChefList.length)
+			if (localChefList.length > 0) {
+				this.props.updateSingleChefList(this.props.route.key, localChefList)
+			}
+			this.setState({ awaitingServer: false })
+		}
+
+		deleteChefList = () => {
+			let newAllChefLists = this.props.allChefLists
+			delete newAllChefLists[this.props.route.key]
+			this.props.updateAllChefLists(newAllChefLists)
+		}
+
 		renderChefListItem = (item) => {
 			return <ChefCard
-				listChoice={this.props["listChoice"]}
+				listChoice={this.getChefListName()}
 				key={item.index.toString()}
 				{...item.item}
 				navigateToChefDetails={this.navigateToChefDetails}
@@ -176,8 +234,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		updateAttributeCountInChefLists = (chefId, attribute, toggle, diff) => {
+			let newAllChefLists = {}
 			Object.keys(this.props.allChefLists).forEach(list => {
-				let newList = this.props.allChefLists[list].map(chef => {
+				let chefList = this.props.allChefLists[list].map(chef => {
 					if (chef.id == chefId) {
 						chef[attribute] += diff
 						chef[toggle] = diff > 0 ? 1 : 0
@@ -186,8 +245,21 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						return chef
 					}
 				})
-				this.props.storeChefList(list, newList)
+				newAllChefLists[list] = chefList
 			})
+			this.props.updateAllChefLists(newAllChefLists)
+			// Object.keys(this.props.allChefLists).forEach(list => {
+			// 	let newList = this.props.allChefLists[list].map(chef => {
+			// 		if (chef.id == chefId) {
+			// 			chef[attribute] += diff
+			// 			chef[toggle] = diff > 0 ? 1 : 0
+			// 			return chef
+			// 		} else {
+			// 			return chef
+			// 		}
+			// 	})
+			// 	this.props.storeChefList(list, newList)
+			// })
 		}
 
 		followChef = async (followee_id) => {
@@ -238,7 +310,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		onEndReached = async () => {
-			if (this.props[this.props["listChoice"]].length % 10 == 0) {
+			if (this.getChefList().length % 10 == 0) {
 				this.setState({ offset: this.state.offset + 10 }, this.fetchAdditionalChefs)
 			}
 		}
@@ -325,7 +397,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								diagnostics={this.props.loggedInChef.is_admin ? this.state.offlineDiagnostics : null}
 							/>)
 						}
-						{this.props[this.props["listChoice"]].length == 0 && (
+						{this.getChefList().length == 0 && (
 							<View
 								style={centralStyles.swipeDownContainer}
 							>
@@ -338,7 +410,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								>Swipe down to refresh</Text>
 							</View>
 						)}
-						{(this.props[this.props["listChoice"]].length > 0 || this.state.searchTerm != '') && (
+						{(this.getChefList().length > 0 || this.state.searchTerm != '') && (
 							<Animated.View
 								style={{
 									position: 'absolute',
@@ -369,7 +441,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						)}
 						<AnimatedFlatList
 							ListHeaderComponent={() => {
-								let searchBarIsDisplayed = this.props[this.props["listChoice"]].length > 0 || this.state.searchTerm != ''
+								let searchBarIsDisplayed = this.getChefList().length > 0 || this.state.searchTerm != ''
 								return (
 									<TouchableOpacity
 										style={{ height: searchBarIsDisplayed ? responsiveHeight(7) : responsiveHeight(70) }}
@@ -379,7 +451,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								)
 							}}
 							ref={(list) => this.chefFlatList = list}
-							data={this.props[this.props["listChoice"]]}
+							data={this.getChefList()}
 							renderItem={this.renderChefListItem}
 							style={{ minHeight: responsiveHeight(70) }}
 							keyExtractor={(item) => item.id.toString()}
@@ -397,7 +469,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							onEndReached={this.onEndReached}
 							onEndReachedThreshold={0.3}
 							scrollEventThrottle={16}
-							listKey={this.props[this.props["listChoice"]]}
+							listKey={this.getChefList()}
 							onScroll={Animated.event(
 								[{ nativeEvent: { contentOffset: { y: this.state.yOffset } } }],
 								{

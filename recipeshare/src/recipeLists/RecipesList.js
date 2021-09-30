@@ -18,6 +18,7 @@ import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import { getRecipeDetails } from '../fetches/getRecipeDetails'
 import saveRecipeDetailsLocally from '../auxFunctions/saveRecipeDetailsLocally'
+import { saveRecipeListsLocally, loadLocalRecipeLists } from '../auxFunctions/saveRecipeListsLocally'
 import saveChefDetailsLocally from '../auxFunctions/saveChefDetailsLocally'
 import { getChefDetails } from '../fetches/getChefDetails'
 import OfflineMessage from '../offlineMessage/offlineMessage'
@@ -25,6 +26,9 @@ import NetInfo from '@react-native-community/netinfo'
 NetInfo.configure({ reachabilityShortTimeout: 5 }) //5ms
 import SearchBar from '../searchBar/SearchBar.js'
 import AppHeaderActionButton from '../../navigation/appHeaderActionButton'
+import { cuisines } from '../dataComponents/cuisines'
+import { serves } from '../dataComponents/serves'
+import { clearedFilters } from '../dataComponents/clearedFilters'
 
 // import { apiCall } from '../auxFunctions/apiCall'
 
@@ -35,22 +39,22 @@ const startingOffset = 0
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)
 
 const mapStateToProps = (state) => ({
-	allRecipeLists: state.recipes,
-	all_Recipes: state.recipes.all,
-	chef_Recipes: state.recipes.chef,
-	chef_feed_Recipes: state.recipes.chef_feed,
-	chef_liked_Recipes: state.recipes.chef_liked,
-	chef_made_Recipes: state.recipes.chef_made,
-	global_ranks_Recipes: state.recipes.global_ranks,
-	most_liked_Recipes: state.recipes.most_liked,
-	most_made_Recipes: state.recipes.most_made,
-	search_Recipes: state.recipes.search,
+	allRecipeLists: state.allRecipeLists,
+	// all_Recipes: state.recipes.all,
+	// chef_Recipes: state.recipes.chef,
+	// chef_feed_Recipes: state.recipes.chef_feed,
+	// chef_liked_Recipes: state.recipes.chef_liked,
+	// chef_made_Recipes: state.recipes.chef_made,
+	// global_ranks_Recipes: state.recipes.global_ranks,
+	// most_liked_Recipes: state.recipes.most_liked,
+	// most_made_Recipes: state.recipes.most_made,
+	// search_Recipes: state.recipes.search,
 	recipes_details: state.recipes_details,
 	loggedInChef: state.loggedInChef,
-	global_ranking: state.global_ranking,
-	filter_settings: state.filter_settings,
-	filterCuisines: state.filterCuisines,
-	serves: state.serves,
+	// global_ranking: state.global_ranking,
+	//filter_settings: state.filter_settings,
+	//filterCuisines: state.filterCuisines,
+	//serves: state.serves,
 })
 
 const mapDispatchToProps = {
@@ -59,14 +63,24 @@ const mapDispatchToProps = {
 	//     dispatch({ type: 'CHANGE_GLOBAL_RANKING'})
 	//   }
 	// },
-	storeRecipeList: (listChoice, recipes) => {
+	// storeRecipeList: (listChoice, recipes) => {
+	// 	return dispatch => {
+	// 		dispatch({ type: 'STORE_RECIPE_LISTS', recipeType: listChoice, recipeList: recipes })
+	// 	}
+	// },
+	// appendToRecipeList: (listChoice, new_recipes) => {
+	// 	return dispatch => {
+	// 		dispatch({ type: 'APPEND_TO_RECIPE_LISTS', recipeType: listChoice, recipeList: new_recipes })
+	// 	}
+	// },
+	updateSingleRecipeList: (listKey, recipeList) => {
 		return dispatch => {
-			dispatch({ type: 'STORE_RECIPE_LISTS', recipeType: listChoice, recipeList: recipes })
+			dispatch({ type: 'UPDATE_SINGLE_RECIPE_LIST', listKey: listKey, recipeList: recipeList })
 		}
 	},
-	appendToRecipeList: (listChoice, new_recipes) => {
+	updateAllRecipeLists: (allRecipeLists) => {
 		return dispatch => {
-			dispatch({ type: 'APPEND_TO_RECIPE_LISTS', recipeType: listChoice, recipeList: new_recipes })
+			dispatch({ type: 'UPDATE_ALL_RECIPE_LISTS', allRecipeLists: allRecipeLists })
 		}
 	},
 	storeRecipeDetails: (recipe_details) => {
@@ -79,22 +93,22 @@ const mapDispatchToProps = {
 			dispatch({ type: 'STORE_CHEF_DETAILS', chefID: `chef${chef_details.chef.id}`, chef_details: chef_details })
 		}
 	},
-	storeCuisinesChoices: (listChoice, cuisines) => {
-		// console.log(cuisines)
-		return dispatch => {
-			dispatch({ type: 'STORE_CUISINES_CHOICES', listChoice: listChoice, cuisines: cuisines })
-		}
-	},
-	storeServesChoices: (listChoice, serves) => {
-		return dispatch => {
-			dispatch({ type: 'STORE_SERVES_CHOICES', listChoice: listChoice, serves: serves })
-		}
-	},
-	storeFilterChoices: (listChoice, filters) => {
-		return dispatch => {
-			dispatch({ type: 'STORE_FILTER_CHOICES', listChoice: listChoice, filters: filters })
-		}
-	}
+	// storeCuisinesChoices: (listChoice, cuisines) => {
+	// 	// console.log(cuisines)
+	// 	return dispatch => {
+	// 		dispatch({ type: 'STORE_CUISINES_CHOICES', listChoice: listChoice, cuisines: cuisines })
+	// 	}
+	// },
+	// storeServesChoices: (listChoice, serves) => {
+	// 	return dispatch => {
+	// 		dispatch({ type: 'STORE_SERVES_CHOICES', listChoice: listChoice, serves: serves })
+	// 	}
+	// },
+	// storeFilterChoices: (listChoice, filters) => {
+	// 	return dispatch => {
+	// 		dispatch({ type: 'STORE_FILTER_CHOICES', listChoice: listChoice, filters: filters })
+	// 	}
+	// }
 	// clearListedRecipes: (listChoice) => {
 	//   return dispatch => {
 	//     dispatch({ type: 'CLEAR_LISTED_RECIPES', recipeType: listChoice})
@@ -115,7 +129,7 @@ export class RecipesList extends React.Component {
 		this.state = {
 			limit: startingLimit,
 			offset: startingOffset,
-			isDisplayed: true,
+			//isDisplayed: true,
 			filterDisplayed: false,
 			awaitingServer: false,
 			dataICantGet: [],
@@ -126,6 +140,13 @@ export class RecipesList extends React.Component {
 			yOffset: new Animated.Value(0),
 			currentYTop: 0,
 			searchBarZIndex: 0,
+			// recipeList: [],
+			cuisineOptions: cuisines,
+			selectedCuisine: "Any",
+			servesOptions: serves,
+			selectedServes: "Any",
+			filterOptions: clearedFilters,
+			filterSettings: clearedFilters
 		}
 	}
 
@@ -150,6 +171,7 @@ export class RecipesList extends React.Component {
 		this.abortController.abort()
 		this.props.navigation.removeListener('focus', this.respondToFocus)
 		this.props.navigation.removeListener('blur', this.respondToBlur)
+		this.deleteRecipeList()
 	}
 
 	componentDidUpdate = async () => {
@@ -176,7 +198,7 @@ export class RecipesList extends React.Component {
 		// this.setState({awaitingServer: true})
 	}
 
-	shouldComponentUpdate = (nextProps, nextState) => {
+	//shouldComponentUpdate = (nextProps, nextState) => {
 		// console.log('LIST')
 		// // console.log(nextProps.navigation.dangerouslyGetParent().dangerouslyGetState())
 
@@ -187,14 +209,14 @@ export class RecipesList extends React.Component {
 		// console.log(thisRouteName)
 		// console.log(nextRouteName)
 		// console.log(`updating ${this.state.isDisplayed}`)
-		return this.state.isDisplayed
-	}
+	//	return this.state.isDisplayed
+	//}
 
 	respondToBlur = () => {
-		this.setState({
-			isDisplayed: false,
-			filterDisplayed: false
-		})
+		// this.setState({
+		// 	//isDisplayed: false,
+		// 	filterDisplayed: false
+		// })
 	}
 
 	respondToFocus = async () => {
@@ -207,27 +229,28 @@ export class RecipesList extends React.Component {
 		this.setState({
 			// offset: startingOffset,
 			// limit: this.state.offset + 5,
-			isDisplayed: true,
+			//isDisplayed: true,
 			awaitingServer: true
 		}, async () => {
 			if (this.props.route.params?.deleteId) {
+				this.deleteRecipeFromAllLists(this.props.route.params?.deleteId)
 				this.props.navigation.setParams({ deleteId: null })
-				let recipeLists = [
-					'all_Recipes',
-					'chef_Recipes',
-					'chef_feed_Recipes',
-					'chef_liked_Recipes',
-					'chef_made_Recipes',
-					'global_ranks_Recipes',
-					'most_liked_Recipes',
-					'most_made_Recipes'
-				]
-				recipeLists.forEach(listName => {
-					let newRecipeList = this.props[listName].filter(recipe => {
-						return recipe.id != this.props.route.params?.deleteId
-					})
-					this.props.storeRecipeList(listName.replace("_Recipes", ""), newRecipeList)
-				})
+				// let recipeLists = [
+				// 	'all_Recipes',
+				// 	'chef_Recipes',
+				// 	'chef_feed_Recipes',
+				// 	'chef_liked_Recipes',
+				// 	'chef_made_Recipes',
+				// 	'global_ranks_Recipes',
+				// 	'most_liked_Recipes',
+				// 	'most_made_Recipes'
+				// ]
+				// recipeLists.forEach(listName => {
+				// 	let newRecipeList = this.props[listName].filter(recipe => {
+				// 		return recipe.id != this.props.route.params?.deleteId
+				// 	})
+				// 	this.props.storeRecipeList(listName.replace("_Recipes", ""), newRecipeList)
+				// })
 				this.setState({ awaitingServer: false })
 			} else if (this.props.route.params?.refresh) {
 				this.props.navigation.setParams({ refresh: false })
@@ -235,7 +258,7 @@ export class RecipesList extends React.Component {
 					offset: startingOffset,
 					limit: startingLimit,
 					awaitingServer: true,
-					isDisplayed: true,
+					//isDisplayed: true,
 				}, async () => {
 					await this.fetchRecipeList()
 					this.recipeFlatList.scrollToOffset({ x: 0, y: 0, animated: true })
@@ -253,64 +276,146 @@ export class RecipesList extends React.Component {
 		})
 	}
 
+	getQueryChefId = () => {
+		let queryChefId = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
+		return queryChefId
+	}
+
+	getRecipeListName = () => {
+		return this.props["listChoice"]
+		//return this.props.allRecipeLists[this.props.route.key]
+	}
+
+	getRecipeList = () => {
+		//return this.props[this.getRecipeListName() + `_Recipes`]
+		// return this.state.recipeList
+		// console.log(this.props.allRecipeLists)
+		return this.props.allRecipeLists[this.props.route.key] || []
+	}
+
 	fetchRecipeList = async () => {
 		// console.log('refreshing')
 		// console.log(this.state.awaitingServer)
-		this.setState({ awaitingServer: true }, async () => {
-			try {
-				const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
-				let result = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.filterCuisines[this.props.listChoice], this.props.serves, this.state.searchTerm, this.abortController)
-				if (result.recipes.length == 0) {
-					this.setState({ renderNoRecipesMessage: true })
+		let netInfoState = await NetInfo.fetch()
+		if (netInfoState.isConnected) {
+			this.setState({ awaitingServer: true }, async () => {
+				try {
+					// const queryChefID = this.getQueryChefId()
+					let result = await getRecipeList(this.getRecipeListName(), this.getQueryChefId(), this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.state.filterSettings, this.state.selectedCuisine, this.state.selectedServes, this.state.searchTerm, this.abortController)
+					if (result.recipes.length == 0) {
+						this.setState({ renderNoRecipesMessage: true })
+					}
+					this.props.updateSingleRecipeList(this.props.route.key, result.recipes)
+					// this.props.storeRecipeList(this.getRecipeListName(), result.recipes)
+					// this.props.storeCuisinesChoices(this.getRecipeListName(), result.cuisines)
+					// this.props.storeServesChoices(this.getRecipeListName(), result.serves)
+					// this.props.storeFilterChoices(this.getRecipeListName(), result.filters)
+					this.setState({
+						// recipeList: result.recipes,
+						cuisineOptions: result.cuisines,
+						servesOptions: result.serves,
+						filterOptions: result.filters,
+						awaitingServer: false
+					})
+					saveRecipeListsLocally(this.getQueryChefId(), this.props.loggedInChef.id, this.getRecipeListName(), this.getRecipeList())
 				}
-				this.props.storeRecipeList(this.props["listChoice"], result.recipes)
-				this.props.storeCuisinesChoices(this.props["listChoice"], result.cuisines)
-				this.props.storeServesChoices(this.props["listChoice"], result.serves)
-				this.props.storeFilterChoices(this.props["listChoice"], result.filters)
-				this.setState({ awaitingServer: false })
-			}
-			catch (e) {
-				switch (e.name) {
-					case 'Logout': { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) } break
-					case 'AbortError': break
-					case 'Timeout':
-						if (this.props[this.props["listChoice"] + `_Recipes`]?.length == 0) {
-							// console.log('failed to get recipes. Loading from async storage.')
-							AsyncStorage.getItem('locallySavedListData', async (err, res) => {
-								if (res != null) {
-									const locallySavedListData = JSON.parse(res)
-									if (locallySavedListData[this.props["listChoice"] + `_Recipes`].length > 0) {
-										this.props.storeRecipeList(this.props["listChoice"], locallySavedListData[this.props["listChoice"] + `_Recipes`])
-										this.setState({ awaitingServer: false })
-									}
-									else {
-										this.setState({
-											renderOfflineMessage: true,
-											awaitingServer: false
-										})
-									}
-								} else {
-									this.setState({
-										renderOfflineMessage: true,
-										awaitingServer: false
-									})
-								}
-							})
-						}
-						break
-					default: this.setState({ awaitingServer: false })
+				catch (e) {
+					switch (e.name) {
+						case 'Logout': { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) } break
+						case 'AbortError': break
+						case 'Timeout':
+							if (this.getRecipeList().length == 0) {
+								// console.log('failed to get recipes. Loading from async storage.')
+								this.loadRecipesLocally()
+
+								// AsyncStorage.getItem('locallySavedListData', async (err, res) => {
+								// 	if (res != null) {
+								// 		const locallySavedListData = JSON.parse(res)
+								// 		if (locallySavedListData[this.getRecipeListName() + `_Recipes`].length > 0) {
+								// 			this.props.updateSingleRecipeList(this.props.route.key, locallySavedListData[this.getRecipeListName() + `_Recipes`])
+								// 			// this.props.storeRecipeList(this.getRecipeListName(), locallySavedListData[this.getRecipeListName() + `_Recipes`])
+								// 			this.setState({
+								// 				// recipeList: locallySavedListData[this.getRecipeListName() + `_Recipes`],
+								// 				awaitingServer: false
+								// 			})
+								// 		}
+								// 		else {
+								// 			this.setState({
+								// 				renderOfflineMessage: true,
+								// 				awaitingServer: false
+								// 			})
+								// 		}
+								// 	} else {
+								// 		this.setState({
+								// 			renderOfflineMessage: true,
+								// 			awaitingServer: false
+								// 		})
+								// 	}
+								// })
+							}
+							break
+						default:
+							if (this.getRecipeList().length == 0) {
+								// console.log('failed to get recipes. Loading from async storage.')
+								this.loadRecipesLocally()
+							}
+							break
+					}
 				}
-			}
-		})
+			})
+		} else {
+			this.setState({ renderOfflineMessage: true, offlineDiagnostics: netInfoState })
+		}
+	}
+
+	fetchAdditionalRecipesForList = async () => {
+		// this.setState({ awaitingServer: true }, async() => {
+		try {
+			const result = await getRecipeList(this.getRecipeListName(), this.getQueryChefId(), this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.state.filterSettings, this.state.selectedCuisine, this.state.selectedServes, this.state.searchTerm, this.abortController)
+			//console.log(result.recipes.length)
+			//console.log([...this.getRecipeList(), ...result.recipes].map(r=>r.id))
+			this.props.updateSingleRecipeList(this.props.route.key, [...this.getRecipeList(), ...result.recipes])
+			//this.props.appendToRecipeList(this.getRecipeListName(), result.recipes)
+			//this.props.storeCuisinesChoices(this.getRecipeListName(), result.cuisines)
+			this.setState({
+				//recipeList: [...state.recipeList, ...result.recipes],
+				cuisineOptions: result.cuisines,
+				servesOptions: result.serves,
+				filterOptions: result.filters,
+			})
+			saveRecipeListsLocally(this.getQueryChefId(), this.props.loggedInChef.id, this.getRecipeListName(), [...this.getRecipeList(), ...result.recipes])
+
+		}
+		catch (e) {
+			if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+			//console.log('failed to get ADDITIONAL recipes')
+			//console.log(e)
+			// this.setState({ awaitingServer: false })
+		}
+		// })
+	}
+
+	loadRecipesLocally = async () => {
+		let localRecipeList = await loadLocalRecipeLists(this.getQueryChefId(), this.getRecipeListName())
+		//console.log(localRecipeList.length)
+		if (localRecipeList.length > 0) {
+			this.props.updateSingleRecipeList(this.props.route.key, localRecipeList)
+		}
+		this.setState({ awaitingServer: false })
 	}
 
 	fetchFilterChoices = async () => {
 		try {
-			const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
-			let result = await getAvailableFilters(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.filterCuisines[this.props.listChoice], this.props.serves, this.state.searchTerm, this.abortController)
-			this.props.storeCuisinesChoices(this.props["listChoice"], result.cuisines)
-			this.props.storeServesChoices(this.props["listChoice"], result.serves)
-			this.props.storeFilterChoices(this.props["listChoice"], result.filters)
+			const queryChefID = this.getQueryChefId()
+			let result = await getAvailableFilters(this.getRecipeListName(), queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.state.filterSettings, this.state.selectedCuisine, this.state.selectedServes, this.state.searchTerm, this.abortController)
+			// this.props.storeCuisinesChoices(this.getRecipeListName(), result.cuisines)
+			// this.props.storeServesChoices(this.getRecipeListName(), result.serves)
+			// this.props.storeFilterChoices(this.getRecipeListName(), result.filters)
+			this.setState({
+				cuisineOptions: result.cuisines,
+				servesOptions: result.serves,
+				filterOptions: result.filters
+			})
 		}
 		catch (e) {
 			switch (e.name) {
@@ -320,22 +425,18 @@ export class RecipesList extends React.Component {
 		}
 	}
 
-	fetchAdditionalRecipesForList = async () => {
-		// this.setState({ awaitingServer: true }, async() => {
-		try {
-			const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
-			const result = await getRecipeList(this.props["listChoice"], queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.props.filter_settings, this.props.filterCuisines[this.props.listChoice], this.props.serves, this.state.searchTerm, this.abortController)
-			this.props.appendToRecipeList(this.props["listChoice"], result.recipes)
-			this.props.storeCuisinesChoices(this.props["listChoice"], result.cuisines)
-			// this.setState({ awaitingServer: false })
-		}
-		catch (e) {
-			if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
-			// console.log('failed to get ADDITIONAL recipes')
-			// console.log(e)
-			// this.setState({ awaitingServer: false })
-		}
-		// })
+	deleteRecipeList = () => {
+		let newAllRecipeLists = this.props.allRecipeLists
+		delete newAllRecipeLists[this.props.route.key]
+		this.props.updateAllRecipeLists(newAllRecipeLists)
+	}
+
+	deleteRecipeFromAllLists = (recipeId) => {
+		let newAllRecipeLists = {}
+		Object.keys(this.props.allRecipeLists).forEach(list => {
+			newAllRecipeLists[list] = this.props.allRecipeLists[list].filter(recipe => recipe.id != recipeId)
+		})
+		this.props.updateAllRecipeLists(newAllRecipeLists)
 	}
 
 	navigateToRecipeDetails = async (recipeID, commenting = false) => {
@@ -448,7 +549,8 @@ export class RecipesList extends React.Component {
 
 	renderRecipeListItem = (item) => {
 		return (
-			<RecipeCard listChoice={this.props["listChoice"]}
+			<RecipeCard
+				listChoice={this.getRecipeListName()}
 				key={item.index.toString()}
 				{...item.item}
 				navigateToRecipeDetails={this.navigateToRecipeDetails}
@@ -474,9 +576,9 @@ export class RecipesList extends React.Component {
 	}
 
 	onEndReached = () => {
-		// console.log('end reached')
-		if (this.props[this.props["listChoice"] + `_Recipes`].length % startingLimit == 0) {
-			this.setState((state) => ({ offset: state.offset + startingLimit }),
+		//console.log('end reached')
+		if (this.getRecipeList().length % startingLimit == 0) {
+			this.setState((state) => ({ offset: state.offset + this.getRecipeList().length }),
 				this.fetchAdditionalRecipesForList
 			)
 		}
@@ -488,8 +590,9 @@ export class RecipesList extends React.Component {
 	// }
 
 	updateAttributeCountInRecipeLists = (recipeId, attribute, toggle, diff) => {
+		let newAllRecipeLists = {}
 		Object.keys(this.props.allRecipeLists).forEach(list => {
-			let newList = this.props.allRecipeLists[list].map(recipe => {
+			let recipeList = this.props.allRecipeLists[list].map(recipe => {
 				if (recipe.id == recipeId) {
 					recipe[attribute] += diff
 					recipe[toggle] = diff > 0 ? 1 : 0
@@ -498,8 +601,9 @@ export class RecipesList extends React.Component {
 					return recipe
 				}
 			})
-			this.props.storeRecipeList(list, newList)
+			newAllRecipeLists[list] = recipeList
 		})
+		this.props.updateAllRecipeLists(newAllRecipeLists)
 	}
 
 	likeRecipe = async (recipeID) => {
@@ -631,19 +735,42 @@ export class RecipesList extends React.Component {
 		this.setState({ searchBarZIndex: 1 }, () => { this.searchBar.current.focus() })
 	}
 
-	checkFilterSetting = (element) => {
-		return this.props.filter_settings[element] == true
+	setSelectedCuisine = (selectedCuisine) => this.setState({ selectedCuisine: selectedCuisine })
+
+	setSelectedServes = (selectedServes) => this.setState({ selectedServes: selectedServes })
+
+	setFilterSetting = (filter, value) => {
+		this.setState(state => {
+			return ({
+				...state,
+				filterSettings: {
+					...state.filterSettings,
+					[filter]: value
+				}
+			})
+		})
 	}
 
+	clearFilterSettings = () => {
+		this.setState({
+			filterSettings: clearedFilters,
+			selectedCuisine: "Any",
+			selectedServes: "Any"
+		})
+	}
+
+	checkFilterSetting = (element) => this.state.filterSettings[element] == true
+
 	render() {
-		//console.log(this.props[this.props["listChoice"] + `_Recipes`][0])
-		// console.log(this.props.route)
+		//console.log(this.getRecipeList()[0]?.chef_liked)
+		//console.log(this.props.route)
+		// console.log(Object.keys(this.props.allRecipeLists))
 		//console.log('recipe list re-rendering')
 		// console.log(this.recipeFlatList.scrollToOffset({ animated: true, offset: 0 }))
-		//console.log(this.props.serves)
-		let anyFilterActive = Object.keys(this.props.filter_settings).some(this.checkFilterSetting) ||
-			this.props.filterCuisines[this.props.listChoice] != "Any" ||
-			this.props.serves != "Any"
+		// console.log(this.state.filterOptions)
+		let anyFilterActive = Object.keys(this.state.filterSettings).some(this.checkFilterSetting) ||
+			this.state.selectedCuisine != "Any" ||
+			this.state.selectedServes != "Any"
 		return (
 			<SpinachAppContainer awaitingServer={this.state.awaitingServer}>
 				<TouchableOpacity
@@ -659,7 +786,7 @@ export class RecipesList extends React.Component {
 						/>)
 					}
 					{(this.props.route.name === "My Feed"
-						&& this.props[this.props["listChoice"] + `_Recipes`].length === 0
+						&& this.getRecipeList().length === 0
 						&& !this.state.renderOfflineMessage
 						&& this.state.renderNoRecipesMessage
 						&& this.state.searchTerm.length == 0) && (
@@ -672,7 +799,7 @@ export class RecipesList extends React.Component {
 								testID={'myFeedMessage'}
 							/>
 						)}
-					{this.props[this.props["listChoice"] + `_Recipes`].length == 0 && (
+					{this.getRecipeList().length == 0 && (
 						<View
 							style={centralStyles.swipeDownContainer}
 						>
@@ -685,7 +812,7 @@ export class RecipesList extends React.Component {
 							>Swipe down to refresh</Text>
 						</View>
 					)}
-					{(this.props[this.props["listChoice"] + `_Recipes`].length > 0 || this.state.searchTerm != '') && (
+					{(this.getRecipeList().length > 0 || this.state.searchTerm != '') && (
 						<Animated.View
 							style={{
 								position: 'absolute',
@@ -716,7 +843,7 @@ export class RecipesList extends React.Component {
 					)}
 					<AnimatedFlatList
 						ListHeaderComponent={() => {
-							let searchBarIsDisplayed = this.props[this.props["listChoice"] + `_Recipes`].length > 0 || this.state.searchTerm != ''
+							let searchBarIsDisplayed = this.getRecipeList().length > 0 || this.state.searchTerm != ''
 							return (
 								<TouchableOpacity
 									style={{ height: searchBarIsDisplayed ? responsiveHeight(7) : responsiveHeight(70) }}
@@ -726,9 +853,9 @@ export class RecipesList extends React.Component {
 							)
 						}}
 						//stickyHeaderIndices={[0]}
-						data={this.props[this.props["listChoice"] + `_Recipes`]}
+						data={this.getRecipeList()}
 						ref={(list) => this.recipeFlatList = list}
-						extraData={this.props.recipes_details}
+						//extraData={this.props.recipes_details}
 						style={{ minHeight: responsiveHeight(70) }}
 						renderItem={this.renderRecipeListItem}
 						keyExtractor={(item) => item.id.toString()}
@@ -779,7 +906,7 @@ export class RecipesList extends React.Component {
 							},
 						)}
 						nestedScrollEnabled={true}
-						listKey={this.props[this.props["listChoice"] + `_Recipes`]}
+						listKey={this.getRecipeList()}
 					/>
 					{this.state.filterDisplayed && (
 						<FilterMenu
@@ -788,9 +915,19 @@ export class RecipesList extends React.Component {
 							closeFilterAndRefresh={this.closeFilterAndRefresh}
 							confirmButtonText={`Apply \n& Close`}
 							title={"Apply filters to recipes list"}
-							listChoice={this.props["listChoice"]}
+							listChoice={this.getRecipeListName()}
 							fetchFilterChoices={this.fetchFilterChoices}
-							clearSearchTerm={async () => this.setState({ searchTerm: "" })}
+							clearSearchTerm={() => this.setState({ searchTerm: "" })}
+							cuisineOptions={this.state.cuisineOptions}
+							selectedCuisine={this.state.selectedCuisine}
+							setSelectedCuisine={this.setSelectedCuisine}
+							servesOptions={this.state.servesOptions}
+							selectedServes={this.state.selectedServes}
+							setSelectedServes={this.setSelectedServes}
+							filterOptions={this.state.filterOptions}
+							filterSettings={this.state.filterSettings}
+							setFilterSetting={this.setFilterSetting}
+							clearFilterSettings={this.clearFilterSettings}
 						/>
 					)}
 				</TouchableOpacity>

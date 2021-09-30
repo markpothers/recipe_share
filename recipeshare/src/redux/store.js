@@ -2,7 +2,7 @@ import { createStore, compose, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk'
 import reducer from './reducer'
 
-import { filters } from '../dataComponents/filters'
+// import { filters } from '../dataComponents/filters'
 
 //exported ONLY for unit testing
 export const initialState = {
@@ -13,46 +13,48 @@ export const initialState = {
 		image_url: "",
 		is_admin: false
 	},
-	recipes: {
-		all: [],
-		chef: [],
-		chef_feed: [],
-		chef_liked: [],
-		chef_made: [],
-		global_ranks: [],
-		most_liked: [],
-		most_made: []
-	},
-	cuisineChoices: {
-		all: [],
-		chef: [],
-		chef_feed: [],
-		chef_liked: [],
-		chef_made: [],
-		global_ranks: [],
-		most_liked: [],
-		most_made: []
-	},
-	servesChoices: {
-		all: [],
-		chef: [],
-		chef_feed: [],
-		chef_liked: [],
-		chef_made: [],
-		global_ranks: [],
-		most_liked: [],
-		most_made: []
-	},
-	filterChoices: {
-		all: [...filters],
-		chef: [...filters],
-		chef_feed: [...filters],
-		chef_liked: [...filters],
-		chef_made: [...filters],
-		global_ranks: [...filters],
-		most_liked: [...filters],
-		most_made: [...filters]
-	},
+	allRecipeLists: {},
+	allChefLists: {},
+	// recipes: {
+	// 	all: [],
+	// 	chef: [],
+	// 	chef_feed: [],
+	// 	chef_liked: [],
+	// 	chef_made: [],
+	// 	global_ranks: [],
+	// 	most_liked: [],
+	// 	most_made: []
+	// },
+	// cuisineChoices: {
+	// 	all: [],
+	// 	chef: [],
+	// 	chef_feed: [],
+	// 	chef_liked: [],
+	// 	chef_made: [],
+	// 	global_ranks: [],
+	// 	most_liked: [],
+	// 	most_made: []
+	// },
+	// servesChoices: {
+	// 	all: [],
+	// 	chef: [],
+	// 	chef_feed: [],
+	// 	chef_liked: [],
+	// 	chef_made: [],
+	// 	global_ranks: [],
+	// 	most_liked: [],
+	// 	most_made: []
+	// },
+	// filterChoices: {
+	// 	all: [...filters],
+	// 	chef: [...filters],
+	// 	chef_feed: [...filters],
+	// 	chef_liked: [...filters],
+	// 	chef_made: [...filters],
+	// 	global_ranks: [...filters],
+	// 	most_liked: [...filters],
+	// 	most_made: [...filters]
+	// },
 	recipes_details: {
 
 	},

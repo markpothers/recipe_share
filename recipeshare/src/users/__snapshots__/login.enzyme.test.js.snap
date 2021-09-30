@@ -1288,10 +1288,10 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                         null,
                                                                       ]
                                                                     }
-                                                                    thumbColor="#eaeaea"
+                                                                    thumbColor={null}
                                                                     trackColor={
                                                                       Object {
-                                                                        "false": "#d8dcd7",
+                                                                        "false": null,
                                                                         "true": "#5c8a5199",
                                                                       }
                                                                     }
@@ -1324,8 +1324,8 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                           ],
                                                                         ]
                                                                       }
-                                                                      thumbTintColor="#eaeaea"
-                                                                      tintColor="#d8dcd7"
+                                                                      thumbTintColor={null}
+                                                                      tintColor={null}
                                                                       value={false}
                                                                     >
                                                                       <RCTSwitch
@@ -1355,8 +1355,8 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                             ],
                                                                           ]
                                                                         }
-                                                                        thumbTintColor="#eaeaea"
-                                                                        tintColor="#d8dcd7"
+                                                                        thumbTintColor={null}
+                                                                        tintColor={null}
                                                                         value={false}
                                                                       />
                                                                     </RCTSwitch>
@@ -1584,10 +1584,10 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                         null,
                                                                       ]
                                                                     }
-                                                                    thumbColor="#eaeaea"
+                                                                    thumbColor={null}
                                                                     trackColor={
                                                                       Object {
-                                                                        "false": "#d8dcd7",
+                                                                        "false": null,
                                                                         "true": "#5c8a5199",
                                                                       }
                                                                     }
@@ -1620,8 +1620,8 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                           ],
                                                                         ]
                                                                       }
-                                                                      thumbTintColor="#eaeaea"
-                                                                      tintColor="#d8dcd7"
+                                                                      thumbTintColor={null}
+                                                                      tintColor={null}
                                                                       value={false}
                                                                     >
                                                                       <RCTSwitch
@@ -1651,8 +1651,8 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                             ],
                                                                           ]
                                                                         }
-                                                                        thumbTintColor="#eaeaea"
-                                                                        tintColor="#d8dcd7"
+                                                                        thumbTintColor={null}
+                                                                        tintColor={null}
                                                                         value={false}
                                                                       />
                                                                     </RCTSwitch>
@@ -3763,10 +3763,10 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                         null,
                                                                       ]
                                                                     }
-                                                                    thumbColor="#eaeaea"
+                                                                    thumbColor={null}
                                                                     trackColor={
                                                                       Object {
-                                                                        "false": "#d8dcd7",
+                                                                        "false": null,
                                                                         "true": "#5c8a5199",
                                                                       }
                                                                     }
@@ -3799,8 +3799,8 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                           ],
                                                                         ]
                                                                       }
-                                                                      thumbTintColor="#eaeaea"
-                                                                      tintColor="#d8dcd7"
+                                                                      thumbTintColor={null}
+                                                                      tintColor={null}
                                                                       value={false}
                                                                     >
                                                                       <RCTSwitch
@@ -3830,8 +3830,8 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                             ],
                                                                           ]
                                                                         }
-                                                                        thumbTintColor="#eaeaea"
-                                                                        tintColor="#d8dcd7"
+                                                                        thumbTintColor={null}
+                                                                        tintColor={null}
                                                                         value={false}
                                                                       />
                                                                     </RCTSwitch>
@@ -4059,10 +4059,10 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                         null,
                                                                       ]
                                                                     }
-                                                                    thumbColor="#eaeaea"
+                                                                    thumbColor={null}
                                                                     trackColor={
                                                                       Object {
-                                                                        "false": "#d8dcd7",
+                                                                        "false": null,
                                                                         "true": "#5c8a5199",
                                                                       }
                                                                     }
@@ -4095,8 +4095,8 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                           ],
                                                                         ]
                                                                       }
-                                                                      thumbTintColor="#eaeaea"
-                                                                      tintColor="#d8dcd7"
+                                                                      thumbTintColor={null}
+                                                                      tintColor={null}
                                                                       value={false}
                                                                     >
                                                                       <RCTSwitch
@@ -4126,8 +4126,8 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                             ],
                                                                           ]
                                                                         }
-                                                                        thumbTintColor="#eaeaea"
-                                                                        tintColor="#d8dcd7"
+                                                                        thumbTintColor={null}
+                                                                        tintColor={null}
                                                                         value={false}
                                                                       />
                                                                     </RCTSwitch>
@@ -6238,10 +6238,10 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                         null,
                                                                       ]
                                                                     }
-                                                                    thumbColor="#eaeaea"
+                                                                    thumbColor={null}
                                                                     trackColor={
                                                                       Object {
-                                                                        "false": "#d8dcd7",
+                                                                        "false": null,
                                                                         "true": "#5c8a5199",
                                                                       }
                                                                     }
@@ -6274,8 +6274,8 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                           ],
                                                                         ]
                                                                       }
-                                                                      thumbTintColor="#eaeaea"
-                                                                      tintColor="#d8dcd7"
+                                                                      thumbTintColor={null}
+                                                                      tintColor={null}
                                                                       value={false}
                                                                     >
                                                                       <RCTSwitch
@@ -6305,8 +6305,8 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                             ],
                                                                           ]
                                                                         }
-                                                                        thumbTintColor="#eaeaea"
-                                                                        tintColor="#d8dcd7"
+                                                                        thumbTintColor={null}
+                                                                        tintColor={null}
                                                                         value={false}
                                                                       />
                                                                     </RCTSwitch>
@@ -6534,10 +6534,10 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                         null,
                                                                       ]
                                                                     }
-                                                                    thumbColor="#eaeaea"
+                                                                    thumbColor={null}
                                                                     trackColor={
                                                                       Object {
-                                                                        "false": "#d8dcd7",
+                                                                        "false": null,
                                                                         "true": "#5c8a5199",
                                                                       }
                                                                     }
@@ -6570,8 +6570,8 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                           ],
                                                                         ]
                                                                       }
-                                                                      thumbTintColor="#eaeaea"
-                                                                      tintColor="#d8dcd7"
+                                                                      thumbTintColor={null}
+                                                                      tintColor={null}
                                                                       value={false}
                                                                     >
                                                                       <RCTSwitch
@@ -6601,8 +6601,8 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                             ],
                                                                           ]
                                                                         }
-                                                                        thumbTintColor="#eaeaea"
-                                                                        tintColor="#d8dcd7"
+                                                                        thumbTintColor={null}
+                                                                        tintColor={null}
                                                                         value={false}
                                                                       />
                                                                     </RCTSwitch>
@@ -8713,10 +8713,10 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                                         null,
                                                                       ]
                                                                     }
-                                                                    thumbColor="#eaeaea"
+                                                                    thumbColor={null}
                                                                     trackColor={
                                                                       Object {
-                                                                        "false": "#d8dcd7",
+                                                                        "false": null,
                                                                         "true": "#5c8a5199",
                                                                       }
                                                                     }
@@ -8749,8 +8749,8 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                                           ],
                                                                         ]
                                                                       }
-                                                                      thumbTintColor="#eaeaea"
-                                                                      tintColor="#d8dcd7"
+                                                                      thumbTintColor={null}
+                                                                      tintColor={null}
                                                                       value={false}
                                                                     >
                                                                       <RCTSwitch
@@ -8780,8 +8780,8 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                                             ],
                                                                           ]
                                                                         }
-                                                                        thumbTintColor="#eaeaea"
-                                                                        tintColor="#d8dcd7"
+                                                                        thumbTintColor={null}
+                                                                        tintColor={null}
                                                                         value={false}
                                                                       />
                                                                     </RCTSwitch>
@@ -9009,10 +9009,10 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                                         null,
                                                                       ]
                                                                     }
-                                                                    thumbColor="#eaeaea"
+                                                                    thumbColor={null}
                                                                     trackColor={
                                                                       Object {
-                                                                        "false": "#d8dcd7",
+                                                                        "false": null,
                                                                         "true": "#5c8a5199",
                                                                       }
                                                                     }
@@ -9045,8 +9045,8 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                                           ],
                                                                         ]
                                                                       }
-                                                                      thumbTintColor="#eaeaea"
-                                                                      tintColor="#d8dcd7"
+                                                                      thumbTintColor={null}
+                                                                      tintColor={null}
                                                                       value={false}
                                                                     >
                                                                       <RCTSwitch
@@ -9076,8 +9076,8 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                                             ],
                                                                           ]
                                                                         }
-                                                                        thumbTintColor="#eaeaea"
-                                                                        tintColor="#d8dcd7"
+                                                                        thumbTintColor={null}
+                                                                        tintColor={null}
                                                                         value={false}
                                                                       />
                                                                     </RCTSwitch>
@@ -11591,10 +11591,10 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                                         null,
                                                                       ]
                                                                     }
-                                                                    thumbColor="#eaeaea"
+                                                                    thumbColor={null}
                                                                     trackColor={
                                                                       Object {
-                                                                        "false": "#d8dcd7",
+                                                                        "false": null,
                                                                         "true": "#5c8a5199",
                                                                       }
                                                                     }
@@ -11627,8 +11627,8 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                                           ],
                                                                         ]
                                                                       }
-                                                                      thumbTintColor="#eaeaea"
-                                                                      tintColor="#d8dcd7"
+                                                                      thumbTintColor={null}
+                                                                      tintColor={null}
                                                                       value={false}
                                                                     >
                                                                       <RCTSwitch
@@ -11658,8 +11658,8 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                                             ],
                                                                           ]
                                                                         }
-                                                                        thumbTintColor="#eaeaea"
-                                                                        tintColor="#d8dcd7"
+                                                                        thumbTintColor={null}
+                                                                        tintColor={null}
                                                                         value={false}
                                                                       />
                                                                     </RCTSwitch>
@@ -11887,10 +11887,10 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                                         null,
                                                                       ]
                                                                     }
-                                                                    thumbColor="#eaeaea"
+                                                                    thumbColor={null}
                                                                     trackColor={
                                                                       Object {
-                                                                        "false": "#d8dcd7",
+                                                                        "false": null,
                                                                         "true": "#5c8a5199",
                                                                       }
                                                                     }
@@ -11923,8 +11923,8 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                                           ],
                                                                         ]
                                                                       }
-                                                                      thumbTintColor="#eaeaea"
-                                                                      tintColor="#d8dcd7"
+                                                                      thumbTintColor={null}
+                                                                      tintColor={null}
                                                                       value={false}
                                                                     >
                                                                       <RCTSwitch
@@ -11954,8 +11954,8 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                                             ],
                                                                           ]
                                                                         }
-                                                                        thumbTintColor="#eaeaea"
-                                                                        tintColor="#d8dcd7"
+                                                                        thumbTintColor={null}
+                                                                        tintColor={null}
                                                                         value={false}
                                                                       />
                                                                     </RCTSwitch>
@@ -14007,10 +14007,10 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                                         null,
                                                                       ]
                                                                     }
-                                                                    thumbColor="#eaeaea"
+                                                                    thumbColor={null}
                                                                     trackColor={
                                                                       Object {
-                                                                        "false": "#d8dcd7",
+                                                                        "false": null,
                                                                         "true": "#5c8a5199",
                                                                       }
                                                                     }
@@ -14043,8 +14043,8 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                                           ],
                                                                         ]
                                                                       }
-                                                                      thumbTintColor="#eaeaea"
-                                                                      tintColor="#d8dcd7"
+                                                                      thumbTintColor={null}
+                                                                      tintColor={null}
                                                                       value={false}
                                                                     >
                                                                       <RCTSwitch
@@ -14074,8 +14074,8 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                                             ],
                                                                           ]
                                                                         }
-                                                                        thumbTintColor="#eaeaea"
-                                                                        tintColor="#d8dcd7"
+                                                                        thumbTintColor={null}
+                                                                        tintColor={null}
                                                                         value={false}
                                                                       />
                                                                     </RCTSwitch>
@@ -14303,10 +14303,10 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                                         null,
                                                                       ]
                                                                     }
-                                                                    thumbColor="#eaeaea"
+                                                                    thumbColor={null}
                                                                     trackColor={
                                                                       Object {
-                                                                        "false": "#d8dcd7",
+                                                                        "false": null,
                                                                         "true": "#5c8a5199",
                                                                       }
                                                                     }
@@ -14339,8 +14339,8 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                                           ],
                                                                         ]
                                                                       }
-                                                                      thumbTintColor="#eaeaea"
-                                                                      tintColor="#d8dcd7"
+                                                                      thumbTintColor={null}
+                                                                      tintColor={null}
                                                                       value={false}
                                                                     >
                                                                       <RCTSwitch
@@ -14370,8 +14370,8 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                                             ],
                                                                           ]
                                                                         }
-                                                                        thumbTintColor="#eaeaea"
-                                                                        tintColor="#d8dcd7"
+                                                                        thumbTintColor={null}
+                                                                        tintColor={null}
                                                                         value={false}
                                                                       />
                                                                     </RCTSwitch>

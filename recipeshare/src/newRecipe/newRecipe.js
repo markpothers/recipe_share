@@ -22,6 +22,8 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-nat
 import InstructionRow from './instructionRow'
 import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
 import { DragSortableView } from 'react-native-drag-sort/lib'
+import { cuisines } from '../dataComponents/cuisines'
+import { serves } from '../dataComponents/serves'
 import { clearedFilters } from '../dataComponents/clearedFilters'
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo';
@@ -681,7 +683,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			}, this.saveNewRecipeDetailsLocally)
 		}
 
-		clearFilerCategories = () => {
+		clearFilterSettings = () => {
 			this.setState((state) => {
 				return ({
 					newRecipeDetails: {
@@ -751,15 +753,29 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						<FilterMenu
 							handleCategoriesButton={this.handleCategoriesButton}
 							newRecipe={true}
-							newRecipeFilterSettings={this.state.newRecipeDetails.filter_settings}
+							//newRecipeFilterSettings={this.state.newRecipeDetails.filter_settings}
 							switchNewRecipeFilterValue={this.toggleFilterCategory}
-							newRecipeServes={this.state.newRecipeDetails.serves}
+							//newRecipeServes={this.state.newRecipeDetails.serves}
 							setNewRecipeServes={this.handleInput}
 							newRecipeCuisine={this.state.newRecipeDetails.cuisine}
 							setNewRecipeCuisine={this.handleInput}
-							clearNewRecipeFilters={this.clearFilerCategories}
+							//clearNewRecipeFilters={this.clearFilerCategories}
 							confirmButtonText={"Save"}
 							title={"Select categories for your recipe"}
+
+							// listChoice={this.getRecipeListName()}
+							// fetchFilterChoices={this.fetchFilterChoices}
+							// clearSearchTerm={() => this.setState({ searchTerm: "" })}
+							cuisineOptions={cuisines}
+							selectedCuisine={this.state.newRecipeDetails.cuisine}
+							//setSelectedCuisine={this.setSelectedCuisine}
+							servesOptions={serves}
+							selectedServes={this.state.newRecipeDetails.serves}
+							//setSelectedServes={this.setSelectedServes}
+							filterOptions={Object.keys(clearedFilters)}
+							filterSettings={this.state.newRecipeDetails.filter_settings}
+							//setFilterSetting={this.setFilterSetting}
+							clearFilterSettings={this.clearFilterSettings}
 						/>
 					)
 					}

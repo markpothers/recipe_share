@@ -21,6 +21,7 @@ export default {
     fetch: () => {
         return Promise.resolve(returnValue);
     },
+	configure: jest.fn(),
     addEventListener: jest.fn(),
     removeEventListener: jest.fn(),
 };

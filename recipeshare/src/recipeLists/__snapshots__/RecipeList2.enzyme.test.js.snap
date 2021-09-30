@@ -38,51 +38,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
   }
 >
   <RecipesList
-    all_Recipes={Array []}
-    appendToRecipeList={[Function]}
-    chef_Recipes={Array []}
-    chef_feed_Recipes={Array []}
-    chef_liked_Recipes={Array []}
-    chef_made_Recipes={Array []}
-    filterCuisines={
-      Object {
-        "all": "Any",
-        "chef": "Any",
-        "chef_feed": "Any",
-        "chef_liked": "Any",
-        "chef_made": "Any",
-        "global_ranks": "Any",
-        "most_liked": "Any",
-        "most_made": "Any",
-      }
-    }
-    filter_settings={
-      Object {
-        "Bread": false,
-        "Breakfast": false,
-        "Chicken": false,
-        "Dairy free": false,
-        "Dessert": false,
-        "Dinner": false,
-        "Freezer meal": false,
-        "Gluten free": false,
-        "Keto": false,
-        "Lunch": false,
-        "Paleo": false,
-        "Red meat": false,
-        "Salad": false,
-        "Seafood": false,
-        "Side": false,
-        "Soup": false,
-        "Vegan": false,
-        "Vegetarian": false,
-        "Weekend": false,
-        "Weeknight": false,
-        "White meat": false,
-        "Whole 30": false,
-      }
-    }
-    global_ranks_Recipes={Array []}
+    allRecipeLists={Object {}}
     listChoice="all"
     loggedInChef={
       Object {
@@ -93,8 +49,6 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
         "username": "",
       }
     }
-    most_liked_Recipes={Array []}
-    most_made_Recipes={Array []}
     navigation={
       Object {
         "addListener": [MockFunction] {
@@ -129,13 +83,10 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
         "name": "All Recipes",
       }
     }
-    serves="Any"
     storeChefDetails={[Function]}
-    storeCuisinesChoices={[Function]}
-    storeFilterChoices={[Function]}
     storeRecipeDetails={[Function]}
-    storeRecipeList={[Function]}
-    storeServesChoices={[Function]}
+    updateAllRecipeLists={[Function]}
+    updateSingleRecipeList={[Function]}
   >
     <SpinachAppContainer
       awaitingServer={false}
@@ -275,26 +226,96 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                           }
                         }
                       >
+                        <View
+                          style={
+                            Object {
+                              "alignItems": "center",
+                              "justifyContent": "center",
+                              "marginTop": 266.8,
+                              "position": "absolute",
+                              "width": "100%",
+                            }
+                          }
+                        >
+                          <View
+                            style={
+                              Object {
+                                "alignItems": "center",
+                                "justifyContent": "center",
+                                "marginTop": 266.8,
+                                "position": "absolute",
+                                "width": "100%",
+                              }
+                            }
+                          >
+                            <Icon
+                              name="gesture-swipe-down"
+                              size={66.7}
+                              style={
+                                Object {
+                                  "color": "#fff59b",
+                                }
+                              }
+                            />
+                            <Text
+                              style={
+                                Object {
+                                  "color": "#fff59b",
+                                  "fontSize": 38.244916147262124,
+                                  "fontWeight": "bold",
+                                  "textAlign": "center",
+                                }
+                              }
+                            >
+                              <Text
+                                style={
+                                  Object {
+                                    "color": "#fff59b",
+                                    "fontSize": 38.244916147262124,
+                                    "fontWeight": "bold",
+                                    "textAlign": "center",
+                                  }
+                                }
+                              >
+                                Swipe down to refresh
+                              </Text>
+                            </Text>
+                          </View>
+                        </View>
                         <ForwardRef(AnimatedComponentWrapper)
                           ListHeaderComponent={[Function]}
                           data={Array []}
-                          extraData={Object {}}
                           initialNumToRender={5}
                           keyExtractor={[Function]}
                           listKey={Array []}
                           nestedScrollEnabled={true}
                           onEndReached={[Function]}
                           onEndReachedThreshold={2.5}
-                          onRefresh={[Function]}
                           onScroll={[Function]}
-                          refreshing={false}
+                          refreshControl={
+                            <RefreshControlMock
+                              colors={
+                                Array [
+                                  "#104e01",
+                                ]
+                              }
+                              onRefresh={[Function]}
+                              progressBackgroundColor="#fff59b"
+                              refreshing={false}
+                              tintColor="#fff59b"
+                            />
+                          }
                           renderItem={[Function]}
                           scrollEventThrottle={16}
+                          style={
+                            Object {
+                              "minHeight": 933.8,
+                            }
+                          }
                         >
                           <AnimatedComponent
                             ListHeaderComponent={[Function]}
                             data={Array []}
-                            extraData={Object {}}
                             forwardedRef={[Function]}
                             initialNumToRender={5}
                             keyExtractor={[Function]}
@@ -302,17 +323,32 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                             nestedScrollEnabled={true}
                             onEndReached={[Function]}
                             onEndReachedThreshold={2.5}
-                            onRefresh={[Function]}
                             onScroll={[Function]}
-                            refreshing={false}
+                            refreshControl={
+                              <RefreshControlMock
+                                colors={
+                                  Array [
+                                    "#104e01",
+                                  ]
+                                }
+                                onRefresh={[Function]}
+                                progressBackgroundColor="#fff59b"
+                                refreshing={false}
+                                tintColor="#fff59b"
+                              />
+                            }
                             renderItem={[Function]}
                             scrollEventThrottle={16}
+                            style={
+                              Object {
+                                "minHeight": 933.8,
+                              }
+                            }
                           >
                             <FlatList
                               ListHeaderComponent={[Function]}
                               data={Array []}
                               disableVirtualization={false}
-                              extraData={Object {}}
                               forwardedRef={[Function]}
                               horizontal={false}
                               initialNumToRender={5}
@@ -323,12 +359,28 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                               numColumns={1}
                               onEndReached={[Function]}
                               onEndReachedThreshold={2.5}
-                              onRefresh={[Function]}
                               onScroll={[Function]}
-                              refreshing={false}
+                              refreshControl={
+                                <RefreshControlMock
+                                  colors={
+                                    Array [
+                                      "#104e01",
+                                    ]
+                                  }
+                                  onRefresh={[Function]}
+                                  progressBackgroundColor="#fff59b"
+                                  refreshing={false}
+                                  tintColor="#fff59b"
+                                />
+                              }
                               removeClippedSubviews={false}
                               renderItem={[Function]}
                               scrollEventThrottle={16}
+                              style={
+                                Object {
+                                  "minHeight": 933.8,
+                                }
+                              }
                               updateCellsBatchingPeriod={50}
                               windowSize={21}
                             >
@@ -336,7 +388,6 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                 ListHeaderComponent={[Function]}
                                 data={Array []}
                                 disableVirtualization={false}
-                                extraData={Object {}}
                                 forwardedRef={[Function]}
                                 getItem={[Function]}
                                 getItemCount={[Function]}
@@ -348,12 +399,28 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                 nestedScrollEnabled={true}
                                 onEndReached={[Function]}
                                 onEndReachedThreshold={2.5}
-                                onRefresh={[Function]}
                                 onScroll={[Function]}
-                                refreshing={false}
+                                refreshControl={
+                                  <RefreshControlMock
+                                    colors={
+                                      Array [
+                                        "#104e01",
+                                      ]
+                                    }
+                                    onRefresh={[Function]}
+                                    progressBackgroundColor="#fff59b"
+                                    refreshing={false}
+                                    tintColor="#fff59b"
+                                  />
+                                }
                                 removeClippedSubviews={false}
                                 renderItem={[Function]}
                                 scrollEventThrottle={16}
+                                style={
+                                  Object {
+                                    "minHeight": 933.8,
+                                  }
+                                }
                                 updateCellsBatchingPeriod={50}
                                 viewabilityConfigCallbackPairs={Array []}
                                 windowSize={21}
@@ -362,7 +429,6 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                   ListHeaderComponent={[Function]}
                                   data={Array []}
                                   disableVirtualization={false}
-                                  extraData={Object {}}
                                   forwardedRef={[Function]}
                                   getItem={[Function]}
                                   getItemCount={[Function]}
@@ -377,21 +443,31 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                   onEndReachedThreshold={2.5}
                                   onLayout={[Function]}
                                   onMomentumScrollEnd={[Function]}
-                                  onRefresh={[Function]}
                                   onScroll={[Function]}
                                   onScrollBeginDrag={[Function]}
                                   onScrollEndDrag={[Function]}
                                   refreshControl={
                                     <RefreshControlMock
+                                      colors={
+                                        Array [
+                                          "#104e01",
+                                        ]
+                                      }
                                       onRefresh={[Function]}
+                                      progressBackgroundColor="#fff59b"
                                       refreshing={false}
+                                      tintColor="#fff59b"
                                     />
                                   }
-                                  refreshing={false}
                                   removeClippedSubviews={false}
                                   renderItem={[Function]}
                                   scrollEventThrottle={16}
                                   stickyHeaderIndices={Array []}
+                                  style={
+                                    Object {
+                                      "minHeight": 933.8,
+                                    }
+                                  }
                                   updateCellsBatchingPeriod={50}
                                   viewabilityConfigCallbackPairs={Array []}
                                   windowSize={21}
@@ -400,7 +476,6 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                     ListHeaderComponent={[Function]}
                                     data={Array []}
                                     disableVirtualization={false}
-                                    extraData={Object {}}
                                     forwardedRef={[Function]}
                                     getItem={[Function]}
                                     getItemCount={[Function]}
@@ -415,21 +490,31 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                     onEndReachedThreshold={2.5}
                                     onLayout={[Function]}
                                     onMomentumScrollEnd={[Function]}
-                                    onRefresh={[Function]}
                                     onScroll={[Function]}
                                     onScrollBeginDrag={[Function]}
                                     onScrollEndDrag={[Function]}
                                     refreshControl={
                                       <RefreshControlMock
+                                        colors={
+                                          Array [
+                                            "#104e01",
+                                          ]
+                                        }
                                         onRefresh={[Function]}
+                                        progressBackgroundColor="#fff59b"
                                         refreshing={false}
+                                        tintColor="#fff59b"
                                       />
                                     }
-                                    refreshing={false}
                                     removeClippedSubviews={false}
                                     renderItem={[Function]}
                                     scrollEventThrottle={16}
                                     stickyHeaderIndices={Array []}
+                                    style={
+                                      Object {
+                                        "minHeight": 933.8,
+                                      }
+                                    }
                                     updateCellsBatchingPeriod={50}
                                     viewabilityConfigCallbackPairs={Array []}
                                     windowSize={21}
@@ -438,7 +523,6 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                       ListHeaderComponent={[Function]}
                                       data={Array []}
                                       disableVirtualization={false}
-                                      extraData={Object {}}
                                       forwardedRef={[Function]}
                                       getItem={[Function]}
                                       getItemCount={[Function]}
@@ -453,28 +537,45 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                       onEndReachedThreshold={2.5}
                                       onLayout={[Function]}
                                       onMomentumScrollEnd={[Function]}
-                                      onRefresh={[Function]}
                                       onScroll={[Function]}
                                       onScrollBeginDrag={[Function]}
                                       onScrollEndDrag={[Function]}
                                       refreshControl={
                                         <RefreshControlMock
+                                          colors={
+                                            Array [
+                                              "#104e01",
+                                            ]
+                                          }
                                           onRefresh={[Function]}
+                                          progressBackgroundColor="#fff59b"
                                           refreshing={false}
+                                          tintColor="#fff59b"
                                         />
                                       }
-                                      refreshing={false}
                                       removeClippedSubviews={false}
                                       renderItem={[Function]}
                                       scrollEventThrottle={16}
                                       stickyHeaderIndices={Array []}
+                                      style={
+                                        Object {
+                                          "minHeight": 933.8,
+                                        }
+                                      }
                                       updateCellsBatchingPeriod={50}
                                       viewabilityConfigCallbackPairs={Array []}
                                       windowSize={21}
                                     >
                                       <RefreshControlMock
+                                        colors={
+                                          Array [
+                                            "#104e01",
+                                          ]
+                                        }
                                         onRefresh={[Function]}
+                                        progressBackgroundColor="#fff59b"
                                         refreshing={false}
+                                        tintColor="#fff59b"
                                       >
                                         <RCTRefreshControl>
                                           <RCTRefreshControl />
@@ -497,7 +598,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                                     onPress={[Function]}
                                                     style={
                                                       Object {
-                                                        "height": 93.38000000000001,
+                                                        "height": 933.8,
                                                       }
                                                     }
                                                   >
@@ -506,7 +607,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                                       onPress={[Function]}
                                                       style={
                                                         Object {
-                                                          "height": 93.38000000000001,
+                                                          "height": 933.8,
                                                         }
                                                       }
                                                     >
@@ -523,7 +624,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                                         style={
                                                           Array [
                                                             Object {
-                                                              "height": 93.38000000000001,
+                                                              "height": 933.8,
                                                             },
                                                             Object {
                                                               "opacity": 1,
@@ -544,7 +645,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                                           style={
                                                             Array [
                                                               Object {
-                                                                "height": 93.38000000000001,
+                                                                "height": 933.8,
                                                               },
                                                               Object {
                                                                 "opacity": 1,
@@ -564,7 +665,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                                             onStartShouldSetResponder={[Function]}
                                                             style={
                                                               Object {
-                                                                "height": 93.38000000000001,
+                                                                "height": 933.8,
                                                                 "opacity": 1,
                                                               }
                                                             }
@@ -581,7 +682,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                                               onStartShouldSetResponder={[Function]}
                                                               style={
                                                                 Object {
-                                                                  "height": 93.38000000000001,
+                                                                  "height": 933.8,
                                                                   "opacity": 1,
                                                                 }
                                                               }

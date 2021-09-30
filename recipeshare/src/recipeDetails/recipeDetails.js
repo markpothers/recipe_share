@@ -25,7 +25,7 @@ import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-nat
 import { ImagePopup } from './imagePopup'
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo';
-NetInfo.configure({reachabilityShortTimeout: 5}) //5ms
+NetInfo.configure({ reachabilityShortTimeout: 5 }) //5ms
 import { AlertPopUp } from '../alertPopUp/alertPopUp'
 import DynamicMenu from '../dynamicMenu/DynamicMenu.js'
 import saveChefDetailsLocally from '../auxFunctions/saveChefDetailsLocally'
@@ -38,7 +38,7 @@ const defaultRecipeImage = require("../dataComponents/default-recipe.jpg")
 let keepAwakeTimer
 
 const mapStateToProps = (state) => ({
-	allRecipeLists: state.recipes,
+	allRecipeLists: state.allRecipeLists,
 	recipe_details: state.recipe_details,
 	loggedInChef: state.loggedInChef,
 	filter_settings: state.filter_settings,
@@ -100,9 +100,9 @@ const mapDispatchToProps = {
 			dispatch({ type: 'STORE_CHEF_DETAILS', chefID: `chef${chef_details.chef.id}`, chef_details: chef_details })
 		}
 	},
-	storeRecipeList: (listChoice, recipes) => {
+	updateAllRecipeLists: (allRecipeLists) => {
 		return dispatch => {
-			dispatch({ type: 'STORE_RECIPE_LISTS', recipeType: listChoice, recipeList: recipes })
+			dispatch({ type: 'UPDATE_ALL_RECIPE_LISTS', allRecipeLists: allRecipeLists })
 		}
 	},
 	// storeRecipeDetails: (recipe_details) => {
@@ -140,7 +140,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			imagePopupDetails: {},
 			imagePopupShowing: false,
 			webviewHeight: responsiveHeight(60),
-			webviewLoading: true
+			webviewLoading: true,
+			webviewCanRespondToEvents: false
 		}
 
 		generateHeaderButtonList = async () => {
@@ -498,10 +499,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			}
 		}
 
-		updateAttributeCountInRecipeLists = (attribute, toggle, diff) => {
-			Object.keys(this.props.allRecipeLists).forEach(list =>{
-				let newList = this.props.allRecipeLists[list].map(recipe => {
-					if (recipe.id == this.props.recipe_details.recipe.id){
+		updateAttributeCountInRecipeLists = (recipeId, attribute, toggle, diff) => {
+			let newAllRecipeLists = {}
+			Object.keys(this.props.allRecipeLists).forEach(list => {
+				let recipeList = this.props.allRecipeLists[list].map(recipe => {
+					if (recipe.id == recipeId) {
 						recipe[attribute] += diff
 						recipe[toggle] = diff > 0 ? 1 : 0
 						return recipe
@@ -509,8 +511,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						return recipe
 					}
 				})
-				this.props.storeRecipeList(list, newList)
+				newAllRecipeLists[list] = recipeList
 			})
+			this.props.updateAllRecipeLists(newAllRecipeLists)
 		}
 
 		likeRecipe = async () => {
@@ -521,7 +524,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						const likePosted = await postRecipeLike(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
 						if (likePosted) {
 							this.props.addRecipeLike()
-							this.updateAttributeCountInRecipeLists("likes_count", "chef_liked", 1)
+							this.updateAttributeCountInRecipeLists(this.props.recipe_details.recipe.id, "likes_count", "chef_liked", 1)
 						}
 					} catch (e) {
 						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
@@ -542,7 +545,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						const unlikePosted = await destroyRecipeLike(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
 						if (unlikePosted) {
 							this.props.removeRecipeLike()
-							this.updateAttributeCountInRecipeLists("likes_count", "chef_liked", -1)
+							this.updateAttributeCountInRecipeLists(this.props.recipe_details.recipe.id, "likes_count", "chef_liked", -1)
 						}
 					} catch (e) {
 						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
@@ -564,7 +567,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						const makePosted = await postRecipeMake(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
 						if (makePosted) {
 							this.props.addRecipeMake()
-							this.updateAttributeCountInRecipeLists("makes_count", "chef_made", 1)
+							this.updateAttributeCountInRecipeLists(this.props.recipe_details.recipe.id, "makes_count", "chef_made", 1)
 
 						}
 					} catch (e) {
@@ -586,7 +589,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						const reSharePosted = await postReShare(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
 						if (reSharePosted) {
 							this.props.addReShare()
-							this.updateAttributeCountInRecipeLists("shares_count", "chef_shared", 1)
+							this.updateAttributeCountInRecipeLists(this.props.recipe_details.recipe.id, "shares_count", "chef_shared", 1)
 						}
 					} catch (e) {
 						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
@@ -607,7 +610,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						const unReShared = await destroyReShare(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token)
 						if (unReShared) {
 							this.props.removeReShare()
-							this.updateAttributeCountInRecipeLists("shares_count", "chef_shared", -1)
+							this.updateAttributeCountInRecipeLists(this.props.recipe_details.recipe.id, "shares_count", "chef_shared", -1)
 						}
 					} catch (e) {
 						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
@@ -714,7 +717,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					const comments = await postComment(this.props.recipe_details.recipe.id, this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.state.commentText)
 					if (comments) {
 						this.props.updateComments(comments)
-						this.updateAttributeCountInRecipeLists("comments_count", "chef_commented", 1)
+						this.updateAttributeCountInRecipeLists(this.props.recipe_details.recipe.id, "comments_count", "chef_commented", 1)
 						this.setState({
 							commenting: false,
 							commentText: ""
@@ -747,7 +750,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						const comments = await destroyComment(this.props.loggedInChef.auth_token, this.state.commentToDelete)
 						if (comments) {
 							this.props.updateComments(comments)
-							this.updateAttributeCountInRecipeLists("comments_count", "chef_commented", -1)
+							this.updateAttributeCountInRecipeLists(this.props.recipe_details.recipe.id, "comments_count", "chef_commented", -1)
 						}
 						this.setState({ deleteCommentPopUpShowing: false })
 					} catch (e) {
@@ -824,15 +827,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											width: '100%',
 										}}
 										onShouldStartLoadWithRequest={event => {
-											if (Platform.OS === 'ios') {
-												if (event.mainDocumentURL !== this.props.recipe_details.recipe.acknowledgement_link) {
-													Linking.openURL(event.mainDocumentURL)
-													return false
-												}
-											} else {
-												if (event.url !== this.props.recipe_details.recipe.acknowledgement_link) {
-													Linking.openURL(event.url)
-													return false
+											if (this.state.webviewCanRespondToEvents) {
+												if (Platform.OS === 'ios') {
+													if (event.mainDocumentURL !== this.props.recipe_details.recipe.acknowledgement_link) {
+														Linking.openURL(event.mainDocumentURL)
+														return false
+													}
+												} else {
+													if (event.url !== this.props.recipe_details.recipe.acknowledgement_link) {
+														Linking.openURL(event.url)
+														return false
+													}
 												}
 											}
 											return true
@@ -842,7 +847,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 										// 		Linking.openURL(event.url)
 										// 	}
 										// }}
-										onLoad={() => this.setState({ webviewLoading: false })}
+										onLoad={() => {
+											this.setState({
+												webviewLoading: false,
+												webviewCanRespondToEvents: true
+											})
+										}
+										}
 									/>
 								</ScrollView>
 								{this.state.webviewLoading && <StyledActivityIndicator />}
@@ -1090,12 +1101,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 														<Text maxFontSizeMultiplier={2} style={notShowingAllTimes ? styles.detailsLikesAndMakesLowerContentsLimitedTimings : styles.detailsLikesAndMakesLowerContentsAllTimings}> / </Text>
 													)
 												} */}
-												<Text
+												{(!notShowingAllTimes || (this.props.recipe_details.recipe.prep_time == 0 && this.props.recipe_details.recipe.cook_time == 0 && this.props.recipe_details.recipe.total_time > 0)) && (<Text
 													maxFontSizeMultiplier={2}
 													style={notShowingAllTimes ? styles.detailsLikesAndMakesLowerContentsLimitedTimings : styles.detailsLikesAndMakesLowerContentsAllTimings}
 												>
 													Total Time: {getTimeStringFromMinutes(this.props.recipe_details.recipe.total_time)}
-												</Text>
+												</Text>)}
 											</View>
 										</View>
 									)}

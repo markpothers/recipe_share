@@ -18,7 +18,7 @@ import AppHeaderRight from '../../navigation/appHeaderRight'
 
 const mapStateToProps = (state) => ({
 	loggedInChef: state.loggedInChef,
-	allChefLists: state.chefs,
+	allChefLists: state.allChefLists,
 	chefs_details: state.chefs_details,
 })
 
@@ -38,9 +38,14 @@ const mapDispatchToProps = {
 			dispatch({ type: 'CLEAR_CHEF_DETAILS' })
 		}
 	},
-	storeChefList: (listChoice, chefs) => {
+	// storeChefList: (listChoice, chefs) => {
+	// 	return dispatch => {
+	// 		dispatch({ type: 'STORE_CHEF_LIST', chefType: listChoice, chefList: chefs })
+	// 	}
+	// },
+	updateAllChefLists: (allChefLists) => {
 		return dispatch => {
-			dispatch({ type: 'STORE_CHEF_LIST', chefType: listChoice, chefList: chefs })
+			dispatch({ type: 'UPDATE_ALL_CHEF_LISTS', allChefLists: allChefLists })
 		}
 	},
 }
@@ -146,8 +151,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		updateAttributeCountInChefLists = (chefId, attribute, toggle, diff) => {
+			let newAllChefLists = {}
 			Object.keys(this.props.allChefLists).forEach(list => {
-				let newList = this.props.allChefLists[list].map(chef => {
+				let chefList = this.props.allChefLists[list].map(chef => {
 					if (chef.id == chefId) {
 						chef[attribute] += diff
 						chef[toggle] = diff > 0 ? 1 : 0
@@ -156,8 +162,21 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						return chef
 					}
 				})
-				this.props.storeChefList(list, newList)
+				newAllChefLists[list] = chefList
 			})
+			this.props.updateAllChefLists(newAllChefLists)
+			// Object.keys(this.props.allChefLists).forEach(list => {
+			// 	let newList = this.props.allChefLists[list].map(chef => {
+			// 		if (chef.id == chefId) {
+			// 			chef[attribute] += diff
+			// 			chef[toggle] = diff > 0 ? 1 : 0
+			// 			return chef
+			// 		} else {
+			// 			return chef
+			// 		}
+			// 	})
+			// 	this.props.storeChefList(list, newList)
+			// })
 		}
 
 		followChef = async () => {
