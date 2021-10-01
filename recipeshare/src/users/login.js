@@ -1,6 +1,7 @@
 import React from 'react'
 import { Text, Image, View, TextInput, TouchableOpacity, Keyboard } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { saveToken } from '../auxFunctions/saveLoadToken'
 import { connect } from 'react-redux'
 import { styles } from './usersStyleSheet'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
@@ -117,10 +118,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				})
 			} else { // we don't want to differentiate between response and response.error for security reasons
 				if (this.props.stayingLoggedIn) {
+					this.props.clearLoginUserDetails()
+					this.props.updateLoggedInChefInState(response.id, response.e_mail, response.username, response.auth_token, response.image_url, response.is_admin, response.is_member)
+					saveToken(response.auth_token)
+					delete response.auth_token
 					AsyncStorage.setItem('chef', JSON.stringify(response), () => {
-						this.props.clearLoginUserDetails()
-						this.props.updateLoggedInChefInState(response.id, response.e_mail, response.username, response.auth_token, response.image_url, response.is_admin, response.is_member)
-						this.props.navigation.navigate("CreateChef", { successfulLogin: true }) //thisnavigate command is used to trigger Apple Keychain.  CreateChef will immediately perform the required actions to login.
+						this.props.navigation.navigate("CreateChef", { successfulLogin: true }) //this navigate command is used to trigger Apple Keychain.  CreateChef will immediately perform the required actions to login.
 					})
 				} else {
 					this.props.updateLoggedInChefInState(response.id, response.e_mail, response.username, response.auth_token, response.image_url, response.is_admin, response.is_member)

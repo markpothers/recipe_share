@@ -1,6 +1,7 @@
 import React from 'react'
 import { Modal, Text, View, ScrollView, KeyboardAvoidingView, TouchableOpacity, TextInput, Platform } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { saveToken } from '../auxFunctions/saveLoadToken'
 import { styles } from './chefEditorStyleSheet'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux'
@@ -10,7 +11,7 @@ import DualOSPicker from '../dualOSPicker/DualOSPicker'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 import NetInfo from '@react-native-community/netinfo';
-NetInfo.configure({reachabilityShortTimeout: 5}) //5ms
+NetInfo.configure({ reachabilityShortTimeout: 5 }) //5ms
 import OfflineMessage from '../offlineMessage/offlineMessage'
 
 const mapStateToProps = (state) => ({
@@ -188,9 +189,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							})
 						} else {
 							if (this.props.stayingLoggedIn) {
+								saveToken(updatedChef.auth_token)
+								this.props.updateLoggedInChefInState(updatedChef.id, chef.e_mail, updatedChef.username, updatedChef.auth_token, updatedChef.image_url, updatedChef.is_admin, updatedChef.is_member)
+								this.props.clearNewUserDetails()
+								delete updatedChef.auth_token
 								AsyncStorage.setItem('chef', JSON.stringify(updatedChef), () => {
-									this.props.updateLoggedInChefInState(updatedChef.id, chef.e_mail, updatedChef.username, updatedChef.auth_token, updatedChef.image_url, updatedChef.is_admin, updatedChef.is_member)
-									this.props.clearNewUserDetails()
 									this.props.chefUpdated(true)
 								})
 							} else {

@@ -1,6 +1,6 @@
 import React from 'react';
-import { AppState } from 'react-native'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+// import { AppState } from 'react-native'
+// import AsyncStorage from '@react-native-async-storage/async-storage'
 import { connect } from 'react-redux'
 import MainDrawerNavigator from './MainDrawerNavigator'
 
@@ -47,15 +47,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         componentDidMount = async() => {
           // await runSavedActions()
           // console.log('Main Drawer Navigator mounted')
-          AppState.addEventListener('change', this.handleAppStateChange)
+        //   AppState.addEventListener('change', this.handleAppStateChange)
         }
 
         componentWillUnmount = () => {
             // console.log('Main Drawer Navigator will unmount')
-            AppState.removeEventListener('change')
+            // AppState.removeEventListener('change')
         }
 
-        handleAppStateChange = async(nextAppState) => {
+        // handleAppStateChange = async(nextAppState) => {
           // AsyncStorage.removeItem('localRecipeDetails')
           // AsyncStorage.removeItem('localChefDetails')
           // AsyncStorage.removeItem('locallySavedListData')
@@ -91,7 +91,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             //     // console.log('locallySavedListData saved')
             //   })
             // }
-          }
+        //   }
 
 
         render() {

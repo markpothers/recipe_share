@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScrollView, View, Text, TouchableOpacity, Image } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { deleteToken } from '../src/auxFunctions/saveLoadToken'
 // import { DrawerItems, SafeAreaView } from 'react-navigation';
 import { styles } from './drawerStyleSheet'
 import { connect } from 'react-redux'
@@ -31,6 +32,7 @@ export default (connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		logout = () => {
+			deleteToken()
 			AsyncStorage.removeItem('chef', () => {
 				this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: false })
 			})

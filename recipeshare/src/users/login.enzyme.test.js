@@ -23,6 +23,7 @@ import { AlertPopUp } from '../alertPopUp/alertPopUp'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import OfflineMessage from '../offlineMessage/offlineMessage';
 import { apiCall } from '../auxFunctions/apiCall'
+import * as SecureStore from 'expo-secure-store';
 
 // manual mocks
 jest.mock('../auxFunctions/apiCall.js')
@@ -452,7 +453,7 @@ describe('Login', () => {
 			expect(mockNavigate).toHaveBeenCalledWith('CreateChef', { successfulLogin: true })
 		})
 
-		test('logs in successfully staying logged in', async () => {
+		test.only('logs in successfully staying logged in', async () => {
 			apiCall.mockImplementation(() => new Promise.resolve(loginResponse))
 			let stayLoggedInToggle = findByTestID(component, SwitchSized, 'stayLoggedInToggle')
 			act(() => stayLoggedInToggle.onValueChange(true))
@@ -461,6 +462,8 @@ describe('Login', () => {
 			component.update()
 			// console.log(instance.props)
 			expect(instance.props.stayingLoggedIn).toEqual(true)
+			let loginResponseWithoutAuth = {...loginResponse}
+			delete loginResponseWithoutAuth.auth_token
 			expect(AsyncStorage.setItem).toBeCalledWith('chef', JSON.stringify(loginResponse), expect.any(Function))
 			expect(instance.props.e_mail).toEqual('') //value is updated in reduxby clearLoginUserDetails
 			expect(instance.props.password).toEqual('') //value is updated in redux

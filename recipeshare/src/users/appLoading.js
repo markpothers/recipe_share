@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, ImageBackground, Image } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { loadToken } from '../auxFunctions/saveLoadToken'
 import { connect } from 'react-redux'
 import { styles } from './usersStyleSheet'
 
@@ -31,11 +32,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		};
 
 		componentDidMount = async () => {
-			let storedChef = JSON.parse(await AsyncStorage.getItem('chef'))
-			if (storedChef != null) {
-				await this.props.stayLoggedIn(true)
-				this.props.updateLoggedInChefInState(storedChef.id, storedChef.e_mail, storedChef.username, storedChef.auth_token, storedChef.image_url, storedChef.is_admin, storedChef.is_member)
-				await this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: true })
+			let token = await loadToken()
+			if (token) {
+				let storedChef = JSON.parse(await AsyncStorage.getItem('chef'))
+				if (storedChef != null) {
+					storedChef.auth_token = token
+					await this.props.stayLoggedIn(true)
+					this.props.updateLoggedInChefInState(storedChef.id, storedChef.e_mail, storedChef.username, storedChef.auth_token, storedChef.image_url, storedChef.is_admin, storedChef.is_member)
+					await this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: true })
+				} else {
+					await this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: false })
+				}
 			} else {
 				await this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: false })
 			}

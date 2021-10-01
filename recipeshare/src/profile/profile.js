@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { deleteToken } from '../auxFunctions/saveLoadToken'
 import ChefDetailsCard from '../chefDetails/ChefDetailsCard'
 import { getChefDetails } from '../fetches/getChefDetails'
 import ChefEditor from './chefEditor'
@@ -117,6 +118,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		componentDidMount = async () => {
 			if (this.props.route.params?.logout) {
+				deleteToken()
 				AsyncStorage.removeItem('chef', () => { })
 				this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: false })
 			}
@@ -280,6 +282,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				const chef = this.props.loggedInChef
 				const deletedChef = await destroyChef(chef.auth_token, chef.id, deleteRecipes)
 				if (deletedChef) {
+					deleteToken()
 					AsyncStorage.removeItem('chef', () => { })
 					this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: false })
 				}
