@@ -357,7 +357,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			Keyboard.dismiss()
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				this.setState(state => ({awaitingServer: true }), async () => {
+				this.setState({ awaitingServer: true }, async () => {
 					let newRecipeDetails = this.state.newRecipeDetails
 					// console.log(newRecipeDetails)
 					if (newRecipeDetails.recipeId) { // it's an existing recipe we're updating
@@ -739,7 +739,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		render() {
-			// console.log(this.state.instructionHeights)
+			// console.log(this.state.newRecipeDetails.instructions)
 			return (
 				<SpinachAppContainer awaitingServer={this.state.awaitingServer} scrollingEnabled={false} >
 					{
@@ -1200,7 +1200,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 												onClickItem={Keyboard.dismiss}
 												onDragEnd={this.activateScrollView}
 												delayLongPress={100}
-												keyExtractor={(item, index) => `${index}${item}`}
+												keyExtractor={(item, index) => `${index}`}
 												renderItem={(item, index) => {
 													return (
 														<InstructionRow
@@ -1220,7 +1220,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 													)
 												}}
 											/>
-
 										</View>
 										<View style={styles.plusButtonContainer}>
 											<TouchableOpacity style={[centralStyles.yellowRectangleButton, styles.addButton]} activeOpacity={0.7} onPress={this.addNewInstruction}>

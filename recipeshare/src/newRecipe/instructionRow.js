@@ -7,14 +7,6 @@ import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-nat
 
 export default class InstructionRow extends React.Component {
 
-	state = {
-		text: ""
-	}
-
-	componentDidMount = () => {
-		this.setState({ text: this.props.item })
-	}
-
 	render() {
 		return (
 			<View style={[centralStyles.formInputContainer, { width: responsiveWidth(100) }]}>
@@ -34,19 +26,14 @@ export default class InstructionRow extends React.Component {
 						style={styles.instructionInput}
 						multiline={true}
 						numberOfLines={1}
-						value={this.state.text}
+						value={this.props.item}
 						placeholder={`Instructions: step ${this.props.index + 1}`}
 						onChangeText={(text) => {
+							this.props.handleInstructionChange(text, this.props.index)
 							this.textInput.measureInWindow((x, y, width, height) => {
 								this.props.handleInstructionSizeChange(this.props.index, height)
 							})
-							this.setState({ text: text })
 						}}
-						// onLayout={(event) => {
-						// 	var { height } = event.nativeEvent.layout
-						// 	this.props.handleInstructionSizeChange(this.props.index, height)
-						// }}
-						onBlur={() => this.props.handleInstructionChange(this.state.text, this.props.index)}
 						ref={(element) => this.props.inputToFocus && this.props.setNextInstructionInput(element)}
 					/>
 				</View>
