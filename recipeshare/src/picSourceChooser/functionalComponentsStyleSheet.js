@@ -80,7 +80,7 @@ export const styles = StyleSheet.create({
 		borderStyle: 'solid',
 		borderWidth: 1,
 		backgroundColor: '#104e01',// red'#720000',
-		borderColor: '#fff59b',
+		borderColor: '#104e01',
 	},
 	picSourceChooserButtonText: {
 		marginLeft: '5%',

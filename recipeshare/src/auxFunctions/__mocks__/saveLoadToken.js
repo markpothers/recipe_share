@@ -1,0 +1,5 @@
+
+
+function loadToken () {
+	return null
+}

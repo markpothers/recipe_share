@@ -25,6 +25,7 @@ import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo'
 NetInfo.configure({ reachabilityShortTimeout: 5 }) //5ms
 import SearchBar from '../searchBar/SearchBar.js'
+import SearchBarClearButton from '../searchBar/SearchBarClearButton'
 import AppHeaderActionButton from '../../navigation/appHeaderActionButton'
 import { cuisines } from '../dataComponents/cuisines'
 import { serves } from '../dataComponents/serves'
@@ -199,16 +200,16 @@ export class RecipesList extends React.Component {
 	}
 
 	//shouldComponentUpdate = (nextProps, nextState) => {
-		// console.log('LIST')
-		// // console.log(nextProps.navigation.dangerouslyGetParent().dangerouslyGetState())
+	// console.log('LIST')
+	// // console.log(nextProps.navigation.dangerouslyGetParent().dangerouslyGetState())
 
-		// let thisRoutes = this.props.navigation.dangerouslyGetParent().dangerouslyGetState().routes
-		// let thisRouteName = thisRoutes[thisRoutes.length-1].name
-		// let nextRoutes = nextProps.navigation.dangerouslyGetParent().dangerouslyGetState().routes
-		// let nextRouteName = nextRoutes[nextRoutes.length-1].name
-		// console.log(thisRouteName)
-		// console.log(nextRouteName)
-		// console.log(`updating ${this.state.isDisplayed}`)
+	// let thisRoutes = this.props.navigation.dangerouslyGetParent().dangerouslyGetState().routes
+	// let thisRouteName = thisRoutes[thisRoutes.length-1].name
+	// let nextRoutes = nextProps.navigation.dangerouslyGetParent().dangerouslyGetState().routes
+	// let nextRouteName = nextRoutes[nextRoutes.length-1].name
+	// console.log(thisRouteName)
+	// console.log(nextRouteName)
+	// console.log(`updating ${this.state.isDisplayed}`)
 	//	return this.state.isDisplayed
 	//}
 
@@ -825,7 +826,8 @@ export class RecipesList extends React.Component {
 											extrapolate: "clamp"
 										})
 									},
-								]
+								],
+								// backgroundColor: 'red'
 							}}
 						>
 							<SearchBar
@@ -849,6 +851,11 @@ export class RecipesList extends React.Component {
 									style={{ height: searchBarIsDisplayed ? responsiveHeight(7) : responsiveHeight(70) }}
 									onPress={searchBarIsDisplayed ? this.handleSearchBarFocus : this.refresh}
 								>
+									{this.state.searchTerm.length > 0 && (
+										<SearchBarClearButton
+											setSearchTerm={this.setSearchTerm}
+										/>
+									)}
 								</TouchableOpacity>
 							)
 						}}

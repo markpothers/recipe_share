@@ -287,6 +287,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			clearTimeout(keepAwakeTimer)
 		}
 
+		resetKeepAwakeTimer = () => {
+			this.disableKeepAwake()
+			this.enableKeepAwake()
+		}
+
 		scrolled = () => {
 			// console.log(e.nativeEvent)
 		}
@@ -1038,6 +1043,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								ref={(ref) => this.myScroll = ref}
 								scrollEnabled={this.state.scrollEnabled}
 								nestedScrollEnabled={true}
+								onMomentumScrollEnd={this.resetKeepAwakeTimer}
 							>
 								<View style={styles.detailsHeader}>
 									<View style={styles.detailsHeaderTopRow}>

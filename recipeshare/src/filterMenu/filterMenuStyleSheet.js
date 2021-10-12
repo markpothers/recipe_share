@@ -41,7 +41,7 @@ export const styles = StyleSheet.create({
 		backgroundColor: '#104e01',
 		borderStyle: 'solid',
 		borderWidth: 1,
-		borderColor: '#fff59b',
+		borderColor: '#104e01',
 		width: 50,
 		height: 50,
 		justifyContent: 'center',

@@ -19,6 +19,11 @@ import reducer from '../redux/reducer.js'
 import AppLoading from './appLoading.js'
 import { Image } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+// import { loadToken } from '../auxFunctions/saveLoadToken'
+
+// manual mocks
+// jest.mock('../auxFunctions/saveLoadToken')
+
 describe('AppLoading', () => {
 
 	let component

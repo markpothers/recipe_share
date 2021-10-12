@@ -1,9 +1,8 @@
 import React from 'react'
-import { View, TextInput, TouchableOpacity } from 'react-native'
+import { View, TextInput } from 'react-native'
 import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-
+import SearchBarClearButton from './SearchBarClearButton'
 export default function SearchBar(props) {
 
 	// console.log(props)
@@ -14,7 +13,7 @@ export default function SearchBar(props) {
 					justifyContent: 'center',
 					alignItems: 'center',
 					marginLeft: 0,
-					marginBottom: responsiveHeight(0.25),
+					marginBottom: responsiveHeight(0.5),
 				}
 			}>
 			<View style={centralStyles.formSection}>
@@ -26,7 +25,7 @@ export default function SearchBar(props) {
 						justifyContent: 'space-between',
 						alignItems: 'center',
 						backgroundColor: 'white',
-						borderRadius:responsiveWidth(1.5),
+						borderRadius: responsiveWidth(1.5),
 						borderWidth: 1,
 						borderColor: '#104e01',
 						overflow: 'hidden',
@@ -54,22 +53,10 @@ export default function SearchBar(props) {
 						testID={'searchTermInput'}
 					/>
 					{props.searchTerm.length > 0 && (
-						<TouchableOpacity
-							style={{
-								width: responsiveWidth(10),
-								height: '100%',
-								justifyContent: 'center',
-								alignItems: 'center',
-							}}
-							onPress={() => props.setSearchTerm("")}
-							testID={'deleteSearchTermButton'}
-						>
-							<Icon
-								name='close'
-								size={responsiveHeight(3.5)}
-								style={{ color: '#505050' }}
-							/>
-						</TouchableOpacity>
+						<SearchBarClearButton
+							displayIcon={true}
+							setSearchTerm={props.setSearchTerm}
+						/>
 					)}
 				</View>
 

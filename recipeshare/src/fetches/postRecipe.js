@@ -55,7 +55,7 @@ export const postRecipe = async (
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
-			reject({name: 'Timeout'})
+			reject({ name: 'Timeout' })
 		}, submitTimeout)
 
 		// had to add this validation in here because doing it in rails doesn't work
@@ -78,7 +78,7 @@ export const postRecipe = async (
 			body: JSON.stringify({
 				recipe: {
 					chef_id: chef_id,
-					name: name,
+					name: name || "",
 					ingredients: ingredients,
 					instructions: instructions,
 					// instruction_images: instructionImagesForRails,
@@ -90,9 +90,9 @@ export const postRecipe = async (
 					filter_settings: filter_settings,
 					cuisine: cuisine,
 					serves: serves,
-					acknowledgement: acknowledgement,
-					acknowledgement_link: acknowledgementLink.toLowerCase().trim(),
-					description: description,
+					acknowledgement: acknowledgement || "",
+					acknowledgement_link: acknowledgementLink?.toLowerCase().trim() || "",
+					description: description || "",
 					show_blog_preview: showBlogPreview,
 				}
 			})
@@ -100,7 +100,7 @@ export const postRecipe = async (
 			.then(res => res.json())
 			.then(recipe => {
 				if (recipe.error && recipe.message == "Invalid authentication") {
-					reject({name: 'Logout'})
+					reject({ name: 'Logout' })
 				}
 				if (recipe) {
 					// console.log(recipe)

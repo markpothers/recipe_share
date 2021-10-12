@@ -169,7 +169,7 @@ export const centralStyles = StyleSheet.create({
 		borderRadius: responsiveWidth(1.5),
 		backgroundColor: '#104e01',
 		borderWidth: 1,
-		borderColor: '#fff59b',
+		borderColor: '#104e01',
 	},
 	greenButtonIcon: {
 		color: '#104e01',

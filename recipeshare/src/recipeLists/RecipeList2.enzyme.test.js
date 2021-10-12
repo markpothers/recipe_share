@@ -18,11 +18,11 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux'
 import { initialState, middleware } from '../redux/store'
 import reducer from '../redux/reducer.js'
-import { TouchableOpacity, TextInput, Text } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 // import { AlertPopUp } from '../alertPopUp/alertPopUp'
 // import AsyncStorage from '@react-native-async-storage/async-storage'
 import OfflineMessage from '../offlineMessage/offlineMessage';
-import { apiCall } from '../auxFunctions/apiCall'
+// import { apiCall } from '../auxFunctions/apiCall'
 import RecipesList from './RecipesList.js'
 import RecipeCard from './RecipeCard'
 import { mockRecipeList } from '../../__mocks__/recipeList/mockRecipeList.js'

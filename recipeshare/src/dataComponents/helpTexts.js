@@ -6,15 +6,15 @@ const helpTexts = {
 	},
 	timings: {
 		title: "Timings",
-		text: "Timings are optional but please at least put a total time, even if it's just for a blog link.\n\nThis will help other members decide if they'll have time to cook your recipe."
+		text: "Timings are optional (if you leave them 00:00, then they won't appear) but please at least put a total time, even if it's just for a blog link.\n\nThis will help other members decide if they'll have time to cook your recipe."
 	},
 	difficulty: {
 		title: "Difficulty",
-		text: "Difficulty is optional but please help other chefs by letting them know what they are in for, even if it's just for a blog link."
+		text: "Please help other chefs by letting them know what they are in for, even if it's just for a blog link."
 	},
 	about: {
 		title: "About",
-		text: "This section is optional but please give us a short description about this recipe. Tell us why you love it so much!"
+		text: "This section is optional (if you leave it blank, it won't appear) but please give us a short description about this recipe. Tell us why you love it so much!"
 	},
 	coverPictures: {
 		title: "Cover Pictures",

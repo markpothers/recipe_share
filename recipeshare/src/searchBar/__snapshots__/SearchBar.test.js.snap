@@ -6,7 +6,7 @@ exports[`Search Bar can be rendered (with the delete button) matches its previou
     Object {
       "alignItems": "center",
       "justifyContent": "center",
-      "marginBottom": 3.335,
+      "marginBottom": 6.67,
       "marginLeft": 0,
     }
   }
@@ -74,6 +74,7 @@ exports[`Search Bar can be rendered (with the delete button) matches its previou
         style={
           Object {
             "alignItems": "center",
+            "alignSelf": "flex-end",
             "height": "100%",
             "justifyContent": "center",
             "opacity": 1,
@@ -103,7 +104,7 @@ exports[`Search Bar can be rendered (without the delete button) matches its prev
     Object {
       "alignItems": "center",
       "justifyContent": "center",
-      "marginBottom": 3.335,
+      "marginBottom": 6.67,
       "marginLeft": 0,
     }
   }

@@ -1,8 +1,8 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View, LogBox } from 'react-native';
+import { Platform, StatusBar, StyleSheet, LogBox } from 'react-native';
 import { Provider } from 'react-redux'
-import { Asset, Font, Icon } from 'expo';
+// import { Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 import { store } from './src/redux/store'
 import { NavigationContainer } from '@react-navigation/native';

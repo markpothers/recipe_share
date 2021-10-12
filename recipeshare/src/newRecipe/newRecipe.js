@@ -27,7 +27,7 @@ import { serves } from '../dataComponents/serves'
 import { clearedFilters } from '../dataComponents/clearedFilters'
 import OfflineMessage from '../offlineMessage/offlineMessage'
 import NetInfo from '@react-native-community/netinfo';
-NetInfo.configure({reachabilityShortTimeout: 5}) //5ms
+NetInfo.configure({ reachabilityShortTimeout: 5 }) //5ms
 import { AlertPopUp } from '../alertPopUp/alertPopUp';
 import AppHeader from '../../navigation/appHeader'
 import { getTimeStringFromMinutes, getMinutesFromTimeString } from '../auxFunctions/getTimeStringFromMinutes'
@@ -37,7 +37,7 @@ import { emptyRecipe } from './recipeTemplates/emptyRecipe'
 import { longTestRecipe } from './recipeTemplates/longTestRecipe' //eslint-disable-line no-unused-vars
 import { shortTestRecipe } from './recipeTemplates/shortTestRecipe' //eslint-disable-line no-unused-vars
 
-const testing = false
+const testing = true
 const testRecipe = shortTestRecipe
 
 const mapStateToProps = (state) => ({
@@ -77,8 +77,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		componentDidMount = async () => {
+			this.fetchIngredientsForAutoComplete() //don't await this, just let it happen in the background
 			this.setState({ awaitingServer: true }, async () => {
-				await this.fetchIngredientsForAutoComplete()
 				//if we're editing a recipe
 				if (this.props.route.params?.recipe_details !== undefined) {
 					let savedEditingRecipe = JSON.parse(await AsyncStorage.getItem('localEditRecipeDetails'))
@@ -245,8 +245,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		clearNewRecipeDetails = async (resetToNewRecipe = false) => {
 			await AsyncStorage.multiRemove(['localNewRecipeDetails', 'localEditRecipeDetails'], async () => {
 				if (resetToNewRecipe !== true && this.props.route.params?.recipe_details !== undefined) {
-					await this.setRecipeParamsForEditing(this.props.route.params.recipe_details)
-					this.setState({ alertPopUpShowing: false })
+					this.setState(() => (testing ? testRecipe : emptyRecipe), async () => {
+						await this.setRecipeParamsForEditing(this.props.route.params.recipe_details)
+						this.setState({ alertPopUpShowing: false })
+					})
 				} else {
 					this.setState(() => (testing ? testRecipe : emptyRecipe))
 					this.props.navigation.setOptions({
@@ -289,7 +291,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					this.setState({ ingredientsList: ingredients })
 				}
 			} catch {
-				this.setState({ awaitingServer: false })
+				// this.setState({ awaitingServer: false })
 			}
 		}
 
@@ -355,7 +357,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			Keyboard.dismiss()
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
-				this.setState({ awaitingServer: true }, async () => {
+				this.setState(state => ({awaitingServer: true }), async () => {
 					let newRecipeDetails = this.state.newRecipeDetails
 					// console.log(newRecipeDetails)
 					if (newRecipeDetails.recipeId) { // it's an existing recipe we're updating
@@ -737,7 +739,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		render() {
-			// console.log(this.state.newRecipeDetails.primaryImages)
+			// console.log(this.state.instructionHeights)
 			return (
 				<SpinachAppContainer awaitingServer={this.state.awaitingServer} scrollingEnabled={false} >
 					{
@@ -977,7 +979,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									</View>
 									<View style={centralStyles.formInputContainer}>
 										<View style={styles.timeAndDifficultyTitleItem}>
-											<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Difficulty (optional):</Text>
+											<Text maxFontSizeMultiplier={1.7} style={styles.timeAndDifficultyTitle}>Difficulty:</Text>
 										</View>
 										<View style={styles.timeAndDifficulty}>
 											<DualOSPicker

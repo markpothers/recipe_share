@@ -111,7 +111,7 @@ exports[`AlertPopUp calls the close function when button pressed 1`] = `
               Object {
                 "alignItems": "center",
                 "backgroundColor": "#104e01",
-                "borderColor": "#fff59b",
+                "borderColor": "#104e01",
                 "borderRadius": 11.25,
                 "borderWidth": 1,
                 "flexDirection": "row",
@@ -163,7 +163,7 @@ exports[`AlertPopUp calls the close function when button pressed 1`] = `
               Object {
                 "alignItems": "center",
                 "backgroundColor": "#104e01",
-                "borderColor": "#fff59b",
+                "borderColor": "#104e01",
                 "borderRadius": 11.25,
                 "borderWidth": 1,
                 "flexDirection": "row",
@@ -319,7 +319,7 @@ exports[`AlertPopUp calls the yes function when button pressed 1`] = `
               Object {
                 "alignItems": "center",
                 "backgroundColor": "#104e01",
-                "borderColor": "#fff59b",
+                "borderColor": "#104e01",
                 "borderRadius": 11.25,
                 "borderWidth": 1,
                 "flexDirection": "row",
@@ -371,7 +371,7 @@ exports[`AlertPopUp calls the yes function when button pressed 1`] = `
               Object {
                 "alignItems": "center",
                 "backgroundColor": "#104e01",
-                "borderColor": "#fff59b",
+                "borderColor": "#104e01",
                 "borderRadius": 11.25,
                 "borderWidth": 1,
                 "flexDirection": "row",
@@ -519,7 +519,7 @@ exports[`AlertPopUp renders with 1 button when no close button and customizable 
                 Object {
                   "alignItems": "center",
                   "backgroundColor": "#104e01",
-                  "borderColor": "#fff59b",
+                  "borderColor": "#104e01",
                   "borderRadius": 11.25,
                   "borderWidth": 1,
                   "flexDirection": "row",
@@ -549,7 +549,7 @@ exports[`AlertPopUp renders with 1 button when no close button and customizable 
               Object {
                 "alignItems": "center",
                 "backgroundColor": "#104e01",
-                "borderColor": "#fff59b",
+                "borderColor": "#104e01",
                 "borderRadius": 11.25,
                 "borderWidth": 1,
                 "flexDirection": "row",
@@ -705,7 +705,7 @@ exports[`AlertPopUp renders with 2 buttons and customizable text 1`] = `
               Object {
                 "alignItems": "center",
                 "backgroundColor": "#104e01",
-                "borderColor": "#fff59b",
+                "borderColor": "#104e01",
                 "borderRadius": 11.25,
                 "borderWidth": 1,
                 "flexDirection": "row",
@@ -757,7 +757,7 @@ exports[`AlertPopUp renders with 2 buttons and customizable text 1`] = `
               Object {
                 "alignItems": "center",
                 "backgroundColor": "#104e01",
-                "borderColor": "#fff59b",
+                "borderColor": "#104e01",
                 "borderRadius": 11.25,
                 "borderWidth": 1,
                 "flexDirection": "row",
@@ -913,7 +913,7 @@ exports[`AlertPopUp renders with 2 buttons and default text 1`] = `
               Object {
                 "alignItems": "center",
                 "backgroundColor": "#104e01",
-                "borderColor": "#fff59b",
+                "borderColor": "#104e01",
                 "borderRadius": 11.25,
                 "borderWidth": 1,
                 "flexDirection": "row",
@@ -965,7 +965,7 @@ exports[`AlertPopUp renders with 2 buttons and default text 1`] = `
               Object {
                 "alignItems": "center",
                 "backgroundColor": "#104e01",
-                "borderColor": "#fff59b",
+                "borderColor": "#104e01",
                 "borderRadius": 11.25,
                 "borderWidth": 1,
                 "flexDirection": "row",

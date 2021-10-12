@@ -2,7 +2,7 @@ import { databaseURL } from '../dataComponents/databaseURL'
 import { submitTimeout } from '../dataComponents/timeouts'
 //import { getBase64FromFile } from '../auxFunctions/getBase64FromFile.js'
 
-export const patchRecipe = async(
+export const patchRecipe = async (
 	chef_id,
 	auth_token,
 	name,
@@ -49,7 +49,7 @@ export const patchRecipe = async(
 	// 			index: index,
 	// 			base64: await getBase64FromFile(image),
 	// 		}
-			
+
 	// 	// if image was already part of the recipe
 	// 	} else {
 	// 		return {
@@ -62,7 +62,7 @@ export const patchRecipe = async(
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
-			reject({name: 'Timeout'})
+			reject({ name: 'Timeout' })
 		}, submitTimeout)
 
 		// had to add this validation in here because doing it in rails doesn't work
@@ -85,7 +85,7 @@ export const patchRecipe = async(
 			body: JSON.stringify({
 				recipe: {
 					chef_id: chef_id,
-					name: name,
+					name: name || "",
 					ingredients: ingredients,
 					instructions: instructions,
 					// instruction_images: instructionImagesForRails,
@@ -97,9 +97,9 @@ export const patchRecipe = async(
 					filter_settings: filter_settings,
 					cuisine: cuisine,
 					serves: serves,
-					acknowledgement: acknowledgement,
-					acknowledgement_link: acknowledgementLink.toLowerCase().trim(),
-					description: description,
+					acknowledgement: acknowledgement || "",
+					acknowledgement_link: acknowledgementLink?.toLowerCase().trim() || "",
+					description: description || "",
 					show_blog_preview: showBlogPreview
 				}
 			})
@@ -107,7 +107,7 @@ export const patchRecipe = async(
 			.then(res => res.json())
 			.then(recipe => {
 				if (recipe.error && recipe.message == "Invalid authentication") {
-					reject({name: 'Logout'})
+					reject({ name: 'Logout' })
 				}
 				if (recipe) {
 					resolve(recipe)
