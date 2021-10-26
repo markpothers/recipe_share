@@ -37,7 +37,7 @@ import { emptyRecipe } from './recipeTemplates/emptyRecipe'
 import { longTestRecipe } from './recipeTemplates/longTestRecipe' //eslint-disable-line no-unused-vars
 import { shortTestRecipe } from './recipeTemplates/shortTestRecipe' //eslint-disable-line no-unused-vars
 
-const testing = true
+const testing = __DEV__ ? true : false
 const testRecipe = shortTestRecipe
 
 const mapStateToProps = (state) => ({

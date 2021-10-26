@@ -146,7 +146,7 @@ export class RecipesList extends React.Component {
 			selectedCuisine: "Any",
 			servesOptions: serves,
 			selectedServes: "Any",
-			filterOptions: clearedFilters,
+			filterOptions: Object.keys(clearedFilters),
 			filterSettings: clearedFilters
 		}
 	}
