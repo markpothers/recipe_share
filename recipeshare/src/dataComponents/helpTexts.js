@@ -6,7 +6,7 @@ const helpTexts = {
 	},
 	timings: {
 		title: "Timings",
-		text: "Timings are optional (if you leave them 00:00, then they won't appear) but please at least put a total time, even if it's just for a blog link.\n\nThis will help other members decide if they'll have time to cook your recipe."
+		text: "Timings are optional (if you leave them 00:00, then they won't appear) but please at least put a total time, even if it's just for a blog link.\n\nThese can be approximations and are just to help other members decide if they'll have time to cook your recipe."
 	},
 	difficulty: {
 		title: "Difficulty",

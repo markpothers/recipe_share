@@ -8,46 +8,8 @@ const reducer = (currentState, action) => {
 			return { ...currentState, allChefLists: { ...currentState.allChefLists, [action.listKey]: action.chefList}}
 		case 'UPDATE_ALL_CHEF_LISTS':
 			return { ...currentState, allChefLists: action.allChefLists}
-		// case 'STORE_RECIPE_LISTS':
-		// 	// console.log("saving recipes list")
-		// 	return { ...currentState, recipes: { ...currentState.recipes, [action.recipeType]: action.recipeList } }
-		// case 'STORE_CUISINES_CHOICES':
-		// 	// console.log("saving cuisines choices")
-		// 	return { ...currentState, cuisineChoices: { ...currentState.cuisineChoices, [action.listChoice]: action.cuisines } }
-		// case 'STORE_SERVES_CHOICES':
-		// 	// console.log("saving serves choices")
-		// 	return { ...currentState, servesChoices: { ...currentState.servesChoices, [action.listChoice]: action.serves } }
-		// case 'STORE_FILTER_CHOICES':
-		// 	// console.log("saving filter choices")
-		// 	return { ...currentState, filterChoices: { ...currentState.filterChoices, [action.listChoice]: action.filters } }
-		// case 'CLEAR_LISTED_RECIPES':
-		//     // console.log("clearing listed recipes")
-		//     return {...currentState, recipes: {...currentState.recipes, [action.recipeType]: []}}
 		case 'STORE_RECIPE_DETAILS':
-			// console.log(action.recipe_details)
-			// console.log(action.recipe_details)
 			return { ...currentState, recipe_details: action.recipe_details }
-		// case 'APPEND_TO_RECIPE_LISTS':
-		// 	// console.log(currentState.recipes[action.recipeType])
-		// 	return { ...currentState, recipes: { ...currentState.recipes, [action.recipeType]: [...currentState.recipes[action.recipeType], ...action.recipeList] } }
-		// case 'APPEND_TO_RECIPES_DETAILS':
-		// 	// console.log("appending recipes details")
-		// 	// console.log(currentState.recipes_details[action.recipeType].comments)
-		// 	// console.log(action.recipesDetailsList)
-		// 	return {
-		// 		...currentState, recipes_details: {
-		// 			...currentState.recipes_details, [action.recipeType]: {
-		// 				comments: [...currentState.recipes_details[action.recipeType].comments, ...action.recipesDetailsList.comments],
-		// 				ingredient_uses: [...currentState.recipes_details[action.recipeType].ingredient_uses, ...action.recipesDetailsList.ingredient_uses],
-		// 				ingredients: [...currentState.recipes_details[action.recipeType].ingredients, ...action.recipesDetailsList.ingredients],
-		// 				make_pics: [...currentState.recipes_details[action.recipeType].make_pics, ...action.recipesDetailsList.make_pics],
-		// 				recipe_images: [...currentState.recipes_details[action.recipeType].recipe_images, ...action.recipesDetailsList.recipe_images],
-		// 				recipe_likes: [...currentState.recipes_details[action.recipeType].recipe_likes, ...action.recipesDetailsList.recipe_likes],
-		// 				recipe_makes: [...currentState.recipes_details[action.recipeType].recipe_makes, ...action.recipesDetailsList.recipe_makes],
-		// 				recipes: [...currentState.recipes_details[action.recipeType].recipes, ...action.recipesDetailsList.recipes],
-		// 			}
-		// 		}
-		// 	}
 		case 'UPDATE_NEW_USER_DETAILS':
 			return { ...currentState, newUserDetails: { ...currentState.newUserDetails, [action.parameter]: action.content } }
 		case 'CLEAR_NEW_USER_DETAILS':
@@ -75,77 +37,6 @@ const reducer = (currentState, action) => {
 					password: "",
 				}
 			}
-		// case 'UPDATE_NEW_RECIPE_DETAILS':
-		// 	return { ...currentState, newRecipeDetails: { ...currentState.newRecipeDetails, [action.parameter]: action.content } }
-		// case 'UPDATE_RECIPE_INGREDIENTS':
-		// 	return {
-		// 		...currentState, newRecipeDetails: {
-		// 			...currentState.newRecipeDetails, ingredients: {
-		// 				...currentState.newRecipeDetails.ingredients, [action.ingredientIndex]: {
-		// 					name: action.ingredientName,
-		// 					quantity: action.ingredientQuantity,
-		// 					unit: action.ingredientUnit
-		// 				}
-		// 			}
-		// 		}
-		// 	}
-		// case 'STORE_ALL_INGREDIENTS':
-		// 	// console.log(action.ingredients)
-		// 	return { ...currentState, newRecipeDetails: { ...currentState.newRecipeDetails, ingredients: action.ingredients } }
-		// case 'CLEAR_NEW_RECIPE_DETAILS':
-		// 	// console.log("clearing new recipe details")
-		// 	return {
-		// 		...currentState, newRecipeDetails: {
-		// 			name: "",
-		// 			instructions: [
-		// 				'Pre heat oven to 450F...',
-		// 				'Dice the chicken...',
-		// 				'Add the onion...',
-		// 				'',
-		// 			],
-		// 			instructionImages: [],
-		// 			ingredients: {
-		// 				ingredient1: {
-		// 					name: "",
-		// 					quantity: "",
-		// 					unit: "Oz"
-		// 				}
-		// 			},
-		// 			difficulty: "0",
-		// 			time: "00:15",
-		// 			imageBase64: "",
-		// 			filter_settings: {
-		// 				"Breakfast": false,
-		// 				"Lunch": false,
-		// 				"Dinner": false,
-		// 				"Chicken": false,
-		// 				"Red meat": false,
-		// 				"Seafood": false,
-		// 				"Vegetarian": false,
-		// 				"Salad": false,
-		// 				"Vegan": false,
-		// 				"Soup": false,
-		// 				"Dessert": false,
-		// 				"Side": false,
-		// 				"Whole 30": false,
-		// 				"Paleo": false,
-		// 				"Freezer meal": false,
-		// 				"Keto": false,
-		// 				"Weeknight": false,
-		// 				"Weekend": false,
-		// 				"Gluten free": false,
-		// 				"Bread": false,
-		// 				"Dairy free": false,
-		// 				"White meat": false,
-		// 			},
-		// 			cuisine: "Any",
-		// 			serves: "Any",
-		// 			acknowledgement: ""
-		// 		}
-		// 	}
-		// case 'LIKE_RECIPE':
-		//         currentState.recipes[action.listType].find( recipe => recipe.id === recipeID)
-		//     return {...currentState, recipes: {...currentState.recipes, [action.recipeType]: {...currentState.recipes[action.listType], }}}
 		case 'ADD_RECIPE_LIKE':
 			return { ...currentState, recipe_details: { ...currentState.recipe_details, recipe_likes: currentState.recipe_details.recipe_likes + 1, likeable: false } }
 		case 'UPDATE_COMMENTS':
@@ -168,8 +59,6 @@ const reducer = (currentState, action) => {
 			return { ...currentState, recipes_details: { ...currentState.recipes_details, [action.listType]: { ...currentState.recipes_details[action.listType], recipe_likes: action.recipe_likes } } }
 		case 'STORE_NEW_FOLLOWERS':
 			return { ...currentState, chefs_details: { ...currentState.chefs_details, [action.chefID]: { ...currentState.chefs_details[action.chefID], followers: action.followers, chef_followed: !currentState.chefs_details[action.chefID].chef_followed } } }
-		// case 'UPDATE_CHEF_IN_LIST':
-		//     return {...currentState, chefs: {...currentState.chefs, [action.chefType]: action.chefList}}
 		case 'LOG_IN_CHEF':
 			// console.log("logging in chef")
 			return {
@@ -190,19 +79,10 @@ const reducer = (currentState, action) => {
 					is_admin: action.is_admin
 				}
 			}
-		// case 'CHANGE_GLOBAL_RANKING':
-		//         // console.log("switching ranking")
-		//         const newValue = currentState.global_ranking == "liked" ? "made" : "liked"
-		//         return {...currentState, global_ranking: newValue}
 		case 'STORE_CHEF_LIST':
-			// console.log("saving chefs list")
 			return { ...currentState, chefs: { ...currentState.chefs, [action.chefType]: action.chefList } }
 		case 'CLEAR_LISTED_CHEFS':
-			// console.log("clearing listed chefs")
 			return { ...currentState, chefs: { ...currentState.chefs, [action.chefType]: [] } }
-		// case 'STORE_CHEFS_DETAILS':
-		//     // console.log(action.chefsDetailsList)
-		//     return {...currentState, chefs_details: {...currentState.chefs_details, [action.chefType]: action.chefsDetailsList}}
 		case 'APPEND_TO_CHEF_LISTS':
 			// console.log(currentState.chefs[action.chefType])
 			return { ...currentState, chefs: { ...currentState.chefs, [action.chefType]: [...currentState.chefs[action.chefType], ...action.chefList] } }

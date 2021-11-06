@@ -24,22 +24,11 @@ const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)
 
 const mapStateToProps = (state) => ({
 	allChefLists: state.allChefLists,
-	// all_chefs: state.chefs.all_chefs,
-	// followed_chefs: state.chefs.followed,
 	loggedInChef: state.loggedInChef,
 	chefs_details: state.chefs_details,
-	// most_liked_chefs: state.chefs.most_liked_chefs,
-	// most_made_chefs: state.chefs.most_made_chefs,
-	// chef_followees: state.chefs.chef_followees,
-	// chef_followers: state.chefs.chef_followers
 })
 
 const mapDispatchToProps = {
-	// changeRanking: () => {
-	//   return dispatch => {
-	//     dispatch({ type: 'CHANGE_GLOBAL_RANKING'})
-	//   }
-	// },
 	updateSingleChefList: (listKey, chefList) => {
 		return dispatch => {
 			dispatch({ type: 'UPDATE_SINGLE_CHEF_LIST', listKey: listKey, chefList: chefList })
@@ -50,21 +39,6 @@ const mapDispatchToProps = {
 			dispatch({ type: 'UPDATE_ALL_CHEF_LISTS', allChefLists: allChefLists })
 		}
 	},
-	// storeChefList: (listChoice, chefs) => {
-	// 	return dispatch => {
-	// 		dispatch({ type: 'STORE_CHEF_LIST', chefType: listChoice, chefList: chefs })
-	// 	}
-	// },
-	// appendToChefList: (listChoice, new_chefs) => {
-	// 	return dispatch => {
-	// 		dispatch({ type: 'APPEND_TO_CHEF_LISTS', chefType: listChoice, chefList: new_chefs })
-	// 	}
-	// },
-	// clearListedChefs: (listChoice) => {
-	// 	return dispatch => {
-	// 		dispatch({ type: 'CLEAR_LISTED_CHEFS', chefType: listChoice })
-	// 	}
-	// },
 	storeChefDetails: (chef_details) => {
 		return dispatch => {
 			dispatch({ type: 'STORE_CHEF_DETAILS', chefID: `chef${chef_details.chef.id}`, chef_details: chef_details })
@@ -117,19 +91,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		respondToFocus = async () => {
 			this.setupHeaderScrollTopTopButton()
-			// this.setState({
-			//awaitingServer: false,
-			// offset: 0,
-			// isDisplayed: true
-			// }, async () => {
-			// await this.fetchChefList()
 			this.setState({ awaitingServer: false })
-			// })
 		}
 
-		respondToBlur = () => {
-			// this.setState({ isDisplayed: false })
-		}
+		respondToBlur = () => { }
 
 		setupHeaderScrollTopTopButton = () => {
 			this.props.navigation.dangerouslyGetParent().setOptions({
@@ -158,10 +123,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			let netInfoState = await NetInfo.fetch()
 			if (netInfoState.isConnected) {
 				try {
-					// console.log(this.state.offset)
-					// const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
 					let chefs = await getChefList(this.getChefListName(), this.getQueryChefId(), this.state.limit, this.state.offset, this.props.loggedInChef.auth_token, this.state.searchTerm)
-					// this.props.updateSingleRecipeList(this.props["listChoice"], chefs)
 					this.props.updateSingleChefList(this.props.route.key, chefs)
 					saveChefListsLocally(this.getQueryChefId(), this.props.loggedInChef.id, this.getChefListName(), this.getChefList())
 
@@ -170,21 +132,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
 					if (this.getChefList()?.length == 0) {
 						this.loadChefsLocally()
-
-						// console.log('failed to get chefs. Loading from async storage.')
-						// AsyncStorage.getItem('locallySavedListData', (err, res) => {
-						// 	if (res != null) {
-						// 		const locallySavedListData = JSON.parse(res)
-						// 		if (locallySavedListData[this.props["listChoice"]].length > 0) {
-						// 			this.props.storeChefList(this.props["listChoice"], locallySavedListData[this.props["listChoice"]])
-						// 		}
-						// 		else {
-						// 			this.setState({ renderOfflineMessage: true })
-						// 		}
-						// 	} else {
-						// 		this.setState({ renderOfflineMessage: true })
-						// 	}
-						// })
 					}
 				}
 			} else {
@@ -194,10 +141,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		fetchAdditionalChefs = async () => {
 			try {
-				// const queryChefID = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id
 				const additionalChefs = await getChefList(this.getChefListName(), this.getQueryChefId(), this.state.limit, this.state.offset, this.props.loggedInChef.auth_token, this.state.searchTerm)
 				this.props.updateSingleChefList(this.props.route.key, [...this.getChefList(), ...additionalChefs])
-				// this.props.appendToChefList(this.getChefListName(), [...this.getChefList(), ,... newChefs])
 				saveChefListsLocally(this.getQueryChefId(), this.props.loggedInChef.id, this.getChefListName(), [...this.getChefList(), ...additionalChefs])
 			}
 			catch (e) {
@@ -249,18 +194,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				newAllChefLists[list] = chefList
 			})
 			this.props.updateAllChefLists(newAllChefLists)
-			// Object.keys(this.props.allChefLists).forEach(list => {
-			// 	let newList = this.props.allChefLists[list].map(chef => {
-			// 		if (chef.id == chefId) {
-			// 			chef[attribute] += diff
-			// 			chef[toggle] = diff > 0 ? 1 : 0
-			// 			return chef
-			// 		} else {
-			// 			return chef
-			// 		}
-			// 	})
-			// 	this.props.storeChefList(list, newList)
-			// })
 		}
 
 		followChef = async (followee_id) => {

@@ -227,34 +227,44 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		askToReset = () => { this.setState({ alertPopUpShowing: true }) }
 
 		renderAlertPopUp = () => {
+			let isEditing = this.props.route.params?.recipe_details !== undefined
 			return (
 				<AlertPopUp
 					close={() => this.setState({ alertPopUpShowing: false })}
-					title={(this.props.route.params?.recipe_details !== undefined ?
+					title={(isEditing ?
 						"Are you sure you want to clear your changes and revert to the original recipe" :
 						"Are you sure you want to clear this form and start a new recipe?"
 					)}
-					onYes={(this.props.route.params?.recipe_details !== undefined ?
-						() => this.clearNewRecipeDetails(false) :
-						() => this.clearNewRecipeDetails(true)
+					onYes={(isEditing ?
+						() => this.clearEditRecipeDetails() :
+						() => this.clearNewRecipeDetails()
 					)}
 				/>
 			)
 		}
 
-		clearNewRecipeDetails = async (resetToNewRecipe = false) => {
-			await AsyncStorage.multiRemove(['localNewRecipeDetails', 'localEditRecipeDetails'], async () => {
-				if (resetToNewRecipe !== true && this.props.route.params?.recipe_details !== undefined) {
-					this.setState(() => (testing ? testRecipe : emptyRecipe), async () => {
+		clearNewRecipeDetails = async () => {
+			AsyncStorage.removeItem('localNewRecipeDetails', async () => {
+				this.setState({
+					...(testing ? testRecipe : emptyRecipe),
+					alertPopUpShowing: false
+				})
+				this.props.navigation.setOptions({
+					headerTitle: props => <AppHeader {...props} text={"Create a New Recipe"} route={this.props.route} />
+				})
+			})
+		}
+
+		clearEditRecipeDetails = async (editedRecipeSavedToDatabase) => {
+			AsyncStorage.removeItem('localEditRecipeDetails', async () => {
+				this.setState(() => (testing ? testRecipe : emptyRecipe), async () => {
+					if (this.props.route.params?.recipe_details !== undefined) {
+						if (!editedRecipeSavedToDatabase){ // if you updated the saved recipe you don't want to refresh async store before leaving
 						await this.setRecipeParamsForEditing(this.props.route.params.recipe_details)
+						}
 						this.setState({ alertPopUpShowing: false })
-					})
-				} else {
-					this.setState(() => (testing ? testRecipe : emptyRecipe))
-					this.props.navigation.setOptions({
-						headerTitle: props => <AppHeader {...props} text={"Create a New Recipe"} route={this.props.route} />
-					})
-				}
+					}
+				})
 			})
 		}
 
@@ -394,7 +404,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									let success = await this.postImages(newRecipeDetails, recipe)
 									if (success) {
 										this.setState({ awaitingServer: false }, async () => {
-											this.clearNewRecipeDetails(true)
+											this.clearEditRecipeDetails(true)
 											// this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
 											this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes', params: { refresh: true } })
 										})
@@ -453,7 +463,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 										let success = await this.postImages(newRecipeDetails, recipe)
 										if (success) {
 											this.setState({ awaitingServer: false }, async () => {
-												this.clearNewRecipeDetails(true)
+												this.clearNewRecipeDetails()
 												// this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
 												this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes', params: { refresh: true } })
 											})
@@ -890,7 +900,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								<View style={centralStyles.formSection}>
 									<View style={[centralStyles.formInputContainer, { justifyContent: 'center' }]}>
 										<View style={[styles.timeAndDifficultyTitleItem, styles.sectionTitle]}>
-											<Text maxFontSizeMultiplier={1.7} style={[styles.timeAndDifficultyTitle, { fontWeight: 'bold' }]}>Timings</Text>
+											<Text maxFontSizeMultiplier={1.7} style={[styles.timeAndDifficultyTitle, { fontWeight: 'bold' }]}>Approximate Timings</Text>
 										</View>
 										<TouchableOpacity
 											style={[centralStyles.helpButton, { right: responsiveWidth(10) }]}
