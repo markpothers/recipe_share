@@ -453,7 +453,7 @@ describe('Login', () => {
 			expect(mockNavigate).toHaveBeenCalledWith('CreateChef', { successfulLogin: true })
 		})
 
-		test.only('logs in successfully staying logged in', async () => {
+		test('logs in successfully staying logged in', async () => {
 			apiCall.mockImplementation(() => new Promise.resolve(loginResponse))
 			let stayLoggedInToggle = findByTestID(component, SwitchSized, 'stayLoggedInToggle')
 			act(() => stayLoggedInToggle.onValueChange(true))
