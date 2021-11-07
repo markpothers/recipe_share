@@ -1090,7 +1090,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 										this.props.recipe_details.recipe.cook_time != 0 ||
 										this.props.recipe_details.recipe.total_time != 0) && (
 										<View style={styles.detailsContainer}>
-											<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Approximate Timings:</Text>
+											<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Timings:</Text>
 											<View style={[
 												styles.detailsTimings,
 												(notShowingAllTimes ? { justifyContent: 'flex-start', marginLeft: responsiveWidth(5), width: responsiveWidth(93), flexDirection: 'column' } : null)
