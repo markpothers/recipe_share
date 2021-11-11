@@ -48,7 +48,7 @@ module RecipeMixins::RecipeListSearches
                                         #{serves_string}
                                         AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
                                         GROUP BY recipes.id
-                                        ORDER BY recipes.updated_at DESC
+                                        ORDER BY recipes.created_at DESC
                                         LIMIT ?
                                         OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, search_term.downcase(), limit, offset])
     elsif type == "chef" # recipes created by me ordered most-recent first
@@ -84,7 +84,7 @@ module RecipeMixins::RecipeListSearches
                                           #{serves_string}
                                           AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
                                           GROUP BY recipes.id
-                                          ORDER BY recipes.updated_at DESC
+                                          ORDER BY recipes.created_at DESC
                                           LIMIT ?
                                           OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, search_term.downcase(), limit, offset])
     elsif type == "chef_feed" # recipes by chefs I follow ordered most-recent first
@@ -103,7 +103,7 @@ module RecipeMixins::RecipeListSearches
                                         COALESCE((SELECT COUNT(*) FROM recipe_makes WHERE recipe_makes.recipe_id = recipes.id AND recipe_makes.hidden = false AND recipe_makes.chef_id = ?), 0) AS chef_made,
                                         COALESCE((SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id AND comments.hidden = false), 0) AS comments_count,
                                         COALESCE((SELECT COUNT(*) FROM comments WHERE comments.recipe_id = recipes.id AND comments.hidden = false AND comments.chef_id = ?), 0) AS chef_commented,
-                                        MAX(CASE WHEN recipes.updated_at > COALESCE(sharers.updated_at, TIMESTAMP '2000-01-01') THEN recipes.updated_at ELSE sharers.updated_at END ) AS ordering_param
+                                        MAX(CASE WHEN recipes.created_at > COALESCE(sharers.updated_at, TIMESTAMP '2000-01-01') THEN recipes.created_at ELSE sharers.updated_at END ) AS ordering_param
                                         FROM recipes
                                         LEFT OUTER JOIN (
                                           SELECT
@@ -136,10 +136,10 @@ module RecipeMixins::RecipeListSearches
                                         #{serves_string}
                                         AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
                                         GROUP BY recipes.id
-                                        ORDER BY MAX(CASE WHEN recipes.updated_at > COALESCE(sharers.updated_at, TIMESTAMP '2000-01-01') THEN recipes.updated_at ELSE sharers.updated_at END ) DESC
+                                        ORDER BY MAX(CASE WHEN recipes.created_at > COALESCE(sharers.updated_at, TIMESTAMP '2000-01-01') THEN recipes.created_at ELSE sharers.updated_at END ) DESC
                                         LIMIT ?
                                         OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, queryChefID, queryChefID, queryChefID, search_term.downcase(), limit, offset])
-                                      elsif type == "chef_liked" # recipes liked by use_chef ordered by most-recently liked
+    elsif type == "chef_liked" # recipes liked by use_chef ordered by most-recently liked
       # byebug
       recipes_results = Recipe.find_by_sql(["SELECT DISTINCT recipes.*,
                                           MAX(ri.image_url) AS image_url,
@@ -314,7 +314,7 @@ module RecipeMixins::RecipeListSearches
                                     #{serves_string}
                                     AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
                                     GROUP BY recipes.id
-                                    ORDER BY recipes.updated_at DESC
+                                    ORDER BY recipes.created_at DESC
                                     LIMIT ?
                                     OFFSET ?", user_chef_id, user_chef_id, user_chef_id, user_chef_id, search_term.downcase(), limit, offset])
     end
