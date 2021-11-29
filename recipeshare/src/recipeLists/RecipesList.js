@@ -178,7 +178,6 @@ export class RecipesList extends React.Component {
 		if (netInfoState.isConnected) {
 			this.setState({ awaitingServer: true }, async () => {
 				try {
-					// const queryChefID = this.getQueryChefId()
 					let result = await getRecipeList(this.getRecipeListName(), this.getQueryChefId(), this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.state.filterSettings, this.state.selectedCuisine, this.state.selectedServes, this.state.searchTerm, this.abortController)
 					if (result.recipes.length == 0) {
 						this.setState({ renderNoRecipesMessage: true })
@@ -245,8 +244,7 @@ export class RecipesList extends React.Component {
 
 	fetchFilterChoices = async () => {
 		try {
-			const queryChefID = this.getQueryChefId()
-			let result = await getAvailableFilters(this.getRecipeListName(), queryChefID, this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.state.filterSettings, this.state.selectedCuisine, this.state.selectedServes, this.state.searchTerm, this.abortController)
+			let result = await getAvailableFilters(this.getRecipeListName(), this.getQueryChefId(), this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.state.filterSettings, this.state.selectedCuisine, this.state.selectedServes, this.state.searchTerm, this.abortController)
 			this.setState({
 				cuisineOptions: result.cuisines,
 				servesOptions: result.serves,

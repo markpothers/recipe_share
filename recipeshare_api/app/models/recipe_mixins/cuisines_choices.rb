@@ -21,7 +21,7 @@ module RecipeMixins::CuisinesChoices
         #{serves_string}
         AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
         ORDER BY recipes.cuisine",
-        user_chef_id,
+        queryChefID,
         search_term.downcase(),
       ])
     elsif type == "chef_liked" # recipes created by me ordered most-recent first
@@ -73,9 +73,9 @@ module RecipeMixins::CuisinesChoices
         AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
         GROUP BY recipes.id
         ORDER BY recipes.cuisine",
-        user_chef_id,
-        user_chef_id,
-        user_chef_id,
+        queryChefID,
+        queryChefID,
+        queryChefID,
         search_term.downcase(),
       ])
     else # if all else fails, just show all recipes ordered most recent first

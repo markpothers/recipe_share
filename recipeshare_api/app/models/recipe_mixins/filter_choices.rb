@@ -101,9 +101,9 @@ module RecipeMixins::FilterChoices
         #{cuisine_string}
         #{serves_string}
         AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')",
-        user_chef_id,
-        user_chef_id,
-        user_chef_id,
+        queryChefID,
+        queryChefID,
+        queryChefID,
         search_term.downcase(),
       ])
     else # if all else fails, just show all recipes ordered most recent first

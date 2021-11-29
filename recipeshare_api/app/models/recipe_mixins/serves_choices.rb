@@ -75,9 +75,9 @@ module RecipeMixins::ServesChoices
         AND LOWER(recipes.name) LIKE CONCAT('%', ?, '%')
         GROUP BY recipes.id
         ORDER BY recipes.serves",
-        user_chef_id,
-        user_chef_id,
-        user_chef_id,
+        queryChefID,
+        queryChefID,
+        queryChefID,
         search_term.downcase(),
       ])
     else # if all else fails, just show all recipes ordered most recent first
