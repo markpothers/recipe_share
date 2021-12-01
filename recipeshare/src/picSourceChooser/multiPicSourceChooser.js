@@ -30,9 +30,23 @@ export default function MultiPicSourceChooser(props) {
 	}, [])
 
 	const addPhoto = async () => {
-		let newImages = [...props.imageSources.slice(0, imageIndex), { uri: '' }, ...props.imageSources.slice(imageIndex)]
+		let newImageIndex = imageIndex + 1
+		let newImages = [...props.imageSources.slice(0, newImageIndex), { uri: '' }, ...props.imageSources.slice(newImageIndex)]
+		setImageIndex(newImageIndex)
 		await props.saveImages(newImages)
+		primaryImageFlatList.current.scrollToIndex({ index: newImageIndex > imageSources.length - 1 ? imageSources.length - 1 : newImageIndex })
 	}
+
+	// after adding a new slot to the end, this function calls to scroll to it
+	// it can only happen after a re-render and for some reason doesn't work without the timeout
+	// i guess the ref.current isn't updated until it's re-rendered
+	// yurgh
+	useEffect(()=>{
+		setTimeout(()=>{
+			primaryImageFlatList.current.scrollToIndex({ index: imageIndex })
+			}, 0)
+	}, [imageIndex])
+
 	const pickImage = async () => {
 		try {
 			if (hasCameraRollPermission) {
@@ -85,11 +99,14 @@ export default function MultiPicSourceChooser(props) {
 		if (props.imageSources.length == 1) { //go back to completely empty list of images
 			setImageIndex(0)
 			props.saveImages([{ uri: '' }])
+			primaryImageFlatList.current.scrollToIndex({ index: 0 })
 		} else {
 			let newImages = [...props.imageSources]
 			newImages.splice(imageIndex, 1)
-			setImageIndex(imageIndex > newImages.length - 1 ? newImages.length - 1 : imageIndex)
+			let newImageIndex = imageIndex > newImages.length - 1 ? newImages.length - 1 : imageIndex
+			setImageIndex(newImageIndex)
 			props.saveImages(newImages)
+			primaryImageFlatList.current.scrollToIndex({ index: newImageIndex })
 		}
 	}
 
