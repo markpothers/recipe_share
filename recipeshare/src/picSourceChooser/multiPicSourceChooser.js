@@ -34,18 +34,22 @@ export default function MultiPicSourceChooser(props) {
 		let newImages = [...props.imageSources.slice(0, newImageIndex), { uri: '' }, ...props.imageSources.slice(newImageIndex)]
 		setImageIndex(newImageIndex)
 		await props.saveImages(newImages)
-		primaryImageFlatList.current.scrollToIndex({ index: newImageIndex > imageSources.length - 1 ? imageSources.length - 1 : newImageIndex })
 	}
 
 	// after adding a new slot to the end, this function calls to scroll to it
 	// it can only happen after a re-render and for some reason doesn't work without the timeout
 	// i guess the ref.current isn't updated until it's re-rendered
-	// yurgh
-	useEffect(()=>{
-		setTimeout(()=>{
-			primaryImageFlatList.current.scrollToIndex({ index: imageIndex })
-			}, 0)
-	}, [imageIndex])
+	// by putting in a timeout of zero it goes to the back of the scheduling queue and happens after the ref is updated, I think
+	// by monitoring length it only happens on add or delete image and since delete doesn't change image index,
+	// it only does anything on add
+	// the if statement prevents scrolling when repeated taps mean the timeout and what's rendered have got out of sync
+	useEffect(() => {
+		setTimeout(() => {
+			if (primaryImageFlatList.current.props.data.length == props.imageSources.length) {
+				primaryImageFlatList.current.scrollToIndex({ index: imageIndex })
+			}
+		}, 0)
+	}, [props.imageSources.length])
 
 	const pickImage = async () => {
 		try {
@@ -201,7 +205,7 @@ export default function MultiPicSourceChooser(props) {
 					//allowedTransformOperations={['crop', 'rotate', 'flip']}
 					//allowedAdjustmentOperations={[]}
 					mode={"full"}
-					//mode={'crop-only'}
+				//mode={'crop-only'}
 				/>
 			)}
 			<View style={[styles.modalFullScreenContainer, { height: Dimensions.get('window').height, width: Dimensions.get('window').width }]}>
@@ -236,6 +240,11 @@ export default function MultiPicSourceChooser(props) {
 									//if (nearestIndex != primaryImageDisplayedIndex) {
 									setImageIndex(nearestIndex)
 									//}
+								}}
+								getItemLayout={(data, index) => ({ length: responsiveWidth(80) - 2, offset: (responsiveWidth(80) - 2) * index, index })}
+								onScrollToIndexFailed={() => {
+									// console.log('the error')
+									// console.log(error)
 								}}
 							/>) : (
 							<View style={{ height: '100%', width: responsiveWidth(80) - 2, justifyContent: 'center', alignItems: 'center' }}>
