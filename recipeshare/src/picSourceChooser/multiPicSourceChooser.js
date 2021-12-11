@@ -45,7 +45,7 @@ export default function MultiPicSourceChooser(props) {
 	// the if statement prevents scrolling when repeated taps mean the timeout and what's rendered have got out of sync
 	useEffect(() => {
 		setTimeout(() => {
-			if (primaryImageFlatList.current.props.data.length == props.imageSources.length) {
+			if (primaryImageFlatList.current?.props.data.length == props.imageSources.length) {
 				primaryImageFlatList.current.scrollToIndex({ index: imageIndex })
 			}
 		}, 0)
