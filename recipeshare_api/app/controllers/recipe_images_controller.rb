@@ -12,6 +12,9 @@ def create
         elsif image["image_id"] != 0
             recipe_image = RecipeImage.find(image["image_id"])
             recipe_image.recipe_id = image["recipe_id"]
+        else # if the image is just nothing i.e. they submitted an empty slot
+            render json: true
+            return
         end
         recipe_image.index = image["image_index"]
         recipe_image.hidden = false

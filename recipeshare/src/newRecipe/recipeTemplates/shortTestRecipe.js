@@ -10,7 +10,7 @@ export const shortTestRecipe = {
 			'step 1', 'step 2', 'step 3', 'step 4', 'step 5', 'step 6'
 		],
 		instructionImages: [
-			'','','','','',''
+			'', '', '', '', '', ''
 			// "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540pothers%252Frecipe-share/ImagePicker/1a15978f-0614-44c8-960c-0987bd52a612.jpg",
 			// "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540pothers%252Frecipe-share/ImagePicker/f23dd50c-2b64-4e4c-8567-550142d66d60.jpg",
 			// "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540pothers%252Frecipe-share/ImagePicker/3869756f-3ae0-490d-8b98-e6d78b6a0667.jpg",
@@ -37,6 +37,9 @@ export const shortTestRecipe = {
 			totalTime: 90,
 		},
 		primaryImages: [
+			{
+				"uri": "",
+			},
 			// {
 			// 	"cancelled": false,
 			// 	"height": 2209,
