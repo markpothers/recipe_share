@@ -189,7 +189,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						cookTime: recipe.cook_time > 0 ? recipe.cook_time : 0,
 						totalTime: recipe.total_time > 0 ? recipe.total_time : (recipe.time ? getMinutesFromTimeString(recipe.time) : 0),
 					},
-					primaryImages: recipeDetails.recipe_images?.length > 0 ? recipeDetails.recipe_images : [],
+					primaryImages: recipeDetails.recipe_images?.length > 0 ? recipeDetails.recipe_images : [{
+						"uri": "",
+					}],
 					filter_settings: {
 						"Breakfast": recipe["breakfast"],
 						"Lunch": recipe["lunch"],
@@ -259,8 +261,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			AsyncStorage.removeItem('localEditRecipeDetails', async () => {
 				this.setState(() => (testing ? testRecipe : emptyRecipe), async () => {
 					if (this.props.route.params?.recipe_details !== undefined) {
-						if (!editedRecipeSavedToDatabase){ // if you updated the saved recipe you don't want to refresh async store before leaving
-						await this.setRecipeParamsForEditing(this.props.route.params.recipe_details)
+						if (!editedRecipeSavedToDatabase) { // if you updated the saved recipe you don't want to refresh async store before leaving
+							await this.setRecipeParamsForEditing(this.props.route.params.recipe_details)
 						}
 						this.setState({ alertPopUpShowing: false })
 					}
