@@ -752,6 +752,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		render() {
 			// console.log(this.state.newRecipeDetails.instructions)
+			// console.log(this.state.newRecipeDetails.instructionImages)
 			return (
 				<SpinachAppContainer awaitingServer={this.state.awaitingServer} scrollingEnabled={false} >
 					{

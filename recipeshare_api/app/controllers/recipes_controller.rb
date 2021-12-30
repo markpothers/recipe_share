@@ -70,7 +70,8 @@ class RecipesController < ApplicationController
             @recipe.ingredients=(newRecipe_Ingredient_params)
             @recipe.instructions=(newRecipe_Instructions_params)
             if @recipe.save
-                render json: { recipe: @recipe, instructions: @recipe.instructions }
+                # byebug
+                render json: { recipe: @recipe, instructions: @recipe.instructions.where(hidden: false) }
             else
                 # byebug
                 render json: {error: true, message: @recipe.errors.full_messages}

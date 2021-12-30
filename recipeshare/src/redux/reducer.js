@@ -1,13 +1,13 @@
 const reducer = (currentState, action) => {
 	switch (action.type) {
 		case 'UPDATE_SINGLE_RECIPE_LIST':
-			return { ...currentState, allRecipeLists: { ...currentState.allRecipeLists, [action.listKey]: action.recipeList}}
+			return { ...currentState, allRecipeLists: { ...currentState.allRecipeLists, [action.listKey]: action.recipeList } }
 		case 'UPDATE_ALL_RECIPE_LISTS':
-			return { ...currentState, allRecipeLists: action.allRecipeLists}
+			return { ...currentState, allRecipeLists: action.allRecipeLists }
 		case 'UPDATE_SINGLE_CHEF_LIST':
-			return { ...currentState, allChefLists: { ...currentState.allChefLists, [action.listKey]: action.chefList}}
+			return { ...currentState, allChefLists: { ...currentState.allChefLists, [action.listKey]: action.chefList } }
 		case 'UPDATE_ALL_CHEF_LISTS':
-			return { ...currentState, allChefLists: action.allChefLists}
+			return { ...currentState, allChefLists: action.allChefLists }
 		case 'STORE_RECIPE_DETAILS':
 			return { ...currentState, recipe_details: action.recipe_details }
 		case 'UPDATE_NEW_USER_DETAILS':
