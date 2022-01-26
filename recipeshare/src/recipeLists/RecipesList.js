@@ -218,14 +218,13 @@ export class RecipesList extends React.Component {
 	fetchAdditionalRecipesForList = async () => {
 		try {
 			const result = await getRecipeList(this.getRecipeListName(), this.getQueryChefId(), this.state.limit, this.state.offset, this.props.global_ranking, this.props.loggedInChef.auth_token, this.state.filterSettings, this.state.selectedCuisine, this.state.selectedServes, this.state.searchTerm, this.abortController)
-			this.props.updateSingleRecipeList(this.props.route.key, [...this.getRecipeList(), ...result.recipes])
 			this.setState({
 				cuisineOptions: result.cuisines,
 				servesOptions: result.serves,
 				filterOptions: result.filters,
 			})
 			saveRecipeListsLocally(this.getQueryChefId(), this.props.loggedInChef.id, this.getRecipeListName(), [...this.getRecipeList(), ...result.recipes])
-
+			this.props.updateSingleRecipeList(this.props.route.key, [...this.getRecipeList(), ...result.recipes])
 		}
 		catch (e) {
 			if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
@@ -410,9 +409,9 @@ export class RecipesList extends React.Component {
 	}
 
 	onEndReached = () => {
-		//console.log('end reached')
+		// console.log('end reached')
 		if (this.getRecipeList().length % startingLimit == 0) {
-			this.setState((state) => ({ offset: state.offset + this.getRecipeList().length }),
+			this.setState((state) => ({ offset: this.getRecipeList().length }),
 				this.fetchAdditionalRecipesForList
 			)
 		}
@@ -596,7 +595,8 @@ export class RecipesList extends React.Component {
 	checkFilterSetting = (element) => this.state.filterSettings[element] == true
 
 	render() {
-		//console.log(this.getRecipeList()[0]?.chef_liked)
+		// console.log(this.getRecipeList().length)
+		// console.log(this.getRecipeList().map(r => r.id))
 		//console.log(this.props.route)
 		// console.log(Object.keys(this.props.allRecipeLists))
 		//console.log('recipe list re-rendering')
@@ -712,7 +712,7 @@ export class RecipesList extends React.Component {
 						}
 						onEndReached={this.onEndReached}
 						onEndReachedThreshold={2.5}
-						initialNumToRender={5}
+						initialNumToRender={this.getRecipeList().length}
 						scrollEventThrottle={16}
 						onScroll={Animated.event(
 							[{ nativeEvent: { contentOffset: { y: this.state.yOffset } } }],

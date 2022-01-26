@@ -26,6 +26,7 @@ export default class InstructionRow extends React.Component {
 						style={styles.instructionInput}
 						multiline={true}
 						numberOfLines={1}
+						scrollEnabled={false}
 						value={this.props.item}
 						placeholder={`Instructions: step ${this.props.index + 1}`}
 						onChangeText={(text) => {

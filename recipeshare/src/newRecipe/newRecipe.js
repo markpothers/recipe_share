@@ -1145,9 +1145,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 													if (this.state.autoCompleteFocused !== null) {
 														this.setState({ autoCompleteFocused: null })
 													}
+													// Keyboard.dismiss()
+												}}
+												onDragStart={() => {
+													this.deactivateScrollView()
 													Keyboard.dismiss()
 												}}
-												onDragStart={this.deactivateScrollView}
 												onDragEnd={this.activateScrollView}
 												delayLongPress={200}
 												keyExtractor={(item, index) => `${index}`}
@@ -1210,7 +1213,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 													this.deactivateScrollView()
 													Keyboard.dismiss()
 												}}
-												onClickItem={Keyboard.dismiss}
+												// onClickItem={Keyboard.dismiss()}
 												onDragEnd={this.activateScrollView}
 												delayLongPress={100}
 												keyExtractor={(item, index) => `${index}`}
