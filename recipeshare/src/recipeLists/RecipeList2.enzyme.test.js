@@ -175,7 +175,7 @@ describe('Recipe List', () => {
 			})
 			component.setProps({})
 			let cards = component.find(RecipeCard)
-			expect(cards.length).toEqual(5) //matches the initial num to render of the flatlist
+			expect(cards.length).toEqual(17) //matches the initial num to render of the flatlist
 			let searchBar = component.find(SearchBar)
 			expect(searchBar.length).toEqual(1)
 			// let json = toJson(component) // snapshot testing doesn't work with a list and cards because it results in too long a string
