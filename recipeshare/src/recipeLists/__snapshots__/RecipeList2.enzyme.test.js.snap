@@ -425,54 +425,26 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                 viewabilityConfigCallbackPairs={Array []}
                                 windowSize={21}
                               >
-                                <ScrollView
-                                  ListHeaderComponent={[Function]}
-                                  data={Array []}
-                                  disableVirtualization={false}
-                                  forwardedRef={[Function]}
-                                  getItem={[Function]}
-                                  getItemCount={[Function]}
-                                  horizontal={false}
-                                  initialNumToRender={0}
-                                  keyExtractor={[Function]}
-                                  listKey={Array []}
-                                  maxToRenderPerBatch={10}
-                                  nestedScrollEnabled={true}
-                                  onContentSizeChange={[Function]}
-                                  onEndReached={[Function]}
-                                  onEndReachedThreshold={2.5}
-                                  onLayout={[Function]}
-                                  onMomentumScrollEnd={[Function]}
-                                  onScroll={[Function]}
-                                  onScrollBeginDrag={[Function]}
-                                  onScrollEndDrag={[Function]}
-                                  refreshControl={
-                                    <RefreshControlMock
-                                      colors={
-                                        Array [
-                                          "#104e01",
-                                        ]
-                                      }
-                                      onRefresh={[Function]}
-                                      progressBackgroundColor="#fff59b"
-                                      refreshing={false}
-                                      tintColor="#fff59b"
-                                    />
-                                  }
-                                  removeClippedSubviews={false}
-                                  renderItem={[Function]}
-                                  scrollEventThrottle={16}
-                                  stickyHeaderIndices={Array []}
-                                  style={
+                                <VirtualizedListContextProvider
+                                  value={
                                     Object {
-                                      "minHeight": 933.8,
+                                      "cellKey": null,
+                                      "debugInfo": Object {
+                                        "cellKey": "rootList",
+                                        "horizontal": false,
+                                        "listKey": Array [],
+                                        "parent": undefined,
+                                      },
+                                      "getNestedChildState": [Function],
+                                      "getOutermostParentListRef": [Function],
+                                      "getScrollMetrics": [Function],
+                                      "horizontal": false,
+                                      "registerAsNestedChild": [Function],
+                                      "unregisterAsNestedChild": [Function],
                                     }
                                   }
-                                  updateCellsBatchingPeriod={50}
-                                  viewabilityConfigCallbackPairs={Array []}
-                                  windowSize={21}
                                 >
-                                  <RCTScrollView
+                                  <ScrollView
                                     ListHeaderComponent={[Function]}
                                     data={Array []}
                                     disableVirtualization={false}
@@ -566,44 +538,82 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                       viewabilityConfigCallbackPairs={Array []}
                                       windowSize={21}
                                     >
-                                      <RefreshControlMock
-                                        colors={
-                                          Array [
-                                            "#104e01",
-                                          ]
+                                      <RCTScrollView
+                                        ListHeaderComponent={[Function]}
+                                        data={Array []}
+                                        disableVirtualization={false}
+                                        forwardedRef={[Function]}
+                                        getItem={[Function]}
+                                        getItemCount={[Function]}
+                                        horizontal={false}
+                                        initialNumToRender={0}
+                                        keyExtractor={[Function]}
+                                        listKey={Array []}
+                                        maxToRenderPerBatch={10}
+                                        nestedScrollEnabled={true}
+                                        onContentSizeChange={[Function]}
+                                        onEndReached={[Function]}
+                                        onEndReachedThreshold={2.5}
+                                        onLayout={[Function]}
+                                        onMomentumScrollEnd={[Function]}
+                                        onScroll={[Function]}
+                                        onScrollBeginDrag={[Function]}
+                                        onScrollEndDrag={[Function]}
+                                        refreshControl={
+                                          <RefreshControlMock
+                                            colors={
+                                              Array [
+                                                "#104e01",
+                                              ]
+                                            }
+                                            onRefresh={[Function]}
+                                            progressBackgroundColor="#fff59b"
+                                            refreshing={false}
+                                            tintColor="#fff59b"
+                                          />
                                         }
-                                        onRefresh={[Function]}
-                                        progressBackgroundColor="#fff59b"
-                                        refreshing={false}
-                                        tintColor="#fff59b"
+                                        removeClippedSubviews={false}
+                                        renderItem={[Function]}
+                                        scrollEventThrottle={16}
+                                        stickyHeaderIndices={Array []}
+                                        style={
+                                          Object {
+                                            "minHeight": 933.8,
+                                          }
+                                        }
+                                        updateCellsBatchingPeriod={50}
+                                        viewabilityConfigCallbackPairs={Array []}
+                                        windowSize={21}
                                       >
-                                        <RCTRefreshControl>
-                                          <RCTRefreshControl />
-                                        </RCTRefreshControl>
-                                      </RefreshControlMock>
-                                      <View>
+                                        <RefreshControlMock
+                                          colors={
+                                            Array [
+                                              "#104e01",
+                                            ]
+                                          }
+                                          onRefresh={[Function]}
+                                          progressBackgroundColor="#fff59b"
+                                          refreshing={false}
+                                          tintColor="#fff59b"
+                                        >
+                                          <RCTRefreshControl>
+                                            <RCTRefreshControl />
+                                          </RCTRefreshControl>
+                                        </RefreshControlMock>
                                         <View>
-                                          <VirtualizedCellWrapper
-                                            cellKey="rootList-header"
-                                            key="$header"
-                                          >
-                                            <View
-                                              onLayout={[Function]}
+                                          <View>
+                                            <VirtualizedListCellContextProvider
+                                              cellKey="rootList-header"
+                                              key="$header"
                                             >
                                               <View
                                                 onLayout={[Function]}
                                               >
-                                                <ListHeaderComponent>
-                                                  <ForwardRef
-                                                    onPress={[Function]}
-                                                    style={
-                                                      Object {
-                                                        "height": 933.8,
-                                                      }
-                                                    }
-                                                  >
-                                                    <TouchableOpacity
-                                                      hostRef={null}
+                                                <View
+                                                  onLayout={[Function]}
+                                                >
+                                                  <ListHeaderComponent>
+                                                    <ForwardRef
                                                       onPress={[Function]}
                                                       style={
                                                         Object {
@@ -611,28 +621,16 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                                         }
                                                       }
                                                     >
-                                                      <ForwardRef(AnimatedComponentWrapper)
-                                                        accessible={true}
-                                                        focusable={true}
-                                                        onClick={[Function]}
-                                                        onResponderGrant={[Function]}
-                                                        onResponderMove={[Function]}
-                                                        onResponderRelease={[Function]}
-                                                        onResponderTerminate={[Function]}
-                                                        onResponderTerminationRequest={[Function]}
-                                                        onStartShouldSetResponder={[Function]}
+                                                      <TouchableOpacity
+                                                        hostRef={null}
+                                                        onPress={[Function]}
                                                         style={
-                                                          Array [
-                                                            Object {
-                                                              "height": 933.8,
-                                                            },
-                                                            Object {
-                                                              "opacity": 1,
-                                                            },
-                                                          ]
+                                                          Object {
+                                                            "height": 933.8,
+                                                          }
                                                         }
                                                       >
-                                                        <AnimatedComponent
+                                                        <ForwardRef(AnimatedComponentWrapper)
                                                           accessible={true}
                                                           focusable={true}
                                                           onClick={[Function]}
@@ -653,7 +651,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                                             ]
                                                           }
                                                         >
-                                                          <View
+                                                          <AnimatedComponent
                                                             accessible={true}
                                                             focusable={true}
                                                             onClick={[Function]}
@@ -664,10 +662,14 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                                             onResponderTerminationRequest={[Function]}
                                                             onStartShouldSetResponder={[Function]}
                                                             style={
-                                                              Object {
-                                                                "height": 933.8,
-                                                                "opacity": 1,
-                                                              }
+                                                              Array [
+                                                                Object {
+                                                                  "height": 933.8,
+                                                                },
+                                                                Object {
+                                                                  "opacity": 1,
+                                                                },
+                                                              ]
                                                             }
                                                           >
                                                             <View
@@ -687,24 +689,42 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                                                 }
                                                               }
                                                             >
-                                                              <PressabilityDebugView
-                                                                color="cyan"
-                                                              />
+                                                              <View
+                                                                accessible={true}
+                                                                focusable={true}
+                                                                onClick={[Function]}
+                                                                onResponderGrant={[Function]}
+                                                                onResponderMove={[Function]}
+                                                                onResponderRelease={[Function]}
+                                                                onResponderTerminate={[Function]}
+                                                                onResponderTerminationRequest={[Function]}
+                                                                onStartShouldSetResponder={[Function]}
+                                                                style={
+                                                                  Object {
+                                                                    "height": 933.8,
+                                                                    "opacity": 1,
+                                                                  }
+                                                                }
+                                                              >
+                                                                <PressabilityDebugView
+                                                                  color="cyan"
+                                                                />
+                                                              </View>
                                                             </View>
-                                                          </View>
-                                                        </AnimatedComponent>
-                                                      </ForwardRef(AnimatedComponentWrapper)>
-                                                    </TouchableOpacity>
-                                                  </ForwardRef>
-                                                </ListHeaderComponent>
+                                                          </AnimatedComponent>
+                                                        </ForwardRef(AnimatedComponentWrapper)>
+                                                      </TouchableOpacity>
+                                                    </ForwardRef>
+                                                  </ListHeaderComponent>
+                                                </View>
                                               </View>
-                                            </View>
-                                          </VirtualizedCellWrapper>
+                                            </VirtualizedListCellContextProvider>
+                                          </View>
                                         </View>
-                                      </View>
+                                      </RCTScrollView>
                                     </RCTScrollView>
-                                  </RCTScrollView>
-                                </ScrollView>
+                                  </ScrollView>
+                                </VirtualizedListContextProvider>
                               </VirtualizedList>
                             </FlatList>
                           </AnimatedComponent>

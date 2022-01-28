@@ -1,6 +1,6 @@
 
-//stops random warnings about Animated.useNativeDriver
-jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper')
+// stops random warnings about Animated.useNativeDriver
+jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
 
 //copy this line in some way to many invalid component name errors
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon')

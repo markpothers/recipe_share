@@ -530,7 +530,7 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="email"
@@ -578,7 +578,7 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -669,7 +669,7 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           maxFontSizeMultiplier={2}
@@ -711,7 +711,7 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -1306,7 +1306,7 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                           ]
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           maxFontSizeMultiplier={2}
                                                           multiline={true}
@@ -1350,7 +1350,7 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -1441,7 +1441,7 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="password"
@@ -1489,7 +1489,7 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                         <ForwardRef
                                                           onPress={[Function]}
                                                           style={
@@ -1733,7 +1733,7 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="password"
@@ -1781,7 +1781,7 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -3310,7 +3310,7 @@ Contact Us
 If you have any questions about this Privacy Policy, please contact us:"
                                                       title="Privacy Policy"
                                                     >
-                                                      <Component
+                                                      <Modal
                                                         animationType="fade"
                                                         hardwareAccelerated={false}
                                                         transparent={true}
@@ -4088,7 +4088,7 @@ If you have any questions about this Privacy Policy, please contact us:
                                                             </View>
                                                           </View>
                                                         </Modal>
-                                                      </Component>
+                                                      </Modal>
                                                     </TextPopUp>
                                                   </View>
                                                 </View>
@@ -5429,7 +5429,7 @@ exports[`CreateChef buttons view terms and conditions button brings up the textP
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="email"
@@ -5477,7 +5477,7 @@ exports[`CreateChef buttons view terms and conditions button brings up the textP
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -5568,7 +5568,7 @@ exports[`CreateChef buttons view terms and conditions button brings up the textP
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           maxFontSizeMultiplier={2}
@@ -5610,7 +5610,7 @@ exports[`CreateChef buttons view terms and conditions button brings up the textP
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -6205,7 +6205,7 @@ exports[`CreateChef buttons view terms and conditions button brings up the textP
                                                           ]
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           maxFontSizeMultiplier={2}
                                                           multiline={true}
@@ -6249,7 +6249,7 @@ exports[`CreateChef buttons view terms and conditions button brings up the textP
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -6340,7 +6340,7 @@ exports[`CreateChef buttons view terms and conditions button brings up the textP
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="password"
@@ -6388,7 +6388,7 @@ exports[`CreateChef buttons view terms and conditions button brings up the textP
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                         <ForwardRef
                                                           onPress={[Function]}
                                                           style={
@@ -6632,7 +6632,7 @@ exports[`CreateChef buttons view terms and conditions button brings up the textP
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="password"
@@ -6680,7 +6680,7 @@ exports[`CreateChef buttons view terms and conditions button brings up the textP
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -7446,7 +7446,7 @@ Contact Us
 If you have any questions about these Terms, please contact us at:"
                                                       title="Terms and Conditions"
                                                     >
-                                                      <Component
+                                                      <Modal
                                                         animationType="fade"
                                                         hardwareAccelerated={false}
                                                         transparent={true}
@@ -8086,7 +8086,7 @@ If you have any questions about these Terms, please contact us at:
                                                             </View>
                                                           </View>
                                                         </Modal>
-                                                      </Component>
+                                                      </Modal>
                                                     </TextPopUp>
                                                   </View>
                                                 </View>
@@ -9820,7 +9820,7 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                           saveImage={[Function]}
                                           sourceChosen={[Function]}
                                         >
-                                          <Component
+                                          <Modal
                                             animationType="fade"
                                             hardwareAccelerated={false}
                                             onRequestClose={[Function]}
@@ -11085,7 +11085,7 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                 </View>
                                               </View>
                                             </Modal>
-                                          </Component>
+                                          </Modal>
                                         </PicSourceChooser>
                                         <View
                                           style={
@@ -11332,7 +11332,7 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="email"
@@ -11380,7 +11380,7 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -11471,7 +11471,7 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           maxFontSizeMultiplier={2}
@@ -11513,7 +11513,7 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -12108,7 +12108,7 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                           ]
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           maxFontSizeMultiplier={2}
                                                           multiline={true}
@@ -12152,7 +12152,7 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -12243,7 +12243,7 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="password"
@@ -12291,7 +12291,7 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                         <ForwardRef
                                                           onPress={[Function]}
                                                           style={
@@ -12535,7 +12535,7 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="password"
@@ -12583,7 +12583,7 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -15185,7 +15185,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="email"
@@ -15233,7 +15233,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                             underlineColorAndroid="transparent"
                                                             value="test@email.com"
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -15324,7 +15324,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           maxFontSizeMultiplier={2}
@@ -15366,7 +15366,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                             underlineColorAndroid="transparent"
                                                             value="testUsername"
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -15961,7 +15961,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                           ]
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           maxFontSizeMultiplier={2}
                                                           multiline={true}
@@ -16005,7 +16005,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                             underlineColorAndroid="transparent"
                                                             value="words about me for testing"
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -16096,7 +16096,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="password"
@@ -16144,7 +16144,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                             underlineColorAndroid="transparent"
                                                             value="myTestPa$$word"
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                         <ForwardRef
                                                           onPress={[Function]}
                                                           style={
@@ -16388,7 +16388,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="password"
@@ -16436,7 +16436,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                             underlineColorAndroid="transparent"
                                                             value="myTestPa$$word"
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -19098,7 +19098,7 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="email"
@@ -19146,7 +19146,7 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -19237,7 +19237,7 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           maxFontSizeMultiplier={2}
@@ -19279,7 +19279,7 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -19874,7 +19874,7 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                           ]
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           maxFontSizeMultiplier={2}
                                                           multiline={true}
@@ -19918,7 +19918,7 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -20009,7 +20009,7 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="password"
@@ -20057,7 +20057,7 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                         <ForwardRef
                                                           onPress={[Function]}
                                                           style={
@@ -20301,7 +20301,7 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="password"
@@ -20349,7 +20349,7 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -22951,7 +22951,7 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="email"
@@ -22999,7 +22999,7 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -23090,7 +23090,7 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           maxFontSizeMultiplier={2}
@@ -23132,7 +23132,7 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -23727,7 +23727,7 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                           ]
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           maxFontSizeMultiplier={2}
                                                           multiline={true}
@@ -23771,7 +23771,7 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -23862,7 +23862,7 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="password"
@@ -23910,7 +23910,7 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                         <ForwardRef
                                                           onPress={[Function]}
                                                           style={
@@ -24154,7 +24154,7 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="password"
@@ -24202,7 +24202,7 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -26804,7 +26804,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="email"
@@ -26852,7 +26852,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -26943,7 +26943,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           maxFontSizeMultiplier={2}
@@ -26985,7 +26985,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -27580,7 +27580,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                           ]
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           maxFontSizeMultiplier={2}
                                                           multiline={true}
@@ -27624,7 +27624,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -27715,7 +27715,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="password"
@@ -27763,7 +27763,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                         <ForwardRef
                                                           onPress={[Function]}
                                                           style={
@@ -28007,7 +28007,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="password"
@@ -28055,7 +28055,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -30657,7 +30657,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="email"
@@ -30705,7 +30705,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -30856,7 +30856,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           maxFontSizeMultiplier={2}
@@ -30898,7 +30898,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -31553,7 +31553,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                           ]
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           maxFontSizeMultiplier={2}
                                                           multiline={true}
@@ -31597,7 +31597,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -31688,7 +31688,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="password"
@@ -31736,7 +31736,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                         <ForwardRef
                                                           onPress={[Function]}
                                                           style={
@@ -31980,7 +31980,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="password"
@@ -32028,7 +32028,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>

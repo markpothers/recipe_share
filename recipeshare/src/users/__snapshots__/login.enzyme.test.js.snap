@@ -615,7 +615,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="email"
@@ -663,7 +663,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                             underlineColorAndroid="transparent"
                                                             value="username@email.com"
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -754,7 +754,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="password"
@@ -802,7 +802,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                         <ForwardRef
                                                           onPress={[Function]}
                                                           style={
@@ -3090,7 +3090,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="email"
@@ -3138,7 +3138,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -3229,7 +3229,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="password"
@@ -3277,7 +3277,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                         <ForwardRef
                                                           onPress={[Function]}
                                                           style={
@@ -5565,7 +5565,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="email"
@@ -5613,7 +5613,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                             underlineColorAndroid="transparent"
                                                             value="username@email.com"
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -5704,7 +5704,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="password"
@@ -5752,7 +5752,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                         <ForwardRef
                                                           onPress={[Function]}
                                                           style={
@@ -8040,7 +8040,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="email"
@@ -8088,7 +8088,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -8179,7 +8179,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="password"
@@ -8227,7 +8227,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                         <ForwardRef
                                                           onPress={[Function]}
                                                           style={
@@ -10140,7 +10140,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                               title="Thanks so much for registering. Please confirm your e-mail address by clicking the link in your welcome e-mail and log in."
                               yesText="Ok"
                             >
-                              <Component
+                              <Modal
                                 animationType="fade"
                                 hardwareAccelerated={false}
                                 transparent={true}
@@ -10337,7 +10337,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                         Object {
                                                           "alignItems": "center",
                                                           "backgroundColor": "#104e01",
-                                                          "borderColor": "#fff59b",
+                                                          "borderColor": "#104e01",
                                                           "borderRadius": 11.25,
                                                           "borderWidth": 1,
                                                           "flexDirection": "row",
@@ -10359,7 +10359,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                           Object {
                                                             "alignItems": "center",
                                                             "backgroundColor": "#104e01",
-                                                            "borderColor": "#fff59b",
+                                                            "borderColor": "#104e01",
                                                             "borderRadius": 11.25,
                                                             "borderWidth": 1,
                                                             "flexDirection": "row",
@@ -10383,7 +10383,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                       Object {
                                                         "alignItems": "center",
                                                         "backgroundColor": "#104e01",
-                                                        "borderColor": "#fff59b",
+                                                        "borderColor": "#104e01",
                                                         "borderRadius": 11.25,
                                                         "borderWidth": 1,
                                                         "flexDirection": "row",
@@ -10404,7 +10404,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                         Object {
                                                           "alignItems": "center",
                                                           "backgroundColor": "#104e01",
-                                                          "borderColor": "#fff59b",
+                                                          "borderColor": "#104e01",
                                                           "borderRadius": 11.25,
                                                           "borderWidth": 1,
                                                           "flexDirection": "row",
@@ -10432,7 +10432,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                             Object {
                                                               "alignItems": "center",
                                                               "backgroundColor": "#104e01",
-                                                              "borderColor": "#fff59b",
+                                                              "borderColor": "#104e01",
                                                               "borderRadius": 11.25,
                                                               "borderWidth": 1,
                                                               "flexDirection": "row",
@@ -10464,7 +10464,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                               Object {
                                                                 "alignItems": "center",
                                                                 "backgroundColor": "#104e01",
-                                                                "borderColor": "#fff59b",
+                                                                "borderColor": "#104e01",
                                                                 "borderRadius": 11.25,
                                                                 "borderWidth": 1,
                                                                 "flexDirection": "row",
@@ -10495,7 +10495,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                               Object {
                                                                 "alignItems": "center",
                                                                 "backgroundColor": "#104e01",
-                                                                "borderColor": "#fff59b",
+                                                                "borderColor": "#104e01",
                                                                 "borderRadius": 11.25,
                                                                 "borderWidth": 1,
                                                                 "flexDirection": "row",
@@ -10523,7 +10523,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                                 Object {
                                                                   "alignItems": "center",
                                                                   "backgroundColor": "#104e01",
-                                                                  "borderColor": "#fff59b",
+                                                                  "borderColor": "#104e01",
                                                                   "borderRadius": 11.25,
                                                                   "borderWidth": 1,
                                                                   "flexDirection": "row",
@@ -10591,7 +10591,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                     </View>
                                   </View>
                                 </Modal>
-                              </Component>
+                              </Modal>
                             </AlertPopUp>
                             <ForwardRef
                               activeOpacity={1}
@@ -10977,7 +10977,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="email"
@@ -11025,7 +11025,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -11116,7 +11116,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="password"
@@ -11164,7 +11164,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                         <ForwardRef
                                                           onPress={[Function]}
                                                           style={
@@ -13393,7 +13393,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="email"
@@ -13441,7 +13441,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                       </View>
                                                     </View>
                                                   </View>
@@ -13532,7 +13532,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <TextInput
                                                           allowFontScaling={true}
                                                           autoCapitalize="none"
                                                           autoCompleteType="password"
@@ -13580,7 +13580,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                             underlineColorAndroid="transparent"
                                                             value=""
                                                           />
-                                                        </Component>
+                                                        </TextInput>
                                                         <ForwardRef
                                                           onPress={[Function]}
                                                           style={
