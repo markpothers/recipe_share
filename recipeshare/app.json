@@ -24,19 +24,20 @@
 		"ios": {
 			"supportsTablet": true,
 			"bundleIdentifier": "com.recipe-share.recipe-share",
-			"buildNumber": "2.0.40",
+			"buildNumber": "2.0.43",
 			"associatedDomains": [
 				"webcredentials:www.recipe-share.com"
 			],
 			"infoPlist": {
 				"NSCameraUsageDescription": "Recipe-Share requires access to your camera to let you set a profile picture and upload pictures of recipes. Your images will not be shared with 3rd parties outside the Recipe-Share app.",
 				"NSPhotoLibraryUsageDescription": "Recipe-Share requires access to your camera roll to let you set a profile picture and upload pictures of recipes. Your images will not be shared with 3rd parties outside the Recipe-Share app.",
-				"NSPhotoLibraryAddUsageDescription": "Recipe-Share requires access to your camera roll to let you set a profile picture and upload pictures of recipes. Your images will not be shared with 3rd parties outside the Recipe-Share app."
+				"NSPhotoLibraryAddUsageDescription": "Recipe-Share requires access to your camera roll to let you set a profile picture and upload pictures of recipes. Your images will not be shared with 3rd parties outside the Recipe-Share app.",
+				"UIRequiresFullScreen": true
 			}
 		},
 		"android": {
 			"package": "com.recipe_share.recipe_share",
-			"versionCode": 40,
+			"versionCode": 43,
 			"permissions": ["CAMERA", "READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE"]
 		}
 	}
