@@ -1,3 +1,6 @@
+// fixes a problem where setImmediate is not defined
+global.setImmediate = process.nextTick;
+
 import 'react-native';
 import 'jest-enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
@@ -25,16 +28,16 @@ Enzyme.configure({ adapter: new Adapter() });
 // }); 
 
 function suppressDomErrors() {
-    const suppressedErrors = /(dispatchCommand was called with a ref that isn't a native component|AsyncStorage has been extracted|Received `%s` for a non-boolean attribute `%s`|React does not recognize the.*prop on a DOM element|Unknown event handler property|is using uppercase HTML|Received `true` for a non-boolean attribute `accessible`|The tag.*is unrecognized in this browser|PascalCase)/;
-    // eslint-disable-next-line no-console
-    const realConsoleError = console.error;
-    // eslint-disable-next-line no-console
-    console.error = message => {
-        if (message.match(suppressedErrors)) {
-            return;
-        }
-        realConsoleError(message);
-    };
-}   
+	const suppressedErrors = /(dispatchCommand was called with a ref that isn't a native component|AsyncStorage has been extracted|Received `%s` for a non-boolean attribute `%s`|React does not recognize the.*prop on a DOM element|Unknown event handler property|is using uppercase HTML|Received `true` for a non-boolean attribute `accessible`|The tag.*is unrecognized in this browser|PascalCase)/;
+	// eslint-disable-next-line no-console
+	const realConsoleError = console.error;
+	// eslint-disable-next-line no-console
+	console.error = message => {
+		if (message.match(suppressedErrors)) {
+			return;
+		}
+		realConsoleError(message);
+	};
+}
 
 suppressDomErrors()

@@ -452,7 +452,7 @@ describe('CreateChef', () => {
 		})
 
 		test('create chef fails with network call and navigates to login', async () => {
-			jest.useFakeTimers()
+			// jest.useFakeTimers('modern')
 			apiCall.mockImplementation(() => new Promise.resolve({fail: true}))
 			await act(async () => await submitButton.onPress())
 			component.update()
@@ -460,8 +460,8 @@ describe('CreateChef', () => {
 			expect(offlineMessage.length).toEqual(1)
 			expect(mockNavigate).not.toHaveBeenCalled()
 			expect(instance.state.renderOfflineMessage).toEqual(true)
-			setTimeout(() => { expect(instance.state.renderOfflineMessage).toEqual(false) }, 6000)
-			jest.runAllTimers()
+			// setTimeout(() => { expect(instance.state.renderOfflineMessage).toEqual(false) }, 6000)
+			// jest.runAllTimers()
 		})
 
 		test('create chef gets some kin of error', async () => {

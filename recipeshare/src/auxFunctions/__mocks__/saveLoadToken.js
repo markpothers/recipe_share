@@ -1,5 +1,8 @@
+export function saveToken () {
+	console.log('mock save token!!!!!')
+	return null
+}
 
-
-function loadToken () {
+export function loadToken () {
 	return null
 }

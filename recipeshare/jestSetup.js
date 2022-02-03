@@ -10,3 +10,6 @@ jest.mock('react-native-vector-icons/FontAwesome', () => 'Icon')
 // also allows you to specify some return value in there
 // import mockAsyncStorage from './__mocks__/@react-native-async-storage/async-storage';
 // jest.mock('@react-native-async-storage/async-storage', () => mockAsyncStorage);
+jest.mock('expo-secure-store', () => ({
+	getItemAsync: jest.fn()
+}))

@@ -1,7 +1,7 @@
 import * as SecureStore from 'expo-secure-store';
 
 export const saveToken = (token) => {
-	let options = { keychainAccessible: SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY}
+	let options = { keychainAccessible: SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY }
 	SecureStore.setItemAsync('token', token, options)
 }
 

@@ -20,6 +20,7 @@ import AppLoading from './appLoading.js'
 import { Image } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 // import { loadToken } from '../auxFunctions/saveLoadToken'
+import * as SecureStore from 'expo-secure-store';
 
 // manual mocks
 // jest.mock('../auxFunctions/saveLoadToken')
@@ -82,9 +83,9 @@ describe('AppLoading', () => {
 	describe('mount-comes', () => {
 
 		test('mounts with no chef saved', async () => {
-			await AsyncStorage.getItem.mockResolvedValueOnce(null)
-			expect(AsyncStorage.getItem).toHaveBeenCalled()
-			expect(AsyncStorage.getItem).toHaveBeenCalledWith('chef')
+			jest.spyOn(SecureStore, 'getItemAsync').mockImplementationOnce(() => Promise.resolve(null));
+			expect(SecureStore.getItemAsync).toHaveBeenCalled()
+			expect(SecureStore.getItemAsync).toHaveBeenCalledWith('token')
 			expect(mockSetLoadedAndLoggedIn).toHaveBeenCalled()
 			expect(mockSetLoadedAndLoggedIn).toHaveBeenCalledWith({ loaded: true, loggedIn: false })
 		})
@@ -99,7 +100,6 @@ describe('AppLoading', () => {
 				is_admin: false
 			})
 			let chef = {
-				"auth_token": "testAuthToken",
 				"country": "United States",
 				"created_at": "2020-11-16T22:50:15.986Z",
 				"deactivated": false,
@@ -115,6 +115,7 @@ describe('AppLoading', () => {
 				"profile_text": "mock profile text",
 				"username": "my test username",
 			}
+			jest.spyOn(SecureStore, 'getItemAsync').mockImplementationOnce(() => Promise.resolve("testAuthToken"));
 			await AsyncStorage.getItem.mockResolvedValueOnce(JSON.stringify(chef))
 			await act(async () => {
 				component = await mount(
@@ -132,12 +133,13 @@ describe('AppLoading', () => {
 			component.setProps({})
 			instance = component.children().instance()
 			component.update()
+			expect(SecureStore.getItemAsync).toHaveBeenCalledWith('token')
 			expect(instance.props.stayingLoggedIn).toEqual(true) //because stay logged in was called
 			expect(instance.props.loggedInChef).toEqual({
 				id: chef.id,
 				e_mail: chef.e_mail,
 				username: chef.username,
-				auth_token: chef.auth_token,
+				auth_token: "testAuthToken",
 				image_url: chef.image_url,
 				is_admin: chef.is_admin,
 			}) // because update logged in chef in state was called
