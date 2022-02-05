@@ -55,6 +55,7 @@ export default function MultiPicSourceChooser(props) {
 		try {
 			if (hasCameraRollPermission) {
 				let image = await ImagePicker.launchImageLibraryAsync({
+					presentationStyle: 0,
 					allowsEditing: Platform.OS == 'android',
 					aspect: [4, 3],
 					base64: false
@@ -71,6 +72,7 @@ export default function MultiPicSourceChooser(props) {
 		try {
 			if (hasCameraPermission) {
 				let image = await ImagePicker.launchCameraAsync({
+					presentationStyle: 0,
 					allowsEditing: Platform.OS == 'android',
 					aspect: [4, 3],
 					base64: false

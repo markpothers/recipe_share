@@ -30,6 +30,7 @@ export default function PicSourceChooser(props) {
 		try {
 			if (hasCameraRollPermission) {
 				let image = await ImagePicker.launchImageLibraryAsync({
+					presentationStyle: 0,
 					allowsEditing: Platform.OS == 'android',
 					aspect: [1, 1],
 					base64: false
@@ -45,6 +46,7 @@ export default function PicSourceChooser(props) {
 		try {
 			if (hasCameraPermission) {
 				let image = await ImagePicker.launchCameraAsync({
+					presentationStyle: 0,
 					allowsEditing: Platform.OS == 'android',
 					aspect: [1, 1],
 					base64: false
