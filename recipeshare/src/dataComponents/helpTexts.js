@@ -23,11 +23,11 @@ const helpTexts = {
 	},
 	ingredients: {
 		title: "Ingredients",
-		text: "Provide the ingredients needed to make this recipe.\n\nType a few letters and autocomplete should provide you with some options. If your ingredient isn't present, just type it in and it'll be available next time.\n\nSort ingredients by holding the button on the left and dragging it to re-order the list.",
+		text: "Provide the ingredients needed to make this recipe.\n\nType a few letters and autocomplete should provide you with some options. If your ingredient isn't present, just type it in and it'll be available next time.\n\nTo sort ingredients, press and hold the button on the left until the row lifts up, then drag it to its new position.",
 	},
 	instructions: {
 		title: "Instructions",
-		text: "Provide step-by-step instructions to make this recipe.\n\nIf you want, you can add an image at each step.\n\nSort steps by holding the button on the left and dragging each step to re-order the list."
+		text: "Provide step-by-step instructions to make this recipe.\n\nIf you want, you can add an image at each step.\n\nTo sort instructions, press and hold the button on the left until the row lifts up, then drag it to its new position."
 	},
 	filterCategories: {
 		title: "Filter Categories",

@@ -212,6 +212,7 @@ const BrowseRecipesStack = () => {
 			<Stack.Screen
 				name="NewRecipe"
 				options={({ route }) => ({
+					gestureEnabled: false,
 					headerLeft: null,
 					headerTitle: Object.assign((props) => <AppHeader {...props} text={"Create a New Recipe"} route={route} />, { displayName: 'Header' })
 				})}
