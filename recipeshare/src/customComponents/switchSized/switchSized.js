@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Switch, Platform } from 'react-native'
 import * as Device from 'expo-device';
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
 
 export default function SwitchSized(props) {
 	let [deviceType, setDeviceType] = useState(0)
@@ -18,7 +19,8 @@ export default function SwitchSized(props) {
 			//reduce size on iPhones (deviceType == 1 ) but not on anything else
 			style={[
 				(Platform.OS === 'ios' && deviceType == 1 ? { transform: [{ scaleX: .7 }, { scaleY: .7 }] } : null),
-				(props.disabled && Platform.OS == 'android' ? { opacity: 0.5 } : null)
+				(props.disabled && Platform.OS == 'android' ? { opacity: 0.5 } : null),
+				(Platform.OS == 'android' ? {height: responsiveHeight(3.5), marginVertical: responsiveHeight(0.5) } : null)
 			]}
 			value={props.value}
 			onValueChange={props.onValueChange}
