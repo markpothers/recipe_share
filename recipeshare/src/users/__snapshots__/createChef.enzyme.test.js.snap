@@ -2327,6 +2327,7 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                                               ],
                                                                             },
                                                                             null,
+                                                                            null,
                                                                           ]
                                                                         }
                                                                         thumbColor={null}
@@ -2362,6 +2363,7 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                                                   ],
                                                                                 },
                                                                                 null,
+                                                                                null,
                                                                               ],
                                                                             ]
                                                                           }
@@ -2392,6 +2394,7 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                                                       },
                                                                                     ],
                                                                                   },
+                                                                                  null,
                                                                                   null,
                                                                                 ],
                                                                               ]
@@ -2957,6 +2960,7 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                                               ],
                                                                             },
                                                                             null,
+                                                                            null,
                                                                           ]
                                                                         }
                                                                         thumbColor={null}
@@ -2992,6 +2996,7 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                                                   ],
                                                                                 },
                                                                                 null,
+                                                                                null,
                                                                               ],
                                                                             ]
                                                                           }
@@ -3022,6 +3027,7 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                                                       },
                                                                                     ],
                                                                                   },
+                                                                                  null,
                                                                                   null,
                                                                                 ],
                                                                               ]
@@ -7226,6 +7232,7 @@ exports[`CreateChef buttons view terms and conditions button brings up the textP
                                                                               ],
                                                                             },
                                                                             null,
+                                                                            null,
                                                                           ]
                                                                         }
                                                                         thumbColor={null}
@@ -7261,6 +7268,7 @@ exports[`CreateChef buttons view terms and conditions button brings up the textP
                                                                                   ],
                                                                                 },
                                                                                 null,
+                                                                                null,
                                                                               ],
                                                                             ]
                                                                           }
@@ -7291,6 +7299,7 @@ exports[`CreateChef buttons view terms and conditions button brings up the textP
                                                                                       },
                                                                                     ],
                                                                                   },
+                                                                                  null,
                                                                                   null,
                                                                                 ],
                                                                               ]
@@ -8631,6 +8640,7 @@ If you have any questions about these Terms, please contact us at:
                                                                               ],
                                                                             },
                                                                             null,
+                                                                            null,
                                                                           ]
                                                                         }
                                                                         thumbColor={null}
@@ -8666,6 +8676,7 @@ If you have any questions about these Terms, please contact us at:
                                                                                   ],
                                                                                 },
                                                                                 null,
+                                                                                null,
                                                                               ],
                                                                             ]
                                                                           }
@@ -8696,6 +8707,7 @@ If you have any questions about these Terms, please contact us at:
                                                                                       },
                                                                                     ],
                                                                                   },
+                                                                                  null,
                                                                                   null,
                                                                                 ],
                                                                               ]
@@ -13129,6 +13141,7 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                                               ],
                                                                             },
                                                                             null,
+                                                                            null,
                                                                           ]
                                                                         }
                                                                         thumbColor={null}
@@ -13164,6 +13177,7 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                                                   ],
                                                                                 },
                                                                                 null,
+                                                                                null,
                                                                               ],
                                                                             ]
                                                                           }
@@ -13194,6 +13208,7 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                                                       },
                                                                                     ],
                                                                                   },
+                                                                                  null,
                                                                                   null,
                                                                                 ],
                                                                               ]
@@ -13759,6 +13774,7 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                                               ],
                                                                             },
                                                                             null,
+                                                                            null,
                                                                           ]
                                                                         }
                                                                         thumbColor={null}
@@ -13794,6 +13810,7 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                                                   ],
                                                                                 },
                                                                                 null,
+                                                                                null,
                                                                               ],
                                                                             ]
                                                                           }
@@ -13824,6 +13841,7 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                                                       },
                                                                                     ],
                                                                                   },
+                                                                                  null,
                                                                                   null,
                                                                                 ],
                                                                               ]
@@ -17042,6 +17060,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                                               ],
                                                                             },
                                                                             null,
+                                                                            null,
                                                                           ]
                                                                         }
                                                                         thumbColor={null}
@@ -17077,6 +17096,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                                                   ],
                                                                                 },
                                                                                 null,
+                                                                                null,
                                                                               ],
                                                                             ]
                                                                           }
@@ -17107,6 +17127,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                                                       },
                                                                                     ],
                                                                                   },
+                                                                                  null,
                                                                                   null,
                                                                                 ],
                                                                               ]
@@ -17672,6 +17693,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                                               ],
                                                                             },
                                                                             null,
+                                                                            null,
                                                                           ]
                                                                         }
                                                                         thumbColor={null}
@@ -17707,6 +17729,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                                                   ],
                                                                                 },
                                                                                 null,
+                                                                                null,
                                                                               ],
                                                                             ]
                                                                           }
@@ -17737,6 +17760,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                                                       },
                                                                                     ],
                                                                                   },
+                                                                                  null,
                                                                                   null,
                                                                                 ],
                                                                               ]
@@ -20895,6 +20919,7 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                                               ],
                                                                             },
                                                                             null,
+                                                                            null,
                                                                           ]
                                                                         }
                                                                         thumbColor={null}
@@ -20930,6 +20955,7 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                                                   ],
                                                                                 },
                                                                                 null,
+                                                                                null,
                                                                               ],
                                                                             ]
                                                                           }
@@ -20960,6 +20986,7 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                                                       },
                                                                                     ],
                                                                                   },
+                                                                                  null,
                                                                                   null,
                                                                                 ],
                                                                               ]
@@ -21525,6 +21552,7 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                                               ],
                                                                             },
                                                                             null,
+                                                                            null,
                                                                           ]
                                                                         }
                                                                         thumbColor={null}
@@ -21560,6 +21588,7 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                                                   ],
                                                                                 },
                                                                                 null,
+                                                                                null,
                                                                               ],
                                                                             ]
                                                                           }
@@ -21590,6 +21619,7 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                                                       },
                                                                                     ],
                                                                                   },
+                                                                                  null,
                                                                                   null,
                                                                                 ],
                                                                               ]
@@ -24748,6 +24778,7 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                                               ],
                                                                             },
                                                                             null,
+                                                                            null,
                                                                           ]
                                                                         }
                                                                         thumbColor={null}
@@ -24783,6 +24814,7 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                                                   ],
                                                                                 },
                                                                                 null,
+                                                                                null,
                                                                               ],
                                                                             ]
                                                                           }
@@ -24813,6 +24845,7 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                                                       },
                                                                                     ],
                                                                                   },
+                                                                                  null,
                                                                                   null,
                                                                                 ],
                                                                               ]
@@ -25378,6 +25411,7 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                                               ],
                                                                             },
                                                                             null,
+                                                                            null,
                                                                           ]
                                                                         }
                                                                         thumbColor={null}
@@ -25413,6 +25447,7 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                                                   ],
                                                                                 },
                                                                                 null,
+                                                                                null,
                                                                               ],
                                                                             ]
                                                                           }
@@ -25443,6 +25478,7 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                                                       },
                                                                                     ],
                                                                                   },
+                                                                                  null,
                                                                                   null,
                                                                                 ],
                                                                               ]
@@ -28601,6 +28637,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                                               ],
                                                                             },
                                                                             null,
+                                                                            null,
                                                                           ]
                                                                         }
                                                                         thumbColor={null}
@@ -28636,6 +28673,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                                                   ],
                                                                                 },
                                                                                 null,
+                                                                                null,
                                                                               ],
                                                                             ]
                                                                           }
@@ -28666,6 +28704,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                                                       },
                                                                                     ],
                                                                                   },
+                                                                                  null,
                                                                                   null,
                                                                                 ],
                                                                               ]
@@ -29231,6 +29270,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                                               ],
                                                                             },
                                                                             null,
+                                                                            null,
                                                                           ]
                                                                         }
                                                                         thumbColor={null}
@@ -29266,6 +29306,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                                                   ],
                                                                                 },
                                                                                 null,
+                                                                                null,
                                                                               ],
                                                                             ]
                                                                           }
@@ -29296,6 +29337,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                                                       },
                                                                                     ],
                                                                                   },
+                                                                                  null,
                                                                                   null,
                                                                                 ],
                                                                               ]
@@ -32634,6 +32676,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                                               ],
                                                                             },
                                                                             null,
+                                                                            null,
                                                                           ]
                                                                         }
                                                                         thumbColor={null}
@@ -32669,6 +32712,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                                                   ],
                                                                                 },
                                                                                 null,
+                                                                                null,
                                                                               ],
                                                                             ]
                                                                           }
@@ -32699,6 +32743,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                                                       },
                                                                                     ],
                                                                                   },
+                                                                                  null,
                                                                                   null,
                                                                                 ],
                                                                               ]
@@ -33264,6 +33309,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                                               ],
                                                                             },
                                                                             null,
+                                                                            null,
                                                                           ]
                                                                         }
                                                                         thumbColor={null}
@@ -33299,6 +33345,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                                                   ],
                                                                                 },
                                                                                 null,
+                                                                                null,
                                                                               ],
                                                                             ]
                                                                           }
@@ -33329,6 +33376,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                                                       },
                                                                                     ],
                                                                                   },
+                                                                                  null,
                                                                                   null,
                                                                                 ],
                                                                               ]

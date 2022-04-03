@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer, { act } from 'react-test-renderer';
 
-import DynamicMenu from './dynamicMenu.js'
+import DynamicMenu from './DynamicMenu.js'
 import { TouchableOpacity } from 'react-native';
 
 describe('DynamicMenu', () => {

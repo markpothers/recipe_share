@@ -1286,6 +1286,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                           ],
                                                                         },
                                                                         null,
+                                                                        null,
                                                                       ]
                                                                     }
                                                                     thumbColor={null}
@@ -1321,6 +1322,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                               ],
                                                                             },
                                                                             null,
+                                                                            null,
                                                                           ],
                                                                         ]
                                                                       }
@@ -1351,6 +1353,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                                   },
                                                                                 ],
                                                                               },
+                                                                              null,
                                                                               null,
                                                                             ],
                                                                           ]
@@ -1582,6 +1585,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                           ],
                                                                         },
                                                                         null,
+                                                                        null,
                                                                       ]
                                                                     }
                                                                     thumbColor={null}
@@ -1617,6 +1621,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                               ],
                                                                             },
                                                                             null,
+                                                                            null,
                                                                           ],
                                                                         ]
                                                                       }
@@ -1647,6 +1652,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                                   },
                                                                                 ],
                                                                               },
+                                                                              null,
                                                                               null,
                                                                             ],
                                                                           ]
@@ -3761,6 +3767,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                           ],
                                                                         },
                                                                         null,
+                                                                        null,
                                                                       ]
                                                                     }
                                                                     thumbColor={null}
@@ -3796,6 +3803,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                               ],
                                                                             },
                                                                             null,
+                                                                            null,
                                                                           ],
                                                                         ]
                                                                       }
@@ -3826,6 +3834,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                                   },
                                                                                 ],
                                                                               },
+                                                                              null,
                                                                               null,
                                                                             ],
                                                                           ]
@@ -4057,6 +4066,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                           ],
                                                                         },
                                                                         null,
+                                                                        null,
                                                                       ]
                                                                     }
                                                                     thumbColor={null}
@@ -4092,6 +4102,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                               ],
                                                                             },
                                                                             null,
+                                                                            null,
                                                                           ],
                                                                         ]
                                                                       }
@@ -4122,6 +4133,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                                   },
                                                                                 ],
                                                                               },
+                                                                              null,
                                                                               null,
                                                                             ],
                                                                           ]
@@ -6236,6 +6248,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                           ],
                                                                         },
                                                                         null,
+                                                                        null,
                                                                       ]
                                                                     }
                                                                     thumbColor={null}
@@ -6271,6 +6284,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                               ],
                                                                             },
                                                                             null,
+                                                                            null,
                                                                           ],
                                                                         ]
                                                                       }
@@ -6301,6 +6315,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                                   },
                                                                                 ],
                                                                               },
+                                                                              null,
                                                                               null,
                                                                             ],
                                                                           ]
@@ -6532,6 +6547,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                           ],
                                                                         },
                                                                         null,
+                                                                        null,
                                                                       ]
                                                                     }
                                                                     thumbColor={null}
@@ -6567,6 +6583,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                               ],
                                                                             },
                                                                             null,
+                                                                            null,
                                                                           ],
                                                                         ]
                                                                       }
@@ -6597,6 +6614,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                                   },
                                                                                 ],
                                                                               },
+                                                                              null,
                                                                               null,
                                                                             ],
                                                                           ]
@@ -8711,6 +8729,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                                           ],
                                                                         },
                                                                         null,
+                                                                        null,
                                                                       ]
                                                                     }
                                                                     thumbColor={null}
@@ -8746,6 +8765,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                                               ],
                                                                             },
                                                                             null,
+                                                                            null,
                                                                           ],
                                                                         ]
                                                                       }
@@ -8776,6 +8796,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                                                   },
                                                                                 ],
                                                                               },
+                                                                              null,
                                                                               null,
                                                                             ],
                                                                           ]
@@ -9007,6 +9028,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                                           ],
                                                                         },
                                                                         null,
+                                                                        null,
                                                                       ]
                                                                     }
                                                                     thumbColor={null}
@@ -9042,6 +9064,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                                               ],
                                                                             },
                                                                             null,
+                                                                            null,
                                                                           ],
                                                                         ]
                                                                       }
@@ -9072,6 +9095,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                                                   },
                                                                                 ],
                                                                               },
+                                                                              null,
                                                                               null,
                                                                             ],
                                                                           ]
@@ -11589,6 +11613,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                                           ],
                                                                         },
                                                                         null,
+                                                                        null,
                                                                       ]
                                                                     }
                                                                     thumbColor={null}
@@ -11624,6 +11649,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                                               ],
                                                                             },
                                                                             null,
+                                                                            null,
                                                                           ],
                                                                         ]
                                                                       }
@@ -11654,6 +11680,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                                                   },
                                                                                 ],
                                                                               },
+                                                                              null,
                                                                               null,
                                                                             ],
                                                                           ]
@@ -11885,6 +11912,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                                           ],
                                                                         },
                                                                         null,
+                                                                        null,
                                                                       ]
                                                                     }
                                                                     thumbColor={null}
@@ -11920,6 +11948,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                                               ],
                                                                             },
                                                                             null,
+                                                                            null,
                                                                           ],
                                                                         ]
                                                                       }
@@ -11950,6 +11979,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                                                   },
                                                                                 ],
                                                                               },
+                                                                              null,
                                                                               null,
                                                                             ],
                                                                           ]
@@ -14005,6 +14035,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                                           ],
                                                                         },
                                                                         null,
+                                                                        null,
                                                                       ]
                                                                     }
                                                                     thumbColor={null}
@@ -14040,6 +14071,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                                               ],
                                                                             },
                                                                             null,
+                                                                            null,
                                                                           ],
                                                                         ]
                                                                       }
@@ -14070,6 +14102,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                                                   },
                                                                                 ],
                                                                               },
+                                                                              null,
                                                                               null,
                                                                             ],
                                                                           ]
@@ -14301,6 +14334,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                                           ],
                                                                         },
                                                                         null,
+                                                                        null,
                                                                       ]
                                                                     }
                                                                     thumbColor={null}
@@ -14336,6 +14370,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                                               ],
                                                                             },
                                                                             null,
+                                                                            null,
                                                                           ],
                                                                         ]
                                                                       }
@@ -14366,6 +14401,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                                                   },
                                                                                 ],
                                                                               },
+                                                                              null,
                                                                               null,
                                                                             ],
                                                                           ]
