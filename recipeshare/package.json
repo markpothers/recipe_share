@@ -10,7 +10,8 @@
 		"test:watch": "node ./node_modules/jest/bin/jest.js --watchAll --colors --runInBand --detectOpenHandles --coverage=false",
 		"test": "node ./node_modules/jest/bin/jest.js --colors --runInBand --detectOpenHandles",
 		"lint": "esw src navigation buildScripts --color",
-		"lint:watch": "npm run lint -- --w --changed "
+		"lint:watch": "npm run lint -- --w --changed ",
+		"testServer": "json-server --watch ./testServer/testData.js --routes ./testServer/routes.json"
 	},
 	"dependencies": {
 		"@expo/samples": "3.0.3",

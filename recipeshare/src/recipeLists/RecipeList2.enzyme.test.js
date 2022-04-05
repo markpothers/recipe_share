@@ -25,7 +25,7 @@ import OfflineMessage from '../offlineMessage/offlineMessage';
 // import { apiCall } from '../auxFunctions/apiCall'
 import RecipesList from './RecipesList.js'
 import RecipeCard from './RecipeCard'
-import { mockRecipeList } from '../../__mocks__/recipeList/mockRecipeList.js'
+import { mockRecipeList } from '../../__mocks__/mockRecipeList.js'
 import SearchBar from '../searchBar/SearchBar.js'
 import { getRecipeList } from '../fetches/getRecipeList.js'
 import { postRecipeLike } from '../fetches/postRecipeLike'

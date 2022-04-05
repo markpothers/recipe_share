@@ -1,0 +1,26 @@
+const filters = [
+	"breakfast",
+	"lunch",
+	"dinner",
+	"dessert",
+	"vegetarian",
+	"vegan",
+	"salad",
+	"soup",
+	"side",
+	"chicken",
+	"red_meat",
+	"seafood",
+	"whole_30",
+	"paleo",
+	"keto",
+	"gluten_free",
+	"freezer_meal",
+	"weeknight",
+	"weekend",
+	"bread",
+	"dairy_free",
+	"white_meat",
+]
+
+module.exports = { filters }

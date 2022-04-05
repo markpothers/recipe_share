@@ -1,0 +1,7 @@
+{
+	"/api/*": "/$1",
+	"/recipes/*": "/recipeDetails/$1",
+	"/chefs/*": "/chefDetails/$1",
+	"/recipes/getAvailableFilters": "/availableFilters"
+}
+
