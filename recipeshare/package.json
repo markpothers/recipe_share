@@ -45,7 +45,7 @@
 		"expo-secure-store": "~11.1.0",
 		"gradle": "^1.0.9",
 		"indent-string": "^4.0.0",
-		"moment": "^2.24.0",
+		"moment": "^2.29.2",
 		"node-fetch": "^2.6.1",
 		"node-forge": "^0.10.0",
 		"react": "17.0.1",
