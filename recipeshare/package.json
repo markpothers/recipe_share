@@ -11,7 +11,7 @@
 		"test": "node ./node_modules/jest/bin/jest.js --colors --runInBand --detectOpenHandles",
 		"lint": "esw src navigation buildScripts --color",
 		"lint:watch": "npm run lint -- --w --changed ",
-		"testServer": "json-server --watch ./testServer/testData.js --routes ./testServer/routes.json"
+		"testServer": "json-server --watch ./testServer/testData.js --routes ./testServer/routes.json --host 10.0.0.145 --middlewares ./testServer/middleware.js"
 	},
 	"dependencies": {
 		"@expo/samples": "3.0.3",

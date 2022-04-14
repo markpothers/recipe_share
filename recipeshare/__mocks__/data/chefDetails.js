@@ -1,6 +1,7 @@
 const chefDetails = [
 	// real chefs
 	{
+		id: 9,
 		"chef": {
 			"country": "United Kingdom",
 			"created_at": "2020-11-04T21:04:13.215Z",
@@ -28,6 +29,7 @@ const chefDetails = [
 		"recipes": 3,
 	},
 	{
+		id: 8,
 		"chef": {
 			"country": "United Kingdom",
 			"created_at": "2020-10-09T16:42:52.797Z",
@@ -55,6 +57,7 @@ const chefDetails = [
 		"recipes": 0,
 	},
 	{
+		id: 7,
 		"chef": {
 			"country": "United Kingdom",
 			"created_at": "2020-10-09T16:41:45.502Z",
@@ -82,6 +85,7 @@ const chefDetails = [
 		"recipes": 2,
 	},
 	{
+		id: 6,
 		"chef": {
 			"country": "United States",
 			"created_at": "2020-10-09T16:36:53.689Z",
@@ -109,6 +113,7 @@ const chefDetails = [
 		"recipes": 0,
 	},
 	{
+		id: 5,
 		"chef": {
 			"country": "United Kingdom",
 			"created_at": "2020-10-09T16:32:13.490Z",
@@ -136,6 +141,7 @@ const chefDetails = [
 		"recipes": 0,
 	},
 	{
+		id: 4,
 		"chef": {
 			"country": "United Kingdom",
 			"created_at": "2020-10-08T17:06:21.580Z",
@@ -163,6 +169,7 @@ const chefDetails = [
 		"recipes": 11,
 	},
 	{
+		id: 3,
 		"chef": {
 			"country": "United States",
 			"created_at": "2020-10-08T02:55:49.278Z",
@@ -190,6 +197,7 @@ const chefDetails = [
 		"recipes": 10,
 	},
 	{
+		id: 2,
 		"chef": {
 			"country": "United States",
 			"created_at": "2020-09-26T02:39:25.936Z",
@@ -217,6 +225,7 @@ const chefDetails = [
 		"recipes": 0,
 	},
 	{
+		id: 1,
 		"chef": {
 			"country": "United States",
 			"created_at": "2020-09-18T01:43:10.853Z",
@@ -245,6 +254,7 @@ const chefDetails = [
 	},
 	// faker chefs
 	{
+		id: 36,
 		"chef": {
 			"country": "United Kingdom",
 			"created_at": "2021-09-13T20:30:01.414Z",
@@ -272,10 +282,11 @@ const chefDetails = [
 		"recipes": 1,
 	},
 	{
+		id: 18,
 		"chef": {
 			"country": "United Kingdom",
 			"created_at": "2020-11-16T22:50:15.986Z",
-			"id": 13,
+			"id": 18,
 			"image_url": "",
 			"profile_text": "I like cooking lots. ",
 			"username": "Pothers",
@@ -299,10 +310,11 @@ const chefDetails = [
 		"recipes": 9,
 	},
 	{
+		id: 17,
 		"chef": {
 			"country": "Alpha Quadrant",
 			"created_at": "2020-10-02T19:07:32.763Z",
-			"id": 11,
+			"id": 17,
 			"image_url": "https://robohash.org/utautnemo.png?size=300x300&set=set1",
 			"profile_text": "It's not what happens to you, but how you react to it that matters.",
 			"username": "I have a very long username for ui testing purposes",
@@ -326,6 +338,7 @@ const chefDetails = [
 		"recipes": 25,
 	},
 	{
+		id: 10,
 		"chef": {
 			"country": "Khitomer",
 			"created_at": "2020-10-02T19:07:32.004Z",
@@ -353,10 +366,11 @@ const chefDetails = [
 		"recipes": 21,
 	},
 	{
+		id: 11,
 		"chef": {
 			"country": "Badlands",
 			"created_at": "2020-10-02T19:07:29.707Z",
-			"id": 9,
+			"id": 11,
 			"image_url": "https://robohash.org/autquiaut.png?size=300x300&set=set1",
 			"profile_text": "Control thy passions lest they take vengence on thee.",
 			"username": "Xinth",
@@ -383,7 +397,7 @@ const chefDetails = [
 		"chef": {
 			"country": "Deep Space Nine",
 			"created_at": "2020-10-02T19:07:26.046Z",
-			"id": 8,
+			"id": 12,
 			"image_url": "https://robohash.org/sedsuntsit.png?size=300x300&set=set1",
 			"profile_text": "The mind is not a vessel to be filled but a fire to be kindled.",
 			"username": "Narisca",
@@ -410,7 +424,7 @@ const chefDetails = [
 		"chef": {
 			"country": "Risa",
 			"created_at": "2020-10-02T19:07:23.057Z",
-			"id": 7,
+			"id": 13,
 			"image_url": "https://robohash.org/erroruteos.png?size=300x300&set=set1",
 			"profile_text": "Love is composed of a single soul inhabiting two bodies.",
 			"username": "Nauptria",
@@ -437,7 +451,7 @@ const chefDetails = [
 		"chef": {
 			"country": "Risa",
 			"created_at": "2020-10-02T19:07:21.562Z",
-			"id": 6,
+			"id": 14,
 			"image_url": "https://robohash.org/etullamrerum.png?size=300x300&set=set1",
 			"profile_text": "Most people would rather give than get affection.",
 			"username": "Issorile",
@@ -464,7 +478,7 @@ const chefDetails = [
 		"chef": {
 			"country": "Delta Quadrant",
 			"created_at": "2020-10-02T19:07:20.796Z",
-			"id": 5,
+			"id": 15,
 			"image_url": "https://robohash.org/quiamollitianon.png?size=300x300&set=set1",
 			"profile_text": "Good habits formed at youth make all the difference.",
 			"username": "Bulthmaas",
@@ -491,7 +505,7 @@ const chefDetails = [
 		"chef": {
 			"country": "Ferenginar",
 			"created_at": "2020-10-02T19:07:19.293Z",
-			"id": 4,
+			"id": 16,
 			"image_url": "https://robohash.org/estperferendiseum.png?size=300x300&set=set1",
 			"profile_text": "The unexamined life is not worth living.",
 			"username": "Zunzil Ligature",

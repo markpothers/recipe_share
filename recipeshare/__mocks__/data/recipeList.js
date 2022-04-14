@@ -30,7 +30,7 @@ const recipeList = [
 		"likes_count": 0,
 		"lunch": false,
 		"makes_count": 0,
-		"name": "Hypoallergenic Protein Shake",
+		"name": "Hypoallergenic Protein Shake - on the JSON testServer",
 		"ordering_param": "2022-03-01T03:33:29.801Z",
 		"paleo": false,
 		"prep_time": 15,
