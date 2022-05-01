@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Platform } from 'react-native'
+import React, { useState, useEffect } from "react"
+import { Platform } from "react-native"
 // import { createStackNavigator, createBottomTabNavigator, createMaterialTopTabNavigator, createDrawerNavigator } from 'react-navigation';
-import RecipeDetailsScreen from '../src/recipeDetails/recipeDetails'
-import ChefDetailsScreen from '../src/chefDetails/chefDetails'
-import NewRecipeScreen from '../src/newRecipe/newRecipe'
-import { ChefFeedScreen, MyRecipesScreen, MyLikedRecipesScreen, ChefsFollowedScreen, ChefsFollowingScreen } from './MyRecipeBookTabs'
-import AppHeader from './appHeader'
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
-import { createStackNavigator } from '@react-navigation/stack';
-import { centralStyles } from '../src/centralStyleSheet' //eslint-disable-line no-unused-vars
-import DynamicMenu from '../src/dynamicMenu/DynamicMenu.js'
-import AppHeaderRight from './appHeaderRight'
+import RecipeDetailsScreen from "../src/recipeDetails/recipeDetails"
+import ChefDetailsScreen from "../src/chefDetails/chefDetails"
+import NewRecipeScreen from "../src/newRecipe/newRecipe"
+import { ChefFeedScreen, MyRecipesScreen, MyLikedRecipesScreen, ChefsFollowedScreen, ChefsFollowingScreen } from "./MyRecipeBookTabs"
+import AppHeader from "./appHeader"
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions" //eslint-disable-line no-unused-vars
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs"
+import { createStackNavigator } from "@react-navigation/stack"
+import { centralStyles } from "../src/centralStyleSheet" //eslint-disable-line no-unused-vars
+import DynamicMenu from "../src/dynamicMenu/DynamicMenu"
+import AppHeaderRight from "./appHeaderRight"
 
 const Tab = createMaterialTopTabNavigator()
 
@@ -24,7 +24,7 @@ const MyRecipeBookTabs = (props) => {
 				text: "Create new recipe",
 				action: (() => {
 					setDynamicMenuShowing(false)
-					props.navigation.navigate('NewRecipe')
+					props.navigation.navigate("NewRecipe")
 				})
 			}
 		]
@@ -32,8 +32,8 @@ const MyRecipeBookTabs = (props) => {
 
 	const addDynamicMenuButtonsToHeader = () => {
 		props.navigation.setOptions({
-			headerRight: Object.assign(() => <AppHeaderRight buttonAction={setDynamicMenuShowing}/>, { displayName: 'HeaderRight' }),
-		});
+			headerRight: Object.assign(() => <AppHeaderRight buttonAction={setDynamicMenuShowing}/>, { displayName: "HeaderRight" }),
+		})
 	}
 
 	useEffect(() => {
@@ -56,15 +56,15 @@ const MyRecipeBookTabs = (props) => {
 				lazy={true}
 				tabBarOptions={{
 					style: {
-						backgroundColor: '#104e01',
+						backgroundColor: "#104e01",
 						// marginTop: -headerHeight
 					},
 					labelStyle: {
-						textTransform: 'none',
+						textTransform: "none",
 						fontSize: responsiveFontSize(2)
 					},
-					activeTintColor: '#fff59b',
-					inactiveTintColor: '#fff59b',
+					activeTintColor: "#fff59b",
+					inactiveTintColor: "#fff59b",
 					tabStyle: {
 						width: responsiveWidth(35),
 						height: responsiveHeight(8),
@@ -74,7 +74,7 @@ const MyRecipeBookTabs = (props) => {
 						// borderColor: 'orange'
 					},
 					indicatorStyle: {
-						backgroundColor: '#fff59b',
+						backgroundColor: "#fff59b",
 					},
 					scrollEnabled: true,
 					showIcon: false,
@@ -196,7 +196,7 @@ const MyRecipeBookStack = () => {
 		headerMode="screen"
 			screenOptions={{
 				headerStyle: {
-					backgroundColor: '#104e01',
+					backgroundColor: "#104e01",
 					height: responsiveHeight(9),
 					shadowOpacity: 0,
 				},
@@ -204,7 +204,7 @@ const MyRecipeBookStack = () => {
 					left: 0,
 					height: responsiveHeight(8),
 					width: responsiveWidth(100),
-					zIndex: Platform.OS == 'ios' ? -1 : null
+					zIndex: Platform.OS == "ios" ? -1 : null
 					// borderWidth: 1,
 					// borderColor: 'red'
 				},
@@ -216,7 +216,7 @@ const MyRecipeBookStack = () => {
 				name="MyRecipeBook"
 				options={({ route }) => ({
 					headerLeft: null,
-					headerTitle: Object.assign((props) => <AppHeader {...props} text={"My Recipe Book"} route={route} />, { displayName: 'Header' })
+					headerTitle: Object.assign((props) => <AppHeader {...props} text={"My Recipe Book"} route={route} />, { displayName: "Header" })
 				})}
 				component={MyRecipeBookTabs}
 			/>
@@ -224,7 +224,7 @@ const MyRecipeBookStack = () => {
 				name="RecipeDetails"
 				options={({ route }) => ({
 					headerLeft: null,
-					headerTitle: Object.assign((props) => <AppHeader {...props} text={"Recipe Details"} route={route} />, { displayName: 'Header' })
+					headerTitle: Object.assign((props) => <AppHeader {...props} text={"Recipe Details"} route={route} />, { displayName: "Header" })
 				})}
 				component={RecipeDetailsScreen}
 			/>
@@ -233,7 +233,7 @@ const MyRecipeBookStack = () => {
 				options={({ route }) => ({
 					gestureEnabled: false,
 					headerLeft: null,
-					headerTitle: Object.assign((props) => <AppHeader {...props} text={"Create a New Recipe"} route={route} />, { displayName: 'Header' })
+					headerTitle: Object.assign((props) => <AppHeader {...props} text={"Create a New Recipe"} route={route} />, { displayName: "Header" })
 				})}
 				component={NewRecipeScreen}
 			/>
@@ -241,7 +241,7 @@ const MyRecipeBookStack = () => {
 				name="ChefDetails"
 				options={({ route }) => ({
 					headerLeft: null,
-					headerTitle: Object.assign((props) => <AppHeader {...props} text={"Chef Details"} route={route} />, { displayName: 'Header' })
+					headerTitle: Object.assign((props) => <AppHeader {...props} text={"Chef Details"} route={route} />, { displayName: "Header" })
 				})}
 				component={ChefDetailsScreen}
 			/>

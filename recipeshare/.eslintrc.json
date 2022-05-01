@@ -9,7 +9,8 @@
 	"plugins": [
 		"react",
 		"react-native",
-		"react-hooks"
+		"react-hooks",
+		"@typescript-eslint"
 	],
 	"parserOptions": {
 		"sourceType": "module",
@@ -25,7 +26,16 @@
 		"plugin:react/recommended"
 	],
 	"rules": {
+		"semi": [
+			"error",
+			"never"
+		],
+		"quotes": [
+			2,
+			"double"
+		],
 		"no-console": 1,
+		"no-unused-vars": 1,
 		"react-native/no-unused-styles": 2,
 		"react-native/split-platform-components": 2,
 		// "react-native/no-inline-styles": 2,
