@@ -1,35 +1,35 @@
-import React from 'react'
-import { FlatList, TouchableOpacity, Animated, Keyboard, Platform, View, Text, RefreshControl } from 'react-native'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import RecipeCard from './RecipeCard'
-import { connect } from 'react-redux'
-import { getRecipeList } from '../fetches/getRecipeList'
-import { getAvailableFilters } from '../fetches/getAvailableFilters'
-import { postRecipeLike } from '../fetches/postRecipeLike'
-import { postReShare } from '../fetches/postReShare'
-import { postRecipeMake } from '../fetches/postRecipeMake'
-import { destroyRecipeLike } from '../fetches/destroyRecipeLike'
-import { destroyReShare } from '../fetches/destroyReShare'
-import { styles } from './recipeListStyleSheet'
-import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import FilterMenu from '../filterMenu/filterMenu'
-import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
-import { getRecipeDetails } from '../fetches/getRecipeDetails'
-import saveRecipeDetailsLocally from '../auxFunctions/saveRecipeDetailsLocally'
-import { saveRecipeListsLocally, loadLocalRecipeLists } from '../auxFunctions/saveRecipeListsLocally'
-import saveChefDetailsLocally from '../auxFunctions/saveChefDetailsLocally'
-import { getChefDetails } from '../fetches/getChefDetails'
-import OfflineMessage from '../offlineMessage/offlineMessage'
-import NetInfo from '@react-native-community/netinfo'
+import React from "react"
+import { FlatList, TouchableOpacity, Animated, Keyboard, Platform, View, Text, RefreshControl } from "react-native"
+import AsyncStorage from "@react-native-async-storage/async-storage"
+import RecipeCard from "./RecipeCard"
+import { connect } from "react-redux"
+import { getRecipeList } from "../fetches/getRecipeList"
+import { getAvailableFilters } from "../fetches/getAvailableFilters"
+import { postRecipeLike } from "../fetches/postRecipeLike"
+import { postReShare } from "../fetches/postReShare"
+import { postRecipeMake } from "../fetches/postRecipeMake"
+import { destroyRecipeLike } from "../fetches/destroyRecipeLike"
+import { destroyReShare } from "../fetches/destroyReShare"
+import { styles } from "./recipeListStyleSheet"
+import { centralStyles } from "../centralStyleSheet" //eslint-disable-line no-unused-vars
+import Icon from "react-native-vector-icons/MaterialCommunityIcons"
+import FilterMenu from "../filterMenu/filterMenu"
+import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer"
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+import { getRecipeDetails } from "../fetches/getRecipeDetails"
+import saveRecipeDetailsLocally from "../auxFunctions/saveRecipeDetailsLocally"
+import { saveRecipeListsLocally, loadLocalRecipeLists } from "../auxFunctions/saveRecipeListsLocally"
+import saveChefDetailsLocally from "../auxFunctions/saveChefDetailsLocally"
+import { getChefDetails } from "../fetches/getChefDetails"
+import OfflineMessage from "../offlineMessage/offlineMessage"
+import NetInfo from "@react-native-community/netinfo"
 NetInfo.configure({ reachabilityShortTimeout: 5 }) //5ms
-import SearchBar from '../searchBar/SearchBar.js'
-import SearchBarClearButton from '../searchBar/SearchBarClearButton'
-import AppHeaderActionButton from '../../navigation/appHeaderActionButton'
-import { cuisines } from '../dataComponents/cuisines'
-import { serves } from '../dataComponents/serves'
-import { clearedFilters } from '../dataComponents/clearedFilters'
+import SearchBar from "../searchBar/SearchBar"
+import SearchBarClearButton from "../searchBar/SearchBarClearButton"
+import AppHeaderActionButton from "../../navigation/appHeaderActionButton"
+import { cuisines } from "../dataComponents/cuisines"
+import { serves } from "../dataComponents/serves"
+import { clearedFilters } from "../dataComponents/clearedFilters"
 
 // import { apiCall } from '../auxFunctions/apiCall'
 
@@ -48,22 +48,22 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
 	updateSingleRecipeList: (listKey, recipeList) => {
 		return dispatch => {
-			dispatch({ type: 'UPDATE_SINGLE_RECIPE_LIST', listKey: listKey, recipeList: recipeList })
+			dispatch({ type: "UPDATE_SINGLE_RECIPE_LIST", listKey: listKey, recipeList: recipeList })
 		}
 	},
 	updateAllRecipeLists: (allRecipeLists) => {
 		return dispatch => {
-			dispatch({ type: 'UPDATE_ALL_RECIPE_LISTS', allRecipeLists: allRecipeLists })
+			dispatch({ type: "UPDATE_ALL_RECIPE_LISTS", allRecipeLists: allRecipeLists })
 		}
 	},
 	storeRecipeDetails: (recipe_details) => {
 		return dispatch => {
-			dispatch({ type: 'STORE_RECIPE_DETAILS', recipe_details: recipe_details })
+			dispatch({ type: "STORE_RECIPE_DETAILS", recipe_details: recipe_details })
 		}
 	},
 	storeChefDetails: (chef_details) => {
 		return dispatch => {
-			dispatch({ type: 'STORE_CHEF_DETAILS', chefID: `chef${chef_details.chef.id}`, chef_details: chef_details })
+			dispatch({ type: "STORE_CHEF_DETAILS", chefID: `chef${chef_details.chef.id}`, chef_details: chef_details })
 		}
 	},
 }
@@ -86,7 +86,7 @@ export class RecipesList extends React.Component {
 			awaitingServer: false,
 			dataICantGet: [],
 			renderOfflineMessage: false,
-			offlineDiagnostics: '',
+			offlineDiagnostics: "",
 			renderNoRecipesMessage: false,
 			searchTerm: "",
 			yOffset: new Animated.Value(0),
@@ -104,8 +104,8 @@ export class RecipesList extends React.Component {
 
 	componentDidMount = async () => {
 		await this.fetchRecipeList()
-		this.props.navigation.addListener('focus', this.respondToFocus)
-		this.props.navigation.addListener('blur', this.respondToBlur)
+		this.props.navigation.addListener("focus", this.respondToFocus)
+		this.props.navigation.addListener("blur", this.respondToBlur)
 		this.setupHeaderScrollTopTopButton()
 
 	}
@@ -113,8 +113,8 @@ export class RecipesList extends React.Component {
 	componentWillUnmount = () => {
 		// console.log(this.abortController)
 		this.abortController.abort()
-		this.props.navigation.removeListener('focus', this.respondToFocus)
-		this.props.navigation.removeListener('blur', this.respondToBlur)
+		this.props.navigation.removeListener("focus", this.respondToFocus)
+		this.props.navigation.removeListener("blur", this.respondToBlur)
 		this.deleteRecipeList()
 	}
 
@@ -193,9 +193,9 @@ export class RecipesList extends React.Component {
 				}
 				catch (e) {
 					switch (e.name) {
-						case 'Logout': { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) } break
-						case 'AbortError': break
-						case 'Timeout':
+						case "Logout": { this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } }) } break
+						case "AbortError": break
+						case "Timeout":
 							if (this.getRecipeList().length == 0) {
 								// console.log('failed to get recipes. Loading from async storage.')
 								this.loadRecipesLocally()
@@ -227,7 +227,7 @@ export class RecipesList extends React.Component {
 			this.props.updateSingleRecipeList(this.props.route.key, [...this.getRecipeList(), ...result.recipes])
 		}
 		catch (e) {
-			if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+			if (e.name === "Logout") { this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } }) }
 			//console.log('failed to get ADDITIONAL recipes')
 			//console.log(e)
 		}
@@ -252,7 +252,7 @@ export class RecipesList extends React.Component {
 		}
 		catch (e) {
 			switch (e.name) {
-				case 'Logout': { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) } break
+				case "Logout": { this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } }) } break
 				default: break
 			}
 		}
@@ -284,20 +284,20 @@ export class RecipesList extends React.Component {
 						awaitingServer: false,
 						filterDisplayed: false
 					}, () => {
-						this.props.navigation.navigate('RecipeDetails', { recipeID: recipeID, commenting: commenting })
+						this.props.navigation.navigate("RecipeDetails", { recipeID: recipeID, commenting: commenting })
 					})
 				}
 			} catch (e) {
-				if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+				if (e.name === "Logout") { this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } }) }
 				// console.log('looking for local recipes')
-				AsyncStorage.getItem('localRecipeDetails', (err, res) => {
+				AsyncStorage.getItem("localRecipeDetails", (err, res) => {
 					if (res != null) {
 						let localRecipeDetails = JSON.parse(res)
 						let thisRecipeDetails = localRecipeDetails.find(recipeDetails => recipeDetails.recipe.id === recipeID)
 						if (thisRecipeDetails) {
 							this.props.storeRecipeDetails(thisRecipeDetails)
 							this.setState({ awaitingServer: false }, () => {
-								this.props.navigation.navigate('RecipeDetails', { recipeID: recipeID, commenting: commenting })
+								this.props.navigation.navigate("RecipeDetails", { recipeID: recipeID, commenting: commenting })
 							})
 						} else {
 							// console.log('recipe not present in saved list')
@@ -331,13 +331,13 @@ export class RecipesList extends React.Component {
 					this.props.storeChefDetails(chefDetails)
 					saveChefDetailsLocally(chefDetails, this.props.loggedInChef.id)
 					this.setState({ awaitingServer: false }, () => {
-						this.props.navigation.navigate('ChefDetails', { chefID: chefID })
+						this.props.navigation.navigate("ChefDetails", { chefID: chefID })
 					})
 				}
 			} catch (e) {
-				if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+				if (e.name === "Logout") { this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } }) }
 				// console.log('looking for local chefs')
-				AsyncStorage.getItem('localChefDetails', (err, res) => {
+				AsyncStorage.getItem("localChefDetails", (err, res) => {
 					if (res != null) {
 						// console.log('found some local chefs')
 						let localChefDetails = JSON.parse(res)
@@ -345,7 +345,7 @@ export class RecipesList extends React.Component {
 						if (thisChefDetails) {
 							this.props.storeChefDetails(thisChefDetails)
 							this.setState({ awaitingServer: false }, () => {
-								this.props.navigation.navigate('ChefDetails', { chefID: chefID })
+								this.props.navigation.navigate("ChefDetails", { chefID: chefID })
 							})
 						} else {
 							// console.log('recipe not present in saved list')
@@ -450,7 +450,7 @@ export class RecipesList extends React.Component {
 						this.props.fetchChefDetails && await this.props.fetchChefDetails()
 					}
 				} catch (e) {
-					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+					if (e.name === "Logout") { this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } }) }
 					this.setState(state => ({ dataICantGet: [...state.dataICantGet, recipeID] }))
 				}
 				this.setState({ awaitingServer: false })
@@ -471,7 +471,7 @@ export class RecipesList extends React.Component {
 						this.props.fetchChefDetails && this.props.fetchChefDetails()
 					}
 				} catch (e) {
-					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+					if (e.name === "Logout") { this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } }) }
 					await this.setState(state => ({ dataICantGet: [...state.dataICantGet, recipeID] }))
 				}
 				this.setState({ awaitingServer: false })
@@ -491,7 +491,7 @@ export class RecipesList extends React.Component {
 						this.updateAttributeCountInRecipeLists(recipeID, "makes_count", "chef_made", 1)
 					}
 				} catch (e) {
-					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+					if (e.name === "Logout") { this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } }) }
 					await this.setState(state => ({ dataICantGet: [...state.dataICantGet, recipeID] }))
 				}
 				this.setState({ awaitingServer: false })
@@ -512,7 +512,7 @@ export class RecipesList extends React.Component {
 						this.props.fetchChefDetails && this.props.fetchChefDetails()
 					}
 				} catch (e) {
-					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+					if (e.name === "Logout") { this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } }) }
 					await this.setState(state => ({ dataICantGet: [...state.dataICantGet, recipeID] }))
 				}
 				this.setState({ awaitingServer: false })
@@ -533,7 +533,7 @@ export class RecipesList extends React.Component {
 						this.props.fetchChefDetails && this.props.fetchChefDetails()
 					}
 				} catch (e) {
-					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+					if (e.name === "Logout") { this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } }) }
 					await this.setState(state => ({ dataICantGet: [...state.dataICantGet, recipeID] }))
 				}
 				this.setState({ awaitingServer: false })
@@ -614,7 +614,7 @@ export class RecipesList extends React.Component {
 					{this.state.renderOfflineMessage && (
 						<OfflineMessage
 							message={`Sorry, can't do that right now.${"\n"}You appear to be offline.`}
-							topOffset={'10%'}
+							topOffset={"10%"}
 							clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
 							diagnostics={this.props.loggedInChef.is_admin ? this.state.offlineDiagnostics : null}
 						/>)
@@ -626,11 +626,11 @@ export class RecipesList extends React.Component {
 						&& this.state.searchTerm.length == 0) && (
 							<OfflineMessage
 								message={`There's nothing to show here at the moment.${"\n"}Touch here to go to All Recipes &${"\n"}Chefs and find some chefs to follow.${"\n"}(or clear your filters)`}
-								topOffset={'10%'}
+								topOffset={"10%"}
 								clearOfflineMessage={() => { this.setState({ renderNoRecipesMessage: false }) }}
 								delay={20000}
-								action={() => this.props.navigation.navigate('BrowseRecipes')}
-								testID={'myFeedMessage'}
+								action={() => this.props.navigation.navigate("BrowseRecipes")}
+								testID={"myFeedMessage"}
 							/>
 						)}
 					{this.getRecipeList().length == 0 && (
@@ -646,10 +646,10 @@ export class RecipesList extends React.Component {
 							>Swipe down to refresh</Text>
 						</View>
 					)}
-					{(this.getRecipeList().length > 0 || this.state.searchTerm != '') && (
+					{(this.getRecipeList().length > 0 || this.state.searchTerm != "") && (
 						<Animated.View
 							style={{
-								position: 'absolute',
+								position: "absolute",
 								zIndex: this.state.searchBarZIndex,
 								transform: [
 									{
@@ -678,7 +678,7 @@ export class RecipesList extends React.Component {
 					)}
 					<AnimatedFlatList
 						ListHeaderComponent={() => {
-							let searchBarIsDisplayed = this.getRecipeList().length > 0 || this.state.searchTerm != ''
+							let searchBarIsDisplayed = this.getRecipeList().length > 0 || this.state.searchTerm != ""
 							return (
 								<TouchableOpacity
 									style={{ height: searchBarIsDisplayed ? responsiveHeight(7) : responsiveHeight(70) }}
@@ -705,9 +705,9 @@ export class RecipesList extends React.Component {
 							<RefreshControl
 								refreshing={false}
 								onRefresh={this.refresh}
-								colors={['#104e01']}
-								progressBackgroundColor={'#fff59b'}
-								tintColor={'#fff59b'}
+								colors={["#104e01"]}
+								progressBackgroundColor={"#fff59b"}
+								tintColor={"#fff59b"}
 							/>
 						}
 						onEndReached={this.onEndReached}
@@ -720,7 +720,7 @@ export class RecipesList extends React.Component {
 								useNativeDriver: true,
 								listener: (e) => {
 									const y = e.nativeEvent.contentOffset.y
-									const isIncreasing = Platform.OS === 'ios' ? y > previousScrollViewOffset : e.nativeEvent.velocity.y > 0
+									const isIncreasing = Platform.OS === "ios" ? y > previousScrollViewOffset : e.nativeEvent.velocity.y > 0
 									if (y <= 0) {
 										this.setState({
 											currentYTop: 0,
@@ -741,7 +741,7 @@ export class RecipesList extends React.Component {
 											searchBarZIndex: 1,
 										})
 									}
-									Platform.OS === 'ios' && (previousScrollViewOffset = y)
+									Platform.OS === "ios" && (previousScrollViewOffset = y)
 								}
 							},
 						)}
@@ -753,7 +753,7 @@ export class RecipesList extends React.Component {
 							handleFilterButton={this.handleFilterButton}
 							refresh={this.refresh}
 							closeFilterAndRefresh={this.closeFilterAndRefresh}
-							confirmButtonText={`Apply \n& Close`}
+							confirmButtonText={"Apply \n& Close"}
 							title={"Apply filters to recipes list"}
 							listChoice={this.getRecipeListName()}
 							fetchFilterChoices={this.fetchFilterChoices}

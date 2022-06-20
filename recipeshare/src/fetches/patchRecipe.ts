@@ -1,6 +1,6 @@
 import { databaseURL } from "../dataComponents/databaseURL"
 import { submitTimeout } from "../dataComponents/timeouts"
-//import { getBase64FromFile } from '../auxFunctions/getBase64FromFile.js'
+//import { getBase64FromFile } from '../auxFunctions/getBase64FromFile'
 import type { FilterSettings, Cuisine, Serves, Ingredient, Difficulty, Recipe, Instruction } from "../centralTypes"
 
 export const patchRecipe = async (

@@ -13,12 +13,13 @@ exports[`OfflineMessage renders with an action button 1`] = `
       "justifyContent": "center",
       "opacity": 0,
       "position": "absolute",
-      "top": undefined,
+      "top": "10%",
       "zIndex": 2,
     }
   }
 >
   <View
+    accessibilityRole="button"
     accessible={true}
     focusable={true}
     onClick={[Function]}
@@ -78,7 +79,7 @@ exports[`OfflineMessage renders without an action button 1`] = `
       "justifyContent": "center",
       "opacity": 0,
       "position": "absolute",
-      "top": undefined,
+      "top": "10%",
       "zIndex": 2,
     }
   }

@@ -1,7 +1,7 @@
 import { Difficulty, FilterSettings, Ingredient, Cuisine, Serves, Recipe, Instruction } from "../centralTypes"
 import { databaseURL } from "../dataComponents/databaseURL"
 import { submitTimeout } from "../dataComponents/timeouts"
-// import { getBase64FromFile } from '../auxFunctions/getBase64FromFile.js'
+// import { getBase64FromFile } from '../auxFunctions/getBase64FromFile'
 
 export const postRecipe = async (
 	chef_id: number,

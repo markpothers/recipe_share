@@ -23,13 +23,14 @@
 	},
 	"extends": [
 		"eslint:recommended",
-		"plugin:react/recommended"
+		"plugin:react/recommended",
+		"plugin:@typescript-eslint/recommended"
 	],
 	"rules": {
-		"semi": [
-			"error",
-			"never"
-		],
+		// "semi": [
+		// 	"error",
+		// 	"never"
+		// ],
 		"quotes": [
 			2,
 			"double"

@@ -1,10 +1,10 @@
-import React from 'react';
-import renderer, { act } from 'react-test-renderer';
+import React from "react";
+import renderer, { act } from "react-test-renderer";
 
-import OfflineMessage from './offlineMessage.js'
-import { TouchableOpacity } from 'react-native';
+import OfflineMessage from "./offlineMessage.js"
+import { TouchableOpacity } from "react-native";
 
-describe('OfflineMessage', () => {
+describe("OfflineMessage", () => {
 
 	let component
 
@@ -25,7 +25,7 @@ describe('OfflineMessage', () => {
 		// console.log('runs after all tests have completed')
 	})
 
-	test('renders with an action button', () => {
+	test("renders with an action button", () => {
 		let mockClearOfflineMessage = jest.fn()
 		let mockAction = jest.fn()
 		act(() => {
@@ -44,7 +44,7 @@ describe('OfflineMessage', () => {
 		expect(buttons.length).toEqual(1)
 	})
 
-	test('renders without an action button', () => {
+	test("renders without an action button", () => {
 		let mockClearOfflineMessage = jest.fn()
 		act(() => {
 			component = renderer.create(
