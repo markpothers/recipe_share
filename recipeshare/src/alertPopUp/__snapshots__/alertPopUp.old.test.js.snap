@@ -8,6 +8,7 @@ exports[`AlertPopUp calls the close function when button pressed 1`] = `
   visible={true}
 >
   <View
+    accessibilityRole="alert"
     style={
       Array [
         Object {
@@ -98,6 +99,7 @@ exports[`AlertPopUp calls the close function when button pressed 1`] = `
           }
         >
           <View
+            accessibilityRole="button"
             accessible={true}
             focusable={true}
             onClick={[Function]}
@@ -150,6 +152,7 @@ exports[`AlertPopUp calls the close function when button pressed 1`] = `
             </Text>
           </View>
           <View
+            accessibilityRole="button"
             accessible={true}
             focusable={true}
             onClick={[Function]}
@@ -216,6 +219,7 @@ exports[`AlertPopUp calls the yes function when button pressed 1`] = `
   visible={true}
 >
   <View
+    accessibilityRole="alert"
     style={
       Array [
         Object {
@@ -306,6 +310,7 @@ exports[`AlertPopUp calls the yes function when button pressed 1`] = `
           }
         >
           <View
+            accessibilityRole="button"
             accessible={true}
             focusable={true}
             onClick={[Function]}
@@ -358,6 +363,7 @@ exports[`AlertPopUp calls the yes function when button pressed 1`] = `
             </Text>
           </View>
           <View
+            accessibilityRole="button"
             accessible={true}
             focusable={true}
             onClick={[Function]}
@@ -424,6 +430,7 @@ exports[`AlertPopUp renders with 1 button when no close button and customizable 
   visible={true}
 >
   <View
+    accessibilityRole="alert"
     style={
       Array [
         Object {
@@ -536,6 +543,7 @@ exports[`AlertPopUp renders with 1 button when no close button and customizable 
             }
           />
           <View
+            accessibilityRole="button"
             accessible={true}
             focusable={true}
             onClick={[Function]}
@@ -602,6 +610,7 @@ exports[`AlertPopUp renders with 2 buttons and customizable text 1`] = `
   visible={true}
 >
   <View
+    accessibilityRole="alert"
     style={
       Array [
         Object {
@@ -692,6 +701,7 @@ exports[`AlertPopUp renders with 2 buttons and customizable text 1`] = `
           }
         >
           <View
+            accessibilityRole="button"
             accessible={true}
             focusable={true}
             onClick={[Function]}
@@ -744,6 +754,7 @@ exports[`AlertPopUp renders with 2 buttons and customizable text 1`] = `
             </Text>
           </View>
           <View
+            accessibilityRole="button"
             accessible={true}
             focusable={true}
             onClick={[Function]}
@@ -810,6 +821,7 @@ exports[`AlertPopUp renders with 2 buttons and default text 1`] = `
   visible={true}
 >
   <View
+    accessibilityRole="alert"
     style={
       Array [
         Object {
@@ -900,6 +912,7 @@ exports[`AlertPopUp renders with 2 buttons and default text 1`] = `
           }
         >
           <View
+            accessibilityRole="button"
             accessible={true}
             focusable={true}
             onClick={[Function]}
@@ -952,6 +965,7 @@ exports[`AlertPopUp renders with 2 buttons and default text 1`] = `
             </Text>
           </View>
           <View
+            accessibilityRole="button"
             accessible={true}
             focusable={true}
             onClick={[Function]}

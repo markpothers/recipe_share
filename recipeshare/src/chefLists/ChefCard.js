@@ -1,20 +1,20 @@
-import React from 'react'
-import { Image, View, TouchableOpacity, Text, ScrollView } from 'react-native'
-import { styles } from './chefListStyleSheet'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { databaseURL } from '../dataComponents/databaseURL'
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
-import OfflineMessage from '../offlineMessage/offlineMessage'
+import React from "react"
+import { Image, View, TouchableOpacity, Text, ScrollView } from "react-native"
+import { styles } from "./chefListStyleSheet"
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { databaseURL } from "../dataComponents/databaseURL"
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+import OfflineMessage from "../offlineMessage/offlineMessage"
 
 export default class ChefCard extends React.PureComponent {
 
 	render() {
 		return (
 			<View style={styles.chefCard}>
-				{this.props.renderOfflineMessage.includes(this.props.id) && (
+				{this.props.renderOfflineMessage?.includes(this.props.id) && (
 					<OfflineMessage
 						message={`Sorry, can't see chef right now.${"\n"}You appear to be offline.`}
-						topOffset={'25%'}
+						topOffset={"25%"}
 						clearOfflineMessage={() => { this.props.clearOfflineMessage(this.props.id) }}
 					/>)}
 				<TouchableOpacity style={styles.chefCardTopContainer} onPress={() => this.props.navigateToChefDetails(this.props.id)}>
@@ -62,7 +62,7 @@ function AvatarImage(chefimage_url) {
 		return (
 			<Image style={styles.avatarThumbnail} source={require("../dataComponents/default-chef.jpg")} resizeMode={"cover"} />
 		)
-	} else if (typeof URL === 'object') {
+	} else if (typeof URL === "object") {
 		return (
 			<Image style={styles.avatarThumbnail} source={URL.uri.startsWith("http") ? { uri: URL.uri } : { uri: `${databaseURL}${URL.uri}` }} resizeMode={"cover"} />
 		)

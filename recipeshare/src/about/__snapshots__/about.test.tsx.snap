@@ -282,9 +282,17 @@ exports[`About Page renders displaying licenses 1`] = `
   </View>
   <View
     style={
-      Object {
-        "width": 750,
-      }
+      Array [
+        Object {
+          "borderColor": "red",
+          "borderWidth": 0,
+          "overflow": "hidden",
+          "width": "100%",
+        },
+        Object {
+          "width": 750,
+        },
+      ]
     }
   >
     <View
@@ -3067,9 +3075,17 @@ exports[`About Page renders displaying privacy policy 1`] = `
   </View>
   <View
     style={
-      Object {
-        "width": 750,
-      }
+      Array [
+        Object {
+          "borderColor": "red",
+          "borderWidth": 0,
+          "overflow": "hidden",
+          "width": "100%",
+        },
+        Object {
+          "width": 750,
+        },
+      ]
     }
   >
     <View
@@ -3805,9 +3821,17 @@ exports[`About Page renders displaying t & c by default 1`] = `
   </View>
   <View
     style={
-      Object {
-        "width": 750,
-      }
+      Array [
+        Object {
+          "borderColor": "red",
+          "borderWidth": 0,
+          "overflow": "hidden",
+          "width": "100%",
+        },
+        Object {
+          "width": 750,
+        },
+      ]
     }
   >
     <View

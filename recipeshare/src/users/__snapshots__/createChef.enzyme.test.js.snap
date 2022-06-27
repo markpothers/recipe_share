@@ -2313,6 +2313,7 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                                       value={false}
                                                                     >
                                                                       <Switch
+                                                                        accessibilityRole="switch"
                                                                         onValueChange={[Function]}
                                                                         style={
                                                                           Array [
@@ -2946,6 +2947,7 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                                       value={false}
                                                                     >
                                                                       <Switch
+                                                                        accessibilityRole="switch"
                                                                         onValueChange={[Function]}
                                                                         style={
                                                                           Array [
@@ -7218,6 +7220,7 @@ exports[`CreateChef buttons view terms and conditions button brings up the textP
                                                                       value={false}
                                                                     >
                                                                       <Switch
+                                                                        accessibilityRole="switch"
                                                                         onValueChange={[Function]}
                                                                         style={
                                                                           Array [
@@ -8626,6 +8629,7 @@ If you have any questions about these Terms, please contact us at:
                                                                       value={false}
                                                                     >
                                                                       <Switch
+                                                                        accessibilityRole="switch"
                                                                         onValueChange={[Function]}
                                                                         style={
                                                                           Array [
@@ -13127,6 +13131,7 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                                       value={false}
                                                                     >
                                                                       <Switch
+                                                                        accessibilityRole="switch"
                                                                         onValueChange={[Function]}
                                                                         style={
                                                                           Array [
@@ -13760,6 +13765,7 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                                       value={false}
                                                                     >
                                                                       <Switch
+                                                                        accessibilityRole="switch"
                                                                         onValueChange={[Function]}
                                                                         style={
                                                                           Array [
@@ -17046,6 +17052,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                                       value={true}
                                                                     >
                                                                       <Switch
+                                                                        accessibilityRole="switch"
                                                                         onValueChange={[Function]}
                                                                         style={
                                                                           Array [
@@ -17679,6 +17686,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                                       value={true}
                                                                     >
                                                                       <Switch
+                                                                        accessibilityRole="switch"
                                                                         onValueChange={[Function]}
                                                                         style={
                                                                           Array [
@@ -20905,6 +20913,7 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                                       value={false}
                                                                     >
                                                                       <Switch
+                                                                        accessibilityRole="switch"
                                                                         onValueChange={[Function]}
                                                                         style={
                                                                           Array [
@@ -21538,6 +21547,7 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                                       value={false}
                                                                     >
                                                                       <Switch
+                                                                        accessibilityRole="switch"
                                                                         onValueChange={[Function]}
                                                                         style={
                                                                           Array [
@@ -24764,6 +24774,7 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                                       value={true}
                                                                     >
                                                                       <Switch
+                                                                        accessibilityRole="switch"
                                                                         onValueChange={[Function]}
                                                                         style={
                                                                           Array [
@@ -25397,6 +25408,7 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                                       value={false}
                                                                     >
                                                                       <Switch
+                                                                        accessibilityRole="switch"
                                                                         onValueChange={[Function]}
                                                                         style={
                                                                           Array [
@@ -28623,6 +28635,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                                       value={true}
                                                                     >
                                                                       <Switch
+                                                                        accessibilityRole="switch"
                                                                         onValueChange={[Function]}
                                                                         style={
                                                                           Array [
@@ -29256,6 +29269,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                                       value={true}
                                                                     >
                                                                       <Switch
+                                                                        accessibilityRole="switch"
                                                                         onValueChange={[Function]}
                                                                         style={
                                                                           Array [
@@ -32662,6 +32676,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                                       value={false}
                                                                     >
                                                                       <Switch
+                                                                        accessibilityRole="switch"
                                                                         onValueChange={[Function]}
                                                                         style={
                                                                           Array [
@@ -33295,6 +33310,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                                       value={false}
                                                                     >
                                                                       <Switch
+                                                                        accessibilityRole="switch"
                                                                         onValueChange={[Function]}
                                                                         style={
                                                                           Array [

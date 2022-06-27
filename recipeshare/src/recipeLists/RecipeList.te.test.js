@@ -20,17 +20,17 @@ import { Provider } from "react-redux"
 import { recipeList } from "../../__mocks__/data/recipeList"
 
 import { initialState, middleware } from "../redux/store"
-import reducer from "../redux/reducer.js"
+import reducer from "../redux/reducer"
 import { TouchableOpacity } from "react-native"
 // import { AlertPopUp } from '../alertPopUp/alertPopUp'
 // import AsyncStorage from '@react-native-async-storage/async-storage'
 import OfflineMessage from "../offlineMessage/offlineMessage"
 // import { apiCall } from '../auxFunctions/apiCall'
-import RecipesList from "./RecipesList.js"
+import RecipesList from "./RecipesList"
 import RecipeCard from "./RecipeCard"
 // import { mockRecipeList } from '../../__mocks__/mockRecipeList.js'
-import SearchBar from "../searchBar/SearchBar.js"
-import { getRecipeList } from "../fetches/getRecipeList.js"
+import SearchBar from "../searchBar/SearchBar"
+import { getRecipeList } from "../fetches/getRecipeList"
 import { postRecipeLike } from "../fetches/postRecipeLike"
 import { postReShare } from "../fetches/postReShare"
 import { postRecipeMake } from "../fetches/postRecipeMake"
@@ -42,8 +42,8 @@ import NetInfo from "@react-native-community/netinfo"
 
 
 // manual mocks
-jest.mock("../auxFunctions/apiCall.js")
-jest.mock("../fetches/getRecipeList.js")
+jest.mock("../auxFunctions/apiCall")
+jest.mock("../fetches/getRecipeList")
 jest.mock("../fetches/postRecipeLike")
 jest.mock("../fetches/postReShare")
 jest.mock("../fetches/postRecipeMake")

@@ -3,51 +3,51 @@
  */
 
 // stock imports always required for enzyme testing
-import React from 'react';
-import { mount } from 'enzyme'
-import { act } from 'react-dom/test-utils';
+import React from "react";
+import { mount } from "enzyme"
+import { act } from "react-dom/test-utils";
 // import { createSerializer } from 'enzyme-to-json';
 // import serializer from 'enzyme-to-json/serializer';
 // expect.addSnapshotSerializer(serializer)
 // expect.addSnapshotSerializer(createSerializer({ mode: 'deep' }));
-import toJson from 'enzyme-to-json';
-import { findByTestID } from '../auxTestFunctions/findByTestId'
+import toJson from "enzyme-to-json";
+import { findByTestID } from "../auxTestFunctions/findByTestId"
 
 // suite-specific imports
-import { createStore } from 'redux';
-import { Provider } from 'react-redux'
-import { initialState, middleware } from '../redux/store'
-import reducer from '../redux/reducer.js'
-import { TouchableOpacity } from 'react-native'
+import { createStore } from "redux";
+import { Provider } from "react-redux"
+import { initialState, middleware } from "../redux/store"
+import reducer from "../redux/reducer.js"
+import { TouchableOpacity } from "react-native"
 // import { AlertPopUp } from '../alertPopUp/alertPopUp'
 // import AsyncStorage from '@react-native-async-storage/async-storage'
-import OfflineMessage from '../offlineMessage/offlineMessage';
+import OfflineMessage from "../offlineMessage/offlineMessage";
 // import { apiCall } from '../auxFunctions/apiCall'
-import RecipesList from './RecipesList.js'
-import RecipeCard from './RecipeCard'
-import { mockRecipeList } from '../../__mocks__/mockRecipeList.js'
-import SearchBar from '../searchBar/SearchBar.js'
-import { getRecipeList } from '../fetches/getRecipeList.js'
-import { postRecipeLike } from '../fetches/postRecipeLike'
-import { postReShare } from '../fetches/postReShare'
-import { postRecipeMake } from '../fetches/postRecipeMake'
-import { destroyRecipeLike } from '../fetches/destroyRecipeLike'
-import { destroyReShare } from '../fetches/destroyReShare'
-import { cuisines } from '../dataComponents/cuisines'
-import { serves } from '../dataComponents/serves'
-import NetInfo from '@react-native-community/netinfo'
+import RecipesList from "./RecipesList"
+import RecipeCard from "./RecipeCard"
+import { mockRecipeList } from "../../__mocks__/mockRecipeList"
+import SearchBar from "../searchBar/SearchBar"
+import { getRecipeList } from "../fetches/getRecipeList"
+import { postRecipeLike } from "../fetches/postRecipeLike"
+import { postReShare } from "../fetches/postReShare"
+import { postRecipeMake } from "../fetches/postRecipeMake"
+import { destroyRecipeLike } from "../fetches/destroyRecipeLike"
+import { destroyReShare } from "../fetches/destroyReShare"
+import { cuisines } from "../dataComponents/cuisines"
+import { serves } from "../dataComponents/serves"
+import NetInfo from "@react-native-community/netinfo"
 
 
 // manual mocks
-jest.mock('../auxFunctions/apiCall.js')
-jest.mock('../fetches/getRecipeList.js')
-jest.mock('../fetches/postRecipeLike')
-jest.mock('../fetches/postReShare')
-jest.mock('../fetches/postRecipeMake')
-jest.mock('../fetches/destroyRecipeLike')
-jest.mock('../fetches/destroyReShare')
+jest.mock("../auxFunctions/apiCall")
+jest.mock("../fetches/getRecipeList")
+jest.mock("../fetches/postRecipeLike")
+jest.mock("../fetches/postReShare")
+jest.mock("../fetches/postRecipeMake")
+jest.mock("../fetches/destroyRecipeLike")
+jest.mock("../fetches/destroyReShare")
 
-describe('Recipe List', () => {
+describe("Recipe List", () => {
 
 	let component
 	let navigation
@@ -76,7 +76,7 @@ describe('Recipe List', () => {
 		}
 
 		route = {
-			name: 'All Recipes'
+			name: "All Recipes"
 		}
 
 		NetInfo.setReturnValue({ isConnected: true })
@@ -94,9 +94,9 @@ describe('Recipe List', () => {
 		// console.log('runs after all tests have completed')
 	})
 
-	describe('rendering', () => {
+	describe("rendering", () => {
 
-		test('renders correctly when empty with an empty list and a filter button and adds appropriate listeners, then removes listeners when unmounted', async () => {
+		test("renders correctly when empty with an empty list and a filter button and adds appropriate listeners, then removes listeners when unmounted", async () => {
 			await act(async () => {
 				component = await mount(
 					<RecipesList
@@ -117,15 +117,15 @@ describe('Recipe List', () => {
 			expect(json).toMatchSnapshot()
 			let cards = component.find(RecipeCard)
 			expect(cards.length).toEqual(0)
-			let filterButton = findByTestID(component, TouchableOpacity, 'filterButton')
+			let filterButton = findByTestID(component, TouchableOpacity, "filterButton")
 			expect(filterButton).toBeTruthy()
 			expect(mockListener).toHaveBeenCalledTimes(2)
-			expect(mockListener).toHaveBeenNthCalledWith(1, 'focus', expect.any(Function))
-			expect(mockListener).toHaveBeenNthCalledWith(2, 'blur', expect.any(Function))
+			expect(mockListener).toHaveBeenNthCalledWith(1, "focus", expect.any(Function))
+			expect(mockListener).toHaveBeenNthCalledWith(2, "blur", expect.any(Function))
 			component.unmount()
 			expect(mockListenerRemove).toHaveBeenCalledTimes(2)
-			expect(mockListenerRemove).toHaveBeenNthCalledWith(1, 'focus', expect.any(Function))
-			expect(mockListenerRemove).toHaveBeenNthCalledWith(2, 'blur', expect.any(Function))
+			expect(mockListenerRemove).toHaveBeenNthCalledWith(1, "focus", expect.any(Function))
+			expect(mockListenerRemove).toHaveBeenNthCalledWith(2, "blur", expect.any(Function))
 		})
 
 		test("renders correctly with the My Feed Message when it's my feed and empty", async () => {
@@ -138,7 +138,7 @@ describe('Recipe List', () => {
 				component = await mount(
 					<RecipesList
 						navigation={navigation}
-						route={{ name: 'My Feed' }}
+						route={{ name: "My Feed" }}
 						listChoice={"chef_feed"}
 					/>,
 					{
@@ -153,16 +153,16 @@ describe('Recipe List', () => {
 			let cards = component.find(RecipeCard)
 			expect(cards.length).toEqual(0)
 			let myFeedMessage = component.find(OfflineMessage)
-			expect(myFeedMessage.first().props().testID).toEqual('myFeedMessage')
+			expect(myFeedMessage.first().props().testID).toEqual("myFeedMessage")
 		})
 
-		test('renders correctly with a bunch of recipe cards when data present', async () => {
+		test("renders correctly with a bunch of recipe cards when data present", async () => {
 			getRecipeList.mockImplementation(() => new Promise.resolve(mockRecipeList))
 			await act(async () => {
 				component = await mount(
 					<RecipesList
 						navigation={navigation}
-						route={{ name: 'My Feed' }}
+						route={{ name: "My Feed" }}
 						listChoice={"chef_feed"}
 					/>,
 					{
@@ -182,7 +182,7 @@ describe('Recipe List', () => {
 			// expect(component).toMatchSnapshot()
 		})
 
-		test('renders with offline message', async () => {
+		test("renders with offline message", async () => {
 			getRecipeList.mockImplementation(() => new Promise.resolve({
 				cuisines: cuisines,
 				serves: serves,
@@ -192,7 +192,7 @@ describe('Recipe List', () => {
 				component = await mount(
 					<RecipesList
 						navigation={navigation}
-						route={{ name: 'My Feed' }}
+						route={{ name: "My Feed" }}
 						listChoice={"chef_feed"}
 					/>,
 					{
@@ -214,7 +214,7 @@ describe('Recipe List', () => {
 
 	})
 
-	describe('liking and commenting etc.', () => {
+	describe("liking and commenting etc.", () => {
 
 		let card
 		let recipe
@@ -227,8 +227,8 @@ describe('Recipe List', () => {
 					<RecipesList
 						navigation={navigation}
 						route={{
-							name: 'My Feed',
-							key: 'my_feed_1234'
+							name: "My Feed",
+							key: "my_feed_1234"
 						}}
 						listChoice={"chef_feed"}
 					/>,
@@ -246,27 +246,27 @@ describe('Recipe List', () => {
 			recipe = instance.props.allRecipeLists[instance.props.route.key][0]
 		})
 
-		test('a RecipeCards likeRecipe is this.likeRecipe', async () => {
+		test("a RecipeCards likeRecipe is this.likeRecipe", async () => {
 			expect(card.likeRecipe).toBe(instance.likeRecipe)
 		})
 
-		test('a RecipeCards unlikeRecipe is this.unlikeRecipe', async () => {
+		test("a RecipeCards unlikeRecipe is this.unlikeRecipe", async () => {
 			expect(card.unlikeRecipe).toBe(instance.unlikeRecipe)
 		})
 
-		test('a RecipeCards makeRecipe is this.makeRecipe', async () => {
+		test("a RecipeCards makeRecipe is this.makeRecipe", async () => {
 			expect(card.makeRecipe).toBe(instance.makeRecipe)
 		})
 
-		test('a RecipeCards reShareRecipe is this.reShareRecipe', async () => {
+		test("a RecipeCards reShareRecipe is this.reShareRecipe", async () => {
 			expect(card.reShareRecipe).toBe(instance.reShareRecipe)
 		})
 
-		test('a RecipeCards unReShareRecipe is this.unReShareRecipe', async () => {
+		test("a RecipeCards unReShareRecipe is this.unReShareRecipe", async () => {
 			expect(card.unReShareRecipe).toBe(instance.unReShareRecipe)
 		})
 
-		test('liking a recipe calls to server and if successful adds a like count', async () => {
+		test("liking a recipe calls to server and if successful adds a like count", async () => {
 			postRecipeLike.mockImplementation(() => new Promise.resolve(true))
 			//console.log(instance.props.allRecipeLists[instance.props.route.key])
 			let otherLikes = instance.props.allRecipeLists[instance.props.route.key].slice(1).map(r => r.likes_count)
@@ -280,27 +280,27 @@ describe('Recipe List', () => {
 			expect(instance.props.allRecipeLists[instance.props.route.key].slice(1).map(r => r.chef_liked)).toEqual(otherChefLikes) //expect no changes to other likes
 		})
 
-		test('liking a recipe with incorrect access token', async () => {
-			postRecipeLike.mockImplementation(() => new Promise.reject({ name: 'Logout' }))
+		test("liking a recipe with incorrect access token", async () => {
+			postRecipeLike.mockImplementation(() => new Promise.reject({ name: "Logout" }))
 			await act(async () => { await card.likeRecipe(recipe.id) })
 			expect(mockNavigate).toHaveBeenCalled()
-			expect(mockNavigate).toHaveBeenCalledWith('Profile', { screen: 'Profile', params: { logout: true } })
+			expect(mockNavigate).toHaveBeenCalledWith("Profile", { screen: "Profile", params: { logout: true } })
 		})
 
-		test('liking a recipe and getting and error results in the offline error on the recipe card', async () => {
+		test("liking a recipe and getting and error results in the offline error on the recipe card", async () => {
 			postRecipeLike.mockImplementation(() => new Promise.reject({}))
 			await act(async () => { await card.likeRecipe(recipe.id) })
 			expect(instance.state.dataICantGet).toContain(recipe.id)
 		})
 
-		test('liking a recipe while offline results in general offline error', async () => {
+		test("liking a recipe while offline results in general offline error", async () => {
 			NetInfo.setReturnValue({ isConnected: false })
 			expect(instance.state.renderOfflineMessage).toEqual(false)
 			await act(async () => { await card.likeRecipe(recipe.id) })
 			expect(instance.state.renderOfflineMessage).toEqual(true)
 		})
 
-		test('unliking a liked recipe calls to server and if successful subtracts a like count', async () => {
+		test("unliking a liked recipe calls to server and if successful subtracts a like count", async () => {
 			recipe = instance.props.allRecipeLists[instance.props.route.key][1] // recipe is now a recipe liked by this chef
 			destroyRecipeLike.mockImplementation(() => new Promise.resolve(true))
 			let otherLikes = [...instance.props.allRecipeLists[instance.props.route.key].slice(0, 1), ...instance.props.allRecipeLists[instance.props.route.key].slice(2)].map(r => r.likes_count)
@@ -314,27 +314,27 @@ describe('Recipe List', () => {
 			expect([...instance.props.allRecipeLists[instance.props.route.key].slice(0, 1), ...instance.props.allRecipeLists[instance.props.route.key].slice(2)].map(r => r.chef_liked)).toEqual(otherChefLikes) //expect no changes to other likes
 		})
 
-		test('unliking a recipe with incorrect access token', async () => {
-			destroyRecipeLike.mockImplementation(() => new Promise.reject({ name: 'Logout' }))
+		test("unliking a recipe with incorrect access token", async () => {
+			destroyRecipeLike.mockImplementation(() => new Promise.reject({ name: "Logout" }))
 			await act(async () => { await card.unlikeRecipe(recipe.id) })
 			expect(mockNavigate).toHaveBeenCalled()
-			expect(mockNavigate).toHaveBeenCalledWith('Profile', { screen: 'Profile', params: { logout: true } })
+			expect(mockNavigate).toHaveBeenCalledWith("Profile", { screen: "Profile", params: { logout: true } })
 		})
 
-		test('unliking a recipe and getting and error results in the offline error on the recipe card', async () => {
+		test("unliking a recipe and getting and error results in the offline error on the recipe card", async () => {
 			destroyRecipeLike.mockImplementation(() => new Promise.reject({}))
 			await act(async () => { await card.unlikeRecipe(recipe.id) })
 			expect(instance.state.dataICantGet).toContain(recipe.id)
 		})
 
-		test('unliking a recipe while offline results in general offline error', async () => {
+		test("unliking a recipe while offline results in general offline error", async () => {
 			NetInfo.setReturnValue({ isConnected: false })
 			expect(instance.state.renderOfflineMessage).toEqual(false)
 			await act(async () => { await card.unlikeRecipe(recipe.id) })
 			expect(instance.state.renderOfflineMessage).toEqual(true)
 		})
 
-		test('resharing a recipe calls to server and if successful adds a share count', async () => {
+		test("resharing a recipe calls to server and if successful adds a share count", async () => {
 			postReShare.mockImplementation(() => new Promise.resolve(true))
 			let otherShares = instance.props.allRecipeLists[instance.props.route.key].slice(1).map(r => r.shares_count)
 			let otherChefShares = instance.props.allRecipeLists[instance.props.route.key].slice(1).map(r => r.chef_shared)
@@ -347,27 +347,27 @@ describe('Recipe List', () => {
 			expect(instance.props.allRecipeLists[instance.props.route.key].slice(1).map(r => r.chef_shared)).toEqual(otherChefShares) //expect no changes to other likes
 		})
 
-		test('resharing a recipe with incorrect access token', async () => {
-			postReShare.mockImplementation(() => new Promise.reject({ name: 'Logout' }))
+		test("resharing a recipe with incorrect access token", async () => {
+			postReShare.mockImplementation(() => new Promise.reject({ name: "Logout" }))
 			await act(async () => { await card.reShareRecipe(recipe.id) })
 			expect(mockNavigate).toHaveBeenCalled()
-			expect(mockNavigate).toHaveBeenCalledWith('Profile', { screen: 'Profile', params: { logout: true } })
+			expect(mockNavigate).toHaveBeenCalledWith("Profile", { screen: "Profile", params: { logout: true } })
 		})
 
-		test('resharing a recipe and getting and error results in the offline error on the recipe card', async () => {
+		test("resharing a recipe and getting and error results in the offline error on the recipe card", async () => {
 			postReShare.mockImplementation(() => new Promise.reject({}))
 			await act(async () => { await card.reShareRecipe(recipe.id) })
 			expect(instance.state.dataICantGet).toContain(recipe.id)
 		})
 
-		test('resharing a recipe while offline results in general offline error', async () => {
+		test("resharing a recipe while offline results in general offline error", async () => {
 			NetInfo.setReturnValue({ isConnected: false })
 			expect(instance.state.renderOfflineMessage).toEqual(false)
 			await act(async () => { await card.reShareRecipe(recipe.id) })
 			expect(instance.state.renderOfflineMessage).toEqual(true)
 		})
 
-		test('unReSharing a liked recipe calls to server and if successful subtracts a share count', async () => {
+		test("unReSharing a liked recipe calls to server and if successful subtracts a share count", async () => {
 			recipe = instance.props.allRecipeLists[instance.props.route.key][2] // recipe is now a recipe liked by this chef
 			destroyReShare.mockImplementation(() => new Promise.resolve(true))
 			let otherLikes = [...instance.props.allRecipeLists[instance.props.route.key].slice(0, 2), ...instance.props.allRecipeLists[instance.props.route.key].slice(3)].map(r => r.shares_count)
@@ -381,20 +381,20 @@ describe('Recipe List', () => {
 			expect([...instance.props.allRecipeLists[instance.props.route.key].slice(0, 2), ...instance.props.allRecipeLists[instance.props.route.key].slice(3)].map(r => r.chef_shared)).toEqual(otherChefLikes) //expect no changes to other likes
 		})
 
-		test('unReSharing a recipe with incorrect access token', async () => {
-			destroyReShare.mockImplementation(() => new Promise.reject({ name: 'Logout' }))
+		test("unReSharing a recipe with incorrect access token", async () => {
+			destroyReShare.mockImplementation(() => new Promise.reject({ name: "Logout" }))
 			await act(async () => { await card.unReShareRecipe(recipe.id) })
 			expect(mockNavigate).toHaveBeenCalled()
-			expect(mockNavigate).toHaveBeenCalledWith('Profile', { screen: 'Profile', params: { logout: true } })
+			expect(mockNavigate).toHaveBeenCalledWith("Profile", { screen: "Profile", params: { logout: true } })
 		})
 
-		test('unReSharing a recipe and getting and error results in the offline error on the recipe card', async () => {
+		test("unReSharing a recipe and getting and error results in the offline error on the recipe card", async () => {
 			destroyReShare.mockImplementation(() => new Promise.reject({}))
 			await act(async () => { await card.unReShareRecipe(recipe.id) })
 			expect(instance.state.dataICantGet).toContain(recipe.id)
 		})
 
-		test('unReSharing a recipe while offline results in general offline error', async () => {
+		test("unReSharing a recipe while offline results in general offline error", async () => {
 			NetInfo.setReturnValue({ isConnected: false })
 			expect(instance.state.renderOfflineMessage).toEqual(false)
 			await act(async () => { await card.unReShareRecipe(recipe.id) })
@@ -402,7 +402,7 @@ describe('Recipe List', () => {
 		})
 
 
-		test('making a recipe calls to server and if successful adds a make count', async () => {
+		test("making a recipe calls to server and if successful adds a make count", async () => {
 			postRecipeMake.mockImplementation(() => new Promise.resolve(true))
 			let otherMakes = instance.props.allRecipeLists[instance.props.route.key].slice(1).map(r => r.makes_count)
 			let otherChefMakes = instance.props.allRecipeLists[instance.props.route.key].slice(1).map(r => r.chef_made)
@@ -415,20 +415,20 @@ describe('Recipe List', () => {
 			expect(instance.props.allRecipeLists[instance.props.route.key].slice(1).map(r => r.chef_made)).toEqual(otherChefMakes) //expect no changes to other likes
 		})
 
-		test('making a recipe with incorrect access token', async () => {
-			postRecipeMake.mockImplementation(() => new Promise.reject({ name: 'Logout' }))
+		test("making a recipe with incorrect access token", async () => {
+			postRecipeMake.mockImplementation(() => new Promise.reject({ name: "Logout" }))
 			await act(async () => { await card.makeRecipe(recipe.id) })
 			expect(mockNavigate).toHaveBeenCalled()
-			expect(mockNavigate).toHaveBeenCalledWith('Profile', { screen: 'Profile', params: { logout: true } })
+			expect(mockNavigate).toHaveBeenCalledWith("Profile", { screen: "Profile", params: { logout: true } })
 		})
 
-		test('making a recipe and getting and error results in the offline error on the recipe card', async () => {
+		test("making a recipe and getting and error results in the offline error on the recipe card", async () => {
 			postRecipeMake.mockImplementation(() => new Promise.reject({}))
 			await act(async () => { await card.makeRecipe(recipe.id) })
 			expect(instance.state.dataICantGet).toContain(recipe.id)
 		})
 
-		test('making a recipe while offline results in general offline error', async () => {
+		test("making a recipe while offline results in general offline error", async () => {
 			NetInfo.setReturnValue({ isConnected: false })
 			expect(instance.state.renderOfflineMessage).toEqual(false)
 			await act(async () => { await card.makeRecipe(recipe.id) })

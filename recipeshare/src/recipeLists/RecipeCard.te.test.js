@@ -1,15 +1,15 @@
-import 'react-native'
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
+import "react-native"
+import React from "react";
+import { render, fireEvent } from "@testing-library/react-native";
 // import renderer from 'react-test-renderer';
 
-import RecipeCard from './RecipeCard.js'
+import RecipeCard from "./RecipeCard.js"
 // import { mockRecipeList } from '../../__mocks__/mockRecipeList.js'
 // import OfflineMessage from '../offlineMessage/offlineMessage';
-import { recipeList } from '../../__mocks__/data/recipeList'
+import { recipeList } from "../../__mocks__/data/recipeList"
 
 
-describe('Recipe Card', () => {
+describe("Recipe Card", () => {
 
 	beforeAll(() => {
 		// console.log('runs at the beginning of everything')
@@ -34,12 +34,12 @@ describe('Recipe Card', () => {
 	// 	}, 100)
 	// })
 
-	test('can be rendered using typical props and matches its previous image - 1', () => {
+	test("can be rendered using typical props and matches its previous image - 1", () => {
 		const { toJSON } = render(<RecipeCard {...recipeList[0]} />);
 		expect(toJSON()).toMatchSnapshot
 	})
 
-	test('has a like button that can be pressed and calls to like recipe', () => {
+	test("has a like button that can be pressed and calls to like recipe", () => {
 		const mockFn = jest.fn()
 		const { getByTestId } = render(<RecipeCard {...recipeList[0]} likeRecipe={mockFn} renderOfflineMessage={[]} />);
 		const likeButton = getByTestId("likeButton")
@@ -48,7 +48,7 @@ describe('Recipe Card', () => {
 		expect(mockFn).toHaveBeenCalledWith(recipeList[0].id)
 	})
 
-	test('has a comment button that can be pressed and calls to navigate to the recipe', () => {
+	test("has a comment button that can be pressed and calls to navigate to the recipe", () => {
 		const mockFn = jest.fn()
 		const { getByTestId } = render(<RecipeCard {...recipeList[0]} navigateToRecipeDetails={mockFn} renderOfflineMessage={[]} />);
 		const likeButton = getByTestId("recipeNameButton")

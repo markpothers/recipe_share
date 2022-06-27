@@ -1,5 +1,5 @@
-import { cuisines } from '../../src/dataComponents/cuisines'
-import { serves } from '../../src/dataComponents/serves'
+import { cuisines } from "../src/dataComponents/cuisines"
+import { serves } from "../src/dataComponents/serves"
 
 export const mockRecipeList = {
 	cuisines: cuisines,
