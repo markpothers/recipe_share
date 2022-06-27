@@ -10,7 +10,7 @@ import { Provider } from 'react-redux'
 import { createStore, compose, applyMiddleware } from 'redux';
 import RecipesList, { RecipesList as NamedRecipesList } from './RecipesList.js'
 import RecipeCard from './RecipeCard'
-import { mockRecipeList } from '../../__mocks__/recipeList/mockRecipeList.js'
+import { mockRecipeList } from '../../__mocks__/mockRecipeList.js'
 import { TouchableOpacity, TextInput } from 'react-native';
 import SearchBar from '../searchBar/SearchBar.js'
 

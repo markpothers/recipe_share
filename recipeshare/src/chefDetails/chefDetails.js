@@ -1,20 +1,20 @@
-import React from 'react'
-import { Image, ScrollView, View } from 'react-native';
-import { connect } from 'react-redux'
-import { styles } from './chefDetailsStyleSheet'
-import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
-import { getChefDetails } from '../fetches/getChefDetails'
-import ChefDetailsCard from './ChefDetailsCard'
-import { ChefRecipeBookTabs } from './ChefDetailsNavigators'
-import { postFollow } from '../fetches/postFollow'
-import { destroyFollow } from '../fetches/destroyFollow'
-import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
-import OfflineMessage from '../offlineMessage/offlineMessage'
-import NetInfo from '@react-native-community/netinfo';
+import React from "react"
+import { Image, ScrollView, View } from "react-native"
+import { connect } from "react-redux"
+import { styles } from "./chefDetailsStyleSheet"
+import { centralStyles } from "../centralStyleSheet" //eslint-disable-line no-unused-vars
+import { getChefDetails } from "../fetches/getChefDetails"
+import ChefDetailsCard from "./ChefDetailsCard"
+import { ChefRecipeBookTabs } from "./ChefDetailsNavigators"
+import { postFollow } from "../fetches/postFollow"
+import { destroyFollow } from "../fetches/destroyFollow"
+import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer"
+import OfflineMessage from "../offlineMessage/offlineMessage"
+import NetInfo from "@react-native-community/netinfo"
 NetInfo.configure({reachabilityShortTimeout: 5}) //5ms
 
-import DynamicMenu from '../dynamicMenu/DynamicMenu.js'
-import AppHeaderRight from '../../navigation/appHeaderRight'
+import DynamicMenu from "../dynamicMenu/DynamicMenu"
+import AppHeaderRight from "../../navigation/appHeaderRight"
 
 const mapStateToProps = (state) => ({
 	loggedInChef: state.loggedInChef,
@@ -25,17 +25,17 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
 	storeChefDetails: (chef_details) => {
 		return dispatch => {
-			dispatch({ type: 'STORE_CHEF_DETAILS', chefID: `chef${chef_details.chef.id}`, chef_details: chef_details })
+			dispatch({ type: "STORE_CHEF_DETAILS", chefID: `chef${chef_details.chef.id}`, chef_details: chef_details })
 		}
 	},
 	storeNewFollowers: (followee_id, followers) => {
 		return dispatch => {
-			dispatch({ type: 'STORE_NEW_FOLLOWERS', chefID: `chef${followee_id}`, followers: followers })
+			dispatch({ type: "STORE_NEW_FOLLOWERS", chefID: `chef${followee_id}`, followers: followers })
 		}
 	},
 	clearChefDetails: () => {
 		return dispatch => {
-			dispatch({ type: 'CLEAR_CHEF_DETAILS' })
+			dispatch({ type: "CLEAR_CHEF_DETAILS" })
 		}
 	},
 	// storeChefList: (listChoice, chefs) => {
@@ -45,7 +45,7 @@ const mapDispatchToProps = {
 	// },
 	updateAllChefLists: (allChefLists) => {
 		return dispatch => {
-			dispatch({ type: 'UPDATE_ALL_CHEF_LISTS', allChefLists: allChefLists })
+			dispatch({ type: "UPDATE_ALL_CHEF_LISTS", allChefLists: allChefLists })
 		}
 	},
 }
@@ -58,7 +58,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			renderOfflineMessage: false,
 			headerButtons: null,
 			dynamicMenuShowing: false,
-			offlineDiagnostics: '',
+			offlineDiagnostics: "",
 		}
 
 		generateHeaderButtonList = async () => {
@@ -76,7 +76,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					text: "Create new recipe",
 					action: (() => {
 						this.setState({ dynamicMenuShowing: false }, () => {
-							this.props.navigation.navigate('NewRecipe')
+							this.props.navigation.navigate("NewRecipe")
 						})
 					})
 				}
@@ -95,8 +95,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		addDynamicMenuButtonsToHeader = () => {
 			this.props.navigation.setOptions({
-				headerRight: Object.assign(() => <AppHeaderRight buttonAction={() => this.setState({ dynamicMenuShowing: true })} />, { displayName: 'HeaderRight' }),
-			});
+				headerRight: Object.assign(() => <AppHeaderRight buttonAction={() => this.setState({ dynamicMenuShowing: true })} />, { displayName: "HeaderRight" }),
+			})
 		}
 
 		componentDidMount = async () => {
@@ -139,15 +139,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			const chef = this.props.chefs_details[`chef${this.props.route.params.chefID}`]
 			if (chef != undefined) {
 				if (chef.image_url != null) {
-					return <Image style={{ width: '100%', height: '100%' }} source={{ uri: chef.image_url }}></Image>
+					return <Image style={{ width: "100%", height: "100%" }} source={{ uri: chef.image_url }}></Image>
 				} else {
-					return <Image style={{ width: '100%', height: '100%' }} source={require("../dataComponents/default-chef.jpg")}></Image>
+					return <Image style={{ width: "100%", height: "100%" }} source={require("../dataComponents/default-chef.jpg")}></Image>
 				}
 			}
 		}
 
 		navigateToRecipeDetails = (recipeID) => {
-			this.props.navigation.navigate('RecipeDetails', { recipeID: recipeID })
+			this.props.navigation.navigate("RecipeDetails", { recipeID: recipeID })
 		}
 
 		updateAttributeCountInChefLists = (chefId, attribute, toggle, diff) => {
@@ -191,7 +191,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							this.props.storeNewFollowers(this.props.route.params.chefID, newFollowers)
 						}
 					} catch (e) {
-						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						if (e.name === "Logout") { this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } }) }
 						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e })
 					}
 					this.setState({ awaitingServer: false })
@@ -213,7 +213,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							this.props.storeNewFollowers(this.props.route.params.chefID, newFollowers)
 						}
 					} catch (e) {
-						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						if (e.name === "Logout") { this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } }) }
 						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e })
 					}
 					this.setState({ awaitingServer: false })
@@ -232,7 +232,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						{this.state.renderOfflineMessage && (
 							<OfflineMessage
 								message={`Sorry, can't do that right now.${"\n"}You appear to be offline.`}
-								topOffset={'10%'}
+								topOffset={"10%"}
 								clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
 								
 								

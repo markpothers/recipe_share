@@ -3,7 +3,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 
 import RecipeCard from './RecipeCard.js'
-import { mockRecipeList } from '../../__mocks__/recipeList/mockRecipeList.js'
+import { mockRecipeList } from '../../__mocks__/mockRecipeList.js'
 // import OfflineMessage from '../offlineMessage/offlineMessage';
 
 

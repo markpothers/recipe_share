@@ -1272,6 +1272,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                   value={false}
                                                                 >
                                                                   <Switch
+                                                                    accessibilityRole="switch"
                                                                     onValueChange={[Function]}
                                                                     style={
                                                                       Array [
@@ -1571,6 +1572,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                   value={false}
                                                                 >
                                                                   <Switch
+                                                                    accessibilityRole="switch"
                                                                     onValueChange={[Function]}
                                                                     style={
                                                                       Array [
@@ -3753,6 +3755,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                   value={false}
                                                                 >
                                                                   <Switch
+                                                                    accessibilityRole="switch"
                                                                     onValueChange={[Function]}
                                                                     style={
                                                                       Array [
@@ -4052,6 +4055,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                   value={false}
                                                                 >
                                                                   <Switch
+                                                                    accessibilityRole="switch"
                                                                     onValueChange={[Function]}
                                                                     style={
                                                                       Array [
@@ -6234,6 +6238,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                   value={false}
                                                                 >
                                                                   <Switch
+                                                                    accessibilityRole="switch"
                                                                     onValueChange={[Function]}
                                                                     style={
                                                                       Array [
@@ -6533,6 +6538,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                   value={false}
                                                                 >
                                                                   <Switch
+                                                                    accessibilityRole="switch"
                                                                     onValueChange={[Function]}
                                                                     style={
                                                                       Array [
@@ -8715,6 +8721,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                                   value={false}
                                                                 >
                                                                   <Switch
+                                                                    accessibilityRole="switch"
                                                                     onValueChange={[Function]}
                                                                     style={
                                                                       Array [
@@ -9014,6 +9021,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                                   value={false}
                                                                 >
                                                                   <Switch
+                                                                    accessibilityRole="switch"
                                                                     onValueChange={[Function]}
                                                                     style={
                                                                       Array [
@@ -10177,6 +10185,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                   visible={true}
                                 >
                                   <View
+                                    accessibilityRole="alert"
                                     style={
                                       Array [
                                         Object {
@@ -10191,6 +10200,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                     }
                                   >
                                     <View
+                                      accessibilityRole="alert"
                                       style={
                                         Array [
                                           Object {
@@ -10401,6 +10411,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                     />
                                                   </View>
                                                   <ForwardRef
+                                                    accessibilityRole="button"
                                                     activeOpacity={0.7}
                                                     onPress={[Function]}
                                                     style={
@@ -10421,6 +10432,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                     testID="yesButton"
                                                   >
                                                     <TouchableOpacity
+                                                      accessibilityRole="button"
                                                       activeOpacity={0.7}
                                                       hostRef={null}
                                                       onPress={[Function]}
@@ -10442,6 +10454,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                       testID="yesButton"
                                                     >
                                                       <ForwardRef(AnimatedComponentWrapper)
+                                                        accessibilityRole="button"
                                                         accessible={true}
                                                         focusable={true}
                                                         onClick={[Function]}
@@ -10474,6 +10487,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                         testID="yesButton"
                                                       >
                                                         <AnimatedComponent
+                                                          accessibilityRole="button"
                                                           accessible={true}
                                                           focusable={true}
                                                           onClick={[Function]}
@@ -10506,6 +10520,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                           testID="yesButton"
                                                         >
                                                           <View
+                                                            accessibilityRole="button"
                                                             accessible={true}
                                                             focusable={true}
                                                             onClick={[Function]}
@@ -10534,6 +10549,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                             testID="yesButton"
                                                           >
                                                             <View
+                                                              accessibilityRole="button"
                                                               accessible={true}
                                                               focusable={true}
                                                               onClick={[Function]}
@@ -11599,6 +11615,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                                   value={false}
                                                                 >
                                                                   <Switch
+                                                                    accessibilityRole="switch"
                                                                     onValueChange={[Function]}
                                                                     style={
                                                                       Array [
@@ -11898,6 +11915,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                                   value={false}
                                                                 >
                                                                   <Switch
+                                                                    accessibilityRole="switch"
                                                                     onValueChange={[Function]}
                                                                     style={
                                                                       Array [
@@ -14021,6 +14039,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                                   value={false}
                                                                 >
                                                                   <Switch
+                                                                    accessibilityRole="switch"
                                                                     onValueChange={[Function]}
                                                                     style={
                                                                       Array [
@@ -14320,6 +14339,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                                   value={false}
                                                                 >
                                                                   <Switch
+                                                                    accessibilityRole="switch"
                                                                     onValueChange={[Function]}
                                                                     style={
                                                                       Array [

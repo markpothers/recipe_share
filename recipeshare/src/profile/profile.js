@@ -1,24 +1,24 @@
-import React from 'react';
-import { connect } from 'react-redux'
-import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import { deleteToken } from '../auxFunctions/saveLoadToken'
-import ChefDetailsCard from '../chefDetails/ChefDetailsCard'
-import { getChefDetails } from '../fetches/getChefDetails'
-import ChefEditor from './chefEditor'
+import React from "react"
+import { connect } from "react-redux"
+import { centralStyles } from "../centralStyleSheet" //eslint-disable-line no-unused-vars
+import AsyncStorage from "@react-native-async-storage/async-storage"
+import { deleteToken } from "../auxFunctions/saveLoadToken"
+import ChefDetailsCard from "../chefDetails/ChefDetailsCard"
+import { getChefDetails } from "../fetches/getChefDetails"
+import ChefEditor from "./chefEditor"
 // import { getDatabaseBackup } from '../fetches/getDatabaseBackup'
 // import { getDatabaseRestore } from '../fetches/getDatabaseRestore'
-import DeleteChefOption from './deleteChefOption'
-import PicSourceChooser from '../picSourceChooser/picSourceChooser'
-import { destroyChef } from '../fetches/destroyChef'
-import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
-import OfflineMessage from '../offlineMessage/offlineMessage'
-import NetInfo from '@react-native-community/netinfo';
+import DeleteChefOption from "./deleteChefOption"
+import PicSourceChooser from "../picSourceChooser/picSourceChooser"
+import { destroyChef } from "../fetches/destroyChef"
+import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer"
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions" //eslint-disable-line no-unused-vars
+import OfflineMessage from "../offlineMessage/offlineMessage"
+import NetInfo from "@react-native-community/netinfo"
 NetInfo.configure({reachabilityShortTimeout: 5}) //5ms
-import { AlertPopUp } from '../alertPopUp/alertPopUp'
-import DynamicMenu from '../dynamicMenu/DynamicMenu.js'
-import AppHeaderRight from '../../navigation/appHeaderRight'
+import { AlertPopUp } from "../alertPopUp/alertPopUp"
+import DynamicMenu from "../dynamicMenu/DynamicMenu"
+import AppHeaderRight from "../../navigation/appHeaderRight"
 
 const mapStateToProps = (state) => ({
 	loggedInChef: state.loggedInChef,
@@ -30,17 +30,17 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
 	storeChefDetails: (chef_details) => {
 		return dispatch => {
-			dispatch({ type: 'STORE_CHEF_DETAILS', chefID: `chef${chef_details.chef.id}`, chef_details: chef_details })
+			dispatch({ type: "STORE_CHEF_DETAILS", chefID: `chef${chef_details.chef.id}`, chef_details: chef_details })
 		}
 	},
 	storeNewFollowers: (followee_id, followers) => {
 		return dispatch => {
-			dispatch({ type: 'STORE_NEW_FOLLOWERS', chefID: `chef${followee_id}`, followers: followers })
+			dispatch({ type: "STORE_NEW_FOLLOWERS", chefID: `chef${followee_id}`, followers: followers })
 		}
 	},
 	saveChefDetails: (parameter, content) => {
 		return dispatch => {
-			dispatch({ type: 'UPDATE_NEW_USER_DETAILS', parameter: parameter, content: content })
+			dispatch({ type: "UPDATE_NEW_USER_DETAILS", parameter: parameter, content: content })
 		}
 	},
 }
@@ -54,8 +54,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			choosingPicture: false,
 			deleteChefOptionVisible: false,
 			renderOfflineMessage: false,
-			offlineDiagnostics: '',
-			imageFileUri: '',
+			offlineDiagnostics: "",
+			imageFileUri: "",
 			chefUpdatedMessageShowing: false,
 			headerButtons: null,
 			dynamicMenuShowing: false,
@@ -70,7 +70,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					text: "Create new recipe",
 					action: (() => {
 						this.setState({ dynamicMenuShowing: false }, () => {
-							this.props.navigation.navigate('NewRecipe')
+							this.props.navigation.navigate("NewRecipe")
 						})
 					})
 				},
@@ -93,7 +93,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					text: "About",
 					action: (() => {
 						this.setState({ dynamicMenuShowing: false }, () => {
-							this.props.navigation.navigate('About')
+							this.props.navigation.navigate("About")
 						})
 					})
 				},
@@ -112,25 +112,25 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		addDynamicMenuButtonsToHeader = () => {
 			this.props.navigation.setOptions({
-				headerRight: Object.assign(() => <AppHeaderRight buttonAction={() => this.setState({ dynamicMenuShowing: true })} />, { displayName: 'HeaderRight' }),
-			});
+				headerRight: Object.assign(() => <AppHeaderRight buttonAction={() => this.setState({ dynamicMenuShowing: true })} />, { displayName: "HeaderRight" }),
+			})
 		}
 
 		componentDidMount = async () => {
 			if (this.props.route.params?.logout) {
 				deleteToken()
-				AsyncStorage.removeItem('chef', () => { })
+				AsyncStorage.removeItem("chef", () => { })
 				this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: false })
 			}
 			await this.generateHeaderButtonList()
 			this.addDynamicMenuButtonsToHeader()
 			this.fetchChefDetails()
-			this.props.navigation.addListener('focus', this.respondToFocus)
+			this.props.navigation.addListener("focus", this.respondToFocus)
 			this.setState({ image: this.props.imageBase64 })
 		}
 
 		componentWillUnmount = () => {
-			this.props.navigation.removeListener('focus', this.respondToFocus)
+			this.props.navigation.removeListener("focus", this.respondToFocus)
 		}
 
 		respondToFocus = async () => {
@@ -221,25 +221,25 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		saveImage = async (image) => {
-			if (image.uri == '') {
-				this.setState({ imageFileUri: 'DELETED' })
+			if (image.uri == "") {
+				this.setState({ imageFileUri: "DELETED" })
 			} else if (image.cancelled === false) {
 				this.setState({ imageFileUri: image.uri })
 			}
 		}
 
 		cancelChooseImage = () => {
-			this.setState({ imageFileUri: '' })
+			this.setState({ imageFileUri: "" })
 		}
 
 		renderPictureChooser = () => {
-			let imageSource = ''
-			if (this.state.imageFileUri == 'DELETED') {
-				imageSource = ''
-			} else if (this.state.imageFileUri != 'DELETED' && this.state.imageFileUri != '') {
+			let imageSource = ""
+			if (this.state.imageFileUri == "DELETED") {
+				imageSource = ""
+			} else if (this.state.imageFileUri != "DELETED" && this.state.imageFileUri != "") {
 				imageSource = this.state.imageFileUri
 			}
-			else if (typeof this.props.chefs_details[`chef${this.props.loggedInChef.id}`].chef == 'object' && this.props.chefs_details[`chef${this.props.loggedInChef.id}`].chef.image_url?.length > 0) {
+			else if (typeof this.props.chefs_details[`chef${this.props.loggedInChef.id}`].chef == "object" && this.props.chefs_details[`chef${this.props.loggedInChef.id}`].chef.image_url?.length > 0) {
 				imageSource = this.props.chefs_details[`chef${this.props.loggedInChef.id}`].chef.image_url
 			}
 			return (
@@ -283,7 +283,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				const deletedChef = await destroyChef(chef.auth_token, chef.id, deleteRecipes)
 				if (deletedChef) {
 					deleteToken()
-					AsyncStorage.removeItem('chef', () => { })
+					AsyncStorage.removeItem("chef", () => { })
 					this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: false })
 				}
 			} else {
@@ -379,7 +379,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						{this.state.renderOfflineMessage && (
 							<OfflineMessage
 								message={`Sorry, can't do that right now.${"\n"}You appear to be offline.`}
-								topOffset={'10%'}
+								topOffset={"10%"}
 								clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
 								diagnostics={this.props.loggedInChef.is_admin ? this.state.offlineDiagnostics : null}
 							/>)

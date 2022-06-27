@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StyledActivityIndicator can be rendered 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#fff59b",
+      "borderColor": "#104e01",
+      "borderRadius": 11.25,
+      "borderWidth": 1,
+      "height": 50,
+      "justifyContent": "center",
+      "left": "50%",
+      "marginLeft": -25,
+      "position": "absolute",
+      "top": "10%",
+      "width": 50,
+      "zIndex": 5,
+    }
+  }
+>
+  <ActivityIndicator
+    animating={true}
+    color="#104e01"
+    hidesWhenStopped={true}
+    size="large"
+    style={
+      Object {
+        "left": 1.25,
+        "top": 1.7,
+      }
+    }
+  />
+</View>
+`;

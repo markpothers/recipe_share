@@ -1,24 +1,24 @@
-import React from 'react'
-import { FlatList, Animated, TouchableOpacity, Keyboard, Platform, View, Text, RefreshControl } from 'react-native'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import ChefCard from './ChefCard'
-import { connect } from 'react-redux'
-import { getChefList } from '../fetches/getChefList'
-import { postFollow } from '../fetches/postFollow'
-import { destroyFollow } from '../fetches/destroyFollow'
-import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
-import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
-import { saveChefListsLocally, loadLocalChefLists } from '../auxFunctions/saveChefListsLocally'
-import saveChefDetailsLocally from '../auxFunctions/saveChefDetailsLocally'
-import { getChefDetails } from '../fetches/getChefDetails'
-import OfflineMessage from '../offlineMessage/offlineMessage'
-import NetInfo from '@react-native-community/netinfo';
+import React from "react"
+import { FlatList, Animated, TouchableOpacity, Keyboard, Platform, View, Text, RefreshControl } from "react-native"
+import AsyncStorage from "@react-native-async-storage/async-storage"
+import Icon from "react-native-vector-icons/MaterialCommunityIcons"
+import ChefCard from "./ChefCard"
+import { connect } from "react-redux"
+import { getChefList } from "../fetches/getChefList"
+import { postFollow } from "../fetches/postFollow"
+import { destroyFollow } from "../fetches/destroyFollow"
+import { centralStyles } from "../centralStyleSheet" //eslint-disable-line no-unused-vars
+import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer"
+import { saveChefListsLocally, loadLocalChefLists } from "../auxFunctions/saveChefListsLocally"
+import saveChefDetailsLocally from "../auxFunctions/saveChefDetailsLocally"
+import { getChefDetails } from "../fetches/getChefDetails"
+import OfflineMessage from "../offlineMessage/offlineMessage"
+import NetInfo from "@react-native-community/netinfo";
 NetInfo.configure({ reachabilityShortTimeout: 5 }) //5ms
-import SearchBar from '../searchBar/SearchBar.js'
-import SearchBarClearButton from '../searchBar/SearchBarClearButton'
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
-import AppHeaderActionButton from '../../navigation/appHeaderActionButton'
+import SearchBar from "../searchBar/SearchBar"
+import SearchBarClearButton from "../searchBar/SearchBarClearButton"
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+import AppHeaderActionButton from "../../navigation/appHeaderActionButton"
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)
 
@@ -31,17 +31,17 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
 	updateSingleChefList: (listKey, chefList) => {
 		return dispatch => {
-			dispatch({ type: 'UPDATE_SINGLE_CHEF_LIST', listKey: listKey, chefList: chefList })
+			dispatch({ type: "UPDATE_SINGLE_CHEF_LIST", listKey: listKey, chefList: chefList })
 		}
 	},
 	updateAllChefLists: (allChefLists) => {
 		return dispatch => {
-			dispatch({ type: 'UPDATE_ALL_CHEF_LISTS', allChefLists: allChefLists })
+			dispatch({ type: "UPDATE_ALL_CHEF_LISTS", allChefLists: allChefLists })
 		}
 	},
 	storeChefDetails: (chef_details) => {
 		return dispatch => {
-			dispatch({ type: 'STORE_CHEF_DETAILS', chefID: `chef${chef_details.chef.id}`, chef_details: chef_details })
+			dispatch({ type: "STORE_CHEF_DETAILS", chefID: `chef${chef_details.chef.id}`, chef_details: chef_details })
 		}
 	},
 }
@@ -67,14 +67,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				yOffset: new Animated.Value(0),
 				currentYTop: 0,
 				searchBarZIndex: 0,
-				offlineDiagnostics: '',
+				offlineDiagnostics: "",
 			}
 		}
 
 		componentDidMount = async () => {
 			this.setState({ awaitingServer: true }, async () => {
-				this.props.navigation.addListener('focus', this.respondToFocus)
-				this.props.navigation.addListener('blur', this.respondToBlur)
+				this.props.navigation.addListener("focus", this.respondToFocus)
+				this.props.navigation.addListener("blur", this.respondToBlur)
 				await this.fetchChefList()
 				this.setState({ awaitingServer: false })
 			})
@@ -82,8 +82,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		componentWillUnmount = () => {
-			this.props.navigation.removeListener('focus', this.respondToFocus)
-			this.props.navigation.removeListener('blur', this.respondToBlur)
+			this.props.navigation.removeListener("focus", this.respondToFocus)
+			this.props.navigation.removeListener("blur", this.respondToBlur)
 			this.deleteChefList()
 		}
 
@@ -129,7 +129,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 				}
 				catch (e) {
-					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+					if (e.name === "Logout") { this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } }) }
 					if (this.getChefList()?.length == 0) {
 						this.loadChefsLocally()
 					}
@@ -146,7 +146,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				saveChefListsLocally(this.getQueryChefId(), this.props.loggedInChef.id, this.getChefListName(), [...this.getChefList(), ...additionalChefs])
 			}
 			catch (e) {
-				if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+				if (e.name === "Logout") { this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } }) }
 				// console.log('failed to get ADDITIONAL chefs')
 			}
 		}
@@ -206,7 +206,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							this.updateAttributeCountInChefLists(followee_id, "followers", "user_chef_following", 1)
 						}
 					} catch (e) {
-						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						if (e.name === "Logout") { this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } }) }
 						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e })
 					}
 					this.setState({ awaitingServer: false })
@@ -226,7 +226,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							this.updateAttributeCountInChefLists(followee_id, "followers", "user_chef_following", -1)
 						}
 					} catch (e) {
-						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						if (e.name === "Logout") { this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } }) }
 						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e })
 					}
 					this.setState({ awaitingServer: false })
@@ -259,12 +259,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.storeChefDetails(chefDetails)
 						saveChefDetailsLocally(chefDetails, this.props.loggedInChef.id)
 						this.setState(() => ({ awaitingServer: false }))
-						this.props.navigation.push('ChefDetails', { chefID: chefID })
+						this.props.navigation.push("ChefDetails", { chefID: chefID })
 					}
 				} catch (e) {
-					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+					if (e.name === "Logout") { this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } }) }
 					// console.log('looking for local chefs')
-					AsyncStorage.getItem('localChefDetails', (err, res) => {
+					AsyncStorage.getItem("localChefDetails", (err, res) => {
 						if (res != null) {
 							// console.log('found some local chefs')
 							let localChefDetails = JSON.parse(res)
@@ -272,7 +272,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							if (thisChefDetails) {
 								this.props.storeChefDetails(thisChefDetails)
 								this.setState({ awaitingServer: false }, () => {
-									this.props.navigation.push('ChefDetails', { chefID: chefID })
+									this.props.navigation.push("ChefDetails", { chefID: chefID })
 								})
 							} else {
 								// console.log('recipe not present in saved list')
@@ -331,7 +331,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							{this.state.renderOfflineMessage && (
 								<OfflineMessage
 									message={`Sorry, can't get recipes chefs now.${"\n"}You appear to be offline.`}
-									topOffset={'10%'}
+									topOffset={"10%"}
 									clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
 									diagnostics={this.props.loggedInChef.is_admin ? this.state.offlineDiagnostics : null}
 								/>)
@@ -349,10 +349,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									>Swipe down to refresh</Text>
 								</View>
 							)}
-							{(this.getChefList().length > 0 || this.state.searchTerm != '') && (
+							{(this.getChefList().length > 0 || this.state.searchTerm != "") && (
 								<Animated.View
 									style={{
-										position: 'absolute',
+										position: "absolute",
 										zIndex: this.state.searchBarZIndex,
 										transform: [
 											{
@@ -380,7 +380,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							)}
 							<AnimatedFlatList
 								ListHeaderComponent={() => {
-									let searchBarIsDisplayed = this.getChefList().length > 0 || this.state.searchTerm != ''
+									let searchBarIsDisplayed = this.getChefList().length > 0 || this.state.searchTerm != ""
 									return (
 										<TouchableOpacity
 											style={{ height: searchBarIsDisplayed ? responsiveHeight(7) : responsiveHeight(70) }}
@@ -405,9 +405,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									<RefreshControl
 										refreshing={false}
 										onRefresh={this.refresh}
-										colors={['#104e01']}
-										progressBackgroundColor={'#fff59b'}
-										tintColor={'#fff59b'}
+										colors={["#104e01"]}
+										progressBackgroundColor={"#fff59b"}
+										tintColor={"#fff59b"}
 									/>
 								}
 								onEndReached={this.onEndReached}
@@ -422,7 +422,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											// console.log(previousScrollViewOffset)
 											const y = e.nativeEvent.contentOffset.y
 											// const isIncreasing = e.nativeEvent.velocity.y > 0
-											const isIncreasing = Platform.OS === 'ios' ? y > previousScrollViewOffset : e.nativeEvent.velocity.y > 0
+											const isIncreasing = Platform.OS === "ios" ? y > previousScrollViewOffset : e.nativeEvent.velocity.y > 0
 											if (y <= 0) {
 												this.setState({
 													currentYTop: 0,
@@ -443,7 +443,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 													searchBarZIndex: 1,
 												})
 											}
-											Platform.OS === 'ios' && (previousScrollViewOffset = y)
+											Platform.OS === "ios" && (previousScrollViewOffset = y)
 										}
 									},
 								)}

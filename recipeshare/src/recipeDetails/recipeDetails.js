@@ -1,38 +1,38 @@
-import React from 'react';
-import { Image, ScrollView, View, Text, TouchableOpacity, FlatList, KeyboardAvoidingView, Platform, Linking, AppState } from 'react-native';
-import StyledActivityIndicator from '../customComponents/StyledActivityIndicator'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import { connect } from 'react-redux'
-import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake'
-import { styles } from './recipeDetailsStyleSheet'
-import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
-import { postRecipeLike } from '../fetches/postRecipeLike'
-import { postMakePic } from '../fetches/postMakePic'
-import { postReShare } from '../fetches/postReShare'
-import { postRecipeMake } from '../fetches/postRecipeMake'
-import { postComment } from '../fetches/postComment'
-import { destroyRecipeLike } from '../fetches/destroyRecipeLike'
-import { destroyMakePic } from '../fetches/destroyMakePic'
-import { destroyComment } from '../fetches/destroyComment'
-import { destroyRecipe } from '../fetches/destroyRecipe'
-import { destroyReShare } from '../fetches/destroyReShare'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import RecipeComment from './recipeComment'
-import RecipeNewComment from './recipeNewComment';
-import PicSourceChooser from '../picSourceChooser/picSourceChooser'
-import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
-import { ImagePopup } from './imagePopup'
-import OfflineMessage from '../offlineMessage/offlineMessage'
-import NetInfo from '@react-native-community/netinfo';
+import React from "react"
+import { Image, ScrollView, View, Text, TouchableOpacity, FlatList, KeyboardAvoidingView, Platform, Linking, AppState } from "react-native"
+import StyledActivityIndicator from "../customComponents/styledActivityIndicator/styledActivityIndicator"
+import AsyncStorage from "@react-native-async-storage/async-storage"
+import { connect } from "react-redux"
+import { activateKeepAwake, deactivateKeepAwake } from "expo-keep-awake"
+import { styles } from "./recipeDetailsStyleSheet"
+import { centralStyles } from "../centralStyleSheet" //eslint-disable-line no-unused-vars
+import { postRecipeLike } from "../fetches/postRecipeLike"
+import { postMakePic } from "../fetches/postMakePic"
+import { postReShare } from "../fetches/postReShare"
+import { postRecipeMake } from "../fetches/postRecipeMake"
+import { postComment } from "../fetches/postComment"
+import { destroyRecipeLike } from "../fetches/destroyRecipeLike"
+import { destroyMakePic } from "../fetches/destroyMakePic"
+import { destroyComment } from "../fetches/destroyComment"
+import { destroyRecipe } from "../fetches/destroyRecipe"
+import { destroyReShare } from "../fetches/destroyReShare"
+import Icon from "react-native-vector-icons/MaterialCommunityIcons"
+import RecipeComment from "./recipeComment"
+import RecipeNewComment from "./recipeNewComment"
+import PicSourceChooser from "../picSourceChooser/picSourceChooser"
+import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer"
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions" //eslint-disable-line no-unused-vars
+import { ImagePopup } from "./imagePopup"
+import OfflineMessage from "../offlineMessage/offlineMessage"
+import NetInfo from "@react-native-community/netinfo"
 NetInfo.configure({ reachabilityShortTimeout: 5 }) //5ms
-import { AlertPopUp } from '../alertPopUp/alertPopUp'
-import DynamicMenu from '../dynamicMenu/DynamicMenu.js'
-import saveChefDetailsLocally from '../auxFunctions/saveChefDetailsLocally'
-import { getTimeStringFromMinutes } from '../auxFunctions/getTimeStringFromMinutes'
-import { getChefDetails } from '../fetches/getChefDetails'
-import AppHeaderRight from '../../navigation/appHeaderRight'
-import { WebView } from 'react-native-webview';
+import { AlertPopUp } from "../alertPopUp/alertPopUp"
+import DynamicMenu from "../dynamicMenu/DynamicMenu"
+import saveChefDetailsLocally from "../auxFunctions/saveChefDetailsLocally"
+import { getTimeStringFromMinutes } from "../auxFunctions/getTimeStringFromMinutes"
+import { getChefDetails } from "../fetches/getChefDetails"
+import AppHeaderRight from "../../navigation/appHeaderRight"
+import { WebView } from "react-native-webview"
 
 const defaultRecipeImage = require("../dataComponents/default-recipe.jpg")
 let keepAwakeTimer
@@ -47,62 +47,62 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
 	addRecipeLike: () => {
 		return dispatch => {
-			dispatch({ type: 'ADD_RECIPE_LIKE' })
+			dispatch({ type: "ADD_RECIPE_LIKE" })
 		}
 	},
 	removeRecipeLike: () => {
 		return dispatch => {
-			dispatch({ type: 'REMOVE_RECIPE_LIKE' })
+			dispatch({ type: "REMOVE_RECIPE_LIKE" })
 		}
 	},
 	addRecipeMake: () => {
 		return dispatch => {
-			dispatch({ type: 'ADD_RECIPE_MAKE' })
+			dispatch({ type: "ADD_RECIPE_MAKE" })
 		}
 	},
 	updateComments: (comments) => {
 		return dispatch => {
-			dispatch({ type: 'UPDATE_COMMENTS', comments: comments })
+			dispatch({ type: "UPDATE_COMMENTS", comments: comments })
 		}
 	},
 	addReShare: () => {
 		return dispatch => {
-			dispatch({ type: 'ADD_RECIPE_SHARE' })
+			dispatch({ type: "ADD_RECIPE_SHARE" })
 		}
 	},
 	removeReShare: () => {
 		return dispatch => {
-			dispatch({ type: 'REMOVE_RECIPE_SHARE' })
+			dispatch({ type: "REMOVE_RECIPE_SHARE" })
 		}
 	},
 	addMakePic: (makePic) => {
 		return dispatch => {
-			dispatch({ type: 'ADD_MAKE_PIC', makePic: makePic })
+			dispatch({ type: "ADD_MAKE_PIC", makePic: makePic })
 		}
 	},
 	addMakePicChef: (makePicChef) => {
 		return dispatch => {
-			dispatch({ type: 'ADD_MAKE_PIC_CHEF', makePicChef: makePicChef })
+			dispatch({ type: "ADD_MAKE_PIC_CHEF", makePicChef: makePicChef })
 		}
 	},
 	saveRemainingMakePics: (makePics) => {
 		return dispatch => {
-			dispatch({ type: 'SAVE_REMAINING_MAKE_PICS', makePics: makePics })
+			dispatch({ type: "SAVE_REMAINING_MAKE_PICS", makePics: makePics })
 		}
 	},
 	removeRecipeLikes: (remaining_likes, listType) => {
 		return dispatch => {
-			dispatch({ type: 'REMOVE_RECIPE_LIKES', recipe_likes: remaining_likes, listType: listType })
+			dispatch({ type: "REMOVE_RECIPE_LIKES", recipe_likes: remaining_likes, listType: listType })
 		}
 	},
 	storeChefDetails: (chef_details) => {
 		return dispatch => {
-			dispatch({ type: 'STORE_CHEF_DETAILS', chefID: `chef${chef_details.chef.id}`, chef_details: chef_details })
+			dispatch({ type: "STORE_CHEF_DETAILS", chefID: `chef${chef_details.chef.id}`, chef_details: chef_details })
 		}
 	},
 	updateAllRecipeLists: (allRecipeLists) => {
 		return dispatch => {
-			dispatch({ type: 'UPDATE_ALL_RECIPE_LISTS', allRecipeLists: allRecipeLists })
+			dispatch({ type: "UPDATE_ALL_RECIPE_LISTS", allRecipeLists: allRecipeLists })
 		}
 	},
 	// storeRecipeDetails: (recipe_details) => {
@@ -116,7 +116,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 	class RecipeDetails extends React.Component {
 
 		state = {
-			appState: 'active',
+			appState: "active",
 			commenting: false,
 			commentText: "",
 			commentsTopY: 0,
@@ -125,7 +125,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			scrollEnabled: true,
 			makePicFileUri: "",
 			renderOfflineMessage: false,
-			offlineDiagnostics: '',
+			offlineDiagnostics: "",
 			primaryImageFlatListWidth: 0,
 			primaryImageDisplayedIndex: 0,
 			deleteMakePicPopUpShowing: false,
@@ -199,7 +199,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					text: "Create new recipe",
 					action: (() => {
 						this.setState({ dynamicMenuShowing: false }, () => {
-							this.props.navigation.navigate('NewRecipe')
+							this.props.navigation.navigate("NewRecipe")
 						})
 					})
 				}
@@ -218,8 +218,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		addDynamicMenuButtonsToHeader = () => {
 			this.props.navigation.setOptions({
-				headerRight: Object.assign(() => <AppHeaderRight buttonAction={() => this.setState({ dynamicMenuShowing: true })} />, { displayName: 'HeaderRight' }),
-			});
+				headerRight: Object.assign(() => <AppHeaderRight buttonAction={() => this.setState({ dynamicMenuShowing: true })} />, { displayName: "HeaderRight" }),
+			})
 		}
 
 		componentDidMount = () => {
@@ -240,7 +240,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 				}
 				this.setState({ awaitingServer: false })
 			})
-			AppState.addEventListener('change', this.handleAppStateChange)
+			AppState.addEventListener("change", this.handleAppStateChange)
 			this.enableKeepAwake()
 		}
 
@@ -254,19 +254,19 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		componentWillUnmount = () => {
-			AppState.removeEventListener('change', this.handleAppStateChange)
+			AppState.removeEventListener("change", this.handleAppStateChange)
 			this.disableKeepAwake()
 		}
 
 		handleAppStateChange = (nextAppState) => {
 			if (
 				this.state.appState.match(/inactive|background/) &&
-				nextAppState === 'active'
+				nextAppState === "active"
 			) {
 				// console.log('App has come to the foreground!');
 				this.enableKeepAwake()
 			} else if (
-				this.state.appState === 'active' &&
+				this.state.appState === "active" &&
 				nextAppState.match(/inactive|background/)
 			) {
 				// console.log('App is going into background!');
@@ -307,13 +307,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						this.props.storeChefDetails(chefDetails)
 						saveChefDetailsLocally(chefDetails, this.props.loggedInChef.id)
 						this.setState({ awaitingServer: false }, () => {
-							this.props.navigation.navigate('ChefDetails', { chefID: chefID })
+							this.props.navigation.navigate("ChefDetails", { chefID: chefID })
 						})
 					}
 				} catch (e) {
-					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+					if (e.name === "Logout") { this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } }) }
 					// console.log('looking for local chefs')
-					AsyncStorage.getItem('localChefDetails', (err, res) => {
+					AsyncStorage.getItem("localChefDetails", (err, res) => {
 						if (res != null) {
 							// console.log('found some local chefs')
 							let localChefDetails = JSON.parse(res)
@@ -321,7 +321,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							if (thisChefDetails) {
 								this.props.storeChefDetails(thisChefDetails)
 								this.setState({ awaitingServer: false }, () => {
-									this.props.navigation.navigate('ChefDetails', { chefID: chefID })
+									this.props.navigation.navigate("ChefDetails", { chefID: chefID })
 								})
 							} else {
 								this.setState({ renderOfflineMessage: true, offlineDiagnostics: res })
@@ -342,7 +342,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					awaitingServer: true,
 					editRecipePopUpShowing: false
 				}, () => {
-					this.props.navigation.navigate('NewRecipe', { recipe_details: this.props.recipe_details })
+					this.props.navigation.navigate("NewRecipe", { recipe_details: this.props.recipe_details })
 					this.setState({ awaitingServer: false })
 				})
 			} else {
@@ -361,7 +361,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					const deleted = await destroyRecipe(this.props.recipe_details.recipe.id, this.props.loggedInChef.auth_token)
 					if (deleted) {
 						// this.props.navigation.goBack()
-						this.props.navigation.navigate('MyRecipeBook', { screen: 'My Recipes', params: { deleteId: this.props.recipe_details.recipe.id } })
+						this.props.navigation.navigate("MyRecipeBook", { screen: "My Recipes", params: { deleteId: this.props.recipe_details.recipe.id } })
 					}
 				})
 			} else {
@@ -438,7 +438,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							key={`${make_pic.id}${make_pic.image_url}`}
 							style={styles.makePicContainer}
 						>
-							<Image style={[{ width: '100%', height: '100%', marginHorizontal: 1 }, styles.makePic]} source={{ uri: make_pic.image_url }}></Image>
+							<Image style={[{ width: "100%", height: "100%", marginHorizontal: 1 }, styles.makePic]} source={{ uri: make_pic.image_url }}></Image>
 							{(make_pic.chef_id === this.props.loggedInChef.id || this.props.loggedInChef.is_admin) && (
 								<TouchableOpacity style={styles.makePicTrashCanButton} onPress={() => this.setState({ deleteMakePicPopUpShowing: true, makePicToDelete: make_pic.id })}>
 									<Icon name='trash-can-outline' size={responsiveHeight(3.5)} style={[styles.icon, styles.makePicTrashCan]} />
@@ -532,7 +532,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							this.updateAttributeCountInRecipeLists(this.props.recipe_details.recipe.id, "likes_count", "chef_liked", 1)
 						}
 					} catch (e) {
-						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						if (e.name === "Logout") { this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } }) }
 						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e })
 					}
 					this.setState({ awaitingServer: false })
@@ -553,7 +553,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							this.updateAttributeCountInRecipeLists(this.props.recipe_details.recipe.id, "likes_count", "chef_liked", -1)
 						}
 					} catch (e) {
-						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						if (e.name === "Logout") { this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } }) }
 						// console.log(e)
 						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e })
 					}
@@ -576,7 +576,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 						}
 					} catch (e) {
-						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						if (e.name === "Logout") { this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } }) }
 						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e })
 					}
 					this.setState({ awaitingServer: false })
@@ -597,7 +597,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							this.updateAttributeCountInRecipeLists(this.props.recipe_details.recipe.id, "shares_count", "chef_shared", 1)
 						}
 					} catch (e) {
-						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						if (e.name === "Logout") { this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } }) }
 						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e })
 					}
 					this.setState({ awaitingServer: false })
@@ -618,7 +618,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							this.updateAttributeCountInRecipeLists(this.props.recipe_details.recipe.id, "shares_count", "chef_shared", -1)
 						}
 					} catch (e) {
-						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						if (e.name === "Logout") { this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } }) }
 						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e })
 					}
 					this.setState({ awaitingServer: false })
@@ -660,7 +660,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							await this.props.addMakePicChef(makePic.make_pic_chef)
 						}
 					} catch (e) {
-						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						if (e.name === "Logout") { this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } }) }
 						// console.log(e)
 						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e })
 					}
@@ -677,13 +677,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			if (netInfoState.isConnected) {
 				this.setState({ awaitingServer: true }, async () => {
 					try {
-						const destroyed = await destroyMakePic(this.props.loggedInChef.id, this.props.loggedInChef.auth_token, this.state.makePicToDelete)
+						const destroyed = await destroyMakePic(this.props.loggedInChef.auth_token, this.state.makePicToDelete)
 						if (destroyed) {
 							this.props.saveRemainingMakePics(this.props.recipe_details.make_pics.filter(pic => pic.id !== this.state.makePicToDelete))
 						}
 						this.setState({ deleteMakePicPopUpShowing: false })
 					} catch (e) {
-						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						if (e.name === "Logout") { this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } }) }
 						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e })
 					}
 					this.setState({
@@ -729,7 +729,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						})
 					}
 				} catch (e) {
-					if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+					if (e.name === "Logout") { this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } }) }
 					this.setState({ renderOfflineMessage: true, offlineDiagnostics: e })
 				}
 				this.setState({ awaitingServer: false })
@@ -759,7 +759,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						}
 						this.setState({ deleteCommentPopUpShowing: false })
 					} catch (e) {
-						if (e.name === 'Logout') { this.props.navigation.navigate('Profile', { screen: 'Profile', params: { logout: true } }) }
+						if (e.name === "Logout") { this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } }) }
 						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e })
 					}
 					this.setState({
@@ -797,7 +797,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			return (
 				<React.Fragment>
 					<View style={styles.detailsContainer}>
-						<View style={{ flexDirection: 'row' }}>
+						<View style={{ flexDirection: "row" }}>
 							<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Acknowledgement:</Text>
 							{displayLink ? ( //using && here creates a bug about text strings. no idea why
 								<TouchableOpacity onPress={() => Linking.openURL(this.props.recipe_details.recipe.acknowledgement_link)}>
@@ -830,11 +830,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 										style={{
 											borderRadius: responsiveWidth(1.5),
 											height: this.state.webviewHeight,
-											width: '100%',
+											width: "100%",
 										}}
 										onShouldStartLoadWithRequest={event => {
 											if (this.state.webviewCanRespondToEvents) {
-												if (Platform.OS === 'ios') {
+												if (Platform.OS === "ios") {
 													if (event.mainDocumentURL !== this.props.recipe_details.recipe.acknowledgement_link) {
 														Linking.openURL(event.mainDocumentURL)
 														return false
@@ -957,9 +957,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		renderPrimaryImageBlobs = () => {
 			return this.props.recipe_details.recipe_images.map((image, index) => {
 				if (this.state.primaryImageDisplayedIndex == index) {
-					return <Icon key={image.hex} name={'checkbox-blank-circle'} size={responsiveHeight(3)} style={styles.primaryImageBlob} />
+					return <Icon key={image.hex} name={"checkbox-blank-circle"} size={responsiveHeight(3)} style={styles.primaryImageBlob} />
 				} else {
-					return <Icon key={image.hex} name={'checkbox-blank-circle-outline'} size={responsiveHeight(3)} style={styles.primaryImageBlob} />
+					return <Icon key={image.hex} name={"checkbox-blank-circle-outline"} size={responsiveHeight(3)} style={styles.primaryImageBlob} />
 				}
 			})
 		}
@@ -1013,7 +1013,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						{this.state.renderOfflineMessage && (
 							<OfflineMessage
 								message={`Sorry, can't do right now.${"\n"}You appear to be offline.`}
-								topOffset={'10%'}
+								topOffset={"10%"}
 								clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
 								diagnostics={this.props.loggedInChef.is_admin ? this.state.offlineDiagnostics : null}
 							/>)
@@ -1038,7 +1038,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						< KeyboardAvoidingView
 							style={centralStyles.fullPageKeyboardAvoidingView}
 							behavior={(Platform.OS === "ios" ? "padding" : "")}
-							keyboardVerticalOffset={Platform.OS === 'ios' ? responsiveHeight(9) + 20 : 0}
+							keyboardVerticalOffset={Platform.OS === "ios" ? responsiveHeight(9) + 20 : 0}
 						>
 							<ScrollView
 								contentContainerStyle={{ flexGrow: 1 }}
@@ -1077,7 +1077,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											{this.renderLikeButton()}
 											<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesLowerContentsAllTimings}>&nbsp;Likes:&nbsp;{this.props.recipe_details.recipe_likes}</Text>
 										</View>
-										{this.props.recipe_details.recipe.serves != 'Any' && (<View style={styles.buttonAndText}>
+										{this.props.recipe_details.recipe.serves != "Any" && (<View style={styles.buttonAndText}>
 											<Text maxFontSizeMultiplier={2} style={styles.detailsLikesAndMakesLowerContentsAllTimings}>Serves:&nbsp;{this.props.recipe_details.recipe.serves}</Text>
 										</View>)}
 										{this.props.recipe_details.recipe.difficulty != 0 && (<View style={styles.buttonAndText}>
@@ -1093,7 +1093,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Timings:</Text>
 											<View style={[
 												styles.detailsTimings,
-												(notShowingAllTimes ? { justifyContent: 'flex-start', marginLeft: responsiveWidth(5), width: responsiveWidth(93), flexDirection: 'column' } : null)
+												(notShowingAllTimes ? { justifyContent: "flex-start", marginLeft: responsiveWidth(5), width: responsiveWidth(93), flexDirection: "column" } : null)
 											]}>
 												{this.props.recipe_details.recipe.prep_time > 0 && <Text maxFontSizeMultiplier={2} style={notShowingAllTimes ? styles.detailsLikesAndMakesLowerContentsLimitedTimings : styles.detailsLikesAndMakesLowerContentsAllTimings}>Prep Time: {getTimeStringFromMinutes(this.props.recipe_details.recipe.prep_time)}</Text>}
 												{this.props.recipe_details.recipe.prep_time > 0 && this.props.recipe_details.recipe.cook_time > 0 && (
@@ -1175,7 +1175,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								{this.renderFilterCategories()}
 								{(this.props.recipe_details.recipe.acknowledgement != "" && this.props.recipe_details.recipe.acknowledgement != null) && this.renderAcknowledgement()}
 								<View style={styles.detailsMakePicsContainer}>
-									<View style={{ flexDirection: 'row' }}>
+									<View style={{ flexDirection: "row" }}>
 										<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Images from other users:</Text>
 										<TouchableOpacity onPress={this.newMakePic}>
 											<Icon name='image-plus' size={responsiveHeight(3.5)} style={styles.addIcon} />
@@ -1186,10 +1186,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 								</View>
 								<View style={styles.detailsComments}
 									onLayout={(event) => this.setState({ commentsTopY: event.nativeEvent.layout.y })}>
-									<View style={{ flexDirection: 'row' }}>
+									<View style={{ flexDirection: "row" }}>
 										<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>Comments:</Text>
 										<TouchableOpacity onPress={this.state.commenting ? (this.state.commentText === "" ? this.cancelComment : this.saveComment) : this.newComment}>
-											<Icon name={this.state.commenting ? (this.state.commentText === "" ? 'comment-remove' : 'comment-check') : 'comment-plus'} size={responsiveHeight(3.5)} style={styles.addIcon} />
+											<Icon name={this.state.commenting ? (this.state.commentText === "" ? "comment-remove" : "comment-check") : "comment-plus"} size={responsiveHeight(3.5)} style={styles.addIcon} />
 										</TouchableOpacity>
 									</View>
 									{this.state.commenting ? <RecipeNewComment scrollToLocation={this.scrollToLocation} {...this.props.loggedInChef} commentText={this.state.commentText} handleCommentTextInput={this.handleCommentTextInput} /> : null}
@@ -1198,7 +1198,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							</ScrollView>
 						</KeyboardAvoidingView>
 					</SpinachAppContainer>
-				);
+				)
 			} else {
 				return (
 					<SpinachAppContainer awaitingServer={this.state.awaitingServer}>

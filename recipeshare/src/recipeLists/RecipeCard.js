@@ -1,12 +1,13 @@
-import React from 'react'
-import { Image, View, TouchableOpacity, Text } from 'react-native'
-import { styles } from './recipeListStyleSheet'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
-import OfflineMessage from '../offlineMessage/offlineMessage'
-import { getTimeStringFromMinutes } from '../auxFunctions/getTimeStringFromMinutes'
+import React from "react"
+import { Image, View, TouchableOpacity, Text } from "react-native"
+import { styles } from "./recipeListStyleSheet"
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+import OfflineMessage from "../offlineMessage/offlineMessage"
+import { getTimeStringFromMinutes } from "../auxFunctions/getTimeStringFromMinutes"
 
 const defaultRecipeImage = require("../dataComponents/default-recipe.jpg")
+
 export default class RecipeCard extends React.PureComponent {
 
 	navigateToSharer = (chefID) => {
@@ -17,10 +18,10 @@ export default class RecipeCard extends React.PureComponent {
 		const imageSource = this.props.image_url ? { uri: this.props.image_url } : defaultRecipeImage
 		return (
 			<View style={styles.recipeCard} >
-				{this.props.renderOfflineMessage.includes(this.props.id) && (
+				{this.props.renderOfflineMessage?.includes(this.props.id) && (
 					<OfflineMessage
 						message={`Sorry, can't do that right now.${"\n"}You appear to be offline.`}
-						topOffset={'35%'}
+						topOffset={"35%"}
 						clearOfflineMessage={() => {
 							this.props.clearOfflineMessage(this.props.id)
 						}}

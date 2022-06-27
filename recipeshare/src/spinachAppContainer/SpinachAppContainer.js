@@ -1,7 +1,7 @@
-import React from 'react'
-import { ScrollView, SafeAreaView, Image, KeyboardAvoidingView, Platform } from 'react-native'
-import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
-import StyledActivityIndicator from '../customComponents/StyledActivityIndicator'
+import React from "react"
+import { ScrollView, SafeAreaView, Image, KeyboardAvoidingView, Platform } from "react-native"
+import { centralStyles } from "../centralStyleSheet" //eslint-disable-line no-unused-vars
+import StyledActivityIndicator from "../customComponents/styledActivityIndicator/styledActivityIndicator"
 export default class SpinachAppContainer extends React.Component {
 	static navigationOptions = {
 
@@ -18,10 +18,10 @@ export default class SpinachAppContainer extends React.Component {
 					<KeyboardAvoidingView
 						style={centralStyles.fullPageKeyboardAvoidingView}
 						behavior={(Platform.OS === "ios" ? "padding" : "")}
-						keyboardVerticalOffset={Platform.OS === 'ios' ? 20 : 0}
+						keyboardVerticalOffset={Platform.OS === "ios" ? 20 : 0}
 					>
 						<Image
-							source={require('../dataComponents/spinach.jpg')}
+							source={require("../dataComponents/spinach.jpg")}
 							style={centralStyles.spinachFullBackground}
 							resizeMode={"cover"}
 						/>
@@ -29,8 +29,8 @@ export default class SpinachAppContainer extends React.Component {
 						<ScrollView style={centralStyles.fullPageScrollView}
 							nestedScrollEnabled={true}
 							scrollEnabled={this.state.scrollingEnabled}
-							keyboardShouldPersistTaps={'always'}
-							ref={(c) => { this.scrollView = c; }}
+							keyboardShouldPersistTaps={"always"}
+							ref={(c) => { this.scrollView = c }}
 						>
 							{this.props.children}
 						</ScrollView>
@@ -42,7 +42,7 @@ export default class SpinachAppContainer extends React.Component {
 			return (
 				<SafeAreaView style={centralStyles.fullPageSafeAreaView}>
 					<Image
-						source={require('../dataComponents/spinach.jpg')}
+						source={require("../dataComponents/spinach.jpg")}
 						style={centralStyles.spinachFullBackground}
 						resizeMode={"cover"}
 					/>

@@ -1,25 +1,25 @@
-import { databaseURL } from '../dataComponents/databaseURL'
-import { actionTimeout } from '../dataComponents/timeouts'
+import { databaseURL } from "../dataComponents/databaseURL"
+import { actionTimeout } from "../dataComponents/timeouts"
 
 export const getDatabaseBackup = (auth_token, method) => {
 
 	return new Promise((resolve, reject) => {
 
 		setTimeout(() => {
-			reject({name: 'Timeout'})
+			reject({name: "Timeout"})
 		}, actionTimeout)
 
 		fetch(`${databaseURL}/database/${method}backup`, {
 			method: "GET",
 			headers: {
 				Authorization: `Bearer ${auth_token}`,
-				'Content-Type': 'application/json'
+				"Content-Type": "application/json"
 			},
 		})
 			.then(res => res.json())
 			.then(confirmation => {
 				if (confirmation.error && confirmation.message == "Invalid authentication") {
-					reject({name: 'Logout'})
+					reject({name: "Logout"})
 				}
 				if (confirmation) {
 					resolve(confirmation)
