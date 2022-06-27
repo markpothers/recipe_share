@@ -88,7 +88,7 @@ const middleware = (req, res, next) => {
 			"username": "TestCommentWriter",
 		}
 		res.json([newComment, ...currentComments])
-	} else if (['POST', 'DELETE'].includes(req.method)) {
+	} else if (["POST", "DELETE"].includes(req.method)) {
 		res.json(true)
 	} else {
 		next()

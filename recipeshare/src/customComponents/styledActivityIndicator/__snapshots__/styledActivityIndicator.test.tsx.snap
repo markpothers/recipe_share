@@ -21,9 +21,7 @@ exports[`StyledActivityIndicator can be rendered 1`] = `
   }
 >
   <ActivityIndicator
-    animating={true}
     color="#104e01"
-    hidesWhenStopped={true}
     size="large"
     style={
       Object {

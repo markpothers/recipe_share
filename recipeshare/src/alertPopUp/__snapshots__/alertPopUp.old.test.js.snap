@@ -101,6 +101,7 @@ exports[`AlertPopUp calls the close function when button pressed 1`] = `
           <View
             accessibilityRole="button"
             accessible={true}
+            collapsable={false}
             focusable={true}
             onClick={[Function]}
             onResponderGrant={[Function]}
@@ -154,6 +155,7 @@ exports[`AlertPopUp calls the close function when button pressed 1`] = `
           <View
             accessibilityRole="button"
             accessible={true}
+            collapsable={false}
             focusable={true}
             onClick={[Function]}
             onResponderGrant={[Function]}
@@ -312,6 +314,7 @@ exports[`AlertPopUp calls the yes function when button pressed 1`] = `
           <View
             accessibilityRole="button"
             accessible={true}
+            collapsable={false}
             focusable={true}
             onClick={[Function]}
             onResponderGrant={[Function]}
@@ -365,6 +368,7 @@ exports[`AlertPopUp calls the yes function when button pressed 1`] = `
           <View
             accessibilityRole="button"
             accessible={true}
+            collapsable={false}
             focusable={true}
             onClick={[Function]}
             onResponderGrant={[Function]}
@@ -545,6 +549,7 @@ exports[`AlertPopUp renders with 1 button when no close button and customizable 
           <View
             accessibilityRole="button"
             accessible={true}
+            collapsable={false}
             focusable={true}
             onClick={[Function]}
             onResponderGrant={[Function]}
@@ -703,6 +708,7 @@ exports[`AlertPopUp renders with 2 buttons and customizable text 1`] = `
           <View
             accessibilityRole="button"
             accessible={true}
+            collapsable={false}
             focusable={true}
             onClick={[Function]}
             onResponderGrant={[Function]}
@@ -756,6 +762,7 @@ exports[`AlertPopUp renders with 2 buttons and customizable text 1`] = `
           <View
             accessibilityRole="button"
             accessible={true}
+            collapsable={false}
             focusable={true}
             onClick={[Function]}
             onResponderGrant={[Function]}
@@ -914,6 +921,7 @@ exports[`AlertPopUp renders with 2 buttons and default text 1`] = `
           <View
             accessibilityRole="button"
             accessible={true}
+            collapsable={false}
             focusable={true}
             onClick={[Function]}
             onResponderGrant={[Function]}
@@ -967,6 +975,7 @@ exports[`AlertPopUp renders with 2 buttons and default text 1`] = `
           <View
             accessibilityRole="button"
             accessible={true}
+            collapsable={false}
             focusable={true}
             onClick={[Function]}
             onResponderGrant={[Function]}

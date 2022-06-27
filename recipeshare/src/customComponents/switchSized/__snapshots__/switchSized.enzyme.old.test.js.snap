@@ -5,7 +5,7 @@ exports[`SwitchSized can be rendered on an android switch is off 1`] = `
   onValueChange={[MockFunction]}
   value={false}
 >
-  <Switch
+  <ForwardRef(Switch)
     accessibilityRole="switch"
     onValueChange={[MockFunction]}
     style={
@@ -72,7 +72,7 @@ exports[`SwitchSized can be rendered on an android switch is off 1`] = `
         trackTintColor="#64715599"
       />
     </AndroidSwitch>
-  </Switch>
+  </ForwardRef(Switch)>
 </SwitchSized>
 `;
 
@@ -81,7 +81,7 @@ exports[`SwitchSized can be rendered on an android where switch is on 1`] = `
   onValueChange={[MockFunction]}
   value={true}
 >
-  <Switch
+  <ForwardRef(Switch)
     accessibilityRole="switch"
     onValueChange={[MockFunction]}
     style={
@@ -148,7 +148,7 @@ exports[`SwitchSized can be rendered on an android where switch is on 1`] = `
         trackTintColor="#5c8a5199"
       />
     </AndroidSwitch>
-  </Switch>
+  </ForwardRef(Switch)>
 </SwitchSized>
 `;
 
@@ -157,7 +157,7 @@ exports[`SwitchSized can be rendered on an iPhone with reduced size switches whe
   onValueChange={[MockFunction]}
   value={false}
 >
-  <Switch
+  <ForwardRef(Switch)
     accessibilityRole="switch"
     onValueChange={[MockFunction]}
     style={
@@ -250,7 +250,7 @@ exports[`SwitchSized can be rendered on an iPhone with reduced size switches whe
         value={false}
       />
     </RCTSwitch>
-  </Switch>
+  </ForwardRef(Switch)>
 </SwitchSized>
 `;
 
@@ -259,7 +259,7 @@ exports[`SwitchSized can be rendered on an iPhone with reduced size switches whe
   onValueChange={[MockFunction]}
   value={true}
 >
-  <Switch
+  <ForwardRef(Switch)
     accessibilityRole="switch"
     onValueChange={[MockFunction]}
     style={
@@ -352,7 +352,7 @@ exports[`SwitchSized can be rendered on an iPhone with reduced size switches whe
         value={true}
       />
     </RCTSwitch>
-  </Switch>
+  </ForwardRef(Switch)>
 </SwitchSized>
 `;
 
@@ -361,7 +361,7 @@ exports[`SwitchSized can be rendered on iPad with regular switch where switch is
   onValueChange={[MockFunction]}
   value={false}
 >
-  <Switch
+  <ForwardRef(Switch)
     accessibilityRole="switch"
     onValueChange={[MockFunction]}
     style={
@@ -428,7 +428,7 @@ exports[`SwitchSized can be rendered on iPad with regular switch where switch is
         trackTintColor="#64715599"
       />
     </AndroidSwitch>
-  </Switch>
+  </ForwardRef(Switch)>
 </SwitchSized>
 `;
 
@@ -437,7 +437,7 @@ exports[`SwitchSized can be rendered on iPad with regular switch where switch is
   onValueChange={[MockFunction]}
   value={true}
 >
-  <Switch
+  <ForwardRef(Switch)
     accessibilityRole="switch"
     onValueChange={[MockFunction]}
     style={
@@ -504,6 +504,6 @@ exports[`SwitchSized can be rendered on iPad with regular switch where switch is
         trackTintColor="#5c8a5199"
       />
     </AndroidSwitch>
-  </Switch>
+  </ForwardRef(Switch)>
 </SwitchSized>
 `;

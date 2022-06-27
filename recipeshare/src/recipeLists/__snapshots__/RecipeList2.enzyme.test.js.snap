@@ -147,7 +147,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                 }
               />
             </Image>
-            <ForwardRef
+            <TouchableOpacity
               activeOpacity={1}
               onPress={[Function]}
             >
@@ -196,6 +196,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                   >
                     <View
                       accessible={true}
+                      collapsable={false}
                       focusable={true}
                       onClick={[Function]}
                       onResponderGrant={[Function]}
@@ -212,6 +213,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                     >
                       <View
                         accessible={true}
+                        collapsable={false}
                         focusable={true}
                         onClick={[Function]}
                         onResponderGrant={[Function]}
@@ -347,16 +349,13 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                           >
                             <FlatList
                               ListHeaderComponent={[Function]}
+                              collapsable={false}
                               data={Array []}
-                              disableVirtualization={false}
                               forwardedRef={[Function]}
-                              horizontal={false}
                               initialNumToRender={0}
                               keyExtractor={[Function]}
                               listKey={Array []}
-                              maxToRenderPerBatch={10}
                               nestedScrollEnabled={true}
-                              numColumns={1}
                               onEndReached={[Function]}
                               onEndReachedThreshold={2.5}
                               onScroll={[Function]}
@@ -373,7 +372,6 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                   tintColor="#fff59b"
                                 />
                               }
-                              removeClippedSubviews={false}
                               renderItem={[Function]}
                               scrollEventThrottle={16}
                               style={
@@ -381,21 +379,17 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                   "minHeight": 933.8,
                                 }
                               }
-                              updateCellsBatchingPeriod={50}
-                              windowSize={21}
                             >
                               <VirtualizedList
                                 ListHeaderComponent={[Function]}
+                                collapsable={false}
                                 data={Array []}
-                                disableVirtualization={false}
                                 forwardedRef={[Function]}
                                 getItem={[Function]}
                                 getItemCount={[Function]}
-                                horizontal={false}
                                 initialNumToRender={0}
                                 keyExtractor={[Function]}
                                 listKey={Array []}
-                                maxToRenderPerBatch={10}
                                 nestedScrollEnabled={true}
                                 onEndReached={[Function]}
                                 onEndReachedThreshold={2.5}
@@ -421,9 +415,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                     "minHeight": 933.8,
                                   }
                                 }
-                                updateCellsBatchingPeriod={50}
                                 viewabilityConfigCallbackPairs={Array []}
-                                windowSize={21}
                               >
                                 <VirtualizedListContextProvider
                                   value={
@@ -446,21 +438,20 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                 >
                                   <ScrollView
                                     ListHeaderComponent={[Function]}
+                                    collapsable={false}
                                     data={Array []}
-                                    disableVirtualization={false}
                                     forwardedRef={[Function]}
                                     getItem={[Function]}
                                     getItemCount={[Function]}
-                                    horizontal={false}
                                     initialNumToRender={0}
                                     keyExtractor={[Function]}
                                     listKey={Array []}
-                                    maxToRenderPerBatch={10}
                                     nestedScrollEnabled={true}
                                     onContentSizeChange={[Function]}
                                     onEndReached={[Function]}
                                     onEndReachedThreshold={2.5}
                                     onLayout={[Function]}
+                                    onMomentumScrollBegin={[Function]}
                                     onMomentumScrollEnd={[Function]}
                                     onScroll={[Function]}
                                     onScrollBeginDrag={[Function]}
@@ -487,27 +478,24 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                         "minHeight": 933.8,
                                       }
                                     }
-                                    updateCellsBatchingPeriod={50}
                                     viewabilityConfigCallbackPairs={Array []}
-                                    windowSize={21}
                                   >
                                     <RCTScrollView
                                       ListHeaderComponent={[Function]}
+                                      collapsable={false}
                                       data={Array []}
-                                      disableVirtualization={false}
                                       forwardedRef={[Function]}
                                       getItem={[Function]}
                                       getItemCount={[Function]}
-                                      horizontal={false}
                                       initialNumToRender={0}
                                       keyExtractor={[Function]}
                                       listKey={Array []}
-                                      maxToRenderPerBatch={10}
                                       nestedScrollEnabled={true}
                                       onContentSizeChange={[Function]}
                                       onEndReached={[Function]}
                                       onEndReachedThreshold={2.5}
                                       onLayout={[Function]}
+                                      onMomentumScrollBegin={[Function]}
                                       onMomentumScrollEnd={[Function]}
                                       onScroll={[Function]}
                                       onScrollBeginDrag={[Function]}
@@ -534,27 +522,24 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                           "minHeight": 933.8,
                                         }
                                       }
-                                      updateCellsBatchingPeriod={50}
                                       viewabilityConfigCallbackPairs={Array []}
-                                      windowSize={21}
                                     >
                                       <RCTScrollView
                                         ListHeaderComponent={[Function]}
+                                        collapsable={false}
                                         data={Array []}
-                                        disableVirtualization={false}
                                         forwardedRef={[Function]}
                                         getItem={[Function]}
                                         getItemCount={[Function]}
-                                        horizontal={false}
                                         initialNumToRender={0}
                                         keyExtractor={[Function]}
                                         listKey={Array []}
-                                        maxToRenderPerBatch={10}
                                         nestedScrollEnabled={true}
                                         onContentSizeChange={[Function]}
                                         onEndReached={[Function]}
                                         onEndReachedThreshold={2.5}
                                         onLayout={[Function]}
+                                        onMomentumScrollBegin={[Function]}
                                         onMomentumScrollEnd={[Function]}
                                         onScroll={[Function]}
                                         onScrollBeginDrag={[Function]}
@@ -581,9 +566,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                             "minHeight": 933.8,
                                           }
                                         }
-                                        updateCellsBatchingPeriod={50}
                                         viewabilityConfigCallbackPairs={Array []}
-                                        windowSize={21}
                                       >
                                         <RefreshControlMock
                                           colors={
@@ -613,7 +596,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                                   onLayout={[Function]}
                                                 >
                                                   <ListHeaderComponent>
-                                                    <ForwardRef
+                                                    <TouchableOpacity
                                                       onPress={[Function]}
                                                       style={
                                                         Object {
@@ -674,6 +657,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                                           >
                                                             <View
                                                               accessible={true}
+                                                              collapsable={false}
                                                               focusable={true}
                                                               onClick={[Function]}
                                                               onResponderGrant={[Function]}
@@ -691,6 +675,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                                             >
                                                               <View
                                                                 accessible={true}
+                                                                collapsable={false}
                                                                 focusable={true}
                                                                 onClick={[Function]}
                                                                 onResponderGrant={[Function]}
@@ -714,7 +699,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                                                           </AnimatedComponent>
                                                         </ForwardRef(AnimatedComponentWrapper)>
                                                       </TouchableOpacity>
-                                                    </ForwardRef>
+                                                    </TouchableOpacity>
                                                   </ListHeaderComponent>
                                                 </View>
                                               </View>
@@ -737,8 +722,8 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                   </AnimatedComponent>
                 </ForwardRef(AnimatedComponentWrapper)>
               </TouchableOpacity>
-            </ForwardRef>
-            <ForwardRef
+            </TouchableOpacity>
+            <TouchableOpacity
               activeOpacity={0.7}
               onPress={[Function]}
               style={
@@ -853,6 +838,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                   >
                     <View
                       accessible={true}
+                      collapsable={false}
                       focusable={true}
                       onClick={[Function]}
                       onResponderGrant={[Function]}
@@ -883,6 +869,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                     >
                       <View
                         accessible={true}
+                        collapsable={false}
                         focusable={true}
                         onClick={[Function]}
                         onResponderGrant={[Function]}
@@ -928,7 +915,7 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
                   </AnimatedComponent>
                 </ForwardRef(AnimatedComponentWrapper)>
               </TouchableOpacity>
-            </ForwardRef>
+            </TouchableOpacity>
           </RCTSafeAreaView>
         </RCTSafeAreaView>
       </ForwardRef(SafeAreaView)>

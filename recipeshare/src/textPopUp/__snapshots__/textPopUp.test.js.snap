@@ -226,6 +226,7 @@ If you have any questions about these Terms, please contact us at:
       >
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}

@@ -38,14 +38,12 @@ exports[`Search Bar can be rendered (with the delete button) matches its previou
       }
     >
       <TextInput
-        allowFontScaling={true}
         autoCapitalize="none"
         keyboardType="default"
         maxFontSizeMultiplier={2}
         onBlur={[MockFunction]}
         onChangeText={[Function]}
         placeholder="SearchBar placeholder text"
-        rejectResponderTermination={true}
         style={
           Object {
             "backgroundColor": "white",
@@ -58,11 +56,11 @@ exports[`Search Bar can be rendered (with the delete button) matches its previou
           }
         }
         testID="searchTermInput"
-        underlineColorAndroid="transparent"
         value="spaghetti"
       />
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -136,14 +134,12 @@ exports[`Search Bar can be rendered (without the delete button) matches its prev
       }
     >
       <TextInput
-        allowFontScaling={true}
         autoCapitalize="none"
         keyboardType="default"
         maxFontSizeMultiplier={2}
         onBlur={[MockFunction]}
         onChangeText={[Function]}
         placeholder="SearchBar placeholder text"
-        rejectResponderTermination={true}
         style={
           Object {
             "backgroundColor": "white",
@@ -156,7 +152,6 @@ exports[`Search Bar can be rendered (without the delete button) matches its prev
           }
         }
         testID="searchTermInput"
-        underlineColorAndroid="transparent"
         value=""
       />
     </View>

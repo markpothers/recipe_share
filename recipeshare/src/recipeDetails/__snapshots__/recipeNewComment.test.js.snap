@@ -61,14 +61,12 @@ exports[`RecipeNewComment renders with some text and a confirm button 1`] = `
       :
     </Text>
     <TextInput
-      allowFontScaling={true}
       autoFocus={true}
       maxFontSizeMultiplier={2}
       multiline={true}
       numberOfLines={2}
       onChangeText={[Function]}
       placeholder="Type comment here..."
-      rejectResponderTermination={true}
       style={
         Object {
           "color": "#505050",
@@ -78,7 +76,6 @@ exports[`RecipeNewComment renders with some text and a confirm button 1`] = `
           "paddingLeft": 15,
         }
       }
-      underlineColorAndroid="transparent"
       value="Here is my test comment text"
     />
   </View>
@@ -142,14 +139,12 @@ exports[`RecipeNewComment renders without an image_url 1`] = `
       :
     </Text>
     <TextInput
-      allowFontScaling={true}
       autoFocus={true}
       maxFontSizeMultiplier={2}
       multiline={true}
       numberOfLines={2}
       onChangeText={[Function]}
       placeholder="Type comment here..."
-      rejectResponderTermination={true}
       style={
         Object {
           "color": "#505050",
@@ -159,7 +154,6 @@ exports[`RecipeNewComment renders without an image_url 1`] = `
           "paddingLeft": 15,
         }
       }
-      underlineColorAndroid="transparent"
       value="Here is my test comment text"
     />
   </View>

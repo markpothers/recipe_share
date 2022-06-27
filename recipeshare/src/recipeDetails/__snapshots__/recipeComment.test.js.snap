@@ -24,6 +24,7 @@ exports[`RecipeComment render first comment and navigate to chef from both butto
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -70,6 +71,7 @@ exports[`RecipeComment render first comment and navigate to chef from both butto
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -151,6 +153,7 @@ exports[`RecipeComment render first comment and the delete comment button calls 
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -201,6 +204,7 @@ exports[`RecipeComment render first comment and the delete comment button calls 
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -234,6 +238,7 @@ exports[`RecipeComment render first comment and the delete comment button calls 
       </View>
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -315,6 +320,7 @@ exports[`RecipeComment render with different comments 1`] = `
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -365,6 +371,7 @@ exports[`RecipeComment render with different comments 1`] = `
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -446,6 +453,7 @@ exports[`RecipeComment render with different comments 2`] = `
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -496,6 +504,7 @@ exports[`RecipeComment render with different comments 2`] = `
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -577,6 +586,7 @@ exports[`RecipeComment render with different comments 3`] = `
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -627,6 +637,7 @@ exports[`RecipeComment render with different comments 3`] = `
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -708,6 +719,7 @@ exports[`RecipeComment render with different comments and an extra button if log
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -758,6 +770,7 @@ exports[`RecipeComment render with different comments and an extra button if log
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -791,6 +804,7 @@ exports[`RecipeComment render with different comments and an extra button if log
       </View>
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -872,6 +886,7 @@ exports[`RecipeComment render with different comments and an extra button if log
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -922,6 +937,7 @@ exports[`RecipeComment render with different comments and an extra button if log
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -955,6 +971,7 @@ exports[`RecipeComment render with different comments and an extra button if log
       </View>
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -1036,6 +1053,7 @@ exports[`RecipeComment render with different comments and an extra button if log
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -1086,6 +1104,7 @@ exports[`RecipeComment render with different comments and an extra button if log
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -1119,6 +1138,7 @@ exports[`RecipeComment render with different comments and an extra button if log
       </View>
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -1200,6 +1220,7 @@ exports[`RecipeComment render with the first comment with no image_url 1`] = `
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -1250,6 +1271,7 @@ exports[`RecipeComment render with the first comment with no image_url 1`] = `
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}

@@ -35,6 +35,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -92,6 +93,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         </Text>
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -164,6 +166,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -202,6 +205,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
   </View>
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -244,6 +248,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -291,6 +296,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -338,6 +344,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -422,6 +429,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -479,6 +487,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         </Text>
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -551,6 +560,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -589,6 +599,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
   </View>
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -635,6 +646,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -682,6 +694,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -729,6 +742,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -813,6 +827,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -870,6 +885,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         </Text>
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -942,6 +958,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -980,6 +997,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
   </View>
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -1022,6 +1040,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -1069,6 +1088,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -1116,6 +1136,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -1200,6 +1221,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -1257,6 +1279,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         </Text>
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -1329,6 +1352,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -1367,6 +1391,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
   </View>
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -1413,6 +1438,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -1460,6 +1486,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -1507,6 +1534,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -1591,6 +1619,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -1648,6 +1677,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         </Text>
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -1720,6 +1750,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -1758,6 +1789,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
   </View>
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -1804,6 +1836,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -1851,6 +1884,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -1898,6 +1932,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -1982,6 +2017,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -2039,6 +2075,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         </Text>
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -2111,6 +2148,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -2149,6 +2187,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
   </View>
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -2195,6 +2234,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -2242,6 +2282,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -2289,6 +2330,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -2373,6 +2415,7 @@ exports[`Recipe Card can be rendered when the recipe has NO COVER IMAGE and matc
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -2430,6 +2473,7 @@ exports[`Recipe Card can be rendered when the recipe has NO COVER IMAGE and matc
         </Text>
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -2502,6 +2546,7 @@ exports[`Recipe Card can be rendered when the recipe has NO COVER IMAGE and matc
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -2540,6 +2585,7 @@ exports[`Recipe Card can be rendered when the recipe has NO COVER IMAGE and matc
   </View>
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -2582,6 +2628,7 @@ exports[`Recipe Card can be rendered when the recipe has NO COVER IMAGE and matc
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -2629,6 +2676,7 @@ exports[`Recipe Card can be rendered when the recipe has NO COVER IMAGE and matc
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -2676,6 +2724,7 @@ exports[`Recipe Card can be rendered when the recipe has NO COVER IMAGE and matc
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -2785,6 +2834,7 @@ exports[`Recipe Card can be rendered when the recipe has a LONG RESHARER USERNAM
     </Text>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -2835,6 +2885,7 @@ exports[`Recipe Card can be rendered when the recipe has a LONG RESHARER USERNAM
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -2892,6 +2943,7 @@ exports[`Recipe Card can be rendered when the recipe has a LONG RESHARER USERNAM
         </Text>
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -2964,6 +3016,7 @@ exports[`Recipe Card can be rendered when the recipe has a LONG RESHARER USERNAM
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -3002,6 +3055,7 @@ exports[`Recipe Card can be rendered when the recipe has a LONG RESHARER USERNAM
   </View>
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -3044,6 +3098,7 @@ exports[`Recipe Card can be rendered when the recipe has a LONG RESHARER USERNAM
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -3091,6 +3146,7 @@ exports[`Recipe Card can be rendered when the recipe has a LONG RESHARER USERNAM
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -3138,6 +3194,7 @@ exports[`Recipe Card can be rendered when the recipe has a LONG RESHARER USERNAM
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -3222,6 +3279,7 @@ exports[`Recipe Card can be rendered when the recipe has been COMMENTED and matc
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -3279,6 +3337,7 @@ exports[`Recipe Card can be rendered when the recipe has been COMMENTED and matc
         </Text>
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -3351,6 +3410,7 @@ exports[`Recipe Card can be rendered when the recipe has been COMMENTED and matc
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -3389,6 +3449,7 @@ exports[`Recipe Card can be rendered when the recipe has been COMMENTED and matc
   </View>
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -3435,6 +3496,7 @@ exports[`Recipe Card can be rendered when the recipe has been COMMENTED and matc
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -3482,6 +3544,7 @@ exports[`Recipe Card can be rendered when the recipe has been COMMENTED and matc
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -3529,6 +3592,7 @@ exports[`Recipe Card can be rendered when the recipe has been COMMENTED and matc
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -3613,6 +3677,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED and matches 
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -3670,6 +3735,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED and matches 
         </Text>
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -3742,6 +3808,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED and matches 
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -3780,6 +3847,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED and matches 
   </View>
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -3826,6 +3894,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED and matches 
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -3873,6 +3942,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED and matches 
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -3920,6 +3990,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED and matches 
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -4004,6 +4075,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED, COMMENTED, 
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -4061,6 +4133,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED, COMMENTED, 
         </Text>
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -4133,6 +4206,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED, COMMENTED, 
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -4171,6 +4245,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED, COMMENTED, 
   </View>
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -4217,6 +4292,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED, COMMENTED, 
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -4264,6 +4340,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED, COMMENTED, 
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -4311,6 +4388,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED, COMMENTED, 
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -4420,6 +4498,7 @@ exports[`Recipe Card can be rendered when the recipe has been RE_SHARED BY SOMEO
     </Text>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -4470,6 +4549,7 @@ exports[`Recipe Card can be rendered when the recipe has been RE_SHARED BY SOMEO
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -4527,6 +4607,7 @@ exports[`Recipe Card can be rendered when the recipe has been RE_SHARED BY SOMEO
         </Text>
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -4599,6 +4680,7 @@ exports[`Recipe Card can be rendered when the recipe has been RE_SHARED BY SOMEO
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -4637,6 +4719,7 @@ exports[`Recipe Card can be rendered when the recipe has been RE_SHARED BY SOMEO
   </View>
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -4683,6 +4766,7 @@ exports[`Recipe Card can be rendered when the recipe has been RE_SHARED BY SOMEO
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -4730,6 +4814,7 @@ exports[`Recipe Card can be rendered when the recipe has been RE_SHARED BY SOMEO
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -4777,6 +4862,7 @@ exports[`Recipe Card can be rendered when the recipe has been RE_SHARED BY SOMEO
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -4861,6 +4947,7 @@ exports[`Recipe Card can be rendered when the recipe has been SHARED and matches
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -4918,6 +5005,7 @@ exports[`Recipe Card can be rendered when the recipe has been SHARED and matches
         </Text>
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -4990,6 +5078,7 @@ exports[`Recipe Card can be rendered when the recipe has been SHARED and matches
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -5028,6 +5117,7 @@ exports[`Recipe Card can be rendered when the recipe has been SHARED and matches
   </View>
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -5074,6 +5164,7 @@ exports[`Recipe Card can be rendered when the recipe has been SHARED and matches
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -5121,6 +5212,7 @@ exports[`Recipe Card can be rendered when the recipe has been SHARED and matches
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -5168,6 +5260,7 @@ exports[`Recipe Card can be rendered when the recipe has been SHARED and matches
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -5252,6 +5345,7 @@ exports[`Recipe Card can be rendered when the recipe has been a LONG RECIPE NAME
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -5309,6 +5403,7 @@ exports[`Recipe Card can be rendered when the recipe has been a LONG RECIPE NAME
         </Text>
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -5381,6 +5476,7 @@ exports[`Recipe Card can be rendered when the recipe has been a LONG RECIPE NAME
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -5419,6 +5515,7 @@ exports[`Recipe Card can be rendered when the recipe has been a LONG RECIPE NAME
   </View>
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -5465,6 +5562,7 @@ exports[`Recipe Card can be rendered when the recipe has been a LONG RECIPE NAME
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -5512,6 +5610,7 @@ exports[`Recipe Card can be rendered when the recipe has been a LONG RECIPE NAME
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -5559,6 +5658,7 @@ exports[`Recipe Card can be rendered when the recipe has been a LONG RECIPE NAME
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -5643,6 +5743,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with NO 
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -5700,6 +5801,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with NO 
         </Text>
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -5772,6 +5874,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with NO 
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -5806,6 +5909,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with NO 
   </View>
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -5852,6 +5956,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with NO 
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -5899,6 +6004,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with NO 
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -5946,6 +6052,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with NO 
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -6030,6 +6137,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with a L
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -6087,6 +6195,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with a L
         </Text>
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -6159,6 +6268,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with a L
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -6197,6 +6307,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with a L
   </View>
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -6243,6 +6354,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with a L
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -6290,6 +6402,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with a L
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -6337,6 +6450,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with a L
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}

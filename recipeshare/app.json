@@ -43,7 +43,6 @@
         "READ_EXTERNAL_STORAGE",
         "WRITE_EXTERNAL_STORAGE"
       ]
-    },
-    "sdkVersion": "44.0.0"
+    }
   }
 }

@@ -55,9 +55,7 @@ exports[`SpinachAppContainer renders with scrollView and activityIndicator on An
       }
     >
       <ActivityIndicator
-        animating={true}
         color="#104e01"
-        hidesWhenStopped={true}
         size="large"
         style={Object {}}
       />
@@ -140,9 +138,7 @@ exports[`SpinachAppContainer renders with scrollView and activityIndicator on IO
       }
     >
       <ActivityIndicator
-        animating={true}
         color="#104e01"
-        hidesWhenStopped={true}
         size="large"
         style={
           Object {
@@ -325,9 +321,7 @@ exports[`SpinachAppContainer renders without scrollView and with ActivityIndicat
     }
   >
     <ActivityIndicator
-      animating={true}
       color="#104e01"
-      hidesWhenStopped={true}
       size="large"
       style={Object {}}
     />
@@ -379,9 +373,7 @@ exports[`SpinachAppContainer renders without scrollView and with ActivityIndicat
     }
   >
     <ActivityIndicator
-      animating={true}
       color="#104e01"
-      hidesWhenStopped={true}
       size="large"
       style={
         Object {
