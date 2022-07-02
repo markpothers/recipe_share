@@ -46,6 +46,7 @@ class ApplicationRecord < ActiveRecord::Base
       if url.blank?
         return ""
       elsif url.include?("robohash") # for testing
+        # puts url
         return url
       else
         # puts url
@@ -92,6 +93,8 @@ class ApplicationRecord < ActiveRecord::Base
         # return url
         # storage = ApplicationRecord.storage_bucket(chosen_bucket)
         bucket = @@gcstorage.bucket chosen_bucket
+        # puts bucket
+        # puts DateTime.now.next_year(100).to_time.to_i
         signed_url = bucket.signed_url file_name, expires: (days_until_reset < 5 ? next_next_reset_date.to_time.to_i - DateTime.now().to_time.to_i : next_reset_date.to_time.to_i - DateTime.now().to_time.to_i)
         # signed_url = storage.signed_url file_name, expires: (days_until_reset < 5 ? next_next_reset_date.to_time.to_i - DateTime.now().to_time.to_i : next_reset_date.to_time.to_i - DateTime.now().to_time.to_i)
         # puts signed_url
