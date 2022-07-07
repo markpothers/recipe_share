@@ -195,9 +195,10 @@ const BrowseRecipesStack = () => {
 		>
 			<Stack.Screen
 				name="BrowseRecipes"
+				initialParams={{ title: "Browse Recipes" }}
 				options={({ route }) => ({
 					headerLeft: null,
-					headerTitle: Object.assign((props) => <AppHeader {...props} text={"Browse Recipes"} route={route} />, { displayName: "Header" })
+					headerTitle: Object.assign((props) => <AppHeader {...props} route={route} />, { displayName: "Header" })
 				})}
 				component={BrowseRecipesTabs}
 			/>

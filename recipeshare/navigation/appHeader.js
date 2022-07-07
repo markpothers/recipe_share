@@ -1,13 +1,12 @@
-import React from 'react'
-import { View, TouchableOpacity, Text } from 'react-native'
-import { styles } from './navigationStyleSheet'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { withNavigation } from '@react-navigation/compat'
-import { centralStyles } from '../src/centralStyleSheet' //eslint-disable-line no-unused-vars
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
+import React from "react";
+import { View, TouchableOpacity, Text } from "react-native";
+import { styles } from "./navigationStyleSheet";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { withNavigation } from "@react-navigation/compat";
+import { centralStyles } from "../src/centralStyleSheet"; //eslint-disable-line no-unused-vars
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
 class AppHeader extends React.PureComponent {
-
 	renderDrawerButton = () => {
 		return (
 			<View style={centralStyles.headerButtonContainer}>
@@ -16,11 +15,11 @@ class AppHeader extends React.PureComponent {
 					activeOpacity={0.7}
 					onPress={() => this.props.navigation.toggleDrawer()}
 				>
-					<Icon name='menu' style={styles.headerIcon} size={responsiveWidth(9)} />
+					<Icon name="menu" style={styles.headerIcon} size={responsiveWidth(9)} />
 				</TouchableOpacity>
 			</View>
-		)
-	}
+		);
+	};
 
 	renderBackButton = () => {
 		return (
@@ -28,12 +27,13 @@ class AppHeader extends React.PureComponent {
 				<TouchableOpacity
 					style={styles.headerDrawerButton}
 					activeOpacity={0.7}
-					onPress={() => this.props.navigation.goBack()}>
-					<Icon name='arrow-left' style={styles.headerIcon} size={responsiveWidth(9)} />
+					onPress={() => this.props.navigation.goBack()}
+				>
+					<Icon name="arrow-left" style={styles.headerIcon} size={responsiveWidth(9)} />
 				</TouchableOpacity>
 			</View>
-		)
-	}
+		);
+	};
 
 	render() {
 		// console.log(this.props.route?.params?.buttons)
@@ -49,16 +49,22 @@ class AppHeader extends React.PureComponent {
 		return (
 			<View style={styles.headerContainer}>
 				<View style={styles.headerEnd}>
-					{!["ChefDetails", "NewRecipe", "RecipeDetails", "About"].includes(this.props.navigation.state.routeName) ? this.renderDrawerButton() : this.renderBackButton()}
+					{!["ChefDetails", "NewRecipe", "RecipeDetails", "About"].includes(
+						this.props.navigation.state.routeName
+					)
+						? this.renderDrawerButton()
+						: this.renderBackButton()}
 				</View>
-				<View
-					style={styles.headerMiddle}
-				>
-					<Text style={styles.headerText} maxFontSizeMultiplier={1.3}>{this.props.text}</Text>
+				<View style={styles.headerMiddle}>
+					{this.props.text && (
+					<Text style={styles.headerText} maxFontSizeMultiplier={1.3}>
+						{this.props.text}
+					</Text>
+					)}
 				</View>
 			</View>
-		)
+		);
 	}
 }
 
-export default withNavigation(AppHeader)
+export default withNavigation(AppHeader);

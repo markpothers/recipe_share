@@ -3,8 +3,8 @@ let databaseURL;
 
 if (__DEV__) {
 	// databaseURL = 'http://10.0.0.145:3000/api'
-	// databaseURL = "http://10.0.0.144:3000/api"
-	databaseURL = "http://192.168.1.190:3000/api"
+	databaseURL = "http://10.0.0.144:3000/api"
+	// databaseURL = "http://192.168.1.190:3000/api"
 	// databaseURL = 'http://10.11.152.28:3000/api'
 	// databaseURL = 'http://73.166.74.229:3000'
 	// databaseURL = 'http://192.168.1.150:3000/api'
