@@ -1,10 +1,10 @@
-import React from 'react';
-import BrowseRecipesStack from './BrowseRecipesNavigator'
-import MyRecipeBookStack from './MyRecipeBookNavigator'
-import ProfileStack from './ProfileNavigator'
-import CustomDrawer from './Drawer'
+import React from "react";
+import BrowseRecipesStack from "./BrowseRecipesNavigator"
+import MyRecipeBookStack from "./MyRecipeBookNavigator"
+import ProfileStack from "./ProfileNavigator"
+import CustomDrawer from "./Drawer"
 // import BrowseRecipesCoverStack from './BrowseRecipesCover'
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 const Drawer = createDrawerNavigator()
 

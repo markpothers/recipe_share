@@ -1,12 +1,12 @@
-import React from 'react'
-import { Text, TextInput, View, Keyboard, Platform, TouchableOpacity } from 'react-native'
-import { styles } from './newRecipeStyleSheet'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Autocomplete from 'react-native-autocomplete-input';
-import { units } from '../dataComponents/units'
-import DualOSPicker from '../dualOSPicker/DualOSPicker'
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
-import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
+import React from "react"
+import { Text, TextInput, View, Keyboard, Platform, TouchableOpacity } from "react-native"
+import { styles } from "./newRecipeStyleSheet"
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import Autocomplete from "react-native-autocomplete-input";
+import { units } from "../dataComponents/units"
+import DualOSPicker from "../dualOSPicker/DualOSPicker"
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+import { centralStyles } from "../centralStyleSheet" //eslint-disable-line no-unused-vars
 
 export default class IngredientAutoComplete extends React.Component {
 
@@ -74,7 +74,7 @@ export default class IngredientAutoComplete extends React.Component {
 				<TouchableOpacity //this Touchable records touches around the list view to close it out in an intuitive way
 					style={[
 						// {backgroundColor: 'red'},
-						{ flexDirection: 'row' },
+						{ flexDirection: "row" },
 						(expandBackgroundTouchCollector && { height: responsiveHeight(65), top: -responsiveHeight(15) }),
 					]}
 					activeOpacity={1}
@@ -85,7 +85,7 @@ export default class IngredientAutoComplete extends React.Component {
 				>
 					<View
 						style={[styles.nameAndUnitsContainer,
-						(Platform.OS == 'ios' && { zIndex: (ingredientsLength - index) }),
+						(Platform.OS == "ios" && { zIndex: (ingredientsLength - index) }),
 						(expandBackgroundTouchCollector && { top: responsiveHeight(15) }),
 						]}
 					>
@@ -97,7 +97,7 @@ export default class IngredientAutoComplete extends React.Component {
 						>
 							<Autocomplete
 								data={autocompleteList}
-								defaultValue={''}
+								defaultValue={""}
 								// onChange={(e) => this.props.updateIngredientEntry(ingredientIndex, e.nativeEvent.text, ingredient.quantity, ingredient.unit)}
 								renderItem={e => this.renderAutoIngredientsListItem(e, ingredientIndex, ingredient)}
 								keyExtractor={(item) => item.id.toString()}
@@ -112,7 +112,7 @@ export default class IngredientAutoComplete extends React.Component {
 								// style={styles.autoCompleteInput}
 								// onFocus={() => this.props.thisAutocompleteIsFocused(index)}
 								// onBlur={() => this.props.thisAutocompleteIsFocused(null)}
-								flatListProps={{ nestedScrollEnabled: true, keyboardShouldPersistTaps: 'always' }}
+								flatListProps={{ nestedScrollEnabled: true, keyboardShouldPersistTaps: "always" }}
 								renderTextInput={this.renderTextInput}
 							/>
 						</View>
