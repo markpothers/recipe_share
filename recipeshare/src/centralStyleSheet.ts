@@ -216,13 +216,6 @@ export const centralStyles = StyleSheet.create({
 		overflow: "hidden",
 		// backgroundColor: 'yellow',
 	},
-	dynamicMenuButtonContainer: {
-		width: responsiveWidth(15),
-		justifyContent: "center",
-		alignItems: "center",
-		//backgroundColor: '#fff59b30',
-
-	},
 	dynamicMenuButton: {
 		height: "105%",
 		width: "105%",

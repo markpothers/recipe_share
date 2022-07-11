@@ -1,14 +1,13 @@
-import React from 'react';
-import { ScrollView, View, Text, TouchableOpacity, Image } from 'react-native'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import { deleteToken } from '../src/auxFunctions/saveLoadToken'
-// import { DrawerItems, SafeAreaView } from 'react-navigation';
-import { styles } from './drawerStyleSheet'
-import { connect } from 'react-redux'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
-import { DrawerContentScrollView } from '@react-navigation/drawer';
-import * as Device from 'expo-device';
+import React from "react";
+import { ScrollView, View, Text, TouchableOpacity, Image } from "react-native"
+import AsyncStorage from "@react-native-async-storage/async-storage"
+import { deleteToken } from "../src/auxFunctions/saveLoadToken"
+import { styles } from "./drawerStyleSheet"
+import { connect } from "react-redux"
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+import { DrawerContentScrollView } from "@react-navigation/drawer";
+import * as Device from "expo-device";
 
 const mapStateToProps = (state) => ({
 	loggedInChef: state.loggedInChef,
@@ -33,7 +32,7 @@ export default (connect(mapStateToProps, mapDispatchToProps)(
 
 		logout = () => {
 			deleteToken()
-			AsyncStorage.removeItem('chef', () => {
+			AsyncStorage.removeItem("chef", () => {
 				this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: false })
 			})
 		}
@@ -44,25 +43,25 @@ export default (connect(mapStateToProps, mapDispatchToProps)(
 					<View style={[styles.mainPageContainer, { height: responsiveHeight(90) }]}>
 						<View style={styles.headerContainer}>
 							<View style={styles.headerTopContainer}>
-								<Image style={styles.logo} resizeMode="contain" source={require('../src/dataComponents/greenLogo.png')} />
+								<Image style={styles.logo} resizeMode="contain" source={require("../src/dataComponents/greenLogo.png")} />
 							</View>
 						</View>
 						<View style={styles.horizontalRule}></View>
 						<ScrollView style={styles.routesContainer}>
-							<TouchableOpacity style={styles.routeLink} onPress={() => this.props.navigation.navigate('MyRecipeBook')}>
+							<TouchableOpacity style={styles.routeLink} onPress={() => this.props.navigation.navigate("MyRecipeBookCover")}>
 								<Icon name='book-open-page-variant' size={responsiveHeight(3.5)} style={styles.icon} />
 								<View style={styles.routeNameContainer}>
 									<Text style={[styles.routeName, { fontSize: this.state.isTablet ? responsiveFontSize(2) : responsiveFontSize(2.7) }]} maxFontSizeMultiplier={2}>My recipe book</Text>
 								</View>
 							</TouchableOpacity>
-							<TouchableOpacity style={styles.routeLink} onPress={() => this.props.navigation.navigate('BrowseRecipes')}>
+							<TouchableOpacity style={styles.routeLink} onPress={() => this.props.navigation.navigate("BrowseRecipesCover")}>
 								<Icon name='food' size={responsiveHeight(3.5)} style={styles.icon} />
 								<View style={styles.routeNameContainer}>
 									<Text style={[styles.routeName, { fontSize: this.state.isTablet ? responsiveFontSize(2) : responsiveFontSize(2.7) }]} maxFontSizeMultiplier={2}>All recipes {"&"} chefs</Text>
 								</View>
 							</TouchableOpacity>
 
-							<TouchableOpacity style={styles.routeLink} onPress={() => this.props.navigation.navigate('Profile')}>
+							<TouchableOpacity style={styles.routeLink} onPress={() => this.props.navigation.navigate("ProfileCover")}>
 								<Icon name='account' size={responsiveHeight(3.5)} style={styles.icon} />
 								<View style={styles.routeNameContainer}>
 									<Text style={[styles.routeName, { fontSize: this.state.isTablet ? responsiveFontSize(2) : responsiveFontSize(2.7) }]} maxFontSizeMultiplier={2}>My profile</Text>
@@ -73,11 +72,11 @@ export default (connect(mapStateToProps, mapDispatchToProps)(
 						<View style={styles.bottomContainer}>
 							<View style={styles.bottomLeftContainer}>
 								<Text style={[styles.userNameHeader, { fontSize: this.state.isTablet ? responsiveFontSize(1.7) : responsiveFontSize(2.5) }]} maxFontSizeMultiplier={1.5}>Logged in as:</Text>
-								<TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')}>
+								<TouchableOpacity onPress={() => this.props.navigation.navigate("Profile")}>
 									<Text style={[styles.userName, { fontSize: this.state.isTablet ? responsiveFontSize(1.9) : responsiveFontSize(2.9) }]} maxFontSizeMultiplier={1.5}>{this.props.loggedInChef.username}</Text>
 								</TouchableOpacity>
 							</View>
-							<TouchableOpacity style={styles.bottomRightContainer} onPress={() => this.props.navigation.navigate('Profile')}>
+							<TouchableOpacity style={styles.bottomRightContainer} onPress={() => this.props.navigation.navigate("Profile")}>
 								<AvatarImage image_url={this.props.loggedInChef.image_url} />
 							</TouchableOpacity>
 						</View>

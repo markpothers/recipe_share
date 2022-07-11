@@ -1,16 +1,9 @@
 import React from "react";
-// import { Platform, Text, View, ImageBackground } from 'react-native';
-// import { createStackNavigator, createBottomTabNavigator, createMaterialTopTabNavigator, createDrawerNavigator } from 'react-navigation';
-// import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-// import ChefDetailsScreen from '../src/chefDetails/chefDetails'
-// import NewRecipeScreen from '../src/newRecipe/newRecipe'
 import RecipesList from "../src/recipeLists/RecipesList";
 import ChefList from "../src/chefLists/ChefList";
-// import { styles } from './navigationStyleSheet'
 
 export class ChefFeedScreen extends React.Component {
 	render() {
-		// console.log(this.props)
 		return <RecipesList {...this.props} listChoice={"chef_feed"} respondToListScroll={this.props.screenProps} />;
 	}
 }

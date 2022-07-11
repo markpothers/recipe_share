@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react"
-import { Platform } from "react-native"
 import RecipeDetailsScreen from "../src/recipeDetails/recipeDetails"
 import ChefDetailsScreen from "../src/chefDetails/chefDetails"
 import NewRecipeScreen from "../src/newRecipe/newRecipe"
@@ -11,6 +10,7 @@ import { createStackNavigator } from "@react-navigation/stack"
 import { centralStyles } from "../src/centralStyleSheet" //eslint-disable-line no-unused-vars
 import DynamicMenu from "../src/dynamicMenu/DynamicMenu"
 import AppHeaderRight from "./appHeaderRight"
+import AppHeaderLeft from "./appHeaderLeft";
 
 const Tab = createMaterialTopTabNavigator()
 
@@ -30,7 +30,6 @@ const BrowseRecipesTabs = (props) => {
 	)
 
 	const addDynamicMenuButtonsToHeader = () => {
-		// console.log(this.props.route)
 		props.navigation.setOptions({
 			headerRight: Object.assign(() => <AppHeaderRight buttonAction={setDynamicMenuShowing}/>, { displayName: "HeaderRight" }),
 		})
@@ -53,30 +52,28 @@ const BrowseRecipesTabs = (props) => {
 		<React.Fragment>
 			{dynamicMenuShowing && renderDynamicMenu()}
 			<Tab.Navigator
-				lazy={true}
-				tabBarOptions={{
-					style: {
-						backgroundColor: "#104e01"
-					},
-					labelStyle: {
-						textTransform: "none",
-						fontSize: responsiveFontSize(2)
-					},
-					activeTintColor: "#fff59b",
-					inactiveTintColor: "#fff59b",
-					tabStyle: {
-						width: responsiveWidth(35),
-						height: responsiveHeight(8),
-						paddingTop: 0,
-						paddingBottom: 0,
-					},
-					indicatorStyle: {
+				screenOptions={() => ({
+					tabBarActiveTintColor: "#fff59b",
+					tabBarInactiveTintColor: "#fff59b",
+					tabBarIndicatorStyle: {
 						backgroundColor: "#fff59b",
 					},
-					scrollEnabled: true,
-					showIcon: false,
-					allowFontScaling: false
-				}}
+					tabBarScrollEnabled: true,
+					tabBarShowIcon: false,
+					tabBarAllowFontScaling: false,
+					tabBarStyle: {
+						backgroundColor: "#104e01",
+					},
+					tabBarLabelStyle: {
+						textTransform: "none",
+						fontSize: responsiveFontSize(2),
+					},
+					tabBarItemStyle: {
+						width: responsiveWidth(35),
+						height: responsiveHeight(8),
+					},
+					lazy: true
+				})}
 			>
 				<Tab.Screen
 					name="Newest Recipes"
@@ -101,129 +98,64 @@ const BrowseRecipesTabs = (props) => {
 	)
 }
 
-
-// const BrowseRecipesTabs = createMaterialTopTabNavigator({
-//   NewestRecipes:  {
-//     screen: NewestRecipesScreen,
-//     navigationOptions: {
-//       tabBarLabel: 'Newest Recipes',
-//     }
-//   },
-//   MostLikedRecipes:  {
-//     screen: MostLikedRecipesScreen,
-//     navigationOptions: {
-//       tabBarLabel: 'Most Liked Recipes',
-//     }
-//   },
-//   // MostMadeRecipes:  {
-//   //   screen: MostMadeRecipesScreen,
-//   //   navigationOptions: {
-//   //     tabBarLabel: 'Most Made Recipes',
-//   //   }
-//   // },
-//   NewestChefs:  {
-//     screen: NewestChefsScreen,
-//     navigationOptions: {
-//       tabBarLabel: 'Newest Chefs',
-//     },
-//   },
-//   MostLikedChefs: {
-//     screen: MostLikedChefsScreen,
-//     navigationOptions: {
-//       tabBarLabel: 'Most Liked Chefs',
-//     },
-//   },
-//   // MostMadeChefs:  {
-//   //   screen: MostMadeChefsScreen,
-//   //   navigationOptions: {
-//   //     tabBarLabel: 'Most Made Chefs',
-//   //   },
-//   // }
-// }, {
-//   initialLayout: {
-//     height: responsiveHeight(8),
-//     width: responsiveWidth(100)
-//   },
-//   lazy: true,
-//   tabBarOptions:{
-//     upperCaseLabel: false,
-//     scrollEnabled: true,
-//     allowFontScaling: false,
-//     // maxFontSizeMultiplier: 1,
-//     labelStyle: {
-//       fontSize: responsiveFontSize(2),
-//       color: '#fff59b'
-//     },
-//     tabStyle: {
-//       // width: 200,
-//       height: responsiveHeight(8),
-//       paddingTop: 0,
-//       paddingBottom: 0
-//     },
-//     style: {
-//       backgroundColor: '#104e01',
-//       // borderStyle: 'solid',
-//       // borderWidth: 2,
-//     },
-//     indicatorStyle: {
-//       backgroundColor: '#fff59b'
-//     }
-//   }
-// })
-
 const Stack = createStackNavigator()
 
 const BrowseRecipesStack = () => {
 	return (
 		<Stack.Navigator
 			initialRouteName="BrowseRecipes"
-			headerMode="screen"
 			screenOptions={{
+				headerMode: "screen",
 				headerStyle: {
 					backgroundColor: "#104e01",
-					height: responsiveHeight(9),
-					shadowOpacity: 0,
+					height: responsiveHeight(8),
 				},
 				headerTitleContainerStyle: {
-					left: 0,
-					height: responsiveHeight(8),
-					width: responsiveWidth(100),
-					zIndex: Platform.OS == "ios" ? -1 : null
+					marginLeft: 0,
+					marginRight: 0,
 				},
 				headerStatusBarHeight: 0,
 			}}
+			headerBackTitleVisible={false}
 		>
 			<Stack.Screen
 				name="BrowseRecipes"
 				initialParams={{ title: "Browse Recipes" }}
 				options={({ route }) => ({
-					headerLeft: null,
-					headerTitle: Object.assign((props) => <AppHeader {...props} route={route} />, { displayName: "Header" })
+					headerLeft: (props) => <AppHeaderLeft {...props} route={route} />,
+					headerTitleAlign: "center",
+					headerTitle: (props) => <AppHeader {...props} text={"Browse Recipes"} />,
 				})}
 				component={BrowseRecipesTabs}
 			/>
 			<Stack.Screen
 				name="RecipeDetails"
+				initialParams={{ title: "Recipe Details" }}
 				options={({ route }) => ({
-					headerLeft: null,
-					headerTitle: Object.assign((props) => <AppHeader {...props} text={"Recipe Details"} route={route} />, { displayName: "Header" })
+					headerLeft: (props) => <AppHeaderLeft {...props} route={route} />,
+					headerTitleAlign: "center",
+					headerTitle: (props) => <AppHeader {...props} text={"Recipe Details"} />,
 				})}
 				component={RecipeDetailsScreen}
 			/>
 			<Stack.Screen
 				name="NewRecipe"
+				initialParams={{ title: "Create a New Recipe" }}
 				options={({ route }) => ({
 					gestureEnabled: false,
-					headerLeft: null,
-					headerTitle: Object.assign((props) => <AppHeader {...props} text={"Create a New Recipe"} route={route} />, { displayName: "Header" })
+					headerLeft: (props) => <AppHeaderLeft {...props} route={route} />,
+					headerTitleAlign: "center",
+					headerTitle: (props) => <AppHeader {...props} text={"Create a New Recipe"} />,
 				})}
 				component={NewRecipeScreen}
 			/>
 			<Stack.Screen
 				name="ChefDetails"
+				initialParams={{ title: "Chef Details" }}
 				options={({ route }) => ({
-					headerLeft: null,
-					headerTitle: Object.assign((props) => <AppHeader {...props} text={"Chef Details"} route={route} />, { displayName: "Header" })
+					headerLeft: (props) => <AppHeaderLeft {...props} route={route} />,
+					headerTitleAlign: "center",
+					headerTitle: (props) => <AppHeader {...props} text={"Chef Details"} />,
 				})}
 				component={ChefDetailsScreen}
 			/>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Platform } from "react-native";
-// import { createStackNavigator, createBottomTabNavigator, createMaterialTopTabNavigator, createDrawerNavigator } from 'react-navigation';
 import RecipeDetailsScreen from "../src/recipeDetails/recipeDetails";
 import ChefDetailsScreen from "../src/chefDetails/chefDetails";
 import NewRecipeScreen from "../src/newRecipe/newRecipe";
@@ -15,9 +14,10 @@ import AppHeader from "./appHeader";
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-import { centralStyles } from "../src/centralStyleSheet"; //eslint-disable-line no-unused-vars
+// import { centralStyles } from "../src/centralStyleSheet"; //eslint-disable-line no-unused-vars
 import DynamicMenu from "../src/dynamicMenu/DynamicMenu";
 import AppHeaderRight from "./appHeaderRight";
+import AppHeaderLeft from "./appHeaderLeft";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -54,33 +54,28 @@ const MyRecipeBookTabs = (props) => {
 		<React.Fragment>
 			{dynamicMenuShowing && renderDynamicMenu()}
 			<Tab.Navigator
-				lazy={true}
-				tabBarOptions={{
-					style: {
-						backgroundColor: "#104e01",
-						// marginTop: -headerHeight
+				screenOptions={() => ({
+					tabBarActiveTintColor: "#fff59b",
+					tabBarInactiveTintColor: "#fff59b",
+					tabBarIndicatorStyle: {
+						backgroundColor: "#fff59b",
 					},
-					labelStyle: {
+					tabBarScrollEnabled: true,
+					tabBarShowIcon: false,
+					tabBarAllowFontScaling: false,
+					tabBarStyle: {
+						backgroundColor: "#104e01",
+					},
+					tabBarLabelStyle: {
 						textTransform: "none",
 						fontSize: responsiveFontSize(2),
 					},
-					activeTintColor: "#fff59b",
-					inactiveTintColor: "#fff59b",
-					tabStyle: {
+					tabBarItemStyle: {
 						width: responsiveWidth(35),
 						height: responsiveHeight(8),
-						paddingTop: 0,
-						paddingBottom: 0,
-						// borderWidth: 1,
-						// borderColor: 'orange'
 					},
-					indicatorStyle: {
-						backgroundColor: "#fff59b",
-					},
-					scrollEnabled: true,
-					showIcon: false,
-					allowFontScaling: false,
-				}}
+					lazy: true
+				})}
 			>
 				<Tab.Screen name="My Feed" component={ChefFeedScreen} />
 				<Tab.Screen name="My Recipes" component={MyRecipesScreen} />
@@ -97,102 +92,22 @@ const MyRecipeBookTabs = (props) => {
 	);
 };
 
-// const MyRecipeBookTabs = createMaterialTopTabNavigator({
-//   ChefFeed: {
-//     screen: ChefFeedScreen,
-//     navigationOptions: {
-//       tabBarLabel: 'My Feed',
-//     }
-//   },
-//   MyRecipes: {
-//     screen: MyRecipesScreen,
-//     navigationOptions: {
-//       tabBarLabel: 'My Recipes',
-//     }
-//   },
-//   MyLikedRecipes: {
-//     screen: MyLikedRecipesScreen,
-//     navigationOptions: {
-//       tabBarLabel: "Recipes I've liked",
-//     }
-//   },
-//   // MyMadeRecipes: {
-//   // screen: MyMadeRecipesScreen,
-//   //   navigationOptions: {
-//   //     tabBarLabel: "Recipes I've made",
-//   //   }
-//   // },
-//   ChefsFollowed: {
-//     screen: ChefsFollowedScreen,
-//     navigationOptions: {
-//       tabBarLabel: 'Chefs I follow',
-//     }
-//   },
-//   ChefsFollowing: {
-//     screen: ChefsFollowingScreen,
-//     navigationOptions: {
-//       tabBarLabel: 'Chefs following me',
-//     }
-//   }}, {
-//   initialLayout: {
-//     height: responsiveHeight(8),
-//     width: responsiveWidth(100)
-//   },
-//   lazy: true,
-//   tabBarOptions:{
-//     upperCaseLabel: false,
-//     scrollEnabled: true,
-//     allowFontScaling: false,
-//     // maxFontSizeMultiplier: 1,
-//     labelStyle: {
-//       fontSize: responsiveFontSize(2),
-//       color: '#fff59b'
-//     },
-//     tabStyle: {
-//       // width: 200,
-//       height: responsiveHeight(8),
-//       paddingTop: 0,
-//       paddingBottom: 0
-//     },
-//     style: {
-//       backgroundColor: '#104e01',
-//       // borderStyle: 'solid',
-//       // borderWidth: 2,
-//     },
-//     indicatorStyle: {
-//       backgroundColor: '#fff59b'
-//     }
-//   }
-// })
-
 const Stack = createStackNavigator();
 
 const MyRecipeBookStack = () => {
-	// console.log(MyRecipeBookTabs)
-	//   const props = {}
-
-	//   const screenOptions = {
-
-	//   }
-
 	return (
 		<Stack.Navigator
 			initialRouteName="MyRecipeBook"
 			// initialRouteName="NewRecipe"
-			headerMode="screen"
 			screenOptions={{
+				headerMode: "screen",
 				headerStyle: {
 					backgroundColor: "#104e01",
-					height: responsiveHeight(9),
-					shadowOpacity: 0,
+					height: responsiveHeight(8),
 				},
 				headerTitleContainerStyle: {
-					left: 0,
-					height: responsiveHeight(8),
-					width: responsiveWidth(100),
-					zIndex: Platform.OS == "ios" ? -1 : null,
-					// borderWidth: 1,
-					// borderColor: 'red'
+					marginLeft: 0,
+					marginRight: 0,
 				},
 				headerStatusBarHeight: 0,
 			}}
@@ -202,34 +117,30 @@ const MyRecipeBookStack = () => {
 				name="MyRecipeBook"
 				initialParams={{ title: "My Recipe Book" }}
 				options={({ route }) => ({
-					headerLeft: null,
-					headerTitle: Object.assign(
-						(props) => <AppHeader {...props} route={route} />,
-						{ displayName: "Header" }
-					),
+					headerLeft: (props) => <AppHeaderLeft {...props} route={route} />,
+					headerTitleAlign: "center",
+					headerTitle: (props) => <AppHeader {...props} text={"My Recipe Book"} />,
 				})}
 				component={MyRecipeBookTabs}
 			/>
 			<Stack.Screen
 				name="RecipeDetails"
+				initialParams={{ title: "Recipe Details" }}
 				options={({ route }) => ({
-					headerLeft: null,
-					headerTitle: Object.assign(
-						(props) => <AppHeader {...props} text={"Recipe Details"} route={route} />,
-						{ displayName: "Header" }
-					),
+					headerLeft: (props) => <AppHeaderLeft {...props} route={route} />,
+					headerTitleAlign: "center",
+					headerTitle: (props) => <AppHeader {...props} text={"Recipe Details"} />,
 				})}
 				component={RecipeDetailsScreen}
 			/>
 			<Stack.Screen
 				name="NewRecipe"
+				initialParams={{ title: "Create a New Recipe" }}
 				options={({ route }) => ({
 					gestureEnabled: false,
-					headerLeft: null,
-					headerTitle: Object.assign(
-						(props) => <AppHeader {...props } text={"Create a New Recipe"} route={route} />,
-						{ displayName: "Header" }
-					),
+					headerLeft: (props) => <AppHeaderLeft {...props} route={route} />,
+					headerTitleAlign: "center",
+					headerTitle: (props) => <AppHeader {...props} text={"Create a New Recipe"} />,
 				})}
 				component={NewRecipeScreen}
 			/>
@@ -237,53 +148,14 @@ const MyRecipeBookStack = () => {
 				name="ChefDetails"
 				initialParams={{ title: "Chef Details" }}
 				options={({ route }) => ({
-					headerLeft: null,
-					headerTitle: Object.assign(
-						(props) => <AppHeader {...props} route={route} />,
-						{ displayName: "Header" }
-					),
+					headerLeft: (props) => <AppHeaderLeft {...props} route={route} />,
+					headerTitleAlign: "center",
+					headerTitle: (props) => <AppHeader {...props} text={"Chef Details"} />,
 				})}
 				component={ChefDetailsScreen}
 			/>
 		</Stack.Navigator>
 	);
 };
-
-// const MyRecipeBookStack = createStackNavigator({
-//   // NewRecipe: NewRecipeScreen,
-//   MyRecipeBook: MyRecipeBookTabs,
-//   RecipeDetails: RecipeDetailsScreen,
-//   NewRecipe: NewRecipeScreen,
-//   ChefDetails: ChefDetailsScreen
-// },{
-//   defaultNavigationOptions: {
-//     headerTitle: <AppHeader text={"My Recipe Book"}/>,
-//     headerStyle: {    //styles possibly needed if app-wide styling doesn't work
-//       backgroundColor: '#104e01',
-//       // borderStyle: 'solid',
-//       // borderWidth: 2,
-//       height: 50,  // cannot be less than 24 as includes space for the notification bar
-//     },
-//     headerTintColor: '#fff59b',
-//     // headerTitleStyle: {
-//     //   fontWeight: 'bold',
-//     // },
-
-// }
-// });
-
-// MyRecipeBookStack.navigationOptions = {
-//   tabBarLabel: 'My recipe book',
-//   tabBarIcon: ({ focused }) => (
-//     <Icon size={responsiveHeight(4)} color="#8d8d8d"
-//       focused={focused}
-//       name={
-//         Platform.OS === 'ios'
-//           ? `ios-information-circle${focused ? '' : '-outline'}`
-//           : 'book-open-page-variant'
-//       }
-//     />
-//   ),
-// };
 
 export default MyRecipeBookStack;

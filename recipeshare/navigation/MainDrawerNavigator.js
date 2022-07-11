@@ -16,21 +16,21 @@ export default function MainDrawerNavigator(props){
 			drawerContent={(props) => <CustomDrawer {...props} setLoadedAndLoggedIn={setLoadedAndLoggedIn} />}
 		>
 			<Drawer.Screen
-				name="MyRecipeBook"
+				name="MyRecipeBookCover"
 				options={
 					{ headerShown: false }
 				}
 				component={MyRecipeBookStack}
 			/>
 			<Drawer.Screen
-				name="BrowseRecipes"
+				name="BrowseRecipesCover"
 				options={
 					{ headerShown: false }
 				}
 				component={BrowseRecipesStack}
 			/>
 			<Drawer.Screen
-				name="Profile"
+				name="ProfileCover"
 				options={
 					{ headerShown: false }
 				}

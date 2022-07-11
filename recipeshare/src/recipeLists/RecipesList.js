@@ -26,10 +26,10 @@ import NetInfo from "@react-native-community/netinfo";
 NetInfo.configure({ reachabilityShortTimeout: 5 }); //5ms
 import SearchBar from "../searchBar/SearchBar";
 import SearchBarClearButton from "../searchBar/SearchBarClearButton";
-import AppHeaderActionButton from "../../navigation/appHeaderActionButton";
 import { cuisines } from "../dataComponents/cuisines";
 import { serves } from "../dataComponents/serves";
 import { clearedFilters } from "../dataComponents/clearedFilters";
+import AppHeader from "../../navigation/appHeader";
 
 // import { apiCall } from '../auxFunctions/apiCall'
 
@@ -156,14 +156,17 @@ export class RecipesList extends React.Component {
 
 	setupHeaderScrollTopTopButton = () => {
 		const { routes } = this.props.navigation?.getParent()?.getState();
-		this.props.navigation.getParent().setOptions({
-			headerLeft: () => (
-				<AppHeaderActionButton
-					buttonAction={() => this.recipeFlatList.scrollToOffset({ offset: 0, animated: true })}
-					text={routes[routes.length - 1]?.params?.title}
-				/>
-			),
-		});
+		if (this.props.navigation.isFocused()) {
+			this.props.navigation.getParent().setOptions({
+				headerTitle: (props) => (
+					<AppHeader
+						{...props}
+						text={routes[routes.length - 1]?.params?.title}
+						buttonAction={() => this.recipeFlatList.scrollToOffset({ offset: 0, animated: true })}
+					/>
+				),
+			});
+		}
 	};
 
 	getQueryChefId = () => {

@@ -1,17 +1,9 @@
-import React, { useState } from 'react';
-// import { createAppContainer, createSwitchNavigator, createStackNavigator } from 'react-navigation';
-import LoginScreen from '../src/users/login'
-import CreateChef from '../src/users/createChef'
-import AppLoading from '../src/users/appLoading'
-// import { NavigationContainer, StackActions } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-
-//basically shows the loading screen which refers to Home or login.  Can move back and forth between login and new user.
-//New user logs straight in as we
-import MainDrawerNavigatorContainer from './MainDrawerNavigatorContainer'
-// const LoginStack = createStackNavigator({Login: LoginScreen})
-// const CreateChefStack = createStackNavigator({CreateChef: CreateChef})
-// const AppLoadingStack = createStackNavigator({AppLoading: AppLoading})
+import React, { useState } from "react";
+import LoginScreen from "../src/users/login"
+import CreateChef from "../src/users/createChef"
+import AppLoading from "../src/users/appLoading"
+import { createStackNavigator } from "@react-navigation/stack";
+import MainDrawerNavigatorContainer from "./MainDrawerNavigatorContainer"
 
 const Stack = createStackNavigator()
 
@@ -78,18 +70,3 @@ const AppNavigator = () => {
 }
 
 export default AppNavigator
-
-
-// export default createAppContainer(createSwitchNavigator(
-//   {
-//     Login: LoginStack,
-//     Home: MainDrawerNavigatorContainer,
-//     CreateChef: CreateChefStack,
-//     AppLoading: AppLoadingStack
-//   },
-//   {
-//     initialRouteName: 'AppLoading'
-//   }
-// ))
-
-// Read more at https://reactnavigation.org/docs/en/auth-flow.html

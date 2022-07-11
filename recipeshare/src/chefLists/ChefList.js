@@ -18,7 +18,7 @@ NetInfo.configure({ reachabilityShortTimeout: 5 }); //5ms
 import SearchBar from "../searchBar/SearchBar";
 import SearchBarClearButton from "../searchBar/SearchBarClearButton";
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
-import AppHeaderActionButton from "../../navigation/appHeaderActionButton";
+import AppHeader from "../../navigation/appHeader";
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
@@ -74,13 +74,13 @@ export default connect(
 		}
 
 		componentDidMount = async () => {
+			this.setupHeaderScrollTopTopButton();
 			this.setState({ awaitingServer: true }, async () => {
 				this.props.navigation.addListener("focus", this.respondToFocus);
 				// this.props.navigation.addListener("blur", this.respondToBlur);
 				await this.fetchChefList();
 				this.setState({ awaitingServer: false });
 			});
-			this.setupHeaderScrollTopTopButton();
 		};
 
 		componentWillUnmount = () => {
@@ -100,14 +100,17 @@ export default connect(
 
 		setupHeaderScrollTopTopButton = () => {
 			const { routes } = this.props.navigation?.getParent()?.getState();
-			this.props.navigation.getParent().setOptions({
-				headerLeft: () => (
-					<AppHeaderActionButton
-						buttonAction={() => this.chefFlatList.scrollToOffset({ offset: 0, animated: true })}
-						text={routes[routes.length - 1]?.params?.title}
-					/>
-				),
-			});
+			if (this.props.navigation.isFocused()) {
+				this.props.navigation.getParent().setOptions({
+					headerTitle: (props) => (
+						<AppHeader
+							{...props}
+							text={routes[routes.length - 1]?.params?.title}
+							buttonAction={() => this.chefFlatList.scrollToOffset({ offset: 0, animated: true })}
+						/>
+					),
+				});
+			}
 		};
 
 		getQueryChefId = () => {

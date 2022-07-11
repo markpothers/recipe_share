@@ -17,18 +17,21 @@ export const styles = StyleSheet.create({
 		// backgroundColor: '#104e01',
 	},
 	headerEnd: {
-		width: responsiveWidth(15),
+		width: "100%",
 		height: "100%",
 		justifyContent: "center",
 		alignItems: "center",
 		//borderWidth: 1,
-		//backgroundColor: '#fff59b30',
+		// backgroundColor: "blue",
+		// position: "absolute"
 	},
 	headerMiddle: {
-		// minWidth: responsiveWidth(70),
+		// width: responsiveWidth(0),
 		height: "100%",
 		justifyContent: "center",
-		// borderWidth: 1
+		// borderWidth: 1,
+		// backgroundColor: "red"
+		// backgroundColor: "#104e01",
 	},
 	headerDrawerButton: {
 		// borderWidth: 1,
@@ -45,21 +48,28 @@ export const styles = StyleSheet.create({
 	headerText: {
 		fontSize: responsiveFontSize(3.5),
 		color: "#fff59b",
-		marginLeft: responsiveWidth(3),
-	},
+		paddingLeft: responsiveWidth(3),
+		// borderWidth: 1,
+		// borderColor: "red",
+		width: responsiveWidth(70)
+		},
 	background: {
 		width: "100%",
 		height: "100%",
 	},
 	headerActionButton: {
+		backgroundColor: "#104e01",
 		// backgroundColor: "#fff59b30",
 		// borderWidth: 1,
 		// borderColor: 'blue',
-		width: responsiveWidth(68),
+		// width: responsiveWidth(68),
 		height: "80%",
-		zIndex: 1,
+		width: "80%",
+		// zIndex: 1,
 		borderRadius: responsiveWidth(1.5),
-		marginLeft: responsiveWidth(16),
+		// marginLeft: responsiveWidth(16),
 		justifyContent: "center",
+		alignItems: "center",
+
 	},
 });

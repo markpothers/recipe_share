@@ -1,7 +1,6 @@
-import React from 'react';
-// import { createStackNavigator, createBottomTabNavigator, createMaterialTopTabNavigator, createDrawerNavigator } from 'react-navigation';
-import RecipesList from '../src/recipeLists/RecipesList'
-import ChefList from '../src/chefLists/ChefList'
+import React from "react";
+import RecipesList from "../src/recipeLists/RecipesList"
+import ChefList from "../src/chefLists/ChefList"
 
 export class NewestRecipesScreen extends React.Component {
 	render() {
