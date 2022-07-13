@@ -115,8 +115,8 @@ const BrowseRecipesStack = () => {
 					marginRight: 0,
 				},
 				headerStatusBarHeight: 0,
+				headerBackTitleVisible: false
 			}}
-			headerBackTitleVisible={false}
 		>
 			<Stack.Screen
 				name="BrowseRecipes"
@@ -162,44 +162,5 @@ const BrowseRecipesStack = () => {
 		</Stack.Navigator>
 	)
 }
-
-
-// const BrowseRecipesStack = createStackNavigator({
-//   // NewRecipe: NewRecipeScreen,
-//   BrowseRecipes: BrowseRecipesTabs,
-//   RecipeDetails: RecipeDetailsScreen,
-//   NewRecipe: NewRecipeScreen,
-//   ChefDetails: ChefDetailsScreen
-// },{
-//   defaultNavigationOptions: {
-//     headerTitle: <AppHeader text={"Browse Recipes"}/>,
-//     // headerRight: null,
-//     headerStyle: {    //styles possibly needed if app-wide styling doesn't work
-//       backgroundColor: '#104e01',
-//       // borderStyle: 'solid',
-//       // borderWidth: 2,
-//       height: 50,  // cannot be less than 24 as includes space for the notification bar
-//     },
-//     headerTintColor: '#fff59b',
-//     // headerTitleStyle: {
-//     //   fontWeight: 'bold',
-//     // },
-
-// }
-// });
-
-// BrowseRecipesStack.navigationOptions = {
-//   tabBarLabel: 'Browse recipes',
-//   tabBarIcon: ({ focused }) => (
-//     <Icon size={responsiveHeight(4)} color="#8d8d8d"
-//       focused={focused}
-//       name={
-//         Platform.OS === 'ios'
-//           ? `ios-information-circle${focused ? '' : '-outline'}`
-//           : 'food-variant'
-//       }
-//     />
-//   ),
-// };
 
 export default BrowseRecipesStack

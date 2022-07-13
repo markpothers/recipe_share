@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Platform } from "react-native";
 import RecipeDetailsScreen from "../src/recipeDetails/recipeDetails";
 import ChefDetailsScreen from "../src/chefDetails/chefDetails";
 import NewRecipeScreen from "../src/newRecipe/newRecipe";
@@ -110,8 +109,8 @@ const MyRecipeBookStack = () => {
 					marginRight: 0,
 				},
 				headerStatusBarHeight: 0,
+				headerBackTitleVisible: false
 			}}
-			headerBackTitleVisible={false}
 		>
 			<Stack.Screen
 				name="MyRecipeBook"

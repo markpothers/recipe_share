@@ -25,8 +25,8 @@ const ProfileStack = (props) => {
 					marginRight: 0,
 				},
 				headerStatusBarHeight: 0,
+				headerBackTitleVisible: false
 			}}
-			headerBackTitleVisible={false}
 		>
 			<Stack.Screen
 				name="Profile"

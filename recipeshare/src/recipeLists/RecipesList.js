@@ -497,11 +497,6 @@ export class RecipesList extends React.Component {
 		}
 	};
 
-	// onScroll = (e) => {
-	//   e.persist()
-	//   this.props.respondToListScroll(e)
-	// }
-
 	updateAttributeCountInRecipeLists = (recipeId, attribute, toggle, diff) => {
 		let newAllRecipeLists = {};
 		Object.keys(this.props.allRecipeLists).forEach((list) => {
