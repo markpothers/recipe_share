@@ -101,11 +101,11 @@ const mapDispatchToProps = {
 			dispatch({ type: "SAVE_REMAINING_MAKE_PICS", makePics: makePics });
 		};
 	},
-	removeRecipeLikes: (remaining_likes, listType) => {
-		return (dispatch) => {
-			dispatch({ type: "REMOVE_RECIPE_LIKES", recipe_likes: remaining_likes, listType: listType });
-		};
-	},
+	// removeRecipeLikes: (remaining_likes, listType) => {
+	// 	return (dispatch) => {
+	// 		dispatch({ type: "REMOVE_RECIPE_LIKES", recipe_likes: remaining_likes, listType: listType });
+	// 	};
+	// },
 	storeChefDetails: (chef_details) => {
 		return (dispatch) => {
 			dispatch({ type: "STORE_CHEF_DETAILS", chefID: `chef${chef_details.chef.id}`, chef_details: chef_details });

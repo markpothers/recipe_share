@@ -19,7 +19,7 @@ import AppHeaderRight from "../../navigation/appHeaderRight"
 const mapStateToProps = (state) => ({
 	loggedInChef: state.loggedInChef,
 	allChefLists: state.allChefLists,
-	chefs_details: state.chefs_details,
+	chef_details: state.chef_details,
 })
 
 const mapDispatchToProps = {
@@ -62,7 +62,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		generateHeaderButtonList = async () => {
-			const chefDetails = this.props.chefs_details[`chef${this.props.route.params.chefID}`]
+			const chefDetails = this.props.chef_details[`chef${this.props.route.params.chefID}`]
 			let headerButtons = [
 				{
 					icon: !chefDetails.chef_followed ? "account-multiple-plus-outline" : "account-multiple-minus",
@@ -109,8 +109,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		componentDidUpdate = async (prevProps) => {
-			const chefDetails = this.props.chefs_details[`chef${this.props.route.params.chefID}`]
-			const prevChefDetails = prevProps.chefs_details[`chef${this.props.route.params.chefID}`]
+			const chefDetails = this.props.chef_details[`chef${this.props.route.params.chefID}`]
+			const prevChefDetails = prevProps.chef_details[`chef${this.props.route.params.chefID}`]
 
 			if (chefDetails.chef_followed != prevChefDetails.chef_followed) {
 				await this.generateHeaderButtonList()
@@ -136,7 +136,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		renderChefImage = () => {
-			const chef = this.props.chefs_details[`chef${this.props.route.params.chefID}`]
+			const chef = this.props.chef_details[`chef${this.props.route.params.chefID}`]
 			if (chef != undefined) {
 				if (chef.image_url != null) {
 					return <Image style={{ width: "100%", height: "100%" }} source={{ uri: chef.image_url }}></Image>
@@ -187,7 +187,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						const followPosted = await postFollow(this.props.loggedInChef.id, this.props.route.params.chefID, this.props.loggedInChef.auth_token)
 						if (followPosted) {
 							this.updateAttributeCountInChefLists(this.props.route.params.chefID, "followers", "user_chef_following", 1)
-							let newFollowers = this.props.chefs_details[`chef${this.props.route.params.chefID}`].followers + 1
+							let newFollowers = this.props.chef_details[`chef${this.props.route.params.chefID}`].followers + 1
 							this.props.storeNewFollowers(this.props.route.params.chefID, newFollowers)
 						}
 					} catch (e) {
@@ -209,7 +209,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						const followPosted = await destroyFollow(this.props.loggedInChef.id, this.props.route.params.chefID, this.props.loggedInChef.auth_token)
 						if (followPosted) {
 							this.updateAttributeCountInChefLists(this.props.route.params.chefID, "followers", "user_chef_following", -1)
-							let newFollowers = this.props.chefs_details[`chef${this.props.route.params.chefID}`].followers - 1
+							let newFollowers = this.props.chef_details[`chef${this.props.route.params.chefID}`].followers - 1
 							this.props.storeNewFollowers(this.props.route.params.chefID, newFollowers)
 						}
 					} catch (e) {
@@ -224,8 +224,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		}
 
 		render() {
-			if (this.props.chefs_details[`chef${this.props.route.params.chefID}`] !== undefined) {
-				const chef_details = this.props.chefs_details[`chef${this.props.route.params.chefID}`]
+			if (this.props.chef_details[`chef${this.props.route.params.chefID}`] !== undefined) {
+				const chef_details = this.props.chef_details[`chef${this.props.route.params.chefID}`]
 				// console.log(chef_details)
 				return (
 					<SpinachAppContainer awaitingServer={this.state.awaitingServer}>

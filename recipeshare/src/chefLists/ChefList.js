@@ -25,7 +25,7 @@ const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 const mapStateToProps = (state) => ({
 	allChefLists: state.allChefLists,
 	loggedInChef: state.loggedInChef,
-	chefs_details: state.chefs_details,
+	chef_details: state.chef_details,
 });
 
 const mapDispatchToProps = {

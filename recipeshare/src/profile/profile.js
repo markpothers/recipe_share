@@ -22,7 +22,7 @@ import AppHeaderRight from "../../navigation/appHeaderRight";
 
 const mapStateToProps = (state) => ({
 	loggedInChef: state.loggedInChef,
-	chefs_details: state.chefs_details,
+	chef_details: state.chef_details,
 	imageBase64: state.newUserDetails.image_url,
 	stayingLoggedIn: state.stayLoggedIn,
 });
@@ -257,10 +257,10 @@ export default connect(
 			} else if (this.state.imageFileUri != "DELETED" && this.state.imageFileUri != "") {
 				imageSource = this.state.imageFileUri;
 			} else if (
-				typeof this.props.chefs_details[`chef${this.props.loggedInChef.id}`].chef == "object" &&
-				this.props.chefs_details[`chef${this.props.loggedInChef.id}`].chef.image_url?.length > 0
+				typeof this.props.chef_details[`chef${this.props.loggedInChef.id}`].chef == "object" &&
+				this.props.chef_details[`chef${this.props.loggedInChef.id}`].chef.image_url?.length > 0
 			) {
-				imageSource = this.props.chefs_details[`chef${this.props.loggedInChef.id}`].chef.image_url;
+				imageSource = this.props.chef_details[`chef${this.props.loggedInChef.id}`].chef.image_url;
 			}
 			return (
 				<PicSourceChooser
@@ -275,7 +275,7 @@ export default connect(
 		};
 
 		renderChefEditor = () => {
-			const chef_details = this.props.chefs_details[`chef${this.props.loggedInChef.id}`];
+			const chef_details = this.props.chef_details[`chef${this.props.loggedInChef.id}`];
 			return (
 				<ChefEditor
 					editingChef={this.editingChef}
@@ -389,8 +389,8 @@ export default connect(
 		// }
 
 		render() {
-			if (this.props.chefs_details[`chef${this.props.loggedInChef.id}`] !== undefined) {
-				const chef_details = this.props.chefs_details[`chef${this.props.loggedInChef.id}`];
+			if (this.props.chef_details[`chef${this.props.loggedInChef.id}`] !== undefined) {
+				const chef_details = this.props.chef_details[`chef${this.props.loggedInChef.id}`];
 				// console.log(chef_details.chef)
 				return (
 					<SpinachAppContainer awaitingServer={this.state.awaitingServer} scrollingEnabled={true}>

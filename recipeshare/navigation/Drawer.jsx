@@ -3,15 +3,15 @@ import { ScrollView, View, Text, TouchableOpacity, Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { deleteToken } from "../src/auxFunctions/saveLoadToken";
 import { styles } from "./drawerStyleSheet";
-import { useSelector } from "react-redux";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 import * as Device from "expo-device";
+import { useAppSelector } from "../src/redux/hooks";
 
 const CustomDrawer = (props) => {
 	const [isTablet, setIsTablet] = useState(false);
-	const loggedInChef = useSelector((state) => state.loggedInChef);
+	const loggedInChef = useAppSelector((state) => state.loggedInChef);
 
 	useEffect(() => {
 		const getDeviceType = async () => {
