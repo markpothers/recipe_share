@@ -1,5 +1,7 @@
 import { RootState } from "./types"
 
+// this is the original manual reducer from before implementing redux toolkit
+// keeping for now until the transition
 const reducer = (currentState: RootState, action: {type: String} & Record<string, any>) => {
 	switch (action.type) {
 		case "UPDATE_SINGLE_RECIPE_LIST":
@@ -61,14 +63,14 @@ const reducer = (currentState: RootState, action: {type: String} & Record<string
 			// return { ...currentState, recipes_details: { ...currentState.recipes_details, [action.listType]: { ...currentState.recipes_details[action.listType], recipe_likes: action.recipe_likes } } }
 		case "STORE_NEW_FOLLOWERS":
 			return { ...currentState, chef_details: { ...currentState.chef_details, [action.chefID]: { ...currentState.chef_details[action.chefID], followers: action.followers, chef_followed: !currentState.chef_details[action.chefID].chef_followed } } }
-		case "LOG_IN_CHEF":
-			// console.log("logging in chef")
-			return {
-				...currentState, loggedInChef: {
-					id: action.id,
-					username: action.username,
-				}
-			}
+		// case "LOG_IN_CHEF":
+		// 	// console.log("logging in chef")
+		// 	return {
+		// 		...currentState, loggedInChef: {
+		// 			id: action.id,
+		// 			username: action.username,
+		// 		}
+		// 	}
 		case "UPDATE_LOGGED_IN_CHEF":
 			// console.log("updating logged in chef")
 			return {
@@ -104,15 +106,15 @@ const reducer = (currentState: RootState, action: {type: String} & Record<string
 			// return { ...currentState, filterCuisines: { ...currentState.filterCuisines, [action.listChoice]: action.cuisine } }
 		// case "SET_RECIPES_LIST_SERVES":
 			// return { ...currentState, serves: action.serves }
-		case "TOGGLE_NEW_RECIPE_FILTER_CATEGORY":
+		// case "TOGGLE_NEW_RECIPE_FILTER_CATEGORY":
 			// console.log(action.chef_details)
-			return { ...currentState, newRecipeDetails: { ...currentState.newRecipeDetails, filter_settings: { ...currentState.newRecipeDetails.filter_settings, [action.category]: action.value } } }
-		case "CLEAR_NEW_RECIPE_FILTERS":
-			return { ...currentState, newRecipeDetails: { ...currentState.newRecipeDetails, filter_settings: action.clearedFilters, cuisine: "Any", serves: "Any" } }
-		case "SET_NEW_RECIPE_CUISINE":
-			return { ...currentState, newRecipeDetails: { ...currentState.newRecipeDetails, cuisine: action.cuisine } }
-		case "SET_NEW_RECIPE_SERVES":
-			return { ...currentState, newRecipeDetails: { ...currentState.newRecipeDetails, serves: action.serves } }
+			// return { ...currentState, newRecipeDetails: { ...currentState.newRecipeDetails, filter_settings: { ...currentState.newRecipeDetails.filter_settings, [action.category]: action.value } } }
+		// case "CLEAR_NEW_RECIPE_FILTERS":
+			// return { ...currentState, newRecipeDetails: { ...currentState.newRecipeDetails, filter_settings: action.clearedFilters, cuisine: "Any", serves: "Any" } }
+		// case "SET_NEW_RECIPE_CUISINE":
+			// return { ...currentState, newRecipeDetails: { ...currentState.newRecipeDetails, cuisine: action.cuisine } }
+		// case "SET_NEW_RECIPE_SERVES":
+			// return { ...currentState, newRecipeDetails: { ...currentState.newRecipeDetails, serves: action.serves } }
 		case "STAY_LOGGED_IN":
 			return { ...currentState, stayLoggedIn: action.value }
 		default:

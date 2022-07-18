@@ -224,7 +224,7 @@ export class RecipesList extends React.Component {
 					switch (e.name) {
 						case "Logout":
 							{
-								this.props.navigation.navigate("Profile", {
+								this.props.navigation.navigate("ProfileCover", {
 									screen: "Profile",
 									params: { logout: true },
 								});
@@ -279,7 +279,7 @@ export class RecipesList extends React.Component {
 			this.props.updateSingleRecipeList(this.props.route.key, [...this.getRecipeList(), ...result.recipes]);
 		} catch (e) {
 			if (e.name === "Logout") {
-				this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } });
+				this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
 			}
 			//console.log('failed to get ADDITIONAL recipes')
 			//console.log(e)
@@ -318,7 +318,7 @@ export class RecipesList extends React.Component {
 			switch (e.name) {
 				case "Logout":
 					{
-						this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } });
+						this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
 					}
 					break;
 				default:
@@ -364,7 +364,7 @@ export class RecipesList extends React.Component {
 				}
 			} catch (e) {
 				if (e.name === "Logout") {
-					this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } });
+					this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
 				}
 				// console.log('looking for local recipes')
 				AsyncStorage.getItem("localRecipeDetails", (err, res) => {
@@ -418,7 +418,7 @@ export class RecipesList extends React.Component {
 				}
 			} catch (e) {
 				if (e.name === "Logout") {
-					this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } });
+					this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
 				}
 				// console.log('looking for local chefs')
 				AsyncStorage.getItem("localChefDetails", (err, res) => {
@@ -530,7 +530,7 @@ export class RecipesList extends React.Component {
 					}
 				} catch (e) {
 					if (e.name === "Logout") {
-						this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } });
+						this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
 					}
 					this.setState((state) => ({ dataICantGet: [...state.dataICantGet, recipeID] }));
 				}
@@ -557,7 +557,7 @@ export class RecipesList extends React.Component {
 					}
 				} catch (e) {
 					if (e.name === "Logout") {
-						this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } });
+						this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
 					}
 					await this.setState((state) => ({ dataICantGet: [...state.dataICantGet, recipeID] }));
 				}
@@ -583,7 +583,7 @@ export class RecipesList extends React.Component {
 					}
 				} catch (e) {
 					if (e.name === "Logout") {
-						this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } });
+						this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
 					}
 					await this.setState((state) => ({ dataICantGet: [...state.dataICantGet, recipeID] }));
 				}
@@ -610,7 +610,7 @@ export class RecipesList extends React.Component {
 					}
 				} catch (e) {
 					if (e.name === "Logout") {
-						this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } });
+						this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
 					}
 					await this.setState((state) => ({ dataICantGet: [...state.dataICantGet, recipeID] }));
 				}
@@ -637,7 +637,7 @@ export class RecipesList extends React.Component {
 					}
 				} catch (e) {
 					if (e.name === "Logout") {
-						this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } });
+						this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
 					}
 					await this.setState((state) => ({ dataICantGet: [...state.dataICantGet, recipeID] }));
 				}

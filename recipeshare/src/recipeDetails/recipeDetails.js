@@ -346,7 +346,10 @@ export default connect(
 						}
 					} catch (e) {
 						if (e.name === "Logout") {
-							this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } });
+							this.props.navigation.navigate("ProfileCover", {
+								screen: "Profile",
+								params: { logout: true },
+							});
 						}
 						// console.log('looking for local chefs')
 						AsyncStorage.getItem("localChefDetails", (err, res) => {
@@ -610,7 +613,10 @@ export default connect(
 						}
 					} catch (e) {
 						if (e.name === "Logout") {
-							this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } });
+							this.props.navigation.navigate("ProfileCover", {
+								screen: "Profile",
+								params: { logout: true },
+							});
 						}
 						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e });
 					}
@@ -642,7 +648,10 @@ export default connect(
 						}
 					} catch (e) {
 						if (e.name === "Logout") {
-							this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } });
+							this.props.navigation.navigate("ProfileCover", {
+								screen: "Profile",
+								params: { logout: true },
+							});
 						}
 						// console.log(e)
 						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e });
@@ -675,7 +684,10 @@ export default connect(
 						}
 					} catch (e) {
 						if (e.name === "Logout") {
-							this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } });
+							this.props.navigation.navigate("ProfileCover", {
+								screen: "Profile",
+								params: { logout: true },
+							});
 						}
 						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e });
 					}
@@ -707,7 +719,10 @@ export default connect(
 						}
 					} catch (e) {
 						if (e.name === "Logout") {
-							this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } });
+							this.props.navigation.navigate("ProfileCover", {
+								screen: "Profile",
+								params: { logout: true },
+							});
 						}
 						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e });
 					}
@@ -739,7 +754,10 @@ export default connect(
 						}
 					} catch (e) {
 						if (e.name === "Logout") {
-							this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } });
+							this.props.navigation.navigate("ProfileCover", {
+								screen: "Profile",
+								params: { logout: true },
+							});
 						}
 						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e });
 					}
@@ -790,7 +808,7 @@ export default connect(
 							}
 						} catch (e) {
 							if (e.name === "Logout") {
-								this.props.navigation.navigate("Profile", {
+								this.props.navigation.navigate("ProfileCover", {
 									screen: "Profile",
 									params: { logout: true },
 								});
@@ -826,7 +844,10 @@ export default connect(
 						this.setState({ deleteMakePicPopUpShowing: false });
 					} catch (e) {
 						if (e.name === "Logout") {
-							this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } });
+							this.props.navigation.navigate("ProfileCover", {
+								screen: "Profile",
+								params: { logout: true },
+							});
 						}
 						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e });
 					}
@@ -884,7 +905,7 @@ export default connect(
 					}
 				} catch (e) {
 					if (e.name === "Logout") {
-						this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } });
+						this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
 					}
 					this.setState({ renderOfflineMessage: true, offlineDiagnostics: e });
 				}
@@ -924,7 +945,10 @@ export default connect(
 						this.setState({ deleteCommentPopUpShowing: false });
 					} catch (e) {
 						if (e.name === "Logout") {
-							this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } });
+							this.props.navigation.navigate("ProfileCover", {
+								screen: "Profile",
+								params: { logout: true },
+							});
 						}
 						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e });
 					}

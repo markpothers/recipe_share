@@ -151,7 +151,7 @@ export default connect(
 					);
 				} catch (e) {
 					if (e.name === "Logout") {
-						this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } });
+						this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
 					}
 					if (this.getChefList()?.length == 0) {
 						this.loadChefsLocally();
@@ -179,7 +179,7 @@ export default connect(
 				]);
 			} catch (e) {
 				if (e.name === "Logout") {
-					this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } });
+					this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
 				}
 				// console.log('failed to get ADDITIONAL chefs')
 			}
@@ -247,7 +247,7 @@ export default connect(
 						}
 					} catch (e) {
 						if (e.name === "Logout") {
-							this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } });
+							this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
 						}
 						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e });
 					}
@@ -273,7 +273,7 @@ export default connect(
 						}
 					} catch (e) {
 						if (e.name === "Logout") {
-							this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } });
+							this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
 						}
 						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e });
 					}
@@ -311,7 +311,7 @@ export default connect(
 					}
 				} catch (e) {
 					if (e.name === "Logout") {
-						this.props.navigation.navigate("Profile", { screen: "Profile", params: { logout: true } });
+						this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
 					}
 					// console.log('looking for local chefs')
 					AsyncStorage.getItem("localChefDetails", (err, res) => {

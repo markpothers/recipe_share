@@ -4,24 +4,33 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { loadToken } from "../auxFunctions/saveLoadToken";
 import { styles } from "./usersStyleSheet";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { LoginChef } from "../centralTypes";
 
 type OwnProps = {
 	setLoadedAndLoggedIn: (loadedAndLoggedIn: { loaded: boolean; loggedIn: boolean }) => void;
 };
 
 export default function AppLoading({ setLoadedAndLoggedIn }: OwnProps) {
-	const stayLoggedIn = useAppSelector(state => state.stayLoggedIn);
+	const stayLoggedIn = useAppSelector((state) => state.stayLoggedIn);
 	const dispatch = useAppDispatch();
 
 	const setStayLoggedIn = useCallback(
-		(value) => {
+		(value: boolean) => {
 			dispatch({ type: "STAY_LOGGED_IN", value: value });
 		},
 		[dispatch]
 	);
 
 	const updateLoggedInChefInState = useCallback(
-		(id, e_mail, username, auth_token, image_url, is_admin, is_member) => {
+		(
+			id: number,
+			e_mail: string,
+			username: string,
+			auth_token: string,
+			image_url: string,
+			is_admin: boolean,
+			is_member: boolean
+		) => {
 			dispatch({
 				type: "UPDATE_LOGGED_IN_CHEF",
 				id: id,
@@ -40,7 +49,7 @@ export default function AppLoading({ setLoadedAndLoggedIn }: OwnProps) {
 		const checkLoggedIn = async () => {
 			const token = await loadToken();
 			if (token) {
-				const storedChef = JSON.parse(await AsyncStorage.getItem("chef"));
+				const storedChef: LoginChef = JSON.parse(await AsyncStorage.getItem("chef"));
 				if (storedChef != null) {
 					const { id, e_mail, username, auth_token, image_url, is_admin, is_member } = storedChef;
 					storedChef.auth_token = token;

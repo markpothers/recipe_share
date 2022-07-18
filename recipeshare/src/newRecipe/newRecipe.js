@@ -470,7 +470,7 @@ export default connect(
 							}
 						} catch (e) {
 							if (e.name === "Logout") {
-								this.props.navigation.navigate("Profile", {
+								this.props.navigation.navigate("ProfileCover", {
 									screen: "Profile",
 									params: { logout: true }
 								})
@@ -544,7 +544,7 @@ export default connect(
 							}
 						} catch (e) {
 							if (e.name === "Logout") {
-								this.props.navigation.navigate("Profile", {
+								this.props.navigation.navigate("ProfileCover", {
 									screen: "Profile",
 									params: { logout: true }
 								})

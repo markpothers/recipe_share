@@ -2,11 +2,13 @@ import { Chef, Cuisine, Difficulty, FilterSettings, ListChef, ListRecipe, Recipe
 
 export type RootState = {
 	loggedInChef: {
-		id: string;
+		id: number;
+		e_mail: string;
 		username: string;
 		auth_token: string;
 		image_url: string;
 		is_admin: boolean;
+		is_member: boolean;
 	},
 	allRecipeLists: Record<string, ListRecipe[]>;
 	allChefLists: Record<string, ListChef[]>;
@@ -62,4 +64,30 @@ export type RootState = {
 	// },
 	// serves: Serves;
 	stayLoggedIn: boolean;
+}
+
+export type ParameterContent = {
+	parameter: string;
+	content: string;
+}
+
+export type UpdateSingleRecipeList = {
+	listKey: string;
+	recipeList: ListRecipe[];
+} ;
+
+
+export type UpdateSingleChefList = {
+	listKey: string;
+	chefList: ListChef[];
+}
+
+export type StoreChefDetails = {
+	chefId: number;
+	chef_details: Chef;
+}
+
+export type StoreNewFollowers = {
+	chefID: number;
+	followers: number;
 }

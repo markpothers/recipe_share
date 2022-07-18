@@ -1,205 +1,25 @@
 import { createStore, compose, applyMiddleware } from "redux";
 import ReduxThunk from "redux-thunk";
 import reducer from "./reducer";
-import { RootState } from "./types";
-
-//exported ONLY for unit testing
-export const initialState: RootState = {
-	loggedInChef: {
-		id: "",
-		username: "",
-		auth_token: "",
-		image_url: "",
-		is_admin: false,
-	},
-	allRecipeLists: {},
-	allChefLists: {},
-	recipe_details: {
-		chef_id: 0,
-		chef_username: "",
-		comments: [],
-		ingredient_uses: [],
-		ingredients: [],
-		instructions: [],
-		instruction_images: [],
-		likeable: true,
-		make_pics: [],
-		make_pics_chefs: [],
-		makeable: true,
-		re_shares: 0,
-		recipe: {
-			acknowledgement: null,
-			acknowledgement_link: null,
-			chef_id: 0,
-			cook_time: 0,
-			created_at: "",
-			cuisine: "Any",
-			description: "",
-			difficulty: 0,
-			hidden: false,
-			id: 0,
-			name: "",
-			prep_time: 0,
-			serves: "Any",
-			show_blog_preview: false,
-			time: 0,
-			total_time: 0,
-			updated_at: "",
-			Breakfast: false,
-			Lunch: false,
-			Dinner: false,
-			Chicken: false,
-			"Red meat": false,
-			Seafood: false,
-			Vegetarian: false,
-			Salad: false,
-			Vegan: false,
-			Soup: false,
-			Dessert: false,
-			Side: false,
-			"Whole 30": false,
-			Paleo: false,
-			"Freezer meal": false,
-			Keto: false,
-			Weeknight: false,
-			Weekend: false,
-			"Gluten free": false,
-			Bread: false,
-			"Dairy free": false,
-			"White meat": false,
-		},
-		recipe_images: [],
-		recipe_likes: 0,
-		recipe_makes: 0,
-		shareable: true,
-	},
-	newRecipeDetails: {
-		name: "",
-		instructions: ["", "", "", ""],
-		instructionImages: [],
-		ingredients: {
-			ingredient1: {
-				name: "",
-				quantity: "",
-				unit: "Oz",
-			},
-		},
-		difficulty: "0",
-		time: "00:15",
-		imageBase64: "",
-		filter_settings: {
-			Breakfast: false,
-			Lunch: false,
-			Dinner: false,
-			Chicken: false,
-			"Red meat": false,
-			Seafood: false,
-			Vegetarian: false,
-			Salad: false,
-			Vegan: false,
-			Soup: false,
-			Dessert: false,
-			Side: false,
-			"Whole 30": false,
-			Paleo: false,
-			"Freezer meal": false,
-			Keto: false,
-			Weeknight: false,
-			Weekend: false,
-			"Gluten free": false,
-			Bread: false,
-			"Dairy free": false,
-			"White meat": false,
-		},
-		cuisine: "Any",
-		serves: "Any",
-		acknowledgement: "",
-	},
-	newUserDetails: {
-		first_name: "",
-		last_name: "",
-		username: "",
-		e_mail: "",
-		password: "",
-		password_confirmation: "",
-		country: "United States",
-		image_url: "",
-		profile_text: "",
-	},
-	loginUserDetails: {
-		e_mail: "",
-		password: "",
-	},
-	chef_details: {
-		chef: {
-			country: "United States",
-			created_at: "",
-			id: 0,
-			image_url: null,
-			profile_text: "",
-			username: "",
-		},
-		chef_commented: false,
-		chef_followed: false,
-		chef_liked: false,
-		chef_made: false,
-		chef_make_piced: false,
-		chef_shared: false,
-		comments: 0,
-		comments_received: 0,
-		followers: 0,
-		following: 0,
-		make_pics: 0,
-		make_pics_received: 0,
-		re_shares: 0,
-		re_shares_received: 0,
-		recipe_likes: 0,
-		recipe_likes_received: 0,
-		recipes: 0,
-	},
-	// filter_settings: {
-	// 	Breakfast: false,
-	// 	Lunch: false,
-	// 	Dinner: false,
-	// 	Chicken: false,
-	// 	"Red meat": false,
-	// 	Seafood: false,
-	// 	Vegetarian: false,
-	// 	Salad: false,
-	// 	Vegan: false,
-	// 	Soup: false,
-	// 	Dessert: false,
-	// 	Side: false,
-	// 	"Whole 30": false,
-	// 	Paleo: false,
-	// 	"Freezer meal": false,
-	// 	Keto: false,
-	// 	Weeknight: false,
-	// 	Weekend: false,
-	// 	"Gluten free": false,
-	// 	Bread: false,
-	// 	"Dairy free": false,
-	// 	"White meat": false,
-	// },
-	// filterCuisines: {
-	// 	all: "Any",
-	// 	chef: "Any",
-	// 	chef_feed: "Any",
-	// 	chef_liked: "Any",
-	// 	chef_made: "Any",
-	// 	global_ranks: "Any",
-	// 	most_liked: "Any",
-	// 	most_made: "Any"
-	// },
-	// serves: "Any",
-	stayLoggedIn: false,
-};
+import { initialRootState } from "./initialRootState";
 
 export const middleware = compose(
 	//exported ONLY for unit testing
 	applyMiddleware(ReduxThunk)
 );
 
-export const store = createStore(reducer, initialState, middleware);
-
+export const store = createStore(reducer, initialRootState, middleware);
 export type AppDispatch = typeof store.dispatch;
+
+
+// to use Redux Toolkit, use the below
+// import { configureStore } from "@reduxjs/toolkit"
+// import rootReducer  from "./rootReducer"
+
+// export const store = configureStore({
+// 	reducer: {
+// 		root: rootReducer
+// 	}
+// })
+
+// export type AppDispatch = typeof store.dispatch;
