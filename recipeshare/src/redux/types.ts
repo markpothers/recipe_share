@@ -1,6 +1,6 @@
 import { Chef, Cuisine, Difficulty, FilterSettings, ListChef, ListRecipe, Recipe, RecipeIngredient, Serves } from "../centralTypes";
 
-export type RootState = {
+export type RootStateType = {
 	loggedInChef: {
 		id: number;
 		e_mail: string;
@@ -50,8 +50,8 @@ export type RootState = {
 	// 	chef_followees: [],
 	// 	chef_followers: []
 	// },
-	chef_details: Chef;
-	// filter_settings: FilterSettings;
+	chef_details: Record<string, Chef>;
+	filter_settings: FilterSettings;
 	// filterCuisines: {
 	// 	all: Cuisine;
 	// 	chef: Cuisine;
@@ -83,7 +83,7 @@ export type UpdateSingleChefList = {
 }
 
 export type StoreChefDetails = {
-	chefId: number;
+	chefID: number;
 	chef_details: Chef;
 }
 

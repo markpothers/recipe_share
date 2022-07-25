@@ -1,43 +1,46 @@
-import React from 'react'
-import { Text, TouchableOpacity, TextInput, View, Linking, Keyboard } from 'react-native'
-import { countries } from '../dataComponents/countries'
-import { connect } from 'react-redux'
-import { postChef } from '../fetches/postChef'
-import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import PicSourceChooser from '../picSourceChooser/picSourceChooser'
-import { TextPopUp } from '../textPopUp/textPopUp'
-import DualOSPicker from '../dualOSPicker/DualOSPicker'
-import { termsAndConditions } from '../dataComponents/termsAndConditions'
-import { privacyPolicy } from '../dataComponents/privacyPolicy'
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions' //eslint-disable-line no-unused-vars
-import SpinachAppContainer from '../spinachAppContainer/SpinachAppContainer'
-import OfflineMessage from '../offlineMessage/offlineMessage'
-import SwitchSized from '../customComponents/switchSized/switchSized'
-import { apiCall } from '../auxFunctions/apiCall'
+import React from "react"
+import { Text, TouchableOpacity, TextInput, View, Linking, Keyboard } from "react-native"
+import { countries } from "../dataComponents/countries"
+import { connect } from "react-redux"
+import { postChef } from "../fetches/postChef"
+import { centralStyles } from "../centralStyleSheet" //eslint-disable-line no-unused-vars
+import Icon from "react-native-vector-icons/MaterialCommunityIcons"
+import PicSourceChooser from "../picSourceChooser/picSourceChooser"
+import { TextPopUp } from "../textPopUp/textPopUp"
+import DualOSPicker from "../dualOSPicker/DualOSPicker"
+import { termsAndConditions } from "../dataComponents/termsAndConditions"
+import { privacyPolicy } from "../dataComponents/privacyPolicy"
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions" //eslint-disable-line no-unused-vars
+import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer"
+import OfflineMessage from "../offlineMessage/offlineMessage"
+import SwitchSized from "../customComponents/switchSized/switchSized"
+import { apiCall } from "../auxFunctions/apiCall"
+import { RootState, updateLoginUserDetails, updateNewUserDetails } from "../redux"
 
 const mapStateToProps = (state) => ({
-	first_name: state.newUserDetails.first_name,
-	last_name: state.newUserDetails.last_name,
-	username: state.newUserDetails.username,
-	e_mail: state.newUserDetails.e_mail,
-	password: state.newUserDetails.password,
-	password_confirmation: state.newUserDetails.password_confirmation,
-	country: state.newUserDetails.country,
-	image_url: state.newUserDetails.image_url,
-	profile_text: state.newUserDetails.profile_text,
-	loggedInChef: state.loggedInChef
+	first_name: state.root.newUserDetails.first_name,
+	last_name: state.root.newUserDetails.last_name,
+	username: state.root.newUserDetails.username,
+	e_mail: state.root.newUserDetails.e_mail,
+	password: state.root.newUserDetails.password,
+	password_confirmation: state.root.newUserDetails.password_confirmation,
+	country: state.root.newUserDetails.country,
+	image_url: state.root.newUserDetails.image_url,
+	profile_text: state.root.newUserDetails.profile_text,
+	loggedInChef: state.root.loggedInChef
 })
 
 const mapDispatchToProps = {
 	saveChefDetails: (parameter, content) => {
 		return dispatch => {
-			dispatch({ type: 'UPDATE_NEW_USER_DETAILS', parameter: parameter, content: content })
+			// dispatch({ type: "UPDATE_NEW_USER_DETAILS", parameter: parameter, content: content })
+			dispatch(updateNewUserDetails({parameter: parameter, content: content }))
 		}
 	},
 	saveLoginChefDetails: (parameter, content) => {
 		return dispatch => {
-			dispatch({ type: 'UPDATE_LOGIN_USER_DETAILS', parameter: parameter, content: content })
+			// dispatch({ type: "UPDATE_LOGIN_USER_DETAILS", parameter: parameter, content: content })
+			dispatch(updateLoginUserDetails({ parameter: parameter, content: content }))
 		}
 	},
 }
@@ -57,7 +60,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			thanksForRegisteringPopUpShowing: false,
 			passwordVisible: false,
 			renderOfflineMessage: false,
-			offlineDiagnostics: '',
+			offlineDiagnostics: "",
 		}
 
 		componentDidMount = () => {
@@ -74,7 +77,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		handleTextInput = (text, parameter) => {
 			this.props.saveChefDetails(parameter, text)
-			if (parameter == 'e_mail') {
+			if (parameter == "e_mail") {
 				this.props.saveLoginChefDetails(parameter, text)
 			}
 		}
@@ -84,7 +87,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 		sourceChosen = () => { this.setState({ choosingPicture: false }) }
 
 		renderPictureChooser = () => {
-			let imageSource = this.props.image_url
+			const imageSource = this.props.image_url
 			return (
 				<PicSourceChooser
 					saveImage={this.saveImage}
@@ -109,7 +112,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 		submitChef = async () => {
 			this.setState({ awaitingServer: true }, async () => {
-				let response = await apiCall(postChef, this.props.username, this.props.e_mail, this.props.password, this.props.password_confirmation, this.props.country, this.props.image_url, this.props.profile_text)
+				const response = await apiCall(postChef, this.props.username, this.props.e_mail, this.props.password, this.props.password_confirmation, this.props.country, this.props.image_url, this.props.profile_text)
 				if (response.fail) {
 					this.setState({
 						renderOfflineMessage: true,
@@ -123,7 +126,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					})
 				} else {
 					this.setState({ awaitingServer: false }, () => {
-						this.props.navigation.navigate('Login', { successfulRegistration: true })
+						this.props.navigation.navigate("Login", { successfulRegistration: true })
 					})
 				}
 			})
@@ -136,7 +139,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					<Text
 						maxFontSizeMultiplier={2}
 						style={centralStyles.formErrorText}
-						testID={'emailError'}
+						testID={"emailError"}
 					>{error}</Text>
 				</View>
 			))
@@ -149,7 +152,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					<Text
 						maxFontSizeMultiplier={2}
 						style={centralStyles.formErrorText}
-						testID={'usernameError'}
+						testID={"usernameError"}
 					>{error}</Text>
 				</View>
 			))
@@ -162,7 +165,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					<Text
 						maxFontSizeMultiplier={2}
 						style={centralStyles.formErrorText}
-						testID={'passwordError'}
+						testID={"passwordError"}
 					>{error}</Text>
 				</View>
 			))
@@ -192,7 +195,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 						{this.state.renderOfflineMessage && (
 							<OfflineMessage
 								message={`Sorry, can't do right now.${"\n"}You appear to be offline.`}
-								topOffset={'10%'}
+								topOffset={"10%"}
 								clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
 								//diagnostics={this.state.offlineDiagnostics}
 							/>)
@@ -221,7 +224,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											autoCompleteType="email"
 											textContentType="username"
 											onChangeText={text => this.handleTextInput(text, "e_mail")}
-											testID={'emailInput'}
+											testID={"emailInput"}
 										/>
 									</View>
 								</View>
@@ -238,7 +241,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											placeholder="username"
 											autoCapitalize="none"
 											onChangeText={text => this.handleTextInput(text, "username")}
-											testID={'usernameInput'}
+											testID={"usernameInput"}
 										/>
 									</View>
 								</View>
@@ -253,7 +256,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											options={countries}
 											selectedChoice={this.props.country}
 											textAlignment={"flex-start"}
-											testID={'countryPicker'}
+											testID={"countryPicker"}
 										/>
 									</View>
 								</View>
@@ -270,7 +273,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											multiline={true}
 											numberOfLines={3}
 											onChangeText={text => this.handleTextInput(text, "profile_text")}
-											testID={'profileInput'}
+											testID={"profileInput"}
 										/>
 									</View>
 								</View>
@@ -289,12 +292,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											autoCompleteType="password"
 											secureTextEntry={!this.state.passwordVisible}
 											onChangeText={text => this.handleTextInput(text, "password")}
-											testID={'passwordInput'}
+											testID={"passwordInput"}
 										/>
 										<TouchableOpacity
 											style={centralStyles.hiddenToggle}
 											onPress={() => this.setState({ passwordVisible: !this.state.passwordVisible })}
-											testID={'visibilityButton'}
+											testID={"visibilityButton"}
 										>
 											<Icon
 												style={centralStyles.hiddenToggleIcon}
@@ -319,7 +322,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											autoCapitalize="none"
 											secureTextEntry={!this.state.passwordVisible}
 											onChangeText={text => this.handleTextInput(text, "password_confirmation")}
-											testID={'passwordConfirmationInput'}
+											testID={"passwordConfirmationInput"}
 										/>
 									</View>
 								</View>
@@ -329,40 +332,40 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
 									<TouchableOpacity
-										style={[centralStyles.yellowRectangleButton, { maxWidth: responsiveWidth(49), width:responsiveWidth(49), justifyContent: 'flex-start', paddingHorizontal: responsiveWidth(1) }]}
+										style={[centralStyles.yellowRectangleButton, { maxWidth: responsiveWidth(49), width:responsiveWidth(49), justifyContent: "flex-start", paddingHorizontal: responsiveWidth(1) }]}
 										activeOpacity={0.7}
 										onPress={() => this.setState({ viewingTermsAndConditions: true })}
-										testID={'viewTAndCButton'}
+										testID={"viewTAndCButton"}
 									>
-										<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>{`View Terms & Conditions`}</Text>
+										<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>{"View Terms & Conditions"}</Text>
 									</TouchableOpacity>
 									<TouchableOpacity
 										activeOpacity={1}
 										style={[centralStyles.yellowRectangleButton, { minWidth: responsiveWidth(30), maxWidth: responsiveWidth(30) }]}
 										onPress={this.handleTandCSwitch}
-										testID={'tAndCAgreedButton'}
+										testID={"tAndCAgreedButton"}
 									>
-										<View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row', flexWrap: 'wrap' }}>
+										<View style={{ justifyContent: "center", alignItems: "center", flexDirection: "row", flexWrap: "wrap" }}>
 											<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>I accept</Text>
 											<SwitchSized
 												value={this.state.tAndCAgreed}
 												onValueChange={this.handleTandCSwitch}
-												testID={'tAndCAgreedToggle'}
+												testID={"tAndCAgreedToggle"}
 											/>
 										</View>
 									</TouchableOpacity>
 									{this.state.viewingTermsAndConditions && (
 										<TextPopUp
 											close={() => this.setState({ viewingTermsAndConditions: false })}
-											title={`Terms and Conditions`}
+											title={"Terms and Conditions"}
 											text={termsAndConditions}
 										>
-											<View style={{ flexDirection: 'row', marginLeft: responsiveWidth(2) }}>
+											<View style={{ flexDirection: "row", marginLeft: responsiveWidth(2) }}>
 												<TouchableOpacity
-													onPress={() => Linking.openURL('mailto:admin@recipe-share.com?subject=Terms%20And%20Conditions%20Question')}
-													testID={'emailTAndCButton'}
+													onPress={() => Linking.openURL("mailto:admin@recipe-share.com?subject=Terms%20And%20Conditions%20Question")}
+													testID={"emailTAndCButton"}
 												>
-													<Text style={{ color: 'blue' }}>admin@recipe-share.com{"\r\r"}</Text>
+													<Text style={{ color: "blue" }}>admin@recipe-share.com{"\r\r"}</Text>
 												</TouchableOpacity>
 											</View>
 										</TextPopUp>
@@ -373,40 +376,40 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
 									<TouchableOpacity
-										style={[centralStyles.yellowRectangleButton, { maxWidth: responsiveWidth(49), width:responsiveWidth(49), justifyContent: 'flex-start', paddingHorizontal: responsiveWidth(1) }]}
+										style={[centralStyles.yellowRectangleButton, { maxWidth: responsiveWidth(49), width:responsiveWidth(49), justifyContent: "flex-start", paddingHorizontal: responsiveWidth(1) }]}
 										activeOpacity={0.7}
 										onPress={() => this.setState({ viewingPrivacyPolicy: true })}
-										testID={'viewPrivacyPolicyButton'}
+										testID={"viewPrivacyPolicyButton"}
 									>
-										<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>{`View Privacy Policy`}</Text>
+										<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>{"View Privacy Policy"}</Text>
 									</TouchableOpacity>
 									<TouchableOpacity
 										activeOpacity={1}
 										style={[centralStyles.yellowRectangleButton, { minWidth: responsiveWidth(30), maxWidth: responsiveWidth(30) }]}
 										onPress={this.handlePrivacyPolicySwitch}
-										testID={'privacyPolicyAgreedButton'}
+										testID={"privacyPolicyAgreedButton"}
 									>
-										<View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row', flexWrap: 'wrap' }}>
+										<View style={{ justifyContent: "center", alignItems: "center", flexDirection: "row", flexWrap: "wrap" }}>
 											<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>I accept</Text>
 											<SwitchSized
 												value={this.state.privacyPolicyAgreed}
 												onValueChange={this.handlePrivacyPolicySwitch}
-												testID={'privacyPolicyAgreedToggle'}
+												testID={"privacyPolicyAgreedToggle"}
 											/>
 										</View>
 									</TouchableOpacity>
 									{this.state.viewingPrivacyPolicy && (
 										<TextPopUp
 											close={() => this.setState({ viewingPrivacyPolicy: false })}
-											title={`Privacy Policy`}
+											title={"Privacy Policy"}
 											text={privacyPolicy}
 										>
-											<View style={{ flexDirection: 'row', marginLeft: responsiveWidth(2) }}>
+											<View style={{ flexDirection: "row", marginLeft: responsiveWidth(2) }}>
 												<Text>* By email: </Text>
 												<TouchableOpacity
-													onPress={() => Linking.openURL('mailto:admin@recipe-share.com?subject=Privacy%20Policy%20Question')}
-													testID={'emailPrivacyPolicyButton'}
-												><Text style={{ color: 'blue' }}>admin@recipe-share.com{"\r\r"}</Text>
+													onPress={() => Linking.openURL("mailto:admin@recipe-share.com?subject=Privacy%20Policy%20Question")}
+													testID={"emailPrivacyPolicyButton"}
+												><Text style={{ color: "blue" }}>admin@recipe-share.com{"\r\r"}</Text>
 												</TouchableOpacity>
 											</View>
 										</TextPopUp>
@@ -417,10 +420,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 							<View style={centralStyles.formSection}>
 								<View style={centralStyles.formInputContainer}>
 									<TouchableOpacity
-										style={[centralStyles.yellowRectangleButton, { justifyContent: 'center', maxWidth: '100%', width: '100%' }]}
+										style={[centralStyles.yellowRectangleButton, { justifyContent: "center", maxWidth: "100%", width: "100%" }]}
 										activeOpacity={0.7}
 										onPress={this.choosePicture}
-										testID={'pictureButton'}
+										testID={"pictureButton"}
 									>
 										<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='camera'></Icon>
 										<Text maxFontSizeMultiplier={2} style={[centralStyles.greenButtonText, { marginLeft: responsiveWidth(3) }]}>Add profile picture</Text>
@@ -433,8 +436,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 									<TouchableOpacity
 										style={centralStyles.yellowRectangleButton}
 										activeOpacity={0.7}
-										onPress={() => this.props.navigation.navigate('Login')}
-										testID={'loginButton'}
+										onPress={() => this.props.navigation.navigate("Login")}
+										testID={"loginButton"}
 									>
 										<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='login'></Icon>
 										<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>Return to{"\n"} login screen</Text>

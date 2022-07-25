@@ -30,6 +30,7 @@ import { cuisines } from "../dataComponents/cuisines";
 import { serves } from "../dataComponents/serves";
 import { clearedFilters } from "../dataComponents/clearedFilters";
 import AppHeader from "../../navigation/appHeader";
+import { storeRecipeDetails, updateAllRecipeLists, updateSingleRecipeList, storeChefDetails } from "../redux";
 
 // import { apiCall } from '../auxFunctions/apiCall'
 
@@ -40,30 +41,34 @@ const startingOffset = 0;
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
 const mapStateToProps = (state) => ({
-	allRecipeLists: state.allRecipeLists,
-	recipes_details: state.recipes_details,
-	loggedInChef: state.loggedInChef,
+	allRecipeLists: state.root.allRecipeLists,
+	recipes_details: state.root.recipes_details,
+	loggedInChef: state.root.loggedInChef,
 });
 
 const mapDispatchToProps = {
 	updateSingleRecipeList: (listKey, recipeList) => {
 		return (dispatch) => {
-			dispatch({ type: "UPDATE_SINGLE_RECIPE_LIST", listKey: listKey, recipeList: recipeList });
+			// dispatch({ type: "UPDATE_SINGLE_RECIPE_LIST", listKey: listKey, recipeList: recipeList });
+			dispatch(updateSingleRecipeList({ listKey: listKey, recipeList: recipeList }));
 		};
 	},
 	updateAllRecipeLists: (allRecipeLists) => {
 		return (dispatch) => {
-			dispatch({ type: "UPDATE_ALL_RECIPE_LISTS", allRecipeLists: allRecipeLists });
+			// dispatch({ type: "UPDATE_ALL_RECIPE_LISTS", allRecipeLists: allRecipeLists });
+			dispatch(updateAllRecipeLists(allRecipeLists));
 		};
 	},
 	storeRecipeDetails: (recipe_details) => {
 		return (dispatch) => {
-			dispatch({ type: "STORE_RECIPE_DETAILS", recipe_details: recipe_details });
+			// dispatch({ type: "STORE_RECIPE_DETAILS", recipe_details: recipe_details });
+			dispatch(storeRecipeDetails(recipe_details));
 		};
 	},
 	storeChefDetails: (chef_details) => {
 		return (dispatch) => {
-			dispatch({ type: "STORE_CHEF_DETAILS", chefID: `chef${chef_details.chef.id}`, chef_details: chef_details });
+			// dispatch({ type: "STORE_CHEF_DETAILS", chefID: `chef${chef_details.chef.id}`, chef_details: chef_details });
+			dispatch(storeChefDetails({ chefID: `chef${chef_details.chef.id}`, chef_details: chef_details }));
 		};
 	},
 };
@@ -498,13 +503,14 @@ export class RecipesList extends React.Component {
 	};
 
 	updateAttributeCountInRecipeLists = (recipeId, attribute, toggle, diff) => {
-		let newAllRecipeLists = {};
+		const newAllRecipeLists = {};
 		Object.keys(this.props.allRecipeLists).forEach((list) => {
-			let recipeList = this.props.allRecipeLists[list].map((recipe) => {
+			const recipeList = this.props.allRecipeLists[list].map((recipe) => {
 				if (recipe.id == recipeId) {
-					recipe[attribute] += diff;
-					recipe[toggle] = diff > 0 ? 1 : 0;
-					return recipe;
+					const newRecipe = { ...recipe };
+					newRecipe[attribute] += diff;
+					newRecipe[toggle] = diff > 0 ? 1 : 0;
+					return newRecipe;
 				} else {
 					return recipe;
 				}

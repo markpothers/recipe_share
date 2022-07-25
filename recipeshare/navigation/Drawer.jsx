@@ -11,7 +11,7 @@ import { useAppSelector } from "../src/redux/hooks";
 
 const CustomDrawer = (props) => {
 	const [isTablet, setIsTablet] = useState(false);
-	const loggedInChef = useAppSelector((state) => state.loggedInChef);
+	const loggedInChef = useAppSelector((state) => state.root.loggedInChef);
 
 	useEffect(() => {
 		const getDeviceType = async () => {

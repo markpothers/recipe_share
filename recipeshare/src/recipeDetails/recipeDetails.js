@@ -44,61 +44,83 @@ import { getTimeStringFromMinutes } from "../auxFunctions/getTimeStringFromMinut
 import { getChefDetails } from "../fetches/getChefDetails";
 import AppHeaderRight from "../../navigation/appHeaderRight";
 import { WebView } from "react-native-webview";
+import {
+	addRecipeLike,
+	addRecipeMake,
+	addMakePic,
+	addMakePicChef,
+	addRecipeReShare,
+	removeRecipeLike,
+	saveRemainingMakePics,
+	storeChefDetails,
+	updateAllRecipeLists,
+	updateComments,
+	removeRecipeReShare,
+} from "../redux";
 
 const defaultRecipeImage = require("../dataComponents/default-recipe.jpg");
 let keepAwakeTimer;
 
 const mapStateToProps = (state) => ({
-	allRecipeLists: state.allRecipeLists,
-	recipe_details: state.recipe_details,
-	loggedInChef: state.loggedInChef,
-	filter_settings: state.filter_settings,
+	allRecipeLists: state.root.allRecipeLists,
+	recipe_details: state.root.recipe_details,
+	loggedInChef: state.root.loggedInChef,
+	filter_settings: state.root.filter_settings,
 });
 
 const mapDispatchToProps = {
 	addRecipeLike: () => {
 		return (dispatch) => {
-			dispatch({ type: "ADD_RECIPE_LIKE" });
+			// dispatch({ type: "ADD_RECIPE_LIKE" });
+			dispatch(addRecipeLike());
 		};
 	},
 	removeRecipeLike: () => {
 		return (dispatch) => {
-			dispatch({ type: "REMOVE_RECIPE_LIKE" });
+			// dispatch({ type: "REMOVE_RECIPE_LIKE" });
+			dispatch(removeRecipeLike());
 		};
 	},
 	addRecipeMake: () => {
 		return (dispatch) => {
-			dispatch({ type: "ADD_RECIPE_MAKE" });
+			// dispatch({ type: "ADD_RECIPE_MAKE" });
+			dispatch(addRecipeMake());
 		};
 	},
 	updateComments: (comments) => {
 		return (dispatch) => {
-			dispatch({ type: "UPDATE_COMMENTS", comments: comments });
+			// dispatch({ type: "UPDATE_COMMENTS", comments: comments });
+			dispatch(updateComments(comments));
 		};
 	},
 	addReShare: () => {
 		return (dispatch) => {
-			dispatch({ type: "ADD_RECIPE_SHARE" });
+			// dispatch({ type: "ADD_RECIPE_SHARE" });
+			dispatch(addRecipeReShare());
 		};
 	},
 	removeReShare: () => {
 		return (dispatch) => {
-			dispatch({ type: "REMOVE_RECIPE_SHARE" });
+			// dispatch({ type: "REMOVE_RECIPE_SHARE" });
+			dispatch(removeRecipeReShare());
 		};
 	},
 	addMakePic: (makePic) => {
 		return (dispatch) => {
-			dispatch({ type: "ADD_MAKE_PIC", makePic: makePic });
+			// dispatch({ type: "ADD_MAKE_PIC", makePic: makePic });
+			dispatch(addMakePic(makePic));
 		};
 	},
 	addMakePicChef: (makePicChef) => {
 		return (dispatch) => {
-			dispatch({ type: "ADD_MAKE_PIC_CHEF", makePicChef: makePicChef });
+			// dispatch({ type: "ADD_MAKE_PIC_CHEF", makePicChef: makePicChef });
+			dispatch(addMakePicChef(makePicChef));
 		};
 	},
 	saveRemainingMakePics: (makePics) => {
 		return (dispatch) => {
-			dispatch({ type: "SAVE_REMAINING_MAKE_PICS", makePics: makePics });
+			// dispatch({ type: "SAVE_REMAINING_MAKE_PICS", makePics: makePics });
+			dispatch(saveRemainingMakePics(makePics));
 		};
 	},
 	// removeRecipeLikes: (remaining_likes, listType) => {
@@ -108,12 +130,14 @@ const mapDispatchToProps = {
 	// },
 	storeChefDetails: (chef_details) => {
 		return (dispatch) => {
-			dispatch({ type: "STORE_CHEF_DETAILS", chefID: `chef${chef_details.chef.id}`, chef_details: chef_details });
+			// dispatch({ type: "STORE_CHEF_DETAILS", chefID: `chef${chef_details.chef.id}`, chef_details: chef_details });
+			dispatch(storeChefDetails({ chefID: `chef${chef_details.chef.id}`, chef_details: chef_details }));
 		};
 	},
 	updateAllRecipeLists: (allRecipeLists) => {
 		return (dispatch) => {
-			dispatch({ type: "UPDATE_ALL_RECIPE_LISTS", allRecipeLists: allRecipeLists });
+			// dispatch({ type: "UPDATE_ALL_RECIPE_LISTS", allRecipeLists: allRecipeLists });
+			dispatch(updateAllRecipeLists(allRecipeLists));
 		};
 	},
 	// storeRecipeDetails: (recipe_details) => {
@@ -580,9 +604,10 @@ export default connect(
 			Object.keys(this.props.allRecipeLists).forEach((list) => {
 				let recipeList = this.props.allRecipeLists[list].map((recipe) => {
 					if (recipe.id == recipeId) {
-						recipe[attribute] += diff;
-						recipe[toggle] = diff > 0 ? 1 : 0;
-						return recipe;
+						const newRecipe = { ...recipe };
+						newRecipe[attribute] += diff;
+						newRecipe[toggle] = diff > 0 ? 1 : 0;
+						return newRecipe;
 					} else {
 						return recipe;
 					}

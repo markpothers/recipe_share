@@ -50,7 +50,7 @@ const testing = __DEV__ ? true : false
 const testRecipe = shortTestRecipe
 
 const mapStateToProps = (state) => ({
-	loggedInChef: state.loggedInChef
+	loggedInChef: state.root.loggedInChef
 })
 
 const mapDispatchToProps = {}

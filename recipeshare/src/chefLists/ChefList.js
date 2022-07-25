@@ -19,29 +19,33 @@ import SearchBar from "../searchBar/SearchBar";
 import SearchBarClearButton from "../searchBar/SearchBarClearButton";
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 import AppHeader from "../../navigation/appHeader";
+import { storeChefDetails, updateAllChefLists, updateSingleChefList } from "../redux";
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
 const mapStateToProps = (state) => ({
-	allChefLists: state.allChefLists,
-	loggedInChef: state.loggedInChef,
-	chef_details: state.chef_details,
+	allChefLists: state.root.allChefLists,
+	loggedInChef: state.root.loggedInChef,
+	chef_details: state.root.chef_details,
 });
 
 const mapDispatchToProps = {
 	updateSingleChefList: (listKey, chefList) => {
 		return (dispatch) => {
-			dispatch({ type: "UPDATE_SINGLE_CHEF_LIST", listKey: listKey, chefList: chefList });
+			// dispatch({ type: "UPDATE_SINGLE_CHEF_LIST", listKey: listKey, chefList: chefList });
+			dispatch(updateSingleChefList({listKey: listKey, chefList: chefList }));
 		};
 	},
 	updateAllChefLists: (allChefLists) => {
 		return (dispatch) => {
-			dispatch({ type: "UPDATE_ALL_CHEF_LISTS", allChefLists: allChefLists });
+			// dispatch({ type: "UPDATE_ALL_CHEF_LISTS", allChefLists: allChefLists });
+			dispatch(updateAllChefLists(allChefLists));
 		};
 	},
 	storeChefDetails: (chef_details) => {
 		return (dispatch) => {
-			dispatch({ type: "STORE_CHEF_DETAILS", chefID: `chef${chef_details.chef.id}`, chef_details: chef_details });
+			// dispatch({ type: "STORE_CHEF_DETAILS", chefID: `chef${chef_details.chef.id}`, chef_details: chef_details });
+			dispatch(storeChefDetails({ chefID: `chef${chef_details.chef.id}`, chef_details: chef_details }));
 		};
 	},
 };
@@ -220,9 +224,10 @@ export default connect(
 			Object.keys(this.props.allChefLists).forEach((list) => {
 				let chefList = this.props.allChefLists[list].map((chef) => {
 					if (chef.id == chefId) {
-						chef[attribute] += diff;
-						chef[toggle] = diff > 0 ? 1 : 0;
-						return chef;
+						const newChef = { ...chef }
+						newChef[attribute] += diff;
+						newChef[toggle] = diff > 0 ? 1 : 0;
+						return newChef;
 					} else {
 						return chef;
 					}

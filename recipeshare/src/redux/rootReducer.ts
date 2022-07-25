@@ -3,6 +3,7 @@ import { ListChef, ListRecipe, LoginChef, MakePic, MakePicChef, Recipe, Comment 
 import { initialRootState } from "./initialRootState";
 import {
 	ParameterContent,
+	RootStateType,
 	StoreChefDetails,
 	StoreNewFollowers,
 	UpdateSingleChefList,
@@ -77,7 +78,7 @@ const rootReducer = createSlice({
 			state.chef_details[action.payload.chefID].chef_followed =
 				!state.chef_details[action.payload.chefID].chef_followed;
 		},
-		updateLoggedInChef(state, action: PayloadAction<LoginChef>) {
+		updateLoggedInChef(state, action: PayloadAction<RootStateType["loggedInChef"]>) {
 			state.loggedInChef = {
 				id: action.payload.id,
 				e_mail: action.payload.e_mail,
@@ -89,7 +90,7 @@ const rootReducer = createSlice({
 			};
 		},
 		storeChefDetails(state, action: PayloadAction<StoreChefDetails>) {
-			state.chef_details[action.payload.chefId] = action.payload.chef_details;
+			state.chef_details[action.payload.chefID] = action.payload.chef_details;
 		},
 		clearChefDetails(state) {
 			state.chef_details = initialRootState.chef_details;
@@ -125,7 +126,7 @@ export const {
 	updateLoggedInChef,
 	storeChefDetails,
 	clearChefDetails,
-	stayLoggedIn
+	stayLoggedIn,
 } = rootReducer.actions;
 
 export default rootReducer.reducer;

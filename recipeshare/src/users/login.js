@@ -14,46 +14,60 @@ import OfflineMessage from "../offlineMessage/offlineMessage";
 import SwitchSized from "../customComponents/switchSized/switchSized";
 import { AlertPopUp } from "../alertPopUp/alertPopUp";
 import { apiCall } from "../auxFunctions/apiCall";
+import { clearLoginUserDetails, clearNewUserDetails, RootState, stayLoggedIn, updateLoggedInChef, updateLoginUserDetails } from "../redux";
 
 const mapStateToProps = (state) => ({
-	e_mail: state.loginUserDetails.e_mail,
-	password: state.loginUserDetails.password,
-	loggedInChef: state.loggedInChef,
-	stayingLoggedIn: state.stayLoggedIn,
+	e_mail: state.root.loginUserDetails.e_mail,
+	password: state.root.loginUserDetails.password,
+	loggedInChef: state.root.loggedInChef,
+	stayingLoggedIn: state.root.stayLoggedIn,
 });
 
 const mapDispatchToProps = {
 	saveLoginChefDetails: (parameter, content) => {
 		return (dispatch) => {
-			dispatch({ type: "UPDATE_LOGIN_USER_DETAILS", parameter: parameter, content: content });
+			// dispatch({ type: "UPDATE_LOGIN_USER_DETAILS", parameter: parameter, content: content });
+			dispatch(updateLoginUserDetails({parameter: parameter, content: content }));
 		};
 	},
 	clearLoginUserDetails: () => {
 		return (dispatch) => {
-			dispatch({ type: "CLEAR_LOGIN_USER_DETAILS" });
+			// dispatch({ type: "CLEAR_LOGIN_USER_DETAILS" });
+			dispatch(clearLoginUserDetails());
 		};
 	},
 	stayLoggedIn: (value) => {
 		return (dispatch) => {
-			dispatch({ type: "STAY_LOGGED_IN", value: value });
+			// dispatch({ type: "STAY_LOGGED_IN", value: value });
+			dispatch(stayLoggedIn(value));
 		};
 	},
-	updateLoggedInChefInState: (id, e_mail, username, auth_token, image_url, is_admin) => {
+	updateLoggedInChefInState: (id, e_mail, username, auth_token, image_url, is_admin, is_member) => {
 		return (dispatch) => {
-			dispatch({
-				type: "UPDATE_LOGGED_IN_CHEF",
+			// dispatch({
+			// 	type: "UPDATE_LOGGED_IN_CHEF",
+			// 	id: id,
+			// 	e_mail: e_mail,
+			// 	username: username,
+			// 	auth_token: auth_token,
+			// 	image_url: image_url,
+			// 	is_admin: is_admin,
+			// });
+			dispatch(updateLoggedInChef({
 				id: id,
 				e_mail: e_mail,
 				username: username,
 				auth_token: auth_token,
 				image_url: image_url,
 				is_admin: is_admin,
-			});
+				is_member: is_member
+			}));
 		};
 	},
 	clearNewUserDetails: () => {
 		return (dispatch) => {
-			dispatch({ type: "CLEAR_NEW_USER_DETAILS" });
+			// dispatch({ type: "CLEAR_NEW_USER_DETAILS" });
+			dispatch(clearNewUserDetails());
 		};
 	},
 };

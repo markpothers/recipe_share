@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import MainDrawerNavigator from "./MainDrawerNavigator";
 
 const mapStateToProps = (state) => ({
-	loggedInChef: state.loggedInChef,
+	loggedInChef: state.root.loggedInChef,
 });
 
 const mapDispatchToProps = {};

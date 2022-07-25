@@ -19,28 +19,32 @@ NetInfo.configure({ reachabilityShortTimeout: 5 }); //5ms
 import { AlertPopUp } from "../alertPopUp/alertPopUp";
 import DynamicMenu from "../dynamicMenu/DynamicMenu";
 import AppHeaderRight from "../../navigation/appHeaderRight";
+import { storeChefDetails, storeNewFollowers, updateNewUserDetails } from "../redux";
 
 const mapStateToProps = (state) => ({
-	loggedInChef: state.loggedInChef,
-	chef_details: state.chef_details,
-	imageBase64: state.newUserDetails.image_url,
-	stayingLoggedIn: state.stayLoggedIn,
+	loggedInChef: state.root.loggedInChef,
+	chef_details: state.root.chef_details,
+	imageBase64: state.root.newUserDetails.image_url,
+	stayingLoggedIn: state.root.stayLoggedIn,
 });
 
 const mapDispatchToProps = {
 	storeChefDetails: (chef_details) => {
 		return (dispatch) => {
-			dispatch({ type: "STORE_CHEF_DETAILS", chefID: `chef${chef_details.chef.id}`, chef_details: chef_details });
+			// dispatch({ type: "STORE_CHEF_DETAILS", chefID: `chef${chef_details.chef.id}`, chef_details: chef_details });
+			dispatch(storeChefDetails({ chefID: `chef${chef_details.chef.id}`, chef_details: chef_details }));
 		};
 	},
 	storeNewFollowers: (followee_id, followers) => {
 		return (dispatch) => {
-			dispatch({ type: "STORE_NEW_FOLLOWERS", chefID: `chef${followee_id}`, followers: followers });
+			// dispatch({ type: "STORE_NEW_FOLLOWERS", chefID: `chef${followee_id}`, followers: followers });
+			dispatch(storeNewFollowers({ chefID: `chef${followee_id}`, followers: followers }));
 		};
 	},
 	saveChefDetails: (parameter, content) => {
 		return (dispatch) => {
-			dispatch({ type: "UPDATE_NEW_USER_DETAILS", parameter: parameter, content: content });
+			// dispatch({ type: "UPDATE_NEW_USER_DETAILS", parameter: parameter, content: content });
+			dispatch(updateNewUserDetails({ parameter: parameter, content: content }));
 		};
 	},
 };
