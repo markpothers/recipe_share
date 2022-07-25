@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AppLoading rendering renders fully; has 1 logo 1`] = `
-<Connect(AppLoading)
+<AppLoading
   setLoadedAndLoggedIn={
     [MockFunction] {
       "calls": Array [
@@ -21,39 +21,12 @@ exports[`AppLoading rendering renders fully; has 1 logo 1`] = `
     }
   }
 >
-  <AppLoading
-    e_mail=""
-    loggedInChef={
+  <View
+    style={
       Object {
-        "auth_token": "",
-        "id": "",
-        "image_url": "",
-        "is_admin": false,
-        "username": "",
+        "flex": 1,
       }
     }
-    password=""
-    setLoadedAndLoggedIn={
-      [MockFunction] {
-        "calls": Array [
-          Array [
-            Object {
-              "loaded": true,
-              "loggedIn": false,
-            },
-          ],
-        ],
-        "results": Array [
-          Object {
-            "type": "return",
-            "value": undefined,
-          },
-        ],
-      }
-    }
-    stayLoggedIn={[Function]}
-    stayingLoggedIn={false}
-    updateLoggedInChefInState={[Function]}
   >
     <View
       style={
@@ -62,16 +35,17 @@ exports[`AppLoading rendering renders fully; has 1 logo 1`] = `
         }
       }
     >
-      <View
+      <ImageBackground
+        imageStyle={Object {}}
+        source={1}
         style={
           Object {
             "flex": 1,
           }
         }
       >
-        <ImageBackground
-          imageStyle={Object {}}
-          source={1}
+        <View
+          accessibilityIgnoresInvertColors={true}
           style={
             Object {
               "flex": 1,
@@ -86,12 +60,23 @@ exports[`AppLoading rendering renders fully; has 1 logo 1`] = `
               }
             }
           >
-            <View
-              accessibilityIgnoresInvertColors={true}
+            <Image
+              source={1}
               style={
-                Object {
-                  "flex": 1,
-                }
+                Array [
+                  Object {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  Object {
+                    "height": undefined,
+                    "width": undefined,
+                  },
+                  Object {},
+                ]
               }
             >
               <Image
@@ -112,27 +97,17 @@ exports[`AppLoading rendering renders fully; has 1 logo 1`] = `
                     Object {},
                   ]
                 }
-              >
-                <Image
-                  source={1}
-                  style={
-                    Array [
-                      Object {
-                        "bottom": 0,
-                        "left": 0,
-                        "position": "absolute",
-                        "right": 0,
-                        "top": 0,
-                      },
-                      Object {
-                        "height": undefined,
-                        "width": undefined,
-                      },
-                      Object {},
-                    ]
-                  }
-                />
-              </Image>
+              />
+            </Image>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "justifyContent": "center",
+                  "top": 133.4,
+                }
+              }
+            >
               <View
                 style={
                   Object {
@@ -142,14 +117,16 @@ exports[`AppLoading rendering renders fully; has 1 logo 1`] = `
                   }
                 }
               >
-                <View
+                <Image
+                  resizeMode="contain"
+                  source={1}
                   style={
                     Object {
-                      "alignItems": "center",
-                      "justifyContent": "center",
-                      "top": 133.4,
+                      "height": 266.8,
+                      "width": "75%",
                     }
                   }
+                  testID="yellowLogo"
                 >
                   <Image
                     resizeMode="contain"
@@ -161,26 +138,14 @@ exports[`AppLoading rendering renders fully; has 1 logo 1`] = `
                       }
                     }
                     testID="yellowLogo"
-                  >
-                    <Image
-                      resizeMode="contain"
-                      source={1}
-                      style={
-                        Object {
-                          "height": 266.8,
-                          "width": "75%",
-                        }
-                      }
-                      testID="yellowLogo"
-                    />
-                  </Image>
-                </View>
+                  />
+                </Image>
               </View>
             </View>
           </View>
-        </ImageBackground>
-      </View>
+        </View>
+      </ImageBackground>
     </View>
-  </AppLoading>
-</Connect(AppLoading)>
+  </View>
+</AppLoading>
 `;

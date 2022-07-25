@@ -15,7 +15,7 @@ import { render, fireEvent, waitFor } from "@testing-library/react-native"
 import { findByTestID } from "../auxTestFunctions/findByTestId"
 
 // suite-specific imports
-import { createStore } from "redux"
+// import { createStore } from "redux"
 import { Provider } from "react-redux"
 import { recipeList } from "../../__mocks__/data/recipeList"
 
@@ -39,7 +39,8 @@ import { destroyReShare } from "../fetches/destroyReShare"
 import { cuisines } from "../dataComponents/cuisines"
 import { serves } from "../dataComponents/serves"
 import NetInfo from "@react-native-community/netinfo"
-
+import { configureStore } from "@reduxjs/toolkit"
+import { rootReducer } from "../redux"
 
 // manual mocks
 jest.mock("../auxFunctions/apiCall")
@@ -67,7 +68,11 @@ describe("Recipe List", () => {
 
 	beforeEach(async () => {
 		// console.log('runs before every test')
-		store = createStore(reducer, initialState, middleware)
+		store = configureStore({
+			reducer: {
+				root: rootReducer
+			}
+		})
 		mockListener = jest.fn()
 		mockNavigate = jest.fn()
 		mockListenerRemove = jest.fn()
@@ -114,9 +119,9 @@ describe("Recipe List", () => {
 			// expect(filterButton).toBeTruthy()
 
 			console.log("mark")
-			expect(mockListener).toHaveBeenCalledTimes(2)
+			expect(mockListener).toHaveBeenCalledTimes(1)
 			expect(mockListener).toHaveBeenNthCalledWith(1, "focus", expect.any(Function))
-			expect(mockListener).toHaveBeenNthCalledWith(2, "blur", expect.any(Function))
+			// expect(mockListener).toHaveBeenNthCalledWith(2, "blur", expect.any(Function))
 		})
 
 		// test('renders correctly when empty with an empty list and a filter button and adds appropriate listeners, then removes listeners when unmounted', async () => {

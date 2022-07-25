@@ -12,10 +12,10 @@ import toJson from "enzyme-to-json";
 import { findByTestID } from "../auxTestFunctions/findByTestId"
 
 // suite-specific imports
-import { createStore } from "redux";
+// import { createStore } from "redux";
 import { Provider } from "react-redux"
-import { initialState, middleware } from "../redux/store"
-import reducer from "../redux/reducer.js"
+// import { initialState, middleware } from "../redux/store"
+// import reducer from "../redux/reducer.js"
 import CreateChef from "./createChef.js"
 import { TouchableOpacity, TextInput, Text, Linking } from "react-native"
 import SwitchSized from "../customComponents/switchSized/switchSized"
@@ -27,7 +27,8 @@ import PicSourceChooser from "../picSourceChooser/picSourceChooser"
 import DualOSPicker from "../dualOSPicker/DualOSPicker"
 import { apiCall } from "../auxFunctions/apiCall"
 import { postChef } from "../fetches/postChef"
-
+import { configureStore } from "@reduxjs/toolkit"
+import { rootReducer } from "../redux"
 
 // manual mocks
 jest.mock("../auxFunctions/apiCall")
@@ -49,7 +50,11 @@ describe("CreateChef", () => {
 
 	beforeEach(async () => {
 		// console.log('runs before every test')
-		store = createStore(reducer, initialState, middleware)
+		store = configureStore({
+			reducer: {
+				root: rootReducer
+			}
+		})
 		mockNavigate = jest.fn()
 		mockSetLoadedAndLoggedIn = jest.fn()
 

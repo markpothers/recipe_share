@@ -23,9 +23,11 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
     loggedInChef={
       Object {
         "auth_token": "",
-        "id": "",
+        "e_mail": "",
+        "id": 0,
         "image_url": "",
         "is_admin": false,
+        "is_member": false,
         "username": "",
       }
     }
@@ -4930,9 +4932,11 @@ exports[`CreateChef buttons view terms and conditions button brings up the textP
     loggedInChef={
       Object {
         "auth_token": "",
-        "id": "",
+        "e_mail": "",
+        "id": 0,
         "image_url": "",
         "is_admin": false,
+        "is_member": false,
         "username": "",
       }
     }
@@ -9566,9 +9570,11 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
     loggedInChef={
       Object {
         "auth_token": "",
-        "id": "",
+        "e_mail": "",
+        "id": 0,
         "image_url": "",
         "is_admin": false,
+        "is_member": false,
         "username": "",
       }
     }
@@ -14709,9 +14715,11 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
     loggedInChef={
       Object {
         "auth_token": "",
-        "id": "",
+        "e_mail": "",
+        "id": 0,
         "image_url": "",
         "is_admin": false,
+        "is_member": false,
         "username": "",
       }
     }
@@ -18619,9 +18627,11 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
     loggedInChef={
       Object {
         "auth_token": "",
-        "id": "",
+        "e_mail": "",
+        "id": 0,
         "image_url": "",
         "is_admin": false,
+        "is_member": false,
         "username": "",
       }
     }
@@ -22469,9 +22479,11 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
     loggedInChef={
       Object {
         "auth_token": "",
-        "id": "",
+        "e_mail": "",
+        "id": 0,
         "image_url": "",
         "is_admin": false,
+        "is_member": false,
         "username": "",
       }
     }
@@ -26319,9 +26331,11 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
     loggedInChef={
       Object {
         "auth_token": "",
-        "id": "",
+        "e_mail": "",
+        "id": 0,
         "image_url": "",
         "is_admin": false,
+        "is_member": false,
         "username": "",
       }
     }
@@ -30169,9 +30183,11 @@ exports[`CreateChef rendering renders with errors 1`] = `
     loggedInChef={
       Object {
         "auth_token": "",
-        "id": "",
+        "e_mail": "",
+        "id": 0,
         "image_url": "",
         "is_admin": false,
+        "is_member": false,
         "username": "",
       }
     }

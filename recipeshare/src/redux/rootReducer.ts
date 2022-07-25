@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ListChef, ListRecipe, LoginChef, MakePic, MakePicChef, Recipe, Comment } from "../centralTypes";
+import { ListChef, ListRecipe, MakePic, MakePicChef, Recipe, Comment } from "../centralTypes";
 import { initialRootState } from "./initialRootState";
 import {
 	ParameterContent,
-	RootStateType,
 	StoreChefDetails,
+	RootStateType,
 	StoreNewFollowers,
 	UpdateSingleChefList,
 	UpdateSingleRecipeList,

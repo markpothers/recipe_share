@@ -26,3 +26,4 @@ export {
 	clearChefDetails,
 	stayLoggedIn
 } from "./rootReducer"
+export { default as rootReducer } from "./rootReducer"

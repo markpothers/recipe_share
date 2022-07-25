@@ -11,16 +11,8 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
             "focus",
             [Function],
           ],
-          Array [
-            "blur",
-            [Function],
-          ],
         ],
         "results": Array [
-          Object {
-            "type": "return",
-            "value": undefined,
-          },
           Object {
             "type": "return",
             "value": undefined,
@@ -43,9 +35,11 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
     loggedInChef={
       Object {
         "auth_token": "",
-        "id": "",
+        "e_mail": "",
+        "id": 0,
         "image_url": "",
         "is_admin": false,
+        "is_member": false,
         "username": "",
       }
     }
@@ -57,16 +51,8 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
               "focus",
               [Function],
             ],
-            Array [
-              "blur",
-              [Function],
-            ],
           ],
           "results": Array [
-            Object {
-              "type": "return",
-              "value": undefined,
-            },
             Object {
               "type": "return",
               "value": undefined,
@@ -77,7 +63,6 @@ exports[`Recipe List rendering renders correctly when empty with an empty list a
         "removeListener": [MockFunction],
       }
     }
-    recipes_details={Object {}}
     route={
       Object {
         "name": "All Recipes",

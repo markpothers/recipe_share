@@ -14,10 +14,10 @@ import toJson from "enzyme-to-json";
 import { findByTestID } from "../auxTestFunctions/findByTestId"
 
 // suite-specific imports
-import { createStore } from "redux";
+// import { createStore } from "redux";
 import { Provider } from "react-redux"
-import { initialState, middleware } from "../redux/store"
-import reducer from "../redux/reducer.js"
+// import { initialState, middleware } from "../redux/store"
+// import reducer from "../redux/reducer.js"
 import { TouchableOpacity } from "react-native"
 // import { AlertPopUp } from '../alertPopUp/alertPopUp'
 // import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -36,7 +36,8 @@ import { destroyReShare } from "../fetches/destroyReShare"
 import { cuisines } from "../dataComponents/cuisines"
 import { serves } from "../dataComponents/serves"
 import NetInfo from "@react-native-community/netinfo"
-
+import { configureStore } from "@reduxjs/toolkit"
+import { rootReducer } from "../redux"
 
 // manual mocks
 jest.mock("../auxFunctions/apiCall")
@@ -64,7 +65,11 @@ describe("Recipe List", () => {
 
 	beforeEach(async () => {
 		// console.log('runs before every test')
-		store = createStore(reducer, initialState, middleware)
+		store = configureStore({
+			reducer: {
+				root: rootReducer
+			}
+		})
 		mockListener = jest.fn()
 		mockNavigate = jest.fn()
 		mockListenerRemove = jest.fn()
@@ -119,13 +124,13 @@ describe("Recipe List", () => {
 			expect(cards.length).toEqual(0)
 			let filterButton = findByTestID(component, TouchableOpacity, "filterButton")
 			expect(filterButton).toBeTruthy()
-			expect(mockListener).toHaveBeenCalledTimes(2)
+			expect(mockListener).toHaveBeenCalledTimes(1)
 			expect(mockListener).toHaveBeenNthCalledWith(1, "focus", expect.any(Function))
-			expect(mockListener).toHaveBeenNthCalledWith(2, "blur", expect.any(Function))
+			// expect(mockListener).toHaveBeenNthCalledWith(2, "blur", expect.any(Function))
 			component.unmount()
-			expect(mockListenerRemove).toHaveBeenCalledTimes(2)
+			expect(mockListenerRemove).toHaveBeenCalledTimes(1)
 			expect(mockListenerRemove).toHaveBeenNthCalledWith(1, "focus", expect.any(Function))
-			expect(mockListenerRemove).toHaveBeenNthCalledWith(2, "blur", expect.any(Function))
+			// expect(mockListenerRemove).toHaveBeenNthCalledWith(2, "blur", expect.any(Function))
 		})
 
 		test("renders correctly with the My Feed Message when it's my feed and empty", async () => {
@@ -284,7 +289,7 @@ describe("Recipe List", () => {
 			postRecipeLike.mockImplementation(() => new Promise.reject({ name: "Logout" }))
 			await act(async () => { await card.likeRecipe(recipe.id) })
 			expect(mockNavigate).toHaveBeenCalled()
-			expect(mockNavigate).toHaveBeenCalledWith("Profile", { screen: "Profile", params: { logout: true } })
+			expect(mockNavigate).toHaveBeenCalledWith("ProfileCover", { screen: "Profile", params: { logout: true } })
 		})
 
 		test("liking a recipe and getting and error results in the offline error on the recipe card", async () => {
@@ -318,7 +323,7 @@ describe("Recipe List", () => {
 			destroyRecipeLike.mockImplementation(() => new Promise.reject({ name: "Logout" }))
 			await act(async () => { await card.unlikeRecipe(recipe.id) })
 			expect(mockNavigate).toHaveBeenCalled()
-			expect(mockNavigate).toHaveBeenCalledWith("Profile", { screen: "Profile", params: { logout: true } })
+			expect(mockNavigate).toHaveBeenCalledWith("ProfileCover", { screen: "Profile", params: { logout: true } })
 		})
 
 		test("unliking a recipe and getting and error results in the offline error on the recipe card", async () => {
@@ -351,7 +356,7 @@ describe("Recipe List", () => {
 			postReShare.mockImplementation(() => new Promise.reject({ name: "Logout" }))
 			await act(async () => { await card.reShareRecipe(recipe.id) })
 			expect(mockNavigate).toHaveBeenCalled()
-			expect(mockNavigate).toHaveBeenCalledWith("Profile", { screen: "Profile", params: { logout: true } })
+			expect(mockNavigate).toHaveBeenCalledWith("ProfileCover", { screen: "Profile", params: { logout: true } })
 		})
 
 		test("resharing a recipe and getting and error results in the offline error on the recipe card", async () => {
@@ -385,7 +390,7 @@ describe("Recipe List", () => {
 			destroyReShare.mockImplementation(() => new Promise.reject({ name: "Logout" }))
 			await act(async () => { await card.unReShareRecipe(recipe.id) })
 			expect(mockNavigate).toHaveBeenCalled()
-			expect(mockNavigate).toHaveBeenCalledWith("Profile", { screen: "Profile", params: { logout: true } })
+			expect(mockNavigate).toHaveBeenCalledWith("ProfileCover", { screen: "Profile", params: { logout: true } })
 		})
 
 		test("unReSharing a recipe and getting and error results in the offline error on the recipe card", async () => {
@@ -419,7 +424,7 @@ describe("Recipe List", () => {
 			postRecipeMake.mockImplementation(() => new Promise.reject({ name: "Logout" }))
 			await act(async () => { await card.makeRecipe(recipe.id) })
 			expect(mockNavigate).toHaveBeenCalled()
-			expect(mockNavigate).toHaveBeenCalledWith("Profile", { screen: "Profile", params: { logout: true } })
+			expect(mockNavigate).toHaveBeenCalledWith("ProfileCover", { screen: "Profile", params: { logout: true } })
 		})
 
 		test("making a recipe and getting and error results in the offline error on the recipe card", async () => {

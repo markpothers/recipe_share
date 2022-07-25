@@ -12,10 +12,10 @@ import toJson from "enzyme-to-json";
 import { findByTestID } from "../auxTestFunctions/findByTestId"
 
 // suite-specific imports
-import { createStore } from "redux";
+// import { createStore } from "redux";
 import { Provider } from "react-redux"
-import { initialState, middleware } from "../redux/store"
-import reducer from "../redux/reducer.js"
+// import { initialState, middleware } from "../redux/store"
+// import reducer from "../redux/reducer.js"
 import LoginScreen from "./login.js"
 import { TouchableOpacity, TextInput, Text } from "react-native"
 import SwitchSized from "../customComponents/switchSized/switchSized"
@@ -25,7 +25,8 @@ import OfflineMessage from "../offlineMessage/offlineMessage";
 import { apiCall } from "../auxFunctions/apiCall"
 import * as SecureStore from "expo-secure-store";
 import { saveToken } from "../auxFunctions/saveLoadToken"
-
+import { configureStore } from "@reduxjs/toolkit"
+import { rootReducer, updateNewUserDetails } from "../redux"
 
 // manual mocks
 jest.mock("../auxFunctions/apiCall.js")
@@ -48,7 +49,11 @@ describe("Login", () => {
 
 	beforeEach(async () => {
 		// console.log('runs before every test')
-		store = createStore(reducer, initialState, middleware)
+		store = configureStore({
+			reducer: {
+				root: rootReducer
+			}
+		})
 		mockListener = jest.fn()
 		mockNavigate = jest.fn()
 		mockListenerRemove = jest.fn()
@@ -262,16 +267,16 @@ describe("Login", () => {
 				}
 			})
 			component.update()
-			let newUserDetails = store.getState().newUserDetails
+			let newUserDetails = store.getState().root.newUserDetails
 			expect(newUserDetails.e_mail).toEqual("")
 			// since I'm not mocking state here, manually put some details in and then see that they are removed
-			store.dispatch({ type: "UPDATE_NEW_USER_DETAILS", parameter: "e_mail", content: "test@email.com" })
-			newUserDetails = store.getState().newUserDetails
+			store.dispatch(updateNewUserDetails({ parameter: "e_mail", content: "test@email.com" }))
+			newUserDetails = store.getState().root.newUserDetails
 			expect(newUserDetails.e_mail).toEqual("test@email.com")
 			let popup = component.find(AlertPopUp)
 			expect(popup.length).toEqual(1)
 			act(() => popup.props().onYes())
-			newUserDetails = store.getState().newUserDetails
+			newUserDetails = store.getState().root.newUserDetails
 			expect(newUserDetails.e_mail).toEqual("")
 		})
 
@@ -432,6 +437,7 @@ describe("Login", () => {
 				auth_token: loginResponse.auth_token,
 				image_url: loginResponse.image_url,
 				is_admin: loginResponse.is_admin,
+				is_member: loginResponse.is_member
 			}) //value is updated in redux by UpdateLoggedInChefInState
 			expect(mockNavigate).toHaveBeenCalled()
 			expect(mockNavigate).toHaveBeenCalledWith("CreateChef", { successfulLogin: true })
@@ -451,6 +457,7 @@ describe("Login", () => {
 				auth_token: loginResponse.auth_token,
 				image_url: loginResponse.image_url,
 				is_admin: loginResponse.is_admin,
+				is_member: loginResponse.is_member
 			}) //value is updated in redux by UpdateLoggedInChefInState
 			expect(mockNavigate).toHaveBeenCalled()
 			expect(mockNavigate).toHaveBeenCalledWith("CreateChef", { successfulLogin: true })
@@ -477,6 +484,7 @@ describe("Login", () => {
 				auth_token: originalLoginResponse.auth_token,
 				image_url: originalLoginResponse.image_url,
 				is_admin: originalLoginResponse.is_admin,
+				is_member: loginResponse.is_member
 			}) //value is updated in redux by UpdateLoggedInChefInState
 			expect(mockNavigate).toHaveBeenCalled()
 			expect(mockNavigate).toHaveBeenCalledWith("CreateChef", { successfulLogin: true })
@@ -497,6 +505,7 @@ describe("Login", () => {
 				auth_token: loginResponse.auth_token,
 				image_url: loginResponse.image_url,
 				is_admin: loginResponse.is_admin,
+				is_member: loginResponse.is_member
 			}) //value is updated in redux by UpdateLoggedInChefInState
 			expect(mockNavigate).toHaveBeenCalled()
 			expect(mockNavigate).toHaveBeenCalledWith("CreateChef", { successfulLogin: true })

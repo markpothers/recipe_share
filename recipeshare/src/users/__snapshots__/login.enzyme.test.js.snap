@@ -43,9 +43,11 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
     loggedInChef={
       Object {
         "auth_token": "",
-        "id": "",
+        "e_mail": "",
+        "id": 0,
         "image_url": "",
         "is_admin": false,
+        "is_member": false,
         "username": "",
       }
     }
@@ -1005,7 +1007,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                         }
                                                         testID="forgotPasswordErrorMessage"
                                                       >
-                                                        Thanks.  If this e-mail address has an account we'll send you a new password.  Please check your e-mail.
+                                                        Thanks. If this e-mail address has an account we'll send you a new password. Please check your e-mail.
                                                       </Text>
                                                     </Text>
                                                   </View>
@@ -2527,9 +2529,11 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
     loggedInChef={
       Object {
         "auth_token": "",
-        "id": "",
+        "e_mail": "",
+        "id": 0,
         "image_url": "",
         "is_admin": false,
+        "is_member": false,
         "username": "",
       }
     }
@@ -5011,9 +5015,11 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
     loggedInChef={
       Object {
         "auth_token": "",
-        "id": "",
+        "e_mail": "",
+        "id": 0,
         "image_url": "",
         "is_admin": false,
+        "is_member": false,
         "username": "",
       }
     }
@@ -5973,7 +5979,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                         }
                                                         testID="forgotPasswordErrorMessage"
                                                       >
-                                                        Thanks.  If this e-mail address has an account we'll send you a new password.  Please check your e-mail.
+                                                        Thanks. If this e-mail address has an account we'll send you a new password. Please check your e-mail.
                                                       </Text>
                                                     </Text>
                                                   </View>
@@ -7495,9 +7501,11 @@ exports[`Login rendering renders correctly with an error message 1`] = `
     loggedInChef={
       Object {
         "auth_token": "",
-        "id": "",
+        "e_mail": "",
+        "id": 0,
         "image_url": "",
         "is_admin": false,
+        "is_member": false,
         "username": "",
       }
     }
@@ -9981,9 +9989,11 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
     loggedInChef={
       Object {
         "auth_token": "",
-        "id": "",
+        "e_mail": "",
+        "id": 0,
         "image_url": "",
         "is_admin": false,
+        "is_member": false,
         "username": "",
       }
     }
@@ -12883,9 +12893,11 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
     loggedInChef={
       Object {
         "auth_token": "",
-        "id": "",
+        "e_mail": "",
+        "id": 0,
         "image_url": "",
         "is_admin": false,
+        "is_member": false,
         "username": "",
       }
     }
