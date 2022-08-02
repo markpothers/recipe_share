@@ -117,8 +117,6 @@ describe("Recipe List", () => {
 
 			const filterButton = getByTestId("filterButton")
 			// expect(filterButton).toBeTruthy()
-
-			console.log("mark")
 			expect(mockListener).toHaveBeenCalledTimes(1)
 			expect(mockListener).toHaveBeenNthCalledWith(1, "focus", expect.any(Function))
 			// expect(mockListener).toHaveBeenNthCalledWith(2, "blur", expect.any(Function))

@@ -2312,6 +2312,7 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                                             null,
                                                                           ]
                                                                         }
+                                                                        testID="tAndCAgreedToggle"
                                                                         thumbColor={null}
                                                                         trackColor={
                                                                           Object {
@@ -2349,6 +2350,7 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                                               ],
                                                                             ]
                                                                           }
+                                                                          testID="tAndCAgreedToggle"
                                                                           thumbTintColor={null}
                                                                           tintColor={null}
                                                                           value={false}
@@ -2381,6 +2383,7 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                                                 ],
                                                                               ]
                                                                             }
+                                                                            testID="tAndCAgreedToggle"
                                                                             thumbTintColor={null}
                                                                             tintColor={null}
                                                                             value={false}
@@ -2950,6 +2953,7 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                                             null,
                                                                           ]
                                                                         }
+                                                                        testID="privacyPolicyAgreedToggle"
                                                                         thumbColor={null}
                                                                         trackColor={
                                                                           Object {
@@ -2987,6 +2991,7 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                                               ],
                                                                             ]
                                                                           }
+                                                                          testID="privacyPolicyAgreedToggle"
                                                                           thumbTintColor={null}
                                                                           tintColor={null}
                                                                           value={false}
@@ -3019,6 +3024,7 @@ exports[`CreateChef buttons view privacy policy button brings up the textPopup a
                                                                                 ],
                                                                               ]
                                                                             }
+                                                                            testID="privacyPolicyAgreedToggle"
                                                                             thumbTintColor={null}
                                                                             tintColor={null}
                                                                             value={false}
@@ -7221,6 +7227,7 @@ exports[`CreateChef buttons view terms and conditions button brings up the textP
                                                                             null,
                                                                           ]
                                                                         }
+                                                                        testID="tAndCAgreedToggle"
                                                                         thumbColor={null}
                                                                         trackColor={
                                                                           Object {
@@ -7258,6 +7265,7 @@ exports[`CreateChef buttons view terms and conditions button brings up the textP
                                                                               ],
                                                                             ]
                                                                           }
+                                                                          testID="tAndCAgreedToggle"
                                                                           thumbTintColor={null}
                                                                           tintColor={null}
                                                                           value={false}
@@ -7290,6 +7298,7 @@ exports[`CreateChef buttons view terms and conditions button brings up the textP
                                                                                 ],
                                                                               ]
                                                                             }
+                                                                            testID="tAndCAgreedToggle"
                                                                             thumbTintColor={null}
                                                                             tintColor={null}
                                                                             value={false}
@@ -8645,6 +8654,7 @@ If you have any questions about these Terms, please contact us at:
                                                                             null,
                                                                           ]
                                                                         }
+                                                                        testID="privacyPolicyAgreedToggle"
                                                                         thumbColor={null}
                                                                         trackColor={
                                                                           Object {
@@ -8682,6 +8692,7 @@ If you have any questions about these Terms, please contact us at:
                                                                               ],
                                                                             ]
                                                                           }
+                                                                          testID="privacyPolicyAgreedToggle"
                                                                           thumbTintColor={null}
                                                                           tintColor={null}
                                                                           value={false}
@@ -8714,6 +8725,7 @@ If you have any questions about these Terms, please contact us at:
                                                                                 ],
                                                                               ]
                                                                             }
+                                                                            testID="privacyPolicyAgreedToggle"
                                                                             thumbTintColor={null}
                                                                             tintColor={null}
                                                                             value={false}
@@ -13152,6 +13164,7 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                                             null,
                                                                           ]
                                                                         }
+                                                                        testID="tAndCAgreedToggle"
                                                                         thumbColor={null}
                                                                         trackColor={
                                                                           Object {
@@ -13189,6 +13202,7 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                                               ],
                                                                             ]
                                                                           }
+                                                                          testID="tAndCAgreedToggle"
                                                                           thumbTintColor={null}
                                                                           tintColor={null}
                                                                           value={false}
@@ -13221,6 +13235,7 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                                                 ],
                                                                               ]
                                                                             }
+                                                                            testID="tAndCAgreedToggle"
                                                                             thumbTintColor={null}
                                                                             tintColor={null}
                                                                             value={false}
@@ -13790,6 +13805,7 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                                             null,
                                                                           ]
                                                                         }
+                                                                        testID="privacyPolicyAgreedToggle"
                                                                         thumbColor={null}
                                                                         trackColor={
                                                                           Object {
@@ -13827,6 +13843,7 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                                               ],
                                                                             ]
                                                                           }
+                                                                          testID="privacyPolicyAgreedToggle"
                                                                           thumbTintColor={null}
                                                                           tintColor={null}
                                                                           value={false}
@@ -13859,6 +13876,7 @@ exports[`CreateChef choosing a picture add profile pic button brings up the pic 
                                                                                 ],
                                                                               ]
                                                                             }
+                                                                            testID="privacyPolicyAgreedToggle"
                                                                             thumbTintColor={null}
                                                                             tintColor={null}
                                                                             value={false}
@@ -17064,6 +17082,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                                             null,
                                                                           ]
                                                                         }
+                                                                        testID="tAndCAgreedToggle"
                                                                         thumbColor={null}
                                                                         trackColor={
                                                                           Object {
@@ -17101,6 +17120,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                                               ],
                                                                             ]
                                                                           }
+                                                                          testID="tAndCAgreedToggle"
                                                                           thumbTintColor={null}
                                                                           tintColor={null}
                                                                           value={true}
@@ -17133,6 +17153,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                                                 ],
                                                                               ]
                                                                             }
+                                                                            testID="tAndCAgreedToggle"
                                                                             thumbTintColor={null}
                                                                             tintColor={null}
                                                                             value={true}
@@ -17702,6 +17723,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                                             null,
                                                                           ]
                                                                         }
+                                                                        testID="privacyPolicyAgreedToggle"
                                                                         thumbColor={null}
                                                                         trackColor={
                                                                           Object {
@@ -17739,6 +17761,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                                               ],
                                                                             ]
                                                                           }
+                                                                          testID="privacyPolicyAgreedToggle"
                                                                           thumbTintColor={null}
                                                                           tintColor={null}
                                                                           value={true}
@@ -17771,6 +17794,7 @@ exports[`CreateChef createChef function create chef gets some kin of error 1`] =
                                                                                 ],
                                                                               ]
                                                                             }
+                                                                            testID="privacyPolicyAgreedToggle"
                                                                             thumbTintColor={null}
                                                                             tintColor={null}
                                                                             value={true}
@@ -20916,6 +20940,7 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                                             null,
                                                                           ]
                                                                         }
+                                                                        testID="tAndCAgreedToggle"
                                                                         thumbColor={null}
                                                                         trackColor={
                                                                           Object {
@@ -20953,6 +20978,7 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                                               ],
                                                                             ]
                                                                           }
+                                                                          testID="tAndCAgreedToggle"
                                                                           thumbTintColor={null}
                                                                           tintColor={null}
                                                                           value={false}
@@ -20985,6 +21011,7 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                                                 ],
                                                                               ]
                                                                             }
+                                                                            testID="tAndCAgreedToggle"
                                                                             thumbTintColor={null}
                                                                             tintColor={null}
                                                                             value={false}
@@ -21554,6 +21581,7 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                                             null,
                                                                           ]
                                                                         }
+                                                                        testID="privacyPolicyAgreedToggle"
                                                                         thumbColor={null}
                                                                         trackColor={
                                                                           Object {
@@ -21591,6 +21619,7 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                                               ],
                                                                             ]
                                                                           }
+                                                                          testID="privacyPolicyAgreedToggle"
                                                                           thumbTintColor={null}
                                                                           tintColor={null}
                                                                           value={false}
@@ -21623,6 +21652,7 @@ exports[`CreateChef rendering renders fully; has 5 TextInputs and 10 TouchableOp
                                                                                 ],
                                                                               ]
                                                                             }
+                                                                            testID="privacyPolicyAgreedToggle"
                                                                             thumbTintColor={null}
                                                                             tintColor={null}
                                                                             value={false}
@@ -24768,6 +24798,7 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                                             null,
                                                                           ]
                                                                         }
+                                                                        testID="tAndCAgreedToggle"
                                                                         thumbColor={null}
                                                                         trackColor={
                                                                           Object {
@@ -24805,6 +24836,7 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                                               ],
                                                                             ]
                                                                           }
+                                                                          testID="tAndCAgreedToggle"
                                                                           thumbTintColor={null}
                                                                           tintColor={null}
                                                                           value={true}
@@ -24837,6 +24869,7 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                                                 ],
                                                                               ]
                                                                             }
+                                                                            testID="tAndCAgreedToggle"
                                                                             thumbTintColor={null}
                                                                             tintColor={null}
                                                                             value={true}
@@ -25406,6 +25439,7 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                                             null,
                                                                           ]
                                                                         }
+                                                                        testID="privacyPolicyAgreedToggle"
                                                                         thumbColor={null}
                                                                         trackColor={
                                                                           Object {
@@ -25443,6 +25477,7 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                                               ],
                                                                             ]
                                                                           }
+                                                                          testID="privacyPolicyAgreedToggle"
                                                                           thumbTintColor={null}
                                                                           tintColor={null}
                                                                           value={false}
@@ -25475,6 +25510,7 @@ exports[`CreateChef rendering renders fully; with t and c agreed; has 5 TextInpu
                                                                                 ],
                                                                               ]
                                                                             }
+                                                                            testID="privacyPolicyAgreedToggle"
                                                                             thumbTintColor={null}
                                                                             tintColor={null}
                                                                             value={false}
@@ -28620,6 +28656,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                                             null,
                                                                           ]
                                                                         }
+                                                                        testID="tAndCAgreedToggle"
                                                                         thumbColor={null}
                                                                         trackColor={
                                                                           Object {
@@ -28657,6 +28694,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                                               ],
                                                                             ]
                                                                           }
+                                                                          testID="tAndCAgreedToggle"
                                                                           thumbTintColor={null}
                                                                           tintColor={null}
                                                                           value={true}
@@ -28689,6 +28727,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                                                 ],
                                                                               ]
                                                                             }
+                                                                            testID="tAndCAgreedToggle"
                                                                             thumbTintColor={null}
                                                                             tintColor={null}
                                                                             value={true}
@@ -29258,6 +29297,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                                             null,
                                                                           ]
                                                                         }
+                                                                        testID="privacyPolicyAgreedToggle"
                                                                         thumbColor={null}
                                                                         trackColor={
                                                                           Object {
@@ -29295,6 +29335,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                                               ],
                                                                             ]
                                                                           }
+                                                                          testID="privacyPolicyAgreedToggle"
                                                                           thumbTintColor={null}
                                                                           tintColor={null}
                                                                           value={true}
@@ -29327,6 +29368,7 @@ exports[`CreateChef rendering renders fully; with t and c and privacy policy agr
                                                                                 ],
                                                                               ]
                                                                             }
+                                                                            testID="privacyPolicyAgreedToggle"
                                                                             thumbTintColor={null}
                                                                             tintColor={null}
                                                                             value={true}
@@ -32652,6 +32694,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                                             null,
                                                                           ]
                                                                         }
+                                                                        testID="tAndCAgreedToggle"
                                                                         thumbColor={null}
                                                                         trackColor={
                                                                           Object {
@@ -32689,6 +32732,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                                               ],
                                                                             ]
                                                                           }
+                                                                          testID="tAndCAgreedToggle"
                                                                           thumbTintColor={null}
                                                                           tintColor={null}
                                                                           value={false}
@@ -32721,6 +32765,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                                                 ],
                                                                               ]
                                                                             }
+                                                                            testID="tAndCAgreedToggle"
                                                                             thumbTintColor={null}
                                                                             tintColor={null}
                                                                             value={false}
@@ -33290,6 +33335,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                                             null,
                                                                           ]
                                                                         }
+                                                                        testID="privacyPolicyAgreedToggle"
                                                                         thumbColor={null}
                                                                         trackColor={
                                                                           Object {
@@ -33327,6 +33373,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                                               ],
                                                                             ]
                                                                           }
+                                                                          testID="privacyPolicyAgreedToggle"
                                                                           thumbTintColor={null}
                                                                           tintColor={null}
                                                                           value={false}
@@ -33359,6 +33406,7 @@ exports[`CreateChef rendering renders with errors 1`] = `
                                                                                 ],
                                                                               ]
                                                                             }
+                                                                            testID="privacyPolicyAgreedToggle"
                                                                             thumbTintColor={null}
                                                                             tintColor={null}
                                                                             value={false}

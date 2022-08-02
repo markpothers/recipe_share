@@ -87,7 +87,7 @@ export default connect(
 			passwordVisible: false,
 			isFocused: true,
 			thanksForRegisteringPopUpShowing: false,
-			thanksForRegisteringPopUpCleared: false,
+			thanksForRegisteringPopUpCleared: false
 		};
 
 		handleTextInput = (text, parameter) => {
@@ -224,7 +224,6 @@ export default connect(
 		};
 
 		render() {
-			// console.log(this.state)
 			return (
 				<SpinachAppContainer scrollingEnabled={true} awaitingServer={this.state.awaitingServer}>
 					{this.state.renderOfflineMessage && (

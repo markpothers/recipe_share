@@ -11,6 +11,7 @@ module.exports = {
 		"!**/babel.config.js",
 		"!**/jest.setup.js"
 	],
+	moduleDirectories: ["node_modules"],
 	verbose: true,
 	setupFiles: [
 		"./jestSetup.js"

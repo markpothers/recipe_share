@@ -9,15 +9,16 @@ type Props = {
 	onValueChange: () => void;
 	trackColor?: { true: string, false: string };
 	thumbColor?: string;
+	testId?: string;
 }
 
 export default function SwitchSized(props: Props) {
-	const { disabled, value, onValueChange, trackColor, thumbColor } = props
-	let [deviceType, setDeviceType] = useState(0)
+	const { disabled, value, onValueChange, trackColor, thumbColor, testID } = props
+	const [deviceType, setDeviceType] = useState(0)
 
 	useEffect(() => {
 		const getDeviceType = async () => {
-			let deviceType = await Device.getDeviceTypeAsync()
+			const deviceType = await Device.getDeviceTypeAsync()
 			setDeviceType(deviceType)
 		}
 		getDeviceType()
@@ -45,6 +46,7 @@ export default function SwitchSized(props: Props) {
 			}
 			disabled={disabled}
 			accessibilityRole="switch"
+			testID={testID}
 		/>
 	)
 }

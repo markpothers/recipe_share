@@ -1285,6 +1285,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                         null,
                                                                       ]
                                                                     }
+                                                                    testID="rememberEmailToggle"
                                                                     thumbColor={null}
                                                                     trackColor={
                                                                       Object {
@@ -1322,6 +1323,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                           ],
                                                                         ]
                                                                       }
+                                                                      testID="rememberEmailToggle"
                                                                       thumbTintColor={null}
                                                                       tintColor={null}
                                                                       value={false}
@@ -1354,6 +1356,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                             ],
                                                                           ]
                                                                         }
+                                                                        testID="rememberEmailToggle"
                                                                         thumbTintColor={null}
                                                                         tintColor={null}
                                                                         value={false}
@@ -1587,6 +1590,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                         null,
                                                                       ]
                                                                     }
+                                                                    testID="stayLoggedInToggle"
                                                                     thumbColor={null}
                                                                     trackColor={
                                                                       Object {
@@ -1624,6 +1628,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                           ],
                                                                         ]
                                                                       }
+                                                                      testID="stayLoggedInToggle"
                                                                       thumbTintColor={null}
                                                                       tintColor={null}
                                                                       value={false}
@@ -1656,6 +1661,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                             ],
                                                                           ]
                                                                         }
+                                                                        testID="stayLoggedInToggle"
                                                                         thumbTintColor={null}
                                                                         tintColor={null}
                                                                         value={false}
@@ -3771,6 +3777,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                         null,
                                                                       ]
                                                                     }
+                                                                    testID="rememberEmailToggle"
                                                                     thumbColor={null}
                                                                     trackColor={
                                                                       Object {
@@ -3808,6 +3815,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                           ],
                                                                         ]
                                                                       }
+                                                                      testID="rememberEmailToggle"
                                                                       thumbTintColor={null}
                                                                       tintColor={null}
                                                                       value={false}
@@ -3840,6 +3848,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                             ],
                                                                           ]
                                                                         }
+                                                                        testID="rememberEmailToggle"
                                                                         thumbTintColor={null}
                                                                         tintColor={null}
                                                                         value={false}
@@ -4073,6 +4082,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                         null,
                                                                       ]
                                                                     }
+                                                                    testID="stayLoggedInToggle"
                                                                     thumbColor={null}
                                                                     trackColor={
                                                                       Object {
@@ -4110,6 +4120,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                           ],
                                                                         ]
                                                                       }
+                                                                      testID="stayLoggedInToggle"
                                                                       thumbTintColor={null}
                                                                       tintColor={null}
                                                                       value={false}
@@ -4142,6 +4153,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                             ],
                                                                           ]
                                                                         }
+                                                                        testID="stayLoggedInToggle"
                                                                         thumbTintColor={null}
                                                                         tintColor={null}
                                                                         value={false}
@@ -6257,6 +6269,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                         null,
                                                                       ]
                                                                     }
+                                                                    testID="rememberEmailToggle"
                                                                     thumbColor={null}
                                                                     trackColor={
                                                                       Object {
@@ -6294,6 +6307,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                           ],
                                                                         ]
                                                                       }
+                                                                      testID="rememberEmailToggle"
                                                                       thumbTintColor={null}
                                                                       tintColor={null}
                                                                       value={false}
@@ -6326,6 +6340,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                             ],
                                                                           ]
                                                                         }
+                                                                        testID="rememberEmailToggle"
                                                                         thumbTintColor={null}
                                                                         tintColor={null}
                                                                         value={false}
@@ -6559,6 +6574,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                         null,
                                                                       ]
                                                                     }
+                                                                    testID="stayLoggedInToggle"
                                                                     thumbColor={null}
                                                                     trackColor={
                                                                       Object {
@@ -6596,6 +6612,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                           ],
                                                                         ]
                                                                       }
+                                                                      testID="stayLoggedInToggle"
                                                                       thumbTintColor={null}
                                                                       tintColor={null}
                                                                       value={false}
@@ -6628,6 +6645,7 @@ exports[`Login forgotPassword function correctly handles the ForgotPassword butt
                                                                             ],
                                                                           ]
                                                                         }
+                                                                        testID="stayLoggedInToggle"
                                                                         thumbTintColor={null}
                                                                         tintColor={null}
                                                                         value={false}
@@ -8743,6 +8761,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                                         null,
                                                                       ]
                                                                     }
+                                                                    testID="rememberEmailToggle"
                                                                     thumbColor={null}
                                                                     trackColor={
                                                                       Object {
@@ -8780,6 +8799,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                                           ],
                                                                         ]
                                                                       }
+                                                                      testID="rememberEmailToggle"
                                                                       thumbTintColor={null}
                                                                       tintColor={null}
                                                                       value={false}
@@ -8812,6 +8832,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                                             ],
                                                                           ]
                                                                         }
+                                                                        testID="rememberEmailToggle"
                                                                         thumbTintColor={null}
                                                                         tintColor={null}
                                                                         value={false}
@@ -9045,6 +9066,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                                         null,
                                                                       ]
                                                                     }
+                                                                    testID="stayLoggedInToggle"
                                                                     thumbColor={null}
                                                                     trackColor={
                                                                       Object {
@@ -9082,6 +9104,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                                           ],
                                                                         ]
                                                                       }
+                                                                      testID="stayLoggedInToggle"
                                                                       thumbTintColor={null}
                                                                       tintColor={null}
                                                                       value={false}
@@ -9114,6 +9137,7 @@ exports[`Login rendering renders correctly with an error message 1`] = `
                                                                             ],
                                                                           ]
                                                                         }
+                                                                        testID="stayLoggedInToggle"
                                                                         thumbTintColor={null}
                                                                         tintColor={null}
                                                                         value={false}
@@ -11649,6 +11673,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                                         null,
                                                                       ]
                                                                     }
+                                                                    testID="rememberEmailToggle"
                                                                     thumbColor={null}
                                                                     trackColor={
                                                                       Object {
@@ -11686,6 +11711,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                                           ],
                                                                         ]
                                                                       }
+                                                                      testID="rememberEmailToggle"
                                                                       thumbTintColor={null}
                                                                       tintColor={null}
                                                                       value={false}
@@ -11718,6 +11744,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                                             ],
                                                                           ]
                                                                         }
+                                                                        testID="rememberEmailToggle"
                                                                         thumbTintColor={null}
                                                                         tintColor={null}
                                                                         value={false}
@@ -11951,6 +11978,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                                         null,
                                                                       ]
                                                                     }
+                                                                    testID="stayLoggedInToggle"
                                                                     thumbColor={null}
                                                                     trackColor={
                                                                       Object {
@@ -11988,6 +12016,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                                           ],
                                                                         ]
                                                                       }
+                                                                      testID="stayLoggedInToggle"
                                                                       thumbTintColor={null}
                                                                       tintColor={null}
                                                                       value={false}
@@ -12020,6 +12049,7 @@ exports[`Login rendering renders correctly with thanks for registering popup 1`]
                                                                             ],
                                                                           ]
                                                                         }
+                                                                        testID="stayLoggedInToggle"
                                                                         thumbTintColor={null}
                                                                         tintColor={null}
                                                                         value={false}
@@ -14076,6 +14106,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                                         null,
                                                                       ]
                                                                     }
+                                                                    testID="rememberEmailToggle"
                                                                     thumbColor={null}
                                                                     trackColor={
                                                                       Object {
@@ -14113,6 +14144,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                                           ],
                                                                         ]
                                                                       }
+                                                                      testID="rememberEmailToggle"
                                                                       thumbTintColor={null}
                                                                       tintColor={null}
                                                                       value={false}
@@ -14145,6 +14177,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                                             ],
                                                                           ]
                                                                         }
+                                                                        testID="rememberEmailToggle"
                                                                         thumbTintColor={null}
                                                                         tintColor={null}
                                                                         value={false}
@@ -14378,6 +14411,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                                         null,
                                                                       ]
                                                                     }
+                                                                    testID="stayLoggedInToggle"
                                                                     thumbColor={null}
                                                                     trackColor={
                                                                       Object {
@@ -14415,6 +14449,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                                           ],
                                                                         ]
                                                                       }
+                                                                      testID="stayLoggedInToggle"
                                                                       thumbTintColor={null}
                                                                       tintColor={null}
                                                                       value={false}
@@ -14447,6 +14482,7 @@ exports[`Login rendering renders fully; has 2 TextInputs and 7 TouchableOpacitie
                                                                             ],
                                                                           ]
                                                                         }
+                                                                        testID="stayLoggedInToggle"
                                                                         thumbTintColor={null}
                                                                         tintColor={null}
                                                                         value={false}
