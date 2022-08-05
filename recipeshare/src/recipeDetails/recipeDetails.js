@@ -37,7 +37,7 @@ import { ImagePopup } from "./imagePopup";
 import OfflineMessage from "../offlineMessage/offlineMessage";
 import NetInfo from "@react-native-community/netinfo";
 NetInfo.configure({ reachabilityShortTimeout: 5 }); //5ms
-import { AlertPopUp } from "../alertPopUp/alertPopUp";
+import { AlertPopup } from "../alertPopup/alertPopup";
 import DynamicMenu from "../dynamicMenu/DynamicMenu";
 import saveChefDetailsLocally from "../auxFunctions/saveChefDetailsLocally";
 import { getTimeStringFromMinutes } from "../auxFunctions/getTimeStringFromMinutes";
@@ -1237,9 +1237,9 @@ export default connect(
 			});
 		};
 
-		renderDeleteMakePicAlertPopUp = () => {
+		renderDeleteMakePicAlertPopup = () => {
 			return (
-				<AlertPopUp
+				<AlertPopup
 					close={() => this.setState({ deleteMakePicPopUpShowing: false })}
 					title={"Are you sure you want to delete this picture?"}
 					onYes={() => this.deleteMakePic(this.state.makePicToDelete)}
@@ -1247,9 +1247,9 @@ export default connect(
 			);
 		};
 
-		renderDeleteCommentAlertPopUp = () => {
+		renderDeleteCommentAlertPopup = () => {
 			return (
-				<AlertPopUp
+				<AlertPopup
 					close={() => this.setState({ deleteCommentPopUpShowing: false })}
 					title={"Are you sure you want to delete this comment?"}
 					onYes={() => this.deleteComment(this.state.commentToDelete)}
@@ -1257,9 +1257,9 @@ export default connect(
 			);
 		};
 
-		renderEditRecipeAlertPopUp = () => {
+		renderEditRecipeAlertPopup = () => {
 			return (
-				<AlertPopUp
+				<AlertPopup
 					close={() => this.setState({ editRecipePopUpShowing: false })}
 					title={"Are you sure you want to edit this recipe?"}
 					onYes={this.editRecipe}
@@ -1267,9 +1267,9 @@ export default connect(
 			);
 		};
 
-		renderDeleteRecipeAlertPopUp = () => {
+		renderDeleteRecipeAlertPopup = () => {
 			return (
-				<AlertPopUp
+				<AlertPopup
 					close={() => this.setState({ deleteRecipePopUpShowing: false })}
 					title={"Are you sure you want to delete this recipe?"}
 					onYes={this.deleteRecipe}
@@ -1292,10 +1292,10 @@ export default connect(
 								diagnostics={this.props.loggedInChef.is_admin ? this.state.offlineDiagnostics : null}
 							/>
 						)}
-						{this.state.deleteMakePicPopUpShowing && this.renderDeleteMakePicAlertPopUp()}
-						{this.state.deleteCommentPopUpShowing && this.renderDeleteCommentAlertPopUp()}
-						{this.state.editRecipePopUpShowing && this.renderEditRecipeAlertPopUp()}
-						{this.state.deleteRecipePopUpShowing && this.renderDeleteRecipeAlertPopUp()}
+						{this.state.deleteMakePicPopUpShowing && this.renderDeleteMakePicAlertPopup()}
+						{this.state.deleteCommentPopUpShowing && this.renderDeleteCommentAlertPopup()}
+						{this.state.editRecipePopUpShowing && this.renderEditRecipeAlertPopup()}
+						{this.state.deleteRecipePopUpShowing && this.renderDeleteRecipeAlertPopup()}
 						{this.state.choosingPicSource && this.renderPictureChooser()}
 						{this.state.dynamicMenuShowing && this.renderDynamicMenu()}
 						{this.state.imagePopupShowing && (

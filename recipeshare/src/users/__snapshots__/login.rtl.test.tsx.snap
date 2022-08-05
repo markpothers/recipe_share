@@ -219,7 +219,7 @@ exports[`login page logging in under different conditions should display activat
                 >
                   <TextInput
                     autoCapitalize="none"
-                    autoCompleteType="email"
+                    autoComplete="email"
                     keyboardType="email-address"
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
@@ -285,7 +285,7 @@ exports[`login page logging in under different conditions should display activat
                 >
                   <TextInput
                     autoCapitalize="none"
-                    autoCompleteType="password"
+                    autoComplete="password"
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="password"
@@ -302,7 +302,7 @@ exports[`login page logging in under different conditions should display activat
                     }
                     testID="passwordInput"
                     textContentType="password"
-                    value=""
+                    value="myTestPassword"
                   />
                   <View
                     accessible={true}
@@ -1014,7 +1014,7 @@ exports[`login page logging in under different conditions should display deactiv
                 >
                   <TextInput
                     autoCapitalize="none"
-                    autoCompleteType="email"
+                    autoComplete="email"
                     keyboardType="email-address"
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
@@ -1080,7 +1080,7 @@ exports[`login page logging in under different conditions should display deactiv
                 >
                   <TextInput
                     autoCapitalize="none"
-                    autoCompleteType="password"
+                    autoComplete="password"
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="password"
@@ -1097,802 +1097,7 @@ exports[`login page logging in under different conditions should display deactiv
                     }
                     testID="passwordInput"
                     textContentType="password"
-                    value=""
-                  />
-                  <View
-                    accessible={true}
-                    collapsable={false}
-                    focusable={true}
-                    onClick={[Function]}
-                    onResponderGrant={[Function]}
-                    onResponderMove={[Function]}
-                    onResponderRelease={[Function]}
-                    onResponderTerminate={[Function]}
-                    onResponderTerminationRequest={[Function]}
-                    onStartShouldSetResponder={[Function]}
-                    style={
-                      Object {
-                        "alignItems": "center",
-                        "height": "100%",
-                        "justifyContent": "center",
-                        "opacity": 1,
-                        "position": "absolute",
-                        "right": 0,
-                        "width": 112.5,
-                        "zIndex": 0,
-                      }
-                    }
-                    testID="visibilityButton"
-                  >
-                    <Icon
-                      name="eye"
-                      size={53.36}
-                      style={
-                        Object {
-                          "color": "#50505055",
-                        }
-                      }
-                    />
-                  </View>
-                </View>
-              </View>
-              <View
-                style={
-                  Object {
-                    "backgroundColor": "white",
-                    "borderColor": "#104e01",
-                    "borderRadius": 11.25,
-                    "borderWidth": 1,
-                    "justifyContent": "center",
-                    "marginTop": 6.67,
-                    "width": "100%",
-                  }
-                }
-              >
-                <Text
-                  maxFontSizeMultiplier={2}
-                  style={
-                    Object {
-                      "color": "#9e0000f8",
-                      "fontSize": 30.595932917809698,
-                      "paddingBottom": 3.335,
-                      "paddingLeft": 15,
-                      "paddingRight": 15,
-                      "paddingTop": 3.335,
-                    }
-                  }
-                  testID="deactivatedErrorMessage"
-                >
-                  This account was deactivated. Reset your password to reactivate your account.
-                </Text>
-              </View>
-            </View>
-            <View
-              style={
-                Object {
-                  "borderColor": "red",
-                  "borderWidth": 0,
-                  "overflow": "hidden",
-                  "width": "100%",
-                }
-              }
-            >
-              <View
-                style={
-                  Object {
-                    "alignItems": "center",
-                    "borderColor": "purple",
-                    "borderRadius": 11.25,
-                    "borderWidth": 0,
-                    "flexDirection": "row",
-                    "flexWrap": "wrap",
-                    "justifyContent": "space-between",
-                    "marginTop": 6.67,
-                    "minHeight": 80.03999999999999,
-                    "overflow": "hidden",
-                    "width": "100%",
-                  }
-                }
-              >
-                <View
-                  accessible={true}
-                  collapsable={false}
-                  focusable={true}
-                  onClick={[Function]}
-                  onResponderGrant={[Function]}
-                  onResponderMove={[Function]}
-                  onResponderRelease={[Function]}
-                  onResponderTerminate={[Function]}
-                  onResponderTerminationRequest={[Function]}
-                  onStartShouldSetResponder={[Function]}
-                  style={
-                    Object {
-                      "alignItems": "center",
-                      "backgroundColor": "#fff59b",
-                      "borderColor": "#104e01",
-                      "borderRadius": 11.25,
-                      "borderWidth": 1,
-                      "flexDirection": "row",
-                      "height": "100%",
-                      "justifyContent": "space-evenly",
-                      "maxWidth": "50%",
-                      "minHeight": 80.03999999999999,
-                      "minWidth": 285,
-                      "opacity": 1,
-                    }
-                  }
-                  testID="rememberEmailButton"
-                >
-                  <Text
-                    maxFontSizeMultiplier={1.25}
-                    style={
-                      Object {
-                        "color": "#104e01",
-                        "fontSize": 27.53633962602873,
-                        "fontWeight": "bold",
-                        "paddingHorizontal": 7.5,
-                        "textAlign": "center",
-                      }
-                    }
-                  >
-                    Remember
-                    
-
-                    email
-                  </Text>
-                  <RCTSwitch
-                    accessibilityRole="switch"
-                    onChange={[Function]}
-                    onResponderTerminationRequest={[Function]}
-                    onStartShouldSetResponder={[Function]}
-                    onTintColor="#5c8a5199"
-                    style={
-                      Array [
-                        Object {
-                          "height": 31,
-                          "width": 51,
-                        },
-                        Array [
-                          Object {
-                            "transform": Array [
-                              Object {
-                                "scaleX": 0.7,
-                              },
-                              Object {
-                                "scaleY": 0.7,
-                              },
-                            ],
-                          },
-                          null,
-                          null,
-                        ],
-                      ]
-                    }
-                    testID="rememberEmailToggle"
-                    thumbTintColor={null}
-                    tintColor={null}
-                    value={false}
-                  />
-                </View>
-                <View
-                  accessible={true}
-                  collapsable={false}
-                  focusable={true}
-                  onClick={[Function]}
-                  onResponderGrant={[Function]}
-                  onResponderMove={[Function]}
-                  onResponderRelease={[Function]}
-                  onResponderTerminate={[Function]}
-                  onResponderTerminationRequest={[Function]}
-                  onStartShouldSetResponder={[Function]}
-                  style={
-                    Object {
-                      "alignItems": "center",
-                      "backgroundColor": "#fff59b",
-                      "borderColor": "#104e01",
-                      "borderRadius": 11.25,
-                      "borderWidth": 1,
-                      "flexDirection": "row",
-                      "height": "100%",
-                      "justifyContent": "space-evenly",
-                      "maxWidth": "50%",
-                      "minHeight": 80.03999999999999,
-                      "minWidth": 285,
-                      "opacity": 1,
-                    }
-                  }
-                  testID="stayLoggedInButton"
-                >
-                  <Text
-                    maxFontSizeMultiplier={1.5}
-                    style={
-                      Object {
-                        "color": "#104e01",
-                        "fontSize": 27.53633962602873,
-                        "fontWeight": "bold",
-                        "paddingHorizontal": 7.5,
-                        "textAlign": "center",
-                      }
-                    }
-                  >
-                    Stay
-                    
-
-                     logged in
-                  </Text>
-                  <RCTSwitch
-                    accessibilityRole="switch"
-                    onChange={[Function]}
-                    onResponderTerminationRequest={[Function]}
-                    onStartShouldSetResponder={[Function]}
-                    onTintColor="#5c8a5199"
-                    style={
-                      Array [
-                        Object {
-                          "height": 31,
-                          "width": 51,
-                        },
-                        Array [
-                          Object {
-                            "transform": Array [
-                              Object {
-                                "scaleX": 0.7,
-                              },
-                              Object {
-                                "scaleY": 0.7,
-                              },
-                            ],
-                          },
-                          null,
-                          null,
-                        ],
-                      ]
-                    }
-                    testID="stayLoggedInToggle"
-                    thumbTintColor={null}
-                    tintColor={null}
-                    value={false}
-                  />
-                </View>
-              </View>
-            </View>
-            <View
-              style={
-                Object {
-                  "borderColor": "red",
-                  "borderWidth": 0,
-                  "overflow": "hidden",
-                  "width": "100%",
-                }
-              }
-            >
-              <View
-                style={
-                  Object {
-                    "alignItems": "center",
-                    "borderColor": "purple",
-                    "borderRadius": 11.25,
-                    "borderWidth": 0,
-                    "flexDirection": "row",
-                    "flexWrap": "wrap",
-                    "justifyContent": "space-between",
-                    "marginTop": 6.67,
-                    "minHeight": 80.03999999999999,
-                    "overflow": "hidden",
-                    "width": "100%",
-                  }
-                }
-              >
-                <View
-                  accessible={true}
-                  collapsable={false}
-                  focusable={true}
-                  onClick={[Function]}
-                  onResponderGrant={[Function]}
-                  onResponderMove={[Function]}
-                  onResponderRelease={[Function]}
-                  onResponderTerminate={[Function]}
-                  onResponderTerminationRequest={[Function]}
-                  onStartShouldSetResponder={[Function]}
-                  style={
-                    Object {
-                      "alignItems": "center",
-                      "backgroundColor": "#fff59b",
-                      "borderColor": "#104e01",
-                      "borderRadius": 11.25,
-                      "borderWidth": 1,
-                      "flexDirection": "row",
-                      "height": "100%",
-                      "justifyContent": "space-evenly",
-                      "maxWidth": "50%",
-                      "minHeight": 80.03999999999999,
-                      "minWidth": 285,
-                      "opacity": 1,
-                    }
-                  }
-                  testID="registerButton"
-                >
-                  <Icon
-                    name="account-plus"
-                    size={53.36}
-                    style={
-                      Object {
-                        "color": "#104e01",
-                      }
-                    }
-                  />
-                  <Text
-                    maxFontSizeMultiplier={1.5}
-                    style={
-                      Object {
-                        "color": "#104e01",
-                        "fontSize": 27.53633962602873,
-                        "fontWeight": "bold",
-                        "paddingHorizontal": 7.5,
-                        "textAlign": "center",
-                      }
-                    }
-                  >
-                    Register
-                  </Text>
-                </View>
-                <View
-                  accessible={true}
-                  collapsable={false}
-                  focusable={true}
-                  onClick={[Function]}
-                  onResponderGrant={[Function]}
-                  onResponderMove={[Function]}
-                  onResponderRelease={[Function]}
-                  onResponderTerminate={[Function]}
-                  onResponderTerminationRequest={[Function]}
-                  onStartShouldSetResponder={[Function]}
-                  style={
-                    Object {
-                      "alignItems": "center",
-                      "backgroundColor": "#fff59b",
-                      "borderColor": "#104e01",
-                      "borderRadius": 11.25,
-                      "borderWidth": 1,
-                      "flexDirection": "row",
-                      "height": "100%",
-                      "justifyContent": "space-evenly",
-                      "maxWidth": "50%",
-                      "minHeight": 80.03999999999999,
-                      "minWidth": 285,
-                      "opacity": 1,
-                    }
-                  }
-                  testID="forgotPasswordButton"
-                >
-                  <Icon
-                    name="lock-open"
-                    size={53.36}
-                    style={
-                      Object {
-                        "color": "#104e01",
-                      }
-                    }
-                  />
-                  <Text
-                    maxFontSizeMultiplier={1.7}
-                    style={
-                      Object {
-                        "color": "#104e01",
-                        "fontSize": 27.53633962602873,
-                        "fontWeight": "bold",
-                        "paddingHorizontal": 7.5,
-                        "textAlign": "center",
-                      }
-                    }
-                  >
-                    Forgot
-                    
-
-                    password
-                  </Text>
-                </View>
-              </View>
-            </View>
-            <View
-              style={
-                Object {
-                  "borderColor": "red",
-                  "borderWidth": 0,
-                  "overflow": "hidden",
-                  "width": "100%",
-                }
-              }
-            >
-              <View
-                style={
-                  Object {
-                    "alignItems": "center",
-                    "borderColor": "purple",
-                    "borderRadius": 11.25,
-                    "borderWidth": 0,
-                    "flexDirection": "row",
-                    "flexWrap": "wrap",
-                    "justifyContent": "space-between",
-                    "marginTop": 6.67,
-                    "minHeight": 80.03999999999999,
-                    "overflow": "hidden",
-                    "width": "100%",
-                  }
-                }
-              >
-                <View
-                  accessible={true}
-                  collapsable={false}
-                  focusable={true}
-                  onClick={[Function]}
-                  onResponderGrant={[Function]}
-                  onResponderMove={[Function]}
-                  onResponderRelease={[Function]}
-                  onResponderTerminate={[Function]}
-                  onResponderTerminationRequest={[Function]}
-                  onStartShouldSetResponder={[Function]}
-                  style={
-                    Object {
-                      "alignItems": "center",
-                      "backgroundColor": "#fff59b",
-                      "borderColor": "#104e01",
-                      "borderRadius": 11.25,
-                      "borderWidth": 1,
-                      "flexDirection": "row",
-                      "height": "100%",
-                      "justifyContent": "center",
-                      "maxWidth": "100%",
-                      "minHeight": 80.03999999999999,
-                      "minWidth": 285,
-                      "opacity": 1,
-                      "width": "100%",
-                    }
-                  }
-                  testID="loginButton"
-                >
-                  <Icon
-                    name="login"
-                    size={53.36}
-                    style={
-                      Object {
-                        "color": "#104e01",
-                      }
-                    }
-                  />
-                  <Text
-                    maxFontSizeMultiplier={2}
-                    style={
-                      Array [
-                        Object {
-                          "color": "#104e01",
-                          "fontSize": 27.53633962602873,
-                          "fontWeight": "bold",
-                          "paddingHorizontal": 7.5,
-                          "textAlign": "center",
-                        },
-                        Object {
-                          "marginLeft": 30,
-                        },
-                      ]
-                    }
-                  >
-                    Login
-                  </Text>
-                </View>
-              </View>
-            </View>
-          </View>
-        </View>
-      </View>
-    </RCTScrollView>
-  </View>
-</RCTSafeAreaView>
-`;
-
-exports[`login page logging in under different conditions should display deactivated message if account was deactivated 2`] = `
-<RCTSafeAreaView
-  emulateUnlessSupported={true}
-  style={
-    Object {
-      "borderColor": "blue",
-      "borderWidth": 0,
-      "flex": 1,
-    }
-  }
->
-  <View
-    onLayout={[Function]}
-    style={
-      Array [
-        Object {
-          "alignItems": "center",
-          "borderColor": "red",
-          "borderWidth": 0,
-          "flex": 1,
-        },
-        Object {
-          "paddingBottom": 0,
-        },
-      ]
-    }
-  >
-    <Image
-      resizeMode="cover"
-      source={1}
-      style={
-        Object {
-          "borderColor": "black",
-          "borderWidth": 0,
-          "height": 1334,
-          "position": "absolute",
-          "width": 750,
-        }
-      }
-    />
-    <RCTScrollView
-      keyboardShouldPersistTaps="always"
-      nestedScrollEnabled={true}
-      scrollEnabled={true}
-      style={
-        Object {
-          "borderColor": "yellow",
-          "borderWidth": 0,
-          "flex": 1,
-        }
-      }
-    >
-      <View>
-        <View
-          accessible={true}
-          collapsable={false}
-          focusable={true}
-          onClick={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-          style={
-            Object {
-              "flex": 1,
-              "opacity": 1,
-            }
-          }
-        >
-          <View
-            style={
-              Object {
-                "alignItems": "center",
-                "justifyContent": "center",
-                "top": 133.4,
-              }
-            }
-          >
-            <Image
-              resizeMode="contain"
-              source={1}
-              style={
-                Object {
-                  "height": 266.8,
-                  "width": "75%",
-                }
-              }
-            />
-          </View>
-          <View
-            style={
-              Array [
-                Object {
-                  "alignItems": "center",
-                  "borderWidth": 0,
-                  "justifyContent": "center",
-                  "marginLeft": 75,
-                  "marginRight": 75,
-                  "width": 600,
-                },
-                Object {
-                  "marginTop": 200.1,
-                },
-              ]
-            }
-          >
-            <View
-              style={
-                Object {
-                  "borderColor": "red",
-                  "borderWidth": 0,
-                  "overflow": "hidden",
-                  "width": "100%",
-                }
-              }
-            >
-              <View
-                style={
-                  Object {
-                    "alignItems": "center",
-                    "borderColor": "purple",
-                    "borderRadius": 11.25,
-                    "borderWidth": 0,
-                    "flexDirection": "row",
-                    "flexWrap": "wrap",
-                    "justifyContent": "space-between",
-                    "marginTop": 6.67,
-                    "minHeight": 80.03999999999999,
-                    "overflow": "hidden",
-                    "width": "100%",
-                  }
-                }
-              >
-                <View
-                  style={
-                    Object {
-                      "alignItems": "center",
-                      "backgroundColor": "white",
-                      "borderColor": "#104e01",
-                      "borderRadius": 11.25,
-                      "borderWidth": 1,
-                      "flexDirection": "row",
-                      "height": "100%",
-                      "overflow": "hidden",
-                      "width": "100%",
-                    }
-                  }
-                >
-                  <Text
-                    maxFontSizeMultiplier={1.5}
-                    style={
-                      Object {
-                        "borderRadius": 11.25,
-                        "color": "#505050",
-                        "fontSize": 33.35,
-                        "fontWeight": "bold",
-                        "height": "100%",
-                        "overflow": "hidden",
-                        "paddingHorizontal": 15,
-                        "paddingVertical": 7.5,
-                        "textAlign": "center",
-                        "width": "100%",
-                      }
-                    }
-                  >
-                    Welcome, chef!
-                    
-
-                     Please log in or register
-                  </Text>
-                </View>
-              </View>
-            </View>
-            <View
-              style={
-                Object {
-                  "borderColor": "red",
-                  "borderWidth": 0,
-                  "overflow": "hidden",
-                  "width": "100%",
-                }
-              }
-            >
-              <View
-                style={
-                  Object {
-                    "alignItems": "center",
-                    "borderColor": "purple",
-                    "borderRadius": 11.25,
-                    "borderWidth": 0,
-                    "flexDirection": "row",
-                    "flexWrap": "wrap",
-                    "justifyContent": "space-between",
-                    "marginTop": 6.67,
-                    "minHeight": 80.03999999999999,
-                    "overflow": "hidden",
-                    "width": "100%",
-                  }
-                }
-              >
-                <View
-                  style={
-                    Object {
-                      "alignItems": "center",
-                      "backgroundColor": "white",
-                      "borderColor": "#104e01",
-                      "borderRadius": 11.25,
-                      "borderWidth": 1,
-                      "flexDirection": "row",
-                      "height": "100%",
-                      "overflow": "hidden",
-                      "width": "100%",
-                    }
-                  }
-                >
-                  <TextInput
-                    autoCapitalize="none"
-                    autoCompleteType="email"
-                    keyboardType="email-address"
-                    maxFontSizeMultiplier={2}
-                    onChangeText={[Function]}
-                    placeholder="e-mail"
-                    style={
-                      Object {
-                        "fontSize": 30.595932917809698,
-                        "paddingLeft": 15,
-                        "paddingVertical": 6.67,
-                        "textAlign": "left",
-                        "textAlignVertical": "center",
-                        "width": "100%",
-                      }
-                    }
-                    testID="usernameInput"
-                    textContentType="username"
-                    value="username@email.com"
-                  />
-                </View>
-              </View>
-            </View>
-            <View
-              style={
-                Object {
-                  "borderColor": "red",
-                  "borderWidth": 0,
-                  "overflow": "hidden",
-                  "width": "100%",
-                }
-              }
-            >
-              <View
-                style={
-                  Object {
-                    "alignItems": "center",
-                    "borderColor": "purple",
-                    "borderRadius": 11.25,
-                    "borderWidth": 0,
-                    "flexDirection": "row",
-                    "flexWrap": "wrap",
-                    "justifyContent": "space-between",
-                    "marginTop": 6.67,
-                    "minHeight": 80.03999999999999,
-                    "overflow": "hidden",
-                    "width": "100%",
-                  }
-                }
-              >
-                <View
-                  style={
-                    Object {
-                      "alignItems": "center",
-                      "backgroundColor": "white",
-                      "borderColor": "#104e01",
-                      "borderRadius": 11.25,
-                      "borderWidth": 1,
-                      "flexDirection": "row",
-                      "height": "100%",
-                      "overflow": "hidden",
-                      "width": "100%",
-                    }
-                  }
-                >
-                  <TextInput
-                    autoCapitalize="none"
-                    autoCompleteType="password"
-                    maxFontSizeMultiplier={2}
-                    onChangeText={[Function]}
-                    placeholder="password"
-                    secureTextEntry={true}
-                    style={
-                      Object {
-                        "fontSize": 30.595932917809698,
-                        "paddingLeft": 15,
-                        "paddingVertical": 6.67,
-                        "textAlign": "left",
-                        "textAlignVertical": "center",
-                        "width": "100%",
-                      }
-                    }
-                    testID="passwordInput"
-                    textContentType="password"
-                    value=""
+                    value="myTestPassword"
                   />
                   <View
                     accessible={true}
@@ -2604,7 +1809,7 @@ exports[`login page logging in under different conditions should display invalid
                 >
                   <TextInput
                     autoCapitalize="none"
-                    autoCompleteType="email"
+                    autoComplete="email"
                     keyboardType="email-address"
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
@@ -2670,7 +1875,7 @@ exports[`login page logging in under different conditions should display invalid
                 >
                   <TextInput
                     autoCapitalize="none"
-                    autoCompleteType="password"
+                    autoComplete="password"
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="password"
@@ -2687,7 +1892,7 @@ exports[`login page logging in under different conditions should display invalid
                     }
                     testID="passwordInput"
                     textContentType="password"
-                    value=""
+                    value="myTestPassword"
                   />
                   <View
                     accessible={true}
@@ -3399,7 +2604,7 @@ exports[`login page logging in under different conditions should display passwor
                 >
                   <TextInput
                     autoCapitalize="none"
-                    autoCompleteType="email"
+                    autoComplete="email"
                     keyboardType="email-address"
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
@@ -3465,7 +2670,7 @@ exports[`login page logging in under different conditions should display passwor
                 >
                   <TextInput
                     autoCapitalize="none"
-                    autoCompleteType="password"
+                    autoComplete="password"
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="password"
@@ -3482,7 +2687,7 @@ exports[`login page logging in under different conditions should display passwor
                     }
                     testID="passwordInput"
                     textContentType="password"
-                    value=""
+                    value="myTestPassword"
                   />
                   <View
                     accessible={true}
@@ -4194,7 +3399,7 @@ exports[`login page logging in under different conditions should display reactiv
                 >
                   <TextInput
                     autoCapitalize="none"
-                    autoCompleteType="email"
+                    autoComplete="email"
                     keyboardType="email-address"
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
@@ -4260,7 +3465,7 @@ exports[`login page logging in under different conditions should display reactiv
                 >
                   <TextInput
                     autoCapitalize="none"
-                    autoCompleteType="password"
+                    autoComplete="password"
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="password"
@@ -4989,7 +4194,7 @@ exports[`login page logging in under different conditions should instruct how to
                 >
                   <TextInput
                     autoCapitalize="none"
-                    autoCompleteType="email"
+                    autoComplete="email"
                     keyboardType="email-address"
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
@@ -5055,7 +4260,7 @@ exports[`login page logging in under different conditions should instruct how to
                 >
                   <TextInput
                     autoCapitalize="none"
-                    autoCompleteType="password"
+                    autoComplete="password"
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="password"
@@ -5784,7 +4989,7 @@ exports[`login page logging in under different conditions should password reset 
                 >
                   <TextInput
                     autoCapitalize="none"
-                    autoCompleteType="email"
+                    autoComplete="email"
                     keyboardType="email-address"
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
@@ -5850,7 +5055,7 @@ exports[`login page logging in under different conditions should password reset 
                 >
                   <TextInput
                     autoCapitalize="none"
-                    autoCompleteType="password"
+                    autoComplete="password"
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="password"
@@ -6579,7 +5784,7 @@ exports[`login page should load and render 1`] = `
                 >
                   <TextInput
                     autoCapitalize="none"
-                    autoCompleteType="email"
+                    autoComplete="email"
                     keyboardType="email-address"
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
@@ -6645,7 +5850,7 @@ exports[`login page should load and render 1`] = `
                 >
                   <TextInput
                     autoCapitalize="none"
-                    autoCompleteType="password"
+                    autoComplete="password"
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="password"

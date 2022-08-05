@@ -1,14 +1,17 @@
 // import saveChefDetailsLocally from '../auxFunctions/saveChefDetailsLocally'
-import { databaseURL } from "../dataComponents/databaseURL"
-import { actionTimeout } from "../dataComponents/timeouts"
-import type { LoginChef } from "../centralTypes"
+import { databaseURL } from "../dataComponents/databaseURL";
+import { actionTimeout } from "../dataComponents/timeouts";
+import type { ApiError, LoginChef } from "../centralTypes";
 
-export const loginChef = (chef: { e_mail: string; password: string }): Promise<LoginChef> => {
+export const postLoginChef = (chef: {
+	e_mail: string;
+	password: string;
+}): Promise<LoginChef | ApiError> => {
 	// console.log(chef.password.trim())
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
-			reject({ name: "Timeout" })
-		}, actionTimeout)
+			reject({ name: "Timeout" });
+		}, actionTimeout);
 
 		fetch(`${databaseURL}/chefs/authenticate`, {
 			method: "POST",
@@ -25,11 +28,12 @@ export const loginChef = (chef: { e_mail: string; password: string }): Promise<L
 			.then((res) => res.json())
 			.then((chef) => {
 				if (chef) {
-					resolve(chef)
+					resolve(chef);
 				}
 			})
 			.catch((e) => {
-				reject(e)
-			})
-	})
-}
+				console.log(e);
+				reject(e);
+			});
+	});
+};

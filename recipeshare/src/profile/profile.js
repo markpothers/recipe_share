@@ -16,7 +16,7 @@ import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-nat
 import OfflineMessage from "../offlineMessage/offlineMessage";
 import NetInfo from "@react-native-community/netinfo";
 NetInfo.configure({ reachabilityShortTimeout: 5 }); //5ms
-import { AlertPopUp } from "../alertPopUp/alertPopUp";
+import { AlertPopup } from "../alertPopup/alertPopup";
 import DynamicMenu from "../dynamicMenu/DynamicMenu";
 import AppHeaderRight from "../../navigation/appHeaderRight";
 import { storeChefDetails, storeNewFollowers, updateNewUserDetails } from "../redux";
@@ -313,9 +313,9 @@ export default connect(
 			}
 		};
 
-		renderChefUpdatedAlertPopUp = () => {
+		renderChefUpdatedAlertPopup = () => {
 			return (
-				<AlertPopUp
+				<AlertPopup
 					// close={() => this.setState({ chefUpdatedMessageShowing: false })}
 					title={"Your profile has been updated"}
 					yesText={"Ok"}
@@ -324,9 +324,9 @@ export default connect(
 			);
 		};
 
-		renderAreYouSureDeleteEverythingAlertPopUp = () => {
+		renderAreYouSureDeleteEverythingAlertPopup = () => {
 			return (
-				<AlertPopUp
+				<AlertPopup
 					close={() => this.setState({ areYouSureDeleteEverythingMessageShowing: false })}
 					title={"Last Chance! Are you sure you close your account?"}
 					onYes={() => this.deleteChefAccount(true)}
@@ -334,9 +334,9 @@ export default connect(
 			);
 		};
 
-		renderAreYouSureLeaveRecipesAlertPopUp = () => {
+		renderAreYouSureLeaveRecipesAlertPopup = () => {
 			return (
-				<AlertPopUp
+				<AlertPopup
 					close={() => this.setState({ areYouSureLeaveRecipesMessageShowing: false })}
 					title={"Last Chance! Are you sure you close your account?"}
 					onYes={() => this.deleteChefAccount(false)}
@@ -407,15 +407,15 @@ export default connect(
 							/>
 						)}
 						{this.state.dynamicMenuShowing && this.renderDynamicMenu()}
-						{this.state.chefUpdatedMessageShowing && this.renderChefUpdatedAlertPopUp()}
+						{this.state.chefUpdatedMessageShowing && this.renderChefUpdatedAlertPopup()}
 						{this.state.editingChef && this.renderChefEditor()}
 						{/* {this.props.loggedInChef.is_admin ? this.renderDatabaseButtons() : null} */}
 						{this.state.choosingPicture && this.renderPictureChooser()}
 						{this.state.deleteChefOptionVisible && this.renderDeleteChefOption()}
 						{this.state.areYouSureDeleteEverythingMessageShowing &&
-							this.renderAreYouSureDeleteEverythingAlertPopUp()}
+							this.renderAreYouSureDeleteEverythingAlertPopup()}
 						{this.state.areYouSureLeaveRecipesMessageShowing &&
-							this.renderAreYouSureLeaveRecipesAlertPopUp()}
+							this.renderAreYouSureLeaveRecipesAlertPopup()}
 						<ChefDetailsCard
 							{...chef_details}
 							email={chef_details.chef.email}

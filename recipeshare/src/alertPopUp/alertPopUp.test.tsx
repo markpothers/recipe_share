@@ -1,8 +1,8 @@
 import React from "react"
 import { render, fireEvent } from "@testing-library/react-native"
-import { AlertPopUp } from "./alertPopUp"
+import { AlertPopup } from "./alertPopup"
 
-describe("AlertPopUp", () => {
+describe("AlertPopup", () => {
 	let mockClose
 	let mockYes
 
@@ -13,7 +13,7 @@ describe("AlertPopUp", () => {
 
 	test("renders with 2 buttons and customizable text", () => {
 		const { toJSON, getAllByRole } = render(
-			<AlertPopUp
+			<AlertPopup
 				close={mockClose}
 				closeText={"mock close text"}
 				title={"Here is a mock alert question that's being asked"}
@@ -28,7 +28,7 @@ describe("AlertPopUp", () => {
 
 	test("renders with 2 buttons and default text", () => {
 		const { toJSON, getAllByRole } = render(
-			<AlertPopUp
+			<AlertPopup
 					close={mockClose}
 					// closeText={"mock close text"}
 					title={"Here is a mock alert question that's being asked"}
@@ -43,7 +43,7 @@ describe("AlertPopUp", () => {
 
 	test("renders with 1 button when no close button and customizable text", () => {
 		const { toJSON, getAllByRole } = render(
-			<AlertPopUp
+			<AlertPopup
 					// close={mockClose}
 					// closeText={"mock close text"}
 					title={"Here is a mock alert question that's being asked"}
@@ -58,7 +58,7 @@ describe("AlertPopUp", () => {
 
 	test("calls the yes function when button pressed", () => {
 		const { toJSON, getByText } = render(
-			<AlertPopUp
+			<AlertPopup
 				close={mockClose}
 				closeText={"mock close text"}
 				title={"Here is a mock alert question that's being asked"}
@@ -74,7 +74,7 @@ describe("AlertPopUp", () => {
 
 	test("calls the close function when button pressed", () => {
 		const { toJSON, getByText } = render(
-			<AlertPopUp
+			<AlertPopup
 				close={mockClose}
 				closeText={"mock close text"}
 				title={"Here is a mock alert question that's being asked"}

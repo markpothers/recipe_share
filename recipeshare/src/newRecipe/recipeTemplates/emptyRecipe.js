@@ -1,5 +1,5 @@
 export const emptyRecipe = {
-	alertPopUpShowing: false,
+	alertPopupShowing: false,
 	errors: [],
 	newRecipeDetails: {
 		recipeId: null,

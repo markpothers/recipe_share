@@ -37,7 +37,7 @@ import { clearedFilters } from "../dataComponents/clearedFilters"
 import OfflineMessage from "../offlineMessage/offlineMessage"
 import NetInfo from "@react-native-community/netinfo"
 NetInfo.configure({ reachabilityShortTimeout: 5 }) //5ms
-import { AlertPopUp } from "../alertPopUp/alertPopUp"
+import { AlertPopup } from "../alertPopup/alertPopup"
 import AppHeader from "../../navigation/appHeader"
 import { getTimeStringFromMinutes, getMinutesFromTimeString } from "../auxFunctions/getTimeStringFromMinutes"
 import SwitchSized from "../customComponents/switchSized/switchSized"
@@ -68,7 +68,7 @@ export default connect(
 				hasPermission: false,
 				renderOfflineMessage: false,
 				isFocused: true,
-				alertPopUpShowing: false,
+				alertPopupShowing: false,
 				helpShowing: false,
 				helpText: "",
 				ingredientsList: [],
@@ -263,14 +263,14 @@ export default connect(
 		}
 
 		askToReset = () => {
-			this.setState({ alertPopUpShowing: true })
+			this.setState({ alertPopupShowing: true })
 		}
 
-		renderAlertPopUp = () => {
+		renderAlertPopup = () => {
 			let isEditing = this.props.route.params?.recipe_details !== undefined
 			return (
-				<AlertPopUp
-					close={() => this.setState({ alertPopUpShowing: false })}
+				<AlertPopup
+					close={() => this.setState({ alertPopupShowing: false })}
 					title={
 						isEditing
 							? "Are you sure you want to clear your changes and revert to the original recipe"
@@ -285,7 +285,7 @@ export default connect(
 			AsyncStorage.removeItem("localNewRecipeDetails", async () => {
 				this.setState({
 					...(testing ? testRecipe : emptyRecipe),
-					alertPopUpShowing: false
+					alertPopupShowing: false
 				})
 				this.props.navigation.setOptions({
 					headerTitle: (props) => (
@@ -305,7 +305,7 @@ export default connect(
 								// if you updated the saved recipe you don't want to refresh async store before leaving
 								await this.setRecipeParamsForEditing(this.props.route.params.recipe_details)
 							}
-							this.setState({ alertPopUpShowing: false })
+							this.setState({ alertPopupShowing: false })
 						}
 					}
 				)
@@ -878,7 +878,7 @@ export default connect(
 					)}
 					{this.state.choosingPrimaryPicture && this.renderPrimaryPictureChooser()}
 					{this.state.choosingInstructionPicture && this.renderInstructionPictureChooser()}
-					{this.state.alertPopUpShowing && this.renderAlertPopUp()}
+					{this.state.alertPopupShowing && this.renderAlertPopup()}
 					{this.state.helpShowing && this.renderHelp()}
 					<KeyboardAvoidingView
 						style={centralStyles.fullPageKeyboardAvoidingView}

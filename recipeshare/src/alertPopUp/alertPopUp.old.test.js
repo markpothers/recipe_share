@@ -1,10 +1,10 @@
 import React from "react"
 import renderer, { act } from "react-test-renderer"
 
-import { AlertPopUp } from "./alertPopUp.tsx"
+import { AlertPopup } from "./alertPopup.tsx"
 import { TouchableOpacity } from "react-native"
 
-describe("AlertPopUp", () => {
+describe("AlertPopup", () => {
 
 	let component
 	let mockClose
@@ -31,7 +31,7 @@ describe("AlertPopUp", () => {
 	test("renders with 2 buttons and customizable text", () => {
 		act(() => {
 			component = renderer.create(
-				<AlertPopUp
+				<AlertPopup
 					close={mockClose}
 					closeText={"mock text"}
 					title={"Here is a mock alert question that's being asked"}
@@ -50,7 +50,7 @@ describe("AlertPopUp", () => {
 	test("renders with 2 buttons and default text", () => {
 		act(() => {
 			component = renderer.create(
-				<AlertPopUp
+				<AlertPopup
 					close={mockClose}
 					// closeText={"mock text"}
 					title={"Here is a mock alert question that's being asked"}
@@ -69,7 +69,7 @@ describe("AlertPopUp", () => {
 	test("renders with 1 button when no close button and customizable text", () => {
 		act(() => {
 			component = renderer.create(
-				<AlertPopUp
+				<AlertPopup
 					// close={mockClose}
 					// closeText={"mock text"}
 					title={"Here is a mock alert question that's being asked"}
@@ -88,7 +88,7 @@ describe("AlertPopUp", () => {
 	test("calls the yes function when button pressed", () => {
 		act(() => {
 			component = renderer.create(
-				<AlertPopUp
+				<AlertPopup
 					close={mockClose}
 					closeText={"mock text"}
 					title={"Here is a mock alert question that's being asked"}
@@ -109,7 +109,7 @@ describe("AlertPopUp", () => {
 	test("calls the close function when button pressed", () => {
 		act(() => {
 			component = renderer.create(
-				<AlertPopUp
+				<AlertPopup
 					close={mockClose}
 					closeText={"mock text"}
 					title={"Here is a mock alert question that's being asked"}

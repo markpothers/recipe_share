@@ -22,7 +22,7 @@ import { recipeList } from "../../__mocks__/data/recipeList"
 import { initialState, middleware } from "../redux/store"
 import reducer from "../redux/reducer"
 import { TouchableOpacity } from "react-native"
-// import { AlertPopUp } from '../alertPopUp/alertPopUp'
+// import { AlertPopup } from '../alertPopup/alertPopup'
 // import AsyncStorage from '@react-native-async-storage/async-storage'
 import OfflineMessage from "../offlineMessage/offlineMessage"
 // import { apiCall } from '../auxFunctions/apiCall'

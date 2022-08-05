@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AlertPopUp calls the close function when button pressed 1`] = `
+exports[`AlertPopup calls the close function when button pressed 1`] = `
 <Modal
   animationType="fade"
   hardwareAccelerated={false}
@@ -213,7 +213,7 @@ exports[`AlertPopUp calls the close function when button pressed 1`] = `
 </Modal>
 `;
 
-exports[`AlertPopUp calls the yes function when button pressed 1`] = `
+exports[`AlertPopup calls the yes function when button pressed 1`] = `
 <Modal
   animationType="fade"
   hardwareAccelerated={false}
@@ -426,7 +426,7 @@ exports[`AlertPopUp calls the yes function when button pressed 1`] = `
 </Modal>
 `;
 
-exports[`AlertPopUp renders with 1 button when no close button and customizable text 1`] = `
+exports[`AlertPopup renders with 1 button when no close button and customizable text 1`] = `
 <Modal
   animationType="fade"
   hardwareAccelerated={false}
@@ -607,7 +607,7 @@ exports[`AlertPopUp renders with 1 button when no close button and customizable 
 </Modal>
 `;
 
-exports[`AlertPopUp renders with 2 buttons and customizable text 1`] = `
+exports[`AlertPopup renders with 2 buttons and customizable text 1`] = `
 <Modal
   animationType="fade"
   hardwareAccelerated={false}

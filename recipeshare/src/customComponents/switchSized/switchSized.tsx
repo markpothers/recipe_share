@@ -6,10 +6,10 @@ import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-nat
 type Props = {
 	disabled?: boolean;
 	value: boolean;
-	onValueChange: () => void;
+	onValueChange: (value: boolean) => void;
 	trackColor?: { true: string, false: string };
 	thumbColor?: string;
-	testId?: string;
+	testID?: string;
 }
 
 export default function SwitchSized(props: Props) {

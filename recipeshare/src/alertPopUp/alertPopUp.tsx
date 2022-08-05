@@ -1,5 +1,5 @@
 import { Modal, Text, View, TouchableOpacity } from "react-native"
-import { styles } from "./alertPopUpStyleSheet"
+import { styles } from "./alertPopupStyleSheet"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 import {
 	responsiveWidth,
@@ -17,7 +17,7 @@ type Props = {
 	yesText?: String;
 };
 
-export function AlertPopUp(props: Props) {
+export function AlertPopup(props: Props) {
 	return (
 		<Modal animationType="fade" transparent={true} visible={true}>
 			<View

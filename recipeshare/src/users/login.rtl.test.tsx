@@ -5,13 +5,17 @@ import { configureStore } from "@reduxjs/toolkit";
 import { rootReducer } from "../redux";
 import NetInfo from "@react-native-community/netinfo";
 import Login from "./login";
-import { apiCall } from "../auxFunctions/apiCall";
 import { saveToken } from "../auxFunctions/saveLoadToken";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { postLoginChef } from "../fetches/loginChef";
+import { getNewPassword } from "../fetches/getNewPassword";
 
 // manual mocks
-jest.mock("../auxFunctions/apiCall.js");
-jest.mock("../auxFunctions/saveLoadToken.ts");
+jest.mock("../fetches/loginChef");
+jest.mock("../fetches/getNewPassword");
+jest.mock("../auxFunctions/saveLoadToken");
+
+type MockedNetInfo = typeof NetInfo & { setReturnValue: ({ isConnected: boolean }) => void };
 
 describe("login page", () => {
 	let store, mockListener, mockListenerRemove, mockNavigate, navigation, route;
@@ -35,7 +39,7 @@ describe("login page", () => {
 
 		route = {};
 
-		NetInfo.setReturnValue({ isConnected: true });
+		(NetInfo as MockedNetInfo).setReturnValue({ isConnected: true });
 	});
 
 	afterEach(async () => {
@@ -63,7 +67,9 @@ describe("login page", () => {
 			</Provider>
 		);
 		fireEvent.changeText(getByPlaceholderText("e-mail"), "myEmail@test.com");
-		await waitFor(() => expect(getByPlaceholderText("e-mail").props.value).toStrictEqual("myEmail@test.com"));
+		await waitFor(() =>
+			expect(getByPlaceholderText("e-mail").props.value).toStrictEqual("myEmail@test.com")
+		);
 	});
 
 	test("should accept text in password input", async () => {
@@ -73,7 +79,9 @@ describe("login page", () => {
 			</Provider>
 		);
 		fireEvent.changeText(getByPlaceholderText("password"), "myTestPassword");
-		await waitFor(() => expect(getByPlaceholderText("password").props.value).toStrictEqual("myTestPassword"));
+		await waitFor(() =>
+			expect(getByPlaceholderText("password").props.value).toStrictEqual("myTestPassword")
+		);
 	});
 
 	test("should press to display/hide password", async () => {
@@ -84,7 +92,9 @@ describe("login page", () => {
 		);
 		expect(getByPlaceholderText("password").props.secureTextEntry).toStrictEqual(true);
 		fireEvent.press(getByTestId("visibilityButton"));
-		await waitFor(() => expect(getByPlaceholderText("password").props.secureTextEntry).toStrictEqual(false));
+		await waitFor(() =>
+			expect(getByPlaceholderText("password").props.secureTextEntry).toStrictEqual(false)
+		);
 	});
 
 	test("should accept toggle to remember username", async () => {
@@ -97,7 +107,9 @@ describe("login page", () => {
 		fireEvent.press(getByTestId("rememberEmailButton")); // works through the button
 		fireEvent.press(getByTestId("rememberEmailToggle")); // works through the toggle
 		fireEvent.press(getByTestId("rememberEmailButton"));
-		await waitFor(() => expect(getByTestId("rememberEmailToggle").props.value).toStrictEqual(true));
+		await waitFor(() =>
+			expect(getByTestId("rememberEmailToggle").props.value).toStrictEqual(true)
+		);
 	});
 
 	test("should accept toggle to stay logged in", async () => {
@@ -110,7 +122,9 @@ describe("login page", () => {
 		fireEvent.press(getByTestId("stayLoggedInButton")); // works through the button
 		fireEvent.press(getByTestId("stayLoggedInToggle")); // works through the toggle
 		fireEvent.press(getByTestId("stayLoggedInButton"));
-		await waitFor(() => expect(getByTestId("stayLoggedInToggle").props.value).toStrictEqual(true));
+		await waitFor(() =>
+			expect(getByTestId("stayLoggedInToggle").props.value).toStrictEqual(true)
+		);
 	});
 
 	test("should be able to navigate to registration page", async () => {
@@ -124,7 +138,9 @@ describe("login page", () => {
 	});
 
 	test("renders with thanks for registering popup", async () => {
-		AsyncStorage.getItem.mockResolvedValueOnce(JSON.stringify("test@email.com"));
+		(
+			AsyncStorage.getItem as jest.MockedFunction<typeof AsyncStorage.getItem>
+		).mockResolvedValueOnce(JSON.stringify("test@email.com"));
 		const { getByText } = render(
 			<Provider store={store}>
 				<Login
@@ -133,6 +149,8 @@ describe("login page", () => {
 						params: {
 							successfulRegistration: true,
 						},
+						key: "key",
+						name: "testLogin",
 					}}
 				/>
 			</Provider>
@@ -181,7 +199,9 @@ describe("login page", () => {
 
 		test("logs in successfully and remembers email address", async () => {
 			// arrange
-			apiCall.mockImplementation(() => Promise.resolve(loginResponse));
+			(postLoginChef as jest.MockedFunction<typeof postLoginChef>).mockImplementation(() =>
+				Promise.resolve(loginResponse)
+			);
 
 			// act
 			fireEvent.changeText(getByPlaceholderText("e-mail"), "username@email.com");
@@ -190,12 +210,18 @@ describe("login page", () => {
 			fireEvent.press(getByText("Login"));
 
 			// assert
-			await waitFor(() => expect(mockNavigate).toBeCalledWith("CreateChef", { successfulLogin: true }));
+			await waitFor(() =>
+				expect(mockNavigate).toBeCalledWith("CreateChef", {
+					successfulLogin: true,
+				})
+			);
 		});
 
 		test("logs in successfully and doesn't remember email address", async () => {
 			// arrange
-			apiCall.mockImplementation(() => Promise.resolve(loginResponse));
+			(postLoginChef as jest.MockedFunction<typeof postLoginChef>).mockImplementation(() =>
+				Promise.resolve(loginResponse)
+			);
 
 			// act
 			fireEvent.changeText(getByPlaceholderText("e-mail"), "username@email.com");
@@ -209,7 +235,9 @@ describe("login page", () => {
 		test("logs in successfully staying logged in", async () => {
 			// arrange
 			const originalLoginResponse = { ...loginResponse }; // copied because it gets modified in the actual method
-			apiCall.mockImplementation(() => Promise.resolve(loginResponse));
+			(postLoginChef as jest.MockedFunction<typeof postLoginChef>).mockImplementation(() =>
+				Promise.resolve(loginResponse)
+			);
 
 			// act
 			fireEvent.changeText(getByPlaceholderText("e-mail"), "username@email.com");
@@ -218,7 +246,9 @@ describe("login page", () => {
 			fireEvent.press(getByText("Login"));
 
 			// assert
-			await waitFor(() => expect(getByPlaceholderText("e-mail").props.value).toStrictEqual("")); // value is updated in redux by clearLoginUserDetails
+			await waitFor(() =>
+				expect(getByPlaceholderText("e-mail").props.value).toStrictEqual("")
+			); // value is updated in redux by clearLoginUserDetails
 			expect(getByPlaceholderText("password").props.value).toStrictEqual(""); //value is updated in redux
 			const loginResponseWithoutAuth = { ...originalLoginResponse };
 			delete loginResponseWithoutAuth.auth_token;
@@ -237,12 +267,16 @@ describe("login page", () => {
 				is_admin: originalLoginResponse.is_admin,
 				is_member: originalLoginResponse.is_member,
 			}); //value is updated in redux by UpdateLoggedInChefInState
-			expect(mockNavigate).toHaveBeenCalledWith("CreateChef", { successfulLogin: true });
+			expect(mockNavigate).toHaveBeenCalledWith("CreateChef", {
+				successfulLogin: true,
+			});
 		});
 
 		test("logs in successfully and not staying logged in", async () => {
 			// arrange
-			apiCall.mockImplementation(() => Promise.resolve(loginResponse));
+			(postLoginChef as jest.MockedFunction<typeof postLoginChef>).mockImplementation(() =>
+				Promise.resolve(loginResponse)
+			);
 
 			// act
 			fireEvent.changeText(getByPlaceholderText("e-mail"), "username@email.com");
@@ -250,7 +284,9 @@ describe("login page", () => {
 			fireEvent.press(getByText("Login"));
 
 			// assert
-			await waitFor(() => expect(getByPlaceholderText("e-mail").props.value).toStrictEqual("")); // value is updated in redux by clearLoginUserDetails
+			await waitFor(() =>
+				expect(getByPlaceholderText("e-mail").props.value).toStrictEqual("")
+			); // value is updated in redux by clearLoginUserDetails
 			expect(getByPlaceholderText("password").props.value).toStrictEqual(""); //value is updated in redux
 			expect(AsyncStorage.setItem).not.toBeCalled();
 			expect(store.getState().root.loggedInChef).toStrictEqual({
@@ -263,12 +299,16 @@ describe("login page", () => {
 				is_member: loginResponse.is_member,
 			}); //value is updated in redux by UpdateLoggedInChefInState
 			expect(saveToken).not.toHaveBeenCalledWith();
-			expect(mockNavigate).toHaveBeenCalledWith("CreateChef", { successfulLogin: true });
+			expect(mockNavigate).toHaveBeenCalledWith("CreateChef", {
+				successfulLogin: true,
+			});
 		});
 
 		test("should password reset message after reset", async () => {
 			// arrange
-			apiCall.mockImplementation(() => Promise.resolve({ message: "forgotPassword" }));
+			(getNewPassword as jest.MockedFunction<typeof getNewPassword>).mockImplementation(() =>
+				Promise.resolve({ error: true, message: "forgotPassword" })
+			);
 
 			// act
 			fireEvent.changeText(getByPlaceholderText("e-mail"), "username@email.com");
@@ -287,43 +327,56 @@ describe("login page", () => {
 
 		test("should instruct how to reset password if email is empty", async () => {
 			// arrange
-			apiCall.mockImplementation(() => Promise.resolve({ message: "forgotPassword" }));
 
 			// act
 			fireEvent.press(getByTestId("forgotPasswordButton"));
 
 			// assert
 			await waitFor(() =>
-				expect(getByText("Please enter your e-mail and hit the 'Forgot Password' button again.")).toBeTruthy()
+				expect(
+					getByText(
+						"Please enter your e-mail and hit the 'Forgot Password' button again."
+					)
+				).toBeTruthy()
 			);
 			expect(toJSON()).toMatchSnapshot();
 		});
 
 		test("should display invalid credentials message from a bad login", async () => {
 			// arrange
-			apiCall.mockImplementation(() => Promise.resolve({ message: "invalid" }));
+			(postLoginChef as jest.MockedFunction<typeof postLoginChef>).mockImplementation(() =>
+				Promise.resolve({ error: true, message: "invalid" })
+			);
 
 			// act
 			fireEvent.changeText(getByPlaceholderText("e-mail"), "username@email.com");
-			fireEvent.press(getByTestId("forgotPasswordButton"));
+			fireEvent.changeText(getByPlaceholderText("password"), "myTestPassword");
+			fireEvent.press(getByText("Login"));
 
 			// assert
-			await waitFor(() => expect(getByText("e-mail and password combination not recognized")).toBeTruthy());
+			await waitFor(() =>
+				expect(getByText("e-mail and password combination not recognized")).toBeTruthy()
+			);
 			expect(toJSON()).toMatchSnapshot();
 		});
 
 		test("should display password expired message if temp password has expired", async () => {
 			// arrange
-			apiCall.mockImplementation(() => Promise.resolve({ message: "password_expired" }));
+			(postLoginChef as jest.MockedFunction<typeof postLoginChef>).mockImplementation(() =>
+				Promise.resolve({ error: true, message: "password_expired" })
+			);
 
 			// act
 			fireEvent.changeText(getByPlaceholderText("e-mail"), "username@email.com");
-			fireEvent.press(getByTestId("forgotPasswordButton"));
+			fireEvent.changeText(getByPlaceholderText("password"), "myTestPassword");
+			fireEvent.press(getByText("Login"));
 
 			// assert
 			await waitFor(() =>
 				expect(
-					getByText("Automatically generated password has expired. Please reset your password.")
+					getByText(
+						"Automatically generated password has expired. Please reset your password."
+					)
 				).toBeTruthy()
 			);
 			expect(toJSON()).toMatchSnapshot();
@@ -331,11 +384,14 @@ describe("login page", () => {
 
 		test("should display activation required message if account is not activated", async () => {
 			// arrange
-			apiCall.mockImplementation(() => Promise.resolve({ message: "activation" }));
+			(postLoginChef as jest.MockedFunction<typeof postLoginChef>).mockImplementation(() =>
+				Promise.resolve({ error: true, message: "activation" })
+			);
 
 			// act
 			fireEvent.changeText(getByPlaceholderText("e-mail"), "username@email.com");
-			fireEvent.press(getByTestId("forgotPasswordButton"));
+			fireEvent.changeText(getByPlaceholderText("password"), "myTestPassword");
+			fireEvent.press(getByText("Login"));
 
 			// assert
 			await waitFor(() =>
@@ -350,33 +406,21 @@ describe("login page", () => {
 
 		test("should display deactivated message if account was deactivated", async () => {
 			// arrange
-			apiCall.mockImplementation(() => Promise.resolve({ message: "deactivated" }));
-
-			// act
-			fireEvent.changeText(getByPlaceholderText("e-mail"), "username@email.com");
-			fireEvent.press(getByTestId("forgotPasswordButton"));
-
-			// assert
-			await waitFor(() =>
-				expect(
-					getByText("This account was deactivated. Reset your password to reactivate your account.")
-				).toBeTruthy()
+			(postLoginChef as jest.MockedFunction<typeof postLoginChef>).mockImplementation(() =>
+				Promise.resolve({ error: true, message: "deactivated" })
 			);
-			expect(toJSON()).toMatchSnapshot();
-		});
-
-		test("should display deactivated message if account was deactivated", async () => {
-			// arrange
-			apiCall.mockImplementation(() => Promise.resolve({ message: "deactivated" }));
 
 			// act
 			fireEvent.changeText(getByPlaceholderText("e-mail"), "username@email.com");
-			fireEvent.press(getByTestId("forgotPasswordButton"));
+			fireEvent.changeText(getByPlaceholderText("password"), "myTestPassword");
+			fireEvent.press(getByText("Login"));
 
 			// assert
 			await waitFor(() =>
 				expect(
-					getByText("This account was deactivated. Reset your password to reactivate your account.")
+					getByText(
+						"This account was deactivated. Reset your password to reactivate your account."
+					)
 				).toBeTruthy()
 			);
 			expect(toJSON()).toMatchSnapshot();
@@ -384,7 +428,9 @@ describe("login page", () => {
 
 		test("should display reactivated message if account was reactivated", async () => {
 			// arrange
-			apiCall.mockImplementation(() => Promise.resolve({ message: "reactivate" }));
+			(getNewPassword as jest.MockedFunction<typeof getNewPassword>).mockImplementation(() =>
+				Promise.resolve({ error: true, message: "reactivate" })
+			);
 
 			// act
 			fireEvent.changeText(getByPlaceholderText("e-mail"), "username@email.com");
@@ -392,7 +438,9 @@ describe("login page", () => {
 
 			// assert
 			await waitFor(() =>
-				expect(getByText("We've e-mailed you a link to re-activate your account.")).toBeTruthy()
+				expect(
+					getByText("We've e-mailed you a link to re-activate your account.")
+				).toBeTruthy()
 			);
 			expect(toJSON()).toMatchSnapshot();
 		});
