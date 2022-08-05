@@ -3,8 +3,8 @@ let returnValue = {
 }
 
 export default {
-    setReturnValue: (newValue: { isConnected: boolean}): void => {
-        returnValue = newValue
+    setReturnValue: (isConnected: boolean): void => {
+        returnValue = { isConnected }
     },
 
     getCurrentConnectivity: jest.fn(),

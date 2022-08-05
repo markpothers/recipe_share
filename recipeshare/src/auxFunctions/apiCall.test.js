@@ -21,7 +21,7 @@ describe("apiCall", () => {
             return {error: true}
         })
 
-        NetInfo.setReturnValue({isConnected: true})
+        NetInfo.setReturnValue(true);
     })
 
     test("callback is called with no arguments", async() => {
@@ -60,7 +60,7 @@ describe("apiCall", () => {
     })
 
     test("response fails if internet not connected", async() => {
-        NetInfo.setReturnValue({isConnected: false})
+        NetInfo.setReturnValue(false)
         let response = await apiCall(mockSuccessfulCallback, 22)
         expect(mockSuccessfulCallback).not.toHaveBeenCalled()
         expect(response).toEqual({fail: true})

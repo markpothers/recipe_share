@@ -15,8 +15,6 @@ jest.mock("../fetches/loginChef");
 jest.mock("../fetches/getNewPassword");
 jest.mock("../auxFunctions/saveLoadToken");
 
-// type MockedNetInfo = typeof NetInfo & { setReturnValue: ({ isConnected }) => void };
-
 describe("login page", () => {
 	let store, mockListener, mockListenerRemove, mockNavigate, navigation, route;
 

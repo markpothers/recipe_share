@@ -87,7 +87,7 @@ describe("Recipe List", () => {
 			name: "All Recipes"
 		}
 
-		NetInfo.setReturnValue({ isConnected: true })
+		NetInfo.setReturnValue(true)
 
 	})
 

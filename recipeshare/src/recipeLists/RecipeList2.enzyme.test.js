@@ -84,7 +84,7 @@ describe("Recipe List", () => {
 			name: "All Recipes"
 		}
 
-		NetInfo.setReturnValue({ isConnected: true })
+		NetInfo.setReturnValue(true)
 
 	})
 
@@ -299,7 +299,7 @@ describe("Recipe List", () => {
 		})
 
 		test("liking a recipe while offline results in general offline error", async () => {
-			NetInfo.setReturnValue({ isConnected: false })
+			NetInfo.setReturnValue(false)
 			expect(instance.state.renderOfflineMessage).toEqual(false)
 			await act(async () => { await card.likeRecipe(recipe.id) })
 			expect(instance.state.renderOfflineMessage).toEqual(true)
@@ -333,7 +333,7 @@ describe("Recipe List", () => {
 		})
 
 		test("unliking a recipe while offline results in general offline error", async () => {
-			NetInfo.setReturnValue({ isConnected: false })
+			NetInfo.setReturnValue(false)
 			expect(instance.state.renderOfflineMessage).toEqual(false)
 			await act(async () => { await card.unlikeRecipe(recipe.id) })
 			expect(instance.state.renderOfflineMessage).toEqual(true)
@@ -366,7 +366,7 @@ describe("Recipe List", () => {
 		})
 
 		test("resharing a recipe while offline results in general offline error", async () => {
-			NetInfo.setReturnValue({ isConnected: false })
+			NetInfo.setReturnValue(false)
 			expect(instance.state.renderOfflineMessage).toEqual(false)
 			await act(async () => { await card.reShareRecipe(recipe.id) })
 			expect(instance.state.renderOfflineMessage).toEqual(true)
@@ -400,7 +400,7 @@ describe("Recipe List", () => {
 		})
 
 		test("unReSharing a recipe while offline results in general offline error", async () => {
-			NetInfo.setReturnValue({ isConnected: false })
+			NetInfo.setReturnValue(false)
 			expect(instance.state.renderOfflineMessage).toEqual(false)
 			await act(async () => { await card.unReShareRecipe(recipe.id) })
 			expect(instance.state.renderOfflineMessage).toEqual(true)
@@ -434,7 +434,7 @@ describe("Recipe List", () => {
 		})
 
 		test("making a recipe while offline results in general offline error", async () => {
-			NetInfo.setReturnValue({ isConnected: false })
+			NetInfo.setReturnValue(false)
 			expect(instance.state.renderOfflineMessage).toEqual(false)
 			await act(async () => { await card.makeRecipe(recipe.id) })
 			expect(instance.state.renderOfflineMessage).toEqual(true)
