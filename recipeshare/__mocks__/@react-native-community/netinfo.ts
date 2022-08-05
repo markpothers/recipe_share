@@ -3,7 +3,7 @@ let returnValue = {
 }
 
 export default {
-    setReturnValue: (newValue: { isConnected: boolean}) => {
+    setReturnValue: (newValue: { isConnected: boolean}): void => {
         returnValue = newValue
     },
 

@@ -15,7 +15,7 @@ jest.mock("../fetches/loginChef");
 jest.mock("../fetches/getNewPassword");
 jest.mock("../auxFunctions/saveLoadToken");
 
-type MockedNetInfo = typeof NetInfo & { setReturnValue: ({ isConnected: boolean }) => void };
+// type MockedNetInfo = typeof NetInfo & { setReturnValue: ({ isConnected }) => void };
 
 describe("login page", () => {
 	let store, mockListener, mockListenerRemove, mockNavigate, navigation, route;
@@ -39,7 +39,8 @@ describe("login page", () => {
 
 		route = {};
 
-		(NetInfo as MockedNetInfo).setReturnValue({ isConnected: true });
+		// eslint-disable-next-line no-unused-vars
+		(NetInfo as typeof NetInfo & { setReturnValue: (isConnected: boolean) => void }).setReturnValue(true)
 	});
 
 	afterEach(async () => {
