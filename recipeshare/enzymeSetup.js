@@ -1,10 +1,10 @@
 // fixes a problem where setImmediate is not defined
 global.setImmediate = process.nextTick;
 
-import 'react-native';
-import 'jest-enzyme';
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-import Enzyme from 'enzyme';
+import "react-native";
+import "jest-enzyme";
+import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
+import Enzyme from "enzyme";
 
 /**
  * Set up Enzyme to mount to DOM, simulate events,
@@ -40,4 +40,4 @@ function suppressDomErrors() {
 	};
 }
 
-suppressDomErrors()
+// suppressDomErrors()
