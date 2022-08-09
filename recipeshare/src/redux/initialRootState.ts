@@ -1,8 +1,9 @@
 import { RootStateType } from "./types";
 
 //exported ONLY for unit testing
-export const initialRootState: RootStateType = {
-	loggedInChef: {
+export const initialRootState: RootStateType =  {
+		deviceType: 0,
+		loggedInChef: {
 		id: 0,
 		e_mail: "",
 		username: "",
@@ -165,5 +166,5 @@ export const initialRootState: RootStateType = {
 	// 	most_made: "Any"
 	// },
 	// serves: "Any",
-	stayLoggedIn: false,
+	stayLoggedIn: false
 };

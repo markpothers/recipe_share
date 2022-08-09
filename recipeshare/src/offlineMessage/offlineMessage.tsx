@@ -46,7 +46,7 @@ const OfflineMessage = ({ delay, clearOfflineMessage, diagnostics, topOffset, me
 			? true
 			: false;
 	return (
-		<Animated.View style={[styles.messageContainer, { opacity: fadeOpacity }, { top: topOffset }]}>
+		<Animated.View style={[styles.messageContainer, { opacity: fadeOpacity }, { top: topOffset }]} testID="offlineMessage">
 			{action ? (
 				<TouchableOpacity
 					activeOpacity={0.7}

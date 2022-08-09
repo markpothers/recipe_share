@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { Modal, Text, View, TouchableOpacity, Dimensions, Image, FlatList, Platform } from 'react-native'
-import { Camera } from 'expo-camera';
-import * as MediaLibrary from 'expo-media-library';
-import * as ImagePicker from 'expo-image-picker'
-import { styles } from './functionalComponentsStyleSheet'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
+import React, { useState, useEffect, useRef } from "react"
+import { Modal, Text, View, TouchableOpacity, Dimensions, Image, FlatList, Platform } from "react-native"
+import { Camera } from "expo-camera";
+import * as MediaLibrary from "expo-media-library";
+import * as ImagePicker from "expo-image-picker"
+import { styles } from "./functionalComponentsStyleSheet"
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 import { ImageEditor } from "expo-image-editor";
 
 export default function MultiPicSourceChooser(props) {
@@ -31,7 +31,7 @@ export default function MultiPicSourceChooser(props) {
 
 	const addPhoto = async () => {
 		let newImageIndex = imageIndex + 1
-		let newImages = [...props.imageSources.slice(0, newImageIndex), { uri: '' }, ...props.imageSources.slice(newImageIndex)]
+		let newImages = [...props.imageSources.slice(0, newImageIndex), { uri: "" }, ...props.imageSources.slice(newImageIndex)]
 		setImageIndex(newImageIndex)
 		await props.saveImages(newImages)
 	}
@@ -56,7 +56,7 @@ export default function MultiPicSourceChooser(props) {
 			if (hasCameraRollPermission) {
 				let image = await ImagePicker.launchImageLibraryAsync({
 					presentationStyle: 0,
-					allowsEditing: Platform.OS == 'android',
+					allowsEditing: Platform.OS == "android",
 					aspect: [4, 3],
 					base64: false
 				})
@@ -73,7 +73,7 @@ export default function MultiPicSourceChooser(props) {
 			if (hasCameraPermission) {
 				let image = await ImagePicker.launchCameraAsync({
 					presentationStyle: 0,
-					allowsEditing: Platform.OS == 'android',
+					allowsEditing: Platform.OS == "android",
 					aspect: [4, 3],
 					base64: false
 				})
@@ -88,7 +88,7 @@ export default function MultiPicSourceChooser(props) {
 		if (image.error) {
 			console.log(image.error)
 		} else {
-			if (Platform.OS == 'ios' && image.cancelled == false) {
+			if (Platform.OS == "ios" && image.cancelled == false) {
 				setTempImageUri(image.uri)
 				setImageEditorShowing(true)
 			} else {
@@ -104,7 +104,7 @@ export default function MultiPicSourceChooser(props) {
 	const deleteImage = () => {
 		if (props.imageSources.length == 1) { //go back to completely empty list of images
 			setImageIndex(0)
-			props.saveImages([{ uri: '' }])
+			props.saveImages([{ uri: "" }])
 			primaryImageFlatList.current.scrollToIndex({ index: 0 })
 		} else {
 			let newImages = [...props.imageSources]
@@ -139,9 +139,9 @@ export default function MultiPicSourceChooser(props) {
 	const renderPrimaryImageBlobs = () => {
 		return props.imageSources.map((image, index) => {
 			if (imageIndex == index) {
-				return <Icon key={index.toString()} name={'checkbox-blank-circle'} size={responsiveHeight(3)} style={styles.primaryImageBlob} />
+				return <Icon key={index.toString()} name={"checkbox-blank-circle"} size={responsiveHeight(3)} style={styles.primaryImageBlob} />
 			} else {
-				return <Icon key={index.toString()} name={'checkbox-blank-circle-outline'} size={responsiveHeight(3)} style={styles.primaryImageBlob} />
+				return <Icon key={index.toString()} name={"checkbox-blank-circle-outline"} size={responsiveHeight(3)} style={styles.primaryImageBlob} />
 			}
 		})
 	}
@@ -155,14 +155,14 @@ export default function MultiPicSourceChooser(props) {
 		if (image.item.uri || image.item.image_url) {
 			return (
 				<Image
-					style={{ height: '100%', width: responsiveWidth(80) - 2 }}
+					style={{ height: "100%", width: responsiveWidth(80) - 2 }}
 					source={{ uri: image.item.image_url ? image.item.image_url : image.item.uri }}
 					resizeMode={"cover"}
 				/>
 			)
 		} else {
 			return (
-				<View style={{ height: '100%', width: responsiveWidth(80) - 2, justifyContent: 'center', alignItems: 'center' }}>
+				<View style={{ height: "100%", width: responsiveWidth(80) - 2, justifyContent: "center", alignItems: "center" }}>
 					<Icon style={styles.standardIcon} size={responsiveHeight(4)} name='image' />
 					<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>No image{"\n"}selected</Text>
 				</View>
@@ -210,7 +210,7 @@ export default function MultiPicSourceChooser(props) {
 				//mode={'crop-only'}
 				/>
 			)}
-			<View style={[styles.modalFullScreenContainer, { height: Dimensions.get('window').height, width: Dimensions.get('window').width }]}>
+			<View style={[styles.modalFullScreenContainer, { height: Dimensions.get("window").height, width: Dimensions.get("window").width }]}>
 				<View style={styles.picChooserModalContainer}>
 					<View style={[styles.picSourceChooserImage, { height: responsiveWidth(60) }]}>
 						{imageSources.length > 0 ? (
@@ -224,7 +224,7 @@ export default function MultiPicSourceChooser(props) {
 										return renderPrimaryImage(image)
 									} else {
 										return (
-											<View style={{ height: responsiveHeight(60), width: responsiveWidth(80) - 2, justifyContent: 'center', alignItems: 'center' }}>
+											<View style={{ height: responsiveHeight(60), width: responsiveWidth(80) - 2, justifyContent: "center", alignItems: "center" }}>
 												<Icon style={styles.standardIcon} size={responsiveHeight(4)} name='image' />
 												<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>No image{"\n"}selected</Text>
 											</View>
@@ -249,7 +249,7 @@ export default function MultiPicSourceChooser(props) {
 									// console.log(error)
 								}}
 							/>) : (
-							<View style={{ height: '100%', width: responsiveWidth(80) - 2, justifyContent: 'center', alignItems: 'center' }}>
+							<View style={{ height: "100%", width: responsiveWidth(80) - 2, justifyContent: "center", alignItems: "center" }}>
 								<Icon style={styles.standardIcon} size={responsiveHeight(4)} name='image' />
 								<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>No image{"\n"}selected</Text>
 							</View>
@@ -310,12 +310,12 @@ export default function MultiPicSourceChooser(props) {
 						<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Choose photo</Text>
 					</TouchableOpacity>
 					<View style={[styles.picSourceChooserArrowButtonContainer, { marginBottom: responsiveHeight(2) }]}>
-						<TouchableOpacity style={[styles.picSourceChooserCancelButton, { backgroundColor: '#720000' }]} activeOpacity={0.7} title="Cancel" onPress={cancel}>
+						<TouchableOpacity style={[styles.picSourceChooserCancelButton, { backgroundColor: "#720000" }]} activeOpacity={0.7} title="Cancel" onPress={cancel}>
 							<Icon style={styles.cancelIcon} size={responsiveHeight(4)} name='cancel' />
 							<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserCancelButtonText}>Cancel</Text>
 						</TouchableOpacity>
 						<TouchableOpacity style={styles.picSourceChooserCancelButton} activeOpacity={0.7} title="SaveAndClose" onPress={props.sourceChosen}>
-							<Icon style={styles.cancelIcon} size={responsiveHeight(4)} name='check-box-outline' />
+							<Icon style={styles.cancelIcon} size={responsiveHeight(4)} name='check' />
 							<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserCancelButtonText}>Save &{"\n"}Close</Text>
 						</TouchableOpacity>
 					</View>

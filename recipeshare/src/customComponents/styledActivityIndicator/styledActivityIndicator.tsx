@@ -9,6 +9,7 @@ export default function StyledActivityIndicator() {
 				style={(Platform.OS === "ios" ? styles.activityIndicator : {})}
 				size="large"
 				color="#104e01"
+				testID="activityIndicator"
 			/>
 		</View>
 	)

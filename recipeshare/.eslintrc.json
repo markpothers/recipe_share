@@ -10,7 +10,9 @@
 		"react",
 		"react-native",
 		"react-hooks",
-		"@typescript-eslint"
+		"@typescript-eslint",
+		"testing-library",
+		"jest-dom"
 	],
 	"parserOptions": {
 		"sourceType": "module",

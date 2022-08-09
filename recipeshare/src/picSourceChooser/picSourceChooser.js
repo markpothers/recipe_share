@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import { Modal, Text, View, TouchableOpacity, Platform, Image } from 'react-native'
-import { Camera } from 'expo-camera';
-import * as MediaLibrary from 'expo-media-library';
-import * as ImagePicker from 'expo-image-picker'
-import { styles } from './functionalComponentsStyleSheet'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
+import React, { useState, useEffect } from "react"
+import { Modal, Text, View, TouchableOpacity, Platform, Image } from "react-native"
+import { Camera } from "expo-camera";
+import * as MediaLibrary from "expo-media-library";
+import * as ImagePicker from "expo-image-picker"
+import { styles } from "./functionalComponentsStyleSheet"
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 import { ImageEditor } from "expo-image-editor";
 
 export default function PicSourceChooser(props) {
@@ -24,14 +24,14 @@ export default function PicSourceChooser(props) {
 		setOriginalImage(props.originalImage)
 		}
 		checkPermissions()
-	},[])
+	}, [])
 
 	const pickImage = async () => {
 		try {
 			if (hasCameraRollPermission) {
 				let image = await ImagePicker.launchImageLibraryAsync({
 					presentationStyle: 0,
-					allowsEditing: Platform.OS == 'android',
+					allowsEditing: Platform.OS == "android",
 					aspect: [1, 1],
 					base64: false
 				})
@@ -47,7 +47,7 @@ export default function PicSourceChooser(props) {
 			if (hasCameraPermission) {
 				let image = await ImagePicker.launchCameraAsync({
 					presentationStyle: 0,
-					allowsEditing: Platform.OS == 'android',
+					allowsEditing: Platform.OS == "android",
 					aspect: [1, 1],
 					base64: false
 				})
@@ -62,7 +62,7 @@ export default function PicSourceChooser(props) {
 		if (image.error) {
 			console.log(image.error)
 		}
-		if (Platform.OS == 'ios' && image.cancelled == false) {
+		if (Platform.OS == "ios" && image.cancelled == false) {
 			setTempImageUri(image.uri)
 			setImageEditorShowing(true)
 		} else {
@@ -73,7 +73,7 @@ export default function PicSourceChooser(props) {
 	const deleteImage = () => {
 		let image = {
 			cancelled: false,
-			uri: ''
+			uri: ""
 		}
 		saveImage(image)
 	}
@@ -127,8 +127,8 @@ export default function PicSourceChooser(props) {
 			<View style={[styles.modalFullScreenContainer, { height: responsiveHeight(100), width: responsiveWidth(100) }]}>
 				<View style={styles.picChooserModalContainer}>
 					<View style={styles.picSourceChooserImage}>
-						{props.imageSource !== '' ? (
-							<Image style={{ height: '100%', width: '100%' }} source={{ uri: props.imageSource }} resizeMode={"cover"} />
+						{props.imageSource !== "" ? (
+							<Image style={{ height: "100%", width: "100%" }} source={{ uri: props.imageSource }} resizeMode={"cover"} />
 						) : (
 							<React.Fragment>
 								<Icon style={styles.standardIcon} size={responsiveHeight(4)} name='camera' />
@@ -149,12 +149,12 @@ export default function PicSourceChooser(props) {
 						<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>Delete photo</Text>
 					</TouchableOpacity>
 					<View style={[styles.picSourceChooserArrowButtonContainer, { marginBottom: responsiveHeight(2) }]}>
-						<TouchableOpacity style={[styles.picSourceChooserCancelButton, { backgroundColor: '#720000' }]} activeOpacity={0.7} title="Cancel" onPress={cancel}>
+						<TouchableOpacity style={[styles.picSourceChooserCancelButton, { backgroundColor: "#720000" }]} activeOpacity={0.7} title="Cancel" onPress={cancel}>
 							<Icon style={styles.cancelIcon} size={responsiveHeight(4)} name='cancel' />
 							<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserCancelButtonText}>Cancel</Text>
 						</TouchableOpacity>
 						<TouchableOpacity style={styles.picSourceChooserCancelButton} activeOpacity={0.7} title="SaveAndClose" onPress={props.sourceChosen}>
-							<Icon style={styles.cancelIcon} size={responsiveHeight(4)} name='check-box-outline' />
+							<Icon style={styles.cancelIcon} size={responsiveHeight(4)} name='check' />
 							<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserCancelButtonText}>Save &{"\n"}Close</Text>
 						</TouchableOpacity>
 					</View>

@@ -458,16 +458,7 @@ exports[`login page logging in under different conditions should display activat
                           "width": 51,
                         },
                         Array [
-                          Object {
-                            "transform": Array [
-                              Object {
-                                "scaleX": 0.7,
-                              },
-                              Object {
-                                "scaleY": 0.7,
-                              },
-                            ],
-                          },
+                          null,
                           null,
                           null,
                         ],
@@ -538,16 +529,7 @@ exports[`login page logging in under different conditions should display activat
                           "width": 51,
                         },
                         Array [
-                          Object {
-                            "transform": Array [
-                              Object {
-                                "scaleX": 0.7,
-                              },
-                              Object {
-                                "scaleY": 0.7,
-                              },
-                            ],
-                          },
+                          null,
                           null,
                           null,
                         ],
@@ -1253,16 +1235,7 @@ exports[`login page logging in under different conditions should display deactiv
                           "width": 51,
                         },
                         Array [
-                          Object {
-                            "transform": Array [
-                              Object {
-                                "scaleX": 0.7,
-                              },
-                              Object {
-                                "scaleY": 0.7,
-                              },
-                            ],
-                          },
+                          null,
                           null,
                           null,
                         ],
@@ -1333,16 +1306,7 @@ exports[`login page logging in under different conditions should display deactiv
                           "width": 51,
                         },
                         Array [
-                          Object {
-                            "transform": Array [
-                              Object {
-                                "scaleX": 0.7,
-                              },
-                              Object {
-                                "scaleY": 0.7,
-                              },
-                            ],
-                          },
+                          null,
                           null,
                           null,
                         ],
@@ -2048,16 +2012,7 @@ exports[`login page logging in under different conditions should display invalid
                           "width": 51,
                         },
                         Array [
-                          Object {
-                            "transform": Array [
-                              Object {
-                                "scaleX": 0.7,
-                              },
-                              Object {
-                                "scaleY": 0.7,
-                              },
-                            ],
-                          },
+                          null,
                           null,
                           null,
                         ],
@@ -2128,16 +2083,7 @@ exports[`login page logging in under different conditions should display invalid
                           "width": 51,
                         },
                         Array [
-                          Object {
-                            "transform": Array [
-                              Object {
-                                "scaleX": 0.7,
-                              },
-                              Object {
-                                "scaleY": 0.7,
-                              },
-                            ],
-                          },
+                          null,
                           null,
                           null,
                         ],
@@ -2843,16 +2789,7 @@ exports[`login page logging in under different conditions should display passwor
                           "width": 51,
                         },
                         Array [
-                          Object {
-                            "transform": Array [
-                              Object {
-                                "scaleX": 0.7,
-                              },
-                              Object {
-                                "scaleY": 0.7,
-                              },
-                            ],
-                          },
+                          null,
                           null,
                           null,
                         ],
@@ -2923,16 +2860,7 @@ exports[`login page logging in under different conditions should display passwor
                           "width": 51,
                         },
                         Array [
-                          Object {
-                            "transform": Array [
-                              Object {
-                                "scaleX": 0.7,
-                              },
-                              Object {
-                                "scaleY": 0.7,
-                              },
-                            ],
-                          },
+                          null,
                           null,
                           null,
                         ],
@@ -3638,16 +3566,7 @@ exports[`login page logging in under different conditions should display reactiv
                           "width": 51,
                         },
                         Array [
-                          Object {
-                            "transform": Array [
-                              Object {
-                                "scaleX": 0.7,
-                              },
-                              Object {
-                                "scaleY": 0.7,
-                              },
-                            ],
-                          },
+                          null,
                           null,
                           null,
                         ],
@@ -3718,16 +3637,7 @@ exports[`login page logging in under different conditions should display reactiv
                           "width": 51,
                         },
                         Array [
-                          Object {
-                            "transform": Array [
-                              Object {
-                                "scaleX": 0.7,
-                              },
-                              Object {
-                                "scaleY": 0.7,
-                              },
-                            ],
-                          },
+                          null,
                           null,
                           null,
                         ],
@@ -4433,16 +4343,7 @@ exports[`login page logging in under different conditions should instruct how to
                           "width": 51,
                         },
                         Array [
-                          Object {
-                            "transform": Array [
-                              Object {
-                                "scaleX": 0.7,
-                              },
-                              Object {
-                                "scaleY": 0.7,
-                              },
-                            ],
-                          },
+                          null,
                           null,
                           null,
                         ],
@@ -4513,16 +4414,7 @@ exports[`login page logging in under different conditions should instruct how to
                           "width": 51,
                         },
                         Array [
-                          Object {
-                            "transform": Array [
-                              Object {
-                                "scaleX": 0.7,
-                              },
-                              Object {
-                                "scaleY": 0.7,
-                              },
-                            ],
-                          },
+                          null,
                           null,
                           null,
                         ],
@@ -5228,16 +5120,7 @@ exports[`login page logging in under different conditions should password reset 
                           "width": 51,
                         },
                         Array [
-                          Object {
-                            "transform": Array [
-                              Object {
-                                "scaleX": 0.7,
-                              },
-                              Object {
-                                "scaleY": 0.7,
-                              },
-                            ],
-                          },
+                          null,
                           null,
                           null,
                         ],
@@ -5308,16 +5191,7 @@ exports[`login page logging in under different conditions should password reset 
                           "width": 51,
                         },
                         Array [
-                          Object {
-                            "transform": Array [
-                              Object {
-                                "scaleX": 0.7,
-                              },
-                              Object {
-                                "scaleY": 0.7,
-                              },
-                            ],
-                          },
+                          null,
                           null,
                           null,
                         ],

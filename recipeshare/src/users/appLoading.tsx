@@ -5,6 +5,8 @@ import { loadToken } from "../auxFunctions/saveLoadToken";
 import { styles } from "./usersStyleSheet";
 import { useAppDispatch, useAppSelector, stayLoggedIn, updateLoggedInChef } from "../redux";
 import { LoginChef } from "../centralTypes";
+import * as Device from "expo-device";
+import { setDeviceType } from "../redux/rootReducer";
 
 type OwnProps = {
 	setLoadedAndLoggedIn: (loadedAndLoggedIn: { loaded: boolean; loggedIn: boolean }) => void;
@@ -58,6 +60,11 @@ export default function AppLoading({ setLoadedAndLoggedIn }: OwnProps) {
 	);
 
 	useEffect(() => {
+		const getDeviceType = async() => {
+			const deviceType = await Device.getDeviceTypeAsync()
+			dispatch(setDeviceType(deviceType))
+		}
+		getDeviceType()
 		const checkLoggedIn = async () => {
 			const token = await loadToken();
 			if (token) {
@@ -76,7 +83,7 @@ export default function AppLoading({ setLoadedAndLoggedIn }: OwnProps) {
 			}
 		};
 		checkLoggedIn();
-	}, [setStayLoggedIn, updateLoggedInChefInState, setLoadedAndLoggedIn]);
+	}, [dispatch, setStayLoggedIn, updateLoggedInChefInState, setLoadedAndLoggedIn]);
 
 	return (
 		<View style={styles.mainPageContainer}>

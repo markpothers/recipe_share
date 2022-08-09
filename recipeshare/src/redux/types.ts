@@ -1,6 +1,7 @@
 import { Chef, Cuisine, Difficulty, FilterSettings, ListChef, ListRecipe, Recipe, RecipeIngredient, Serves } from "../centralTypes";
 
 export type RootStateType = {
+	deviceType: number;
 	loggedInChef: {
 		id: number;
 		e_mail: string;

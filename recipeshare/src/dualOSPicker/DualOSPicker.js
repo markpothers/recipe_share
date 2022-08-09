@@ -41,6 +41,7 @@ export default class DualOSPicker extends React.PureComponent {
 						mode="dropdown"
 						onValueChange={choice => this.props.onChoiceChange(choice)}
 						selectedValue={this.props.selectedChoice}
+						testID="androidPicker"
 					>
 						{this.choicesPicker()}
 					</Picker>
