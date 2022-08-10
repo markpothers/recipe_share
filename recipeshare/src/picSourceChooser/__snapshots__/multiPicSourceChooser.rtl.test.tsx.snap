@@ -1,0 +1,1374 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should load and render 1`] = `
+<Modal
+  animationType="fade"
+  hardwareAccelerated={false}
+  onRequestClose={[MockFunction]}
+  transparent={true}
+  visible={true}
+>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        Object {
+          "height": 1334,
+          "width": 750,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "white",
+          "borderColor": "#104e01",
+          "borderRadius": 5,
+          "borderWidth": 1,
+          "marginLeft": 48.75,
+          "marginRight": 48.75,
+          "minWidth": 652.5,
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "borderColor": "#104e01",
+              "borderRadius": 5,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "height": 600,
+              "justifyContent": "center",
+              "marginLeft": 26.250000000000004,
+              "marginRight": 26.250000000000004,
+              "marginTop": 26.68,
+              "overflow": "hidden",
+              "width": 600,
+            },
+            Object {
+              "height": 450,
+            },
+          ]
+        }
+      >
+        <RCTScrollView
+          data={
+            Array [
+              Object {
+                "uri": "",
+              },
+            ]
+          }
+          getItem={[Function]}
+          getItemCount={[Function]}
+          getItemLayout={[Function]}
+          horizontal={true}
+          keyExtractor={[Function]}
+          onContentSizeChange={[Function]}
+          onLayout={[Function]}
+          onMomentumScrollBegin={[Function]}
+          onMomentumScrollEnd={[Function]}
+          onScroll={[Function]}
+          onScrollBeginDrag={[Function]}
+          onScrollEndDrag={[Function]}
+          onScrollToIndexFailed={[Function]}
+          pagingEnabled={true}
+          removeClippedSubviews={false}
+          renderItem={[Function]}
+          scrollEventThrottle={50}
+          stickyHeaderIndices={Array []}
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
+          testID="multiPicFlatList"
+          viewabilityConfigCallbackPairs={Array []}
+        >
+          <View>
+            <View
+              style={
+                Array [
+                  Object {
+                    "flexDirection": "row",
+                  },
+                  null,
+                ]
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "height": "100%",
+                    "justifyContent": "center",
+                    "width": 598,
+                  }
+                }
+              >
+                <Icon
+                  name="image"
+                  size={53.36}
+                  style={
+                    Object {
+                      "color": "#104e01",
+                    }
+                  }
+                />
+                <Text
+                  maxFontSizeMultiplier={1.5}
+                  style={
+                    Object {
+                      "color": "#104e01",
+                      "fontSize": 34.420424532535904,
+                      "fontWeight": "bold",
+                      "marginLeft": "5%",
+                      "marginRight": "5%",
+                      "textAlign": "center",
+                    }
+                  }
+                >
+                  No image
+                  
+
+                  selected
+                </Text>
+              </View>
+            </View>
+          </View>
+        </RCTScrollView>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "alignSelf": "center",
+              "bottom": 0,
+              "flexDirection": "row",
+              "flexWrap": "wrap",
+              "justifyContent": "center",
+              "position": "absolute",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "alignSelf": "center",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "width": 600,
+          }
+        }
+      >
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#fff59b",
+              "borderColor": "#104e01",
+              "borderRadius": 11.25,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginTop": 6.67,
+              "minHeight": 106.72,
+              "opacity": 1,
+              "width": 296.25,
+            }
+          }
+        >
+          <Icon
+            name="shuffle"
+            size={53.36}
+            style={
+              Array [
+                Object {
+                  "color": "#104e01",
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotateZ": "270deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          />
+          <Text
+            maxFontSizeMultiplier={1.5}
+            style={
+              Array [
+                Object {
+                  "color": "#104e01",
+                  "fontSize": 34.420424532535904,
+                  "fontWeight": "bold",
+                  "marginLeft": "5%",
+                  "marginRight": "5%",
+                  "textAlign": "center",
+                },
+                Object {
+                  "maxWidth": 187.5,
+                },
+              ]
+            }
+          >
+            Sort left
+          </Text>
+        </View>
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#fff59b",
+              "borderColor": "#104e01",
+              "borderRadius": 11.25,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginTop": 6.67,
+              "minHeight": 106.72,
+              "opacity": 1,
+              "width": 296.25,
+            }
+          }
+        >
+          <Text
+            maxFontSizeMultiplier={1.5}
+            style={
+              Array [
+                Object {
+                  "color": "#104e01",
+                  "fontSize": 34.420424532535904,
+                  "fontWeight": "bold",
+                  "marginLeft": "5%",
+                  "marginRight": "5%",
+                  "textAlign": "center",
+                },
+                Object {
+                  "maxWidth": 187.5,
+                },
+              ]
+            }
+          >
+            Sort right
+          </Text>
+          <Icon
+            name="shuffle"
+            size={53.36}
+            style={
+              Array [
+                Object {
+                  "color": "#104e01",
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotateZ": "270deg",
+                    },
+                    Object {
+                      "rotateX": "180deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          />
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignSelf": "center",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "width": 600,
+          }
+        }
+      >
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#fff59b",
+              "borderColor": "#104e01",
+              "borderRadius": 11.25,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginTop": 6.67,
+              "minHeight": 106.72,
+              "opacity": 1,
+              "width": 296.25,
+            }
+          }
+        >
+          <Icon
+            name="image-plus"
+            size={53.36}
+            style={
+              Object {
+                "color": "#104e01",
+              }
+            }
+          />
+          <Text
+            maxFontSizeMultiplier={1.5}
+            style={
+              Object {
+                "color": "#104e01",
+                "fontSize": 34.420424532535904,
+                "fontWeight": "bold",
+                "marginLeft": "5%",
+                "marginRight": "5%",
+                "textAlign": "center",
+              }
+            }
+          >
+            Add slot
+          </Text>
+        </View>
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#fff59b",
+              "borderColor": "#104e01",
+              "borderRadius": 11.25,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginTop": 6.67,
+              "minHeight": 106.72,
+              "opacity": 1,
+              "width": 296.25,
+            }
+          }
+        >
+          <Icon
+            name="image-off"
+            size={53.36}
+            style={
+              Object {
+                "color": "#104e01",
+              }
+            }
+          />
+          <Text
+            maxFontSizeMultiplier={1.5}
+            style={
+              Object {
+                "color": "#104e01",
+                "fontSize": 34.420424532535904,
+                "fontWeight": "bold",
+                "marginLeft": "5%",
+                "marginRight": "5%",
+                "textAlign": "center",
+              }
+            }
+          >
+            Delete
+          </Text>
+        </View>
+      </View>
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#fff59b",
+            "borderColor": "#104e01",
+            "borderRadius": 11.25,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "flexDirection": "row",
+            "height": 106.72,
+            "justifyContent": "center",
+            "marginLeft": 26.250000000000004,
+            "marginRight": 26.250000000000004,
+            "marginTop": 6.67,
+            "minWidth": 600,
+            "opacity": 1,
+          }
+        }
+      >
+        <Icon
+          name="camera"
+          size={53.36}
+          style={
+            Object {
+              "color": "#104e01",
+            }
+          }
+        />
+        <Text
+          maxFontSizeMultiplier={1.5}
+          style={
+            Object {
+              "color": "#104e01",
+              "fontSize": 34.420424532535904,
+              "fontWeight": "bold",
+              "marginLeft": "5%",
+              "marginRight": "5%",
+              "textAlign": "center",
+            }
+          }
+        >
+          Take photo
+        </Text>
+      </View>
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#fff59b",
+            "borderColor": "#104e01",
+            "borderRadius": 11.25,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "flexDirection": "row",
+            "height": 106.72,
+            "justifyContent": "center",
+            "marginLeft": 26.250000000000004,
+            "marginRight": 26.250000000000004,
+            "marginTop": 6.67,
+            "minWidth": 600,
+            "opacity": 1,
+          }
+        }
+      >
+        <Icon
+          name="camera-image"
+          size={53.36}
+          style={
+            Object {
+              "color": "#104e01",
+            }
+          }
+        />
+        <Text
+          maxFontSizeMultiplier={1.5}
+          style={
+            Object {
+              "color": "#104e01",
+              "fontSize": 34.420424532535904,
+              "fontWeight": "bold",
+              "marginLeft": "5%",
+              "marginRight": "5%",
+              "textAlign": "center",
+            }
+          }
+        >
+          Choose photo
+        </Text>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "alignSelf": "center",
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "width": 600,
+            },
+            Object {
+              "marginBottom": 26.68,
+            },
+          ]
+        }
+      >
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#720000",
+              "borderColor": "#104e01",
+              "borderRadius": 11.25,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginTop": 6.67,
+              "minHeight": 106.72,
+              "opacity": 1,
+              "width": 296.25,
+            }
+          }
+        >
+          <Icon
+            name="cancel"
+            size={53.36}
+            style={
+              Object {
+                "color": "#fff59b",
+              }
+            }
+          />
+          <Text
+            maxFontSizeMultiplier={1.5}
+            style={
+              Object {
+                "color": "#fff59b",
+                "fontSize": 34.420424532535904,
+                "fontWeight": "bold",
+                "marginLeft": "10%",
+                "marginRight": "5%",
+                "textAlign": "center",
+              }
+            }
+          >
+            Cancel
+          </Text>
+        </View>
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#104e01",
+              "borderColor": "#104e01",
+              "borderRadius": 11.25,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginTop": 6.67,
+              "minHeight": 106.72,
+              "opacity": 1,
+              "width": 296.25,
+            }
+          }
+        >
+          <Icon
+            name="check"
+            size={53.36}
+            style={
+              Object {
+                "color": "#fff59b",
+              }
+            }
+          />
+          <Text
+            maxFontSizeMultiplier={1.5}
+            style={
+              Object {
+                "color": "#fff59b",
+                "fontSize": 34.420424532535904,
+                "fontWeight": "bold",
+                "marginLeft": "10%",
+                "marginRight": "5%",
+                "textAlign": "center",
+              }
+            }
+          >
+            Save &
+            
+
+            Close
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</Modal>
+`;
+
+exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should load and render 1`] = `
+<Modal
+  animationType="fade"
+  hardwareAccelerated={false}
+  onRequestClose={[MockFunction]}
+  transparent={true}
+  visible={true}
+>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        Object {
+          "height": 1334,
+          "width": 750,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "white",
+          "borderColor": "#104e01",
+          "borderRadius": 5,
+          "borderWidth": 1,
+          "marginLeft": 48.75,
+          "marginRight": 48.75,
+          "minWidth": 652.5,
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "borderColor": "#104e01",
+              "borderRadius": 5,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "height": 600,
+              "justifyContent": "center",
+              "marginLeft": 26.250000000000004,
+              "marginRight": 26.250000000000004,
+              "marginTop": 26.68,
+              "overflow": "hidden",
+              "width": 600,
+            },
+            Object {
+              "height": 450,
+            },
+          ]
+        }
+      >
+        <RCTScrollView
+          data={
+            Array [
+              Object {
+                "created_at": "2022-02-23T04:16:48.850Z",
+                "hex": "63d1f92fb2f9ca89f36f8935dcf048813ced9ca0-20220223_041648",
+                "hidden": false,
+                "id": 141,
+                "image_url": "https://storage.googleapis.com/test-images-be4d3e05-1e77-4efd-8571-364e22ea7c0d/recipe51.jpg?GoogleAccessId=recipe-share-image-handler%40recipe-share-272202.iam.gserviceaccount.com&Expires=6468590268&Signature=KxpAMV%2F6NUiU91OPDQJb8JCnwFjowwkeBWUnrwejz8MjYjD6SqHPIkxln9Zo6%2FlhROowJwb0jCfgeW7Bdd%2FkZ1wMR3LkgqiKjURrYIxzypqXh%2FSbP5thj9T27Rr2klDI1rqYJ9%2FzzJUlFGY%2FKgVb4bdnwaUszuVUdjJKndsKKvNQZky7BvdAxoeBFbhojA0Jsep48Zj1ByTephGpuIinmriRava93H9y4yl8o9tFIAKOqQK3qQ5LqtKZstN4SZUJ0pnbp0WveOSROyZs8LPU4Enj%2BzgFwepuDalrS4%2B3uioFw72ESvhgAalxF3ZAyV9pTZB4QQ13Oysq0f3rfG109g%3D%3D",
+                "index": 0,
+                "name": null,
+                "recipe_id": 111,
+                "updated_at": "2022-02-23T04:17:28.270Z",
+              },
+              Object {
+                "created_at": "2022-02-23T04:16:48.110Z",
+                "hex": "84fb2e077ba3659b27885706704c32a31e79916a-20220223_041647",
+                "hidden": false,
+                "id": 140,
+                "image_url": "https://storage.googleapis.com/test-images-be4d3e05-1e77-4efd-8571-364e22ea7c0d/recipe9.jpg?GoogleAccessId=recipe-share-image-handler%40recipe-share-272202.iam.gserviceaccount.com&Expires=6468590152&Signature=QE0BHb5NDCDLVlO6WaD%2B13tl7WJ0vrSCK3meugG%2BbKznZiP44B79nlAztn96%2Bvq2nk1P1ske9XqBK9PTRF65EX%2FdPyOr1MjVmlnOkOl%2BEj6KLIPIOmL1ymXr%2BTSEJ2eXI8iCf76%2BbszsNvHKaxaMN9ntA6b%2BB4E%2FOjt9gUc7Dr8RKWlSgvlBAuvmXgAAKaBd3Q6YOB%2B%2B%2FQn9AlzLUpQkdgNJ%2Fl1x6zYMfBRaqPopSZHgNJT36xlPIh1q5AK0ut7kb7m%2FkWAhYv%2FgJ4YevAXTCA6jb9%2BsV0Jbs8m6hE9llWdmKmpdZAKrxkh07xveRDWErmPopX%2Fws5xB08CNXpP50A%3D%3D",
+                "index": 1,
+                "name": null,
+                "recipe_id": 111,
+                "updated_at": "2022-02-23T04:17:28.284Z",
+              },
+            ]
+          }
+          getItem={[Function]}
+          getItemCount={[Function]}
+          getItemLayout={[Function]}
+          horizontal={true}
+          keyExtractor={[Function]}
+          onContentSizeChange={[Function]}
+          onLayout={[Function]}
+          onMomentumScrollBegin={[Function]}
+          onMomentumScrollEnd={[Function]}
+          onScroll={[Function]}
+          onScrollBeginDrag={[Function]}
+          onScrollEndDrag={[Function]}
+          onScrollToIndexFailed={[Function]}
+          pagingEnabled={true}
+          removeClippedSubviews={false}
+          renderItem={[Function]}
+          scrollEventThrottle={50}
+          stickyHeaderIndices={Array []}
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
+          testID="multiPicFlatList"
+          viewabilityConfigCallbackPairs={Array []}
+        >
+          <View>
+            <View
+              style={
+                Array [
+                  Object {
+                    "flexDirection": "row",
+                  },
+                  null,
+                ]
+              }
+            >
+              <Image
+                resizeMode="cover"
+                source={
+                  Object {
+                    "uri": "https://storage.googleapis.com/test-images-be4d3e05-1e77-4efd-8571-364e22ea7c0d/recipe51.jpg?GoogleAccessId=recipe-share-image-handler%40recipe-share-272202.iam.gserviceaccount.com&Expires=6468590268&Signature=KxpAMV%2F6NUiU91OPDQJb8JCnwFjowwkeBWUnrwejz8MjYjD6SqHPIkxln9Zo6%2FlhROowJwb0jCfgeW7Bdd%2FkZ1wMR3LkgqiKjURrYIxzypqXh%2FSbP5thj9T27Rr2klDI1rqYJ9%2FzzJUlFGY%2FKgVb4bdnwaUszuVUdjJKndsKKvNQZky7BvdAxoeBFbhojA0Jsep48Zj1ByTephGpuIinmriRava93H9y4yl8o9tFIAKOqQK3qQ5LqtKZstN4SZUJ0pnbp0WveOSROyZs8LPU4Enj%2BzgFwepuDalrS4%2B3uioFw72ESvhgAalxF3ZAyV9pTZB4QQ13Oysq0f3rfG109g%3D%3D",
+                  }
+                }
+                style={
+                  Object {
+                    "height": "100%",
+                    "width": 598,
+                  }
+                }
+              />
+            </View>
+            <View
+              style={
+                Array [
+                  Object {
+                    "flexDirection": "row",
+                  },
+                  null,
+                ]
+              }
+            >
+              <Image
+                resizeMode="cover"
+                source={
+                  Object {
+                    "uri": "https://storage.googleapis.com/test-images-be4d3e05-1e77-4efd-8571-364e22ea7c0d/recipe9.jpg?GoogleAccessId=recipe-share-image-handler%40recipe-share-272202.iam.gserviceaccount.com&Expires=6468590152&Signature=QE0BHb5NDCDLVlO6WaD%2B13tl7WJ0vrSCK3meugG%2BbKznZiP44B79nlAztn96%2Bvq2nk1P1ske9XqBK9PTRF65EX%2FdPyOr1MjVmlnOkOl%2BEj6KLIPIOmL1ymXr%2BTSEJ2eXI8iCf76%2BbszsNvHKaxaMN9ntA6b%2BB4E%2FOjt9gUc7Dr8RKWlSgvlBAuvmXgAAKaBd3Q6YOB%2B%2B%2FQn9AlzLUpQkdgNJ%2Fl1x6zYMfBRaqPopSZHgNJT36xlPIh1q5AK0ut7kb7m%2FkWAhYv%2FgJ4YevAXTCA6jb9%2BsV0Jbs8m6hE9llWdmKmpdZAKrxkh07xveRDWErmPopX%2Fws5xB08CNXpP50A%3D%3D",
+                  }
+                }
+                style={
+                  Object {
+                    "height": "100%",
+                    "width": 598,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </RCTScrollView>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "alignSelf": "center",
+              "bottom": 0,
+              "flexDirection": "row",
+              "flexWrap": "wrap",
+              "justifyContent": "center",
+              "position": "absolute",
+              "width": "100%",
+            }
+          }
+        >
+          <Icon
+            name="checkbox-blank-circle"
+            size={40.019999999999996}
+            style={
+              Object {
+                "color": "#fff59b",
+                "marginHorizontal": 2,
+                "opacity": 0.85,
+              }
+            }
+          />
+          <Icon
+            name="checkbox-blank-circle-outline"
+            size={40.019999999999996}
+            style={
+              Object {
+                "color": "#fff59b",
+                "marginHorizontal": 2,
+                "opacity": 0.85,
+              }
+            }
+          />
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignSelf": "center",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "width": 600,
+          }
+        }
+      >
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#fff59b",
+              "borderColor": "#104e01",
+              "borderRadius": 11.25,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginTop": 6.67,
+              "minHeight": 106.72,
+              "opacity": 1,
+              "width": 296.25,
+            }
+          }
+        >
+          <Icon
+            name="shuffle"
+            size={53.36}
+            style={
+              Array [
+                Object {
+                  "color": "#104e01",
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotateZ": "270deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          />
+          <Text
+            maxFontSizeMultiplier={1.5}
+            style={
+              Array [
+                Object {
+                  "color": "#104e01",
+                  "fontSize": 34.420424532535904,
+                  "fontWeight": "bold",
+                  "marginLeft": "5%",
+                  "marginRight": "5%",
+                  "textAlign": "center",
+                },
+                Object {
+                  "maxWidth": 187.5,
+                },
+              ]
+            }
+          >
+            Sort left
+          </Text>
+        </View>
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#fff59b",
+              "borderColor": "#104e01",
+              "borderRadius": 11.25,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginTop": 6.67,
+              "minHeight": 106.72,
+              "opacity": 1,
+              "width": 296.25,
+            }
+          }
+        >
+          <Text
+            maxFontSizeMultiplier={1.5}
+            style={
+              Array [
+                Object {
+                  "color": "#104e01",
+                  "fontSize": 34.420424532535904,
+                  "fontWeight": "bold",
+                  "marginLeft": "5%",
+                  "marginRight": "5%",
+                  "textAlign": "center",
+                },
+                Object {
+                  "maxWidth": 187.5,
+                },
+              ]
+            }
+          >
+            Sort right
+          </Text>
+          <Icon
+            name="shuffle"
+            size={53.36}
+            style={
+              Array [
+                Object {
+                  "color": "#104e01",
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotateZ": "270deg",
+                    },
+                    Object {
+                      "rotateX": "180deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          />
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignSelf": "center",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "width": 600,
+          }
+        }
+      >
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#fff59b",
+              "borderColor": "#104e01",
+              "borderRadius": 11.25,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginTop": 6.67,
+              "minHeight": 106.72,
+              "opacity": 1,
+              "width": 296.25,
+            }
+          }
+        >
+          <Icon
+            name="image-plus"
+            size={53.36}
+            style={
+              Object {
+                "color": "#104e01",
+              }
+            }
+          />
+          <Text
+            maxFontSizeMultiplier={1.5}
+            style={
+              Object {
+                "color": "#104e01",
+                "fontSize": 34.420424532535904,
+                "fontWeight": "bold",
+                "marginLeft": "5%",
+                "marginRight": "5%",
+                "textAlign": "center",
+              }
+            }
+          >
+            Add slot
+          </Text>
+        </View>
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#fff59b",
+              "borderColor": "#104e01",
+              "borderRadius": 11.25,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginTop": 6.67,
+              "minHeight": 106.72,
+              "opacity": 1,
+              "width": 296.25,
+            }
+          }
+        >
+          <Icon
+            name="image-off"
+            size={53.36}
+            style={
+              Object {
+                "color": "#104e01",
+              }
+            }
+          />
+          <Text
+            maxFontSizeMultiplier={1.5}
+            style={
+              Object {
+                "color": "#104e01",
+                "fontSize": 34.420424532535904,
+                "fontWeight": "bold",
+                "marginLeft": "5%",
+                "marginRight": "5%",
+                "textAlign": "center",
+              }
+            }
+          >
+            Delete
+          </Text>
+        </View>
+      </View>
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#fff59b",
+            "borderColor": "#104e01",
+            "borderRadius": 11.25,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "flexDirection": "row",
+            "height": 106.72,
+            "justifyContent": "center",
+            "marginLeft": 26.250000000000004,
+            "marginRight": 26.250000000000004,
+            "marginTop": 6.67,
+            "minWidth": 600,
+            "opacity": 1,
+          }
+        }
+      >
+        <Icon
+          name="camera"
+          size={53.36}
+          style={
+            Object {
+              "color": "#104e01",
+            }
+          }
+        />
+        <Text
+          maxFontSizeMultiplier={1.5}
+          style={
+            Object {
+              "color": "#104e01",
+              "fontSize": 34.420424532535904,
+              "fontWeight": "bold",
+              "marginLeft": "5%",
+              "marginRight": "5%",
+              "textAlign": "center",
+            }
+          }
+        >
+          Take photo
+        </Text>
+      </View>
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#fff59b",
+            "borderColor": "#104e01",
+            "borderRadius": 11.25,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "flexDirection": "row",
+            "height": 106.72,
+            "justifyContent": "center",
+            "marginLeft": 26.250000000000004,
+            "marginRight": 26.250000000000004,
+            "marginTop": 6.67,
+            "minWidth": 600,
+            "opacity": 1,
+          }
+        }
+      >
+        <Icon
+          name="camera-image"
+          size={53.36}
+          style={
+            Object {
+              "color": "#104e01",
+            }
+          }
+        />
+        <Text
+          maxFontSizeMultiplier={1.5}
+          style={
+            Object {
+              "color": "#104e01",
+              "fontSize": 34.420424532535904,
+              "fontWeight": "bold",
+              "marginLeft": "5%",
+              "marginRight": "5%",
+              "textAlign": "center",
+            }
+          }
+        >
+          Choose photo
+        </Text>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "alignSelf": "center",
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "width": 600,
+            },
+            Object {
+              "marginBottom": 26.68,
+            },
+          ]
+        }
+      >
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#720000",
+              "borderColor": "#104e01",
+              "borderRadius": 11.25,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginTop": 6.67,
+              "minHeight": 106.72,
+              "opacity": 1,
+              "width": 296.25,
+            }
+          }
+        >
+          <Icon
+            name="cancel"
+            size={53.36}
+            style={
+              Object {
+                "color": "#fff59b",
+              }
+            }
+          />
+          <Text
+            maxFontSizeMultiplier={1.5}
+            style={
+              Object {
+                "color": "#fff59b",
+                "fontSize": 34.420424532535904,
+                "fontWeight": "bold",
+                "marginLeft": "10%",
+                "marginRight": "5%",
+                "textAlign": "center",
+              }
+            }
+          >
+            Cancel
+          </Text>
+        </View>
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#104e01",
+              "borderColor": "#104e01",
+              "borderRadius": 11.25,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginTop": 6.67,
+              "minHeight": 106.72,
+              "opacity": 1,
+              "width": 296.25,
+            }
+          }
+        >
+          <Icon
+            name="check"
+            size={53.36}
+            style={
+              Object {
+                "color": "#fff59b",
+              }
+            }
+          />
+          <Text
+            maxFontSizeMultiplier={1.5}
+            style={
+              Object {
+                "color": "#fff59b",
+                "fontSize": 34.420424532535904,
+                "fontWeight": "bold",
+                "marginLeft": "10%",
+                "marginRight": "5%",
+                "textAlign": "center",
+              }
+            }
+          >
+            Save &
+            
+
+            Close
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</Modal>
+`;

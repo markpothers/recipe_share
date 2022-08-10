@@ -10,9 +10,9 @@ import { ImageEditor } from "expo-image-editor";
 
 type OwnProps = {
 	index?: number;
-	originalImage: ImagePicker.ImagePickerResult;
+	// originalImage: ImagePicker.ImagePickerResult; // refactored so this isn't needed any more
 	imageSource: string;
-	cancelChooseImage: (image: ImagePicker.ImagePickerResult, index?: number) => void;
+	cancelChooseImage: (image: string, index?: number) => void;
 	saveImage: (image: ImagePicker.ImagePickerResult, index?: number) => void;
 	sourceChosen: () => void;
 }
@@ -20,7 +20,7 @@ type OwnProps = {
 export default function PicSourceChooser(props: OwnProps) {
 	const [hasCameraRollPermission, setHasCameraRollPermission] = useState<boolean>(false);
 	const [hasCameraPermission, setHasCameraPermission] = useState<boolean>(false);
-	const [originalImage, setOriginalImage] = useState<ImagePicker.ImagePickerResult>(null);
+	const [originalImage, setOriginalImage] = useState<string>(null);
 	const [imageEditorShowing, setImageEditorShowing] = useState<boolean>(false);
 	const [tempImageUri, setTempImageUri] = useState<string>(null);
 
@@ -30,7 +30,7 @@ export default function PicSourceChooser(props: OwnProps) {
 			const cameraPermission = await Camera.requestCameraPermissionsAsync();
 			setHasCameraRollPermission(cameraRollPermission.granted);
 			setHasCameraPermission(cameraPermission.granted);
-			setOriginalImage(props.originalImage);
+			setOriginalImage(props.imageSource);
 		}
 		checkPermissions();
 	// eslint-disable-next-line react-hooks/exhaustive-deps

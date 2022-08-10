@@ -5,7 +5,7 @@ export const ImageEditor = (props) => {
 	useEffect(()=>{
 		props.onEditingComplete({
 			cancelled: false,
-			uri: "",
+			uri: props.imageUri,
 		})
 	}, [props])
 	return <View testID={"mockImageEditor"}></View>;

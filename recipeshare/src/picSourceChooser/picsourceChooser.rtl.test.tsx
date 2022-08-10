@@ -1,7 +1,6 @@
 import React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react-native";
+import { render, fireEvent, waitFor, act } from "@testing-library/react-native";
 import PicSourceChooser from "./picSourceChooser";
-import { ImagePickerResult } from "expo-image-picker";
 
 // manual mocks
 
@@ -33,12 +32,6 @@ describe("picSourceChooser", () => {
 					sourceChosen={mockSourceChosen}
 					key={"pic-chooser"}
 					imageSource={"mockInitialImageUrl"}
-					originalImage={
-						{
-							cancelled: false,
-							uri: "mockInitialImageUrl",
-						} as ImagePickerResult
-					}
 					cancelChooseImage={mockCancelChooseImage}
 				/>
 			);
@@ -64,23 +57,25 @@ describe("picSourceChooser", () => {
 	});
 
 	test("it should be possible to take a photo", async () => {
-		fireEvent.press(getByText("Take photo"));
-		waitFor(() =>
+		await waitFor(() => expect(getByText("Take photo")).toBeTruthy());
+		await act(async () => {
+			fireEvent.press(getByText("Take photo"));
+		});
 			expect(mockSaveImage).toHaveBeenCalledWith({
 				cancelled: false,
 				uri: "mockCameraUri",
 			})
-		);
 	});
 
 	test("it should be possible to select a photo", async () => {
+		await waitFor(() => expect(getByText("Choose photo")).toBeTruthy());
+		await act(async () => {
 		fireEvent.press(getByText("Choose photo"));
-		waitFor(() =>
+		})
 			expect(mockSaveImage).toHaveBeenCalledWith({
 				cancelled: false,
 				uri: "mockLibraryUri",
 			})
-		);
 	});
 
 	test("it should be possible to delete the selected photo", async () => {
@@ -93,7 +88,7 @@ describe("picSourceChooser", () => {
 
 	test("it should be possible to cancel and close", async () => {
 		fireEvent.press(getByText("Cancel"));
-		expect(mockCancelChooseImage).toHaveBeenCalledWith({ cancelled: false, uri: "mockInitialImageUrl" });
+		expect(mockCancelChooseImage).toHaveBeenCalledWith("mockInitialImageUrl");
 		expect(mockSourceChosen).toHaveBeenCalled();
 	});
 

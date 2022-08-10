@@ -101,7 +101,7 @@ export default connect(
 					sourceChosen={this.sourceChosen}
 					key={"pic-chooser"}
 					imageSource={imageSource}
-					originalImage={this.props.image_url}
+					// originalImage={this.props.image_url} refactored to remove
 					cancelChooseImage={this.cancelChooseImage}
 				/>
 			)
