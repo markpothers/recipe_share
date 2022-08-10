@@ -3,8 +3,8 @@ import { getTimeStringFromMinutes, getMinutesFromTimeString } from "./getTimeStr
 describe("time string conversion functions", () => {
 
 	test("getTimeStringFromMinutes converts an integer of minutes to a string like 01:00", () => {
-		let testValues = [30, 45, 60, 150, 255, 345, 600]
-		let testResults = ["00:30", "00:45", "01:00", "02:30", "04:15", "05:45", "10:00"]
+		const testValues = [30, 45, 60, 150, 255, 345, 600]
+		const testResults = ["00:30", "00:45", "01:00", "02:30", "04:15", "05:45", "10:00"]
 		testValues.forEach((min, index) => {
 			expect(getTimeStringFromMinutes(min)).toEqual(testResults[index])
 		})
@@ -20,8 +20,8 @@ describe("time string conversion functions", () => {
 	})
 
 	test("getMinutesFromTimeString converts a string of hours and minutes to total minutes", () => {
-		let testValues = ["00:30", "00:45", "01:00", "02:30", "04:15", "05:45", "10:00"]
-		let testResults = [30, 45, 60, 150, 255, 345, 600]
+		const testValues = ["00:30", "00:45", "01:00", "02:30", "04:15", "05:45", "10:00"]
+		const testResults = [30, 45, 60, 150, 255, 345, 600]
 		testValues.forEach((timeString, index) => {
 			expect(getMinutesFromTimeString(timeString)).toEqual(testResults[index])
 		})

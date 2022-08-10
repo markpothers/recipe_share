@@ -29,6 +29,7 @@ exports[`StyledActivityIndicator can be rendered 1`] = `
         "top": 1.7,
       }
     }
+    testID="activityIndicator"
   />
 </View>
 `;
