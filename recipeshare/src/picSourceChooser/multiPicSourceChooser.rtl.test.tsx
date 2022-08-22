@@ -92,7 +92,7 @@ describe("multiPicSourceChooser", () => {
 		});
 
 		test("it should be possible to take a photo", async () => {
-			await waitFor(() => expect(getByText("Choose photo")).toBeTruthy());
+			await waitFor(() => expect(getByText("Take photo")).toBeTruthy());
 			await act(async () => {
 				fireEvent.press(getByText("Take photo"));
 			});

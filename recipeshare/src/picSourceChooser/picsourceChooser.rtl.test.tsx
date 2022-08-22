@@ -61,21 +61,21 @@ describe("picSourceChooser", () => {
 		await act(async () => {
 			fireEvent.press(getByText("Take photo"));
 		});
-			expect(mockSaveImage).toHaveBeenCalledWith({
-				cancelled: false,
-				uri: "mockCameraUri",
-			})
+		expect(mockSaveImage).toHaveBeenCalledWith({
+			cancelled: false,
+			uri: "mockCameraUri",
+		});
 	});
 
 	test("it should be possible to select a photo", async () => {
 		await waitFor(() => expect(getByText("Choose photo")).toBeTruthy());
 		await act(async () => {
-		fireEvent.press(getByText("Choose photo"));
-		})
-			expect(mockSaveImage).toHaveBeenCalledWith({
-				cancelled: false,
-				uri: "mockLibraryUri",
-			})
+			fireEvent.press(getByText("Choose photo"));
+		});
+		expect(mockSaveImage).toHaveBeenCalledWith({
+			cancelled: false,
+			uri: "mockLibraryUri",
+		});
 	});
 
 	test("it should be possible to delete the selected photo", async () => {

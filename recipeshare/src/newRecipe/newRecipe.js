@@ -46,7 +46,7 @@ import { emptyRecipe } from "./recipeTemplates/emptyRecipe"
 import { longTestRecipe } from "./recipeTemplates/longTestRecipe" //eslint-disable-line no-unused-vars
 import { shortTestRecipe } from "./recipeTemplates/shortTestRecipe" //eslint-disable-line no-unused-vars
 
-const testing = __DEV__ ? true : false
+const testing = __DEV__ ? false : false
 const testRecipe = shortTestRecipe
 
 const mapStateToProps = (state) => ({
@@ -86,8 +86,8 @@ export default connect(
 		}
 
 		componentDidMount = async () => {
-			this.fetchIngredientsForAutoComplete() //don't await this, just let it happen in the background
 			this.setState({ awaitingServer: true }, async () => {
+				this.fetchIngredientsForAutoComplete() //don't await this, just let it happen in the background
 				//if we're editing a recipe
 				if (this.props.route.params?.recipe_details !== undefined) {
 					let savedEditingRecipe = JSON.parse(await AsyncStorage.getItem("localEditRecipeDetails"))
@@ -507,7 +507,6 @@ export default connect(
 								newRecipeDetails.showBlogPreview
 							)
 							if (recipe) {
-								// console.log('recipe succeeded')
 								if (recipe.error) {
 									this.setState({
 										errors: recipe.message,
@@ -585,7 +584,7 @@ export default connect(
 								this.props.loggedInChef.auth_token,
 								recipe.instructions.sort((a, b) => (a.step > b.step ? 1 : -1))[index].id,
 								image.id || 0,
-								image
+								image // this sends the whole object if it's existing image, and it really shouldn't
 							)
 						}
 					})
@@ -735,7 +734,7 @@ export default connect(
 		}
 
 		saveInstructionImage = (image, index) => {
-			this.setState({ awaitingServer: true }, async () => {
+			// this.setState({ awaitingServer: true }, async () => {
 				if (image.cancelled === false) {
 					this.setState((state) => {
 						let newInstructionImages = [...state.newRecipeDetails.instructionImages]
@@ -746,13 +745,13 @@ export default connect(
 								...state.newRecipeDetails,
 								instructionImages: newInstructionImages
 							},
-							awaitingServer: false
+							// awaitingServer: false
 						}
 					}, this.saveNewRecipeDetailsLocally)
-				} else {
-					this.setState({ awaitingServer: false })
+				// } else {
+					// this.setState({ awaitingServer: false })
 				}
-			})
+			// })
 		}
 
 		cancelChooseInstructionImage = (image, index) => {
@@ -921,6 +920,7 @@ export default connect(
 											onPress={() =>
 												this.setState({ helpShowing: true, helpText: helpTexts.recipeName })
 											}
+											accessibilityLabel={"recipe name help"}
 										>
 											<Icon
 												style={centralStyles.greenButtonIcon}
@@ -960,7 +960,8 @@ export default connect(
 										style={[centralStyles.helpButton, { right: responsiveWidth(10) }]}
 										activeOpacity={0.7}
 										onPress={() => this.setState({ helpShowing: true, helpText: helpTexts.about })}
-									>
+										accessibilityLabel={"about help"}
+										>
 										<Icon
 											style={centralStyles.greenButtonIcon}
 											size={responsiveHeight(3)}
@@ -1019,6 +1020,7 @@ export default connect(
 											onPress={() =>
 												this.setState({ helpShowing: true, helpText: helpTexts.coverPictures })
 											}
+											accessibilityLabel={"cover pictures help"}
 										>
 											<Icon
 												style={centralStyles.greenButtonIcon}
@@ -1049,6 +1051,7 @@ export default connect(
 											onPress={() =>
 												this.setState({ helpShowing: true, helpText: helpTexts.timings })
 											}
+											accessibilityLabel={"timings help"}
 										>
 											<Icon
 												style={centralStyles.greenButtonIcon}
@@ -1079,6 +1082,7 @@ export default connect(
 												selectedChoice={getTimeStringFromMinutes(
 													this.state.newRecipeDetails.times?.prepTime
 												)}
+												testID={"cookTime"}
 											/>
 										</View>
 									</View>
@@ -1104,6 +1108,7 @@ export default connect(
 												selectedChoice={getTimeStringFromMinutes(
 													this.state.newRecipeDetails.times?.cookTime
 												)}
+												testID={"prepTime"}
 											/>
 										</View>
 									</View>
@@ -1127,6 +1132,7 @@ export default connect(
 												selectedChoice={getTimeStringFromMinutes(
 													this.state.newRecipeDetails.times?.totalTime
 												)}
+												testID={"totalTime"}
 											/>
 										</View>
 									</View>
@@ -1152,6 +1158,7 @@ export default connect(
 											onPress={() =>
 												this.setState({ helpShowing: true, helpText: helpTexts.difficulty })
 											}
+											accessibilityLabel={"difficulty help"}
 										>
 											<Icon
 												style={centralStyles.greenButtonIcon}
@@ -1171,6 +1178,7 @@ export default connect(
 												onChoiceChange={(choice) => this.handleInput(choice, "difficulty")}
 												options={difficulties}
 												selectedChoice={this.state.newRecipeDetails.difficulty}
+												testID={"difficulty"}
 											/>
 										</View>
 									</View>
@@ -1214,6 +1222,7 @@ export default connect(
 													helpText: helpTexts.filterCategories
 												})
 											}
+											accessibilityLabel={"filter categories help"}
 										>
 											<Icon
 												style={centralStyles.greenButtonIcon}
@@ -1247,6 +1256,7 @@ export default connect(
 													helpText: helpTexts.acknowledgement
 												})
 											}
+											accessibilityLabel={"acknowledgement help"}
 										>
 											<Icon
 												style={centralStyles.greenButtonIcon}
@@ -1310,6 +1320,7 @@ export default connect(
 													helpText: helpTexts.acknowledgementLink
 												})
 											}
+											accessibilityLabel={"display as help"}
 										>
 											<Icon
 												style={centralStyles.greenButtonIcon}
@@ -1342,6 +1353,7 @@ export default connect(
 												onValueChange={(value) => this.handleInput(value, "showBlogPreview")}
 												trackColor={{ true: "#5c8a5199", false: "#5c8a5199" }}
 												thumbColor={"#4b7142"}
+												testID={"showBlogPreviewSwitch"}
 											/>
 										</View>
 										<View
@@ -1389,6 +1401,7 @@ export default connect(
 														helpText: helpTexts.ingredients
 													})
 												}
+												accessibilityLabel={"ingredients help"}
 											>
 												<Icon
 													style={centralStyles.greenButtonIcon}
@@ -1507,6 +1520,7 @@ export default connect(
 														helpText: helpTexts.instructions
 													})
 												}
+												accessibilityLabel={"instructions help"}
 											>
 												<Icon
 													style={centralStyles.greenButtonIcon}

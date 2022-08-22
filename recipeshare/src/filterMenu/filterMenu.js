@@ -1,15 +1,15 @@
-import React from 'react'
-import { Modal, Text, View, TouchableOpacity, ScrollView } from 'react-native'
-import { styles } from './filterMenuStyleSheet'
-import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { connect } from 'react-redux'
+import React from "react"
+import { Modal, Text, View, TouchableOpacity, ScrollView } from "react-native"
+import { styles } from "./filterMenuStyleSheet"
+import { centralStyles } from "../centralStyleSheet" //eslint-disable-line no-unused-vars
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { connect } from "react-redux"
 // import { cuisines } from '../dataComponents/cuisines'
 // import { serves } from '../dataComponents/serves'
-import { clearedFilters } from '../dataComponents/clearedFilters'
-import DualOSPicker from '../dualOSPicker/DualOSPicker'
-import SwitchSized from '../customComponents/switchSized/switchSized'
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
+import { clearedFilters } from "../dataComponents/clearedFilters"
+import DualOSPicker from "../dualOSPicker/DualOSPicker"
+import SwitchSized from "../customComponents/switchSized/switchSized"
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
 const mapStateToProps = (state) => ({
 	// filter_settings: state.filter_settings,
@@ -55,20 +55,23 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 			//console.log(this.props.filterOptions)
 			return Object.keys(clearedFilters).sort().map(filter => {
 				return (
-					<View
+					<TouchableOpacity
 						style={styles.filterItemContainer}
-						key={filter}>
+						key={filter}
+						activeOpacity={1}
+						onPress={() => this.handleCategoryChange(filter, !filterSettings[filter])}>
 						<View style={styles.switchContainer}>
 							<SwitchSized
 								value={filterSettings[filter]}
 								onValueChange={(value) => this.handleCategoryChange(filter, value)}
 								disabled={!this.props.newRecipe && !filterOptions.includes(filter)}
+								testID={`${filter}-switch`}
 							/>
 						</View>
 						<View style={styles.categoryContainer}>
 							<Text maxFontSizeMultiplier={2} style={styles.categoryText}>{filter}</Text>
 						</View>
-					</View>
+					</TouchableOpacity>
 				)
 			})
 		}
@@ -149,6 +152,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											options={cuisineOptions}
 											selectedChoice={selectedCuisine}
 											textAlignment={"flex-start"}
+											testID={"cuisines"}
 										/>
 									</View>
 								</View>
@@ -160,6 +164,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											options={servesOptions}
 											selectedChoice={selectedServes}
 											textAlignment={"flex-start"}
+											testID={"serves"}
 										/>
 									</View>
 								</View>

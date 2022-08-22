@@ -123,7 +123,7 @@ export default class IngredientAutoComplete extends React.Component {
 									style={styles.ingredientTextAdjustment}
 									placeholder="Qty"
 									keyboardType="decimal-pad"
-									onChange={(e) => this.props.updateIngredientEntry(ingredientIndex, ingredient.name, e.nativeEvent.text, ingredient.unit)}
+									onChangeText={(text) => this.props.updateIngredientEntry(ingredientIndex, ingredient.name, text, ingredient.unit)}
 									value={ingredient.quantity}
 								/>
 							</View>
@@ -131,7 +131,9 @@ export default class IngredientAutoComplete extends React.Component {
 								<DualOSPicker
 									onChoiceChange={this.onChoiceChange}
 									options={units}
-									selectedChoice={ingredient.unit} />
+									selectedChoice={ingredient.unit} 
+									testID={`ingredient${this.props.index + 1}`}
+									/>
 							</View>
 						</View>
 					</View>
@@ -142,7 +144,8 @@ export default class IngredientAutoComplete extends React.Component {
 						]}
 						onPress={() => this.props.removeIngredient(index)}
 						activeOpacity={0.7}
-					>
+						testID={`delete-ingredient${this.props.index + 1}`}
+						>
 						<Icon name='trash-can-outline' size={responsiveHeight(3.5)} style={styles.ingredientTrashCan} />
 					</TouchableOpacity>
 				</TouchableOpacity>
