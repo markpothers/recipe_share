@@ -476,8 +476,10 @@ exports[`create chef page createChef functions should display errors after submi
                           "width": "100%",
                         }
                       }
+                      testID="countryPicker picker"
                     >
                       <Text
+                        accessibilityLabel="country picker"
                         maxFontSizeMultiplier={2}
                         style={
                           Object {
@@ -485,6 +487,7 @@ exports[`create chef page createChef functions should display errors after submi
                             "marginLeft": 15,
                           }
                         }
+                        testID="country picker value"
                       >
                         United States
                       </Text>
@@ -833,6 +836,7 @@ exports[`create chef page createChef functions should display errors after submi
                 }
               >
                 <View
+                  accessibilityLabel="view terms and conditions"
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -879,6 +883,7 @@ exports[`create chef page createChef functions should display errors after submi
                   </Text>
                 </View>
                 <View
+                  accessibilityLabel="agree terms and conditions"
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -932,6 +937,7 @@ exports[`create chef page createChef functions should display errors after submi
                       I accept
                     </Text>
                     <RCTSwitch
+                      accessibilityLabel="agree terms and conditions toggle"
                       accessibilityRole="switch"
                       onChange={[Function]}
                       onResponderTerminationRequest={[Function]}
@@ -987,6 +993,7 @@ exports[`create chef page createChef functions should display errors after submi
                 }
               >
                 <View
+                  accessibilityLabel="view privacy policy"
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -1033,6 +1040,7 @@ exports[`create chef page createChef functions should display errors after submi
                   </Text>
                 </View>
                 <View
+                  accessibilityLabel="agree privacy policy"
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -1086,6 +1094,7 @@ exports[`create chef page createChef functions should display errors after submi
                       I accept
                     </Text>
                     <RCTSwitch
+                      accessibilityLabel="agree privacy policy toggle"
                       accessibilityRole="switch"
                       onChange={[Function]}
                       onResponderTerminationRequest={[Function]}
@@ -1705,8 +1714,10 @@ exports[`create chef page createChef functions should load and render 1`] = `
                           "width": "100%",
                         }
                       }
+                      testID="countryPicker picker"
                     >
                       <Text
+                        accessibilityLabel="country picker"
                         maxFontSizeMultiplier={2}
                         style={
                           Object {
@@ -1714,6 +1725,7 @@ exports[`create chef page createChef functions should load and render 1`] = `
                             "marginLeft": 15,
                           }
                         }
+                        testID="country picker value"
                       >
                         United States
                       </Text>
@@ -2002,6 +2014,7 @@ exports[`create chef page createChef functions should load and render 1`] = `
                 }
               >
                 <View
+                  accessibilityLabel="view terms and conditions"
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -2048,6 +2061,7 @@ exports[`create chef page createChef functions should load and render 1`] = `
                   </Text>
                 </View>
                 <View
+                  accessibilityLabel="agree terms and conditions"
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -2101,6 +2115,7 @@ exports[`create chef page createChef functions should load and render 1`] = `
                       I accept
                     </Text>
                     <RCTSwitch
+                      accessibilityLabel="agree terms and conditions toggle"
                       accessibilityRole="switch"
                       onChange={[Function]}
                       onResponderTerminationRequest={[Function]}
@@ -2156,6 +2171,7 @@ exports[`create chef page createChef functions should load and render 1`] = `
                 }
               >
                 <View
+                  accessibilityLabel="view privacy policy"
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -2202,6 +2218,7 @@ exports[`create chef page createChef functions should load and render 1`] = `
                   </Text>
                 </View>
                 <View
+                  accessibilityLabel="agree privacy policy"
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -2255,6 +2272,7 @@ exports[`create chef page createChef functions should load and render 1`] = `
                       I accept
                     </Text>
                     <RCTSwitch
+                      accessibilityLabel="agree privacy policy toggle"
                       accessibilityRole="switch"
                       onChange={[Function]}
                       onResponderTerminationRequest={[Function]}

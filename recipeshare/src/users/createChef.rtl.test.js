@@ -57,6 +57,7 @@ describe("create chef page", () => {
 			// getAllByRole,
 			// findByText,
 			// findByTestId,
+			getByLabelText,
 			toJSON;
 
 		beforeEach(async () => {
@@ -91,6 +92,7 @@ describe("create chef page", () => {
 			getByPlaceholderText = rendered.getByPlaceholderText;
 			getByText = rendered.getByText;
 			queryAllByText = rendered.queryAllByText;
+			getByLabelText = rendered.getByLabelText
 			toJSON = rendered.toJSON;
 			// getAllByRole = rendered.getAllByRole;
 			// findByText = rendered.findByText;
@@ -129,7 +131,7 @@ describe("create chef page", () => {
 			// arrange
 
 			// act
-			fireEvent.press(getByText("United States")); // open the picker
+			fireEvent.press(getByLabelText("country picker")); // open the picker
 			await waitFor(() => expect(getByTestId("iosPicker")).toBeTruthy()); // see the picker
 			fireEvent(getByTestId("iosPicker"), "onValueChange", "United Kingdom"); // change the value
 			await act(async () => await jest.runAllTimers());
@@ -178,7 +180,7 @@ describe("create chef page", () => {
 		});
 
 		test("can view and close terms and conditions", async () => {
-			fireEvent.press(getByTestId("viewTAndCButton"));
+			fireEvent.press(getByLabelText("view terms and conditions"));
 			await waitFor(() => expect(getByText("Terms and Conditions")).toBeTruthy);
 			expect(toJSON).toMatchSnapshot();
 			fireEvent.press(getByText("Close"));
@@ -186,15 +188,15 @@ describe("create chef page", () => {
 		});
 
 		test("should accept toggle to accept terms and conditions", async () => {
-			expect(getByTestId("tAndCAgreedToggle").props.value).toStrictEqual(false);
-			fireEvent.press(getByTestId("tAndCAgreedButton")); // works through the button
-			fireEvent.press(getByTestId("tAndCAgreedToggle")); // works through the toggle
-			fireEvent.press(getByTestId("tAndCAgreedButton"));
-			await waitFor(() => expect(getByTestId("tAndCAgreedToggle").props.value).toStrictEqual(true));
+			expect(getByLabelText("agree terms and conditions toggle").props.value).toStrictEqual(false);
+			fireEvent.press(getByLabelText("agree terms and conditions")); // works through the button
+			fireEvent.press(getByLabelText("agree terms and conditions toggle")); // works through the toggle
+			fireEvent.press(getByLabelText("agree terms and conditions"));
+			await waitFor(() => expect(getByLabelText("agree terms and conditions toggle").props.value).toStrictEqual(true));
 		});
 
 		test("can view and close privacy policy", async () => {
-			fireEvent.press(getByTestId("viewPrivacyPolicyButton"));
+			fireEvent.press(getByLabelText("view privacy policy"));
 			await waitFor(() => expect(getByText("Privacy Policy")).toBeTruthy());
 			expect(toJSON).toMatchSnapshot();
 			fireEvent.press(getByText("Close"));
@@ -202,15 +204,15 @@ describe("create chef page", () => {
 		});
 
 		test("should accept toggle to accept privacy policy", async () => {
-			expect(getByTestId("tAndCAgreedToggle").props.value).toStrictEqual(false);
-			fireEvent.press(getByTestId("privacyPolicyAgreedButton")); // works through the button
-			fireEvent.press(getByTestId("privacyPolicyAgreedToggle")); // works through the toggle
-			fireEvent.press(getByTestId("privacyPolicyAgreedButton"));
-			await waitFor(() => expect(getByTestId("privacyPolicyAgreedToggle").props.value).toStrictEqual(true));
+			expect(getByLabelText("agree terms and conditions toggle").props.value).toStrictEqual(false);
+			fireEvent.press(getByLabelText("agree privacy policy")); // works through the button
+			fireEvent.press(getByLabelText("agree privacy policy toggle")); // works through the toggle
+			fireEvent.press(getByLabelText("agree privacy policy"));
+			await waitFor(() => expect(getByLabelText("agree privacy policy toggle").props.value).toStrictEqual(true));
 		});
 
 		test("should be able to navigate to login page", async () => {
-			fireEvent.press(getByTestId("loginButton"));
+			fireEvent.press(getByText("Return to login screen"));
 			expect(mockNavigate).toBeCalledWith("Login");
 		});
 
@@ -221,15 +223,15 @@ describe("create chef page", () => {
 
 		test("submit button should request privacy policy acceptance after t&c accepted", async () => {
 			postChef.mockImplementation(() => Promise.resolve({ error: true, messages: [] }));
-			fireEvent.press(getByTestId("tAndCAgreedButton")); // works through the button
+			fireEvent.press(getByLabelText("agree terms and conditions")); // works through the button
 			await waitFor(() => expect(getByText("Please accept privacy policy")).toBeTruthy());
 			expect(getByTestId("submitButton").props.accessibilityState.disabled).toEqual(true);
 		});
 
 		test("submit should enable submission after pp and t&c accepted", async () => {
 			postChef.mockImplementation(() => Promise.resolve({ error: true, messages: [] }));
-			fireEvent.press(getByTestId("tAndCAgreedButton"));
-			fireEvent.press(getByTestId("privacyPolicyAgreedButton"));
+			fireEvent.press(getByLabelText("agree terms and conditions"));
+			fireEvent.press(getByLabelText("agree privacy policy"));
 			await waitFor(() => expect(getByText("Submit & go to log in")).toBeTruthy());
 			fireEvent.press(getByTestId("submitButton"));
 			expect(postChef).toHaveBeenCalled();
@@ -243,8 +245,8 @@ describe("create chef page", () => {
 			fireEvent.changeText(getByPlaceholderText("about me"), "Some things about me");
 			fireEvent.changeText(getByPlaceholderText("password"), "myTestPassword");
 			fireEvent.changeText(getByPlaceholderText("password confirmation"), "myTestPassword");
-			fireEvent.press(getByTestId("tAndCAgreedToggle"));
-			fireEvent.press(getByTestId("privacyPolicyAgreedToggle"));
+			fireEvent.press(getByLabelText("agree terms and conditions toggle"));
+			fireEvent.press(getByLabelText("agree privacy policy toggle"));
 
 			// act
 			fireEvent.press(getByTestId("submitButton"));
@@ -271,8 +273,8 @@ describe("create chef page", () => {
 					messages: errors,
 				})
 			);
-			fireEvent.press(getByTestId("tAndCAgreedToggle"));
-			fireEvent.press(getByTestId("privacyPolicyAgreedToggle"));
+			fireEvent.press(getByLabelText("agree terms and conditions toggle"));
+			fireEvent.press(getByLabelText("agree privacy policy toggle"));
 
 			// act
 			fireEvent.press(getByTestId("submitButton"));
@@ -286,8 +288,8 @@ describe("create chef page", () => {
 		test("should display offline message if offline", async () => {
 			// arrange
 			postChef.mockImplementation(() => Promise.reject({ error: "something went wrong" }));
-			fireEvent.press(getByTestId("tAndCAgreedToggle"));
-			fireEvent.press(getByTestId("privacyPolicyAgreedToggle"));
+			fireEvent.press(getByLabelText("agree terms and conditions toggle"));
+			fireEvent.press(getByLabelText("agree privacy policy toggle"));
 
 			// act
 			fireEvent.press(getByTestId("submitButton"));

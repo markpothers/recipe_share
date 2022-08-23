@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`New Recipe page New Recipe functions if you set Blog, ingredients and instructions sections should be absent 1`] = `
+exports[`New Recipe page New Recipe creation and functions if you set Blog, ingredients and instructions sections should be absent 1`] = `
 <RCTSafeAreaView
   emulateUnlessSupported={true}
   style={
@@ -798,9 +798,10 @@ exports[`New Recipe page New Recipe functions if you set Blog, ingredients and i
                         "width": "100%",
                       }
                     }
-                    testID="cookTime-picker"
+                    testID="prepTime picker"
                   >
                     <Text
+                      accessibilityLabel="prep time picker"
                       maxFontSizeMultiplier={2}
                       style={
                         Object {
@@ -808,7 +809,7 @@ exports[`New Recipe page New Recipe functions if you set Blog, ingredients and i
                           "marginLeft": 15,
                         }
                       }
-                      testID="cookTime-picker-value"
+                      testID="prep time picker value"
                     >
                       00:00
                     </Text>
@@ -917,9 +918,10 @@ exports[`New Recipe page New Recipe functions if you set Blog, ingredients and i
                         "width": "100%",
                       }
                     }
-                    testID="prepTime-picker"
+                    testID="cookTime picker"
                   >
                     <Text
+                      accessibilityLabel="cook time picker"
                       maxFontSizeMultiplier={2}
                       style={
                         Object {
@@ -927,7 +929,7 @@ exports[`New Recipe page New Recipe functions if you set Blog, ingredients and i
                           "marginLeft": 15,
                         }
                       }
-                      testID="prepTime-picker-value"
+                      testID="cook time picker value"
                     >
                       00:00
                     </Text>
@@ -1036,9 +1038,10 @@ exports[`New Recipe page New Recipe functions if you set Blog, ingredients and i
                         "width": "100%",
                       }
                     }
-                    testID="totalTime-picker"
+                    testID="totalTime picker"
                   >
                     <Text
+                      accessibilityLabel="total time picker"
                       maxFontSizeMultiplier={2}
                       style={
                         Object {
@@ -1046,7 +1049,7 @@ exports[`New Recipe page New Recipe functions if you set Blog, ingredients and i
                           "marginLeft": 15,
                         }
                       }
-                      testID="totalTime-picker-value"
+                      testID="total time picker value"
                     >
                       00:00
                     </Text>
@@ -1285,9 +1288,10 @@ exports[`New Recipe page New Recipe functions if you set Blog, ingredients and i
                         "width": "100%",
                       }
                     }
-                    testID="difficulty-picker"
+                    testID="difficulty picker"
                   >
                     <Text
+                      accessibilityLabel="difficulty picker"
                       maxFontSizeMultiplier={2}
                       style={
                         Object {
@@ -1295,7 +1299,7 @@ exports[`New Recipe page New Recipe functions if you set Blog, ingredients and i
                           "marginLeft": 15,
                         }
                       }
-                      testID="difficulty-picker-value"
+                      testID="difficulty picker value"
                     >
                       0
                     </Text>
@@ -1914,6 +1918,7 @@ exports[`New Recipe page New Recipe functions if you set Blog, ingredients and i
                 }
               >
                 <RCTSwitch
+                  accessibilityLabel="show blog switch"
                   accessibilityRole="switch"
                   onChange={[Function]}
                   onResponderTerminationRequest={[Function]}
@@ -1932,7 +1937,6 @@ exports[`New Recipe page New Recipe functions if you set Blog, ingredients and i
                       ],
                     ]
                   }
-                  testID="showBlogPreviewSwitch"
                   thumbTintColor="#4b7142"
                   tintColor="#5c8a5199"
                   value={true}
@@ -2179,7 +2183,7 @@ exports[`New Recipe page New Recipe functions if you set Blog, ingredients and i
 </RCTSafeAreaView>
 `;
 
-exports[`New Recipe page New Recipe functions if you set Full Recipe, ingredients and instructions sections should be present 1`] = `
+exports[`New Recipe page New Recipe creation and functions if you set Full Recipe, ingredients and instructions sections should be present 1`] = `
 <RCTSafeAreaView
   emulateUnlessSupported={true}
   style={
@@ -2977,9 +2981,10 @@ exports[`New Recipe page New Recipe functions if you set Full Recipe, ingredient
                         "width": "100%",
                       }
                     }
-                    testID="cookTime-picker"
+                    testID="prepTime picker"
                   >
                     <Text
+                      accessibilityLabel="prep time picker"
                       maxFontSizeMultiplier={2}
                       style={
                         Object {
@@ -2987,7 +2992,7 @@ exports[`New Recipe page New Recipe functions if you set Full Recipe, ingredient
                           "marginLeft": 15,
                         }
                       }
-                      testID="cookTime-picker-value"
+                      testID="prep time picker value"
                     >
                       00:00
                     </Text>
@@ -3096,9 +3101,10 @@ exports[`New Recipe page New Recipe functions if you set Full Recipe, ingredient
                         "width": "100%",
                       }
                     }
-                    testID="prepTime-picker"
+                    testID="cookTime picker"
                   >
                     <Text
+                      accessibilityLabel="cook time picker"
                       maxFontSizeMultiplier={2}
                       style={
                         Object {
@@ -3106,7 +3112,7 @@ exports[`New Recipe page New Recipe functions if you set Full Recipe, ingredient
                           "marginLeft": 15,
                         }
                       }
-                      testID="prepTime-picker-value"
+                      testID="cook time picker value"
                     >
                       00:00
                     </Text>
@@ -3215,9 +3221,10 @@ exports[`New Recipe page New Recipe functions if you set Full Recipe, ingredient
                         "width": "100%",
                       }
                     }
-                    testID="totalTime-picker"
+                    testID="totalTime picker"
                   >
                     <Text
+                      accessibilityLabel="total time picker"
                       maxFontSizeMultiplier={2}
                       style={
                         Object {
@@ -3225,7 +3232,7 @@ exports[`New Recipe page New Recipe functions if you set Full Recipe, ingredient
                           "marginLeft": 15,
                         }
                       }
-                      testID="totalTime-picker-value"
+                      testID="total time picker value"
                     >
                       00:00
                     </Text>
@@ -3464,9 +3471,10 @@ exports[`New Recipe page New Recipe functions if you set Full Recipe, ingredient
                         "width": "100%",
                       }
                     }
-                    testID="difficulty-picker"
+                    testID="difficulty picker"
                   >
                     <Text
+                      accessibilityLabel="difficulty picker"
                       maxFontSizeMultiplier={2}
                       style={
                         Object {
@@ -3474,7 +3482,7 @@ exports[`New Recipe page New Recipe functions if you set Full Recipe, ingredient
                           "marginLeft": 15,
                         }
                       }
-                      testID="difficulty-picker-value"
+                      testID="difficulty picker value"
                     >
                       0
                     </Text>
@@ -4093,6 +4101,7 @@ exports[`New Recipe page New Recipe functions if you set Full Recipe, ingredient
                 }
               >
                 <RCTSwitch
+                  accessibilityLabel="show blog switch"
                   accessibilityRole="switch"
                   onChange={[Function]}
                   onResponderTerminationRequest={[Function]}
@@ -4111,7 +4120,6 @@ exports[`New Recipe page New Recipe functions if you set Full Recipe, ingredient
                       ],
                     ]
                   }
-                  testID="showBlogPreviewSwitch"
                   thumbTintColor="#4b7142"
                   tintColor="#5c8a5199"
                   value={false}
@@ -4807,7 +4815,7 @@ exports[`New Recipe page New Recipe functions if you set Full Recipe, ingredient
 </RCTSafeAreaView>
 `;
 
-exports[`New Recipe page New Recipe functions should load and render 1`] = `
+exports[`New Recipe page New Recipe creation and functions should load and render 1`] = `
 <RCTSafeAreaView
   emulateUnlessSupported={true}
   style={
@@ -5605,9 +5613,10 @@ exports[`New Recipe page New Recipe functions should load and render 1`] = `
                         "width": "100%",
                       }
                     }
-                    testID="cookTime-picker"
+                    testID="prepTime picker"
                   >
                     <Text
+                      accessibilityLabel="prep time picker"
                       maxFontSizeMultiplier={2}
                       style={
                         Object {
@@ -5615,7 +5624,7 @@ exports[`New Recipe page New Recipe functions should load and render 1`] = `
                           "marginLeft": 15,
                         }
                       }
-                      testID="cookTime-picker-value"
+                      testID="prep time picker value"
                     >
                       00:00
                     </Text>
@@ -5724,9 +5733,10 @@ exports[`New Recipe page New Recipe functions should load and render 1`] = `
                         "width": "100%",
                       }
                     }
-                    testID="prepTime-picker"
+                    testID="cookTime picker"
                   >
                     <Text
+                      accessibilityLabel="cook time picker"
                       maxFontSizeMultiplier={2}
                       style={
                         Object {
@@ -5734,7 +5744,7 @@ exports[`New Recipe page New Recipe functions should load and render 1`] = `
                           "marginLeft": 15,
                         }
                       }
-                      testID="prepTime-picker-value"
+                      testID="cook time picker value"
                     >
                       00:00
                     </Text>
@@ -5843,9 +5853,10 @@ exports[`New Recipe page New Recipe functions should load and render 1`] = `
                         "width": "100%",
                       }
                     }
-                    testID="totalTime-picker"
+                    testID="totalTime picker"
                   >
                     <Text
+                      accessibilityLabel="total time picker"
                       maxFontSizeMultiplier={2}
                       style={
                         Object {
@@ -5853,7 +5864,7 @@ exports[`New Recipe page New Recipe functions should load and render 1`] = `
                           "marginLeft": 15,
                         }
                       }
-                      testID="totalTime-picker-value"
+                      testID="total time picker value"
                     >
                       00:00
                     </Text>
@@ -6092,9 +6103,10 @@ exports[`New Recipe page New Recipe functions should load and render 1`] = `
                         "width": "100%",
                       }
                     }
-                    testID="difficulty-picker"
+                    testID="difficulty picker"
                   >
                     <Text
+                      accessibilityLabel="difficulty picker"
                       maxFontSizeMultiplier={2}
                       style={
                         Object {
@@ -6102,7 +6114,7 @@ exports[`New Recipe page New Recipe functions should load and render 1`] = `
                           "marginLeft": 15,
                         }
                       }
-                      testID="difficulty-picker-value"
+                      testID="difficulty picker value"
                     >
                       0
                     </Text>
@@ -6721,6 +6733,7 @@ exports[`New Recipe page New Recipe functions should load and render 1`] = `
                 }
               >
                 <RCTSwitch
+                  accessibilityLabel="show blog switch"
                   accessibilityRole="switch"
                   onChange={[Function]}
                   onResponderTerminationRequest={[Function]}
@@ -6739,7 +6752,6 @@ exports[`New Recipe page New Recipe functions should load and render 1`] = `
                       ],
                     ]
                   }
-                  testID="showBlogPreviewSwitch"
                   thumbTintColor="#4b7142"
                   tintColor="#5c8a5199"
                   value={false}

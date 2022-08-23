@@ -10,10 +10,11 @@ type Props = {
 	trackColor?: { true: string; false: string };
 	thumbColor?: string;
 	testID?: string;
+	accessibilityLabel?: string;
 };
 
 export default function SwitchSized(props: Props) {
-	const { disabled, value, onValueChange, trackColor, thumbColor, testID } = props;
+	const { disabled, value, onValueChange, trackColor, thumbColor, testID, accessibilityLabel } = props;
 	// const [deviceType, setDeviceType] = useState(0)
 	const deviceType = useAppSelector((state) => state.root.deviceType);
 
@@ -44,6 +45,7 @@ export default function SwitchSized(props: Props) {
 			disabled={disabled}
 			accessibilityRole="switch"
 			testID={testID}
+			accessibilityLabel={accessibilityLabel}
 		/>
 	);
 }

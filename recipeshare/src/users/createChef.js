@@ -285,6 +285,7 @@ export default connect(
 											selectedChoice={this.props.country}
 											textAlignment={"flex-start"}
 											testID={"countryPicker"}
+											accessibilityLabel={"country picker"}
 										/>
 									</View>
 								</View>
@@ -379,6 +380,7 @@ export default connect(
 										activeOpacity={0.7}
 										onPress={() => this.setState({ viewingTermsAndConditions: true })}
 										testID={"viewTAndCButton"}
+										accessibilityLabel={"view terms and conditions"}
 									>
 										<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>
 											{"View Terms & Conditions"}
@@ -392,6 +394,7 @@ export default connect(
 										]}
 										onPress={this.handleTandCSwitch}
 										testID={"tAndCAgreedButton"}
+										accessibilityLabel={"agree terms and conditions"}
 									>
 										<View
 											style={{
@@ -408,6 +411,7 @@ export default connect(
 												value={this.state.tAndCAgreed}
 												onValueChange={this.handleTandCSwitch}
 												testID={"tAndCAgreedToggle"}
+												accessibilityLabel={"agree terms and conditions toggle"}
 											/>
 										</View>
 									</TouchableOpacity>
@@ -425,6 +429,7 @@ export default connect(
 														)
 													}
 													testID={"emailTAndCButton"}
+													accessibilityLabel={"email terms and conditions"}
 												>
 													<Text style={{ color: "blue" }}>
 														admin@recipe-share.com{"\r\r"}
@@ -451,6 +456,7 @@ export default connect(
 										activeOpacity={0.7}
 										onPress={() => this.setState({ viewingPrivacyPolicy: true })}
 										testID={"viewPrivacyPolicyButton"}
+										accessibilityLabel={"view privacy policy"}
 									>
 										<Text maxFontSizeMultiplier={2} style={centralStyles.greenButtonText}>
 											{"View Privacy Policy"}
@@ -464,6 +470,7 @@ export default connect(
 										]}
 										onPress={this.handlePrivacyPolicySwitch}
 										testID={"privacyPolicyAgreedButton"}
+										accessibilityLabel={"agree privacy policy"}
 									>
 										<View
 											style={{
@@ -480,6 +487,7 @@ export default connect(
 												value={this.state.privacyPolicyAgreed}
 												onValueChange={this.handlePrivacyPolicySwitch}
 												testID={"privacyPolicyAgreedToggle"}
+												accessibilityLabel={"agree privacy policy toggle"}
 											/>
 										</View>
 									</TouchableOpacity>
@@ -498,6 +506,7 @@ export default connect(
 														)
 													}
 													testID={"emailPrivacyPolicyButton"}
+													accessibilityLabel={"email privacy policy"}
 												>
 													<Text style={{ color: "blue" }}>
 														admin@recipe-share.com{"\r\r"}

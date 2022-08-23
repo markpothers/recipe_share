@@ -133,6 +133,7 @@ export default class IngredientAutoComplete extends React.Component {
 									options={units}
 									selectedChoice={ingredient.unit} 
 									testID={`ingredient${this.props.index + 1}`}
+									accessibilityLabel={`ingredient${this.props.index + 1} unit picker`}
 									/>
 							</View>
 						</View>
@@ -145,6 +146,7 @@ export default class IngredientAutoComplete extends React.Component {
 						onPress={() => this.props.removeIngredient(index)}
 						activeOpacity={0.7}
 						testID={`delete-ingredient${this.props.index + 1}`}
+						accessibilityLabel={`delete ingredient${this.props.index + 1}`}
 						>
 						<Icon name='trash-can-outline' size={responsiveHeight(3.5)} style={styles.ingredientTrashCan} />
 					</TouchableOpacity>

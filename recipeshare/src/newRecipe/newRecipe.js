@@ -835,7 +835,7 @@ export default connect(
 		}
 
 		render() {
-			// console.log(this.state.newRecipeDetails.instructions)
+			// console.log(this.state.newRecipeDetails)
 			// console.log(this.state.newRecipeDetails.instructionImages)
 			return (
 				<SpinachAppContainer awaitingServer={this.state.awaitingServer} scrollingEnabled={false}>
@@ -1082,7 +1082,8 @@ export default connect(
 												selectedChoice={getTimeStringFromMinutes(
 													this.state.newRecipeDetails.times?.prepTime
 												)}
-												testID={"cookTime"}
+												testID={"prepTime"}
+												accessibilityLabel={"prep time picker"}
 											/>
 										</View>
 									</View>
@@ -1108,7 +1109,8 @@ export default connect(
 												selectedChoice={getTimeStringFromMinutes(
 													this.state.newRecipeDetails.times?.cookTime
 												)}
-												testID={"prepTime"}
+												testID={"cookTime"}
+												accessibilityLabel={"cook time picker"}
 											/>
 										</View>
 									</View>
@@ -1133,6 +1135,7 @@ export default connect(
 													this.state.newRecipeDetails.times?.totalTime
 												)}
 												testID={"totalTime"}
+												accessibilityLabel={"total time picker"}
 											/>
 										</View>
 									</View>
@@ -1179,6 +1182,7 @@ export default connect(
 												options={difficulties}
 												selectedChoice={this.state.newRecipeDetails.difficulty}
 												testID={"difficulty"}
+												accessibilityLabel={"difficulty picker"}
 											/>
 										</View>
 									</View>
@@ -1353,7 +1357,8 @@ export default connect(
 												onValueChange={(value) => this.handleInput(value, "showBlogPreview")}
 												trackColor={{ true: "#5c8a5199", false: "#5c8a5199" }}
 												thumbColor={"#4b7142"}
-												testID={"showBlogPreviewSwitch"}
+												// testID={"showBlogPreviewSwitch"}
+												accessibilityLabel={"show blog switch"}
 											/>
 										</View>
 										<View

@@ -153,6 +153,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											selectedChoice={selectedCuisine}
 											textAlignment={"flex-start"}
 											testID={"cuisines"}
+											accessibilityLabel={"cuisines picker"}
 										/>
 									</View>
 								</View>
@@ -165,6 +166,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 											selectedChoice={selectedServes}
 											textAlignment={"flex-start"}
 											testID={"serves"}
+											accessibilityLabel={"serves picker"}
 										/>
 									</View>
 								</View>

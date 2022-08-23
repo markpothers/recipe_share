@@ -31,12 +31,13 @@ export default class DualOSPicker extends React.PureComponent {
 							{ justifyContent: this.props.textAlignment ?? "space-evenly" },
 						]}
 						onPress={() => this.setState({ IOSPickerShowing: true })}
-						testID={`${this.props.testID}-picker`}
+						testID={`${this.props.testID} picker`}
 					>
 						<Text
 							maxFontSizeMultiplier={2}
 							style={styles.IOSSelectedChoiceTextBox}
-							testID={`${this.props.testID}-picker-value`}
+							testID={`${this.props.accessibilityLabel} value`}
+							accessibilityLabel={`${this.props.accessibilityLabel}`}
 						>
 							{this.props.selectedChoice}
 						</Text>
