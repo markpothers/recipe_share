@@ -58,6 +58,7 @@ exports[`SpinachAppContainer renders with scrollView and activityIndicator on An
         color="#104e01"
         size="large"
         style={Object {}}
+        testID="activityIndicator"
       />
     </View>
     <RCTScrollView
@@ -146,6 +147,7 @@ exports[`SpinachAppContainer renders with scrollView and activityIndicator on IO
             "top": 1.7,
           }
         }
+        testID="activityIndicator"
       />
     </View>
     <RCTScrollView
@@ -324,6 +326,7 @@ exports[`SpinachAppContainer renders without scrollView and with ActivityIndicat
       color="#104e01"
       size="large"
       style={Object {}}
+      testID="activityIndicator"
     />
   </View>
 </RCTSafeAreaView>
@@ -381,6 +384,7 @@ exports[`SpinachAppContainer renders without scrollView and with ActivityIndicat
           "top": 1.7,
         }
       }
+      testID="activityIndicator"
     />
   </View>
 </RCTSafeAreaView>

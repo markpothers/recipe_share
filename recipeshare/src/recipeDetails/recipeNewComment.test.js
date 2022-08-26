@@ -1,34 +1,33 @@
-import React from 'react';
-import renderer, { act } from 'react-test-renderer';
+import React from "react";
+import renderer, { act } from "react-test-renderer";
 
-import RecipeNewComment from './recipeNewComment.js'
-import { TextInput } from 'react-native';
+import RecipeNewComment from "./recipeNewComment.js";
+import { TextInput } from "react-native";
 
-describe('RecipeNewComment', () => {
-
-	let component
-	let mockScrollToLocation
-	let mockHandleCommentTextInput
+describe("RecipeNewComment", () => {
+	let component;
+	let mockScrollToLocation;
+	let mockHandleCommentTextInput;
 
 	beforeAll(() => {
 		// console.log('runs at the beginning of everything')
-	})
+	});
 
 	beforeEach(() => {
 		// console.log('runs before every test')
-		mockScrollToLocation = jest.fn()
-		mockHandleCommentTextInput = jest.fn()
-	})
+		mockScrollToLocation = jest.fn();
+		mockHandleCommentTextInput = jest.fn();
+	});
 
 	afterEach(() => {
 		// console.log('runs after each test')
-	})
+	});
 
 	afterAll(() => {
 		// console.log('runs after all tests have completed')
-	})
+	});
 
-	test('renders with some text and a confirm button', () => {
+	test("renders with some text and a confirm button", () => {
 		act(() => {
 			component = renderer.create(
 				<RecipeNewComment
@@ -38,16 +37,16 @@ describe('RecipeNewComment', () => {
 					commentText={"Here is my test comment text"}
 					handleCommentTextInput={mockHandleCommentTextInput}
 				/>
-			)
-		})
-		const image = component.toJSON()
-		expect(image).toMatchSnapshot()
-		let root = component.root
-		const input = root.findAllByType(TextInput)
-		expect(input.length).toEqual(1)
-	})
+			);
+		});
+		const image = component.toJSON();
+		expect(image).toMatchSnapshot();
+		let root = component.root;
+		const input = root.findAllByType(TextInput);
+		expect(input.length).toEqual(1);
+	});
 
-	test('renders without an image_url', () => {
+	test("renders without an image_url", () => {
 		act(() => {
 			component = renderer.create(
 				<RecipeNewComment
@@ -57,13 +56,13 @@ describe('RecipeNewComment', () => {
 					commentText={"Here is my test comment text"}
 					handleCommentTextInput={mockHandleCommentTextInput}
 				/>
-			)
-		})
-		const image = component.toJSON()
-		expect(image).toMatchSnapshot()
-	})
+			);
+		});
+		const image = component.toJSON();
+		expect(image).toMatchSnapshot();
+	});
 
-	test('the text box can be typed in and calles handleCommentTextInput', () => {
+	test("the text box can be typed in and calles handleCommentTextInput", () => {
 		act(() => {
 			component = renderer.create(
 				<RecipeNewComment
@@ -73,14 +72,13 @@ describe('RecipeNewComment', () => {
 					commentText={"Here is my test comment text"}
 					handleCommentTextInput={mockHandleCommentTextInput}
 				/>
-			)
-		})
-		let root = component.root
-		const input = root.findAllByType(TextInput)
-		expect(input.length).toEqual(1)
-		input[0].props.onChangeText("Great recipe")
-		expect(mockHandleCommentTextInput).toHaveBeenCalled()
-		expect(mockHandleCommentTextInput).toHaveBeenCalledWith("Great recipe")
-	})
-
-})
+			);
+		});
+		let root = component.root;
+		const input = root.findAllByType(TextInput);
+		expect(input.length).toEqual(1);
+		input[0].props.onChangeText("Great recipe");
+		expect(mockHandleCommentTextInput).toHaveBeenCalled();
+		expect(mockHandleCommentTextInput).toHaveBeenCalledWith("Great recipe");
+	});
+});

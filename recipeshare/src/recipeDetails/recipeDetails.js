@@ -57,8 +57,8 @@ import {
 	updateComments,
 	removeRecipeReShare,
 } from "../redux";
-
 const defaultRecipeImage = require("../dataComponents/default-recipe.jpg");
+
 let keepAwakeTimer;
 
 const mapStateToProps = (state) => ({
