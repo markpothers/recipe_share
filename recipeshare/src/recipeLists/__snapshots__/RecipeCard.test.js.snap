@@ -14,6 +14,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       "width": "100%",
     }
   }
+  testID="recipeCard"
 >
   <View
     style={
@@ -89,7 +90,8 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
             }
           }
         >
-          Created by: 
+          Created by:
+           
         </Text>
         <View
           accessible={true}
@@ -187,6 +189,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       testID="chefImageButton"
     >
       <Image
+        accessibilityLabel="picture of chef"
         source={
           Object {
             "uri": "https://storage.googleapis.com/download/storage/v1/b/chef-avatars-ac1cff8d11c908f3cf8613121b61683221152250/o/59b9a3ad9aaf1fe5f9fd5c92c62461eaa88fea89.jpg?generation=1601673323651524&alt=media",
@@ -204,6 +207,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     </View>
   </View>
   <View
+    accessibilityLabel="picture of recipe"
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -269,6 +273,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       testID="reShareButton"
     >
       <Icon
+        accessibilityLabel="share recipe with followers"
         name="share-outline"
         size={46.690000000000005}
         style={
@@ -280,6 +285,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         }
       />
       <Text
+        accessibilityLabel="shares count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -317,6 +323,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       testID="likeButton"
     >
       <Icon
+        accessibilityLabel="like recipe"
         name="heart-outline"
         size={46.690000000000005}
         style={
@@ -328,6 +335,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         }
       />
       <Text
+        accessibilityLabel="likes count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -365,6 +373,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       testID="commentButton"
     >
       <Icon
+        accessibilityLabel="comment on recipe"
         name="comment-outline"
         size={46.690000000000005}
         style={
@@ -376,6 +385,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         }
       />
       <Text
+        accessibilityLabel="comments count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -408,6 +418,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       "width": "100%",
     }
   }
+  testID="recipeCard"
 >
   <View
     style={
@@ -483,7 +494,8 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
             }
           }
         >
-          Created by: 
+          Created by:
+           
         </Text>
         <View
           accessible={true}
@@ -581,6 +593,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       testID="chefImageButton"
     >
       <Image
+        accessibilityLabel="picture of chef"
         source={
           Object {
             "uri": "https://robohash.org/autquiaut.png?size=300x300&set=set1",
@@ -598,6 +611,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     </View>
   </View>
   <View
+    accessibilityLabel="picture of recipe"
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -667,6 +681,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       testID="reShareButton"
     >
       <Icon
+        accessibilityLabel="share recipe with followers"
         name="share-outline"
         size={46.690000000000005}
         style={
@@ -678,6 +693,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         }
       />
       <Text
+        accessibilityLabel="shares count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -715,6 +731,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       testID="likeButton"
     >
       <Icon
+        accessibilityLabel="unlike recipe"
         name="heart"
         size={46.690000000000005}
         style={
@@ -726,6 +743,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         }
       />
       <Text
+        accessibilityLabel="likes count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -763,6 +781,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       testID="commentButton"
     >
       <Icon
+        accessibilityLabel="comment on recipe"
         name="comment-outline"
         size={46.690000000000005}
         style={
@@ -774,6 +793,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         }
       />
       <Text
+        accessibilityLabel="comments count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -806,6 +826,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       "width": "100%",
     }
   }
+  testID="recipeCard"
 >
   <View
     style={
@@ -881,7 +902,8 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
             }
           }
         >
-          Created by: 
+          Created by:
+           
         </Text>
         <View
           accessible={true}
@@ -979,6 +1001,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       testID="chefImageButton"
     >
       <Image
+        accessibilityLabel="picture of chef"
         source={
           Object {
             "uri": "https://storage.googleapis.com/download/storage/v1/b/chef-avatars-ac1cff8d11c908f3cf8613121b61683221152250/o/59b9a3ad9aaf1fe5f9fd5c92c62461eaa88fea89.jpg?generation=1601673323651524&alt=media",
@@ -996,6 +1019,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     </View>
   </View>
   <View
+    accessibilityLabel="picture of recipe"
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -1061,6 +1085,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       testID="reShareButton"
     >
       <Icon
+        accessibilityLabel="share recipe with followers"
         name="share-outline"
         size={46.690000000000005}
         style={
@@ -1072,6 +1097,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         }
       />
       <Text
+        accessibilityLabel="shares count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -1109,6 +1135,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       testID="likeButton"
     >
       <Icon
+        accessibilityLabel="like recipe"
         name="heart-outline"
         size={46.690000000000005}
         style={
@@ -1120,6 +1147,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         }
       />
       <Text
+        accessibilityLabel="likes count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -1157,6 +1185,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       testID="commentButton"
     >
       <Icon
+        accessibilityLabel="comment on recipe"
         name="comment-outline"
         size={46.690000000000005}
         style={
@@ -1168,6 +1197,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         }
       />
       <Text
+        accessibilityLabel="comments count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -1200,6 +1230,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       "width": "100%",
     }
   }
+  testID="recipeCard"
 >
   <View
     style={
@@ -1275,7 +1306,8 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
             }
           }
         >
-          Created by: 
+          Created by:
+           
         </Text>
         <View
           accessible={true}
@@ -1373,6 +1405,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       testID="chefImageButton"
     >
       <Image
+        accessibilityLabel="picture of chef"
         source={
           Object {
             "uri": "https://robohash.org/sedsuntsit.png?size=300x300&set=set1",
@@ -1390,6 +1423,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     </View>
   </View>
   <View
+    accessibilityLabel="picture of recipe"
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -1459,6 +1493,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       testID="reShareButton"
     >
       <Icon
+        accessibilityLabel="share recipe with followers"
         name="share-outline"
         size={46.690000000000005}
         style={
@@ -1470,6 +1505,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         }
       />
       <Text
+        accessibilityLabel="shares count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -1507,6 +1543,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       testID="likeButton"
     >
       <Icon
+        accessibilityLabel="unlike recipe"
         name="heart"
         size={46.690000000000005}
         style={
@@ -1518,6 +1555,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         }
       />
       <Text
+        accessibilityLabel="likes count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -1555,6 +1593,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       testID="commentButton"
     >
       <Icon
+        accessibilityLabel="comment on recipe"
         name="comment-outline"
         size={46.690000000000005}
         style={
@@ -1566,6 +1605,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         }
       />
       <Text
+        accessibilityLabel="comments count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -1598,6 +1638,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       "width": "100%",
     }
   }
+  testID="recipeCard"
 >
   <View
     style={
@@ -1673,7 +1714,8 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
             }
           }
         >
-          Created by: 
+          Created by:
+           
         </Text>
         <View
           accessible={true}
@@ -1771,6 +1813,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       testID="chefImageButton"
     >
       <Image
+        accessibilityLabel="picture of chef"
         source={
           Object {
             "uri": "https://robohash.org/architectoquidemqui.png?size=300x300&set=set1",
@@ -1788,6 +1831,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     </View>
   </View>
   <View
+    accessibilityLabel="picture of recipe"
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -1857,6 +1901,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       testID="reShareButton"
     >
       <Icon
+        accessibilityLabel="share recipe with followers"
         name="share-outline"
         size={46.690000000000005}
         style={
@@ -1868,6 +1913,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         }
       />
       <Text
+        accessibilityLabel="shares count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -1905,6 +1951,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       testID="likeButton"
     >
       <Icon
+        accessibilityLabel="unlike recipe"
         name="heart"
         size={46.690000000000005}
         style={
@@ -1916,6 +1963,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         }
       />
       <Text
+        accessibilityLabel="likes count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -1953,6 +2001,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       testID="commentButton"
     >
       <Icon
+        accessibilityLabel="comment on recipe"
         name="comment-outline"
         size={46.690000000000005}
         style={
@@ -1964,6 +2013,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         }
       />
       <Text
+        accessibilityLabel="comments count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -1996,6 +2046,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       "width": "100%",
     }
   }
+  testID="recipeCard"
 >
   <View
     style={
@@ -2071,7 +2122,8 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
             }
           }
         >
-          Created by: 
+          Created by:
+           
         </Text>
         <View
           accessible={true}
@@ -2169,6 +2221,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       testID="chefImageButton"
     >
       <Image
+        accessibilityLabel="picture of chef"
         source={
           Object {
             "uri": "https://robohash.org/ablaudantiumaut.png?size=300x300&set=set1",
@@ -2186,6 +2239,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
     </View>
   </View>
   <View
+    accessibilityLabel="picture of recipe"
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -2255,6 +2309,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       testID="reShareButton"
     >
       <Icon
+        accessibilityLabel="share recipe with followers"
         name="share-outline"
         size={46.690000000000005}
         style={
@@ -2266,6 +2321,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         }
       />
       <Text
+        accessibilityLabel="shares count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -2303,6 +2359,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       testID="likeButton"
     >
       <Icon
+        accessibilityLabel="unlike recipe"
         name="heart"
         size={46.690000000000005}
         style={
@@ -2314,6 +2371,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         }
       />
       <Text
+        accessibilityLabel="likes count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -2351,6 +2409,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
       testID="commentButton"
     >
       <Icon
+        accessibilityLabel="comment on recipe"
         name="comment-outline"
         size={46.690000000000005}
         style={
@@ -2362,6 +2421,7 @@ exports[`Recipe Card can be rendered using typical props and matches its previou
         }
       />
       <Text
+        accessibilityLabel="comments count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -2394,6 +2454,7 @@ exports[`Recipe Card can be rendered when the recipe has NO COVER IMAGE and matc
       "width": "100%",
     }
   }
+  testID="recipeCard"
 >
   <View
     style={
@@ -2469,7 +2530,8 @@ exports[`Recipe Card can be rendered when the recipe has NO COVER IMAGE and matc
             }
           }
         >
-          Created by: 
+          Created by:
+           
         </Text>
         <View
           accessible={true}
@@ -2567,6 +2629,7 @@ exports[`Recipe Card can be rendered when the recipe has NO COVER IMAGE and matc
       testID="chefImageButton"
     >
       <Image
+        accessibilityLabel="picture of chef"
         source={
           Object {
             "uri": "https://storage.googleapis.com/download/storage/v1/b/chef-avatars-ac1cff8d11c908f3cf8613121b61683221152250/o/59b9a3ad9aaf1fe5f9fd5c92c62461eaa88fea89.jpg?generation=1601673323651524&alt=media",
@@ -2584,6 +2647,7 @@ exports[`Recipe Card can be rendered when the recipe has NO COVER IMAGE and matc
     </View>
   </View>
   <View
+    accessibilityLabel="picture of recipe"
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -2649,6 +2713,7 @@ exports[`Recipe Card can be rendered when the recipe has NO COVER IMAGE and matc
       testID="reShareButton"
     >
       <Icon
+        accessibilityLabel="share recipe with followers"
         name="share-outline"
         size={46.690000000000005}
         style={
@@ -2660,6 +2725,7 @@ exports[`Recipe Card can be rendered when the recipe has NO COVER IMAGE and matc
         }
       />
       <Text
+        accessibilityLabel="shares count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -2697,6 +2763,7 @@ exports[`Recipe Card can be rendered when the recipe has NO COVER IMAGE and matc
       testID="likeButton"
     >
       <Icon
+        accessibilityLabel="unlike recipe"
         name="heart"
         size={46.690000000000005}
         style={
@@ -2708,6 +2775,7 @@ exports[`Recipe Card can be rendered when the recipe has NO COVER IMAGE and matc
         }
       />
       <Text
+        accessibilityLabel="likes count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -2745,6 +2813,7 @@ exports[`Recipe Card can be rendered when the recipe has NO COVER IMAGE and matc
       testID="commentButton"
     >
       <Icon
+        accessibilityLabel="comment on recipe"
         name="comment-outline"
         size={46.690000000000005}
         style={
@@ -2756,6 +2825,7 @@ exports[`Recipe Card can be rendered when the recipe has NO COVER IMAGE and matc
         }
       />
       <Text
+        accessibilityLabel="comments count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -2788,6 +2858,7 @@ exports[`Recipe Card can be rendered when the recipe has a LONG RESHARER USERNAM
       "width": "100%",
     }
   }
+  testID="recipeCard"
 >
   <View
     style={
@@ -2830,7 +2901,8 @@ exports[`Recipe Card can be rendered when the recipe has a LONG RESHARER USERNAM
         ]
       }
     >
-      Re-shared by: 
+      Re-shared by:
+       
     </Text>
     <View
       accessible={true}
@@ -2939,7 +3011,8 @@ exports[`Recipe Card can be rendered when the recipe has a LONG RESHARER USERNAM
             }
           }
         >
-          Created by: 
+          Created by:
+           
         </Text>
         <View
           accessible={true}
@@ -3037,6 +3110,7 @@ exports[`Recipe Card can be rendered when the recipe has a LONG RESHARER USERNAM
       testID="chefImageButton"
     >
       <Image
+        accessibilityLabel="picture of chef"
         source={
           Object {
             "uri": "https://storage.googleapis.com/download/storage/v1/b/chef-avatars-ac1cff8d11c908f3cf8613121b61683221152250/o/59b9a3ad9aaf1fe5f9fd5c92c62461eaa88fea89.jpg?generation=1601673323651524&alt=media",
@@ -3054,6 +3128,7 @@ exports[`Recipe Card can be rendered when the recipe has a LONG RESHARER USERNAM
     </View>
   </View>
   <View
+    accessibilityLabel="picture of recipe"
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -3119,6 +3194,7 @@ exports[`Recipe Card can be rendered when the recipe has a LONG RESHARER USERNAM
       testID="reShareButton"
     >
       <Icon
+        accessibilityLabel="remove share"
         name="share"
         size={46.690000000000005}
         style={
@@ -3130,6 +3206,7 @@ exports[`Recipe Card can be rendered when the recipe has a LONG RESHARER USERNAM
         }
       />
       <Text
+        accessibilityLabel="shares count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -3167,6 +3244,7 @@ exports[`Recipe Card can be rendered when the recipe has a LONG RESHARER USERNAM
       testID="likeButton"
     >
       <Icon
+        accessibilityLabel="unlike recipe"
         name="heart"
         size={46.690000000000005}
         style={
@@ -3178,6 +3256,7 @@ exports[`Recipe Card can be rendered when the recipe has a LONG RESHARER USERNAM
         }
       />
       <Text
+        accessibilityLabel="likes count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -3215,6 +3294,7 @@ exports[`Recipe Card can be rendered when the recipe has a LONG RESHARER USERNAM
       testID="commentButton"
     >
       <Icon
+        accessibilityLabel="comment on recipe"
         name="comment-outline"
         size={46.690000000000005}
         style={
@@ -3226,6 +3306,7 @@ exports[`Recipe Card can be rendered when the recipe has a LONG RESHARER USERNAM
         }
       />
       <Text
+        accessibilityLabel="comments count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -3258,6 +3339,7 @@ exports[`Recipe Card can be rendered when the recipe has been COMMENTED and matc
       "width": "100%",
     }
   }
+  testID="recipeCard"
 >
   <View
     style={
@@ -3333,7 +3415,8 @@ exports[`Recipe Card can be rendered when the recipe has been COMMENTED and matc
             }
           }
         >
-          Created by: 
+          Created by:
+           
         </Text>
         <View
           accessible={true}
@@ -3431,6 +3514,7 @@ exports[`Recipe Card can be rendered when the recipe has been COMMENTED and matc
       testID="chefImageButton"
     >
       <Image
+        accessibilityLabel="picture of chef"
         source={
           Object {
             "uri": "https://robohash.org/ablaudantiumaut.png?size=300x300&set=set1",
@@ -3448,6 +3532,7 @@ exports[`Recipe Card can be rendered when the recipe has been COMMENTED and matc
     </View>
   </View>
   <View
+    accessibilityLabel="picture of recipe"
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -3517,6 +3602,7 @@ exports[`Recipe Card can be rendered when the recipe has been COMMENTED and matc
       testID="reShareButton"
     >
       <Icon
+        accessibilityLabel="share recipe with followers"
         name="share-outline"
         size={46.690000000000005}
         style={
@@ -3528,6 +3614,7 @@ exports[`Recipe Card can be rendered when the recipe has been COMMENTED and matc
         }
       />
       <Text
+        accessibilityLabel="shares count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -3565,6 +3652,7 @@ exports[`Recipe Card can be rendered when the recipe has been COMMENTED and matc
       testID="likeButton"
     >
       <Icon
+        accessibilityLabel="unlike recipe"
         name="heart"
         size={46.690000000000005}
         style={
@@ -3576,6 +3664,7 @@ exports[`Recipe Card can be rendered when the recipe has been COMMENTED and matc
         }
       />
       <Text
+        accessibilityLabel="likes count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -3613,6 +3702,7 @@ exports[`Recipe Card can be rendered when the recipe has been COMMENTED and matc
       testID="commentButton"
     >
       <Icon
+        accessibilityLabel="comment on recipe"
         name="comment"
         size={46.690000000000005}
         style={
@@ -3624,6 +3714,7 @@ exports[`Recipe Card can be rendered when the recipe has been COMMENTED and matc
         }
       />
       <Text
+        accessibilityLabel="comments count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -3656,6 +3747,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED and matches 
       "width": "100%",
     }
   }
+  testID="recipeCard"
 >
   <View
     style={
@@ -3731,7 +3823,8 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED and matches 
             }
           }
         >
-          Created by: 
+          Created by:
+           
         </Text>
         <View
           accessible={true}
@@ -3829,6 +3922,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED and matches 
       testID="chefImageButton"
     >
       <Image
+        accessibilityLabel="picture of chef"
         source={
           Object {
             "uri": "https://robohash.org/architectoquidemqui.png?size=300x300&set=set1",
@@ -3846,6 +3940,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED and matches 
     </View>
   </View>
   <View
+    accessibilityLabel="picture of recipe"
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -3915,6 +4010,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED and matches 
       testID="reShareButton"
     >
       <Icon
+        accessibilityLabel="share recipe with followers"
         name="share-outline"
         size={46.690000000000005}
         style={
@@ -3926,6 +4022,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED and matches 
         }
       />
       <Text
+        accessibilityLabel="shares count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -3963,6 +4060,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED and matches 
       testID="likeButton"
     >
       <Icon
+        accessibilityLabel="unlike recipe"
         name="heart"
         size={46.690000000000005}
         style={
@@ -3974,6 +4072,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED and matches 
         }
       />
       <Text
+        accessibilityLabel="likes count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -4011,6 +4110,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED and matches 
       testID="commentButton"
     >
       <Icon
+        accessibilityLabel="comment on recipe"
         name="comment-outline"
         size={46.690000000000005}
         style={
@@ -4022,6 +4122,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED and matches 
         }
       />
       <Text
+        accessibilityLabel="comments count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -4054,6 +4155,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED, COMMENTED, 
       "width": "100%",
     }
   }
+  testID="recipeCard"
 >
   <View
     style={
@@ -4129,7 +4231,8 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED, COMMENTED, 
             }
           }
         >
-          Created by: 
+          Created by:
+           
         </Text>
         <View
           accessible={true}
@@ -4227,6 +4330,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED, COMMENTED, 
       testID="chefImageButton"
     >
       <Image
+        accessibilityLabel="picture of chef"
         source={
           Object {
             "uri": "https://robohash.org/ablaudantiumaut.png?size=300x300&set=set1",
@@ -4244,6 +4348,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED, COMMENTED, 
     </View>
   </View>
   <View
+    accessibilityLabel="picture of recipe"
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -4313,6 +4418,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED, COMMENTED, 
       testID="reShareButton"
     >
       <Icon
+        accessibilityLabel="remove share"
         name="share"
         size={46.690000000000005}
         style={
@@ -4324,6 +4430,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED, COMMENTED, 
         }
       />
       <Text
+        accessibilityLabel="shares count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -4361,6 +4468,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED, COMMENTED, 
       testID="likeButton"
     >
       <Icon
+        accessibilityLabel="unlike recipe"
         name="heart"
         size={46.690000000000005}
         style={
@@ -4372,6 +4480,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED, COMMENTED, 
         }
       />
       <Text
+        accessibilityLabel="likes count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -4409,6 +4518,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED, COMMENTED, 
       testID="commentButton"
     >
       <Icon
+        accessibilityLabel="comment on recipe"
         name="comment"
         size={46.690000000000005}
         style={
@@ -4420,6 +4530,7 @@ exports[`Recipe Card can be rendered when the recipe has been LIKED, COMMENTED, 
         }
       />
       <Text
+        accessibilityLabel="comments count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -4452,6 +4563,7 @@ exports[`Recipe Card can be rendered when the recipe has been RE_SHARED BY SOMEO
       "width": "100%",
     }
   }
+  testID="recipeCard"
 >
   <View
     style={
@@ -4494,7 +4606,8 @@ exports[`Recipe Card can be rendered when the recipe has been RE_SHARED BY SOMEO
         ]
       }
     >
-      Re-shared by: 
+      Re-shared by:
+       
     </Text>
     <View
       accessible={true}
@@ -4603,7 +4716,8 @@ exports[`Recipe Card can be rendered when the recipe has been RE_SHARED BY SOMEO
             }
           }
         >
-          Created by: 
+          Created by:
+           
         </Text>
         <View
           accessible={true}
@@ -4701,6 +4815,7 @@ exports[`Recipe Card can be rendered when the recipe has been RE_SHARED BY SOMEO
       testID="chefImageButton"
     >
       <Image
+        accessibilityLabel="picture of chef"
         source={
           Object {
             "uri": "https://robohash.org/architectoquidemqui.png?size=300x300&set=set1",
@@ -4718,6 +4833,7 @@ exports[`Recipe Card can be rendered when the recipe has been RE_SHARED BY SOMEO
     </View>
   </View>
   <View
+    accessibilityLabel="picture of recipe"
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -4787,6 +4903,7 @@ exports[`Recipe Card can be rendered when the recipe has been RE_SHARED BY SOMEO
       testID="reShareButton"
     >
       <Icon
+        accessibilityLabel="remove share"
         name="share"
         size={46.690000000000005}
         style={
@@ -4798,6 +4915,7 @@ exports[`Recipe Card can be rendered when the recipe has been RE_SHARED BY SOMEO
         }
       />
       <Text
+        accessibilityLabel="shares count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -4835,6 +4953,7 @@ exports[`Recipe Card can be rendered when the recipe has been RE_SHARED BY SOMEO
       testID="likeButton"
     >
       <Icon
+        accessibilityLabel="like recipe"
         name="heart-outline"
         size={46.690000000000005}
         style={
@@ -4846,6 +4965,7 @@ exports[`Recipe Card can be rendered when the recipe has been RE_SHARED BY SOMEO
         }
       />
       <Text
+        accessibilityLabel="likes count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -4883,6 +5003,7 @@ exports[`Recipe Card can be rendered when the recipe has been RE_SHARED BY SOMEO
       testID="commentButton"
     >
       <Icon
+        accessibilityLabel="comment on recipe"
         name="comment-outline"
         size={46.690000000000005}
         style={
@@ -4894,6 +5015,7 @@ exports[`Recipe Card can be rendered when the recipe has been RE_SHARED BY SOMEO
         }
       />
       <Text
+        accessibilityLabel="comments count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -4926,6 +5048,7 @@ exports[`Recipe Card can be rendered when the recipe has been SHARED and matches
       "width": "100%",
     }
   }
+  testID="recipeCard"
 >
   <View
     style={
@@ -5001,7 +5124,8 @@ exports[`Recipe Card can be rendered when the recipe has been SHARED and matches
             }
           }
         >
-          Created by: 
+          Created by:
+           
         </Text>
         <View
           accessible={true}
@@ -5099,6 +5223,7 @@ exports[`Recipe Card can be rendered when the recipe has been SHARED and matches
       testID="chefImageButton"
     >
       <Image
+        accessibilityLabel="picture of chef"
         source={
           Object {
             "uri": "https://robohash.org/architectoquidemqui.png?size=300x300&set=set1",
@@ -5116,6 +5241,7 @@ exports[`Recipe Card can be rendered when the recipe has been SHARED and matches
     </View>
   </View>
   <View
+    accessibilityLabel="picture of recipe"
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -5185,6 +5311,7 @@ exports[`Recipe Card can be rendered when the recipe has been SHARED and matches
       testID="reShareButton"
     >
       <Icon
+        accessibilityLabel="remove share"
         name="share"
         size={46.690000000000005}
         style={
@@ -5196,6 +5323,7 @@ exports[`Recipe Card can be rendered when the recipe has been SHARED and matches
         }
       />
       <Text
+        accessibilityLabel="shares count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -5233,6 +5361,7 @@ exports[`Recipe Card can be rendered when the recipe has been SHARED and matches
       testID="likeButton"
     >
       <Icon
+        accessibilityLabel="unlike recipe"
         name="heart"
         size={46.690000000000005}
         style={
@@ -5244,6 +5373,7 @@ exports[`Recipe Card can be rendered when the recipe has been SHARED and matches
         }
       />
       <Text
+        accessibilityLabel="likes count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -5281,6 +5411,7 @@ exports[`Recipe Card can be rendered when the recipe has been SHARED and matches
       testID="commentButton"
     >
       <Icon
+        accessibilityLabel="comment on recipe"
         name="comment-outline"
         size={46.690000000000005}
         style={
@@ -5292,6 +5423,7 @@ exports[`Recipe Card can be rendered when the recipe has been SHARED and matches
         }
       />
       <Text
+        accessibilityLabel="comments count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -5324,6 +5456,7 @@ exports[`Recipe Card can be rendered when the recipe has been a LONG RECIPE NAME
       "width": "100%",
     }
   }
+  testID="recipeCard"
 >
   <View
     style={
@@ -5399,7 +5532,8 @@ exports[`Recipe Card can be rendered when the recipe has been a LONG RECIPE NAME
             }
           }
         >
-          Created by: 
+          Created by:
+           
         </Text>
         <View
           accessible={true}
@@ -5497,6 +5631,7 @@ exports[`Recipe Card can be rendered when the recipe has been a LONG RECIPE NAME
       testID="chefImageButton"
     >
       <Image
+        accessibilityLabel="picture of chef"
         source={
           Object {
             "uri": "https://storage.googleapis.com/download/storage/v1/b/chef-avatars-ac1cff8d11c908f3cf8613121b61683221152250/o/59b9a3ad9aaf1fe5f9fd5c92c62461eaa88fea89.jpg?generation=1601673323651524&alt=media",
@@ -5514,6 +5649,7 @@ exports[`Recipe Card can be rendered when the recipe has been a LONG RECIPE NAME
     </View>
   </View>
   <View
+    accessibilityLabel="picture of recipe"
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -5583,6 +5719,7 @@ exports[`Recipe Card can be rendered when the recipe has been a LONG RECIPE NAME
       testID="reShareButton"
     >
       <Icon
+        accessibilityLabel="share recipe with followers"
         name="share-outline"
         size={46.690000000000005}
         style={
@@ -5594,6 +5731,7 @@ exports[`Recipe Card can be rendered when the recipe has been a LONG RECIPE NAME
         }
       />
       <Text
+        accessibilityLabel="shares count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -5631,6 +5769,7 @@ exports[`Recipe Card can be rendered when the recipe has been a LONG RECIPE NAME
       testID="likeButton"
     >
       <Icon
+        accessibilityLabel="unlike recipe"
         name="heart"
         size={46.690000000000005}
         style={
@@ -5642,6 +5781,7 @@ exports[`Recipe Card can be rendered when the recipe has been a LONG RECIPE NAME
         }
       />
       <Text
+        accessibilityLabel="likes count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -5679,6 +5819,7 @@ exports[`Recipe Card can be rendered when the recipe has been a LONG RECIPE NAME
       testID="commentButton"
     >
       <Icon
+        accessibilityLabel="comment on recipe"
         name="comment-outline"
         size={46.690000000000005}
         style={
@@ -5690,6 +5831,7 @@ exports[`Recipe Card can be rendered when the recipe has been a LONG RECIPE NAME
         }
       />
       <Text
+        accessibilityLabel="comments count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -5722,6 +5864,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with NO 
       "width": "100%",
     }
   }
+  testID="recipeCard"
 >
   <View
     style={
@@ -5797,7 +5940,8 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with NO 
             }
           }
         >
-          Created by: 
+          Created by:
+           
         </Text>
         <View
           accessible={true}
@@ -5895,6 +6039,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with NO 
       testID="chefImageButton"
     >
       <Image
+        accessibilityLabel="picture of chef"
         source={1}
         style={
           Object {
@@ -5908,6 +6053,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with NO 
     </View>
   </View>
   <View
+    accessibilityLabel="picture of recipe"
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -5977,6 +6123,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with NO 
       testID="reShareButton"
     >
       <Icon
+        accessibilityLabel="share recipe with followers"
         name="share-outline"
         size={46.690000000000005}
         style={
@@ -5988,6 +6135,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with NO 
         }
       />
       <Text
+        accessibilityLabel="shares count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -6025,6 +6173,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with NO 
       testID="likeButton"
     >
       <Icon
+        accessibilityLabel="unlike recipe"
         name="heart"
         size={46.690000000000005}
         style={
@@ -6036,6 +6185,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with NO 
         }
       />
       <Text
+        accessibilityLabel="likes count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -6073,6 +6223,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with NO 
       testID="commentButton"
     >
       <Icon
+        accessibilityLabel="comment on recipe"
         name="comment-outline"
         size={46.690000000000005}
         style={
@@ -6084,6 +6235,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with NO 
         }
       />
       <Text
+        accessibilityLabel="comments count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -6116,6 +6268,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with a L
       "width": "100%",
     }
   }
+  testID="recipeCard"
 >
   <View
     style={
@@ -6191,7 +6344,8 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with a L
             }
           }
         >
-          Created by: 
+          Created by:
+           
         </Text>
         <View
           accessible={true}
@@ -6289,6 +6443,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with a L
       testID="chefImageButton"
     >
       <Image
+        accessibilityLabel="picture of chef"
         source={
           Object {
             "uri": "https://storage.googleapis.com/download/storage/v1/b/chef-avatars-ac1cff8d11c908f3cf8613121b61683221152250/o/59b9a3ad9aaf1fe5f9fd5c92c62461eaa88fea89.jpg?generation=1601673323651524&alt=media",
@@ -6306,6 +6461,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with a L
     </View>
   </View>
   <View
+    accessibilityLabel="picture of recipe"
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -6375,6 +6531,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with a L
       testID="reShareButton"
     >
       <Icon
+        accessibilityLabel="share recipe with followers"
         name="share-outline"
         size={46.690000000000005}
         style={
@@ -6386,6 +6543,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with a L
         }
       />
       <Text
+        accessibilityLabel="shares count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -6423,6 +6581,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with a L
       testID="likeButton"
     >
       <Icon
+        accessibilityLabel="unlike recipe"
         name="heart"
         size={46.690000000000005}
         style={
@@ -6434,6 +6593,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with a L
         }
       />
       <Text
+        accessibilityLabel="likes count"
         maxFontSizeMultiplier={2}
         style={
           Object {
@@ -6471,6 +6631,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with a L
       testID="commentButton"
     >
       <Icon
+        accessibilityLabel="comment on recipe"
         name="comment-outline"
         size={46.690000000000005}
         style={
@@ -6482,6 +6643,7 @@ exports[`Recipe Card can be rendered when the recipe has is from a chef with a L
         }
       />
       <Text
+        accessibilityLabel="comments count"
         maxFontSizeMultiplier={2}
         style={
           Object {

@@ -23,6 +23,7 @@ export default function SearchBarClearButton(props: Props) {
 			}}
 			onPress={() => setSearchTerm("")}
 			testID={"deleteSearchTermButton"}
+			accessibilityLabel={"clear search text"}
 		>
 			{displayIcon && (
 			<Icon

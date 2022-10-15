@@ -59,6 +59,7 @@ exports[`Search Bar can be rendered (with the delete button) matches its previou
         value="spaghetti"
       />
       <View
+        accessibilityLabel="clear search text"
         accessible={true}
         collapsable={false}
         focusable={true}

@@ -7,7 +7,7 @@ export const saveRecipeListsLocally = (chefId: number, myId: number, listName: s
 	// AsyncStorage.removeItem('localRecipeLists')
 	AsyncStorage.getItem("localRecipeLists", (err, res) => {
 		if (res == null) {
-			let newLocalRecipesList = {
+			const newLocalRecipesList = {
 				[chefId]: {
 					[listName]: {
 						recipeList,
@@ -15,17 +15,17 @@ export const saveRecipeListsLocally = (chefId: number, myId: number, listName: s
 					}
 				}
 			}
-			AsyncStorage.setItem("localRecipeLists", JSON.stringify(newLocalRecipesList), () => { })
+			AsyncStorage.setItem("localRecipeLists", JSON.stringify(newLocalRecipesList))
 		} else {
-			let localRecipeLists = JSON.parse(res)
-			let listKeys = Object.keys(localRecipeLists)
+			const localRecipeLists = JSON.parse(res)
+			const listKeys = Object.keys(localRecipeLists)
 			const oneWeek = 1000 * 60 * 60 * 24 * 7
 
 			// for every chef ...
 			listKeys.forEach(key => {
 				// ...except if its one of my recipe lists (never expire this member's lists, just replace them)
 				if (myId != parseInt(key)) {
-					let chefLists = Object.keys(localRecipeLists[key])
+					const chefLists = Object.keys(localRecipeLists[key])
 					// ...check every saved list and delete if it's > 7 days old
 					chefLists.forEach(list => {
 						if (localRecipeLists[key][list].dateSaved < date - oneWeek) {
@@ -48,7 +48,7 @@ export const saveRecipeListsLocally = (chefId: number, myId: number, listName: s
 				}
 			}
 
-			AsyncStorage.setItem("localRecipeLists", JSON.stringify(localRecipeLists), () => { })
+			AsyncStorage.setItem("localRecipeLists", JSON.stringify(localRecipeLists))
 		}
 	})
 }
@@ -57,7 +57,7 @@ export const loadLocalRecipeLists = (chefId: number, listName: string): Promise<
 	return new Promise(resolve => {
 		AsyncStorage.getItem("localRecipeLists", (err, res) => {
 			if (res) {
-				let localRecipeLists = JSON.parse(res)
+				const localRecipeLists = JSON.parse(res)
 				// console.log(Object.keys(localRecipeLists))
 				// Object.keys(localRecipeLists).forEach( chef => {
 				// 	console.log(Object.keys(localRecipeLists[chef]))

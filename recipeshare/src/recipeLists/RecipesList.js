@@ -371,13 +371,14 @@ export class RecipesList extends React.Component {
 				if (e.name === "Logout") {
 					this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
 				}
-				// console.log('looking for local recipes')
+				// console.log("looking for local recipes");
 				AsyncStorage.getItem("localRecipeDetails", (err, res) => {
 					if (res != null) {
 						let localRecipeDetails = JSON.parse(res);
 						let thisRecipeDetails = localRecipeDetails.find(
 							(recipeDetails) => recipeDetails.recipe.id === recipeID
 						);
+
 						if (thisRecipeDetails) {
 							this.props.storeRecipeDetails(thisRecipeDetails);
 							this.setState({ awaitingServer: false }, () => {
@@ -669,11 +670,11 @@ export class RecipesList extends React.Component {
 				limit: startingLimit,
 				offset: startingOffset,
 			},
-			() => {
+			async () => {
 				this.abortController.abort();
 				this.abortController = new AbortController();
 				this.recipeFlatList.scrollToOffset({ animated: true, offset: 0 });
-				this.fetchRecipeList();
+				await this.fetchRecipeList();
 			}
 		);
 	};
@@ -890,6 +891,7 @@ export class RecipesList extends React.Component {
 					activeOpacity={0.7}
 					onPress={this.handleFilterButton}
 					testID={"filterButton"}
+					accessibilityLabel={"display filter options"}
 				>
 					{anyFilterActive && (
 						<Icon
