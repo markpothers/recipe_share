@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native"
-import { responsiveHeight, responsiveWidth, responsiveFontSize } from "react-native-responsive-dimensions" //eslint-disable-line no-unused-vars
+import { StyleSheet } from "react-native";
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
 export const styles = StyleSheet.create({
 	contentsContainer: {
@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
 		bottom: 0,
 		height: responsiveHeight(25),
 		width: responsiveWidth(100),
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		justifyContent: "center",
 		alignItems: "center",
 	},
@@ -24,9 +24,12 @@ export const styles = StyleSheet.create({
 		// borderColor: 'blue'
 	},
 	androidPicker: {
+		top: -4,
 		height: "100%",
 		width: "100%",
 		justifyContent: "flex-end",
+		// borderWidth: 1,
+		// borderColor: "red",
 	},
 	// IOSPicker: {
 	// 	height: '100%',
@@ -44,8 +47,8 @@ export const styles = StyleSheet.create({
 		height: "100%",
 		width: "100%",
 		// borderWidth: 1,
-		// borderColor: 'red',
-		borderRadius:responsiveWidth(1.5),
+		// borderColor: "red",
+		borderRadius: responsiveWidth(1.5),
 	},
 	IOSSelectedChoiceContainer: {
 		width: "100%",
@@ -72,7 +75,7 @@ export const styles = StyleSheet.create({
 	},
 	iosCloseButtonText: {
 		fontSize: responsiveFontSize(2),
-		color: "#104e01"
+		color: "#104e01",
 	},
 	pickerText: {
 		color: "#104e01",
@@ -84,5 +87,5 @@ export const styles = StyleSheet.create({
 		// borderWidth: 1,
 		height: "100%",
 		// borderColor: 'red'
-	}
-})
+	},
+});

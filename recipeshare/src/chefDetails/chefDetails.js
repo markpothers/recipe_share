@@ -273,8 +273,8 @@ export default connect(
 		};
 
 		render() {
-			console.log("chef id:", this.props.route.params.chefID);
-			console.log(this.props.chef_details);
+			// console.log("chef id:", this.props.route.params.chefID);
+			// console.log(this.props.chef_details);
 
 			if (this.props.chef_details[`chef${this.props.route.params.chefID}`] !== undefined) {
 				const chef_details = this.props.chef_details[`chef${this.props.route.params.chefID}`];

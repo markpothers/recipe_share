@@ -32,7 +32,17 @@ const CustomDrawer = (props) => {
 
 	return (
 		<DrawerContentScrollView {...props}>
-			<View style={[styles.mainPageContainer, { height: responsiveHeight(90) }]}>
+			<View
+				style={[
+					styles.mainPageContainer,
+					{
+						height: responsiveHeight(90),
+						// borderColor: "red",
+						// borderWidth: 1,
+						// marginTop: Constants.statusBarHeight,
+					},
+				]}
+			>
 				<View style={styles.headerContainer}>
 					<View style={styles.headerTopContainer}>
 						<Image

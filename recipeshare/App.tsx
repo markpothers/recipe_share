@@ -1,6 +1,6 @@
 import "react-native-gesture-handler"; // required by react-navigation
 import React, { useState, useEffect, useCallback } from "react";
-import { Platform, StatusBar, StyleSheet, LogBox } from "react-native";
+import { Platform, StyleSheet, LogBox } from "react-native";
 import { Provider } from "react-redux";
 // import { Asset, Font, Icon } from 'expo';
 import AppNavigator from "./navigation/AppNavigator";
@@ -8,6 +8,7 @@ import { store } from "./src/redux/store";
 import { NavigationContainer } from "@react-navigation/native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import * as SplashScreen from "expo-splash-screen";
+import { StatusBar } from "expo-status-bar"
 
 export default function App() {
 	const [appIsReady, setAppIsReady] = useState(false);
@@ -51,7 +52,8 @@ export default function App() {
 			<NavigationContainer>
 				<Provider store={store}>
 					<SafeAreaView style={styles.container}>
-						{Platform.OS === "ios" && <StatusBar barStyle="default" />}
+						{/* {Platform.OS === "ios" && <StatusBar barStyle="default" />} */}
+						<StatusBar backgroundColor="#000" style={Platform.OS === "ios" ? "auto" : "light"} />
 						<AppNavigator />
 					</SafeAreaView>
 				</Provider>
@@ -64,5 +66,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: "#fff",
+		// borderWidth: 1,
+		// borderColor: "red"
 	},
 });

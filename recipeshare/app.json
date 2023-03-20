@@ -24,7 +24,7 @@
 		"ios": {
 			"supportsTablet": true,
 			"bundleIdentifier": "com.recipe-share.recipe-share",
-			"buildNumber": "2.0.45",
+			"buildNumber": "2.0.47",
 			"associatedDomains": [
 				"webcredentials:www.recipe-share.com"
 			],
@@ -37,12 +37,26 @@
 		},
 		"android": {
 			"package": "com.recipe_share.recipe_share",
-			"versionCode": 45,
+			"versionCode": 47,
 			"permissions": [
 				"CAMERA",
 				"READ_EXTERNAL_STORAGE",
 				"WRITE_EXTERNAL_STORAGE"
-			]
+			],
+			"icon": "./assets/images/icon.png",
+			"adaptiveIcon": {
+				"foregroundImage": "./assets/images/iconForeground.png",
+				"backgroundImage": "./assets/images/iconBackground.png"
+			}
+		},
+		"androidStatusBar": {
+			"backgroundColor": "#000000",
+			"barStyle": "light-content"
+		},
+		"extra": {
+			"eas": {
+				"projectId": "2ebe3530-e000-11e9-a464-1daf89a8f23f"
+			}
 		}
 	}
 }
