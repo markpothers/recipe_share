@@ -45,7 +45,7 @@ jest.mock("../auxFunctions/saveRecipeListsLocally", () => {
 });
 
 describe("Recipe List", () => {
-	let navigation, route, mockListener, mockListenerRemove, mockNavigate, store;
+	let navigation, route, mockListener, mockListenerRemove, mockGetParent, mockIsFocused, mockNavigate, store;
 
 	beforeEach(async () => {
 		jest.useFakeTimers();
@@ -70,11 +70,20 @@ describe("Recipe List", () => {
 		mockListener = jest.fn();
 		mockNavigate = jest.fn();
 		mockListenerRemove = jest.fn();
+		mockGetParent = () => ({
+			getState: () => ({
+				routes: [{ params: { title: "testRouteName" } }],
+			}),
+			setOptions: jest.fn(),
+		});
+		mockIsFocused = jest.fn().mockResolvedValue(true);
 
 		navigation = {
 			addListener: mockListener,
 			removeListener: mockListenerRemove,
 			navigate: mockNavigate,
+			getParent: mockGetParent,
+			isFocused: mockIsFocused,
 		};
 
 		route = {
@@ -101,18 +110,21 @@ describe("Recipe List", () => {
 					filterOptions: clearedFilters,
 				})
 			);
-			const { toJSON, getByTestId, queryAllByTestId } = render(
-				<Provider store={store}>
-					<RecipesList navigation={navigation} route={route} listChoice={"all"} />
-				</Provider>
+			const { toJSON, getByTestId, queryAllByTestId } = await waitFor(async () =>
+				render(
+					<Provider store={store}>
+						<RecipesList navigation={navigation} route={route} listChoice={"all"} />
+					</Provider>
+				)
 			);
+
 			await waitFor(() => expect(queryAllByTestId("activityIndicator").length).toEqual(0));
 
 			expect(getByTestId("filterButton")).toBeTruthy();
 			expect(queryAllByTestId("recipeCard").length).toEqual(0);
 			expect(mockListener).toHaveBeenCalledTimes(1);
 			expect(mockListener).toHaveBeenNthCalledWith(1, "focus", expect.any(Function));
-			// expect(mockListener).toHaveBeenNthCalledWith(2, "blur", expect.any(Function))
+			// expect(mockListener).toHaveBeenNthCalledWith(2, "blur", expect.any(Function));
 			expect(toJSON()).toMatchSnapshot();
 		});
 		test("renders with lots of recipes", async () => {
@@ -124,10 +136,12 @@ describe("Recipe List", () => {
 					filterOptions: clearedFilters,
 				})
 			);
-			const { toJSON, queryAllByTestId, getByPlaceholderText } = render(
-				<Provider store={store}>
-					<RecipesList navigation={navigation} route={route} listChoice={"all"} />
-				</Provider>
+			const { toJSON, queryAllByTestId, getByPlaceholderText } = await waitFor(async () =>
+				render(
+					<Provider store={store}>
+						<RecipesList navigation={navigation} route={route} listChoice={"all"} />
+					</Provider>
+				)
 			);
 			await waitFor(() => expect(queryAllByTestId("activityIndicator").length).toEqual(0));
 			expect(getByPlaceholderText("Search for Recipes")).toBeTruthy();
@@ -141,10 +155,12 @@ describe("Recipe List", () => {
 					name: "Logout",
 				})
 			);
-			const { queryAllByTestId } = render(
-				<Provider store={store}>
-					<RecipesList navigation={navigation} route={route} listChoice={"all"} />
-				</Provider>
+			const { queryAllByTestId } = await waitFor(async () =>
+				render(
+					<Provider store={store}>
+						<RecipesList navigation={navigation} route={route} listChoice={"all"} />
+					</Provider>
+				)
 			);
 			await waitFor(() => expect(queryAllByTestId("activityIndicator").length).toEqual(0));
 
@@ -170,10 +186,12 @@ describe("Recipe List", () => {
 					})
 				);
 			});
-			const { queryAllByTestId } = render(
-				<Provider store={store}>
-					<RecipesList navigation={navigation} route={route} listChoice={"all"} />
-				</Provider>
+			const { queryAllByTestId } = await waitFor(() =>
+				render(
+					<Provider store={store}>
+						<RecipesList navigation={navigation} route={route} listChoice={"all"} />
+					</Provider>
+				)
 			);
 			await waitFor(() => expect(queryAllByTestId("activityIndicator").length).toEqual(0));
 
@@ -192,10 +210,12 @@ describe("Recipe List", () => {
 					})
 				);
 			});
-			const { queryAllByTestId } = render(
-				<Provider store={store}>
-					<RecipesList navigation={navigation} route={route} listChoice={"all"} />
-				</Provider>
+			const { queryAllByTestId } = await waitFor(() =>
+				render(
+					<Provider store={store}>
+						<RecipesList navigation={navigation} route={route} listChoice={"all"} />
+					</Provider>
+				)
 			);
 			await waitFor(() => expect(queryAllByTestId("activityIndicator").length).toEqual(0));
 
@@ -227,10 +247,12 @@ describe("Recipe List", () => {
 					filterOptions: clearedFilters,
 				})
 			);
-			const rendered = render(
-				<Provider store={store}>
-					<RecipesList navigation={navigation} route={route} listChoice={"all"} />
-				</Provider>
+			const rendered = await waitFor(async () =>
+				render(
+					<Provider store={store}>
+						<RecipesList navigation={navigation} route={route} listChoice={"all"} />
+					</Provider>
+				)
 			);
 
 			getByTestId = rendered.getByTestId;
@@ -461,10 +483,12 @@ describe("Recipe List", () => {
 					filters,
 				})
 			);
-			const rendered = render(
-				<Provider store={store}>
-					<RecipesList navigation={navigation} route={route} listChoice={"all"} />
-				</Provider>
+			const rendered = await waitFor(async () =>
+				render(
+					<Provider store={store}>
+						<RecipesList navigation={navigation} route={route} listChoice={"all"} />
+					</Provider>
+				)
 			);
 
 			getByTestId = rendered.getByTestId;
@@ -663,79 +687,83 @@ describe("Recipe List", () => {
 	describe("interacting with the list", () => {
 		// 	test.skip("scrolling to the bottom should load more recipes", async () => {});
 		// 	test.skip("pull to refresh should reload the list", async () => {});
-			test("typing in the search box should reload the list", async () => {
-				//arrange
-				const chiRecipes = recipeList.filter((r) => r.name.toLowerCase().includes("chi"));
-				getRecipeList
-					.mockImplementationOnce(() =>
-						Promise.resolve({
-							recipes: recipeList,
-							cuisines,
-							serves,
-							filterOptions: clearedFilters,
-						})
-					)
-					.mockImplementationOnce(() =>
-						Promise.resolve({
-							recipes: chiRecipes,
-							cuisines,
-							serves,
-							filterOptions: clearedFilters,
-						})
-					);
-				const { queryAllByTestId, getByPlaceholderText } = render(
-					<Provider store={store}>
-						<RecipesList navigation={navigation} route={route} listChoice={"all"} />
-					</Provider>
-				);
-				await waitFor(() => expect(queryAllByTestId("activityIndicator").length).toEqual(0));
-	
-				// act
-				fireEvent.changeText(getByPlaceholderText("Search for Recipes"), "chi")
-	
-				// assert
-				await waitFor(() => expect(queryAllByTestId("recipeCard").length).toEqual(chiRecipes.length));
-				expect(getRecipeList).toHaveBeenCalledTimes(2);
-			});
-			test("clearing the search box should reload the list", async () => {
-				//arrange
-				const chiRecipes = recipeList.filter((r) => r.name.toLowerCase().includes("chi"));
-				getRecipeList
-					.mockResolvedValueOnce({
+		test("typing in the search box should reload the list", async () => {
+			//arrange
+			const chiRecipes = recipeList.filter((r) => r.name.toLowerCase().includes("chi"));
+			getRecipeList
+				.mockImplementationOnce(() =>
+					Promise.resolve({
 						recipes: recipeList,
 						cuisines,
 						serves,
 						filterOptions: clearedFilters,
 					})
-					.mockResolvedValueOnce({
+				)
+				.mockImplementationOnce(() =>
+					Promise.resolve({
 						recipes: chiRecipes,
 						cuisines,
 						serves,
 						filterOptions: clearedFilters,
 					})
-					.mockResolvedValueOnce({
-						recipes: recipeList,
-						cuisines,
-						serves,
-						filterOptions: clearedFilters,
-					});
-				const { queryAllByTestId, getByPlaceholderText, queryAllByLabelText } = render(
+				);
+			const { queryAllByTestId, getByPlaceholderText } = await waitFor(async () =>
+				render(
 					<Provider store={store}>
 						<RecipesList navigation={navigation} route={route} listChoice={"all"} />
 					</Provider>
-				);
-				await waitFor(() => expect(queryAllByTestId("activityIndicator").length).toEqual(0));
-				expect(getByPlaceholderText("Search for Recipes")).toBeTruthy();
-				await waitFor(() => fireEvent.changeText(getByPlaceholderText("Search for Recipes"), "chi"));
-				expect(getRecipeList).toHaveBeenCalledTimes(2);
-				expect(queryAllByTestId("recipeCard").length).toEqual(chiRecipes.length);
-	
-				// act
-				await waitFor(() => fireEvent.press(queryAllByLabelText("clear search text")[0]));
-	
-				// assert
-				expect(getRecipeList).toHaveBeenCalledTimes(3);
-				expect(queryAllByTestId("recipeCard").length).toEqual(recipeList.length);
-			});
+				)
+			);
+			await waitFor(() => expect(queryAllByTestId("activityIndicator").length).toEqual(0));
+
+			// act
+			fireEvent.changeText(getByPlaceholderText("Search for Recipes"), "chi");
+
+			// assert
+			await waitFor(() => expect(queryAllByTestId("recipeCard").length).toEqual(chiRecipes.length));
+			expect(getRecipeList).toHaveBeenCalledTimes(2);
 		});
+		test("clearing the search box should reload the list", async () => {
+			//arrange
+			const chiRecipes = recipeList.filter((r) => r.name.toLowerCase().includes("chi"));
+			getRecipeList
+				.mockResolvedValueOnce({
+					recipes: recipeList,
+					cuisines,
+					serves,
+					filterOptions: clearedFilters,
+				})
+				.mockResolvedValueOnce({
+					recipes: chiRecipes,
+					cuisines,
+					serves,
+					filterOptions: clearedFilters,
+				})
+				.mockResolvedValueOnce({
+					recipes: recipeList,
+					cuisines,
+					serves,
+					filterOptions: clearedFilters,
+				});
+			const { queryAllByTestId, getByPlaceholderText, queryAllByLabelText } = await waitFor(async() =>
+				render(
+					<Provider store={store}>
+						<RecipesList navigation={navigation} route={route} listChoice={"all"} />
+					</Provider>
+				)
+			);
+			await waitFor(() => expect(queryAllByTestId("activityIndicator").length).toEqual(0));
+			expect(getByPlaceholderText("Search for Recipes")).toBeTruthy();
+			await waitFor(async() => fireEvent.changeText(getByPlaceholderText("Search for Recipes"), "chi"));
+			expect(getRecipeList).toHaveBeenCalledTimes(2);
+			expect(queryAllByTestId("recipeCard").length).toEqual(chiRecipes.length);
+
+			// act
+			await waitFor(async() => fireEvent.press(queryAllByLabelText("clear search text")[0]));
+
+			// assert
+			expect(getRecipeList).toHaveBeenCalledTimes(3);
+			expect(queryAllByTestId("recipeCard").length).toEqual(recipeList.length);
+		});
+	});
 });

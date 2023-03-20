@@ -25,6 +25,7 @@ describe("New Recipe page", () => {
 		let store,
 			mockNavigate,
 			mockSetParams,
+			mockSetOptions,
 			navigation,
 			route,
 			getByTestId,
@@ -68,10 +69,12 @@ describe("New Recipe page", () => {
 
 			mockNavigate = jest.fn();
 			mockSetParams = jest.fn();
+			mockSetOptions = jest.fn();
 
 			navigation = {
 				navigate: mockNavigate,
 				setParams: mockSetParams,
+				setOptions: mockSetOptions
 			};
 
 			route = {};
@@ -586,6 +589,7 @@ describe("New Recipe page", () => {
 						navigation={{
 							navigate: mockNavigate,
 							setParams: jest.fn(),
+							setOptions: jest.fn()
 						}}
 						route={{}}
 					/>

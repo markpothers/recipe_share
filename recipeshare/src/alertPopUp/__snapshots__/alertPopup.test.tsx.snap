@@ -10,12 +10,12 @@ exports[`AlertPopup calls the close function when button pressed 1`] = `
   <View
     accessibilityRole="alert"
     style={
-      Array [
-        Object {
+      [
+        {
           "alignItems": "center",
           "justifyContent": "center",
         },
-        Object {
+        {
           "height": 1334,
           "width": 750,
         },
@@ -24,7 +24,7 @@ exports[`AlertPopup calls the close function when button pressed 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#fff59b",
           "borderColor": "#104e01",
@@ -39,7 +39,7 @@ exports[`AlertPopup calls the close function when button pressed 1`] = `
     >
       <View
         style={
-          Object {
+          {
             "justifyContent": "center",
             "paddingTop": 13.34,
             "width": "90%",
@@ -49,7 +49,7 @@ exports[`AlertPopup calls the close function when button pressed 1`] = `
         <Text
           maxFontSizeMultiplier={1.5}
           style={
-            Object {
+            {
               "color": "#104e01",
               "fontSize": 33.65552620959067,
               "fontWeight": "bold",
@@ -61,14 +61,14 @@ exports[`AlertPopup calls the close function when button pressed 1`] = `
       </View>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "borderColor": "red",
               "borderWidth": 0,
               "overflow": "hidden",
               "width": "100%",
             },
-            Object {
+            {
               "marginBottom": 26.68,
               "marginTop": 26.68,
               "width": 600,
@@ -78,8 +78,8 @@ exports[`AlertPopup calls the close function when button pressed 1`] = `
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "alignItems": "center",
                 "borderColor": "purple",
                 "borderRadius": 11.25,
@@ -92,7 +92,7 @@ exports[`AlertPopup calls the close function when button pressed 1`] = `
                 "overflow": "hidden",
                 "width": "100%",
               },
-              Object {
+              {
                 "justifyContent": "space-around",
               },
             ]
@@ -100,6 +100,23 @@ exports[`AlertPopup calls the close function when button pressed 1`] = `
         >
           <View
             accessibilityRole="button"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
             accessible={true}
             collapsable={false}
             focusable={true}
@@ -111,7 +128,7 @@ exports[`AlertPopup calls the close function when button pressed 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "backgroundColor": "#104e01",
                 "borderColor": "#104e01",
@@ -132,7 +149,7 @@ exports[`AlertPopup calls the close function when button pressed 1`] = `
               name="cancel"
               size={53.36}
               style={
-                Object {
+                {
                   "color": "#fff59b",
                 }
               }
@@ -140,7 +157,7 @@ exports[`AlertPopup calls the close function when button pressed 1`] = `
             <Text
               maxFontSizeMultiplier={2}
               style={
-                Object {
+                {
                   "color": "#fff59b",
                   "fontSize": 27.53633962602873,
                   "fontWeight": "bold",
@@ -154,6 +171,23 @@ exports[`AlertPopup calls the close function when button pressed 1`] = `
           </View>
           <View
             accessibilityRole="button"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
             accessible={true}
             collapsable={false}
             focusable={true}
@@ -165,7 +199,7 @@ exports[`AlertPopup calls the close function when button pressed 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "backgroundColor": "#104e01",
                 "borderColor": "#104e01",
@@ -186,7 +220,7 @@ exports[`AlertPopup calls the close function when button pressed 1`] = `
               name="check"
               size={53.36}
               style={
-                Object {
+                {
                   "color": "#fff59b",
                 }
               }
@@ -194,7 +228,7 @@ exports[`AlertPopup calls the close function when button pressed 1`] = `
             <Text
               maxFontSizeMultiplier={2}
               style={
-                Object {
+                {
                   "color": "#fff59b",
                   "fontSize": 27.53633962602873,
                   "fontWeight": "bold",
@@ -223,12 +257,12 @@ exports[`AlertPopup calls the yes function when button pressed 1`] = `
   <View
     accessibilityRole="alert"
     style={
-      Array [
-        Object {
+      [
+        {
           "alignItems": "center",
           "justifyContent": "center",
         },
-        Object {
+        {
           "height": 1334,
           "width": 750,
         },
@@ -237,7 +271,7 @@ exports[`AlertPopup calls the yes function when button pressed 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#fff59b",
           "borderColor": "#104e01",
@@ -252,7 +286,7 @@ exports[`AlertPopup calls the yes function when button pressed 1`] = `
     >
       <View
         style={
-          Object {
+          {
             "justifyContent": "center",
             "paddingTop": 13.34,
             "width": "90%",
@@ -262,7 +296,7 @@ exports[`AlertPopup calls the yes function when button pressed 1`] = `
         <Text
           maxFontSizeMultiplier={1.5}
           style={
-            Object {
+            {
               "color": "#104e01",
               "fontSize": 33.65552620959067,
               "fontWeight": "bold",
@@ -274,14 +308,14 @@ exports[`AlertPopup calls the yes function when button pressed 1`] = `
       </View>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "borderColor": "red",
               "borderWidth": 0,
               "overflow": "hidden",
               "width": "100%",
             },
-            Object {
+            {
               "marginBottom": 26.68,
               "marginTop": 26.68,
               "width": 600,
@@ -291,8 +325,8 @@ exports[`AlertPopup calls the yes function when button pressed 1`] = `
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "alignItems": "center",
                 "borderColor": "purple",
                 "borderRadius": 11.25,
@@ -305,7 +339,7 @@ exports[`AlertPopup calls the yes function when button pressed 1`] = `
                 "overflow": "hidden",
                 "width": "100%",
               },
-              Object {
+              {
                 "justifyContent": "space-around",
               },
             ]
@@ -313,6 +347,23 @@ exports[`AlertPopup calls the yes function when button pressed 1`] = `
         >
           <View
             accessibilityRole="button"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
             accessible={true}
             collapsable={false}
             focusable={true}
@@ -324,7 +375,7 @@ exports[`AlertPopup calls the yes function when button pressed 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "backgroundColor": "#104e01",
                 "borderColor": "#104e01",
@@ -345,7 +396,7 @@ exports[`AlertPopup calls the yes function when button pressed 1`] = `
               name="cancel"
               size={53.36}
               style={
-                Object {
+                {
                   "color": "#fff59b",
                 }
               }
@@ -353,7 +404,7 @@ exports[`AlertPopup calls the yes function when button pressed 1`] = `
             <Text
               maxFontSizeMultiplier={2}
               style={
-                Object {
+                {
                   "color": "#fff59b",
                   "fontSize": 27.53633962602873,
                   "fontWeight": "bold",
@@ -367,6 +418,23 @@ exports[`AlertPopup calls the yes function when button pressed 1`] = `
           </View>
           <View
             accessibilityRole="button"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
             accessible={true}
             collapsable={false}
             focusable={true}
@@ -378,7 +446,7 @@ exports[`AlertPopup calls the yes function when button pressed 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "backgroundColor": "#104e01",
                 "borderColor": "#104e01",
@@ -399,7 +467,7 @@ exports[`AlertPopup calls the yes function when button pressed 1`] = `
               name="check"
               size={53.36}
               style={
-                Object {
+                {
                   "color": "#fff59b",
                 }
               }
@@ -407,7 +475,7 @@ exports[`AlertPopup calls the yes function when button pressed 1`] = `
             <Text
               maxFontSizeMultiplier={2}
               style={
-                Object {
+                {
                   "color": "#fff59b",
                   "fontSize": 27.53633962602873,
                   "fontWeight": "bold",
@@ -436,12 +504,12 @@ exports[`AlertPopup renders with 1 button when no close button and customizable 
   <View
     accessibilityRole="alert"
     style={
-      Array [
-        Object {
+      [
+        {
           "alignItems": "center",
           "justifyContent": "center",
         },
-        Object {
+        {
           "height": 1334,
           "width": 750,
         },
@@ -450,7 +518,7 @@ exports[`AlertPopup renders with 1 button when no close button and customizable 
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#fff59b",
           "borderColor": "#104e01",
@@ -465,7 +533,7 @@ exports[`AlertPopup renders with 1 button when no close button and customizable 
     >
       <View
         style={
-          Object {
+          {
             "justifyContent": "center",
             "paddingTop": 13.34,
             "width": "90%",
@@ -475,7 +543,7 @@ exports[`AlertPopup renders with 1 button when no close button and customizable 
         <Text
           maxFontSizeMultiplier={1.5}
           style={
-            Object {
+            {
               "color": "#104e01",
               "fontSize": 33.65552620959067,
               "fontWeight": "bold",
@@ -487,14 +555,14 @@ exports[`AlertPopup renders with 1 button when no close button and customizable 
       </View>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "borderColor": "red",
               "borderWidth": 0,
               "overflow": "hidden",
               "width": "100%",
             },
-            Object {
+            {
               "marginBottom": 26.68,
               "marginTop": 26.68,
               "width": 600,
@@ -504,8 +572,8 @@ exports[`AlertPopup renders with 1 button when no close button and customizable 
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "alignItems": "center",
                 "borderColor": "purple",
                 "borderRadius": 11.25,
@@ -518,7 +586,7 @@ exports[`AlertPopup renders with 1 button when no close button and customizable 
                 "overflow": "hidden",
                 "width": "100%",
               },
-              Object {
+              {
                 "justifyContent": "space-around",
               },
             ]
@@ -526,8 +594,8 @@ exports[`AlertPopup renders with 1 button when no close button and customizable 
         >
           <View
             style={
-              Array [
-                Object {
+              [
+                {
                   "alignItems": "center",
                   "backgroundColor": "#104e01",
                   "borderColor": "#104e01",
@@ -540,7 +608,7 @@ exports[`AlertPopup renders with 1 button when no close button and customizable 
                   "minHeight": 80.03999999999999,
                   "minWidth": 285,
                 },
-                Object {
+                {
                   "opacity": 0,
                 },
               ]
@@ -548,6 +616,23 @@ exports[`AlertPopup renders with 1 button when no close button and customizable 
           />
           <View
             accessibilityRole="button"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
             accessible={true}
             collapsable={false}
             focusable={true}
@@ -559,7 +644,7 @@ exports[`AlertPopup renders with 1 button when no close button and customizable 
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "backgroundColor": "#104e01",
                 "borderColor": "#104e01",
@@ -580,7 +665,7 @@ exports[`AlertPopup renders with 1 button when no close button and customizable 
               name="check"
               size={53.36}
               style={
-                Object {
+                {
                   "color": "#fff59b",
                 }
               }
@@ -588,7 +673,7 @@ exports[`AlertPopup renders with 1 button when no close button and customizable 
             <Text
               maxFontSizeMultiplier={2}
               style={
-                Object {
+                {
                   "color": "#fff59b",
                   "fontSize": 27.53633962602873,
                   "fontWeight": "bold",
@@ -617,12 +702,12 @@ exports[`AlertPopup renders with 2 buttons and customizable text 1`] = `
   <View
     accessibilityRole="alert"
     style={
-      Array [
-        Object {
+      [
+        {
           "alignItems": "center",
           "justifyContent": "center",
         },
-        Object {
+        {
           "height": 1334,
           "width": 750,
         },
@@ -631,7 +716,7 @@ exports[`AlertPopup renders with 2 buttons and customizable text 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#fff59b",
           "borderColor": "#104e01",
@@ -646,7 +731,7 @@ exports[`AlertPopup renders with 2 buttons and customizable text 1`] = `
     >
       <View
         style={
-          Object {
+          {
             "justifyContent": "center",
             "paddingTop": 13.34,
             "width": "90%",
@@ -656,7 +741,7 @@ exports[`AlertPopup renders with 2 buttons and customizable text 1`] = `
         <Text
           maxFontSizeMultiplier={1.5}
           style={
-            Object {
+            {
               "color": "#104e01",
               "fontSize": 33.65552620959067,
               "fontWeight": "bold",
@@ -668,14 +753,14 @@ exports[`AlertPopup renders with 2 buttons and customizable text 1`] = `
       </View>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "borderColor": "red",
               "borderWidth": 0,
               "overflow": "hidden",
               "width": "100%",
             },
-            Object {
+            {
               "marginBottom": 26.68,
               "marginTop": 26.68,
               "width": 600,
@@ -685,8 +770,8 @@ exports[`AlertPopup renders with 2 buttons and customizable text 1`] = `
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "alignItems": "center",
                 "borderColor": "purple",
                 "borderRadius": 11.25,
@@ -699,7 +784,7 @@ exports[`AlertPopup renders with 2 buttons and customizable text 1`] = `
                 "overflow": "hidden",
                 "width": "100%",
               },
-              Object {
+              {
                 "justifyContent": "space-around",
               },
             ]
@@ -707,6 +792,23 @@ exports[`AlertPopup renders with 2 buttons and customizable text 1`] = `
         >
           <View
             accessibilityRole="button"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
             accessible={true}
             collapsable={false}
             focusable={true}
@@ -718,7 +820,7 @@ exports[`AlertPopup renders with 2 buttons and customizable text 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "backgroundColor": "#104e01",
                 "borderColor": "#104e01",
@@ -739,7 +841,7 @@ exports[`AlertPopup renders with 2 buttons and customizable text 1`] = `
               name="cancel"
               size={53.36}
               style={
-                Object {
+                {
                   "color": "#fff59b",
                 }
               }
@@ -747,7 +849,7 @@ exports[`AlertPopup renders with 2 buttons and customizable text 1`] = `
             <Text
               maxFontSizeMultiplier={2}
               style={
-                Object {
+                {
                   "color": "#fff59b",
                   "fontSize": 27.53633962602873,
                   "fontWeight": "bold",
@@ -761,6 +863,23 @@ exports[`AlertPopup renders with 2 buttons and customizable text 1`] = `
           </View>
           <View
             accessibilityRole="button"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
             accessible={true}
             collapsable={false}
             focusable={true}
@@ -772,7 +891,7 @@ exports[`AlertPopup renders with 2 buttons and customizable text 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "backgroundColor": "#104e01",
                 "borderColor": "#104e01",
@@ -793,7 +912,7 @@ exports[`AlertPopup renders with 2 buttons and customizable text 1`] = `
               name="check"
               size={53.36}
               style={
-                Object {
+                {
                   "color": "#fff59b",
                 }
               }
@@ -801,7 +920,7 @@ exports[`AlertPopup renders with 2 buttons and customizable text 1`] = `
             <Text
               maxFontSizeMultiplier={2}
               style={
-                Object {
+                {
                   "color": "#fff59b",
                   "fontSize": 27.53633962602873,
                   "fontWeight": "bold",
@@ -830,12 +949,12 @@ exports[`AlertPopup renders with 2 buttons and default text 1`] = `
   <View
     accessibilityRole="alert"
     style={
-      Array [
-        Object {
+      [
+        {
           "alignItems": "center",
           "justifyContent": "center",
         },
-        Object {
+        {
           "height": 1334,
           "width": 750,
         },
@@ -844,7 +963,7 @@ exports[`AlertPopup renders with 2 buttons and default text 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#fff59b",
           "borderColor": "#104e01",
@@ -859,7 +978,7 @@ exports[`AlertPopup renders with 2 buttons and default text 1`] = `
     >
       <View
         style={
-          Object {
+          {
             "justifyContent": "center",
             "paddingTop": 13.34,
             "width": "90%",
@@ -869,7 +988,7 @@ exports[`AlertPopup renders with 2 buttons and default text 1`] = `
         <Text
           maxFontSizeMultiplier={1.5}
           style={
-            Object {
+            {
               "color": "#104e01",
               "fontSize": 33.65552620959067,
               "fontWeight": "bold",
@@ -881,14 +1000,14 @@ exports[`AlertPopup renders with 2 buttons and default text 1`] = `
       </View>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "borderColor": "red",
               "borderWidth": 0,
               "overflow": "hidden",
               "width": "100%",
             },
-            Object {
+            {
               "marginBottom": 26.68,
               "marginTop": 26.68,
               "width": 600,
@@ -898,8 +1017,8 @@ exports[`AlertPopup renders with 2 buttons and default text 1`] = `
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "alignItems": "center",
                 "borderColor": "purple",
                 "borderRadius": 11.25,
@@ -912,7 +1031,7 @@ exports[`AlertPopup renders with 2 buttons and default text 1`] = `
                 "overflow": "hidden",
                 "width": "100%",
               },
-              Object {
+              {
                 "justifyContent": "space-around",
               },
             ]
@@ -920,6 +1039,23 @@ exports[`AlertPopup renders with 2 buttons and default text 1`] = `
         >
           <View
             accessibilityRole="button"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
             accessible={true}
             collapsable={false}
             focusable={true}
@@ -931,7 +1067,7 @@ exports[`AlertPopup renders with 2 buttons and default text 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "backgroundColor": "#104e01",
                 "borderColor": "#104e01",
@@ -952,7 +1088,7 @@ exports[`AlertPopup renders with 2 buttons and default text 1`] = `
               name="cancel"
               size={53.36}
               style={
-                Object {
+                {
                   "color": "#fff59b",
                 }
               }
@@ -960,7 +1096,7 @@ exports[`AlertPopup renders with 2 buttons and default text 1`] = `
             <Text
               maxFontSizeMultiplier={2}
               style={
-                Object {
+                {
                   "color": "#fff59b",
                   "fontSize": 27.53633962602873,
                   "fontWeight": "bold",
@@ -974,6 +1110,23 @@ exports[`AlertPopup renders with 2 buttons and default text 1`] = `
           </View>
           <View
             accessibilityRole="button"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
             accessible={true}
             collapsable={false}
             focusable={true}
@@ -985,7 +1138,7 @@ exports[`AlertPopup renders with 2 buttons and default text 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "backgroundColor": "#104e01",
                 "borderColor": "#104e01",
@@ -1006,7 +1159,7 @@ exports[`AlertPopup renders with 2 buttons and default text 1`] = `
               name="check"
               size={53.36}
               style={
-                Object {
+                {
                   "color": "#fff59b",
                 }
               }
@@ -1014,7 +1167,7 @@ exports[`AlertPopup renders with 2 buttons and default text 1`] = `
             <Text
               maxFontSizeMultiplier={2}
               style={
-                Object {
+                {
                   "color": "#fff59b",
                   "fontSize": 27.53633962602873,
                   "fontWeight": "bold",

@@ -25,7 +25,7 @@ describe("picSourceChooser", () => {
 		mockSourceChosen = jest.fn();
 		mockCancelChooseImage = jest.fn();
 
-		await waitFor(() => {
+		await waitFor(async() => {
 			const rendered = render(
 				<PicSourceChooser
 					saveImage={mockSaveImage}

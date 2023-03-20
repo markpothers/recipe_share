@@ -9,10 +9,10 @@ exports[`SwitchSized can be rendered on an android switch is off 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Array [
+    [
       null,
       null,
-      Object {
+      {
         "height": 46.690000000000005,
         "marginVertical": 6.67,
       },
@@ -34,10 +34,10 @@ exports[`SwitchSized can be rendered on an android where switch is on 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Array [
+    [
       null,
       null,
-      Object {
+      {
         "height": 46.690000000000005,
         "marginVertical": 6.67,
       },
@@ -58,12 +58,12 @@ exports[`SwitchSized can be rendered on an iPhone with reduced size switches whe
   onStartShouldSetResponder={[Function]}
   onTintColor="#5c8a5199"
   style={
-    Array [
-      Object {
+    [
+      {
         "height": 31,
         "width": 51,
       },
-      Array [
+      [
         null,
         null,
         null,
@@ -84,12 +84,12 @@ exports[`SwitchSized can be rendered on an iPhone with reduced size switches whe
   onStartShouldSetResponder={[Function]}
   onTintColor="#5c8a5199"
   style={
-    Array [
-      Object {
+    [
+      {
         "height": 31,
         "width": 51,
       },
-      Array [
+      [
         null,
         null,
         null,
@@ -111,10 +111,10 @@ exports[`SwitchSized can be rendered on iPad with regular switch where switch is
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Array [
+    [
       null,
       null,
-      Object {
+      {
         "height": 46.690000000000005,
         "marginVertical": 6.67,
       },
@@ -136,10 +136,10 @@ exports[`SwitchSized can be rendered on iPad with regular switch where switch is
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Array [
+    [
       null,
       null,
-      Object {
+      {
         "height": 46.690000000000005,
         "marginVertical": 6.67,
       },

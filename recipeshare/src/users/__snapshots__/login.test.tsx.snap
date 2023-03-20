@@ -2,9 +2,8 @@
 
 exports[`login page logging in under different conditions should display activation required message if account is not activated 1`] = `
 <RCTSafeAreaView
-  emulateUnlessSupported={true}
   style={
-    Object {
+    {
       "borderColor": "blue",
       "borderWidth": 0,
       "flex": 1,
@@ -14,14 +13,14 @@ exports[`login page logging in under different conditions should display activat
   <View
     onLayout={[Function]}
     style={
-      Array [
-        Object {
+      [
+        {
           "alignItems": "center",
           "borderColor": "red",
           "borderWidth": 0,
           "flex": 1,
         },
-        Object {
+        {
           "paddingBottom": 0,
         },
       ]
@@ -31,7 +30,7 @@ exports[`login page logging in under different conditions should display activat
       resizeMode="cover"
       source={1}
       style={
-        Object {
+        {
           "borderColor": "black",
           "borderWidth": 0,
           "height": 1334,
@@ -45,7 +44,7 @@ exports[`login page logging in under different conditions should display activat
       nestedScrollEnabled={true}
       scrollEnabled={true}
       style={
-        Object {
+        {
           "borderColor": "yellow",
           "borderWidth": 0,
           "flex": 1,
@@ -54,6 +53,23 @@ exports[`login page logging in under different conditions should display activat
     >
       <View>
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -65,7 +81,7 @@ exports[`login page logging in under different conditions should display activat
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "flex": 1,
               "opacity": 1,
             }
@@ -73,7 +89,7 @@ exports[`login page logging in under different conditions should display activat
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "justifyContent": "center",
                 "top": 133.4,
@@ -84,7 +100,7 @@ exports[`login page logging in under different conditions should display activat
               resizeMode="contain"
               source={1}
               style={
-                Object {
+                {
                   "height": 266.8,
                   "width": "75%",
                 }
@@ -93,8 +109,8 @@ exports[`login page logging in under different conditions should display activat
           </View>
           <View
             style={
-              Array [
-                Object {
+              [
+                {
                   "alignItems": "center",
                   "borderWidth": 0,
                   "justifyContent": "center",
@@ -102,7 +118,7 @@ exports[`login page logging in under different conditions should display activat
                   "marginRight": 75,
                   "width": 600,
                 },
-                Object {
+                {
                   "marginTop": 200.1,
                 },
               ]
@@ -110,7 +126,7 @@ exports[`login page logging in under different conditions should display activat
           >
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -120,7 +136,7 @@ exports[`login page logging in under different conditions should display activat
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -137,7 +153,7 @@ exports[`login page logging in under different conditions should display activat
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "white",
                       "borderColor": "#104e01",
@@ -153,7 +169,7 @@ exports[`login page logging in under different conditions should display activat
                   <Text
                     maxFontSizeMultiplier={1.5}
                     style={
-                      Object {
+                      {
                         "borderRadius": 11.25,
                         "color": "#505050",
                         "fontSize": 33.35,
@@ -177,7 +193,7 @@ exports[`login page logging in under different conditions should display activat
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -187,7 +203,7 @@ exports[`login page logging in under different conditions should display activat
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -204,7 +220,7 @@ exports[`login page logging in under different conditions should display activat
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "white",
                       "borderColor": "#104e01",
@@ -225,7 +241,7 @@ exports[`login page logging in under different conditions should display activat
                     onChangeText={[Function]}
                     placeholder="e-mail"
                     style={
-                      Object {
+                      {
                         "fontSize": 30.595932917809698,
                         "paddingLeft": 15,
                         "paddingVertical": 6.67,
@@ -243,7 +259,7 @@ exports[`login page logging in under different conditions should display activat
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -253,7 +269,7 @@ exports[`login page logging in under different conditions should display activat
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -270,7 +286,7 @@ exports[`login page logging in under different conditions should display activat
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "white",
                       "borderColor": "#104e01",
@@ -291,7 +307,7 @@ exports[`login page logging in under different conditions should display activat
                     placeholder="password"
                     secureTextEntry={true}
                     style={
-                      Object {
+                      {
                         "fontSize": 30.595932917809698,
                         "paddingLeft": 15,
                         "paddingVertical": 6.67,
@@ -305,6 +321,23 @@ exports[`login page logging in under different conditions should display activat
                     value="myTestPassword"
                   />
                   <View
+                    accessibilityState={
+                      {
+                        "busy": undefined,
+                        "checked": undefined,
+                        "disabled": undefined,
+                        "expanded": undefined,
+                        "selected": undefined,
+                      }
+                    }
+                    accessibilityValue={
+                      {
+                        "max": undefined,
+                        "min": undefined,
+                        "now": undefined,
+                        "text": undefined,
+                      }
+                    }
                     accessible={true}
                     collapsable={false}
                     focusable={true}
@@ -316,7 +349,7 @@ exports[`login page logging in under different conditions should display activat
                     onResponderTerminationRequest={[Function]}
                     onStartShouldSetResponder={[Function]}
                     style={
-                      Object {
+                      {
                         "alignItems": "center",
                         "height": "100%",
                         "justifyContent": "center",
@@ -333,7 +366,7 @@ exports[`login page logging in under different conditions should display activat
                       name="eye"
                       size={53.36}
                       style={
-                        Object {
+                        {
                           "color": "#50505055",
                         }
                       }
@@ -343,7 +376,7 @@ exports[`login page logging in under different conditions should display activat
               </View>
               <View
                 style={
-                  Object {
+                  {
                     "backgroundColor": "white",
                     "borderColor": "#104e01",
                     "borderRadius": 11.25,
@@ -357,7 +390,7 @@ exports[`login page logging in under different conditions should display activat
                 <Text
                   maxFontSizeMultiplier={2}
                   style={
-                    Object {
+                    {
                       "color": "#9e0000f8",
                       "fontSize": 30.595932917809698,
                       "paddingBottom": 3.335,
@@ -374,7 +407,7 @@ exports[`login page logging in under different conditions should display activat
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -384,7 +417,7 @@ exports[`login page logging in under different conditions should display activat
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -400,6 +433,23 @@ exports[`login page logging in under different conditions should display activat
                 }
               >
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -411,7 +461,7 @@ exports[`login page logging in under different conditions should display activat
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -431,7 +481,7 @@ exports[`login page logging in under different conditions should display activat
                   <Text
                     maxFontSizeMultiplier={1.25}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -452,12 +502,12 @@ exports[`login page logging in under different conditions should display activat
                     onStartShouldSetResponder={[Function]}
                     onTintColor="#5c8a5199"
                     style={
-                      Array [
-                        Object {
+                      [
+                        {
                           "height": 31,
                           "width": 51,
                         },
-                        Array [
+                        [
                           null,
                           null,
                           null,
@@ -471,6 +521,23 @@ exports[`login page logging in under different conditions should display activat
                   />
                 </View>
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -482,7 +549,7 @@ exports[`login page logging in under different conditions should display activat
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -502,7 +569,7 @@ exports[`login page logging in under different conditions should display activat
                   <Text
                     maxFontSizeMultiplier={1.5}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -523,12 +590,12 @@ exports[`login page logging in under different conditions should display activat
                     onStartShouldSetResponder={[Function]}
                     onTintColor="#5c8a5199"
                     style={
-                      Array [
-                        Object {
+                      [
+                        {
                           "height": 31,
                           "width": 51,
                         },
-                        Array [
+                        [
                           null,
                           null,
                           null,
@@ -545,7 +612,7 @@ exports[`login page logging in under different conditions should display activat
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -555,7 +622,7 @@ exports[`login page logging in under different conditions should display activat
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -571,6 +638,23 @@ exports[`login page logging in under different conditions should display activat
                 }
               >
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -582,7 +666,7 @@ exports[`login page logging in under different conditions should display activat
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -603,7 +687,7 @@ exports[`login page logging in under different conditions should display activat
                     name="account-plus"
                     size={53.36}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                       }
                     }
@@ -611,7 +695,7 @@ exports[`login page logging in under different conditions should display activat
                   <Text
                     maxFontSizeMultiplier={1.5}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -624,6 +708,23 @@ exports[`login page logging in under different conditions should display activat
                   </Text>
                 </View>
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -635,7 +736,7 @@ exports[`login page logging in under different conditions should display activat
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -656,7 +757,7 @@ exports[`login page logging in under different conditions should display activat
                     name="lock-open"
                     size={53.36}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                       }
                     }
@@ -664,7 +765,7 @@ exports[`login page logging in under different conditions should display activat
                   <Text
                     maxFontSizeMultiplier={1.7}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -683,7 +784,7 @@ exports[`login page logging in under different conditions should display activat
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -693,7 +794,7 @@ exports[`login page logging in under different conditions should display activat
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -709,6 +810,23 @@ exports[`login page logging in under different conditions should display activat
                 }
               >
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -720,7 +838,7 @@ exports[`login page logging in under different conditions should display activat
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -742,7 +860,7 @@ exports[`login page logging in under different conditions should display activat
                     name="login"
                     size={53.36}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                       }
                     }
@@ -750,15 +868,15 @@ exports[`login page logging in under different conditions should display activat
                   <Text
                     maxFontSizeMultiplier={2}
                     style={
-                      Array [
-                        Object {
+                      [
+                        {
                           "color": "#104e01",
                           "fontSize": 27.53633962602873,
                           "fontWeight": "bold",
                           "paddingHorizontal": 7.5,
                           "textAlign": "center",
                         },
-                        Object {
+                        {
                           "marginLeft": 30,
                         },
                       ]
@@ -779,9 +897,8 @@ exports[`login page logging in under different conditions should display activat
 
 exports[`login page logging in under different conditions should display deactivated message if account was deactivated 1`] = `
 <RCTSafeAreaView
-  emulateUnlessSupported={true}
   style={
-    Object {
+    {
       "borderColor": "blue",
       "borderWidth": 0,
       "flex": 1,
@@ -791,14 +908,14 @@ exports[`login page logging in under different conditions should display deactiv
   <View
     onLayout={[Function]}
     style={
-      Array [
-        Object {
+      [
+        {
           "alignItems": "center",
           "borderColor": "red",
           "borderWidth": 0,
           "flex": 1,
         },
-        Object {
+        {
           "paddingBottom": 0,
         },
       ]
@@ -808,7 +925,7 @@ exports[`login page logging in under different conditions should display deactiv
       resizeMode="cover"
       source={1}
       style={
-        Object {
+        {
           "borderColor": "black",
           "borderWidth": 0,
           "height": 1334,
@@ -822,7 +939,7 @@ exports[`login page logging in under different conditions should display deactiv
       nestedScrollEnabled={true}
       scrollEnabled={true}
       style={
-        Object {
+        {
           "borderColor": "yellow",
           "borderWidth": 0,
           "flex": 1,
@@ -831,6 +948,23 @@ exports[`login page logging in under different conditions should display deactiv
     >
       <View>
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -842,7 +976,7 @@ exports[`login page logging in under different conditions should display deactiv
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "flex": 1,
               "opacity": 1,
             }
@@ -850,7 +984,7 @@ exports[`login page logging in under different conditions should display deactiv
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "justifyContent": "center",
                 "top": 133.4,
@@ -861,7 +995,7 @@ exports[`login page logging in under different conditions should display deactiv
               resizeMode="contain"
               source={1}
               style={
-                Object {
+                {
                   "height": 266.8,
                   "width": "75%",
                 }
@@ -870,8 +1004,8 @@ exports[`login page logging in under different conditions should display deactiv
           </View>
           <View
             style={
-              Array [
-                Object {
+              [
+                {
                   "alignItems": "center",
                   "borderWidth": 0,
                   "justifyContent": "center",
@@ -879,7 +1013,7 @@ exports[`login page logging in under different conditions should display deactiv
                   "marginRight": 75,
                   "width": 600,
                 },
-                Object {
+                {
                   "marginTop": 200.1,
                 },
               ]
@@ -887,7 +1021,7 @@ exports[`login page logging in under different conditions should display deactiv
           >
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -897,7 +1031,7 @@ exports[`login page logging in under different conditions should display deactiv
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -914,7 +1048,7 @@ exports[`login page logging in under different conditions should display deactiv
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "white",
                       "borderColor": "#104e01",
@@ -930,7 +1064,7 @@ exports[`login page logging in under different conditions should display deactiv
                   <Text
                     maxFontSizeMultiplier={1.5}
                     style={
-                      Object {
+                      {
                         "borderRadius": 11.25,
                         "color": "#505050",
                         "fontSize": 33.35,
@@ -954,7 +1088,7 @@ exports[`login page logging in under different conditions should display deactiv
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -964,7 +1098,7 @@ exports[`login page logging in under different conditions should display deactiv
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -981,7 +1115,7 @@ exports[`login page logging in under different conditions should display deactiv
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "white",
                       "borderColor": "#104e01",
@@ -1002,7 +1136,7 @@ exports[`login page logging in under different conditions should display deactiv
                     onChangeText={[Function]}
                     placeholder="e-mail"
                     style={
-                      Object {
+                      {
                         "fontSize": 30.595932917809698,
                         "paddingLeft": 15,
                         "paddingVertical": 6.67,
@@ -1020,7 +1154,7 @@ exports[`login page logging in under different conditions should display deactiv
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -1030,7 +1164,7 @@ exports[`login page logging in under different conditions should display deactiv
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -1047,7 +1181,7 @@ exports[`login page logging in under different conditions should display deactiv
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "white",
                       "borderColor": "#104e01",
@@ -1068,7 +1202,7 @@ exports[`login page logging in under different conditions should display deactiv
                     placeholder="password"
                     secureTextEntry={true}
                     style={
-                      Object {
+                      {
                         "fontSize": 30.595932917809698,
                         "paddingLeft": 15,
                         "paddingVertical": 6.67,
@@ -1082,6 +1216,23 @@ exports[`login page logging in under different conditions should display deactiv
                     value="myTestPassword"
                   />
                   <View
+                    accessibilityState={
+                      {
+                        "busy": undefined,
+                        "checked": undefined,
+                        "disabled": undefined,
+                        "expanded": undefined,
+                        "selected": undefined,
+                      }
+                    }
+                    accessibilityValue={
+                      {
+                        "max": undefined,
+                        "min": undefined,
+                        "now": undefined,
+                        "text": undefined,
+                      }
+                    }
                     accessible={true}
                     collapsable={false}
                     focusable={true}
@@ -1093,7 +1244,7 @@ exports[`login page logging in under different conditions should display deactiv
                     onResponderTerminationRequest={[Function]}
                     onStartShouldSetResponder={[Function]}
                     style={
-                      Object {
+                      {
                         "alignItems": "center",
                         "height": "100%",
                         "justifyContent": "center",
@@ -1110,7 +1261,7 @@ exports[`login page logging in under different conditions should display deactiv
                       name="eye"
                       size={53.36}
                       style={
-                        Object {
+                        {
                           "color": "#50505055",
                         }
                       }
@@ -1120,7 +1271,7 @@ exports[`login page logging in under different conditions should display deactiv
               </View>
               <View
                 style={
-                  Object {
+                  {
                     "backgroundColor": "white",
                     "borderColor": "#104e01",
                     "borderRadius": 11.25,
@@ -1134,7 +1285,7 @@ exports[`login page logging in under different conditions should display deactiv
                 <Text
                   maxFontSizeMultiplier={2}
                   style={
-                    Object {
+                    {
                       "color": "#9e0000f8",
                       "fontSize": 30.595932917809698,
                       "paddingBottom": 3.335,
@@ -1151,7 +1302,7 @@ exports[`login page logging in under different conditions should display deactiv
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -1161,7 +1312,7 @@ exports[`login page logging in under different conditions should display deactiv
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -1177,6 +1328,23 @@ exports[`login page logging in under different conditions should display deactiv
                 }
               >
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -1188,7 +1356,7 @@ exports[`login page logging in under different conditions should display deactiv
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -1208,7 +1376,7 @@ exports[`login page logging in under different conditions should display deactiv
                   <Text
                     maxFontSizeMultiplier={1.25}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -1229,12 +1397,12 @@ exports[`login page logging in under different conditions should display deactiv
                     onStartShouldSetResponder={[Function]}
                     onTintColor="#5c8a5199"
                     style={
-                      Array [
-                        Object {
+                      [
+                        {
                           "height": 31,
                           "width": 51,
                         },
-                        Array [
+                        [
                           null,
                           null,
                           null,
@@ -1248,6 +1416,23 @@ exports[`login page logging in under different conditions should display deactiv
                   />
                 </View>
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -1259,7 +1444,7 @@ exports[`login page logging in under different conditions should display deactiv
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -1279,7 +1464,7 @@ exports[`login page logging in under different conditions should display deactiv
                   <Text
                     maxFontSizeMultiplier={1.5}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -1300,12 +1485,12 @@ exports[`login page logging in under different conditions should display deactiv
                     onStartShouldSetResponder={[Function]}
                     onTintColor="#5c8a5199"
                     style={
-                      Array [
-                        Object {
+                      [
+                        {
                           "height": 31,
                           "width": 51,
                         },
-                        Array [
+                        [
                           null,
                           null,
                           null,
@@ -1322,7 +1507,7 @@ exports[`login page logging in under different conditions should display deactiv
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -1332,7 +1517,7 @@ exports[`login page logging in under different conditions should display deactiv
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -1348,6 +1533,23 @@ exports[`login page logging in under different conditions should display deactiv
                 }
               >
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -1359,7 +1561,7 @@ exports[`login page logging in under different conditions should display deactiv
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -1380,7 +1582,7 @@ exports[`login page logging in under different conditions should display deactiv
                     name="account-plus"
                     size={53.36}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                       }
                     }
@@ -1388,7 +1590,7 @@ exports[`login page logging in under different conditions should display deactiv
                   <Text
                     maxFontSizeMultiplier={1.5}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -1401,6 +1603,23 @@ exports[`login page logging in under different conditions should display deactiv
                   </Text>
                 </View>
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -1412,7 +1631,7 @@ exports[`login page logging in under different conditions should display deactiv
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -1433,7 +1652,7 @@ exports[`login page logging in under different conditions should display deactiv
                     name="lock-open"
                     size={53.36}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                       }
                     }
@@ -1441,7 +1660,7 @@ exports[`login page logging in under different conditions should display deactiv
                   <Text
                     maxFontSizeMultiplier={1.7}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -1460,7 +1679,7 @@ exports[`login page logging in under different conditions should display deactiv
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -1470,7 +1689,7 @@ exports[`login page logging in under different conditions should display deactiv
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -1486,6 +1705,23 @@ exports[`login page logging in under different conditions should display deactiv
                 }
               >
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -1497,7 +1733,7 @@ exports[`login page logging in under different conditions should display deactiv
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -1519,7 +1755,7 @@ exports[`login page logging in under different conditions should display deactiv
                     name="login"
                     size={53.36}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                       }
                     }
@@ -1527,15 +1763,15 @@ exports[`login page logging in under different conditions should display deactiv
                   <Text
                     maxFontSizeMultiplier={2}
                     style={
-                      Array [
-                        Object {
+                      [
+                        {
                           "color": "#104e01",
                           "fontSize": 27.53633962602873,
                           "fontWeight": "bold",
                           "paddingHorizontal": 7.5,
                           "textAlign": "center",
                         },
-                        Object {
+                        {
                           "marginLeft": 30,
                         },
                       ]
@@ -1556,9 +1792,8 @@ exports[`login page logging in under different conditions should display deactiv
 
 exports[`login page logging in under different conditions should display invalid credentials message from a bad login 1`] = `
 <RCTSafeAreaView
-  emulateUnlessSupported={true}
   style={
-    Object {
+    {
       "borderColor": "blue",
       "borderWidth": 0,
       "flex": 1,
@@ -1568,14 +1803,14 @@ exports[`login page logging in under different conditions should display invalid
   <View
     onLayout={[Function]}
     style={
-      Array [
-        Object {
+      [
+        {
           "alignItems": "center",
           "borderColor": "red",
           "borderWidth": 0,
           "flex": 1,
         },
-        Object {
+        {
           "paddingBottom": 0,
         },
       ]
@@ -1585,7 +1820,7 @@ exports[`login page logging in under different conditions should display invalid
       resizeMode="cover"
       source={1}
       style={
-        Object {
+        {
           "borderColor": "black",
           "borderWidth": 0,
           "height": 1334,
@@ -1599,7 +1834,7 @@ exports[`login page logging in under different conditions should display invalid
       nestedScrollEnabled={true}
       scrollEnabled={true}
       style={
-        Object {
+        {
           "borderColor": "yellow",
           "borderWidth": 0,
           "flex": 1,
@@ -1608,6 +1843,23 @@ exports[`login page logging in under different conditions should display invalid
     >
       <View>
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -1619,7 +1871,7 @@ exports[`login page logging in under different conditions should display invalid
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "flex": 1,
               "opacity": 1,
             }
@@ -1627,7 +1879,7 @@ exports[`login page logging in under different conditions should display invalid
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "justifyContent": "center",
                 "top": 133.4,
@@ -1638,7 +1890,7 @@ exports[`login page logging in under different conditions should display invalid
               resizeMode="contain"
               source={1}
               style={
-                Object {
+                {
                   "height": 266.8,
                   "width": "75%",
                 }
@@ -1647,8 +1899,8 @@ exports[`login page logging in under different conditions should display invalid
           </View>
           <View
             style={
-              Array [
-                Object {
+              [
+                {
                   "alignItems": "center",
                   "borderWidth": 0,
                   "justifyContent": "center",
@@ -1656,7 +1908,7 @@ exports[`login page logging in under different conditions should display invalid
                   "marginRight": 75,
                   "width": 600,
                 },
-                Object {
+                {
                   "marginTop": 200.1,
                 },
               ]
@@ -1664,7 +1916,7 @@ exports[`login page logging in under different conditions should display invalid
           >
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -1674,7 +1926,7 @@ exports[`login page logging in under different conditions should display invalid
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -1691,7 +1943,7 @@ exports[`login page logging in under different conditions should display invalid
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "white",
                       "borderColor": "#104e01",
@@ -1707,7 +1959,7 @@ exports[`login page logging in under different conditions should display invalid
                   <Text
                     maxFontSizeMultiplier={1.5}
                     style={
-                      Object {
+                      {
                         "borderRadius": 11.25,
                         "color": "#505050",
                         "fontSize": 33.35,
@@ -1731,7 +1983,7 @@ exports[`login page logging in under different conditions should display invalid
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -1741,7 +1993,7 @@ exports[`login page logging in under different conditions should display invalid
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -1758,7 +2010,7 @@ exports[`login page logging in under different conditions should display invalid
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "white",
                       "borderColor": "#104e01",
@@ -1779,7 +2031,7 @@ exports[`login page logging in under different conditions should display invalid
                     onChangeText={[Function]}
                     placeholder="e-mail"
                     style={
-                      Object {
+                      {
                         "fontSize": 30.595932917809698,
                         "paddingLeft": 15,
                         "paddingVertical": 6.67,
@@ -1797,7 +2049,7 @@ exports[`login page logging in under different conditions should display invalid
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -1807,7 +2059,7 @@ exports[`login page logging in under different conditions should display invalid
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -1824,7 +2076,7 @@ exports[`login page logging in under different conditions should display invalid
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "white",
                       "borderColor": "#104e01",
@@ -1845,7 +2097,7 @@ exports[`login page logging in under different conditions should display invalid
                     placeholder="password"
                     secureTextEntry={true}
                     style={
-                      Object {
+                      {
                         "fontSize": 30.595932917809698,
                         "paddingLeft": 15,
                         "paddingVertical": 6.67,
@@ -1859,6 +2111,23 @@ exports[`login page logging in under different conditions should display invalid
                     value="myTestPassword"
                   />
                   <View
+                    accessibilityState={
+                      {
+                        "busy": undefined,
+                        "checked": undefined,
+                        "disabled": undefined,
+                        "expanded": undefined,
+                        "selected": undefined,
+                      }
+                    }
+                    accessibilityValue={
+                      {
+                        "max": undefined,
+                        "min": undefined,
+                        "now": undefined,
+                        "text": undefined,
+                      }
+                    }
                     accessible={true}
                     collapsable={false}
                     focusable={true}
@@ -1870,7 +2139,7 @@ exports[`login page logging in under different conditions should display invalid
                     onResponderTerminationRequest={[Function]}
                     onStartShouldSetResponder={[Function]}
                     style={
-                      Object {
+                      {
                         "alignItems": "center",
                         "height": "100%",
                         "justifyContent": "center",
@@ -1887,7 +2156,7 @@ exports[`login page logging in under different conditions should display invalid
                       name="eye"
                       size={53.36}
                       style={
-                        Object {
+                        {
                           "color": "#50505055",
                         }
                       }
@@ -1897,7 +2166,7 @@ exports[`login page logging in under different conditions should display invalid
               </View>
               <View
                 style={
-                  Object {
+                  {
                     "backgroundColor": "white",
                     "borderColor": "#104e01",
                     "borderRadius": 11.25,
@@ -1911,7 +2180,7 @@ exports[`login page logging in under different conditions should display invalid
                 <Text
                   maxFontSizeMultiplier={2}
                   style={
-                    Object {
+                    {
                       "color": "#9e0000f8",
                       "fontSize": 30.595932917809698,
                       "paddingBottom": 3.335,
@@ -1928,7 +2197,7 @@ exports[`login page logging in under different conditions should display invalid
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -1938,7 +2207,7 @@ exports[`login page logging in under different conditions should display invalid
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -1954,6 +2223,23 @@ exports[`login page logging in under different conditions should display invalid
                 }
               >
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -1965,7 +2251,7 @@ exports[`login page logging in under different conditions should display invalid
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -1985,7 +2271,7 @@ exports[`login page logging in under different conditions should display invalid
                   <Text
                     maxFontSizeMultiplier={1.25}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -2006,12 +2292,12 @@ exports[`login page logging in under different conditions should display invalid
                     onStartShouldSetResponder={[Function]}
                     onTintColor="#5c8a5199"
                     style={
-                      Array [
-                        Object {
+                      [
+                        {
                           "height": 31,
                           "width": 51,
                         },
-                        Array [
+                        [
                           null,
                           null,
                           null,
@@ -2025,6 +2311,23 @@ exports[`login page logging in under different conditions should display invalid
                   />
                 </View>
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -2036,7 +2339,7 @@ exports[`login page logging in under different conditions should display invalid
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -2056,7 +2359,7 @@ exports[`login page logging in under different conditions should display invalid
                   <Text
                     maxFontSizeMultiplier={1.5}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -2077,12 +2380,12 @@ exports[`login page logging in under different conditions should display invalid
                     onStartShouldSetResponder={[Function]}
                     onTintColor="#5c8a5199"
                     style={
-                      Array [
-                        Object {
+                      [
+                        {
                           "height": 31,
                           "width": 51,
                         },
-                        Array [
+                        [
                           null,
                           null,
                           null,
@@ -2099,7 +2402,7 @@ exports[`login page logging in under different conditions should display invalid
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -2109,7 +2412,7 @@ exports[`login page logging in under different conditions should display invalid
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -2125,6 +2428,23 @@ exports[`login page logging in under different conditions should display invalid
                 }
               >
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -2136,7 +2456,7 @@ exports[`login page logging in under different conditions should display invalid
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -2157,7 +2477,7 @@ exports[`login page logging in under different conditions should display invalid
                     name="account-plus"
                     size={53.36}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                       }
                     }
@@ -2165,7 +2485,7 @@ exports[`login page logging in under different conditions should display invalid
                   <Text
                     maxFontSizeMultiplier={1.5}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -2178,6 +2498,23 @@ exports[`login page logging in under different conditions should display invalid
                   </Text>
                 </View>
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -2189,7 +2526,7 @@ exports[`login page logging in under different conditions should display invalid
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -2210,7 +2547,7 @@ exports[`login page logging in under different conditions should display invalid
                     name="lock-open"
                     size={53.36}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                       }
                     }
@@ -2218,7 +2555,7 @@ exports[`login page logging in under different conditions should display invalid
                   <Text
                     maxFontSizeMultiplier={1.7}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -2237,7 +2574,7 @@ exports[`login page logging in under different conditions should display invalid
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -2247,7 +2584,7 @@ exports[`login page logging in under different conditions should display invalid
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -2263,6 +2600,23 @@ exports[`login page logging in under different conditions should display invalid
                 }
               >
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -2274,7 +2628,7 @@ exports[`login page logging in under different conditions should display invalid
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -2296,7 +2650,7 @@ exports[`login page logging in under different conditions should display invalid
                     name="login"
                     size={53.36}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                       }
                     }
@@ -2304,15 +2658,15 @@ exports[`login page logging in under different conditions should display invalid
                   <Text
                     maxFontSizeMultiplier={2}
                     style={
-                      Array [
-                        Object {
+                      [
+                        {
                           "color": "#104e01",
                           "fontSize": 27.53633962602873,
                           "fontWeight": "bold",
                           "paddingHorizontal": 7.5,
                           "textAlign": "center",
                         },
-                        Object {
+                        {
                           "marginLeft": 30,
                         },
                       ]
@@ -2333,9 +2687,8 @@ exports[`login page logging in under different conditions should display invalid
 
 exports[`login page logging in under different conditions should display password expired message if temp password has expired 1`] = `
 <RCTSafeAreaView
-  emulateUnlessSupported={true}
   style={
-    Object {
+    {
       "borderColor": "blue",
       "borderWidth": 0,
       "flex": 1,
@@ -2345,14 +2698,14 @@ exports[`login page logging in under different conditions should display passwor
   <View
     onLayout={[Function]}
     style={
-      Array [
-        Object {
+      [
+        {
           "alignItems": "center",
           "borderColor": "red",
           "borderWidth": 0,
           "flex": 1,
         },
-        Object {
+        {
           "paddingBottom": 0,
         },
       ]
@@ -2362,7 +2715,7 @@ exports[`login page logging in under different conditions should display passwor
       resizeMode="cover"
       source={1}
       style={
-        Object {
+        {
           "borderColor": "black",
           "borderWidth": 0,
           "height": 1334,
@@ -2376,7 +2729,7 @@ exports[`login page logging in under different conditions should display passwor
       nestedScrollEnabled={true}
       scrollEnabled={true}
       style={
-        Object {
+        {
           "borderColor": "yellow",
           "borderWidth": 0,
           "flex": 1,
@@ -2385,6 +2738,23 @@ exports[`login page logging in under different conditions should display passwor
     >
       <View>
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -2396,7 +2766,7 @@ exports[`login page logging in under different conditions should display passwor
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "flex": 1,
               "opacity": 1,
             }
@@ -2404,7 +2774,7 @@ exports[`login page logging in under different conditions should display passwor
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "justifyContent": "center",
                 "top": 133.4,
@@ -2415,7 +2785,7 @@ exports[`login page logging in under different conditions should display passwor
               resizeMode="contain"
               source={1}
               style={
-                Object {
+                {
                   "height": 266.8,
                   "width": "75%",
                 }
@@ -2424,8 +2794,8 @@ exports[`login page logging in under different conditions should display passwor
           </View>
           <View
             style={
-              Array [
-                Object {
+              [
+                {
                   "alignItems": "center",
                   "borderWidth": 0,
                   "justifyContent": "center",
@@ -2433,7 +2803,7 @@ exports[`login page logging in under different conditions should display passwor
                   "marginRight": 75,
                   "width": 600,
                 },
-                Object {
+                {
                   "marginTop": 200.1,
                 },
               ]
@@ -2441,7 +2811,7 @@ exports[`login page logging in under different conditions should display passwor
           >
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -2451,7 +2821,7 @@ exports[`login page logging in under different conditions should display passwor
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -2468,7 +2838,7 @@ exports[`login page logging in under different conditions should display passwor
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "white",
                       "borderColor": "#104e01",
@@ -2484,7 +2854,7 @@ exports[`login page logging in under different conditions should display passwor
                   <Text
                     maxFontSizeMultiplier={1.5}
                     style={
-                      Object {
+                      {
                         "borderRadius": 11.25,
                         "color": "#505050",
                         "fontSize": 33.35,
@@ -2508,7 +2878,7 @@ exports[`login page logging in under different conditions should display passwor
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -2518,7 +2888,7 @@ exports[`login page logging in under different conditions should display passwor
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -2535,7 +2905,7 @@ exports[`login page logging in under different conditions should display passwor
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "white",
                       "borderColor": "#104e01",
@@ -2556,7 +2926,7 @@ exports[`login page logging in under different conditions should display passwor
                     onChangeText={[Function]}
                     placeholder="e-mail"
                     style={
-                      Object {
+                      {
                         "fontSize": 30.595932917809698,
                         "paddingLeft": 15,
                         "paddingVertical": 6.67,
@@ -2574,7 +2944,7 @@ exports[`login page logging in under different conditions should display passwor
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -2584,7 +2954,7 @@ exports[`login page logging in under different conditions should display passwor
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -2601,7 +2971,7 @@ exports[`login page logging in under different conditions should display passwor
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "white",
                       "borderColor": "#104e01",
@@ -2622,7 +2992,7 @@ exports[`login page logging in under different conditions should display passwor
                     placeholder="password"
                     secureTextEntry={true}
                     style={
-                      Object {
+                      {
                         "fontSize": 30.595932917809698,
                         "paddingLeft": 15,
                         "paddingVertical": 6.67,
@@ -2636,6 +3006,23 @@ exports[`login page logging in under different conditions should display passwor
                     value="myTestPassword"
                   />
                   <View
+                    accessibilityState={
+                      {
+                        "busy": undefined,
+                        "checked": undefined,
+                        "disabled": undefined,
+                        "expanded": undefined,
+                        "selected": undefined,
+                      }
+                    }
+                    accessibilityValue={
+                      {
+                        "max": undefined,
+                        "min": undefined,
+                        "now": undefined,
+                        "text": undefined,
+                      }
+                    }
                     accessible={true}
                     collapsable={false}
                     focusable={true}
@@ -2647,7 +3034,7 @@ exports[`login page logging in under different conditions should display passwor
                     onResponderTerminationRequest={[Function]}
                     onStartShouldSetResponder={[Function]}
                     style={
-                      Object {
+                      {
                         "alignItems": "center",
                         "height": "100%",
                         "justifyContent": "center",
@@ -2664,7 +3051,7 @@ exports[`login page logging in under different conditions should display passwor
                       name="eye"
                       size={53.36}
                       style={
-                        Object {
+                        {
                           "color": "#50505055",
                         }
                       }
@@ -2674,7 +3061,7 @@ exports[`login page logging in under different conditions should display passwor
               </View>
               <View
                 style={
-                  Object {
+                  {
                     "backgroundColor": "white",
                     "borderColor": "#104e01",
                     "borderRadius": 11.25,
@@ -2688,7 +3075,7 @@ exports[`login page logging in under different conditions should display passwor
                 <Text
                   maxFontSizeMultiplier={2}
                   style={
-                    Object {
+                    {
                       "color": "#9e0000f8",
                       "fontSize": 30.595932917809698,
                       "paddingBottom": 3.335,
@@ -2705,7 +3092,7 @@ exports[`login page logging in under different conditions should display passwor
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -2715,7 +3102,7 @@ exports[`login page logging in under different conditions should display passwor
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -2731,6 +3118,23 @@ exports[`login page logging in under different conditions should display passwor
                 }
               >
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -2742,7 +3146,7 @@ exports[`login page logging in under different conditions should display passwor
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -2762,7 +3166,7 @@ exports[`login page logging in under different conditions should display passwor
                   <Text
                     maxFontSizeMultiplier={1.25}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -2783,12 +3187,12 @@ exports[`login page logging in under different conditions should display passwor
                     onStartShouldSetResponder={[Function]}
                     onTintColor="#5c8a5199"
                     style={
-                      Array [
-                        Object {
+                      [
+                        {
                           "height": 31,
                           "width": 51,
                         },
-                        Array [
+                        [
                           null,
                           null,
                           null,
@@ -2802,6 +3206,23 @@ exports[`login page logging in under different conditions should display passwor
                   />
                 </View>
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -2813,7 +3234,7 @@ exports[`login page logging in under different conditions should display passwor
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -2833,7 +3254,7 @@ exports[`login page logging in under different conditions should display passwor
                   <Text
                     maxFontSizeMultiplier={1.5}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -2854,12 +3275,12 @@ exports[`login page logging in under different conditions should display passwor
                     onStartShouldSetResponder={[Function]}
                     onTintColor="#5c8a5199"
                     style={
-                      Array [
-                        Object {
+                      [
+                        {
                           "height": 31,
                           "width": 51,
                         },
-                        Array [
+                        [
                           null,
                           null,
                           null,
@@ -2876,7 +3297,7 @@ exports[`login page logging in under different conditions should display passwor
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -2886,7 +3307,7 @@ exports[`login page logging in under different conditions should display passwor
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -2902,6 +3323,23 @@ exports[`login page logging in under different conditions should display passwor
                 }
               >
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -2913,7 +3351,7 @@ exports[`login page logging in under different conditions should display passwor
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -2934,7 +3372,7 @@ exports[`login page logging in under different conditions should display passwor
                     name="account-plus"
                     size={53.36}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                       }
                     }
@@ -2942,7 +3380,7 @@ exports[`login page logging in under different conditions should display passwor
                   <Text
                     maxFontSizeMultiplier={1.5}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -2955,6 +3393,23 @@ exports[`login page logging in under different conditions should display passwor
                   </Text>
                 </View>
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -2966,7 +3421,7 @@ exports[`login page logging in under different conditions should display passwor
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -2987,7 +3442,7 @@ exports[`login page logging in under different conditions should display passwor
                     name="lock-open"
                     size={53.36}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                       }
                     }
@@ -2995,7 +3450,7 @@ exports[`login page logging in under different conditions should display passwor
                   <Text
                     maxFontSizeMultiplier={1.7}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -3014,7 +3469,7 @@ exports[`login page logging in under different conditions should display passwor
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -3024,7 +3479,7 @@ exports[`login page logging in under different conditions should display passwor
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -3040,6 +3495,23 @@ exports[`login page logging in under different conditions should display passwor
                 }
               >
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -3051,7 +3523,7 @@ exports[`login page logging in under different conditions should display passwor
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -3073,7 +3545,7 @@ exports[`login page logging in under different conditions should display passwor
                     name="login"
                     size={53.36}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                       }
                     }
@@ -3081,15 +3553,15 @@ exports[`login page logging in under different conditions should display passwor
                   <Text
                     maxFontSizeMultiplier={2}
                     style={
-                      Array [
-                        Object {
+                      [
+                        {
                           "color": "#104e01",
                           "fontSize": 27.53633962602873,
                           "fontWeight": "bold",
                           "paddingHorizontal": 7.5,
                           "textAlign": "center",
                         },
-                        Object {
+                        {
                           "marginLeft": 30,
                         },
                       ]
@@ -3110,9 +3582,8 @@ exports[`login page logging in under different conditions should display passwor
 
 exports[`login page logging in under different conditions should display reactivated message if account was reactivated 1`] = `
 <RCTSafeAreaView
-  emulateUnlessSupported={true}
   style={
-    Object {
+    {
       "borderColor": "blue",
       "borderWidth": 0,
       "flex": 1,
@@ -3122,14 +3593,14 @@ exports[`login page logging in under different conditions should display reactiv
   <View
     onLayout={[Function]}
     style={
-      Array [
-        Object {
+      [
+        {
           "alignItems": "center",
           "borderColor": "red",
           "borderWidth": 0,
           "flex": 1,
         },
-        Object {
+        {
           "paddingBottom": 0,
         },
       ]
@@ -3139,7 +3610,7 @@ exports[`login page logging in under different conditions should display reactiv
       resizeMode="cover"
       source={1}
       style={
-        Object {
+        {
           "borderColor": "black",
           "borderWidth": 0,
           "height": 1334,
@@ -3153,7 +3624,7 @@ exports[`login page logging in under different conditions should display reactiv
       nestedScrollEnabled={true}
       scrollEnabled={true}
       style={
-        Object {
+        {
           "borderColor": "yellow",
           "borderWidth": 0,
           "flex": 1,
@@ -3162,6 +3633,23 @@ exports[`login page logging in under different conditions should display reactiv
     >
       <View>
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -3173,7 +3661,7 @@ exports[`login page logging in under different conditions should display reactiv
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "flex": 1,
               "opacity": 1,
             }
@@ -3181,7 +3669,7 @@ exports[`login page logging in under different conditions should display reactiv
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "justifyContent": "center",
                 "top": 133.4,
@@ -3192,7 +3680,7 @@ exports[`login page logging in under different conditions should display reactiv
               resizeMode="contain"
               source={1}
               style={
-                Object {
+                {
                   "height": 266.8,
                   "width": "75%",
                 }
@@ -3201,8 +3689,8 @@ exports[`login page logging in under different conditions should display reactiv
           </View>
           <View
             style={
-              Array [
-                Object {
+              [
+                {
                   "alignItems": "center",
                   "borderWidth": 0,
                   "justifyContent": "center",
@@ -3210,7 +3698,7 @@ exports[`login page logging in under different conditions should display reactiv
                   "marginRight": 75,
                   "width": 600,
                 },
-                Object {
+                {
                   "marginTop": 200.1,
                 },
               ]
@@ -3218,7 +3706,7 @@ exports[`login page logging in under different conditions should display reactiv
           >
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -3228,7 +3716,7 @@ exports[`login page logging in under different conditions should display reactiv
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -3245,7 +3733,7 @@ exports[`login page logging in under different conditions should display reactiv
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "white",
                       "borderColor": "#104e01",
@@ -3261,7 +3749,7 @@ exports[`login page logging in under different conditions should display reactiv
                   <Text
                     maxFontSizeMultiplier={1.5}
                     style={
-                      Object {
+                      {
                         "borderRadius": 11.25,
                         "color": "#505050",
                         "fontSize": 33.35,
@@ -3285,7 +3773,7 @@ exports[`login page logging in under different conditions should display reactiv
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -3295,7 +3783,7 @@ exports[`login page logging in under different conditions should display reactiv
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -3312,7 +3800,7 @@ exports[`login page logging in under different conditions should display reactiv
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "white",
                       "borderColor": "#104e01",
@@ -3333,7 +3821,7 @@ exports[`login page logging in under different conditions should display reactiv
                     onChangeText={[Function]}
                     placeholder="e-mail"
                     style={
-                      Object {
+                      {
                         "fontSize": 30.595932917809698,
                         "paddingLeft": 15,
                         "paddingVertical": 6.67,
@@ -3351,7 +3839,7 @@ exports[`login page logging in under different conditions should display reactiv
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -3361,7 +3849,7 @@ exports[`login page logging in under different conditions should display reactiv
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -3378,7 +3866,7 @@ exports[`login page logging in under different conditions should display reactiv
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "white",
                       "borderColor": "#104e01",
@@ -3399,7 +3887,7 @@ exports[`login page logging in under different conditions should display reactiv
                     placeholder="password"
                     secureTextEntry={true}
                     style={
-                      Object {
+                      {
                         "fontSize": 30.595932917809698,
                         "paddingLeft": 15,
                         "paddingVertical": 6.67,
@@ -3413,6 +3901,23 @@ exports[`login page logging in under different conditions should display reactiv
                     value=""
                   />
                   <View
+                    accessibilityState={
+                      {
+                        "busy": undefined,
+                        "checked": undefined,
+                        "disabled": undefined,
+                        "expanded": undefined,
+                        "selected": undefined,
+                      }
+                    }
+                    accessibilityValue={
+                      {
+                        "max": undefined,
+                        "min": undefined,
+                        "now": undefined,
+                        "text": undefined,
+                      }
+                    }
                     accessible={true}
                     collapsable={false}
                     focusable={true}
@@ -3424,7 +3929,7 @@ exports[`login page logging in under different conditions should display reactiv
                     onResponderTerminationRequest={[Function]}
                     onStartShouldSetResponder={[Function]}
                     style={
-                      Object {
+                      {
                         "alignItems": "center",
                         "height": "100%",
                         "justifyContent": "center",
@@ -3441,7 +3946,7 @@ exports[`login page logging in under different conditions should display reactiv
                       name="eye"
                       size={53.36}
                       style={
-                        Object {
+                        {
                           "color": "#50505055",
                         }
                       }
@@ -3451,7 +3956,7 @@ exports[`login page logging in under different conditions should display reactiv
               </View>
               <View
                 style={
-                  Object {
+                  {
                     "backgroundColor": "white",
                     "borderColor": "#104e01",
                     "borderRadius": 11.25,
@@ -3465,7 +3970,7 @@ exports[`login page logging in under different conditions should display reactiv
                 <Text
                   maxFontSizeMultiplier={2}
                   style={
-                    Object {
+                    {
                       "color": "#9e0000f8",
                       "fontSize": 30.595932917809698,
                       "paddingBottom": 3.335,
@@ -3482,7 +3987,7 @@ exports[`login page logging in under different conditions should display reactiv
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -3492,7 +3997,7 @@ exports[`login page logging in under different conditions should display reactiv
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -3508,6 +4013,23 @@ exports[`login page logging in under different conditions should display reactiv
                 }
               >
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -3519,7 +4041,7 @@ exports[`login page logging in under different conditions should display reactiv
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -3539,7 +4061,7 @@ exports[`login page logging in under different conditions should display reactiv
                   <Text
                     maxFontSizeMultiplier={1.25}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -3560,12 +4082,12 @@ exports[`login page logging in under different conditions should display reactiv
                     onStartShouldSetResponder={[Function]}
                     onTintColor="#5c8a5199"
                     style={
-                      Array [
-                        Object {
+                      [
+                        {
                           "height": 31,
                           "width": 51,
                         },
-                        Array [
+                        [
                           null,
                           null,
                           null,
@@ -3579,6 +4101,23 @@ exports[`login page logging in under different conditions should display reactiv
                   />
                 </View>
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -3590,7 +4129,7 @@ exports[`login page logging in under different conditions should display reactiv
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -3610,7 +4149,7 @@ exports[`login page logging in under different conditions should display reactiv
                   <Text
                     maxFontSizeMultiplier={1.5}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -3631,12 +4170,12 @@ exports[`login page logging in under different conditions should display reactiv
                     onStartShouldSetResponder={[Function]}
                     onTintColor="#5c8a5199"
                     style={
-                      Array [
-                        Object {
+                      [
+                        {
                           "height": 31,
                           "width": 51,
                         },
-                        Array [
+                        [
                           null,
                           null,
                           null,
@@ -3653,7 +4192,7 @@ exports[`login page logging in under different conditions should display reactiv
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -3663,7 +4202,7 @@ exports[`login page logging in under different conditions should display reactiv
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -3679,6 +4218,23 @@ exports[`login page logging in under different conditions should display reactiv
                 }
               >
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -3690,7 +4246,7 @@ exports[`login page logging in under different conditions should display reactiv
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -3711,7 +4267,7 @@ exports[`login page logging in under different conditions should display reactiv
                     name="account-plus"
                     size={53.36}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                       }
                     }
@@ -3719,7 +4275,7 @@ exports[`login page logging in under different conditions should display reactiv
                   <Text
                     maxFontSizeMultiplier={1.5}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -3732,6 +4288,23 @@ exports[`login page logging in under different conditions should display reactiv
                   </Text>
                 </View>
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -3743,7 +4316,7 @@ exports[`login page logging in under different conditions should display reactiv
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -3764,7 +4337,7 @@ exports[`login page logging in under different conditions should display reactiv
                     name="lock-open"
                     size={53.36}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                       }
                     }
@@ -3772,7 +4345,7 @@ exports[`login page logging in under different conditions should display reactiv
                   <Text
                     maxFontSizeMultiplier={1.7}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -3791,7 +4364,7 @@ exports[`login page logging in under different conditions should display reactiv
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -3801,7 +4374,7 @@ exports[`login page logging in under different conditions should display reactiv
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -3817,6 +4390,23 @@ exports[`login page logging in under different conditions should display reactiv
                 }
               >
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -3828,7 +4418,7 @@ exports[`login page logging in under different conditions should display reactiv
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -3850,7 +4440,7 @@ exports[`login page logging in under different conditions should display reactiv
                     name="login"
                     size={53.36}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                       }
                     }
@@ -3858,15 +4448,15 @@ exports[`login page logging in under different conditions should display reactiv
                   <Text
                     maxFontSizeMultiplier={2}
                     style={
-                      Array [
-                        Object {
+                      [
+                        {
                           "color": "#104e01",
                           "fontSize": 27.53633962602873,
                           "fontWeight": "bold",
                           "paddingHorizontal": 7.5,
                           "textAlign": "center",
                         },
-                        Object {
+                        {
                           "marginLeft": 30,
                         },
                       ]
@@ -3887,9 +4477,8 @@ exports[`login page logging in under different conditions should display reactiv
 
 exports[`login page logging in under different conditions should instruct how to reset password if email is empty 1`] = `
 <RCTSafeAreaView
-  emulateUnlessSupported={true}
   style={
-    Object {
+    {
       "borderColor": "blue",
       "borderWidth": 0,
       "flex": 1,
@@ -3899,14 +4488,14 @@ exports[`login page logging in under different conditions should instruct how to
   <View
     onLayout={[Function]}
     style={
-      Array [
-        Object {
+      [
+        {
           "alignItems": "center",
           "borderColor": "red",
           "borderWidth": 0,
           "flex": 1,
         },
-        Object {
+        {
           "paddingBottom": 0,
         },
       ]
@@ -3916,7 +4505,7 @@ exports[`login page logging in under different conditions should instruct how to
       resizeMode="cover"
       source={1}
       style={
-        Object {
+        {
           "borderColor": "black",
           "borderWidth": 0,
           "height": 1334,
@@ -3930,7 +4519,7 @@ exports[`login page logging in under different conditions should instruct how to
       nestedScrollEnabled={true}
       scrollEnabled={true}
       style={
-        Object {
+        {
           "borderColor": "yellow",
           "borderWidth": 0,
           "flex": 1,
@@ -3939,6 +4528,23 @@ exports[`login page logging in under different conditions should instruct how to
     >
       <View>
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -3950,7 +4556,7 @@ exports[`login page logging in under different conditions should instruct how to
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "flex": 1,
               "opacity": 1,
             }
@@ -3958,7 +4564,7 @@ exports[`login page logging in under different conditions should instruct how to
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "justifyContent": "center",
                 "top": 133.4,
@@ -3969,7 +4575,7 @@ exports[`login page logging in under different conditions should instruct how to
               resizeMode="contain"
               source={1}
               style={
-                Object {
+                {
                   "height": 266.8,
                   "width": "75%",
                 }
@@ -3978,8 +4584,8 @@ exports[`login page logging in under different conditions should instruct how to
           </View>
           <View
             style={
-              Array [
-                Object {
+              [
+                {
                   "alignItems": "center",
                   "borderWidth": 0,
                   "justifyContent": "center",
@@ -3987,7 +4593,7 @@ exports[`login page logging in under different conditions should instruct how to
                   "marginRight": 75,
                   "width": 600,
                 },
-                Object {
+                {
                   "marginTop": 200.1,
                 },
               ]
@@ -3995,7 +4601,7 @@ exports[`login page logging in under different conditions should instruct how to
           >
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -4005,7 +4611,7 @@ exports[`login page logging in under different conditions should instruct how to
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -4022,7 +4628,7 @@ exports[`login page logging in under different conditions should instruct how to
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "white",
                       "borderColor": "#104e01",
@@ -4038,7 +4644,7 @@ exports[`login page logging in under different conditions should instruct how to
                   <Text
                     maxFontSizeMultiplier={1.5}
                     style={
-                      Object {
+                      {
                         "borderRadius": 11.25,
                         "color": "#505050",
                         "fontSize": 33.35,
@@ -4062,7 +4668,7 @@ exports[`login page logging in under different conditions should instruct how to
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -4072,7 +4678,7 @@ exports[`login page logging in under different conditions should instruct how to
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -4089,7 +4695,7 @@ exports[`login page logging in under different conditions should instruct how to
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "white",
                       "borderColor": "#104e01",
@@ -4110,7 +4716,7 @@ exports[`login page logging in under different conditions should instruct how to
                     onChangeText={[Function]}
                     placeholder="e-mail"
                     style={
-                      Object {
+                      {
                         "fontSize": 30.595932917809698,
                         "paddingLeft": 15,
                         "paddingVertical": 6.67,
@@ -4128,7 +4734,7 @@ exports[`login page logging in under different conditions should instruct how to
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -4138,7 +4744,7 @@ exports[`login page logging in under different conditions should instruct how to
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -4155,7 +4761,7 @@ exports[`login page logging in under different conditions should instruct how to
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "white",
                       "borderColor": "#104e01",
@@ -4176,7 +4782,7 @@ exports[`login page logging in under different conditions should instruct how to
                     placeholder="password"
                     secureTextEntry={true}
                     style={
-                      Object {
+                      {
                         "fontSize": 30.595932917809698,
                         "paddingLeft": 15,
                         "paddingVertical": 6.67,
@@ -4190,6 +4796,23 @@ exports[`login page logging in under different conditions should instruct how to
                     value=""
                   />
                   <View
+                    accessibilityState={
+                      {
+                        "busy": undefined,
+                        "checked": undefined,
+                        "disabled": undefined,
+                        "expanded": undefined,
+                        "selected": undefined,
+                      }
+                    }
+                    accessibilityValue={
+                      {
+                        "max": undefined,
+                        "min": undefined,
+                        "now": undefined,
+                        "text": undefined,
+                      }
+                    }
                     accessible={true}
                     collapsable={false}
                     focusable={true}
@@ -4201,7 +4824,7 @@ exports[`login page logging in under different conditions should instruct how to
                     onResponderTerminationRequest={[Function]}
                     onStartShouldSetResponder={[Function]}
                     style={
-                      Object {
+                      {
                         "alignItems": "center",
                         "height": "100%",
                         "justifyContent": "center",
@@ -4218,7 +4841,7 @@ exports[`login page logging in under different conditions should instruct how to
                       name="eye"
                       size={53.36}
                       style={
-                        Object {
+                        {
                           "color": "#50505055",
                         }
                       }
@@ -4228,7 +4851,7 @@ exports[`login page logging in under different conditions should instruct how to
               </View>
               <View
                 style={
-                  Object {
+                  {
                     "backgroundColor": "white",
                     "borderColor": "#104e01",
                     "borderRadius": 11.25,
@@ -4242,7 +4865,7 @@ exports[`login page logging in under different conditions should instruct how to
                 <Text
                   maxFontSizeMultiplier={2}
                   style={
-                    Object {
+                    {
                       "color": "#9e0000f8",
                       "fontSize": 30.595932917809698,
                       "paddingBottom": 3.335,
@@ -4259,7 +4882,7 @@ exports[`login page logging in under different conditions should instruct how to
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -4269,7 +4892,7 @@ exports[`login page logging in under different conditions should instruct how to
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -4285,6 +4908,23 @@ exports[`login page logging in under different conditions should instruct how to
                 }
               >
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -4296,7 +4936,7 @@ exports[`login page logging in under different conditions should instruct how to
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -4316,7 +4956,7 @@ exports[`login page logging in under different conditions should instruct how to
                   <Text
                     maxFontSizeMultiplier={1.25}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -4337,12 +4977,12 @@ exports[`login page logging in under different conditions should instruct how to
                     onStartShouldSetResponder={[Function]}
                     onTintColor="#5c8a5199"
                     style={
-                      Array [
-                        Object {
+                      [
+                        {
                           "height": 31,
                           "width": 51,
                         },
-                        Array [
+                        [
                           null,
                           null,
                           null,
@@ -4356,6 +4996,23 @@ exports[`login page logging in under different conditions should instruct how to
                   />
                 </View>
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -4367,7 +5024,7 @@ exports[`login page logging in under different conditions should instruct how to
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -4387,7 +5044,7 @@ exports[`login page logging in under different conditions should instruct how to
                   <Text
                     maxFontSizeMultiplier={1.5}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -4408,12 +5065,12 @@ exports[`login page logging in under different conditions should instruct how to
                     onStartShouldSetResponder={[Function]}
                     onTintColor="#5c8a5199"
                     style={
-                      Array [
-                        Object {
+                      [
+                        {
                           "height": 31,
                           "width": 51,
                         },
-                        Array [
+                        [
                           null,
                           null,
                           null,
@@ -4430,7 +5087,7 @@ exports[`login page logging in under different conditions should instruct how to
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -4440,7 +5097,7 @@ exports[`login page logging in under different conditions should instruct how to
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -4456,6 +5113,23 @@ exports[`login page logging in under different conditions should instruct how to
                 }
               >
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -4467,7 +5141,7 @@ exports[`login page logging in under different conditions should instruct how to
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -4488,7 +5162,7 @@ exports[`login page logging in under different conditions should instruct how to
                     name="account-plus"
                     size={53.36}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                       }
                     }
@@ -4496,7 +5170,7 @@ exports[`login page logging in under different conditions should instruct how to
                   <Text
                     maxFontSizeMultiplier={1.5}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -4509,6 +5183,23 @@ exports[`login page logging in under different conditions should instruct how to
                   </Text>
                 </View>
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -4520,7 +5211,7 @@ exports[`login page logging in under different conditions should instruct how to
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -4541,7 +5232,7 @@ exports[`login page logging in under different conditions should instruct how to
                     name="lock-open"
                     size={53.36}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                       }
                     }
@@ -4549,7 +5240,7 @@ exports[`login page logging in under different conditions should instruct how to
                   <Text
                     maxFontSizeMultiplier={1.7}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -4568,7 +5259,7 @@ exports[`login page logging in under different conditions should instruct how to
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -4578,7 +5269,7 @@ exports[`login page logging in under different conditions should instruct how to
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -4594,6 +5285,23 @@ exports[`login page logging in under different conditions should instruct how to
                 }
               >
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -4605,7 +5313,7 @@ exports[`login page logging in under different conditions should instruct how to
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -4627,7 +5335,7 @@ exports[`login page logging in under different conditions should instruct how to
                     name="login"
                     size={53.36}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                       }
                     }
@@ -4635,15 +5343,15 @@ exports[`login page logging in under different conditions should instruct how to
                   <Text
                     maxFontSizeMultiplier={2}
                     style={
-                      Array [
-                        Object {
+                      [
+                        {
                           "color": "#104e01",
                           "fontSize": 27.53633962602873,
                           "fontWeight": "bold",
                           "paddingHorizontal": 7.5,
                           "textAlign": "center",
                         },
-                        Object {
+                        {
                           "marginLeft": 30,
                         },
                       ]
@@ -4664,9 +5372,8 @@ exports[`login page logging in under different conditions should instruct how to
 
 exports[`login page logging in under different conditions should password reset message after reset 1`] = `
 <RCTSafeAreaView
-  emulateUnlessSupported={true}
   style={
-    Object {
+    {
       "borderColor": "blue",
       "borderWidth": 0,
       "flex": 1,
@@ -4676,14 +5383,14 @@ exports[`login page logging in under different conditions should password reset 
   <View
     onLayout={[Function]}
     style={
-      Array [
-        Object {
+      [
+        {
           "alignItems": "center",
           "borderColor": "red",
           "borderWidth": 0,
           "flex": 1,
         },
-        Object {
+        {
           "paddingBottom": 0,
         },
       ]
@@ -4693,7 +5400,7 @@ exports[`login page logging in under different conditions should password reset 
       resizeMode="cover"
       source={1}
       style={
-        Object {
+        {
           "borderColor": "black",
           "borderWidth": 0,
           "height": 1334,
@@ -4707,7 +5414,7 @@ exports[`login page logging in under different conditions should password reset 
       nestedScrollEnabled={true}
       scrollEnabled={true}
       style={
-        Object {
+        {
           "borderColor": "yellow",
           "borderWidth": 0,
           "flex": 1,
@@ -4716,6 +5423,23 @@ exports[`login page logging in under different conditions should password reset 
     >
       <View>
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -4727,7 +5451,7 @@ exports[`login page logging in under different conditions should password reset 
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "flex": 1,
               "opacity": 1,
             }
@@ -4735,7 +5459,7 @@ exports[`login page logging in under different conditions should password reset 
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "justifyContent": "center",
                 "top": 133.4,
@@ -4746,7 +5470,7 @@ exports[`login page logging in under different conditions should password reset 
               resizeMode="contain"
               source={1}
               style={
-                Object {
+                {
                   "height": 266.8,
                   "width": "75%",
                 }
@@ -4755,8 +5479,8 @@ exports[`login page logging in under different conditions should password reset 
           </View>
           <View
             style={
-              Array [
-                Object {
+              [
+                {
                   "alignItems": "center",
                   "borderWidth": 0,
                   "justifyContent": "center",
@@ -4764,7 +5488,7 @@ exports[`login page logging in under different conditions should password reset 
                   "marginRight": 75,
                   "width": 600,
                 },
-                Object {
+                {
                   "marginTop": 200.1,
                 },
               ]
@@ -4772,7 +5496,7 @@ exports[`login page logging in under different conditions should password reset 
           >
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -4782,7 +5506,7 @@ exports[`login page logging in under different conditions should password reset 
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -4799,7 +5523,7 @@ exports[`login page logging in under different conditions should password reset 
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "white",
                       "borderColor": "#104e01",
@@ -4815,7 +5539,7 @@ exports[`login page logging in under different conditions should password reset 
                   <Text
                     maxFontSizeMultiplier={1.5}
                     style={
-                      Object {
+                      {
                         "borderRadius": 11.25,
                         "color": "#505050",
                         "fontSize": 33.35,
@@ -4839,7 +5563,7 @@ exports[`login page logging in under different conditions should password reset 
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -4849,7 +5573,7 @@ exports[`login page logging in under different conditions should password reset 
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -4866,7 +5590,7 @@ exports[`login page logging in under different conditions should password reset 
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "white",
                       "borderColor": "#104e01",
@@ -4887,7 +5611,7 @@ exports[`login page logging in under different conditions should password reset 
                     onChangeText={[Function]}
                     placeholder="e-mail"
                     style={
-                      Object {
+                      {
                         "fontSize": 30.595932917809698,
                         "paddingLeft": 15,
                         "paddingVertical": 6.67,
@@ -4905,7 +5629,7 @@ exports[`login page logging in under different conditions should password reset 
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -4915,7 +5639,7 @@ exports[`login page logging in under different conditions should password reset 
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -4932,7 +5656,7 @@ exports[`login page logging in under different conditions should password reset 
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "white",
                       "borderColor": "#104e01",
@@ -4953,7 +5677,7 @@ exports[`login page logging in under different conditions should password reset 
                     placeholder="password"
                     secureTextEntry={true}
                     style={
-                      Object {
+                      {
                         "fontSize": 30.595932917809698,
                         "paddingLeft": 15,
                         "paddingVertical": 6.67,
@@ -4967,6 +5691,23 @@ exports[`login page logging in under different conditions should password reset 
                     value=""
                   />
                   <View
+                    accessibilityState={
+                      {
+                        "busy": undefined,
+                        "checked": undefined,
+                        "disabled": undefined,
+                        "expanded": undefined,
+                        "selected": undefined,
+                      }
+                    }
+                    accessibilityValue={
+                      {
+                        "max": undefined,
+                        "min": undefined,
+                        "now": undefined,
+                        "text": undefined,
+                      }
+                    }
                     accessible={true}
                     collapsable={false}
                     focusable={true}
@@ -4978,7 +5719,7 @@ exports[`login page logging in under different conditions should password reset 
                     onResponderTerminationRequest={[Function]}
                     onStartShouldSetResponder={[Function]}
                     style={
-                      Object {
+                      {
                         "alignItems": "center",
                         "height": "100%",
                         "justifyContent": "center",
@@ -4995,7 +5736,7 @@ exports[`login page logging in under different conditions should password reset 
                       name="eye"
                       size={53.36}
                       style={
-                        Object {
+                        {
                           "color": "#50505055",
                         }
                       }
@@ -5005,7 +5746,7 @@ exports[`login page logging in under different conditions should password reset 
               </View>
               <View
                 style={
-                  Object {
+                  {
                     "backgroundColor": "white",
                     "borderColor": "#104e01",
                     "borderRadius": 11.25,
@@ -5019,7 +5760,7 @@ exports[`login page logging in under different conditions should password reset 
                 <Text
                   maxFontSizeMultiplier={2}
                   style={
-                    Object {
+                    {
                       "color": "#9e0000f8",
                       "fontSize": 30.595932917809698,
                       "paddingBottom": 3.335,
@@ -5036,7 +5777,7 @@ exports[`login page logging in under different conditions should password reset 
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -5046,7 +5787,7 @@ exports[`login page logging in under different conditions should password reset 
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -5062,6 +5803,23 @@ exports[`login page logging in under different conditions should password reset 
                 }
               >
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -5073,7 +5831,7 @@ exports[`login page logging in under different conditions should password reset 
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -5093,7 +5851,7 @@ exports[`login page logging in under different conditions should password reset 
                   <Text
                     maxFontSizeMultiplier={1.25}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -5114,12 +5872,12 @@ exports[`login page logging in under different conditions should password reset 
                     onStartShouldSetResponder={[Function]}
                     onTintColor="#5c8a5199"
                     style={
-                      Array [
-                        Object {
+                      [
+                        {
                           "height": 31,
                           "width": 51,
                         },
-                        Array [
+                        [
                           null,
                           null,
                           null,
@@ -5133,6 +5891,23 @@ exports[`login page logging in under different conditions should password reset 
                   />
                 </View>
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -5144,7 +5919,7 @@ exports[`login page logging in under different conditions should password reset 
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -5164,7 +5939,7 @@ exports[`login page logging in under different conditions should password reset 
                   <Text
                     maxFontSizeMultiplier={1.5}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -5185,12 +5960,12 @@ exports[`login page logging in under different conditions should password reset 
                     onStartShouldSetResponder={[Function]}
                     onTintColor="#5c8a5199"
                     style={
-                      Array [
-                        Object {
+                      [
+                        {
                           "height": 31,
                           "width": 51,
                         },
-                        Array [
+                        [
                           null,
                           null,
                           null,
@@ -5207,7 +5982,7 @@ exports[`login page logging in under different conditions should password reset 
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -5217,7 +5992,7 @@ exports[`login page logging in under different conditions should password reset 
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -5233,6 +6008,23 @@ exports[`login page logging in under different conditions should password reset 
                 }
               >
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -5244,7 +6036,7 @@ exports[`login page logging in under different conditions should password reset 
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -5265,7 +6057,7 @@ exports[`login page logging in under different conditions should password reset 
                     name="account-plus"
                     size={53.36}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                       }
                     }
@@ -5273,7 +6065,7 @@ exports[`login page logging in under different conditions should password reset 
                   <Text
                     maxFontSizeMultiplier={1.5}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -5286,6 +6078,23 @@ exports[`login page logging in under different conditions should password reset 
                   </Text>
                 </View>
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -5297,7 +6106,7 @@ exports[`login page logging in under different conditions should password reset 
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -5318,7 +6127,7 @@ exports[`login page logging in under different conditions should password reset 
                     name="lock-open"
                     size={53.36}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                       }
                     }
@@ -5326,7 +6135,7 @@ exports[`login page logging in under different conditions should password reset 
                   <Text
                     maxFontSizeMultiplier={1.7}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -5345,7 +6154,7 @@ exports[`login page logging in under different conditions should password reset 
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -5355,7 +6164,7 @@ exports[`login page logging in under different conditions should password reset 
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -5371,6 +6180,23 @@ exports[`login page logging in under different conditions should password reset 
                 }
               >
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -5382,7 +6208,7 @@ exports[`login page logging in under different conditions should password reset 
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -5404,7 +6230,7 @@ exports[`login page logging in under different conditions should password reset 
                     name="login"
                     size={53.36}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                       }
                     }
@@ -5412,15 +6238,15 @@ exports[`login page logging in under different conditions should password reset 
                   <Text
                     maxFontSizeMultiplier={2}
                     style={
-                      Array [
-                        Object {
+                      [
+                        {
                           "color": "#104e01",
                           "fontSize": 27.53633962602873,
                           "fontWeight": "bold",
                           "paddingHorizontal": 7.5,
                           "textAlign": "center",
                         },
-                        Object {
+                        {
                           "marginLeft": 30,
                         },
                       ]
@@ -5441,9 +6267,8 @@ exports[`login page logging in under different conditions should password reset 
 
 exports[`login page should load and render 1`] = `
 <RCTSafeAreaView
-  emulateUnlessSupported={true}
   style={
-    Object {
+    {
       "borderColor": "blue",
       "borderWidth": 0,
       "flex": 1,
@@ -5453,14 +6278,14 @@ exports[`login page should load and render 1`] = `
   <View
     onLayout={[Function]}
     style={
-      Array [
-        Object {
+      [
+        {
           "alignItems": "center",
           "borderColor": "red",
           "borderWidth": 0,
           "flex": 1,
         },
-        Object {
+        {
           "paddingBottom": 0,
         },
       ]
@@ -5470,7 +6295,7 @@ exports[`login page should load and render 1`] = `
       resizeMode="cover"
       source={1}
       style={
-        Object {
+        {
           "borderColor": "black",
           "borderWidth": 0,
           "height": 1334,
@@ -5484,7 +6309,7 @@ exports[`login page should load and render 1`] = `
       nestedScrollEnabled={true}
       scrollEnabled={true}
       style={
-        Object {
+        {
           "borderColor": "yellow",
           "borderWidth": 0,
           "flex": 1,
@@ -5493,6 +6318,23 @@ exports[`login page should load and render 1`] = `
     >
       <View>
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -5504,7 +6346,7 @@ exports[`login page should load and render 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "flex": 1,
               "opacity": 1,
             }
@@ -5512,7 +6354,7 @@ exports[`login page should load and render 1`] = `
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "justifyContent": "center",
                 "top": 133.4,
@@ -5523,7 +6365,7 @@ exports[`login page should load and render 1`] = `
               resizeMode="contain"
               source={1}
               style={
-                Object {
+                {
                   "height": 266.8,
                   "width": "75%",
                 }
@@ -5532,8 +6374,8 @@ exports[`login page should load and render 1`] = `
           </View>
           <View
             style={
-              Array [
-                Object {
+              [
+                {
                   "alignItems": "center",
                   "borderWidth": 0,
                   "justifyContent": "center",
@@ -5541,7 +6383,7 @@ exports[`login page should load and render 1`] = `
                   "marginRight": 75,
                   "width": 600,
                 },
-                Object {
+                {
                   "marginTop": 200.1,
                 },
               ]
@@ -5549,7 +6391,7 @@ exports[`login page should load and render 1`] = `
           >
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -5559,7 +6401,7 @@ exports[`login page should load and render 1`] = `
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -5576,7 +6418,7 @@ exports[`login page should load and render 1`] = `
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "white",
                       "borderColor": "#104e01",
@@ -5592,7 +6434,7 @@ exports[`login page should load and render 1`] = `
                   <Text
                     maxFontSizeMultiplier={1.5}
                     style={
-                      Object {
+                      {
                         "borderRadius": 11.25,
                         "color": "#505050",
                         "fontSize": 33.35,
@@ -5616,7 +6458,7 @@ exports[`login page should load and render 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -5626,7 +6468,7 @@ exports[`login page should load and render 1`] = `
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -5643,7 +6485,7 @@ exports[`login page should load and render 1`] = `
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "white",
                       "borderColor": "#104e01",
@@ -5664,7 +6506,7 @@ exports[`login page should load and render 1`] = `
                     onChangeText={[Function]}
                     placeholder="e-mail"
                     style={
-                      Object {
+                      {
                         "fontSize": 30.595932917809698,
                         "paddingLeft": 15,
                         "paddingVertical": 6.67,
@@ -5682,7 +6524,7 @@ exports[`login page should load and render 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -5692,7 +6534,7 @@ exports[`login page should load and render 1`] = `
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -5709,7 +6551,7 @@ exports[`login page should load and render 1`] = `
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "white",
                       "borderColor": "#104e01",
@@ -5730,7 +6572,7 @@ exports[`login page should load and render 1`] = `
                     placeholder="password"
                     secureTextEntry={true}
                     style={
-                      Object {
+                      {
                         "fontSize": 30.595932917809698,
                         "paddingLeft": 15,
                         "paddingVertical": 6.67,
@@ -5744,6 +6586,23 @@ exports[`login page should load and render 1`] = `
                     value=""
                   />
                   <View
+                    accessibilityState={
+                      {
+                        "busy": undefined,
+                        "checked": undefined,
+                        "disabled": undefined,
+                        "expanded": undefined,
+                        "selected": undefined,
+                      }
+                    }
+                    accessibilityValue={
+                      {
+                        "max": undefined,
+                        "min": undefined,
+                        "now": undefined,
+                        "text": undefined,
+                      }
+                    }
                     accessible={true}
                     collapsable={false}
                     focusable={true}
@@ -5755,7 +6614,7 @@ exports[`login page should load and render 1`] = `
                     onResponderTerminationRequest={[Function]}
                     onStartShouldSetResponder={[Function]}
                     style={
-                      Object {
+                      {
                         "alignItems": "center",
                         "height": "100%",
                         "justifyContent": "center",
@@ -5772,7 +6631,7 @@ exports[`login page should load and render 1`] = `
                       name="eye"
                       size={53.36}
                       style={
-                        Object {
+                        {
                           "color": "#50505055",
                         }
                       }
@@ -5783,7 +6642,7 @@ exports[`login page should load and render 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -5793,7 +6652,7 @@ exports[`login page should load and render 1`] = `
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -5809,6 +6668,23 @@ exports[`login page should load and render 1`] = `
                 }
               >
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -5820,7 +6696,7 @@ exports[`login page should load and render 1`] = `
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -5840,7 +6716,7 @@ exports[`login page should load and render 1`] = `
                   <Text
                     maxFontSizeMultiplier={1.25}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -5861,12 +6737,12 @@ exports[`login page should load and render 1`] = `
                     onStartShouldSetResponder={[Function]}
                     onTintColor="#5c8a5199"
                     style={
-                      Array [
-                        Object {
+                      [
+                        {
                           "height": 31,
                           "width": 51,
                         },
-                        Array [
+                        [
                           null,
                           null,
                           null,
@@ -5880,6 +6756,23 @@ exports[`login page should load and render 1`] = `
                   />
                 </View>
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -5891,7 +6784,7 @@ exports[`login page should load and render 1`] = `
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -5911,7 +6804,7 @@ exports[`login page should load and render 1`] = `
                   <Text
                     maxFontSizeMultiplier={1.5}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -5932,12 +6825,12 @@ exports[`login page should load and render 1`] = `
                     onStartShouldSetResponder={[Function]}
                     onTintColor="#5c8a5199"
                     style={
-                      Array [
-                        Object {
+                      [
+                        {
                           "height": 31,
                           "width": 51,
                         },
-                        Array [
+                        [
                           null,
                           null,
                           null,
@@ -5954,7 +6847,7 @@ exports[`login page should load and render 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -5964,7 +6857,7 @@ exports[`login page should load and render 1`] = `
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -5980,6 +6873,23 @@ exports[`login page should load and render 1`] = `
                 }
               >
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -5991,7 +6901,7 @@ exports[`login page should load and render 1`] = `
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -6012,7 +6922,7 @@ exports[`login page should load and render 1`] = `
                     name="account-plus"
                     size={53.36}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                       }
                     }
@@ -6020,7 +6930,7 @@ exports[`login page should load and render 1`] = `
                   <Text
                     maxFontSizeMultiplier={1.5}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -6033,6 +6943,23 @@ exports[`login page should load and render 1`] = `
                   </Text>
                 </View>
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -6044,7 +6971,7 @@ exports[`login page should load and render 1`] = `
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -6065,7 +6992,7 @@ exports[`login page should load and render 1`] = `
                     name="lock-open"
                     size={53.36}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                       }
                     }
@@ -6073,7 +7000,7 @@ exports[`login page should load and render 1`] = `
                   <Text
                     maxFontSizeMultiplier={1.7}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                         "fontSize": 27.53633962602873,
                         "fontWeight": "bold",
@@ -6092,7 +7019,7 @@ exports[`login page should load and render 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "borderColor": "red",
                   "borderWidth": 0,
                   "overflow": "hidden",
@@ -6102,7 +7029,7 @@ exports[`login page should load and render 1`] = `
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "borderColor": "purple",
                     "borderRadius": 11.25,
@@ -6118,6 +7045,23 @@ exports[`login page should load and render 1`] = `
                 }
               >
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -6129,7 +7073,7 @@ exports[`login page should load and render 1`] = `
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "#fff59b",
                       "borderColor": "#104e01",
@@ -6151,7 +7095,7 @@ exports[`login page should load and render 1`] = `
                     name="login"
                     size={53.36}
                     style={
-                      Object {
+                      {
                         "color": "#104e01",
                       }
                     }
@@ -6159,15 +7103,15 @@ exports[`login page should load and render 1`] = `
                   <Text
                     maxFontSizeMultiplier={2}
                     style={
-                      Array [
-                        Object {
+                      [
+                        {
                           "color": "#104e01",
                           "fontSize": 27.53633962602873,
                           "fontWeight": "bold",
                           "paddingHorizontal": 7.5,
                           "textAlign": "center",
                         },
-                        Object {
+                        {
                           "marginLeft": 30,
                         },
                       ]

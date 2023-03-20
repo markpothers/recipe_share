@@ -3,7 +3,7 @@
 exports[`StyledActivityIndicator can be rendered 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "#fff59b",
       "borderColor": "#104e01",
@@ -24,7 +24,7 @@ exports[`StyledActivityIndicator can be rendered 1`] = `
     color="#104e01"
     size="large"
     style={
-      Object {
+      {
         "left": 1.25,
         "top": 1.7,
       }

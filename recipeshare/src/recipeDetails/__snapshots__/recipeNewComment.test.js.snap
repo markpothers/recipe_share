@@ -3,7 +3,7 @@
 exports[`RecipeNewComment renders with some text and a confirm button 1`] = `
 <View
   style={
-    Object {
+    {
       "borderBottomColor": "#104e01",
       "borderBottomWidth": 0.5,
       "flexDirection": "row",
@@ -17,19 +17,19 @@ exports[`RecipeNewComment renders with some text and a confirm button 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "flex": 2,
       }
     }
   >
     <Image
       source={
-        Object {
+        {
           "uri": "https://robohash.org/utautnemo.png?size=300x300&set=set1",
         }
       }
       style={
-        Object {
+        {
           "borderRadius": 11.25,
           "height": 60,
           "marginRight": "4%",
@@ -40,7 +40,7 @@ exports[`RecipeNewComment renders with some text and a confirm button 1`] = `
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 8,
       }
     }
@@ -48,7 +48,7 @@ exports[`RecipeNewComment renders with some text and a confirm button 1`] = `
     <Text
       maxFontSizeMultiplier={2}
       style={
-        Object {
+        {
           "color": "#505050",
           "fontSize": 33.65552620959067,
           "fontStyle": "italic",
@@ -68,7 +68,7 @@ exports[`RecipeNewComment renders with some text and a confirm button 1`] = `
       onChangeText={[Function]}
       placeholder="Type comment here..."
       style={
-        Object {
+        {
           "color": "#505050",
           "fontSize": 33.65552620959067,
           "marginLeft": "3%",
@@ -85,7 +85,7 @@ exports[`RecipeNewComment renders with some text and a confirm button 1`] = `
 exports[`RecipeNewComment renders without an image_url 1`] = `
 <View
   style={
-    Object {
+    {
       "borderBottomColor": "#104e01",
       "borderBottomWidth": 0.5,
       "flexDirection": "row",
@@ -99,7 +99,7 @@ exports[`RecipeNewComment renders without an image_url 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "flex": 2,
       }
     }
@@ -107,7 +107,7 @@ exports[`RecipeNewComment renders without an image_url 1`] = `
     <Image
       source={1}
       style={
-        Object {
+        {
           "borderRadius": 11.25,
           "height": 60,
           "marginRight": "4%",
@@ -118,7 +118,7 @@ exports[`RecipeNewComment renders without an image_url 1`] = `
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 8,
       }
     }
@@ -126,7 +126,7 @@ exports[`RecipeNewComment renders without an image_url 1`] = `
     <Text
       maxFontSizeMultiplier={2}
       style={
-        Object {
+        {
           "color": "#505050",
           "fontSize": 33.65552620959067,
           "fontStyle": "italic",
@@ -146,7 +146,7 @@ exports[`RecipeNewComment renders without an image_url 1`] = `
       onChangeText={[Function]}
       placeholder="Type comment here..."
       style={
-        Object {
+        {
           "color": "#505050",
           "fontSize": 33.65552620959067,
           "marginLeft": "3%",

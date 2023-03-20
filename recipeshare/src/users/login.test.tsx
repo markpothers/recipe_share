@@ -38,7 +38,7 @@ describe("login page", () => {
 		route = {};
 
 		// eslint-disable-next-line no-unused-vars
-		(NetInfo as typeof NetInfo & { setReturnValue: (isConnected: boolean) => void }).setReturnValue(true)
+		(NetInfo as typeof NetInfo & { setReturnValue: (isConnected: boolean) => void }).setReturnValue(true);
 	});
 
 	afterEach(async () => {
@@ -66,9 +66,7 @@ describe("login page", () => {
 			</Provider>
 		);
 		fireEvent.changeText(getByPlaceholderText("e-mail"), "myEmail@test.com");
-		await waitFor(() =>
-			expect(getByPlaceholderText("e-mail").props.value).toStrictEqual("myEmail@test.com")
-		);
+		await waitFor(() => expect(getByPlaceholderText("e-mail").props.value).toStrictEqual("myEmail@test.com"));
 	});
 
 	test("should accept text in password input", async () => {
@@ -78,9 +76,7 @@ describe("login page", () => {
 			</Provider>
 		);
 		fireEvent.changeText(getByPlaceholderText("password"), "myTestPassword");
-		await waitFor(() =>
-			expect(getByPlaceholderText("password").props.value).toStrictEqual("myTestPassword")
-		);
+		await waitFor(() => expect(getByPlaceholderText("password").props.value).toStrictEqual("myTestPassword"));
 	});
 
 	test("should press to display/hide password", async () => {
@@ -91,9 +87,7 @@ describe("login page", () => {
 		);
 		expect(getByPlaceholderText("password").props.secureTextEntry).toStrictEqual(true);
 		fireEvent.press(getByTestId("visibilityButton"));
-		await waitFor(() =>
-			expect(getByPlaceholderText("password").props.secureTextEntry).toStrictEqual(false)
-		);
+		await waitFor(() => expect(getByPlaceholderText("password").props.secureTextEntry).toStrictEqual(false));
 	});
 
 	test("should accept toggle to remember username", async () => {
@@ -106,9 +100,7 @@ describe("login page", () => {
 		fireEvent.press(getByTestId("rememberEmailButton")); // works through the button
 		fireEvent.press(getByTestId("rememberEmailToggle")); // works through the toggle
 		fireEvent.press(getByTestId("rememberEmailButton"));
-		await waitFor(() =>
-			expect(getByTestId("rememberEmailToggle").props.value).toStrictEqual(true)
-		);
+		await waitFor(() => expect(getByTestId("rememberEmailToggle").props.value).toStrictEqual(true));
 	});
 
 	test("should accept toggle to stay logged in", async () => {
@@ -121,9 +113,7 @@ describe("login page", () => {
 		fireEvent.press(getByTestId("stayLoggedInButton")); // works through the button
 		fireEvent.press(getByTestId("stayLoggedInToggle")); // works through the toggle
 		fireEvent.press(getByTestId("stayLoggedInButton"));
-		await waitFor(() =>
-			expect(getByTestId("stayLoggedInToggle").props.value).toStrictEqual(true)
-		);
+		await waitFor(() => expect(getByTestId("stayLoggedInToggle").props.value).toStrictEqual(true));
 	});
 
 	test("should be able to navigate to registration page", async () => {
@@ -137,9 +127,9 @@ describe("login page", () => {
 	});
 
 	test("renders with thanks for registering popup", async () => {
-		(
-			AsyncStorage.getItem as jest.MockedFunction<typeof AsyncStorage.getItem>
-		).mockResolvedValueOnce(JSON.stringify("test@email.com"));
+		(AsyncStorage.getItem as jest.MockedFunction<typeof AsyncStorage.getItem>).mockResolvedValueOnce(
+			JSON.stringify("test@email.com")
+		);
 		const { getByText } = render(
 			<Provider store={store}>
 				<Login
@@ -245,9 +235,7 @@ describe("login page", () => {
 			fireEvent.press(getByText("Login"));
 
 			// assert
-			await waitFor(() =>
-				expect(getByPlaceholderText("e-mail").props.value).toStrictEqual("")
-			); // value is updated in redux by clearLoginUserDetails
+			await waitFor(() => expect(getByPlaceholderText("e-mail").props.value).toStrictEqual("")); // value is updated in redux by clearLoginUserDetails
 			expect(getByPlaceholderText("password").props.value).toStrictEqual(""); //value is updated in redux
 			const loginResponseWithoutAuth = { ...originalLoginResponse };
 			delete loginResponseWithoutAuth.auth_token;
@@ -283,9 +271,7 @@ describe("login page", () => {
 			fireEvent.press(getByText("Login"));
 
 			// assert
-			await waitFor(() =>
-				expect(getByPlaceholderText("e-mail").props.value).toStrictEqual("")
-			); // value is updated in redux by clearLoginUserDetails
+			await waitFor(() => expect(getByPlaceholderText("e-mail").props.value).toStrictEqual("")); // value is updated in redux by clearLoginUserDetails
 			expect(getByPlaceholderText("password").props.value).toStrictEqual(""); //value is updated in redux
 			expect(AsyncStorage.setItem).not.toBeCalled();
 			expect(store.getState().root.loggedInChef).toStrictEqual({
@@ -332,11 +318,7 @@ describe("login page", () => {
 
 			// assert
 			await waitFor(() =>
-				expect(
-					getByText(
-						"Please enter your e-mail and hit the 'Forgot Password' button again."
-					)
-				).toBeTruthy()
+				expect(getByText("Please enter your e-mail and hit the 'Forgot Password' button again.")).toBeTruthy()
 			);
 			expect(toJSON()).toMatchSnapshot();
 		});
@@ -353,9 +335,7 @@ describe("login page", () => {
 			fireEvent.press(getByText("Login"));
 
 			// assert
-			await waitFor(() =>
-				expect(getByText("e-mail and password combination not recognized")).toBeTruthy()
-			);
+			await waitFor(() => expect(getByText("e-mail and password combination not recognized")).toBeTruthy());
 			expect(toJSON()).toMatchSnapshot();
 		});
 
@@ -373,9 +353,7 @@ describe("login page", () => {
 			// assert
 			await waitFor(() =>
 				expect(
-					getByText(
-						"Automatically generated password has expired. Please reset your password."
-					)
+					getByText("Automatically generated password has expired. Please reset your password.")
 				).toBeTruthy()
 			);
 			expect(toJSON()).toMatchSnapshot();
@@ -417,9 +395,7 @@ describe("login page", () => {
 			// assert
 			await waitFor(() =>
 				expect(
-					getByText(
-						"This account was deactivated. Reset your password to reactivate your account."
-					)
+					getByText("This account was deactivated. Reset your password to reactivate your account.")
 				).toBeTruthy()
 			);
 			expect(toJSON()).toMatchSnapshot();
@@ -437,9 +413,7 @@ describe("login page", () => {
 
 			// assert
 			await waitFor(() =>
-				expect(
-					getByText("We've e-mailed you a link to re-activate your account.")
-				).toBeTruthy()
+				expect(getByText("We've e-mailed you a link to re-activate your account.")).toBeTruthy()
 			);
 			expect(toJSON()).toMatchSnapshot();
 		});

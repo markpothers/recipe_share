@@ -27,15 +27,16 @@ export default function MultiPicSourceChooser(props: OwnProps) {
 	const [primaryImageFlatListWidth, setPrimaryImageFlatListWidth] = useState<number>(300);
 	const primaryImageFlatList = useRef(null);
 
+	const checkPermissions = async() => {
+		const cameraRollPermission = await MediaLibrary.requestPermissionsAsync();
+		const cameraPermission = await Camera.requestCameraPermissionsAsync();
+		setHasCameraRollPermission(cameraRollPermission.granted);
+		setHasCameraPermission(cameraPermission.granted);
+	}
+
 	useEffect(() => {
-		async function checkPermissions() {
-			const cameraRollPermission = await MediaLibrary.requestPermissionsAsync();
-			const cameraPermission = await Camera.requestCameraPermissionsAsync();
-			setHasCameraRollPermission(cameraRollPermission.granted);
-			setHasCameraPermission(cameraPermission.granted);
-		}
-		checkPermissions();
 		setOriginalImages([...props.imageSources]);
+		checkPermissions();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []); // don't put a value in here, you don't want original image to be overwritten
 

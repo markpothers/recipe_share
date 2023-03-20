@@ -10,13 +10,13 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
 >
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "alignItems": "center",
           "flex": 1,
           "justifyContent": "center",
         },
-        Object {
+        {
           "height": 1334,
           "width": 750,
         },
@@ -25,7 +25,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
   >
     <View
       style={
-        Object {
+        {
           "backgroundColor": "white",
           "borderColor": "#104e01",
           "borderRadius": 5,
@@ -38,8 +38,8 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "borderColor": "#104e01",
               "borderRadius": 5,
@@ -53,7 +53,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
               "overflow": "hidden",
               "width": 600,
             },
-            Object {
+            {
               "height": 450,
             },
           ]
@@ -61,8 +61,8 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
       >
         <RCTScrollView
           data={
-            Array [
-              Object {
+            [
+              {
                 "uri": "",
               },
             ]
@@ -84,20 +84,21 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
           removeClippedSubviews={false}
           renderItem={[Function]}
           scrollEventThrottle={50}
-          stickyHeaderIndices={Array []}
+          stickyHeaderIndices={[]}
           style={
-            Object {
+            {
               "flex": 1,
             }
           }
           testID="multiPicFlatList"
-          viewabilityConfigCallbackPairs={Array []}
+          viewabilityConfigCallbackPairs={[]}
         >
           <View>
             <View
+              onFocusCapture={[Function]}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "flexDirection": "row",
                   },
                   null,
@@ -106,7 +107,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "height": "100%",
                     "justifyContent": "center",
@@ -118,7 +119,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
                   name="image"
                   size={53.36}
                   style={
-                    Object {
+                    {
                       "color": "#104e01",
                     }
                   }
@@ -126,7 +127,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
                 <Text
                   maxFontSizeMultiplier={1.5}
                   style={
-                    Object {
+                    {
                       "color": "#104e01",
                       "fontSize": 34.420424532535904,
                       "fontWeight": "bold",
@@ -147,7 +148,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
         </RCTScrollView>
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
               "alignSelf": "center",
               "bottom": 0,
@@ -162,7 +163,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
       </View>
       <View
         style={
-          Object {
+          {
             "alignSelf": "center",
             "flexDirection": "row",
             "justifyContent": "space-between",
@@ -171,6 +172,23 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
         }
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -182,7 +200,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#fff59b",
               "borderColor": "#104e01",
@@ -202,13 +220,13 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
             name="shuffle"
             size={53.36}
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "#104e01",
                 },
-                Object {
-                  "transform": Array [
-                    Object {
+                {
+                  "transform": [
+                    {
                       "rotateZ": "270deg",
                     },
                   ],
@@ -219,8 +237,8 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
           <Text
             maxFontSizeMultiplier={1.5}
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "#104e01",
                   "fontSize": 34.420424532535904,
                   "fontWeight": "bold",
@@ -228,7 +246,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
                   "marginRight": "5%",
                   "textAlign": "center",
                 },
-                Object {
+                {
                   "maxWidth": 187.5,
                 },
               ]
@@ -238,6 +256,23 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
           </Text>
         </View>
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -249,7 +284,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#fff59b",
               "borderColor": "#104e01",
@@ -268,8 +303,8 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
           <Text
             maxFontSizeMultiplier={1.5}
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "#104e01",
                   "fontSize": 34.420424532535904,
                   "fontWeight": "bold",
@@ -277,7 +312,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
                   "marginRight": "5%",
                   "textAlign": "center",
                 },
-                Object {
+                {
                   "maxWidth": 187.5,
                 },
               ]
@@ -289,16 +324,16 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
             name="shuffle"
             size={53.36}
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "#104e01",
                 },
-                Object {
-                  "transform": Array [
-                    Object {
+                {
+                  "transform": [
+                    {
                       "rotateZ": "270deg",
                     },
-                    Object {
+                    {
                       "rotateX": "180deg",
                     },
                   ],
@@ -310,7 +345,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
       </View>
       <View
         style={
-          Object {
+          {
             "alignSelf": "center",
             "flexDirection": "row",
             "justifyContent": "space-between",
@@ -319,6 +354,23 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
         }
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -330,7 +382,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#fff59b",
               "borderColor": "#104e01",
@@ -350,7 +402,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
             name="image-plus"
             size={53.36}
             style={
-              Object {
+              {
                 "color": "#104e01",
               }
             }
@@ -358,7 +410,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
           <Text
             maxFontSizeMultiplier={1.5}
             style={
-              Object {
+              {
                 "color": "#104e01",
                 "fontSize": 34.420424532535904,
                 "fontWeight": "bold",
@@ -372,6 +424,23 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
           </Text>
         </View>
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -383,7 +452,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#fff59b",
               "borderColor": "#104e01",
@@ -403,7 +472,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
             name="image-off"
             size={53.36}
             style={
-              Object {
+              {
                 "color": "#104e01",
               }
             }
@@ -411,7 +480,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
           <Text
             maxFontSizeMultiplier={1.5}
             style={
-              Object {
+              {
                 "color": "#104e01",
                 "fontSize": 34.420424532535904,
                 "fontWeight": "bold",
@@ -426,6 +495,23 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
         </View>
       </View>
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={true}
         collapsable={false}
         focusable={true}
@@ -437,7 +523,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": "#fff59b",
             "borderColor": "#104e01",
@@ -459,7 +545,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
           name="camera"
           size={53.36}
           style={
-            Object {
+            {
               "color": "#104e01",
             }
           }
@@ -467,7 +553,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
         <Text
           maxFontSizeMultiplier={1.5}
           style={
-            Object {
+            {
               "color": "#104e01",
               "fontSize": 34.420424532535904,
               "fontWeight": "bold",
@@ -481,6 +567,23 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
         </Text>
       </View>
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={true}
         collapsable={false}
         focusable={true}
@@ -492,7 +595,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": "#fff59b",
             "borderColor": "#104e01",
@@ -514,7 +617,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
           name="camera-image"
           size={53.36}
           style={
-            Object {
+            {
               "color": "#104e01",
             }
           }
@@ -522,7 +625,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
         <Text
           maxFontSizeMultiplier={1.5}
           style={
-            Object {
+            {
               "color": "#104e01",
               "fontSize": 34.420424532535904,
               "fontWeight": "bold",
@@ -537,20 +640,37 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
       </View>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "alignSelf": "center",
               "flexDirection": "row",
               "justifyContent": "space-between",
               "width": 600,
             },
-            Object {
+            {
               "marginBottom": 26.68,
             },
           ]
         }
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -562,7 +682,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#720000",
               "borderColor": "#104e01",
@@ -582,7 +702,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
             name="cancel"
             size={53.36}
             style={
-              Object {
+              {
                 "color": "#fff59b",
               }
             }
@@ -590,7 +710,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
           <Text
             maxFontSizeMultiplier={1.5}
             style={
-              Object {
+              {
                 "color": "#fff59b",
                 "fontSize": 34.420424532535904,
                 "fontWeight": "bold",
@@ -604,6 +724,23 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
           </Text>
         </View>
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -615,7 +752,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#104e01",
               "borderColor": "#104e01",
@@ -635,7 +772,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
             name="check"
             size={53.36}
             style={
-              Object {
+              {
                 "color": "#fff59b",
               }
             }
@@ -643,7 +780,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
           <Text
             maxFontSizeMultiplier={1.5}
             style={
-              Object {
+              {
                 "color": "#fff59b",
                 "fontSize": 34.420424532535904,
                 "fontWeight": "bold",
@@ -675,13 +812,13 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
 >
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "alignItems": "center",
           "flex": 1,
           "justifyContent": "center",
         },
-        Object {
+        {
           "height": 1334,
           "width": 750,
         },
@@ -690,7 +827,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
   >
     <View
       style={
-        Object {
+        {
           "backgroundColor": "white",
           "borderColor": "#104e01",
           "borderRadius": 5,
@@ -703,8 +840,8 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "borderColor": "#104e01",
               "borderRadius": 5,
@@ -718,7 +855,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
               "overflow": "hidden",
               "width": 600,
             },
-            Object {
+            {
               "height": 450,
             },
           ]
@@ -726,8 +863,8 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
       >
         <RCTScrollView
           data={
-            Array [
-              Object {
+            [
+              {
                 "created_at": "2022-02-23T04:16:48.850Z",
                 "hex": "63d1f92fb2f9ca89f36f8935dcf048813ced9ca0-20220223_041648",
                 "hidden": false,
@@ -738,7 +875,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
                 "recipe_id": 111,
                 "updated_at": "2022-02-23T04:17:28.270Z",
               },
-              Object {
+              {
                 "created_at": "2022-02-23T04:16:48.110Z",
                 "hex": "84fb2e077ba3659b27885706704c32a31e79916a-20220223_041647",
                 "hidden": false,
@@ -768,20 +905,21 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
           removeClippedSubviews={false}
           renderItem={[Function]}
           scrollEventThrottle={50}
-          stickyHeaderIndices={Array []}
+          stickyHeaderIndices={[]}
           style={
-            Object {
+            {
               "flex": 1,
             }
           }
           testID="multiPicFlatList"
-          viewabilityConfigCallbackPairs={Array []}
+          viewabilityConfigCallbackPairs={[]}
         >
           <View>
             <View
+              onFocusCapture={[Function]}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "flexDirection": "row",
                   },
                   null,
@@ -791,12 +929,12 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
               <Image
                 resizeMode="cover"
                 source={
-                  Object {
+                  {
                     "uri": "https://storage.googleapis.com/test-images-be4d3e05-1e77-4efd-8571-364e22ea7c0d/recipe51.jpg?GoogleAccessId=recipe-share-image-handler%40recipe-share-272202.iam.gserviceaccount.com&Expires=6468590268&Signature=KxpAMV%2F6NUiU91OPDQJb8JCnwFjowwkeBWUnrwejz8MjYjD6SqHPIkxln9Zo6%2FlhROowJwb0jCfgeW7Bdd%2FkZ1wMR3LkgqiKjURrYIxzypqXh%2FSbP5thj9T27Rr2klDI1rqYJ9%2FzzJUlFGY%2FKgVb4bdnwaUszuVUdjJKndsKKvNQZky7BvdAxoeBFbhojA0Jsep48Zj1ByTephGpuIinmriRava93H9y4yl8o9tFIAKOqQK3qQ5LqtKZstN4SZUJ0pnbp0WveOSROyZs8LPU4Enj%2BzgFwepuDalrS4%2B3uioFw72ESvhgAalxF3ZAyV9pTZB4QQ13Oysq0f3rfG109g%3D%3D",
                   }
                 }
                 style={
-                  Object {
+                  {
                     "height": "100%",
                     "width": 598,
                   }
@@ -804,9 +942,10 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
               />
             </View>
             <View
+              onFocusCapture={[Function]}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "flexDirection": "row",
                   },
                   null,
@@ -816,12 +955,12 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
               <Image
                 resizeMode="cover"
                 source={
-                  Object {
+                  {
                     "uri": "https://storage.googleapis.com/test-images-be4d3e05-1e77-4efd-8571-364e22ea7c0d/recipe9.jpg?GoogleAccessId=recipe-share-image-handler%40recipe-share-272202.iam.gserviceaccount.com&Expires=6468590152&Signature=QE0BHb5NDCDLVlO6WaD%2B13tl7WJ0vrSCK3meugG%2BbKznZiP44B79nlAztn96%2Bvq2nk1P1ske9XqBK9PTRF65EX%2FdPyOr1MjVmlnOkOl%2BEj6KLIPIOmL1ymXr%2BTSEJ2eXI8iCf76%2BbszsNvHKaxaMN9ntA6b%2BB4E%2FOjt9gUc7Dr8RKWlSgvlBAuvmXgAAKaBd3Q6YOB%2B%2B%2FQn9AlzLUpQkdgNJ%2Fl1x6zYMfBRaqPopSZHgNJT36xlPIh1q5AK0ut7kb7m%2FkWAhYv%2FgJ4YevAXTCA6jb9%2BsV0Jbs8m6hE9llWdmKmpdZAKrxkh07xveRDWErmPopX%2Fws5xB08CNXpP50A%3D%3D",
                   }
                 }
                 style={
-                  Object {
+                  {
                     "height": "100%",
                     "width": 598,
                   }
@@ -832,7 +971,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
         </RCTScrollView>
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
               "alignSelf": "center",
               "bottom": 0,
@@ -848,7 +987,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
             name="checkbox-blank-circle"
             size={40.019999999999996}
             style={
-              Object {
+              {
                 "color": "#fff59b",
                 "marginHorizontal": 2,
                 "opacity": 0.85,
@@ -859,7 +998,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
             name="checkbox-blank-circle-outline"
             size={40.019999999999996}
             style={
-              Object {
+              {
                 "color": "#fff59b",
                 "marginHorizontal": 2,
                 "opacity": 0.85,
@@ -870,7 +1009,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
       </View>
       <View
         style={
-          Object {
+          {
             "alignSelf": "center",
             "flexDirection": "row",
             "justifyContent": "space-between",
@@ -879,6 +1018,23 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
         }
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -890,7 +1046,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#fff59b",
               "borderColor": "#104e01",
@@ -910,13 +1066,13 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
             name="shuffle"
             size={53.36}
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "#104e01",
                 },
-                Object {
-                  "transform": Array [
-                    Object {
+                {
+                  "transform": [
+                    {
                       "rotateZ": "270deg",
                     },
                   ],
@@ -927,8 +1083,8 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
           <Text
             maxFontSizeMultiplier={1.5}
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "#104e01",
                   "fontSize": 34.420424532535904,
                   "fontWeight": "bold",
@@ -936,7 +1092,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
                   "marginRight": "5%",
                   "textAlign": "center",
                 },
-                Object {
+                {
                   "maxWidth": 187.5,
                 },
               ]
@@ -946,6 +1102,23 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
           </Text>
         </View>
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -957,7 +1130,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#fff59b",
               "borderColor": "#104e01",
@@ -976,8 +1149,8 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
           <Text
             maxFontSizeMultiplier={1.5}
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "#104e01",
                   "fontSize": 34.420424532535904,
                   "fontWeight": "bold",
@@ -985,7 +1158,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
                   "marginRight": "5%",
                   "textAlign": "center",
                 },
-                Object {
+                {
                   "maxWidth": 187.5,
                 },
               ]
@@ -997,16 +1170,16 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
             name="shuffle"
             size={53.36}
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "#104e01",
                 },
-                Object {
-                  "transform": Array [
-                    Object {
+                {
+                  "transform": [
+                    {
                       "rotateZ": "270deg",
                     },
-                    Object {
+                    {
                       "rotateX": "180deg",
                     },
                   ],
@@ -1018,7 +1191,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
       </View>
       <View
         style={
-          Object {
+          {
             "alignSelf": "center",
             "flexDirection": "row",
             "justifyContent": "space-between",
@@ -1027,6 +1200,23 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
         }
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -1038,7 +1228,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#fff59b",
               "borderColor": "#104e01",
@@ -1058,7 +1248,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
             name="image-plus"
             size={53.36}
             style={
-              Object {
+              {
                 "color": "#104e01",
               }
             }
@@ -1066,7 +1256,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
           <Text
             maxFontSizeMultiplier={1.5}
             style={
-              Object {
+              {
                 "color": "#104e01",
                 "fontSize": 34.420424532535904,
                 "fontWeight": "bold",
@@ -1080,6 +1270,23 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
           </Text>
         </View>
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -1091,7 +1298,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#fff59b",
               "borderColor": "#104e01",
@@ -1111,7 +1318,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
             name="image-off"
             size={53.36}
             style={
-              Object {
+              {
                 "color": "#104e01",
               }
             }
@@ -1119,7 +1326,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
           <Text
             maxFontSizeMultiplier={1.5}
             style={
-              Object {
+              {
                 "color": "#104e01",
                 "fontSize": 34.420424532535904,
                 "fontWeight": "bold",
@@ -1134,6 +1341,23 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
         </View>
       </View>
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={true}
         collapsable={false}
         focusable={true}
@@ -1145,7 +1369,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": "#fff59b",
             "borderColor": "#104e01",
@@ -1167,7 +1391,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
           name="camera"
           size={53.36}
           style={
-            Object {
+            {
               "color": "#104e01",
             }
           }
@@ -1175,7 +1399,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
         <Text
           maxFontSizeMultiplier={1.5}
           style={
-            Object {
+            {
               "color": "#104e01",
               "fontSize": 34.420424532535904,
               "fontWeight": "bold",
@@ -1189,6 +1413,23 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
         </Text>
       </View>
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={true}
         collapsable={false}
         focusable={true}
@@ -1200,7 +1441,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": "#fff59b",
             "borderColor": "#104e01",
@@ -1222,7 +1463,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
           name="camera-image"
           size={53.36}
           style={
-            Object {
+            {
               "color": "#104e01",
             }
           }
@@ -1230,7 +1471,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
         <Text
           maxFontSizeMultiplier={1.5}
           style={
-            Object {
+            {
               "color": "#104e01",
               "fontSize": 34.420424532535904,
               "fontWeight": "bold",
@@ -1245,20 +1486,37 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
       </View>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "alignSelf": "center",
               "flexDirection": "row",
               "justifyContent": "space-between",
               "width": 600,
             },
-            Object {
+            {
               "marginBottom": 26.68,
             },
           ]
         }
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -1270,7 +1528,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#720000",
               "borderColor": "#104e01",
@@ -1290,7 +1548,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
             name="cancel"
             size={53.36}
             style={
-              Object {
+              {
                 "color": "#fff59b",
               }
             }
@@ -1298,7 +1556,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
           <Text
             maxFontSizeMultiplier={1.5}
             style={
-              Object {
+              {
                 "color": "#fff59b",
                 "fontSize": 34.420424532535904,
                 "fontWeight": "bold",
@@ -1312,6 +1570,23 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
           </Text>
         </View>
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -1323,7 +1598,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#104e01",
               "borderColor": "#104e01",
@@ -1343,7 +1618,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
             name="check"
             size={53.36}
             style={
-              Object {
+              {
                 "color": "#fff59b",
               }
             }
@@ -1351,7 +1626,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
           <Text
             maxFontSizeMultiplier={1.5}
             style={
-              Object {
+              {
                 "color": "#fff59b",
                 "fontSize": 34.420424532535904,
                 "fontWeight": "bold",

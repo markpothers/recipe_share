@@ -51,7 +51,7 @@ describe("multiPicSourceChooser", () => {
 			mockSaveImages = jest.fn();
 			mockSourceChosen = jest.fn();
 
-			await waitFor(() => {
+			await waitFor(async() => {
 				const rendered = render(
 					<MultiPicSourceChooser
 						saveImages={mockSaveImages}
@@ -148,7 +148,7 @@ describe("multiPicSourceChooser", () => {
 			mockSaveImages = jest.fn();
 			mockSourceChosen = jest.fn();
 
-			await waitFor(() => {
+			await waitFor(async() => {
 				const rendered = render(
 					<MultiPicSourceChooser
 						saveImages={mockSaveImages}

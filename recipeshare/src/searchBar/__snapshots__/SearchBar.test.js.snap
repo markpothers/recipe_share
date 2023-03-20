@@ -3,7 +3,7 @@
 exports[`Search Bar can be rendered (with the delete button) matches its previous image 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "justifyContent": "center",
       "marginBottom": 6.67,
@@ -13,7 +13,7 @@ exports[`Search Bar can be rendered (with the delete button) matches its previou
 >
   <View
     style={
-      Object {
+      {
         "borderColor": "red",
         "borderWidth": 0,
         "overflow": "hidden",
@@ -23,7 +23,7 @@ exports[`Search Bar can be rendered (with the delete button) matches its previou
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "white",
           "borderColor": "#104e01",
@@ -45,7 +45,7 @@ exports[`Search Bar can be rendered (with the delete button) matches its previou
         onChangeText={[Function]}
         placeholder="SearchBar placeholder text"
         style={
-          Object {
+          {
             "backgroundColor": "white",
             "fontSize": 30.595932917809698,
             "minHeight": 80.03999999999999,
@@ -60,6 +60,23 @@ exports[`Search Bar can be rendered (with the delete button) matches its previou
       />
       <View
         accessibilityLabel="clear search text"
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={true}
         collapsable={false}
         focusable={true}
@@ -71,7 +88,7 @@ exports[`Search Bar can be rendered (with the delete button) matches its previou
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "alignSelf": "flex-end",
             "height": "100%",
@@ -86,7 +103,7 @@ exports[`Search Bar can be rendered (with the delete button) matches its previou
           name="close"
           size={46.690000000000005}
           style={
-            Object {
+            {
               "color": "#505050",
             }
           }
@@ -100,7 +117,7 @@ exports[`Search Bar can be rendered (with the delete button) matches its previou
 exports[`Search Bar can be rendered (without the delete button) matches its previous image 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "justifyContent": "center",
       "marginBottom": 6.67,
@@ -110,7 +127,7 @@ exports[`Search Bar can be rendered (without the delete button) matches its prev
 >
   <View
     style={
-      Object {
+      {
         "borderColor": "red",
         "borderWidth": 0,
         "overflow": "hidden",
@@ -120,7 +137,7 @@ exports[`Search Bar can be rendered (without the delete button) matches its prev
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "white",
           "borderColor": "#104e01",
@@ -142,7 +159,7 @@ exports[`Search Bar can be rendered (without the delete button) matches its prev
         onChangeText={[Function]}
         placeholder="SearchBar placeholder text"
         style={
-          Object {
+          {
             "backgroundColor": "white",
             "fontSize": 30.595932917809698,
             "minHeight": 80.03999999999999,

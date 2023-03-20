@@ -110,7 +110,7 @@ export class RecipesList extends React.Component {
 		await this.fetchRecipeList();
 		this.props.navigation.addListener("focus", this.respondToFocus);
 		// this.props.navigation.addListener("blur", this.respondToBlur);
-		this.setupHeaderScrollTopTopButton();
+		this.setupHeaderScrollToTopButton();
 	};
 
 	componentWillUnmount = () => {
@@ -128,7 +128,7 @@ export class RecipesList extends React.Component {
 	// respondToBlur = () => {};
 
 	respondToFocus = async () => {
-		this.setupHeaderScrollTopTopButton();
+		this.setupHeaderScrollToTopButton();
 		this.setState(
 			{
 				awaitingServer: true,
@@ -159,7 +159,7 @@ export class RecipesList extends React.Component {
 		);
 	};
 
-	setupHeaderScrollTopTopButton = () => {
+	setupHeaderScrollToTopButton = () => {
 		const { routes } = this.props.navigation?.getParent()?.getState();
 		if (this.props.navigation.isFocused()) {
 			this.props.navigation.getParent().setOptions({
@@ -226,6 +226,9 @@ export class RecipesList extends React.Component {
 						this.getRecipeList()
 					);
 				} catch (e) {
+					this.setState({
+						awaitingServer: false,
+					});
 					switch (e.name) {
 						case "Logout":
 							{

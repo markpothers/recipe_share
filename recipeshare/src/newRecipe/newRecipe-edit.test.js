@@ -8,7 +8,6 @@ import { postRecipe } from "../fetches/postRecipe";
 import { patchRecipe } from "../fetches/patchRecipe";
 import { postRecipeImage } from "../fetches/postRecipeImage";
 import { postInstructionImage } from "../fetches/postInstructionImage";
-// import { act } from "react-dom/test-utils";
 import { fetchIngredients } from "../fetches/fetchIngredients";
 import { ingredients } from "../../__mocks__/data/ingredients";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -83,6 +82,7 @@ describe("New Recipe page", () => {
 						navigation={{
 							navigate: mockNavigate,
 							setParams: jest.fn(),
+							setOptions: jest.fn()
 						}}
 						route={{
 							params: { recipe_details: rte },
@@ -254,6 +254,7 @@ describe("New Recipe page", () => {
 						navigation={{
 							navigate: mockNavigate,
 							setParams: jest.fn(),
+							setOptions: jest.fn()
 						}}
 						route={{
 							params: { recipe_details: rte },
@@ -298,6 +299,7 @@ describe("New Recipe page", () => {
 						navigation={{
 							navigate: mockNavigate,
 							setParams: jest.fn(),
+							setOptions: jest.fn()
 						}}
 						route={{
 							params: { recipe_details: rte },
@@ -360,6 +362,7 @@ describe("New Recipe page", () => {
 						navigation={{
 							navigate: mockNavigate,
 							setParams: jest.fn(),
+							setOptions: jest.fn()
 						}}
 						route={{
 							params: { recipe_details: rte },

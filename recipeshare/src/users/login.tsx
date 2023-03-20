@@ -68,14 +68,18 @@ export default function Login(props: OwnProps) {
 		const setRememberedEmail = async () => {
 			const storedEmail = await AsyncStorage.getItem("rememberedEmail");
 			if (storedEmail) {
-				await handleTextInput(storedEmail, "e_mail");
+				handleTextInput(storedEmail, "e_mail");
 				setRememberEmail(true);
 			}
 		};
 		setRememberedEmail();
 		return () => {
-			focusListener();
-			blurListener();
+			if (focusListener) {
+				focusListener();
+			}
+			if (blurListener) {
+				blurListener();
+			}
 		};
 	}, [props.navigation, handleTextInput]);
 
@@ -198,7 +202,6 @@ export default function Login(props: OwnProps) {
 				setError(response.message);
 			} catch {
 				setRenderOfflineMessage(true);
-
 			}
 			// const response = await getNewPassword(e_mail);
 			// // const response = await apiCall(getNewPassword, e_mail);
@@ -211,7 +214,6 @@ export default function Login(props: OwnProps) {
 		} else {
 			setLoginError(true);
 			setError("forgotPassword");
-
 		}
 		setAwaitingServer(false);
 	};

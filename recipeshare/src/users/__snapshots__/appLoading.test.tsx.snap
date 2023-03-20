@@ -3,7 +3,7 @@
 exports[`appLoading page should load and render with no saved login 1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -11,7 +11,7 @@ exports[`appLoading page should load and render with no saved login 1`] = `
   <View
     accessibilityIgnoresInvertColors={true}
     style={
-      Object {
+      {
         "flex": 1,
       }
     }
@@ -19,25 +19,25 @@ exports[`appLoading page should load and render with no saved login 1`] = `
     <Image
       source={1}
       style={
-        Array [
-          Object {
+        [
+          {
             "bottom": 0,
             "left": 0,
             "position": "absolute",
             "right": 0,
             "top": 0,
           },
-          Object {
+          {
             "height": undefined,
             "width": undefined,
           },
-          Object {},
+          {},
         ]
       }
     />
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "justifyContent": "center",
           "top": 133.4,
@@ -48,7 +48,7 @@ exports[`appLoading page should load and render with no saved login 1`] = `
         resizeMode="contain"
         source={1}
         style={
-          Object {
+          {
             "height": 266.8,
             "width": "75%",
           }

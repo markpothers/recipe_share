@@ -2,9 +2,8 @@
 
 exports[`About Page renders displaying licenses 1`] = `
 <RCTSafeAreaView
-  emulateUnlessSupported={true}
   style={
-    Object {
+    {
       "borderColor": "blue",
       "borderWidth": 0,
       "flex": 1,
@@ -15,7 +14,7 @@ exports[`About Page renders displaying licenses 1`] = `
     resizeMode="cover"
     source={1}
     style={
-      Object {
+      {
         "borderColor": "black",
         "borderWidth": 0,
         "height": 1334,
@@ -26,7 +25,7 @@ exports[`About Page renders displaying licenses 1`] = `
   />
   <View
     style={
-      Object {
+      {
         "borderColor": "red",
         "borderWidth": 0,
         "overflow": "hidden",
@@ -36,7 +35,7 @@ exports[`About Page renders displaying licenses 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "borderColor": "purple",
           "borderRadius": 11.25,
@@ -53,8 +52,8 @@ exports[`About Page renders displaying licenses 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "backgroundColor": "white",
               "borderColor": "#104e01",
@@ -65,7 +64,7 @@ exports[`About Page renders displaying licenses 1`] = `
               "overflow": "hidden",
               "width": "100%",
             },
-            Object {
+            {
               "justifyContent": "space-between",
             },
           ]
@@ -74,7 +73,7 @@ exports[`About Page renders displaying licenses 1`] = `
         <Text
           maxFontSizeMultiplier={2}
           style={
-            Object {
+            {
               "fontSize": 33.65552620959067,
               "padding": 15,
             }
@@ -85,7 +84,7 @@ exports[`About Page renders displaying licenses 1`] = `
         <Text
           maxFontSizeMultiplier={2}
           style={
-            Object {
+            {
               "fontSize": 33.65552620959067,
               "padding": 15,
             }
@@ -98,14 +97,14 @@ exports[`About Page renders displaying licenses 1`] = `
   </View>
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "borderColor": "red",
           "borderWidth": 0,
           "overflow": "hidden",
           "width": "100%",
         },
-        Object {
+        {
           "width": 750,
         },
       ]
@@ -113,7 +112,7 @@ exports[`About Page renders displaying licenses 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "borderColor": "purple",
           "borderRadius": 11.25,
@@ -129,6 +128,23 @@ exports[`About Page renders displaying licenses 1`] = `
       }
     >
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={true}
         collapsable={false}
         focusable={true}
@@ -140,7 +156,7 @@ exports[`About Page renders displaying licenses 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": "#fff59b",
             "borderColor": "#104e01",
@@ -162,7 +178,7 @@ exports[`About Page renders displaying licenses 1`] = `
           name="information"
           size={53.36}
           style={
-            Object {
+            {
               "color": "#104e01",
             }
           }
@@ -170,15 +186,15 @@ exports[`About Page renders displaying licenses 1`] = `
         <Text
           maxFontSizeMultiplier={2}
           style={
-            Array [
-              Object {
+            [
+              {
                 "color": "#104e01",
                 "fontSize": 27.53633962602873,
                 "fontWeight": "bold",
                 "paddingHorizontal": 7.5,
                 "textAlign": "center",
               },
-              Object {
+              {
                 "fontSize": 33.65552620959067,
               },
             ]
@@ -191,14 +207,14 @@ exports[`About Page renders displaying licenses 1`] = `
   </View>
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "borderColor": "red",
           "borderWidth": 0,
           "overflow": "hidden",
           "width": "100%",
         },
-        Object {
+        {
           "width": 750,
         },
       ]
@@ -206,7 +222,7 @@ exports[`About Page renders displaying licenses 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "borderColor": "purple",
           "borderRadius": 11.25,
@@ -222,6 +238,23 @@ exports[`About Page renders displaying licenses 1`] = `
       }
     >
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={true}
         collapsable={false}
         focusable={true}
@@ -233,7 +266,7 @@ exports[`About Page renders displaying licenses 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": "#fff59b",
             "borderColor": "#104e01",
@@ -255,7 +288,7 @@ exports[`About Page renders displaying licenses 1`] = `
           name="information-outline"
           size={53.36}
           style={
-            Object {
+            {
               "color": "#104e01",
             }
           }
@@ -263,15 +296,15 @@ exports[`About Page renders displaying licenses 1`] = `
         <Text
           maxFontSizeMultiplier={2}
           style={
-            Array [
-              Object {
+            [
+              {
                 "color": "#104e01",
                 "fontSize": 27.53633962602873,
                 "fontWeight": "bold",
                 "paddingHorizontal": 7.5,
                 "textAlign": "center",
               },
-              Object {
+              {
                 "fontSize": 33.65552620959067,
               },
             ]
@@ -284,14 +317,14 @@ exports[`About Page renders displaying licenses 1`] = `
   </View>
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "borderColor": "red",
           "borderWidth": 0,
           "overflow": "hidden",
           "width": "100%",
         },
-        Object {
+        {
           "width": 750,
         },
       ]
@@ -299,7 +332,7 @@ exports[`About Page renders displaying licenses 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "borderColor": "purple",
           "borderRadius": 11.25,
@@ -316,8 +349,8 @@ exports[`About Page renders displaying licenses 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "backgroundColor": "#104e01",
               "borderColor": "#104e01",
@@ -330,7 +363,7 @@ exports[`About Page renders displaying licenses 1`] = `
               "minHeight": 80.03999999999999,
               "minWidth": 285,
             },
-            Object {
+            {
               "height": 80.03999999999999,
               "justifyContent": "flex-start",
               "maxWidth": "100%",
@@ -344,7 +377,7 @@ exports[`About Page renders displaying licenses 1`] = `
           name="cellphone-information"
           size={53.36}
           style={
-            Object {
+            {
               "color": "#fff59b",
             }
           }
@@ -352,15 +385,15 @@ exports[`About Page renders displaying licenses 1`] = `
         <Text
           maxFontSizeMultiplier={2}
           style={
-            Array [
-              Object {
+            [
+              {
                 "color": "#fff59b",
                 "fontSize": 27.53633962602873,
                 "fontWeight": "bold",
                 "paddingHorizontal": 7.5,
                 "textAlign": "center",
               },
-              Object {
+              {
                 "fontSize": 33.65552620959067,
               },
             ]
@@ -373,14 +406,14 @@ exports[`About Page renders displaying licenses 1`] = `
   </View>
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "borderColor": "red",
           "borderWidth": 0,
           "overflow": "hidden",
           "width": "100%",
         },
-        Object {
+        {
           "flex": 1,
         },
       ]
@@ -388,8 +421,8 @@ exports[`About Page renders displaying licenses 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignItems": "center",
             "borderColor": "purple",
             "borderRadius": 11.25,
@@ -402,7 +435,7 @@ exports[`About Page renders displaying licenses 1`] = `
             "overflow": "hidden",
             "width": "100%",
           },
-          Object {
+          {
             "flex": 1,
           },
         ]
@@ -410,7 +443,7 @@ exports[`About Page renders displaying licenses 1`] = `
     >
       <RCTScrollView
         style={
-          Object {
+          {
             "backgroundColor": "white",
             "borderColor": "#104e01",
             "borderRadius": 11.25,
@@ -423,7 +456,7 @@ exports[`About Page renders displaying licenses 1`] = `
         <View>
           <View
             style={
-              Object {
+              {
                 "height": "100%",
                 "padding": 15,
                 "width": "100%",
@@ -446,7 +479,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </Text>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -464,6 +497,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -475,14 +525,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -493,7 +543,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -511,6 +561,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -522,14 +589,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -540,7 +607,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -558,6 +625,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -569,14 +653,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -587,7 +671,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -605,6 +689,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -616,14 +717,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -634,7 +735,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -652,6 +753,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -663,14 +781,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -681,7 +799,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -699,6 +817,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -710,14 +845,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -728,7 +863,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -746,6 +881,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -757,14 +909,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -775,7 +927,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -793,6 +945,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -804,14 +973,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -822,7 +991,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -840,6 +1009,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -851,14 +1037,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -869,7 +1055,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -887,6 +1073,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -898,14 +1101,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -916,7 +1119,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -934,6 +1137,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -945,14 +1165,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -963,7 +1183,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -977,10 +1197,26 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <Text>
-                
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -992,14 +1228,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -1010,7 +1246,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -1028,6 +1264,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -1039,14 +1292,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -1057,7 +1310,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -1075,6 +1328,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -1086,14 +1356,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -1104,7 +1374,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -1122,6 +1392,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -1133,14 +1420,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -1151,7 +1438,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -1169,6 +1456,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -1180,14 +1484,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -1198,7 +1502,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -1216,6 +1520,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -1227,14 +1548,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -1245,7 +1566,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -1263,6 +1584,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -1274,14 +1612,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -1292,7 +1630,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -1310,6 +1648,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -1321,14 +1676,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -1339,7 +1694,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -1357,6 +1712,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -1368,14 +1740,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -1386,7 +1758,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -1404,6 +1776,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -1415,14 +1804,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -1433,7 +1822,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -1451,6 +1840,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -1462,14 +1868,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -1480,7 +1886,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -1498,6 +1904,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -1509,14 +1932,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -1527,7 +1950,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -1545,6 +1968,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -1556,14 +1996,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -1574,7 +2014,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -1592,6 +2032,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -1603,14 +2060,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -1621,7 +2078,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -1639,6 +2096,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -1650,14 +2124,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -1668,7 +2142,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -1686,6 +2160,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -1697,14 +2188,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -1715,7 +2206,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -1733,6 +2224,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -1744,14 +2252,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -1762,7 +2270,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -1780,6 +2288,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -1791,14 +2316,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -1809,7 +2334,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -1823,10 +2348,26 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <Text>
-                
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -1838,14 +2379,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -1856,7 +2397,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -1874,6 +2415,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -1885,14 +2443,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -1903,7 +2461,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -1921,6 +2479,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -1932,14 +2507,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -1950,7 +2525,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -1968,6 +2543,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -1979,14 +2571,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -1997,7 +2589,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -2015,6 +2607,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -2026,14 +2635,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -2044,7 +2653,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -2062,6 +2671,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -2073,14 +2699,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -2091,7 +2717,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -2105,10 +2731,26 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <Text>
-                
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -2120,14 +2762,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -2138,7 +2780,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -2156,6 +2798,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -2167,14 +2826,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -2185,7 +2844,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -2203,6 +2862,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -2214,14 +2890,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -2232,7 +2908,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -2250,6 +2926,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -2261,14 +2954,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -2279,7 +2972,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -2297,6 +2990,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -2308,14 +3018,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -2326,7 +3036,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -2344,6 +3054,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -2355,14 +3082,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -2373,7 +3100,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -2391,6 +3118,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -2402,14 +3146,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -2420,7 +3164,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -2438,6 +3182,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -2449,14 +3210,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -2467,7 +3228,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -2485,6 +3246,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -2496,14 +3274,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -2514,7 +3292,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -2532,6 +3310,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -2543,14 +3338,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -2561,7 +3356,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -2579,6 +3374,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -2590,14 +3402,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -2608,7 +3420,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -2626,6 +3438,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -2637,14 +3466,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -2655,7 +3484,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -2673,6 +3502,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -2684,14 +3530,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -2702,7 +3548,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -2720,6 +3566,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -2731,14 +3594,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -2749,7 +3612,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -2767,6 +3630,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -2778,14 +3658,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -2796,7 +3676,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </View>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "flexWrap": "wrap",
                   "marginHorizontal": 15,
@@ -2814,6 +3694,23 @@ exports[`About Page renders displaying licenses 1`] = `
                 ; 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -2825,14 +3722,14 @@ exports[`About Page renders displaying licenses 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                     }
                   }
@@ -2851,9 +3748,8 @@ exports[`About Page renders displaying licenses 1`] = `
 
 exports[`About Page renders displaying privacy policy 1`] = `
 <RCTSafeAreaView
-  emulateUnlessSupported={true}
   style={
-    Object {
+    {
       "borderColor": "blue",
       "borderWidth": 0,
       "flex": 1,
@@ -2864,7 +3760,7 @@ exports[`About Page renders displaying privacy policy 1`] = `
     resizeMode="cover"
     source={1}
     style={
-      Object {
+      {
         "borderColor": "black",
         "borderWidth": 0,
         "height": 1334,
@@ -2875,7 +3771,7 @@ exports[`About Page renders displaying privacy policy 1`] = `
   />
   <View
     style={
-      Object {
+      {
         "borderColor": "red",
         "borderWidth": 0,
         "overflow": "hidden",
@@ -2885,7 +3781,7 @@ exports[`About Page renders displaying privacy policy 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "borderColor": "purple",
           "borderRadius": 11.25,
@@ -2902,8 +3798,8 @@ exports[`About Page renders displaying privacy policy 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "backgroundColor": "white",
               "borderColor": "#104e01",
@@ -2914,7 +3810,7 @@ exports[`About Page renders displaying privacy policy 1`] = `
               "overflow": "hidden",
               "width": "100%",
             },
-            Object {
+            {
               "justifyContent": "space-between",
             },
           ]
@@ -2923,7 +3819,7 @@ exports[`About Page renders displaying privacy policy 1`] = `
         <Text
           maxFontSizeMultiplier={2}
           style={
-            Object {
+            {
               "fontSize": 33.65552620959067,
               "padding": 15,
             }
@@ -2934,7 +3830,7 @@ exports[`About Page renders displaying privacy policy 1`] = `
         <Text
           maxFontSizeMultiplier={2}
           style={
-            Object {
+            {
               "fontSize": 33.65552620959067,
               "padding": 15,
             }
@@ -2947,14 +3843,14 @@ exports[`About Page renders displaying privacy policy 1`] = `
   </View>
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "borderColor": "red",
           "borderWidth": 0,
           "overflow": "hidden",
           "width": "100%",
         },
-        Object {
+        {
           "width": 750,
         },
       ]
@@ -2962,7 +3858,7 @@ exports[`About Page renders displaying privacy policy 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "borderColor": "purple",
           "borderRadius": 11.25,
@@ -2978,6 +3874,23 @@ exports[`About Page renders displaying privacy policy 1`] = `
       }
     >
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={true}
         collapsable={false}
         focusable={true}
@@ -2989,7 +3902,7 @@ exports[`About Page renders displaying privacy policy 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": "#fff59b",
             "borderColor": "#104e01",
@@ -3011,7 +3924,7 @@ exports[`About Page renders displaying privacy policy 1`] = `
           name="information"
           size={53.36}
           style={
-            Object {
+            {
               "color": "#104e01",
             }
           }
@@ -3019,15 +3932,15 @@ exports[`About Page renders displaying privacy policy 1`] = `
         <Text
           maxFontSizeMultiplier={2}
           style={
-            Array [
-              Object {
+            [
+              {
                 "color": "#104e01",
                 "fontSize": 27.53633962602873,
                 "fontWeight": "bold",
                 "paddingHorizontal": 7.5,
                 "textAlign": "center",
               },
-              Object {
+              {
                 "fontSize": 33.65552620959067,
               },
             ]
@@ -3040,14 +3953,14 @@ exports[`About Page renders displaying privacy policy 1`] = `
   </View>
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "borderColor": "red",
           "borderWidth": 0,
           "overflow": "hidden",
           "width": "100%",
         },
-        Object {
+        {
           "width": 750,
         },
       ]
@@ -3055,7 +3968,7 @@ exports[`About Page renders displaying privacy policy 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "borderColor": "purple",
           "borderRadius": 11.25,
@@ -3072,8 +3985,8 @@ exports[`About Page renders displaying privacy policy 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "backgroundColor": "#104e01",
               "borderColor": "#104e01",
@@ -3086,7 +3999,7 @@ exports[`About Page renders displaying privacy policy 1`] = `
               "minHeight": 80.03999999999999,
               "minWidth": 285,
             },
-            Object {
+            {
               "height": 80.03999999999999,
               "justifyContent": "flex-start",
               "maxWidth": "100%",
@@ -3100,7 +4013,7 @@ exports[`About Page renders displaying privacy policy 1`] = `
           name="information-outline"
           size={53.36}
           style={
-            Object {
+            {
               "color": "#fff59b",
             }
           }
@@ -3108,15 +4021,15 @@ exports[`About Page renders displaying privacy policy 1`] = `
         <Text
           maxFontSizeMultiplier={2}
           style={
-            Array [
-              Object {
+            [
+              {
                 "color": "#fff59b",
                 "fontSize": 27.53633962602873,
                 "fontWeight": "bold",
                 "paddingHorizontal": 7.5,
                 "textAlign": "center",
               },
-              Object {
+              {
                 "fontSize": 33.65552620959067,
               },
             ]
@@ -3129,14 +4042,14 @@ exports[`About Page renders displaying privacy policy 1`] = `
   </View>
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "borderColor": "red",
           "borderWidth": 0,
           "overflow": "hidden",
           "width": "100%",
         },
-        Object {
+        {
           "width": 750,
         },
       ]
@@ -3144,7 +4057,7 @@ exports[`About Page renders displaying privacy policy 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "borderColor": "purple",
           "borderRadius": 11.25,
@@ -3160,6 +4073,23 @@ exports[`About Page renders displaying privacy policy 1`] = `
       }
     >
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={true}
         collapsable={false}
         focusable={true}
@@ -3171,7 +4101,7 @@ exports[`About Page renders displaying privacy policy 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": "#fff59b",
             "borderColor": "#104e01",
@@ -3193,7 +4123,7 @@ exports[`About Page renders displaying privacy policy 1`] = `
           name="cellphone-information"
           size={53.36}
           style={
-            Object {
+            {
               "color": "#104e01",
             }
           }
@@ -3201,15 +4131,15 @@ exports[`About Page renders displaying privacy policy 1`] = `
         <Text
           maxFontSizeMultiplier={2}
           style={
-            Array [
-              Object {
+            [
+              {
                 "color": "#104e01",
                 "fontSize": 27.53633962602873,
                 "fontWeight": "bold",
                 "paddingHorizontal": 7.5,
                 "textAlign": "center",
               },
-              Object {
+              {
                 "fontSize": 33.65552620959067,
               },
             ]
@@ -3222,14 +4152,14 @@ exports[`About Page renders displaying privacy policy 1`] = `
   </View>
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "borderColor": "red",
           "borderWidth": 0,
           "overflow": "hidden",
           "width": "100%",
         },
-        Object {
+        {
           "flex": 1,
         },
       ]
@@ -3237,8 +4167,8 @@ exports[`About Page renders displaying privacy policy 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignItems": "center",
             "borderColor": "purple",
             "borderRadius": 11.25,
@@ -3251,7 +4181,7 @@ exports[`About Page renders displaying privacy policy 1`] = `
             "overflow": "hidden",
             "width": "100%",
           },
-          Object {
+          {
             "flex": 1,
           },
         ]
@@ -3259,7 +4189,7 @@ exports[`About Page renders displaying privacy policy 1`] = `
     >
       <RCTScrollView
         style={
-          Object {
+          {
             "backgroundColor": "white",
             "borderColor": "#104e01",
             "borderRadius": 11.25,
@@ -3274,7 +4204,7 @@ exports[`About Page renders displaying privacy policy 1`] = `
             <Text
               maxFontSizeMultiplier={2}
               style={
-                Object {
+                {
                   "fontSize": 33.65552620959067,
                   "padding": 15,
                 }
@@ -3545,7 +4475,7 @@ If you have any questions about this Privacy Policy, please contact us:
             </Text>
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "marginLeft": 15,
                 }
@@ -3553,7 +4483,7 @@ If you have any questions about this Privacy Policy, please contact us:
             >
               <Text
                 style={
-                  Object {
+                  {
                     "fontSize": 33.65552620959067,
                   }
                 }
@@ -3561,6 +4491,23 @@ If you have any questions about this Privacy Policy, please contact us:
                 * By email: 
               </Text>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -3572,14 +4519,14 @@ If you have any questions about this Privacy Policy, please contact us:
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "blue",
                       "fontSize": 33.65552620959067,
                       "marginBottom": 30,
@@ -3600,9 +4547,8 @@ If you have any questions about this Privacy Policy, please contact us:
 
 exports[`About Page renders displaying t & c by default 1`] = `
 <RCTSafeAreaView
-  emulateUnlessSupported={true}
   style={
-    Object {
+    {
       "borderColor": "blue",
       "borderWidth": 0,
       "flex": 1,
@@ -3613,7 +4559,7 @@ exports[`About Page renders displaying t & c by default 1`] = `
     resizeMode="cover"
     source={1}
     style={
-      Object {
+      {
         "borderColor": "black",
         "borderWidth": 0,
         "height": 1334,
@@ -3624,7 +4570,7 @@ exports[`About Page renders displaying t & c by default 1`] = `
   />
   <View
     style={
-      Object {
+      {
         "borderColor": "red",
         "borderWidth": 0,
         "overflow": "hidden",
@@ -3634,7 +4580,7 @@ exports[`About Page renders displaying t & c by default 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "borderColor": "purple",
           "borderRadius": 11.25,
@@ -3651,8 +4597,8 @@ exports[`About Page renders displaying t & c by default 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "backgroundColor": "white",
               "borderColor": "#104e01",
@@ -3663,7 +4609,7 @@ exports[`About Page renders displaying t & c by default 1`] = `
               "overflow": "hidden",
               "width": "100%",
             },
-            Object {
+            {
               "justifyContent": "space-between",
             },
           ]
@@ -3672,7 +4618,7 @@ exports[`About Page renders displaying t & c by default 1`] = `
         <Text
           maxFontSizeMultiplier={2}
           style={
-            Object {
+            {
               "fontSize": 33.65552620959067,
               "padding": 15,
             }
@@ -3683,7 +4629,7 @@ exports[`About Page renders displaying t & c by default 1`] = `
         <Text
           maxFontSizeMultiplier={2}
           style={
-            Object {
+            {
               "fontSize": 33.65552620959067,
               "padding": 15,
             }
@@ -3696,14 +4642,14 @@ exports[`About Page renders displaying t & c by default 1`] = `
   </View>
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "borderColor": "red",
           "borderWidth": 0,
           "overflow": "hidden",
           "width": "100%",
         },
-        Object {
+        {
           "width": 750,
         },
       ]
@@ -3711,7 +4657,7 @@ exports[`About Page renders displaying t & c by default 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "borderColor": "purple",
           "borderRadius": 11.25,
@@ -3728,8 +4674,8 @@ exports[`About Page renders displaying t & c by default 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "backgroundColor": "#104e01",
               "borderColor": "#104e01",
@@ -3742,7 +4688,7 @@ exports[`About Page renders displaying t & c by default 1`] = `
               "minHeight": 80.03999999999999,
               "minWidth": 285,
             },
-            Object {
+            {
               "height": 80.03999999999999,
               "justifyContent": "flex-start",
               "maxWidth": "100%",
@@ -3756,7 +4702,7 @@ exports[`About Page renders displaying t & c by default 1`] = `
           name="information"
           size={53.36}
           style={
-            Object {
+            {
               "color": "#fff59b",
             }
           }
@@ -3764,15 +4710,15 @@ exports[`About Page renders displaying t & c by default 1`] = `
         <Text
           maxFontSizeMultiplier={2}
           style={
-            Array [
-              Object {
+            [
+              {
                 "color": "#fff59b",
                 "fontSize": 27.53633962602873,
                 "fontWeight": "bold",
                 "paddingHorizontal": 7.5,
                 "textAlign": "center",
               },
-              Object {
+              {
                 "fontSize": 33.65552620959067,
               },
             ]
@@ -3785,14 +4731,14 @@ exports[`About Page renders displaying t & c by default 1`] = `
   </View>
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "borderColor": "red",
           "borderWidth": 0,
           "overflow": "hidden",
           "width": "100%",
         },
-        Object {
+        {
           "width": 750,
         },
       ]
@@ -3800,7 +4746,7 @@ exports[`About Page renders displaying t & c by default 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "borderColor": "purple",
           "borderRadius": 11.25,
@@ -3816,6 +4762,23 @@ exports[`About Page renders displaying t & c by default 1`] = `
       }
     >
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={true}
         collapsable={false}
         focusable={true}
@@ -3827,7 +4790,7 @@ exports[`About Page renders displaying t & c by default 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": "#fff59b",
             "borderColor": "#104e01",
@@ -3849,7 +4812,7 @@ exports[`About Page renders displaying t & c by default 1`] = `
           name="information-outline"
           size={53.36}
           style={
-            Object {
+            {
               "color": "#104e01",
             }
           }
@@ -3857,15 +4820,15 @@ exports[`About Page renders displaying t & c by default 1`] = `
         <Text
           maxFontSizeMultiplier={2}
           style={
-            Array [
-              Object {
+            [
+              {
                 "color": "#104e01",
                 "fontSize": 27.53633962602873,
                 "fontWeight": "bold",
                 "paddingHorizontal": 7.5,
                 "textAlign": "center",
               },
-              Object {
+              {
                 "fontSize": 33.65552620959067,
               },
             ]
@@ -3878,14 +4841,14 @@ exports[`About Page renders displaying t & c by default 1`] = `
   </View>
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "borderColor": "red",
           "borderWidth": 0,
           "overflow": "hidden",
           "width": "100%",
         },
-        Object {
+        {
           "width": 750,
         },
       ]
@@ -3893,7 +4856,7 @@ exports[`About Page renders displaying t & c by default 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "borderColor": "purple",
           "borderRadius": 11.25,
@@ -3909,6 +4872,23 @@ exports[`About Page renders displaying t & c by default 1`] = `
       }
     >
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={true}
         collapsable={false}
         focusable={true}
@@ -3920,7 +4900,7 @@ exports[`About Page renders displaying t & c by default 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": "#fff59b",
             "borderColor": "#104e01",
@@ -3942,7 +4922,7 @@ exports[`About Page renders displaying t & c by default 1`] = `
           name="cellphone-information"
           size={53.36}
           style={
-            Object {
+            {
               "color": "#104e01",
             }
           }
@@ -3950,15 +4930,15 @@ exports[`About Page renders displaying t & c by default 1`] = `
         <Text
           maxFontSizeMultiplier={2}
           style={
-            Array [
-              Object {
+            [
+              {
                 "color": "#104e01",
                 "fontSize": 27.53633962602873,
                 "fontWeight": "bold",
                 "paddingHorizontal": 7.5,
                 "textAlign": "center",
               },
-              Object {
+              {
                 "fontSize": 33.65552620959067,
               },
             ]
@@ -3971,14 +4951,14 @@ exports[`About Page renders displaying t & c by default 1`] = `
   </View>
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "borderColor": "red",
           "borderWidth": 0,
           "overflow": "hidden",
           "width": "100%",
         },
-        Object {
+        {
           "flex": 1,
         },
       ]
@@ -3986,8 +4966,8 @@ exports[`About Page renders displaying t & c by default 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignItems": "center",
             "borderColor": "purple",
             "borderRadius": 11.25,
@@ -4000,7 +4980,7 @@ exports[`About Page renders displaying t & c by default 1`] = `
             "overflow": "hidden",
             "width": "100%",
           },
-          Object {
+          {
             "flex": 1,
           },
         ]
@@ -4008,7 +4988,7 @@ exports[`About Page renders displaying t & c by default 1`] = `
     >
       <RCTScrollView
         style={
-          Object {
+          {
             "backgroundColor": "white",
             "borderColor": "#104e01",
             "borderRadius": 11.25,
@@ -4023,7 +5003,7 @@ exports[`About Page renders displaying t & c by default 1`] = `
             <Text
               maxFontSizeMultiplier={2}
               style={
-                Object {
+                {
                   "fontSize": 33.65552620959067,
                   "padding": 15,
                 }
@@ -4160,6 +5140,23 @@ Contact Us
 If you have any questions about these Terms, please contact us at:
             </Text>
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
@@ -4171,14 +5168,14 @@ If you have any questions about these Terms, please contact us at:
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "opacity": 1,
                 }
               }
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "blue",
                     "fontSize": 33.65552620959067,
                     "marginBottom": 30,
