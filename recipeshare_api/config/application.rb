@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 module RecipeshareApi
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.0
+    config.load_defaults 7.0
 
     # configure logging level to :warn if you want to stop base64 logging
     config.log_level = :debug
