@@ -2,16 +2,15 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_24_220352) do
-
+ActiveRecord::Schema[7.0].define(version: 2023_03_22_140708) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,15 +27,15 @@ ActiveRecord::Schema.define(version: 2021_03_24_220352) do
     t.boolean "hidden", default: false
     t.string "hex"
     t.boolean "is_admin", default: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.string "profile_text"
     t.boolean "is_member", default: false
     t.boolean "activated", default: false
     t.string "activation_digest"
     t.boolean "password_is_auto"
-    t.datetime "password_created_at"
+    t.datetime "password_created_at", precision: nil
     t.boolean "deactivated", default: false
-    t.datetime "updated_at", null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "comments", force: :cascade do |t|
@@ -44,8 +43,8 @@ ActiveRecord::Schema.define(version: 2021_03_24_220352) do
     t.bigint "recipe_id"
     t.string "comment"
     t.boolean "hidden", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["chef_id"], name: "index_comments_on_chef_id"
     t.index ["recipe_id"], name: "index_comments_on_recipe_id"
   end
@@ -54,8 +53,8 @@ ActiveRecord::Schema.define(version: 2021_03_24_220352) do
     t.bigint "followee_id"
     t.bigint "follower_id"
     t.boolean "hidden", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["followee_id"], name: "index_follows_on_followee_id"
     t.index ["follower_id"], name: "index_follows_on_follower_id"
   end
@@ -64,8 +63,8 @@ ActiveRecord::Schema.define(version: 2021_03_24_220352) do
     t.bigint "requestor_id"
     t.bigint "acceptor_id"
     t.boolean "hidden", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["acceptor_id"], name: "index_friendships_on_acceptor_id"
     t.index ["requestor_id"], name: "index_friendships_on_requestor_id"
   end
@@ -77,8 +76,8 @@ ActiveRecord::Schema.define(version: 2021_03_24_220352) do
     t.string "unit"
     t.integer "index"
     t.boolean "hidden", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["ingredient_id"], name: "index_ingredient_uses_on_ingredient_id"
     t.index ["recipe_id"], name: "index_ingredient_uses_on_recipe_id"
   end
@@ -86,8 +85,8 @@ ActiveRecord::Schema.define(version: 2021_03_24_220352) do
   create_table "ingredients", force: :cascade do |t|
     t.string "name"
     t.boolean "hidden", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "instruction_images", force: :cascade do |t|
@@ -96,8 +95,8 @@ ActiveRecord::Schema.define(version: 2021_03_24_220352) do
     t.string "image_url"
     t.string "hex"
     t.boolean "hidden", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["instruction_id"], name: "index_instruction_images_on_instruction_id"
   end
 
@@ -106,8 +105,8 @@ ActiveRecord::Schema.define(version: 2021_03_24_220352) do
     t.integer "step"
     t.bigint "recipe_id"
     t.boolean "hidden", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["recipe_id"], name: "index_instructions_on_recipe_id"
   end
 
@@ -118,8 +117,8 @@ ActiveRecord::Schema.define(version: 2021_03_24_220352) do
     t.string "hex"
     t.boolean "hidden", default: false
     t.string "comment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["chef_id"], name: "index_make_pics_on_chef_id"
     t.index ["recipe_id"], name: "index_make_pics_on_recipe_id"
   end
@@ -128,8 +127,8 @@ ActiveRecord::Schema.define(version: 2021_03_24_220352) do
     t.bigint "recipe_id"
     t.bigint "chef_id"
     t.boolean "hidden", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["chef_id"], name: "index_re_shares_on_chef_id"
     t.index ["recipe_id"], name: "index_re_shares_on_recipe_id"
   end
@@ -141,8 +140,8 @@ ActiveRecord::Schema.define(version: 2021_03_24_220352) do
     t.string "hex"
     t.integer "index"
     t.boolean "hidden", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["recipe_id"], name: "index_recipe_images_on_recipe_id"
   end
 
@@ -150,8 +149,8 @@ ActiveRecord::Schema.define(version: 2021_03_24_220352) do
     t.bigint "chef_id"
     t.bigint "recipe_id"
     t.boolean "hidden", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["chef_id"], name: "index_recipe_likes_on_chef_id"
     t.index ["recipe_id"], name: "index_recipe_likes_on_recipe_id"
   end
@@ -164,8 +163,8 @@ ActiveRecord::Schema.define(version: 2021_03_24_220352) do
     t.string "comment"
     t.integer "tastiness"
     t.boolean "hidden", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["chef_id"], name: "index_recipe_makes_on_chef_id"
     t.index ["recipe_id"], name: "index_recipe_makes_on_recipe_id"
   end
@@ -202,8 +201,8 @@ ActiveRecord::Schema.define(version: 2021_03_24_220352) do
     t.boolean "white_meat"
     t.string "cuisine"
     t.string "serves"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "prep_time", default: 0
     t.integer "cook_time", default: 0
     t.integer "total_time", default: 0
