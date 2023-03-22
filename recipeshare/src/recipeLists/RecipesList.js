@@ -261,36 +261,40 @@ export class RecipesList extends React.Component {
 	};
 
 	fetchAdditionalRecipesForList = async () => {
-		try {
-			const result = await getRecipeList(
-				this.getRecipeListName(),
-				this.getQueryChefId(),
-				this.state.limit,
-				this.state.offset,
-				this.props.global_ranking,
-				this.props.loggedInChef.auth_token,
-				this.state.filterSettings,
-				this.state.selectedCuisine,
-				this.state.selectedServes,
-				this.state.searchTerm,
-				this.abortController
-			);
-			this.setState({
-				cuisineOptions: result.cuisines,
-				servesOptions: result.serves,
-				filterOptions: result.filters,
-			});
-			saveRecipeListsLocally(this.getQueryChefId(), this.props.loggedInChef.id, this.getRecipeListName(), [
-				...this.getRecipeList(),
-				...result.recipes,
-			]);
-			this.props.updateSingleRecipeList(this.props.route.key, [...this.getRecipeList(), ...result.recipes]);
-		} catch (e) {
-			if (e.name === "Logout") {
-				this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
+		// only run if there are recipes present already, otherwise it won't be needed, and it
+		// prevents running immediately on mount before initial fetch is finished
+		if (this.getRecipeList().length > 0) {
+			try {
+				const result = await getRecipeList(
+					this.getRecipeListName(),
+					this.getQueryChefId(),
+					this.state.limit,
+					this.state.offset,
+					this.props.global_ranking,
+					this.props.loggedInChef.auth_token,
+					this.state.filterSettings,
+					this.state.selectedCuisine,
+					this.state.selectedServes,
+					this.state.searchTerm,
+					this.abortController
+				);
+				this.setState({
+					cuisineOptions: result.cuisines,
+					servesOptions: result.serves,
+					filterOptions: result.filters,
+				});
+				saveRecipeListsLocally(this.getQueryChefId(), this.props.loggedInChef.id, this.getRecipeListName(), [
+					...this.getRecipeList(),
+					...result.recipes,
+				]);
+				this.props.updateSingleRecipeList(this.props.route.key, [...this.getRecipeList(), ...result.recipes]);
+			} catch (e) {
+				if (e.name === "Logout") {
+					this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
+				}
+				//console.log('failed to get ADDITIONAL recipes')
+				//console.log(e)
 			}
-			//console.log('failed to get ADDITIONAL recipes')
-			//console.log(e)
 		}
 	};
 

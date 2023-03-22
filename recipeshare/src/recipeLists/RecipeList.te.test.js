@@ -144,6 +144,7 @@ describe("Recipe List", () => {
 				)
 			);
 			await waitFor(() => expect(queryAllByTestId("activityIndicator").length).toEqual(0));
+			expect(getRecipeList).toHaveBeenCalledTimes(1);
 			expect(getByPlaceholderText("Search for Recipes")).toBeTruthy();
 			expect(queryAllByTestId("recipeCard").length).toEqual(recipeList.length);
 			expect(toJSON()).toMatchSnapshot();
