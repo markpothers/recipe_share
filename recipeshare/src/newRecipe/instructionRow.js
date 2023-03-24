@@ -13,7 +13,7 @@ export default class InstructionRow extends React.Component {
 					<Icon name="menu" size={responsiveHeight(3.5)} style={styles.ingredientTrashCan} />
 				</View>
 				<View
-					style={[centralStyles.formInputWhiteBackground, { width: "67%" }]}
+					style={[centralStyles.formInputWhiteBackground, { width: "57%" }]}
 					ref={(ref) => (this.textInput = ref)}
 					onLayout={(event) => {
 						var { height } = event.nativeEvent.layout;
@@ -37,9 +37,9 @@ export default class InstructionRow extends React.Component {
 						ref={(element) => this.props.inputToFocus && this.props.setNextInstructionInput(element)}
 					/>
 				</View>
-				{/* <TouchableOpacity style={[styles.deleteInstructionContainer, { width: '9%' }]} onPress={this.voice} activeOpacity={0.7}>
+				<TouchableOpacity style={[styles.deleteInstructionContainer, { width: '9%' }]} onPress={this.props.onMicrophonePress} activeOpacity={0.7}>
 					<Icon name='microphone' size={responsiveHeight(3.5)} style={styles.ingredientTrashCan} />
-				</TouchableOpacity> */}
+				</TouchableOpacity>
 				<TouchableOpacity
 					style={[
 						styles.deleteInstructionContainer,

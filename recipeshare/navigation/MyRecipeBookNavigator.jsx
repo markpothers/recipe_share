@@ -96,8 +96,8 @@ const Stack = createStackNavigator();
 const MyRecipeBookStack = () => {
 	return (
 		<Stack.Navigator
-			initialRouteName="MyRecipeBook"
-			// initialRouteName="NewRecipe"
+			// initialRouteName="MyRecipeBook"
+			initialRouteName="NewRecipe"
 			screenOptions={{
 				headerMode: "screen",
 				headerStyle: {

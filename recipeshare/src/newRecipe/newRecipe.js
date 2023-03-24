@@ -45,6 +45,7 @@ import { TextPopUp } from "../textPopUp/textPopUp"
 import { emptyRecipe } from "./recipeTemplates/emptyRecipe"
 import { longTestRecipe } from "./recipeTemplates/longTestRecipe" //eslint-disable-line no-unused-vars
 import { shortTestRecipe } from "./recipeTemplates/shortTestRecipe" //eslint-disable-line no-unused-vars
+import Voice, {SpeechRecognizedEvent, SpeechResultsEvent, SpeechErrorEvent} from "@react-native-voice/voice";
 
 const testing = __DEV__ ? false : false
 const testRecipe = shortTestRecipe
@@ -731,6 +732,10 @@ export default connect(
 					cancelChooseImage={this.cancelChooseInstructionImage}
 				/>
 			)
+		}
+
+		startStopSpeechRecognition = async () => {
+			console.log('speech recognition started')
 		}
 
 		saveInstructionImage = (image, index) => {
@@ -1578,6 +1583,7 @@ export default connect(
 																index ==
 																this.state.newRecipeDetails.instructions.length - 1
 															}
+															onMicrophonePress={this.startStopSpeechRecognition}
 														/>
 													)
 												}}

@@ -32,6 +32,7 @@
 				"NSCameraUsageDescription": "Recipe-Share requires access to your camera to let you set a profile picture and upload pictures of recipes. Your images will not be shared with 3rd parties outside the Recipe-Share app.",
 				"NSPhotoLibraryUsageDescription": "Recipe-Share requires access to your camera roll to let you set a profile picture and upload pictures of recipes. Your images will not be shared with 3rd parties outside the Recipe-Share app.",
 				"NSPhotoLibraryAddUsageDescription": "Recipe-Share requires access to your camera roll to let you set a profile picture and upload pictures of recipes. Your images will not be shared with 3rd parties outside the Recipe-Share app.",
+				"NSSpeechRecognitionUsageDescription": "Recipe-Share requires speech recognition permission to easier allow you to input instructions when creating a recipe.",
 				"UIRequiresFullScreen": true
 			}
 		},
@@ -57,6 +58,7 @@
 			"eas": {
 				"projectId": "2ebe3530-e000-11e9-a464-1daf89a8f23f"
 			}
-		}
+		},
+		"plugins": ["@react-native-voice/voice"]
 	}
 }
