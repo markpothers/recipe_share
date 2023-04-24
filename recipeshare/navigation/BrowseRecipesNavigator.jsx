@@ -31,7 +31,7 @@ const BrowseRecipesTabs = (props) => {
 
 	const addDynamicMenuButtonsToHeader = () => {
 		props.navigation.setOptions({
-			headerRight: Object.assign(() => <AppHeaderRight buttonAction={setDynamicMenuShowing}/>, { displayName: "HeaderRight" }),
+			headerRight: Object.assign(() => <AppHeaderRight buttonAction={setDynamicMenuShowing} accessibilityLabel={"Open action menu"}/>, { displayName: "HeaderRight" }),
 		})
 	}
 
