@@ -11,17 +11,13 @@ import { SoftwareLicenses } from "./softwareLicenses";
 import Constants from "expo-constants";
 
 export default class About extends React.Component {
-	scrollView = React.createRef();
+	scrollView = React.createRef<ScrollView>();
 	state = {
 		awaitingServer: false,
 		displayingTermsAndConditions: true,
 		displayingPrivacyPolicy: false,
 		displayingLicenses: false,
 	};
-
-	componentDidMount = async () => {};
-
-	componentWillUnmount = () => {};
 
 	viewTermsAndConditions = () => {
 		this.setState({
