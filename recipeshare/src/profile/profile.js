@@ -119,7 +119,12 @@ export default connect(
 		addDynamicMenuButtonsToHeader = () => {
 			this.props.navigation.setOptions({
 				headerRight: Object.assign(
-					() => <AppHeaderRight buttonAction={() => this.setState({ dynamicMenuShowing: true })} />,
+					() => (
+						<AppHeaderRight
+							buttonAction={() => this.setState({ dynamicMenuShowing: true })}
+							accessibilityLabel={"Open action menu"}
+						/>
+					),
 					{ displayName: "HeaderRight" }
 				),
 			});

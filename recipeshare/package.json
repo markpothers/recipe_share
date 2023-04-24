@@ -12,7 +12,8 @@
     "test": "node ./node_modules/jest/bin/jest.js --colors --runInBand --detectOpenHandles",
     "lint": "esw src navigation buildScripts --color",
     "lint:watch": "npm run lint -- --w --changed ",
-    "testServer": "json-server --watch ./testServer/testData.js --routes ./testServer/routes.json --host 10.0.0.145 --middlewares ./testServer/middleware.js"
+    "testServer": "json-server --watch ./testServer/testData.js --routes ./testServer/routes.json --host 10.0.0.78 --middlewares ./testServer/middleware.js",
+    "getipmac": "ipconfig getifaddr en0"
   },
   "dependencies": {
     "@expo/samples": "3.0.3",
@@ -32,6 +33,7 @@
     "expo-asset": "~8.9.1",
     "expo-camera": "~13.2.1",
     "expo-constants": "~14.2.1",
+    "expo-dev-client": "~2.1.6",
     "expo-device": "~5.2.1",
     "expo-file-system": "~15.2.2",
     "expo-font": "~11.1.1",
@@ -43,6 +45,7 @@
     "expo-media-library": "~15.2.3",
     "expo-secure-store": "~12.1.1",
     "expo-splash-screen": "~0.18.1",
+    "expo-status-bar": "~1.4.2",
     "gradle": "^1.0.9",
     "indent-string": "^4.0.0",
     "moment": "^2.24.0",
@@ -70,12 +73,11 @@
     "schedule": "0.5.0",
     "serialize-javascript": "^5.0.1",
     "sync-exec": "0.6.1",
-    "ws": "^7.1.2",
-    "expo-dev-client": "~2.1.6",
-    "expo-status-bar": "~1.4.2"
+    "ws": "^7.1.2"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.11.5",
+    "@cfaester/enzyme-adapter-react-18": "^0.7.0",
     "@testing-library/jest-native": "^5.4.0",
     "@testing-library/react-native": "^11.4.0",
     "@types/jest": "^27.4.1",
@@ -85,7 +87,6 @@
     "@types/react-redux": "^7.1.24",
     "@typescript-eslint/eslint-plugin": "^5.19.0",
     "@typescript-eslint/parser": "^5.19.0",
-    "@cfaester/enzyme-adapter-react-18": "^0.7.0",
     "babel-eslint": "^10.1.0",
     "babel-preset-expo": "^9.3.0",
     "enzyme": "^3.11.0",
@@ -101,6 +102,7 @@
     "jest-environment-enzyme": "^7.1.2",
     "jest-enzyme": "^7.1.2",
     "jest-expo": "^47.0.0",
+    "json-server": "^0.17.3",
     "react-dom": "18.2.0",
     "react-native-mock-render": "0.1.9",
     "react-test-renderer": "^18.2.0",
