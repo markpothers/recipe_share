@@ -102,6 +102,7 @@
     "jest-environment-enzyme": "^7.1.2",
     "jest-enzyme": "^7.1.2",
     "jest-expo": "^47.0.0",
+	"jest-fetch-mock": "3.0.3",
     "json-server": "^0.17.3",
     "react-dom": "18.2.0",
     "react-native-mock-render": "0.1.9",

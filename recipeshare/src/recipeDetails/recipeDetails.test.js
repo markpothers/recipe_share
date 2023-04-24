@@ -8,18 +8,19 @@ import { postRecipeLike } from "../fetches/postRecipeLike";
 import { postComment } from "../fetches/postComment";
 import { destroyComment } from "../fetches/destroyComment";
 import { destroyRecipeLike } from "../fetches/destroyRecipeLike";
-import { getChefDetails } from "../fetches/getChefDetails";
+// import { getChefDetails } from "../fetches/getChefDetails";
 import NetInfo from "@react-native-community/netinfo";
 import { configureStore } from "@reduxjs/toolkit";
 import { rootReducer, updateLoggedInChef, storeRecipeDetails, updateSingleRecipeList } from "../redux";
 import RecipeDetails from "./recipeDetails";
+import { databaseURL } from "../dataComponents/databaseURL";
 
 // manual mocks
 jest.mock("../auxFunctions/apiCall");
 jest.mock("../fetches/getAvailableFilters");
 jest.mock("../fetches/getRecipeList");
 jest.mock("../fetches/getRecipeDetails");
-jest.mock("../fetches/getChefDetails");
+// jest.mock("../fetches/getChefDetails");
 jest.mock("../fetches/postRecipeLike");
 jest.mock("../fetches/postReShare");
 jest.mock("../fetches/postComment");
@@ -46,6 +47,7 @@ describe("Recipe Details", () => {
 	beforeEach(() => {
 		// console.log('runs before every test')
 		jest.useFakeTimers();
+		fetch.resetMocks();
 
 		store = configureStore({
 			reducer: {
@@ -255,8 +257,8 @@ describe("Recipe Details", () => {
 			expect(queryAllByText("i like this recipe").length).toEqual(0);
 		});
 
-		test("can navigate to Chef", async () => {
-			getChefDetails.mockResolvedValue(chefDetails[0]);
+		test.only("can navigate to Chef", async () => {
+			fetch.mockResolvedValue({json: () => chefDetails[0]});
 			store.dispatch(storeRecipeDetails(recipeDetails[0]));
 			const { getByText } = await waitFor(
 				async () =>
@@ -268,9 +270,11 @@ describe("Recipe Details", () => {
 			);
 			const button = getByText("by Pothers");
 			await waitFor(() => fireEvent.press(button));
-
-			expect(getChefDetails).toHaveBeenCalledWith(1, "mockAuthToken");
-			expect(mockNavigate).toHaveBeenCalledWith("ChefDetails", { chefID: 1 });
+			expect(fetch).toHaveBeenCalledWith(`${databaseURL}/chefs/1`, {
+				headers: { Authorization: "Bearer mockAuthToken", "Content-Type": "application/json" },
+				method: "GET",
+			});
+			await waitFor(()=> expect(mockNavigate).toHaveBeenCalledWith("ChefDetails", { chefID: 1 }));
 		});
 	});
 });
