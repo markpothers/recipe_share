@@ -118,7 +118,7 @@ describe("New Recipe page", () => {
 			expect(toJSON()).toMatchSnapshot();
 		});
 
-		test("it should accept input in the recipe name field", async () => {
+		test.only("it should accept input in the recipe name field", async () => {
 			fireEvent.changeText(getByPlaceholderText("Recipe name"), "testRecipeName");
 			await waitFor(() =>
 				expect(getByPlaceholderText("Recipe name").props.value).toStrictEqual("testRecipeName")

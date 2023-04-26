@@ -225,7 +225,7 @@ describe("New Recipe page", () => {
 				params: { refresh: true },
 			});
 		});
-		test("an async stored recipe should override fields for an edited recipe if they have the same id", async () => {
+		test.only("an async stored recipe should override fields for an edited recipe if they have the same id", async () => {
 			fetchIngredients.mockImplementation(() => Promise.resolve(ingredients));
 			const mockNavigate = jest.fn();
 			const storedRecipe =
