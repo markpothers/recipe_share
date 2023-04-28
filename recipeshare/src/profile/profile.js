@@ -250,7 +250,7 @@ export default connect(
 		saveImage = async (image) => {
 			if (image.uri == "") {
 				this.setState({ imageFileUri: "DELETED" });
-			} else if (image.cancelled === false) {
+			} else if (image.canceled === false) {
 				this.setState({ imageFileUri: image.uri });
 			}
 		};

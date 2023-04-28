@@ -1,6 +1,7 @@
 import React from "react";
 import { render, fireEvent, waitFor, act } from "@testing-library/react-native";
-import MultiPicSourceChooser, { ImageSource } from "./multiPicSourceChooser";
+import MultiPicSourceChooser from "./multiPicSourceChooser";
+import { ImageSource } from "../centralTypes";
 
 // manual mocks
 
@@ -98,7 +99,7 @@ describe("multiPicSourceChooser", () => {
 			});
 			expect(mockSaveImages).toHaveBeenCalledWith([
 				{
-					cancelled: false,
+					canceled: false,
 					uri: "mockCameraUri",
 				},
 			]);
@@ -111,7 +112,7 @@ describe("multiPicSourceChooser", () => {
 			});
 			expect(mockSaveImages).toHaveBeenCalledWith([
 				{
-					cancelled: false,
+					canceled: false,
 					uri: "mockLibraryUri",
 				},
 			]);
@@ -221,7 +222,7 @@ describe("multiPicSourceChooser", () => {
 			});
 			expect(mockSaveImages).toHaveBeenCalledWith([
 				{
-					cancelled: false,
+					canceled: false,
 					uri: "mockCameraUri",
 				},
 				recipeImages[1],
@@ -243,7 +244,7 @@ describe("multiPicSourceChooser", () => {
 			expect(mockSaveImages).toHaveBeenCalledWith([
 				recipeImages[0],
 				{
-					cancelled: false,
+					canceled: false,
 					uri: "mockLibraryUri",
 				},
 			]);

@@ -855,7 +855,6 @@ exports[`New Recipe page New Recipe creation and functions if you set Blog, ingr
                 </Text>
               </View>
               <View
-                picker={true}
                 style={
                   {
                     "backgroundColor": "white",
@@ -992,7 +991,6 @@ exports[`New Recipe page New Recipe creation and functions if you set Blog, ingr
                 </Text>
               </View>
               <View
-                picker={true}
                 style={
                   {
                     "backgroundColor": "white",
@@ -1129,7 +1127,6 @@ exports[`New Recipe page New Recipe creation and functions if you set Blog, ingr
                 </Text>
               </View>
               <View
-                picker={true}
                 style={
                   {
                     "backgroundColor": "white",
@@ -3316,7 +3313,6 @@ exports[`New Recipe page New Recipe creation and functions if you set Full Recip
                 </Text>
               </View>
               <View
-                picker={true}
                 style={
                   {
                     "backgroundColor": "white",
@@ -3453,7 +3449,6 @@ exports[`New Recipe page New Recipe creation and functions if you set Full Recip
                 </Text>
               </View>
               <View
-                picker={true}
                 style={
                   {
                     "backgroundColor": "white",
@@ -3590,7 +3585,6 @@ exports[`New Recipe page New Recipe creation and functions if you set Full Recip
                 </Text>
               </View>
               <View
-                picker={true}
                 style={
                   {
                     "backgroundColor": "white",
@@ -6294,7 +6288,6 @@ exports[`New Recipe page New Recipe creation and functions should load and rende
                 </Text>
               </View>
               <View
-                picker={true}
                 style={
                   {
                     "backgroundColor": "white",
@@ -6431,7 +6424,6 @@ exports[`New Recipe page New Recipe creation and functions should load and rende
                 </Text>
               </View>
               <View
-                picker={true}
                 style={
                   {
                     "backgroundColor": "white",
@@ -6568,7 +6560,6 @@ exports[`New Recipe page New Recipe creation and functions should load and rende
                 </Text>
               </View>
               <View
-                picker={true}
                 style={
                   {
                     "backgroundColor": "white",

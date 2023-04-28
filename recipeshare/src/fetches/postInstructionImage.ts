@@ -1,6 +1,6 @@
-import { databaseURL } from "../dataComponents/databaseURL"
-import { submitTimeout } from "../dataComponents/timeouts"
-import { getBase64FromFile } from "../auxFunctions/getBase64FromFile"
+import { databaseURL } from "../dataComponents/databaseURL";
+import { submitTimeout } from "../dataComponents/timeouts";
+import { getBase64FromFile } from "../auxFunctions/getBase64FromFile";
 
 export const postInstructionImage = async (
 	chef_id: number,
@@ -10,15 +10,15 @@ export const postInstructionImage = async (
 	local_uri: string
 ): Promise<boolean> => {
 	// let image = await getBase64FromFile(image.uri)
-	let base64 = null
+	let base64 = null;
 	if (local_uri) {
-		base64 = await getBase64FromFile(local_uri)
+		base64 = await getBase64FromFile(local_uri);
 	}
 
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
-			reject({ name: "Timeout" })
-		}, submitTimeout)
+			reject({ name: "Timeout" });
+		}, submitTimeout);
 
 		fetch(`${databaseURL}/instruction_images`, {
 			method: "POST",
@@ -38,15 +38,15 @@ export const postInstructionImage = async (
 			.then((res) => res.json())
 			.then((result) => {
 				if (result.error && result.message == "Invalid authentication") {
-					reject({ name: "Logout" })
+					reject({ name: "Logout" });
 				}
 				if (result) {
-					// console.log(result)
-					resolve(result)
+					console.log(result)
+					resolve(result);
 				}
 			})
 			.catch((e) => {
-				reject(e)
-			})
-	})
-}
+				reject(e);
+			});
+	});
+};

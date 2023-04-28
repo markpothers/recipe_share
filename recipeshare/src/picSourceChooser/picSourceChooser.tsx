@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Text, View, TouchableOpacity, Platform, Image, ImagePickerResult } from "react-native";
+import { Modal, Text, View, TouchableOpacity, Platform, Image } from "react-native";
 import { Camera } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 import * as ImagePicker from "expo-image-picker";
@@ -13,9 +13,9 @@ type OwnProps = {
 	// originalImage: ImagePicker.ImagePickerResult; // refactored so this isn't needed any more
 	imageSource: string;
 	cancelChooseImage: (image: string, index?: number) => void;
-	saveImage: (image: ImagePicker.ImagePickerResult, index?: number) => void;
+	saveImage: (image: ImagePicker.ImagePickerAsset, index?: number) => void;
 	sourceChosen: () => void;
-}
+};
 
 export default function PicSourceChooser(props: OwnProps) {
 	const [hasCameraRollPermission, setHasCameraRollPermission] = useState<boolean>(false);
@@ -33,7 +33,7 @@ export default function PicSourceChooser(props: OwnProps) {
 			setOriginalImage(props.imageSource);
 		}
 		checkPermissions();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []); // don't fix this lint error. You don't want original image to get updated, which it would.
 
 	const pickImage = async () => {
@@ -68,22 +68,21 @@ export default function PicSourceChooser(props: OwnProps) {
 
 	const handleChosenImage = (image: ImagePicker.ImagePickerResult) => {
 		// if ("error" in image) {
-			// console.log(image.error);
+		// console.log(image.error);
 		// }
-		if (Platform.OS == "ios" && image.cancelled == false) {
-			setTempImageUri(image.uri);
-			setImageEditorShowing(true);
-		} else {
-			saveImage(image);
+		if (image.assets.length > 0) {
+			if (Platform.OS == "ios" && image.canceled == false) {
+				setTempImageUri(image.assets[0].uri);
+				setImageEditorShowing(true);
+			} else {
+				saveImage(image);
+			}
 		}
 	};
 
 	const deleteImage = () => {
-		const image = {
-			cancelled: false,
-			uri: "",
-		};
-		saveImage(image as ImagePicker.ImagePickerResult);
+		const image = { uri: "", width: 0, height: 0 };
+		saveImage(image as ImagePicker.ImagePickerAsset);
 	};
 
 	const cancel = () => {
@@ -100,12 +99,12 @@ export default function PicSourceChooser(props: OwnProps) {
 	const saveCroppedImage = (image) => {
 		image = {
 			...image,
-			cancelled: false,
+			canceled: false,
 		};
 		saveImage(image);
 	};
 
-	const saveImage = (image: ImagePicker.ImagePickerResult) => {
+	const saveImage = (image: ImagePicker.ImagePickerAsset) => {
 		props.index !== undefined ? props.saveImage(image, props.index) : props.saveImage(image);
 	};
 
@@ -165,22 +164,14 @@ export default function PicSourceChooser(props: OwnProps) {
 						</TouchableOpacity>
 					)}
 					{hasCameraRollPermission && (
-						<TouchableOpacity
-							style={styles.picSourceChooserButton}
-							activeOpacity={0.7}
-							onPress={pickImage}
-						>
+						<TouchableOpacity style={styles.picSourceChooserButton} activeOpacity={0.7} onPress={pickImage}>
 							<Icon style={styles.standardIcon} size={responsiveHeight(4)} name="camera-burst" />
 							<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>
 								Choose photo
 							</Text>
 						</TouchableOpacity>
 					)}
-					<TouchableOpacity
-						style={styles.picSourceChooserButton}
-						activeOpacity={0.7}
-						onPress={deleteImage}
-					>
+					<TouchableOpacity style={styles.picSourceChooserButton} activeOpacity={0.7} onPress={deleteImage}>
 						<Icon style={styles.standardIcon} size={responsiveHeight(4)} name="camera-burst" />
 						<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>
 							Delete photo
