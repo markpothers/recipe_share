@@ -1,4 +1,3 @@
-import { responsiveHeight, responsiveWidth, responsiveFontSize } from "react-native-responsive-dimensions" //eslint-disable-line no-unused-vars
 import { NewRecipe } from "../../centralTypes"
 
 export const shortTestRecipe = {

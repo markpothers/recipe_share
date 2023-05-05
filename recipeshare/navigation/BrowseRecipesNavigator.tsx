@@ -1,52 +1,55 @@
-import React, { useState, useEffect } from "react"
-import RecipeDetailsScreen from "../src/recipeDetails/recipeDetails"
-import ChefDetailsScreen from "../src/chefDetails/chefDetails"
-import NewRecipeScreen from "../src/newRecipe/newRecipe"
-import { NewestRecipesScreen, MostLikedRecipesScreen, MostMadeRecipesScreen, NewestChefsScreen, MostLikedChefsScreen, MostMadeChefsScreen } from "./BrowseRecipesTabs" //eslint-disable-line no-unused-vars
-import AppHeader from "./appHeader"
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions" //eslint-disable-line no-unused-vars
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs"
-import { createStackNavigator } from "@react-navigation/stack"
-import { centralStyles } from "../src/centralStyleSheet" //eslint-disable-line no-unused-vars
-import DynamicMenu from "../src/dynamicMenu/DynamicMenu"
-import AppHeaderRight from "./appHeaderRight"
+import React, { useState, useEffect } from "react";
+import RecipeDetailsScreen from "../src/recipeDetails/recipeDetails";
+import ChefDetailsScreen from "../src/chefDetails/chefDetails";
+import NewRecipeScreen from "../src/newRecipe/newRecipe";
+import {
+	NewestRecipesScreen,
+	MostLikedRecipesScreen,
+	// MostMadeRecipesScreen,
+	NewestChefsScreen,
+	MostLikedChefsScreen,
+	// MostMadeChefsScreen,
+} from "./BrowseRecipesTabs"; //eslint-disable-line no-unused-vars
+import AppHeader from "./appHeader";
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
+import DynamicMenu from "../src/dynamicMenu/DynamicMenu";
+import AppHeaderRight from "./appHeaderRight";
 import AppHeaderLeft from "./appHeaderLeft";
+import type { BrowseRecipesStackParamList, BrowseRecipesTabsParamList } from "./types";
 
-const Tab = createMaterialTopTabNavigator()
+const Tab = createMaterialTopTabNavigator<BrowseRecipesTabsParamList>();
 
 const BrowseRecipesTabs = (props) => {
-	const [dynamicMenuShowing, setDynamicMenuShowing] = useState(false)
-	const [headerButtons] = useState(
-		[
-			{
-				icon: "food",
-				text: "Create new recipe",
-				action: (() => {
-					setDynamicMenuShowing(false)
-					props.navigation.navigate("NewRecipe")
-				})
-			}
-		]
-	)
+	const [dynamicMenuShowing, setDynamicMenuShowing] = useState(false);
+	const [headerButtons] = useState([
+		{
+			icon: "food",
+			text: "Create new recipe",
+			action: () => {
+				setDynamicMenuShowing(false);
+				props.navigation.navigate("NewRecipe");
+			},
+		},
+	]);
 
 	const addDynamicMenuButtonsToHeader = () => {
 		props.navigation.setOptions({
-			headerRight: Object.assign(() => <AppHeaderRight buttonAction={setDynamicMenuShowing} accessibilityLabel={"Open action menu"}/>, { displayName: "HeaderRight" }),
-		})
-	}
+			headerRight: Object.assign(
+				() => <AppHeaderRight buttonAction={setDynamicMenuShowing} accessibilityLabel={"Open action menu"} />,
+				{ displayName: "HeaderRight" }
+			),
+		});
+	};
 
 	useEffect(() => {
-		addDynamicMenuButtonsToHeader()
-	})
+		addDynamicMenuButtonsToHeader();
+	});
 
 	const renderDynamicMenu = () => {
-		return (
-			<DynamicMenu
-				buttons={headerButtons}
-				closeDynamicMenu={() => setDynamicMenuShowing(false)}
-			/>
-		)
-	}
+		return <DynamicMenu buttons={headerButtons} closeDynamicMenu={() => setDynamicMenuShowing(false)} />;
+	};
 
 	return (
 		<React.Fragment>
@@ -72,33 +75,21 @@ const BrowseRecipesTabs = (props) => {
 						width: responsiveWidth(35),
 						height: responsiveHeight(8),
 					},
-					lazy: true
+					lazy: true,
 				})}
 			>
-				<Tab.Screen
-					name="Newest Recipes"
-					component={NewestRecipesScreen}
-				/>
-				<Tab.Screen
-					name="Top Recipes"
-					component={MostLikedRecipesScreen}
-				/>
-				<Tab.Screen
-					name="Newest Chefs"
-					component={NewestChefsScreen}
-				/>
-				<Tab.Screen
-					name="Top Chefs"
-					component={MostLikedChefsScreen}
-				/>
+				<Tab.Screen name="Newest Recipes" component={NewestRecipesScreen} />
+				<Tab.Screen name="Top Recipes" component={MostLikedRecipesScreen} />
+				<Tab.Screen name="Newest Chefs" component={NewestChefsScreen} />
+				<Tab.Screen name="Top Chefs" component={MostLikedChefsScreen} />
 				{/* <Tab.Screen name="MostMadeRecipes" component={MostMadeRecipesScreen}/> */}
 				{/* <Tab.Screen name="MostMadeChefs" component={MostMadeChefsScreen}/> */}
 			</Tab.Navigator>
 		</React.Fragment>
-	)
-}
+	);
+};
 
-const Stack = createStackNavigator()
+const Stack = createStackNavigator<BrowseRecipesStackParamList>();
 
 const BrowseRecipesStack = () => {
 	return (
@@ -115,7 +106,7 @@ const BrowseRecipesStack = () => {
 					marginRight: 0,
 				},
 				headerStatusBarHeight: 0,
-				headerBackTitleVisible: false
+				headerBackTitleVisible: false,
 			}}
 		>
 			<Stack.Screen
@@ -160,7 +151,7 @@ const BrowseRecipesStack = () => {
 				component={ChefDetailsScreen}
 			/>
 		</Stack.Navigator>
-	)
-}
+	);
+};
 
-export default BrowseRecipesStack
+export default BrowseRecipesStack;

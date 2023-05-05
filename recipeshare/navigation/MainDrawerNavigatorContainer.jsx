@@ -1,32 +1,32 @@
-import React from "react";
-import { connect } from "react-redux";
-import MainDrawerNavigator from "./MainDrawerNavigator";
+// import React from "react";
+// import { connect } from "react-redux";
+// import MainDrawerNavigator from "./MainDrawerNavigator";
 
-const mapStateToProps = (state) => ({
-	loggedInChef: state.root.loggedInChef,
-});
+// const mapStateToProps = (state) => ({
+// 	loggedInChef: state.root.loggedInChef,
+// });
 
-const mapDispatchToProps = {};
+// const mapDispatchToProps = {};
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(
-	class MainDrawerNavigatorContainer extends React.Component {
-		static router = MainDrawerNavigator.router;
-		static navigationOptions = {
-			header: null,
-		};
+// export default connect(
+// 	mapStateToProps,
+// 	mapDispatchToProps
+// )(
+// 	class MainDrawerNavigatorContainer extends React.Component {
+// 		static router = MainDrawerNavigator.router;
+// 		// static navigationOptions = {
+// 			// header: null,
+// 		// };
 
-		state = {};
+// 		state = {};
 
-		render() {
-			return (
-				<MainDrawerNavigator
-					navigation={this.props.navigation}
-					setLoadedAndLoggedIn={this.props.setLoadedAndLoggedIn}
-				/>
-			);
-		}
-	}
-);
+// 		render() {
+// 			return (
+// 				<MainDrawerNavigator
+// 					navigation={this.props.navigation}
+// 					setLoadedAndLoggedIn={this.props.setLoadedAndLoggedIn}
+// 				/>
+// 			);
+// 		}
+// 	}
+// );

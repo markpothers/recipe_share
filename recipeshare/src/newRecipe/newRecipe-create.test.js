@@ -74,10 +74,12 @@ describe("New Recipe page", () => {
 			navigation = {
 				navigate: mockNavigate,
 				setParams: mockSetParams,
-				setOptions: mockSetOptions
+				setOptions: mockSetOptions,
 			};
 
-			route = {};
+			route = {
+				params: {},
+			};
 
 			// eslint-disable-next-line no-unused-vars
 			// NetInfo as typeof NetInfo & { setReturnValue: (isConnected: boolean) => void }
@@ -531,6 +533,7 @@ describe("New Recipe page", () => {
 			expect(mockNavigate).toHaveBeenCalledWith("MyRecipeBook", {
 				screen: "My Recipes",
 				params: { refresh: true },
+				title: "My Recipe Book",
 			});
 		});
 	});
@@ -563,6 +566,7 @@ describe("New Recipe page", () => {
 			fetchIngredients.mockImplementation(() => Promise.resolve(ingredients));
 			const mockNavigate = jest.fn();
 			const storedRecipe =
+				// eslint-disable-next-line quotes
 				'{"newRecipeDetails":{"recipeId":null,"instructions":["step 1","step 2","step 3","step 4","step 5","step 6"],"ingredients":[{"name":"Chicken","quantity":"1","unit":"Oz"},{"name":"Brown rice","quantity":"1","unit":"cup"}],"difficulty":"4","times":{"prepTime":15,"cookTime":75,"totalTime":90},"filter_settings":{"Breakfast":false,"Lunch":true,"Dinner":false,"Chicken":true,"Red meat":false,"Seafood":false,"Vegetarian":false,"Salad":false,"Vegan":false,"Soup":true,"Dessert":false,"Side":true,"Whole 30":false,"Paleo":true,"Freezer meal":false,"Keto":false,"Weeknight":false,"Weekend":true,"Gluten free":false,"Bread":true,"Dairy free":false,"White meat":false},"cuisine":"American","serves":"3","acknowledgement":"The food lab","acknowledgementLink":"https://www.amazon.com/Food-Lab-Cooking-Through-Science/dp/0393081087/ref=sr_1_2?dchild=1&keywords=the+food+lab&qid=1618170711&sr=8-2","description":"I love this recipe","showBlogPreview":false,"name":"My test short recipe","instructionImages":["","file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540pothers%252Frecipe-share/ImagePicker/d138f30a-0b57-475c-a1ed-3c99307c58c7.jpg","","file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540pothers%252Frecipe-share/ImagePicker/e0938290-655c-4361-96a1-c580bab2567d.jpg","file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540pothers%252Frecipe-share/ImagePicker/7b2c7e95-0d7f-4aa6-843c-c95441d099b4.jpg",""],"primaryImages":[{"canceled":false,"width":2108,"type":"image","uri":"file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540pothers%252Frecipe-share/ImagePicker/05436971-9a5c-463e-a922-b73b9ef1e849.jpg","height":1581},{"canceled":false,"width":2772,"type":"image","uri":"file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540pothers%252Frecipe-share/ImagePicker/0a24dd3e-6cc7-47f2-9d4b-5ffa8b3d9ca6.jpg","height":2080}]},"instructionHeights":[54.477141767229355,54.477141767229355,54.477141767229355,54.477141767229355,54.477141767229355,54.477141767229355],"averageInstructionHeight":54.47714176722935}';
 			AsyncStorage.getItem.mockImplementation((key, callback) => {
 				callback(null, storedRecipe);
@@ -589,9 +593,9 @@ describe("New Recipe page", () => {
 						navigation={{
 							navigate: mockNavigate,
 							setParams: jest.fn(),
-							setOptions: jest.fn()
+							setOptions: jest.fn(),
 						}}
-						route={{}}
+						route={{ params: {} }}
 					/>
 				</Provider>
 			);
@@ -662,6 +666,7 @@ describe("New Recipe page", () => {
 			expect(mockNavigate).toHaveBeenCalledWith("MyRecipeBook", {
 				screen: "My Recipes",
 				params: { refresh: true },
+				title: "My Recipe Book",
 			});
 		});
 
@@ -684,16 +689,16 @@ describe("New Recipe page", () => {
 			// fireEvent.press(getByText("Save & Close"));
 			// expect(queryAllByText("Save & Close").length).toEqual(0);
 		});
-		test.skip("instruction photos should sort with instructions", async () => {});
-		test.skip("it should be possible to sort the ingredients", async () => {});
-		test.skip("it should be possible to sort the instructions", async () => {});
-		test.skip("it should be possible to add a photo to an instruction", async () => {
-			// fireEvent.press(getByText("Add instruction"));
-			// fireEvent.press(getByTestId("photo-instruction1"));
-			// await waitFor(() => expect(getByText("Choose photo")).toBeTruthy());
-			// await act(async () => {
-			// fireEvent.press(getByText("Choose photo"));
-			// });
-		});
+		// test.skip("instruction photos should sort with instructions", async () => {});
+		// test.skip("it should be possible to sort the ingredients", async () => {});
+		// test.skip("it should be possible to sort the instructions", async () => {});
+		// test.skip("it should be possible to add a photo to an instruction", async () => {
+		// fireEvent.press(getByText("Add instruction"));
+		// fireEvent.press(getByTestId("photo-instruction1"));
+		// await waitFor(() => expect(getByText("Choose photo")).toBeTruthy());
+		// await act(async () => {
+		// fireEvent.press(getByText("Choose photo"));
+		// });
+		// });
 	});
 });

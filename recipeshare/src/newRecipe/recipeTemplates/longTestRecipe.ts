@@ -1,4 +1,3 @@
-import { responsiveHeight, responsiveWidth, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 import { NewRecipe } from "../../centralTypes";
 
 export const longTestRecipe = {
@@ -128,28 +127,24 @@ export const longTestRecipe = {
 	},
 	primaryImages: [
 		{
-			canceled: false,
 			height: 2250,
 			type: "image",
 			uri: "file:/data/user/0/host.exp.exponent/cache/ExperienceData/%2540pothers%252Frecipe-share/ImagePicker/0219c735-ea10-4437-aba0-8de39d4121e9.jpg",
 			width: 3000,
 		},
 		{
-			canceled: false,
 			height: 2250,
 			type: "image",
 			uri: "file:/data/user/0/host.exp.exponent/cache/ExperienceData/%2540pothers%252Frecipe-share/ImagePicker/9f82b809-276c-40bb-8a7e-55a9b650a49d.jpg",
 			width: 3000,
 		},
 		{
-			canceled: false,
 			height: 1688,
 			type: "image",
 			uri: "file:/data/user/0/host.exp.exponent/cache/ExperienceData/%2540pothers%252Frecipe-share/ImagePicker/41f1dddf-cda2-40a5-9c38-21673c915ded.jpg",
 			width: 2252,
 		},
 		{
-			canceled: false,
 			height: 2250,
 			type: "image",
 			uri: "file:/data/user/0/host.exp.exponent/cache/ExperienceData/%2540pothers%252Frecipe-share/ImagePicker/f2199d15-0441-4763-8864-da0fa22cdbda.jpg",

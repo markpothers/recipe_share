@@ -7,7 +7,7 @@ import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-u
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { getNewPassword } from "../fetches/getNewPassword";
 import { postLoginChef } from "../fetches/loginChef";
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+import { responsiveWidth, responsiveHeight } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
 import OfflineMessage from "../offlineMessage/offlineMessage";
 import SwitchSized from "../customComponents/switchSized/switchSized";
@@ -22,12 +22,13 @@ import {
 	useAppDispatch,
 	useAppSelector,
 } from "../redux";
-import { NavigationProp, RouteProp } from "@react-navigation/native";
+import { LoginNavigationProps, LoginRouteProps } from "../../navigation";
 // import { ApiError } from "../centralTypes";
 
 type OwnProps = {
-	navigation: NavigationProp<any, any>;
-	route: RouteProp<any, any>;
+	navigation: LoginNavigationProps;
+	route: LoginRouteProps;
+	setLoadedAndLoggedIn: (args: { loaded: boolean; loggedIn: boolean }) => void;
 };
 
 export default function Login(props: OwnProps) {

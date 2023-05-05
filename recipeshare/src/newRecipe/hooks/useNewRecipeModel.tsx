@@ -26,17 +26,17 @@ import { Keyboard, TextInput } from "react-native";
 import { getMinutesFromTimeString } from "../../auxFunctions/getTimeStringFromMinutes";
 import { shortTestRecipe } from "../recipeTemplates/shortTestRecipe";
 import * as ImagePicker from "expo-image-picker";
+import { NewRecipeNavigationProps, NewRecipeRouteProps } from "../../../navigation";
 
 const isDev = __DEV__ ? false : false;
 const testRecipe = shortTestRecipe;
 
 export const useNewRecipeModel = (
-	navigation: boolean,
-	route: boolean,
+	navigation: NewRecipeNavigationProps,
+	route: NewRecipeRouteProps,
 	nextInstructionInput: React.MutableRefObject<any>,
 	nextIngredientInput: React.MutableRefObject<any>
 ) => {
-	// return { ...useNewRecipeMethods(navigation, route), ...useSubmitRecipe(navigation, route) };
 	const loggedInChef = useAppSelector((state) => state.root.loggedInChef);
 	const [hasPermission, setHasPermission] = useState<boolean>(false);
 	const [renderOfflineMessage, setRenderOfflineMessage] = useState<boolean>(false);
@@ -45,7 +45,7 @@ export const useNewRecipeModel = (
 	const [helpShowing, setHelpShowing] = useState<boolean>(false);
 	const [helpText, setHelpText] = useState<{ title: string; text: string }>();
 	const [ingredientsList, setIngredientsList] = useState<Ingredient[]>([]);
-	const [autoCompleteFocused, setAutoCompleteFocused] = useState<boolean | null>(null);
+	const [autoCompleteFocused, setAutoCompleteFocused] = useState<number | null>(null);
 	const [choosingPrimaryPicture, setChoosingPrimaryPicture] = useState<boolean>(false);
 	const [choosingInstructionPicture, setChoosingInstructionPicture] = useState<boolean>(false);
 	const [instructionImageIndex, setInstructionImageIndex] = useState<number>(0);
@@ -58,6 +58,82 @@ export const useNewRecipeModel = (
 	const [newRecipeDetails, setNewRecipeDetails] = useState<NewRecipe>(isDev ? testRecipe : emptyRecipe);
 	const [instructionHeights, setInstructionHeights] = useState<number[]>([]);
 	const [averageInstructionHeight, setAverageInstructionHeight] = useState<number>(responsiveHeight(6.5));
+	const [instructionsLength, setInstructionsLength] = useState<number>(100); // start with a high number so first number is always a decrease
+	const [ingredientsLength, setIngredientsLength] = useState<number>(100); // start with a high number so first number is always a decrease
+
+	const fetchIngredientsForAutoComplete = useCallback(async () => {
+		try {
+			const ingredients = await fetchIngredients(loggedInChef.auth_token);
+			if (ingredients) {
+				setIngredientsList(ingredients);
+			}
+		} catch {
+			// this.setState({ awaitingServer: false })
+		}
+	}, [loggedInChef.auth_token]);
+
+	const setEditRecipeDetails = useCallback(async () => {
+		const savedEditingRecipe = JSON.parse(await AsyncStorage.getItem("localEditRecipeDetails"));
+		if (
+			savedEditingRecipe &&
+			savedEditingRecipe.newRecipeDetails.recipeId == route.params?.recipe_details.recipe.id
+		) {
+			if (
+				"newRecipeDetails" in savedEditingRecipe &&
+				"instructionHeights" in savedEditingRecipe &&
+				"averageInstructionHeight" in savedEditingRecipe
+			) {
+				const { newRecipeDetails, instructionHeights, averageInstructionHeight } = savedEditingRecipe;
+				setNewRecipeDetails(newRecipeDetails);
+				setInstructionHeights(instructionHeights);
+				setAverageInstructionHeight(averageInstructionHeight);
+			}
+			setAwaitingServer(false);
+		} else {
+			setRecipeParamsForEditing(route.params.recipe_details);
+			setAwaitingServer(false);
+		}
+	}, [route.params.recipe_details]);
+
+	const loadNewRecipeDetails = useCallback(async () => {
+		AsyncStorage.getItem("localNewRecipeDetails", (err, res) => {
+			if (res != null) {
+				const savedData = JSON.parse(res);
+				if (
+					"newRecipeDetails" in savedData &&
+					"instructionHeights" in savedData &&
+					"averageInstructionHeight" in savedData
+				) {
+					const {
+						newRecipeDetails: savedNewRecipeDetails,
+						instructionHeights: savedInstructionsHeights,
+						averageInstructionHeight: savedAverageInstructionHeights,
+					} = savedData;
+					setNewRecipeDetails(savedNewRecipeDetails);
+					setInstructionHeights(savedInstructionsHeights);
+					setAverageInstructionHeight(savedAverageInstructionHeights);
+				}
+			}
+			setAwaitingServer(false);
+		});
+	}, []);
+
+	useEffect(() => {
+		fetchIngredientsForAutoComplete(); //don't await this, just let it happen in the background
+		// console.log("route1:", route);
+		if (route.params.recipe_details !== undefined) {
+			setEditRecipeDetails();
+		} else {
+			//look to see if we're half way through creating a recipe
+			loadNewRecipeDetails();
+		}
+	}, [
+		fetchIngredientsForAutoComplete,
+		setEditRecipeDetails,
+		setNewRecipeDetails,
+		route.params?.recipe_details,
+		loadNewRecipeDetails,
+	]);
 
 	const saveNewRecipeDetailsLocally = useCallback(
 		(forceNew = false) => {
@@ -72,7 +148,7 @@ export const useNewRecipeModel = (
 				});
 			} else {
 				AsyncStorage.setItem("localNewRecipeDetails", JSON.stringify(dataToSave), () => {
-					// console.log('localNewRecipeDetails saved')
+					// console.log("localNewRecipeDetails saved");
 				});
 			}
 		},
@@ -80,20 +156,40 @@ export const useNewRecipeModel = (
 	);
 
 	useEffect(() => {
+		if (newRecipeDetails.recipeId) {
+			if (route.params?.recipe_details?.recipe?.id) {
+				navigation.setOptions({
+					headerTitle: (props) => <AppHeader {...props} text={"Update Recipe"} />,
+				});
+			} else {
+				navigation.setOptions({
+					headerTitle: (props) => <AppHeader {...props} text={"Finish Recipe"} />,
+				});
+			}
+		} else {
+			navigation.setOptions({
+				headerTitle: (props) => <AppHeader {...props} text={"Create a New Recipe"} />,
+			});
+		}
+	}, [newRecipeDetails, route, navigation]);
+
+	useEffect(() => {
 		saveNewRecipeDetailsLocally();
 	}, [newRecipeDetails, instructionHeights, averageInstructionHeight, saveNewRecipeDetailsLocally]);
 
 	useEffect(() => {
-		if (nextInstructionInput.current) {
+		if (newRecipeDetails.instructions.length - instructionsLength === 1 && nextInstructionInput.current) {
 			nextInstructionInput.current.focus();
 		}
-	}, [newRecipeDetails.instructions.length, nextInstructionInput]);
+		setInstructionsLength(newRecipeDetails.instructions.length);
+	}, [newRecipeDetails.instructions.length, instructionsLength, nextInstructionInput]);
 
 	useEffect(() => {
-		if (nextIngredientInput.current) {
+		if (newRecipeDetails.ingredients.length - ingredientsLength === 1 && nextIngredientInput.current) {
 			nextIngredientInput.current.focus();
 		}
-	}, [newRecipeDetails.ingredients.length, nextIngredientInput]);
+		setIngredientsLength(newRecipeDetails.ingredients.length);
+	}, [newRecipeDetails.ingredients.length, ingredientsLength, nextIngredientInput]);
 
 	const activateScrollView = () => setScrollingEnabled(true);
 
@@ -109,17 +205,6 @@ export const useNewRecipeModel = (
 
 	const savePrimaryImages = (newImages: RecipeImage[]) => {
 		setNewRecipeDetails({ ...newRecipeDetails, primaryImages: newImages });
-	};
-
-	const fetchIngredientsForAutoComplete = async () => {
-		try {
-			const ingredients = await fetchIngredients(loggedInChef.auth_token);
-			if (ingredients) {
-				setIngredientsList(ingredients);
-			}
-		} catch {
-			// this.setState({ awaitingServer: false })
-		}
 	};
 
 	const updateIngredientEntry = (index: number, name: string, quantity: string, unit: Unit) => {
@@ -170,7 +255,7 @@ export const useNewRecipeModel = (
 			// alertPopupShowing: false,
 			// });
 			navigation.setOptions({
-				headerTitle: (props) => <AppHeader {...props} text={"Create a New Recipe"} route={route} />,
+				headerTitle: (props) => <AppHeader {...props} text={"Create a New Recipe"} />,
 			});
 		});
 	};
@@ -185,19 +270,6 @@ export const useNewRecipeModel = (
 				}
 				setAlertPopupShowing(false);
 			}
-
-			// this.setState(
-			// () => (testing ? testRecipe : emptyRecipe),
-			// async () => {
-			// if (this.props.route.params?.recipe_details !== undefined) {
-			// if (!editedRecipeSavedToDatabase) {
-			// if you updated the saved recipe you don't want to refresh async store before leaving
-			// await this.setRecipeParamsForEditing(this.props.route.params.recipe_details);
-			// }
-			// this.setState({ alertPopupShowing: false });
-			// }
-			// }
-			// );
 		});
 	};
 
@@ -284,14 +356,10 @@ export const useNewRecipeModel = (
 		setChoosingInstructionPicture(false);
 	};
 
-	const saveInstructionImage = (image: ImagePicker.ImagePickerResult, index: number) => {
-		console.log(image);
-		console.log("canceled:", image.canceled);
-		console.log("assets length:", image.assets.length);
-		if (image.canceled === false && image.assets.length > 0) {
+	const saveInstructionImage = (image: ImagePicker.ImagePickerAsset, index: number) => {
+		if (image) {
 			const newInstructionImages = [...newRecipeDetails.instructionImages];
-			console.log("imageURL:", image.assets[0].uri);
-			newInstructionImages[index] = image.assets[0].uri;
+			newInstructionImages[index] = image.uri;
 			setNewRecipeDetails({
 				...newRecipeDetails,
 				instructionImages: newInstructionImages,
@@ -308,14 +376,6 @@ export const useNewRecipeModel = (
 			instructionImages: newInstructionImages,
 		});
 		setAwaitingServer(false);
-		// return {
-		// 	choosingPicture: false,
-		// 	newRecipeDetails: {
-		// 		...state.newRecipeDetails,
-		// 		instructionImages: newInstructionImages,
-		// 	},
-		// 	awaitingServer: false,
-		// };
 	};
 
 	const toggleFilterCategory = (category) => {
@@ -417,6 +477,7 @@ export const useNewRecipeModel = (
 								setAwaitingServer(false);
 								clearEditRecipeDetails(true);
 								navigation.navigate("MyRecipeBook", {
+									title: "My Recipe Book",
 									screen: "My Recipes",
 									params: { refresh: true },
 								});
@@ -428,7 +489,7 @@ export const useNewRecipeModel = (
 					if (e.name === "Logout") {
 						navigation.navigate("ProfileCover", {
 							screen: "Profile",
-							params: { logout: true },
+							params: { logout: true, title: "Profile" },
 						});
 					}
 					// console.log(e)
@@ -472,15 +533,16 @@ export const useNewRecipeModel = (
 
 							// save the recipe locally with its new id to make sure resubmissions don't submit duplicates (as often as possible)
 							saveNewRecipeDetailsLocally(true);
-							navigation.setParams({
-								recipeDetails: { recipe: { id: recipe.recipe.id } },
-							});
+							// navigation.setParams({
+							// recipeDetails: { recipe: { id: recipe.recipe.id } },
+							// });
 							const success = await postImages(newRecipeDetails, recipe);
 							if (success) {
 								setAwaitingServer(false);
 								clearNewRecipeDetails();
 								// this.props.navigation.popToTop() //clears Recipe Details and newRecipe screens from the view stack so that switching back to BrowseRecipes will go to the List and not another screen
 								navigation.navigate("MyRecipeBook", {
+									title: "My Recipe Book",
 									screen: "My Recipes",
 									params: { refresh: true },
 								});
@@ -491,7 +553,7 @@ export const useNewRecipeModel = (
 					if (e.name === "Logout") {
 						navigation.navigate("ProfileCover", {
 							screen: "Profile",
-							params: { logout: true },
+							params: { title: "Profile", logout: true },
 						});
 					}
 					// console.log(e)
@@ -503,48 +565,6 @@ export const useNewRecipeModel = (
 		} else {
 			setRenderOfflineMessage(true);
 		}
-	};
-
-	const setEditRecipeDetails = async () => {
-		const savedEditingRecipe = JSON.parse(await AsyncStorage.getItem("localEditRecipeDetails"));
-		if (
-			savedEditingRecipe &&
-			savedEditingRecipe.newRecipeDetails.recipeId == route.params?.recipe_details.recipe.id
-		) {
-			if (
-				"newRecipeDetails" in savedEditingRecipe &&
-				"instructionHeights" in savedEditingRecipe &&
-				"averageInstructionHeight" in savedEditingRecipe
-			) {
-				const { newRecipeDetails, instructionHeights, averageInstructionHeight } = savedEditingRecipe;
-				setNewRecipeDetails(newRecipeDetails);
-				setInstructionHeights(instructionHeights);
-				setAverageInstructionHeight(averageInstructionHeight);
-			}
-			setAwaitingServer(false);
-		} else {
-			setRecipeParamsForEditing(route.params.recipe_details);
-			setAwaitingServer(false);
-		}
-	};
-
-	const loadNewRecipeDetails = async () => {
-		AsyncStorage.getItem("localNewRecipeDetails", (err, res) => {
-			if (res != null) {
-				const savedData = JSON.parse(res);
-				if (
-					"newRecipeDetails" in savedData &&
-					"instructionHeights" in savedData &&
-					"averageInstructionHeight" in savedData
-				) {
-					const { newRecipeDetails, instructionHeights, averageInstructionHeight } = savedData;
-					setNewRecipeDetails(newRecipeDetails);
-					setInstructionHeights(instructionHeights);
-					setAverageInstructionHeight(averageInstructionHeight);
-				}
-			}
-			setAwaitingServer(false);
-		});
 	};
 
 	const setRecipeParamsForEditing = async (recipeDetails) => {
@@ -584,14 +604,7 @@ export const useNewRecipeModel = (
 				totalTime:
 					recipe.total_time > 0 ? recipe.total_time : recipe.time ? getMinutesFromTimeString(recipe.time) : 0,
 			},
-			primaryImages:
-				recipeDetails.recipe_images?.length > 0
-					? recipeDetails.recipe_images
-					: [
-							{
-								uri: "",
-							},
-					  ],
+			primaryImages: recipeDetails.recipe_images?.length > 0 ? recipeDetails.recipe_images : [{ uri: "" }],
 			filter_settings: {
 				Breakfast: recipe["breakfast"],
 				Lunch: recipe["lunch"],

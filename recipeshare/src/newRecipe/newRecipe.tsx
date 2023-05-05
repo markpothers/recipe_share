@@ -47,6 +47,8 @@ import { longTestRecipe } from "./recipeTemplates/longTestRecipe"; //eslint-disa
 import { shortTestRecipe } from "./recipeTemplates/shortTestRecipe"; //eslint-disable-line no-unused-vars
 import { useNewRecipeModel } from "./hooks/useNewRecipeModel";
 import { InstructionImage } from "../centralTypes";
+import { NewRecipeProps } from "../../navigation";
+
 // import Voice, { SpeechRecognizedEvent, SpeechResultsEvent, SpeechErrorEvent } from "@react-native-voice/voice";
 
 const testing = __DEV__ ? false : false;
@@ -93,7 +95,7 @@ type OwnProps = {
 	route: string;
 };
 
-const NewRecipe = (props: OwnProps) => {
+const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 	const nextInstructionInput = useRef(null);
 	const nextIngredientInput = useRef(null);
 	const {
@@ -171,24 +173,23 @@ const NewRecipe = (props: OwnProps) => {
 		loadNewRecipeDetails,
 	} = useNewRecipeModel(props.navigation, props.route, nextInstructionInput, nextIngredientInput);
 
-	useEffect(
-		() => {
-			// fetchIngredientsForAutoComplete(); //don't await this, just let it happen in the background
-			if (props.route.params?.recipe_details !== undefined) {
-				setEditRecipeDetails();
-			} else {
-				//look to see if we're half way through creating a recipe
-				loadNewRecipeDetails();
-			}
-		},
-		[
-			// fetchIngredientsForAutoComplete,
-			// setEditRecipeDetails,
-			// setNewRecipeDetails,
-			// props.route.params?.recipe_details,
-			// loadNewRecipeDetails
-		]
-	);
+	// useEffect(
+	// 	() => {
+	// 		// fetchIngredientsForAutoComplete(); //don't await this, just let it happen in the background
+	// 		if (props.route.params.recipe_details !== undefined) {
+	// 			setEditRecipeDetails();
+	// 		} else {
+	// 			//look to see if we're half way through creating a recipe
+	// 			loadNewRecipeDetails();
+	// 		}
+	// 	},
+	// 	[
+	// 		setEditRecipeDetails,
+	// 		setNewRecipeDetails,
+	// 		props.route.params?.recipe_details,
+	// 		loadNewRecipeDetails
+	// 	]
+	// );
 
 	// componentDidMount = async () => {
 	// 	this.setState({ awaitingServer: true }, async () => {
@@ -993,6 +994,8 @@ const NewRecipe = (props: OwnProps) => {
 			{helpShowing && renderHelp()}
 			<KeyboardAvoidingView
 				style={centralStyles.fullPageKeyboardAvoidingView}
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				// @ts-ignore
 				behavior={Platform.OS === "ios" ? "padding" : ""}
 				keyboardVerticalOffset={Platform.OS === "ios" ? responsiveHeight(9) + 20 : 0}
 			>
@@ -1633,6 +1636,7 @@ const NewRecipe = (props: OwnProps) => {
 										childrenWidth={responsiveWidth(100)}
 										childrenHeight={averageInstructionHeight}
 										childrenHeights={instructionHeights}
+										reverseChildZIndexing={false}
 										marginChildrenTop={0}
 										onDataChange={(newInstructions) => handleInstructionsSort(newInstructions)}
 										onDragStart={() => {

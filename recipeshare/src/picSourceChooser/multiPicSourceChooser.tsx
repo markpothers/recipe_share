@@ -56,7 +56,7 @@ export default function MultiPicSourceChooser(props: OwnProps) {
 			...props.imageSources.slice(newImageIndex),
 		] as ImageSource[];
 		setImageIndex(newImageIndex);
-		await props.saveImages(newImages);
+		props.saveImages(newImages);
 	};
 
 	// after adding a new slot to the end, this function calls to scroll to it
@@ -66,13 +66,13 @@ export default function MultiPicSourceChooser(props: OwnProps) {
 	// by monitoring length it only happens on add or delete image and since delete doesn't change image index,
 	// it only does anything on add
 	// the if statement prevents scrolling when repeated taps mean the timeout and what's rendered have got out of sync
-	// useEffect(() => {
-	// setTimeout(() => {
-	// if (primaryImageFlatList.current?.props.data.length === props.imageSources.length) {
-	// primaryImageFlatList.current.scrollToIndex({ index: imageIndex });
-	// }
-	// }, 0);
-	// }, [props.imageSources.length, imageIndex]);
+	useEffect(() => {
+		setTimeout(() => {
+			if (primaryImageFlatList.current?.props.data.length === props.imageSources.length) {
+				primaryImageFlatList.current.scrollToIndex({ index: imageIndex });
+			}
+		}, 0);
+	}, [props.imageSources.length, imageIndex]);
 
 	const pickImage = async () => {
 		try {
@@ -218,7 +218,7 @@ export default function MultiPicSourceChooser(props: OwnProps) {
 	};
 
 	const saveCroppedImage = (image: ImagePicker.ImagePickerResult) => {
-		console.log("cropped image:", image)
+		console.log("cropped image:", image);
 		const newImage = {
 			...image,
 			canceled: false,
@@ -298,7 +298,7 @@ export default function MultiPicSourceChooser(props: OwnProps) {
 									const { x, y, width, height } = event.nativeEvent.layout; //eslint-disable-line no-unused-vars
 									setPrimaryImageFlatListWidth(width);
 								}}
-								onScroll={(e) => {
+								onMomentumScrollEnd={(e) => {
 									const nearestIndex = Math.round(
 										e.nativeEvent.contentOffset.x / primaryImageFlatListWidth
 									);

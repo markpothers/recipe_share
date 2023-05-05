@@ -17,10 +17,11 @@ import { createStackNavigator } from "@react-navigation/stack";
 import DynamicMenu from "../src/dynamicMenu/DynamicMenu";
 import AppHeaderRight from "./appHeaderRight";
 import AppHeaderLeft from "./appHeaderLeft";
+import { MyRecipeBookTabsParamList, MyRecipeBookProps, MyRecipeBookStackParamList } from "./types";
 
-const Tab = createMaterialTopTabNavigator();
+const Tab = createMaterialTopTabNavigator<MyRecipeBookTabsParamList>();
 
-const MyRecipeBookTabs = (props) => {
+const MyRecipeBookTabs = (props: MyRecipeBookProps) => {
 	const [dynamicMenuShowing, setDynamicMenuShowing] = useState(false);
 	const [headerButtons] = useState([
 		{
@@ -35,9 +36,12 @@ const MyRecipeBookTabs = (props) => {
 
 	const addDynamicMenuButtonsToHeader = () => {
 		props.navigation.setOptions({
-			headerRight: Object.assign(() => <AppHeaderRight buttonAction={setDynamicMenuShowing} accessibilityLabel={"Open action menu"} />, {
-				displayName: "HeaderRight",
-			}),
+			headerRight: Object.assign(
+				() => <AppHeaderRight buttonAction={setDynamicMenuShowing} accessibilityLabel={"Open action menu"} />,
+				{
+					displayName: "HeaderRight",
+				}
+			),
 		});
 	};
 
@@ -73,7 +77,7 @@ const MyRecipeBookTabs = (props) => {
 						width: responsiveWidth(35),
 						height: responsiveHeight(8),
 					},
-					lazy: true
+					lazy: true,
 				})}
 			>
 				<Tab.Screen name="My Feed" component={ChefFeedScreen} />
@@ -91,13 +95,14 @@ const MyRecipeBookTabs = (props) => {
 	);
 };
 
-const Stack = createStackNavigator();
+
+const Stack = createStackNavigator<MyRecipeBookStackParamList>();
 
 const MyRecipeBookStack = () => {
 	return (
 		<Stack.Navigator
-			// initialRouteName="MyRecipeBook"
-			initialRouteName="NewRecipe"
+			initialRouteName="MyRecipeBook"
+			// initialRouteName="NewRecipe"
 			screenOptions={{
 				headerMode: "screen",
 				headerStyle: {
@@ -109,7 +114,7 @@ const MyRecipeBookStack = () => {
 					marginRight: 0,
 				},
 				headerStatusBarHeight: 0,
-				headerBackTitleVisible: false
+				headerBackTitleVisible: false,
 			}}
 		>
 			<Stack.Screen
