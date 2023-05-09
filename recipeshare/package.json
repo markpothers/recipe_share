@@ -1,12 +1,12 @@
 {
-  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "build": "./buildScripts/wslStartupScript.sh",
     "clean": "rm -rf node_modules package-lock.json",
     "prestart": "node ./buildScripts/startMessage.js",
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+	"go": "expo start",
+    "start": "expo start --dev-client",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "eject": "expo eject",
     "test:watch": "node ./node_modules/jest/bin/jest.js --watchAll --colors --runInBand --detectOpenHandles --coverage=false",
     "test": "node ./node_modules/jest/bin/jest.js --colors --runInBand --detectOpenHandles",
@@ -30,9 +30,10 @@
     "@reduxjs/toolkit": "^1.8.3",
     "chalk": "^2.4.2",
     "each-async": "^1.1.1",
-    "expo": "48.0.7",
+    "expo": "~48.0.15",
     "expo-asset": "~8.9.1",
     "expo-camera": "~13.2.1",
+	"@expo/config-plugins": "^6.0.0",
     "expo-constants": "~14.2.1",
     "expo-dev-client": "~2.2.1",
     "expo-device": "~5.2.1",
@@ -103,13 +104,16 @@
     "jest-environment-enzyme": "^7.1.2",
     "jest-enzyme": "^7.1.2",
     "jest-expo": "^47.0.0",
-	"jest-fetch-mock": "3.0.3",
+    "jest-fetch-mock": "3.0.3",
     "json-server": "^0.17.3",
     "react-dom": "18.2.0",
     "react-native-mock-render": "0.1.9",
     "react-test-renderer": "^18.2.0",
     "redux-mock-store": "^1.5.4",
-    "typescript": "^4.6.3"
+    "typescript": "^4.6.3",
+    "@babel/core": "^7.20.0"
   },
-  "private": true
+  "private": true,
+  "name": "recipeshare",
+  "version": "1.0.0"
 }
