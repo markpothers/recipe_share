@@ -1,16 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useAppSelector } from "../../redux";
-import {
-	ImageSource,
-	Ingredient,
-	Instruction,
-	InstructionImage,
-	NewRecipe,
-	Recipe,
-	RecipeImage,
-	RecipeIngredient,
-	Unit,
-} from "../../centralTypes";
+import { Ingredient, NewRecipe, RecipeImage, RecipeIngredient, Unit } from "../../centralTypes";
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { fetchIngredients } from "../../fetches/fetchIngredients";
@@ -22,11 +12,12 @@ import { patchRecipe } from "../../fetches/patchRecipe";
 import { postRecipeImage } from "../../fetches/postRecipeImage";
 import { postInstructionImage } from "../../fetches/postInstructionImage";
 import { postRecipe } from "../../fetches/postRecipe";
-import { Keyboard, TextInput } from "react-native";
+import { Keyboard } from "react-native";
 import { getMinutesFromTimeString } from "../../auxFunctions/getTimeStringFromMinutes";
 import { shortTestRecipe } from "../recipeTemplates/shortTestRecipe";
 import * as ImagePicker from "expo-image-picker";
 import { NewRecipeNavigationProps, NewRecipeRouteProps } from "../../../navigation";
+import { useSpeechToText } from "./useSpeechToText";
 
 const isDev = __DEV__ ? false : false;
 const testRecipe = shortTestRecipe;
@@ -38,9 +29,7 @@ export const useNewRecipeModel = (
 	nextIngredientInput: React.MutableRefObject<any>
 ) => {
 	const loggedInChef = useAppSelector((state) => state.root.loggedInChef);
-	const [hasPermission, setHasPermission] = useState<boolean>(false);
 	const [renderOfflineMessage, setRenderOfflineMessage] = useState<boolean>(false);
-	const [isFocused, setIsFocused] = useState<boolean>(true);
 	const [alertPopupShowing, setAlertPopupShowing] = useState<boolean>(false);
 	const [helpShowing, setHelpShowing] = useState<boolean>(false);
 	const [helpText, setHelpText] = useState<{ title: string; text: string }>();
@@ -60,6 +49,11 @@ export const useNewRecipeModel = (
 	const [averageInstructionHeight, setAverageInstructionHeight] = useState<number>(responsiveHeight(6.5));
 	const [instructionsLength, setInstructionsLength] = useState<number>(100); // start with a high number so first number is always a decrease
 	const [ingredientsLength, setIngredientsLength] = useState<number>(100); // start with a high number so first number is always a decrease
+	const [recordingInstructionIndex, setRecordingInstructionIndex] = useState<number | null>(null);
+	const [isRecordingAbout, setIsRecordingAbout] = useState<boolean>(false);
+	const [isRecordingAcknowledgement, setIsRecordingAcknowledgement] = useState<boolean>(false);
+
+	const { startSpeechToText, endSpeechToText } = useSpeechToText();
 
 	const fetchIngredientsForAutoComplete = useCallback(async () => {
 		try {
@@ -638,14 +632,64 @@ export const useNewRecipeModel = (
 		});
 	};
 
+	const startInstructionSpeechRecognition = async (index: number) => {
+		if (recordingInstructionIndex) {
+			setRecordingInstructionIndex(null);
+			endSpeechToText();
+		} else {
+			setRecordingInstructionIndex(index);
+			const callback = (speechResult: string, isFinished: boolean) => {
+				if (speechResult) {
+					handleInstructionChange(speechResult, index);
+				}
+				if (isFinished) {
+					setRecordingInstructionIndex(null);
+				}
+			};
+			startSpeechToText(callback);
+		}
+	};
+
+	const startAboutSpeechRecognition = async () => {
+		if (isRecordingAbout) {
+			endSpeechToText();
+			setIsRecordingAbout(false);
+		} else {
+			setIsRecordingAbout(true);
+			const callback = (speechResult: string, isFinished: boolean) => {
+				if (speechResult) {
+					handleInput(speechResult, "description");
+				}
+				if (isFinished) {
+					setIsRecordingAbout(false);
+				}
+			};
+			startSpeechToText(callback);
+		}
+	};
+
+	const startAcknowledgementSpeechRecognition = async () => {
+		if (isRecordingAcknowledgement) {
+			endSpeechToText();
+			setIsRecordingAcknowledgement(false);
+		} else {
+			setIsRecordingAcknowledgement(true);
+			const callback = (speechResult: string, isFinished: boolean) => {
+				if (speechResult) {
+					handleInput(speechResult, "acknowledgement");
+				}
+				if (isFinished) {
+					setIsRecordingAcknowledgement(false);
+				}
+			};
+			startSpeechToText(callback);
+		}
+	};
+
 	return {
 		loggedInChef,
-		hasPermission,
-		setHasPermission,
 		renderOfflineMessage,
 		setRenderOfflineMessage,
-		isFocused,
-		setIsFocused,
 		alertPopupShowing,
 		setAlertPopupShowing,
 		helpShowing,
@@ -653,33 +697,19 @@ export const useNewRecipeModel = (
 		helpText,
 		setHelpText,
 		ingredientsList,
-		setIngredientsList,
 		autoCompleteFocused,
 		setAutoCompleteFocused,
 		choosingPrimaryPicture,
-		setChoosingPrimaryPicture,
 		choosingInstructionPicture,
-		setChoosingInstructionPicture,
 		instructionImageIndex,
-		setInstructionImageIndex,
 		filterDisplayed,
-		setFilterDisplayed,
 		awaitingServer,
-		setAwaitingServer,
 		scrollingEnabled,
-		setScrollingEnabled,
 		errors,
-		setErrors,
 		offlineDiagnostics,
-		setOfflineDiagnostics,
-		testing,
 		newRecipeDetails,
-		setNewRecipeDetails,
 		instructionHeights,
-		setInstructionHeights,
 		averageInstructionHeight,
-		setAverageInstructionHeight,
-		saveNewRecipeDetailsLocally,
 		activateScrollView,
 		deactivateScrollView,
 		askToReset,
@@ -687,7 +717,6 @@ export const useNewRecipeModel = (
 		primarySourceChosen,
 		autocompleteIsFocused,
 		savePrimaryImages,
-		fetchIngredientsForAutoComplete,
 		updateIngredientEntry,
 		handleIngredientSort,
 		addNewIngredient,
@@ -707,9 +736,12 @@ export const useNewRecipeModel = (
 		cancelChooseInstructionImage,
 		toggleFilterCategory,
 		clearFilterSettings,
-		postImages,
 		submitRecipe,
-		setEditRecipeDetails,
-		loadNewRecipeDetails,
+		startInstructionSpeechRecognition,
+		recordingInstructionIndex,
+		startAboutSpeechRecognition,
+		isRecordingAbout,
+		startAcknowledgementSpeechRecognition,
+		isRecordingAcknowledgement,
 	};
 };

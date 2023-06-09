@@ -218,7 +218,7 @@ export default function MultiPicSourceChooser(props: OwnProps) {
 	};
 
 	const saveCroppedImage = (image: ImagePicker.ImagePickerResult) => {
-		console.log("cropped image:", image);
+		// console.log("cropped image:", image);
 		const newImage = {
 			...image,
 			canceled: false,

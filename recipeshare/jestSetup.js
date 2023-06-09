@@ -1,6 +1,8 @@
 import fetchMock from "jest-fetch-mock";
 fetchMock.enableMocks();
 
+jest.mock("@react-native-voice/voice");
+
 // stops random warnings about Animated.useNativeDriver
 jest.mock("react-native/Libraries/Animated/NativeAnimatedHelper");
 

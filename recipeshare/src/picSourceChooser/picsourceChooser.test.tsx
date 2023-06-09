@@ -25,7 +25,7 @@ describe("picSourceChooser", () => {
 		mockSourceChosen = jest.fn();
 		mockCancelChooseImage = jest.fn();
 
-		await waitFor(async() => {
+		await waitFor(async () => {
 			const rendered = render(
 				<PicSourceChooser
 					saveImage={mockSaveImage}
@@ -81,8 +81,9 @@ describe("picSourceChooser", () => {
 	test("it should be possible to delete the selected photo", async () => {
 		fireEvent.press(getByText("Delete photo"));
 		expect(mockSaveImage).toHaveBeenCalledWith({
-			canceled: false,
 			uri: "",
+			width: 0,
+			height: 0,
 		});
 	});
 

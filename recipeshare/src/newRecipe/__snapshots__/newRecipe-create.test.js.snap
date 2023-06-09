@@ -438,17 +438,22 @@ exports[`New Recipe page New Recipe creation and functions if you set Blog, ingr
             >
               <View
                 style={
-                  {
-                    "alignItems": "center",
-                    "backgroundColor": "white",
-                    "borderColor": "#104e01",
-                    "borderRadius": 11.25,
-                    "borderWidth": 1,
-                    "flexDirection": "row",
-                    "height": "100%",
-                    "overflow": "hidden",
-                    "width": "100%",
-                  }
+                  [
+                    {
+                      "alignItems": "center",
+                      "backgroundColor": "white",
+                      "borderColor": "#104e01",
+                      "borderRadius": 11.25,
+                      "borderWidth": 1,
+                      "flexDirection": "row",
+                      "height": "100%",
+                      "overflow": "hidden",
+                      "width": "100%",
+                    },
+                    {
+                      "width": "90%",
+                    },
+                  ]
                 }
               >
                 <TextInput
@@ -473,6 +478,65 @@ exports[`New Recipe page New Recipe creation and functions if you set Blog, ingr
                     ]
                   }
                   value=""
+                />
+              </View>
+              <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  {
+                    "alignItems": "center",
+                    "backgroundColor": "white",
+                    "borderColor": "#104e01",
+                    "borderRadius": 11.25,
+                    "borderStyle": "solid",
+                    "borderWidth": 1,
+                    "flexDirection": "row",
+                    "height": "100%",
+                    "justifyContent": "center",
+                    "opacity": 1,
+                    "width": "9%",
+                  }
+                }
+              >
+                <Icon
+                  name="microphone"
+                  size={46.690000000000005}
+                  style={
+                    [
+                      {
+                        "color": "#505050",
+                      },
+                      {
+                        "color": "#505050",
+                      },
+                    ]
+                  }
                 />
               </View>
             </View>
@@ -1855,17 +1919,22 @@ exports[`New Recipe page New Recipe creation and functions if you set Blog, ingr
             >
               <View
                 style={
-                  {
-                    "alignItems": "center",
-                    "backgroundColor": "white",
-                    "borderColor": "#104e01",
-                    "borderRadius": 11.25,
-                    "borderWidth": 1,
-                    "flexDirection": "row",
-                    "height": "100%",
-                    "overflow": "hidden",
-                    "width": "100%",
-                  }
+                  [
+                    {
+                      "alignItems": "center",
+                      "backgroundColor": "white",
+                      "borderColor": "#104e01",
+                      "borderRadius": 11.25,
+                      "borderWidth": 1,
+                      "flexDirection": "row",
+                      "height": "100%",
+                      "overflow": "hidden",
+                      "width": "100%",
+                    },
+                    {
+                      "width": "90%",
+                    },
+                  ]
                 }
               >
                 <TextInput
@@ -1883,6 +1952,65 @@ exports[`New Recipe page New Recipe creation and functions if you set Blog, ingr
                     }
                   }
                   value=""
+                />
+              </View>
+              <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  {
+                    "alignItems": "center",
+                    "backgroundColor": "white",
+                    "borderColor": "#104e01",
+                    "borderRadius": 11.25,
+                    "borderStyle": "solid",
+                    "borderWidth": 1,
+                    "flexDirection": "row",
+                    "height": "100%",
+                    "justifyContent": "center",
+                    "opacity": 1,
+                    "width": "9%",
+                  }
+                }
+              >
+                <Icon
+                  name="microphone"
+                  size={46.690000000000005}
+                  style={
+                    [
+                      {
+                        "color": "#505050",
+                      },
+                      {
+                        "color": "#505050",
+                      },
+                    ]
+                  }
                 />
               </View>
             </View>
@@ -2896,17 +3024,22 @@ exports[`New Recipe page New Recipe creation and functions if you set Full Recip
             >
               <View
                 style={
-                  {
-                    "alignItems": "center",
-                    "backgroundColor": "white",
-                    "borderColor": "#104e01",
-                    "borderRadius": 11.25,
-                    "borderWidth": 1,
-                    "flexDirection": "row",
-                    "height": "100%",
-                    "overflow": "hidden",
-                    "width": "100%",
-                  }
+                  [
+                    {
+                      "alignItems": "center",
+                      "backgroundColor": "white",
+                      "borderColor": "#104e01",
+                      "borderRadius": 11.25,
+                      "borderWidth": 1,
+                      "flexDirection": "row",
+                      "height": "100%",
+                      "overflow": "hidden",
+                      "width": "100%",
+                    },
+                    {
+                      "width": "90%",
+                    },
+                  ]
                 }
               >
                 <TextInput
@@ -2931,6 +3064,65 @@ exports[`New Recipe page New Recipe creation and functions if you set Full Recip
                     ]
                   }
                   value=""
+                />
+              </View>
+              <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  {
+                    "alignItems": "center",
+                    "backgroundColor": "white",
+                    "borderColor": "#104e01",
+                    "borderRadius": 11.25,
+                    "borderStyle": "solid",
+                    "borderWidth": 1,
+                    "flexDirection": "row",
+                    "height": "100%",
+                    "justifyContent": "center",
+                    "opacity": 1,
+                    "width": "9%",
+                  }
+                }
+              >
+                <Icon
+                  name="microphone"
+                  size={46.690000000000005}
+                  style={
+                    [
+                      {
+                        "color": "#505050",
+                      },
+                      {
+                        "color": "#505050",
+                      },
+                    ]
+                  }
                 />
               </View>
             </View>
@@ -4313,17 +4505,22 @@ exports[`New Recipe page New Recipe creation and functions if you set Full Recip
             >
               <View
                 style={
-                  {
-                    "alignItems": "center",
-                    "backgroundColor": "white",
-                    "borderColor": "#104e01",
-                    "borderRadius": 11.25,
-                    "borderWidth": 1,
-                    "flexDirection": "row",
-                    "height": "100%",
-                    "overflow": "hidden",
-                    "width": "100%",
-                  }
+                  [
+                    {
+                      "alignItems": "center",
+                      "backgroundColor": "white",
+                      "borderColor": "#104e01",
+                      "borderRadius": 11.25,
+                      "borderWidth": 1,
+                      "flexDirection": "row",
+                      "height": "100%",
+                      "overflow": "hidden",
+                      "width": "100%",
+                    },
+                    {
+                      "width": "90%",
+                    },
+                  ]
                 }
               >
                 <TextInput
@@ -4341,6 +4538,65 @@ exports[`New Recipe page New Recipe creation and functions if you set Full Recip
                     }
                   }
                   value=""
+                />
+              </View>
+              <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  {
+                    "alignItems": "center",
+                    "backgroundColor": "white",
+                    "borderColor": "#104e01",
+                    "borderRadius": 11.25,
+                    "borderStyle": "solid",
+                    "borderWidth": 1,
+                    "flexDirection": "row",
+                    "height": "100%",
+                    "justifyContent": "center",
+                    "opacity": 1,
+                    "width": "9%",
+                  }
+                }
+              >
+                <Icon
+                  name="microphone"
+                  size={46.690000000000005}
+                  style={
+                    [
+                      {
+                        "color": "#505050",
+                      },
+                      {
+                        "color": "#505050",
+                      },
+                    ]
+                  }
                 />
               </View>
             </View>
@@ -5871,17 +6127,22 @@ exports[`New Recipe page New Recipe creation and functions should load and rende
             >
               <View
                 style={
-                  {
-                    "alignItems": "center",
-                    "backgroundColor": "white",
-                    "borderColor": "#104e01",
-                    "borderRadius": 11.25,
-                    "borderWidth": 1,
-                    "flexDirection": "row",
-                    "height": "100%",
-                    "overflow": "hidden",
-                    "width": "100%",
-                  }
+                  [
+                    {
+                      "alignItems": "center",
+                      "backgroundColor": "white",
+                      "borderColor": "#104e01",
+                      "borderRadius": 11.25,
+                      "borderWidth": 1,
+                      "flexDirection": "row",
+                      "height": "100%",
+                      "overflow": "hidden",
+                      "width": "100%",
+                    },
+                    {
+                      "width": "90%",
+                    },
+                  ]
                 }
               >
                 <TextInput
@@ -5906,6 +6167,65 @@ exports[`New Recipe page New Recipe creation and functions should load and rende
                     ]
                   }
                   value=""
+                />
+              </View>
+              <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  {
+                    "alignItems": "center",
+                    "backgroundColor": "white",
+                    "borderColor": "#104e01",
+                    "borderRadius": 11.25,
+                    "borderStyle": "solid",
+                    "borderWidth": 1,
+                    "flexDirection": "row",
+                    "height": "100%",
+                    "justifyContent": "center",
+                    "opacity": 1,
+                    "width": "9%",
+                  }
+                }
+              >
+                <Icon
+                  name="microphone"
+                  size={46.690000000000005}
+                  style={
+                    [
+                      {
+                        "color": "#505050",
+                      },
+                      {
+                        "color": "#505050",
+                      },
+                    ]
+                  }
                 />
               </View>
             </View>
@@ -7288,17 +7608,22 @@ exports[`New Recipe page New Recipe creation and functions should load and rende
             >
               <View
                 style={
-                  {
-                    "alignItems": "center",
-                    "backgroundColor": "white",
-                    "borderColor": "#104e01",
-                    "borderRadius": 11.25,
-                    "borderWidth": 1,
-                    "flexDirection": "row",
-                    "height": "100%",
-                    "overflow": "hidden",
-                    "width": "100%",
-                  }
+                  [
+                    {
+                      "alignItems": "center",
+                      "backgroundColor": "white",
+                      "borderColor": "#104e01",
+                      "borderRadius": 11.25,
+                      "borderWidth": 1,
+                      "flexDirection": "row",
+                      "height": "100%",
+                      "overflow": "hidden",
+                      "width": "100%",
+                    },
+                    {
+                      "width": "90%",
+                    },
+                  ]
                 }
               >
                 <TextInput
@@ -7316,6 +7641,65 @@ exports[`New Recipe page New Recipe creation and functions should load and rende
                     }
                   }
                   value=""
+                />
+              </View>
+              <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  {
+                    "alignItems": "center",
+                    "backgroundColor": "white",
+                    "borderColor": "#104e01",
+                    "borderRadius": 11.25,
+                    "borderStyle": "solid",
+                    "borderWidth": 1,
+                    "flexDirection": "row",
+                    "height": "100%",
+                    "justifyContent": "center",
+                    "opacity": 1,
+                    "width": "9%",
+                  }
+                }
+              >
+                <Icon
+                  name="microphone"
+                  size={46.690000000000005}
+                  style={
+                    [
+                      {
+                        "color": "#505050",
+                      },
+                      {
+                        "color": "#505050",
+                      },
+                    ]
+                  }
                 />
               </View>
             </View>

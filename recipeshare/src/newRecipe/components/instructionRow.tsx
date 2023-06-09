@@ -13,10 +13,10 @@ type OwnProps = {
 	chooseInstructionPicture: (index: number) => void;
 	instructionImagePresent: boolean;
 	removeInstruction: (index: number) => void;
-	onMicrophonePressIn: (index: number) => void;
-	onMicrophonePressOut: (index: number) => void;
+	onInstructionMicrophonePress: (index: number) => void;
 	inputToFocus: boolean;
-	setNextInstructionInput: (element: TextInput) => void
+	setNextInstructionInput: (element: TextInput) => void;
+	isRecording: boolean;
 };
 
 export const InstructionRow = ({
@@ -27,10 +27,10 @@ export const InstructionRow = ({
 	chooseInstructionPicture,
 	instructionImagePresent,
 	removeInstruction,
-	onMicrophonePressIn,
-	onMicrophonePressOut,
+	onInstructionMicrophonePress,
 	inputToFocus,
-	setNextInstructionInput
+	setNextInstructionInput,
+	isRecording,
 }: OwnProps) => {
 	const textInput = useRef(null);
 
@@ -67,12 +67,18 @@ export const InstructionRow = ({
 				/>
 			</View>
 			<TouchableOpacity
-				style={[styles.deleteInstructionContainer, { width: "9%" }]}
-				onPressIn={() => onMicrophonePressIn(index)}
-				onPressOut={() => onMicrophonePressOut(index)}
+				style={[
+					styles.deleteInstructionContainer,
+					{ width: "9%", backgroundColor: isRecording ? "#505050" : "white" },
+				]}
+				onPress={() => onInstructionMicrophonePress(index)}
 				activeOpacity={0.7}
 			>
-				<Icon name="microphone" size={responsiveHeight(3.5)} style={styles.ingredientTrashCan} />
+				<Icon
+					name="microphone"
+					size={responsiveHeight(3.5)}
+					style={[styles.ingredientTrashCan, { color: isRecording ? "white" : "#505050" }]}
+				/>
 			</TouchableOpacity>
 			<TouchableOpacity
 				style={[
@@ -86,10 +92,7 @@ export const InstructionRow = ({
 				<Icon
 					name="camera"
 					size={responsiveHeight(3.5)}
-					style={[
-						styles.ingredientTrashCan,
-						{ color: instructionImagePresent ? "white" : "#505050" },
-					]}
+					style={[styles.ingredientTrashCan, { color: instructionImagePresent ? "white" : "#505050" }]}
 				/>
 			</TouchableOpacity>
 			<TouchableOpacity

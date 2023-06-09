@@ -52,7 +52,7 @@ describe("multiPicSourceChooser", () => {
 			mockSaveImages = jest.fn();
 			mockSourceChosen = jest.fn();
 
-			await waitFor(async() => {
+			await waitFor(async () => {
 				const rendered = render(
 					<MultiPicSourceChooser
 						saveImages={mockSaveImages}
@@ -149,7 +149,7 @@ describe("multiPicSourceChooser", () => {
 			mockSaveImages = jest.fn();
 			mockSourceChosen = jest.fn();
 
-			await waitFor(async() => {
+			await waitFor(async () => {
 				const rendered = render(
 					<MultiPicSourceChooser
 						saveImages={mockSaveImages}
@@ -192,7 +192,11 @@ describe("multiPicSourceChooser", () => {
 					layoutMeasurement: { height: 300, width: 300 }, // Dimensions of the device
 				},
 			});
+			fireEvent(getByTestId("multiPicFlatList"), "onMomentumScrollEnd", {
+				nativeEvent: { contentOffset: { x: 300 } },
+			});
 			fireEvent.press(getByText("Add slot"));
+
 			expect(mockSaveImages).toHaveBeenCalledWith([...recipeImages, { uri: "" }]);
 		});
 
@@ -209,6 +213,9 @@ describe("multiPicSourceChooser", () => {
 					contentOffset: { y: 0, x: 300 },
 					layoutMeasurement: { height: 300, width: 300 }, // Dimensions of the device
 				},
+			});
+			fireEvent(getByTestId("multiPicFlatList"), "onMomentumScrollEnd", {
+				nativeEvent: { contentOffset: { x: 300 } },
 			});
 			fireEvent.press(getByText("Delete"));
 			await waitFor(() => expect(getByText("Take photo")).toBeTruthy());
@@ -237,6 +244,9 @@ describe("multiPicSourceChooser", () => {
 					contentOffset: { y: 0, x: 300 },
 					layoutMeasurement: { height: 300, width: 300 }, // Dimensions of the device
 				},
+			});
+			fireEvent(getByTestId("multiPicFlatList"), "onMomentumScrollEnd", {
+				nativeEvent: { contentOffset: { x: 300 } },
 			});
 			await act(async () => {
 				fireEvent.press(getByText("Choose photo"));
