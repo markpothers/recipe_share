@@ -4,7 +4,7 @@ import { Chef } from "../centralTypes"
 const saveChefDetailsLocally = (chefDetails: Chef & { dateSaved: number }, userId: number): void => {
 	AsyncStorage.getItem("localChefDetails", (err, res) => {
 		if (res != null) {
-			let localChefDetails = JSON.parse(res)
+			const localChefDetails = JSON.parse(res)
 			let newChefsList = localChefDetails.filter((localChef) => localChef.chef.id !== chefDetails.chef.id)
 
 			const date = new Date().getTime()
@@ -27,10 +27,10 @@ const saveChefDetailsLocally = (chefDetails: Chef & { dateSaved: number }, userI
 				}
 			})
 
-			AsyncStorage.setItem("localChefDetails", JSON.stringify(newChefsList), () => {})
+			AsyncStorage.setItem("localChefDetails", JSON.stringify(newChefsList))
 		} else {
-			let newChefsList = [chefDetails]
-			AsyncStorage.setItem("localChefDetails", JSON.stringify(newChefsList), () => {})
+			const newChefsList = [chefDetails]
+			AsyncStorage.setItem("localChefDetails", JSON.stringify(newChefsList))
 		}
 	})
 }
