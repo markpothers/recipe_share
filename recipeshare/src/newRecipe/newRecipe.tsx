@@ -1,42 +1,44 @@
-import React, { useRef } from "react";
 import {
+	Keyboard,
+	KeyboardAvoidingView,
+	Platform,
 	ScrollView,
 	Text,
 	TextInput,
 	TouchableOpacity,
 	View,
-	Keyboard,
-	Platform,
-	KeyboardAvoidingView,
 } from "react-native";
-import { styles } from "./newRecipeStyleSheet";
-import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { times, doubleTimes } from "../dataComponents/times";
-import helpTexts from "../dataComponents/helpTexts";
-import { difficulties } from "../dataComponents/difficulties";
-import IngredientAutoComplete from "./ingredientAutoComplete";
-import PicSourceChooser from "../picSourceChooser/picSourceChooser";
-import MultiPicSourceChooser from "../picSourceChooser/multiPicSourceChooser";
-import FilterMenu from "../filterMenu/filterMenu";
-import DualOSPicker from "../dualOSPicker/DualOSPicker";
-import { responsiveHeight, responsiveWidth, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
-import { InstructionRow } from "./components/instructionRow";
-import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
-import { DragSortableView } from "react-native-drag-sort/lib";
-import { cuisines } from "../dataComponents/cuisines";
-import { serves } from "../dataComponents/serves";
-import { clearedFilters } from "../dataComponents/clearedFilters";
-import OfflineMessage from "../offlineMessage/offlineMessage";
-import NetInfo from "@react-native-community/netinfo";
-NetInfo.configure({ reachabilityShortTimeout: 5 }); //5ms
+import React, { useRef } from "react";
+import { doubleTimes, times } from "../dataComponents/times";
+import { getMinutesFromTimeString, getTimeStringFromMinutes } from "../auxFunctions/getTimeStringFromMinutes";
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+
 import { AlertPopup } from "../alertPopup/alertPopup";
-import { getTimeStringFromMinutes, getMinutesFromTimeString } from "../auxFunctions/getTimeStringFromMinutes";
+import { DragSortableView } from "react-native-drag-sort/lib";
+import DualOSPicker from "../dualOSPicker/DualOSPicker";
+import FilterMenu from "../filterMenu/filterMenu";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import IngredientAutoComplete from "./ingredientAutoComplete";
+import { InstructionImage } from "../centralTypes";
+import { InstructionRow } from "./components/instructionRow";
+import MultiPicSourceChooser from "../picSourceChooser/multiPicSourceChooser";
+import NetInfo from "@react-native-community/netinfo";
+import { NewRecipeProps } from "../../navigation";
+import OfflineMessage from "../offlineMessage/offlineMessage";
+import PicSourceChooser from "../picSourceChooser/picSourceChooser";
+import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
 import SwitchSized from "../customComponents/switchSized/switchSized";
 import { TextPopUp } from "../textPopUp/textPopUp";
+import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
+import { clearedFilters } from "../dataComponents/clearedFilters";
+import { cuisines } from "../dataComponents/cuisines";
+import { difficulties } from "../dataComponents/difficulties";
+import helpTexts from "../dataComponents/helpTexts";
+import { serves } from "../dataComponents/serves";
+import { styles } from "./newRecipeStyleSheet";
 import { useNewRecipeModel } from "./hooks/useNewRecipeModel";
-import { InstructionImage } from "../centralTypes";
-import { NewRecipeProps } from "../../navigation";
+
+NetInfo.configure({ reachabilityShortTimeout: 5 }); //5ms
 
 type OwnProps = {
 	navigation: string;
@@ -102,8 +104,8 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 		startAboutSpeechRecognition,
 		isRecordingAbout,
 		startAcknowledgementSpeechRecognition,
-		isRecordingAcknowledgement
-		} = useNewRecipeModel(props.navigation, props.route, nextInstructionInput, nextIngredientInput);
+		isRecordingAcknowledgement,
+	} = useNewRecipeModel(props.navigation, props.route, nextInstructionInput, nextIngredientInput);
 
 	const renderAlertPopup = () => {
 		const isEditing = props.route.params?.recipe_details !== undefined;
@@ -629,7 +631,7 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 								</TouchableOpacity>
 							</View>
 							<View style={centralStyles.formInputContainer}>
-								<View style={[centralStyles.formInputWhiteBackground, {width: "90%"}]}>
+								<View style={[centralStyles.formInputWhiteBackground, { width: "90%" }]}>
 									<TextInput
 										maxFontSizeMultiplier={2}
 										style={centralStyles.formInput}
@@ -643,7 +645,10 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 								<TouchableOpacity
 									style={[
 										styles.deleteInstructionContainer,
-										{ width: "9%", backgroundColor: isRecordingAcknowledgement ? "#505050" : "white" },
+										{
+											width: "9%",
+											backgroundColor: isRecordingAcknowledgement ? "#505050" : "white",
+										},
 									]}
 									onPress={() => startAcknowledgementSpeechRecognition()}
 									activeOpacity={0.7}
