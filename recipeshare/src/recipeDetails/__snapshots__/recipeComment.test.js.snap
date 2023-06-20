@@ -305,6 +305,7 @@ exports[`RecipeComment render first comment and the delete comment button calls 
         </Text>
       </View>
       <View
+        accessibilityLabel="delete comment"
         accessibilityState={
           {
             "busy": undefined,
@@ -1024,6 +1025,7 @@ exports[`RecipeComment render with different comments and an extra button if log
         </Text>
       </View>
       <View
+        accessibilityLabel="delete comment"
         accessibilityState={
           {
             "busy": undefined,
@@ -1242,6 +1244,7 @@ exports[`RecipeComment render with different comments and an extra button if log
         </Text>
       </View>
       <View
+        accessibilityLabel="delete comment"
         accessibilityState={
           {
             "busy": undefined,
@@ -1460,6 +1463,7 @@ exports[`RecipeComment render with different comments and an extra button if log
         </Text>
       </View>
       <View
+        accessibilityLabel="delete comment"
         accessibilityState={
           {
             "busy": undefined,

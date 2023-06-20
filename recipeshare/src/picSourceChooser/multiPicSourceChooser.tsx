@@ -1,5 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Modal, Text, View, TouchableOpacity, Dimensions, Image, FlatList, Platform, ListRenderItemInfo } from "react-native";
+import {
+	Modal,
+	Text,
+	View,
+	TouchableOpacity,
+	Dimensions,
+	Image,
+	FlatList,
+	Platform,
+	ListRenderItemInfo,
+} from "react-native";
 import { Camera } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 import * as ImagePicker from "expo-image-picker";
@@ -7,9 +17,7 @@ import { styles } from "./functionalComponentsStyleSheet";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 import { ImageEditor } from "expo-image-editor";
-import { RecipeImage } from "../centralTypes";
-
-export type ImageSource = RecipeImage | ImagePicker.ImagePickerResult
+import { ImageSource, RecipeImage } from "../centralTypes";
 
 type OwnProps = {
 	imageSources: ImageSource[];
@@ -27,12 +35,12 @@ export default function MultiPicSourceChooser(props: OwnProps) {
 	const [primaryImageFlatListWidth, setPrimaryImageFlatListWidth] = useState<number>(300);
 	const primaryImageFlatList = useRef(null);
 
-	const checkPermissions = async() => {
+	const checkPermissions = async () => {
 		const cameraRollPermission = await MediaLibrary.requestPermissionsAsync();
 		const cameraPermission = await Camera.requestCameraPermissionsAsync();
 		setHasCameraRollPermission(cameraRollPermission.granted);
 		setHasCameraPermission(cameraPermission.granted);
-	}
+	};
 
 	useEffect(() => {
 		setOriginalImages([...props.imageSources]);
@@ -48,7 +56,7 @@ export default function MultiPicSourceChooser(props: OwnProps) {
 			...props.imageSources.slice(newImageIndex),
 		] as ImageSource[];
 		setImageIndex(newImageIndex);
-		await props.saveImages(newImages);
+		props.saveImages(newImages);
 	};
 
 	// after adding a new slot to the end, this function calls to scroll to it
@@ -60,7 +68,7 @@ export default function MultiPicSourceChooser(props: OwnProps) {
 	// the if statement prevents scrolling when repeated taps mean the timeout and what's rendered have got out of sync
 	useEffect(() => {
 		setTimeout(() => {
-			if (primaryImageFlatList.current?.props.data.length == props.imageSources.length) {
+			if (primaryImageFlatList.current?.props.data.length === props.imageSources.length) {
 				primaryImageFlatList.current.scrollToIndex({ index: imageIndex });
 			}
 		}, 0);
@@ -97,17 +105,15 @@ export default function MultiPicSourceChooser(props: OwnProps) {
 		}
 	};
 
-	const handleChosenImage = (image) => {
-		if (image.error) {
-			console.log(image.error);
-		} else {
-			if (Platform.OS == "ios" && image.cancelled == false) {
-				setTempImageUri(image.uri);
+	const handleChosenImage = (image: ImagePicker.ImagePickerResult) => {
+		if (!image.canceled && image.assets.length > 0) {
+			if (Platform.OS == "ios" && image.canceled == false) {
+				setTempImageUri(image.assets[0].uri);
 				setImageEditorShowing(true);
 			} else {
 				const newImages = [...props.imageSources];
-				if (!image.cancelled) {
-					newImages[imageIndex] = image;
+				if (!image.canceled) {
+					newImages[imageIndex] = image.assets[0];
 				}
 				props.saveImages(newImages);
 			}
@@ -212,12 +218,13 @@ export default function MultiPicSourceChooser(props: OwnProps) {
 	};
 
 	const saveCroppedImage = (image: ImagePicker.ImagePickerResult) => {
+		// console.log("cropped image:", image);
 		const newImage = {
 			...image,
-			cancelled: false,
+			canceled: false,
 		};
 		const newImages = props.imageSources;
-		newImages[imageIndex] = newImage as ImageSource;
+		newImages[imageIndex] = newImage as ImagePicker.ImagePickerAsset;
 		props.saveImages(newImages);
 	};
 
@@ -291,7 +298,7 @@ export default function MultiPicSourceChooser(props: OwnProps) {
 									const { x, y, width, height } = event.nativeEvent.layout; //eslint-disable-line no-unused-vars
 									setPrimaryImageFlatListWidth(width);
 								}}
-								onScroll={(e) => {
+								onMomentumScrollEnd={(e) => {
 									const nearestIndex = Math.round(
 										e.nativeEvent.contentOffset.x / primaryImageFlatListWidth
 									);

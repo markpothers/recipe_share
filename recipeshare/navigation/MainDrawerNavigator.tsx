@@ -4,15 +4,20 @@ import MyRecipeBookStack from "./MyRecipeBookNavigator";
 import ProfileStack from "./ProfileNavigator";
 import CustomDrawer from "./Drawer";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import { MainDrawerParamList } from "./types";
 
-const Drawer = createDrawerNavigator();
+const Drawer = createDrawerNavigator<MainDrawerParamList>();
 
-export default function MainDrawerNavigator(props) {
+type OwnProps = {
+	setLoadedAndLoggedIn: (args: {loaded: boolean, loggedIn: boolean}) => void;
+};
+
+export default function MainDrawerNavigator(props: OwnProps) {
 	const { setLoadedAndLoggedIn } = props;
 
 	return (
 		<Drawer.Navigator
-			initialRouteName="MyRecipeBook"
+			initialRouteName="MyRecipeBookCover"
 			drawerContent={(props) => <CustomDrawer {...props} setLoadedAndLoggedIn={setLoadedAndLoggedIn} />}
 		>
 			<Drawer.Screen name="MyRecipeBookCover" options={{ headerShown: false }} component={MyRecipeBookStack} />

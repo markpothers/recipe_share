@@ -36,7 +36,7 @@ describe("Recipe Card", () => {
 
 	test("can be rendered using typical props and matches its previous image - 1", () => {
 		const { toJSON } = render(<RecipeCard {...recipeList[0]} />);
-		expect(toJSON()).toMatchSnapshot
+		expect(toJSON()).toMatchSnapshot()
 	})
 
 	test("has a like button that can be pressed and calls to like recipe", () => {

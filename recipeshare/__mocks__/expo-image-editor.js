@@ -4,7 +4,7 @@ import { View } from "react-native";
 export const ImageEditor = (props) => {
 	useEffect(()=>{
 		props.onEditingComplete({
-			cancelled: false,
+			canceled: false,
 			uri: props.imageUri,
 		})
 	}, [props])

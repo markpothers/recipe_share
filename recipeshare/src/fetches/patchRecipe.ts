@@ -1,13 +1,13 @@
 import { databaseURL } from "../dataComponents/databaseURL"
 import { submitTimeout } from "../dataComponents/timeouts"
 //import { getBase64FromFile } from '../auxFunctions/getBase64FromFile'
-import type { FilterSettings, Cuisine, Serves, Ingredient, Difficulty, Recipe, Instruction } from "../centralTypes"
+import type { FilterSettings, Cuisine, Serves, RecipeIngredient, Difficulty, Recipe, Instruction } from "../centralTypes"
 
 export const patchRecipe = async (
 	chef_id: number,
 	auth_token: string,
 	name: string,
-	ingredients: Ingredient[],
+	ingredients: RecipeIngredient[],
 	instructions: string[],
 	// instructionImages,
 	prep_time: number,
@@ -23,7 +23,7 @@ export const patchRecipe = async (
 	acknowledgementLink: string,
 	description: string,
 	showBlogPreview: boolean
-): Promise<{ recipe: Recipe; instructions: Instruction[] } | { error: boolean; message: string[] }> => {
+): Promise<Recipe & { instructions: Instruction[] } | { error: boolean; message: string[] }> => {
 	// let primaryImagesForRails = await Promise.all(primaryImages.map(async (image, index) => {
 	// 	// if image is in a file
 	// 	if (image.uri) {

@@ -11,7 +11,7 @@ import { loadToken } from "../auxFunctions/saveLoadToken";
 jest.mock("../auxFunctions/saveLoadToken.ts");
 
 describe("appLoading page", () => {
-	let store, mockSetLoadedAndLoggedIn;
+	let store, mockSetLoadedAndLoggedIn, navigation, route;
 
 	beforeEach(async () => {
 		store = configureStore({
@@ -21,6 +21,8 @@ describe("appLoading page", () => {
 		});
 
 		mockSetLoadedAndLoggedIn = jest.fn();
+		navigation = {};
+		route = {}
 	});
 
 	afterEach(async () => {
@@ -31,7 +33,7 @@ describe("appLoading page", () => {
 	test("should load and render with no saved login", async () => {
 		const { toJSON } = render(
 			<Provider store={store}>
-				<AppLoading setLoadedAndLoggedIn={mockSetLoadedAndLoggedIn} />
+				<AppLoading navigation={navigation} route={route} setLoadedAndLoggedIn={mockSetLoadedAndLoggedIn} />
 			</Provider>
 		);
 		await waitFor(() => expect(toJSON()).toMatchSnapshot());
@@ -42,7 +44,7 @@ describe("appLoading page", () => {
 		(loadToken as jest.MockedFunction<typeof loadToken>).mockImplementation(() => Promise.resolve("myMockToken"));
 		render(
 			<Provider store={store}>
-				<AppLoading setLoadedAndLoggedIn={mockSetLoadedAndLoggedIn} />
+				<AppLoading navigation={navigation} route={route} setLoadedAndLoggedIn={mockSetLoadedAndLoggedIn} />
 			</Provider>
 		);
 		await waitFor(() => expect(mockSetLoadedAndLoggedIn).toHaveBeenCalledWith({ loaded: true, loggedIn: false }));
@@ -64,7 +66,7 @@ describe("appLoading page", () => {
 		);
 		render(
 			<Provider store={store}>
-				<AppLoading setLoadedAndLoggedIn={mockSetLoadedAndLoggedIn} />
+				<AppLoading navigation={navigation} route={route} setLoadedAndLoggedIn={mockSetLoadedAndLoggedIn} />
 			</Provider>
 		);
 		await waitFor(() => expect(mockSetLoadedAndLoggedIn).toHaveBeenCalledWith({ loaded: true, loggedIn: true }));

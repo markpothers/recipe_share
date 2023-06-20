@@ -3,15 +3,17 @@ import { View, ImageBackground, Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { loadToken } from "../auxFunctions/saveLoadToken";
 import { styles } from "./usersStyleSheet";
-import { useAppDispatch, useAppSelector, stayLoggedIn, updateLoggedInChef } from "../redux";
+import { useAppDispatch, stayLoggedIn, updateLoggedInChef } from "../redux";
 import { LoginChef } from "../centralTypes";
 import * as Device from "expo-device";
 import { setDeviceType } from "../redux/rootReducer";
+import { AppLoadingNavigationProps, AppLoadingRouteProps } from "../../navigation";
 
 type OwnProps = {
-	setLoadedAndLoggedIn: (loadedAndLoggedIn: { loaded: boolean; loggedIn: boolean }) => void;
+	navigation: AppLoadingNavigationProps;
+	route: AppLoadingRouteProps;
+	setLoadedAndLoggedIn: (args: { loaded: boolean; loggedIn: boolean }) => void;
 };
-
 export default function AppLoading({ setLoadedAndLoggedIn }: OwnProps) {
 	// const stayLoggedIn = useAppSelector((state) => state.stayLoggedIn);
 	const dispatch = useAppDispatch();

@@ -119,7 +119,12 @@ export default connect(
 		addDynamicMenuButtonsToHeader = () => {
 			this.props.navigation.setOptions({
 				headerRight: Object.assign(
-					() => <AppHeaderRight buttonAction={() => this.setState({ dynamicMenuShowing: true })} />,
+					() => (
+						<AppHeaderRight
+							buttonAction={() => this.setState({ dynamicMenuShowing: true })}
+							accessibilityLabel={"Open action menu"}
+						/>
+					),
 					{ displayName: "HeaderRight" }
 				),
 			});
@@ -245,7 +250,7 @@ export default connect(
 		saveImage = async (image) => {
 			if (image.uri == "") {
 				this.setState({ imageFileUri: "DELETED" });
-			} else if (image.cancelled === false) {
+			} else if (image.canceled === false) {
 				this.setState({ imageFileUri: image.uri });
 			}
 		};

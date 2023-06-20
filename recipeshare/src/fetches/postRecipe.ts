@@ -1,4 +1,4 @@
-import { Difficulty, FilterSettings, Ingredient, Cuisine, Serves, Recipe, Instruction } from "../centralTypes"
+import { Difficulty, FilterSettings, RecipeIngredient, Cuisine, Serves, Recipe, Instruction } from "../centralTypes"
 import { databaseURL } from "../dataComponents/databaseURL"
 import { submitTimeout } from "../dataComponents/timeouts"
 // import { getBase64FromFile } from '../auxFunctions/getBase64FromFile'
@@ -7,7 +7,7 @@ export const postRecipe = async (
 	chef_id: number,
 	auth_token: string,
 	name: string,
-	ingredients: Ingredient[],
+	ingredients: RecipeIngredient[],
 	instructions: string[],
 	// instructionImages,
 	prep_time: number,
@@ -22,7 +22,7 @@ export const postRecipe = async (
 	acknowledgementLink: string,
 	description: string,
 	showBlogPreview: boolean
-): Promise<{ recipe: Recipe; instructions: Instruction[] } | { error: boolean; message: string[] }> => {
+): Promise<Recipe & { instructions: Instruction[] } | { error: boolean; message: string[] }> => {
 	// let primaryImagesForRails = await Promise.all(primaryImages.map(async (image, index) => {
 	// 	if (image.uri) {
 	// 		return {

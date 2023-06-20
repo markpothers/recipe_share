@@ -14,7 +14,7 @@ import {
 import StyledActivityIndicator from "../customComponents/styledActivityIndicator/styledActivityIndicator";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { connect } from "react-redux";
-import { activateKeepAwake, deactivateKeepAwake } from "expo-keep-awake";
+import { deactivateKeepAwake, activateKeepAwakeAsync } from "expo-keep-awake";
 import { styles } from "./recipeDetailsStyleSheet";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { postRecipeLike } from "../fetches/postRecipeLike";
@@ -268,7 +268,12 @@ export default connect(
 		addDynamicMenuButtonsToHeader = () => {
 			this.props.navigation.setOptions({
 				headerRight: Object.assign(
-					() => <AppHeaderRight buttonAction={() => this.setState({ dynamicMenuShowing: true })} />,
+					() => (
+						<AppHeaderRight
+							buttonAction={() => this.setState({ dynamicMenuShowing: true })}
+							accessibilityLabel={"Open action menu"}
+						/>
+					),
 					{ displayName: "HeaderRight" }
 				),
 			});
@@ -320,10 +325,10 @@ export default connect(
 			this.disableKeepAwake();
 		};
 
-		handleAppStateChange = (nextAppState) => {
+		handleAppStateChange = async (nextAppState) => {
 			if (this.state.appState.match(/inactive|background/) && nextAppState === "active") {
 				// console.log('App has come to the foreground!');
-				this.enableKeepAwake();
+				await this.enableKeepAwake();
 			} else if (this.state.appState === "active" && nextAppState.match(/inactive|background/)) {
 				// console.log('App is going into background!');
 				this.disableKeepAwake();
@@ -331,8 +336,8 @@ export default connect(
 			this.setState({ appState: nextAppState });
 		};
 
-		enableKeepAwake = () => {
-			activateKeepAwake();
+		enableKeepAwake = async () => {
+			await activateKeepAwakeAsync();
 			keepAwakeTimer = setTimeout(() => {
 				deactivateKeepAwake();
 			}, 600000);
@@ -570,13 +575,17 @@ export default connect(
 		renderLikeButton = () => {
 			if (this.props.recipe_details.likeable) {
 				return (
-					<TouchableOpacity onPress={this.likeRecipe}>
+					<TouchableOpacity onPress={this.likeRecipe} testID="likeButton" accessibilityLabel="like recipe">
 						<Icon name="heart-outline" size={responsiveHeight(3.5)} style={styles.icon} />
 					</TouchableOpacity>
 				);
 			} else {
 				return (
-					<TouchableOpacity onPress={this.unlikeRecipe}>
+					<TouchableOpacity
+						onPress={this.unlikeRecipe}
+						testID="unlikeButton"
+						accessibilityLabel="unlike recipe"
+					>
 						<Icon name="heart" size={responsiveHeight(3.5)} style={styles.icon} />
 					</TouchableOpacity>
 				);
@@ -1282,6 +1291,7 @@ export default connect(
 				let notShowingAllTimes =
 					this.props.recipe_details.recipe.prep_time == 0 || this.props.recipe_details.recipe.cook_time == 0;
 				// console.log(notShowingAllTimes)
+				// console.log(this.props.recipe_details)
 				return (
 					<SpinachAppContainer awaitingServer={this.state.awaitingServer}>
 						{this.state.renderOfflineMessage && (
@@ -1565,7 +1575,10 @@ export default connect(
 										<Text maxFontSizeMultiplier={2} style={styles.detailsSubHeadings}>
 											Images from other users:
 										</Text>
-										<TouchableOpacity onPress={this.newMakePic}>
+										<TouchableOpacity
+											onPress={this.newMakePic}
+											accessibilityLabel="add your own image"
+										>
 											<Icon
 												name="image-plus"
 												size={responsiveHeight(3.5)}
@@ -1595,6 +1608,13 @@ export default connect(
 														? this.cancelComment
 														: this.saveComment
 													: this.newComment
+											}
+											accessibilityLabel={
+												this.state.commenting
+													? this.state.commentText === ""
+														? "cancel commenting"
+														: "save comment"
+													: "new comment"
 											}
 										>
 											<Icon
