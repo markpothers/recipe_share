@@ -1,6 +1,7 @@
-// const { clearedFilters } = require("../src/dataComponents/clearedFilters")
+/* eslint-disable @typescript-eslint/no-var-requires */
 const { recipeDetails } = require("../__mocks__/data/recipeDetails");
 const { loggedInChef } = require("../__mocks__/data/loggedInChef");
+// const { clearedFilters } = require("../src/dataComponents/clearedFilters")
 
 const middleware = (req, res, next) => {
 	console.log(req.method);

@@ -12,12 +12,12 @@ import Enzyme from "enzyme";
  */
 Enzyme.configure({ adapter: new Adapter() });
 
-// import "react-native-mock-render/mock"; 
+// import "react-native-mock-render/mock";
 // const { JSDOM } = require("jsdom");
 
 // const { document } = new JSDOM(``, {
 //     url: "https://example.com", // or whatever
-// }).window; 
+// }).window;
 
 // global.document = document;
 // global.window = document.defaultView;
@@ -25,14 +25,15 @@ Enzyme.configure({ adapter: new Adapter() });
 //     if (typeof global[property] === "undefined") {
 //         global[property] = document.defaultView[property];
 //     }
-// }); 
+// });
 
 function suppressDomErrors() {
-	const suppressedErrors = /(dispatchCommand was called with a ref that isn't a native component|AsyncStorage has been extracted|Received `%s` for a non-boolean attribute `%s`|React does not recognize the.*prop on a DOM element|Unknown event handler property|is using uppercase HTML|Received `true` for a non-boolean attribute `accessible`|The tag.*is unrecognized in this browser|PascalCase)/;
+	const suppressedErrors =
+		/(dispatchCommand was called with a ref that isn't a native component|AsyncStorage has been extracted|Received `%s` for a non-boolean attribute `%s`|React does not recognize the.*prop on a DOM element|Unknown event handler property|is using uppercase HTML|Received `true` for a non-boolean attribute `accessible`|The tag.*is unrecognized in this browser|PascalCase)/;
 	// eslint-disable-next-line no-console
 	const realConsoleError = console.error;
 	// eslint-disable-next-line no-console
-	console.error = message => {
+	console.error = (message) => {
 		if (message.match(suppressedErrors)) {
 			return;
 		}

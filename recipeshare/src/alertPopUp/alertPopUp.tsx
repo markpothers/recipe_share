@@ -14,7 +14,7 @@ type Props = {
 	close?: () => void;
 	closeText?: string;
 	onYes: () => void;
-	yesText?: String;
+	yesText?: string;
 };
 
 export function AlertPopup(props: Props) {

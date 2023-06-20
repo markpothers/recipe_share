@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const { chefDetails } = require("../__mocks__/data/chefDetails")
 const { chefList } = require("../__mocks__/data/chefList")
 const { cuisines } = require("../__mocks__/data/cuisines")
