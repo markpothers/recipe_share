@@ -1,6 +1,10 @@
 {
   "scripts": {
     "build": "./buildScripts/wslStartupScript.sh",
+	"build:android": "eas build --platform android",
+	"build:devClient": "eas build --profile devClient --platform android",
+	"build:development": "eas build --profile development --platform android",
+	"build:ios": "eas build --platform ios",
     "clean": "rm -rf node_modules package-lock.json",
     "prestart": "node ./buildScripts/startMessage.js",
     "go": "expo start",
@@ -12,7 +16,7 @@
     "test": "node ./node_modules/jest/bin/jest.js --colors --runInBand --detectOpenHandles",
     "lint": "esw src navigation buildScripts --color",
     "lint:watch": "npm run lint -- --w --changed ",
-	"prebuild": "npx expo prebuild --clean",
+    "prebuild": "npx expo prebuild --clean",
     "testServer": "json-server --watch ./testServer/testData.js --routes ./testServer/routes.json --host 10.0.0.78 --middlewares ./testServer/middleware.js",
     "getipmac": "ipconfig getifaddr en0"
   },
@@ -31,7 +35,7 @@
     "@reduxjs/toolkit": "^1.8.3",
     "chalk": "^2.4.2",
     "each-async": "^1.1.1",
-    "expo": "~48.0.15",
+    "expo": "~48.0.18",
     "expo-asset": "~8.9.1",
     "expo-camera": "~13.2.1",
     "@expo/config-plugins": "^6.0.0",
