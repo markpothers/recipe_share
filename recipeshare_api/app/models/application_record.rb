@@ -29,13 +29,17 @@ class ApplicationRecord < ActiveRecord::Base
 
   def self.save_image(bucket, hex, base64)
     temp_file = Tempfile.new(["tempFile", ".jpg"], "/tmp")
-    temp_file.binmode
-    temp_file.write(Base64.decode64(base64))
-    bucket = @@gcstorage.bucket bucket
-    # gcstorage = ApplicationRecord.storage_bucket(bucket)
-    save_record = bucket.create_file(temp_file, "#{hex}.jpg")
-    temp_file.close
-    temp_file.unlink
+    begin
+      temp_file.binmode
+      temp_file.write(Base64.decode64(base64))
+      temp_file.rewind
+      bucket = @@gcstorage.bucket bucket
+      # gcstorage = ApplicationRecord.storage_bucket(bucket)
+      save_record = bucket.create_file temp_file, "#{hex}.jpg"
+    ensure
+      temp_file.close
+      temp_file.unlink
+    end
     # File.delete(file_path) if File.exist?(file_path)
     return save_record.media_url
   end
