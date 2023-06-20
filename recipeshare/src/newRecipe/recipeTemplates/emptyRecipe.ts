@@ -1,7 +1,6 @@
+import { ImageSource, InstructionImage, NewRecipe } from "../../centralTypes";
+
 export const emptyRecipe = {
-	alertPopupShowing: false,
-	errors: [],
-	newRecipeDetails: {
 		recipeId: null,
 		name: "",
 		instructions: [],
@@ -15,7 +14,7 @@ export const emptyRecipe = {
 		},
 		primaryImages: [{
 			"uri": "",
-		}],
+		}] as ImageSource[],
 		filter_settings: {
 			"Breakfast": false,
 			"Lunch": false,
@@ -46,7 +45,4 @@ export const emptyRecipe = {
 		acknowledgementLink: "",
 		description: "",
 		showBlogPreview: false
-	},
-	instructionHeights: [], //responsiveHeight(6.5)],
-	averageInstructionHeight: 0, //responsiveHeight(6.5),
-}
+	} as NewRecipe

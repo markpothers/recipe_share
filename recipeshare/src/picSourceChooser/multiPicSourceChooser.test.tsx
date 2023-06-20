@@ -1,6 +1,7 @@
 import React from "react";
 import { render, fireEvent, waitFor, act } from "@testing-library/react-native";
-import MultiPicSourceChooser, { ImageSource } from "./multiPicSourceChooser";
+import MultiPicSourceChooser from "./multiPicSourceChooser";
+import { ImageSource } from "../centralTypes";
 
 // manual mocks
 
@@ -51,7 +52,7 @@ describe("multiPicSourceChooser", () => {
 			mockSaveImages = jest.fn();
 			mockSourceChosen = jest.fn();
 
-			await waitFor(async() => {
+			await waitFor(async () => {
 				const rendered = render(
 					<MultiPicSourceChooser
 						saveImages={mockSaveImages}
@@ -98,7 +99,7 @@ describe("multiPicSourceChooser", () => {
 			});
 			expect(mockSaveImages).toHaveBeenCalledWith([
 				{
-					cancelled: false,
+					canceled: false,
 					uri: "mockCameraUri",
 				},
 			]);
@@ -111,7 +112,7 @@ describe("multiPicSourceChooser", () => {
 			});
 			expect(mockSaveImages).toHaveBeenCalledWith([
 				{
-					cancelled: false,
+					canceled: false,
 					uri: "mockLibraryUri",
 				},
 			]);
@@ -148,7 +149,7 @@ describe("multiPicSourceChooser", () => {
 			mockSaveImages = jest.fn();
 			mockSourceChosen = jest.fn();
 
-			await waitFor(async() => {
+			await waitFor(async () => {
 				const rendered = render(
 					<MultiPicSourceChooser
 						saveImages={mockSaveImages}
@@ -191,7 +192,11 @@ describe("multiPicSourceChooser", () => {
 					layoutMeasurement: { height: 300, width: 300 }, // Dimensions of the device
 				},
 			});
+			fireEvent(getByTestId("multiPicFlatList"), "onMomentumScrollEnd", {
+				nativeEvent: { contentOffset: { x: 300 } },
+			});
 			fireEvent.press(getByText("Add slot"));
+
 			expect(mockSaveImages).toHaveBeenCalledWith([...recipeImages, { uri: "" }]);
 		});
 
@@ -209,6 +214,9 @@ describe("multiPicSourceChooser", () => {
 					layoutMeasurement: { height: 300, width: 300 }, // Dimensions of the device
 				},
 			});
+			fireEvent(getByTestId("multiPicFlatList"), "onMomentumScrollEnd", {
+				nativeEvent: { contentOffset: { x: 300 } },
+			});
 			fireEvent.press(getByText("Delete"));
 			await waitFor(() => expect(getByText("Take photo")).toBeTruthy());
 			expect(mockSaveImages).toHaveBeenCalledWith([recipeImages[0]]);
@@ -221,7 +229,7 @@ describe("multiPicSourceChooser", () => {
 			});
 			expect(mockSaveImages).toHaveBeenCalledWith([
 				{
-					cancelled: false,
+					canceled: false,
 					uri: "mockCameraUri",
 				},
 				recipeImages[1],
@@ -237,13 +245,16 @@ describe("multiPicSourceChooser", () => {
 					layoutMeasurement: { height: 300, width: 300 }, // Dimensions of the device
 				},
 			});
+			fireEvent(getByTestId("multiPicFlatList"), "onMomentumScrollEnd", {
+				nativeEvent: { contentOffset: { x: 300 } },
+			});
 			await act(async () => {
 				fireEvent.press(getByText("Choose photo"));
 			});
 			expect(mockSaveImages).toHaveBeenCalledWith([
 				recipeImages[0],
 				{
-					cancelled: false,
+					canceled: false,
 					uri: "mockLibraryUri",
 				},
 			]);

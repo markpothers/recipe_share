@@ -25,7 +25,7 @@ describe("picSourceChooser", () => {
 		mockSourceChosen = jest.fn();
 		mockCancelChooseImage = jest.fn();
 
-		await waitFor(async() => {
+		await waitFor(async () => {
 			const rendered = render(
 				<PicSourceChooser
 					saveImage={mockSaveImage}
@@ -62,7 +62,7 @@ describe("picSourceChooser", () => {
 			fireEvent.press(getByText("Take photo"));
 		});
 		expect(mockSaveImage).toHaveBeenCalledWith({
-			cancelled: false,
+			canceled: false,
 			uri: "mockCameraUri",
 		});
 	});
@@ -73,7 +73,7 @@ describe("picSourceChooser", () => {
 			fireEvent.press(getByText("Choose photo"));
 		});
 		expect(mockSaveImage).toHaveBeenCalledWith({
-			cancelled: false,
+			canceled: false,
 			uri: "mockLibraryUri",
 		});
 	});
@@ -81,8 +81,9 @@ describe("picSourceChooser", () => {
 	test("it should be possible to delete the selected photo", async () => {
 		fireEvent.press(getByText("Delete photo"));
 		expect(mockSaveImage).toHaveBeenCalledWith({
-			cancelled: false,
 			uri: "",
+			width: 0,
+			height: 0,
 		});
 	});
 

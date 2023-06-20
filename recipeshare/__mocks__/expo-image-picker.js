@@ -2,14 +2,14 @@
 
 export const launchCameraAsync = () => {
 	return Promise.resolve({
-		cancelled: false,
-		uri: "mockCameraUri"
+		canceled: false,
+		assets: [{uri: "mockCameraUri"}]
 	})
 }
 
 export const launchImageLibraryAsync = () => {
 	return Promise.resolve({
-		cancelled: false,
-		uri: "mockLibraryUri"
+		canceled: false,
+		assets: [{uri: "mockLibraryUri"}]
 	})
 }

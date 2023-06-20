@@ -1,3 +1,5 @@
+import * as ImagePicker from "expo-image-picker";
+
 export type Filters =
 	| "Bread"
 	| "Breakfast"
@@ -288,6 +290,29 @@ export type Recipe = {
 	shareable: boolean;
 }
 
+
+export type NewRecipe = {
+		recipeId: number|null,
+		name: string,
+		instructions: string[],
+		instructionImages: (string|InstructionImage)[],
+		ingredients: RecipeIngredient[],
+		difficulty: Difficulty,
+		times: {
+			prepTime: number,
+			cookTime: number,
+			totalTime: number,
+		},
+		primaryImages: ImageSource[],
+		filter_settings: FilterSettings,
+		cuisine: Cuisine,
+		serves: Serves,
+		acknowledgement: string,
+		acknowledgementLink: string,
+		description: string,
+		showBlogPreview: boolean
+	}
+
 export type LoginChef = {
 	auth_token: string;
 	country: string;
@@ -335,3 +360,5 @@ export type ApiError = {
 	error: boolean;
 	message: string;
 }
+
+export type ImageSource = RecipeImage | ImagePicker.ImagePickerAsset

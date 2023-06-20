@@ -108,7 +108,7 @@ export default connect(
 		};
 
 		saveImage = async (image) => {
-			if (image.cancelled === false) {
+			if (image.canceled === false) {
 				this.props.saveChefDetails("image_url", image.uri);
 			}
 		};

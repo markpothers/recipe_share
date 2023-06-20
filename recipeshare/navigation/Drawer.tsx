@@ -4,18 +4,22 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { deleteToken } from "../src/auxFunctions/saveLoadToken";
 import { styles } from "./drawerStyleSheet";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
-import { DrawerContentScrollView } from "@react-navigation/drawer";
+import { responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+import { DrawerContentComponentProps, DrawerContentScrollView } from "@react-navigation/drawer";
 import * as Device from "expo-device";
 import { useAppSelector } from "../src/redux/hooks";
 
-const CustomDrawer = (props) => {
+type OwnProps = {
+	setLoadedAndLoggedIn: (args: { loaded: boolean; loggedIn: boolean }) => void;
+};
+
+const CustomDrawer = (props: OwnProps & DrawerContentComponentProps) => {
 	const [isTablet, setIsTablet] = useState(false);
 	const loggedInChef = useAppSelector((state) => state.root.loggedInChef);
 
 	useEffect(() => {
 		const getDeviceType = async () => {
-			let deviceType = await Device.getDeviceTypeAsync();
+			const deviceType = await Device.getDeviceTypeAsync();
 			if (deviceType === 2) {
 				setIsTablet(true);
 			}

@@ -2,13 +2,33 @@ import React from "react";
 import { View, TouchableHighlight } from "react-native";
 import { styles } from "./navigationStyleSheet";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-// import { withNavigation } from "@react-navigation/compat";
-import { useNavigation } from '@react-navigation/native';
-// import { centralStyles } from "../src/centralStyleSheet"; //eslint-disable-line no-unused-vars
+import { useNavigation } from "@react-navigation/native";
 import { responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+import {
+	AboutRouteProps,
+	BrowseRecipesRouteProps,
+	ChefDetailsRouteProps,
+	MyRecipeBookCoverProps,
+	MyRecipeBookRouteProps,
+	NewRecipeRouteProps,
+	ProfileRouteProps,
+	RecipeDetailsRouteProps,
+} from "./types";
+import type { HeaderBackButtonProps } from "@react-navigation/elements";
 
-const AppHeaderLeft = (props) => {
-		const navigation = useNavigation();
+type OwnProps = {
+	route:
+		| MyRecipeBookRouteProps
+		| NewRecipeRouteProps
+		| RecipeDetailsRouteProps
+		| ChefDetailsRouteProps
+		| BrowseRecipesRouteProps
+		| ProfileRouteProps
+		| AboutRouteProps;
+};
+
+const AppHeaderLeft = (props: OwnProps & HeaderBackButtonProps) => {
+	const navigation = useNavigation<MyRecipeBookCoverProps["navigation"]>();
 
 	const renderDrawerButton = () => {
 		return (

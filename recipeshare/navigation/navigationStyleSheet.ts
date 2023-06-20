@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+import { responsiveWidth, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
 export const styles = StyleSheet.create({
 	mainPageContainer: {
