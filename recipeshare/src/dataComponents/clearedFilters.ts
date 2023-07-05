@@ -1,4 +1,6 @@
-export const clearedFilters = {
+import { FilterSettings } from "../centralTypes";
+
+export const clearedFilters: FilterSettings = {
 	"Breakfast": false,
 	"Lunch": false,
 	"Dinner": false,

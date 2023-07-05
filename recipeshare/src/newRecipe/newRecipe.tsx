@@ -195,12 +195,11 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 			{filterDisplayed && (
 				<FilterMenu
 					handleCategoriesButton={handleCategoriesButton}
-					newRecipe={true}
+					newRecipe
 					//newRecipeFilterSettings={this.state.newRecipeDetails.filter_settings}
 					switchNewRecipeFilterValue={toggleFilterCategory}
 					//newRecipeServes={this.state.newRecipeDetails.serves}
 					setNewRecipeServes={handleInput}
-					newRecipeCuisine={newRecipeDetails.cuisine}
 					setNewRecipeCuisine={handleInput}
 					//clearNewRecipeFilters={this.clearFilerCategories}
 					confirmButtonText={"Save"}

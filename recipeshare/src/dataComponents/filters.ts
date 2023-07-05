@@ -1,4 +1,6 @@
-export const filters = [
+import { Filters } from "../centralTypes";
+
+export const filters: Filters[] = [
 	"Breakfast",
 	"Lunch",
 	"Dinner",

@@ -1,4 +1,6 @@
-export const cuisines = [
+import { Cuisine } from "../centralTypes";
+
+export const cuisines: Cuisine[] = [
 	"Any",
 	"American",
 	"Brazilian",
