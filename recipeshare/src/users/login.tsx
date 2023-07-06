@@ -1,18 +1,6 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Text, Image, View, TextInput, TouchableOpacity, Keyboard } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { saveToken } from "../auxFunctions/saveLoadToken";
-import { styles } from "./usersStyleSheet";
-import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { getNewPassword } from "../fetches/getNewPassword";
-import { postLoginChef } from "../fetches/loginChef";
-import { responsiveWidth, responsiveHeight } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
-import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
-import OfflineMessage from "../offlineMessage/offlineMessage";
-import SwitchSized from "../customComponents/switchSized/switchSized";
-import { AlertPopup } from "../alertPopup/alertPopup";
-// import { apiCall } from "../auxFunctions/apiCall";
+import { Image, Keyboard, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { LoginNavigationProps, LoginRouteProps } from "../../navigation";
+import React, { useCallback, useEffect, useState } from "react";
 import {
 	clearLoginUserDetails,
 	clearNewUserDetails,
@@ -22,7 +10,23 @@ import {
 	useAppDispatch,
 	useAppSelector,
 } from "../redux";
-import { LoginNavigationProps, LoginRouteProps } from "../../navigation";
+import { getLoggedInUserDetails, getStayLoggedIn } from "../redux/selectors";
+import { responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+
+import { AlertPopup } from "../alertPopup/alertPopup";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import OfflineMessage from "../offlineMessage/offlineMessage";
+import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
+import SwitchSized from "../customComponents/switchSized/switchSized";
+import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
+import { getNewPassword } from "../fetches/getNewPassword";
+import { postLoginChef } from "../fetches/loginChef";
+import { saveToken } from "../auxFunctions/saveLoadToken";
+import { styles } from "./usersStyleSheet";
+
+// import { apiCall } from "../auxFunctions/apiCall";
+
 // import { ApiError } from "../centralTypes";
 
 type OwnProps = {
@@ -32,9 +36,8 @@ type OwnProps = {
 };
 
 export default function Login(props: OwnProps) {
-	const e_mail = useAppSelector((state) => state.root.loginUserDetails.e_mail);
-	const password = useAppSelector((state) => state.root.loginUserDetails.password);
-	const stayingLoggedIn = useAppSelector((state) => state.root.stayLoggedIn);
+	const { e_mail, password } = useAppSelector(getLoggedInUserDetails);
+	const stayingLoggedIn = useAppSelector(getStayLoggedIn);
 	const dispatch = useAppDispatch();
 	const [loginError, setLoginError] = useState<boolean>(false);
 	const [error, setError] = useState<string>("invalid");

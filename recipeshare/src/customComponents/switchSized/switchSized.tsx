@@ -1,7 +1,8 @@
+import { Platform, Switch } from "react-native";
+import { getDeviceType, useAppSelector } from "../../redux";
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+
 import React from "react";
-import { Switch, Platform } from "react-native";
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
-import { useAppSelector } from "../../redux";
 
 type Props = {
 	disabled?: boolean;
@@ -16,7 +17,7 @@ type Props = {
 export default function SwitchSized(props: Props) {
 	const { disabled, value, onValueChange, trackColor, thumbColor, testID, accessibilityLabel } = props;
 	// const [deviceType, setDeviceType] = useState(0)
-	const deviceType = useAppSelector((state) => state.root.deviceType);
+	const deviceType = useAppSelector(getDeviceType);
 
 	// useEffect(() => {
 	// 	const getDeviceType = async () => {

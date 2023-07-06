@@ -1,10 +1,11 @@
-import React from "react"
-import { View, TextInput } from "react-native"
-import { centralStyles } from "../centralStyleSheet" //eslint-disable-line no-unused-vars
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
-import SearchBarClearButton from "./SearchBarClearButton"
+import { TextInput, View } from "react-native"
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
-type Props = {
+import React from "react"
+import SearchBarClearButton from "./SearchBarClearButton"
+import { centralStyles } from "../centralStyleSheet" //eslint-disable-line no-unused-vars
+
+type OwnProps = {
 	searchTerm: string;
 	text: string;
 	setSearchTerm: (searchTerm: string) => void;
@@ -12,7 +13,7 @@ type Props = {
 	searchBar: React.RefObject<typeof SearchBar>;
 }
 
-export default function SearchBar(props: Props) {
+export default function SearchBar(props: OwnProps) {
 	const {searchTerm, text, setSearchTerm, searchBar, onBlur} = props;
 
 	// console.log(props)

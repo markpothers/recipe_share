@@ -1,22 +1,25 @@
-import React from "react"
-import { ScrollView, SafeAreaView, Image, KeyboardAvoidingView, Platform } from "react-native"
-import { centralStyles } from "../centralStyleSheet" //eslint-disable-line no-unused-vars
+import { Image, KeyboardAvoidingView, Platform, SafeAreaView, ScrollView } from "react-native"
+import React, { useState } from "react"
+
 import StyledActivityIndicator from "../customComponents/styledActivityIndicator/styledActivityIndicator"
-export default class SpinachAppContainer extends React.Component {
-	static navigationOptions = {
+import { centralStyles } from "../centralStyleSheet" //eslint-disable-line no-unused-vars
 
-	}
+type OwnProps = {
+	scrollingEnabled: boolean,
+	awaitingServer: boolean,
+	children: React.ReactElement[]
+}
 
-	state = {
-		scrollingEnabled: true
-	}
+const SpinachAppContainer = ({scrollingEnabled, awaitingServer, children}: OwnProps) => {
+// export default class SpinachAppContainer extends React.Component {
+	const [ stateScrollingEnabled ] = useState(true)
 
-	render() {
-		if (this.props.scrollingEnabled) {
+		if (scrollingEnabled) {
 			return (
 				<SafeAreaView style={centralStyles.fullPageSafeAreaView}>
 					<KeyboardAvoidingView
 						style={centralStyles.fullPageKeyboardAvoidingView}
+						// @ts-ignore
 						behavior={(Platform.OS === "ios" ? "padding" : "")}
 						keyboardVerticalOffset={Platform.OS === "ios" ? 20 : 0}
 					>
@@ -25,14 +28,14 @@ export default class SpinachAppContainer extends React.Component {
 							style={centralStyles.spinachFullBackground}
 							resizeMode={"cover"}
 						/>
-						{this.props.awaitingServer && <StyledActivityIndicator/>}
+						{awaitingServer && <StyledActivityIndicator/>}
 						<ScrollView style={centralStyles.fullPageScrollView}
 							nestedScrollEnabled={true}
-							scrollEnabled={this.state.scrollingEnabled}
+							scrollEnabled={stateScrollingEnabled}
 							keyboardShouldPersistTaps={"always"}
-							ref={(c) => { this.scrollView = c }}
+							// ref={(c) => { this.scrollView = c }}
 						>
-							{this.props.children}
+							{children}
 						</ScrollView>
 					</KeyboardAvoidingView>
 				</SafeAreaView>
@@ -46,10 +49,11 @@ export default class SpinachAppContainer extends React.Component {
 						style={centralStyles.spinachFullBackground}
 						resizeMode={"cover"}
 					/>
-					{this.props.awaitingServer && <StyledActivityIndicator/>}
-					{this.props.children}
+					{awaitingServer && <StyledActivityIndicator/>}
+					{children}
 				</SafeAreaView>
 			)
 		}
 	}
-}
+
+export default SpinachAppContainer

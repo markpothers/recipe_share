@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import LoginScreen from "../src/users/login";
-import CreateChef from "../src/users/createChef";
-import AppLoading from "../src/users/appLoading";
 import { StackScreenProps, createStackNavigator } from "@react-navigation/stack";
-// import MainDrawerNavigatorContainer from "./MainDrawerNavigatorContainer";
+
+import AppLoading from "../src/users/appLoading";
+import CreateChef from "../src/users/createChef";
+import LoginScreen from "../src/users/login";
 import MainDrawerNavigator from "./MainDrawerNavigator";
+
+// import MainDrawerNavigatorContainer from "./MainDrawerNavigatorContainer";
+
 
 //AppNavigator
 export type AppNavigatorParamList = {
@@ -18,8 +21,8 @@ export type HomeStackParamList = {
 };
 
 export type LoginStackParamList = {
-	Login: undefined;
-	CreateChef: undefined;
+	Login: { successfulRegistration?: boolean };
+	CreateChef: { successfulLogin?: boolean };
 };
 
 export type LoginProps = StackScreenProps<LoginStackParamList, "Login">;

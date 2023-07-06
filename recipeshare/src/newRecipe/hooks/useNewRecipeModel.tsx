@@ -1,22 +1,24 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { useAppSelector } from "../../redux";
+import * as ImagePicker from "expo-image-picker";
+
 import { Ingredient, NewRecipe, RecipeImage, RecipeIngredient, Unit } from "../../centralTypes";
-import { responsiveHeight, responsiveWidth, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { fetchIngredients } from "../../fetches/fetchIngredients";
+import { NewRecipeNavigationProps, NewRecipeRouteProps } from "../../../navigation";
+import React, { useCallback, useEffect, useState } from "react";
+import { getLoggedInChef, useAppSelector } from "../../redux";
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+
 import AppHeader from "../../../navigation/appHeader";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Keyboard } from "react-native";
+import NetInfo from "@react-native-community/netinfo";
 import { clearedFilters } from "../../dataComponents/clearedFilters";
 import { emptyRecipe } from "../recipeTemplates/emptyRecipe";
-import NetInfo from "@react-native-community/netinfo";
+import { fetchIngredients } from "../../fetches/fetchIngredients";
+import { getMinutesFromTimeString } from "../../auxFunctions/getTimeStringFromMinutes";
 import { patchRecipe } from "../../fetches/patchRecipe";
-import { postRecipeImage } from "../../fetches/postRecipeImage";
 import { postInstructionImage } from "../../fetches/postInstructionImage";
 import { postRecipe } from "../../fetches/postRecipe";
-import { Keyboard } from "react-native";
-import { getMinutesFromTimeString } from "../../auxFunctions/getTimeStringFromMinutes";
+import { postRecipeImage } from "../../fetches/postRecipeImage";
 import { shortTestRecipe } from "../recipeTemplates/shortTestRecipe";
-import * as ImagePicker from "expo-image-picker";
-import { NewRecipeNavigationProps, NewRecipeRouteProps } from "../../../navigation";
 import { useSpeechToText } from "./useSpeechToText";
 
 const isDev = __DEV__ ? false : false;
@@ -28,7 +30,7 @@ export const useNewRecipeModel = (
 	nextInstructionInput: React.MutableRefObject<any>,
 	nextIngredientInput: React.MutableRefObject<any>
 ) => {
-	const loggedInChef = useAppSelector((state) => state.root.loggedInChef);
+	const loggedInChef = useAppSelector(getLoggedInChef);
 	const [renderOfflineMessage, setRenderOfflineMessage] = useState<boolean>(false);
 	const [alertPopupShowing, setAlertPopupShowing] = useState<boolean>(false);
 	const [helpShowing, setHelpShowing] = useState<boolean>(false);

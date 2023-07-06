@@ -1,3 +1,4 @@
+import { Filters, InstructionImage } from "../centralTypes";
 import {
 	Keyboard,
 	KeyboardAvoidingView,
@@ -19,7 +20,6 @@ import DualOSPicker from "../dualOSPicker/DualOSPicker";
 import FilterMenu from "../filterMenu/filterMenu";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import IngredientAutoComplete from "./ingredientAutoComplete";
-import { InstructionImage } from "../centralTypes";
 import { InstructionRow } from "./components/instructionRow";
 import MultiPicSourceChooser from "../picSourceChooser/multiPicSourceChooser";
 import NetInfo from "@react-native-community/netinfo";
@@ -178,10 +178,6 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 		);
 	};
 
-	// render() {
-	// console.log(newRecipeDetails);
-	// console.log("something:", something);
-	// console.log(this.state.newRecipeDetails.instructionImages)
 	return (
 		<SpinachAppContainer awaitingServer={awaitingServer} scrollingEnabled={false}>
 			{renderOfflineMessage && (
@@ -196,26 +192,17 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 				<FilterMenu
 					handleCategoriesButton={handleCategoriesButton}
 					newRecipe
-					//newRecipeFilterSettings={this.state.newRecipeDetails.filter_settings}
 					switchNewRecipeFilterValue={toggleFilterCategory}
-					//newRecipeServes={this.state.newRecipeDetails.serves}
 					setNewRecipeServes={handleInput}
 					setNewRecipeCuisine={handleInput}
-					//clearNewRecipeFilters={this.clearFilerCategories}
 					confirmButtonText={"Save"}
 					title={"Select categories for your recipe"}
-					// listChoice={this.getRecipeListName()}
-					// fetchFilterChoices={this.fetchFilterChoices}
-					// clearSearchTerm={() => this.setState({ searchTerm: "" })}
 					cuisineOptions={cuisines}
 					selectedCuisine={newRecipeDetails.cuisine}
-					//setSelectedCuisine={this.setSelectedCuisine}
 					servesOptions={serves}
 					selectedServes={newRecipeDetails.serves}
-					//setSelectedServes={this.setSelectedServes}
-					filterOptions={Object.keys(clearedFilters)}
+					filterOptions={Object.keys(clearedFilters) as Filters[]}
 					filterSettings={newRecipeDetails.filter_settings}
-					//setFilterSetting={this.setFilterSetting}
 					clearFilterSettings={clearFilterSettings}
 				/>
 			)}

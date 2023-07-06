@@ -1,13 +1,14 @@
-import React from "react";
-import { Modal, Text, View, TouchableOpacity, ScrollView } from "react-native";
-import { styles } from "./filterMenuStyleSheet";
-import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { clearedFilters } from "../dataComponents/clearedFilters";
+import { Cuisine, FilterSettings, Filters, Serves } from "../centralTypes";
+import { Modal, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+
 import DualOSPicker from "../dualOSPicker/DualOSPicker";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import React from "react";
 import SwitchSized from "../customComponents/switchSized/switchSized";
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
-import { FilterSettings, Filters, Cuisine, Serves } from "../centralTypes";
+import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
+import { clearedFilters } from "../dataComponents/clearedFilters";
+import { styles } from "./filterMenuStyleSheet";
 
 type OwnProps = {
 	confirmButtonText: string;
@@ -19,16 +20,16 @@ type OwnProps = {
 	selectedServes: Serves;
 	cuisineOptions: Cuisine[];
 	servesOptions: Serves[];
-	setSelectedCuisine: (cuisine: Cuisine) => void;
-	setNewRecipeCuisine: (cuisine: Cuisine, field: "cuisine") => void;
-	setSelectedServes: (serves: Serves) => void;
-	setNewRecipeServes: (serves: Serves, field: "serves") => void;
-	fetchFilterChoices: () => void;
+	setSelectedCuisine?: (cuisine: Cuisine) => void;
+	setNewRecipeCuisine?: (cuisine: Cuisine, field: "cuisine") => void;
+	setSelectedServes?: (serves: Serves) => void;
+	setNewRecipeServes?: (serves: Serves, field: "serves") => void;
+	fetchFilterChoices?: () => void;
 	clearFilterSettings: () => void;
-	clearSearchTerm: () => void;
+	clearSearchTerm?: () => void;
 	switchNewRecipeFilterValue: (filter: Filters) => void;
-	setFilterSetting: (filter: Filters, value: boolean) => void;
-	closeFilterAndRefresh: () => void;
+	setFilterSetting?: (filter: Filters, value: boolean) => void;
+	closeFilterAndRefresh?: () => void;
 	handleCategoriesButton: () => void;
 };
 
