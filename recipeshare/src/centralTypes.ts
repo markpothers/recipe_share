@@ -22,7 +22,7 @@ export type Filters =
 	| "Weekend"
 	| "Weeknight"
 	| "White meat"
-	| "Whole 30"
+	| "Whole 30";
 
 export type FilterSettings = {
 	Bread: boolean;
@@ -47,7 +47,7 @@ export type FilterSettings = {
 	Weeknight: boolean;
 	"White meat": boolean;
 	"Whole 30": boolean;
-}
+};
 
 export type Cuisine =
 	| "Any"
@@ -76,11 +76,11 @@ export type Cuisine =
 	| "Swedish"
 	| "Thai"
 	| "Turkish"
-	| "Vietnamese"
+	| "Vietnamese";
 
-export type Serves = "Any" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10"
+export type Serves = "Any" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10";
 
-export type Difficulty = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10"
+export type Difficulty = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10";
 
 export type Comment = {
 	chef_id: number;
@@ -92,7 +92,7 @@ export type Comment = {
 	recipe_id: number;
 	updated_at: string;
 	username: string;
-}
+};
 
 export type Instruction = {
 	created_at: string;
@@ -102,7 +102,7 @@ export type Instruction = {
 	recipe_id: number;
 	step: number;
 	updated_at: string;
-}
+};
 
 export type Ingredient = {
 	created_at: string;
@@ -110,13 +110,13 @@ export type Ingredient = {
 	id: number;
 	name: string;
 	updated_at: string;
-}
+};
 
 export type AvailableFilters = {
 	filters: Filters[];
 	serves: Serves[];
 	cuisines: Cuisine[];
-}
+};
 
 export type ListChef = {
 	comments_given: number;
@@ -134,17 +134,19 @@ export type ListChef = {
 	recipe_makes_received: number;
 	user_chef_following: number;
 	username: string;
-}
+};
+
+export type SimpleChef = {
+	country: string;
+	created_at: string;
+	id: number;
+	image_url: string | null;
+	profile_text: string;
+	username: string;
+};
 
 export type Chef = {
-	chef: {
-		country: string;
-		created_at: string;
-		id: number;
-		image_url: string | null;
-		profile_text: string;
-		username: string;
-	},
+	chef: SimpleChef;
 	chef_commented: boolean;
 	chef_followed: boolean;
 	chef_liked: boolean;
@@ -162,7 +164,7 @@ export type Chef = {
 	recipe_likes: number;
 	recipe_likes_received: number;
 	recipes: number;
-}
+};
 
 export type IngredientUse = {
 	created_at: string;
@@ -174,7 +176,7 @@ export type IngredientUse = {
 	recipe_id: number;
 	unit: string;
 	updated_at: string;
-}
+};
 
 export type InstructionImage = {
 	created_at: string;
@@ -185,7 +187,7 @@ export type InstructionImage = {
 	instruction_id: number;
 	name: string | null;
 	updated_at: string;
-}
+};
 
 export type MakePic = {
 	chef_id: number;
@@ -197,14 +199,14 @@ export type MakePic = {
 	image_url: string;
 	recipe_id: number;
 	updated_at: string;
-}
+};
 
 export type MakePicChef = {
 	id: number;
 	image_url: string | null;
 	profile_text: number | null;
 	username: string;
-}
+};
 
 export type RecipeImage = {
 	created_at: string;
@@ -216,7 +218,7 @@ export type RecipeImage = {
 	name: string | null;
 	recipe_id: number;
 	updated_at: string;
-}
+};
 
 export type ListRecipe = {
 	acknowledgement: string;
@@ -250,7 +252,7 @@ export type ListRecipe = {
 	total_time: number;
 	updated_at: string;
 	username: string;
-}
+};
 
 export type Recipe = {
 	chef_id: number;
@@ -288,30 +290,29 @@ export type Recipe = {
 	recipe_likes: number;
 	recipe_makes: number;
 	shareable: boolean;
-}
-
+};
 
 export type NewRecipe = {
-		recipeId: number|null,
-		name: string,
-		instructions: string[],
-		instructionImages: (string|InstructionImage)[],
-		ingredients: RecipeIngredient[],
-		difficulty: Difficulty,
-		times: {
-			prepTime: number,
-			cookTime: number,
-			totalTime: number,
-		},
-		primaryImages: ImageSource[],
-		filter_settings: FilterSettings,
-		cuisine: Cuisine,
-		serves: Serves,
-		acknowledgement: string,
-		acknowledgementLink: string,
-		description: string,
-		showBlogPreview: boolean
-	}
+	recipeId: number | null;
+	name: string;
+	instructions: string[];
+	instructionImages: (string | InstructionImage)[];
+	ingredients: RecipeIngredient[];
+	difficulty: Difficulty;
+	times: {
+		prepTime: number;
+		cookTime: number;
+		totalTime: number;
+	};
+	primaryImages: ImageSource[];
+	filter_settings: FilterSettings;
+	cuisine: Cuisine;
+	serves: Serves;
+	acknowledgement: string;
+	acknowledgementLink: string;
+	description: string;
+	showBlogPreview: boolean;
+};
 
 export type LoginChef = {
 	auth_token: string;
@@ -329,24 +330,15 @@ export type LoginChef = {
 	password_is_auto: boolean;
 	profile_text: boolean;
 	username: string;
-}
+};
 
-export type Unit =
-	"Oz" |
-	"lb" |
-	"g" |
-	"tsp" |
-	"tbsp" |
-	"fl oz" |
-	"cup" |
-	"ml" |
-	"each"
+export type Unit = "Oz" | "lb" | "g" | "tsp" | "tbsp" | "fl oz" | "cup" | "ml" | "each";
 
 export type RecipeIngredient = {
 	name: string;
 	quantity: string;
 	unit: Unit;
-}
+};
 
 export type Follow = {
 	followee_id: number;
@@ -354,11 +346,27 @@ export type Follow = {
 	hidden: boolean;
 	created_at: string;
 	updated_at: string;
-}
+};
 
 export type ApiError = {
 	error: boolean;
 	message: string;
-}
+};
 
-export type ImageSource = RecipeImage | ImagePicker.ImagePickerAsset
+export type ImageSource = RecipeImage | ImagePicker.ImagePickerAsset;
+
+export type LoggedInChef = {
+	id: number;
+	e_mail: string;
+	username: string;
+	auth_token: string;
+	image_url: string;
+	is_admin: boolean;
+	is_member: boolean;
+};
+
+export type HeaderButton = {
+	icon: string;
+	text: string;
+	action: () => void;
+};

@@ -6,7 +6,7 @@ const saveRecipeDetailsLocally = (recipeDetails: Recipe & { dateSaved: number },
 		if (res != null) {
 			const localRecipeDetails = JSON.parse(res);
 			let newRecipesList = localRecipeDetails.filter(
-				(localRecipe) => localRecipe.recipe.id !== recipeDetails.recipe.id
+				(localRecipe) => localRecipe.recipe && localRecipe.recipe.id !== recipeDetails.recipe.id
 			);
 			const date = new Date().getTime();
 			recipeDetails.dateSaved = date;

@@ -1,7 +1,7 @@
-import React from "react";
 import renderer, { act } from "react-test-renderer";
 
-import RecipeComment from "./recipeComment.js";
+import React from "react";
+import RecipeComment from "./recipeComment";
 import { TouchableOpacity } from "react-native";
 
 describe("RecipeComment", () => {

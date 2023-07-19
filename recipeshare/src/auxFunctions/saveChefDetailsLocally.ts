@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { Chef } from "../centralTypes"
 
-const saveChefDetailsLocally = (chefDetails: Chef & { dateSaved: number }, userId: number): void => {
+const saveChefDetailsLocally = (chefDetails: Chef & { dateSaved?: number }, userId: number): void => {
 	AsyncStorage.getItem("localChefDetails", (err, res) => {
 		if (res != null) {
 			const localChefDetails = JSON.parse(res)

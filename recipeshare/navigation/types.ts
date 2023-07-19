@@ -1,8 +1,9 @@
-import type { StackScreenProps } from "@react-navigation/stack";
+import { CompositeScreenProps, NavigatorScreenParams } from "@react-navigation/native";
+
 import type { DrawerScreenProps } from "@react-navigation/drawer";
 import type { MaterialTopTabScreenProps } from "@react-navigation/material-top-tabs";
 import { Recipe } from "../src/centralTypes";
-import { NavigatorScreenParams, CompositeScreenProps } from "@react-navigation/native";
+import type { StackScreenProps } from "@react-navigation/stack";
 
 // MainDrawer
 export type MainDrawerParamList = {
@@ -15,14 +16,14 @@ export type MyRecipeBookCoverProps = DrawerScreenProps<MainDrawerParamList, "MyR
 export type BrowseRecipesCoverProps = DrawerScreenProps<MainDrawerParamList, "BrowseRecipesCover">;
 export type ProfileCoverProps = DrawerScreenProps<MainDrawerParamList, "ProfileCover">;
 
-type CommonParams = { title: string };
+type CommonParams = { title?: string };
 
 // MyRecipeBook
 export type MyRecipeBookStackParamList = {
-	NewRecipe: CommonParams & { recipe_details: Recipe };
+	NewRecipe: { recipe_details: Recipe };
 	MyRecipeBook: CommonParams & NavigatorScreenParams<MyRecipeBookTabsParamList>;
-	RecipeDetails: CommonParams;
-	ChefDetails: CommonParams;
+	RecipeDetails: CommonParams & { commenting?: boolean };
+	ChefDetails: CommonParams & { chefID: number };
 };
 
 export type NewRecipeProps = CompositeScreenProps<
@@ -55,7 +56,7 @@ export type MyRecipeBookRouteProps = MyRecipeBookProps["route"];
 
 export type MyRecipeBookTabsParamList = {
 	"My Feed": undefined;
-	"My Recipes": { refresh: boolean };
+	"My Recipes": { refresh?: boolean, deleteId?: number };
 	"Recipes I Like": undefined;
 	"Chefs I Follow": undefined;
 	"Chefs Following Me": undefined;
@@ -87,8 +88,8 @@ export type ChefsFollowingMeTabProps = CompositeScreenProps<
 export type BrowseRecipesStackParamList = {
 	NewRecipe: CommonParams & { recipe_details: Recipe };
 	BrowseRecipes: CommonParams & NavigatorScreenParams<BrowseRecipesTabsParamList>;
-	RecipeDetails: CommonParams;
-	ChefDetails: CommonParams;
+	RecipeDetails: CommonParams & { commenting?: boolean };
+	ChefDetails: CommonParams & { chefID: number };
 };
 
 // export type NewRecipeProps = StackScreenProps<MyRecipeBookStackParamList, "NewRecipe">;

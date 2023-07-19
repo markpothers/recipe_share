@@ -1,62 +1,65 @@
-import React from "react";
 import {
+	AppState,
+	FlatList,
 	Image,
+	KeyboardAvoidingView,
+	Linking,
+	Platform,
 	ScrollView,
-	View,
 	Text,
 	TouchableOpacity,
-	FlatList,
-	KeyboardAvoidingView,
-	Platform,
-	Linking,
-	AppState,
+	View,
 } from "react-native";
-import StyledActivityIndicator from "../customComponents/styledActivityIndicator/styledActivityIndicator";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { connect } from "react-redux";
-import { deactivateKeepAwake, activateKeepAwakeAsync } from "expo-keep-awake";
-import { styles } from "./recipeDetailsStyleSheet";
-import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
-import { postRecipeLike } from "../fetches/postRecipeLike";
-import { postMakePic } from "../fetches/postMakePic";
-import { postReShare } from "../fetches/postReShare";
-import { postRecipeMake } from "../fetches/postRecipeMake";
-import { postComment } from "../fetches/postComment";
-import { destroyRecipeLike } from "../fetches/destroyRecipeLike";
-import { destroyMakePic } from "../fetches/destroyMakePic";
-import { destroyComment } from "../fetches/destroyComment";
-import { destroyRecipe } from "../fetches/destroyRecipe";
-import { destroyReShare } from "../fetches/destroyReShare";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import RecipeComment from "./recipeComment";
-import RecipeNewComment from "./recipeNewComment";
-import PicSourceChooser from "../picSourceChooser/picSourceChooser";
-import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
-import { ImagePopup } from "./imagePopup";
-import OfflineMessage from "../offlineMessage/offlineMessage";
-import NetInfo from "@react-native-community/netinfo";
-NetInfo.configure({ reachabilityShortTimeout: 5 }); //5ms
-import { AlertPopup } from "../alertPopup/alertPopup";
-import DynamicMenu from "../dynamicMenu/DynamicMenu";
-import saveChefDetailsLocally from "../auxFunctions/saveChefDetailsLocally";
-import { getTimeStringFromMinutes } from "../auxFunctions/getTimeStringFromMinutes";
-import { getChefDetails } from "../fetches/getChefDetails";
-import AppHeaderRight from "../../navigation/appHeaderRight";
-import { WebView } from "react-native-webview";
+import { activateKeepAwakeAsync, deactivateKeepAwake } from "expo-keep-awake";
 import {
-	addRecipeLike,
-	addRecipeMake,
 	addMakePic,
 	addMakePicChef,
+	addRecipeLike,
+	addRecipeMake,
 	addRecipeReShare,
 	removeRecipeLike,
+	removeRecipeReShare,
 	saveRemainingMakePics,
 	storeChefDetails,
 	updateAllRecipeLists,
 	updateComments,
-	removeRecipeReShare,
 } from "../redux";
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+
+import { AlertPopup } from "../alertPopup/alertPopup";
+import AppHeaderRight from "../../navigation/appHeaderRight";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import DynamicMenu from "../dynamicMenu/DynamicMenu";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { ImagePopup } from "./components/imagePopup";
+import NetInfo from "@react-native-community/netinfo";
+import OfflineMessage from "../offlineMessage/offlineMessage";
+import PicSourceChooser from "../picSourceChooser/picSourceChooser";
+import React from "react";
+import RecipeComment from "./recipeComment";
+import RecipeNewComment from "./recipeNewComment";
+import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
+import StyledActivityIndicator from "../customComponents/styledActivityIndicator/styledActivityIndicator";
+import { WebView } from "react-native-webview";
+import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
+import { connect } from "react-redux";
+import { destroyComment } from "../fetches/destroyComment";
+import { destroyMakePic } from "../fetches/destroyMakePic";
+import { destroyReShare } from "../fetches/destroyReShare";
+import { destroyRecipe } from "../fetches/destroyRecipe";
+import { destroyRecipeLike } from "../fetches/destroyRecipeLike";
+import { getChefDetails } from "../fetches/getChefDetails";
+import { getTimeStringFromMinutes } from "../auxFunctions/getTimeStringFromMinutes";
+import { postComment } from "../fetches/postComment";
+import { postMakePic } from "../fetches/postMakePic";
+import { postReShare } from "../fetches/postReShare";
+import { postRecipeLike } from "../fetches/postRecipeLike";
+import { postRecipeMake } from "../fetches/postRecipeMake";
+import saveChefDetailsLocally from "../auxFunctions/saveChefDetailsLocally";
+import { styles } from "./recipeDetailsStyleSheet";
+
+NetInfo.configure({ reachabilityShortTimeout: 5 }); //5ms
+
 const defaultRecipeImage = require("../dataComponents/default-recipe.jpg");
 
 let keepAwakeTimer;

@@ -1,7 +1,7 @@
-import React from "react";
 import renderer, { act } from "react-test-renderer";
 
-import RecipeNewComment from "./recipeNewComment.js";
+import React from "react";
+import RecipeNewComment from "./recipeNewComment";
 import { TextInput } from "react-native";
 
 describe("RecipeNewComment", () => {
