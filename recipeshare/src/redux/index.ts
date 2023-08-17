@@ -1,6 +1,9 @@
 export { useAppDispatch, useAppSelector } from "./hooks";
 export * from "./types";
-export type { RootState } from "./store"
+export type { RootState } from "./store";
+
+export { getLoggedInChef, getDeviceType, getLoggedInUserDetails, getStayLoggedIn } from "./selectors";
+
 export {
 	updateSingleRecipeList,
 	updateAllRecipeLists,
@@ -24,6 +27,6 @@ export {
 	updateLoggedInChef,
 	storeChefDetails,
 	clearChefDetails,
-	stayLoggedIn
-} from "./rootReducer"
-export { default as rootReducer } from "./rootReducer"
+	stayLoggedIn,
+} from "./rootReducer";
+export { default as rootReducer } from "./rootReducer";

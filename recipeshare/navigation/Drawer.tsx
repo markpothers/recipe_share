@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { ScrollView, View, Text, TouchableOpacity, Image } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { deleteToken } from "../src/auxFunctions/saveLoadToken";
-import { styles } from "./drawerStyleSheet";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
-import { DrawerContentComponentProps, DrawerContentScrollView } from "@react-navigation/drawer";
 import * as Device from "expo-device";
+
+import { DrawerContentComponentProps, DrawerContentScrollView } from "@react-navigation/drawer";
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { responsiveFontSize, responsiveHeight } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { deleteToken } from "../src/auxFunctions/saveLoadToken";
+import { getLoggedInChef } from "../src/redux";
+import { styles } from "./drawerStyleSheet";
 import { useAppSelector } from "../src/redux/hooks";
 
 type OwnProps = {
@@ -15,7 +18,7 @@ type OwnProps = {
 
 const CustomDrawer = (props: OwnProps & DrawerContentComponentProps) => {
 	const [isTablet, setIsTablet] = useState(false);
-	const loggedInChef = useAppSelector((state) => state.root.loggedInChef);
+	const loggedInChef = useAppSelector(getLoggedInChef);
 
 	useEffect(() => {
 		const getDeviceType = async () => {

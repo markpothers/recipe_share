@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react"
-import { Modal, Text, TouchableOpacity, Animated, SafeAreaView } from "react-native"
-import { styles } from "./dynamicMenuStyleSheet"
+import { Animated, Modal, SafeAreaView, Text, TouchableOpacity } from "react-native"
+import React, { useEffect, useState } from "react"
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions" //eslint-disable-line no-unused-vars
+
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions" //eslint-disable-line no-unused-vars
+import { styles } from "./dynamicMenuStyleSheet"
 
 type Props = {
 	buttons: {
@@ -28,7 +29,7 @@ export default function DynamicMenu(props: Props) {
 				duration: 150,
 				useNativeDriver: true,
 			},
-		).start(() => { })
+		).start()
 		Animated.timing(
 			menuWidth,
 			{
@@ -36,7 +37,7 @@ export default function DynamicMenu(props: Props) {
 				duration: 150,
 				useNativeDriver: true,
 			},
-		).start(() => { })
+		).start()
 		Animated.timing(
 			menuTop,
 			{
@@ -44,7 +45,7 @@ export default function DynamicMenu(props: Props) {
 				duration: 150,
 				useNativeDriver: true,
 			},
-		).start(() => { })
+		).start()
 		Animated.timing(
 			menuLeft,
 			{
@@ -52,7 +53,7 @@ export default function DynamicMenu(props: Props) {
 				duration: 150,
 				useNativeDriver: true,
 			},
-		).start(() => { })
+		).start()
 	})
 
 	const handleButtonPress = (buttonAction) => {

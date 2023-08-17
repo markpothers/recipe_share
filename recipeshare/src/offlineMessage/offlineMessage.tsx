@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { Text, Animated, TouchableOpacity } from "react-native";
-import { styles } from "./offlineMessageStyleSheet";
+import { Animated, Text, TouchableOpacity } from "react-native";
+import React, { useEffect, useState } from "react";
+import { responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { NetInfoState } from "@react-native-community/netinfo";
+import { styles } from "./offlineMessageStyleSheet";
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
 const diagnosingConnectivityIssues = true;
 
 type Props = {
 	delay?: number;
 	clearOfflineMessage: () => void;
-	diagnostics?: string | Record<string, unknown>;
+	diagnostics?: string | Error | NetInfoState;
 	topOffset: string;
 	message: string;
 	action?: () => void;
@@ -46,7 +49,10 @@ const OfflineMessage = ({ delay, clearOfflineMessage, diagnostics, topOffset, me
 			? true
 			: false;
 	return (
-		<Animated.View style={[styles.messageContainer, { opacity: fadeOpacity }, { top: topOffset }]} testID="offlineMessage">
+		<Animated.View
+			style={[styles.messageContainer, { opacity: fadeOpacity }, { top: topOffset }]}
+			testID="offlineMessage"
+		>
 			{action ? (
 				<TouchableOpacity
 					activeOpacity={0.7}

@@ -1,0 +1,1708 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RecipeComment render first comment and navigate to chef from both buttons 1`] = `
+<View
+  style={
+    {
+      "borderBottomColor": "#104e01",
+      "borderBottomWidth": 0.5,
+      "flexDirection": "row",
+      "marginLeft": "2%",
+      "marginRight": "2%",
+      "marginTop": 3,
+      "paddingBottom": "1%",
+      "width": "96%",
+    }
+  }
+>
+  <View
+    style={
+      {
+        "flex": 2,
+      }
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "opacity": 1,
+        }
+      }
+      testID="navigateToChefImageButton"
+    >
+      <Image
+        source={1}
+        style={
+          {
+            "borderRadius": 11.25,
+            "height": 60,
+            "marginRight": "4%",
+            "width": "96%",
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    style={
+      {
+        "flex": 8,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "width": "93%",
+        }
+      }
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          {
+            "opacity": 1,
+          }
+        }
+        testID="navigateToChefUsernameButton"
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "fontStyle": "italic",
+              "marginLeft": "3%",
+              "marginRight": "3%",
+            }
+          }
+        >
+          Xinth
+          :
+        </Text>
+      </View>
+    </View>
+    <View>
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          [
+            {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "marginLeft": "3%",
+              "marginRight": "3%",
+              "paddingLeft": 15,
+            },
+            {
+              "paddingLeft": 0,
+            },
+          ]
+        }
+      >
+        Beware the barrenness of a busy life.
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`RecipeComment render first comment and the delete comment button calls to delete the comment 1`] = `
+<View
+  style={
+    {
+      "borderBottomColor": "#104e01",
+      "borderBottomWidth": 0.5,
+      "flexDirection": "row",
+      "marginLeft": "2%",
+      "marginRight": "2%",
+      "marginTop": 3,
+      "paddingBottom": "1%",
+      "width": "96%",
+    }
+  }
+>
+  <View
+    style={
+      {
+        "flex": 2,
+      }
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "opacity": 1,
+        }
+      }
+      testID="navigateToChefImageButton"
+    >
+      <Image
+        source={
+          {
+            "uri": "https://robohash.org/autquiaut.png?size=300x300&set=set1",
+          }
+        }
+        style={
+          {
+            "borderRadius": 11.25,
+            "height": 60,
+            "marginRight": "4%",
+            "width": "96%",
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    style={
+      {
+        "flex": 8,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "width": "93%",
+        }
+      }
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          {
+            "opacity": 1,
+          }
+        }
+        testID="navigateToChefUsernameButton"
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "fontStyle": "italic",
+              "marginLeft": "3%",
+              "marginRight": "3%",
+            }
+          }
+        >
+          Xinth
+          :
+        </Text>
+      </View>
+      <View
+        accessibilityLabel="delete comment"
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          {
+            "opacity": 1,
+            "zIndex": 1,
+          }
+        }
+        testID="deleteCommentButton"
+      >
+        <Icon
+          name="trash-can-outline"
+          size={46.690000000000005}
+          style={
+            [
+              {
+                "color": "#505050",
+              },
+              {
+                "color": "#505050",
+              },
+            ]
+          }
+        />
+      </View>
+    </View>
+    <View>
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          [
+            {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "marginLeft": "3%",
+              "marginRight": "3%",
+              "paddingLeft": 15,
+            },
+            {
+              "paddingLeft": 0,
+            },
+          ]
+        }
+      >
+        Beware the barrenness of a busy life.
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`RecipeComment render with different comments 1`] = `
+<View
+  style={
+    {
+      "borderBottomColor": "#104e01",
+      "borderBottomWidth": 0.5,
+      "flexDirection": "row",
+      "marginLeft": "2%",
+      "marginRight": "2%",
+      "marginTop": 3,
+      "paddingBottom": "1%",
+      "width": "96%",
+    }
+  }
+>
+  <View
+    style={
+      {
+        "flex": 2,
+      }
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "opacity": 1,
+        }
+      }
+      testID="navigateToChefImageButton"
+    >
+      <Image
+        source={
+          {
+            "uri": "https://robohash.org/autquiaut.png?size=300x300&set=set1",
+          }
+        }
+        style={
+          {
+            "borderRadius": 11.25,
+            "height": 60,
+            "marginRight": "4%",
+            "width": "96%",
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    style={
+      {
+        "flex": 8,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "width": "93%",
+        }
+      }
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          {
+            "opacity": 1,
+          }
+        }
+        testID="navigateToChefUsernameButton"
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "fontStyle": "italic",
+              "marginLeft": "3%",
+              "marginRight": "3%",
+            }
+          }
+        >
+          Xinth
+          :
+        </Text>
+      </View>
+    </View>
+    <View>
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          [
+            {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "marginLeft": "3%",
+              "marginRight": "3%",
+              "paddingLeft": 15,
+            },
+            {
+              "paddingLeft": 0,
+            },
+          ]
+        }
+      >
+        Beware the barrenness of a busy life.
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`RecipeComment render with different comments 2`] = `
+<View
+  style={
+    {
+      "borderBottomColor": "#104e01",
+      "borderBottomWidth": 0.5,
+      "flexDirection": "row",
+      "marginLeft": "2%",
+      "marginRight": "2%",
+      "marginTop": 3,
+      "paddingBottom": "1%",
+      "width": "96%",
+    }
+  }
+>
+  <View
+    style={
+      {
+        "flex": 2,
+      }
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "opacity": 1,
+        }
+      }
+      testID="navigateToChefImageButton"
+    >
+      <Image
+        source={
+          {
+            "uri": "https://robohash.org/utautnemo.png?size=300x300&set=set1",
+          }
+        }
+        style={
+          {
+            "borderRadius": 11.25,
+            "height": 60,
+            "marginRight": "4%",
+            "width": "96%",
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    style={
+      {
+        "flex": 8,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "width": "93%",
+        }
+      }
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          {
+            "opacity": 1,
+          }
+        }
+        testID="navigateToChefUsernameButton"
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "fontStyle": "italic",
+              "marginLeft": "3%",
+              "marginRight": "3%",
+            }
+          }
+        >
+          I have a very long username for ui testing purposes
+          :
+        </Text>
+      </View>
+    </View>
+    <View>
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          [
+            {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "marginLeft": "3%",
+              "marginRight": "3%",
+              "paddingLeft": 15,
+            },
+            {
+              "paddingLeft": 0,
+            },
+          ]
+        }
+      >
+        It's not what happens to you, but how you react to it that matters.
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`RecipeComment render with different comments 3`] = `
+<View
+  style={
+    {
+      "borderBottomColor": "#104e01",
+      "borderBottomWidth": 0.5,
+      "flexDirection": "row",
+      "marginLeft": "2%",
+      "marginRight": "2%",
+      "marginTop": 3,
+      "paddingBottom": "1%",
+      "width": "96%",
+    }
+  }
+>
+  <View
+    style={
+      {
+        "flex": 2,
+      }
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "opacity": 1,
+        }
+      }
+      testID="navigateToChefImageButton"
+    >
+      <Image
+        source={
+          {
+            "uri": "https://robohash.org/estperferendiseum.png?size=300x300&set=set1",
+          }
+        }
+        style={
+          {
+            "borderRadius": 11.25,
+            "height": 60,
+            "marginRight": "4%",
+            "width": "96%",
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    style={
+      {
+        "flex": 8,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "width": "93%",
+        }
+      }
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          {
+            "opacity": 1,
+          }
+        }
+        testID="navigateToChefUsernameButton"
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "fontStyle": "italic",
+              "marginLeft": "3%",
+              "marginRight": "3%",
+            }
+          }
+        >
+          Zunzil Ligature
+          :
+        </Text>
+      </View>
+    </View>
+    <View>
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          [
+            {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "marginLeft": "3%",
+              "marginRight": "3%",
+              "paddingLeft": 15,
+            },
+            {
+              "paddingLeft": 0,
+            },
+          ]
+        }
+      >
+        The unexamined life is not worth living.
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`RecipeComment render with different comments and an extra button if logged in as admin 1`] = `
+<View
+  style={
+    {
+      "borderBottomColor": "#104e01",
+      "borderBottomWidth": 0.5,
+      "flexDirection": "row",
+      "marginLeft": "2%",
+      "marginRight": "2%",
+      "marginTop": 3,
+      "paddingBottom": "1%",
+      "width": "96%",
+    }
+  }
+>
+  <View
+    style={
+      {
+        "flex": 2,
+      }
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "opacity": 1,
+        }
+      }
+      testID="navigateToChefImageButton"
+    >
+      <Image
+        source={
+          {
+            "uri": "https://robohash.org/autquiaut.png?size=300x300&set=set1",
+          }
+        }
+        style={
+          {
+            "borderRadius": 11.25,
+            "height": 60,
+            "marginRight": "4%",
+            "width": "96%",
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    style={
+      {
+        "flex": 8,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "width": "93%",
+        }
+      }
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          {
+            "opacity": 1,
+          }
+        }
+        testID="navigateToChefUsernameButton"
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "fontStyle": "italic",
+              "marginLeft": "3%",
+              "marginRight": "3%",
+            }
+          }
+        >
+          Xinth
+          :
+        </Text>
+      </View>
+      <View
+        accessibilityLabel="delete comment"
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          {
+            "opacity": 1,
+            "zIndex": 1,
+          }
+        }
+        testID="deleteCommentButton"
+      >
+        <Icon
+          name="trash-can-outline"
+          size={46.690000000000005}
+          style={
+            [
+              {
+                "color": "#505050",
+              },
+              {
+                "color": "#505050",
+              },
+            ]
+          }
+        />
+      </View>
+    </View>
+    <View>
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          [
+            {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "marginLeft": "3%",
+              "marginRight": "3%",
+              "paddingLeft": 15,
+            },
+            {
+              "paddingLeft": 0,
+            },
+          ]
+        }
+      >
+        Beware the barrenness of a busy life.
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`RecipeComment render with different comments and an extra button if logged in as admin 2`] = `
+<View
+  style={
+    {
+      "borderBottomColor": "#104e01",
+      "borderBottomWidth": 0.5,
+      "flexDirection": "row",
+      "marginLeft": "2%",
+      "marginRight": "2%",
+      "marginTop": 3,
+      "paddingBottom": "1%",
+      "width": "96%",
+    }
+  }
+>
+  <View
+    style={
+      {
+        "flex": 2,
+      }
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "opacity": 1,
+        }
+      }
+      testID="navigateToChefImageButton"
+    >
+      <Image
+        source={
+          {
+            "uri": "https://robohash.org/utautnemo.png?size=300x300&set=set1",
+          }
+        }
+        style={
+          {
+            "borderRadius": 11.25,
+            "height": 60,
+            "marginRight": "4%",
+            "width": "96%",
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    style={
+      {
+        "flex": 8,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "width": "93%",
+        }
+      }
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          {
+            "opacity": 1,
+          }
+        }
+        testID="navigateToChefUsernameButton"
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "fontStyle": "italic",
+              "marginLeft": "3%",
+              "marginRight": "3%",
+            }
+          }
+        >
+          I have a very long username for ui testing purposes
+          :
+        </Text>
+      </View>
+      <View
+        accessibilityLabel="delete comment"
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          {
+            "opacity": 1,
+            "zIndex": 1,
+          }
+        }
+        testID="deleteCommentButton"
+      >
+        <Icon
+          name="trash-can-outline"
+          size={46.690000000000005}
+          style={
+            [
+              {
+                "color": "#505050",
+              },
+              {
+                "color": "#505050",
+              },
+            ]
+          }
+        />
+      </View>
+    </View>
+    <View>
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          [
+            {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "marginLeft": "3%",
+              "marginRight": "3%",
+              "paddingLeft": 15,
+            },
+            {
+              "paddingLeft": 0,
+            },
+          ]
+        }
+      >
+        It's not what happens to you, but how you react to it that matters.
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`RecipeComment render with different comments and an extra button if logged in as admin 3`] = `
+<View
+  style={
+    {
+      "borderBottomColor": "#104e01",
+      "borderBottomWidth": 0.5,
+      "flexDirection": "row",
+      "marginLeft": "2%",
+      "marginRight": "2%",
+      "marginTop": 3,
+      "paddingBottom": "1%",
+      "width": "96%",
+    }
+  }
+>
+  <View
+    style={
+      {
+        "flex": 2,
+      }
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "opacity": 1,
+        }
+      }
+      testID="navigateToChefImageButton"
+    >
+      <Image
+        source={
+          {
+            "uri": "https://robohash.org/estperferendiseum.png?size=300x300&set=set1",
+          }
+        }
+        style={
+          {
+            "borderRadius": 11.25,
+            "height": 60,
+            "marginRight": "4%",
+            "width": "96%",
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    style={
+      {
+        "flex": 8,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "width": "93%",
+        }
+      }
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          {
+            "opacity": 1,
+          }
+        }
+        testID="navigateToChefUsernameButton"
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "fontStyle": "italic",
+              "marginLeft": "3%",
+              "marginRight": "3%",
+            }
+          }
+        >
+          Zunzil Ligature
+          :
+        </Text>
+      </View>
+      <View
+        accessibilityLabel="delete comment"
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          {
+            "opacity": 1,
+            "zIndex": 1,
+          }
+        }
+        testID="deleteCommentButton"
+      >
+        <Icon
+          name="trash-can-outline"
+          size={46.690000000000005}
+          style={
+            [
+              {
+                "color": "#505050",
+              },
+              {
+                "color": "#505050",
+              },
+            ]
+          }
+        />
+      </View>
+    </View>
+    <View>
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          [
+            {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "marginLeft": "3%",
+              "marginRight": "3%",
+              "paddingLeft": 15,
+            },
+            {
+              "paddingLeft": 0,
+            },
+          ]
+        }
+      >
+        The unexamined life is not worth living.
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`RecipeComment render with the first comment with no image_url 1`] = `
+<View
+  style={
+    {
+      "borderBottomColor": "#104e01",
+      "borderBottomWidth": 0.5,
+      "flexDirection": "row",
+      "marginLeft": "2%",
+      "marginRight": "2%",
+      "marginTop": 3,
+      "paddingBottom": "1%",
+      "width": "96%",
+    }
+  }
+>
+  <View
+    style={
+      {
+        "flex": 2,
+      }
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "opacity": 1,
+        }
+      }
+      testID="navigateToChefImageButton"
+    >
+      <Image
+        source={
+          {
+            "uri": "https://robohash.org/autquiaut.png?size=300x300&set=set1",
+          }
+        }
+        style={
+          {
+            "borderRadius": 11.25,
+            "height": 60,
+            "marginRight": "4%",
+            "width": "96%",
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    style={
+      {
+        "flex": 8,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "width": "93%",
+        }
+      }
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          {
+            "opacity": 1,
+          }
+        }
+        testID="navigateToChefUsernameButton"
+      >
+        <Text
+          maxFontSizeMultiplier={2}
+          style={
+            {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "fontStyle": "italic",
+              "marginLeft": "3%",
+              "marginRight": "3%",
+            }
+          }
+        >
+          Xinth
+          :
+        </Text>
+      </View>
+    </View>
+    <View>
+      <Text
+        maxFontSizeMultiplier={2}
+        style={
+          [
+            {
+              "color": "#505050",
+              "fontSize": 33.65552620959067,
+              "marginLeft": "3%",
+              "marginRight": "3%",
+              "paddingLeft": 15,
+            },
+            {
+              "paddingLeft": 0,
+            },
+          ]
+        }
+      >
+        Beware the barrenness of a busy life.
+      </Text>
+    </View>
+  </View>
+</View>
+`;

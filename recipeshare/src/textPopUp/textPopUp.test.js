@@ -1,7 +1,7 @@
-import React from "react";
 import renderer, { act } from "react-test-renderer";
 
-import { TextPopUp } from "./textPopUp.js";
+import React from "react";
+import { TextPopUp } from "./textPopUp";
 import { TouchableOpacity } from "react-native";
 import { termsAndConditions } from "../dataComponents/termsAndConditions";
 

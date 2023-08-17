@@ -1,16 +1,12 @@
-import { Chef, Cuisine, Difficulty, FilterSettings, ListChef, ListRecipe, Recipe, RecipeIngredient, Serves } from "../centralTypes";
+import { Chef, Cuisine, Difficulty, FilterSettings, ListChef, ListRecipe, LoggedInChef, Recipe, RecipeIngredient, Serves } from "../centralTypes";
+
+export type ReduxStateType = {
+	root: RootStateType;
+}
 
 export type RootStateType = {
 	deviceType: number;
-	loggedInChef: {
-		id: number;
-		e_mail: string;
-		username: string;
-		auth_token: string;
-		image_url: string;
-		is_admin: boolean;
-		is_member: boolean;
-	},
+	loggedInChef: LoggedInChef;
 	allRecipeLists: Record<string, ListRecipe[]>;
 	allChefLists: Record<string, ListChef[]>;
 	// recipes_details: Recipe;
@@ -84,7 +80,7 @@ export type UpdateSingleChefList = {
 }
 
 export type StoreChefDetails = {
-	chefID: number;
+	chefID: string;
 	chef_details: Chef;
 }
 
