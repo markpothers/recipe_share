@@ -1,0 +1,30 @@
+# SQLite version 3.x
+#   gem install sqlite3
+#
+#   Ensure the SQLite 3 gem is defined in your Gemfile
+#   gem 'sqlite3'
+#
+unix: &unix
+  adapter: postgresql
+  # Configure additional properties here.
+  # Note: Saving credentials in environment variables is convenient, but not
+  # secure - consider a more secure solution such as
+  # Cloud Secret Manager (https://cloud.google.com/secret-manager) to help
+  # keep secrets safe.
+  username: <%= Rails.application.credentials.Google[:postgres_username] %>
+  password: <%= Rails.application.credentials.Google[:postgres_password] %>
+  database: <%= Rails.application.credentials.Google[:database_names][Rails.env.to_sym] %>
+  # Specify the Unix socket path as host
+  host: <%= Rails.application.credentials.Google[:database_hosts][Rails.env.to_sym] %>
+
+development:
+  <<: *unix
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *unix
+
+production:
+  <<: *unix

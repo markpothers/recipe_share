@@ -1,6 +1,6 @@
 entrypoint: bundle exec rails s -p 8080 -e production
-env: standard
-runtime: ruby32
+env: flex
+runtime: ruby
 
 env_variables:
   SECRET_KEY_BASE: <%= Rails.application.credentials[:secret_key_base] %>
