@@ -8,9 +8,6 @@ env_variables:
 beta_settings:
   cloud_sql_instances: "recipe-share-272202:us-central1:recipe-share"
 
-manual_scaling:
-  instances: 1
-resources:
-  cpu: 1
-  memory_gb: 1
-  disk_size_gb: 15
+automatic_scaling:
+  min_instances: 1
+  max_instances: 1

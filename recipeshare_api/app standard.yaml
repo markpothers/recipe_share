@@ -1,9 +1,6 @@
-entrypoint: bundle exec rails s -u Puma -p 8081 -e production
+entrypoint: bundle exec rails s -p 8080 -e production
 env: standard
 runtime: ruby32
-
-runtime_config:
-  operating_system: "ubuntu22"
 
 env_variables:
   SECRET_KEY_BASE: <%= Rails.application.credentials[:secret_key_base] %>
@@ -11,9 +8,6 @@ env_variables:
 beta_settings:
   cloud_sql_instances: "recipe-share-272202:us-central1:recipe-share"
 
-manual_scaling:
-  instances: 1
-resources:
-  cpu: 1
-  memory_gb: 1
-  disk_size_gb: 15
+automatic_scaling:
+  min_instances: 1
+  max_instances: 1
