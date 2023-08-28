@@ -1,52 +1,45 @@
-import { Animated, FlatList, Keyboard, Platform, RefreshControl, Text, TouchableOpacity, View } from "react-native";
-import { loadLocalRecipeLists, saveRecipeListsLocally } from "../auxFunctions/saveRecipeListsLocally";
+import { Animated, FlatList, Keyboard, Platform, RefreshControl, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Cuisine, FilterSettings, Filters, Serves } from "../../centralTypes";
+import { MyRecipeBookNavigationProps, MyRecipeBookRouteProps } from "../../../navigation";
+import NetInfo, { NetInfoState } from "@react-native-community/netinfo";
+import React, {useEffect, useRef, useState} from "react";
+import { getLoggedInChef, storeChefDetails, storeRecipeDetails, updateAllRecipeLists, updateSingleRecipeList, useAppDispatch, useAppSelector } from "../../redux";
+import { loadLocalRecipeLists, saveRecipeListsLocally } from "../../auxFunctions/saveRecipeListsLocally";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
-import { storeChefDetails, storeRecipeDetails, updateAllRecipeLists, updateSingleRecipeList } from "../redux";
 
-import AppHeader from "../../navigation/appHeader";
+import AppHeader from "../../../navigation/appHeader";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import FilterMenu from "../filterMenu/filterMenu";
+import FilterMenu from "../../filterMenu/filterMenu";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import NetInfo from "@react-native-community/netinfo";
-import OfflineMessage from "../offlineMessage/offlineMessage";
-import React from "react";
-import RecipeCard from "./components/RecipeCard";
-import SearchBar from "../searchBar/SearchBar";
-import SearchBarClearButton from "../searchBar/SearchBarClearButton";
-import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
-import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
-import { clearedFilters } from "../dataComponents/clearedFilters";
+import OfflineMessage from "../../offlineMessage/offlineMessage";
+import RecipeCard from "../components/RecipeCard";
+import SearchBar from "../../searchBar/SearchBar";
+import SearchBarClearButton from "../../searchBar/SearchBarClearButton";
+import SpinachAppContainer from "../../spinachAppContainer/SpinachAppContainer";
+import { centralStyles } from "../../centralStyleSheet"; //eslint-disable-line no-unused-vars
+import { clearedFilters } from "../../dataComponents/clearedFilters";
 import { connect } from "react-redux";
-import { cuisines } from "../dataComponents/cuisines";
-import { destroyReShare } from "../fetches/destroyReShare";
-import { destroyRecipeLike } from "../fetches/destroyRecipeLike";
-import { getAvailableFilters } from "../fetches/getAvailableFilters";
-import { getChefDetails } from "../fetches/getChefDetails";
-import { getRecipeDetails } from "../fetches/getRecipeDetails";
-import { getRecipeList } from "../fetches/getRecipeList";
-import { postReShare } from "../fetches/postReShare";
-import { postRecipeLike } from "../fetches/postRecipeLike";
-import { postRecipeMake } from "../fetches/postRecipeMake";
-import saveChefDetailsLocally from "../auxFunctions/saveChefDetailsLocally";
-import saveRecipeDetailsLocally from "../auxFunctions/saveRecipeDetailsLocally";
-import { serves } from "../dataComponents/serves";
-import { styles } from "./recipeListStyleSheet";
+import { cuisines } from "../../dataComponents/cuisines";
+import { destroyReShare } from "../../fetches/destroyReShare";
+import { destroyRecipeLike } from "../../fetches/destroyRecipeLike";
+import { getAllRecipeLists } from "../../redux/selectors";
+import { getAvailableFilters } from "../../fetches/getAvailableFilters";
+import { getChefDetails } from "../../fetches/getChefDetails";
+import { getRecipeDetails } from "../../fetches/getRecipeDetails";
+import { getRecipeList } from "../../fetches/getRecipeList";
+import { postReShare } from "../../fetches/postReShare";
+import { postRecipeLike } from "../../fetches/postRecipeLike";
+import { postRecipeMake } from "../../fetches/postRecipeMake";
+import saveChefDetailsLocally from "../../auxFunctions/saveChefDetailsLocally";
+import saveRecipeDetailsLocally from "../../auxFunctions/saveRecipeDetailsLocally";
+import { serves } from "../../dataComponents/serves";
+import { set } from "react-native-reanimated";
+import { styles } from "../recipeListStyleSheet";
 
 NetInfo.configure({ reachabilityShortTimeout: 5 }); //5ms
 
-
-
-
-
-
-
-
-// import { apiCall } from '../auxFunctions/apiCall'
-
-// import Constants from 'expo-constants';
-
-const startingLimit = 10;
-const startingOffset = 0;
+const STARTING_LIMIT = 10;
+const STARTING_OFFSET = 0;
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
 const mapStateToProps = (state) => ({
@@ -85,6 +78,191 @@ const mapDispatchToProps = {
 //variable to synchronously record FlatList y offset on ios since velocity is not available
 let previousScrollViewOffset = 0;
 
+type OwnProps = {
+	navigation: MyRecipeBookNavigationProps;
+	route: MyRecipeBookRouteProps;
+	queryChefID?: number;
+	listChoice: string;
+	global_ranking: string;
+}
+
+export const useRecipesListModel = ({navigation, route, queryChefID, listChoice, global_ranking}: OwnProps)=>{
+	const dispatch = useAppDispatch();
+	const loggedInChef = useAppSelector(getLoggedInChef);
+	const allRecipeLists = useAppSelector(getAllRecipeLists);
+	const searchBar = useRef(null);
+	const recipeFlatList = useRef<ScrollView>(null);
+	const abortController = new AbortController();
+	const [limit, setLimit] = useState<number>(STARTING_LIMIT);
+	const [offset, setOffset] = useState<number>(STARTING_OFFSET);
+	const [filterDisplayed, setFilterDisplayed] = useState<boolean>(false);
+	const [awaitingServer, setAwaitingServer] = useState<boolean>(false);
+	const [dataICantGet, setDataICantGet] = useState<number[]>([]);
+	const [renderOfflineMessage, setRenderOfflineMessage] = useState<boolean>(false);
+	const [offlineDiagnostics, setOfflineDiagnostics] = useState<string|NetInfoState>("");
+	const [renderNoRecipesMessage, setRenderNoRecipesMessage] = useState<boolean>(false);
+	const [searchTerm, setSearchTerm] = useState<string>("");
+	const [yOffset, setYOffset] = useState(new Animated.Value(0));
+	const [currentYTop, setCurrentYTop] = useState<number>(0);
+	const [searchBarZIndex, setSearchBarZIndex] = useState<number>(0);
+	const [cuisineOptions, setCuisineOptions] = useState<Cuisine[]>(cuisines);
+	const [selectedCuisine, setSelectedCuisine] = useState<Cuisine>("Any");
+	const [servesOptions, setServesOptions] = useState<Serves[]>(serves);
+	const [selectedServes, setSelectedServes] = useState<Serves>("Any");
+	const [filterOptions, setFilterOptions] = useState<Filters[]>(Object.keys(clearedFilters) as Filters[]);
+	const [filterSettings, setFilterSettings] = useState<FilterSettings>(clearedFilters);
+
+	const respondToFocus = async () => {
+		setupHeaderScrollToTopButton();
+		setAwaitingServer(true);
+		// this.setState(
+			// {
+				// awaitingServer: true,
+			// },
+			// async () => {
+				if (route.params?.deleteId) {
+					deleteRecipeFromAllLists(route.params?.deleteId);
+					navigation.setParams({ deleteId: null });
+					setAwaitingServer(false);
+					// this.setState({ awaitingServer: false });
+				} else if (route.params?.refresh) {
+					navigation.setParams({ refresh: false });
+					setOffset(STARTING_OFFSET);
+					setLimit(STARTING_LIMIT);
+					setAwaitingServer(true);
+					// this.setState(
+						// {
+							// offset: STARTING_OFFSET,
+							// limit: STARTING_LIMIT,
+							// awaitingServer: true,
+						// },
+						// async () => {
+							await fetchRecipeList();
+							recipeFlatList.scrollToOffset({ x: 0, y: 0, animated: true });
+							setAwaitingServer(false);
+							// this.setState({ awaitingServer: false });
+						// }
+					// );
+				} else {
+					setAwaitingServer(false);
+					// this.setState({ awaitingServer: false });
+				}
+			// }
+		// );
+	};
+
+	const setupHeaderScrollToTopButton = () => {
+		const { routes } = navigation?.getParent()?.getState();
+		if (navigation.isFocused()) {
+			navigation.getParent().setOptions({
+				headerTitle: (props) => (
+					<AppHeader
+						{...props}
+						text={routes[routes.length - 1]?.params?.title}
+						buttonAction={() => recipeFlatList.scrollToOffset({ offset: 0, animated: true })}
+					/>
+				),
+			});
+		}
+	};
+
+	const getQueryChefId = () => {
+		return queryChefID ? queryChefID : loggedInChef.id;
+	};
+
+	const getRecipeListName = () => {
+		return listChoice;
+		//return this.props.allRecipeLists[route.key]
+	};
+
+	const recipesList = () => {
+		//return this.props[this.getRecipeListName() + `_Recipes`]
+		// return this.state.recipeList
+		// console.log(this.props.allRecipeLists)
+		return allRecipeLists[route.key] || [];
+	};
+
+	const fetchRecipeList = async () => {
+		const netInfoState = await NetInfo.fetch();
+		if (netInfoState.isConnected) {
+			setAwaitingServer(true);
+			// this.setState({ awaitingServer: true }, async () => {
+				try {
+					const result = await getRecipeList(
+						getRecipeListName(),
+						getQueryChefId(),
+						limit,
+						offset,
+						global_ranking,
+						loggedInChef.auth_token,
+						filterSettings,
+						selectedCuisine,
+						selectedServes,
+						searchTerm,
+						abortController
+					);
+					if (result.recipes.length == 0) {
+						setRenderNoRecipesMessage(true);
+						// this.setState({ renderNoRecipesMessage: true });
+					}
+					dispatch(updateSingleRecipeList({ listKey: route.key, recipeList: result.recipes }))
+					// this.props.updateSingleRecipeList(route.key, result.recipes);
+					setCuisineOptions(result.cuisines);
+					setServesOptions(result.serves);
+					setFilterOptions(result.filters);
+					setAwaitingServer(false);
+					// this.setState({
+						// cuisineOptions: result.cuisines,
+						// servesOptions: result.serves,
+						// filterOptions: result.filters,
+						// awaitingServer: false,
+					// });
+					saveRecipeListsLocally(
+						getQueryChefId(),
+						loggedInChef.id,
+						getRecipeListName(),
+						recipesList()
+					);
+				} catch (e) {
+					setAwaitingServer(false);
+					// this.setState({
+						// awaitingServer: false,
+					// });
+					switch (e.name) {
+						case "Logout":
+							{
+								navigation.navigate("ProfileCover", {
+									screen: "Profile",
+									params: { logout: true },
+								});
+							}
+							break;
+						case "AbortError":
+							break;
+						case "Timeout":
+							if (recipesList().length == 0) {
+								// console.log('failed to get recipes. Loading from async storage.')
+								loadRecipesLocally();
+							}
+							break;
+						default:
+							if (recipesList().length == 0) {
+								// console.log('failed to get recipes. Loading from async storage.')
+								loadRecipesLocally();
+							}
+							break;
+					}
+				}
+			// });
+		} else {
+			setRenderOfflineMessage(true);
+			setOfflineDiagnostics(netInfoState);
+			// this.setState({ renderOfflineMessage: true, offlineDiagnostics: netInfoState });
+		}
+	};
+
+}
+
 export class RecipesList extends React.Component {
 	constructor(props) {
 		super(props);
@@ -92,8 +270,8 @@ export class RecipesList extends React.Component {
 		this.recipeFlatList = React.createRef();
 		this.abortController = new AbortController();
 		this.state = {
-			limit: startingLimit,
-			offset: startingOffset,
+			limit: STARTING_LIMIT,
+			offset: STARTING_OFFSET,
 			//isDisplayed: true,
 			filterDisplayed: false,
 			awaitingServer: false,
@@ -117,16 +295,16 @@ export class RecipesList extends React.Component {
 
 	componentDidMount = async () => {
 		await this.fetchRecipeList();
-		this.props.navigation.addListener("focus", this.respondToFocus);
-		// this.props.navigation.addListener("blur", this.respondToBlur);
+		navigation.addListener("focus", this.respondToFocus);
+		// navigation.addListener("blur", this.respondToBlur);
 		this.setupHeaderScrollToTopButton();
 	};
 
 	componentWillUnmount = () => {
 		// console.log(this.abortController)
 		this.abortController.abort();
-		this.props.navigation.removeListener("focus", this.respondToFocus);
-		// this.props.navigation.removeListener("blur", this.respondToBlur);
+		navigation.removeListener("focus", this.respondToFocus);
+		// navigation.removeListener("blur", this.respondToBlur);
 		this.deleteRecipeList();
 	};
 
@@ -136,143 +314,143 @@ export class RecipesList extends React.Component {
 
 	// respondToBlur = () => {};
 
-	respondToFocus = async () => {
-		this.setupHeaderScrollToTopButton();
-		this.setState(
-			{
-				awaitingServer: true,
-			},
-			async () => {
-				if (this.props.route.params?.deleteId) {
-					this.deleteRecipeFromAllLists(this.props.route.params?.deleteId);
-					this.props.navigation.setParams({ deleteId: null });
-					this.setState({ awaitingServer: false });
-				} else if (this.props.route.params?.refresh) {
-					this.props.navigation.setParams({ refresh: false });
-					this.setState(
-						{
-							offset: startingOffset,
-							limit: startingLimit,
-							awaitingServer: true,
-						},
-						async () => {
-							await this.fetchRecipeList();
-							this.recipeFlatList.scrollToOffset({ x: 0, y: 0, animated: true });
-							this.setState({ awaitingServer: false });
-						}
-					);
-				} else {
-					this.setState({ awaitingServer: false });
-				}
-			}
-		);
-	};
+	// respondToFocus = async () => {
+	// 	this.setupHeaderScrollToTopButton();
+	// 	this.setState(
+	// 		{
+	// 			awaitingServer: true,
+	// 		},
+	// 		async () => {
+	// 			if (route.params?.deleteId) {
+	// 				this.deleteRecipeFromAllLists(route.params?.deleteId);
+	// 				navigation.setParams({ deleteId: null });
+	// 				this.setState({ awaitingServer: false });
+	// 			} else if (route.params?.refresh) {
+	// 				navigation.setParams({ refresh: false });
+	// 				this.setState(
+	// 					{
+	// 						offset: STARTING_OFFSET,
+	// 						limit: STARTING_LIMIT,
+	// 						awaitingServer: true,
+	// 					},
+	// 					async () => {
+	// 						await this.fetchRecipeList();
+	// 						this.recipeFlatList.scrollToOffset({ x: 0, y: 0, animated: true });
+	// 						this.setState({ awaitingServer: false });
+	// 					}
+	// 				);
+	// 			} else {
+	// 				this.setState({ awaitingServer: false });
+	// 			}
+	// 		}
+	// 	);
+	// };
 
-	setupHeaderScrollToTopButton = () => {
-		const { routes } = this.props.navigation?.getParent()?.getState();
-		if (this.props.navigation.isFocused()) {
-			this.props.navigation.getParent().setOptions({
-				headerTitle: (props) => (
-					<AppHeader
-						{...props}
-						text={routes[routes.length - 1]?.params?.title}
-						buttonAction={() => this.recipeFlatList.scrollToOffset({ offset: 0, animated: true })}
-					/>
-				),
-			});
-		}
-	};
+	// setupHeaderScrollToTopButton = () => {
+	// 	const { routes } = navigation?.getParent()?.getState();
+	// 	if (navigation.isFocused()) {
+	// 		navigation.getParent().setOptions({
+	// 			headerTitle: (props) => (
+	// 				<AppHeader
+	// 					{...props}
+	// 					text={routes[routes.length - 1]?.params?.title}
+	// 					buttonAction={() => this.recipeFlatList.scrollToOffset({ offset: 0, animated: true })}
+	// 				/>
+	// 			),
+	// 		});
+	// 	}
+	// };
 
-	getQueryChefId = () => {
-		let queryChefId = this.props.queryChefID ? this.props.queryChefID : this.props.loggedInChef.id;
-		return queryChefId;
-	};
+	// getQueryChefId = () => {
+	// 	let queryChefId = this.props.queryChefID ? this.props.queryChefID : loggedInChef.id;
+	// 	return queryChefId;
+	// };
 
-	getRecipeListName = () => {
-		return this.props["listChoice"];
-		//return this.props.allRecipeLists[this.props.route.key]
-	};
+	// getRecipeListName = () => {
+	// 	return this.props["listChoice"];
+	// 	//return this.props.allRecipeLists[route.key]
+	// };
 
-	getRecipeList = () => {
-		//return this.props[this.getRecipeListName() + `_Recipes`]
-		// return this.state.recipeList
-		// console.log(this.props.allRecipeLists)
-		return this.props.allRecipeLists[this.props.route.key] || [];
-	};
+	// getRecipeList = () => {
+	// 	//return this.props[this.getRecipeListName() + `_Recipes`]
+	// 	// return this.state.recipeList
+	// 	// console.log(this.props.allRecipeLists)
+	// 	return this.props.allRecipeLists[route.key] || [];
+	// };
 
-	fetchRecipeList = async () => {
-		let netInfoState = await NetInfo.fetch();
-		if (netInfoState.isConnected) {
-			this.setState({ awaitingServer: true }, async () => {
-				try {
-					let result = await getRecipeList(
-						this.getRecipeListName(),
-						this.getQueryChefId(),
-						this.state.limit,
-						this.state.offset,
-						this.props.global_ranking,
-						this.props.loggedInChef.auth_token,
-						this.state.filterSettings,
-						this.state.selectedCuisine,
-						this.state.selectedServes,
-						this.state.searchTerm,
-						this.abortController
-					);
-					if (result.recipes.length == 0) {
-						this.setState({ renderNoRecipesMessage: true });
-					}
-					this.props.updateSingleRecipeList(this.props.route.key, result.recipes);
-					this.setState({
-						cuisineOptions: result.cuisines,
-						servesOptions: result.serves,
-						filterOptions: result.filters,
-						awaitingServer: false,
-					});
-					saveRecipeListsLocally(
-						this.getQueryChefId(),
-						this.props.loggedInChef.id,
-						this.getRecipeListName(),
-						this.getRecipeList()
-					);
-				} catch (e) {
-					this.setState({
-						awaitingServer: false,
-					});
-					switch (e.name) {
-						case "Logout":
-							{
-								this.props.navigation.navigate("ProfileCover", {
-									screen: "Profile",
-									params: { logout: true },
-								});
-							}
-							break;
-						case "AbortError":
-							break;
-						case "Timeout":
-							if (this.getRecipeList().length == 0) {
-								// console.log('failed to get recipes. Loading from async storage.')
-								this.loadRecipesLocally();
-							}
-							break;
-						default:
-							if (this.getRecipeList().length == 0) {
-								// console.log('failed to get recipes. Loading from async storage.')
-								this.loadRecipesLocally();
-							}
-							break;
-					}
-				}
-			});
-		} else {
-			this.setState({ renderOfflineMessage: true, offlineDiagnostics: netInfoState });
-		}
-	};
+	// fetchRecipeList = async () => {
+	// 	let netInfoState = await NetInfo.fetch();
+	// 	if (netInfoState.isConnected) {
+	// 		this.setState({ awaitingServer: true }, async () => {
+	// 			try {
+	// 				let result = await getRecipeList(
+	// 					this.getRecipeListName(),
+	// 					this.getQueryChefId(),
+	// 					this.state.limit,
+	// 					this.state.offset,
+	// 					this.props.global_ranking,
+	// 					loggedInChef.auth_token,
+	// 					this.state.filterSettings,
+	// 					this.state.selectedCuisine,
+	// 					this.state.selectedServes,
+	// 					this.state.searchTerm,
+	// 					this.abortController
+	// 				);
+	// 				if (result.recipes.length == 0) {
+	// 					this.setState({ renderNoRecipesMessage: true });
+	// 				}
+	// 				this.props.updateSingleRecipeList(route.key, result.recipes);
+	// 				this.setState({
+	// 					cuisineOptions: result.cuisines,
+	// 					servesOptions: result.serves,
+	// 					filterOptions: result.filters,
+	// 					awaitingServer: false,
+	// 				});
+	// 				saveRecipeListsLocally(
+	// 					this.getQueryChefId(),
+	// 					loggedInChef.id,
+	// 					this.getRecipeListName(),
+	// 					this.recipesList()
+	// 				);
+	// 			} catch (e) {
+	// 				this.setState({
+	// 					awaitingServer: false,
+	// 				});
+	// 				switch (e.name) {
+	// 					case "Logout":
+	// 						{
+	// 							navigation.navigate("ProfileCover", {
+	// 								screen: "Profile",
+	// 								params: { logout: true },
+	// 							});
+	// 						}
+	// 						break;
+	// 					case "AbortError":
+	// 						break;
+	// 					case "Timeout":
+	// 						if (this.recipesList().length == 0) {
+	// 							// console.log('failed to get recipes. Loading from async storage.')
+	// 							this.loadRecipesLocally();
+	// 						}
+	// 						break;
+	// 					default:
+	// 						if (this.recipesList().length == 0) {
+	// 							// console.log('failed to get recipes. Loading from async storage.')
+	// 							this.loadRecipesLocally();
+	// 						}
+	// 						break;
+	// 				}
+	// 			}
+	// 		});
+	// 	} else {
+	// 		this.setState({ renderOfflineMessage: true, offlineDiagnostics: netInfoState });
+	// 	}
+	// };
 
 	fetchAdditionalRecipesForList = async () => {
 		// only run if there are recipes present already, otherwise it won't be needed, and it
 		// prevents running immediately on mount before initial fetch is finished
-		if (this.getRecipeList().length > 0) {
+		if (this.recipesList().length > 0) {
 			try {
 				const result = await getRecipeList(
 					this.getRecipeListName(),
@@ -280,7 +458,7 @@ export class RecipesList extends React.Component {
 					this.state.limit,
 					this.state.offset,
 					this.props.global_ranking,
-					this.props.loggedInChef.auth_token,
+					loggedInChef.auth_token,
 					this.state.filterSettings,
 					this.state.selectedCuisine,
 					this.state.selectedServes,
@@ -292,14 +470,14 @@ export class RecipesList extends React.Component {
 					servesOptions: result.serves,
 					filterOptions: result.filters,
 				});
-				saveRecipeListsLocally(this.getQueryChefId(), this.props.loggedInChef.id, this.getRecipeListName(), [
-					...this.getRecipeList(),
+				saveRecipeListsLocally(this.getQueryChefId(), loggedInChef.id, this.getRecipeListName(), [
+					...this.recipesList(),
 					...result.recipes,
 				]);
-				this.props.updateSingleRecipeList(this.props.route.key, [...this.getRecipeList(), ...result.recipes]);
+				this.props.updateSingleRecipeList(route.key, [...this.recipesList(), ...result.recipes]);
 			} catch (e) {
 				if (e.name === "Logout") {
-					this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
+					navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
 				}
 				//console.log('failed to get ADDITIONAL recipes')
 				//console.log(e)
@@ -310,7 +488,7 @@ export class RecipesList extends React.Component {
 	loadRecipesLocally = async () => {
 		let localRecipeList = await loadLocalRecipeLists(this.getQueryChefId(), this.getRecipeListName());
 		if (localRecipeList.length > 0) {
-			this.props.updateSingleRecipeList(this.props.route.key, localRecipeList);
+			this.props.updateSingleRecipeList(route.key, localRecipeList);
 		}
 		this.setState({ awaitingServer: false });
 	};
@@ -323,7 +501,7 @@ export class RecipesList extends React.Component {
 				this.state.limit,
 				this.state.offset,
 				this.props.global_ranking,
-				this.props.loggedInChef.auth_token,
+				loggedInChef.auth_token,
 				this.state.filterSettings,
 				this.state.selectedCuisine,
 				this.state.selectedServes,
@@ -339,7 +517,7 @@ export class RecipesList extends React.Component {
 			switch (e.name) {
 				case "Logout":
 					{
-						this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
+						navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
 					}
 					break;
 				default:
@@ -350,7 +528,7 @@ export class RecipesList extends React.Component {
 
 	deleteRecipeList = () => {
 		let newAllRecipeLists = this.props.allRecipeLists;
-		delete newAllRecipeLists[this.props.route.key];
+		delete newAllRecipeLists[route.key];
 		this.props.updateAllRecipeLists(newAllRecipeLists);
 	};
 
@@ -365,10 +543,10 @@ export class RecipesList extends React.Component {
 	navigateToRecipeDetails = async (recipeID, commenting = false) => {
 		this.setState({ awaitingServer: true }, async () => {
 			try {
-				const recipeDetails = await getRecipeDetails(recipeID, this.props.loggedInChef.auth_token);
+				const recipeDetails = await getRecipeDetails(recipeID, loggedInChef.auth_token);
 				if (recipeDetails) {
 					// console.log(recipeDetails.recipe)
-					saveRecipeDetailsLocally(recipeDetails, this.props.loggedInChef.id);
+					saveRecipeDetailsLocally(recipeDetails, loggedInChef.id);
 					await this.props.storeRecipeDetails(recipeDetails);
 					this.setState(
 						{
@@ -376,7 +554,7 @@ export class RecipesList extends React.Component {
 							filterDisplayed: false,
 						},
 						() => {
-							this.props.navigation.navigate("RecipeDetails", {
+							navigation.navigate("RecipeDetails", {
 								recipeID: recipeID,
 								commenting: commenting,
 							});
@@ -385,7 +563,7 @@ export class RecipesList extends React.Component {
 				}
 			} catch (e) {
 				if (e.name === "Logout") {
-					this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
+					navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
 				}
 				// console.log("looking for local recipes");
 				AsyncStorage.getItem("localRecipeDetails", (err, res) => {
@@ -398,7 +576,7 @@ export class RecipesList extends React.Component {
 						if (thisRecipeDetails) {
 							this.props.storeRecipeDetails(thisRecipeDetails);
 							this.setState({ awaitingServer: false }, () => {
-								this.props.navigation.navigate("RecipeDetails", {
+								navigation.navigate("RecipeDetails", {
 									recipeID: recipeID,
 									commenting: commenting,
 								});
@@ -430,17 +608,17 @@ export class RecipesList extends React.Component {
 	navigateToChefDetails = async (chefID, recipeID) => {
 		this.setState({ awaitingServer: true }, async () => {
 			try {
-				const chefDetails = await getChefDetails(chefID, this.props.loggedInChef.auth_token);
+				const chefDetails = await getChefDetails(chefID, loggedInChef.auth_token);
 				if (chefDetails) {
 					this.props.storeChefDetails(chefDetails);
-					saveChefDetailsLocally(chefDetails, this.props.loggedInChef.id);
+					saveChefDetailsLocally(chefDetails, loggedInChef.id);
 					this.setState({ awaitingServer: false }, () => {
-						this.props.navigation.navigate("ChefDetails", { chefID: chefID });
+						navigation.navigate("ChefDetails", { chefID: chefID });
 					});
 				}
 			} catch (e) {
 				if (e.name === "Logout") {
-					this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
+					navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
 				}
 				// console.log('looking for local chefs')
 				AsyncStorage.getItem("localChefDetails", (err, res) => {
@@ -451,7 +629,7 @@ export class RecipesList extends React.Component {
 						if (thisChefDetails) {
 							this.props.storeChefDetails(thisChefDetails);
 							this.setState({ awaitingServer: false }, () => {
-								this.props.navigation.navigate("ChefDetails", { chefID: chefID });
+								navigation.navigate("ChefDetails", { chefID: chefID });
 							});
 						} else {
 							// console.log('recipe not present in saved list')
@@ -506,7 +684,7 @@ export class RecipesList extends React.Component {
 	};
 
 	refresh = async () => {
-		this.setState({ limit: startingLimit, offset: startingOffset, awaitingServer: true }, async () => {
+		this.setState({ limit: STARTING_LIMIT, offset: STARTING_OFFSET, awaitingServer: true }, async () => {
 			await this.fetchRecipeList();
 			this.setState({ awaitingServer: false });
 		});
@@ -514,8 +692,8 @@ export class RecipesList extends React.Component {
 
 	onEndReached = () => {
 		// console.log('end reached')
-		if (this.getRecipeList().length % startingLimit == 0) {
-			this.setState((state) => ({ offset: this.getRecipeList().length }), this.fetchAdditionalRecipesForList);
+		if (this.recipesList().length % STARTING_LIMIT == 0) {
+			this.setState((state) => ({ offset: this.recipesList().length }), this.fetchAdditionalRecipesForList);
 		}
 	};
 
@@ -544,8 +722,8 @@ export class RecipesList extends React.Component {
 				try {
 					const likePosted = await postRecipeLike(
 						recipeID,
-						this.props.loggedInChef.id,
-						this.props.loggedInChef.auth_token
+						loggedInChef.id,
+						loggedInChef.auth_token
 					);
 					if (likePosted) {
 						this.updateAttributeCountInRecipeLists(recipeID, "likes_count", "chef_liked", 1);
@@ -553,7 +731,7 @@ export class RecipesList extends React.Component {
 					}
 				} catch (e) {
 					if (e.name === "Logout") {
-						this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
+						navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
 					}
 					this.setState((state) => ({ dataICantGet: [...state.dataICantGet, recipeID] }));
 				}
@@ -571,8 +749,8 @@ export class RecipesList extends React.Component {
 				try {
 					const unlikePosted = await destroyRecipeLike(
 						recipeID,
-						this.props.loggedInChef.id,
-						this.props.loggedInChef.auth_token
+						loggedInChef.id,
+						loggedInChef.auth_token
 					);
 					if (unlikePosted) {
 						this.updateAttributeCountInRecipeLists(recipeID, "likes_count", "chef_liked", -1);
@@ -580,7 +758,7 @@ export class RecipesList extends React.Component {
 					}
 				} catch (e) {
 					if (e.name === "Logout") {
-						this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
+						navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
 					}
 					await this.setState((state) => ({ dataICantGet: [...state.dataICantGet, recipeID] }));
 				}
@@ -598,15 +776,15 @@ export class RecipesList extends React.Component {
 				try {
 					const makePosted = await postRecipeMake(
 						recipeID,
-						this.props.loggedInChef.id,
-						this.props.loggedInChef.auth_token
+						loggedInChef.id,
+						loggedInChef.auth_token
 					);
 					if (makePosted) {
 						this.updateAttributeCountInRecipeLists(recipeID, "makes_count", "chef_made", 1);
 					}
 				} catch (e) {
 					if (e.name === "Logout") {
-						this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
+						navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
 					}
 					await this.setState((state) => ({ dataICantGet: [...state.dataICantGet, recipeID] }));
 				}
@@ -624,8 +802,8 @@ export class RecipesList extends React.Component {
 				try {
 					const reSharePosted = await postReShare(
 						recipeID,
-						this.props.loggedInChef.id,
-						this.props.loggedInChef.auth_token
+						loggedInChef.id,
+						loggedInChef.auth_token
 					);
 					if (reSharePosted) {
 						this.updateAttributeCountInRecipeLists(recipeID, "shares_count", "chef_shared", 1);
@@ -633,7 +811,7 @@ export class RecipesList extends React.Component {
 					}
 				} catch (e) {
 					if (e.name === "Logout") {
-						this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
+						navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
 					}
 					await this.setState((state) => ({ dataICantGet: [...state.dataICantGet, recipeID] }));
 				}
@@ -651,8 +829,8 @@ export class RecipesList extends React.Component {
 				try {
 					const unReShared = await destroyReShare(
 						recipeID,
-						this.props.loggedInChef.id,
-						this.props.loggedInChef.auth_token
+						loggedInChef.id,
+						loggedInChef.auth_token
 					);
 					if (unReShared) {
 						this.updateAttributeCountInRecipeLists(recipeID, "shares_count", "chef_shared", -1);
@@ -660,7 +838,7 @@ export class RecipesList extends React.Component {
 					}
 				} catch (e) {
 					if (e.name === "Logout") {
-						this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
+						navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
 					}
 					await this.setState((state) => ({ dataICantGet: [...state.dataICantGet, recipeID] }));
 				}
@@ -683,8 +861,8 @@ export class RecipesList extends React.Component {
 		this.setState(
 			{
 				searchTerm: searchTerm,
-				limit: startingLimit,
-				offset: startingOffset,
+				limit: STARTING_LIMIT,
+				offset: STARTING_OFFSET,
 			},
 			async () => {
 				this.abortController.abort();
@@ -728,8 +906,8 @@ export class RecipesList extends React.Component {
 	checkFilterSetting = (element) => this.state.filterSettings[element] == true;
 
 	render() {
-		// console.log(this.getRecipeList().length)
-		// console.log(this.getRecipeList().map(r => r.id))
+		// console.log(this.recipesList().length)
+		// console.log(this.recipesList().map(r => r.id))
 		//console.log(this.props.route)
 		// console.log(Object.keys(this.props.allRecipeLists))
 		//console.log('recipe list re-rendering')
@@ -747,11 +925,11 @@ export class RecipesList extends React.Component {
 							message={`Sorry, can't do that right now.${"\n"}You appear to be offline.`}
 							topOffset={"10%"}
 							clearOfflineMessage={() => this.setState({ renderOfflineMessage: false })}
-							diagnostics={this.props.loggedInChef.is_admin ? this.state.offlineDiagnostics : null}
+							diagnostics={loggedInChef.is_admin ? this.state.offlineDiagnostics : null}
 						/>
 					)}
-					{this.props.route.name === "My Feed" &&
-						this.getRecipeList().length === 0 &&
+					{route.name === "My Feed" &&
+						this.recipesList().length === 0 &&
 						!this.state.renderOfflineMessage &&
 						this.state.renderNoRecipesMessage &&
 						this.state.searchTerm.length == 0 && (
@@ -762,11 +940,11 @@ export class RecipesList extends React.Component {
 									this.setState({ renderNoRecipesMessage: false });
 								}}
 								delay={20000}
-								action={() => this.props.navigation.navigate("BrowseRecipes")}
+								action={() => navigation.navigate("BrowseRecipes")}
 								testID={"myFeedMessage"}
 							/>
 						)}
-					{this.getRecipeList().length == 0 && (
+					{this.recipesList().length == 0 && (
 						<View style={centralStyles.swipeDownContainer}>
 							<Icon
 								name="gesture-swipe-down"
@@ -776,7 +954,7 @@ export class RecipesList extends React.Component {
 							<Text style={centralStyles.swipeDownText}>Swipe down to refresh</Text>
 						</View>
 					)}
-					{(this.getRecipeList().length > 0 || this.state.searchTerm != "") && (
+					{(this.recipesList().length > 0 || this.state.searchTerm != "") && (
 						<Animated.View
 							style={{
 								position: "absolute",
@@ -811,7 +989,7 @@ export class RecipesList extends React.Component {
 					)}
 					<AnimatedFlatList
 						ListHeaderComponent={() => {
-							let searchBarIsDisplayed = this.getRecipeList().length > 0 || this.state.searchTerm != "";
+							let searchBarIsDisplayed = this.recipesList().length > 0 || this.state.searchTerm != "";
 							return (
 								<TouchableOpacity
 									style={{
@@ -826,7 +1004,7 @@ export class RecipesList extends React.Component {
 							);
 						}}
 						//stickyHeaderIndices={[0]}
-						data={this.getRecipeList()}
+						data={this.recipesList()}
 						ref={(list) => (this.recipeFlatList = list)}
 						//extraData={this.props.recipes_details}
 						style={{ minHeight: responsiveHeight(70) }}
@@ -845,7 +1023,7 @@ export class RecipesList extends React.Component {
 						}
 						onEndReached={this.onEndReached}
 						onEndReachedThreshold={2.5}
-						initialNumToRender={this.getRecipeList().length}
+						initialNumToRender={this.recipesList().length}
 						scrollEventThrottle={16}
 						onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: this.state.yOffset } } }], {
 							useNativeDriver: true,
@@ -877,7 +1055,7 @@ export class RecipesList extends React.Component {
 							},
 						})}
 						nestedScrollEnabled={true}
-						listKey={this.getRecipeList()}
+						listKey={this.recipesList()}
 					/>
 					{this.state.filterDisplayed && (
 						<FilterMenu

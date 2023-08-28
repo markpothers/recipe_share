@@ -3,41 +3,63 @@
  */
 
 // stock imports always required for enzyme testing
+
+import NetInfo from "@react-native-community/netinfo"
+import OfflineMessage from "../offlineMessage/offlineMessage";
+import { Provider } from "react-redux"
 import React from "react";
-import { mount } from "enzyme"
+import RecipeCard from "./RecipeCard"
+import RecipesList from "./RecipesList"
+import SearchBar from "../searchBar/SearchBar"
+import { TouchableOpacity } from "react-native"
 import { act } from "react-dom/test-utils";
+import { configureStore } from "@reduxjs/toolkit"
+import { cuisines } from "../dataComponents/cuisines"
+import { destroyReShare } from "../fetches/destroyReShare"
+import { destroyRecipeLike } from "../fetches/destroyRecipeLike"
+import { findByTestID } from "../auxTestFunctions/findByTestId"
+import { getRecipeList } from "../fetches/getRecipeList"
+import { mockRecipeList } from "../../__mocks__/mockRecipeList"
+import { mount } from "enzyme"
+import { postReShare } from "../fetches/postReShare"
+import { postRecipeLike } from "../fetches/postRecipeLike"
+import { postRecipeMake } from "../fetches/postRecipeMake"
+import { rootReducer } from "../redux"
+import { serves } from "../dataComponents/serves"
+import toJson from "enzyme-to-json";
+
 // import { createSerializer } from 'enzyme-to-json';
 // import serializer from 'enzyme-to-json/serializer';
 // expect.addSnapshotSerializer(serializer)
 // expect.addSnapshotSerializer(createSerializer({ mode: 'deep' }));
-import toJson from "enzyme-to-json";
-import { findByTestID } from "../auxTestFunctions/findByTestId"
+
+
 
 // suite-specific imports
 // import { createStore } from "redux";
-import { Provider } from "react-redux"
+
 // import { initialState, middleware } from "../redux/store"
 // import reducer from "../redux/reducer.js"
-import { TouchableOpacity } from "react-native"
+
 // import { AlertPopup } from '../alertPopup/alertPopup'
 // import AsyncStorage from '@react-native-async-storage/async-storage'
-import OfflineMessage from "../offlineMessage/offlineMessage";
+
 // import { apiCall } from '../auxFunctions/apiCall'
-import RecipesList from "./RecipesList"
-import RecipeCard from "./RecipeCard"
-import { mockRecipeList } from "../../__mocks__/mockRecipeList"
-import SearchBar from "../searchBar/SearchBar"
-import { getRecipeList } from "../fetches/getRecipeList"
-import { postRecipeLike } from "../fetches/postRecipeLike"
-import { postReShare } from "../fetches/postReShare"
-import { postRecipeMake } from "../fetches/postRecipeMake"
-import { destroyRecipeLike } from "../fetches/destroyRecipeLike"
-import { destroyReShare } from "../fetches/destroyReShare"
-import { cuisines } from "../dataComponents/cuisines"
-import { serves } from "../dataComponents/serves"
-import NetInfo from "@react-native-community/netinfo"
-import { configureStore } from "@reduxjs/toolkit"
-import { rootReducer } from "../redux"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // manual mocks
 jest.mock("../auxFunctions/apiCall")

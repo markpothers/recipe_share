@@ -20,7 +20,7 @@ type CommonParams = { title?: string };
 
 // MyRecipeBook
 export type MyRecipeBookStackParamList = {
-	NewRecipe: { recipe_details: Recipe };
+	NewRecipe: CommonParams & { recipe_details: Recipe };
 	MyRecipeBook: CommonParams & NavigatorScreenParams<MyRecipeBookTabsParamList>;
 	RecipeDetails: CommonParams & { commenting?: boolean };
 	ChefDetails: CommonParams & { chefID: number };
@@ -153,3 +153,18 @@ export type ProfileRouteProps = ProfileProps["route"];
 export type AboutProps = CompositeScreenProps<StackScreenProps<ProfileStackParamList, "About">, ProfileCoverProps>;
 export type AboutNavigationProps = AboutProps["navigation"];
 export type AboutRouteProps = AboutProps["route"];
+
+export enum RecipeListChoice {
+	MyFeed = "My Feed",
+	MyRecipes = "My Recipes",
+	RecipesILike = "Recipes I Like",
+	NewestRecipes = "Newest Recipes",
+	TopRecipes = "Top Recipes",
+}
+
+export enum ChefListChoice {
+	ChefsIFollow = "Chefs I Follow",
+	ChefsFollowingMe = "Chefs Following Me",
+	NewestChefs = "Newest Chefs",
+	TopChefs = "Top Chefs",
+}

@@ -1,12 +1,17 @@
 import "react-native"
+
+import { fireEvent, render } from "@testing-library/react-native";
+
 import React from "react";
-import { render, fireEvent } from "@testing-library/react-native";
+import RecipeCard from "./RecipeCard.js"
+import { recipeList } from "../../../__mocks__/data/recipeList.js"
+
 // import renderer from 'react-test-renderer';
 
-import RecipeCard from "./RecipeCard.js"
+
 // import { mockRecipeList } from '../../__mocks__/mockRecipeList.js'
 // import OfflineMessage from '../offlineMessage/offlineMessage';
-import { recipeList } from "../../__mocks__/data/recipeList"
+
 
 
 describe("Recipe Card", () => {
