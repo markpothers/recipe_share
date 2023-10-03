@@ -1,20 +1,21 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ListChef, ListRecipe, MakePic, MakePicChef, Recipe, Comment } from "../centralTypes";
-import { initialRootState } from "./initialRootState";
+import { Comment, ListChef, ListRecipe, MakePic, MakePicChef, Recipe } from "../centralTypes";
 import {
 	ParameterContent,
-	StoreChefDetails,
 	RootStateType,
+	StoreChefDetails,
 	StoreNewFollowers,
 	UpdateSingleChefList,
 	UpdateSingleRecipeList,
 } from "./types";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+
+import { initialRootState } from "./initialRootState";
 
 const rootReducer = createSlice({
 	name: "root",
 	initialState: initialRootState,
 	reducers: {
-		setDeviceType(state, action: PayloadAction<number>){
+		setDeviceType(state, action: PayloadAction<number>) {
 			state.deviceType = action.payload;
 		},
 		updateSingleRecipeList(state, action: PayloadAction<UpdateSingleRecipeList>) {

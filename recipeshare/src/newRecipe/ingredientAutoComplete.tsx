@@ -15,12 +15,12 @@ type OwnProps = {
 	updateIngredientEntry: (ingredientIndex: number, name: string, quantity: string, unit: Unit) => void;
 	ingredientIndex: number;
 	thisAutocompleteIsFocused: (index: number) => void;
-	inputToFocus: boolean,
-	setNextIngredientInput: (element: TextInput) => void
-	focused: number,
-	ingredientsLength: number,
-	ingredientsList: Ingredient[],
-	removeIngredient: (index: number) => void
+	inputToFocus: boolean;
+	setNextIngredientInput: (element: TextInput) => void;
+	focused: number;
+	ingredientsLength: number;
+	ingredientsList: Ingredient[];
+	removeIngredient: (index: number) => void;
 };
 
 const IngredientAutoComplete = ({
@@ -34,7 +34,7 @@ const IngredientAutoComplete = ({
 	focused,
 	ingredientsLength,
 	ingredientsList,
-	removeIngredient
+	removeIngredient,
 }: OwnProps) => {
 	const renderAutoIngredientsListItem = (item, ingredientIndex, ingredient) => {
 		return (
@@ -84,12 +84,12 @@ const IngredientAutoComplete = ({
 	};
 
 	const autocompleteList = ingredientsList
-		.sort((a, b) => (a.name > b.name ? 1 : -1))
-		.filter((ing) => ing.name.toLowerCase().startsWith(ingredient.name.toLowerCase()));
+		.filter((ing) => ing.name.toLowerCase().startsWith(ingredient.name.toLowerCase()))
+		.sort((a, b) => (a.name > b.name ? 1 : -1));
 	const expandBackgroundTouchCollector =
 		focused == index && autocompleteList.length > 0 && ingredient.name.length > 1;
 	// console.log(focused == index)
-	return (
+		return (
 		<View
 			style={[
 				styles.autoCompleteRowContainer,

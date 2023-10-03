@@ -95,7 +95,7 @@ export const useNewRecipeModel = (
 		AsyncStorage.getItem("localNewRecipeDetails", (err, res) => {
 			if (res != null) {
 				const savedData = JSON.parse(res);
-				if (
+								if (
 					"newRecipeDetails" in savedData &&
 					"instructionHeights" in savedData &&
 					"averageInstructionHeight" in savedData
@@ -106,7 +106,7 @@ export const useNewRecipeModel = (
 						averageInstructionHeight: savedAverageInstructionHeights,
 					} = savedData;
 					setNewRecipeDetails(savedNewRecipeDetails);
-					setInstructionHeights(savedInstructionsHeights);
+										setInstructionHeights(savedInstructionsHeights);
 					setAverageInstructionHeight(savedAverageInstructionHeights);
 				}
 			}
@@ -246,6 +246,8 @@ export const useNewRecipeModel = (
 		AsyncStorage.removeItem("localNewRecipeDetails", async () => {
 			setAlertPopupShowing(false);
 			setNewRecipeDetails(emptyRecipe);
+			setInstructionHeights([]);
+			setAverageInstructionHeight(responsiveHeight(6.5));
 			// this.setState({
 			// ...(testing ? testRecipe : emptyRecipe),
 			// alertPopupShowing: false,
@@ -259,6 +261,8 @@ export const useNewRecipeModel = (
 	const clearEditRecipeDetails = async (editedRecipeSavedToDatabase) => {
 		AsyncStorage.removeItem("localEditRecipeDetails", async () => {
 			setAlertPopupShowing(false);
+			// primarily this is to clear out the instructions so when repopulated they layout and measure their heights correctly
+			setNewRecipeDetails(emptyRecipe);
 			if (route.params?.recipe_details !== undefined) {
 				if (!editedRecipeSavedToDatabase) {
 					// if you updated the saved recipe you don't want to refresh async store before leaving
@@ -285,7 +289,10 @@ export const useNewRecipeModel = (
 		const newInstructionHeights = [...instructionHeights];
 		newInstructionHeights[index] = size + responsiveHeight(0.5);
 		const newAverageInstructionHeight = parseFloat(
-			(newInstructionHeights.reduce((acc, height) => acc + height, 0) / newInstructionHeights.length).toString()
+			// note that height may be undefined if the instructions render in parallel and later ones complete rendering before earlier ones
+			(
+				newInstructionHeights.reduce((acc, height) => acc + (height || 0), 0) / newInstructionHeights.length
+			).toString()
 		);
 		setInstructionHeights(newInstructionHeights);
 		setAverageInstructionHeight(newAverageInstructionHeight);

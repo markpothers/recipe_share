@@ -161,7 +161,6 @@ const RecipeDetails = ({ navigation, route }: OwnProps) => {
 
 	const renderRecipeMakePics = () => {
 		return recipeDetails.make_pics.map((make_pic) => {
-			// console.log(recipeDetails.make_pics_chefs)
 			if (make_pic.image_url) {
 				return (
 					<TouchableOpacity
@@ -569,12 +568,10 @@ const RecipeDetails = ({ navigation, route }: OwnProps) => {
 								: undefined
 						}
 						navigateToChefDetails={navigateToChefDetails}
-						close={
-							() => {
-								setImagePopupShowing(false);
-								setScrollEnabled(true);
-							}
-						}
+						close={() => {
+							setImagePopupShowing(false);
+							setScrollEnabled(true);
+						}}
 					/>
 				)}
 				<KeyboardAvoidingView

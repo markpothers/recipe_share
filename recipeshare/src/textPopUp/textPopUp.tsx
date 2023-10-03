@@ -8,7 +8,7 @@ import { styles } from "./textPopUpStyleSheet";
 type OwnProps = {
 	title: string,
 	text: string,
-	children: React.ReactElement
+	children?: React.ReactElement
 	close: () => void
 };
 
@@ -27,7 +27,7 @@ export function TextPopUp({title, text, children, close}: OwnProps) {
 							<Text maxFontSizeMultiplier={2} style={styles.tAndCText}>
 								{text}
 							</Text>
-							{children}
+							{children && children}
 						</ScrollView>
 					</View>
 					<View style={styles.formRow}>

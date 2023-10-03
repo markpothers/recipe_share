@@ -1,5 +1,6 @@
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+
 import { StyleSheet } from "react-native";
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
 export const styles = StyleSheet.create({
 	mainPageContainer: {
@@ -180,7 +181,7 @@ export const styles = StyleSheet.create({
 		// borderColor: 'white',
 		// justifyContent: 'space-between'
 		// overflow: 'visible',
-	},
+			},
 	autoCompleteContainer: {
 		position: "absolute",
 		width: "100%",
@@ -235,12 +236,12 @@ export const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	autoCompleteOuterContainerStyle: {
-		borderRadius: responsiveWidth(1.5),
+				borderRadius: responsiveWidth(1.5),
 	},
 	autoCompleteInputContainerStyle: {
 		borderRadius: responsiveWidth(1.5),
 		backgroundColor: "transparent",
-		borderStyle: "solid",
+				borderStyle: "solid",
 		borderColor: "transparent",
 		borderWidth: 0,
 	},
@@ -263,7 +264,7 @@ export const styles = StyleSheet.create({
 		borderColor: "#104e01",
 		marginLeft: "5%",
 		marginRight: "5%",
-		// zIndex: 10
+				// zIndex: 10
 	},
 	ingredientDeleteTrashCanButton: {
 		// zIndex: 1,

@@ -78,7 +78,9 @@ export const useRecipeDetailsModel = ({ navigation, route }: OwnProps) => {
 	const [headerButtons, setHeaderButtons] = React.useState<HeaderButton[]>([]);
 	const [dynamicMenuShowing, setDynamicMenuShowing] = React.useState<boolean>(false);
 	const [chefNameTextColor, setChefNameTextColor] = React.useState<string>("#505050");
-	const [imagePopupDetails, setImagePopupDetails] = React.useState<MakePic | InstructionImage | Record<string, never>>({});
+	const [imagePopupDetails, setImagePopupDetails] = React.useState<
+		MakePic | InstructionImage | Record<string, never>
+	>({});
 	const [imagePopupShowing, setImagePopupShowing] = React.useState<boolean>(false);
 	const [webviewHeight, setWebviewHeight] = React.useState<number>(responsiveHeight(60));
 	const [webviewLoading, setWebviewLoading] = React.useState<boolean>(true);
@@ -238,9 +240,9 @@ export const useRecipeDetailsModel = ({ navigation, route }: OwnProps) => {
 			if (netInfoState.isConnected) {
 				setAwaitingServer(true);
 				try {
-					const result = await action;
+					const result = await action();
 					if (result) {
-						successAction();
+						successAction(result);
 					}
 				} catch (e) {
 					if (e.name === "Logout") {
@@ -367,6 +369,7 @@ export const useRecipeDetailsModel = ({ navigation, route }: OwnProps) => {
 			(makePic: { make_pic: MakePic; make_pic_chef: MakePicChef }) => {
 				dispatch(addMakePic(makePic.make_pic));
 				dispatch(addMakePicChef(makePic.make_pic_chef));
+				setChoosingPicSource(false);
 			},
 			() => setMakePicFileUri("")
 		);
@@ -376,7 +379,7 @@ export const useRecipeDetailsModel = ({ navigation, route }: OwnProps) => {
 		await recipeAction(
 			() => destroyMakePic(loggedInChef.auth_token, makePicToDelete),
 			() => {
-				saveRemainingMakePics(recipeDetails.make_pics.filter((pic) => pic.id !== makePicToDelete));
+				dispatch(saveRemainingMakePics(recipeDetails.make_pics.filter((pic) => pic.id !== makePicToDelete)));
 			},
 			() => setDeleteMakePicPopUpShowing(false)
 		);
@@ -637,6 +640,6 @@ export const useRecipeDetailsModel = ({ navigation, route }: OwnProps) => {
 		askDeleteComment,
 		deleteComment,
 		resetKeepAwakeTimer,
-		setWebviewLoading
+		setWebviewLoading,
 	};
 };

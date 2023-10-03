@@ -782,6 +782,11 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 									]}
 								>
 									<DragSortableView
+										// padding gives room for the bottom autocomplete dropdown to be fully responsive
+										containerStyle={{
+											paddingBottom:
+												newRecipeDetails.ingredients.length > 0 ? responsiveHeight(30) : 0,
+										}}
 										dataSource={newRecipeDetails.ingredients}
 										parentWidth={responsiveWidth(100)}
 										childrenWidth={responsiveWidth(100)}
@@ -823,7 +828,18 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 											);
 										}}
 									/>
-									<View style={styles.plusButtonContainer}>
+									{/*negative margin to bring the button into line under the padding added to the dragSortableScrollView */}
+									<View
+										style={[
+											styles.plusButtonContainer,
+											{
+												marginTop:
+													newRecipeDetails.ingredients.length > 0
+														? -responsiveHeight(16.5)
+														: responsiveHeight(0.5),
+											},
+										]}
+									>
 										<TouchableOpacity
 											style={[centralStyles.yellowRectangleButton, styles.addButton]}
 											activeOpacity={0.7}
@@ -890,7 +906,7 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 										parentWidth={responsiveWidth(100)}
 										childrenWidth={responsiveWidth(100)}
 										childrenHeight={averageInstructionHeight}
-										childrenHeights={instructionHeights}
+										childrenHeights={instructionHeights.map((height) => height ?? 0)}
 										reverseChildZIndexing={false}
 										marginChildrenTop={0}
 										onDataChange={(newInstructions) => handleInstructionsSort(newInstructions)}

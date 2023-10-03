@@ -1,9 +1,10 @@
 import React, { useRef } from "react";
 import { TextInput, TouchableOpacity, View } from "react-native";
-import { styles } from "../newRecipeStyleSheet";
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { centralStyles } from "../../centralStyleSheet"; //eslint-disable-line no-unused-vars
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+import { styles } from "../newRecipeStyleSheet";
 
 type OwnProps = {
 	index: number;
@@ -44,7 +45,7 @@ export const InstructionRow = ({
 				ref={textInput}
 				onLayout={(event) => {
 					const { height } = event.nativeEvent.layout;
-					handleInstructionSizeChange(index, height);
+										handleInstructionSizeChange(index, height);
 				}}
 			>
 				<TextInput
@@ -58,7 +59,7 @@ export const InstructionRow = ({
 					onChangeText={(text) => {
 						handleInstructionChange(text, index);
 						textInput.current.measureInWindow((x, y, width, height) => {
-							handleInstructionSizeChange(index, height);
+														handleInstructionSizeChange(index, height);
 						});
 					}}
 					ref={(element) => {

@@ -62,7 +62,7 @@
 		"react-dom": "18.0.0",
 		"react-native": "0.71.8",
 		"react-native-autocomplete-input": "^4.1.0",
-		"react-native-drag-sort": "markpothers/react-native-drag-sort#24358116ed84f2ea988cab6d8c268219db66195a",
+		"react-native-drag-sort": "markpothers/react-native-drag-sort#b8bf50c103cecb6316647ac158b828139c6ba1c4",
 		"react-native-elements": "^1.1.0",
 		"react-native-gesture-handler": "~2.9.0",
 		"react-native-reanimated": "~2.14.4",

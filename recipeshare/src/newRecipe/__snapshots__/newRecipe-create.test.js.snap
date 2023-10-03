@@ -5114,19 +5114,27 @@ exports[`New Recipe page New Recipe creation and functions if you set Full Recip
                     "marginTop": undefined,
                     "width": 750,
                   },
+                  {
+                    "paddingBottom": 0,
+                  },
                 ]
               }
             />
             <View
               style={
-                {
-                  "alignItems": "center",
-                  "flexDirection": "row",
-                  "justifyContent": "center",
-                  "marginTop": 6.67,
-                  "width": 750,
-                  "zIndex": -1,
-                }
+                [
+                  {
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "justifyContent": "center",
+                    "marginTop": 6.67,
+                    "width": 750,
+                    "zIndex": -1,
+                  },
+                  {
+                    "marginTop": 6.67,
+                  },
+                ]
               }
             >
               <View
@@ -5372,6 +5380,7 @@ exports[`New Recipe page New Recipe creation and functions if you set Full Recip
                     "marginTop": undefined,
                     "width": 750,
                   },
+                  {},
                 ]
               }
             />
@@ -8217,19 +8226,27 @@ exports[`New Recipe page New Recipe creation and functions should load and rende
                     "marginTop": undefined,
                     "width": 750,
                   },
+                  {
+                    "paddingBottom": 0,
+                  },
                 ]
               }
             />
             <View
               style={
-                {
-                  "alignItems": "center",
-                  "flexDirection": "row",
-                  "justifyContent": "center",
-                  "marginTop": 6.67,
-                  "width": 750,
-                  "zIndex": -1,
-                }
+                [
+                  {
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "justifyContent": "center",
+                    "marginTop": 6.67,
+                    "width": 750,
+                    "zIndex": -1,
+                  },
+                  {
+                    "marginTop": 6.67,
+                  },
+                ]
               }
             >
               <View
@@ -8475,6 +8492,7 @@ exports[`New Recipe page New Recipe creation and functions should load and rende
                     "marginTop": undefined,
                     "width": 750,
                   },
+                  {},
                 ]
               }
             />
