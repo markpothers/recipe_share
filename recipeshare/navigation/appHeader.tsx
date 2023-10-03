@@ -1,6 +1,8 @@
+import { Text, TouchableHighlight, View } from "react-native";
+
 import React from "react";
-import { View, TouchableHighlight, Text } from "react-native";
 import { styles } from "./navigationStyleSheet";
+
 // import { centralStyles } from "../src/centralStyleSheet"; //eslint-disable-line no-unused-vars
 // import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
