@@ -1259,7 +1259,6 @@ exports[`Recipe List loading and rendering with different fetch and async respon
           },
         ]
       }
-      forwardedRef={[Function]}
       getItem={[Function]}
       getItemCount={[Function]}
       initialNumToRender={20}
@@ -2425,6 +2424,7 @@ exports[`Recipe List loading and rendering with different fetch and async respon
       <RCTRefreshControl />
       <View>
         <View
+          collapsable={false}
           onLayout={[Function]}
         >
           <View
@@ -13406,7 +13406,6 @@ exports[`Recipe List loading and rendering with different fetch and async respon
       ListHeaderComponent={[Function]}
       collapsable={false}
       data={[]}
-      forwardedRef={[Function]}
       getItem={[Function]}
       getItemCount={[Function]}
       initialNumToRender={0}
@@ -13449,6 +13448,7 @@ exports[`Recipe List loading and rendering with different fetch and async respon
       <RCTRefreshControl />
       <View>
         <View
+          collapsable={false}
           onLayout={[Function]}
         >
           <View
