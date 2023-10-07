@@ -16,7 +16,10 @@
     "test": "node ./node_modules/jest/bin/jest.js --colors --runInBand --detectOpenHandles",
     "lint": "esw src navigation buildScripts --color",
     "lint:watch": "npm run lint -- --w --changed ",
-    "prebuild": "npx expo prebuild --clean",
+    "prebuild:android": "npx expo prebuild --clean",
+    "prebuild:devClient": "npx expo prebuild --clean",
+    "prebuild:development": "npx expo prebuild --clean",
+    "prebuild:ios": "npx expo prebuild --clean",
     "testServer": "json-server --watch ./testServer/testData.js --routes ./testServer/routes.json --host 10.0.0.78 --middlewares ./testServer/middleware.js",
     "getipmac": "ipconfig getifaddr en0"
   },
