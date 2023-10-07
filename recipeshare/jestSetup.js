@@ -1,4 +1,5 @@
 import fetchMock from "jest-fetch-mock";
+
 fetchMock.enableMocks();
 
 jest.mock("@react-native-voice/voice");
@@ -17,6 +18,8 @@ jest.mock("react-native-vector-icons/FontAwesome", () => "Icon")
 jest.mock("expo-secure-store", () => ({
 	getItemAsync: jest.fn()
 }))
+
+jest.mock("react-native-webview", () => ({}))
 
 // fixes a bug where this is undefined.  It was removed from react.reanimated at some point
 // and I think some dependencies have not been updated to account for it, at least, not in
