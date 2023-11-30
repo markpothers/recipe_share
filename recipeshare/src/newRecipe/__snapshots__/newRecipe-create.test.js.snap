@@ -5095,9 +5095,7 @@ exports[`New Recipe page New Recipe creation and functions if you set Full Recip
                   "width": "100%",
                 },
                 false,
-                {
-                  "paddingBottom": 133.4,
-                },
+                {},
               ]
             }
           >
@@ -5115,119 +5113,113 @@ exports[`New Recipe page New Recipe creation and functions if you set Full Recip
                     "width": 750,
                   },
                   {
-                    "paddingBottom": 0,
+                    "height": 0,
                   },
                 ]
               }
             />
-            <View
-              style={
-                [
-                  {
-                    "alignItems": "center",
-                    "flexDirection": "row",
-                    "justifyContent": "center",
-                    "marginTop": 6.67,
-                    "width": 750,
-                    "zIndex": -1,
-                  },
-                  {
-                    "marginTop": 6.67,
-                  },
-                ]
-              }
-            >
-              <View
-                accessibilityState={
-                  {
-                    "busy": undefined,
-                    "checked": undefined,
-                    "disabled": undefined,
-                    "expanded": undefined,
-                    "selected": undefined,
-                  }
-                }
-                accessibilityValue={
-                  {
-                    "max": undefined,
-                    "min": undefined,
-                    "now": undefined,
-                    "text": undefined,
-                  }
-                }
-                accessible={true}
-                collapsable={false}
-                focusable={true}
-                onClick={[Function]}
-                onResponderGrant={[Function]}
-                onResponderMove={[Function]}
-                onResponderRelease={[Function]}
-                onResponderTerminate={[Function]}
-                onResponderTerminationRequest={[Function]}
-                onStartShouldSetResponder={[Function]}
-                style={
-                  {
-                    "alignItems": "center",
-                    "backgroundColor": "#fff59b",
-                    "borderColor": "#104e01",
-                    "borderRadius": 11.25,
-                    "borderWidth": 1,
-                    "flexDirection": "row",
-                    "height": "100%",
-                    "justifyContent": "center",
-                    "maxWidth": 450,
-                    "minHeight": 80.03999999999999,
-                    "minWidth": 285,
-                    "opacity": 1,
-                    "width": 450,
-                  }
-                }
-              >
-                <Icon
-                  name="plus"
-                  size={66.7}
-                  style={
-                    {
-                      "color": "#104e01",
-                    }
-                  }
-                />
-                <Text
-                  maxFontSizeMultiplier={2}
-                  style={
-                    [
-                      {
-                        "color": "#104e01",
-                        "fontSize": 27.53633962602873,
-                        "fontWeight": "bold",
-                        "paddingHorizontal": 7.5,
-                        "textAlign": "center",
-                      },
-                      {
-                        "fontSize": 35.18532285548115,
-                        "marginLeft": 22.5,
-                      },
-                    ]
-                  }
-                >
-                  Add ingredient
-                </Text>
-              </View>
-            </View>
           </View>
           <View
             style={
               [
                 {
-                  "borderColor": "#104e01",
-                  "borderWidth": 1,
-                  "marginBottom": 6.67,
-                  "marginTop": 13.34,
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "center",
+                  "marginTop": 6.67,
+                  "width": 750,
                 },
                 {
-                  "marginTop": -122.728,
+                  "marginTop": 6.67,
                 },
               ]
+            }
+          >
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "alignItems": "center",
+                  "backgroundColor": "#fff59b",
+                  "borderColor": "#104e01",
+                  "borderRadius": 11.25,
+                  "borderWidth": 1,
+                  "flexDirection": "row",
+                  "height": "100%",
+                  "justifyContent": "center",
+                  "maxWidth": 450,
+                  "minHeight": 80.03999999999999,
+                  "minWidth": 285,
+                  "opacity": 1,
+                  "width": 450,
+                }
+              }
+            >
+              <Icon
+                name="plus"
+                size={66.7}
+                style={
+                  {
+                    "color": "#104e01",
+                  }
+                }
+              />
+              <Text
+                maxFontSizeMultiplier={2}
+                style={
+                  [
+                    {
+                      "color": "#104e01",
+                      "fontSize": 27.53633962602873,
+                      "fontWeight": "bold",
+                      "paddingHorizontal": 7.5,
+                      "textAlign": "center",
+                    },
+                    {
+                      "fontSize": 35.18532285548115,
+                      "marginLeft": 22.5,
+                    },
+                  ]
+                }
+              >
+                Add ingredient
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              {
+                "borderColor": "#104e01",
+                "borderWidth": 1,
+                "marginBottom": 6.67,
+                "marginTop": 13.34,
+              }
             }
           >
             <View
@@ -5393,7 +5385,6 @@ exports[`New Recipe page New Recipe creation and functions if you set Full Recip
                 "justifyContent": "center",
                 "marginTop": 6.67,
                 "width": 750,
-                "zIndex": -1,
               }
             }
           >
@@ -8207,9 +8198,7 @@ exports[`New Recipe page New Recipe creation and functions should load and rende
                   "width": "100%",
                 },
                 false,
-                {
-                  "paddingBottom": 133.4,
-                },
+                {},
               ]
             }
           >
@@ -8227,119 +8216,113 @@ exports[`New Recipe page New Recipe creation and functions should load and rende
                     "width": 750,
                   },
                   {
-                    "paddingBottom": 0,
+                    "height": 0,
                   },
                 ]
               }
             />
-            <View
-              style={
-                [
-                  {
-                    "alignItems": "center",
-                    "flexDirection": "row",
-                    "justifyContent": "center",
-                    "marginTop": 6.67,
-                    "width": 750,
-                    "zIndex": -1,
-                  },
-                  {
-                    "marginTop": 6.67,
-                  },
-                ]
-              }
-            >
-              <View
-                accessibilityState={
-                  {
-                    "busy": undefined,
-                    "checked": undefined,
-                    "disabled": undefined,
-                    "expanded": undefined,
-                    "selected": undefined,
-                  }
-                }
-                accessibilityValue={
-                  {
-                    "max": undefined,
-                    "min": undefined,
-                    "now": undefined,
-                    "text": undefined,
-                  }
-                }
-                accessible={true}
-                collapsable={false}
-                focusable={true}
-                onClick={[Function]}
-                onResponderGrant={[Function]}
-                onResponderMove={[Function]}
-                onResponderRelease={[Function]}
-                onResponderTerminate={[Function]}
-                onResponderTerminationRequest={[Function]}
-                onStartShouldSetResponder={[Function]}
-                style={
-                  {
-                    "alignItems": "center",
-                    "backgroundColor": "#fff59b",
-                    "borderColor": "#104e01",
-                    "borderRadius": 11.25,
-                    "borderWidth": 1,
-                    "flexDirection": "row",
-                    "height": "100%",
-                    "justifyContent": "center",
-                    "maxWidth": 450,
-                    "minHeight": 80.03999999999999,
-                    "minWidth": 285,
-                    "opacity": 1,
-                    "width": 450,
-                  }
-                }
-              >
-                <Icon
-                  name="plus"
-                  size={66.7}
-                  style={
-                    {
-                      "color": "#104e01",
-                    }
-                  }
-                />
-                <Text
-                  maxFontSizeMultiplier={2}
-                  style={
-                    [
-                      {
-                        "color": "#104e01",
-                        "fontSize": 27.53633962602873,
-                        "fontWeight": "bold",
-                        "paddingHorizontal": 7.5,
-                        "textAlign": "center",
-                      },
-                      {
-                        "fontSize": 35.18532285548115,
-                        "marginLeft": 22.5,
-                      },
-                    ]
-                  }
-                >
-                  Add ingredient
-                </Text>
-              </View>
-            </View>
           </View>
           <View
             style={
               [
                 {
-                  "borderColor": "#104e01",
-                  "borderWidth": 1,
-                  "marginBottom": 6.67,
-                  "marginTop": 13.34,
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "center",
+                  "marginTop": 6.67,
+                  "width": 750,
                 },
                 {
-                  "marginTop": -122.728,
+                  "marginTop": 6.67,
                 },
               ]
+            }
+          >
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "alignItems": "center",
+                  "backgroundColor": "#fff59b",
+                  "borderColor": "#104e01",
+                  "borderRadius": 11.25,
+                  "borderWidth": 1,
+                  "flexDirection": "row",
+                  "height": "100%",
+                  "justifyContent": "center",
+                  "maxWidth": 450,
+                  "minHeight": 80.03999999999999,
+                  "minWidth": 285,
+                  "opacity": 1,
+                  "width": 450,
+                }
+              }
+            >
+              <Icon
+                name="plus"
+                size={66.7}
+                style={
+                  {
+                    "color": "#104e01",
+                  }
+                }
+              />
+              <Text
+                maxFontSizeMultiplier={2}
+                style={
+                  [
+                    {
+                      "color": "#104e01",
+                      "fontSize": 27.53633962602873,
+                      "fontWeight": "bold",
+                      "paddingHorizontal": 7.5,
+                      "textAlign": "center",
+                    },
+                    {
+                      "fontSize": 35.18532285548115,
+                      "marginLeft": 22.5,
+                    },
+                  ]
+                }
+              >
+                Add ingredient
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              {
+                "borderColor": "#104e01",
+                "borderWidth": 1,
+                "marginBottom": 6.67,
+                "marginTop": 13.34,
+              }
             }
           >
             <View
@@ -8505,7 +8488,6 @@ exports[`New Recipe page New Recipe creation and functions should load and rende
                 "justifyContent": "center",
                 "marginTop": 6.67,
                 "width": 750,
-                "zIndex": -1,
               }
             }
           >

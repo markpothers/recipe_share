@@ -1,6 +1,7 @@
-import React from "react";
-import { render, fireEvent } from "@testing-library/react-native";
+import { act, fireEvent, render } from "@testing-library/react-native";
+
 import OfflineMessage from "./offlineMessage";
+import React from "react";
 
 describe("OfflineMessage", () => {
 	let mockClearOfflineMessage;
@@ -29,7 +30,7 @@ describe("OfflineMessage", () => {
 			/>
 		);
 		expect(mockClearOfflineMessage).toHaveBeenCalledTimes(0);
-		jest.runAllTimers();
+		await act(async () => await jest.runAllTimers());
 		expect(mockClearOfflineMessage).toHaveBeenCalledTimes(1);
 	});
 
@@ -44,7 +45,7 @@ describe("OfflineMessage", () => {
 			/>
 		);
 		expect(mockClearOfflineMessage).toHaveBeenCalledTimes(0);
-		jest.runAllTimers();
+		await act(async () => await jest.runAllTimers());
 		expect(mockClearOfflineMessage).toHaveBeenCalledTimes(1);
 	});
 

@@ -778,14 +778,23 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 									style={[
 										centralStyles.formSection,
 										autoCompleteFocused !== null && { zIndex: 1 },
-										{ paddingBottom: responsiveHeight(10) },
+										{
+											// paddingBottom:
+											// newRecipeDetails.ingredients.length > 0 ? responsiveHeight(11) : 0,
+											// borderWidth: 1,
+											// borderColor: "yellow",
+										},
 									]}
 								>
 									<DragSortableView
 										// padding gives room for the bottom autocomplete dropdown to be fully responsive
 										containerStyle={{
-											paddingBottom:
-												newRecipeDetails.ingredients.length > 0 ? responsiveHeight(30) : 0,
+											height:
+												newRecipeDetails.ingredients.length > 0
+													? newRecipeDetails.ingredients.length * responsiveHeight(13) +
+													  responsiveHeight(17) +
+													  responsiveHeight(0.5)
+													: 0,
 										}}
 										dataSource={newRecipeDetails.ingredients}
 										parentWidth={responsiveWidth(100)}
@@ -829,49 +838,47 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 										}}
 									/>
 									{/*negative margin to bring the button into line under the padding added to the dragSortableScrollView */}
-									<View
-										style={[
-											styles.plusButtonContainer,
-											{
-												marginTop:
-													newRecipeDetails.ingredients.length > 0
-														? -responsiveHeight(16.5)
-														: responsiveHeight(0.5),
-											},
-										]}
-									>
-										<TouchableOpacity
-											style={[centralStyles.yellowRectangleButton, styles.addButton]}
-											activeOpacity={0.7}
-											onPress={addNewIngredient}
-										>
-											<Icon
-												style={centralStyles.greenButtonIcon}
-												size={responsiveHeight(5)}
-												name="plus"
-											></Icon>
-											<Text
-												maxFontSizeMultiplier={2}
-												style={[
-													centralStyles.greenButtonText,
-													{
-														marginLeft: responsiveWidth(3),
-														fontSize: responsiveFontSize(2.3),
-													},
-												]}
-											>
-												Add ingredient
-											</Text>
-										</TouchableOpacity>
-									</View>
 								</View>
-								{/* separator */}
 								<View
 									style={[
-										centralStyles.formSectionSeparatorContainer,
-										{ marginTop: -responsiveHeight(9.2) },
+										styles.plusButtonContainer,
+										{
+											marginTop:
+												newRecipeDetails.ingredients.length > 0
+													? -responsiveHeight(17)
+													: responsiveHeight(0.5),
+											// borderWidth: 1,
+											// borderColor: "orange",
+											// zIndex: 'unset'
+										},
 									]}
 								>
+									<TouchableOpacity
+										style={[centralStyles.yellowRectangleButton, styles.addButton]}
+										activeOpacity={0.7}
+										onPress={addNewIngredient}
+									>
+										<Icon
+											style={centralStyles.greenButtonIcon}
+											size={responsiveHeight(5)}
+											name="plus"
+										></Icon>
+										<Text
+											maxFontSizeMultiplier={2}
+											style={[
+												centralStyles.greenButtonText,
+												{
+													marginLeft: responsiveWidth(3),
+													fontSize: responsiveFontSize(2.3),
+												},
+											]}
+										>
+											Add ingredient
+										</Text>
+									</TouchableOpacity>
+								</View>
+								{/* separator */}
+								<View style={centralStyles.formSectionSeparatorContainer}>
 									<View style={centralStyles.formSectionSeparator}></View>
 								</View>
 								{/* instructions */}

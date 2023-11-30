@@ -181,7 +181,7 @@ export const styles = StyleSheet.create({
 		// borderColor: 'white',
 		// justifyContent: 'space-between'
 		// overflow: 'visible',
-			},
+	},
 	autoCompleteContainer: {
 		position: "absolute",
 		width: "100%",
@@ -236,12 +236,12 @@ export const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	autoCompleteOuterContainerStyle: {
-				borderRadius: responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 	},
 	autoCompleteInputContainerStyle: {
 		borderRadius: responsiveWidth(1.5),
 		backgroundColor: "transparent",
-				borderStyle: "solid",
+		borderStyle: "solid",
 		borderColor: "transparent",
 		borderWidth: 0,
 	},
@@ -264,7 +264,7 @@ export const styles = StyleSheet.create({
 		borderColor: "#104e01",
 		marginLeft: "5%",
 		marginRight: "5%",
-				// zIndex: 10
+		// zIndex: 20
 	},
 	ingredientDeleteTrashCanButton: {
 		// zIndex: 1,
@@ -336,7 +336,7 @@ export const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 		flexDirection: "row",
-		zIndex: -1,
+		// zIndex: -1,
 		// borderWidth: 1,
 		// borderColor: 'red'
 	},
