@@ -1,17 +1,54 @@
+import { useEffect, useState } from "react";
+
 import { StaticContentWrapper } from "./common/staticContentWrapper";
-import chickenBaconMushroom from "../assets/chickenBaconMushroom.png";
+import areYouSure from "../assets/areYouSure.png";
+import deleteProfile from "../assets/deleteProfile.png";
+import lastChance from "../assets/lastChance.png";
 
 export const DeleteAccount = () => {
+  const [currentImage, setCurrentImage] = useState(deleteProfile);
+
+  useEffect(() => {
+    const imageInterval = setInterval(() => {
+      const images = [deleteProfile, areYouSure, lastChance];
+      const randomIndex = Math.floor(Math.random() * images.length);
+      const image = images[randomIndex];
+      setCurrentImage(image);
+    }, 2000);
+
+    return () => {
+      clearInterval(imageInterval);
+    };
+  }, []);
   return (
     <StaticContentWrapper
       content={
         <>
-          Thanks for visiting. We hope you are getting on well with the app. If
-          you have any problems or need support, please e-mail us at{" "}
-          <a href="mailto:admin@recipe-share.com">admin@recipe-share.com</a>
+          Sorry you are thinking about leaving but it's easy to do. Simply
+          follow these steps:
+          <ol>
+            <li>
+              In the app, switch to your <strong>Profile</strong> page.
+            </li>
+            <li>
+              Open the '3 dot' menu and select the{" "}
+              <strong>Delete Profile</strong> option.
+            </li>
+            <li>
+              Choose whether you want to <strong>Delete everything</strong>{" "}
+              you've ever created, or you can deactivate your account, and{" "}
+              <strong>Leave recipes</strong> you've created behind. Your recipes
+              will be anonymized and you will no longer be able to log in. (You
+              can reactivate your account any time in the future.)
+            </li>
+            <li>
+              Confirm your choice; you will be logged out and your account will
+              be deactivated.
+            </li>
+          </ol>
         </>
       }
-      image={chickenBaconMushroom}
+      image={currentImage}
     />
   );
 };

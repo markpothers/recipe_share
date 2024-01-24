@@ -16,9 +16,12 @@ const Wrapper = styled("div")`
   /* align-items: center; */
 
   @media (max-width: 928px) {
-    border: 5px solid red;
+    /* border: 5px solid red; */
     flex-direction: column;
     overflow-y: auto;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4px;
     /* height: undefined; */
     /* flex: 1; */
   }
@@ -53,9 +56,10 @@ const ContentContainer = styled("div")`
   /* height: fit-content; */
 
   @media (max-width: 928px) {
-    width: 90%;
+    width: 95%;
     /* border: 5px solid red; */
     height: fit-content;
+    margin: 16px 0px;
   }
 `;
 
@@ -74,6 +78,8 @@ const ContentWrapper = styled("div")`
   /* height: 800px; */
   width: 100%;
   height: fit-content;
+
+  
 `;
 
 const ImageWrapper = styled("div")`
@@ -90,7 +96,7 @@ const ImageWrapper = styled("div")`
   width: 400px;
   overflow-y: auto;
   @media (max-width: 928px) {
-    width: 90%;
+    width: 95%;
   }
 `;
 

@@ -67,6 +67,10 @@ const Body = styled("div")`
   flex: 1;
   position: relative;
   padding: 24px 0px;
+
+  @media (max-width: 928px) {
+    padding: 0px;
+  }
 `;
 
 export const AppRoute = new RootRoute({
@@ -80,11 +84,11 @@ export const AppRoute = new RootRoute({
           </HeaderLeft>
           <HeaderRight>
             <Link to="/support">Support</Link>
-            <Link to="/activate">Activated</Link>
+            {/* <Link to="/activate">Activated</Link>
             <Link to="/reactivate">Reactivated</Link>
             <Link to="/reactivation-confirmed">Reactivation Confirmed</Link>
             <Link to="/reactivation-rejected">Reactivation Rejected</Link>
-            <Link to="/rejected">Rejected</Link>
+            <Link to="/rejected">Rejected</Link> */}
             <Link to="/deleteAccount">Delete Account</Link>
           </HeaderRight>
         </Header>
