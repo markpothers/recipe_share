@@ -55,6 +55,8 @@ gem "rubocop"
 gem "solargraph"
 gem "google-cloud-storage"
 gem "pg", "~> 1.2"
+gem "vite_rails"
+gem "vite_ruby"
 
 gem "app", "~> 1.2"
 

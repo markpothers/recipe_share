@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "vite": "^5.0.12",
+    "vite-plugin-ruby": "^5.0.0"
+  },
+  "scripts": {
+    "dev": "bin/vite dev",
+    "build": "bin/vite build",
+    "upgrade": "bin/vite upgrade",
+    "clean": "bin/vite clobber"
+  }
+}
