@@ -8,5 +8,9 @@
     "build": "bin/vite build",
     "upgrade": "bin/vite upgrade",
     "clean": "bin/vite clobber"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }

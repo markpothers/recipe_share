@@ -2,7 +2,7 @@ class IngredientUsesController < ApplicationController
 
     before_action :define_current_ingredient_use
     skip_before_action :define_current_ingredient_use, :only => [:index, :create]
-
+    skip_before_action :verify_authenticity_token
 
     # def index
     #     render json: IngredientUse.all

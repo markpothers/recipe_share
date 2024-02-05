@@ -3,7 +3,8 @@ require 'securerandom'
 class ChefsController < ApplicationController
 
     skip_before_action :logged_in?, :only => [:authenticate, :create, :activate, :password_reset, :reactivate]
-
+    skip_before_action :verify_authenticity_token
+    
     def authenticate
         # byebug
         if @chef = Chef.find_by(e_mail: chef_params[:e_mail])

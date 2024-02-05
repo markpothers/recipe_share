@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # get 'web/index'
   scope "api" do
     resources :instruction_images
     resources :instructions
@@ -23,16 +24,17 @@ Rails.application.routes.draw do
   delete "/api/recipe_likes", to: "recipe_likes#destroy"
   delete "/api/re_shares", to: "re_shares#destroy"
   delete "/api/follows", to: "follows#destroy"
-  get "/api/get_available_filters", to: "recipes#get_available_filters"
-  get "/api/database/manualbackup", to: "databases#manualBackup"
-  get "/api/database/autobackup", to: "databases#autoBackup"
-  get "/api/database/stopautobackup", to: "databases#stopAutoBackup"
-  get "/api/database/primaryrestore", to: "databases#primaryRestore"
-  get "/api/database/secondaryrestore", to: "databases#secondaryRestore"
+  # get "/api/get_available_filters", to: "recipes#get_available_filters"
+  # get "/api/database/manualbackup", to: "databases#manualBackup"
+  # get "/api/database/autobackup", to: "databases#autoBackup"
+  # get "/api/database/stopautobackup", to: "databases#stopAutoBackup"
+  # get "/api/database/primaryrestore", to: "databases#primaryRestore"
+  # get "/api/database/secondaryrestore", to: "databases#secondaryRestore"
   # get "*path" => redirect("/welcome.html")
-  # get "/" => redirect("/welcome.html")
+  get "/", to: "web#index"
   # get "/support" => redirect("/support.html")
   # this is google appengine's test route and it musn't redirect to welcome
   get "_ah/start" => redirect("/_ah/start.html")
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
