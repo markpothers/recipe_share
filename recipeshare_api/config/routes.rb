@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   # get "/api/database/secondaryrestore", to: "databases#secondaryRestore"
   # get "*path" => redirect("/welcome.html")
   get "/", to: "web#index"
+  get "*path", to: "web#index"
   # get "/support" => redirect("/support.html")
   # this is google appengine's test route and it musn't redirect to welcome
   get "_ah/start" => redirect("/_ah/start.html")
