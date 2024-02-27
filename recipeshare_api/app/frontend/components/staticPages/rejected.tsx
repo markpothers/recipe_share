@@ -10,13 +10,14 @@ export const Rejected = () => {
             We're sorry but your activation token didn't match our records.
             Please re-register or click the activation link.
           </span>
-          <p>
+          <br />
+          <span>
             If you need additional support, please feel free to contact us at:{" "}
             <a href="<%= Rails.application.credentials.email[:admin_email] %>">
               admin@recipe-share.com
             </a>
             .
-          </p>
+          </span>
         </>
       }
       image={toadInTheHole}

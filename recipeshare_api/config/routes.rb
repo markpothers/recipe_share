@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  # get 'web/index'
   scope "api" do
     resources :instruction_images
     resources :instructions
@@ -31,11 +30,11 @@ Rails.application.routes.draw do
   # get "/api/database/primaryrestore", to: "databases#primaryRestore"
   # get "/api/database/secondaryrestore", to: "databases#secondaryRestore"
   # get "*path" => redirect("/welcome.html")
+  # this is google appengine's test route and it musn't redirect to welcome
+  get "_ah/start" => redirect("/_ah/start.html")
   get "/", to: "web#index"
   get "*path", to: "web#index"
   # get "/support" => redirect("/support.html")
-  # this is google appengine's test route and it musn't redirect to welcome
-  get "_ah/start" => redirect("/_ah/start.html")
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

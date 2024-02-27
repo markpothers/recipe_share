@@ -7,10 +7,11 @@ export const Reactivated = () => {
       content={
         <>
           <span>Thanks for confirming your desire to reactivate this account.</span>
-          <p>
+          <br />
+          <span>
             We've sent you a second e-mail with a new password. You can use that
             to log in. Please reset it within 24hrs for added security.
-          </p>
+          </span>
         </>
       }
       image={sausageAndLentils}

@@ -13,6 +13,8 @@ const Wrapper = styled("div")`
   /* position: relative; */
   display: flex;
   justify-content: space-evenly;
+  gap: 16px;
+
   /* align-items: center; */
 
   @media (max-width: 928px) {
@@ -21,7 +23,6 @@ const Wrapper = styled("div")`
     overflow-y: auto;
     align-items: center;
     justify-content: flex-start;
-    gap: 4px;
     /* height: undefined; */
     /* flex: 1; */
   }
@@ -51,7 +52,8 @@ const ContentContainer = styled("div")`
   /* left: 0%; */
   /* right: 0%; */
   /* max-height: 500px; */
-  height: 750px;
+  flex: 1;
+  /* height: 750px; */
   width: calc(100% - 500px);
   /* height: fit-content; */
 
@@ -59,12 +61,12 @@ const ContentContainer = styled("div")`
     width: 95%;
     /* border: 5px solid red; */
     height: fit-content;
-    margin: 16px 0px;
+    /* margin-top: 16px; */
   }
 `;
 
 const ContentWrapper = styled("div")`
-  border: 5px solid #104e01;
+  border: 3px solid #104e01;
   /* outline: 5px solid #fff59b; */
   /* background-color: #fff59b; */
   background-color: white;
@@ -79,12 +81,10 @@ const ContentWrapper = styled("div")`
   /* height: 800px; */
   width: 100%;
   height: fit-content;
-
-  
 `;
 
 const ImageWrapper = styled("div")`
-  border: 5px solid #104e01;
+  border: 3px solid #104e01;
   /* outline: 5px solid #fff59b; */
   /* background-color: #fff59b; */
   /* padding: 12px; */
@@ -93,9 +93,10 @@ const ImageWrapper = styled("div")`
   /* top: 40%; */
   /* left: 0%; */
   /* right: 0%; */
-  height: 700px;
+  max-height: 700px;
   width: 400px;
   overflow-y: auto;
+  overflow-x: hidden;
   @media (max-width: 928px) {
     width: 95%;
   }
