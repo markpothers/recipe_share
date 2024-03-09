@@ -17,7 +17,7 @@ export const welcomeRoute = new Route({
 
 export const activatedRoute = new Route({
   getParentRoute: () => AppRoute,
-  path: "/activate",
+  path: "/activated",
   component: Activated,
 });
 
@@ -29,7 +29,7 @@ export const deleteAccountRoute = new Route({
 
 export const reactivatedRoute = new Route({
   getParentRoute: () => AppRoute,
-  path: "/reactivate",
+  path: "/reactivated",
   component: Reactivated,
 });
 

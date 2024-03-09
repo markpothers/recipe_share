@@ -41,7 +41,7 @@ export const postInstructionImage = async (
 					reject({ name: "Logout" });
 				}
 				if (result) {
-					console.log(result)
+					// console.log(result)
 					resolve(result);
 				}
 			})

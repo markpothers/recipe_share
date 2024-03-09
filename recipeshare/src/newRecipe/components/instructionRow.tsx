@@ -45,7 +45,7 @@ export const InstructionRow = ({
 				ref={textInput}
 				onLayout={(event) => {
 					const { height } = event.nativeEvent.layout;
-										handleInstructionSizeChange(index, height);
+					handleInstructionSizeChange(index, height);
 				}}
 			>
 				<TextInput
@@ -59,7 +59,7 @@ export const InstructionRow = ({
 					onChangeText={(text) => {
 						handleInstructionChange(text, index);
 						textInput.current.measureInWindow((x, y, width, height) => {
-														handleInstructionSizeChange(index, height);
+							handleInstructionSizeChange(index, height);
 						});
 					}}
 					ref={(element) => {

@@ -1,36 +1,38 @@
-import React from "react";
-import { FlatList, TouchableOpacity, Animated, Keyboard, Platform, View, Text, RefreshControl } from "react-native";
+import { Animated, FlatList, Keyboard, Platform, RefreshControl, Text, TouchableOpacity, View } from "react-native";
+import { loadLocalRecipeLists, saveRecipeListsLocally } from "../auxFunctions/saveRecipeListsLocally";
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+import { storeChefDetails, storeRecipeDetails, updateAllRecipeLists, updateSingleRecipeList } from "../redux";
+
+import AppHeader from "../../navigation/appHeader";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import RecipeCard from "./RecipeCard";
-import { connect } from "react-redux";
-import { getRecipeList } from "../fetches/getRecipeList";
-import { getAvailableFilters } from "../fetches/getAvailableFilters";
-import { postRecipeLike } from "../fetches/postRecipeLike";
-import { postReShare } from "../fetches/postReShare";
-import { postRecipeMake } from "../fetches/postRecipeMake";
-import { destroyRecipeLike } from "../fetches/destroyRecipeLike";
-import { destroyReShare } from "../fetches/destroyReShare";
-import { styles } from "./recipeListStyleSheet";
-import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import FilterMenu from "../filterMenu/filterMenu";
-import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
-import { getRecipeDetails } from "../fetches/getRecipeDetails";
-import saveRecipeDetailsLocally from "../auxFunctions/saveRecipeDetailsLocally";
-import { saveRecipeListsLocally, loadLocalRecipeLists } from "../auxFunctions/saveRecipeListsLocally";
-import saveChefDetailsLocally from "../auxFunctions/saveChefDetailsLocally";
-import { getChefDetails } from "../fetches/getChefDetails";
-import OfflineMessage from "../offlineMessage/offlineMessage";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import NetInfo from "@react-native-community/netinfo";
-NetInfo.configure({ reachabilityShortTimeout: 5 }); //5ms
+import OfflineMessage from "../offlineMessage/offlineMessage";
+import React from "react";
+import RecipeCard from "./RecipeCard";
 import SearchBar from "../searchBar/SearchBar";
 import SearchBarClearButton from "../searchBar/SearchBarClearButton";
-import { cuisines } from "../dataComponents/cuisines";
-import { serves } from "../dataComponents/serves";
+import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
+import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { clearedFilters } from "../dataComponents/clearedFilters";
-import AppHeader from "../../navigation/appHeader";
-import { storeRecipeDetails, updateAllRecipeLists, updateSingleRecipeList, storeChefDetails } from "../redux";
+import { connect } from "react-redux";
+import { cuisines } from "../dataComponents/cuisines";
+import { destroyReShare } from "../fetches/destroyReShare";
+import { destroyRecipeLike } from "../fetches/destroyRecipeLike";
+import { getAvailableFilters } from "../fetches/getAvailableFilters";
+import { getChefDetails } from "../fetches/getChefDetails";
+import { getRecipeDetails } from "../fetches/getRecipeDetails";
+import { getRecipeList } from "../fetches/getRecipeList";
+import { postReShare } from "../fetches/postReShare";
+import { postRecipeLike } from "../fetches/postRecipeLike";
+import { postRecipeMake } from "../fetches/postRecipeMake";
+import saveChefDetailsLocally from "../auxFunctions/saveChefDetailsLocally";
+import saveRecipeDetailsLocally from "../auxFunctions/saveRecipeDetailsLocally";
+import { serves } from "../dataComponents/serves";
+import { styles } from "./recipeListStyleSheet";
+
+NetInfo.configure({ reachabilityShortTimeout: 5 }); //5ms
 
 // import { apiCall } from '../auxFunctions/apiCall'
 
@@ -382,9 +384,7 @@ export class RecipesList extends React.Component {
 				AsyncStorage.getItem("localRecipeDetails", (err, res) => {
 					if (res != null) {
 						let localRecipeDetails = JSON.parse(res);
-						let thisRecipeDetails = localRecipeDetails.find(
-							(recipeDetails) => recipeDetails.recipe.id === recipeID
-						);
+						let thisRecipeDetails = localRecipeDetails.find((recipeDetails) => recipeDetails.recipe.id === recipeID);
 
 						if (thisRecipeDetails) {
 							this.props.storeRecipeDetails(thisRecipeDetails);
@@ -753,17 +753,13 @@ export class RecipesList extends React.Component {
 									this.setState({ renderNoRecipesMessage: false });
 								}}
 								delay={20000}
-								action={() => this.props.navigation.navigate("BrowseRecipes")}
+								action={() => this.props.navigation.navigate("BrowseRecipesCover")}
 								testID={"myFeedMessage"}
 							/>
 						)}
 					{this.getRecipeList().length == 0 && (
 						<View style={centralStyles.swipeDownContainer}>
-							<Icon
-								name="gesture-swipe-down"
-								size={responsiveHeight(5)}
-								style={centralStyles.swipeDownIcon}
-							/>
+							<Icon name="gesture-swipe-down" size={responsiveHeight(5)} style={centralStyles.swipeDownIcon} />
 							<Text style={centralStyles.swipeDownText}>Swipe down to refresh</Text>
 						</View>
 					)}
@@ -775,10 +771,7 @@ export class RecipesList extends React.Component {
 								transform: [
 									{
 										translateY: this.state.yOffset.interpolate({
-											inputRange: [
-												this.state.currentYTop,
-												this.state.currentYTop + responsiveHeight(7),
-											],
+											inputRange: [this.state.currentYTop, this.state.currentYTop + responsiveHeight(7)],
 											outputRange: [0, -responsiveHeight(7)],
 											extrapolate: "clamp",
 										}),
@@ -810,9 +803,7 @@ export class RecipesList extends React.Component {
 									}}
 									onPress={searchBarIsDisplayed ? this.handleSearchBarFocus : this.refresh}
 								>
-									{this.state.searchTerm.length > 0 && (
-										<SearchBarClearButton setSearchTerm={this.setSearchTerm} />
-									)}
+									{this.state.searchTerm.length > 0 && <SearchBarClearButton setSearchTerm={this.setSearchTerm} />}
 								</TouchableOpacity>
 							);
 						}}
@@ -901,11 +892,7 @@ export class RecipesList extends React.Component {
 					accessibilityLabel={"display filter options"}
 				>
 					{anyFilterActive && (
-						<Icon
-							name="checkbox-blank-circle"
-							size={responsiveHeight(2.5)}
-							style={styles.filterActiveIcon}
-						/>
+						<Icon name="checkbox-blank-circle" size={responsiveHeight(2.5)} style={styles.filterActiveIcon} />
 					)}
 					<Icon name="filter" size={responsiveHeight(3.5)} style={styles.filterIcon} />
 				</TouchableOpacity>

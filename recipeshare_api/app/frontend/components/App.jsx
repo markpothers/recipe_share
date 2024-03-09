@@ -27,7 +27,7 @@ const Wrapper = styled("div")`
 
 const BodyWrapper = styled("div")`
   /* border: 5px solid blue; */
-  background-color: #f5f5f5cc;
+  background-color: #f5f5f5ee;
   backdrop-filter: blur(5px);
   /* opacity: 0.5; */
   /* background-color: #fff59b; */
@@ -43,7 +43,7 @@ const BodyWrapper = styled("div")`
   // min-height: 100%;
   /* height: fit-content; */
   width: 80%;
-  margin: 8px auto;
+  margin: 0px auto;
   /* margin-top:4px; */
   /* margin-left: auto; */
   /* margin-right: auto; */
@@ -130,8 +130,8 @@ export const AppRoute = new RootRoute({
             </HeaderLeft>
             <HeaderRight>
               <Link to="/support">Support</Link>
-              {/* <Link to="/activate">Activated</Link>
-              <Link to="/reactivate">Reactivated</Link>
+              {/* <Link to="/activated">Activated</Link>
+              <Link to="/reactivated">Reactivated</Link>
               <Link to="/reactivation-confirmed">Reactivation Confirmed</Link>
               <Link to="/reactivation-rejected">Reactivation Rejected</Link>
               <Link to="/rejected">Rejected</Link> */}

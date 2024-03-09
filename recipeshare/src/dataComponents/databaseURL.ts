@@ -1,7 +1,7 @@
 let databaseURL;
 
 if (__DEV__) {
-	databaseURL = "http://10.0.0.145:3000/api"
+	databaseURL = "http://10.0.0.145:3000/api";
 	// databaseURL = "https://www.recipe-share.com/api";
 	// databaseURL = "http://10.0.0.144:3000/api"
 	// databaseURL = "http://10.0.0.78:3000/api" // testServer must be local ip. see package.json for command to get

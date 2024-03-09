@@ -1,23 +1,25 @@
-import React, { useState, useEffect, useRef } from "react";
-import {
-	Modal,
-	Text,
-	View,
-	TouchableOpacity,
-	Dimensions,
-	Image,
-	FlatList,
-	Platform,
-	ListRenderItemInfo,
-} from "react-native";
-import { Camera } from "expo-camera";
-import * as MediaLibrary from "expo-media-library";
 import * as ImagePicker from "expo-image-picker";
-import { styles } from "./functionalComponentsStyleSheet";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
-import { ImageEditor } from "expo-image-editor";
+import * as MediaLibrary from "expo-media-library";
+
+import {
+	Dimensions,
+	FlatList,
+	Image,
+	ListRenderItemInfo,
+	Modal,
+	Platform,
+	Text,
+	TouchableOpacity,
+	View,
+} from "react-native";
 import { ImageSource, RecipeImage } from "../centralTypes";
+import React, { useEffect, useRef, useState } from "react";
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+
+import { Camera } from "expo-camera";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { ImageEditor } from "expo-image-editor";
+import { styles } from "./functionalComponentsStyleSheet";
 
 type OwnProps = {
 	imageSources: ImageSource[];
@@ -217,8 +219,9 @@ export default function MultiPicSourceChooser(props: OwnProps) {
 		setImageEditorShowing(false);
 	};
 
-	const saveCroppedImage = (image: ImagePicker.ImagePickerResult) => {
+	const saveCroppedImage = (image: ImagePicker.ImagePickerAsset) => {
 		// console.log("cropped image:", image);
+		// if (images && images.assets && images.assets.length > 0)
 		const newImage = {
 			...image,
 			canceled: false,
