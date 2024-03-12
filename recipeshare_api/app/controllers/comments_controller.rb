@@ -2,7 +2,8 @@ class CommentsController < ApplicationController
 
     before_action :define_current_comment
     skip_before_action :define_current_comment, :only => [:index, :create]
-
+    skip_before_action :verify_authenticity_token
+    
     def index
         render json: Comment.all
     end

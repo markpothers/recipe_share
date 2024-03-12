@@ -2,6 +2,7 @@ class IngredientsController < ApplicationController
 
     before_action :define_current_ingredient
     skip_before_action :define_current_ingredient, :only => [:index, :create]
+    skip_before_action :verify_authenticity_token
     # skip_before_action :logged_in?, :only => [:index]
 
     def index

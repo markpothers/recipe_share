@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { Modal, Text, View, TouchableOpacity, Platform, Image } from "react-native";
-import { Camera } from "expo-camera";
-import * as MediaLibrary from "expo-media-library";
 import * as ImagePicker from "expo-image-picker";
-import { styles } from "./functionalComponentsStyleSheet";
+import * as MediaLibrary from "expo-media-library";
+
+import { Image, Modal, Platform, Text, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+
+import { Camera } from "expo-camera";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 import { ImageEditor } from "expo-image-editor";
+import { styles } from "./functionalComponentsStyleSheet";
 
 type OwnProps = {
 	index?: number;
@@ -70,12 +72,12 @@ export default function PicSourceChooser(props: OwnProps) {
 		// if ("error" in image) {
 		// console.log(image.error);
 		// }
-		if (image.assets.length > 0) {
+		if (image.assets && image.assets.length > 0) {
 			if (Platform.OS == "ios" && image.canceled == false) {
 				setTempImageUri(image.assets[0].uri);
 				setImageEditorShowing(true);
 			} else {
-				saveImage(image);
+				saveImage(image.assets[0]);
 			}
 		}
 	};

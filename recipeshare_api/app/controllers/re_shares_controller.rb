@@ -1,5 +1,7 @@
 class ReSharesController < ApplicationController
 
+    skip_before_action :verify_authenticity_token
+    
     def create
         # byebug
         if re_share_params["chef_id"] === @chef.id || @chef.is_admin === true

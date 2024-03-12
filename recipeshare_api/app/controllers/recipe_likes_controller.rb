@@ -2,7 +2,7 @@ class RecipeLikesController < ApplicationController
 
     before_action :define_current_recipe_like
     skip_before_action :define_current_recipe_like, :only => [:index, :create, :destroy]
-
+    skip_before_action :verify_authenticity_token
 
     def index
         render json: RecipeLike.all

@@ -95,7 +95,7 @@ export const useNewRecipeModel = (
 		AsyncStorage.getItem("localNewRecipeDetails", (err, res) => {
 			if (res != null) {
 				const savedData = JSON.parse(res);
-								if (
+				if (
 					"newRecipeDetails" in savedData &&
 					"instructionHeights" in savedData &&
 					"averageInstructionHeight" in savedData
@@ -106,7 +106,7 @@ export const useNewRecipeModel = (
 						averageInstructionHeight: savedAverageInstructionHeights,
 					} = savedData;
 					setNewRecipeDetails(savedNewRecipeDetails);
-										setInstructionHeights(savedInstructionsHeights);
+					setInstructionHeights(savedInstructionsHeights);
 					setAverageInstructionHeight(savedAverageInstructionHeights);
 				}
 			}

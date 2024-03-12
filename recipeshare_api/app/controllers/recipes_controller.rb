@@ -4,7 +4,8 @@ class RecipesController < ApplicationController
 
     before_action :define_current_recipe
     skip_before_action :define_current_recipe, :only => [:index, :create, :details, :get_available_filters]
-
+    skip_before_action :verify_authenticity_token
+    
     def index
         # byebug
         # puts "getting recipe list: #{params["listType"]}"

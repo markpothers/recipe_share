@@ -2,7 +2,7 @@ class RecipeMakesController < ApplicationController
 
     before_action :define_current_recipe_make
     skip_before_action :define_current_recipe_make, :only => [:index, :create]
-
+    skip_before_action :verify_authenticity_token
 
     def index
         render json: RecipeMake.all

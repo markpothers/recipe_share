@@ -1,5 +1,7 @@
 class RecipeImagesController < ApplicationController
 
+    skip_before_action :verify_authenticity_token
+    
 def create
     if recipe_image_params["chef_id"] === @chef.id || @chef.is_admin === true
         image = recipe_image_params

@@ -2,10 +2,10 @@ require "google/cloud/storage"
 require "tempfile"
 
 class ApplicationRecord < ActiveRecord::Base
-  self.abstract_class = true
+  primary_abstract_class
 
   @@gcstorage = Google::Cloud::Storage.new project_id: Rails.application.credentials.Google[:project_id],
-    credentials: Rails.application.credentials.Google[:image_storage_handler_credentials]
+                                           credentials: Rails.application.credentials.Google[:image_storage_handler_credentials]
 
   # def initialize()
   #   self.gcstorage = Google::Cloud::Storage.new project_id: Rails.application.credentials.Google[:project_id],

@@ -1,6 +1,9 @@
 require "securerandom"
 
 class MakePicsController < ApplicationController
+
+  skip_before_action :verify_authenticity_token
+  
   def create
     # byebug
     if make_pic_params["chef_id"] == @chef.id || @chef.is_admin == true
