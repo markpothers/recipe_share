@@ -1,12 +1,11 @@
 // import saveChefDetailsLocally from '../auxFunctions/saveChefDetailsLocally'
-import { databaseURL } from "../dataComponents/databaseURL";
-import { actionTimeout } from "../dataComponents/timeouts";
+
 import type { ApiError, LoginChef } from "../centralTypes";
 
-export const postLoginChef = (chef: {
-	e_mail: string;
-	password: string;
-}): Promise<LoginChef | ApiError> => {
+import { actionTimeout } from "../dataComponents/timeouts";
+import { databaseURL } from "../dataComponents/databaseURL";
+
+export const postLoginChef = (chef: { e_mail: string; password: string }): Promise<LoginChef | ApiError> => {
 	// console.log(chef.password.trim())
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {

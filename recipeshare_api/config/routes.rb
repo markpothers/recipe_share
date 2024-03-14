@@ -33,7 +33,9 @@ Rails.application.routes.draw do
   # this is google appengine's test route and it musn't redirect to welcome
   get "_ah/start" => redirect("/_ah/start.html")
   get "/", to: "web#index"
-  get "*path", to: "web#index"
+  get "*path", to: "web#index", constraints: ->(request) do
+                                               !request.xhr? && requset.format.html?
+                                             end
   # get "/support" => redirect("/support.html")
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

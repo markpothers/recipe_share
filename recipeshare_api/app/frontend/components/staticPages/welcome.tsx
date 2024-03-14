@@ -17,7 +17,6 @@ import styled from "styled-components";
 import toadInTheHole from "../../../assets/images/toadInTheHole.png";
 
 const ImageWrapper = styled("div")`
-  /* border: 1px solid red; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -29,21 +28,12 @@ const ImageWrapper = styled("div")`
 `;
 
 const AppStoreLink = styled("a")`
-  /* border: 1px solid green; */
-  /* flex: 1; */
   height: 100%;
   width: 50%;
 `;
 
 const AppStoreImage = styled("img")`
-  /* height: 100%; */
-  /* flex: 1; */
   width: 100%;
-  /* margin-left: auto; */
-  /* max-height: 100%; */
-  /* height: 60px; */
-  /* margin: 16px; */
-  /* margin-left: calc(100% - 200px); */
 `;
 
 const WelcomeContent = () => {

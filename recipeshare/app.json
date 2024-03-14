@@ -1,65 +1,69 @@
 {
-	"expo": {
-		"name": "Recipe-Share",
-		"slug": "recipe-share",
-		"privacy": "public",
-		"platforms": [
-			"ios",
-			"android"
-		],
-		"version": "0.0.010",
-		"orientation": "portrait",
-		"icon": "./assets/images/icon.png",
-		"splash": {
-			"image": "./assets/images/splash.png",
-			"resizeMode": "contain",
-			"backgroundColor": "#ffffff"
-		},
-		"updates": {
-			"fallbackToCacheTimeout": 0
-		},
-		"assetBundlePatterns": [
-			"**/*"
-		],
-		"ios": {
-			"supportsTablet": true,
-			"bundleIdentifier": "com.recipe-share.recipe-share",
-			"buildNumber": "2.0.47",
-			"associatedDomains": [
-				"webcredentials:www.recipe-share.com"
-			],
-			"infoPlist": {
-				"NSCameraUsageDescription": "Recipe-Share requires access to your camera to let you set a profile picture and upload pictures of recipes. Your images will not be shared with 3rd parties outside the Recipe-Share app.",
-				"NSPhotoLibraryUsageDescription": "Recipe-Share requires access to your camera roll to let you set a profile picture and upload pictures of recipes. Your images will not be shared with 3rd parties outside the Recipe-Share app.",
-				"NSPhotoLibraryAddUsageDescription": "Recipe-Share requires access to your camera roll to let you set a profile picture and upload pictures of recipes. Your images will not be shared with 3rd parties outside the Recipe-Share app.",
-				"NSSpeechRecognitionUsageDescription": "Recipe-Share requires speech recognition permission to easier allow you to input instructions when creating a recipe.",
-				"UIRequiresFullScreen": true
-			}
-		},
-		"android": {
-			"package": "com.recipe_share.recipe_share",
-			"versionCode": 47,
-			"permissions": [
-				"CAMERA",
-				"READ_EXTERNAL_STORAGE",
-				"WRITE_EXTERNAL_STORAGE",
-				"android.permission.RECORD_AUDIO"
-			],
-			"icon": "./assets/images/icon.png",
-			"adaptiveIcon": {
-				"foregroundImage": "./assets/images/iconForeground.png",
-				"backgroundImage": "./assets/images/iconBackground.png"
-			}
-		},
-		"androidStatusBar": {
-			"backgroundColor": "#000000",
-			"barStyle": "light-content"
-		},
-		"extra": {
-			"eas": {
-				"projectId": "2ebe3530-e000-11e9-a464-1daf89a8f23f"
-			}
-		},
-		"plugins": ["@react-native-voice/voice"]
-	}
+  "expo": {
+    "name": "Recipe-Share",
+    "slug": "recipe-share",
+    "privacy": "public",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "version": "0.0.010",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.recipe-share.recipe-share",
+      "buildNumber": "2.0.47",
+      "associatedDomains": [
+        "webcredentials:www.recipe-share.com"
+      ],
+      "infoPlist": {
+        "NSCameraUsageDescription": "Recipe-Share requires access to your camera to let you set a profile picture and upload pictures of recipes. Your images will not be shared with 3rd parties outside the Recipe-Share app.",
+        "NSPhotoLibraryUsageDescription": "Recipe-Share requires access to your camera roll to let you set a profile picture and upload pictures of recipes. Your images will not be shared with 3rd parties outside the Recipe-Share app.",
+        "NSPhotoLibraryAddUsageDescription": "Recipe-Share requires access to your camera roll to let you set a profile picture and upload pictures of recipes. Your images will not be shared with 3rd parties outside the Recipe-Share app.",
+        "NSSpeechRecognitionUsageDescription": "Recipe-Share requires speech recognition permission to easier allow you to input instructions when creating a recipe.",
+        "UIRequiresFullScreen": true
+      }
+    },
+    "android": {
+      "package": "com.recipe_share.recipe_share",
+      "versionCode": 47,
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "icon": "./assets/images/icon.png",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/iconForeground.png",
+        "backgroundImage": "./assets/images/iconBackground.png"
+      }
+    },
+    "androidStatusBar": {
+      "backgroundColor": "#000000",
+      "barStyle": "light-content"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "2ebe3530-e000-11e9-a464-1daf89a8f23f"
+      }
+    },
+    "plugins": [
+      "@react-native-voice/voice",
+      "expo-font",
+      "expo-secure-store"
+    ]
+  }
 }

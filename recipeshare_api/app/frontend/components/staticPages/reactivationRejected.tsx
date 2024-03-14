@@ -17,7 +17,6 @@ export const ReactivationRejected = () => {
         </>
       }
       image={sausageSweetPotato}
-
     />
   );
 };
