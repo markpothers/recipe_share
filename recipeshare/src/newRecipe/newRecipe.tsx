@@ -324,7 +324,7 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 										styles.deleteInstructionContainer,
 										{ width: "9%", backgroundColor: isRecordingAbout ? "#505050" : "white" },
 									]}
-									onPress={() => startAboutSpeechRecognition()}
+									onPress={startAboutSpeechRecognition}
 									activeOpacity={0.7}
 								>
 									<Icon
