@@ -1,7 +1,8 @@
-import { StyleSheet } from "react-native"
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions" //eslint-disable-line no-unused-vars
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
-const inDevelopment = false
+import { StyleSheet } from "react-native";
+
+const inDevelopment = false;
 
 export const centralStyles = StyleSheet.create({
 	spinachFullBackground: {
@@ -20,7 +21,7 @@ export const centralStyles = StyleSheet.create({
 		flex: 1,
 		borderWidth: inDevelopment ? 1 : 0,
 		borderColor: "red",
-		alignItems: "center"
+		alignItems: "center",
 	},
 	fullPageScrollView: {
 		flex: 1,
@@ -33,7 +34,7 @@ export const centralStyles = StyleSheet.create({
 		marginRight: responsiveWidth(10),
 		borderWidth: inDevelopment ? 1 : 0,
 		justifyContent: "center",
-		alignItems: "center"
+		alignItems: "center",
 	},
 	formTitle: {
 		width: "100%",
@@ -60,12 +61,12 @@ export const centralStyles = StyleSheet.create({
 		borderWidth: 1,
 		borderColor: "#104e01",
 		marginTop: responsiveHeight(1),
-		marginBottom: responsiveHeight(0.5)
+		marginBottom: responsiveHeight(0.5),
 	},
 	formSectionSeparator: {
 		borderBottomWidth: responsiveHeight(0.66),
 		borderBottomColor: "#fff59b",
-		width: responsiveWidth(80)
+		width: responsiveWidth(80),
 	},
 	formInputContainer: {
 		flexDirection: "row",
@@ -103,7 +104,7 @@ export const centralStyles = StyleSheet.create({
 		// borderColor: '#104e01',
 		paddingLeft: responsiveWidth(2),
 		fontSize: responsiveFontSize(2),
-		paddingVertical: responsiveHeight(0.5)
+		paddingVertical: responsiveHeight(0.5),
 	},
 	formTextBoxContainer: {
 		minHeight: responsiveHeight(6),
@@ -113,7 +114,7 @@ export const centralStyles = StyleSheet.create({
 		backgroundColor: "white",
 		borderWidth: 1,
 		borderColor: "#104e01",
-		borderRadius: responsiveWidth(1.5)
+		borderRadius: responsiveWidth(1.5),
 	},
 	formTextBox: {
 		width: "100%",
@@ -121,7 +122,7 @@ export const centralStyles = StyleSheet.create({
 		textAlignVertical: "center",
 		borderRadius: responsiveWidth(1.5),
 		paddingLeft: responsiveWidth(2),
-		fontSize: responsiveFontSize(2)
+		fontSize: responsiveFontSize(2),
 	},
 	formErrorView: {
 		marginTop: responsiveHeight(0.5),
@@ -132,7 +133,7 @@ export const centralStyles = StyleSheet.create({
 		// alignItems: 'center',
 		borderRadius: responsiveWidth(1.5),
 		borderWidth: 1,
-		borderColor: "#104e01"
+		borderColor: "#104e01",
 	},
 	formErrorText: {
 		color: "#9e0000f8",
@@ -140,7 +141,7 @@ export const centralStyles = StyleSheet.create({
 		paddingLeft: responsiveWidth(2),
 		paddingRight: responsiveWidth(2),
 		paddingTop: responsiveHeight(0.25),
-		paddingBottom: responsiveHeight(0.25)
+		paddingBottom: responsiveHeight(0.25),
 	},
 	yellowRectangleButton: {
 		justifyContent: "space-evenly",
@@ -184,14 +185,14 @@ export const centralStyles = StyleSheet.create({
 		fontWeight: "bold",
 		color: "#104e01",
 		fontSize: responsiveFontSize(1.8),
-		paddingHorizontal: responsiveWidth(1)
+		paddingHorizontal: responsiveWidth(1),
 	},
 	yellowButtonText: {
 		textAlign: "center",
 		fontWeight: "bold",
 		color: "#fff59b",
 		fontSize: responsiveFontSize(1.8),
-		paddingHorizontal: responsiveWidth(1)
+		paddingHorizontal: responsiveWidth(1),
 	},
 	helpButton: {
 		alignSelf: "flex-start",
@@ -225,7 +226,7 @@ export const centralStyles = StyleSheet.create({
 		borderRadius: responsiveWidth(1.5),
 	},
 	dynamicMenuIcon: {
-		color: "#fff59b"
+		color: "#fff59b",
 	},
 	headerButtonContainer: {
 		backgroundColor: "#fff59b",
@@ -245,10 +246,10 @@ export const centralStyles = StyleSheet.create({
 		width: responsiveWidth(15),
 		justifyContent: "center",
 		alignItems: "center",
-		zIndex: 0
+		zIndex: 0,
 	},
 	hiddenToggleIcon: {
-		color: "#50505055"
+		color: "#50505055",
 	},
 	swipeDownContainer: {
 		//borderWidth: 1,
@@ -258,7 +259,7 @@ export const centralStyles = StyleSheet.create({
 		marginTop: responsiveHeight(20),
 		width: "100%",
 		//marginLeft: 'auto',
-		position: "absolute"
+		position: "absolute",
 	},
 	swipeDownIcon: {
 		color: "#fff59b",
@@ -267,6 +268,6 @@ export const centralStyles = StyleSheet.create({
 		color: "#fff59b",
 		fontWeight: "bold",
 		fontSize: responsiveFontSize(2.5),
-		textAlign: "center"
-	}
-})
+		textAlign: "center",
+	},
+});

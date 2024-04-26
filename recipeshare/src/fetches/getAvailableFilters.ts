@@ -1,6 +1,7 @@
-import { databaseURL } from "../dataComponents/databaseURL"
-import { listsTimeout } from "../dataComponents/timeouts"
-import type { FilterSettings, Cuisine, Serves, AvailableFilters } from "../centralTypes"
+import type { AvailableFilters, Cuisine, FilterSettings, Serves } from "../centralTypes";
+
+import { databaseURL } from "../dataComponents/databaseURL";
+import { listsTimeout } from "../dataComponents/timeouts";
 
 export const getAvailableFilters = (
 	listType: string,
@@ -18,11 +19,11 @@ export const getAvailableFilters = (
 	const filters = Object.keys(filter_settings)
 		.filter((category) => filter_settings[category] === true)
 		.join("/")
-		.toLowerCase()
+		.toLowerCase();
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
-			reject({ name: "Timeout" })
-		}, listsTimeout)
+			reject({ name: "Timeout" });
+		}, listsTimeout);
 
 		fetch(
 			`${databaseURL}/get_available_filters?listType=${listType}&queryChefID=${queryChefID}&limit=${limit}&offset=${offset}&global_ranking=${global_ranking}&filters=${filters}&cuisine=${cuisine}&serves=${serves}&search_term=${searchTerm}`,
@@ -30,17 +31,17 @@ export const getAvailableFilters = (
 				method: "GET",
 				headers: {
 					Authorization: `Bearer ${auth_token}`,
-					"Content-Type": "application/json"
+					"Content-Type": "application/json",
 				},
-				signal: abortController.signal
+				signal: abortController.signal,
 			}
 		)
 			.then((res) => res.json())
 			.then((result) => {
 				if (result.error && result.message == "Invalid authentication") {
-					reject({ name: "Logout" })
+					reject({ name: "Logout" });
 				}
-				resolve(result)
+				resolve(result);
 			})
 			.catch((e) => {
 				reject(e)
