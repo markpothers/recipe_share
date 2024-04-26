@@ -35,8 +35,9 @@ export const DeleteAccount = () => {
               <strong>Delete Profile</strong> option.
             </li>
             <li>
-              Choose whether you want to <strong>Delete everything</strong>{" "}
-              you've ever created, or you can deactivate your account, and{" "}
+              If you choose to <strong>Delete everything</strong>, then all
+              recipes you've created and your account will be deleted.
+              Alternatively, you can deactivate your account, and{" "}
               <strong>Leave recipes</strong> you've created behind. Your recipes
               will be anonymized and you will no longer be able to log in. (You
               can reactivate your account any time in the future.)

@@ -20,10 +20,10 @@ Rails.application.routes.draw do
   get "/api/reactivate", to: "chefs#reactivate"
   get "/api/password_reset", to: "chefs#password_reset"
   post "/api/chefs/authenticate", to: "chefs#authenticate"
+  get "/api/get_available_filters", to: "recipes#get_available_filters"
   delete "/api/recipe_likes", to: "recipe_likes#destroy"
   delete "/api/re_shares", to: "re_shares#destroy"
   delete "/api/follows", to: "follows#destroy"
-  # get "/api/get_available_filters", to: "recipes#get_available_filters"
   # get "/api/database/manualbackup", to: "databases#manualBackup"
   # get "/api/database/autobackup", to: "databases#autoBackup"
   # get "/api/database/stopautobackup", to: "databases#stopAutoBackup"
@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   get "_ah/start" => redirect("/_ah/start.html")
   get "/", to: "web#index"
   get "*path", to: "web#index", constraints: ->(request) do
-                                               !request.xhr? && requset.format.html?
+                                               !request.xhr? && request.format.html?
                                              end
   # get "/support" => redirect("/support.html")
 
