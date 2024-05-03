@@ -24,7 +24,7 @@ export const DeleteAccount = () => {
     <StaticContentWrapper
       content={
         <>
-          Sorry you are thinking about leaving but it's easy to do. Simply
+          Sorry you are thinking about leaving but it's easy to do. To delete your account <strong>within the app</strong>, simply
           follow these steps:
           <ol>
             <li>
@@ -47,6 +47,7 @@ export const DeleteAccount = () => {
               be deactivated.
             </li>
           </ol>
+Alternatively please <strong>e-mail</strong> us at <a href="admin@recipe-share.com">admin@recipe-share.com</a>, and we'll be happy to delete your account and send you are confirmation.
         </>
       }
       image={currentImage}

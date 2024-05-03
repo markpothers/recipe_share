@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Delete my account</title>
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="index.css" />
+    <style>
+      html {
+        background-image: url(./assets/spinach-3449142e15d5fdb71725b54674cf3a396e7de177f5eeac89ddddca4011ab6203.jpg);
+        background-repeat: repeat;
+      }
+
+      .wrapper {
+        background-color: #f5f5f5ee;
+        backdrop-filter: blur(5px);
+        width: 80%;
+        margin: 0px auto;
+        border-radius: 4px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        color: #104e01;
+
+        @media (max-width: 928px) {
+          width: 90%;
+        }
+      }
+
+      .header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0px 12px;
+        align-items: center;
+        border-bottom: solid 1px #104e01;
+      }
+
+      .titleBar {
+        padding: 0px 24px;
+        border-bottom: solid 1px #104e01;
+      }
+
+      .title {
+        margin: 8px 0px 8px 0px;
+      }
+
+      .content {
+        flex: 1;
+        position: relative;
+        padding: 16px 16px;
+
+        @media (max-width: 928px) {
+          padding: 12px;
+        }
+      }
+
+      .textWrapper {
+        border: 2px solid #104e01;
+        background-color: white;
+        border-radius: 10px;
+        color: #104e01;
+        padding: 12px;
+        width: 100%;
+        height: fit-content;
+      }
+
+      .emailLink:visited {
+        color: blue;
+      }
+
+      .emailLink:visited {
+        color: purple;
+      }
+
+      .imagesWrapper {
+        margin-top: 16px;
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+
+        @media (max-width: 928px) {
+          flex-direction: column;
+          /* overflow-y: auto; */
+          align-items: center;
+          justify-content: flex-start;
+        }
+      }
+
+      .imageWrapper {
+        height: 600px;
+        border: 2px solid #104e01;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      .imageContent {
+        object-fit: cover;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="bodyWrapper">
+      <div class="wrapper">
+        <div class="header">
+          <a href="https://www.recipe-share.com">Home</a>
+          <a href="https://www.recipe-share.com/support">Support</a>
+        </div>
+
+        <div class="titleBar"><h2 class="title">Recipe-Share</h2></div>
+        <div class="content">
+          <div class="textWrapper">
+            Sorry you are thinking about leaving but it's easy to do. To delete
+            your account <strong>within the app</strong>, simply follow these
+            steps:
+            <ol>
+              <li>In the app, switch to your <strong>Profile</strong> page.</li>
+              <li>
+                Open the '3 dot' menu and select the
+                <strong>Delete Profile</strong> option.
+              </li>
+              <li>
+                If you choose to <strong>Delete everything</strong>, then all
+                recipes you've created and your account will be deleted.
+                Alternatively, you can deactivate your account, and
+                <strong>Leave recipes</strong> you've created behind. Your
+                recipes will be anonymized and you will no longer be able to log
+                in. (You can reactivate your account any time in the future.)
+              </li>
+              <li>
+                Confirm your choice; you will be logged out and your account
+                will be deactivated.
+              </li>
+            </ol>
+            Alternatively please <strong>e-mail</strong> us at
+            <a href="admin@recipe-share.com" class="emailLink"
+              >admin@recipe-share.com</a
+            >, and we'll be happy to delete your account and send you are
+            confirmation.
+          </div>
+          <div class="imagesWrapper">
+            <div class="imageWrapper">
+              <img
+                src="./assets/deleteProfile-7883bd7d4ad3b8d96ffde72a474be2e79d515f95637032aefcf9f343e3bfc1d0.png"
+                height="100%"
+                width="100%"
+                class="imageContent"
+              />
+            </div>
+            <div class="imageWrapper">
+              <img
+                src="./assets/areYouSure-dbf33d462d62f1d1405f58fc3e1429ef555383b56238e5f52a1caebeb12933e3.png"
+                height="100%"
+                width="100%"
+                class="imageContent"
+              />
+            </div>
+            <div class="imageWrapper">
+              <img
+                src="./assets/lastChance-c2f4bbc8f539f18e5a6240a57f4059edd859cbaa3ef7bb866d308fc1c6d5b9e1.png"
+                height="100%"
+                width="100%"
+                class="imageContent"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
