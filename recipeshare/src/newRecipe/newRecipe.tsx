@@ -215,7 +215,7 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 				// @ts-ignore
 				behavior={Platform.OS === "ios" ? "padding" : ""}
-				keyboardVerticalOffset={Platform.OS === "ios" ? responsiveHeight(9) + 20 : 0}
+				keyboardVerticalOffset={Platform.OS === "ios" ? responsiveHeight(9) + 12 : 0}
 			>
 				<ScrollView
 					style={centralStyles.fullPageScrollView}

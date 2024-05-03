@@ -61,7 +61,12 @@ export const useNewRecipeModel = (
 		try {
 			const ingredients = await fetchIngredients(loggedInChef.auth_token);
 			if (ingredients) {
-				setIngredientsList(ingredients);
+				// remove untrimmed duplicates
+				const uniqueIngredients = {};
+				ingredients.forEach((ingredient) => {
+					uniqueIngredients[ingredient.name.trim()] = ingredient;
+				});
+				setIngredientsList(Object.values(uniqueIngredients));
 			}
 		} catch {
 			// this.setState({ awaitingServer: false })

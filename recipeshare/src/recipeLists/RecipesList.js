@@ -384,7 +384,9 @@ export class RecipesList extends React.Component {
 				AsyncStorage.getItem("localRecipeDetails", (err, res) => {
 					if (res != null) {
 						let localRecipeDetails = JSON.parse(res);
-						let thisRecipeDetails = localRecipeDetails.find((recipeDetails) => recipeDetails.recipe.id === recipeID);
+						let thisRecipeDetails = localRecipeDetails.find(
+							(recipeDetails) => recipeDetails.recipe.id === recipeID
+						);
 
 						if (thisRecipeDetails) {
 							this.props.storeRecipeDetails(thisRecipeDetails);
@@ -759,7 +761,11 @@ export class RecipesList extends React.Component {
 						)}
 					{this.getRecipeList().length == 0 && (
 						<View style={centralStyles.swipeDownContainer}>
-							<Icon name="gesture-swipe-down" size={responsiveHeight(5)} style={centralStyles.swipeDownIcon} />
+							<Icon
+								name="gesture-swipe-down"
+								size={responsiveHeight(5)}
+								style={centralStyles.swipeDownIcon}
+							/>
 							<Text style={centralStyles.swipeDownText}>Swipe down to refresh</Text>
 						</View>
 					)}
@@ -771,7 +777,10 @@ export class RecipesList extends React.Component {
 								transform: [
 									{
 										translateY: this.state.yOffset.interpolate({
-											inputRange: [this.state.currentYTop, this.state.currentYTop + responsiveHeight(7)],
+											inputRange: [
+												this.state.currentYTop,
+												this.state.currentYTop + responsiveHeight(7),
+											],
 											outputRange: [0, -responsiveHeight(7)],
 											extrapolate: "clamp",
 										}),
@@ -803,7 +812,9 @@ export class RecipesList extends React.Component {
 									}}
 									onPress={searchBarIsDisplayed ? this.handleSearchBarFocus : this.refresh}
 								>
-									{this.state.searchTerm.length > 0 && <SearchBarClearButton setSearchTerm={this.setSearchTerm} />}
+									{this.state.searchTerm.length > 0 && (
+										<SearchBarClearButton setSearchTerm={this.setSearchTerm} />
+									)}
 								</TouchableOpacity>
 							);
 						}}
@@ -892,7 +903,11 @@ export class RecipesList extends React.Component {
 					accessibilityLabel={"display filter options"}
 				>
 					{anyFilterActive && (
-						<Icon name="checkbox-blank-circle" size={responsiveHeight(2.5)} style={styles.filterActiveIcon} />
+						<Icon
+							name="checkbox-blank-circle"
+							size={responsiveHeight(2.5)}
+							style={styles.filterActiveIcon}
+						/>
 					)}
 					<Icon name="filter" size={responsiveHeight(3.5)} style={styles.filterIcon} />
 				</TouchableOpacity>
