@@ -18,7 +18,6 @@ module.exports = {
 	],
 	setupFilesAfterEnv: [
 		"./enzymeSetup.js",
-		"@testing-library/jest-native/extend-expect"
 	],
 	snapshotSerializers: [
 		"enzyme-to-json/serializer"
