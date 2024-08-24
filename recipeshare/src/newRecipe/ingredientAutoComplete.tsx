@@ -36,16 +36,14 @@ const IngredientAutoComplete = ({
 	ingredientsList,
 	removeIngredient,
 }: OwnProps) => {
-	const renderAutoIngredientsListItem = (item, ingredientIndex, ingredient) => {
+	const renderAutoIngredientsListItem = (item: Ingredient, ingredientIndex: number, ingredient: RecipeIngredient) => {
 		return (
 			<TouchableOpacity
 				style={{ padding: 5, zIndex: 2 }}
-				key={item.item.id.toString()}
-				onPress={() =>
-					handleListItemTouch(ingredientIndex, item.item.name, ingredient.quantity, ingredient.unit)
-				}
+				key={item.id.toString()}
+				onPress={() => handleListItemTouch(ingredientIndex, item.name, ingredient.quantity, ingredient.unit)}
 			>
-				<Text style={styles.autocompleteListText}>{item.item.name}</Text>
+				<Text style={styles.autocompleteListText}>{item.name}</Text>
 			</TouchableOpacity>
 		);
 	};
@@ -124,8 +122,17 @@ const IngredientAutoComplete = ({
 							data={autocompleteList}
 							defaultValue={""}
 							// onChange={(e) => updateIngredientEntry(ingredientIndex, e.nativeEvent.text, ingredient.quantity, ingredient.unit)}
-							renderItem={(e) => renderAutoIngredientsListItem(e, ingredientIndex, ingredient)}
-							keyExtractor={(item) => item.id.toString()}
+							// renderItem={(e) => renderAutoIngredientsListItem(e, ingredientIndex, ingredient)}
+							flatListProps={{
+								keyExtractor: (item) => item.id.toString(),
+								renderItem: ({ item }) =>
+									renderAutoIngredientsListItem(item, ingredientIndex, ingredient),
+								nestedScrollEnabled: true,
+								keyboardShouldPersistTaps: "always",
+								showsVerticalScrollIndicator: true,
+								style: styles.autoCompleteList,
+							}}
+							// keyExtractor={(item) => item.id.toString()}
 							autoCapitalize="none"
 							// placeholder={`Ingredient ${index+1}`}
 							autoCorrect={false}
@@ -133,11 +140,11 @@ const IngredientAutoComplete = ({
 							hideResults={expandBackgroundTouchCollector && ingredient.name.length > 1 ? false : true}
 							containerStyle={styles.autoCompleteOuterContainerStyle}
 							inputContainerStyle={styles.autoCompleteInputContainerStyle}
-							listStyle={styles.autoCompleteList}
+							// listStyle={styles.autoCompleteList}
 							// style={styles.autoCompleteInput}
 							// onFocus={() => thisAutocompleteIsFocused(index)}
 							// onBlur={() => thisAutocompleteIsFocused(null)}
-							flatListProps={{ nestedScrollEnabled: true, keyboardShouldPersistTaps: "always" }}
+							// flatListProps={{ nestedScrollEnabled: true, keyboardShouldPersistTaps: "always" }}
 							renderTextInput={renderTextInput}
 						/>
 					</View>
