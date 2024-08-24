@@ -89,7 +89,7 @@ const IngredientAutoComplete = ({
 	const expandBackgroundTouchCollector =
 		focused == index && autocompleteList.length > 0 && ingredient.name.length > 1;
 	// console.log(focused == index)
-		return (
+	return (
 		<View
 			style={[
 				styles.autoCompleteRowContainer,
