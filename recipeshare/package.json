@@ -20,7 +20,7 @@
 		"eject": "expo eject",
 		"test:watch": "node ./node_modules/jest/bin/jest.js --watchAll --colors --runInBand --detectOpenHandles --coverage=false",
 		"test": "node ./node_modules/jest/bin/jest.js --colors --runInBand --detectOpenHandles",
-		"lint": "esw src navigation buildScripts --color",
+		"lint": "esw src buildScripts \"navigation/*.{ts,tsx}\" --color",
 		"lint:watch": "npm run lint -- --w --changed ",
 		"prebuild:android": "npx expo prebuild --clean",
 		"prebuild:devClient:android": "npx expo prebuild --clean",
