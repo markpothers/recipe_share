@@ -1,9 +1,9 @@
-import React from 'react'
-import { Image, View, TouchableOpacity, Text, ScrollView } from 'react-native'
-import { styles } from './chefDetailsStyleSheet'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { databaseURL } from '../dataComponents/databaseURL'
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
+import React from "react"
+import { Image, View, TouchableOpacity, Text, ScrollView } from "react-native"
+import { styles } from "./chefDetailsStyleSheet"
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { databaseURL } from "../dataComponents/databaseURL"
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
 export default class ChefDetailsCard extends React.PureComponent {
 
@@ -45,13 +45,13 @@ export default class ChefDetailsCard extends React.PureComponent {
 					</View>
 				</View>
 				<View>
-					<View style={[styles.chefDetailsStats, { justifyContent: 'flex-start' }]}>
+					<View style={[styles.chefDetailsStats, { justifyContent: "flex-start" }]}>
 						<Icon name='food' size={responsiveHeight(3.5)} style={styles.icon}/>
 						<Text maxFontSizeMultiplier={2} style={styles.chefRecipesRowContents}>Recipes created:</Text>
 						<Text maxFontSizeMultiplier={2} style={styles.chefRecipesRowContents}>{this.props.recipes}</Text>
 						{/* {this.props.notProfile ? this.renderFollowButton() : null} */}
 					</View>
-					<View style={[styles.chefDetailsStats, { justifyContent: 'flex-end' }]}>
+					<View style={[styles.chefDetailsStats, { justifyContent: "flex-end" }]}>
 						<Text maxFontSizeMultiplier={1.5} style={[styles.chefDetailsColumnHeaders, { marginRight: responsiveWidth(3) }]}>Given:</Text>
 						<Text maxFontSizeMultiplier={1.5} style={[styles.chefDetailsColumnHeaders, { marginRight: responsiveWidth(1) }]}>Received:</Text>
 					</View>
@@ -101,13 +101,13 @@ function AvatarImage(chefimage_url) {
 	const URL = chefimage_url.chefimage_url
 	if (!URL) {
 		return (
-			<Image style={styles.avatarThumbnail} source={require("../dataComponents/default-chef.jpg")} resizeMode={'cover'} />
+			<Image style={styles.avatarThumbnail} source={require("../dataComponents/default-chef.jpg")} resizeMode={"cover"} />
 		)
-	} else if (typeof URL === 'object') {
+	} else if (typeof URL === "object") {
 		return (
-			<Image style={styles.avatarThumbnail} source={URL.uri.startsWith("http") ? { uri: URL.uri } : { uri: `${databaseURL}${URL.uri}` }} resizeMode={'cover'} />
+			<Image style={styles.avatarThumbnail} source={URL.uri.startsWith("http") ? { uri: URL.uri } : { uri: `${databaseURL}${URL.uri}` }} resizeMode={"cover"} />
 		)
 	} else {
-		return <Image style={styles.avatarThumbnail} source={URL.startsWith("http") ? { uri: URL } : { uri: `${databaseURL}${URL}` }} resizeMode={'cover'} />
+		return <Image style={styles.avatarThumbnail} source={URL.startsWith("http") ? { uri: URL } : { uri: `${databaseURL}${URL}` }} resizeMode={"cover"} />
 	}
 }

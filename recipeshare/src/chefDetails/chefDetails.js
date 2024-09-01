@@ -10,12 +10,12 @@ import { postFollow } from "../fetches/postFollow";
 import { destroyFollow } from "../fetches/destroyFollow";
 import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
 import OfflineMessage from "../offlineMessage/offlineMessage";
-import NetInfo from "@react-native-community/netinfo";
-NetInfo.configure({ reachabilityShortTimeout: 5 }); //5ms
+import NetInfo from "@react-native-community/netinfo"; //5ms
 
 import DynamicMenu from "../dynamicMenu/DynamicMenu";
 import AppHeaderRight from "../../navigation/appHeaderRight";
 import { clearChefDetails, storeChefDetails, storeNewFollowers, updateAllChefLists } from "../redux";
+NetInfo.configure({ reachabilityShortTimeout: 5 });
 
 const mapStateToProps = (state) => ({
 	loggedInChef: state.root.loggedInChef,

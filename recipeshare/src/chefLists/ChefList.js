@@ -13,13 +13,13 @@ import { saveChefListsLocally, loadLocalChefLists } from "../auxFunctions/saveCh
 import saveChefDetailsLocally from "../auxFunctions/saveChefDetailsLocally";
 import { getChefDetails } from "../fetches/getChefDetails";
 import OfflineMessage from "../offlineMessage/offlineMessage";
-import NetInfo from "@react-native-community/netinfo";
-NetInfo.configure({ reachabilityShortTimeout: 5 }); //5ms
+import NetInfo from "@react-native-community/netinfo"; //5ms
 import SearchBar from "../searchBar/SearchBar";
 import SearchBarClearButton from "../searchBar/SearchBarClearButton";
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 import AppHeader from "../../navigation/appHeader";
 import { storeChefDetails, updateAllChefLists, updateSingleChefList } from "../redux";
+NetInfo.configure({ reachabilityShortTimeout: 5 });
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 

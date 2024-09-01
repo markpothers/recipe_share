@@ -1,5 +1,5 @@
 export function saveToken () {
-	console.log('mock save token!!!!!')
+	console.log("mock save token!!!!!")
 	return null
 }
 

@@ -1,6 +1,6 @@
-import React from 'react';
-import RecipesList from '../recipeLists/RecipesList'
-import ChefList from '../chefLists/ChefList'
+import React from "react";
+import RecipesList from "../recipeLists/RecipesList"
+import ChefList from "../chefLists/ChefList"
 
 export class ChefFeedScreen extends React.Component {
 	render() {
