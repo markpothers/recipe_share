@@ -1,14 +1,18 @@
 import "react-native-gesture-handler"; // required by react-navigation
-import React, { useState, useEffect, useCallback } from "react";
-import { Platform, StyleSheet, LogBox } from "react-native";
-import { Provider } from "react-redux";
-// import { Asset, Font, Icon } from 'expo';
-import AppNavigator from "./navigation/AppNavigator";
-import { store } from "./src/redux/store";
-import { NavigationContainer } from "@react-navigation/native";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+
 import * as SplashScreen from "expo-splash-screen";
-import { StatusBar } from "expo-status-bar"
+
+import { LogBox, Platform, StyleSheet } from "react-native";
+import React, { useCallback, useEffect, useState } from "react";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+
+import AppNavigator from "./navigation/AppNavigator";
+import { NavigationContainer } from "@react-navigation/native";
+import { Provider } from "react-redux";
+import { StatusBar } from "expo-status-bar";
+import { store } from "./src/redux/store";
+
+// import { Asset, Font, Icon } from 'expo';
 
 export default function App() {
 	const [appIsReady, setAppIsReady] = useState(false);

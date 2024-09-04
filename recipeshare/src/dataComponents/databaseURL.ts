@@ -1,9 +1,9 @@
 let databaseURL;
 
 if (__DEV__) {
-	// databaseURL = "http://10.0.0.145:3000/api";
-	databaseURL = "http://10.0.0.78:3000/api";
-	// databaseURL = "https://www.recipe-share.com/api";
+	// databaseURL = "http://10.0.0.145:3000/api"; // Surface Pro IP address
+	databaseURL = "http://10.0.0.78:3000/api"; // Macboox Pro IP address
+	// databaseURL = "https://www.recipe-share.com/api";// Production server
 	// databaseURL = "http://10.0.0.144:3000/api"
 	// databaseURL = "http://10.0.0.78:3000/api" // testServer must be local ip. see package.json for command to get
 	// databaseURL = "http://192.168.1.190:3000/api"

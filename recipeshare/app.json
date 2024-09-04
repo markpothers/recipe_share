@@ -33,10 +33,6 @@
 				"NSPhotoLibraryUsageDescription": "Recipe-Share requires access to your camera roll to let you set a profile picture and upload pictures of recipes. Your images will not be shared with 3rd parties outside the Recipe-Share app.",
 				"NSPhotoLibraryAddUsageDescription": "Recipe-Share requires access to your camera roll to let you set a profile picture and upload pictures of recipes. Your images will not be shared with 3rd parties outside the Recipe-Share app.",
 				"NSSpeechRecognitionUsageDescription": "Recipe-Share requires speech recognition permission to easier allow you to input instructions when creating a recipe.",
-				// "NSPrivacyAccessedAPICategoryUserDefaults": "",
-				// "NSPrivacyAccessedAPITypes": "",
-				// "NSPrivacyAccessedAPICategoryDiskSpace": "",
-				// "NSPrivacyAccessedAPICategoryFileTimestamp": "",
 				"UIRequiresFullScreen": true
 			}
 		},
@@ -67,7 +63,8 @@
 		"plugins": [
 			"@react-native-voice/voice",
 			"expo-font",
-			"expo-secure-store"
+			"expo-secure-store",
+			"expo-asset"
 		]
 	}
 }

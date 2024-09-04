@@ -1,11 +1,12 @@
-import React from "react";
-import { render, fireEvent } from "@testing-library/react-native";
+import { fireEvent, render } from "@testing-library/react-native";
+
 import { Platform } from "react-native";
+import { Provider } from "react-redux";
+import React from "react";
 import SwitchSized from "./switchSized";
-import { setMockDeviceType } from "../../../__mocks__/expo-device";
 import { configureStore } from "@reduxjs/toolkit";
 import { rootReducer } from "../../redux";
-import { Provider } from "react-redux";
+import { setMockDeviceType } from "../../../__mocks__/expo-device";
 
 describe("SwitchSized", () => {
 	let mockChangeFunction, store;
@@ -83,35 +84,36 @@ describe("SwitchSized", () => {
 	});
 
 	test("can be rendered and switched off", async () => {
-		const { getByRole } = render(
+		const { getByTestId } = render(
 			<Provider store={store}>
-				<SwitchSized value={true} onValueChange={mockChangeFunction} />
+				<SwitchSized value={true} onValueChange={mockChangeFunction} testID="testSwitch" />
 			</Provider>
 		);
-		fireEvent(getByRole("switch"), "onValueChange");
+		console.log("getBy:", getByTestId("testSwitch"));
+		fireEvent(getByTestId("testSwitch"), "onValueChange");
 		expect(mockChangeFunction).toHaveBeenCalled();
 		expect(mockChangeFunction).toHaveBeenCalledTimes(1);
 	});
 
 	test("can be rendered and switched on", async () => {
-		const { getByRole } = render(
+		const { getByTestId } = render(
 			<Provider store={store}>
-				<SwitchSized value={false} onValueChange={mockChangeFunction} />
+				<SwitchSized value={false} onValueChange={mockChangeFunction} testID="testSwitch" />
 			</Provider>
 		);
-		fireEvent(getByRole("switch"), "onValueChange");
+		fireEvent(getByTestId("testSwitch"), "onValueChange");
 		expect(mockChangeFunction).toHaveBeenCalled();
 		expect(mockChangeFunction).toHaveBeenCalledTimes(1);
 	});
 
 	test("can be rendered and switched on and off", async () => {
-		const { getByRole } = render(
+		const { getByTestId } = render(
 			<Provider store={store}>
-				<SwitchSized value={false} onValueChange={mockChangeFunction} />
+				<SwitchSized value={false} onValueChange={mockChangeFunction} testID="testSwitch" />
 			</Provider>
 		);
-		fireEvent(getByRole("switch"), "onValueChange");
-		fireEvent(getByRole("switch"), "onValueChange");
+		fireEvent(getByTestId("testSwitch"), "onValueChange");
+		fireEvent(getByTestId("testSwitch"), "onValueChange");
 		expect(mockChangeFunction).toHaveBeenCalled();
 		expect(mockChangeFunction).toHaveBeenCalledTimes(2);
 	});

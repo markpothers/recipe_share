@@ -83,7 +83,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
           pagingEnabled={true}
           removeClippedSubviews={false}
           renderItem={[Function]}
-          scrollEventThrottle={50}
+          scrollEventThrottle={0.0001}
           stickyHeaderIndices={[]}
           style={
             {
@@ -904,7 +904,7 @@ exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should l
           pagingEnabled={true}
           removeClippedSubviews={false}
           renderItem={[Function]}
-          scrollEventThrottle={50}
+          scrollEventThrottle={0.0001}
           stickyHeaderIndices={[]}
           style={
             {

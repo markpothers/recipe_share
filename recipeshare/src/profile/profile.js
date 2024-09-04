@@ -14,12 +14,12 @@ import { destroyChef } from "../fetches/destroyChef";
 import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 import OfflineMessage from "../offlineMessage/offlineMessage";
-import NetInfo from "@react-native-community/netinfo";
-NetInfo.configure({ reachabilityShortTimeout: 5 }); //5ms
+import NetInfo from "@react-native-community/netinfo"; //5ms
 import { AlertPopup } from "../alertPopup/alertPopup";
 import DynamicMenu from "../dynamicMenu/DynamicMenu";
 import AppHeaderRight from "../../navigation/appHeaderRight";
 import { storeChefDetails, storeNewFollowers, updateNewUserDetails } from "../redux";
+NetInfo.configure({ reachabilityShortTimeout: 5 });
 
 const mapStateToProps = (state) => ({
 	loggedInChef: state.root.loggedInChef,

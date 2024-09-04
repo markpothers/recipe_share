@@ -1,12 +1,12 @@
-import React from 'react'
-import { Text, Image, View, TextInput, TouchableOpacity } from 'react-native'
-import { styles } from './usersStyleSheet'
-import { centralStyles } from '../centralStyleSheet' //eslint-disable-line no-unused-vars
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import SpinachAppContainer from './spinachAppContainer/SpinachAppContainer'
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions'; //eslint-disable-line no-unused-vars
-import SwitchSized from '../customComponents/switchSized/switchSized'
-import { apiCall } from '../auxFunctions/apiCall'
+import React from "react"
+import { Text, Image, View, TextInput, TouchableOpacity } from "react-native"
+import { styles } from "./usersStyleSheet"
+import { centralStyles } from "../centralStyleSheet" //eslint-disable-line no-unused-vars
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import SpinachAppContainer from "./spinachAppContainer/SpinachAppContainer"
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+import SwitchSized from "../customComponents/switchSized/switchSized"
+import { apiCall } from "../auxFunctions/apiCall"
 
 export default class Templates extends React.Component {
 	static navigationOptions = {
@@ -14,9 +14,9 @@ export default class Templates extends React.Component {
 	};
 
 	state = {
-		loginError: 'Invalid credentials',
+		loginError: "Invalid credentials",
 		awaitingServer: false,
-		forgottenPasswordMessage: ''
+		forgottenPasswordMessage: ""
 	}
 
 	handleTextInput = (e, parameter) => {
@@ -46,7 +46,7 @@ export default class Templates extends React.Component {
 			<SpinachAppContainer awaitingServer={this.state.awaitingServer} scrollingEnabled={true}>
 				{/* logo   */}
 				<View style={styles.logoContainer}>
-					<Image style={styles.logo} resizeMode={"contain"} source={require('../dataComponents/yellowLogo.png')} />
+					<Image style={styles.logo} resizeMode={"contain"} source={require("../dataComponents/yellowLogo.png")} />
 				</View>
 
 				{/* form */}
@@ -64,7 +64,7 @@ export default class Templates extends React.Component {
 						<View style={centralStyles.formInputContainer}>
 							<TextInput style={centralStyles.formInput} value={this.props.e_mail} placeholder="e-mail" keyboardType="email-address" autoCapitalize="none" onChange={(e) => this.handleTextInput(e, "e_mail")} />
 						</View>
-						{this.state.loginError !== '' && (
+						{this.state.loginError !== "" && (
 							<View style={centralStyles.formErrorView}>
 								<Text style={centralStyles.formErrorText}>{this.state.loginError}</Text>
 							</View>
@@ -81,7 +81,7 @@ export default class Templates extends React.Component {
 					{/* row with 1 full width button */}
 					<View style={centralStyles.formSection}>
 						<View style={centralStyles.formInputContainer}>
-							<TouchableOpacity style={[centralStyles.yellowRectangleButton, { width: '100%' }]} activeOpacity={0.7} onPress={this.choosePicture}>
+							<TouchableOpacity style={[centralStyles.yellowRectangleButton, { width: "100%" }]} activeOpacity={0.7} onPress={this.choosePicture}>
 								<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='camera'></Icon>
 								<Text style={centralStyles.greenButtonText}>Add profile picture</Text>
 							</TouchableOpacity>
@@ -105,7 +105,7 @@ export default class Templates extends React.Component {
 					{/* row with a button and a switch*/}
 					<View style={centralStyles.formSection}>
 						<View style={centralStyles.formInputContainer}>
-							<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={() => this.props.navigation.navigate('CreateChef')}>
+							<TouchableOpacity style={centralStyles.yellowRectangleButton} activeOpacity={0.7} onPress={() => this.props.navigation.navigate("CreateChef")}>
 								<Icon style={centralStyles.greenButtonIcon} size={responsiveHeight(4)} name='account-plus'></Icon>
 								<Text style={centralStyles.greenButtonText}>Register</Text>
 							</TouchableOpacity>
@@ -124,7 +124,7 @@ export default class Templates extends React.Component {
 						<View style={centralStyles.formInputContainer}>
 							<TouchableOpacity style={{ width: responsiveWidth(49) }} activeOpacity={0.7} onPress={() => this.setState({ viewingTermsAndConditions: true })}>
 								<View style={centralStyles.formTextBoxContainer}>
-									<Text style={centralStyles.formTextBox}>{`View Terms & Conditions`}</Text>
+									<Text style={centralStyles.formTextBox}>{"View Terms & Conditions"}</Text>
 								</View>
 							</TouchableOpacity>
 							<View style={[centralStyles.yellowRectangleButton, { width: responsiveWidth(30) }]}>
