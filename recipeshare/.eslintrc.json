@@ -24,7 +24,7 @@
 		}
 	},
 	"extends": [
-		// "expo",
+		// "expo", // this one has a rule that is depracated. Once updated with fix, it can be used again
 		"eslint:recommended",
 		"plugin:react/recommended",
 		"plugin:@typescript-eslint/eslint-recommended",
