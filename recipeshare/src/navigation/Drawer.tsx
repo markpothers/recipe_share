@@ -7,10 +7,10 @@ import { responsiveFontSize, responsiveHeight } from "react-native-responsive-di
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { deleteToken } from "../src/auxFunctions/saveLoadToken";
-import { getLoggedInChef } from "../src/redux";
+import { deleteToken } from "../auxFunctions/saveLoadToken";
+import { getLoggedInChef } from "../redux";
 import { styles } from "./drawerStyleSheet";
-import { useAppSelector } from "../src/redux/hooks";
+import { useAppSelector } from "../redux/hooks";
 
 type OwnProps = {
 	setLoadedAndLoggedIn: (args: { loaded: boolean; loggedIn: boolean }) => void;
@@ -55,7 +55,7 @@ const CustomDrawer = (props: OwnProps & DrawerContentComponentProps) => {
 						<Image
 							style={styles.logo}
 							resizeMode="contain"
-							source={require("../assets/images/greenLogo.png")}
+							source={require("../../assets/images/greenLogo.png")}
 						/>
 					</View>
 				</View>
@@ -172,7 +172,7 @@ const CustomDrawer = (props: OwnProps & DrawerContentComponentProps) => {
 function AvatarImage(props) {
 	const URL = props.image_url;
 	if (!URL) {
-		return <Image style={styles.avatarThumbnail} source={require("../assets/images/default-chef.jpg")} />;
+		return <Image style={styles.avatarThumbnail} source={require("../../assets/images/default-chef.jpg")} />;
 	} else {
 		return <Image style={styles.avatarThumbnail} source={{ uri: URL }} />;
 	}

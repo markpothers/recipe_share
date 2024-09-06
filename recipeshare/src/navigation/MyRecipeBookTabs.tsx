@@ -1,14 +1,14 @@
-import React from "react";
-import RecipesList from "../src/recipeLists/RecipesList";
-import ChefList from "../src/chefLists/ChefList";
 import {
 	ChefsFollowingMeTabProps,
 	ChefsIFollowTabProps,
 	MyFeedTabProps,
 	MyRecipesTabProps,
 	RecipesILikeTabProps,
-	// RecipesIMadeTabProps,
 } from "./types";
+
+import ChefList from "../chefLists/ChefList";
+import React from "react";
+import RecipesList from "../recipeLists/RecipesList";
 
 export const ChefFeedScreen = (props: MyFeedTabProps) => {
 	return <RecipesList {...props} listChoice={"chef_feed"} />;
@@ -23,7 +23,7 @@ export const MyLikedRecipesScreen = (props: RecipesILikeTabProps) => {
 };
 
 // export const MyMadeRecipesScreen = (props: RecipesIMadeTabProps) => {
-	// return <RecipesList {...props} listChoice={"chef_made"} />;
+// return <RecipesList {...props} listChoice={"chef_made"} />;
 // };
 
 export const ChefsFollowedScreen = (props: ChefsIFollowTabProps) => {

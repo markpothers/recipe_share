@@ -3,7 +3,7 @@ import { loadLocalRecipeLists, saveRecipeListsLocally } from "../auxFunctions/sa
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 import { storeChefDetails, storeRecipeDetails, updateAllRecipeLists, updateSingleRecipeList } from "../redux";
 
-import AppHeader from "../../navigation/appHeader";
+import AppHeader from "../navigation/appHeader";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import FilterMenu from "../filterMenu/filterMenu";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";

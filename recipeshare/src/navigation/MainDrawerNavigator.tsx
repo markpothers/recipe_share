@@ -1,15 +1,15 @@
-import React from "react";
 import BrowseRecipesStack from "./BrowseRecipesNavigator";
+import CustomDrawer from "./Drawer";
+import { MainDrawerParamList } from "./types";
 import MyRecipeBookStack from "./MyRecipeBookNavigator";
 import ProfileStack from "./ProfileNavigator";
-import CustomDrawer from "./Drawer";
+import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { MainDrawerParamList } from "./types";
 
 const Drawer = createDrawerNavigator<MainDrawerParamList>();
 
 type OwnProps = {
-	setLoadedAndLoggedIn: (args: {loaded: boolean, loggedIn: boolean}) => void;
+	setLoadedAndLoggedIn: (args: { loaded: boolean; loggedIn: boolean }) => void;
 };
 
 export default function MainDrawerNavigator(props: OwnProps) {

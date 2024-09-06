@@ -4,7 +4,7 @@ import { AppState, NativeEventSubscription, ScrollView } from "react-native";
 import { HeaderButton, InstructionImage, MakePic, MakePicChef } from "../../centralTypes";
 import NetInfo, { NetInfoState } from "@react-native-community/netinfo";
 import React, { useCallback, useEffect, useRef } from "react";
-import { RecipeDetailsNavigationProps, RecipeDetailsRouteProps } from "../../../navigation";
+import { RecipeDetailsNavigationProps, RecipeDetailsRouteProps } from "../../navigation";
 import { activateKeepAwakeAsync, deactivateKeepAwake } from "expo-keep-awake";
 import {
 	addMakePic,
@@ -23,7 +23,7 @@ import {
 } from "../../redux";
 import { getAllRecipeLists, getLoggedInChef, getRecipeDetails } from "../../redux/selectors";
 
-import AppHeaderRight from "../../../navigation/appHeaderRight";
+import AppHeaderRight from "../../navigation/appHeaderRight";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { destroyComment } from "../../fetches/destroyComment";
 import { destroyMakePic } from "../../fetches/destroyMakePic";

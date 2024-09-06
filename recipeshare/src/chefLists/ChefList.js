@@ -1,24 +1,26 @@
-import React from "react";
-import { FlatList, Animated, TouchableOpacity, Keyboard, Platform, View, Text, RefreshControl } from "react-native";
+import { Animated, FlatList, Keyboard, Platform, RefreshControl, Text, TouchableOpacity, View } from "react-native";
+import { loadLocalChefLists, saveChefListsLocally } from "../auxFunctions/saveChefListsLocally";
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+import { storeChefDetails, updateAllChefLists, updateSingleChefList } from "../redux";
+
+import AppHeader from "../navigation/appHeader";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import ChefCard from "./ChefCard";
-import { connect } from "react-redux";
-import { getChefList } from "../fetches/getChefList";
-import { postFollow } from "../fetches/postFollow";
-import { destroyFollow } from "../fetches/destroyFollow";
-import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
-import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
-import { saveChefListsLocally, loadLocalChefLists } from "../auxFunctions/saveChefListsLocally";
-import saveChefDetailsLocally from "../auxFunctions/saveChefDetailsLocally";
-import { getChefDetails } from "../fetches/getChefDetails";
-import OfflineMessage from "../offlineMessage/offlineMessage";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import NetInfo from "@react-native-community/netinfo"; //5ms
+import OfflineMessage from "../offlineMessage/offlineMessage";
+import React from "react";
 import SearchBar from "../searchBar/SearchBar";
 import SearchBarClearButton from "../searchBar/SearchBarClearButton";
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
-import AppHeader from "../../navigation/appHeader";
-import { storeChefDetails, updateAllChefLists, updateSingleChefList } from "../redux";
+import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
+import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
+import { connect } from "react-redux";
+import { destroyFollow } from "../fetches/destroyFollow";
+import { getChefDetails } from "../fetches/getChefDetails";
+import { getChefList } from "../fetches/getChefList";
+import { postFollow } from "../fetches/postFollow";
+import saveChefDetailsLocally from "../auxFunctions/saveChefDetailsLocally";
+
 NetInfo.configure({ reachabilityShortTimeout: 5 });
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
@@ -33,7 +35,7 @@ const mapDispatchToProps = {
 	updateSingleChefList: (listKey, chefList) => {
 		return (dispatch) => {
 			// dispatch({ type: "UPDATE_SINGLE_CHEF_LIST", listKey: listKey, chefList: chefList });
-			dispatch(updateSingleChefList({listKey: listKey, chefList: chefList }));
+			dispatch(updateSingleChefList({ listKey: listKey, chefList: chefList }));
 		};
 	},
 	updateAllChefLists: (allChefLists) => {
@@ -224,7 +226,7 @@ export default connect(
 			Object.keys(this.props.allChefLists).forEach((list) => {
 				let chefList = this.props.allChefLists[list].map((chef) => {
 					if (chef.id == chefId) {
-						const newChef = { ...chef }
+						const newChef = { ...chef };
 						newChef[attribute] += diff;
 						newChef[toggle] = diff > 0 ? 1 : 0;
 						return newChef;
@@ -252,7 +254,10 @@ export default connect(
 						}
 					} catch (e) {
 						if (e.name === "Logout") {
-							this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
+							this.props.navigation.navigate("ProfileCover", {
+								screen: "Profile",
+								params: { logout: true },
+							});
 						}
 						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e });
 					}
@@ -278,7 +283,10 @@ export default connect(
 						}
 					} catch (e) {
 						if (e.name === "Logout") {
-							this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
+							this.props.navigation.navigate("ProfileCover", {
+								screen: "Profile",
+								params: { logout: true },
+							});
 						}
 						this.setState({ renderOfflineMessage: true, offlineDiagnostics: e });
 					}

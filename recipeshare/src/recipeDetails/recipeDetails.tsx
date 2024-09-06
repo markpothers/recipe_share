@@ -10,7 +10,7 @@ import {
 	View,
 } from "react-native";
 import { InstructionImage, MakePic, RecipeImage } from "../centralTypes";
-import { RecipeDetailsNavigationProps, RecipeDetailsRouteProps } from "../../navigation";
+import { RecipeDetailsNavigationProps, RecipeDetailsRouteProps } from "../navigation";
 import { responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
 import { AlertPopup } from "../alertPopup/alertPopup";

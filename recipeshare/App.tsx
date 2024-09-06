@@ -6,7 +6,7 @@ import { LogBox, Platform, StyleSheet } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
-import AppNavigator from "./navigation/AppNavigator";
+import AppNavigator from "./src/navigation/AppNavigator";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
 import { StatusBar } from "expo-status-bar";

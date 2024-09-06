@@ -1,9 +1,10 @@
-import React from "react";
-import { View, TouchableHighlight } from "react-native";
+import { TouchableHighlight, View } from "react-native";
+
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { centralStyles } from "../src/centralStyleSheet"; //eslint-disable-line no-unused-vars
-import { styles } from "./navigationStyleSheet";
+import React from "react";
+import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+import { styles } from "./navigationStyleSheet";
 
 type OwnProps = {
 	buttonAction: (setDynamicMenuShowing: boolean) => void;

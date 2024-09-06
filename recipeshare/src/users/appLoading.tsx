@@ -1,6 +1,6 @@
 import * as Device from "expo-device";
 
-import { AppLoadingNavigationProps, AppLoadingRouteProps } from "../../navigation";
+import { AppLoadingNavigationProps, AppLoadingRouteProps } from "../navigation";
 import { Image, ImageBackground, View } from "react-native";
 import React, { useCallback, useEffect } from "react";
 import { stayLoggedIn, updateLoggedInChef, useAppDispatch } from "../redux";

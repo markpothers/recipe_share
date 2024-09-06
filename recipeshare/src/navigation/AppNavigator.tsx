@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { StackScreenProps, createStackNavigator } from "@react-navigation/stack";
 
-import AppLoading from "../src/users/appLoading";
-import CreateChef from "../src/users/createChef";
-import LoginScreen from "../src/users/login";
+import AppLoading from "../users/appLoading";
+import CreateChef from "../users/createChef";
+import LoginScreen from "../users/login";
 import MainDrawerNavigator from "./MainDrawerNavigator";
 
 // import MainDrawerNavigatorContainer from "./MainDrawerNavigatorContainer";
-
 
 //AppNavigator
 export type AppNavigatorParamList = {

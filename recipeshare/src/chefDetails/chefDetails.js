@@ -1,7 +1,7 @@
 import { Image, ScrollView, View } from "react-native";
 import { clearChefDetails, storeChefDetails, storeNewFollowers, updateAllChefLists } from "../redux";
 
-import AppHeaderRight from "../../navigation/appHeaderRight";
+import AppHeaderRight from "../navigation/appHeaderRight";
 import ChefDetailsCard from "./ChefDetailsCard";
 import { ChefRecipeBookTabs } from "./ChefDetailsNavigators";
 import DynamicMenu from "../dynamicMenu/DynamicMenu";
@@ -104,7 +104,12 @@ export default connect(
 		addDynamicMenuButtonsToHeader = () => {
 			this.props.navigation.setOptions({
 				headerRight: Object.assign(
-					() => <AppHeaderRight buttonAction={() => this.setState({ dynamicMenuShowing: true })} accessibilityLabel={"Open action menu"} />,
+					() => (
+						<AppHeaderRight
+							buttonAction={() => this.setState({ dynamicMenuShowing: true })}
+							accessibilityLabel={"Open action menu"}
+						/>
+					),
 					{ displayName: "HeaderRight" }
 				),
 			});

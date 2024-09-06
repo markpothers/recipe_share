@@ -1,17 +1,18 @@
-import React from "react";
-import Profile from "../src/profile/profile";
+import { ProfileCoverProps, ProfileStackParamList } from "./types";
+
+import About from "../about/about";
 import AppHeader from "./appHeader";
+import AppHeaderLeft from "./appHeaderLeft";
+import NewRecipeScreen from "../newRecipe/newRecipe";
+import Profile from "../profile/profile";
+import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { responsiveHeight } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
-import NewRecipeScreen from "../src/newRecipe/newRecipe";
-import About from "../src/about/about";
-import AppHeaderLeft from "./appHeaderLeft";
-import { ProfileCoverProps, ProfileStackParamList } from "./types";
 
 const Stack = createStackNavigator<ProfileStackParamList>();
 
 type OwnProps = {
-	setLoadedAndLoggedIn: (args: {loaded: boolean, loggedIn: boolean}) => void;
+	setLoadedAndLoggedIn: (args: { loaded: boolean; loggedIn: boolean }) => void;
 };
 
 const ProfileStack = (props: ProfileCoverProps & OwnProps) => {

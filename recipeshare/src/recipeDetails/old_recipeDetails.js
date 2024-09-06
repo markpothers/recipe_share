@@ -27,7 +27,7 @@ import {
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
 import { AlertPopup } from "../alertPopup/alertPopup";
-import AppHeaderRight from "../../navigation/appHeaderRight";
+import AppHeaderRight from "../navigation/appHeaderRight";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import DynamicMenu from "../dynamicMenu/DynamicMenu";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";

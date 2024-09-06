@@ -23,7 +23,7 @@ import IngredientAutoComplete from "./ingredientAutoComplete";
 import { InstructionRow } from "./components/instructionRow";
 import MultiPicSourceChooser from "../picSourceChooser/multiPicSourceChooser";
 import NetInfo from "@react-native-community/netinfo";
-import { NewRecipeProps } from "../../navigation";
+import { NewRecipeProps } from "../navigation";
 import OfflineMessage from "../offlineMessage/offlineMessage";
 import PicSourceChooser from "../picSourceChooser/picSourceChooser";
 import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";

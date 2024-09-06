@@ -1,12 +1,12 @@
 import * as ImagePicker from "expo-image-picker";
 
 import { Ingredient, NewRecipe, RecipeImage, RecipeIngredient, Unit } from "../../centralTypes";
-import { NewRecipeNavigationProps, NewRecipeRouteProps } from "../../../navigation";
+import { NewRecipeNavigationProps, NewRecipeRouteProps } from "../../navigation";
 import React, { useCallback, useEffect, useState } from "react";
 import { getLoggedInChef, useAppSelector } from "../../redux";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
-import AppHeader from "../../../navigation/appHeader";
+import AppHeader from "../../navigation/appHeader";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Keyboard } from "react-native";
 import NetInfo from "@react-native-community/netinfo";

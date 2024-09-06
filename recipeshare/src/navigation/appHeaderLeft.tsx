@@ -1,9 +1,3 @@
-import React from "react";
-import { View, TouchableHighlight } from "react-native";
-import { styles } from "./navigationStyleSheet";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { useNavigation } from "@react-navigation/native";
-import { responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 import {
 	AboutRouteProps,
 	BrowseRecipesRouteProps,
@@ -14,7 +8,14 @@ import {
 	ProfileRouteProps,
 	RecipeDetailsRouteProps,
 } from "./types";
+import { TouchableHighlight, View } from "react-native";
+
 import type { HeaderBackButtonProps } from "@react-navigation/elements";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import React from "react";
+import { responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+import { styles } from "./navigationStyleSheet";
+import { useNavigation } from "@react-navigation/native";
 
 type OwnProps = {
 	route:

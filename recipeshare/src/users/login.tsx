@@ -1,5 +1,5 @@
 import { Image, Keyboard, Text, TextInput, TouchableOpacity, View } from "react-native";
-import { LoginNavigationProps, LoginRouteProps } from "../../navigation";
+import { LoginNavigationProps, LoginRouteProps } from "../navigation";
 import React, { useCallback, useEffect, useState } from "react";
 import {
 	clearLoginUserDetails,

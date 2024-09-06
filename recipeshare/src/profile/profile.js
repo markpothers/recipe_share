@@ -1,24 +1,37 @@
-import React from "react";
-import { connect } from "react-redux";
-import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+import { storeChefDetails, storeNewFollowers, updateNewUserDetails } from "../redux";
+
+import { AlertPopup } from "../alertPopup/alertPopup";
+import AppHeaderRight from "../navigation/appHeaderRight";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { deleteToken } from "../auxFunctions/saveLoadToken";
 import ChefDetailsCard from "../chefDetails/ChefDetailsCard";
-import { getChefDetails } from "../fetches/getChefDetails";
 import ChefEditor from "./chefEditor";
+import DeleteChefOption from "./deleteChefOption";
+import DynamicMenu from "../dynamicMenu/DynamicMenu";
+import NetInfo from "@react-native-community/netinfo"; //5ms
+import OfflineMessage from "../offlineMessage/offlineMessage";
+import PicSourceChooser from "../picSourceChooser/picSourceChooser";
+import React from "react";
+import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
+import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
+import { connect } from "react-redux";
+import { deleteToken } from "../auxFunctions/saveLoadToken";
+import { destroyChef } from "../fetches/destroyChef";
+import { getChefDetails } from "../fetches/getChefDetails";
+
 // import { getDatabaseBackup } from '../fetches/getDatabaseBackup'
 // import { getDatabaseRestore } from '../fetches/getDatabaseRestore'
-import DeleteChefOption from "./deleteChefOption";
-import PicSourceChooser from "../picSourceChooser/picSourceChooser";
-import { destroyChef } from "../fetches/destroyChef";
-import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
-import OfflineMessage from "../offlineMessage/offlineMessage";
-import NetInfo from "@react-native-community/netinfo"; //5ms
-import { AlertPopup } from "../alertPopup/alertPopup";
-import DynamicMenu from "../dynamicMenu/DynamicMenu";
-import AppHeaderRight from "../../navigation/appHeaderRight";
-import { storeChefDetails, storeNewFollowers, updateNewUserDetails } from "../redux";
+
+
+
+
+
+
+
+
+
+
+
 NetInfo.configure({ reachabilityShortTimeout: 5 });
 
 const mapStateToProps = (state) => ({

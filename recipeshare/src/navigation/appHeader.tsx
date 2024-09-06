@@ -9,9 +9,9 @@ import { styles } from "./navigationStyleSheet";
 type OwnProps = {
 	buttonAction?: () => void;
 	text: string;
-}
+};
 
-const AppHeader = ({buttonAction, text}: OwnProps) => {
+const AppHeader = ({ buttonAction, text }: OwnProps) => {
 	return (
 		<View style={styles.headerMiddle}>
 			<TouchableHighlight
