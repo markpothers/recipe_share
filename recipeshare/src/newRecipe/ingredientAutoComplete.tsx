@@ -7,7 +7,7 @@ import DualOSPicker from "../dualOSPicker/DualOSPicker";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import React from "react";
 import { styles } from "./newRecipeStyleSheet";
-import { units } from "../dataComponents/units";
+import { units } from "../constants/units";
 
 type OwnProps = {
 	ingredient: RecipeIngredient;

@@ -1,6 +1,8 @@
-import { Difficulty, FilterSettings, RecipeIngredient, Cuisine, Serves, Recipe, Instruction } from "../centralTypes"
-import { databaseURL } from "../dataComponents/databaseURL"
-import { submitTimeout } from "../dataComponents/timeouts"
+import { Cuisine, Difficulty, FilterSettings, Instruction, Recipe, RecipeIngredient, Serves } from "../centralTypes";
+
+import { databaseURL } from "../constants/databaseURL";
+import { submitTimeout } from "../constants/timeouts";
+
 // import { getBase64FromFile } from '../auxFunctions/getBase64FromFile'
 
 export const postRecipe = async (
@@ -22,7 +24,7 @@ export const postRecipe = async (
 	acknowledgementLink: string,
 	description: string,
 	showBlogPreview: boolean
-): Promise<Recipe & { instructions: Instruction[] } | { error: boolean; message: string[] }> => {
+): Promise<(Recipe & { instructions: Instruction[] }) | { error: boolean; message: string[] }> => {
 	// let primaryImagesForRails = await Promise.all(primaryImages.map(async (image, index) => {
 	// 	if (image.uri) {
 	// 		return {
@@ -54,8 +56,8 @@ export const postRecipe = async (
 
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
-			reject({ name: "Timeout" })
-		}, submitTimeout)
+			reject({ name: "Timeout" });
+		}, submitTimeout);
 
 		// had to add this validation in here because doing it in rails doesn't work
 		// you end up rejecting everything because you don't save instructions and ingredients
@@ -66,8 +68,8 @@ export const postRecipe = async (
 				message: [
 					"If not showing blog preview, a recipe must contain at least one ingredient and one instruction step. Add one of each or check 'Show blog preview'.",
 				],
-			})
-			return
+			});
+			return;
 		}
 
 		fetch(`${databaseURL}/recipes`, {
@@ -101,15 +103,15 @@ export const postRecipe = async (
 			.then((res) => res.json())
 			.then((recipe) => {
 				if (recipe.error && recipe.message == "Invalid authentication") {
-					reject({ name: "Logout" })
+					reject({ name: "Logout" });
 				}
 				if (recipe) {
 					// console.log(recipe)
-					resolve(recipe)
+					resolve(recipe);
 				}
 			})
 			.catch((e) => {
-				reject(e)
-			})
-	})
-}
+				reject(e);
+			});
+	});
+};

@@ -1,21 +1,23 @@
-import React from "react";
-import { Text, TouchableOpacity, TextInput, View, Linking, Keyboard } from "react-native";
-import { countries } from "../dataComponents/countries";
-import { connect } from "react-redux";
-import { postChef } from "../fetches/postChef";
-import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import PicSourceChooser from "../picSourceChooser/picSourceChooser"
-import { TextPopUp } from "../textPopUp/textPopUp";
-import DualOSPicker from "../dualOSPicker/DualOSPicker";
-import { termsAndConditions } from "../dataComponents/termsAndConditions";
-import { privacyPolicy } from "../dataComponents/privacyPolicy";
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
-import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
-import OfflineMessage from "../offlineMessage/offlineMessage";
-import SwitchSized from "../customComponents/switchSized/switchSized";
-// import { apiCall } from "../auxFunctions/apiCall";
+import { Keyboard, Linking, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { RootState, updateLoginUserDetails, updateNewUserDetails } from "../redux";
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+
+import DualOSPicker from "../dualOSPicker/DualOSPicker";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import OfflineMessage from "../offlineMessage/offlineMessage";
+import PicSourceChooser from "../picSourceChooser/picSourceChooser";
+import React from "react";
+import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
+import SwitchSized from "../customComponents/switchSized/switchSized";
+import { TextPopUp } from "../textPopUp/textPopUp";
+import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
+import { connect } from "react-redux";
+import { countries } from "../constants/countries";
+import { postChef } from "../fetches/postChef";
+import { privacyPolicy } from "../constants/privacyPolicy";
+import { termsAndConditions } from "../constants/termsAndConditions";
+
+// import { apiCall } from "../auxFunctions/apiCall";
 
 const mapStateToProps = (state) => ({
 	first_name: state.root.newUserDetails.first_name,
@@ -94,7 +96,7 @@ export default connect(
 		};
 
 		renderPictureChooser = () => {
-			const imageSource = this.props.image_url
+			const imageSource = this.props.image_url;
 			return (
 				<PicSourceChooser
 					saveImage={this.saveImage}
@@ -104,7 +106,7 @@ export default connect(
 					// originalImage={this.props.image_url} refactored to remove
 					cancelChooseImage={this.cancelChooseImage}
 				/>
-			)
+			);
 		};
 
 		saveImage = async (image) => {

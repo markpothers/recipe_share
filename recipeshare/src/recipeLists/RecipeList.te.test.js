@@ -1,28 +1,29 @@
-import React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react-native";
-import { Provider } from "react-redux";
-import { recipeList } from "../../__mocks__/data/recipeList";
-import { recipeDetails } from "../../__mocks__/data/recipeDetails";
-import { chefDetails } from "../../__mocks__/data/chefDetails";
-import RecipesList from "./RecipesList";
-import { getAvailableFilters } from "../fetches/getAvailableFilters";
-import { getRecipeList } from "../fetches/getRecipeList";
-import { postRecipeLike } from "../fetches/postRecipeLike";
-import { postReShare } from "../fetches/postReShare";
-import { destroyRecipeLike } from "../fetches/destroyRecipeLike";
-import { destroyReShare } from "../fetches/destroyReShare";
-import { getRecipeDetails } from "../fetches/getRecipeDetails";
-import { getChefDetails } from "../fetches/getChefDetails";
-import { cuisines } from "../dataComponents/cuisines";
-import { serves } from "../dataComponents/serves";
-import NetInfo from "@react-native-community/netinfo";
-import { configureStore } from "@reduxjs/toolkit";
+import { fireEvent, render, waitFor } from "@testing-library/react-native";
+import { loadLocalRecipeLists, saveRecipeListsLocally } from "../auxFunctions/saveRecipeListsLocally";
 import { rootReducer, updateLoggedInChef } from "../redux";
-import { clearedFilters } from "../../__mocks__/data/clearedFilters";
-import { saveRecipeListsLocally, loadLocalRecipeLists } from "../auxFunctions/saveRecipeListsLocally";
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { filters } from "../../__mocks__/data/filters";
+import NetInfo from "@react-native-community/netinfo";
+import { Provider } from "react-redux";
+import React from "react";
+import RecipesList from "./RecipesList";
 import { act } from "react-dom/test-utils";
+import { chefDetails } from "../../__mocks__/data/chefDetails";
+import { clearedFilters } from "../../__mocks__/data/clearedFilters";
+import { configureStore } from "@reduxjs/toolkit";
+import { cuisines } from "../constants/cuisines";
+import { destroyReShare } from "../fetches/destroyReShare";
+import { destroyRecipeLike } from "../fetches/destroyRecipeLike";
+import { filters } from "../../__mocks__/data/filters";
+import { getAvailableFilters } from "../fetches/getAvailableFilters";
+import { getChefDetails } from "../fetches/getChefDetails";
+import { getRecipeDetails } from "../fetches/getRecipeDetails";
+import { getRecipeList } from "../fetches/getRecipeList";
+import { postReShare } from "../fetches/postReShare";
+import { postRecipeLike } from "../fetches/postRecipeLike";
+import { recipeDetails } from "../../__mocks__/data/recipeDetails";
+import { recipeList } from "../../__mocks__/data/recipeList";
+import { serves } from "../constants/serves";
 
 // manual mocks
 jest.mock("../auxFunctions/apiCall");
@@ -746,7 +747,7 @@ describe("Recipe List", () => {
 					serves,
 					filterOptions: clearedFilters,
 				});
-			const { queryAllByTestId, getByPlaceholderText, queryAllByLabelText } = await waitFor(async() =>
+			const { queryAllByTestId, getByPlaceholderText, queryAllByLabelText } = await waitFor(async () =>
 				render(
 					<Provider store={store}>
 						<RecipesList navigation={navigation} route={route} listChoice={"all"} />
@@ -755,12 +756,12 @@ describe("Recipe List", () => {
 			);
 			await waitFor(() => expect(queryAllByTestId("activityIndicator").length).toEqual(0));
 			expect(getByPlaceholderText("Search for Recipes")).toBeTruthy();
-			await waitFor(async() => fireEvent.changeText(getByPlaceholderText("Search for Recipes"), "chi"));
+			await waitFor(async () => fireEvent.changeText(getByPlaceholderText("Search for Recipes"), "chi"));
 			expect(getRecipeList).toHaveBeenCalledTimes(2);
 			expect(queryAllByTestId("recipeCard").length).toEqual(chiRecipes.length);
 
 			// act
-			await waitFor(async() => fireEvent.press(queryAllByLabelText("clear search text")[0]));
+			await waitFor(async () => fireEvent.press(queryAllByLabelText("clear search text")[0]));
 
 			// assert
 			expect(getRecipeList).toHaveBeenCalledTimes(3);

@@ -36,7 +36,7 @@ import { useRecipeDetailsModel } from "./hooks/useRecipeDetailsModel";
 NetInfo.configure({ reachabilityShortTimeout: 5 }); //5ms
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const defaultRecipeImage = require("../dataComponents/default-recipe.jpg");
+const defaultRecipeImage = require("../../assets/images/default-recipe.jpg");
 
 type OwnProps = {
 	navigation: RecipeDetailsNavigationProps;

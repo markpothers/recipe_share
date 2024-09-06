@@ -1,19 +1,26 @@
-import React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react-native";
+import { fireEvent, render, waitFor } from "@testing-library/react-native";
+import { rootReducer, storeRecipeDetails, updateLoggedInChef, updateSingleRecipeList } from "../redux";
+
+import NetInfo from "@react-native-community/netinfo";
 import { Provider } from "react-redux";
-import { recipeList } from "../../__mocks__/data/recipeList";
-import { recipeDetails } from "../../__mocks__/data/recipeDetails";
+import React from "react";
+import RecipeDetails from "./recipeDetails";
 import { chefDetails } from "../../__mocks__/data/chefDetails";
-import { postRecipeLike } from "../fetches/postRecipeLike";
-import { postComment } from "../fetches/postComment";
+import { configureStore } from "@reduxjs/toolkit";
+import { databaseURL } from "../constants/databaseURL";
 import { destroyComment } from "../fetches/destroyComment";
 import { destroyRecipeLike } from "../fetches/destroyRecipeLike";
+import { postComment } from "../fetches/postComment";
+import { postRecipeLike } from "../fetches/postRecipeLike";
+import { recipeDetails } from "../../__mocks__/data/recipeDetails";
+import { recipeList } from "../../__mocks__/data/recipeList";
+
 // import { getChefDetails } from "../fetches/getChefDetails";
-import NetInfo from "@react-native-community/netinfo";
-import { configureStore } from "@reduxjs/toolkit";
-import { rootReducer, updateLoggedInChef, storeRecipeDetails, updateSingleRecipeList } from "../redux";
-import RecipeDetails from "./recipeDetails";
-import { databaseURL } from "../dataComponents/databaseURL";
+
+
+
+
+
 
 // manual mocks
 jest.mock("../auxFunctions/apiCall");
@@ -258,7 +265,7 @@ describe("Recipe Details", () => {
 		});
 
 		test.only("can navigate to Chef", async () => {
-			fetch.mockResolvedValue({json: () => chefDetails[0]});
+			fetch.mockResolvedValue({ json: () => chefDetails[0] });
 			store.dispatch(storeRecipeDetails(recipeDetails[0]));
 			const { getByText } = await waitFor(
 				async () =>
@@ -274,7 +281,7 @@ describe("Recipe Details", () => {
 				headers: { Authorization: "Bearer mockAuthToken", "Content-Type": "application/json" },
 				method: "GET",
 			});
-			await waitFor(()=> expect(mockNavigate).toHaveBeenCalledWith("ChefDetails", { chefID: 1 }));
+			await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith("ChefDetails", { chefID: 1 }));
 		});
 	});
 });

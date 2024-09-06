@@ -1,20 +1,21 @@
-import React from "react";
 import { Image, ScrollView, View } from "react-native";
-import { connect } from "react-redux";
-import { styles } from "./chefDetailsStyleSheet";
-import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
-import { getChefDetails } from "../fetches/getChefDetails";
+import { clearChefDetails, storeChefDetails, storeNewFollowers, updateAllChefLists } from "../redux";
+
+import AppHeaderRight from "../../navigation/appHeaderRight";
 import ChefDetailsCard from "./ChefDetailsCard";
 import { ChefRecipeBookTabs } from "./ChefDetailsNavigators";
-import { postFollow } from "../fetches/postFollow";
-import { destroyFollow } from "../fetches/destroyFollow";
-import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
-import OfflineMessage from "../offlineMessage/offlineMessage";
-import NetInfo from "@react-native-community/netinfo"; //5ms
-
 import DynamicMenu from "../dynamicMenu/DynamicMenu";
-import AppHeaderRight from "../../navigation/appHeaderRight";
-import { clearChefDetails, storeChefDetails, storeNewFollowers, updateAllChefLists } from "../redux";
+import NetInfo from "@react-native-community/netinfo"; //5ms
+import OfflineMessage from "../offlineMessage/offlineMessage";
+import React from "react";
+import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
+import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
+import { connect } from "react-redux";
+import { destroyFollow } from "../fetches/destroyFollow";
+import { getChefDetails } from "../fetches/getChefDetails";
+import { postFollow } from "../fetches/postFollow";
+import { styles } from "./chefDetailsStyleSheet";
+
 NetInfo.configure({ reachabilityShortTimeout: 5 });
 
 const mapStateToProps = (state) => ({
@@ -157,7 +158,7 @@ export default connect(
 					return (
 						<Image
 							style={{ width: "100%", height: "100%" }}
-							source={require("../dataComponents/default-chef.jpg")}
+							source={require("../../assets/images/default-chef.jpg")}
 						></Image>
 					);
 				}

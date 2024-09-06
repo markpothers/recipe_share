@@ -1,14 +1,15 @@
-import React from "react";
-import { Text, View, TouchableOpacity, Platform, Linking, ScrollView } from "react-native";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
-import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
-import { styles } from "./aboutStyleSheet";
-import { termsAndConditions } from "../dataComponents/termsAndConditions";
-import { privacyPolicy } from "../dataComponents/privacyPolicy";
-import { SoftwareLicenses } from "./softwareLicenses";
+import { Linking, Platform, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+
 import Constants from "expo-constants";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import React from "react";
+import { SoftwareLicenses } from "./softwareLicenses";
+import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
+import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
+import { privacyPolicy } from "../constants/privacyPolicy";
+import { styles } from "./aboutStyleSheet";
+import { termsAndConditions } from "../constants/termsAndConditions";
 
 export default class About extends React.Component {
 	scrollView = React.createRef<ScrollView>();

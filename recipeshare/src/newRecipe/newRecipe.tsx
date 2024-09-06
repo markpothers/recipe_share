@@ -10,7 +10,7 @@ import {
 	View,
 } from "react-native";
 import React, { useRef } from "react";
-import { doubleTimes, times } from "../dataComponents/times";
+import { doubleTimes, times } from "../constants/times";
 import { getMinutesFromTimeString, getTimeStringFromMinutes } from "../auxFunctions/getTimeStringFromMinutes";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
@@ -30,11 +30,11 @@ import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
 import SwitchSized from "../customComponents/switchSized/switchSized";
 import { TextPopUp } from "../textPopUp/textPopUp";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
-import { clearedFilters } from "../dataComponents/clearedFilters";
-import { cuisines } from "../dataComponents/cuisines";
-import { difficulties } from "../dataComponents/difficulties";
-import helpTexts from "../dataComponents/helpTexts";
-import { serves } from "../dataComponents/serves";
+import { clearedFilters } from "../constants/clearedFilters";
+import { cuisines } from "../constants/cuisines";
+import { difficulties } from "../constants/difficulties";
+import helpTexts from "../constants/helpTexts";
+import { serves } from "../constants/serves";
 import { styles } from "./newRecipeStyleSheet";
 import { useNewRecipeModel } from "./hooks/useNewRecipeModel";
 

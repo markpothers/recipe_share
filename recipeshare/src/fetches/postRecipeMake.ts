@@ -1,11 +1,11 @@
-import { databaseURL } from "../dataComponents/databaseURL"
-import { actionTimeout } from "../dataComponents/timeouts"
+import { actionTimeout } from "../constants/timeouts";
+import { databaseURL } from "../constants/databaseURL";
 
 export const postRecipeMake = (recipeID: number, chefID: number, auth_token: string): Promise<boolean> => {
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
-			reject({ name: "Timeout" })
-		}, actionTimeout)
+			reject({ name: "Timeout" });
+		}, actionTimeout);
 
 		fetch(`${databaseURL}/recipe_makes`, {
 			method: "POST",
@@ -23,14 +23,14 @@ export const postRecipeMake = (recipeID: number, chefID: number, auth_token: str
 			.then((res) => res.json())
 			.then((make) => {
 				if (make.error && make.message == "Invalid authentication") {
-					reject({ name: "Logout" })
+					reject({ name: "Logout" });
 				}
 				if (make == true) {
-					resolve(make)
+					resolve(make);
 				}
 			})
 			.catch((e) => {
-				reject(e)
-			})
-	})
-}
+				reject(e);
+			});
+	});
+};

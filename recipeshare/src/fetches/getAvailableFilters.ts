@@ -1,7 +1,7 @@
 import type { AvailableFilters, Cuisine, FilterSettings, Serves } from "../centralTypes";
 
-import { databaseURL } from "../dataComponents/databaseURL";
-import { listsTimeout } from "../dataComponents/timeouts";
+import { databaseURL } from "../constants/databaseURL";
+import { listsTimeout } from "../constants/timeouts";
 
 export const getAvailableFilters = (
 	listType: string,
@@ -44,7 +44,7 @@ export const getAvailableFilters = (
 				resolve(result);
 			})
 			.catch((e) => {
-				reject(e)
-			})
-	})
-}
+				reject(e);
+			});
+	});
+};

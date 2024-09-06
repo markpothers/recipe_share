@@ -254,7 +254,7 @@ export default function Login(props: OwnProps) {
 					<Image
 						style={styles.logo}
 						resizeMode={"contain"}
-						source={require("../dataComponents/yellowLogo.png")}
+						source={require("../../assets/images/yellowLogo.png")}
 					/>
 				</View>
 				<View style={[centralStyles.formContainer, { marginTop: responsiveHeight(15) }]}>

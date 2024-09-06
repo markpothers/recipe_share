@@ -4,7 +4,7 @@ import React from "react";
 import { styles } from "../recipeDetailsStyleSheet";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const defaultChefImage = require("../../dataComponents/default-chef.jpg");
+const defaultChefImage = require("../../../assets/images/default-chef.jpg");
 
 type OwnProps = {
 	image_url: string;

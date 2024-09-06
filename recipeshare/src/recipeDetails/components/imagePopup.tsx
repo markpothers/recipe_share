@@ -60,7 +60,7 @@ export function ImagePopup({ chef, imageDetails, close, navigateToChefDetails }:
 function AvatarImage(chefimage_url) {
 	const URL = chefimage_url.chefimage_url;
 	if (!URL) {
-		return <Image style={styles.thumbnail} source={require("../../dataComponents/default-chef.jpg")} />;
+		return <Image style={styles.thumbnail} source={require("../../../assets/images/default-chef.jpg")} />;
 	} else {
 		return <Image style={styles.thumbnail} source={{ uri: URL }} />;
 	}

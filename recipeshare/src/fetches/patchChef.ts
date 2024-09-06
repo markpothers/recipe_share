@@ -1,7 +1,7 @@
-import { databaseURL } from "../dataComponents/databaseURL"
-import { detailsTimeout } from "../dataComponents/timeouts"
-import { getBase64FromFile } from "../auxFunctions/getBase64FromFile"
-import type { LoginChef } from "../centralTypes"
+import type { LoginChef } from "../centralTypes";
+import { databaseURL } from "../constants/databaseURL";
+import { detailsTimeout } from "../constants/timeouts";
+import { getBase64FromFile } from "../auxFunctions/getBase64FromFile";
 
 export const patchChef = async (
 	chefID: number,
@@ -15,12 +15,12 @@ export const patchChef = async (
 	password_confirmation: string,
 	imageFileUri: string
 ): Promise<LoginChef> => {
-	const imageBase64 = imageFileUri === "DELETED" ? imageFileUri : await getBase64FromFile(imageFileUri)
+	const imageBase64 = imageFileUri === "DELETED" ? imageFileUri : await getBase64FromFile(imageFileUri);
 
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
-			reject({ name: "Timeout" })
-		}, detailsTimeout)
+			reject({ name: "Timeout" });
+		}, detailsTimeout);
 
 		fetch(`${databaseURL}/chefs/${chefID}`, {
 			method: "PATCH",
@@ -44,14 +44,14 @@ export const patchChef = async (
 			.then((res) => res.json())
 			.then((chef) => {
 				if (chef.error && chef.message == "Invalid authentication") {
-					reject({ name: "Logout" })
+					reject({ name: "Logout" });
 				}
 				if (chef) {
-					resolve(chef)
+					resolve(chef);
 				}
 			})
 			.catch((e) => {
-				reject(e)
-			})
-	})
-}
+				reject(e);
+			});
+	});
+};

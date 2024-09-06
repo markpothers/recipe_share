@@ -1,7 +1,8 @@
+import { Linking, Platform, Text, TouchableOpacity, View } from "react-native"
+
 import React from "react"
-import { Text, View, Platform, TouchableOpacity, Linking } from "react-native"
 import { responsiveWidth } from "react-native-responsive-dimensions"
-import { softwarePackages } from "../dataComponents/softwarePackages"
+import { softwarePackages } from "../constants/softwarePackages"
 
 export const SoftwareLicenses = () => {
 

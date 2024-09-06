@@ -1,11 +1,11 @@
-import { databaseURL } from "../dataComponents/databaseURL"
-import { actionTimeout } from "../dataComponents/timeouts"
+import { actionTimeout } from "../constants/timeouts";
+import { databaseURL } from "../constants/databaseURL";
 
 export const postRecipeLike = (recipeID: number, chefID: number, auth_token: string): Promise<boolean> => {
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
-			reject({ name: "Timeout" })
-		}, actionTimeout)
+			reject({ name: "Timeout" });
+		}, actionTimeout);
 
 		fetch(`${databaseURL}/recipe_likes`, {
 			method: "POST",
@@ -23,14 +23,14 @@ export const postRecipeLike = (recipeID: number, chefID: number, auth_token: str
 			.then((res) => res.json())
 			.then((like) => {
 				if (like.error && like.message == "Invalid authentication") {
-					reject({ name: "Logout" })
+					reject({ name: "Logout" });
 				}
 				if (like) {
-					resolve(like)
+					resolve(like);
 				}
 			})
 			.catch((e) => {
-				reject(e)
-			})
-	})
-}
+				reject(e);
+			});
+	});
+};

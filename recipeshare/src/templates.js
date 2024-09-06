@@ -1,12 +1,13 @@
-import React from "react"
-import { Text, Image, View, TextInput, TouchableOpacity } from "react-native"
-import { styles } from "./usersStyleSheet"
-import { centralStyles } from "../centralStyleSheet" //eslint-disable-line no-unused-vars
+import { Image, Text, TextInput, TouchableOpacity, View } from "react-native"
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import React from "react"
 import SpinachAppContainer from "./spinachAppContainer/SpinachAppContainer"
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 import SwitchSized from "../customComponents/switchSized/switchSized"
 import { apiCall } from "../auxFunctions/apiCall"
+import { centralStyles } from "../centralStyleSheet" //eslint-disable-line no-unused-vars
+import { styles } from "./usersStyleSheet"
 
 export default class Templates extends React.Component {
 	static navigationOptions = {
@@ -46,7 +47,7 @@ export default class Templates extends React.Component {
 			<SpinachAppContainer awaitingServer={this.state.awaitingServer} scrollingEnabled={true}>
 				{/* logo   */}
 				<View style={styles.logoContainer}>
-					<Image style={styles.logo} resizeMode={"contain"} source={require("../dataComponents/yellowLogo.png")} />
+					<Image style={styles.logo} resizeMode={"contain"} source={require("../assets/images/yellowLogo.png")} />
 				</View>
 
 				{/* form */}

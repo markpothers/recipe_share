@@ -15,9 +15,9 @@ import SearchBar from "../searchBar/SearchBar";
 import SearchBarClearButton from "../searchBar/SearchBarClearButton";
 import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
-import { clearedFilters } from "../dataComponents/clearedFilters";
+import { clearedFilters } from "../constants/clearedFilters";
 import { connect } from "react-redux";
-import { cuisines } from "../dataComponents/cuisines";
+import { cuisines } from "../constants/cuisines";
 import { destroyReShare } from "../fetches/destroyReShare";
 import { destroyRecipeLike } from "../fetches/destroyRecipeLike";
 import { getAvailableFilters } from "../fetches/getAvailableFilters";
@@ -29,7 +29,7 @@ import { postRecipeLike } from "../fetches/postRecipeLike";
 import { postRecipeMake } from "../fetches/postRecipeMake";
 import saveChefDetailsLocally from "../auxFunctions/saveChefDetailsLocally";
 import saveRecipeDetailsLocally from "../auxFunctions/saveRecipeDetailsLocally";
-import { serves } from "../dataComponents/serves";
+import { serves } from "../constants/serves";
 import { styles } from "./recipeListStyleSheet";
 
 NetInfo.configure({ reachabilityShortTimeout: 5 }); //5ms

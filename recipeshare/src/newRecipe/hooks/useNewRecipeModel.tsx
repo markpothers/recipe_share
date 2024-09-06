@@ -10,7 +10,7 @@ import AppHeader from "../../../navigation/appHeader";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Keyboard } from "react-native";
 import NetInfo from "@react-native-community/netinfo";
-import { clearedFilters } from "../../dataComponents/clearedFilters";
+import { clearedFilters } from "../../constants/clearedFilters";
 import { emptyRecipe } from "../recipeTemplates/emptyRecipe";
 import { fetchIngredients } from "../../fetches/fetchIngredients";
 import { getMinutesFromTimeString } from "../../auxFunctions/getTimeStringFromMinutes";

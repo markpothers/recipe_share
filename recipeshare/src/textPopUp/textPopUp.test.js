@@ -3,7 +3,7 @@ import renderer, { act } from "react-test-renderer";
 import React from "react";
 import { TextPopUp } from "./textPopUp";
 import { TouchableOpacity } from "react-native";
-import { termsAndConditions } from "../dataComponents/termsAndConditions";
+import { termsAndConditions } from "../constants/termsAndConditions";
 
 describe("TextPopUp", () => {
 	let component;

@@ -60,7 +60,7 @@ import { styles } from "./recipeDetailsStyleSheet";
 
 NetInfo.configure({ reachabilityShortTimeout: 5 }); //5ms
 
-const defaultRecipeImage = require("../dataComponents/default-recipe.jpg");
+const defaultRecipeImage = require("../../assets/images/default-recipe.jpg");
 
 let keepAwakeTimer;
 

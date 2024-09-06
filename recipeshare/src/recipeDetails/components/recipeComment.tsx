@@ -6,7 +6,7 @@ import { responsiveHeight } from "react-native-responsive-dimensions"; //eslint-
 import { styles } from "../recipeDetailsStyleSheet";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const defaultChefImage = require("../../dataComponents/default-chef.jpg");
+const defaultChefImage = require("../../../assets/images/default-chef.jpg");
 
 type OwnProps = {
 	loggedInChefID: number;

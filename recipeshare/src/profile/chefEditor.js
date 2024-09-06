@@ -1,27 +1,29 @@
-import React from "react";
 import {
-	Modal,
-	Text,
-	View,
-	ScrollView,
 	KeyboardAvoidingView,
-	TouchableOpacity,
-	TextInput,
+	Modal,
 	Platform,
+	ScrollView,
+	Text,
+	TextInput,
+	TouchableOpacity,
+	View,
 } from "react-native";
+import { clearNewUserDetails, updateLoggedInChef, updateNewUserDetails } from "../redux";
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { saveToken } from "../auxFunctions/saveLoadToken";
-import { styles } from "./chefEditorStyleSheet";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { connect } from "react-redux";
-import { countries } from "../dataComponents/countries";
-import { patchChef } from "../fetches/patchChef";
 import DualOSPicker from "../dualOSPicker/DualOSPicker";
-import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import NetInfo from "@react-native-community/netinfo"; //5ms
 import OfflineMessage from "../offlineMessage/offlineMessage";
-import { clearNewUserDetails, updateLoggedInChef, updateNewUserDetails } from "../redux";
+import React from "react";
+import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
+import { connect } from "react-redux";
+import { countries } from "../constants/countries";
+import { patchChef } from "../fetches/patchChef";
+import { saveToken } from "../auxFunctions/saveLoadToken";
+import { styles } from "./chefEditorStyleSheet";
+
 NetInfo.configure({ reachabilityShortTimeout: 5 });
 
 const mapStateToProps = (state) => ({

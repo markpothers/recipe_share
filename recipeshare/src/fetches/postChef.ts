@@ -1,6 +1,6 @@
-import { databaseURL } from "../dataComponents/databaseURL"
-import { detailsTimeout } from "../dataComponents/timeouts"
-import { getBase64FromFile } from "../auxFunctions/getBase64FromFile"
+import { databaseURL } from "../constants/databaseURL";
+import { detailsTimeout } from "../constants/timeouts";
+import { getBase64FromFile } from "../auxFunctions/getBase64FromFile";
 
 export const postChef = async (
 	username: string,
@@ -11,12 +11,12 @@ export const postChef = async (
 	image_url: string,
 	profile_text: String
 ): Promise<boolean> => {
-	const imageBase64 = await getBase64FromFile(image_url)
+	const imageBase64 = await getBase64FromFile(image_url);
 
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
-			reject({ name: "Timeout" })
-		}, detailsTimeout)
+			reject({ name: "Timeout" });
+		}, detailsTimeout);
 
 		fetch(`${databaseURL}/chefs`, {
 			method: "POST",
@@ -38,11 +38,11 @@ export const postChef = async (
 			.then((res) => res.json())
 			.then((chef) => {
 				if (chef) {
-					resolve(chef)
+					resolve(chef);
 				}
 			})
 			.catch((e) => {
-				reject(e)
-			})
-	})
-}
+				reject(e);
+			});
+	});
+};

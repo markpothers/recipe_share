@@ -1,13 +1,15 @@
-import React, { useEffect, useCallback } from "react";
-import { View, ImageBackground, Image } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { loadToken } from "../auxFunctions/saveLoadToken";
-import { styles } from "./usersStyleSheet";
-import { useAppDispatch, stayLoggedIn, updateLoggedInChef } from "../redux";
-import { LoginChef } from "../centralTypes";
 import * as Device from "expo-device";
-import { setDeviceType } from "../redux/rootReducer";
+
 import { AppLoadingNavigationProps, AppLoadingRouteProps } from "../../navigation";
+import { Image, ImageBackground, View } from "react-native";
+import React, { useCallback, useEffect } from "react";
+import { stayLoggedIn, updateLoggedInChef, useAppDispatch } from "../redux";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { LoginChef } from "../centralTypes";
+import { loadToken } from "../auxFunctions/saveLoadToken";
+import { setDeviceType } from "../redux/rootReducer";
+import { styles } from "./usersStyleSheet";
 
 type OwnProps = {
 	navigation: AppLoadingNavigationProps;
@@ -62,11 +64,11 @@ export default function AppLoading({ setLoadedAndLoggedIn }: OwnProps) {
 	);
 
 	useEffect(() => {
-		const getDeviceType = async() => {
-			const deviceType = await Device.getDeviceTypeAsync()
-			dispatch(setDeviceType(deviceType))
-		}
-		getDeviceType()
+		const getDeviceType = async () => {
+			const deviceType = await Device.getDeviceTypeAsync();
+			dispatch(setDeviceType(deviceType));
+		};
+		getDeviceType();
 		const checkLoggedIn = async () => {
 			const token = await loadToken();
 			if (token) {
@@ -90,7 +92,7 @@ export default function AppLoading({ setLoadedAndLoggedIn }: OwnProps) {
 	return (
 		<View style={styles.mainPageContainer}>
 			<ImageBackground
-				source={require("../dataComponents/spinach.jpg")}
+				source={require("../../assets/images/spinach.jpg")}
 				style={styles.background}
 				imageStyle={styles.backgroundImageStyle}
 			>
@@ -98,7 +100,7 @@ export default function AppLoading({ setLoadedAndLoggedIn }: OwnProps) {
 					<Image
 						style={styles.logo}
 						resizeMode={"contain"}
-						source={require("../dataComponents/yellowLogo.png")}
+						source={require("../../assets/images/yellowLogo.png")}
 						testID={"yellowLogo"}
 					/>
 				</View>

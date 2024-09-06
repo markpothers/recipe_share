@@ -1,12 +1,13 @@
-import React from "react";
-import { Image, View, TouchableOpacity, Text } from "react-native";
-import { styles } from "./recipeListStyleSheet";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
-import OfflineMessage from "../offlineMessage/offlineMessage";
-import { getTimeStringFromMinutes } from "../auxFunctions/getTimeStringFromMinutes";
+import { Image, Text, TouchableOpacity, View } from "react-native";
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
-const defaultRecipeImage = require("../dataComponents/default-recipe.jpg");
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import OfflineMessage from "../offlineMessage/offlineMessage";
+import React from "react";
+import { getTimeStringFromMinutes } from "../auxFunctions/getTimeStringFromMinutes";
+import { styles } from "./recipeListStyleSheet";
+
+const defaultRecipeImage = require("../../assets/images/default-recipe.jpg");
 
 export default class RecipeCard extends React.PureComponent {
 	navigateToSharer = (chefID) => {
@@ -148,7 +149,7 @@ export default class RecipeCard extends React.PureComponent {
 function AvatarImage(chefimage_url) {
 	const URL = chefimage_url.chefimage_url;
 	if (!URL) {
-		return <Image style={styles.avatarThumbnail} source={require("../dataComponents/default-chef.jpg")} accessibilityLabel={"picture of chef"} />;
+		return <Image style={styles.avatarThumbnail} source={require("../../assets/images/default-chef.jpg")} accessibilityLabel={"picture of chef"} />;
 	} else {
 		return <Image style={styles.avatarThumbnail} source={{ uri: URL }} accessibilityLabel={"picture of chef"} />;
 	}

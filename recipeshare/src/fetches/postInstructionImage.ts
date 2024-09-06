@@ -1,6 +1,6 @@
-import { databaseURL } from "../dataComponents/databaseURL";
-import { submitTimeout } from "../dataComponents/timeouts";
+import { databaseURL } from "../constants/databaseURL";
 import { getBase64FromFile } from "../auxFunctions/getBase64FromFile";
+import { submitTimeout } from "../constants/timeouts";
 
 export const postInstructionImage = async (
 	chef_id: number,

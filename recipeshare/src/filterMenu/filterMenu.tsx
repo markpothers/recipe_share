@@ -7,7 +7,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import React from "react";
 import SwitchSized from "../customComponents/switchSized/switchSized";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
-import { clearedFilters } from "../dataComponents/clearedFilters";
+import { clearedFilters } from "../constants/clearedFilters";
 import { styles } from "./filterMenuStyleSheet";
 
 type OwnProps = {

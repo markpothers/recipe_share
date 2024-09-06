@@ -2,8 +2,8 @@
 
 import type { ApiError, LoginChef } from "../centralTypes";
 
-import { actionTimeout } from "../dataComponents/timeouts";
-import { databaseURL } from "../dataComponents/databaseURL";
+import { actionTimeout } from "../constants/timeouts";
+import { databaseURL } from "../constants/databaseURL";
 
 export const postLoginChef = (chef: { e_mail: string; password: string }): Promise<LoginChef | ApiError> => {
 	// console.log(chef.password.trim())

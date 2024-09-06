@@ -1,6 +1,6 @@
-import { databaseURL } from "../dataComponents/databaseURL"
-import { submitTimeout } from "../dataComponents/timeouts"
-import { getBase64FromFile } from "../auxFunctions/getBase64FromFile"
+import { databaseURL } from "../constants/databaseURL";
+import { getBase64FromFile } from "../auxFunctions/getBase64FromFile";
+import { submitTimeout } from "../constants/timeouts";
 
 export const postRecipeImage = async (
 	chef_id: number,
@@ -11,15 +11,15 @@ export const postRecipeImage = async (
 	local_uri: string
 ): Promise<boolean> => {
 	// let image = await getBase64FromFile(image.uri)
-	let base64 = null
+	let base64 = null;
 	if (local_uri) {
-		base64 = await getBase64FromFile(local_uri)
+		base64 = await getBase64FromFile(local_uri);
 	}
 
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
-			reject({ name: "Timeout" })
-		}, submitTimeout)
+			reject({ name: "Timeout" });
+		}, submitTimeout);
 
 		// had to add this validation in here because doing it in rails doesn't work
 		// you end up rejecting everything because you don't save instructions and ingredients
@@ -50,15 +50,15 @@ export const postRecipeImage = async (
 			.then((res) => res.json())
 			.then((result) => {
 				if (result.error && result.message == "Invalid authentication") {
-					reject({ name: "Logout" })
+					reject({ name: "Logout" });
 				}
 				if (result) {
 					// console.log(result)
-					resolve(result)
+					resolve(result);
 				}
 			})
 			.catch((e) => {
-				reject(e)
-			})
-	})
-}
+				reject(e);
+			});
+	});
+};

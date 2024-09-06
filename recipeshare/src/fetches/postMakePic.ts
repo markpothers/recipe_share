@@ -1,7 +1,8 @@
-import { databaseURL } from "../dataComponents/databaseURL"
-import { detailsTimeout } from "../dataComponents/timeouts"
-import { getBase64FromFile } from "../auxFunctions/getBase64FromFile"
-import { MakePic, MakePicChef } from "../centralTypes"
+import { MakePic, MakePicChef } from "../centralTypes";
+
+import { databaseURL } from "../constants/databaseURL";
+import { detailsTimeout } from "../constants/timeouts";
+import { getBase64FromFile } from "../auxFunctions/getBase64FromFile";
 
 export const postMakePic = async (
 	recipeID: number,
@@ -9,11 +10,11 @@ export const postMakePic = async (
 	auth_token: string,
 	makePicFileUri: string
 ): Promise<{ make_pic: MakePic; make_pic_chef: MakePicChef }> => {
-	const imageBase64 = await getBase64FromFile(makePicFileUri)
+	const imageBase64 = await getBase64FromFile(makePicFileUri);
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
-			reject({ name: "Timeout" })
-		}, detailsTimeout)
+			reject({ name: "Timeout" });
+		}, detailsTimeout);
 
 		fetch(`${databaseURL}/make_pics`, {
 			method: "POST",
@@ -32,15 +33,15 @@ export const postMakePic = async (
 			.then((res) => res.json())
 			.then((makepic) => {
 				if (makepic.error && makepic.message == "Invalid authentication") {
-					reject({ name: "Logout" })
+					reject({ name: "Logout" });
 				}
 				if (makepic) {
-					resolve(makepic)
+					resolve(makepic);
 				}
 			})
 			.catch((e) => {
-				console.log(e)
-				reject(e)
-			})
-	})
-}
+				console.log(e);
+				reject(e);
+			});
+	});
+};

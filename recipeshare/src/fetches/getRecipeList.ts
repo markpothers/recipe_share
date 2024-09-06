@@ -1,6 +1,7 @@
-import { databaseURL } from "../dataComponents/databaseURL"
-import { listsTimeout } from "../dataComponents/timeouts"
-import type { FilterSettings, Cuisine, Serves, AvailableFilters, ListRecipe } from "../centralTypes"
+import type { AvailableFilters, Cuisine, FilterSettings, ListRecipe, Serves } from "../centralTypes";
+
+import { databaseURL } from "../constants/databaseURL";
+import { listsTimeout } from "../constants/timeouts";
 
 export const getRecipeList = (
 	listType: string,
@@ -14,15 +15,15 @@ export const getRecipeList = (
 	serves: Serves,
 	searchTerm: string,
 	abortController: AbortController
-): Promise<{recipes: ListRecipe[]} & AvailableFilters> => {
+): Promise<{ recipes: ListRecipe[] } & AvailableFilters> => {
 	const filters = Object.keys(filter_settings)
 		.filter((category) => filter_settings[category] === true)
 		.join("/")
-		.toLowerCase()
+		.toLowerCase();
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
-			reject({ name: "Timeout" })
-		}, listsTimeout)
+			reject({ name: "Timeout" });
+		}, listsTimeout);
 
 		fetch(
 			`${databaseURL}/recipes?listType=${listType}&queryChefID=${queryChefID}&limit=${limit}&offset=${offset}&global_ranking=${global_ranking}&filters=${filters}&cuisine=${cuisine}&serves=${serves}&search_term=${searchTerm}`,
@@ -41,16 +42,16 @@ export const getRecipeList = (
 				// console.log(res.status)
 				// console.log(res.statusText)
 				// console.log(res.ok)
-				return res.json()
+				return res.json();
 			})
 			.then((result) => {
 				if (result.error && result.message == "Invalid authentication") {
-					reject({ name: "Logout" })
+					reject({ name: "Logout" });
 				}
-				resolve(result)
+				resolve(result);
 			})
 			.catch((e) => {
-				reject(e)
-			})
-	})
-}
+				reject(e);
+			});
+	});
+};

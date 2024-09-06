@@ -1,6 +1,6 @@
 import { Ingredient } from "../centralTypes";
-import { databaseURL } from "../dataComponents/databaseURL";
-import { actionTimeout } from "../dataComponents/timeouts";
+import { actionTimeout } from "../constants/timeouts";
+import { databaseURL } from "../constants/databaseURL";
 
 export const fetchIngredients = (auth_token: string): Promise<Ingredient[]> => {
 	return new Promise((resolve, reject) => {

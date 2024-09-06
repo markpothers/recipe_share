@@ -1,12 +1,12 @@
-import { databaseURL } from "../dataComponents/databaseURL"
-import { actionTimeout } from "../dataComponents/timeouts"
-import type { Follow } from "../centralTypes"
+import type { Follow } from "../centralTypes";
+import { actionTimeout } from "../constants/timeouts";
+import { databaseURL } from "../constants/databaseURL";
 
 export const postFollow = (follower_id: number, followee_id: number, auth_token: string): Promise<Follow> => {
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
-			reject({ name: "Timeout" })
-		}, actionTimeout)
+			reject({ name: "Timeout" });
+		}, actionTimeout);
 
 		fetch(`${databaseURL}/follows`, {
 			method: "POST",
@@ -24,14 +24,14 @@ export const postFollow = (follower_id: number, followee_id: number, auth_token:
 			.then((res) => res.json())
 			.then((follow) => {
 				if (follow.error && follow.message == "Invalid authentication") {
-					reject({ name: "Logout" })
+					reject({ name: "Logout" });
 				}
 				if (follow) {
-					resolve(follow)
+					resolve(follow);
 				}
 			})
 			.catch((e) => {
-				reject(e)
-			})
-	})
-}
+				reject(e);
+			});
+	});
+};

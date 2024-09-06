@@ -1,6 +1,6 @@
-import { databaseURL } from "../dataComponents/databaseURL"
-import { actionTimeout } from "../dataComponents/timeouts"
-import type { Comment } from "../centralTypes"
+import type { Comment } from "../centralTypes";
+import { actionTimeout } from "../constants/timeouts";
+import { databaseURL } from "../constants/databaseURL";
 
 export const postComment = (
 	recipeID: number,
@@ -10,8 +10,8 @@ export const postComment = (
 ): Promise<Comment[]> => {
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
-			reject({ name: "Timeout" })
-		}, actionTimeout)
+			reject({ name: "Timeout" });
+		}, actionTimeout);
 
 		fetch(`${databaseURL}/comments`, {
 			method: "POST",
@@ -30,14 +30,14 @@ export const postComment = (
 			.then((res) => res.json())
 			.then((comments) => {
 				if (comments.error && comments.message == "Invalid authentication") {
-					reject({ name: "Logout" })
+					reject({ name: "Logout" });
 				}
 				if (comments) {
-					resolve(comments)
+					resolve(comments);
 				}
 			})
 			.catch((e) => {
-				reject(e)
-			})
-	})
-}
+				reject(e);
+			});
+	});
+};
