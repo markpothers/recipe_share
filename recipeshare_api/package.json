@@ -7,7 +7,9 @@
     "go": "bin/vite dev",
     "build": "bin/vite build",
     "upgrade": "bin/vite upgrade",
-    "clean": "bin/vite clobber"
+    "clean": "bin/vite clobber",
+    "api": "rails s -b 10.0.0.78 -p 3000",
+    "sql": " ./cloud-sql-proxy recipe-share-272202:us-central1:recipe-share"
   },
   "dependencies": {
     "@tanstack/react-router": "^1.0.0",
