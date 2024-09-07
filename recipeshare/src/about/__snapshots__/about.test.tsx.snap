@@ -90,7 +90,7 @@ exports[`About Page renders displaying licenses 1`] = `
             }
           }
         >
-          undefined.22
+          00.00
         </Text>
       </View>
     </View>
@@ -3836,7 +3836,7 @@ exports[`About Page renders displaying privacy policy 1`] = `
             }
           }
         >
-          undefined.22
+          00.00
         </Text>
       </View>
     </View>
@@ -4635,7 +4635,7 @@ exports[`About Page renders displaying t & c by default 1`] = `
             }
           }
         >
-          undefined.22
+          00.00
         </Text>
       </View>
     </View>

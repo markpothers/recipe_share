@@ -1,7 +1,8 @@
-import React from "react";
-import { render, fireEvent, waitFor, act } from "@testing-library/react-native";
+import { act, fireEvent, render, waitFor } from "@testing-library/react-native";
+
+import { ImageSource } from "../../centralTypes";
 import MultiPicSourceChooser from "./multiPicSourceChooser";
-import { ImageSource } from "../centralTypes";
+import React from "react";
 
 // manual mocks
 

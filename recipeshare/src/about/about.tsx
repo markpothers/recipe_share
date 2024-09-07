@@ -5,7 +5,7 @@ import Constants from "expo-constants";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import React from "react";
 import { SoftwareLicenses } from "./softwareLicenses";
-import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
+import SpinachAppContainer from "../components/spinachAppContainer/SpinachAppContainer";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { privacyPolicy } from "../constants/privacyPolicy";
 import { styles } from "./aboutStyleSheet";
@@ -57,15 +57,13 @@ export default class About extends React.Component {
 								App Version:
 							</Text>
 							{Platform.OS == "ios" ? (
-								<Text
-									maxFontSizeMultiplier={2}
-									style={styles.text}
-								>{`${Constants.manifest.version}.${Constants.manifest.ios.buildNumber}`}</Text>
+								<Text maxFontSizeMultiplier={2} style={styles.text}>{`${
+									Constants.expoConfig?.version ?? "00"
+								}.${Constants.expoConfig?.ios?.buildNumber ?? "00"}`}</Text>
 							) : (
-								<Text
-									maxFontSizeMultiplier={2}
-									style={styles.text}
-								>{`${Constants.manifest.version}.${Constants.manifest.android.versionCode}`}</Text>
+								<Text maxFontSizeMultiplier={2} style={styles.text}>{`${
+									Constants.expoConfig?.version ?? "00"
+								}.${Constants.expoConfig?.android?.versionCode ?? "00"}`}</Text>
 							)}
 						</View>
 					</View>

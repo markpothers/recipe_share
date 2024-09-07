@@ -13,12 +13,12 @@ import {
 import { getLoggedInUserDetails, getStayLoggedIn } from "../redux/selectors";
 import { responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
-import { AlertPopup } from "../alertPopup/alertPopup";
+import { AlertPopup } from "../components/alertPopup/alertPopup";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import OfflineMessage from "../offlineMessage/offlineMessage";
-import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
-import SwitchSized from "../customComponents/switchSized/switchSized";
+import SpinachAppContainer from "../components/spinachAppContainer/SpinachAppContainer";
+import SwitchSized from "../components/switchSized/switchSized";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { getNewPassword } from "../fetches/getNewPassword";
 import { postLoginChef } from "../fetches/loginChef";

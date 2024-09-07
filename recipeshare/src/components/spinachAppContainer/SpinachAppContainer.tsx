@@ -1,8 +1,8 @@
 import { Image, KeyboardAvoidingView, Platform, SafeAreaView, ScrollView } from "react-native";
 import React, { useState } from "react";
 
-import StyledActivityIndicator from "../customComponents/styledActivityIndicator/styledActivityIndicator";
-import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
+import StyledActivityIndicator from "../styledActivityIndicator/styledActivityIndicator";
+import { centralStyles } from "../../centralStyleSheet"; //eslint-disable-line no-unused-vars
 
 type OwnProps = {
 	scrollingEnabled: boolean;
@@ -24,7 +24,7 @@ const SpinachAppContainer = ({ scrollingEnabled, awaitingServer, children }: Own
 					keyboardVerticalOffset={Platform.OS === "ios" ? 20 : 0}
 				>
 					<Image
-						source={require("../../assets/images/spinach.jpg")}
+						source={require("../../../assets/images/spinach.jpg")}
 						style={centralStyles.spinachFullBackground}
 						resizeMode={"cover"}
 					/>
@@ -45,7 +45,7 @@ const SpinachAppContainer = ({ scrollingEnabled, awaitingServer, children }: Own
 		return (
 			<SafeAreaView style={centralStyles.fullPageSafeAreaView}>
 				<Image
-					source={require("../../assets/images/spinach.jpg")}
+					source={require("../../../assets/images/spinach.jpg")}
 					style={centralStyles.spinachFullBackground}
 					resizeMode={"cover"}
 				/>

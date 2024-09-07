@@ -2,14 +2,14 @@ import { Keyboard, Linking, Text, TextInput, TouchableOpacity, View } from "reac
 import { RootState, updateLoginUserDetails, updateNewUserDetails } from "../redux";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
-import DualOSPicker from "../dualOSPicker/DualOSPicker";
+import DualOSPicker from "../components/dualOSPicker/DualOSPicker";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import OfflineMessage from "../offlineMessage/offlineMessage";
-import PicSourceChooser from "../picSourceChooser/picSourceChooser";
+import PicSourceChooser from "../components/picSourceChooser/picSourceChooser";
 import React from "react";
-import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
-import SwitchSized from "../customComponents/switchSized/switchSized";
-import { TextPopUp } from "../textPopUp/textPopUp";
+import SpinachAppContainer from "../components/spinachAppContainer/SpinachAppContainer";
+import SwitchSized from "../components/switchSized/switchSized";
+import { TextPopUp } from "../components/textPopUp/textPopUp";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { connect } from "react-redux";
 import { countries } from "../constants/countries";

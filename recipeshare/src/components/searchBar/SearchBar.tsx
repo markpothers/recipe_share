@@ -3,7 +3,7 @@ import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-nat
 
 import React from "react"
 import SearchBarClearButton from "./SearchBarClearButton"
-import { centralStyles } from "../centralStyleSheet" //eslint-disable-line no-unused-vars
+import { centralStyles } from "../../centralStyleSheet" //eslint-disable-line no-unused-vars
 
 type OwnProps = {
 	searchTerm: string;

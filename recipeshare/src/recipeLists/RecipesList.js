@@ -5,15 +5,15 @@ import { storeChefDetails, storeRecipeDetails, updateAllRecipeLists, updateSingl
 
 import AppHeader from "../navigation/appHeader";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import FilterMenu from "../filterMenu/filterMenu";
+import FilterMenu from "../components/filterMenu/filterMenu";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import NetInfo from "@react-native-community/netinfo";
 import OfflineMessage from "../offlineMessage/offlineMessage";
 import React from "react";
 import RecipeCard from "./RecipeCard";
-import SearchBar from "../searchBar/SearchBar";
-import SearchBarClearButton from "../searchBar/SearchBarClearButton";
-import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
+import SearchBar from "../components/searchBar/SearchBar";
+import SearchBarClearButton from "../components/searchBar/SearchBarClearButton";
+import SpinachAppContainer from "../components/spinachAppContainer/SpinachAppContainer";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { clearedFilters } from "../constants/clearedFilters";
 import { connect } from "react-redux";

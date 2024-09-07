@@ -1,13 +1,10 @@
-import { Modal, Text, View, TouchableOpacity } from "react-native"
-import { styles } from "./alertPopupStyleSheet"
-import Icon from "react-native-vector-icons/MaterialCommunityIcons"
-import {
-	responsiveWidth,
-	responsiveHeight,
-	responsiveFontSize, //eslint-disable-line no-unused-vars
-} from "react-native-responsive-dimensions"
-import { centralStyles } from "../centralStyleSheet" //eslint-disable-line no-unused-vars
-import React from "react"
+import { Modal, Text, TouchableOpacity, View } from "react-native";
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions";
+
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import React from "react";
+import { centralStyles } from "../../centralStyleSheet"; //eslint-disable-line no-unused-vars
+import { styles } from "./alertPopupStyleSheet";
 
 type Props = {
 	title: string;
@@ -46,12 +43,7 @@ export function AlertPopup(props: Props) {
 							},
 						]}
 					>
-						<View
-							style={[
-								centralStyles.formInputContainer,
-								{ justifyContent: "space-around" },
-							]}
-						>
+						<View style={[centralStyles.formInputContainer, { justifyContent: "space-around" }]}>
 							{props.close && (
 								<TouchableOpacity
 									style={centralStyles.greenRectangleButton}
@@ -65,24 +57,12 @@ export function AlertPopup(props: Props) {
 										size={responsiveHeight(4)}
 										name="cancel"
 									></Icon>
-									<Text
-										maxFontSizeMultiplier={2}
-										style={centralStyles.yellowButtonText}
-									>
-										{props.closeText
-											? props.closeText
-											: "Cancel"}
+									<Text maxFontSizeMultiplier={2} style={centralStyles.yellowButtonText}>
+										{props.closeText ? props.closeText : "Cancel"}
 									</Text>
 								</TouchableOpacity>
 							)}
-							{!props.close && (
-								<View
-									style={[
-										centralStyles.greenRectangleButton,
-										{ opacity: 0 },
-									]}
-								></View>
-							)}
+							{!props.close && <View style={[centralStyles.greenRectangleButton, { opacity: 0 }]}></View>}
 							<TouchableOpacity
 								style={centralStyles.greenRectangleButton}
 								activeOpacity={0.7}
@@ -95,10 +75,7 @@ export function AlertPopup(props: Props) {
 									size={responsiveHeight(4)}
 									name="check"
 								></Icon>
-								<Text
-									maxFontSizeMultiplier={2}
-									style={centralStyles.yellowButtonText}
-								>
+								<Text maxFontSizeMultiplier={2} style={centralStyles.yellowButtonText}>
 									{props.yesText ? props.yesText : "Yes"}
 								</Text>
 							</TouchableOpacity>
@@ -107,5 +84,5 @@ export function AlertPopup(props: Props) {
 				</View>
 			</View>
 		</Modal>
-	)
+	);
 }

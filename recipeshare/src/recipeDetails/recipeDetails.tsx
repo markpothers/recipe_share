@@ -13,18 +13,18 @@ import { InstructionImage, MakePic, RecipeImage } from "../centralTypes";
 import { RecipeDetailsNavigationProps, RecipeDetailsRouteProps } from "../navigation";
 import { responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
-import { AlertPopup } from "../alertPopup/alertPopup";
+import { AlertPopup } from "../components/alertPopup/alertPopup";
 import DynamicMenu from "../dynamicMenu/DynamicMenu";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { ImagePopup } from "./components/imagePopup";
 import NetInfo from "@react-native-community/netinfo";
 import OfflineMessage from "../offlineMessage/offlineMessage";
-import PicSourceChooser from "../picSourceChooser/picSourceChooser";
+import PicSourceChooser from "../components/picSourceChooser/picSourceChooser";
 import React from "react";
 import RecipeComment from "./components/recipeComment";
 import RecipeNewComment from "./components/recipeNewComment";
-import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
-import StyledActivityIndicator from "../customComponents/styledActivityIndicator/styledActivityIndicator";
+import SpinachAppContainer from "../components/spinachAppContainer/SpinachAppContainer";
+import StyledActivityIndicator from "../components/styledActivityIndicator/styledActivityIndicator";
 import { WebView } from "react-native-webview";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { getFilterSettings } from "../redux/selectors";

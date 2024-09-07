@@ -10,9 +10,9 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import NetInfo from "@react-native-community/netinfo"; //5ms
 import OfflineMessage from "../offlineMessage/offlineMessage";
 import React from "react";
-import SearchBar from "../searchBar/SearchBar";
-import SearchBarClearButton from "../searchBar/SearchBarClearButton";
-import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
+import SearchBar from "../components/searchBar/SearchBar";
+import SearchBarClearButton from "../components/searchBar/SearchBarClearButton";
+import SpinachAppContainer from "../components/spinachAppContainer/SpinachAppContainer";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { connect } from "react-redux";
 import { destroyFollow } from "../fetches/destroyFollow";

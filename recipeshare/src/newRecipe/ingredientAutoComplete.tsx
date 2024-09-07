@@ -3,7 +3,7 @@ import { Keyboard, Platform, Text, TextInput, TouchableOpacity, View } from "rea
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
 import Autocomplete from "react-native-autocomplete-input";
-import DualOSPicker from "../dualOSPicker/DualOSPicker";
+import DualOSPicker from "../components/dualOSPicker/DualOSPicker";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import React from "react";
 import { styles } from "./newRecipeStyleSheet";

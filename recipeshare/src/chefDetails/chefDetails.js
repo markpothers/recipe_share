@@ -8,7 +8,7 @@ import DynamicMenu from "../dynamicMenu/DynamicMenu";
 import NetInfo from "@react-native-community/netinfo"; //5ms
 import OfflineMessage from "../offlineMessage/offlineMessage";
 import React from "react";
-import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
+import SpinachAppContainer from "../components/spinachAppContainer/SpinachAppContainer";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { connect } from "react-redux";
 import { destroyFollow } from "../fetches/destroyFollow";
