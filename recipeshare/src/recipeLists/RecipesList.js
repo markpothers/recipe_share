@@ -1,5 +1,5 @@
 import { Animated, FlatList, Keyboard, Platform, RefreshControl, Text, TouchableOpacity, View } from "react-native";
-import {FilterMenu, OfflineMessage, SearchBar, SearchBarClearButton, SpinachAppContainer} from "../components";
+import { FilterMenu, OfflineMessage, SearchBar, SearchBarClearButton, SpinachAppContainer } from "../components";
 import { loadLocalRecipeLists, saveRecipeListsLocally } from "../auxFunctions/saveRecipeListsLocally";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 import { storeChefDetails, storeRecipeDetails, updateAllRecipeLists, updateSingleRecipeList } from "../redux";
@@ -808,9 +808,9 @@ export class RecipesList extends React.Component {
 									}}
 									onPress={searchBarIsDisplayed ? this.handleSearchBarFocus : this.refresh}
 								>
-									{this.state.searchTerm.length > 0 && (
+									{this.state.searchTerm.length > 0 ? (
 										<SearchBarClearButton setSearchTerm={this.setSearchTerm} />
-									)}
+									) : null}
 								</TouchableOpacity>
 							);
 						}}

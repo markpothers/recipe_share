@@ -1,15 +1,16 @@
-import React from "react"
-import { TouchableOpacity } from "react-native"
-import Icon from "react-native-vector-icons/MaterialCommunityIcons"
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import React from "react";
+import { TouchableOpacity } from "react-native";
 
 type Props = {
 	setSearchTerm: (searchTerm: string) => void;
 	displayIcon?: boolean;
-}
+};
 
 export default function SearchBarClearButton(props: Props) {
-	const {setSearchTerm, displayIcon } = props;
+	const { setSearchTerm, displayIcon } = props;
 
 	return (
 		<TouchableOpacity
@@ -19,19 +20,13 @@ export default function SearchBarClearButton(props: Props) {
 				justifyContent: "center",
 				alignItems: "center",
 				// backgroundColor: 'red',
-				alignSelf: "flex-end"
+				alignSelf: "flex-end",
 			}}
 			onPress={() => setSearchTerm("")}
 			testID={"deleteSearchTermButton"}
 			accessibilityLabel={"clear search text"}
 		>
-			{displayIcon && (
-			<Icon
-				name='close'
-				size={responsiveHeight(3.5)}
-				style={{ color: "#505050" }}
-			/>
-			)}
+			{displayIcon ? <Icon name="close" size={responsiveHeight(3.5)} style={{ color: "#505050" }} /> : null}
 		</TouchableOpacity>
-	)
+	);
 }
