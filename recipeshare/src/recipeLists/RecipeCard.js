@@ -2,7 +2,7 @@ import { Image, Text, TouchableOpacity, View } from "react-native";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import OfflineMessage from "../components/offlineMessage/offlineMessage";
+import { OfflineMessage } from "../components";
 import React from "react";
 import { getTimeStringFromMinutes } from "../auxFunctions/getTimeStringFromMinutes";
 import { styles } from "./recipeListStyleSheet";
@@ -96,11 +96,25 @@ export default class RecipeCard extends React.PureComponent {
 						}
 					>
 						{this.props.chef_shared == 0 ? (
-							<Icon name="share-outline" size={responsiveHeight(3.5)} style={styles.icon} accessibilityLabel={"share recipe with followers"}/>
+							<Icon
+								name="share-outline"
+								size={responsiveHeight(3.5)}
+								style={styles.icon}
+								accessibilityLabel={"share recipe with followers"}
+							/>
 						) : (
-							<Icon name="share" size={responsiveHeight(3.5)} style={styles.icon} accessibilityLabel={"remove share"} />
+							<Icon
+								name="share"
+								size={responsiveHeight(3.5)}
+								style={styles.icon}
+								accessibilityLabel={"remove share"}
+							/>
 						)}
-						<Text maxFontSizeMultiplier={2} style={styles.recipeCardBottomOther} accessibilityLabel={"shares count"}>
+						<Text
+							maxFontSizeMultiplier={2}
+							style={styles.recipeCardBottomOther}
+							accessibilityLabel={"shares count"}
+						>
 							{this.props.shares_count}
 						</Text>
 					</TouchableOpacity>
@@ -114,11 +128,25 @@ export default class RecipeCard extends React.PureComponent {
 						}
 					>
 						{this.props.chef_liked == 0 ? (
-							<Icon name="heart-outline" size={responsiveHeight(3.5)} style={styles.icon}  accessibilityLabel={"like recipe"} />
+							<Icon
+								name="heart-outline"
+								size={responsiveHeight(3.5)}
+								style={styles.icon}
+								accessibilityLabel={"like recipe"}
+							/>
 						) : (
-							<Icon name="heart" size={responsiveHeight(3.5)} style={styles.icon}  accessibilityLabel={"unlike recipe"}/>
+							<Icon
+								name="heart"
+								size={responsiveHeight(3.5)}
+								style={styles.icon}
+								accessibilityLabel={"unlike recipe"}
+							/>
 						)}
-						<Text maxFontSizeMultiplier={2} style={styles.recipeCardBottomOther} accessibilityLabel={"likes count"}>
+						<Text
+							maxFontSizeMultiplier={2}
+							style={styles.recipeCardBottomOther}
+							accessibilityLabel={"likes count"}
+						>
 							{this.props.likes_count}
 						</Text>
 					</TouchableOpacity>
@@ -132,11 +160,25 @@ export default class RecipeCard extends React.PureComponent {
 						onPress={() => this.props.navigateToRecipeDetails(this.props.id, true)}
 					>
 						{this.props.chef_commented == 0 ? (
-							<Icon name="comment-outline" size={responsiveHeight(3.5)} style={styles.icon}  accessibilityLabel={"comment on recipe"}/>
+							<Icon
+								name="comment-outline"
+								size={responsiveHeight(3.5)}
+								style={styles.icon}
+								accessibilityLabel={"comment on recipe"}
+							/>
 						) : (
-							<Icon name="comment" size={responsiveHeight(3.5)} style={styles.icon}  accessibilityLabel={"comment on recipe"}/>
+							<Icon
+								name="comment"
+								size={responsiveHeight(3.5)}
+								style={styles.icon}
+								accessibilityLabel={"comment on recipe"}
+							/>
 						)}
-						<Text maxFontSizeMultiplier={2} style={styles.recipeCardBottomOther} accessibilityLabel={"comments count"}>
+						<Text
+							maxFontSizeMultiplier={2}
+							style={styles.recipeCardBottomOther}
+							accessibilityLabel={"comments count"}
+						>
 							{this.props.comments_count}
 						</Text>
 					</TouchableOpacity>
@@ -149,7 +191,13 @@ export default class RecipeCard extends React.PureComponent {
 function AvatarImage(chefimage_url) {
 	const URL = chefimage_url.chefimage_url;
 	if (!URL) {
-		return <Image style={styles.avatarThumbnail} source={require("../../assets/images/default-chef.jpg")} accessibilityLabel={"picture of chef"} />;
+		return (
+			<Image
+				style={styles.avatarThumbnail}
+				source={require("../../assets/images/default-chef.jpg")}
+				accessibilityLabel={"picture of chef"}
+			/>
+		);
 	} else {
 		return <Image style={styles.avatarThumbnail} source={{ uri: URL }} accessibilityLabel={"picture of chef"} />;
 	}

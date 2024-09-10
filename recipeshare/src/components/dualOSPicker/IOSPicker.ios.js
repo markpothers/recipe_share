@@ -1,8 +1,9 @@
-import React from "react";
-import { Modal, View, TouchableOpacity, Text } from "react-native";
+import { Modal, Text, TouchableOpacity, View } from "react-native";
 import { Picker, PickerIOS } from "@react-native-picker/picker";
-import { styles } from "./DualOSPickerStyleSheet";
-import { responsiveHeight, responsiveWidth, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+
+import React from "react";
+import { styles } from "./dualOSPickerStyleSheet";
 
 let IOSPickerTimer; // this variable makes the timer available across methods
 

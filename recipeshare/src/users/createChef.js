@@ -1,15 +1,17 @@
+import {
+	DualOSPicker,
+	OfflineMessage,
+	PicSourceChooser,
+	SpinachAppContainer,
+	SwitchSized,
+	TextPopup,
+} from "../components";
 import { Keyboard, Linking, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { RootState, updateLoginUserDetails, updateNewUserDetails } from "../redux";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
-import DualOSPicker from "../components/dualOSPicker/DualOSPicker";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import OfflineMessage from "../components/offlineMessage/offlineMessage";
-import PicSourceChooser from "../components/picSourceChooser/picSourceChooser";
 import React from "react";
-import SpinachAppContainer from "../components/spinachAppContainer/SpinachAppContainer";
-import SwitchSized from "../components/switchSized/switchSized";
-import { TextPopUp } from "../components/textPopUp/textPopUp";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { connect } from "react-redux";
 import { countries } from "../constants/countries";
@@ -418,7 +420,7 @@ export default connect(
 										</View>
 									</TouchableOpacity>
 									{this.state.viewingTermsAndConditions && (
-										<TextPopUp
+										<TextPopup
 											close={() => this.setState({ viewingTermsAndConditions: false })}
 											title={"Terms and Conditions"}
 											text={termsAndConditions}
@@ -438,7 +440,7 @@ export default connect(
 													</Text>
 												</TouchableOpacity>
 											</View>
-										</TextPopUp>
+										</TextPopup>
 									)}
 								</View>
 							</View>
@@ -494,7 +496,7 @@ export default connect(
 										</View>
 									</TouchableOpacity>
 									{this.state.viewingPrivacyPolicy && (
-										<TextPopUp
+										<TextPopup
 											close={() => this.setState({ viewingPrivacyPolicy: false })}
 											title={"Privacy Policy"}
 											text={privacyPolicy}
@@ -515,7 +517,7 @@ export default connect(
 													</Text>
 												</TouchableOpacity>
 											</View>
-										</TextPopUp>
+										</TextPopup>
 									)}
 								</View>
 							</View>

@@ -1,7 +1,7 @@
+import { AlertPopup, OfflineMessage, PicSourceChooser, SpinachAppContainer } from "../components";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 import { storeChefDetails, storeNewFollowers, updateNewUserDetails } from "../redux";
 
-import { AlertPopup } from "../components/alertPopup/alertPopup";
 import AppHeaderRight from "../navigation/appHeaderRight";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ChefDetailsCard from "../chefDetails/ChefDetailsCard";
@@ -9,10 +9,7 @@ import ChefEditor from "./chefEditor";
 import DeleteChefOption from "./deleteChefOption";
 import DynamicMenu from "../dynamicMenu/DynamicMenu";
 import NetInfo from "@react-native-community/netinfo"; //5ms
-import OfflineMessage from "../components/offlineMessage/offlineMessage";
-import PicSourceChooser from "../components/picSourceChooser/picSourceChooser";
 import React from "react";
-import SpinachAppContainer from "../components/spinachAppContainer/SpinachAppContainer";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { connect } from "react-redux";
 import { deleteToken } from "../auxFunctions/saveLoadToken";

@@ -2,7 +2,7 @@ import { ActivityIndicator, Platform, ScrollView } from "react-native";
 import renderer, { act } from "react-test-renderer";
 
 import React from "react";
-import SpinachAppContainer from "./SpinachAppContainer";
+import SpinachAppContainer from "./spinachAppContainer";
 
 describe("SpinachAppContainer", () => {
 	let component;

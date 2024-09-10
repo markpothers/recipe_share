@@ -1,3 +1,4 @@
+import { AlertPopup, SpinachAppContainer, StyledActivityIndicator } from "../components";
 import {
 	AppState,
 	FlatList,
@@ -26,7 +27,6 @@ import {
 } from "../redux";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
-import { AlertPopup } from "../components/alertPopup/alertPopup";
 import AppHeaderRight from "../navigation/appHeaderRight";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import DynamicMenu from "../dynamicMenu/DynamicMenu";
@@ -38,8 +38,6 @@ import PicSourceChooser from "../picSourceChooser/picSourceChooser";
 import React from "react";
 import RecipeComment from "./recipeComment";
 import RecipeNewComment from "./recipeNewComment";
-import SpinachAppContainer from "../spinachAppContainer/SpinachAppContainer";
-import StyledActivityIndicator from "../components/styledActivityIndicator/styledActivityIndicator";
 import { WebView } from "react-native-webview";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { connect } from "react-redux";

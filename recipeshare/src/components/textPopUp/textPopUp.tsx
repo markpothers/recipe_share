@@ -3,7 +3,7 @@ import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-nat
 
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import React from "react";
-import { styles } from "./textPopUpStyleSheet";
+import { styles } from "./textPopupStyleSheet";
 
 type OwnProps = {
 	title: string,
@@ -12,7 +12,7 @@ type OwnProps = {
 	close: () => void
 };
 
-export function TextPopUp({title, text, children, close}: OwnProps) {
+export function TextPopup({title, text, children, close}: OwnProps) {
 	return (
 		<Modal animationType="fade" transparent={true} visible={true}>
 			<View style={styles.modalFullScreenContainer}>

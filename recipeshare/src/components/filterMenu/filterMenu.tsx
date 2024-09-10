@@ -2,7 +2,7 @@ import { Cuisine, FilterSettings, Filters, Serves } from "../../centralTypes";
 import { Modal, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
-import DualOSPicker from "../dualOSPicker/DualOSPicker";
+import DualOSPicker from "../dualOSPicker/dualOSPicker";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import React from "react";
 import SwitchSized from "../switchSized/switchSized";

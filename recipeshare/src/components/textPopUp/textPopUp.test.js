@@ -1,11 +1,11 @@
 import renderer, { act } from "react-test-renderer";
 
 import React from "react";
-import { TextPopUp } from "./textPopUp";
+import { TextPopup } from "./textPopup";
 import { TouchableOpacity } from "react-native";
 import { termsAndConditions } from "../../constants/termsAndConditions";
 
-describe("TextPopUp", () => {
+describe("TextPopup", () => {
 	let component;
 
 	beforeAll(() => {
@@ -28,7 +28,7 @@ describe("TextPopUp", () => {
 		let mockCallback = jest.fn();
 		act(() => {
 			component = renderer.create(
-				<TextPopUp title={"Terms & Conditions"} text={termsAndConditions} close={mockCallback} />
+				<TextPopup title={"Terms & Conditions"} text={termsAndConditions} close={mockCallback} />
 			);
 		});
 		const image = component.toJSON();

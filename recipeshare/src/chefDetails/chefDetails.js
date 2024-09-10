@@ -1,4 +1,5 @@
 import { Image, ScrollView, View } from "react-native";
+import { OfflineMessage, SpinachAppContainer } from "../components";
 import { clearChefDetails, storeChefDetails, storeNewFollowers, updateAllChefLists } from "../redux";
 
 import AppHeaderRight from "../navigation/appHeaderRight";
@@ -6,9 +7,7 @@ import ChefDetailsCard from "./ChefDetailsCard";
 import { ChefRecipeBookTabs } from "./ChefDetailsNavigators";
 import DynamicMenu from "../dynamicMenu/DynamicMenu";
 import NetInfo from "@react-native-community/netinfo"; //5ms
-import OfflineMessage from "../components/offlineMessage/offlineMessage";
 import React from "react";
-import SpinachAppContainer from "../components/spinachAppContainer/SpinachAppContainer";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { connect } from "react-redux";
 import { destroyFollow } from "../fetches/destroyFollow";

@@ -1,10 +1,11 @@
-import React from "react";
-import { Platform, TouchableOpacity, Text, View } from "react-native";
-import { Picker } from "@react-native-picker/picker";
-import { styles } from "./DualOSPickerStyleSheet";
-import IOSPicker from "./IOSPicker.ios";
+import { Platform, Text, TouchableOpacity, View } from "react-native";
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+
+import IOSPicker from "./iOSPicker.ios";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { responsiveHeight, responsiveWidth, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+import { Picker } from "@react-native-picker/picker";
+import React from "react";
+import { styles } from "./dualOSPickerStyleSheet";
 
 export default class DualOSPicker extends React.PureComponent {
 	state = {

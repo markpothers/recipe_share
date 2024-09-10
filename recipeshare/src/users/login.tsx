@@ -1,3 +1,4 @@
+import { AlertPopup, OfflineMessage, SpinachAppContainer, SwitchSized } from "../components";
 import { Image, Keyboard, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { LoginNavigationProps, LoginRouteProps } from "../navigation";
 import React, { useCallback, useEffect, useState } from "react";
@@ -13,12 +14,8 @@ import {
 import { getLoggedInUserDetails, getStayLoggedIn } from "../redux/selectors";
 import { responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
-import { AlertPopup } from "../components/alertPopup/alertPopup";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import OfflineMessage from "../components/offlineMessage/offlineMessage";
-import SpinachAppContainer from "../components/spinachAppContainer/SpinachAppContainer";
-import SwitchSized from "../components/switchSized/switchSized";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { getNewPassword } from "../fetches/getNewPassword";
 import { postLoginChef } from "../fetches/loginChef";

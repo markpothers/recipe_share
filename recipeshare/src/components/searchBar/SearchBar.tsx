@@ -1,9 +1,9 @@
-import { TextInput, View } from "react-native"
+import { TextInput, View } from "react-native";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
-import React from "react"
-import SearchBarClearButton from "./SearchBarClearButton"
-import { centralStyles } from "../../centralStyleSheet" //eslint-disable-line no-unused-vars
+import React from "react";
+import SearchBarClearButton from "./searchBarClearButton";
+import { centralStyles } from "../../centralStyleSheet"; //eslint-disable-line no-unused-vars
 
 type OwnProps = {
 	searchTerm: string;
@@ -11,25 +11,24 @@ type OwnProps = {
 	setSearchTerm: (searchTerm: string) => void;
 	onBlur: () => void;
 	searchBar: React.RefObject<typeof SearchBar>;
-}
+};
 
 export default function SearchBar(props: OwnProps) {
-	const {searchTerm, text, setSearchTerm, searchBar, onBlur} = props;
+	const { searchTerm, text, setSearchTerm, searchBar, onBlur } = props;
 
 	// console.log(props)
 	return (
 		<View
-			style={
-				{
-					justifyContent: "center",
-					alignItems: "center",
-					marginLeft: 0,
-					marginBottom: responsiveHeight(0.5),
-				}
-			}>
+			style={{
+				justifyContent: "center",
+				alignItems: "center",
+				marginLeft: 0,
+				marginBottom: responsiveHeight(0.5),
+			}}
+		>
 			<View style={centralStyles.formSection}>
-				<View style={
-					{
+				<View
+					style={{
 						flexDirection: "row",
 						marginTop: responsiveHeight(0.5),
 						width: responsiveWidth(100),
@@ -40,8 +39,8 @@ export default function SearchBar(props: OwnProps) {
 						borderWidth: 1,
 						borderColor: "#104e01",
 						overflow: "hidden",
-					}
-				}>
+					}}
+				>
 					<TextInput
 						maxFontSizeMultiplier={2}
 						style={{
@@ -51,7 +50,7 @@ export default function SearchBar(props: OwnProps) {
 							textAlignVertical: "center",
 							paddingLeft: responsiveWidth(2),
 							width: responsiveWidth(90),
-							fontSize: responsiveFontSize(2)
+							fontSize: responsiveFontSize(2),
 						}}
 						value={searchTerm}
 						placeholder={text}
@@ -63,15 +62,9 @@ export default function SearchBar(props: OwnProps) {
 						onBlur={onBlur}
 						testID={"searchTermInput"}
 					/>
-					{searchTerm.length > 0 && (
-						<SearchBarClearButton
-							displayIcon={true}
-							setSearchTerm={setSearchTerm}
-						/>
-					)}
+					{searchTerm.length > 0 && <SearchBarClearButton displayIcon={true} setSearchTerm={setSearchTerm} />}
 				</View>
-
 			</View>
 		</View>
-	)
+	);
 }

@@ -1,3 +1,13 @@
+import {
+	DualOSPicker,
+	FilterMenu,
+	MultiPicSourceChooser,
+	OfflineMessage,
+	PicSourceChooser,
+	SpinachAppContainer,
+	SwitchSized,
+	TextPopup,
+} from "../components";
 import { Filters, InstructionImage } from "../centralTypes";
 import {
 	Keyboard,
@@ -14,21 +24,13 @@ import { doubleTimes, times } from "../constants/times";
 import { getMinutesFromTimeString, getTimeStringFromMinutes } from "../auxFunctions/getTimeStringFromMinutes";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
-import { AlertPopup } from "../components/alertPopup/alertPopup";
+import { AlertPopup } from "../components";
 import { DragSortableView } from "react-native-drag-sort/lib";
-import DualOSPicker from "../components/dualOSPicker/DualOSPicker";
-import FilterMenu from "../components/filterMenu/filterMenu";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import IngredientAutoComplete from "./ingredientAutoComplete";
 import { InstructionRow } from "./components/instructionRow";
-import MultiPicSourceChooser from "../components/picSourceChooser/multiPicSourceChooser";
 import NetInfo from "@react-native-community/netinfo";
 import { NewRecipeProps } from "../navigation";
-import OfflineMessage from "../components/offlineMessage/offlineMessage";
-import PicSourceChooser from "../components/picSourceChooser/picSourceChooser";
-import SpinachAppContainer from "../components/spinachAppContainer/SpinachAppContainer";
-import SwitchSized from "../components/switchSized/switchSized";
-import { TextPopUp } from "../components/textPopUp/textPopUp";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { clearedFilters } from "../constants/clearedFilters";
 import { cuisines } from "../constants/cuisines";
@@ -174,7 +176,7 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 
 	const renderHelp = () => {
 		return (
-			<TextPopUp close={() => setHelpShowing(false)} title={`Help - ${helpText.title}`} text={helpText.text} />
+			<TextPopup close={() => setHelpShowing(false)} title={`Help - ${helpText.title}`} text={helpText.text} />
 		);
 	};
 

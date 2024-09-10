@@ -2,7 +2,7 @@ import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import OfflineMessage from "../components/offlineMessage/offlineMessage";
+import { OfflineMessage } from "../components";
 import React from "react";
 import { databaseURL } from "../constants/databaseURL";
 import { styles } from "./chefListStyleSheet";

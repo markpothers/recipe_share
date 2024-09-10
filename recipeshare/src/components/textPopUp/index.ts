@@ -1,0 +1,1 @@
+export { TextPopup } from "./textPopup";

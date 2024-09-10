@@ -1,4 +1,5 @@
 import { Animated, FlatList, Keyboard, Platform, RefreshControl, Text, TouchableOpacity, View } from "react-native";
+import { OfflineMessage, SearchBar, SearchBarClearButton, SpinachAppContainer } from "../components";
 import { loadLocalChefLists, saveChefListsLocally } from "../auxFunctions/saveChefListsLocally";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 import { storeChefDetails, updateAllChefLists, updateSingleChefList } from "../redux";
@@ -8,11 +9,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import ChefCard from "./ChefCard";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import NetInfo from "@react-native-community/netinfo"; //5ms
-import OfflineMessage from "../components/offlineMessage/offlineMessage";
 import React from "react";
-import SearchBar from "../components/searchBar/SearchBar";
-import SearchBarClearButton from "../components/searchBar/SearchBarClearButton";
-import SpinachAppContainer from "../components/spinachAppContainer/SpinachAppContainer";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { connect } from "react-redux";
 import { destroyFollow } from "../fetches/destroyFollow";

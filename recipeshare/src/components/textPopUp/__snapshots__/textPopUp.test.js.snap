@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TextPopUp renders with some mock props 1`] = `
+exports[`TextPopup renders with some mock props 1`] = `
 <Modal
   animationType="fade"
   hardwareAccelerated={false}

@@ -5,7 +5,7 @@ import Constants from "expo-constants";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import React from "react";
 import { SoftwareLicenses } from "./softwareLicenses";
-import SpinachAppContainer from "../components/spinachAppContainer/SpinachAppContainer";
+import {SpinachAppContainer} from "../components";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { privacyPolicy } from "../constants/privacyPolicy";
 import { styles } from "./aboutStyleSheet";
