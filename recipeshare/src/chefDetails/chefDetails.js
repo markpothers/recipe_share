@@ -6,7 +6,7 @@ import ChefDetailsCard from "./ChefDetailsCard";
 import { ChefRecipeBookTabs } from "./ChefDetailsNavigators";
 import DynamicMenu from "../dynamicMenu/DynamicMenu";
 import NetInfo from "@react-native-community/netinfo"; //5ms
-import OfflineMessage from "../offlineMessage/offlineMessage";
+import OfflineMessage from "../components/offlineMessage/offlineMessage";
 import React from "react";
 import SpinachAppContainer from "../components/spinachAppContainer/SpinachAppContainer";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars

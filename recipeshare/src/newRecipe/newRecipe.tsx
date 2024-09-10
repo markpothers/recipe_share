@@ -24,7 +24,7 @@ import { InstructionRow } from "./components/instructionRow";
 import MultiPicSourceChooser from "../components/picSourceChooser/multiPicSourceChooser";
 import NetInfo from "@react-native-community/netinfo";
 import { NewRecipeProps } from "../navigation";
-import OfflineMessage from "../offlineMessage/offlineMessage";
+import OfflineMessage from "../components/offlineMessage/offlineMessage";
 import PicSourceChooser from "../components/picSourceChooser/picSourceChooser";
 import SpinachAppContainer from "../components/spinachAppContainer/SpinachAppContainer";
 import SwitchSized from "../components/switchSized/switchSized";

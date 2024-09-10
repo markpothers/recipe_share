@@ -8,7 +8,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import ChefCard from "./ChefCard";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import NetInfo from "@react-native-community/netinfo"; //5ms
-import OfflineMessage from "../offlineMessage/offlineMessage";
+import OfflineMessage from "../components/offlineMessage/offlineMessage";
 import React from "react";
 import SearchBar from "../components/searchBar/SearchBar";
 import SearchBarClearButton from "../components/searchBar/SearchBarClearButton";

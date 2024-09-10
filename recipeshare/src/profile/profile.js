@@ -9,7 +9,7 @@ import ChefEditor from "./chefEditor";
 import DeleteChefOption from "./deleteChefOption";
 import DynamicMenu from "../dynamicMenu/DynamicMenu";
 import NetInfo from "@react-native-community/netinfo"; //5ms
-import OfflineMessage from "../offlineMessage/offlineMessage";
+import OfflineMessage from "../components/offlineMessage/offlineMessage";
 import PicSourceChooser from "../components/picSourceChooser/picSourceChooser";
 import React from "react";
 import SpinachAppContainer from "../components/spinachAppContainer/SpinachAppContainer";

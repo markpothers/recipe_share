@@ -18,7 +18,7 @@ import DynamicMenu from "../dynamicMenu/DynamicMenu";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { ImagePopup } from "./components/imagePopup";
 import NetInfo from "@react-native-community/netinfo";
-import OfflineMessage from "../offlineMessage/offlineMessage";
+import OfflineMessage from "../components/offlineMessage/offlineMessage";
 import PicSourceChooser from "../components/picSourceChooser/picSourceChooser";
 import React from "react";
 import RecipeComment from "./components/recipeComment";

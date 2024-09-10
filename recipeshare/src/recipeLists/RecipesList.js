@@ -8,7 +8,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import FilterMenu from "../components/filterMenu/filterMenu";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import NetInfo from "@react-native-community/netinfo";
-import OfflineMessage from "../offlineMessage/offlineMessage";
+import OfflineMessage from "../components/offlineMessage/offlineMessage";
 import React from "react";
 import RecipeCard from "./RecipeCard";
 import SearchBar from "../components/searchBar/SearchBar";

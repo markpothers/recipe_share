@@ -15,7 +15,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import DualOSPicker from "../components/dualOSPicker/DualOSPicker";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import NetInfo from "@react-native-community/netinfo"; //5ms
-import OfflineMessage from "../offlineMessage/offlineMessage";
+import OfflineMessage from "../components/offlineMessage/offlineMessage";
 import React from "react";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { connect } from "react-redux";

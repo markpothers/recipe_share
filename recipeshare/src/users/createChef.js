@@ -4,7 +4,7 @@ import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-nat
 
 import DualOSPicker from "../components/dualOSPicker/DualOSPicker";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import OfflineMessage from "../offlineMessage/offlineMessage";
+import OfflineMessage from "../components/offlineMessage/offlineMessage";
 import PicSourceChooser from "../components/picSourceChooser/picSourceChooser";
 import React from "react";
 import SpinachAppContainer from "../components/spinachAppContainer/SpinachAppContainer";

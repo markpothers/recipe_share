@@ -16,7 +16,7 @@ import { responsiveHeight, responsiveWidth } from "react-native-responsive-dimen
 import { AlertPopup } from "../components/alertPopup/alertPopup";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import OfflineMessage from "../offlineMessage/offlineMessage";
+import OfflineMessage from "../components/offlineMessage/offlineMessage";
 import SpinachAppContainer from "../components/spinachAppContainer/SpinachAppContainer";
 import SwitchSized from "../components/switchSized/switchSized";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
