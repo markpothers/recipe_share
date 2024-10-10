@@ -1,6 +1,7 @@
 import { Image, ScrollView, View } from "react-native";
 import { OfflineMessage, SpinachAppContainer } from "../components";
 import { clearChefDetails, storeChefDetails, storeNewFollowers, updateAllChefLists } from "../redux";
+import { destroyFollow, getChefDetails, postFollow } from "../fetches";
 
 import AppHeaderRight from "../navigation/appHeaderRight";
 import ChefDetailsCard from "./ChefDetailsCard";
@@ -10,9 +11,6 @@ import NetInfo from "@react-native-community/netinfo"; //5ms
 import React from "react";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { connect } from "react-redux";
-import { destroyFollow } from "../fetches/destroyFollow";
-import { getChefDetails } from "../fetches/getChefDetails";
-import { postFollow } from "../fetches/postFollow";
 import { styles } from "./chefDetailsStyleSheet";
 
 NetInfo.configure({ reachabilityShortTimeout: 5 });

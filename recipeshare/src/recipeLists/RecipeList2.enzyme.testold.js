@@ -4,6 +4,8 @@
 
 // stock imports always required for enzyme testing
 
+import { destroyReShare, destroyRecipeLike, getRecipeList, postReShare, postRecipeLike, postRecipeMake } from "../fetches";
+
 import NetInfo from "@react-native-community/netinfo";
 import OfflineMessage from "../offlineMessage/offlineMessage";
 import { Provider } from "react-redux";
@@ -15,15 +17,9 @@ import { TouchableOpacity } from "react-native";
 import { act } from "react-dom/test-utils";
 import { configureStore } from "@reduxjs/toolkit";
 import { cuisines } from "../constants/cuisines";
-import { destroyReShare } from "../fetches/destroyReShare";
-import { destroyRecipeLike } from "../fetches/destroyRecipeLike";
 import { findByTestID } from "../auxTestFunctions/findByTestId";
-import { getRecipeList } from "../fetches/getRecipeList";
 import { mockRecipeList } from "../../__mocks__/mockRecipeList";
 import { mount } from "enzyme";
-import { postReShare } from "../fetches/postReShare";
-import { postRecipeLike } from "../fetches/postRecipeLike";
-import { postRecipeMake } from "../fetches/postRecipeMake";
 import { rootReducer } from "../redux";
 import { serves } from "../constants/serves";
 import toJson from "enzyme-to-json";

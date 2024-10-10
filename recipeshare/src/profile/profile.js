@@ -1,4 +1,5 @@
 import { AlertPopup, OfflineMessage, PicSourceChooser, SpinachAppContainer } from "../components";
+import { destroyChef, getChefDetails } from "../fetches";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 import { storeChefDetails, storeNewFollowers, updateNewUserDetails } from "../redux";
 
@@ -13,8 +14,6 @@ import React from "react";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { connect } from "react-redux";
 import { deleteToken } from "../auxFunctions/saveLoadToken";
-import { destroyChef } from "../fetches/destroyChef";
-import { getChefDetails } from "../fetches/getChefDetails";
 
 // import { getDatabaseBackup } from '../fetches/getDatabaseBackup'
 // import { getDatabaseRestore } from '../fetches/getDatabaseRestore'

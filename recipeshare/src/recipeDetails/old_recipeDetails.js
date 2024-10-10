@@ -25,6 +25,19 @@ import {
 	updateAllRecipeLists,
 	updateComments,
 } from "../redux";
+import {
+	destroyComment,
+	destroyMakePic,
+	destroyReShare,
+	destroyRecipe,
+	destroyRecipeLike,
+	getChefDetails,
+	postComment,
+	postMakePic,
+	postReShare,
+	postRecipeLike,
+	postRecipeMake
+} from "../fetches";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
 import AppHeaderRight from "../navigation/appHeaderRight";
@@ -41,18 +54,7 @@ import RecipeNewComment from "./recipeNewComment";
 import { WebView } from "react-native-webview";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { connect } from "react-redux";
-import { destroyComment } from "../fetches/destroyComment";
-import { destroyMakePic } from "../fetches/destroyMakePic";
-import { destroyReShare } from "../fetches/destroyReShare";
-import { destroyRecipe } from "../fetches/destroyRecipe";
-import { destroyRecipeLike } from "../fetches/destroyRecipeLike";
-import { getChefDetails } from "../fetches/getChefDetails";
 import { getTimeStringFromMinutes } from "../auxFunctions/getTimeStringFromMinutes";
-import { postComment } from "../fetches/postComment";
-import { postMakePic } from "../fetches/postMakePic";
-import { postReShare } from "../fetches/postReShare";
-import { postRecipeLike } from "../fetches/postRecipeLike";
-import { postRecipeMake } from "../fetches/postRecipeMake";
 import saveChefDetailsLocally from "../auxFunctions/saveChefDetailsLocally";
 import { styles } from "./recipeDetailsStyleSheet";
 

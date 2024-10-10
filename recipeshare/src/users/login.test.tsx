@@ -1,14 +1,14 @@
-import React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react-native";
+import { fireEvent, render, waitFor } from "@testing-library/react-native";
+import { getNewPassword, postLoginChef } from "../fetches";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import Login from "./login";
+import NetInfo from "@react-native-community/netinfo";
 import { Provider } from "react-redux";
+import React from "react";
 import { configureStore } from "@reduxjs/toolkit";
 import { rootReducer } from "../redux";
-import NetInfo from "@react-native-community/netinfo";
-import Login from "./login";
 import { saveToken } from "../auxFunctions/saveLoadToken";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { postLoginChef } from "../fetches/loginChef";
-import { getNewPassword } from "../fetches/getNewPassword";
 
 // manual mocks
 jest.mock("../fetches/loginChef");

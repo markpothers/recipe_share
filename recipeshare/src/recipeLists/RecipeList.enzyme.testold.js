@@ -1,20 +1,21 @@
 /**
  * @jest-environment jsdom
  */
+
+import RecipesList, { RecipesList as NamedRecipesList } from "./RecipesList.js";
+import { TextInput, TouchableOpacity } from "react-native";
+import { applyMiddleware, compose, createStore } from "redux";
+import { configure, mount, shallow } from "enzyme";
+
+import { Provider } from "react-redux";
 import React from "react";
-import { configure, shallow, mount } from "enzyme";
+import RecipeCard from "./RecipeCard";
+import ReduxThunk from "redux-thunk";
+import SearchBar from "../searchBar/SearchBar.js";
 import { act } from "react-dom/test-utils";
 import configureStore from "redux-mock-store";
-import ReduxThunk from "redux-thunk";
-import { Provider } from "react-redux";
-import { createStore, compose, applyMiddleware } from "redux";
-import RecipesList, { RecipesList as NamedRecipesList } from "./RecipesList.js";
-import RecipeCard from "./RecipeCard";
-import { mockRecipeList } from "../../__mocks__/mockRecipeList.js";
-import { TouchableOpacity, TextInput } from "react-native";
-import SearchBar from "../searchBar/SearchBar.js";
-
-import { getRecipeList } from "../fetches/getRecipeList.js";
+import { getRecipeList } from "../fetches/.js";
+import { mockRecipeList } from "../../__mocks__/mockRecipeList";
 import reducer from "../redux/reducer";
 import { store } from "../redux/store";
 

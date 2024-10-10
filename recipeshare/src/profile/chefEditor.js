@@ -19,7 +19,7 @@ import React from "react";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { connect } from "react-redux";
 import { countries } from "../constants/countries";
-import { patchChef } from "../fetches/patchChef";
+import { patchChef } from "../fetches";
 import { saveToken } from "../auxFunctions/saveLoadToken";
 import { styles } from "./chefEditorStyleSheet";
 

@@ -1,12 +1,13 @@
-import React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react-native";
-import { Provider } from "react-redux";
-import { configureStore } from "@reduxjs/toolkit";
-import { rootReducer } from "../redux";
-import NetInfo from "@react-native-community/netinfo";
+import { fireEvent, render, waitFor } from "@testing-library/react-native";
+
 import CreateChef from "./createChef";
-import { postChef } from "../fetches/postChef";
+import NetInfo from "@react-native-community/netinfo";
+import { Provider } from "react-redux";
+import React from "react";
 import { act } from "react-dom/test-utils";
+import { configureStore } from "@reduxjs/toolkit";
+import { postChef } from "../fetches";
+import { rootReducer } from "../redux";
 
 // manual mocks
 jest.mock("../fetches/postChef");

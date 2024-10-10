@@ -1,18 +1,15 @@
-import React from "react";
-import { render, fireEvent, waitFor, act } from "@testing-library/react-native";
-import { Provider } from "react-redux";
-import { configureStore } from "@reduxjs/toolkit";
+import { act, fireEvent, render, waitFor } from "@testing-library/react-native";
+import { fetchIngredients, patchRecipe, postInstructionImage, postRecipe, postRecipeImage } from "../fetches";
 import { rootReducer, updateLoggedInChef } from "../redux";
-import NewRecipe from "./newRecipe";
-import { postRecipe } from "../fetches/postRecipe";
-import { patchRecipe } from "../fetches/patchRecipe";
-import { postRecipeImage } from "../fetches/postRecipeImage";
-import { postInstructionImage } from "../fetches/postInstructionImage";
-import { fetchIngredients } from "../fetches/fetchIngredients";
-import { ingredients } from "../../__mocks__/data/ingredients";
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { recipeDetails } from "../../__mocks__/data/recipeDetails";
+import NewRecipe from "./newRecipe";
+import { Provider } from "react-redux";
+import React from "react";
+import { configureStore } from "@reduxjs/toolkit";
 import { getTimeStringFromMinutes } from "../auxFunctions/getTimeStringFromMinutes";
+import { ingredients } from "../../__mocks__/data/ingredients";
+import { recipeDetails } from "../../__mocks__/data/recipeDetails";
 
 // manual mocks
 jest.mock("../fetches/fetchIngredients");

@@ -1,5 +1,6 @@
 import { Animated, FlatList, Keyboard, Platform, RefreshControl, Text, TouchableOpacity, View } from "react-native";
 import { OfflineMessage, SearchBar, SearchBarClearButton, SpinachAppContainer } from "../components";
+import { destroyFollow, getChefDetails, getChefList, postFollow } from "../fetches";
 import { loadLocalChefLists, saveChefListsLocally } from "../auxFunctions/saveChefListsLocally";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 import { storeChefDetails, updateAllChefLists, updateSingleChefList } from "../redux";
@@ -12,10 +13,6 @@ import NetInfo from "@react-native-community/netinfo"; //5ms
 import React from "react";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { connect } from "react-redux";
-import { destroyFollow } from "../fetches/destroyFollow";
-import { getChefDetails } from "../fetches/getChefDetails";
-import { getChefList } from "../fetches/getChefList";
-import { postFollow } from "../fetches/postFollow";
 import saveChefDetailsLocally from "../auxFunctions/saveChefDetailsLocally";
 
 NetInfo.configure({ reachabilityShortTimeout: 5 });

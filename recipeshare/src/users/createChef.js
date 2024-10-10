@@ -15,7 +15,7 @@ import React from "react";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { connect } from "react-redux";
 import { countries } from "../constants/countries";
-import { postChef } from "../fetches/postChef";
+import { postChef } from "../fetches";
 import { privacyPolicy } from "../constants/privacyPolicy";
 import { termsAndConditions } from "../constants/termsAndConditions";
 

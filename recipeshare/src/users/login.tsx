@@ -12,13 +12,12 @@ import {
 	useAppSelector,
 } from "../redux";
 import { getLoggedInUserDetails, getStayLoggedIn } from "../redux/selectors";
+import { getNewPassword, postLoginChef } from "../fetches";
 import { responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
-import { getNewPassword } from "../fetches/getNewPassword";
-import { postLoginChef } from "../fetches/loginChef";
 import { saveToken } from "../auxFunctions/saveLoadToken";
 import { styles } from "./usersStyleSheet";
 

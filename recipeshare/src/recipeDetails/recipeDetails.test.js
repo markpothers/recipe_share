@@ -1,3 +1,4 @@
+import { destroyComment, destroyRecipeLike, postComment, postRecipeLike } from "../fetches";
 import { fireEvent, render, waitFor } from "@testing-library/react-native";
 import { rootReducer, storeRecipeDetails, updateLoggedInChef, updateSingleRecipeList } from "../redux";
 
@@ -8,14 +9,10 @@ import RecipeDetails from "./recipeDetails";
 import { chefDetails } from "../../__mocks__/data/chefDetails";
 import { configureStore } from "@reduxjs/toolkit";
 import { databaseURL } from "../constants/databaseURL";
-import { destroyComment } from "../fetches/destroyComment";
-import { destroyRecipeLike } from "../fetches/destroyRecipeLike";
-import { postComment } from "../fetches/postComment";
-import { postRecipeLike } from "../fetches/postRecipeLike";
 import { recipeDetails } from "../../__mocks__/data/recipeDetails";
 import { recipeList } from "../../__mocks__/data/recipeList";
 
-// import { getChefDetails } from "../fetches/getChefDetails";
+// import { getChefDetails } from "../fetches";
 
 
 

@@ -1,5 +1,16 @@
 import { Animated, FlatList, Keyboard, Platform, RefreshControl, Text, TouchableOpacity, View } from "react-native";
 import { FilterMenu, OfflineMessage, SearchBar, SearchBarClearButton, SpinachAppContainer } from "../components";
+import {
+	destroyReShare,
+	destroyRecipeLike,
+	getAvailableFilters,
+	getChefDetails,
+	getRecipeDetails,
+	getRecipeList,
+	postReShare,
+	postRecipeLike,
+	postRecipeMake,
+} from "../fetches";
 import { loadLocalRecipeLists, saveRecipeListsLocally } from "../auxFunctions/saveRecipeListsLocally";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 import { storeChefDetails, storeRecipeDetails, updateAllRecipeLists, updateSingleRecipeList } from "../redux";
@@ -14,15 +25,6 @@ import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-u
 import { clearedFilters } from "../constants/clearedFilters";
 import { connect } from "react-redux";
 import { cuisines } from "../constants/cuisines";
-import { destroyReShare } from "../fetches/destroyReShare";
-import { destroyRecipeLike } from "../fetches/destroyRecipeLike";
-import { getAvailableFilters } from "../fetches/getAvailableFilters";
-import { getChefDetails } from "../fetches/getChefDetails";
-import { getRecipeDetails } from "../fetches/getRecipeDetails";
-import { getRecipeList } from "../fetches/getRecipeList";
-import { postReShare } from "../fetches/postReShare";
-import { postRecipeLike } from "../fetches/postRecipeLike";
-import { postRecipeMake } from "../fetches/postRecipeMake";
 import saveChefDetailsLocally from "../auxFunctions/saveChefDetailsLocally";
 import saveRecipeDetailsLocally from "../auxFunctions/saveRecipeDetailsLocally";
 import { serves } from "../constants/serves";

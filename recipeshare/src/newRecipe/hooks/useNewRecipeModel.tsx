@@ -3,6 +3,7 @@ import * as ImagePicker from "expo-image-picker";
 import { Ingredient, NewRecipe, RecipeImage, RecipeIngredient, Unit } from "../../centralTypes";
 import { NewRecipeNavigationProps, NewRecipeRouteProps } from "../../navigation";
 import React, { useCallback, useEffect, useState } from "react";
+import { fetchIngredients, patchRecipe, postInstructionImage, postRecipe, postRecipeImage } from "../../fetches";
 import { getLoggedInChef, useAppSelector } from "../../redux";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
@@ -12,12 +13,7 @@ import { Keyboard } from "react-native";
 import NetInfo from "@react-native-community/netinfo";
 import { clearedFilters } from "../../constants/clearedFilters";
 import { emptyRecipe } from "../recipeTemplates/emptyRecipe";
-import { fetchIngredients } from "../../fetches/fetchIngredients";
 import { getMinutesFromTimeString } from "../../auxFunctions/getTimeStringFromMinutes";
-import { patchRecipe } from "../../fetches/patchRecipe";
-import { postInstructionImage } from "../../fetches/postInstructionImage";
-import { postRecipe } from "../../fetches/postRecipe";
-import { postRecipeImage } from "../../fetches/postRecipeImage";
 import { shortTestRecipe } from "../recipeTemplates/shortTestRecipe";
 import { useSpeechToText } from "./useSpeechToText";
 

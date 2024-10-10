@@ -21,21 +21,23 @@ import {
 	useAppDispatch,
 	useAppSelector,
 } from "../../redux";
+import {
+	destroyComment,
+	destroyMakePic,
+	destroyReShare,
+	destroyRecipe,
+	destroyRecipeLike,
+	getChefDetails,
+	postComment,
+	postMakePic,
+	postReShare,
+	postRecipeLike,
+	postRecipeMake
+} from "../../fetches";
 import { getAllRecipeLists, getLoggedInChef, getRecipeDetails } from "../../redux/selectors";
 
 import AppHeaderRight from "../../navigation/appHeaderRight";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { destroyComment } from "../../fetches/destroyComment";
-import { destroyMakePic } from "../../fetches/destroyMakePic";
-import { destroyReShare } from "../../fetches/destroyReShare";
-import { destroyRecipe } from "../../fetches/destroyRecipe";
-import { destroyRecipeLike } from "../../fetches/destroyRecipeLike";
-import { getChefDetails } from "../../fetches/getChefDetails";
-import { postComment } from "../../fetches/postComment";
-import { postMakePic } from "../../fetches/postMakePic";
-import { postReShare } from "../../fetches/postReShare";
-import { postRecipeLike } from "../../fetches/postRecipeLike";
-import { postRecipeMake } from "../../fetches/postRecipeMake";
 import { responsiveHeight } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 import saveChefDetailsLocally from "../../auxFunctions/saveChefDetailsLocally";
 import { useSelector } from "react-redux";
