@@ -2,7 +2,6 @@
 	"expo": {
 		"name": "Recipe-Share",
 		"slug": "recipe-share",
-		"privacy": "public",
 		"platforms": [
 			"ios",
 			"android"
