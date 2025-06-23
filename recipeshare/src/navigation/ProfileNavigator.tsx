@@ -19,6 +19,7 @@ const ProfileStack = (props: ProfileCoverProps & OwnProps) => {
 	const fwdProps = props;
 	return (
 		<Stack.Navigator
+			id={undefined}
 			initialRouteName="Profile"
 			screenOptions={{
 				headerMode: "screen",
@@ -31,7 +32,6 @@ const ProfileStack = (props: ProfileCoverProps & OwnProps) => {
 					marginRight: 0,
 				},
 				headerStatusBarHeight: 0,
-				headerBackTitleVisible: false,
 			}}
 		>
 			<Stack.Screen

@@ -46,7 +46,7 @@ const AppNavigator = () => {
 
 	if (loadedAndLoggedIn.loaded == true && loadedAndLoggedIn.loggedIn == true) {
 		return (
-			<AppNavigatorStack.Navigator initialRouteName="Home">
+			<AppNavigatorStack.Navigator initialRouteName="Home" id={undefined}>
 				<HomeStack.Screen name="Home" options={{ headerShown: false }}>
 					{(props) => <MainDrawerNavigator {...props} setLoadedAndLoggedIn={setLoadedAndLoggedIn} />}
 				</HomeStack.Screen>
@@ -54,7 +54,7 @@ const AppNavigator = () => {
 		);
 	} else if (loadedAndLoggedIn.loaded == true && loadedAndLoggedIn.loggedIn == false) {
 		return (
-			<AppNavigatorStack.Navigator initialRouteName="Login">
+			<AppNavigatorStack.Navigator initialRouteName="Login" id={undefined}>
 				<LoginStack.Screen
 					name="Login"
 					options={{ headerShown: false }}
@@ -73,10 +73,16 @@ const AppNavigator = () => {
 		);
 	} else {
 		return (
-			<AppNavigatorStack.Navigator initialRouteName="AppLoadingStack">
-				<AppLoadingStack.Screen name="AppLoading" options={{ headerShown: false }}>
-					{(props) => <AppLoading {...props} setLoadedAndLoggedIn={setLoadedAndLoggedIn} />}
-				</AppLoadingStack.Screen>
+			<AppNavigatorStack.Navigator initialRouteName="AppLoadingStack" id={undefined}>
+				<AppNavigatorStack.Screen name="AppLoadingStack" options={{ headerShown: false }}>
+					{(props) => (
+						<AppLoadingStack.Navigator id={undefined}>
+							<AppLoadingStack.Screen name="AppLoading" options={{ headerShown: false }}>
+								{(_props) => <AppLoading {..._props} setLoadedAndLoggedIn={setLoadedAndLoggedIn} />}
+							</AppLoadingStack.Screen>
+						</AppLoadingStack.Navigator>
+					)}
+				</AppNavigatorStack.Screen>
 			</AppNavigatorStack.Navigator>
 		);
 	}

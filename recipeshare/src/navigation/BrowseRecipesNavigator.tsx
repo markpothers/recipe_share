@@ -56,6 +56,7 @@ const BrowseRecipesTabs = (props) => {
 		<React.Fragment>
 			{dynamicMenuShowing && renderDynamicMenu()}
 			<Tab.Navigator
+				id={undefined}
 				screenOptions={() => ({
 					tabBarActiveTintColor: "#fff59b",
 					tabBarInactiveTintColor: "#fff59b",
@@ -95,6 +96,7 @@ const Stack = createStackNavigator<BrowseRecipesStackParamList>();
 const BrowseRecipesStack = () => {
 	return (
 		<Stack.Navigator
+			id={undefined}
 			initialRouteName="BrowseRecipes"
 			screenOptions={{
 				headerMode: "screen",
@@ -107,7 +109,6 @@ const BrowseRecipesStack = () => {
 					marginRight: 0,
 				},
 				headerStatusBarHeight: 0,
-				headerBackTitleVisible: false,
 			}}
 		>
 			<Stack.Screen
