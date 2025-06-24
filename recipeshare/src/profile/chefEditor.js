@@ -502,7 +502,7 @@ export default connect(
 			if (Platform.OS === "ios") {
 				return (
 					<Modal animationType="fade" transparent={true} visible={this.state.updateModalVisible}>
-						<KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : ""}>
+						<KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}>
 							{this.renderContents()}
 						</KeyboardAvoidingView>
 					</Modal>

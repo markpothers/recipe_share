@@ -20,7 +20,7 @@ const SpinachAppContainer = ({ scrollingEnabled, awaitingServer, children }: Own
 				<KeyboardAvoidingView
 					style={centralStyles.fullPageKeyboardAvoidingView}
 					// @ts-ignore
-					behavior={Platform.OS === "ios" ? "padding" : ""}
+					behavior={Platform.OS === "ios" ? "padding" : "height"}
 					keyboardVerticalOffset={Platform.OS === "ios" ? 20 : 0}
 				>
 					<Image

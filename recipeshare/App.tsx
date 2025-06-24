@@ -2,12 +2,12 @@ import "react-native-gesture-handler"; // required by react-navigation
 
 import * as SplashScreen from "expo-splash-screen";
 
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { LogBox, Platform, StyleSheet } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 import AppNavigator from "./src/navigation/AppNavigator";
-import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { Provider } from "react-redux";
 import { StatusBar } from "expo-status-bar";
 import { store } from "./src/redux/store";
@@ -61,7 +61,6 @@ export default function App() {
 			>
 				<Provider store={store}>
 					<SafeAreaView style={styles.container}>
-						{/* {Platform.OS === "ios" && <StatusBar barStyle="default" />} */}
 						<StatusBar
 							backgroundColor="#000"
 							style={Platform.OS === "ios" ? "auto" : "light"}

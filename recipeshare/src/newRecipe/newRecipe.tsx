@@ -214,9 +214,7 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 			{helpShowing && renderHelp()}
 			<KeyboardAvoidingView
 				style={centralStyles.fullPageKeyboardAvoidingView}
-				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-				// @ts-ignore
-				behavior={Platform.OS === "ios" ? "padding" : ""}
+				behavior={Platform.OS === "ios" ? "padding" : "height"}
 				keyboardVerticalOffset={Platform.OS === "ios" ? responsiveHeight(9) + 12 : 0}
 			>
 				<ScrollView
