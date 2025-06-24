@@ -7,7 +7,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 import AppNavigator from "./src/navigation/AppNavigator";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { Provider } from "react-redux";
 import { StatusBar } from "expo-status-bar";
 import { store } from "./src/redux/store";
@@ -53,11 +53,19 @@ export default function App() {
 	LogBox.ignoreAllLogs();
 	return (
 		<SafeAreaProvider onLayout={onLayoutRootView}>
-			<NavigationContainer>
+			<NavigationContainer
+				theme={{
+					...DefaultTheme,
+					colors: { ...DefaultTheme.colors, background: "#104e01" },
+				}}
+			>
 				<Provider store={store}>
 					<SafeAreaView style={styles.container}>
 						{/* {Platform.OS === "ios" && <StatusBar barStyle="default" />} */}
-						<StatusBar backgroundColor="#000" style={Platform.OS === "ios" ? "auto" : "light"} />
+						<StatusBar
+							backgroundColor="#000"
+							style={Platform.OS === "ios" ? "auto" : "light"}
+						/>
 						<AppNavigator />
 					</SafeAreaView>
 				</Provider>
@@ -69,7 +77,7 @@ export default function App() {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: "#fff",
+		backgroundColor: "#104e01",
 		// borderWidth: 1,
 		// borderColor: "red"
 	},

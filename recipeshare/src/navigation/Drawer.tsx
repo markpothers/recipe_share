@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import { responsiveFontSize, responsiveHeight } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Constants from "expo-constants";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { deleteToken } from "../auxFunctions/saveLoadToken";
 import { getLoggedInChef } from "../redux";
@@ -43,10 +44,9 @@ const CustomDrawer = (props: OwnProps & DrawerContentComponentProps) => {
 				style={[
 					styles.mainPageContainer,
 					{
-						height: responsiveHeight(90),
+						height: responsiveHeight(85),
 						// borderColor: "red",
 						// borderWidth: 1,
-						// marginTop: Constants.statusBarHeight,
 					},
 				]}
 			>

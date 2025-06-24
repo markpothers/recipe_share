@@ -578,9 +578,8 @@ const RecipeDetails = ({ navigation, route }: OwnProps) => {
 				)}
 				<KeyboardAvoidingView
 					style={centralStyles.fullPageKeyboardAvoidingView}
-					// @ts-ignore
-					behavior={Platform.OS === "ios" ? "padding" : ""}
-					keyboardVerticalOffset={Platform.OS === "ios" ? responsiveHeight(9) + 20 : 0}
+					behavior={Platform.OS === "ios" ? "padding" : "height"}
+					keyboardVerticalOffset={Platform.OS === "ios" ? responsiveHeight(9) + 20 : 50}
 				>
 					<ScrollView
 						contentContainerStyle={{ flexGrow: 1 }}
@@ -878,7 +877,7 @@ const RecipeDetails = ({ navigation, route }: OwnProps) => {
 	} else {
 		return (
 			<SpinachAppContainer awaitingServer={awaitingServer} scrollingEnabled={false}>
-				{}
+				{[]}
 			</SpinachAppContainer>
 		);
 	}
