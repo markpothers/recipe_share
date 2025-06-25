@@ -6,6 +6,7 @@ import { OfflineMessage } from "../components";
 import React from "react";
 import { databaseURL } from "../constants/databaseURL";
 import { styles } from "./chefListStyleSheet";
+import defaultChef from "../../assets/images/default-chef.jpg";
 
 export default class ChefCard extends React.PureComponent {
 	render() {
@@ -95,7 +96,7 @@ function AvatarImage(chefimage_url) {
 		return (
 			<Image
 				style={styles.avatarThumbnail}
-				source={require("../../assets/images/default-chef.jpg")}
+				source={defaultChef}
 				resizeMode={"cover"}
 			/>
 		);

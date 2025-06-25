@@ -5,6 +5,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import React from "react";
 import { databaseURL } from "../constants/databaseURL";
 import { styles } from "./chefDetailsStyleSheet";
+import defaultChef from "../../assets/images/default-chef.jpg";
 
 export default class ChefDetailsCard extends React.PureComponent {
 	renderFollowButton = () => {
@@ -186,7 +187,7 @@ function AvatarImage(chefimage_url) {
 		return (
 			<Image
 				style={styles.avatarThumbnail}
-				source={require("../../assets/images/default-chef.jpg")}
+				source={defaultChef}
 				resizeMode={"cover"}
 			/>
 		);

@@ -1,4 +1,6 @@
 import * as Device from "expo-device";
+import greenLogo from "../../assets/images/greenLogo.png";
+import defaultChef from "../../assets/images/default-chef.jpg";
 
 import { DrawerContentComponentProps, DrawerContentScrollView } from "@react-navigation/drawer";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
@@ -6,7 +8,6 @@ import React, { useEffect, useState } from "react";
 import { responsiveFontSize, responsiveHeight } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Constants from "expo-constants";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { deleteToken } from "../auxFunctions/saveLoadToken";
 import { getLoggedInChef } from "../redux";
@@ -39,12 +40,15 @@ const CustomDrawer = (props: OwnProps & DrawerContentComponentProps) => {
 	};
 
 	return (
-		<DrawerContentScrollView {...props}>
+		<DrawerContentScrollView
+			{...props}
+			contentContainerStyle={{ flex: 1, paddingTop: 30, paddingHorizontal: 0, margin: 0 }}
+		>
 			<View
 				style={[
 					styles.mainPageContainer,
 					{
-						height: responsiveHeight(85),
+						height: responsiveHeight(87),
 						// borderColor: "red",
 						// borderWidth: 1,
 					},
@@ -55,7 +59,7 @@ const CustomDrawer = (props: OwnProps & DrawerContentComponentProps) => {
 						<Image
 							style={styles.logo}
 							resizeMode="contain"
-							source={require("../../assets/images/greenLogo.png")}
+							source={greenLogo}
 						/>
 					</View>
 				</View>
@@ -172,7 +176,7 @@ const CustomDrawer = (props: OwnProps & DrawerContentComponentProps) => {
 function AvatarImage(props) {
 	const URL = props.image_url;
 	if (!URL) {
-		return <Image style={styles.avatarThumbnail} source={require("../../assets/images/default-chef.jpg")} />;
+		return <Image style={styles.avatarThumbnail} source={defaultChef} />;
 	} else {
 		return <Image style={styles.avatarThumbnail} source={{ uri: URL }} />;
 	}

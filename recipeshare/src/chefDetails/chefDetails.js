@@ -12,6 +12,7 @@ import React from "react";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { connect } from "react-redux";
 import { styles } from "./chefDetailsStyleSheet";
+import defaultChef from "../../assets/images/default-chef.jpg";
 
 NetInfo.configure({ reachabilityShortTimeout: 5 });
 
@@ -160,8 +161,8 @@ export default connect(
 					return (
 						<Image
 							style={{ width: "100%", height: "100%" }}
-							source={require("../../assets/images/default-chef.jpg")}
-						></Image>
+							source={defaultChef}
+						/>
 					);
 				}
 			}

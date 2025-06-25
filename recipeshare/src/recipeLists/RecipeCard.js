@@ -6,8 +6,8 @@ import { OfflineMessage } from "../components";
 import React from "react";
 import { getTimeStringFromMinutes } from "../auxFunctions/getTimeStringFromMinutes";
 import { styles } from "./recipeListStyleSheet";
-
-const defaultRecipeImage = require("../../assets/images/default-recipe.jpg");
+import defaultChef from "../../assets/images/default-chef.jpg";
+import defaultRecipeImage from "../../assets/images/default-recipe.jpg";
 
 export default class RecipeCard extends React.PureComponent {
 	navigateToSharer = (chefID) => {
@@ -194,7 +194,7 @@ function AvatarImage(chefimage_url) {
 		return (
 			<Image
 				style={styles.avatarThumbnail}
-				source={require("../../assets/images/default-chef.jpg")}
+				source={defaultChef}
 				accessibilityLabel={"picture of chef"}
 			/>
 		);
