@@ -485,7 +485,6 @@ export const useNewRecipeModel = (
 									screen: "My Recipes",
 									params: { refresh: true },
 								});
-								// });
 							}
 						}
 					}
