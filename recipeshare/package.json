@@ -69,7 +69,6 @@
 		"react-native": "0.79.3",
 		"react-native-autocomplete-input": "5.4.0",
 		"react-native-drag-sort": "markpothers/react-native-drag-sort#b8bf50c103cecb6316647ac158b828139c6ba1c4",
-		"react-native-elements": "^1.1.0",
 		"react-native-gesture-handler": "~2.24.0",
 		"react-native-pager-view": "6.7.1",
 		"react-native-reanimated": "~3.17.4",
