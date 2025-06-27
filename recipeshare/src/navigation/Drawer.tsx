@@ -1,6 +1,4 @@
 import * as Device from "expo-device";
-import greenLogo from "../../assets/images/greenLogo.png";
-import defaultChef from "../../assets/images/default-chef.jpg";
 
 import { DrawerContentComponentProps, DrawerContentScrollView } from "@react-navigation/drawer";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
@@ -9,8 +7,10 @@ import { responsiveFontSize, responsiveHeight } from "react-native-responsive-di
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import defaultChef from "../../assets/images/default-chef.jpg";
 import { deleteToken } from "../auxFunctions/saveLoadToken";
 import { getLoggedInChef } from "../redux";
+import greenLogo from "../../assets/images/greenLogo.png";
 import { styles } from "./drawerStyleSheet";
 import { useAppSelector } from "../redux/hooks";
 
@@ -56,11 +56,7 @@ const CustomDrawer = (props: OwnProps & DrawerContentComponentProps) => {
 			>
 				<View style={styles.headerContainer}>
 					<View style={styles.headerTopContainer}>
-						<Image
-							style={styles.logo}
-							resizeMode="contain"
-							source={greenLogo}
-						/>
+						<Image style={styles.logo} resizeMode="contain" source={greenLogo} />
 					</View>
 				</View>
 				<View style={styles.horizontalRule}></View>

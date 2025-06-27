@@ -1,8 +1,8 @@
 import { Image, Modal, Text, TouchableOpacity, View } from "react-native";
 import { InstructionImage, MakePic, MakePicChef, RecipeImage, SimpleChef } from "../../centralTypes";
-import defaultChef from "../../../assets/images/default-chef.jpg";
 
 import React from "react";
+import defaultChef from "../../../assets/images/default-chef.jpg";
 import { styles } from "../recipeDetailsStyleSheet";
 
 type OwnProps = {
