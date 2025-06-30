@@ -6,6 +6,14 @@ import React from "react";
 import { centralStyles } from "../../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { styles } from "./alertPopupStyleSheet";
 
+// Type assertion for Icon component to fix TypeScript issues
+const IconComponent = Icon as React.ComponentType<{
+	name: string;
+	size: number;
+	style?: object;
+	color?: string;
+}>;
+
 type Props = {
 	title: string;
 	close?: () => void;
@@ -16,7 +24,13 @@ type Props = {
 
 export function AlertPopup(props: Props) {
 	return (
-		<Modal animationType="fade" transparent={true} visible={true}>
+		<Modal
+			animationType="fade"
+			transparent={true}
+			visible={true}
+			presentationStyle="overFullScreen"
+			statusBarTranslucent={true}
+		>
 			<View
 				style={[
 					styles.modalFullScreenContainer,
@@ -52,11 +66,11 @@ export function AlertPopup(props: Props) {
 									testID={"closeButton"}
 									accessibilityRole="button"
 								>
-									<Icon
+									<IconComponent
 										style={centralStyles.yellowButtonIcon}
 										size={responsiveHeight(4)}
 										name="cancel"
-									></Icon>
+									></IconComponent>
 									<Text maxFontSizeMultiplier={2} style={centralStyles.yellowButtonText}>
 										{props.closeText ? props.closeText : "Cancel"}
 									</Text>
@@ -70,15 +84,15 @@ export function AlertPopup(props: Props) {
 								testID={"yesButton"}
 								accessibilityRole="button"
 							>
-								<Icon
+								<IconComponent
 									style={centralStyles.yellowButtonIcon}
 									size={responsiveHeight(4)}
 									name="check"
-								></Icon>
+								></IconComponent>
 								<Text maxFontSizeMultiplier={2} style={centralStyles.yellowButtonText}>
 									{props.yesText ? props.yesText : "Yes"}
 								</Text>
-							</TouchableOpacity>
+							</TouchableOpacity>{" "}
 						</View>
 					</View>
 				</View>

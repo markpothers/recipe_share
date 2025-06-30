@@ -58,7 +58,8 @@
 			"eas": {
 				"projectId": "2ebe3530-e000-11e9-a464-1daf89a8f23f"
 			}
-		},		"plugins": [
+		},
+		"plugins": [
 			"expo-font",
 			"expo-secure-store",
 			"expo-asset",
@@ -67,7 +68,9 @@
 				{
 					"microphonePermission": "Allow $(PRODUCT_NAME) to use the microphone for speech-to-text when creating recipes.",
 					"speechRecognitionPermission": "Allow $(PRODUCT_NAME) to use speech recognition for easier recipe creation.",
-					"androidSpeechServicePackages": ["com.google.android.googlequicksearchbox"]
+					"androidSpeechServicePackages": [
+						"com.google.android.googlequicksearchbox"
+					]
 				}
 			]
 		]

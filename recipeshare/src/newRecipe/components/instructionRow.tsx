@@ -1,10 +1,17 @@
 import React, { useRef } from "react";
 import { TextInput, TouchableOpacity, View } from "react-native";
-import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+import { responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions";
 
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { centralStyles } from "../../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { styles } from "../newRecipeStyleSheet";
+
+// Type assertion for Icon component to fix TypeScript issues
+const IconComponent = Icon as React.ComponentType<{
+	name: string;
+	size: number;
+	style: object;
+}>;
 
 type OwnProps = {
 	index: number;
@@ -18,6 +25,8 @@ type OwnProps = {
 	inputToFocus: boolean;
 	setNextInstructionInput: (element: TextInput) => void;
 	isRecording: boolean;
+	onLongPress?: () => void;
+	isActive?: boolean;
 };
 
 export const InstructionRow = ({
@@ -32,14 +41,19 @@ export const InstructionRow = ({
 	inputToFocus,
 	setNextInstructionInput,
 	isRecording,
-}: OwnProps) => {
+	onLongPress,
+}: // isActive - reserved for future drag visual feedback
+OwnProps) => {
 	const textInput = useRef(null);
-
 	return (
 		<View style={[centralStyles.formInputContainer, { width: responsiveWidth(100) }]}>
-			<View style={[styles.deleteInstructionContainer, { width: responsiveWidth(12) }]}>
-				<Icon name="menu" size={responsiveHeight(3.5)} style={styles.ingredientTrashCan} />
-			</View>
+			<TouchableOpacity
+				style={[styles.deleteInstructionContainer, { width: responsiveWidth(12) }]}
+				onLongPress={onLongPress}
+				disabled={!onLongPress}
+			>
+				<IconComponent name="menu" size={responsiveHeight(3.5)} style={styles.ingredientTrashCan} />
+			</TouchableOpacity>
 			<View
 				style={[centralStyles.formInputWhiteBackground, { width: "57%" }]}
 				ref={textInput}
@@ -75,7 +89,7 @@ export const InstructionRow = ({
 				onPress={() => onInstructionMicrophonePress(index)}
 				activeOpacity={0.7}
 			>
-				<Icon
+				<IconComponent
 					name="microphone"
 					size={responsiveHeight(3.5)}
 					style={[styles.ingredientTrashCan, { color: isRecording ? "white" : "#505050" }]}
@@ -90,7 +104,7 @@ export const InstructionRow = ({
 				onPress={() => chooseInstructionPicture(index)}
 				testID={`photo-instruction${index + 1}`}
 			>
-				<Icon
+				<IconComponent
 					name="camera"
 					size={responsiveHeight(3.5)}
 					style={[styles.ingredientTrashCan, { color: instructionImagePresent ? "white" : "#505050" }]}
@@ -102,7 +116,11 @@ export const InstructionRow = ({
 				activeOpacity={0.7}
 				testID={`delete-instruction${index + 1}`}
 			>
-				<Icon name="trash-can-outline" size={responsiveHeight(3.5)} style={styles.ingredientTrashCan} />
+				<IconComponent
+					name="trash-can-outline"
+					size={responsiveHeight(3.5)}
+					style={styles.ingredientTrashCan}
+				/>
 			</TouchableOpacity>
 		</View>
 	);

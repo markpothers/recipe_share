@@ -1,10 +1,11 @@
-import { StyleSheet } from "react-native"
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions" //eslint-disable-line no-unused-vars
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+
+import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
 	modalFullScreenContainer: {
 		alignItems: "center",
-		justifyContent: "center"
+		justifyContent: "center",
 	},
 	contentsContainer: {
 		borderStyle: "solid",
@@ -14,17 +15,17 @@ export const styles = StyleSheet.create({
 		width: responsiveWidth(85),
 		marginLeft: "7.5%",
 		marginRight: "7.5%",
-		borderRadius:responsiveWidth(1.5),
-		alignItems: "center"
+		borderRadius: responsiveWidth(1.5),
+		alignItems: "center",
 	},
 	titleContainer: {
 		justifyContent: "center",
 		width: "90%",
-		paddingTop: responsiveHeight(1)
+		paddingTop: responsiveHeight(1),
 	},
 	title: {
 		color: "#104e01",
 		fontSize: responsiveFontSize(2.2),
-		fontWeight: "bold"
-	}
-})
+		fontWeight: "bold",
+	},
+});

@@ -95,9 +95,9 @@ export const softwarePackages = [
 		url: "https://github.com/mrlaessig/react-native-autocomplete-input/blob/master/LICENSE",
 	},
 	{
-		name: "react-native-drag-sort",
-		copyright: "Copyright 2021 github.com/mochixuan",
-		url: "https://github.com/mochixuan/react-native-drag-sort/blob/master/LICENSE",
+		name: "react-native-draggable-flatlist",
+		copyright: "Copyright (c) 2025 computerjazz",
+		url: "https://github.com/computerjazz/react-native-draggable-flatlist/blob/main/LICENSE.txt",
 	},
 	{
 		name: "react-native-elements",

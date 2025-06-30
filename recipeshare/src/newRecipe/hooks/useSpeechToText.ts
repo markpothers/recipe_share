@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { useCallback, useRef, useState, useEffect } from "react";
+
+import { useCallback, useEffect, useRef, useState } from "react";
+
 import { Alert } from "react-native";
 
 type SpeechRecognitionCallback = (speechResult: string, isFinished: boolean) => void;
@@ -34,7 +36,7 @@ try {
 
 /**
  * Speech-to-text hook with conditional implementation.
- * 
+ *
  * In development builds: Uses full speech recognition
  * In Expo Go: Shows helpful alert and provides fallback behavior
  */
@@ -55,12 +57,15 @@ export const useSpeechToText = () => {
 				speechResultCallback.current("", true);
 			}
 		});
-		const resultListener = speechModule.ExpoSpeechRecognitionModule.addListener("result", (event: { results: Array<{ transcript: string }>; isFinal: boolean }) => {
-			if (speechResultCallback.current && event.results && event.results.length > 0) {
-				const transcript = event.results[0]?.transcript || "";
-				speechResultCallback.current(transcript, event.isFinal || false);
+		const resultListener = speechModule.ExpoSpeechRecognitionModule.addListener(
+			"result",
+			(event: { results: Array<{ transcript: string }>; isFinal: boolean }) => {
+				if (speechResultCallback.current && event.results && event.results.length > 0) {
+					const transcript = event.results[0]?.transcript || "";
+					speechResultCallback.current(transcript, event.isFinal || false);
+				}
 			}
-		});
+		);
 
 		const errorListener = speechModule.ExpoSpeechRecognitionModule.addListener("error", () => {
 			setIsRecording(false);
@@ -97,7 +102,7 @@ export const useSpeechToText = () => {
 
 	const startSpeechToText = useCallback(async (callback: SpeechRecognitionCallback) => {
 		speechResultCallback.current = callback;
-		
+
 		// If speech recognition module is not available (Expo Go), show alert and fail gracefully
 		if (!speechModule?.ExpoSpeechRecognitionModule) {
 			showExpoGoFallbackAlert();

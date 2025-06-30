@@ -25,7 +25,7 @@ import { getMinutesFromTimeString, getTimeStringFromMinutes } from "../auxFuncti
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
 import { AlertPopup } from "../components";
-import { DragSortableView } from "react-native-drag-sort/lib";
+import DraggableFlatList from "react-native-draggable-flatlist";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import IngredientAutoComplete from "./ingredientAutoComplete";
 import { InstructionRow } from "./components/instructionRow";
@@ -39,6 +39,14 @@ import helpTexts from "../constants/helpTexts";
 import { serves } from "../constants/serves";
 import { styles } from "./newRecipeStyleSheet";
 import { useNewRecipeModel } from "./hooks/useNewRecipeModel";
+
+// Type assertion for Icon component to fix TypeScript issues
+const IconComponent = Icon as React.ComponentType<{
+	name: string;
+	size: number;
+	style?: object;
+	color?: string;
+}>;
 
 NetInfo.configure({ reachabilityShortTimeout: 5 }); //5ms
 
@@ -62,7 +70,7 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 		setHelpText,
 		ingredientsList,
 		autoCompleteFocused,
-		setAutoCompleteFocused,
+		// setAutoCompleteFocused, // unused in current implementation
 		choosingPrimaryPicture,
 		choosingInstructionPicture,
 		instructionImageIndex,
@@ -72,8 +80,8 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 		errors,
 		offlineDiagnostics,
 		newRecipeDetails,
-		instructionHeights,
-		averageInstructionHeight,
+		// instructionHeights, // unused in current implementation
+		// averageInstructionHeight, // unused in current implementation
 		activateScrollView,
 		deactivateScrollView,
 		askToReset,
@@ -108,9 +116,17 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 		startAcknowledgementSpeechRecognition,
 		isRecordingAcknowledgement,
 	} = useNewRecipeModel(props.navigation, props.route, nextInstructionInput, nextIngredientInput);
-
 	const renderAlertPopup = () => {
 		const isEditing = props.route.params?.recipe_details !== undefined;
+
+		const handleYes = () => {
+			if (isEditing) {
+				clearEditRecipeDetails(false);
+			} else {
+				clearNewRecipeDetails();
+			}
+		};
+
 		return (
 			<AlertPopup
 				close={() => setAlertPopupShowing(false)}
@@ -119,7 +135,7 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 						? "Are you sure you want to clear your changes and revert to the original recipe"
 						: "Are you sure you want to clear this form and start a new recipe?"
 				}
-				onYes={isEditing ? () => clearEditRecipeDetails(false) : () => clearNewRecipeDetails()}
+				onYes={handleYes}
 			/>
 		);
 	};
@@ -256,11 +272,11 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 									}}
 									accessibilityLabel={"recipe name help"}
 								>
-									<Icon
+									<IconComponent
 										style={centralStyles.greenButtonIcon}
 										size={responsiveHeight(3)}
 										name="help"
-									></Icon>
+									></IconComponent>
 								</TouchableOpacity>
 							</View>
 							<View style={centralStyles.formInputContainer}>
@@ -299,11 +315,11 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 								}}
 								accessibilityLabel={"about help"}
 							>
-								<Icon
+								<IconComponent
 									style={centralStyles.greenButtonIcon}
 									size={responsiveHeight(3)}
 									name="help"
-								></Icon>
+								></IconComponent>
 							</TouchableOpacity>
 						</View>
 						<View style={centralStyles.formSection}>
@@ -327,7 +343,7 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 									onPress={startAboutSpeechRecognition}
 									activeOpacity={0.7}
 								>
-									<Icon
+									<IconComponent
 										name="microphone"
 										size={responsiveHeight(3.5)}
 										style={[
@@ -350,11 +366,11 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 									activeOpacity={0.7}
 									onPress={choosePrimaryPicture}
 								>
-									<Icon
+									<IconComponent
 										style={centralStyles.greenButtonIcon}
 										size={responsiveHeight(4)}
 										name="camera"
-									></Icon>
+									></IconComponent>
 									<Text
 										maxFontSizeMultiplier={2}
 										style={[
@@ -377,11 +393,11 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 									}}
 									accessibilityLabel={"cover pictures help"}
 								>
-									<Icon
+									<IconComponent
 										style={centralStyles.greenButtonIcon}
 										size={responsiveHeight(3)}
 										name="help"
-									></Icon>
+									></IconComponent>
 								</TouchableOpacity>
 							</View>
 						</View>
@@ -409,11 +425,11 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 									}}
 									accessibilityLabel={"timings help"}
 								>
-									<Icon
+									<IconComponent
 										style={centralStyles.greenButtonIcon}
 										size={responsiveHeight(3)}
 										name="help"
-									></Icon>
+									></IconComponent>
 								</TouchableOpacity>
 							</View>
 							<View style={centralStyles.formInputContainer}>
@@ -514,11 +530,11 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 									}}
 									accessibilityLabel={"difficulty help"}
 								>
-									<Icon
+									<IconComponent
 										style={centralStyles.greenButtonIcon}
 										size={responsiveHeight(3)}
 										name="help"
-									></Icon>
+									></IconComponent>
 								</TouchableOpacity>
 							</View>
 							<View style={centralStyles.formInputContainer}>
@@ -550,11 +566,11 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 									activeOpacity={0.7}
 									onPress={handleCategoriesButton}
 								>
-									<Icon
+									<IconComponent
 										style={centralStyles.greenButtonIcon}
 										size={responsiveHeight(4)}
 										name="filter"
-									></Icon>
+									></IconComponent>
 									<Text
 										maxFontSizeMultiplier={2}
 										style={[
@@ -577,11 +593,11 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 									}}
 									accessibilityLabel={"filter categories help"}
 								>
-									<Icon
+									<IconComponent
 										style={centralStyles.greenButtonIcon}
 										size={responsiveHeight(3)}
 										name="help"
-									></Icon>
+									></IconComponent>
 								</TouchableOpacity>
 							</View>
 						</View>
@@ -609,11 +625,11 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 									}}
 									accessibilityLabel={"acknowledgement help"}
 								>
-									<Icon
+									<IconComponent
 										style={centralStyles.greenButtonIcon}
 										size={responsiveHeight(3)}
 										name="help"
-									></Icon>
+									></IconComponent>
 								</TouchableOpacity>
 							</View>
 							<View style={centralStyles.formInputContainer}>
@@ -639,7 +655,7 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 									onPress={() => startAcknowledgementSpeechRecognition()}
 									activeOpacity={0.7}
 								>
-									<Icon
+									<IconComponent
 										name="microphone"
 										size={responsiveHeight(3.5)}
 										style={[
@@ -691,11 +707,11 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 									}}
 									accessibilityLabel={"display as help"}
 								>
-									<Icon
+									<IconComponent
 										style={centralStyles.greenButtonIcon}
 										size={responsiveHeight(3)}
 										name="help"
-									></Icon>
+									></IconComponent>
 								</TouchableOpacity>
 							</View>
 							<View style={centralStyles.formInputContainer}>
@@ -767,74 +783,75 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 										}}
 										accessibilityLabel={"ingredients help"}
 									>
-										<Icon
+										<IconComponent
 											style={centralStyles.greenButtonIcon}
 											size={responsiveHeight(3)}
 											name="help"
-										></Icon>
+										></IconComponent>
 									</TouchableOpacity>
 								</View>
 								<View
 									style={[
 										centralStyles.formSection,
-										autoCompleteFocused !== null && { zIndex: 1 },
+										// autoCompleteFocused !== null && { zIndex: 1 },
 										{
 											// paddingBottom:
 											// newRecipeDetails.ingredients.length > 0 ? responsiveHeight(11) : 0,
-											// borderWidth: 1,
+											// borderWidth: 5,
 											// borderColor: "yellow",
 										},
 									]}
 								>
-									<DragSortableView
-										// padding gives room for the bottom autocomplete dropdown to be fully responsive
-										containerStyle={{
-											height:
-												newRecipeDetails.ingredients.length > 0
-													? newRecipeDetails.ingredients.length * responsiveHeight(13) +
-													  responsiveHeight(17) +
-													  responsiveHeight(0.5)
-													: 0,
-										}}
-										dataSource={newRecipeDetails.ingredients}
-										parentWidth={responsiveWidth(100)}
-										childrenWidth={responsiveWidth(100)}
-										childrenHeight={responsiveHeight(12.5)}
-										reverseChildZIndexing={true}
-										marginChildrenTop={responsiveHeight(0.5)}
-										onDataChange={(newIngredients) => handleIngredientSort(newIngredients)}
-										onClickItem={() => {
-											if (autoCompleteFocused !== null) {
-												setAutoCompleteFocused(null);
-											}
-											// Keyboard.dismiss()
-										}}
-										onDragStart={() => {
+									<DraggableFlatList
+										data={newRecipeDetails.ingredients}
+										keyExtractor={(item, index) => `ingredient-${index}`}
+										onDragBegin={() => {
 											deactivateScrollView();
 											Keyboard.dismiss();
 										}}
-										onDragEnd={activateScrollView}
-										delayLongPress={200}
-										keyExtractor={(item, index) => `${index}`}
-										renderItem={(item, index) => {
+										onDragEnd={({ data }) => {
+											handleIngredientSort(data);
+											activateScrollView();
+										}}
+										renderItem={({ item, drag, isActive, getIndex }) => {
+											const index = getIndex() ?? 0;
 											return (
-												<IngredientAutoComplete
-													removeIngredient={removeIngredient}
-													// key={index}
-													ingredientIndex={index}
-													ingredient={item}
-													ingredientsList={ingredientsList}
-													focused={autoCompleteFocused}
-													index={index}
-													ingredientsLength={newRecipeDetails.ingredients.length}
-													thisAutocompleteIsFocused={autocompleteIsFocused}
-													updateIngredientEntry={updateIngredientEntry}
-													setNextIngredientInput={(element) => {
-														nextIngredientInput.current = element;
+												<View
+													style={{
+														marginTop: responsiveHeight(0.5),
+														zIndex: alertPopupShowing
+															? 0
+															: Math.min(10, newRecipeDetails.ingredients.length - index),
 													}}
-													inputToFocus={index === newRecipeDetails.ingredients.length - 1}
-												/>
+												>
+													<IngredientAutoComplete
+														removeIngredient={removeIngredient}
+														ingredientIndex={index}
+														ingredient={item}
+														ingredientsList={ingredientsList}
+														focused={autoCompleteFocused}
+														index={index}
+														ingredientsLength={newRecipeDetails.ingredients.length}
+														thisAutocompleteIsFocused={autocompleteIsFocused}
+														updateIngredientEntry={updateIngredientEntry}
+														setNextIngredientInput={(element) => {
+															nextIngredientInput.current = element;
+														}}
+														inputToFocus={index === newRecipeDetails.ingredients.length - 1}
+														onLongPress={drag}
+														isActive={isActive}
+													/>
+												</View>
 											);
+										}}
+										nestedScrollEnabled={true}
+										scrollEnabled={false}
+										style={{
+											height:
+												newRecipeDetails.ingredients.length > 0
+													? newRecipeDetails.ingredients.length * responsiveHeight(13) +
+													  responsiveHeight(0.5)
+													: 0,
 										}}
 									/>
 									{/*negative margin to bring the button into line under the padding added to the dragSortableScrollView */}
@@ -843,10 +860,10 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 									style={[
 										styles.plusButtonContainer,
 										{
-											marginTop:
-												newRecipeDetails.ingredients.length > 0
-													? -responsiveHeight(17)
-													: responsiveHeight(0.5),
+											// marginTop:
+											// 	newRecipeDetails.ingredients.length > 0
+											// 		? -responsiveHeight(17)
+											// 		: responsiveHeight(0.5),
 											// borderWidth: 1,
 											// borderColor: "orange",
 											// zIndex: 'unset'
@@ -858,11 +875,11 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 										activeOpacity={0.7}
 										onPress={addNewIngredient}
 									>
-										<Icon
+										<IconComponent
 											style={centralStyles.greenButtonIcon}
 											size={responsiveHeight(5)}
 											name="plus"
-										></Icon>
+										></IconComponent>
 										<Text
 											maxFontSizeMultiplier={2}
 											style={[
@@ -900,32 +917,27 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 										}}
 										accessibilityLabel={"instructions help"}
 									>
-										<Icon
+										<IconComponent
 											style={centralStyles.greenButtonIcon}
 											size={responsiveHeight(3)}
 											name="help"
-										></Icon>
+										></IconComponent>
 									</TouchableOpacity>
 								</View>
 								<View style={centralStyles.formSection}>
-									<DragSortableView
-										dataSource={newRecipeDetails.instructions}
-										parentWidth={responsiveWidth(100)}
-										childrenWidth={responsiveWidth(100)}
-										childrenHeight={averageInstructionHeight}
-										childrenHeights={instructionHeights.map((height) => height ?? 0)}
-										reverseChildZIndexing={false}
-										marginChildrenTop={0}
-										onDataChange={(newInstructions) => handleInstructionsSort(newInstructions)}
-										onDragStart={() => {
+									<DraggableFlatList
+										data={newRecipeDetails.instructions}
+										keyExtractor={(item, index) => `instruction-${index}`}
+										onDragBegin={() => {
 											deactivateScrollView();
 											Keyboard.dismiss();
 										}}
-										// onClickItem={Keyboard.dismiss()}
-										onDragEnd={activateScrollView}
-										delayLongPress={100}
-										keyExtractor={(item, index) => `${index}`}
-										renderItem={(item, index) => {
+										onDragEnd={({ data }) => {
+											handleInstructionsSort(data);
+											activateScrollView();
+										}}
+										renderItem={({ item, drag, isActive, getIndex }) => {
+											const index = getIndex() ?? 0;
 											return (
 												<InstructionRow
 													removeInstruction={removeInstruction}
@@ -937,16 +949,19 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 													instructionImagePresent={
 														newRecipeDetails.instructionImages[index] != ""
 													}
-													// setFocusedInstructionInput={setFocusedInstructionInput}
 													setNextInstructionInput={(element) => {
 														nextInstructionInput.current = element;
 													}}
 													inputToFocus={index === newRecipeDetails.instructions.length - 1}
 													onInstructionMicrophonePress={startInstructionSpeechRecognition}
 													isRecording={recordingInstructionIndex === index}
+													onLongPress={drag}
+													isActive={isActive}
 												/>
 											);
 										}}
+										nestedScrollEnabled={true}
+										scrollEnabled={false}
 									/>
 								</View>
 								<View style={styles.plusButtonContainer}>
@@ -955,11 +970,11 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 										activeOpacity={0.7}
 										onPress={addNewInstruction}
 									>
-										<Icon
+										<IconComponent
 											style={centralStyles.greenButtonIcon}
 											size={responsiveHeight(5)}
 											name="plus"
-										></Icon>
+										></IconComponent>
 										<Text
 											maxFontSizeMultiplier={2}
 											style={[
@@ -991,11 +1006,11 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 									onPress={askToReset}
 									disabled={awaitingServer}
 								>
-									<Icon
+									<IconComponent
 										style={centralStyles.greenButtonIcon}
 										size={responsiveHeight(4)}
 										name="alert-circle-outline"
-									></Icon>
+									></IconComponent>
 									<Text
 										maxFontSizeMultiplier={2}
 										style={[centralStyles.greenButtonText, { fontSize: responsiveFontSize(2.2) }]}
@@ -1009,11 +1024,11 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 									onPress={submitRecipe}
 									disabled={awaitingServer}
 								>
-									<Icon
+									<IconComponent
 										style={centralStyles.greenButtonIcon}
 										size={responsiveHeight(4)}
 										name="login"
-									></Icon>
+									></IconComponent>
 									<Text
 										maxFontSizeMultiplier={2}
 										style={[centralStyles.greenButtonText, { fontSize: responsiveFontSize(2.2) }]}

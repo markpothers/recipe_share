@@ -17,7 +17,7 @@ import { getMinutesFromTimeString } from "../../auxFunctions/getTimeStringFromMi
 import { shortTestRecipe } from "../recipeTemplates/shortTestRecipe";
 import { useSpeechToText } from "./useSpeechToText";
 
-const isDev = __DEV__ ? false : false;
+const isDev = __DEV__ ? true : false;
 const testRecipe = shortTestRecipe;
 
 export const useNewRecipeModel = (
@@ -245,8 +245,7 @@ export const useNewRecipeModel = (
 
 	const clearNewRecipeDetails = async () => {
 		AsyncStorage.removeItem("localNewRecipeDetails", async () => {
-			setAlertPopupShowing(false);
-			setNewRecipeDetails(emptyRecipe);
+			setNewRecipeDetails(testing ? testRecipe : emptyRecipe);
 			setInstructionHeights([]);
 			setAverageInstructionHeight(responsiveHeight(6.5));
 			// this.setState({
