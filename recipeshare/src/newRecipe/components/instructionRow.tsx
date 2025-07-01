@@ -5,6 +5,7 @@ import { responsiveHeight, responsiveWidth } from "react-native-responsive-dimen
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { centralStyles } from "../../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { styles } from "../newRecipeStyleSheet";
+import { RecipeInstruction } from "../../centralTypes";
 
 // Type assertion for Icon component to fix TypeScript issues
 const IconComponent = Icon as React.ComponentType<{
@@ -15,13 +16,13 @@ const IconComponent = Icon as React.ComponentType<{
 
 type OwnProps = {
 	index: number;
-	handleInstructionSizeChange: (index: number, height: number) => void;
-	handleInstructionChange: (text: string, index: number) => void;
-	item: string;
-	chooseInstructionPicture: (index: number) => void;
+	handleInstructionSizeChange: (id: string, height: number) => void;
+	handleInstructionChange: (text: string, id: string) => void;
+	item: RecipeInstruction;
+	chooseInstructionPicture: (id: string) => void;
 	instructionImagePresent: boolean;
-	removeInstruction: (index: number) => void;
-	onInstructionMicrophonePress: (index: number) => void;
+	removeInstruction: (id: string) => void;
+	onInstructionMicrophonePress: (id: string) => void;
 	inputToFocus: boolean;
 	setNextInstructionInput: (element: TextInput) => void;
 	isRecording: boolean;
@@ -60,7 +61,7 @@ export const InstructionRow = ({
 				ref={textInput}
 				onLayout={(event) => {
 					const { height } = event.nativeEvent.layout;
-					handleInstructionSizeChange(index, height);
+					handleInstructionSizeChange(item.id, height);
 				}}
 			>
 				<TextInput
@@ -69,12 +70,12 @@ export const InstructionRow = ({
 					multiline={true}
 					numberOfLines={1}
 					scrollEnabled={false}
-					value={item}
+					value={item.text}
 					placeholder={`Instructions: step ${index + 1}`}
 					onChangeText={(text) => {
-						handleInstructionChange(text, index);
-						textInput.current.measureInWindow((x, y, width, height) => {
-							handleInstructionSizeChange(index, height);
+						handleInstructionChange(text, item.id);
+						textInput.current?.measureInWindow?.((x, y, width, height) => {
+							handleInstructionSizeChange(item.id, height);
 						});
 					}}
 					ref={(element) => {
@@ -87,7 +88,7 @@ export const InstructionRow = ({
 					styles.deleteInstructionContainer,
 					{ width: "9%", backgroundColor: isRecording ? "#505050" : "white" },
 				]}
-				onPress={() => onInstructionMicrophonePress(index)}
+				onPress={() => onInstructionMicrophonePress(item.id)}
 				activeOpacity={0.7}
 			>
 				<IconComponent
@@ -102,7 +103,7 @@ export const InstructionRow = ({
 					{ width: "9%", backgroundColor: instructionImagePresent ? "#505050" : "white" },
 				]}
 				activeOpacity={0.7}
-				onPress={() => chooseInstructionPicture(index)}
+				onPress={() => chooseInstructionPicture(item.id)}
 				testID={`photo-instruction${index + 1}`}
 			>
 				<IconComponent
@@ -113,7 +114,7 @@ export const InstructionRow = ({
 			</TouchableOpacity>
 			<TouchableOpacity
 				style={[styles.deleteInstructionContainer, { width: "9%" }]}
-				onPress={() => removeInstruction(index)}
+				onPress={() => removeInstruction(item.id)}
 				activeOpacity={0.7}
 				testID={`delete-instruction${index + 1}`}
 			>

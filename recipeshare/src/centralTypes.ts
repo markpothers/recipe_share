@@ -292,12 +292,16 @@ export type Recipe = {
 	shareable: boolean;
 };
 
+export type RecipeInstruction = {
+	id: string;
+	text: string;
+	image?: string | InstructionImage;
+};
+
 export type NewRecipe = {
 	recipeId: number | null;
 	name: string;
-	instructions: string[];
-	instructionImages: (string | InstructionImage)[];
-	ingredients: RecipeIngredient[];
+	instructions: RecipeInstruction[];
 	difficulty: Difficulty;
 	times: {
 		prepTime: number;
@@ -312,6 +316,7 @@ export type NewRecipe = {
 	acknowledgementLink: string;
 	description: string;
 	showBlogPreview: boolean;
+	ingredients: RecipeIngredient[];
 };
 
 export type LoginChef = {

@@ -8,7 +8,7 @@ import {
 	SwitchSized,
 	TextPopup,
 } from "../components";
-import { Filters, InstructionImage, RecipeIngredient } from "../centralTypes";
+import { Filters, RecipeIngredient, RecipeInstruction } from "../centralTypes";
 import {
 	FlatList,
 	Keyboard,
@@ -74,7 +74,6 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 		// setAutoCompleteFocused, // unused in current implementation
 		choosingPrimaryPicture,
 		choosingInstructionPicture,
-		instructionImageIndex,
 		filterDisplayed,
 		awaitingServer,
 		scrollingEnabled,
@@ -153,16 +152,23 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 		);
 	};
 
+	// Remove all references to instructionImageIndex and update renderInstructionPictureChooser to use the id-based approach.
 	const renderInstructionPictureChooser = () => {
 		Keyboard.dismiss();
+		// Find the instruction being edited (e.g., the one for which choosingInstructionPicture is true)
+		// For this refactor, let's assume you store the id of the instruction being edited in a variable, e.g., choosingInstructionPictureId
+		// If not, you should add it to your state in useNewRecipeModel and update all logic accordingly.
+		const instruction = newRecipeDetails.instructions.find((inst) => inst.id === choosingInstructionPicture);
 		const imageSource =
-			typeof newRecipeDetails.instructionImages[instructionImageIndex] === "object"
-				? (newRecipeDetails.instructionImages[instructionImageIndex] as InstructionImage).image_url
-				: (newRecipeDetails.instructionImages[instructionImageIndex] as string);
+			instruction && instruction.image
+				? typeof instruction.image === "object"
+					? instruction.image.image_url
+					: instruction.image
+				: "";
 		return (
 			<PicSourceChooser
 				saveImage={saveInstructionImage}
-				index={instructionImageIndex}
+				index={instruction ? instruction.id : undefined}
 				sourceChosen={instructionSourceChosen}
 				key={"instruction-pic-chooser"}
 				imageSource={imageSource}
@@ -235,14 +241,14 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 		</View>
 	);
 
-	// Abstracted renderItem for Instruction
+	// Update renderInstructionItem to use id-based props and pass RecipeInstruction item to InstructionRow.
 	const renderInstructionItem = ({
 		item,
 		index,
 		drag,
 		isActive,
 	}: {
-		item: string;
+		item: RecipeInstruction;
 		index: number;
 		drag?: () => void;
 		isActive?: boolean;
@@ -254,13 +260,13 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 			index={index}
 			handleInstructionSizeChange={handleInstructionSizeChange}
 			chooseInstructionPicture={chooseInstructionPicture}
-			instructionImagePresent={newRecipeDetails.instructionImages[index] != ""}
+			instructionImagePresent={!!item.image && item.image !== ""}
 			setNextInstructionInput={(element) => {
 				nextInstructionInput.current = element;
 			}}
 			inputToFocus={index === newRecipeDetails.instructions.length - 1}
 			onInstructionMicrophonePress={startInstructionSpeechRecognition}
-			isRecording={recordingInstructionIndex === index}
+			isRecording={recordingInstructionIndex === item.id}
 			{...(drag && { onLongPress: drag })}
 			{...(isActive !== undefined && { isActive })}
 		/>

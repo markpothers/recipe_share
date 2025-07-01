@@ -10,12 +10,12 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { ImageEditor } from "expo-image-editor";
 import { styles } from "./functionalComponentsStyleSheet";
 
+// Patch PicSourceChooser to accept string ids for index, and update all usages to treat index as string | undefined.
 type OwnProps = {
-	index?: number;
-	// originalImage: ImagePicker.ImagePickerResult; // refactored so this isn't needed any more
+	index?: string;
 	imageSource: string;
-	cancelChooseImage: (image: string, index?: number) => void;
-	saveImage: (image: ImagePicker.ImagePickerAsset, index?: number) => void;
+	cancelChooseImage: (image: string, id?: string) => void;
+	saveImage: (image: ImagePicker.ImagePickerAsset, id?: string) => void;
 	sourceChosen: () => void;
 };
 
@@ -88,9 +88,11 @@ export default function PicSourceChooser(props: OwnProps) {
 	};
 
 	const cancel = () => {
-		props.index !== undefined
-			? props.cancelChooseImage(originalImage, props.index)
-			: props.cancelChooseImage(originalImage);
+		if (props.index !== undefined) {
+			props.cancelChooseImage(originalImage, props.index);
+		} else {
+			props.cancelChooseImage(originalImage);
+		}
 		props.sourceChosen();
 	};
 
@@ -107,7 +109,11 @@ export default function PicSourceChooser(props: OwnProps) {
 	};
 
 	const saveImage = (image: ImagePicker.ImagePickerAsset) => {
-		props.index !== undefined ? props.saveImage(image, props.index) : props.saveImage(image);
+		if (props.index !== undefined) {
+			props.saveImage(image, props.index);
+		} else {
+			props.saveImage(image);
+		}
 	};
 
 	return (
