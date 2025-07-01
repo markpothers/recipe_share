@@ -893,7 +893,13 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 														: 0,
 											}}
 										/>
-									) : (
+									) : !(
+											alertPopupShowing ||
+											helpShowing ||
+											choosingPrimaryPicture ||
+											choosingInstructionPicture ||
+											filterDisplayed
+									  ) ? (
 										<DraggableFlatList
 											data={newRecipeDetails.ingredients}
 											keyExtractor={(item) => item.id!}
@@ -909,7 +915,21 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 												const index = getIndex() ?? 0;
 												return renderIngredientItem({ item, index, drag, isActive });
 											}}
-											nestedScrollEnabled={true}
+											// nestedScrollEnabled={true}
+											scrollEnabled={false}
+											style={{
+												height:
+													newRecipeDetails.ingredients.length > 0
+														? newRecipeDetails.ingredients.length * responsiveHeight(13) +
+														  responsiveHeight(0.5)
+														: 0,
+											}}
+										/>
+									) : (
+										<FlatList
+											data={newRecipeDetails.ingredients}
+											keyExtractor={(item) => item.id!}
+											renderItem={({ item, index }) => renderIngredientItem({ item, index })}
 											scrollEnabled={false}
 											style={{
 												height:
@@ -997,10 +1017,16 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 											renderItem={({ item, index }) => renderInstructionItem({ item, index })}
 											scrollEnabled={false}
 										/>
-									) : (
+									) : !(
+											alertPopupShowing ||
+											helpShowing ||
+											choosingPrimaryPicture ||
+											choosingInstructionPicture ||
+											filterDisplayed
+									  ) ? (
 										<DraggableFlatList
 											data={newRecipeDetails.instructions}
-											keyExtractor={(item, index) => `instruction-${index}`}
+											keyExtractor={(item) => item.id}
 											onDragBegin={() => {
 												deactivateScrollView();
 												Keyboard.dismiss();
@@ -1013,7 +1039,14 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 												const index = getIndex() ?? 0;
 												return renderInstructionItem({ item, index, drag, isActive });
 											}}
-											nestedScrollEnabled={true}
+											// nestedScrollEnabled={true}
+											scrollEnabled={false}
+										/>
+									) : (
+										<FlatList
+											data={newRecipeDetails.instructions}
+											keyExtractor={(item, index) => `instruction-${index}`}
+											renderItem={({ item, index }) => renderInstructionItem({ item, index })}
 											scrollEnabled={false}
 										/>
 									)}

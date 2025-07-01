@@ -1,7 +1,6 @@
 import * as ImagePicker from "expo-image-picker";
-import uuid from "react-native-uuid";
 
-import { Ingredient, NewRecipe, RecipeImage, RecipeIngredient, Unit, RecipeInstruction } from "../../centralTypes";
+import { Ingredient, NewRecipe, RecipeImage, RecipeIngredient, RecipeInstruction, Unit } from "../../centralTypes";
 import { NewRecipeNavigationProps, NewRecipeRouteProps } from "../../navigation";
 import React, { useCallback, useEffect, useState } from "react";
 import { fetchIngredients, patchRecipe, postInstructionImage, postRecipe, postRecipeImage } from "../../fetches";
@@ -17,6 +16,7 @@ import { emptyRecipe } from "../recipeTemplates/emptyRecipe";
 import { getMinutesFromTimeString } from "../../auxFunctions/getTimeStringFromMinutes";
 import { shortTestRecipe } from "../recipeTemplates/shortTestRecipe";
 import { useSpeechToText } from "./useSpeechToText";
+import uuid from "react-native-uuid";
 
 const isDev = __DEV__ ? true : false;
 const testRecipe = shortTestRecipe;
@@ -374,7 +374,7 @@ export const useNewRecipeModel = (
 			serves: "Any",
 		});
 	};
-
+	
 	const postImages = async (newRecipeDetails, recipe) => {
 		try {
 			await Promise.all(
@@ -389,21 +389,40 @@ export const useNewRecipeModel = (
 					);
 				})
 			);
+			// Post instruction images using newRecipeDetails.instructions
 			await Promise.all(
-				newRecipeDetails.instructionImages.map((image, index) => {
-					if (image) {
+				newRecipeDetails.instructions.map((instruction, index) => {
+					const recipeInstruction = recipe.instructions.find((i) => i.step === index);
+					// for new images, the image is the local uri and has no id
+					// it needs to be uploaded to the server along with the instruction id
+					if (
+						instruction.image &&
+						typeof instruction.image === "string" &&
+						instruction.image !== ""
+					) {
 						return postInstructionImage(
 							loggedInChef.id,
 							loggedInChef.auth_token,
-							recipe.instructions.sort((a, b) => (a.step > b.step ? 1 : -1))[index].id,
-							image.id || 0,
-							image // this sends the whole object if it's existing image, and it really shouldn't
+							recipeInstruction?.id,
+							0,
+							instruction.image
+						);
+						// for existing images, the image is the object from the server with an id
+						// we just need to associate this id with the instruction id
+					} else if (instruction.image && typeof instruction.image !== "string" && instruction.image.id) {
+						return postInstructionImage(
+							loggedInChef.id,
+							loggedInChef.auth_token,
+							recipeInstruction?.id,
+							instruction.image.id,
+							""
 						);
 					}
 				})
 			);
 			return true;
-		} catch {
+		} catch (e) {
+			console.error("Error posting images:", e);
 			setErrors(
 				"The recipe saved successfully but not all the images could be saved. Please finish submission now or later to try again. Your recipe will be visible without those images that failed already."
 			);
@@ -557,7 +576,7 @@ export const useNewRecipeModel = (
 			return {
 				id: uuid.v4() as string,
 				text: i.instruction,
-				image: image ? image : "",
+				image: image ?? "",
 			};
 		});
 		setInstructionHeights(recipeDetails.instructions.map(() => responsiveHeight(6.5)));
