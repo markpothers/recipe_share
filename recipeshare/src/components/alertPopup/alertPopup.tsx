@@ -44,7 +44,7 @@ export function AlertPopup(props: Props) {
 				<View style={styles.contentsContainer}>
 					<View style={styles.titleContainer}>
 						<Text maxFontSizeMultiplier={1.5} style={styles.title}>
-							{props.title}
+							{props.title ? String(props.title) : ""}
 						</Text>
 					</View>
 					<View
@@ -92,7 +92,7 @@ export function AlertPopup(props: Props) {
 								<Text maxFontSizeMultiplier={2} style={centralStyles.yellowButtonText}>
 									{props.yesText ? props.yesText : "Yes"}
 								</Text>
-							</TouchableOpacity>{" "}
+							</TouchableOpacity>
 						</View>
 					</View>
 				</View>

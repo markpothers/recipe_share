@@ -8,8 +8,9 @@ import {
 	SwitchSized,
 	TextPopup,
 } from "../components";
-import { Filters, InstructionImage } from "../centralTypes";
+import { Filters, InstructionImage, RecipeIngredient } from "../centralTypes";
 import {
+	FlatList,
 	Keyboard,
 	KeyboardAvoidingView,
 	Platform,
@@ -195,6 +196,75 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 			<TextPopup close={() => setHelpShowing(false)} title={`Help - ${helpText.title}`} text={helpText.text} />
 		);
 	};
+
+	// Abstracted renderItem for Ingredient
+	const renderIngredientItem = ({
+		item,
+		index,
+		drag,
+		isActive,
+	}: {
+		item: RecipeIngredient;
+		index: number;
+		drag?: () => void;
+		isActive?: boolean;
+	}) => (
+		<View
+			style={{
+				marginTop: responsiveHeight(0.5),
+				zIndex: alertPopupShowing ? 0 : Math.min(10, newRecipeDetails.ingredients.length - index),
+			}}
+		>
+			<IngredientAutoComplete
+				removeIngredient={removeIngredient}
+				ingredientIndex={index}
+				ingredient={item}
+				ingredientsList={ingredientsList}
+				focused={autoCompleteFocused}
+				index={index}
+				ingredientsLength={newRecipeDetails.ingredients.length}
+				thisAutocompleteIsFocused={autocompleteIsFocused}
+				updateIngredientEntry={updateIngredientEntry}
+				setNextIngredientInput={(element) => {
+					nextIngredientInput.current = element;
+				}}
+				inputToFocus={index === newRecipeDetails.ingredients.length - 1}
+				{...(drag && { onLongPress: drag })}
+				{...(isActive !== undefined && { isActive })}
+			/>
+		</View>
+	);
+
+	// Abstracted renderItem for Instruction
+	const renderInstructionItem = ({
+		item,
+		index,
+		drag,
+		isActive,
+	}: {
+		item: string;
+		index: number;
+		drag?: () => void;
+		isActive?: boolean;
+	}) => (
+		<InstructionRow
+			removeInstruction={removeInstruction}
+			handleInstructionChange={handleInstructionChange}
+			item={item}
+			index={index}
+			handleInstructionSizeChange={handleInstructionSizeChange}
+			chooseInstructionPicture={chooseInstructionPicture}
+			instructionImagePresent={newRecipeDetails.instructionImages[index] != ""}
+			setNextInstructionInput={(element) => {
+				nextInstructionInput.current = element;
+			}}
+			inputToFocus={index === newRecipeDetails.instructions.length - 1}
+			onInstructionMicrophonePress={startInstructionSpeechRecognition}
+			isRecording={recordingInstructionIndex === index}
+			{...(drag && { onLongPress: drag })}
+			{...(isActive !== undefined && { isActive })}
+		/>
+	);
 
 	return (
 		<SpinachAppContainer awaitingServer={awaitingServer} scrollingEnabled={false}>
@@ -799,62 +869,51 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 											// newRecipeDetails.ingredients.length > 0 ? responsiveHeight(11) : 0,
 											// borderWidth: 5,
 											// borderColor: "yellow",
+											// backgroundColor: "yellow",
 										},
 									]}
 								>
-									<DraggableFlatList
-										data={newRecipeDetails.ingredients}
-										keyExtractor={(item, index) => `ingredient-${index}`}
-										onDragBegin={() => {
-											deactivateScrollView();
-											Keyboard.dismiss();
-										}}
-										onDragEnd={({ data }) => {
-											handleIngredientSort(data);
-											activateScrollView();
-										}}
-										renderItem={({ item, drag, isActive, getIndex }) => {
-											const index = getIndex() ?? 0;
-											return (
-												<View
-													style={{
-														marginTop: responsiveHeight(0.5),
-														zIndex: alertPopupShowing
-															? 0
-															: Math.min(10, newRecipeDetails.ingredients.length - index),
-													}}
-												>
-													<IngredientAutoComplete
-														removeIngredient={removeIngredient}
-														ingredientIndex={index}
-														ingredient={item}
-														ingredientsList={ingredientsList}
-														focused={autoCompleteFocused}
-														index={index}
-														ingredientsLength={newRecipeDetails.ingredients.length}
-														thisAutocompleteIsFocused={autocompleteIsFocused}
-														updateIngredientEntry={updateIngredientEntry}
-														setNextIngredientInput={(element) => {
-															nextIngredientInput.current = element;
-														}}
-														inputToFocus={index === newRecipeDetails.ingredients.length - 1}
-														onLongPress={drag}
-														isActive={isActive}
-													/>
-												</View>
-											);
-										}}
-										nestedScrollEnabled={true}
-										scrollEnabled={false}
-										style={{
-											height:
-												newRecipeDetails.ingredients.length > 0
-													? newRecipeDetails.ingredients.length * responsiveHeight(13) +
-													  responsiveHeight(0.5)
-													: 0,
-										}}
-									/>
-									{/*negative margin to bring the button into line under the padding added to the dragSortableScrollView */}
+									{alertPopupShowing ? (
+										<FlatList
+											data={newRecipeDetails.ingredients}
+											keyExtractor={(item, index) => `ingredient-${index}`}
+											renderItem={({ item, index }) => renderIngredientItem({ item, index })}
+											scrollEnabled={false}
+											style={{
+												height:
+													newRecipeDetails.ingredients.length > 0
+														? newRecipeDetails.ingredients.length * responsiveHeight(13) +
+														  responsiveHeight(0.5)
+														: 0,
+											}}
+										/>
+									) : (
+										<DraggableFlatList
+											data={newRecipeDetails.ingredients}
+											keyExtractor={(item, index) => `ingredient-${index}`}
+											onDragBegin={() => {
+												deactivateScrollView();
+												Keyboard.dismiss();
+											}}
+											onDragEnd={({ data }) => {
+												handleIngredientSort(data);
+												activateScrollView();
+											}}
+											renderItem={({ item, drag, isActive, getIndex }) => {
+												const index = getIndex() ?? 0;
+												return renderIngredientItem({ item, index, drag, isActive });
+											}}
+											nestedScrollEnabled={true}
+											scrollEnabled={false}
+											style={{
+												height:
+													newRecipeDetails.ingredients.length > 0
+														? newRecipeDetails.ingredients.length * responsiveHeight(13) +
+														  responsiveHeight(0.5)
+														: 0,
+											}}
+										/>
+									)}
 								</View>
 								<View
 									style={[
@@ -925,44 +984,33 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 									</TouchableOpacity>
 								</View>
 								<View style={centralStyles.formSection}>
-									<DraggableFlatList
-										data={newRecipeDetails.instructions}
-										keyExtractor={(item, index) => `instruction-${index}`}
-										onDragBegin={() => {
-											deactivateScrollView();
-											Keyboard.dismiss();
-										}}
-										onDragEnd={({ data }) => {
-											handleInstructionsSort(data);
-											activateScrollView();
-										}}
-										renderItem={({ item, drag, isActive, getIndex }) => {
-											const index = getIndex() ?? 0;
-											return (
-												<InstructionRow
-													removeInstruction={removeInstruction}
-													handleInstructionChange={handleInstructionChange}
-													item={item}
-													index={index}
-													handleInstructionSizeChange={handleInstructionSizeChange}
-													chooseInstructionPicture={chooseInstructionPicture}
-													instructionImagePresent={
-														newRecipeDetails.instructionImages[index] != ""
-													}
-													setNextInstructionInput={(element) => {
-														nextInstructionInput.current = element;
-													}}
-													inputToFocus={index === newRecipeDetails.instructions.length - 1}
-													onInstructionMicrophonePress={startInstructionSpeechRecognition}
-													isRecording={recordingInstructionIndex === index}
-													onLongPress={drag}
-													isActive={isActive}
-												/>
-											);
-										}}
-										nestedScrollEnabled={true}
-										scrollEnabled={false}
-									/>
+									{alertPopupShowing ? (
+										<FlatList
+											data={newRecipeDetails.instructions}
+											keyExtractor={(item, index) => `instruction-${index}`}
+											renderItem={({ item, index }) => renderInstructionItem({ item, index })}
+											scrollEnabled={false}
+										/>
+									) : (
+										<DraggableFlatList
+											data={newRecipeDetails.instructions}
+											keyExtractor={(item, index) => `instruction-${index}`}
+											onDragBegin={() => {
+												deactivateScrollView();
+												Keyboard.dismiss();
+											}}
+											onDragEnd={({ data }) => {
+												handleInstructionsSort(data);
+												activateScrollView();
+											}}
+											renderItem={({ item, drag, isActive, getIndex }) => {
+												const index = getIndex() ?? 0;
+												return renderInstructionItem({ item, index, drag, isActive });
+											}}
+											nestedScrollEnabled={true}
+											scrollEnabled={false}
+										/>
+									)}
 								</View>
 								<View style={styles.plusButtonContainer}>
 									<TouchableOpacity

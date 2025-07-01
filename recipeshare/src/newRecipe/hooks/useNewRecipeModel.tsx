@@ -242,9 +242,9 @@ export const useNewRecipeModel = (
 		// console.log("param:", parameter);
 		setNewRecipeDetails({ ...newRecipeDetails, [parameter]: text });
 	};
-
 	const clearNewRecipeDetails = async () => {
 		AsyncStorage.removeItem("localNewRecipeDetails", async () => {
+			setAlertPopupShowing(false);
 			setNewRecipeDetails(testing ? testRecipe : emptyRecipe);
 			setInstructionHeights([]);
 			setAverageInstructionHeight(responsiveHeight(6.5));
@@ -257,7 +257,6 @@ export const useNewRecipeModel = (
 			});
 		});
 	};
-
 	const clearEditRecipeDetails = async (editedRecipeSavedToDatabase) => {
 		AsyncStorage.removeItem("localEditRecipeDetails", async () => {
 			setAlertPopupShowing(false);
@@ -268,7 +267,6 @@ export const useNewRecipeModel = (
 					// if you updated the saved recipe you don't want to refresh async store before leaving
 					await setRecipeParamsForEditing(route.params.recipe_details);
 				}
-				setAlertPopupShowing(false);
 			}
 		});
 	};
