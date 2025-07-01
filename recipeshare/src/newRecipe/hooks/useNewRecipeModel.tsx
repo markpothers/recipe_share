@@ -1,4 +1,5 @@
 import * as ImagePicker from "expo-image-picker";
+import uuid from "react-native-uuid";
 
 import { Ingredient, NewRecipe, RecipeImage, RecipeIngredient, Unit } from "../../centralTypes";
 import { NewRecipeNavigationProps, NewRecipeRouteProps } from "../../navigation";
@@ -32,7 +33,7 @@ export const useNewRecipeModel = (
 	const [helpShowing, setHelpShowing] = useState<boolean>(false);
 	const [helpText, setHelpText] = useState<{ title: string; text: string }>();
 	const [ingredientsList, setIngredientsList] = useState<Ingredient[]>([]);
-	const [autoCompleteFocused, setAutoCompleteFocused] = useState<number | null>(null);
+	const [autoCompleteFocused, setAutoCompleteFocused] = useState<string | null>(null);
 	const [choosingPrimaryPicture, setChoosingPrimaryPicture] = useState<boolean>(false);
 	const [choosingInstructionPicture, setChoosingInstructionPicture] = useState<boolean>(false);
 	const [instructionImageIndex, setInstructionImageIndex] = useState<number>(0);
@@ -198,21 +199,29 @@ export const useNewRecipeModel = (
 
 	const primarySourceChosen = async () => setChoosingPrimaryPicture(false);
 
-	const autocompleteIsFocused = (index: number) => setAutoCompleteFocused(index);
+	const autocompleteIsFocused = (id: string | null) => setAutoCompleteFocused(id);
 
 	const savePrimaryImages = (newImages: RecipeImage[]) => {
 		setNewRecipeDetails({ ...newRecipeDetails, primaryImages: newImages });
 	};
 
-	const updateIngredientEntry = (index: number, name: string, quantity: string, unit: Unit) => {
-		const newIngredients = newRecipeDetails.ingredients;
-		newIngredients[index].name = name;
-		newIngredients[index].quantity = quantity;
-		newIngredients[index].unit = unit;
+	const updateIngredientEntry = (id: string, name: string, quantity: string, unit: Unit) => {
+		const newIngredients = newRecipeDetails.ingredients.map((ing) =>
+			ing.id === id ? { ...ing, name, quantity, unit } : ing
+		);
 		setNewRecipeDetails({
 			...newRecipeDetails,
 			ingredients: newIngredients,
 		});
+	};
+
+	const addNewIngredient = () => {
+		const ingredients = newRecipeDetails.ingredients;
+		const newIngredients = [
+			...ingredients,
+			{ name: "", quantity: "", unit: "Oz" as Unit, id: uuid.v4() as string },
+		];
+		setNewRecipeDetails({ ...newRecipeDetails, ingredients: newIngredients });
 	};
 
 	const handleIngredientSort = async (newIngredients: RecipeIngredient[]) => {
@@ -222,15 +231,8 @@ export const useNewRecipeModel = (
 		});
 	};
 
-	const addNewIngredient = () => {
-		const ingredients = newRecipeDetails.ingredients;
-		const newIngredients = [...ingredients, { name: "", quantity: "", unit: "Oz" as const }];
-		setNewRecipeDetails({ ...newRecipeDetails, ingredients: newIngredients });
-	};
-
-	const removeIngredient = (index: number) => {
-		const newIngredients = [...newRecipeDetails.ingredients];
-		newIngredients.splice(index, 1);
+	const removeIngredient = (id: string) => {
+		const newIngredients = newRecipeDetails.ingredients.filter((ing) => ing.id !== id);
 		setNewRecipeDetails({ ...newRecipeDetails, ingredients: newIngredients });
 	};
 
@@ -691,6 +693,21 @@ export const useNewRecipeModel = (
 			startSpeechToText(callback);
 		}
 	};
+
+	// Ensure all ingredients have an id on load
+	useEffect(() => {
+		setNewRecipeDetails((prev) => {
+			if (prev.ingredients.some((ing) => !ing.id)) {
+				return {
+					...prev,
+					ingredients: prev.ingredients.map((ing) =>
+						({ ...ing, id: ing.id || uuid.v4() as string, unit: ing.unit as Unit })
+					),
+				};
+			}
+			return prev;
+		});
+	}, [newRecipeDetails.ingredients]);
 
 	return {
 		loggedInChef,

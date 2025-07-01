@@ -26,6 +26,26 @@ export const shortTestRecipe = {
 				quantity: "1",
 				unit: "cup"
 			},
+						{
+				name: "Pasta",
+				quantity: "1",
+				unit: "Cup"
+			},
+			{
+				name: "Carrots",
+				quantity: "4",
+				unit: "Oz"
+			},
+						{
+				name: "Parsley",
+				quantity: "0.5",
+				unit: "tsp"
+			},
+			{
+				name: "Chocolate",
+				quantity: "5",
+				unit: "ml"
+			},
 		],
 		difficulty: "4",
 		times: {

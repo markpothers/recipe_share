@@ -338,6 +338,7 @@ export type RecipeIngredient = {
 	name: string;
 	quantity: string;
 	unit: Unit;
+	id?: string;
 };
 
 export type Follow = {

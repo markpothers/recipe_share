@@ -18,15 +18,15 @@ const IconComponent = Icon as React.ComponentType<{
 type OwnProps = {
 	ingredient: RecipeIngredient;
 	index: number;
-	updateIngredientEntry: (ingredientIndex: number, name: string, quantity: string, unit: Unit) => void;
+	updateIngredientEntry: (ingredientId: string, name: string, quantity: string, unit: Unit) => void;
 	ingredientIndex: number;
-	thisAutocompleteIsFocused: (index: number) => void;
+	thisAutocompleteIsFocused: (id: string | null) => void;
 	inputToFocus: boolean;
 	setNextIngredientInput: (element: TextInput) => void;
-	focused: number;
+	focused: string | null;
 	ingredientsLength: number;
 	ingredientsList: Ingredient[];
-	removeIngredient: (index: number) => void;
+	removeIngredient: (ingredientId: string) => void;
 	onLongPress?: () => void;
 	isActive?: boolean;
 };
@@ -79,7 +79,7 @@ const IngredientAutoComplete = ({
 		.filter((ing) => ing.name.toLowerCase().startsWith(ingredient.name.toLowerCase()))
 		.sort((a, b) => (a.name > b.name ? 1 : -1));
 	const expandBackgroundTouchCollector =
-		focused == index && autocompleteList.length > 0 && ingredient.name.length > 1;
+		focused === ingredient.id && autocompleteList.length > 0 && ingredient.name.length > 1;
 	// console.log(focused == index)
 	return (
 		<View
@@ -123,9 +123,9 @@ const IngredientAutoComplete = ({
 							value={ingredient.name}
 							placeholder={`Ingredient ${index + 1}`}
 							onChangeText={(text) =>
-								updateIngredientEntry(index, text, ingredient.quantity, ingredient.unit)
+								updateIngredientEntry(ingredient.id!, text, ingredient.quantity, ingredient.unit)
 							}
-							onFocus={() => thisAutocompleteIsFocused(index)}
+							onFocus={() => thisAutocompleteIsFocused(ingredient.id!)}
 							onBlur={() => thisAutocompleteIsFocused(null)}
 							ref={(element) => inputToFocus && setNextIngredientInput(element)}
 						/>
@@ -151,7 +151,7 @@ const IngredientAutoComplete = ({
 								placeholder="Qty"
 								keyboardType="decimal-pad"
 								onChangeText={(text) =>
-									updateIngredientEntry(ingredientIndex, ingredient.name, text, ingredient.unit)
+									updateIngredientEntry(ingredient.id!, ingredient.name, text, ingredient.unit)
 								}
 								value={ingredient.quantity}
 							/>
@@ -172,7 +172,7 @@ const IngredientAutoComplete = ({
 						styles.deleteIngredientContainer,
 						expandBackgroundTouchCollector && { top: responsiveHeight(15) },
 					]}
-					onPress={() => removeIngredient(index)}
+					onPress={() => removeIngredient(ingredient.id!)}
 					activeOpacity={0.7}
 					testID={`delete-ingredient${index + 1}`}
 					accessibilityLabel={`delete ingredient${index + 1}`}

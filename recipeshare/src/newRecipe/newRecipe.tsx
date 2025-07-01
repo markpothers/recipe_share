@@ -876,7 +876,7 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 									{alertPopupShowing ? (
 										<FlatList
 											data={newRecipeDetails.ingredients}
-											keyExtractor={(item, index) => `ingredient-${index}`}
+											keyExtractor={(item) => item.id!}
 											renderItem={({ item, index }) => renderIngredientItem({ item, index })}
 											scrollEnabled={false}
 											style={{
@@ -890,7 +890,7 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 									) : (
 										<DraggableFlatList
 											data={newRecipeDetails.ingredients}
-											keyExtractor={(item, index) => `ingredient-${index}`}
+											keyExtractor={(item) => item.id!}
 											onDragBegin={() => {
 												deactivateScrollView();
 												Keyboard.dismiss();
