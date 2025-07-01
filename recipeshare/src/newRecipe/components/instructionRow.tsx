@@ -42,15 +42,16 @@ export const InstructionRow = ({
 	setNextInstructionInput,
 	isRecording,
 	onLongPress,
-}: // isActive - reserved for future drag visual feedback
-OwnProps) => {
+	isActive,
+}: OwnProps) => {
 	const textInput = useRef(null);
 	return (
-		<View style={[centralStyles.formInputContainer, { width: responsiveWidth(100) }]}>
+		<View style={[centralStyles.formInputContainer, { width: responsiveWidth(100), opacity: isActive ? 0.5 : 1 }]}>
 			<TouchableOpacity
 				style={[styles.deleteInstructionContainer, { width: responsiveWidth(12) }]}
 				onLongPress={onLongPress}
 				disabled={!onLongPress}
+				activeOpacity={0.8}
 			>
 				<IconComponent name="menu" size={responsiveHeight(3.5)} style={styles.ingredientTrashCan} />
 			</TouchableOpacity>

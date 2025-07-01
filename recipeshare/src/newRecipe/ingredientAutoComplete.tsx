@@ -44,8 +44,8 @@ const IngredientAutoComplete = ({
 	ingredientsList,
 	removeIngredient,
 	onLongPress,
-}: // isActive - reserved for future drag visual feedback
-OwnProps) => {
+	isActive,
+}: OwnProps) => {
 	const renderAutoIngredientsListItem = (item: Ingredient, ingredientIndex: number, ingredient: RecipeIngredient) => {
 		return (
 			<TouchableOpacity
@@ -86,13 +86,18 @@ OwnProps) => {
 			style={[
 				styles.autoCompleteRowContainer,
 				expandBackgroundTouchCollector && { height: responsiveHeight(100) },
-				// (Platform.OS == 'ios' ? {zIndex: (ingredientsLength - index) } : null)
+				isActive ? { opacity: 0.5 } : null,
 			]}
 		>
-			<TouchableOpacity style={styles.ingredientSortContainer} onLongPress={onLongPress} disabled={!onLongPress}>
+			<TouchableOpacity
+				style={styles.ingredientSortContainer}
+				onLongPress={onLongPress}
+				disabled={!onLongPress}
+				activeOpacity={0.9}
+			>
 				<IconComponent name="menu" size={responsiveHeight(3.5)} style={styles.ingredientTrashCan} />
 			</TouchableOpacity>
-			<TouchableOpacity //this Touchable records touches around the list view to close it out in an intuitive way
+			<TouchableOpacity
 				style={[
 					// {backgroundColor: 'red'},
 					{ flexDirection: "row" },
