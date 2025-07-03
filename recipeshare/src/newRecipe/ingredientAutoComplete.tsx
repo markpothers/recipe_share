@@ -49,17 +49,24 @@ const IngredientAutoComplete = ({
 	const renderAutoIngredientsListItem = (item: Ingredient, ingredientIndex: number, ingredient: RecipeIngredient) => {
 		return (
 			<TouchableOpacity
-				style={{ padding: 5, zIndex: 2 }}
+				style={{
+					padding: responsiveHeight(1.5),
+					borderBottomWidth: 0.5,
+					borderBottomColor: "#104e0150",
+					backgroundColor: "white",
+				}}
 				key={item.id.toString()}
-				onPress={() => handleListItemTouch(ingredientIndex, item.name, ingredient.quantity, ingredient.unit)}
+				onPress={() => {
+					handleListItemTouch(ingredientIndex, item.name, ingredient.quantity, ingredient.unit);
+				}}
+				activeOpacity={0.7}
 			>
 				<Text style={styles.autocompleteListText}>{item.name}</Text>
 			</TouchableOpacity>
 		);
 	};
-
-	const handleListItemTouch = (ingredientIndex, name, quantity, unit) => {
-		updateIngredientEntry(ingredientIndex, name, quantity, unit);
+	const handleListItemTouch = (ingredientIndex: number, name: string, quantity: string, unit: Unit) => {
+		updateIngredientEntry(ingredient.id!, name, quantity, unit);
 		thisAutocompleteIsFocused(null);
 		Keyboard.dismiss();
 	};
@@ -74,21 +81,13 @@ const IngredientAutoComplete = ({
 	const onChoiceChange = (choice) => {
 		handlePickerChange(ingredientIndex, ingredient.name, ingredient.quantity, choice);
 	};
-
 	const autocompleteList = ingredientsList
 		.filter((ing) => ing.name.toLowerCase().startsWith(ingredient.name.toLowerCase()))
 		.sort((a, b) => (a.name > b.name ? 1 : -1));
-	const expandBackgroundTouchCollector =
-		focused === ingredient.id && autocompleteList.length > 0 && ingredient.name.length > 1;
-	// console.log(focused == index)
+	const showAutocomplete = focused === ingredient.id && autocompleteList.length > 0 && ingredient.name.length > 1;
+
 	return (
-		<View
-			style={[
-				styles.autoCompleteRowContainer,
-				expandBackgroundTouchCollector && { height: responsiveHeight(100) },
-				isActive ? { opacity: 0.5 } : null,
-			]}
-		>
+		<View style={[styles.autoCompleteRowContainer, isActive ? { opacity: 0.5 } : null]}>
 			<TouchableOpacity
 				style={styles.ingredientSortContainer}
 				onLongPress={onLongPress}
@@ -97,92 +96,84 @@ const IngredientAutoComplete = ({
 			>
 				<IconComponent name="menu" size={responsiveHeight(3.5)} style={styles.ingredientTrashCan} />
 			</TouchableOpacity>
-			<TouchableOpacity
+			<View
 				style={[
-					// {backgroundColor: 'red'},
-					{ flexDirection: "row" },
-					expandBackgroundTouchCollector && { height: responsiveHeight(65), top: -responsiveHeight(15) },
+					styles.nameAndUnitsContainer,
+					Platform.OS == "ios" && { zIndex: Math.min(10, ingredientsLength - index) },
 				]}
-				activeOpacity={1}
-				onPress={() => {
-					thisAutocompleteIsFocused(null);
-					Keyboard.dismiss();
-				}}
 			>
-				<View
-					style={[
-						styles.nameAndUnitsContainer,
-						Platform.OS == "ios" && { zIndex: Math.min(10, ingredientsLength - index) },
-						expandBackgroundTouchCollector && { top: responsiveHeight(15) },
-					]}
-				>
-					<View style={[styles.autoCompleteContainer, { zIndex: Math.min(10, ingredientsLength - index) }]}>
-						<TextInput
-							maxFontSizeMultiplier={2}
-							style={styles.autoCompleteInput}
-							value={ingredient.name}
-							placeholder={`Ingredient ${index + 1}`}
-							onChangeText={(text) =>
-								updateIngredientEntry(ingredient.id!, text, ingredient.quantity, ingredient.unit)
-							}
-							onFocus={() => thisAutocompleteIsFocused(ingredient.id!)}
-							onBlur={() => thisAutocompleteIsFocused(null)}
-							ref={(element) => inputToFocus && setNextIngredientInput(element)}
-						/>
-						{expandBackgroundTouchCollector && (
+				<View style={[styles.autoCompleteContainer, { zIndex: Math.min(10, ingredientsLength - index) }]}>
+					<TextInput
+						maxFontSizeMultiplier={2}
+						style={styles.autoCompleteInput}
+						value={ingredient.name}
+						placeholder={`Ingredient ${index + 1}`}
+						onChangeText={(text) =>
+							updateIngredientEntry(ingredient.id!, text, ingredient.quantity, ingredient.unit)
+						}
+						onFocus={() => thisAutocompleteIsFocused(ingredient.id!)}
+						onBlur={() => thisAutocompleteIsFocused(null)}
+						ref={(element) => inputToFocus && setNextIngredientInput(element)}
+					/>
+					{showAutocomplete && (
+						<View style={styles.autoCompleteList}>
 							<FlatList
 								data={autocompleteList}
 								keyExtractor={(item) => item.id.toString()}
 								renderItem={({ item }) =>
 									renderAutoIngredientsListItem(item, ingredientIndex, ingredient)
 								}
+								scrollEnabled={true}
 								nestedScrollEnabled={true}
 								keyboardShouldPersistTaps="always"
 								showsVerticalScrollIndicator={true}
-								style={styles.autoCompleteList}
+								// style={{
+								// 	flex: 1,
+								// 	maxHeight: responsiveHeight(25),
+								// }}
+								// contentContainerStyle={{ flexGrow: 1 }}
+								// removeClippedSubviews={false}
+								// windowSize={10}
 							/>
-						)}
+						</View>
+					)}
+				</View>
+				<View style={styles.quantityAndUnitContainer}>
+					<View style={styles.addIngredientQuantityInputBox}>
+						<TextInput
+							maxFontSizeMultiplier={2}
+							style={styles.ingredientTextAdjustment}
+							placeholder="Qty"
+							keyboardType="decimal-pad"
+							onChangeText={(text) =>
+								updateIngredientEntry(ingredient.id!, ingredient.name, text, ingredient.unit)
+							}
+							value={ingredient.quantity}
+						/>
 					</View>
-					<View style={styles.quantityAndUnitContainer}>
-						<View style={styles.addIngredientQuantityInputBox}>
-							<TextInput
-								maxFontSizeMultiplier={2}
-								style={styles.ingredientTextAdjustment}
-								placeholder="Qty"
-								keyboardType="decimal-pad"
-								onChangeText={(text) =>
-									updateIngredientEntry(ingredient.id!, ingredient.name, text, ingredient.unit)
-								}
-								value={ingredient.quantity}
-							/>
-						</View>
-						<View style={styles.addIngredientUnitInputBox}>
-							<DualOSPicker
-								onChoiceChange={onChoiceChange}
-								options={units}
-								selectedChoice={ingredient.unit}
-								testID={`ingredient${index + 1}`}
-								accessibilityLabel={`ingredient${index + 1} unit picker`}
-							/>
-						</View>
+					<View style={styles.addIngredientUnitInputBox}>
+						<DualOSPicker
+							onChoiceChange={onChoiceChange}
+							options={units}
+							selectedChoice={ingredient.unit}
+							testID={`ingredient${index + 1}`}
+							accessibilityLabel={`ingredient${index + 1} unit picker`}
+						/>
 					</View>
 				</View>
-				<TouchableOpacity
-					style={[
-						styles.deleteIngredientContainer,
-						expandBackgroundTouchCollector && { top: responsiveHeight(15) },
-					]}
-					onPress={() => removeIngredient(ingredient.id!)}
-					activeOpacity={0.7}
-					testID={`delete-ingredient${index + 1}`}
-					accessibilityLabel={`delete ingredient${index + 1}`}
-				>
-					<IconComponent
-						name="trash-can-outline"
-						size={responsiveHeight(3.5)}
-						style={styles.ingredientTrashCan}
-					/>
-				</TouchableOpacity>
+			</View>
+			<TouchableOpacity
+				style={styles.deleteIngredientContainer}
+				onPress={() => removeIngredient(ingredient.id!)}
+				activeOpacity={0.7}
+				testID={`delete-ingredient${index + 1}`}
+				accessibilityLabel={`delete ingredient${index + 1}`}
+			>
+				<IconComponent
+					name="trash-can-outline"
+					size={responsiveHeight(3.5)}
+					style={styles.ingredientTrashCan}
+				/>
 			</TouchableOpacity>
 		</View>
 	);

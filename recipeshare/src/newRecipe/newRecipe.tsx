@@ -898,7 +898,8 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 											helpShowing ||
 											choosingPrimaryPicture ||
 											choosingInstructionPicture ||
-											filterDisplayed
+											filterDisplayed ||
+											autoCompleteFocused !== null
 									  ) ? (
 										<DraggableFlatList
 											data={newRecipeDetails.ingredients}
@@ -1022,7 +1023,8 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 											helpShowing ||
 											choosingPrimaryPicture ||
 											choosingInstructionPicture ||
-											filterDisplayed
+											filterDisplayed ||
+											autoCompleteFocused !== null
 									  ) ? (
 										<DraggableFlatList
 											data={newRecipeDetails.instructions}

@@ -374,7 +374,7 @@ export const useNewRecipeModel = (
 			serves: "Any",
 		});
 	};
-	
+
 	const postImages = async (newRecipeDetails, recipe) => {
 		try {
 			await Promise.all(
@@ -395,11 +395,7 @@ export const useNewRecipeModel = (
 					const recipeInstruction = recipe.instructions.find((i) => i.step === index);
 					// for new images, the image is the local uri and has no id
 					// it needs to be uploaded to the server along with the instruction id
-					if (
-						instruction.image &&
-						typeof instruction.image === "string" &&
-						instruction.image !== ""
-					) {
+					if (instruction.image && typeof instruction.image === "string" && instruction.image !== "") {
 						return postInstructionImage(
 							loggedInChef.id,
 							loggedInChef.auth_token,
@@ -559,6 +555,7 @@ export const useNewRecipeModel = (
 		}
 	};
 
+	// console.log("newRecipeDetails:", newRecipeDetails.instructions);
 	const setRecipeParamsForEditing = async (recipeDetails) => {
 		const { recipe } = recipeDetails;
 		const newIngredients = recipeDetails.ingredient_uses.map((ingredient_use) => {
