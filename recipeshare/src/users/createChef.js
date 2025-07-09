@@ -335,6 +335,7 @@ export default connect(
 											secureTextEntry={!this.state.passwordVisible}
 											onChangeText={(text) => this.handleTextInput(text, "password")}
 											testID={"passwordInput"}
+											color="black"
 										/>
 										<TouchableOpacity
 											style={centralStyles.hiddenToggle}
@@ -368,6 +369,7 @@ export default connect(
 											secureTextEntry={!this.state.passwordVisible}
 											onChangeText={(text) => this.handleTextInput(text, "password_confirmation")}
 											testID={"passwordConfirmationInput"}
+											color="black"
 										/>
 									</View>
 								</View>

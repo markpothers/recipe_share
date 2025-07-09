@@ -295,6 +295,7 @@ export default function Login(props: OwnProps) {
 										secureTextEntry={!passwordVisible}
 										onChangeText={(text) => handleTextInput(text, "password")}
 										testID={"passwordInput"}
+										color="black"
 									/>
 								)}
 								<TouchableOpacity
