@@ -8,7 +8,7 @@ import {
 	SwitchSized,
 	TextPopup,
 } from "../components";
-import { Filters, RecipeIngredient, RecipeInstruction } from "../centralTypes";
+import { Filters, Ingredient, RecipeIngredient, RecipeInstruction } from "../centralTypes";
 import {
 	FlatList,
 	Keyboard,
@@ -29,6 +29,7 @@ import { AlertPopup } from "../components";
 import DraggableFlatList from "react-native-draggable-flatlist";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import IngredientAutoComplete from "./ingredientAutoComplete";
+import { IngredientAutocompleteBar } from "./IngredientAutocompleteBar";
 import { InstructionRow } from "./components/instructionRow";
 import NetInfo from "@react-native-community/netinfo";
 import { NewRecipeProps } from "../navigation";
@@ -116,6 +117,82 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 		startAcknowledgementSpeechRecognition,
 		isRecordingAcknowledgement,
 	} = useNewRecipeModel(props.navigation, props.route, nextInstructionInput, nextIngredientInput);
+	const [ingredientAutocompleteVisible, setIngredientAutocompleteVisible] = React.useState(false);
+	const [ingredientAutocompleteId, setIngredientAutocompleteId] = React.useState<string | null>(null);
+	const [ingredientAutocompleteValue, setIngredientAutocompleteValue] = React.useState("");
+	const [keyboardHeight, setKeyboardHeight] = React.useState(0);
+
+	React.useEffect(() => {
+		// Use correct type for keyboard event
+		const onKeyboardDidShow = (e: { endCoordinates?: { height: number } }) => {
+			setKeyboardHeight(e.endCoordinates ? e.endCoordinates.height : 0);
+		};
+		const onKeyboardDidHide = () => {
+			setKeyboardHeight(0);
+		};
+		const showSub = Keyboard.addListener("keyboardDidShow", onKeyboardDidShow);
+		const hideSub = Keyboard.addListener("keyboardDidHide", onKeyboardDidHide);
+		return () => {
+			showSub.remove();
+			hideSub.remove();
+		};
+	}, []);
+
+	// Handler for IngredientAutoComplete focus
+	const handleIngredientNameFocus = (ingredientId: string, currentName: string) => {
+		setIngredientAutocompleteId(ingredientId);
+		setIngredientAutocompleteValue(currentName);
+		setIngredientAutocompleteVisible(true);
+	};
+
+	// Handler for IngredientAutoComplete blur
+	const handleIngredientNameBlur = () => {
+		setIngredientAutocompleteVisible(false);
+		setIngredientAutocompleteId(null);
+	};
+
+	// Handler for selecting an autocomplete suggestion
+	const handleIngredientAutocompleteSelect = (ingredient: Ingredient) => {
+		if (ingredientAutocompleteId) {
+			const ing = newRecipeDetails.ingredients.find((i) => i.id === ingredientAutocompleteId);
+			if (ing) {
+				updateIngredientEntry(ingredientAutocompleteId, ingredient.name, ing.quantity, ing.unit);
+			}
+		}
+		setIngredientAutocompleteVisible(false);
+		setIngredientAutocompleteId(null);
+	};
+
+	// Handler for closing the autocomplete bar
+	const handleIngredientAutocompleteClose = () => {
+		setIngredientAutocompleteVisible(false);
+		setIngredientAutocompleteId(null);
+	};
+
+	// Handler for toggling autocomplete bar from icon
+	const handleIngredientAutocompleteIconPress = (ingredientId: string, currentName: string) => {
+		if (ingredientAutocompleteVisible && ingredientAutocompleteId === ingredientId) {
+			setIngredientAutocompleteVisible(false);
+			setIngredientAutocompleteId(null);
+		} else {
+			setIngredientAutocompleteId(ingredientId);
+			setIngredientAutocompleteValue(currentName);
+			setIngredientAutocompleteVisible(true);
+		}
+	};
+
+	// Filter suggestions based on current input
+	const ingredientSuggestions = ingredientsList
+		.filter(
+			(ing) =>
+				ing.name.toLowerCase().startsWith(ingredientAutocompleteValue.toLowerCase()) &&
+				ingredientAutocompleteValue.length > 1
+		)
+		.sort((a, b) => (a.name > b.name ? 1 : -1));
+
+	// Only show autocomplete bar if more than one suggestion
+	const showAutocompleteBar = ingredientAutocompleteVisible && ingredientSuggestions.length > 1;
+
 	const renderAlertPopup = () => {
 		const isEditing = props.route.params?.recipe_details !== undefined;
 
@@ -203,6 +280,13 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 		);
 	};
 
+	// Handler for updating ingredient name and showing autocomplete
+	const handleIngredientNameChange = (ingredientId: string, newName: string) => {
+		setIngredientAutocompleteId(ingredientId);
+		setIngredientAutocompleteValue(newName);
+		setIngredientAutocompleteVisible(true);
+	};
+
 	// Abstracted renderItem for Ingredient
 	const renderIngredientItem = ({
 		item,
@@ -214,32 +298,41 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 		index: number;
 		drag?: () => void;
 		isActive?: boolean;
-	}) => (
-		<View
-			style={{
-				marginTop: responsiveHeight(0.5),
-				zIndex: alertPopupShowing ? 0 : Math.min(10, newRecipeDetails.ingredients.length - index),
-			}}
-		>
-			<IngredientAutoComplete
-				removeIngredient={removeIngredient}
-				ingredientIndex={index}
-				ingredient={item}
-				ingredientsList={ingredientsList}
-				focused={autoCompleteFocused}
-				index={index}
-				ingredientsLength={newRecipeDetails.ingredients.length}
-				thisAutocompleteIsFocused={autocompleteIsFocused}
-				updateIngredientEntry={updateIngredientEntry}
-				setNextIngredientInput={(element) => {
-					nextIngredientInput.current = element;
+	}) => {
+		// Compute suggestions for this ingredient's name
+		const ingredientSuggestions = ingredientsList
+			.filter((ing) => ing.name.toLowerCase().startsWith(item.name.toLowerCase()) && item.name.length > 1)
+			.sort((a, b) => (a.name > b.name ? 1 : -1));
+		return (
+			<View
+				style={{
+					marginTop: responsiveHeight(0.5),
+					zIndex: alertPopupShowing ? 0 : Math.min(10, newRecipeDetails.ingredients.length - index),
 				}}
-				inputToFocus={index === newRecipeDetails.ingredients.length - 1}
-				{...(drag && { onLongPress: drag })}
-				{...(isActive !== undefined && { isActive })}
-			/>
-		</View>
-	);
+			>
+				<IngredientAutoComplete
+					removeIngredient={removeIngredient}
+					ingredient={item}
+					index={index}
+					ingredientsLength={newRecipeDetails.ingredients.length}
+					thisAutocompleteIsFocused={autocompleteIsFocused}
+					updateIngredientEntry={updateIngredientEntry}
+					setNextIngredientInput={(element: TextInput | null) => {
+						nextIngredientInput.current = element;
+					}}
+					inputToFocus={index === newRecipeDetails.ingredients.length - 1}
+					{...(drag && { onLongPress: drag })}
+					{...(isActive !== undefined && { isActive })}
+					onIngredientNameFocus={handleIngredientNameFocus}
+					onIngredientNameBlur={handleIngredientNameBlur}
+					onIngredientNameChange={(newName: string) => handleIngredientNameChange(item.id, newName)}
+					onAutocompleteIconPress={handleIngredientAutocompleteIconPress}
+					ingredientSuggestions={ingredientSuggestions}
+					autocompleteOpenIngredientId={ingredientAutocompleteId}
+				/>
+			</View>
+		);
+	};
 
 	// Update renderInstructionItem to use id-based props and pass RecipeInstruction item to InstructionRow.
 	const renderInstructionItem = ({
@@ -1132,6 +1225,16 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 					</TouchableOpacity>
 				</ScrollView>
 			</KeyboardAvoidingView>
+			{/* Autocomplete Bar absolutely positioned above the keyboard using keyboard height */}
+			{showAutocompleteBar && (
+				<IngredientAutocompleteBar
+					visible={showAutocompleteBar}
+					suggestions={ingredientSuggestions}
+					onSelect={handleIngredientAutocompleteSelect}
+					onRequestClose={handleIngredientAutocompleteClose}
+					keyboardHeight={keyboardHeight}
+				/>
+			)}
 		</SpinachAppContainer>
 	);
 };

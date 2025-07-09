@@ -1,5 +1,5 @@
-import { FlatList, Keyboard, Platform, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { Ingredient, RecipeIngredient, Unit } from "../centralTypes";
+import { Platform, TextInput, TouchableOpacity, View } from "react-native";
 
 import { DualOSPicker } from "../components";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -19,73 +19,45 @@ type OwnProps = {
 	ingredient: RecipeIngredient;
 	index: number;
 	updateIngredientEntry: (ingredientId: string, name: string, quantity: string, unit: Unit) => void;
-	ingredientIndex: number;
 	thisAutocompleteIsFocused: (id: string | null) => void;
 	inputToFocus: boolean;
 	setNextIngredientInput: (element: TextInput) => void;
-	focused: string | null;
 	ingredientsLength: number;
-	ingredientsList: Ingredient[];
 	removeIngredient: (ingredientId: string) => void;
 	onLongPress?: () => void;
 	isActive?: boolean;
+	// New prop: suggestions for this ingredient
+	ingredientSuggestions: Ingredient[];
+	// New prop: id of the ingredient whose autocomplete is currently open
+	autocompleteOpenIngredientId: string | null;
+	// Add new blur handler prop
+	onIngredientNameBlur?: () => void;
 };
 
 const IngredientAutoComplete = ({
 	ingredient,
 	index,
 	updateIngredientEntry,
-	ingredientIndex,
 	thisAutocompleteIsFocused,
 	inputToFocus,
 	setNextIngredientInput,
-	focused,
 	ingredientsLength,
-	ingredientsList,
 	removeIngredient,
 	onLongPress,
 	isActive,
-}: OwnProps) => {
-	const renderAutoIngredientsListItem = (item: Ingredient, ingredientIndex: number, ingredient: RecipeIngredient) => {
-		return (
-			<TouchableOpacity
-				style={{
-					padding: responsiveHeight(1.5),
-					borderBottomWidth: 0.5,
-					borderBottomColor: "#104e0150",
-					backgroundColor: "white",
-				}}
-				key={item.id.toString()}
-				onPress={() => {
-					handleListItemTouch(ingredientIndex, item.name, ingredient.quantity, ingredient.unit);
-				}}
-				activeOpacity={0.7}
-			>
-				<Text style={styles.autocompleteListText}>{item.name}</Text>
-			</TouchableOpacity>
-		);
-	};
-	const handleListItemTouch = (ingredientIndex: number, name: string, quantity: string, unit: Unit) => {
-		updateIngredientEntry(ingredient.id!, name, quantity, unit);
-		thisAutocompleteIsFocused(null);
-		Keyboard.dismiss();
-	};
-
-	const handlePickerChange = (ingredientIndex, name, quantity, unit) => {
-		// if(name !== ""){
-		updateIngredientEntry(ingredientIndex, name, quantity, unit);
-		Keyboard.dismiss();
-		// }
-	};
-
-	const onChoiceChange = (choice) => {
-		handlePickerChange(ingredientIndex, ingredient.name, ingredient.quantity, choice);
-	};
-	const autocompleteList = ingredientsList
-		.filter((ing) => ing.name.toLowerCase().startsWith(ingredient.name.toLowerCase()))
-		.sort((a, b) => (a.name > b.name ? 1 : -1));
-	const showAutocomplete = focused === ingredient.id && autocompleteList.length > 0 && ingredient.name.length > 1;
-
+	onIngredientNameFocus,
+	onIngredientNameBlur,
+	onIngredientNameChange,
+	onAutocompleteIconPress,
+	ingredientSuggestions,
+	autocompleteOpenIngredientId,
+}: OwnProps & {
+	onIngredientNameFocus: (ingredientId: string, currentName: string) => void;
+	onIngredientNameChange: (newName: string) => void;
+	onAutocompleteIconPress: (ingredientId: string, currentName: string) => void;
+}) => {
+	const showChevron = ingredientSuggestions.length > 1;
+	const isOpen = autocompleteOpenIngredientId === ingredient.id;
 	return (
 		<View style={[styles.autoCompleteRowContainer, isActive ? { opacity: 0.5 } : null]}>
 			<TouchableOpacity
@@ -102,40 +74,50 @@ const IngredientAutoComplete = ({
 					Platform.OS == "ios" && { zIndex: Math.min(10, ingredientsLength - index) },
 				]}
 			>
-				<View style={[styles.autoCompleteContainer, { zIndex: Math.min(10, ingredientsLength - index) }]}>
+				<View
+					style={[
+						styles.autoCompleteContainer,
+						{ zIndex: Math.min(10, ingredientsLength - index), position: "relative" },
+					]}
+				>
 					<TextInput
 						maxFontSizeMultiplier={2}
-						style={styles.autoCompleteInput}
+						style={[styles.autoCompleteInput, { flex: 1, paddingRight: 32 }]}
 						value={ingredient.name}
 						placeholder={`Ingredient ${index + 1}`}
-						onChangeText={(text) =>
-							updateIngredientEntry(ingredient.id!, text, ingredient.quantity, ingredient.unit)
-						}
-						onFocus={() => thisAutocompleteIsFocused(ingredient.id!)}
-						onBlur={() => thisAutocompleteIsFocused(null)}
+						onChangeText={(text) => {
+							updateIngredientEntry(ingredient.id!, text, ingredient.quantity, ingredient.unit);
+							if (onIngredientNameChange) {
+								onIngredientNameChange(text);
+							}
+						}}
+						onFocus={() => onIngredientNameFocus(ingredient.id!, ingredient.name)}
+						onBlur={() => {
+							if (onIngredientNameBlur) onIngredientNameBlur();
+							thisAutocompleteIsFocused(null);
+						}}
 						ref={(element) => inputToFocus && setNextIngredientInput(element)}
 					/>
-					{showAutocomplete && (
-						<View style={styles.autoCompleteList}>
-							<FlatList
-								data={autocompleteList}
-								keyExtractor={(item) => item.id.toString()}
-								renderItem={({ item }) =>
-									renderAutoIngredientsListItem(item, ingredientIndex, ingredient)
-								}
-								scrollEnabled={true}
-								nestedScrollEnabled={true}
-								keyboardShouldPersistTaps="always"
-								showsVerticalScrollIndicator={true}
-								// style={{
-								// 	flex: 1,
-								// 	maxHeight: responsiveHeight(25),
-								// }}
-								// contentContainerStyle={{ flexGrow: 1 }}
-								// removeClippedSubviews={false}
-								// windowSize={10}
+					{/* Only show chevron if more than one autocomplete option is available for this ingredient */}
+					{showChevron && (
+						<TouchableOpacity
+							onPress={() => onAutocompleteIconPress(ingredient.id!, ingredient.name)}
+							style={{
+								padding: 4,
+								position: "absolute",
+								right: 8,
+								top: 0,
+								bottom: 0,
+								justifyContent: "center",
+							}}
+							accessibilityLabel={isOpen ? "Hide ingredient suggestions" : "Show ingredient suggestions"}
+						>
+							<Icon
+								name={isOpen ? "chevron-down" : "chevron-left"}
+								size={22}
+								color={isOpen ? "#4b7142" : "#888"}
 							/>
-						</View>
+						</TouchableOpacity>
 					)}
 				</View>
 				<View style={styles.quantityAndUnitContainer}>
@@ -153,7 +135,9 @@ const IngredientAutoComplete = ({
 					</View>
 					<View style={styles.addIngredientUnitInputBox}>
 						<DualOSPicker
-							onChoiceChange={onChoiceChange}
+							onChoiceChange={(choice) =>
+								updateIngredientEntry(ingredient.id!, ingredient.name, ingredient.quantity, choice)
+							}
 							options={units}
 							selectedChoice={ingredient.unit}
 							testID={`ingredient${index + 1}`}
