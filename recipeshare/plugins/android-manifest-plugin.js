@@ -1,4 +1,4 @@
-import { withAndroidManifest } from "@expo/config-plugins";
+const { withAndroidManifest } = require("@expo/config-plugins");
 
 const withCustomAndroidManifest = (config) => {
 	return withAndroidManifest(config, async (config) => {
@@ -22,4 +22,4 @@ const withCustomAndroidManifest = (config) => {
 	});
 };
 
-export default withCustomAndroidManifest;
+module.exports = withCustomAndroidManifest;
