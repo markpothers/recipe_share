@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-// Learn more https://docs.expo.io/guides/customizing-metro
-const { getDefaultConfig } = require("expo/metro-config");
+import { getDefaultConfig } from "expo/metro-config";
 
-module.exports = getDefaultConfig(__dirname);
+export default getDefaultConfig(__dirname);
 

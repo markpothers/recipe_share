@@ -10,6 +10,8 @@ import { LoginChef } from "../centralTypes";
 import { loadToken } from "../auxFunctions/saveLoadToken";
 import { setDeviceType } from "../redux/rootReducer";
 import { styles } from "./usersStyleSheet";
+import spinachJpg from "../../assets/images/spinach.jpg";
+import yellowLogo from "../../assets/images/yellowLogo.png";
 
 type OwnProps = {
 	navigation: AppLoadingNavigationProps;
@@ -92,7 +94,7 @@ export default function AppLoading({ setLoadedAndLoggedIn }: OwnProps) {
 	return (
 		<View style={styles.mainPageContainer}>
 			<ImageBackground
-				source={require("../../assets/images/spinach.jpg")}
+				source={spinachJpg}
 				style={styles.background}
 				imageStyle={styles.backgroundImageStyle}
 			>
@@ -100,7 +102,7 @@ export default function AppLoading({ setLoadedAndLoggedIn }: OwnProps) {
 					<Image
 						style={styles.logo}
 						resizeMode={"contain"}
-						source={require("../../assets/images/yellowLogo.png")}
+						source={yellowLogo}
 						testID={"yellowLogo"}
 					/>
 				</View>

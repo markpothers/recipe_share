@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { Alert } from "react-native";
+import type SpeechModule from "expo-speech-recognition";
 
 type SpeechRecognitionCallback = (speechResult: string, isFinished: boolean) => void;
 
@@ -27,8 +28,7 @@ let speechModule: SpeechModule | null = null;
 
 try {
 	// Try to load the speech recognition module
-	// eslint-disable-next-line
-	speechModule = require("expo-speech-recognition") as SpeechModule;
+	speechModule = (await import("expo-speech-recognition")) as SpeechModule;
 } catch {
 	// Module not available in Expo Go
 	speechModule = null;

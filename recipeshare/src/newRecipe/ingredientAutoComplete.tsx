@@ -85,6 +85,7 @@ const IngredientAutoComplete = ({
 						style={[styles.autoCompleteInput, { flex: 1, paddingRight: 32 }]}
 						value={ingredient.name}
 						placeholder={`Ingredient ${index + 1}`}
+						placeholderTextColor="#888"
 						onChangeText={(text) => {
 							updateIngredientEntry(ingredient.id!, text, ingredient.quantity, ingredient.unit);
 							if (onIngredientNameChange) {
@@ -126,6 +127,7 @@ const IngredientAutoComplete = ({
 							maxFontSizeMultiplier={2}
 							style={styles.ingredientTextAdjustment}
 							placeholder="Qty"
+							placeholderTextColor="#888"
 							keyboardType="decimal-pad"
 							onChangeText={(text) =>
 								updateIngredientEntry(ingredient.id!, ingredient.name, text, ingredient.unit)

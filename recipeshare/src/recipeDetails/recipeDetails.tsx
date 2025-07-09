@@ -34,11 +34,12 @@ import { getTimeStringFromMinutes } from "../auxFunctions/getTimeStringFromMinut
 import { styles } from "./recipeDetailsStyleSheet";
 import { useAppSelector } from "../redux";
 import { useRecipeDetailsModel } from "./hooks/useRecipeDetailsModel";
+import defaultRecipeImage from "../../assets/images/default-recipe.jpg";
 
 NetInfo.configure({ reachabilityShortTimeout: 5 }); //5ms
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const defaultRecipeImage = require("../../assets/images/default-recipe.jpg");
+// const defaultRecipeImage = require("../../assets/images/default-recipe.jpg");
 
 type OwnProps = {
 	navigation: RecipeDetailsNavigationProps;

@@ -32,7 +32,11 @@ exports[`create chef page createChef functions should display errors after submi
   >
     <Image
       resizeMode="cover"
-      source={1}
+      source={
+        {
+          "testUri": "../../../assets/images/spinach.jpg",
+        }
+      }
       style={
         {
           "borderColor": "black",
@@ -1554,7 +1558,11 @@ exports[`create chef page createChef functions should load and render 1`] = `
   >
     <Image
       resizeMode="cover"
-      source={1}
+      source={
+        {
+          "testUri": "../../../assets/images/spinach.jpg",
+        }
+      }
       style={
         {
           "borderColor": "black",
@@ -2807,7 +2815,7 @@ exports[`create chef page createChef functions should load and render 1`] = `
                   }
                   accessible={true}
                   collapsable={false}
-                  focusable={true}
+                  focusable={false}
                   onClick={[Function]}
                   onResponderGrant={[Function]}
                   onResponderMove={[Function]}

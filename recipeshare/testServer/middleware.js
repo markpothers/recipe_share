@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const { recipeDetails } = require("../__mocks__/data/recipeDetails");
-const { loggedInChef } = require("../__mocks__/data/loggedInChef");
+import { recipeDetails } from "../__mocks__/data/recipeDetails";
+import { loggedInChef } from "../__mocks__/data/loggedInChef";
 // const { clearedFilters } = require("../src/dataComponents/clearedFilters")
 
 const middleware = (req, res, next) => {
@@ -113,4 +112,4 @@ const middleware = (req, res, next) => {
 	}
 };
 
-module.exports = middleware;
+export default middleware;

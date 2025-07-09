@@ -12,7 +12,11 @@ exports[`New Recipe page New Recipe creation and functions if you set Blog, ingr
 >
   <Image
     resizeMode="cover"
-    source={1}
+    source={
+      {
+        "testUri": "../../../assets/images/spinach.jpg",
+      }
+    }
     style={
       {
         "borderColor": "black",
@@ -267,7 +271,7 @@ exports[`New Recipe page New Recipe creation and functions if you set Blog, ingr
                       "width": "100%",
                     }
                   }
-                  value=""
+                  value="My test short recipe"
                 />
               </View>
             </View>
@@ -477,7 +481,7 @@ exports[`New Recipe page New Recipe creation and functions if you set Blog, ingr
                       },
                     ]
                   }
-                  value=""
+                  value="I love this recipe"
                 />
               </View>
               <View
@@ -992,7 +996,7 @@ exports[`New Recipe page New Recipe creation and functions if you set Blog, ingr
                       }
                       testID="prep time picker value"
                     >
-                      00:00
+                      00:15
                     </Text>
                     <Icon
                       name="caret-down"
@@ -1128,7 +1132,7 @@ exports[`New Recipe page New Recipe creation and functions if you set Blog, ingr
                       }
                       testID="cook time picker value"
                     >
-                      00:00
+                      01:15
                     </Text>
                     <Icon
                       name="caret-down"
@@ -1264,7 +1268,7 @@ exports[`New Recipe page New Recipe creation and functions if you set Blog, ingr
                       }
                       testID="total time picker value"
                     >
-                      00:00
+                      01:30
                     </Text>
                     <Icon
                       name="caret-down"
@@ -1548,7 +1552,7 @@ exports[`New Recipe page New Recipe creation and functions if you set Blog, ingr
                       }
                       testID="difficulty picker value"
                     >
-                      0
+                      4
                     </Text>
                     <Icon
                       name="caret-down"
@@ -1951,7 +1955,7 @@ exports[`New Recipe page New Recipe creation and functions if you set Blog, ingr
                       "width": "100%",
                     }
                   }
-                  value=""
+                  value="The food lab"
                 />
               </View>
               <View
@@ -2072,7 +2076,7 @@ exports[`New Recipe page New Recipe creation and functions if you set Blog, ingr
                       "width": "100%",
                     }
                   }
-                  value=""
+                  value="https://www.amazon.com/Food-Lab-Cooking-Through-Science/dp/0393081087/ref=sr_1_2?dchild=1&keywords=the+food+lab&qid=1618170711&sr=8-2"
                 />
               </View>
             </View>

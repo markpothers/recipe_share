@@ -105,7 +105,11 @@ exports[`RecipeNewComment renders without an image_url 1`] = `
     }
   >
     <Image
-      source={1}
+      source={
+        {
+          "testUri": "../../../assets/images/default-chef.jpg",
+        }
+      }
       style={
         {
           "borderRadius": 11.25,

@@ -72,6 +72,7 @@ export const InstructionRow = ({
 					scrollEnabled={false}
 					value={item.text}
 					placeholder={`Instructions: step ${index + 1}`}
+					placeholderTextColor="#888"
 					onChangeText={(text) => {
 						handleInstructionChange(text, item.id);
 						textInput.current?.measureInWindow?.((x, y, width, height) => {

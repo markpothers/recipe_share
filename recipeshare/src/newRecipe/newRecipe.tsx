@@ -456,6 +456,7 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 										style={centralStyles.formInput}
 										value={newRecipeDetails.name}
 										placeholder="Recipe name"
+										placeholderTextColor="#888"
 										onChangeText={(t) => handleInput(t, "name")}
 									/>
 								</View>
@@ -501,6 +502,7 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 										style={[centralStyles.formInput, { padding: responsiveHeight(0.5) }]}
 										value={newRecipeDetails.description}
 										placeholder="Tell us about this recipe (optional; if you leave this section blank, it won't be displayed)"
+										placeholderTextColor="#888"
 										onChangeText={(t) => handleInput(t, "description")}
 									/>
 								</View>
@@ -810,6 +812,7 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 										placeholder={`Acknowledge your recipe's source${
 											newRecipeDetails.showBlogPreview ? "" : " (optional)"
 										}`}
+										placeholderTextColor="#888"
 										onChangeText={(t) => handleInput(t, "acknowledgement")}
 									/>
 								</View>
@@ -846,6 +849,7 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 										placeholder={`Link to the original book or blog${
 											newRecipeDetails.showBlogPreview ? "" : " (optional)"
 										}`}
+										placeholderTextColor="#888"
 										onChangeText={(t) => handleInput(t, "acknowledgementLink")}
 										autoCapitalize={"none"}
 									/>

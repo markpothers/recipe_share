@@ -54,6 +54,7 @@ export default function SearchBar(props: OwnProps) {
 						}}
 						value={searchTerm}
 						placeholder={text}
+						placeholderTextColor="#888"
 						keyboardType="default"
 						autoCapitalize="none"
 						onChangeText={(text) => setSearchTerm(text)}

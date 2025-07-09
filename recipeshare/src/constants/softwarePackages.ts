@@ -200,16 +200,6 @@ export const softwarePackages = [
 		url: "https://github.com/expo/expo/blob/master/LICENSE",
 	},
 	{
-		name: "enzyme",
-		copyright: "Copyright (c) 2015 Airbnb, Inc. and contributors",
-		url: "https://github.com/enzymejs/enzyme/blob/master/LICENSE.md",
-	},
-	{
-		name: "enzyme-to-json",
-		copyright: "Copyright (c) 2016 Adrien Antoine adriantoine@gmail.com",
-		url: "https://github.com/adriantoine/enzyme-to-json/blob/master/LICENSE",
-	},
-	{
 		name: "eslint",
 		copyright: "Copyright JS Foundation and other contributors, https://js.foundation",
 		url: "https://github.com/eslint/eslint/blob/master/LICENSE",
@@ -233,16 +223,6 @@ export const softwarePackages = [
 		name: "jest",
 		copyright: "Copyright (c) Facebook, Inc. and its affiliates.",
 		url: "https://github.com/facebook/jest/blob/master/LICENSE",
-	},
-	{
-		name: "jest-environment-enzyme",
-		copyright: "Copyright (c) 2016 Blaine Kasten",
-		url: "https://github.com/enzymejs/enzyme-matchers/blob/master/LICENSE",
-	},
-	{
-		name: "jest-enzyme",
-		copyright: "Copyright (c) 2016 Blaine Kasten",
-		url: "https://github.com/enzymejs/enzyme-matchers/blob/master/LICENSE",
 	},
 	{
 		name: "react-native-mock-render",
