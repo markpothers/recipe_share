@@ -126,7 +126,7 @@ const CustomDrawer = (props: OwnProps & DrawerContentComponentProps) => {
 						>
 							Logged in as:
 						</Text>
-						<TouchableOpacity onPress={() => props.navigation.navigate("Profile")}>
+						<TouchableOpacity onPress={() => props.navigation.navigate("ProfileCover")}>
 							<Text
 								style={[
 									styles.userName,
@@ -142,7 +142,7 @@ const CustomDrawer = (props: OwnProps & DrawerContentComponentProps) => {
 					</View>
 					<TouchableOpacity
 						style={styles.bottomRightContainer}
-						onPress={() => props.navigation.navigate("Profile")}
+						onPress={() => props.navigation.navigate("ProfileCover")}
 					>
 						<AvatarImage image_url={loggedInChef.image_url} />
 					</TouchableOpacity>
