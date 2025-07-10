@@ -18,12 +18,14 @@ export const IngredientAutocompleteBar: React.FC<IngredientAutocompleteBarProps>
 	suggestions,
 	onSelect,
 	onRequestClose,
-	keyboardHeight = 0,
 }) => {
 	if (!visible) return null;
 
+	// Always stick to the bottom of the screen (just above the keyboard)
+	const containerStyle = [styles.container, { bottom: 0 }];
+
 	return (
-		<View style={[styles.container, { bottom: keyboardHeight }]}>
+		<View style={containerStyle} pointerEvents="box-none">
 			{/* Move above keyboard */}
 			<TouchableOpacity
 				style={styles.closeIconButton}
@@ -37,11 +39,7 @@ export const IngredientAutocompleteBar: React.FC<IngredientAutocompleteBarProps>
 				data={suggestions}
 				keyExtractor={(item) => item.id.toString()}
 				renderItem={({ item }) => (
-					<TouchableOpacity
-						style={styles.item}
-						onPress={() => onSelect(item)}
-						activeOpacity={0.7}
-					>
+					<TouchableOpacity style={styles.item} onPress={() => onSelect(item)} activeOpacity={0.7}>
 						<Text style={styles.text}>{item.name}</Text>
 					</TouchableOpacity>
 				)}
