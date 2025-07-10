@@ -77,7 +77,7 @@ export const styles = StyleSheet.create({
 		// height: '25%',
 		width: "90%",
 		marginTop: "3%",
-		marginLeft: "5%",
+		// marginLeft: "0%",
 		marginRight: "5%",
 		// borderWidth: 1,
 	},
@@ -106,7 +106,7 @@ export const styles = StyleSheet.create({
 	logoutContainer: {
 		width: "90%",
 		marginTop: "5%",
-		marginLeft: "5%",
+		// marginLeft: "5%",
 		marginRight: "5%",
 		// borderWidth: 1
 	},

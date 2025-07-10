@@ -18,7 +18,7 @@ import { shortTestRecipe } from "../recipeTemplates/shortTestRecipe";
 import { useSpeechToText } from "./useSpeechToText";
 import uuid from "react-native-uuid";
 
-const isDev = __DEV__ ? true : false;
+const isDev = __DEV__ ? false : false;
 const testRecipe = shortTestRecipe;
 
 export const useNewRecipeModel = (

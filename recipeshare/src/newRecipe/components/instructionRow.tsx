@@ -3,9 +3,9 @@ import { TextInput, TouchableOpacity, View } from "react-native";
 import { responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions";
 
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { RecipeInstruction } from "../../centralTypes";
 import { centralStyles } from "../../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { styles } from "../newRecipeStyleSheet";
-import { RecipeInstruction } from "../../centralTypes";
 
 // Type assertion for Icon component to fix TypeScript issues
 const IconComponent = Icon as React.ComponentType<{
@@ -58,7 +58,10 @@ export const InstructionRow = ({
 			]}
 		>
 			<TouchableOpacity
-				style={[styles.deleteInstructionContainer, { width: responsiveWidth(12), height: inputHeight, minHeight }]}
+				style={[
+					styles.deleteInstructionContainer,
+					{ width: responsiveWidth(12), height: inputHeight, minHeight },
+				]}
 				onLongPress={onLongPress}
 				disabled={!onLongPress}
 				activeOpacity={0.8}
@@ -108,7 +111,12 @@ export const InstructionRow = ({
 			<TouchableOpacity
 				style={[
 					styles.deleteInstructionContainer,
-					{ width: "9%", backgroundColor: instructionImagePresent ? "#505050" : "white", height: inputHeight, minHeight },
+					{
+						width: "9%",
+						backgroundColor: instructionImagePresent ? "#505050" : "white",
+						height: inputHeight,
+						minHeight,
+					},
 				]}
 				activeOpacity={0.7}
 				onPress={() => chooseInstructionPicture(item.id)}

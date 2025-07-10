@@ -14,7 +14,15 @@ export default class DualOSPicker extends React.PureComponent {
 
 	choicesPicker = () => {
 		return this.props.options.map((option) => {
-			return <Picker.Item style={styles.pickerText} key={option} label={option} value={option} />;
+			return (
+				<Picker.Item
+					style={styles.pickerText}
+					key={option}
+					label={option}
+					value={option}
+					// color="white"
+				/>
+			);
 		});
 	};
 
@@ -70,6 +78,7 @@ export default class DualOSPicker extends React.PureComponent {
 						onValueChange={(choice) => this.props.onChoiceChange(choice)}
 						selectedValue={this.props.selectedChoice}
 						testID="androidPicker"
+						dropdownIconColor={"#104e01"}
 					>
 						{this.choicesPicker()}
 					</Picker>
