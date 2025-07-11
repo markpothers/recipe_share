@@ -40,8 +40,7 @@
 			"versionCode": 55,
 			"permissions": [
 				"CAMERA",
-				"READ_EXTERNAL_STORAGE",
-				"WRITE_EXTERNAL_STORAGE",
+				"android.permission.READ_MEDIA_IMAGES",
 				"android.permission.RECORD_AUDIO"
 			],
 			"icon": "./assets/images/icon.png",
