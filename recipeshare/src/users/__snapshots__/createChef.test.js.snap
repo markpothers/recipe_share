@@ -225,6 +225,7 @@ exports[`create chef page createChef functions should display errors after submi
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="e-mail"
+                    placeholderTextColor="#888"
                     style={
                       {
                         "fontSize": 30.595932917809698,
@@ -349,6 +350,7 @@ exports[`create chef page createChef functions should display errors after submi
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="username"
+                    placeholderTextColor="#888"
                     style={
                       {
                         "fontSize": 30.595932917809698,
@@ -602,6 +604,7 @@ exports[`create chef page createChef functions should display errors after submi
                     numberOfLines={3}
                     onChangeText={[Function]}
                     placeholder="about me"
+                    placeholderTextColor="#888"
                     style={
                       {
                         "fontSize": 30.595932917809698,
@@ -663,9 +666,11 @@ exports[`create chef page createChef functions should display errors after submi
                   <TextInput
                     autoCapitalize="none"
                     autoCompleteType="password"
+                    color="black"
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="password"
+                    placeholderTextColor="#888"
                     secureTextEntry={true}
                     style={
                       {
@@ -781,9 +786,11 @@ exports[`create chef page createChef functions should display errors after submi
                   <TextInput
                     autoCapitalize="none"
                     autoCompleteType="password"
+                    color="black"
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="password confirmation"
+                    placeholderTextColor="#888"
                     secureTextEntry={true}
                     style={
                       {
@@ -1751,6 +1758,7 @@ exports[`create chef page createChef functions should load and render 1`] = `
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="e-mail"
+                    placeholderTextColor="#888"
                     style={
                       {
                         "fontSize": 30.595932917809698,
@@ -1815,6 +1823,7 @@ exports[`create chef page createChef functions should load and render 1`] = `
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="username"
+                    placeholderTextColor="#888"
                     style={
                       {
                         "fontSize": 30.595932917809698,
@@ -2008,6 +2017,7 @@ exports[`create chef page createChef functions should load and render 1`] = `
                     numberOfLines={3}
                     onChangeText={[Function]}
                     placeholder="about me"
+                    placeholderTextColor="#888"
                     style={
                       {
                         "fontSize": 30.595932917809698,
@@ -2069,9 +2079,11 @@ exports[`create chef page createChef functions should load and render 1`] = `
                   <TextInput
                     autoCapitalize="none"
                     autoCompleteType="password"
+                    color="black"
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="password"
+                    placeholderTextColor="#888"
                     secureTextEntry={true}
                     style={
                       {
@@ -2187,9 +2199,11 @@ exports[`create chef page createChef functions should load and render 1`] = `
                   <TextInput
                     autoCapitalize="none"
                     autoCompleteType="password"
+                    color="black"
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="password confirmation"
+                    placeholderTextColor="#888"
                     secureTextEntry={true}
                     style={
                       {

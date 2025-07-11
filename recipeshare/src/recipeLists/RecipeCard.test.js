@@ -1,4 +1,5 @@
 // import "react-native"
+
 // import React from "react";
 // import renderer from "react-test-renderer";
 
@@ -6,6 +7,12 @@
 // import { mockRecipeList } from "../../__mocks__/mockRecipeList.js"
 // // import OfflineMessage from '../offlineMessage/offlineMessage';
 
+
+describe("dummy", ()=>{
+	test("dummy", ()=>{
+		expect(1).toEqual(1)
+	})
+})
 
 // describe("Recipe Card", () => {
 

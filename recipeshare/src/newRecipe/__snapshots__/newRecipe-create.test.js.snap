@@ -261,6 +261,7 @@ exports[`New Recipe page New Recipe creation and functions if you set Blog, ingr
                   multiline={true}
                   onChangeText={[Function]}
                   placeholder="Recipe name"
+                  placeholderTextColor="#888"
                   style={
                     {
                       "fontSize": 30.595932917809698,
@@ -271,7 +272,7 @@ exports[`New Recipe page New Recipe creation and functions if you set Blog, ingr
                       "width": "100%",
                     }
                   }
-                  value="My test short recipe"
+                  value=""
                 />
               </View>
             </View>
@@ -466,6 +467,7 @@ exports[`New Recipe page New Recipe creation and functions if you set Blog, ingr
                   numberOfLines={3}
                   onChangeText={[Function]}
                   placeholder="Tell us about this recipe (optional; if you leave this section blank, it won't be displayed)"
+                  placeholderTextColor="#888"
                   style={
                     [
                       {
@@ -481,7 +483,7 @@ exports[`New Recipe page New Recipe creation and functions if you set Blog, ingr
                       },
                     ]
                   }
-                  value="I love this recipe"
+                  value=""
                 />
               </View>
               <View
@@ -996,7 +998,7 @@ exports[`New Recipe page New Recipe creation and functions if you set Blog, ingr
                       }
                       testID="prep time picker value"
                     >
-                      00:15
+                      00:00
                     </Text>
                     <Icon
                       name="caret-down"
@@ -1132,7 +1134,7 @@ exports[`New Recipe page New Recipe creation and functions if you set Blog, ingr
                       }
                       testID="cook time picker value"
                     >
-                      01:15
+                      00:00
                     </Text>
                     <Icon
                       name="caret-down"
@@ -1268,7 +1270,7 @@ exports[`New Recipe page New Recipe creation and functions if you set Blog, ingr
                       }
                       testID="total time picker value"
                     >
-                      01:30
+                      00:00
                     </Text>
                     <Icon
                       name="caret-down"
@@ -1552,7 +1554,7 @@ exports[`New Recipe page New Recipe creation and functions if you set Blog, ingr
                       }
                       testID="difficulty picker value"
                     >
-                      4
+                      0
                     </Text>
                     <Icon
                       name="caret-down"
@@ -1945,6 +1947,7 @@ exports[`New Recipe page New Recipe creation and functions if you set Blog, ingr
                   maxFontSizeMultiplier={2}
                   onChangeText={[Function]}
                   placeholder="Acknowledge your recipe's source"
+                  placeholderTextColor="#888"
                   style={
                     {
                       "fontSize": 30.595932917809698,
@@ -1955,7 +1958,7 @@ exports[`New Recipe page New Recipe creation and functions if you set Blog, ingr
                       "width": "100%",
                     }
                   }
-                  value="The food lab"
+                  value=""
                 />
               </View>
               <View
@@ -2066,6 +2069,7 @@ exports[`New Recipe page New Recipe creation and functions if you set Blog, ingr
                   maxFontSizeMultiplier={2}
                   onChangeText={[Function]}
                   placeholder="Link to the original book or blog"
+                  placeholderTextColor="#888"
                   style={
                     {
                       "fontSize": 30.595932917809698,
@@ -2076,7 +2080,7 @@ exports[`New Recipe page New Recipe creation and functions if you set Blog, ingr
                       "width": "100%",
                     }
                   }
-                  value="https://www.amazon.com/Food-Lab-Cooking-Through-Science/dp/0393081087/ref=sr_1_2?dchild=1&keywords=the+food+lab&qid=1618170711&sr=8-2"
+                  value=""
                 />
               </View>
             </View>

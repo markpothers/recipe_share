@@ -248,6 +248,7 @@ exports[`login page logging in under different conditions should display activat
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="e-mail"
+                    placeholderTextColor="#888"
                     style={
                       {
                         "fontSize": 30.595932917809698,
@@ -310,9 +311,11 @@ exports[`login page logging in under different conditions should display activat
                   <TextInput
                     autoCapitalize="none"
                     autoComplete="password"
+                    color="black"
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="password"
+                    placeholderTextColor="#888"
                     secureTextEntry={true}
                     style={
                       {
@@ -1151,6 +1154,7 @@ exports[`login page logging in under different conditions should display deactiv
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="e-mail"
+                    placeholderTextColor="#888"
                     style={
                       {
                         "fontSize": 30.595932917809698,
@@ -1213,9 +1217,11 @@ exports[`login page logging in under different conditions should display deactiv
                   <TextInput
                     autoCapitalize="none"
                     autoComplete="password"
+                    color="black"
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="password"
+                    placeholderTextColor="#888"
                     secureTextEntry={true}
                     style={
                       {
@@ -2054,6 +2060,7 @@ exports[`login page logging in under different conditions should display invalid
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="e-mail"
+                    placeholderTextColor="#888"
                     style={
                       {
                         "fontSize": 30.595932917809698,
@@ -2116,9 +2123,11 @@ exports[`login page logging in under different conditions should display invalid
                   <TextInput
                     autoCapitalize="none"
                     autoComplete="password"
+                    color="black"
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="password"
+                    placeholderTextColor="#888"
                     secureTextEntry={true}
                     style={
                       {
@@ -2957,6 +2966,7 @@ exports[`login page logging in under different conditions should display passwor
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="e-mail"
+                    placeholderTextColor="#888"
                     style={
                       {
                         "fontSize": 30.595932917809698,
@@ -3019,9 +3029,11 @@ exports[`login page logging in under different conditions should display passwor
                   <TextInput
                     autoCapitalize="none"
                     autoComplete="password"
+                    color="black"
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="password"
+                    placeholderTextColor="#888"
                     secureTextEntry={true}
                     style={
                       {
@@ -3860,6 +3872,7 @@ exports[`login page logging in under different conditions should display reactiv
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="e-mail"
+                    placeholderTextColor="#888"
                     style={
                       {
                         "fontSize": 30.595932917809698,
@@ -3922,9 +3935,11 @@ exports[`login page logging in under different conditions should display reactiv
                   <TextInput
                     autoCapitalize="none"
                     autoComplete="password"
+                    color="black"
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="password"
+                    placeholderTextColor="#888"
                     secureTextEntry={true}
                     style={
                       {
@@ -4763,6 +4778,7 @@ exports[`login page logging in under different conditions should instruct how to
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="e-mail"
+                    placeholderTextColor="#888"
                     style={
                       {
                         "fontSize": 30.595932917809698,
@@ -4825,9 +4841,11 @@ exports[`login page logging in under different conditions should instruct how to
                   <TextInput
                     autoCapitalize="none"
                     autoComplete="password"
+                    color="black"
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="password"
+                    placeholderTextColor="#888"
                     secureTextEntry={true}
                     style={
                       {
@@ -5666,6 +5684,7 @@ exports[`login page logging in under different conditions should password reset 
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="e-mail"
+                    placeholderTextColor="#888"
                     style={
                       {
                         "fontSize": 30.595932917809698,
@@ -5728,9 +5747,11 @@ exports[`login page logging in under different conditions should password reset 
                   <TextInput
                     autoCapitalize="none"
                     autoComplete="password"
+                    color="black"
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="password"
+                    placeholderTextColor="#888"
                     secureTextEntry={true}
                     style={
                       {
@@ -6569,6 +6590,7 @@ exports[`login page should load and render 1`] = `
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="e-mail"
+                    placeholderTextColor="#888"
                     style={
                       {
                         "fontSize": 30.595932917809698,
@@ -6631,9 +6653,11 @@ exports[`login page should load and render 1`] = `
                   <TextInput
                     autoCapitalize="none"
                     autoComplete="password"
+                    color="black"
                     maxFontSizeMultiplier={2}
                     onChangeText={[Function]}
                     placeholder="password"
+                    placeholderTextColor="#888"
                     secureTextEntry={true}
                     style={
                       {

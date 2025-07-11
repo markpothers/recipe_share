@@ -6,7 +6,7 @@
 			"ios",
 			"android"
 		],
-		"version": "0.0.20",
+		"version": "0.0.21",
 		"orientation": "portrait",
 		"icon": "./assets/images/icon.png",
 		"splash": {
@@ -23,7 +23,7 @@
 		"ios": {
 			"supportsTablet": true,
 			"bundleIdentifier": "com.recipe-share.recipe-share",
-			"buildNumber": "2.0.54",
+			"buildNumber": "2.0.55",
 			"associatedDomains": [
 				"webcredentials:www.recipe-share.com"
 			],
@@ -37,7 +37,7 @@
 		},
 		"android": {
 			"package": "com.recipe_share.recipe_share",
-			"versionCode": 54,
+			"versionCode": 55,
 			"permissions": [
 				"CAMERA",
 				"READ_EXTERNAL_STORAGE",
