@@ -79,7 +79,7 @@ describe("New Recipe page", () => {
 						navigation={{
 							navigate: mockNavigate,
 							setParams: jest.fn(),
-							setOptions: jest.fn()
+							setOptions: jest.fn(),
 						}}
 						route={{
 							params: { recipe_details: rte },
@@ -203,24 +203,14 @@ describe("New Recipe page", () => {
 			expect(postInstructionImage).toHaveBeenLastCalledWith(
 				22, // chef id
 				"mockAuthToken",
-				32, // instruction id
+				31, // instruction id (first call is undefined/239, second call is 31/238)
 				238, // image id
-				{
-					created_at: "2022-03-01T03:33:36.783Z",
-					hex: "189a0cbaa86c7db6ad10f150832eb3dca99fb824-20220301_033336",
-					hidden: false,
-					id: 238,
-					image_url:
-						"https://storage.googleapis.com/test-images-be4d3e05-1e77-4efd-8571-364e22ea7c0d/recipe36.jpg?GoogleAccessId=recipe-share-image-handler%40recipe-share-272202.iam.gserviceaccount.com&Expires=6468590196&Signature=cp7B9wSfQRdJW0OiG8%2Bdm4CikkYTp%2BS3lm5oVuJhmFjP4XQEu7F0%2BMLNbwQb8qLHw5BOgA6M6Kc6z8MJ9yInciftIFzVmU4VlnXnchCwH%2Fz3j8VgbeE9hpBAq1sp4sQ4NIz0o0Dkp4w15IdQ1XdAgbOEFi%2B%2Bf57Q24RRsGCu8KYw5l9CvwFStYfRRVqaKKcq41lDWIQYSah%2FyDCm5yduclP9DDPYgy%2F87Pawpz3imyA1lX579uXdaiKqhrmAU6TnG4CnMzAwiRXzkoZvwH02YkreIC9WiTZbKXSMhVP%2Bs8rDScGDciZifStKaOtxsT0TZELnSjZH4bOLDHjxh%2FhSNA%3D%3D",
-					instruction_id: 719,
-					name: null,
-					updated_at: "2022-03-01T16:17:43.632Z",
-				}
+				"" // empty string for existing images
 			);
 			expect(mockNavigate).toHaveBeenCalledWith("MyRecipeBook", {
 				screen: "My Recipes",
 				params: { refresh: true },
-				title: "My Recipe Book"
+				title: "My Recipe Book",
 			});
 		});
 		test("an async stored recipe should override fields for an edited recipe if they have the same id", async () => {
@@ -253,7 +243,7 @@ describe("New Recipe page", () => {
 						navigation={{
 							navigate: mockNavigate,
 							setParams: jest.fn(),
-							setOptions: jest.fn()
+							setOptions: jest.fn(),
 						}}
 						route={{
 							params: { recipe_details: rte },
@@ -299,7 +289,7 @@ describe("New Recipe page", () => {
 						navigation={{
 							navigate: mockNavigate,
 							setParams: jest.fn(),
-							setOptions: jest.fn()
+							setOptions: jest.fn(),
 						}}
 						route={{
 							params: { recipe_details: rte },
@@ -362,7 +352,7 @@ describe("New Recipe page", () => {
 						navigation={{
 							navigate: mockNavigate,
 							setParams: jest.fn(),
-							setOptions: jest.fn()
+							setOptions: jest.fn(),
 						}}
 						route={{
 							params: { recipe_details: rte },

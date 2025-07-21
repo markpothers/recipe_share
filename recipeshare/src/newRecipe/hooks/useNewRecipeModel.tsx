@@ -414,6 +414,7 @@ export const useNewRecipeModel = (
 							""
 						);
 					}
+					return Promise.resolve(true);
 				})
 			);
 			return true;
