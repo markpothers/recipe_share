@@ -23,7 +23,7 @@
 		"ios": {
 			"supportsTablet": true,
 			"bundleIdentifier": "com.recipe-share.recipe-share",
-			"buildNumber": "2.0.55",
+			"buildNumber": "2.0.59",
 			"associatedDomains": [
 				"webcredentials:www.recipe-share.com"
 			],
@@ -37,7 +37,7 @@
 		},
 		"android": {
 			"package": "com.recipe_share.recipe_share",
-			"versionCode": 55,
+			"versionCode": 59,
 			"permissions": [
 				"CAMERA",
 				"android.permission.READ_MEDIA_IMAGES",

@@ -5378,13 +5378,6 @@ expo-asset@~11.1.5:
     "@expo/image-utils" "^0.7.4"
     expo-constants "~17.1.5"
 
-expo-camera@~16.1.9:
-  version "16.1.9"
-  resolved "https://registry.yarnpkg.com/expo-camera/-/expo-camera-16.1.9.tgz#f0f06ed3fc4007e2c84c0711875c0e575ba4615d"
-  integrity sha512-Aao0rNhhJxrWLx1moWZYBsRnEoZ04Vnm8uPO24V1161m5PLGptI7m5NS8NKoHx9McfrnDkvyJSWxz/7AhfEzTw==
-  dependencies:
-    invariant "^2.2.4"
-
 expo-constants@~17.1.5, expo-constants@~17.1.6:
   version "17.1.6"
   resolved "https://registry.yarnpkg.com/expo-constants/-/expo-constants-17.1.6.tgz#a31b019216f7f7bb4907aeffa2d6bf856751985e"
@@ -5498,11 +5491,6 @@ expo-manifests@~0.16.5:
   dependencies:
     "@expo/config" "~11.0.10"
     expo-json-utils "~0.15.0"
-
-expo-media-library@~17.1.7:
-  version "17.1.7"
-  resolved "https://registry.yarnpkg.com/expo-media-library/-/expo-media-library-17.1.7.tgz#71ed3d2d246d33410d6aecc335098a23519bd890"
-  integrity sha512-hLCoMvlhjtt+iYxPe71P1F6t06mYGysuNOfjQzDbbf64PCkglCZJYmywPyUSV1V5Hu9DhRj//gEg+Ki+7VWXog==
 
 expo-modules-autolinking@2.1.12:
   version "2.1.12"
