@@ -8,7 +8,7 @@ import spinachJpg from "../../../assets/images/spinach.jpg";
 type OwnProps = {
 	scrollingEnabled: boolean;
 	awaitingServer: boolean;
-	children: React.ReactElement[];
+	children?: React.ReactElement | React.ReactElement[];
 };
 
 const SpinachAppContainer = ({ scrollingEnabled, awaitingServer, children }: OwnProps) => {
