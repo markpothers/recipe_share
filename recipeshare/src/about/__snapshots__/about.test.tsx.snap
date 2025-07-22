@@ -101,17 +101,12 @@ exports[`About Page renders displaying licenses 1`] = `
   </View>
   <View
     style={
-      [
-        {
-          "borderColor": "red",
-          "borderWidth": 0,
-          "overflow": "hidden",
-          "width": "100%",
-        },
-        {
-          "width": 750,
-        },
-      ]
+      {
+        "borderColor": "red",
+        "borderWidth": 0,
+        "overflow": "hidden",
+        "width": "100%",
+      }
     }
   >
     <View
@@ -132,279 +127,227 @@ exports[`About Page renders displaying licenses 1`] = `
       }
     >
       <View
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": undefined,
-            "expanded": undefined,
-            "selected": undefined,
-          }
-        }
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onClick={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
         style={
           {
-            "alignItems": "center",
             "backgroundColor": "#fff59b",
             "borderColor": "#104e01",
             "borderRadius": 11.25,
             "borderWidth": 1,
             "flexDirection": "row",
-            "height": 80.03999999999999,
-            "justifyContent": "flex-start",
-            "maxWidth": "100%",
-            "minHeight": 80.03999999999999,
-            "minWidth": 285,
-            "opacity": 1,
-            "paddingLeft": 15,
-            "width": "100%",
+            "overflow": "hidden",
           }
         }
       >
-        <Icon
-          name="information"
-          size={53.36}
-          style={
+        <View
+          accessibilityState={
             {
-              "color": "#104e01",
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
             }
           }
-        />
-        <Text
-          maxFontSizeMultiplier={2}
-          style={
-            [
-              {
-                "color": "#104e01",
-                "fontSize": 27.53633962602873,
-                "fontWeight": "bold",
-                "paddingHorizontal": 7.5,
-                "textAlign": "center",
-              },
-              {
-                "fontSize": 33.65552620959067,
-              },
-            ]
-          }
-        >
-          View terms and conditions
-        </Text>
-      </View>
-    </View>
-  </View>
-  <View
-    style={
-      [
-        {
-          "borderColor": "red",
-          "borderWidth": 0,
-          "overflow": "hidden",
-          "width": "100%",
-        },
-        {
-          "width": 750,
-        },
-      ]
-    }
-  >
-    <View
-      style={
-        {
-          "alignItems": "center",
-          "borderColor": "purple",
-          "borderRadius": 11.25,
-          "borderWidth": 0,
-          "flexDirection": "row",
-          "flexWrap": "wrap",
-          "justifyContent": "space-between",
-          "marginTop": 6.67,
-          "minHeight": 80.03999999999999,
-          "overflow": "hidden",
-          "width": "100%",
-        }
-      }
-    >
-      <View
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": undefined,
-            "expanded": undefined,
-            "selected": undefined,
-          }
-        }
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onClick={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        style={
-          {
-            "alignItems": "center",
-            "backgroundColor": "#fff59b",
-            "borderColor": "#104e01",
-            "borderRadius": 11.25,
-            "borderWidth": 1,
-            "flexDirection": "row",
-            "height": 80.03999999999999,
-            "justifyContent": "flex-start",
-            "maxWidth": "100%",
-            "minHeight": 80.03999999999999,
-            "minWidth": 285,
-            "opacity": 1,
-            "paddingLeft": 15,
-            "width": "100%",
-          }
-        }
-      >
-        <Icon
-          name="information-outline"
-          size={53.36}
-          style={
+          accessibilityValue={
             {
-              "color": "#104e01",
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
             }
           }
-        />
-        <Text
-          maxFontSizeMultiplier={2}
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
-            [
-              {
-                "color": "#104e01",
-                "fontSize": 27.53633962602873,
-                "fontWeight": "bold",
-                "paddingHorizontal": 7.5,
-                "textAlign": "center",
-              },
-              {
-                "fontSize": 33.65552620959067,
-              },
-            ]
+            {
+              "alignItems": "center",
+              "backgroundColor": "transparent",
+              "borderBottomLeftRadius": 11.25,
+              "borderRightColor": "#104e01",
+              "borderRightWidth": 1,
+              "borderTopLeftRadius": 11.25,
+              "flex": 1,
+              "justifyContent": "center",
+              "opacity": 1,
+              "paddingHorizontal": 15,
+              "paddingVertical": 20.009999999999998,
+            }
           }
         >
-          View privacy policy
-        </Text>
-      </View>
-    </View>
-  </View>
-  <View
-    style={
-      [
-        {
-          "borderColor": "red",
-          "borderWidth": 0,
-          "overflow": "hidden",
-          "width": "100%",
-        },
-        {
-          "width": 750,
-        },
-      ]
-    }
-  >
-    <View
-      style={
-        {
-          "alignItems": "center",
-          "borderColor": "purple",
-          "borderRadius": 11.25,
-          "borderWidth": 0,
-          "flexDirection": "row",
-          "flexWrap": "wrap",
-          "justifyContent": "space-between",
-          "marginTop": 6.67,
-          "minHeight": 80.03999999999999,
-          "overflow": "hidden",
-          "width": "100%",
-        }
-      }
-    >
-      <View
-        style={
-          [
+          <Icon
+            color="#104e01"
+            name="information"
+            size={33.35}
+            style={
+              {
+                "marginBottom": 2,
+              }
+            }
+          />
+          <Text
+            style={
+              [
+                {
+                  "color": "#104e01",
+                  "fontSize": 27.53633962602873,
+                  "fontWeight": "600",
+                  "textAlign": "center",
+                },
+                false,
+              ]
+            }
+          >
+            Terms
+          </Text>
+        </View>
+        <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            {
+              "alignItems": "center",
+              "backgroundColor": "transparent",
+              "borderRightColor": "#104e01",
+              "borderRightWidth": 1,
+              "flex": 1,
+              "justifyContent": "center",
+              "opacity": 1,
+              "paddingHorizontal": 15,
+              "paddingVertical": 20.009999999999998,
+            }
+          }
+        >
+          <Icon
+            color="#104e01"
+            name="information-outline"
+            size={33.35}
+            style={
+              {
+                "marginBottom": 2,
+              }
+            }
+          />
+          <Text
+            style={
+              [
+                {
+                  "color": "#104e01",
+                  "fontSize": 27.53633962602873,
+                  "fontWeight": "600",
+                  "textAlign": "center",
+                },
+                false,
+              ]
+            }
+          >
+            Privacy
+          </Text>
+        </View>
+        <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
             {
               "alignItems": "center",
               "backgroundColor": "#104e01",
-              "borderColor": "#104e01",
-              "borderRadius": 11.25,
-              "borderWidth": 1,
-              "flexDirection": "row",
-              "height": "100%",
-              "justifyContent": "space-evenly",
-              "maxWidth": "50%",
-              "minHeight": 80.03999999999999,
-              "minWidth": 285,
-            },
-            {
-              "height": 80.03999999999999,
-              "justifyContent": "flex-start",
-              "maxWidth": "100%",
-              "paddingLeft": 15,
-              "width": "100%",
-            },
-          ]
-        }
-      >
-        <Icon
-          name="cellphone-information"
-          size={53.36}
-          style={
-            {
-              "color": "#fff59b",
+              "borderBottomRightRadius": 11.25,
+              "borderRightColor": "#104e01",
+              "borderRightWidth": 0,
+              "borderTopRightRadius": 11.25,
+              "flex": 1,
+              "justifyContent": "center",
+              "opacity": 1,
+              "paddingHorizontal": 15,
+              "paddingVertical": 20.009999999999998,
             }
           }
-        />
-        <Text
-          maxFontSizeMultiplier={2}
-          style={
-            [
-              {
-                "color": "#fff59b",
-                "fontSize": 27.53633962602873,
-                "fontWeight": "bold",
-                "paddingHorizontal": 7.5,
-                "textAlign": "center",
-              },
-              {
-                "fontSize": 33.65552620959067,
-              },
-            ]
-          }
         >
-          View licenses
-        </Text>
+          <Icon
+            color="#fff59b"
+            name="cellphone-information"
+            size={33.35}
+            style={
+              {
+                "marginBottom": 2,
+              }
+            }
+          />
+          <Text
+            style={
+              [
+                {
+                  "color": "#104e01",
+                  "fontSize": 27.53633962602873,
+                  "fontWeight": "600",
+                  "textAlign": "center",
+                },
+                {
+                  "color": "#fff59b",
+                },
+              ]
+            }
+          >
+            Licenses
+          </Text>
+        </View>
       </View>
     </View>
   </View>
@@ -453,7 +396,7 @@ exports[`About Page renders displaying licenses 1`] = `
             "borderRadius": 11.25,
             "borderWidth": 1,
             "flex": 1,
-            "flexDirection": "column",
+            "padding": 22.5,
           }
         }
       >
@@ -467,16 +410,34 @@ exports[`About Page renders displaying licenses 1`] = `
               }
             }
           >
-            <Text>
+            <Text
+              style={
+                {
+                  "fontSize": 33.65552620959067,
+                }
+              }
+            >
               Recipe-Share for 
               ios
             </Text>
-            <Text>
+            <Text
+              style={
+                {
+                  "fontSize": 33.65552620959067,
+                }
+              }
+            >
               Copyright © 
               2025
                Recipe-Share LLC. All rights reserved.
             </Text>
-            <Text>
+            <Text
+              style={
+                {
+                  "fontSize": 33.65552620959067,
+                }
+              }
+            >
               Recipe-Share for 
               ios
                is built using these open-source packages and their licenses:
@@ -491,12 +452,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 @react-native-async-storage/async-storage
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) , Facebook, Inc.
                 ; 
               </Text>
@@ -538,6 +511,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -555,12 +529,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 @react-native-community/masked-view
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) , Facebook, Inc.
                 ; 
               </Text>
@@ -602,6 +588,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -619,12 +606,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 @react-native-community/netinfo
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) , Facebook, Inc.
                 ; 
               </Text>
@@ -666,6 +665,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -683,12 +683,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 @react-navigation/core
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2017 React Navigation Contributors
                 ; 
               </Text>
@@ -730,6 +742,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -747,12 +760,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 @react-navigation/drawer
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2017 React Navigation Contributors
                 ; 
               </Text>
@@ -794,6 +819,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -811,12 +837,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 @react-navigation/material-top-tabs
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2017 React Navigation Contributors
                 ; 
               </Text>
@@ -858,6 +896,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -875,12 +914,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 @react-navigation/native
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2017 React Navigation Contributors
                 ; 
               </Text>
@@ -922,6 +973,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -939,12 +991,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 @react-navigation/stack
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2017 React Navigation Contributors
                 ; 
               </Text>
@@ -986,6 +1050,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -1003,12 +1068,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 chalk
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (https://sindresorhus.com)
                 ; 
               </Text>
@@ -1050,6 +1127,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -1067,12 +1145,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 expo
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c)  650 Industries, Inc. (aka Expo)
                 ; 
               </Text>
@@ -1114,6 +1204,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -1131,12 +1222,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 expo-image-editor
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c)  Thomas Coldwell
                 ; 
               </Text>
@@ -1178,6 +1281,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -1195,12 +1299,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 gradle
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 ; 
               </Text>
               <View
@@ -1241,6 +1357,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -1258,12 +1375,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 indent-string
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (https://sindresorhus.com)
                 ; 
               </Text>
@@ -1305,6 +1434,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -1322,12 +1452,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 moment
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) JS Foundation and other contributors
                 ; 
               </Text>
@@ -1369,6 +1511,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -1386,12 +1529,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 node-fetch
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2016 - 2020 Node Fetch Team
                 ; 
               </Text>
@@ -1433,6 +1588,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -1450,12 +1606,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 node-forge
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2010, Digital Bazaar, Inc.
                 ; 
               </Text>
@@ -1497,6 +1665,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -1514,12 +1683,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 react
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) Facebook, Inc. and its affiliates.
                 ; 
               </Text>
@@ -1561,6 +1742,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -1578,12 +1760,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 react-native
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) Facebook, Inc. and its affiliates.
                 ; 
               </Text>
@@ -1625,6 +1819,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -1642,12 +1837,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 react-native-autocomplete-input
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2015 Laurence
                 ; 
               </Text>
@@ -1689,6 +1896,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -1706,12 +1914,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 react-native-draggable-flatlist
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2025 computerjazz
                 ; 
               </Text>
@@ -1753,6 +1973,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -1770,12 +1991,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 react-native-elements
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2021 Nader Dabit
                 ; 
               </Text>
@@ -1817,6 +2050,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -1834,12 +2068,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 react-native-gesture-handler
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2016 Krzysztof Magiera
                 ; 
               </Text>
@@ -1881,6 +2127,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -1898,12 +2145,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 react-native-reanimated
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2016 Krzysztof Magiera
                 ; 
               </Text>
@@ -1945,6 +2204,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -1962,12 +2222,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 react-native-responsive-dimensions
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2017-present DaniAkash
                 ; 
               </Text>
@@ -2009,6 +2281,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -2026,12 +2299,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 react-native-safe-area-context
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2019 Th3rd Wave
                 ; 
               </Text>
@@ -2073,6 +2358,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -2090,12 +2376,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 react-native-screens
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2018 Krzysztof Magiera
                 ; 
               </Text>
@@ -2137,6 +2435,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -2154,12 +2453,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 react-native-tab-view
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2017 React Native Community
                 ; 
               </Text>
@@ -2201,6 +2512,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -2218,12 +2530,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 react-native-vector-icons
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2015 Joel Arvidsson
                 ; 
               </Text>
@@ -2265,6 +2589,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -2282,12 +2607,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 react-native-webview
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2015-present, Facebook, Inc.
                 ; 
               </Text>
@@ -2329,6 +2666,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -2346,12 +2684,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 react-native-webview-autoheight
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 ; 
               </Text>
               <View
@@ -2392,6 +2742,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -2409,12 +2760,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 react-redux
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2015-present Dan Abramov
                 ; 
               </Text>
@@ -2456,6 +2819,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -2473,12 +2837,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 react-scripts
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2013-present, Facebook, Inc.
                 ; 
               </Text>
@@ -2520,6 +2896,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -2537,12 +2914,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 redux
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2015-present Dan Abramov
                 ; 
               </Text>
@@ -2584,6 +2973,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -2601,12 +2991,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 redux-thunk
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2015-present Dan Abramov
                 ; 
               </Text>
@@ -2648,6 +3050,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -2665,12 +3068,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 serialize-javascript
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright 2014 Yahoo! Inc.
                 ; 
               </Text>
@@ -2712,6 +3127,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -2729,12 +3145,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 sync-exec
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 ; 
               </Text>
               <View
@@ -2775,6 +3203,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -2792,12 +3221,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 ws
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2011 Einar Otto Stangvik &lt;einaros@gmail.com&gt;
                 ; 
               </Text>
@@ -2839,6 +3280,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -2856,12 +3298,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 @babel/preset-env
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2014-present Sebastian McKenzie and other contributors
                 ; 
               </Text>
@@ -2903,6 +3357,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -2920,12 +3375,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 babel-eslint
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2014-2016 Sebastian McKenzie &lt;sebmck@gmail.com&gt;
                 ; 
               </Text>
@@ -2967,6 +3434,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -2984,12 +3452,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 babel-preset-expo
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2015-present 650 Industries, Inc. (aka Expo)
                 ; 
               </Text>
@@ -3031,6 +3511,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -3048,12 +3529,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 eslint
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright JS Foundation and other contributors, https://js.foundation
                 ; 
               </Text>
@@ -3095,6 +3588,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -3112,12 +3606,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 eslint-plugin-react
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2014 Yannick Croissant
                 ; 
               </Text>
@@ -3159,6 +3665,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -3176,12 +3683,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 eslint-plugin-react-native
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2015 Tom Hastjarjanto
                 ; 
               </Text>
@@ -3223,6 +3742,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -3240,12 +3760,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 eslint-watch
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2015 Colten Rouska
                 ; 
               </Text>
@@ -3287,6 +3819,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -3304,12 +3837,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 jest
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) Facebook, Inc. and its affiliates.
                 ; 
               </Text>
@@ -3351,6 +3896,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -3368,12 +3914,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 react-native-mock-render
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2016 Jake Howard
                 ; 
               </Text>
@@ -3415,6 +3973,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -3432,12 +3991,24 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               }
             >
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 • 
                 redux-mock-store
                 ; 
               </Text>
-              <Text>
+              <Text
+                style={
+                  {
+                    "fontSize": 33.65552620959067,
+                  }
+                }
+              >
                 Copyright (c) 2017 Arnaud Benard
                 ; 
               </Text>
@@ -3479,6 +4050,7 @@ exports[`About Page renders displaying licenses 1`] = `
                   style={
                     {
                       "color": "blue",
+                      "fontSize": 33.65552620959067,
                     }
                   }
                 >
@@ -3595,17 +4167,12 @@ exports[`About Page renders displaying privacy policy 1`] = `
   </View>
   <View
     style={
-      [
-        {
-          "borderColor": "red",
-          "borderWidth": 0,
-          "overflow": "hidden",
-          "width": "100%",
-        },
-        {
-          "width": 750,
-        },
-      ]
+      {
+        "borderColor": "red",
+        "borderWidth": 0,
+        "overflow": "hidden",
+        "width": "100%",
+      }
     }
   >
     <View
@@ -3626,279 +4193,227 @@ exports[`About Page renders displaying privacy policy 1`] = `
       }
     >
       <View
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": undefined,
-            "expanded": undefined,
-            "selected": undefined,
-          }
-        }
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onClick={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
         style={
           {
-            "alignItems": "center",
             "backgroundColor": "#fff59b",
             "borderColor": "#104e01",
             "borderRadius": 11.25,
             "borderWidth": 1,
             "flexDirection": "row",
-            "height": 80.03999999999999,
-            "justifyContent": "flex-start",
-            "maxWidth": "100%",
-            "minHeight": 80.03999999999999,
-            "minWidth": 285,
-            "opacity": 1,
-            "paddingLeft": 15,
-            "width": "100%",
+            "overflow": "hidden",
           }
         }
       >
-        <Icon
-          name="information"
-          size={53.36}
-          style={
+        <View
+          accessibilityState={
             {
-              "color": "#104e01",
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
             }
           }
-        />
-        <Text
-          maxFontSizeMultiplier={2}
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
-            [
-              {
-                "color": "#104e01",
-                "fontSize": 27.53633962602873,
-                "fontWeight": "bold",
-                "paddingHorizontal": 7.5,
-                "textAlign": "center",
-              },
-              {
-                "fontSize": 33.65552620959067,
-              },
-            ]
+            {
+              "alignItems": "center",
+              "backgroundColor": "transparent",
+              "borderBottomLeftRadius": 11.25,
+              "borderRightColor": "#104e01",
+              "borderRightWidth": 1,
+              "borderTopLeftRadius": 11.25,
+              "flex": 1,
+              "justifyContent": "center",
+              "opacity": 1,
+              "paddingHorizontal": 15,
+              "paddingVertical": 20.009999999999998,
+            }
           }
         >
-          View terms and conditions
-        </Text>
-      </View>
-    </View>
-  </View>
-  <View
-    style={
-      [
-        {
-          "borderColor": "red",
-          "borderWidth": 0,
-          "overflow": "hidden",
-          "width": "100%",
-        },
-        {
-          "width": 750,
-        },
-      ]
-    }
-  >
-    <View
-      style={
-        {
-          "alignItems": "center",
-          "borderColor": "purple",
-          "borderRadius": 11.25,
-          "borderWidth": 0,
-          "flexDirection": "row",
-          "flexWrap": "wrap",
-          "justifyContent": "space-between",
-          "marginTop": 6.67,
-          "minHeight": 80.03999999999999,
-          "overflow": "hidden",
-          "width": "100%",
-        }
-      }
-    >
-      <View
-        style={
-          [
+          <Icon
+            color="#104e01"
+            name="information"
+            size={33.35}
+            style={
+              {
+                "marginBottom": 2,
+              }
+            }
+          />
+          <Text
+            style={
+              [
+                {
+                  "color": "#104e01",
+                  "fontSize": 27.53633962602873,
+                  "fontWeight": "600",
+                  "textAlign": "center",
+                },
+                false,
+              ]
+            }
+          >
+            Terms
+          </Text>
+        </View>
+        <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
             {
               "alignItems": "center",
               "backgroundColor": "#104e01",
-              "borderColor": "#104e01",
-              "borderRadius": 11.25,
-              "borderWidth": 1,
-              "flexDirection": "row",
-              "height": "100%",
-              "justifyContent": "space-evenly",
-              "maxWidth": "50%",
-              "minHeight": 80.03999999999999,
-              "minWidth": 285,
-            },
-            {
-              "height": 80.03999999999999,
-              "justifyContent": "flex-start",
-              "maxWidth": "100%",
-              "paddingLeft": 15,
-              "width": "100%",
-            },
-          ]
-        }
-      >
-        <Icon
-          name="information-outline"
-          size={53.36}
-          style={
-            {
-              "color": "#fff59b",
+              "borderRightColor": "#104e01",
+              "borderRightWidth": 1,
+              "flex": 1,
+              "justifyContent": "center",
+              "opacity": 1,
+              "paddingHorizontal": 15,
+              "paddingVertical": 20.009999999999998,
             }
           }
-        />
-        <Text
-          maxFontSizeMultiplier={2}
-          style={
-            [
-              {
-                "color": "#fff59b",
-                "fontSize": 27.53633962602873,
-                "fontWeight": "bold",
-                "paddingHorizontal": 7.5,
-                "textAlign": "center",
-              },
-              {
-                "fontSize": 33.65552620959067,
-              },
-            ]
-          }
         >
-          View privacy policy
-        </Text>
-      </View>
-    </View>
-  </View>
-  <View
-    style={
-      [
-        {
-          "borderColor": "red",
-          "borderWidth": 0,
-          "overflow": "hidden",
-          "width": "100%",
-        },
-        {
-          "width": 750,
-        },
-      ]
-    }
-  >
-    <View
-      style={
-        {
-          "alignItems": "center",
-          "borderColor": "purple",
-          "borderRadius": 11.25,
-          "borderWidth": 0,
-          "flexDirection": "row",
-          "flexWrap": "wrap",
-          "justifyContent": "space-between",
-          "marginTop": 6.67,
-          "minHeight": 80.03999999999999,
-          "overflow": "hidden",
-          "width": "100%",
-        }
-      }
-    >
-      <View
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": undefined,
-            "expanded": undefined,
-            "selected": undefined,
-          }
-        }
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onClick={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        style={
-          {
-            "alignItems": "center",
-            "backgroundColor": "#fff59b",
-            "borderColor": "#104e01",
-            "borderRadius": 11.25,
-            "borderWidth": 1,
-            "flexDirection": "row",
-            "height": 80.03999999999999,
-            "justifyContent": "flex-start",
-            "maxWidth": "100%",
-            "minHeight": 80.03999999999999,
-            "minWidth": 285,
-            "opacity": 1,
-            "paddingLeft": 15,
-            "width": "100%",
-          }
-        }
-      >
-        <Icon
-          name="cellphone-information"
-          size={53.36}
-          style={
+          <Icon
+            color="#fff59b"
+            name="information-outline"
+            size={33.35}
+            style={
+              {
+                "marginBottom": 2,
+              }
+            }
+          />
+          <Text
+            style={
+              [
+                {
+                  "color": "#104e01",
+                  "fontSize": 27.53633962602873,
+                  "fontWeight": "600",
+                  "textAlign": "center",
+                },
+                {
+                  "color": "#fff59b",
+                },
+              ]
+            }
+          >
+            Privacy
+          </Text>
+        </View>
+        <View
+          accessibilityState={
             {
-              "color": "#104e01",
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
             }
           }
-        />
-        <Text
-          maxFontSizeMultiplier={2}
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
-            [
-              {
-                "color": "#104e01",
-                "fontSize": 27.53633962602873,
-                "fontWeight": "bold",
-                "paddingHorizontal": 7.5,
-                "textAlign": "center",
-              },
-              {
-                "fontSize": 33.65552620959067,
-              },
-            ]
+            {
+              "alignItems": "center",
+              "backgroundColor": "transparent",
+              "borderBottomRightRadius": 11.25,
+              "borderRightColor": "#104e01",
+              "borderRightWidth": 0,
+              "borderTopRightRadius": 11.25,
+              "flex": 1,
+              "justifyContent": "center",
+              "opacity": 1,
+              "paddingHorizontal": 15,
+              "paddingVertical": 20.009999999999998,
+            }
           }
         >
-          View licenses
-        </Text>
+          <Icon
+            color="#104e01"
+            name="cellphone-information"
+            size={33.35}
+            style={
+              {
+                "marginBottom": 2,
+              }
+            }
+          />
+          <Text
+            style={
+              [
+                {
+                  "color": "#104e01",
+                  "fontSize": 27.53633962602873,
+                  "fontWeight": "600",
+                  "textAlign": "center",
+                },
+                false,
+              ]
+            }
+          >
+            Licenses
+          </Text>
+        </View>
       </View>
     </View>
   </View>
@@ -3947,7 +4462,7 @@ exports[`About Page renders displaying privacy policy 1`] = `
             "borderRadius": 11.25,
             "borderWidth": 1,
             "flex": 1,
-            "flexDirection": "column",
+            "padding": 22.5,
           }
         }
       >
@@ -4297,7 +4812,7 @@ If you have any questions about this Privacy Policy, please contact us:
 </RCTSafeAreaView>
 `;
 
-exports[`About Page renders displaying t & c by default 1`] = `
+exports[`About Page renders displaying terms & conditions by default 1`] = `
 <RCTSafeAreaView
   style={
     {
@@ -4398,17 +4913,12 @@ exports[`About Page renders displaying t & c by default 1`] = `
   </View>
   <View
     style={
-      [
-        {
-          "borderColor": "red",
-          "borderWidth": 0,
-          "overflow": "hidden",
-          "width": "100%",
-        },
-        {
-          "width": 750,
-        },
-      ]
+      {
+        "borderColor": "red",
+        "borderWidth": 0,
+        "overflow": "hidden",
+        "width": "100%",
+      }
     }
   >
     <View
@@ -4430,278 +4940,226 @@ exports[`About Page renders displaying t & c by default 1`] = `
     >
       <View
         style={
-          [
+          {
+            "backgroundColor": "#fff59b",
+            "borderColor": "#104e01",
+            "borderRadius": 11.25,
+            "borderWidth": 1,
+            "flexDirection": "row",
+            "overflow": "hidden",
+          }
+        }
+      >
+        <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
             {
               "alignItems": "center",
               "backgroundColor": "#104e01",
-              "borderColor": "#104e01",
-              "borderRadius": 11.25,
-              "borderWidth": 1,
-              "flexDirection": "row",
-              "height": "100%",
-              "justifyContent": "space-evenly",
-              "maxWidth": "50%",
-              "minHeight": 80.03999999999999,
-              "minWidth": 285,
-            },
-            {
-              "height": 80.03999999999999,
-              "justifyContent": "flex-start",
-              "maxWidth": "100%",
-              "paddingLeft": 15,
-              "width": "100%",
-            },
-          ]
-        }
-      >
-        <Icon
-          name="information"
-          size={53.36}
-          style={
-            {
-              "color": "#fff59b",
+              "borderBottomLeftRadius": 11.25,
+              "borderRightColor": "#104e01",
+              "borderRightWidth": 1,
+              "borderTopLeftRadius": 11.25,
+              "flex": 1,
+              "justifyContent": "center",
+              "opacity": 1,
+              "paddingHorizontal": 15,
+              "paddingVertical": 20.009999999999998,
             }
           }
-        />
-        <Text
-          maxFontSizeMultiplier={2}
-          style={
-            [
-              {
-                "color": "#fff59b",
-                "fontSize": 27.53633962602873,
-                "fontWeight": "bold",
-                "paddingHorizontal": 7.5,
-                "textAlign": "center",
-              },
-              {
-                "fontSize": 33.65552620959067,
-              },
-            ]
-          }
         >
-          View terms and conditions
-        </Text>
-      </View>
-    </View>
-  </View>
-  <View
-    style={
-      [
-        {
-          "borderColor": "red",
-          "borderWidth": 0,
-          "overflow": "hidden",
-          "width": "100%",
-        },
-        {
-          "width": 750,
-        },
-      ]
-    }
-  >
-    <View
-      style={
-        {
-          "alignItems": "center",
-          "borderColor": "purple",
-          "borderRadius": 11.25,
-          "borderWidth": 0,
-          "flexDirection": "row",
-          "flexWrap": "wrap",
-          "justifyContent": "space-between",
-          "marginTop": 6.67,
-          "minHeight": 80.03999999999999,
-          "overflow": "hidden",
-          "width": "100%",
-        }
-      }
-    >
-      <View
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": undefined,
-            "expanded": undefined,
-            "selected": undefined,
-          }
-        }
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onClick={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        style={
-          {
-            "alignItems": "center",
-            "backgroundColor": "#fff59b",
-            "borderColor": "#104e01",
-            "borderRadius": 11.25,
-            "borderWidth": 1,
-            "flexDirection": "row",
-            "height": 80.03999999999999,
-            "justifyContent": "flex-start",
-            "maxWidth": "100%",
-            "minHeight": 80.03999999999999,
-            "minWidth": 285,
-            "opacity": 1,
-            "paddingLeft": 15,
-            "width": "100%",
-          }
-        }
-      >
-        <Icon
-          name="information-outline"
-          size={53.36}
-          style={
+          <Icon
+            color="#fff59b"
+            name="information"
+            size={33.35}
+            style={
+              {
+                "marginBottom": 2,
+              }
+            }
+          />
+          <Text
+            style={
+              [
+                {
+                  "color": "#104e01",
+                  "fontSize": 27.53633962602873,
+                  "fontWeight": "600",
+                  "textAlign": "center",
+                },
+                {
+                  "color": "#fff59b",
+                },
+              ]
+            }
+          >
+            Terms
+          </Text>
+        </View>
+        <View
+          accessibilityState={
             {
-              "color": "#104e01",
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
             }
           }
-        />
-        <Text
-          maxFontSizeMultiplier={2}
-          style={
-            [
-              {
-                "color": "#104e01",
-                "fontSize": 27.53633962602873,
-                "fontWeight": "bold",
-                "paddingHorizontal": 7.5,
-                "textAlign": "center",
-              },
-              {
-                "fontSize": 33.65552620959067,
-              },
-            ]
-          }
-        >
-          View privacy policy
-        </Text>
-      </View>
-    </View>
-  </View>
-  <View
-    style={
-      [
-        {
-          "borderColor": "red",
-          "borderWidth": 0,
-          "overflow": "hidden",
-          "width": "100%",
-        },
-        {
-          "width": 750,
-        },
-      ]
-    }
-  >
-    <View
-      style={
-        {
-          "alignItems": "center",
-          "borderColor": "purple",
-          "borderRadius": 11.25,
-          "borderWidth": 0,
-          "flexDirection": "row",
-          "flexWrap": "wrap",
-          "justifyContent": "space-between",
-          "marginTop": 6.67,
-          "minHeight": 80.03999999999999,
-          "overflow": "hidden",
-          "width": "100%",
-        }
-      }
-    >
-      <View
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": undefined,
-            "expanded": undefined,
-            "selected": undefined,
-          }
-        }
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onClick={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        style={
-          {
-            "alignItems": "center",
-            "backgroundColor": "#fff59b",
-            "borderColor": "#104e01",
-            "borderRadius": 11.25,
-            "borderWidth": 1,
-            "flexDirection": "row",
-            "height": 80.03999999999999,
-            "justifyContent": "flex-start",
-            "maxWidth": "100%",
-            "minHeight": 80.03999999999999,
-            "minWidth": 285,
-            "opacity": 1,
-            "paddingLeft": 15,
-            "width": "100%",
-          }
-        }
-      >
-        <Icon
-          name="cellphone-information"
-          size={53.36}
-          style={
+          accessibilityValue={
             {
-              "color": "#104e01",
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
             }
           }
-        />
-        <Text
-          maxFontSizeMultiplier={2}
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
-            [
-              {
-                "color": "#104e01",
-                "fontSize": 27.53633962602873,
-                "fontWeight": "bold",
-                "paddingHorizontal": 7.5,
-                "textAlign": "center",
-              },
-              {
-                "fontSize": 33.65552620959067,
-              },
-            ]
+            {
+              "alignItems": "center",
+              "backgroundColor": "transparent",
+              "borderRightColor": "#104e01",
+              "borderRightWidth": 1,
+              "flex": 1,
+              "justifyContent": "center",
+              "opacity": 1,
+              "paddingHorizontal": 15,
+              "paddingVertical": 20.009999999999998,
+            }
           }
         >
-          View licenses
-        </Text>
+          <Icon
+            color="#104e01"
+            name="information-outline"
+            size={33.35}
+            style={
+              {
+                "marginBottom": 2,
+              }
+            }
+          />
+          <Text
+            style={
+              [
+                {
+                  "color": "#104e01",
+                  "fontSize": 27.53633962602873,
+                  "fontWeight": "600",
+                  "textAlign": "center",
+                },
+                false,
+              ]
+            }
+          >
+            Privacy
+          </Text>
+        </View>
+        <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            {
+              "alignItems": "center",
+              "backgroundColor": "transparent",
+              "borderBottomRightRadius": 11.25,
+              "borderRightColor": "#104e01",
+              "borderRightWidth": 0,
+              "borderTopRightRadius": 11.25,
+              "flex": 1,
+              "justifyContent": "center",
+              "opacity": 1,
+              "paddingHorizontal": 15,
+              "paddingVertical": 20.009999999999998,
+            }
+          }
+        >
+          <Icon
+            color="#104e01"
+            name="cellphone-information"
+            size={33.35}
+            style={
+              {
+                "marginBottom": 2,
+              }
+            }
+          />
+          <Text
+            style={
+              [
+                {
+                  "color": "#104e01",
+                  "fontSize": 27.53633962602873,
+                  "fontWeight": "600",
+                  "textAlign": "center",
+                },
+                false,
+              ]
+            }
+          >
+            Licenses
+          </Text>
+        </View>
       </View>
     </View>
   </View>
@@ -4750,7 +5208,7 @@ exports[`About Page renders displaying t & c by default 1`] = `
             "borderRadius": 11.25,
             "borderWidth": 1,
             "flex": 1,
-            "flexDirection": "column",
+            "padding": 22.5,
           }
         }
       >

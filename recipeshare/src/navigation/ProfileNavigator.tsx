@@ -1,6 +1,6 @@
 import { ProfileCoverProps, ProfileStackParamList } from "./types";
 
-import About from "../about/about";
+import { About } from "../about/about";
 import AppHeader from "./appHeader";
 import AppHeaderLeft from "./appHeaderLeft";
 import NewRecipeScreen from "../newRecipe/newRecipe";
