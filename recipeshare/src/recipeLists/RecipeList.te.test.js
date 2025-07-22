@@ -1,12 +1,52 @@
-import { destroyReShare, destroyRecipeLike, getAvailableFilters, getChefDetails, getRecipeDetails, getRecipeList, postReShare, postRecipeLike } from "../fetches";
-import { fireEvent, render, waitFor } from "@testing-library/react-native";
+import { act, fireEvent, render, waitFor } from "@testing-library/react-native";
+import {
+	changeTextAndWait,
+	commentOnRecipeAndWait,
+	expectApiCall,
+	expectApiCallCount,
+	expectChefNavigation,
+	expectCountChange,
+	expectElementCount,
+	expectElementExists,
+	expectElementProp,
+	expectLogoutNavigation,
+	expectNavigation,
+	expectNoNavigation,
+	expectRecipeNavigation,
+	expectStorageCall,
+	expectStorageSet,
+	likeRecipeAndWait,
+	openFiltersAndWait,
+	openPickerAndSelect,
+	pressAndExpectClosing,
+	pressAndExpectNavigation,
+	pressAndExpectOfflineMessage,
+	pressAndWait,
+	pressAndWaitForResults,
+	runTimersAndWait,
+	searchAndWaitForResults,
+	selectFilterAndWait,
+	shareRecipeAndWait,
+	triggerEventAndWait,
+	waitForLoadingToComplete,
+} from "../auxTestFunctions/testUtils";
+import {
+	destroyReShare,
+	destroyRecipeLike,
+	getAvailableFilters,
+	getChefDetails,
+	getRecipeDetails,
+	getRecipeList,
+	postReShare,
+	postRecipeLike,
+} from "../fetches";
 import { loadLocalRecipeLists, saveRecipeListsLocally } from "../auxFunctions/saveRecipeListsLocally";
 import { rootReducer, updateLoggedInChef } from "../redux";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import NetInfo from "@react-native-community/netinfo";
 import { Provider } from "react-redux";
-import React, { act } from "react";
+import React from "react";
 import RecipesList from "./RecipesList";
 import { chefDetails } from "../../__mocks__/data/chefDetails";
 import { clearedFilters } from "../../__mocks__/data/clearedFilters";
@@ -111,14 +151,14 @@ describe("Recipe List", () => {
 				)
 			);
 
-			await waitFor(() => expect(queryAllByTestId("activityIndicator").length).toEqual(0));
+			await waitForLoadingToComplete(queryAllByTestId);
 
-			expect(getByTestId("filterButton")).toBeTruthy();
-			expect(queryAllByTestId("recipeCard").length).toEqual(0);
-			expect(mockListener).toHaveBeenCalledTimes(1);
+			expectElementExists(getByTestId("filterButton"));
+			expectElementCount(queryAllByTestId("recipeCard"), 0);
+			expectApiCallCount(mockListener, 1);
 			expect(mockListener).toHaveBeenNthCalledWith(1, "focus", expect.any(Function));
-			// expect(mockListener).toHaveBeenNthCalledWith(2, "blur", expect.any(Function));
 		});
+
 		test("renders with lots of recipes", async () => {
 			getRecipeList.mockImplementation(() =>
 				Promise.resolve({
@@ -135,10 +175,10 @@ describe("Recipe List", () => {
 					</Provider>
 				)
 			);
-			await waitFor(() => expect(queryAllByTestId("activityIndicator").length).toEqual(0));
-			expect(getRecipeList).toHaveBeenCalledTimes(1);
-			expect(getByPlaceholderText("Search for Recipes")).toBeTruthy();
-			expect(queryAllByTestId("recipeCard").length).toEqual(recipeList.length);
+			await waitForLoadingToComplete(queryAllByTestId);
+			expectApiCallCount(getRecipeList, 1);
+			expectElementExists(getByPlaceholderText("Search for Recipes"));
+			expectElementCount(queryAllByTestId("recipeCard"), recipeList.length);
 		});
 
 		test("renders, fails to fetch logs out", async () => {
@@ -154,12 +194,9 @@ describe("Recipe List", () => {
 					</Provider>
 				)
 			);
-			await waitFor(() => expect(queryAllByTestId("activityIndicator").length).toEqual(0));
+			await waitForLoadingToComplete(queryAllByTestId);
 
-			expect(mockNavigate).toHaveBeenCalledWith("ProfileCover", {
-				screen: "Profile",
-				params: { logout: true },
-			});
+			expectLogoutNavigation(mockNavigate);
 		});
 
 		test("renders, fetch times out, loads locally", async () => {
@@ -185,9 +222,9 @@ describe("Recipe List", () => {
 					</Provider>
 				)
 			);
-			await waitFor(() => expect(queryAllByTestId("activityIndicator").length).toEqual(0));
+			await waitForLoadingToComplete(queryAllByTestId);
 
-			expect(queryAllByTestId("recipeCard").length).toEqual(recipeList.length);
+			expectElementCount(queryAllByTestId("recipeCard"), recipeList.length);
 		});
 
 		test("renders, fetch fails for unspecified reason, loads locally", async () => {
@@ -209,9 +246,9 @@ describe("Recipe List", () => {
 					</Provider>
 				)
 			);
-			await waitFor(() => expect(queryAllByTestId("activityIndicator").length).toEqual(0));
+			await waitForLoadingToComplete(queryAllByTestId);
 
-			expect(queryAllByTestId("recipeCard").length).toEqual(recipeList.length);
+			expectElementCount(queryAllByTestId("recipeCard"), recipeList.length);
 		});
 	});
 
@@ -255,13 +292,9 @@ describe("Recipe List", () => {
 			getByText = rendered.getByText;
 			queryAllByText = rendered.queryAllByText;
 			toJSON = rendered.toJSON;
-			// getAllByRole = rendered.getAllByRole;
-			// findByText = rendered.findByText;
-			// findByTestId = rendered.findByTestId;
-			// getByDisplayValue = rendered.getByDisplayValue;
 			getByLabelText = rendered.getByLabelText;
 
-			await waitFor(() => expect(queryAllByTestId("activityIndicator").length).toEqual(0));
+			await waitForLoadingToComplete(queryAllByTestId);
 		});
 
 		test("should be able to navigate to recipe details page from title", async () => {
@@ -270,46 +303,45 @@ describe("Recipe List", () => {
 			AsyncStorage.getItem.mockImplementation((key, callback) => {
 				callback([]);
 			});
-			await waitFor(() => fireEvent.press(getByText("Mini Baguettes")));
-			expect(AsyncStorage.getItem).toHaveBeenCalledWith("localRecipeDetails", expect.any(Function));
-			expect(AsyncStorage.setItem).toHaveBeenCalledWith(
-				"localRecipeDetails",
-				JSON.stringify([testRecipeDetails])
-			);
-			expect(mockNavigate).toHaveBeenCalledWith("RecipeDetails", {
+
+			await pressAndExpectNavigation(getByText("Mini Baguettes"), mockNavigate, "RecipeDetails", {
 				recipeID: 111,
 				commenting: false,
 			});
+
+			expectStorageCall(AsyncStorage.getItem, "localRecipeDetails");
+			expectStorageSet(AsyncStorage.setItem, "localRecipeDetails", [testRecipeDetails]);
 		});
+
 		test("should be able to navigate to recipe details page from image", async () => {
 			const testRecipeDetails = recipeDetails.find((d) => d.id === 111);
 			getRecipeDetails.mockImplementation(() => Promise.resolve(testRecipeDetails));
 			AsyncStorage.getItem.mockImplementation((key, callback) => {
 				callback([]);
 			});
-			await waitFor(() => fireEvent.press(queryAllByLabelText("picture of recipe")[2]));
-			expect(AsyncStorage.getItem).toHaveBeenCalledWith("localRecipeDetails", expect.any(Function));
-			expect(AsyncStorage.setItem).toHaveBeenCalledWith(
-				"localRecipeDetails",
-				JSON.stringify([testRecipeDetails])
-			);
-			expect(mockNavigate).toHaveBeenCalledWith("RecipeDetails", {
+
+			await pressAndExpectNavigation(queryAllByLabelText("picture of recipe")[2], mockNavigate, "RecipeDetails", {
 				recipeID: 111,
 				commenting: false,
 			});
+
+			expectStorageCall(AsyncStorage.getItem, "localRecipeDetails");
+			expectStorageSet(AsyncStorage.setItem, "localRecipeDetails", [testRecipeDetails]);
 		});
+
 		test("should be able to navigate to recipe details page from title using locally saved recipe if fetch fails", async () => {
 			const testRecipeDetails = recipeDetails.find((d) => d.id === 111);
 			getRecipeDetails.mockImplementation(() => Promise.reject({}));
 			AsyncStorage.getItem.mockImplementation((key, callback) => {
 				callback(undefined, JSON.stringify([testRecipeDetails]));
 			});
-			await waitFor(() => fireEvent.press(getByText("Mini Baguettes")));
-			expect(AsyncStorage.getItem).toHaveBeenCalledWith("localRecipeDetails", expect.any(Function));
-			expect(mockNavigate).toHaveBeenCalledWith("RecipeDetails", {
+
+			await pressAndExpectNavigation(getByText("Mini Baguettes"), mockNavigate, "RecipeDetails", {
 				recipeID: 111,
 				commenting: false,
 			});
+
+			expectStorageCall(AsyncStorage.getItem, "localRecipeDetails");
 		});
 
 		test("should fail to navigate to recipe details if fetch fails and not saved locally", async () => {
@@ -318,26 +350,30 @@ describe("Recipe List", () => {
 			AsyncStorage.getItem.mockImplementation((key, callback) => {
 				callback(undefined, JSON.stringify([]));
 			});
-			await waitFor(() => fireEvent.press(getByText("Mini Baguettes")));
-			expect(getByTestId("offlineMessage")).toBeTruthy();
-			expect(mockNavigate).not.toHaveBeenCalledWith();
+
+			await pressAndExpectOfflineMessage(getByText("Mini Baguettes"), getByTestId);
+			expectNoNavigation(mockNavigate);
 		});
 		test("should be able to navigate to chef details page from chef name", async () => {
 			const testRecipeDetails = recipeDetails.find((d) => d.id === 110);
 			const testChefDetails = chefDetails.find((d) => d.id === 1);
 			getRecipeDetails.mockImplementation(() => Promise.resolve(testRecipeDetails));
 			getChefDetails.mockImplementation(() => Promise.resolve(testChefDetails));
-			await waitFor(() => fireEvent.press(queryAllByText("Pothers")[1]));
-			expect(mockNavigate).toHaveBeenCalledWith("ChefDetails", { chefID: 1 });
+
+			await pressAndExpectNavigation(queryAllByText("Pothers")[1], mockNavigate, "ChefDetails", { chefID: 1 });
 		});
+
 		test("should be able to navigate to chef details page from chef image", async () => {
 			const testRecipeDetails = recipeDetails.find((d) => d.id === 110);
 			const testChefDetails = chefDetails.find((d) => d.id === 1);
 			getRecipeDetails.mockImplementation(() => Promise.resolve(testRecipeDetails));
 			getChefDetails.mockImplementation(() => Promise.resolve(testChefDetails));
-			await waitFor(() => fireEvent.press(queryAllByLabelText("picture of chef")[1]));
-			expect(mockNavigate).toHaveBeenCalledWith("ChefDetails", { chefID: 1 });
+
+			await pressAndExpectNavigation(queryAllByLabelText("picture of chef")[1], mockNavigate, "ChefDetails", {
+				chefID: 1,
+			});
 		});
+
 		test("should be able to navigate to chef details when loaded locally if api fails", async () => {
 			const testChefDetails = chefDetails.find((d) => d.id === 1);
 			getRecipeDetails.mockImplementation(() => Promise.reject({}));
@@ -345,147 +381,115 @@ describe("Recipe List", () => {
 			AsyncStorage.getItem.mockImplementation((key, callback) => {
 				callback(undefined, JSON.stringify([testChefDetails]));
 			});
-			await waitFor(() => fireEvent.press(queryAllByText("Pothers")[1]));
-			expect(mockNavigate).toHaveBeenCalledWith("ChefDetails", { chefID: 1 });
+
+			await pressAndExpectNavigation(queryAllByText("Pothers")[1], mockNavigate, "ChefDetails", { chefID: 1 });
 		});
+
 		test("should show offline message and not navigate to chef details if api fails and not stored locally", async () => {
 			getRecipeDetails.mockImplementation(() => Promise.reject({}));
 			getChefDetails.mockImplementation(() => Promise.reject({}));
 			AsyncStorage.getItem.mockImplementation((key, callback) => {
 				callback(undefined, JSON.stringify([]));
 			});
-			await waitFor(() => fireEvent.press(queryAllByText("Pothers")[1]));
-			expect(getByTestId("offlineMessage")).toBeTruthy();
-			expect(mockNavigate).not.toHaveBeenCalledWith();
+
+			await pressAndExpectOfflineMessage(queryAllByText("Pothers")[1], getByTestId);
+			expectNoNavigation(mockNavigate);
 		});
+
 		test("should show offline message and not navigate to chef details if api fails and no recipes are stored locally", async () => {
 			getRecipeDetails.mockImplementation(() => Promise.reject({}));
 			getChefDetails.mockImplementation(() => Promise.reject({}));
 			AsyncStorage.getItem.mockImplementation((key, callback) => callback());
-			await waitFor(() => fireEvent.press(queryAllByText("Pothers")[1]));
-			expect(getByTestId("offlineMessage")).toBeTruthy();
-			expect(mockNavigate).not.toHaveBeenCalledWith();
+
+			await pressAndExpectOfflineMessage(queryAllByText("Pothers")[1], getByTestId);
+			expectNoNavigation(mockNavigate);
 		});
 
 		describe("resharing", () => {
 			test("should be able to reshare recipe", async () => {
 				postReShare.mockResolvedValue(true);
-				expect(queryAllByLabelText("shares count")[0].props.children).toEqual(0);
-				
-				await act(async () => {
-					fireEvent.press(queryAllByLabelText("share recipe with followers")[0]);
-				});
-				
-				expect(postReShare).toHaveBeenCalledWith(113, 22, "mockAuthToken");
-				
-				await waitFor(() => {
-					expect(queryAllByLabelText("shares count")[0].props.children).toEqual(1);
-				});
+				expectCountChange(queryAllByLabelText("shares count")[0], 0);
+
+				await shareRecipeAndWait(queryAllByLabelText("share recipe with followers")[0], () =>
+					expectCountChange(queryAllByLabelText("shares count")[0], 1)
+				);
+
+				expectApiCall(postReShare, 113, 22, "mockAuthToken");
 			});
+
 			test("api fail when sharing recipe should show offline message", async () => {
 				postReShare.mockImplementation(() => Promise.reject({}));
-				expect(queryAllByLabelText("shares count")[0].props.children).toEqual(0);
-				
-				await act(async () => {
-					fireEvent.press(queryAllByLabelText("share recipe with followers")[0]);
-				});
-				
-				expect(postReShare).toHaveBeenCalledWith(113, 22, "mockAuthToken");
-				expect(queryAllByLabelText("shares count")[0].props.children).toEqual(0);
-				
-				await waitFor(() => {
-					expect(getByTestId("offlineMessage")).toBeTruthy();
-				});
+				expectCountChange(queryAllByLabelText("shares count")[0], 0);
+
+				await pressAndExpectOfflineMessage(queryAllByLabelText("share recipe with followers")[0], getByTestId);
+
+				expectApiCall(postReShare, 113, 22, "mockAuthToken");
+				expectCountChange(queryAllByLabelText("shares count")[0], 0);
 			});
+
 			test("should be able to un-reshare recipe", async () => {
 				destroyReShare.mockResolvedValue(true);
-				expect(queryAllByLabelText("shares count")[1].props.children).toEqual(1);
-				
-				await act(async () => {
-					fireEvent.press(queryAllByLabelText("remove share")[0]);
-				});
-				
-				expect(destroyReShare).toHaveBeenCalledWith(112, 22, "mockAuthToken");
-				
-				await waitFor(() => {
-					expect(queryAllByLabelText("shares count")[1].props.children).toEqual(0);
-				});
+				expectCountChange(queryAllByLabelText("shares count")[1], 1);
+
+				await shareRecipeAndWait(queryAllByLabelText("remove share")[0], () =>
+					expectCountChange(queryAllByLabelText("shares count")[1], 0)
+				);
+
+				expectApiCall(destroyReShare, 112, 22, "mockAuthToken");
 			});
+
 			test("api fail when un-sharing recipe should show offline message", async () => {
 				destroyReShare.mockImplementation(() => Promise.reject({}));
-				expect(queryAllByLabelText("shares count")[1].props.children).toEqual(1);
-				
-				await act(async () => {
-					fireEvent.press(queryAllByLabelText("remove share")[0]);
-				});
-				
-				expect(destroyReShare).toHaveBeenCalledWith(112, 22, "mockAuthToken");
-				expect(queryAllByLabelText("shares count")[1].props.children).toEqual(1);
-				
-				await waitFor(() => {
-					expect(getByTestId("offlineMessage")).toBeTruthy();
-				});
+				expectCountChange(queryAllByLabelText("shares count")[1], 1);
+
+				await pressAndExpectOfflineMessage(queryAllByLabelText("remove share")[0], getByTestId);
+
+				expectApiCall(destroyReShare, 112, 22, "mockAuthToken");
+				expectCountChange(queryAllByLabelText("shares count")[1], 1);
 			});
 		});
 
 		describe("liking", () => {
 			test("should be able to like recipe", async () => {
 				postRecipeLike.mockResolvedValue(true);
-				expect(queryAllByLabelText("likes count")[0].props.children).toEqual(0);
-				
-				await act(async () => {
-					fireEvent.press(queryAllByLabelText("like recipe")[0]);
-				});
-				
-				expect(postRecipeLike).toHaveBeenCalledWith(113, 22, "mockAuthToken");
-				
-				await waitFor(() => {
-					expect(queryAllByLabelText("likes count")[0].props.children).toEqual(1);
-				});
+				expectCountChange(queryAllByLabelText("likes count")[0], 0);
+
+				await likeRecipeAndWait(queryAllByLabelText("like recipe")[0], () =>
+					expectCountChange(queryAllByLabelText("likes count")[0], 1)
+				);
+
+				expectApiCall(postRecipeLike, 113, 22, "mockAuthToken");
 			});
+
 			test("api fail when liking recipe should show offline message", async () => {
 				postRecipeLike.mockImplementation(() => Promise.reject({}));
-				expect(queryAllByLabelText("likes count")[0].props.children).toEqual(0);
-				
-				await act(async () => {
-					fireEvent.press(queryAllByLabelText("like recipe")[0]);
-				});
-				
-				expect(postRecipeLike).toHaveBeenCalledWith(113, 22, "mockAuthToken");
-				expect(queryAllByLabelText("likes count")[0].props.children).toEqual(0);
-				
-				await waitFor(() => {
-					expect(getByTestId("offlineMessage")).toBeTruthy();
-				});
+				expectCountChange(queryAllByLabelText("likes count")[0], 0);
+
+				await pressAndExpectOfflineMessage(queryAllByLabelText("like recipe")[0], getByTestId);
+
+				expectApiCall(postRecipeLike, 113, 22, "mockAuthToken");
+				expectCountChange(queryAllByLabelText("likes count")[0], 0);
 			});
+
 			test("should be able to un-like recipe", async () => {
 				destroyRecipeLike.mockResolvedValue(true);
-				expect(queryAllByLabelText("likes count")[1].props.children).toEqual(1);
-				
-				await act(async () => {
-					fireEvent.press(queryAllByLabelText("unlike recipe")[0]);
-				});
-				
-				expect(destroyRecipeLike).toHaveBeenCalledWith(112, 22, "mockAuthToken");
-				
-				await waitFor(() => {
-					expect(queryAllByLabelText("likes count")[1].props.children).toEqual(0);
-				});
+				expectCountChange(queryAllByLabelText("likes count")[1], 1);
+
+				await likeRecipeAndWait(queryAllByLabelText("unlike recipe")[0], () =>
+					expectCountChange(queryAllByLabelText("likes count")[1], 0)
+				);
+
+				expectApiCall(destroyRecipeLike, 112, 22, "mockAuthToken");
 			});
+
 			test("api fail when un-liking recipe should show offline message", async () => {
 				destroyRecipeLike.mockImplementation(() => Promise.reject({}));
-				expect(queryAllByLabelText("likes count")[1].props.children).toEqual(1);
-				
-				await act(async () => {
-					fireEvent.press(queryAllByLabelText("unlike recipe")[0]);
-				});
-				
-				expect(destroyRecipeLike).toHaveBeenCalledWith(112, 22, "mockAuthToken");
-				expect(queryAllByLabelText("likes count")[1].props.children).toEqual(1);
-				
-				await waitFor(() => {
-					expect(getByTestId("offlineMessage")).toBeTruthy();
-				});
+				expectCountChange(queryAllByLabelText("likes count")[1], 1);
+
+				await pressAndExpectOfflineMessage(queryAllByLabelText("unlike recipe")[0], getByTestId);
+
+				expectApiCall(destroyRecipeLike, 112, 22, "mockAuthToken");
+				expectCountChange(queryAllByLabelText("likes count")[1], 1);
 			});
 		});
 		describe("commenting", () => {
@@ -493,15 +497,11 @@ describe("Recipe List", () => {
 				const testRecipeDetails = recipeDetails.find((d) => d.id === 113);
 				getRecipeDetails.mockImplementation(() => Promise.resolve(testRecipeDetails));
 				AsyncStorage.getItem.mockImplementation((key, callback) => callback([]));
-				await waitFor(() => fireEvent.press(queryAllByLabelText("comment on recipe")[0]));
-				expect(AsyncStorage.getItem).toHaveBeenCalledWith("localRecipeDetails", expect.any(Function));
-				expect(AsyncStorage.setItem).toHaveBeenCalledWith(
-					"localRecipeDetails",
-					JSON.stringify([testRecipeDetails])
-				);
-				expect(mockNavigate).toHaveBeenCalledWith("RecipeDetails", {
-					recipeID: 113,
-					commenting: true,
+
+				await commentOnRecipeAndWait(queryAllByLabelText("comment on recipe")[0], () => {
+					expectStorageCall(AsyncStorage.getItem, "localRecipeDetails");
+					expectStorageSet(AsyncStorage.setItem, "localRecipeDetails", [testRecipeDetails]);
+					expectRecipeNavigation(mockNavigate, 113, true);
 				});
 			});
 		});
@@ -547,13 +547,9 @@ describe("Recipe List", () => {
 			getByText = rendered.getByText;
 			queryAllByText = rendered.queryAllByText;
 			toJSON = rendered.toJSON;
-			// getAllByRole = rendered.getAllByRole;
-			// findByText = rendered.findByText;
-			// findByTestId = rendered.findByTestId;
-			// getByDisplayValue = rendered.getByDisplayValue;
 			getByLabelText = rendered.getByLabelText;
 
-			await waitFor(() => expect(queryAllByTestId("activityIndicator").length).toEqual(0));
+			await waitForLoadingToComplete(queryAllByTestId);
 		});
 
 		afterEach(() => {
@@ -567,52 +563,28 @@ describe("Recipe List", () => {
 					filters: filters.filter((f) => f !== "dessert"),
 				})
 			);
-			fireEvent.press(getByLabelText("display filter options"));
-			expect(getByText("Apply filters to recipes list")).toBeTruthy();
+			await openFiltersAndWait(
+				getByLabelText("display filter options"),
+				getByText,
+				"Apply filters to recipes list"
+			);
 			expect(getByTestId("Side-switch").props.value).toBeFalsy();
 			expect(getByTestId("Dessert-switch").props.disabled).toBeFalsy();
-			await waitFor(() => fireEvent.press(getByText("Side")));
-			expect(getByTestId("Dessert-switch").props.disabled).toBeTruthy();
-			expect(getByTestId("Side-switch").props.value).toBeTruthy();
-			expect(getAvailableFilters).toHaveBeenCalled();
-			expect(getAvailableFilters).toHaveBeenCalledWith(
-				"all",
-				22,
-				10,
-				0,
-				undefined,
-				"mockAuthToken",
-				{
-					Bread: false,
-					Breakfast: false,
-					Chicken: false,
-					"Dairy free": false,
-					Dessert: false,
-					Dinner: false,
-					"Freezer meal": false,
-					"Gluten free": false,
-					Keto: false,
-					Lunch: false,
-					Paleo: false,
-					"Red meat": false,
-					Salad: false,
-					Seafood: false,
-					Side: true,
-					Soup: false,
-					Vegan: false,
-					Vegetarian: false,
-					Weekend: false,
-					Weeknight: false,
-					"White meat": false,
-					"Whole 30": false,
-				},
-				"Any",
-				"Any",
-				"",
-				expect.any(Object)
-			);
-			fireEvent.press(getByText("Apply & Close"));
-			expect(queryAllByText("Apply filters to recipes list").length).toEqual(0);
+
+			await act(async () => {
+				fireEvent.press(getByText("Side"));
+			});
+
+			await waitFor(() => {
+				expect(getByTestId("Side-switch").props.value).toBeTruthy();
+				expect(getByTestId("Dessert-switch").props.disabled).toBeTruthy();
+			});
+
+			await waitFor(() => {
+				expect(getAvailableFilters).toHaveBeenCalled();
+			});
+
+			await pressAndExpectClosing(getByText("Apply & Close"), queryAllByText, "Apply filters to recipes list");
 		});
 		test("should be able to set Cuisine", async () => {
 			getAvailableFilters.mockImplementation(() =>
@@ -622,28 +594,19 @@ describe("Recipe List", () => {
 					filters: filters.filter((f) => f !== "dessert"),
 				})
 			);
-			fireEvent.press(getByLabelText("display filter options"));
-			expect(getByText("Apply filters to recipes list")).toBeTruthy();
+			await openFiltersAndWait(
+				getByLabelText("display filter options"),
+				getByText,
+				"Apply filters to recipes list"
+			);
 			expect(getByTestId("Dessert-switch").props.disabled).toBeFalsy();
 
-			// Open the picker
-			fireEvent.press(getByLabelText("cuisines picker"));
-			await waitFor(() => expect(getByTestId("iosPicker")).toBeTruthy());
-			
-			// Use the same pattern as newRecipe tests
-			fireEvent(getByTestId("iosPicker"), "onValueChange", "American");
-			
-			// Allow state update to complete
-			await act(async () => await jest.runAllTimers());
+			await openPickerAndSelect(getByLabelText("cuisines picker"), getByTestId, "iosPicker", "American");
 
-			// Check that getAvailableFilters was called (it will be called at least once)
-			// The race condition between state update and API call means we can't reliably
-			// test the exact parameters, but we can verify the interaction works
 			await waitFor(() => {
 				expect(getAvailableFilters).toHaveBeenCalled();
 			});
-			
-			// Check that the component state is handling the picker interaction
+
 			await waitFor(() => {
 				expect(queryAllByText("Apply filters to recipes list").length).toEqual(1);
 			});
@@ -656,28 +619,19 @@ describe("Recipe List", () => {
 					filters: filters.filter((f) => f !== "dessert"),
 				})
 			);
-			fireEvent.press(getByLabelText("display filter options"));
-			expect(getByText("Apply filters to recipes list")).toBeTruthy();
+			await openFiltersAndWait(
+				getByLabelText("display filter options"),
+				getByText,
+				"Apply filters to recipes list"
+			);
 			expect(getByTestId("Dessert-switch").props.disabled).toBeFalsy();
 
-			// Open the picker
-			fireEvent.press(getByLabelText("serves picker"));
-			await waitFor(() => expect(getByTestId("iosPicker")).toBeTruthy());
-			
-			// Use the same pattern as newRecipe tests
-			fireEvent(getByTestId("iosPicker"), "onValueChange", "6");
-			
-			// Allow state update to complete
-			await act(async () => await jest.runAllTimers());
+			await openPickerAndSelect(getByLabelText("serves picker"), getByTestId, "iosPicker", "6");
 
-			// Check that getAvailableFilters was called (it will be called at least once)
-			// The race condition between state update and API call means we can't reliably
-			// test the exact parameters, but we can verify the interaction works
 			await waitFor(() => {
 				expect(getAvailableFilters).toHaveBeenCalled();
 			});
-			
-			// Check that the component state is handling the picker interaction
+
 			await waitFor(() => {
 				expect(queryAllByText("Apply filters to recipes list").length).toEqual(1);
 			});
@@ -714,13 +668,17 @@ describe("Recipe List", () => {
 					</Provider>
 				)
 			);
-			await waitFor(() => expect(queryAllByTestId("activityIndicator").length).toEqual(0));
+			await waitForLoadingToComplete(queryAllByTestId);
 
 			// act
-			fireEvent.changeText(getByPlaceholderText("Search for Recipes"), "chi");
+			await searchAndWaitForResults(
+				getByPlaceholderText("Search for Recipes"),
+				"chi",
+				queryAllByTestId,
+				chiRecipes.length
+			);
 
 			// assert
-			await waitFor(() => expect(queryAllByTestId("recipeCard").length).toEqual(chiRecipes.length));
 			expect(getRecipeList).toHaveBeenCalledTimes(2);
 		});
 		test("clearing the search box should reload the list", async () => {
@@ -752,32 +710,29 @@ describe("Recipe List", () => {
 					</Provider>
 				)
 			);
-			await waitFor(() => expect(queryAllByTestId("activityIndicator").length).toEqual(0));
+			await waitForLoadingToComplete(queryAllByTestId);
 			expect(getByPlaceholderText("Search for Recipes")).toBeTruthy();
-			
+
 			// First, type "chi" to filter the results
-			await act(async () => {
-				fireEvent.changeText(getByPlaceholderText("Search for Recipes"), "chi");
-			});
-			
+			await searchAndWaitForResults(
+				getByPlaceholderText("Search for Recipes"),
+				"chi",
+				queryAllByTestId,
+				chiRecipes.length
+			);
+
 			expect(getRecipeList).toHaveBeenCalledTimes(2);
-			
-			// Wait for the filtered results to appear
-			await waitFor(() => {
-				expect(queryAllByTestId("recipeCard").length).toEqual(chiRecipes.length);
-			});
 
 			// act - now clear the search
-			await act(async () => {
-				fireEvent.press(queryAllByLabelText("clear search text")[0]);
-			});
+			await pressAndWaitForResults(
+				queryAllByLabelText("clear search text")[0],
+				queryAllByTestId,
+				"recipeCard",
+				recipeList.length
+			);
 
 			// assert - should reload with all recipes
 			expect(getRecipeList).toHaveBeenCalledTimes(3);
-			
-			await waitFor(() => {
-				expect(queryAllByTestId("recipeCard").length).toEqual(recipeList.length);
-			});
 		});
 	});
 });

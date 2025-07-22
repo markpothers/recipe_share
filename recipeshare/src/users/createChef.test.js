@@ -1,10 +1,19 @@
+import {
+	changeTextAndWait,
+	expectElementCount,
+	expectElementExists,
+	expectNavigation,
+	openPickerAndSelect,
+	pressAndWait,
+	runTimersAndWait,
+	waitForLoadingToComplete,
+} from "../auxTestFunctions/testUtils";
 import { fireEvent, render, waitFor } from "@testing-library/react-native";
 
 import CreateChef from "./createChef";
 import NetInfo from "@react-native-community/netinfo";
 import { Provider } from "react-redux";
 import React from "react";
-import { act } from "react-dom/test-utils";
 import { configureStore } from "@reduxjs/toolkit";
 import { postChef } from "../fetches";
 import { rootReducer } from "../redux";
@@ -93,7 +102,7 @@ describe("create chef page", () => {
 			getByPlaceholderText = rendered.getByPlaceholderText;
 			getByText = rendered.getByText;
 			queryAllByText = rendered.queryAllByText;
-			getByLabelText = rendered.getByLabelText
+			getByLabelText = rendered.getByLabelText;
 			toJSON = rendered.toJSON;
 			// getAllByRole = rendered.getAllByRole;
 			// findByText = rendered.findByText;
@@ -112,30 +121,29 @@ describe("create chef page", () => {
 			// arrange
 
 			// act
-			fireEvent.changeText(getByPlaceholderText("e-mail"), "username@email.com");
+			await changeTextAndWait(getByPlaceholderText("e-mail"), "username@email.com", () => {
+				expect(getByPlaceholderText("e-mail").props.value).toStrictEqual("username@email.com");
+			});
 
 			// assert
-			await waitFor(() => expect(getByPlaceholderText("e-mail").props.value).toStrictEqual("username@email.com"));
 		});
 
 		test("should accept text in username input", async () => {
 			// arrange
 
 			// act
-			fireEvent.changeText(getByPlaceholderText("username"), "myUsername");
+			await changeTextAndWait(getByPlaceholderText("username"), "myUsername", () => {
+				expect(getByPlaceholderText("username").props.value).toStrictEqual("myUsername");
+			});
 
 			// assert
-			await waitFor(() => expect(getByPlaceholderText("username").props.value).toStrictEqual("myUsername"));
 		});
 
 		test("should accept a change in country", async () => {
 			// arrange
 
 			// act
-			fireEvent.press(getByLabelText("country picker")); // open the picker
-			await waitFor(() => expect(getByTestId("iosPicker")).toBeTruthy()); // see the picker
-			fireEvent(getByTestId("iosPicker"), "onValueChange", "United Kingdom"); // change the value
-			await act(async () => await jest.runAllTimers());
+			await openPickerAndSelect(getByLabelText("country picker"), getByTestId, "iosPicker", "United Kingdom");
 
 			// assert
 			expect(queryAllByTestId("iosPicker").length).toEqual(0); // wait till the picker disappears
@@ -146,43 +154,46 @@ describe("create chef page", () => {
 			// arrange
 
 			// act
-			fireEvent.changeText(getByPlaceholderText("about me"), "I like to cook");
+			await changeTextAndWait(getByPlaceholderText("about me"), "I like to cook", () => {
+				expect(getByPlaceholderText("about me").props.value).toStrictEqual("I like to cook");
+			});
 
 			// assert
-			await waitFor(() => expect(getByPlaceholderText("about me").props.value).toStrictEqual("I like to cook"));
 		});
 
 		test("should accept text in password input", async () => {
 			// arrange
 
 			// act
-			fireEvent.changeText(getByPlaceholderText("password"), "testPassword");
+			await changeTextAndWait(getByPlaceholderText("password"), "testPassword", () => {
+				expect(getByPlaceholderText("password").props.value).toStrictEqual("testPassword");
+			});
 
 			// assert
-			await waitFor(() => expect(getByPlaceholderText("password").props.value).toStrictEqual("testPassword"));
 		});
 
 		test("should press to display/hide password", async () => {
 			expect(getByPlaceholderText("password").props.secureTextEntry).toStrictEqual(true);
-			fireEvent.press(getByTestId("visibilityButton"));
-			await waitFor(() => expect(getByPlaceholderText("password").props.secureTextEntry).toStrictEqual(false));
+			await pressAndWait(getByTestId("visibilityButton"), () => {
+				expect(getByPlaceholderText("password").props.secureTextEntry).toStrictEqual(false);
+			});
 		});
 
 		test("should accept text in password confirmation input", async () => {
 			// arrange
 
 			// act
-			fireEvent.changeText(getByPlaceholderText("password confirmation"), "testPassword");
+			await changeTextAndWait(getByPlaceholderText("password confirmation"), "testPassword", () => {
+				expect(getByPlaceholderText("password confirmation").props.value).toStrictEqual("testPassword");
+			});
 
 			// assert
-			await waitFor(() =>
-				expect(getByPlaceholderText("password confirmation").props.value).toStrictEqual("testPassword")
-			);
 		});
 
 		test("can view and close terms and conditions", async () => {
-			fireEvent.press(getByLabelText("view terms and conditions"));
-			await waitFor(() => expect(getByText("Terms and Conditions")).toBeTruthy);
+			await pressAndWait(getByLabelText("view terms and conditions"), () => {
+				expect(getByText("Terms and Conditions")).toBeTruthy();
+			});
 			expect(toJSON).toMatchSnapshot();
 			fireEvent.press(getByText("Close"));
 			expect(queryAllByText("Privacy Policy").length).toEqual(0);
@@ -192,13 +203,15 @@ describe("create chef page", () => {
 			expect(getByLabelText("agree terms and conditions toggle").props.value).toStrictEqual(false);
 			fireEvent.press(getByLabelText("agree terms and conditions")); // works through the button
 			fireEvent.press(getByLabelText("agree terms and conditions toggle")); // works through the toggle
-			fireEvent.press(getByLabelText("agree terms and conditions"));
-			await waitFor(() => expect(getByLabelText("agree terms and conditions toggle").props.value).toStrictEqual(true));
+			await pressAndWait(getByLabelText("agree terms and conditions"), () => {
+				expect(getByLabelText("agree terms and conditions toggle").props.value).toStrictEqual(true);
+			});
 		});
 
 		test("can view and close privacy policy", async () => {
-			fireEvent.press(getByLabelText("view privacy policy"));
-			await waitFor(() => expect(getByText("Privacy Policy")).toBeTruthy());
+			await pressAndWait(getByLabelText("view privacy policy"), () => {
+				expect(getByText("Privacy Policy")).toBeTruthy();
+			});
 			expect(toJSON).toMatchSnapshot();
 			fireEvent.press(getByText("Close"));
 			expect(queryAllByText("Privacy Policy").length).toEqual(0);
@@ -208,8 +221,9 @@ describe("create chef page", () => {
 			expect(getByLabelText("agree terms and conditions toggle").props.value).toStrictEqual(false);
 			fireEvent.press(getByLabelText("agree privacy policy")); // works through the button
 			fireEvent.press(getByLabelText("agree privacy policy toggle")); // works through the toggle
-			fireEvent.press(getByLabelText("agree privacy policy"));
-			await waitFor(() => expect(getByLabelText("agree privacy policy toggle").props.value).toStrictEqual(true));
+			await pressAndWait(getByLabelText("agree privacy policy"), () => {
+				expect(getByLabelText("agree privacy policy toggle").props.value).toStrictEqual(true);
+			});
 		});
 
 		test("should be able to navigate to login page", async () => {
@@ -218,22 +232,24 @@ describe("create chef page", () => {
 		});
 
 		test("submit button should request t&c acceptance initially", async () => {
-			expect(getByText("Please accept T&C")).toBeTruthy();
+			expectElementExists(getByText("Please accept T&C"));
 			expect(getByTestId("submitButton").props.accessibilityState.disabled).toEqual(true);
 		});
 
 		test("submit button should request privacy policy acceptance after t&c accepted", async () => {
 			postChef.mockImplementation(() => Promise.resolve({ error: true, messages: [] }));
-			fireEvent.press(getByLabelText("agree terms and conditions")); // works through the button
-			await waitFor(() => expect(getByText("Please accept privacy policy")).toBeTruthy());
+			await pressAndWait(getByLabelText("agree terms and conditions"), () => {
+				expectElementExists(getByText("Please accept privacy policy"));
+			});
 			expect(getByTestId("submitButton").props.accessibilityState.disabled).toEqual(true);
 		});
 
 		test("submit should enable submission after pp and t&c accepted", async () => {
 			postChef.mockImplementation(() => Promise.resolve({ error: true, messages: [] }));
 			fireEvent.press(getByLabelText("agree terms and conditions"));
-			fireEvent.press(getByLabelText("agree privacy policy"));
-			await waitFor(() => expect(getByText("Submit & go to log in")).toBeTruthy());
+			await pressAndWait(getByLabelText("agree privacy policy"), () => {
+				expectElementExists(getByText("Submit & go to log in"));
+			});
 			fireEvent.press(getByTestId("submitButton"));
 			expect(postChef).toHaveBeenCalled();
 		});
@@ -253,7 +269,7 @@ describe("create chef page", () => {
 			fireEvent.press(getByTestId("submitButton"));
 
 			// assert
-			await waitFor(() => expect(mockNavigate).toBeCalledWith("Login", { successfulRegistration: true }));
+			await waitFor(() => expectNavigation(mockNavigate, "Login", { successfulRegistration: true }));
 			// expect the email field in login to be populated
 			expect(getByPlaceholderText("e-mail").props.value).toStrictEqual("username@email.com");
 		});
@@ -281,8 +297,8 @@ describe("create chef page", () => {
 			fireEvent.press(getByTestId("submitButton"));
 
 			// assert
-			await waitFor(() => expect(queryAllByTestId("activityIndicator").length).toEqual(0));
-			errors.forEach((error) => expect(getByText(error)).toBeTruthy());
+			await waitForLoadingToComplete(queryAllByTestId);
+			errors.forEach((error) => expectElementExists(getByText(error)));
 			expect(toJSON()).toMatchSnapshot();
 		});
 
@@ -296,9 +312,9 @@ describe("create chef page", () => {
 			fireEvent.press(getByTestId("submitButton"));
 
 			// assert
-			await waitFor(() => expect(getByTestId("offlineMessage")).toBeTruthy());
-			await act(async () => await jest.runAllTimers());
-			expect(queryAllByTestId("offlineMessage").length).toEqual(0);
+			await waitFor(() => expectElementExists(getByTestId("offlineMessage")));
+			await runTimersAndWait();
+			expectElementCount(queryAllByTestId("offlineMessage"), 0);
 		});
 	});
 });
