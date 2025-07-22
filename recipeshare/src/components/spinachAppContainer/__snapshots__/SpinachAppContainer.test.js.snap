@@ -23,7 +23,11 @@ exports[`SpinachAppContainer renders with scrollView and activityIndicator on An
   >
     <Image
       resizeMode="cover"
-      source={1}
+      source={
+        {
+          "testUri": "../../../assets/images/spinach.jpg",
+        }
+      }
       style={
         {
           "borderColor": "black",
@@ -106,7 +110,11 @@ exports[`SpinachAppContainer renders with scrollView and activityIndicator on IO
   >
     <Image
       resizeMode="cover"
-      source={1}
+      source={
+        {
+          "testUri": "../../../assets/images/spinach.jpg",
+        }
+      }
       style={
         {
           "borderColor": "black",
@@ -189,7 +197,11 @@ exports[`SpinachAppContainer renders with scrollView on Android 1`] = `
   >
     <Image
       resizeMode="cover"
-      source={1}
+      source={
+        {
+          "testUri": "../../../assets/images/spinach.jpg",
+        }
+      }
       style={
         {
           "borderColor": "black",
@@ -246,7 +258,11 @@ exports[`SpinachAppContainer renders with scrollView on IOS 1`] = `
   >
     <Image
       resizeMode="cover"
-      source={1}
+      source={
+        {
+          "testUri": "../../../assets/images/spinach.jpg",
+        }
+      }
       style={
         {
           "borderColor": "black",
@@ -287,7 +303,11 @@ exports[`SpinachAppContainer renders without scrollView and with ActivityIndicat
 >
   <Image
     resizeMode="cover"
-    source={1}
+    source={
+      {
+        "testUri": "../../../assets/images/spinach.jpg",
+      }
+    }
     style={
       {
         "borderColor": "black",
@@ -339,7 +359,11 @@ exports[`SpinachAppContainer renders without scrollView and with ActivityIndicat
 >
   <Image
     resizeMode="cover"
-    source={1}
+    source={
+      {
+        "testUri": "../../../assets/images/spinach.jpg",
+      }
+    }
     style={
       {
         "borderColor": "black",
@@ -396,7 +420,11 @@ exports[`SpinachAppContainer renders without scrollView on Android 1`] = `
 >
   <Image
     resizeMode="cover"
-    source={1}
+    source={
+      {
+        "testUri": "../../../assets/images/spinach.jpg",
+      }
+    }
     style={
       {
         "borderColor": "black",
@@ -422,7 +450,11 @@ exports[`SpinachAppContainer renders without scrollView on IOS 1`] = `
 >
   <Image
     resizeMode="cover"
-    source={1}
+    source={
+      {
+        "testUri": "../../../assets/images/spinach.jpg",
+      }
+    }
     style={
       {
         "borderColor": "black",

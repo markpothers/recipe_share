@@ -67,6 +67,7 @@ exports[`RecipeNewComment renders with some text and a confirm button 1`] = `
       numberOfLines={2}
       onChangeText={[Function]}
       placeholder="Type comment here..."
+      placeholderTextColor="#888"
       style={
         {
           "color": "#505050",
@@ -105,7 +106,11 @@ exports[`RecipeNewComment renders without an image_url 1`] = `
     }
   >
     <Image
-      source={1}
+      source={
+        {
+          "testUri": "../../../assets/images/default-chef.jpg",
+        }
+      }
       style={
         {
           "borderRadius": 11.25,
@@ -145,6 +150,7 @@ exports[`RecipeNewComment renders without an image_url 1`] = `
       numberOfLines={2}
       onChangeText={[Function]}
       placeholder="Type comment here..."
+      placeholderTextColor="#888"
       style={
         {
           "color": "#505050",

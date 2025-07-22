@@ -89,7 +89,6 @@ describe("SwitchSized", () => {
 				<SwitchSized value={true} onValueChange={mockChangeFunction} testID="testSwitch" />
 			</Provider>
 		);
-		console.log("getBy:", getByTestId("testSwitch"));
 		fireEvent(getByTestId("testSwitch"), "onValueChange");
 		expect(mockChangeFunction).toHaveBeenCalled();
 		expect(mockChangeFunction).toHaveBeenCalledTimes(1);

@@ -1,5 +1,4 @@
 import * as ImagePicker from "expo-image-picker";
-import * as MediaLibrary from "expo-media-library";
 
 import {
 	Dimensions,
@@ -16,7 +15,6 @@ import { ImageSource, RecipeImage } from "../centralTypes";
 import React, { useEffect, useRef, useState } from "react";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
-import { Camera } from "expo-camera";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { ImageEditor } from "expo-image-editor";
 import { styles } from "./functionalComponentsStyleSheet";
@@ -28,8 +26,6 @@ type OwnProps = {
 };
 
 export default function MultiPicSourceChooser(props: OwnProps) {
-	const [hasCameraRollPermission, setHasCameraRollPermission] = useState<boolean>(false);
-	const [hasCameraPermission, setHasCameraPermission] = useState<boolean>(false);
 	const [originalImages, setOriginalImages] = useState<ImageSource[]>(null);
 	const [imageEditorShowing, setImageEditorShowing] = useState<boolean>(false);
 	const [tempImageUri, setTempImageUri] = useState<string>(null);
@@ -37,16 +33,8 @@ export default function MultiPicSourceChooser(props: OwnProps) {
 	const [primaryImageFlatListWidth, setPrimaryImageFlatListWidth] = useState<number>(300);
 	const primaryImageFlatList = useRef(null);
 
-	const checkPermissions = async () => {
-		const cameraRollPermission = await MediaLibrary.requestPermissionsAsync();
-		const cameraPermission = await Camera.requestCameraPermissionsAsync();
-		setHasCameraRollPermission(cameraRollPermission.granted);
-		setHasCameraPermission(cameraPermission.granted);
-	};
-
 	useEffect(() => {
 		setOriginalImages([...props.imageSources]);
-		checkPermissions();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []); // don't put a value in here, you don't want original image to be overwritten
 
@@ -78,14 +66,12 @@ export default function MultiPicSourceChooser(props: OwnProps) {
 
 	const pickImage = async () => {
 		try {
-			if (hasCameraRollPermission) {
-				const image = await ImagePicker.launchImageLibraryAsync({
-					allowsEditing: Platform.OS == "android",
-					aspect: [4, 3],
-					base64: false,
-				});
-				handleChosenImage(image);
-			}
+			const image = await ImagePicker.launchImageLibraryAsync({
+				allowsEditing: Platform.OS == "android",
+				aspect: [4, 3],
+				base64: false,
+			});
+			handleChosenImage(image);
 		} catch (e) {
 			// console.log('fail')
 			console.log(e);
@@ -94,14 +80,19 @@ export default function MultiPicSourceChooser(props: OwnProps) {
 
 	const openCamera = async () => {
 		try {
-			if (hasCameraPermission) {
-				const image = await ImagePicker.launchCameraAsync({
-					allowsEditing: Platform.OS == "android",
-					aspect: [4, 3],
-					base64: false,
-				});
-				handleChosenImage(image);
+			// Request camera permissions first
+			const { status } = await ImagePicker.requestCameraPermissionsAsync();
+			if (status !== "granted") {
+				alert("Sorry, we need camera permissions to take photos!");
+				return;
 			}
+
+			const image = await ImagePicker.launchCameraAsync({
+				allowsEditing: Platform.OS == "android",
+				aspect: [4, 3],
+				base64: false,
+			});
+			handleChosenImage(image);
 		} catch (e) {
 			console.log(e);
 		}
@@ -406,26 +397,18 @@ export default function MultiPicSourceChooser(props: OwnProps) {
 							</Text>
 						</TouchableOpacity>
 					</View>
-					{hasCameraPermission && (
-						<TouchableOpacity
-							style={styles.picSourceChooserButton}
-							activeOpacity={0.7}
-							onPress={openCamera}
-						>
-							<Icon style={styles.standardIcon} size={responsiveHeight(4)} name="camera" />
-							<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>
-								Take photo
-							</Text>
-						</TouchableOpacity>
-					)}
-					{hasCameraRollPermission && (
-						<TouchableOpacity style={styles.picSourceChooserButton} activeOpacity={0.7} onPress={pickImage}>
-							<Icon style={styles.standardIcon} size={responsiveHeight(4)} name="camera-image" />
-							<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>
-								Choose photo
-							</Text>
-						</TouchableOpacity>
-					)}
+					<TouchableOpacity style={styles.picSourceChooserButton} activeOpacity={0.7} onPress={openCamera}>
+						<Icon style={styles.standardIcon} size={responsiveHeight(4)} name="camera" />
+						<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>
+							Take photo
+						</Text>
+					</TouchableOpacity>
+					<TouchableOpacity style={styles.picSourceChooserButton} activeOpacity={0.7} onPress={pickImage}>
+						<Icon style={styles.standardIcon} size={responsiveHeight(4)} name="camera-image" />
+						<Text maxFontSizeMultiplier={1.5} style={styles.picSourceChooserButtonText}>
+							Choose photo
+						</Text>
+					</TouchableOpacity>
 					<View style={[styles.picSourceChooserArrowButtonContainer, { marginBottom: responsiveHeight(2) }]}>
 						<TouchableOpacity
 							style={[styles.picSourceChooserCancelButton, { backgroundColor: "#720000" }]}

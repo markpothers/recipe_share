@@ -1,5 +1,6 @@
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+
 import { StyleSheet } from "react-native";
-import { responsiveHeight, responsiveWidth, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
 export const styles = StyleSheet.create({
 	contentsContainer: {
@@ -18,16 +19,21 @@ export const styles = StyleSheet.create({
 	choicesPicker: {
 		width: "100%",
 		height: "100%",
-		// top: 15,
 		zIndex: 2,
+		backgroundColor: "white", // Ensure white background on iOS modal
 		// borderWidth: 1,
 		// borderColor: 'blue'
 	},
 	androidPicker: {
-		top: -4,
-		height: "100%",
+		// top: 0,
+		// height: "90%",
+		left: 5,
+		height: "99%",
+		paddingVertical: 1,
+		borderRadius: 5,
 		width: "100%",
 		justifyContent: "flex-end",
+		// overflow: "hidden",
 		// borderWidth: 1,
 		// borderColor: "red",
 	},
@@ -79,6 +85,8 @@ export const styles = StyleSheet.create({
 	},
 	pickerText: {
 		color: "#104e01",
+		backgroundColor: "white", // Ensure white background on Android
+		marginTop: 50,
 		// borderWidth: 1
 	},
 	iosPickerText: {

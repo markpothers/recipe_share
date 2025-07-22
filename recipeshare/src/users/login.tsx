@@ -20,6 +20,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { saveToken } from "../auxFunctions/saveLoadToken";
 import { styles } from "./usersStyleSheet";
+import yellowLogo from "../../assets/images/yellowLogo.png";
 
 // import { apiCall } from "../auxFunctions/apiCall";
 
@@ -247,11 +248,7 @@ export default function Login(props: OwnProps) {
 			{thanksForRegisteringPopupShowing && renderThanksForRegisteringAlertPopup()}
 			<TouchableOpacity activeOpacity={1} onPress={Keyboard.dismiss} style={{ flex: 1 }}>
 				<View style={styles.logoContainer}>
-					<Image
-						style={styles.logo}
-						resizeMode={"contain"}
-						source={require("../../assets/images/yellowLogo.png")}
-					/>
+					<Image style={styles.logo} resizeMode={"contain"} source={yellowLogo} />
 				</View>
 				<View style={[centralStyles.formContainer, { marginTop: responsiveHeight(15) }]}>
 					<View style={centralStyles.formSection}>
@@ -271,6 +268,7 @@ export default function Login(props: OwnProps) {
 									style={centralStyles.formInput}
 									value={e_mail}
 									placeholder="e-mail"
+									placeholderTextColor="#888"
 									keyboardType="email-address"
 									autoCapitalize="none"
 									autoComplete="email"
@@ -284,18 +282,20 @@ export default function Login(props: OwnProps) {
 					<View style={centralStyles.formSection}>
 						<View style={centralStyles.formInputContainer}>
 							<View style={centralStyles.formInputWhiteBackground}>
-								{isFocused && ( //this conditional helps ios properly recognise both password fields in the createchef form
+								{isFocused && (
 									<TextInput
 										maxFontSizeMultiplier={2}
 										style={centralStyles.formInput}
 										value={password}
 										placeholder="password"
+										placeholderTextColor="#888"
 										autoCapitalize="none"
 										autoComplete="password"
 										textContentType="password"
 										secureTextEntry={!passwordVisible}
 										onChangeText={(text) => handleTextInput(text, "password")}
 										testID={"passwordInput"}
+										color="black"
 									/>
 								)}
 								<TouchableOpacity

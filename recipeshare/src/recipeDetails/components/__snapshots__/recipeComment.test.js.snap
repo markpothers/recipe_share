@@ -58,7 +58,11 @@ exports[`RecipeComment render first comment and navigate to chef from both butto
       testID="navigateToChefImageButton"
     >
       <Image
-        source={1}
+        source={
+          {
+            "testUri": "../../../assets/images/default-chef.jpg",
+          }
+        }
         style={
           {
             "borderRadius": 11.25,

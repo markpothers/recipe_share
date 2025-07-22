@@ -4,9 +4,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import React from "react";
 import { responsiveHeight } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 import { styles } from "../recipeDetailsStyleSheet";
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const defaultChefImage = require("../../../assets/images/default-chef.jpg");
+import defaultChefImage from "../../../assets/images/default-chef.jpg";
 
 type OwnProps = {
 	loggedInChefID: number;
@@ -51,8 +49,6 @@ const RecipeComment = ({
 		}
 	};
 
-	// render() {
-	// console.log(this.props)
 	const imageUrl = image_url ? { uri: image_url } : defaultChefImage;
 	return (
 		<View style={styles.commentContainer}>

@@ -251,6 +251,7 @@ export default connect(
 											style={centralStyles.formInput}
 											value={this.props.e_mail}
 											placeholder="e-mail"
+											placeholderTextColor="#888"
 											keyboardType="email-address"
 											autoCapitalize="none"
 											autoCompleteType="email"
@@ -271,6 +272,7 @@ export default connect(
 											style={centralStyles.formInput}
 											value={this.props.username}
 											placeholder="username"
+											placeholderTextColor="#888"
 											autoCapitalize="none"
 											onChangeText={(text) => this.handleTextInput(text, "username")}
 											testID={"usernameInput"}
@@ -308,6 +310,7 @@ export default connect(
 											style={centralStyles.formInput}
 											value={this.props.profile_text}
 											placeholder="about me"
+											placeholderTextColor="#888"
 											multiline={true}
 											numberOfLines={3}
 											onChangeText={(text) => this.handleTextInput(text, "profile_text")}
@@ -325,12 +328,14 @@ export default connect(
 											style={centralStyles.formInput}
 											value={this.props.password}
 											placeholder="password"
+											placeholderTextColor="#888"
 											textContentType="password"
 											autoCapitalize="none"
 											autoCompleteType="password"
 											secureTextEntry={!this.state.passwordVisible}
 											onChangeText={(text) => this.handleTextInput(text, "password")}
 											testID={"passwordInput"}
+											color="black"
 										/>
 										<TouchableOpacity
 											style={centralStyles.hiddenToggle}
@@ -357,12 +362,14 @@ export default connect(
 											style={centralStyles.formInput}
 											value={this.props.password_confirmation}
 											placeholder="password confirmation"
+											placeholderTextColor="#888"
 											autoCompleteType="password"
 											textContentType="newPassword"
 											autoCapitalize="none"
 											secureTextEntry={!this.state.passwordVisible}
 											onChangeText={(text) => this.handleTextInput(text, "password_confirmation")}
 											testID={"passwordConfirmationInput"}
+											color="black"
 										/>
 									</View>
 								</View>

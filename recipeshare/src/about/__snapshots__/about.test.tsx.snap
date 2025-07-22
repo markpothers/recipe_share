@@ -12,7 +12,11 @@ exports[`About Page renders displaying licenses 1`] = `
 >
   <Image
     resizeMode="cover"
-    source={1}
+    source={
+      {
+        "testUri": "../../../assets/images/spinach.jpg",
+      }
+    }
     style={
       {
         "borderColor": "black",
@@ -469,7 +473,7 @@ exports[`About Page renders displaying licenses 1`] = `
             </Text>
             <Text>
               Copyright © 
-              2024
+              2025
                Recipe-Share LLC. All rights reserved.
             </Text>
             <Text>
@@ -1704,11 +1708,11 @@ exports[`About Page renders displaying licenses 1`] = `
             >
               <Text>
                 • 
-                react-native-drag-sort
+                react-native-draggable-flatlist
                 ; 
               </Text>
               <Text>
-                Copyright 2021 github.com/mochixuan
+                Copyright (c) 2025 computerjazz
                 ; 
               </Text>
               <View
@@ -3046,134 +3050,6 @@ exports[`About Page renders displaying licenses 1`] = `
             >
               <Text>
                 • 
-                enzyme
-                ; 
-              </Text>
-              <Text>
-                Copyright (c) 2015 Airbnb, Inc. and contributors
-                ; 
-              </Text>
-              <View
-                accessibilityState={
-                  {
-                    "busy": undefined,
-                    "checked": undefined,
-                    "disabled": undefined,
-                    "expanded": undefined,
-                    "selected": undefined,
-                  }
-                }
-                accessibilityValue={
-                  {
-                    "max": undefined,
-                    "min": undefined,
-                    "now": undefined,
-                    "text": undefined,
-                  }
-                }
-                accessible={true}
-                collapsable={false}
-                focusable={true}
-                onClick={[Function]}
-                onResponderGrant={[Function]}
-                onResponderMove={[Function]}
-                onResponderRelease={[Function]}
-                onResponderTerminate={[Function]}
-                onResponderTerminationRequest={[Function]}
-                onStartShouldSetResponder={[Function]}
-                style={
-                  {
-                    "opacity": 1,
-                  }
-                }
-              >
-                <Text
-                  style={
-                    {
-                      "color": "blue",
-                    }
-                  }
-                >
-                  license
-                </Text>
-              </View>
-            </View>
-            <View
-              style={
-                {
-                  "flexDirection": "row",
-                  "flexWrap": "wrap",
-                  "marginHorizontal": 15,
-                  "marginVertical": 7.5,
-                }
-              }
-            >
-              <Text>
-                • 
-                enzyme-to-json
-                ; 
-              </Text>
-              <Text>
-                Copyright (c) 2016 Adrien Antoine adriantoine@gmail.com
-                ; 
-              </Text>
-              <View
-                accessibilityState={
-                  {
-                    "busy": undefined,
-                    "checked": undefined,
-                    "disabled": undefined,
-                    "expanded": undefined,
-                    "selected": undefined,
-                  }
-                }
-                accessibilityValue={
-                  {
-                    "max": undefined,
-                    "min": undefined,
-                    "now": undefined,
-                    "text": undefined,
-                  }
-                }
-                accessible={true}
-                collapsable={false}
-                focusable={true}
-                onClick={[Function]}
-                onResponderGrant={[Function]}
-                onResponderMove={[Function]}
-                onResponderRelease={[Function]}
-                onResponderTerminate={[Function]}
-                onResponderTerminationRequest={[Function]}
-                onStartShouldSetResponder={[Function]}
-                style={
-                  {
-                    "opacity": 1,
-                  }
-                }
-              >
-                <Text
-                  style={
-                    {
-                      "color": "blue",
-                    }
-                  }
-                >
-                  license
-                </Text>
-              </View>
-            </View>
-            <View
-              style={
-                {
-                  "flexDirection": "row",
-                  "flexWrap": "wrap",
-                  "marginHorizontal": 15,
-                  "marginVertical": 7.5,
-                }
-              }
-            >
-              <Text>
-                • 
                 eslint
                 ; 
               </Text>
@@ -3494,134 +3370,6 @@ exports[`About Page renders displaying licenses 1`] = `
             >
               <Text>
                 • 
-                jest-environment-enzyme
-                ; 
-              </Text>
-              <Text>
-                Copyright (c) 2016 Blaine Kasten
-                ; 
-              </Text>
-              <View
-                accessibilityState={
-                  {
-                    "busy": undefined,
-                    "checked": undefined,
-                    "disabled": undefined,
-                    "expanded": undefined,
-                    "selected": undefined,
-                  }
-                }
-                accessibilityValue={
-                  {
-                    "max": undefined,
-                    "min": undefined,
-                    "now": undefined,
-                    "text": undefined,
-                  }
-                }
-                accessible={true}
-                collapsable={false}
-                focusable={true}
-                onClick={[Function]}
-                onResponderGrant={[Function]}
-                onResponderMove={[Function]}
-                onResponderRelease={[Function]}
-                onResponderTerminate={[Function]}
-                onResponderTerminationRequest={[Function]}
-                onStartShouldSetResponder={[Function]}
-                style={
-                  {
-                    "opacity": 1,
-                  }
-                }
-              >
-                <Text
-                  style={
-                    {
-                      "color": "blue",
-                    }
-                  }
-                >
-                  license
-                </Text>
-              </View>
-            </View>
-            <View
-              style={
-                {
-                  "flexDirection": "row",
-                  "flexWrap": "wrap",
-                  "marginHorizontal": 15,
-                  "marginVertical": 7.5,
-                }
-              }
-            >
-              <Text>
-                • 
-                jest-enzyme
-                ; 
-              </Text>
-              <Text>
-                Copyright (c) 2016 Blaine Kasten
-                ; 
-              </Text>
-              <View
-                accessibilityState={
-                  {
-                    "busy": undefined,
-                    "checked": undefined,
-                    "disabled": undefined,
-                    "expanded": undefined,
-                    "selected": undefined,
-                  }
-                }
-                accessibilityValue={
-                  {
-                    "max": undefined,
-                    "min": undefined,
-                    "now": undefined,
-                    "text": undefined,
-                  }
-                }
-                accessible={true}
-                collapsable={false}
-                focusable={true}
-                onClick={[Function]}
-                onResponderGrant={[Function]}
-                onResponderMove={[Function]}
-                onResponderRelease={[Function]}
-                onResponderTerminate={[Function]}
-                onResponderTerminationRequest={[Function]}
-                onStartShouldSetResponder={[Function]}
-                style={
-                  {
-                    "opacity": 1,
-                  }
-                }
-              >
-                <Text
-                  style={
-                    {
-                      "color": "blue",
-                    }
-                  }
-                >
-                  license
-                </Text>
-              </View>
-            </View>
-            <View
-              style={
-                {
-                  "flexDirection": "row",
-                  "flexWrap": "wrap",
-                  "marginHorizontal": 15,
-                  "marginVertical": 7.5,
-                }
-              }
-            >
-              <Text>
-                • 
                 react-native-mock-render
                 ; 
               </Text>
@@ -3758,7 +3506,11 @@ exports[`About Page renders displaying privacy policy 1`] = `
 >
   <Image
     resizeMode="cover"
-    source={1}
+    source={
+      {
+        "testUri": "../../../assets/images/spinach.jpg",
+      }
+    }
     style={
       {
         "borderColor": "black",
@@ -4557,7 +4309,11 @@ exports[`About Page renders displaying t & c by default 1`] = `
 >
   <Image
     resizeMode="cover"
-    source={1}
+    source={
+      {
+        "testUri": "../../../assets/images/spinach.jpg",
+      }
+    }
     style={
       {
         "borderColor": "black",

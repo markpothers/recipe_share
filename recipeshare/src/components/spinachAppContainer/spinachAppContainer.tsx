@@ -3,11 +3,12 @@ import React, { useState } from "react";
 
 import StyledActivityIndicator from "../styledActivityIndicator/styledActivityIndicator";
 import { centralStyles } from "../../centralStyleSheet"; //eslint-disable-line no-unused-vars
+import spinachJpg from "../../../assets/images/spinach.jpg";
 
 type OwnProps = {
 	scrollingEnabled: boolean;
 	awaitingServer: boolean;
-	children: React.ReactElement[];
+	children?: React.ReactElement | React.ReactElement[];
 };
 
 const SpinachAppContainer = ({ scrollingEnabled, awaitingServer, children }: OwnProps) => {
@@ -20,11 +21,11 @@ const SpinachAppContainer = ({ scrollingEnabled, awaitingServer, children }: Own
 				<KeyboardAvoidingView
 					style={centralStyles.fullPageKeyboardAvoidingView}
 					// @ts-ignore
-					behavior={Platform.OS === "ios" ? "padding" : ""}
+					behavior={Platform.OS === "ios" ? "padding" : "height"}
 					keyboardVerticalOffset={Platform.OS === "ios" ? 20 : 0}
 				>
 					<Image
-						source={require("../../../assets/images/spinach.jpg")}
+						source={spinachJpg}
 						style={centralStyles.spinachFullBackground}
 						resizeMode={"cover"}
 					/>
@@ -45,7 +46,7 @@ const SpinachAppContainer = ({ scrollingEnabled, awaitingServer, children }: Own
 		return (
 			<SafeAreaView style={centralStyles.fullPageSafeAreaView}>
 				<Image
-					source={require("../../../assets/images/spinach.jpg")}
+					source={spinachJpg}
 					style={centralStyles.spinachFullBackground}
 					resizeMode={"cover"}
 				/>

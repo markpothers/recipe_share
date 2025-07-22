@@ -4,6 +4,7 @@ import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-nat
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import React from "react";
 import { databaseURL } from "../constants/databaseURL";
+import defaultChef from "../../assets/images/default-chef.jpg";
 import { styles } from "./chefDetailsStyleSheet";
 
 export default class ChefDetailsCard extends React.PureComponent {
@@ -183,13 +184,7 @@ export default class ChefDetailsCard extends React.PureComponent {
 function AvatarImage(chefimage_url) {
 	const URL = chefimage_url.chefimage_url;
 	if (!URL) {
-		return (
-			<Image
-				style={styles.avatarThumbnail}
-				source={require("../../assets/images/default-chef.jpg")}
-				resizeMode={"cover"}
-			/>
-		);
+		return <Image style={styles.avatarThumbnail} source={defaultChef} resizeMode={"cover"} />;
 	} else if (typeof URL === "object") {
 		return (
 			<Image

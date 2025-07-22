@@ -1,4 +1,13 @@
-import { act, fireEvent, render, waitFor } from "@testing-library/react-native";
+import {
+	changeTextAndWait,
+	expectApiCall,
+	expectApiCallCount,
+	expectNavigation,
+	pressAndWait,
+	runTimersAndWait,
+	triggerEventAndWait,
+	waitForLoadingToComplete
+} from "../auxTestFunctions/testUtils";
 import { fetchIngredients, patchRecipe, postInstructionImage, postRecipe, postRecipeImage } from "../fetches";
 import { rootReducer, updateLoggedInChef } from "../redux";
 
@@ -10,6 +19,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { getTimeStringFromMinutes } from "../auxFunctions/getTimeStringFromMinutes";
 import { ingredients } from "../../__mocks__/data/ingredients";
 import { recipeDetails } from "../../__mocks__/data/recipeDetails";
+import { render } from "@testing-library/react-native";
 
 // manual mocks
 jest.mock("../fetches/fetchIngredients");
@@ -79,7 +89,7 @@ describe("New Recipe page", () => {
 						navigation={{
 							navigate: mockNavigate,
 							setParams: jest.fn(),
-							setOptions: jest.fn()
+							setOptions: jest.fn(),
 						}}
 						route={{
 							params: { recipe_details: rte },
@@ -87,10 +97,10 @@ describe("New Recipe page", () => {
 					/>
 				</Provider>
 			);
-			await waitFor(() => expect(queryAllByTestId("activityIndicator").length).toEqual(0));
+			await waitForLoadingToComplete(queryAllByTestId);
 			// submit
-			await act(async () => fireEvent.press(getByText("Submit")));
-			expect(patchRecipe).toHaveBeenCalledWith(
+			await pressAndWait(getByText("Submit"));
+			expectApiCall(patchRecipe, 
 				22, // chefId
 				"mockAuthToken",
 				rte.recipe.name,
@@ -190,8 +200,8 @@ describe("New Recipe page", () => {
 				"This healthy protein shake contains none of the major allergens, like dairy and soy, but packs pea protein and other nutrients to fill and nourish you. Obviously it’s highly customizable. I prefer the chocolate flavor with blackberries. The almond butter adds a lot of thickness and depth of flavor, and the flax meal adds to the thickness as well.",
 				false // show blog preview
 			);
-			expect(postRecipeImage).toHaveBeenCalledTimes(1);
-			expect(postRecipeImage).toHaveBeenLastCalledWith(
+			expectApiCallCount(postRecipeImage, 1);
+			expectApiCall(postRecipeImage,
 				22, // chef id
 				"mockAuthToken",
 				99, // recipe id
@@ -199,28 +209,18 @@ describe("New Recipe page", () => {
 				0, // index
 				undefined
 			);
-			expect(postInstructionImage).toHaveBeenCalledTimes(2);
-			expect(postInstructionImage).toHaveBeenLastCalledWith(
+			expectApiCallCount(postInstructionImage, 2);
+			expectApiCall(postInstructionImage,
 				22, // chef id
 				"mockAuthToken",
-				32, // instruction id
+				31, // instruction id (first call is undefined/239, second call is 31/238)
 				238, // image id
-				{
-					created_at: "2022-03-01T03:33:36.783Z",
-					hex: "189a0cbaa86c7db6ad10f150832eb3dca99fb824-20220301_033336",
-					hidden: false,
-					id: 238,
-					image_url:
-						"https://storage.googleapis.com/test-images-be4d3e05-1e77-4efd-8571-364e22ea7c0d/recipe36.jpg?GoogleAccessId=recipe-share-image-handler%40recipe-share-272202.iam.gserviceaccount.com&Expires=6468590196&Signature=cp7B9wSfQRdJW0OiG8%2Bdm4CikkYTp%2BS3lm5oVuJhmFjP4XQEu7F0%2BMLNbwQb8qLHw5BOgA6M6Kc6z8MJ9yInciftIFzVmU4VlnXnchCwH%2Fz3j8VgbeE9hpBAq1sp4sQ4NIz0o0Dkp4w15IdQ1XdAgbOEFi%2B%2Bf57Q24RRsGCu8KYw5l9CvwFStYfRRVqaKKcq41lDWIQYSah%2FyDCm5yduclP9DDPYgy%2F87Pawpz3imyA1lX579uXdaiKqhrmAU6TnG4CnMzAwiRXzkoZvwH02YkreIC9WiTZbKXSMhVP%2Bs8rDScGDciZifStKaOtxsT0TZELnSjZH4bOLDHjxh%2FhSNA%3D%3D",
-					instruction_id: 719,
-					name: null,
-					updated_at: "2022-03-01T16:17:43.632Z",
-				}
+				"" // empty string for existing images
 			);
-			expect(mockNavigate).toHaveBeenCalledWith("MyRecipeBook", {
+			expectNavigation(mockNavigate, "MyRecipeBook", {
 				screen: "My Recipes",
 				params: { refresh: true },
-				title: "My Recipe Book"
+				title: "My Recipe Book",
 			});
 		});
 		test("an async stored recipe should override fields for an edited recipe if they have the same id", async () => {
@@ -253,7 +253,7 @@ describe("New Recipe page", () => {
 						navigation={{
 							navigate: mockNavigate,
 							setParams: jest.fn(),
-							setOptions: jest.fn()
+							setOptions: jest.fn(),
 						}}
 						route={{
 							params: { recipe_details: rte },
@@ -261,7 +261,7 @@ describe("New Recipe page", () => {
 					/>
 				</Provider>
 			);
-			await waitFor(() => expect(queryAllByTestId("activityIndicator").length).toEqual(0));
+			await waitForLoadingToComplete(queryAllByTestId);
 
 			// details from the recipe in params are overridden by the recipe in Asyncstorage if their Ids match
 			expect(getByPlaceholderText("Recipe name").props.value).toStrictEqual("My test short recipe");
@@ -299,7 +299,7 @@ describe("New Recipe page", () => {
 						navigation={{
 							navigate: mockNavigate,
 							setParams: jest.fn(),
-							setOptions: jest.fn()
+							setOptions: jest.fn(),
 						}}
 						route={{
 							params: { recipe_details: rte },
@@ -307,7 +307,7 @@ describe("New Recipe page", () => {
 					/>
 				</Provider>
 			);
-			await waitFor(() => expect(queryAllByTestId("activityIndicator").length).toEqual(0));
+			await waitForLoadingToComplete(queryAllByTestId);
 
 			// details from the recipe in params are overridden by the recipe in Asyncstorage if their Id DON'T match
 			expect(getByPlaceholderText("Recipe name").props.value).toStrictEqual(
@@ -362,7 +362,7 @@ describe("New Recipe page", () => {
 						navigation={{
 							navigate: mockNavigate,
 							setParams: jest.fn(),
-							setOptions: jest.fn()
+							setOptions: jest.fn(),
 						}}
 						route={{
 							params: { recipe_details: rte },
@@ -370,46 +370,46 @@ describe("New Recipe page", () => {
 					/>
 				</Provider>
 			);
-			await waitFor(() => expect(queryAllByTestId("activityIndicator").length).toEqual(0));
-			fireEvent.changeText(getByPlaceholderText("Recipe name"), "testRecipeName");
+			await waitForLoadingToComplete(queryAllByTestId);
+			await changeTextAndWait(getByPlaceholderText("Recipe name"), "testRecipeName");
 			//about
-			fireEvent.changeText(
+			await changeTextAndWait(
 				getByPlaceholderText(
 					"Tell us about this recipe (optional; if you leave this section blank, it won't be displayed)"
 				),
 				"Interesting things about my recipe."
 			);
 			// acknowledgement
-			fireEvent.changeText(
+			await changeTextAndWait(
 				getByPlaceholderText("Acknowledge your recipe's source (optional)"),
 				"My mum taught me this recipe"
 			);
 			// acknowledgement link
-			fireEvent.changeText(getByPlaceholderText("Link to the original book or blog (optional)"), "someWebLink");
+			await changeTextAndWait(getByPlaceholderText("Link to the original book or blog (optional)"), "someWebLink");
 			// prep time
-			fireEvent.press(getByLabelText("prep time picker")); // open the picker
-			fireEvent(getByTestId("iosPicker"), "onValueChange", "01:15"); // change the value
-			await act(async () => await jest.runAllTimers());
+			await pressAndWait(getByLabelText("prep time picker")); // open the picker
+			await triggerEventAndWait(getByTestId("iosPicker"), "onValueChange", "01:15"); // change the value
+			await runTimersAndWait();
 			// cook time
-			fireEvent.press(getByLabelText("cook time picker")); // open the picker
-			fireEvent(getByTestId("iosPicker"), "onValueChange", "02:30"); // change the value
-			await act(async () => await jest.runAllTimers());
+			await pressAndWait(getByLabelText("cook time picker")); // open the picker
+			await triggerEventAndWait(getByTestId("iosPicker"), "onValueChange", "02:30"); // change the value
+			await runTimersAndWait();
 			// difficulty
-			fireEvent.press(getByLabelText("difficulty picker")); // open the picker
-			fireEvent(getByTestId("iosPicker"), "onValueChange", "7"); // change the value
-			await act(async () => await jest.runAllTimers());
-			fireEvent.press(getByText("Add ingredient"));
-			fireEvent.changeText(getByPlaceholderText("Ingredient 1"), "Bacon rasher - thick cut");
-			fireEvent.press(getByLabelText("ingredient1 unit picker")); // open the picker
-			fireEvent(getByTestId("iosPicker"), "onValueChange", "each"); // change the value
-			await act(async () => await jest.runAllTimers());
-			fireEvent.press(getByText("Add instruction"));
-			fireEvent.changeText(getByPlaceholderText("Instructions: step 1"), "Fry the bacon");
-			await act(async () => fireEvent.press(getByText("Reset")));
+			await pressAndWait(getByLabelText("difficulty picker")); // open the picker
+			await triggerEventAndWait(getByTestId("iosPicker"), "onValueChange", "7"); // change the value
+			await runTimersAndWait();
+			await pressAndWait(getByText("Add ingredient"));
+			await changeTextAndWait(getByPlaceholderText("Ingredient 1"), "Bacon rasher - thick cut");
+			await pressAndWait(getByLabelText("ingredient1 unit picker")); // open the picker
+			await triggerEventAndWait(getByTestId("iosPicker"), "onValueChange", "each"); // change the value
+			await runTimersAndWait();
+			await pressAndWait(getByText("Add instruction"));
+			await changeTextAndWait(getByPlaceholderText("Instructions: step 1"), "Fry the bacon");
+			await pressAndWait(getByText("Reset"));
 			expect(
 				getByText("Are you sure you want to clear your changes and revert to the original recipe")
 			).toBeTruthy();
-			await act(async () => fireEvent.press(getByText("Yes")));
+			await pressAndWait(getByText("Yes"));
 
 			expect(getByPlaceholderText("Recipe name").props.value).toStrictEqual(rte.recipe.name);
 			expect(

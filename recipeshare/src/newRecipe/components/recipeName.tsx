@@ -52,6 +52,7 @@ export const InstructionRow = ({
 					style={centralStyles.formInput}
 					value={this.state.newRecipeDetails.name}
 					placeholder="Recipe name"
+					placeholderTextColor="#888"
 					onChangeText={(t) => this.handleInput(t, "name")}
 				/>
 			</View>

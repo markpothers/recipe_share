@@ -4,6 +4,8 @@ exports[`AlertPopup calls the close function when button pressed 1`] = `
 <Modal
   animationType="fade"
   hardwareAccelerated={false}
+  presentationStyle="overFullScreen"
+  statusBarTranslucent={true}
   transparent={true}
   visible={true}
 >
@@ -251,6 +253,8 @@ exports[`AlertPopup calls the yes function when button pressed 1`] = `
 <Modal
   animationType="fade"
   hardwareAccelerated={false}
+  presentationStyle="overFullScreen"
+  statusBarTranslucent={true}
   transparent={true}
   visible={true}
 >
@@ -498,6 +502,8 @@ exports[`AlertPopup renders with 1 button when no close button and customizable 
 <Modal
   animationType="fade"
   hardwareAccelerated={false}
+  presentationStyle="overFullScreen"
+  statusBarTranslucent={true}
   transparent={true}
   visible={true}
 >
@@ -696,6 +702,8 @@ exports[`AlertPopup renders with 2 buttons and customizable text 1`] = `
 <Modal
   animationType="fade"
   hardwareAccelerated={false}
+  presentationStyle="overFullScreen"
+  statusBarTranslucent={true}
   transparent={true}
   visible={true}
 >
@@ -943,6 +951,8 @@ exports[`AlertPopup renders with 2 buttons and default text 1`] = `
 <Modal
   animationType="fade"
   hardwareAccelerated={false}
+  presentationStyle="overFullScreen"
+  statusBarTranslucent={true}
   transparent={true}
   visible={true}
 >

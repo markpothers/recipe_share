@@ -2,6 +2,7 @@ import { Image, Modal, Text, TouchableOpacity, View } from "react-native";
 import { InstructionImage, MakePic, MakePicChef, RecipeImage, SimpleChef } from "../../centralTypes";
 
 import React from "react";
+import defaultChef from "../../../assets/images/default-chef.jpg";
 import { styles } from "../recipeDetailsStyleSheet";
 
 type OwnProps = {
@@ -60,7 +61,7 @@ export function ImagePopup({ chef, imageDetails, close, navigateToChefDetails }:
 function AvatarImage(chefimage_url) {
 	const URL = chefimage_url.chefimage_url;
 	if (!URL) {
-		return <Image style={styles.thumbnail} source={require("../../../assets/images/default-chef.jpg")} />;
+		return <Image style={styles.thumbnail} source={defaultChef} />;
 	} else {
 		return <Image style={styles.thumbnail} source={{ uri: URL }} />;
 	}

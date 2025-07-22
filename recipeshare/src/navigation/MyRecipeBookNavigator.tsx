@@ -81,6 +81,7 @@ const MyRecipeBookTabs = (props: MyRecipeBookProps) => {
 					},
 					lazy: true,
 				})}
+				id={undefined}
 			>
 				<Tab.Screen name="My Feed" component={ChefFeedScreen} />
 				<Tab.Screen name="My Recipes" component={MyRecipesScreen} />
@@ -102,6 +103,7 @@ const Stack = createStackNavigator<MyRecipeBookStackParamList>();
 const MyRecipeBookStack = () => {
 	return (
 		<Stack.Navigator
+			id={undefined}
 			initialRouteName="MyRecipeBook"
 			// initialRouteName="NewRecipe"
 			screenOptions={{
@@ -115,7 +117,6 @@ const MyRecipeBookStack = () => {
 					marginRight: 0,
 				},
 				headerStatusBarHeight: 0,
-				headerBackTitleVisible: false,
 			}}
 		>
 			<Stack.Screen

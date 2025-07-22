@@ -2,7 +2,7 @@ import { CompositeScreenProps, NavigatorScreenParams } from "@react-navigation/n
 
 import type { DrawerScreenProps } from "@react-navigation/drawer";
 import type { MaterialTopTabScreenProps } from "@react-navigation/material-top-tabs";
-import { Recipe } from "../src/centralTypes";
+import { Recipe } from "../centralTypes";
 import type { StackScreenProps } from "@react-navigation/stack";
 
 // MainDrawer
@@ -20,7 +20,7 @@ type CommonParams = { title?: string };
 
 // MyRecipeBook
 export type MyRecipeBookStackParamList = {
-	NewRecipe: { recipe_details: Recipe };
+	NewRecipe: { recipe_details: Recipe; title?: string };
 	MyRecipeBook: CommonParams & NavigatorScreenParams<MyRecipeBookTabsParamList>;
 	RecipeDetails: CommonParams & { commenting?: boolean };
 	ChefDetails: CommonParams & { chefID: number };
@@ -56,7 +56,7 @@ export type MyRecipeBookRouteProps = MyRecipeBookProps["route"];
 
 export type MyRecipeBookTabsParamList = {
 	"My Feed": undefined;
-	"My Recipes": { refresh?: boolean, deleteId?: number };
+	"My Recipes": { refresh?: boolean; deleteId?: number };
 	"Recipes I Like": undefined;
 	"Chefs I Follow": undefined;
 	"Chefs Following Me": undefined;

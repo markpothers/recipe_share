@@ -29,6 +29,7 @@ import RecipeComment from "./components/recipeComment";
 import RecipeNewComment from "./components/recipeNewComment";
 import { WebView } from "react-native-webview";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
+import defaultRecipeImage from "../../assets/images/default-recipe.jpg";
 import { getFilterSettings } from "../redux/selectors";
 import { getTimeStringFromMinutes } from "../auxFunctions/getTimeStringFromMinutes";
 import { styles } from "./recipeDetailsStyleSheet";
@@ -36,9 +37,6 @@ import { useAppSelector } from "../redux";
 import { useRecipeDetailsModel } from "./hooks/useRecipeDetailsModel";
 
 NetInfo.configure({ reachabilityShortTimeout: 5 }); //5ms
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const defaultRecipeImage = require("../../assets/images/default-recipe.jpg");
 
 type OwnProps = {
 	navigation: RecipeDetailsNavigationProps;
@@ -578,9 +576,8 @@ const RecipeDetails = ({ navigation, route }: OwnProps) => {
 				)}
 				<KeyboardAvoidingView
 					style={centralStyles.fullPageKeyboardAvoidingView}
-					// @ts-ignore
-					behavior={Platform.OS === "ios" ? "padding" : ""}
-					keyboardVerticalOffset={Platform.OS === "ios" ? responsiveHeight(9) + 20 : 0}
+					behavior={Platform.OS === "ios" ? "padding" : "height"}
+					keyboardVerticalOffset={Platform.OS === "ios" ? responsiveHeight(9) + 20 : 50}
 				>
 					<ScrollView
 						contentContainerStyle={{ flexGrow: 1 }}
@@ -829,7 +826,6 @@ const RecipeDetails = ({ navigation, route }: OwnProps) => {
 							style={styles.detailsComments}
 							onLayout={(event) => {
 								setCommentsTopY(event.nativeEvent.layout.y);
-								// this.setState({ commentsTopY: event.nativeEvent.layout.y })}
 							}}
 						>
 							<View style={{ flexDirection: "row" }}>
@@ -878,7 +874,6 @@ const RecipeDetails = ({ navigation, route }: OwnProps) => {
 	} else {
 		return (
 			<SpinachAppContainer awaitingServer={awaitingServer} scrollingEnabled={false}>
-				{}
 			</SpinachAppContainer>
 		);
 	}

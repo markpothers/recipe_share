@@ -2,9 +2,7 @@ import { Image, Text, TextInput, View } from "react-native";
 
 import React from "react";
 import { styles } from "../recipeDetailsStyleSheet";
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const defaultChefImage = require("../../../assets/images/default-chef.jpg");
+import defaultChefImage from "../../../assets/images/default-chef.jpg";
 
 type OwnProps = {
 	image_url: string;
@@ -37,6 +35,7 @@ const RecipeNewComment = ({
 					multiline={true}
 					numberOfLines={2}
 					placeholder="Type comment here..."
+					placeholderTextColor="#888"
 					onChangeText={(text) => handleCommentTextInput(text)}
 					autoFocus={true}
 					// onFocus={scrollToNewComment}

@@ -14,6 +14,6 @@ module.exports = {
 	moduleDirectories: ["node_modules"],
 	verbose: true,
 	setupFiles: ["./jestSetup.js"],
-	setupFilesAfterEnv: ["./enzymeSetup.js"],
-	snapshotSerializers: ["enzyme-to-json/serializer"],
+	setupFilesAfterEnv: [],
+	snapshotSerializers: [],
 };

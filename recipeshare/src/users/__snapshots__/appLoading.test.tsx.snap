@@ -17,7 +17,11 @@ exports[`appLoading page should load and render with no saved login 1`] = `
     }
   >
     <Image
-      source={1}
+      source={
+        {
+          "testUri": "../../../assets/images/spinach.jpg",
+        }
+      }
       style={
         [
           {
@@ -46,7 +50,11 @@ exports[`appLoading page should load and render with no saved login 1`] = `
     >
       <Image
         resizeMode="contain"
-        source={1}
+        source={
+          {
+            "testUri": "../../../assets/images/yellowLogo.png",
+          }
+        }
         style={
           {
             "height": 266.8,

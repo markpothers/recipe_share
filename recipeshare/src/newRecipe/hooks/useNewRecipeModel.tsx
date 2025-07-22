@@ -1,6 +1,6 @@
 import * as ImagePicker from "expo-image-picker";
 
-import { Ingredient, NewRecipe, RecipeImage, RecipeIngredient, Unit } from "../../centralTypes";
+import { Ingredient, NewRecipe, RecipeImage, RecipeIngredient, RecipeInstruction, Unit } from "../../centralTypes";
 import { NewRecipeNavigationProps, NewRecipeRouteProps } from "../../navigation";
 import React, { useCallback, useEffect, useState } from "react";
 import { fetchIngredients, patchRecipe, postInstructionImage, postRecipe, postRecipeImage } from "../../fetches";
@@ -16,6 +16,7 @@ import { emptyRecipe } from "../recipeTemplates/emptyRecipe";
 import { getMinutesFromTimeString } from "../../auxFunctions/getTimeStringFromMinutes";
 import { shortTestRecipe } from "../recipeTemplates/shortTestRecipe";
 import { useSpeechToText } from "./useSpeechToText";
+import uuid from "react-native-uuid";
 
 const isDev = __DEV__ ? false : false;
 const testRecipe = shortTestRecipe;
@@ -32,10 +33,9 @@ export const useNewRecipeModel = (
 	const [helpShowing, setHelpShowing] = useState<boolean>(false);
 	const [helpText, setHelpText] = useState<{ title: string; text: string }>();
 	const [ingredientsList, setIngredientsList] = useState<Ingredient[]>([]);
-	const [autoCompleteFocused, setAutoCompleteFocused] = useState<number | null>(null);
+	const [autoCompleteFocused, setAutoCompleteFocused] = useState<string | null>(null);
 	const [choosingPrimaryPicture, setChoosingPrimaryPicture] = useState<boolean>(false);
-	const [choosingInstructionPicture, setChoosingInstructionPicture] = useState<boolean>(false);
-	const [instructionImageIndex, setInstructionImageIndex] = useState<number>(0);
+	const [choosingInstructionPicture, setChoosingInstructionPicture] = useState<string | null>(null);
 	const [filterDisplayed, setFilterDisplayed] = useState<boolean>(false);
 	const [awaitingServer, setAwaitingServer] = useState<boolean>(false);
 	const [scrollingEnabled, setScrollingEnabled] = useState<boolean>(true);
@@ -47,7 +47,7 @@ export const useNewRecipeModel = (
 	const [averageInstructionHeight, setAverageInstructionHeight] = useState<number>(responsiveHeight(6.5));
 	const [instructionsLength, setInstructionsLength] = useState<number>(100); // start with a high number so first number is always a decrease
 	const [ingredientsLength, setIngredientsLength] = useState<number>(100); // start with a high number so first number is always a decrease
-	const [recordingInstructionIndex, setRecordingInstructionIndex] = useState<number | null>(null);
+	const [recordingInstructionIndex, setRecordingInstructionIndex] = useState<string | null>(null);
 	const [isRecordingAbout, setIsRecordingAbout] = useState<boolean>(false);
 	const [isRecordingAcknowledgement, setIsRecordingAcknowledgement] = useState<boolean>(false);
 
@@ -198,21 +198,29 @@ export const useNewRecipeModel = (
 
 	const primarySourceChosen = async () => setChoosingPrimaryPicture(false);
 
-	const autocompleteIsFocused = (index: number) => setAutoCompleteFocused(index);
+	const autocompleteIsFocused = (id: string | null) => setAutoCompleteFocused(id);
 
 	const savePrimaryImages = (newImages: RecipeImage[]) => {
 		setNewRecipeDetails({ ...newRecipeDetails, primaryImages: newImages });
 	};
 
-	const updateIngredientEntry = (index: number, name: string, quantity: string, unit: Unit) => {
-		const newIngredients = newRecipeDetails.ingredients;
-		newIngredients[index].name = name;
-		newIngredients[index].quantity = quantity;
-		newIngredients[index].unit = unit;
+	const updateIngredientEntry = (id: string, name: string, quantity: string, unit: Unit) => {
+		const newIngredients = newRecipeDetails.ingredients.map((ing) =>
+			ing.id === id ? { ...ing, name, quantity, unit } : ing
+		);
 		setNewRecipeDetails({
 			...newRecipeDetails,
 			ingredients: newIngredients,
 		});
+	};
+
+	const addNewIngredient = () => {
+		const ingredients = newRecipeDetails.ingredients;
+		const newIngredients = [
+			...ingredients,
+			{ name: "", quantity: "", unit: "Oz" as Unit, id: uuid.v4() as string },
+		];
+		setNewRecipeDetails({ ...newRecipeDetails, ingredients: newIngredients });
 	};
 
 	const handleIngredientSort = async (newIngredients: RecipeIngredient[]) => {
@@ -222,15 +230,8 @@ export const useNewRecipeModel = (
 		});
 	};
 
-	const addNewIngredient = () => {
-		const ingredients = newRecipeDetails.ingredients;
-		const newIngredients = [...ingredients, { name: "", quantity: "", unit: "Oz" as const }];
-		setNewRecipeDetails({ ...newRecipeDetails, ingredients: newIngredients });
-	};
-
-	const removeIngredient = (index: number) => {
-		const newIngredients = [...newRecipeDetails.ingredients];
-		newIngredients.splice(index, 1);
+	const removeIngredient = (id: string) => {
+		const newIngredients = newRecipeDetails.ingredients.filter((ing) => ing.id !== id);
 		setNewRecipeDetails({ ...newRecipeDetails, ingredients: newIngredients });
 	};
 
@@ -242,11 +243,10 @@ export const useNewRecipeModel = (
 		// console.log("param:", parameter);
 		setNewRecipeDetails({ ...newRecipeDetails, [parameter]: text });
 	};
-
 	const clearNewRecipeDetails = async () => {
 		AsyncStorage.removeItem("localNewRecipeDetails", async () => {
 			setAlertPopupShowing(false);
-			setNewRecipeDetails(emptyRecipe);
+			setNewRecipeDetails(testing ? testRecipe : emptyRecipe);
 			setInstructionHeights([]);
 			setAverageInstructionHeight(responsiveHeight(6.5));
 			// this.setState({
@@ -258,7 +258,6 @@ export const useNewRecipeModel = (
 			});
 		});
 	};
-
 	const clearEditRecipeDetails = async (editedRecipeSavedToDatabase) => {
 		AsyncStorage.removeItem("localEditRecipeDetails", async () => {
 			setAlertPopupShowing(false);
@@ -269,7 +268,6 @@ export const useNewRecipeModel = (
 					// if you updated the saved recipe you don't want to refresh async store before leaving
 					await setRecipeParamsForEditing(route.params.recipe_details);
 				}
-				setAlertPopupShowing(false);
 			}
 		});
 	};
@@ -278,19 +276,19 @@ export const useNewRecipeModel = (
 		setFilterDisplayed(!filterDisplayed);
 	};
 
-	const handleInstructionChange = (text: string, index: number) => {
-		const newInstructions = [...newRecipeDetails.instructions];
-		newInstructions[index] = text;
-		const newInstructionHeights = [...instructionHeights];
+	const handleInstructionChange = (text: string, id: string) => {
+		const newInstructions = newRecipeDetails.instructions.map((inst) =>
+			inst.id === id ? { ...inst, text } : inst
+		);
 		setNewRecipeDetails({ ...newRecipeDetails, instructions: newInstructions });
-		setInstructionHeights(newInstructionHeights);
 	};
 
-	const handleInstructionSizeChange = (index: number, size: number) => {
+	const handleInstructionSizeChange = (id: string, size: number) => {
+		const index = newRecipeDetails.instructions.findIndex((inst) => inst.id === id);
+		if (index === -1) return;
 		const newInstructionHeights = [...instructionHeights];
 		newInstructionHeights[index] = size + responsiveHeight(0.5);
 		const newAverageInstructionHeight = parseFloat(
-			// note that height may be undefined if the instructions render in parallel and later ones complete rendering before earlier ones
 			(
 				newInstructionHeights.reduce((acc, height) => acc + (height || 0), 0) / newInstructionHeights.length
 			).toString()
@@ -299,86 +297,62 @@ export const useNewRecipeModel = (
 		setAverageInstructionHeight(newAverageInstructionHeight);
 	};
 
-	const handleInstructionsSort = (newInstructions: string[]) => {
+	const handleInstructionsSort = (newInstructions: RecipeInstruction[]) => {
 		const newInstructionHeights = [];
-		const newInstructionImages = [];
-		newInstructions.forEach((instruction) => {
-			const index = newRecipeDetails.instructions.indexOf(instruction);
+		newInstructions.forEach((inst) => {
+			const index = newRecipeDetails.instructions.findIndex((i) => i.id === inst.id);
 			newInstructionHeights.push(instructionHeights[index]);
-			newInstructionImages.push(newRecipeDetails.instructionImages[index]);
 		});
-		setNewRecipeDetails({
-			...newRecipeDetails,
-			instructions: newInstructions,
-			instructionImages: newInstructionImages,
-		});
+		setNewRecipeDetails({ ...newRecipeDetails, instructions: newInstructions });
 		setInstructionHeights(newInstructionHeights);
 	};
 
 	const addNewInstruction = () => {
-		const newInstructions = [...newRecipeDetails.instructions];
-		newInstructions.push("");
-		const newInstructionImages = [...newRecipeDetails.instructionImages, ""];
+		const newInstructions = [...newRecipeDetails.instructions, { id: uuid.v4() as string, text: "", image: "" }];
 		const newInstructionHeights = [...instructionHeights, responsiveHeight(6.5)];
 		const newAverageInstructionHeight =
 			newInstructionHeights.reduce((acc, h) => acc + h, 0) / newInstructionHeights.length;
-		setNewRecipeDetails({
-			...newRecipeDetails,
-			instructions: newInstructions,
-			instructionImages: newInstructionImages,
-		});
+		setNewRecipeDetails({ ...newRecipeDetails, instructions: newInstructions });
 		setInstructionHeights(newInstructionHeights);
 		setAverageInstructionHeight(newAverageInstructionHeight);
 	};
 
-	const removeInstruction = (index: number) => {
-		const newInstructions = [...newRecipeDetails.instructions];
-		newInstructions.splice(index, 1);
+	const removeInstruction = (id: string) => {
+		const index = newRecipeDetails.instructions.findIndex((inst) => inst.id === id);
+		if (index === -1) return;
+		const newInstructions = newRecipeDetails.instructions.filter((inst) => inst.id !== id);
 		const newInstructionHeights = [...instructionHeights];
 		newInstructionHeights.splice(index, 1);
-		const newInstructionImages = [...newRecipeDetails.instructionImages];
-		newInstructionImages.splice(index, 1);
 		const newAverageInstructionHeight =
 			newInstructionHeights.length > 0
 				? newInstructionHeights.reduce((acc, h) => acc + h, 0) / newInstructionHeights.length
 				: 0;
-		setNewRecipeDetails({
-			...newRecipeDetails,
-			instructions: newInstructions,
-			instructionImages: newInstructionImages,
-		});
+		setNewRecipeDetails({ ...newRecipeDetails, instructions: newInstructions });
 		setInstructionHeights(newInstructionHeights);
 		setAverageInstructionHeight(newAverageInstructionHeight);
 	};
 
-	const chooseInstructionPicture = (index: number) => {
-		setChoosingInstructionPicture(true);
-		setInstructionImageIndex(index);
+	const chooseInstructionPicture = (id: string) => {
+		setChoosingInstructionPicture(id);
 	};
 
 	const instructionSourceChosen = async () => {
-		setChoosingInstructionPicture(false);
+		setChoosingInstructionPicture(null);
 	};
 
-	const saveInstructionImage = (image: ImagePicker.ImagePickerAsset, index: number) => {
-		if (image) {
-			const newInstructionImages = [...newRecipeDetails.instructionImages];
-			newInstructionImages[index] = image.uri;
-			setNewRecipeDetails({
-				...newRecipeDetails,
-				instructionImages: newInstructionImages,
-			});
-		}
+	const saveInstructionImage = (image: ImagePicker.ImagePickerAsset, id: string) => {
+		const newInstructions = newRecipeDetails.instructions.map((inst) =>
+			inst.id === id ? { ...inst, image: image.uri } : inst
+		);
+		setNewRecipeDetails({ ...newRecipeDetails, instructions: newInstructions });
 	};
 
-	const cancelChooseInstructionImage = (image: string, index: number) => {
-		const newInstructionImages = [...newRecipeDetails.instructionImages];
-		newInstructionImages[index] = image;
-		setChoosingInstructionPicture(false);
-		setNewRecipeDetails({
-			...newRecipeDetails,
-			instructionImages: newInstructionImages,
-		});
+	const cancelChooseInstructionImage = (image: string, id: string) => {
+		const newInstructions = newRecipeDetails.instructions.map((inst) =>
+			inst.id === id ? { ...inst, image } : inst
+		);
+		setChoosingInstructionPicture(null);
+		setNewRecipeDetails({ ...newRecipeDetails, instructions: newInstructions });
 		setAwaitingServer(false);
 	};
 
@@ -415,21 +389,37 @@ export const useNewRecipeModel = (
 					);
 				})
 			);
+			// Post instruction images using newRecipeDetails.instructions
 			await Promise.all(
-				newRecipeDetails.instructionImages.map((image, index) => {
-					if (image) {
+				newRecipeDetails.instructions.map((instruction, index) => {
+					const recipeInstruction = recipe.instructions.find((i) => i.step === index);
+					// for new images, the image is the local uri and has no id
+					// it needs to be uploaded to the server along with the instruction id
+					if (instruction.image && typeof instruction.image === "string" && instruction.image !== "") {
 						return postInstructionImage(
 							loggedInChef.id,
 							loggedInChef.auth_token,
-							recipe.instructions.sort((a, b) => (a.step > b.step ? 1 : -1))[index].id,
-							image.id || 0,
-							image // this sends the whole object if it's existing image, and it really shouldn't
+							recipeInstruction?.id,
+							0,
+							instruction.image
+						);
+						// for existing images, the image is the object from the server with an id
+						// we just need to associate this id with the instruction id
+					} else if (instruction.image && typeof instruction.image !== "string" && instruction.image.id) {
+						return postInstructionImage(
+							loggedInChef.id,
+							loggedInChef.auth_token,
+							recipeInstruction?.id,
+							instruction.image.id,
+							""
 						);
 					}
+					return Promise.resolve(true);
 				})
 			);
 			return true;
-		} catch {
+		} catch (e) {
+			console.error("Error posting images:", e);
 			setErrors(
 				"The recipe saved successfully but not all the images could be saved. Please finish submission now or later to try again. Your recipe will be visible without those images that failed already."
 			);
@@ -455,13 +445,11 @@ export const useNewRecipeModel = (
 						loggedInChef.auth_token,
 						newRecipeDetails.name,
 						newRecipeDetails.ingredients,
-						newRecipeDetails.instructions,
-						// newRecipeDetails.instructionImages,
+						newRecipeDetails.instructions.map((i) => i.text),
 						newRecipeDetails.times.prepTime,
 						newRecipeDetails.times.cookTime,
 						newRecipeDetails.times.totalTime,
 						newRecipeDetails.difficulty,
-						// newRecipeDetails.primaryImages,
 						newRecipeDetails.filter_settings,
 						newRecipeDetails.cuisine,
 						newRecipeDetails.serves,
@@ -485,7 +473,6 @@ export const useNewRecipeModel = (
 									screen: "My Recipes",
 									params: { refresh: true },
 								});
-								// });
 							}
 						}
 					}
@@ -510,13 +497,11 @@ export const useNewRecipeModel = (
 						loggedInChef.auth_token,
 						newRecipeDetails.name,
 						newRecipeDetails.ingredients,
-						newRecipeDetails.instructions,
-						// newRecipeDetails.instructionImages,
+						newRecipeDetails.instructions.map((i) => i.text),
 						newRecipeDetails.times.prepTime,
 						newRecipeDetails.times.cookTime,
 						newRecipeDetails.times.totalTime,
 						newRecipeDetails.difficulty,
-						// newRecipeDetails.primaryImages,
 						newRecipeDetails.filter_settings,
 						newRecipeDetails.cuisine,
 						newRecipeDetails.serves,
@@ -571,6 +556,7 @@ export const useNewRecipeModel = (
 		}
 	};
 
+	// console.log("newRecipeDetails:", newRecipeDetails.instructions);
 	const setRecipeParamsForEditing = async (recipeDetails) => {
 		const { recipe } = recipeDetails;
 		const newIngredients = recipeDetails.ingredient_uses.map((ingredient_use) => {
@@ -583,13 +569,13 @@ export const useNewRecipeModel = (
 		newIngredients.forEach(
 			(use) => (use.name = recipeDetails.ingredients.find((ingredient) => ingredient.id == use.ingredientId).name)
 		);
-		const newInstructionImages = recipeDetails.instructions.map((i) => {
+		const newInstructions = recipeDetails.instructions.map((i) => {
 			const image = recipeDetails.instruction_images.find((j) => j.instruction_id == i.id);
-			if (image) {
-				return image;
-			} else {
-				return "";
-			}
+			return {
+				id: uuid.v4() as string,
+				text: i.instruction,
+				image: image ?? "",
+			};
 		});
 		setInstructionHeights(recipeDetails.instructions.map(() => responsiveHeight(6.5)));
 		setAverageInstructionHeight(responsiveHeight(6.5));
@@ -597,9 +583,7 @@ export const useNewRecipeModel = (
 		setNewRecipeDetails({
 			recipeId: recipe.id,
 			name: recipe.name,
-			instructions:
-				recipeDetails.instructions.length > 0 ? recipeDetails.instructions.map((i) => i.instruction) : [],
-			instructionImages: newInstructionImages.length > 0 ? newInstructionImages : [],
+			instructions: newInstructions,
 			ingredients: newIngredients.length > 0 ? newIngredients : [],
 			difficulty: recipe.difficulty.toString(),
 			times: {
@@ -642,15 +626,15 @@ export const useNewRecipeModel = (
 		});
 	};
 
-	const startInstructionSpeechRecognition = async (index: number) => {
+	const startInstructionSpeechRecognition = async (id: string) => {
 		if (recordingInstructionIndex) {
 			setRecordingInstructionIndex(null);
 			endSpeechToText();
 		} else {
-			setRecordingInstructionIndex(index);
+			setRecordingInstructionIndex(id);
 			const callback = (speechResult: string, isFinished: boolean) => {
 				if (speechResult) {
-					handleInstructionChange(speechResult, index);
+					handleInstructionChange(speechResult, id);
 				}
 				if (isFinished) {
 					setRecordingInstructionIndex(null);
@@ -696,6 +680,23 @@ export const useNewRecipeModel = (
 		}
 	};
 
+	// Ensure all ingredients have an id on load
+	useEffect(() => {
+		setNewRecipeDetails((prev) => {
+			if (prev.ingredients.some((ing) => !ing.id)) {
+				return {
+					...prev,
+					ingredients: prev.ingredients.map((ing) => ({
+						...ing,
+						id: ing.id || (uuid.v4() as string),
+						unit: ing.unit as Unit,
+					})),
+				};
+			}
+			return prev;
+		});
+	}, [newRecipeDetails.ingredients]);
+
 	return {
 		loggedInChef,
 		renderOfflineMessage,
@@ -711,7 +712,6 @@ export const useNewRecipeModel = (
 		setAutoCompleteFocused,
 		choosingPrimaryPicture,
 		choosingInstructionPicture,
-		instructionImageIndex,
 		filterDisplayed,
 		awaitingServer,
 		scrollingEnabled,

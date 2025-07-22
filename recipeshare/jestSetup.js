@@ -2,10 +2,11 @@ import fetchMock from "jest-fetch-mock";
 
 fetchMock.enableMocks();
 
-jest.mock("@react-native-voice/voice");
+// Voice package removed - fallback implementation doesn't need mocking
+// jest.mock("@react-native-voice/voice");
 
 // stops random warnings about Animated.useNativeDriver
-jest.mock("react-native/Libraries/Animated/NativeAnimatedHelper");
+// jest.mock("react-native/Libraries/Animated/NativeAnimatedHelper");
 
 //copy this line in some way to many invalid component name errors
 jest.mock("react-native-vector-icons/MaterialCommunityIcons", () => "Icon");

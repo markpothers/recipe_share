@@ -44,6 +44,7 @@ exports[`Search Bar can be rendered (with the delete button) matches its previou
         onBlur={[MockFunction]}
         onChangeText={[Function]}
         placeholder="SearchBar placeholder text"
+        placeholderTextColor="#888"
         style={
           {
             "backgroundColor": "white",
@@ -158,6 +159,7 @@ exports[`Search Bar can be rendered (without the delete button) matches its prev
         onBlur={[MockFunction]}
         onChangeText={[Function]}
         placeholder="SearchBar placeholder text"
+        placeholderTextColor="#888"
         style={
           {
             "backgroundColor": "white",

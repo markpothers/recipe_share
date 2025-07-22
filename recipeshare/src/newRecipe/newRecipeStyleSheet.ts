@@ -183,9 +183,10 @@ export const styles = StyleSheet.create({
 		// overflow: 'visible',
 	},
 	autoCompleteContainer: {
-		position: "absolute",
+		position: "relative",
 		width: "100%",
 		borderRadius: responsiveWidth(1.5),
+		marginBottom: responsiveHeight(0.5),
 		// height: responsiveHeight(10),
 		// justifyContent: 'center'
 		// borderWidth: 1,
@@ -197,6 +198,8 @@ export const styles = StyleSheet.create({
 		width: responsiveWidth(77),
 		marginLeft: responsiveWidth(1),
 		marginRight: responsiveWidth(1),
+		flexDirection: "column",
+		alignItems: "flex-start",
 	},
 	quantityAndUnitContainer: {
 		// marginLeft: '1%',
@@ -206,7 +209,6 @@ export const styles = StyleSheet.create({
 		flexDirection: "row",
 		// borderWidth: 1,
 		// borderColor: 'red',
-		top: responsiveHeight(6.5),
 		height: responsiveHeight(6),
 	},
 	ingredientSortContainer: {
@@ -256,15 +258,25 @@ export const styles = StyleSheet.create({
 		fontSize: responsiveFontSize(2),
 	},
 	autoCompleteList: {
+		backgroundColor: "white",
 		borderRadius: responsiveWidth(1.5),
-		height: responsiveHeight(23),
-		width: "90%",
+		maxHeight: responsiveHeight(25),
+		width: "100%",
 		borderStyle: "solid",
 		borderWidth: 1,
 		borderColor: "#104e01",
-		marginLeft: "5%",
-		marginRight: "5%",
-		// zIndex: 20
+		position: "absolute",
+		top: responsiveHeight(6.5),
+		zIndex: 9999,
+		elevation: 9999, // For Android
+		shadowColor: "#000",
+		shadowOffset: {
+			width: 0,
+			height: 2,
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 3.84,
+		overflow: "scroll",
 	},
 	ingredientDeleteTrashCanButton: {
 		// zIndex: 1,
@@ -324,6 +336,9 @@ export const styles = StyleSheet.create({
 	},
 	autocompleteListText: {
 		fontSize: responsiveFontSize(1.8),
+		color: "#104e01",
+		paddingVertical: responsiveHeight(1),
+		paddingHorizontal: responsiveWidth(2),
 	},
 	addButton: {
 		maxWidth: responsiveWidth(60),

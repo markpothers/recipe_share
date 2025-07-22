@@ -7,8 +7,10 @@ import { responsiveFontSize, responsiveHeight } from "react-native-responsive-di
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import defaultChef from "../../assets/images/default-chef.jpg";
 import { deleteToken } from "../auxFunctions/saveLoadToken";
 import { getLoggedInChef } from "../redux";
+import greenLogo from "../../assets/images/greenLogo.png";
 import { styles } from "./drawerStyleSheet";
 import { useAppSelector } from "../redux/hooks";
 
@@ -38,25 +40,23 @@ const CustomDrawer = (props: OwnProps & DrawerContentComponentProps) => {
 	};
 
 	return (
-		<DrawerContentScrollView {...props}>
+		<DrawerContentScrollView
+			{...props}
+			contentContainerStyle={{ flex: 1, paddingTop: 30, paddingHorizontal: 0, margin: 0 }}
+		>
 			<View
 				style={[
 					styles.mainPageContainer,
 					{
-						height: responsiveHeight(90),
+						height: responsiveHeight(87),
 						// borderColor: "red",
 						// borderWidth: 1,
-						// marginTop: Constants.statusBarHeight,
 					},
 				]}
 			>
 				<View style={styles.headerContainer}>
 					<View style={styles.headerTopContainer}>
-						<Image
-							style={styles.logo}
-							resizeMode="contain"
-							source={require("../../assets/images/greenLogo.png")}
-						/>
+						<Image style={styles.logo} resizeMode="contain" source={greenLogo} />
 					</View>
 				</View>
 				<View style={styles.horizontalRule}></View>
@@ -126,7 +126,7 @@ const CustomDrawer = (props: OwnProps & DrawerContentComponentProps) => {
 						>
 							Logged in as:
 						</Text>
-						<TouchableOpacity onPress={() => props.navigation.navigate("Profile")}>
+						<TouchableOpacity onPress={() => props.navigation.navigate("ProfileCover")}>
 							<Text
 								style={[
 									styles.userName,
@@ -142,7 +142,7 @@ const CustomDrawer = (props: OwnProps & DrawerContentComponentProps) => {
 					</View>
 					<TouchableOpacity
 						style={styles.bottomRightContainer}
-						onPress={() => props.navigation.navigate("Profile")}
+						onPress={() => props.navigation.navigate("ProfileCover")}
 					>
 						<AvatarImage image_url={loggedInChef.image_url} />
 					</TouchableOpacity>
@@ -172,7 +172,7 @@ const CustomDrawer = (props: OwnProps & DrawerContentComponentProps) => {
 function AvatarImage(props) {
 	const URL = props.image_url;
 	if (!URL) {
-		return <Image style={styles.avatarThumbnail} source={require("../../assets/images/default-chef.jpg")} />;
+		return <Image style={styles.avatarThumbnail} source={defaultChef} />;
 	} else {
 		return <Image style={styles.avatarThumbnail} source={{ uri: URL }} />;
 	}

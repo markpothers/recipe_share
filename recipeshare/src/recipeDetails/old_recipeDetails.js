@@ -57,10 +57,9 @@ import { connect } from "react-redux";
 import { getTimeStringFromMinutes } from "../auxFunctions/getTimeStringFromMinutes";
 import saveChefDetailsLocally from "../auxFunctions/saveChefDetailsLocally";
 import { styles } from "./recipeDetailsStyleSheet";
+import defaultRecipeImage from "../../assets/images/default-recipe.jpg";
 
 NetInfo.configure({ reachabilityShortTimeout: 5 }); //5ms
-
-const defaultRecipeImage = require("../../assets/images/default-recipe.jpg");
 
 let keepAwakeTimer;
 

@@ -13,3 +13,9 @@ export const launchImageLibraryAsync = () => {
 		assets: [{uri: "mockLibraryUri"}]
 	})
 }
+
+export const requestCameraPermissionsAsync = () => {
+	return Promise.resolve({
+		status: "granted"
+	})
+}

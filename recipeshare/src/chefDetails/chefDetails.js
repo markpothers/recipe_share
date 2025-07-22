@@ -11,6 +11,7 @@ import NetInfo from "@react-native-community/netinfo"; //5ms
 import React from "react";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { connect } from "react-redux";
+import defaultChef from "../../assets/images/default-chef.jpg";
 import { styles } from "./chefDetailsStyleSheet";
 
 NetInfo.configure({ reachabilityShortTimeout: 5 });
@@ -157,12 +158,7 @@ export default connect(
 				if (chef.image_url != null) {
 					return <Image style={{ width: "100%", height: "100%" }} source={{ uri: chef.image_url }}></Image>;
 				} else {
-					return (
-						<Image
-							style={{ width: "100%", height: "100%" }}
-							source={require("../../assets/images/default-chef.jpg")}
-						></Image>
-					);
+					return <Image style={{ width: "100%", height: "100%" }} source={defaultChef} />;
 				}
 			}
 		};
