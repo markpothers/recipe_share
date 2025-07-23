@@ -147,7 +147,7 @@ export default connect(
 						this.getQueryChefId(),
 						this.props.loggedInChef.id,
 						this.getChefListName(),
-						this.getChefList()
+						chefs
 					);
 				} catch (e) {
 					if (e.name === "Logout") {
@@ -172,11 +172,9 @@ export default connect(
 					this.props.loggedInChef.auth_token,
 					this.state.searchTerm
 				);
-				this.props.updateSingleChefList(this.props.route.key, [...this.getChefList(), ...additionalChefs]);
-				await saveChefListsLocally(this.getQueryChefId(), this.props.loggedInChef.id, this.getChefListName(), [
-					...this.getChefList(),
-					...additionalChefs,
-				]);
+				const combinedChefs = [...this.getChefList(), ...additionalChefs];
+				this.props.updateSingleChefList(this.props.route.key, combinedChefs);
+				await saveChefListsLocally(this.getQueryChefId(), this.props.loggedInChef.id, this.getChefListName(), combinedChefs);
 			} catch (e) {
 				if (e.name === "Logout") {
 					this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });

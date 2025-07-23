@@ -223,7 +223,7 @@ export class RecipesList extends React.Component {
 						this.getQueryChefId(),
 						this.props.loggedInChef.id,
 						this.getRecipeListName(),
-						this.getRecipeList()
+						result.recipes
 					);
 				} catch (e) {
 					this.setState({
@@ -283,13 +283,14 @@ export class RecipesList extends React.Component {
 					servesOptions: result.serves,
 					filterOptions: result.filters,
 				});
+				const combinedRecipes = [...this.getRecipeList(), ...result.recipes];
 				await saveRecipeListsLocally(
 					this.getQueryChefId(),
 					this.props.loggedInChef.id,
 					this.getRecipeListName(),
-					[...this.getRecipeList(), ...result.recipes]
+					combinedRecipes
 				);
-				this.props.updateSingleRecipeList(this.props.route.key, [...this.getRecipeList(), ...result.recipes]);
+				this.props.updateSingleRecipeList(this.props.route.key, combinedRecipes);
 			} catch (e) {
 				if (e.name === "Logout") {
 					this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
