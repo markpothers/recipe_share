@@ -9,11 +9,11 @@ export const getBase64FromFile = async (uri: string): Promise<string> => {
 				format: ImageManipulator.SaveFormat.JPEG,
 			});
 			// const compressedImageBase64 = await FileSystem.readAsStringAsync(compressedImage.uri, {
-				// encoding: FileSystem.EncodingType.Base64,
+			// encoding: FileSystem.EncodingType.Base64,
 			// });
 			// console.log("compressedImageBase64:", compressedImageBase64);
 			// FileSystem.deleteAsync(compressedImage.uri, { idempotent: true });
-			return compressedImage.base64;
+			return compressedImage.base64 || "";
 		} catch {
 			return "";
 		}

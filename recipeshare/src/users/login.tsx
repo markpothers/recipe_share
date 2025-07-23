@@ -121,7 +121,7 @@ export default function Login(props: OwnProps) {
 							is_member: response.is_member,
 						})
 					);
-					saveToken(response.auth_token);
+					await saveToken(response.auth_token);
 					delete response.auth_token;
 					AsyncStorage.setItem("chef", JSON.stringify(response), () => {
 						props.navigation.navigate("CreateChef", { successfulLogin: true }); //this navigate command is used to trigger Apple Keychain.  CreateChef will immediately perform the required actions to login.

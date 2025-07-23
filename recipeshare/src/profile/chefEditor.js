@@ -244,7 +244,7 @@ export default connect(
 							});
 						} else {
 							if (this.props.stayingLoggedIn) {
-								saveToken(updatedChef.auth_token);
+								await saveToken(updatedChef.auth_token);
 								this.props.updateLoggedInChefInState(
 									updatedChef.id,
 									chef.e_mail,

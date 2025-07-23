@@ -143,7 +143,7 @@ export default connect(
 						this.state.searchTerm
 					);
 					this.props.updateSingleChefList(this.props.route.key, chefs);
-					saveChefListsLocally(
+					await saveChefListsLocally(
 						this.getQueryChefId(),
 						this.props.loggedInChef.id,
 						this.getChefListName(),
@@ -173,7 +173,7 @@ export default connect(
 					this.state.searchTerm
 				);
 				this.props.updateSingleChefList(this.props.route.key, [...this.getChefList(), ...additionalChefs]);
-				saveChefListsLocally(this.getQueryChefId(), this.props.loggedInChef.id, this.getChefListName(), [
+				await saveChefListsLocally(this.getQueryChefId(), this.props.loggedInChef.id, this.getChefListName(), [
 					...this.getChefList(),
 					...additionalChefs,
 				]);

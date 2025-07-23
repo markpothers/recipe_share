@@ -74,6 +74,7 @@ jest.mock("../auxFunctions/saveRecipeListsLocally", () => {
 		__esModule: true,
 		...originalModule,
 		saveRecipeListsLocally: jest.fn(),
+		loadLocalRecipeLists: jest.fn(),
 	};
 });
 
@@ -131,6 +132,8 @@ describe("Recipe List", () => {
 		AsyncStorage.getItem.mockClear();
 		AsyncStorage.clear(); //clear out the contents of AsyncStorage between tests
 		getRecipeList.mockClear();
+		loadLocalRecipeLists.mockClear();
+		loadLocalRecipeLists.mockResolvedValue([]); // Default to empty
 	});
 
 	describe("loading and rendering with different fetch and async responses", () => {
@@ -205,16 +208,7 @@ describe("Recipe List", () => {
 					name: "Timeout",
 				})
 			);
-			AsyncStorage.getItem.mockImplementation((key, callback) => {
-				callback(
-					undefined,
-					JSON.stringify({
-						22: {
-							all: { recipeList },
-						},
-					})
-				);
-			});
+			loadLocalRecipeLists.mockResolvedValue(recipeList);
 			const { queryAllByTestId } = await waitFor(() =>
 				render(
 					<Provider store={store}>
@@ -229,16 +223,7 @@ describe("Recipe List", () => {
 
 		test("renders, fetch fails for unspecified reason, loads locally", async () => {
 			getRecipeList.mockImplementation(() => Promise.reject({}));
-			AsyncStorage.getItem.mockImplementation((key, callback) => {
-				callback(
-					undefined,
-					JSON.stringify({
-						22: {
-							all: { recipeList },
-						},
-					})
-				);
-			});
+			loadLocalRecipeLists.mockResolvedValue(recipeList);
 			const { queryAllByTestId } = await waitFor(() =>
 				render(
 					<Provider store={store}>
@@ -300,32 +285,28 @@ describe("Recipe List", () => {
 		test("should be able to navigate to recipe details page from title", async () => {
 			const testRecipeDetails = recipeDetails.find((d) => d.id === 111);
 			getRecipeDetails.mockImplementation(() => Promise.resolve(testRecipeDetails));
-			AsyncStorage.getItem.mockImplementation((key, callback) => {
-				callback([]);
-			});
+			AsyncStorage.getItem.mockResolvedValue(JSON.stringify([]));
 
 			await pressAndExpectNavigation(getByText("Mini Baguettes"), mockNavigate, "RecipeDetails", {
 				recipeID: 111,
 				commenting: false,
 			});
 
-			expectStorageCall(AsyncStorage.getItem, "localRecipeDetails");
+			expectStorageCall(AsyncStorage.getItem, "localRecipeDetails", false);
 			expectStorageSet(AsyncStorage.setItem, "localRecipeDetails", [testRecipeDetails]);
 		});
 
 		test("should be able to navigate to recipe details page from image", async () => {
 			const testRecipeDetails = recipeDetails.find((d) => d.id === 111);
 			getRecipeDetails.mockImplementation(() => Promise.resolve(testRecipeDetails));
-			AsyncStorage.getItem.mockImplementation((key, callback) => {
-				callback([]);
-			});
+			AsyncStorage.getItem.mockResolvedValue(JSON.stringify([]));
 
 			await pressAndExpectNavigation(queryAllByLabelText("picture of recipe")[2], mockNavigate, "RecipeDetails", {
 				recipeID: 111,
 				commenting: false,
 			});
 
-			expectStorageCall(AsyncStorage.getItem, "localRecipeDetails");
+			expectStorageCall(AsyncStorage.getItem, "localRecipeDetails", false);
 			expectStorageSet(AsyncStorage.setItem, "localRecipeDetails", [testRecipeDetails]);
 		});
 
@@ -333,7 +314,7 @@ describe("Recipe List", () => {
 			const testRecipeDetails = recipeDetails.find((d) => d.id === 111);
 			getRecipeDetails.mockImplementation(() => Promise.reject({}));
 			AsyncStorage.getItem.mockImplementation((key, callback) => {
-				callback(undefined, JSON.stringify([testRecipeDetails]));
+				callback(null, JSON.stringify([testRecipeDetails]));
 			});
 
 			await pressAndExpectNavigation(getByText("Mini Baguettes"), mockNavigate, "RecipeDetails", {
@@ -341,14 +322,14 @@ describe("Recipe List", () => {
 				commenting: false,
 			});
 
-			expectStorageCall(AsyncStorage.getItem, "localRecipeDetails");
+			expectStorageCall(AsyncStorage.getItem, "localRecipeDetails", true);
 		});
 
 		test("should fail to navigate to recipe details if fetch fails and not saved locally", async () => {
 			const testRecipeDetails = recipeDetails.find((d) => d.id === 111);
 			getRecipeDetails.mockImplementation(() => Promise.reject({}));
 			AsyncStorage.getItem.mockImplementation((key, callback) => {
-				callback(undefined, JSON.stringify([]));
+				callback(null, JSON.stringify([]));
 			});
 
 			await pressAndExpectOfflineMessage(getByText("Mini Baguettes"), getByTestId);
@@ -496,10 +477,10 @@ describe("Recipe List", () => {
 			test("commenting should navigate to recipe with commenting == true", async () => {
 				const testRecipeDetails = recipeDetails.find((d) => d.id === 113);
 				getRecipeDetails.mockImplementation(() => Promise.resolve(testRecipeDetails));
-				AsyncStorage.getItem.mockImplementation((key, callback) => callback([]));
+				AsyncStorage.getItem.mockResolvedValue(JSON.stringify([]));
 
 				await commentOnRecipeAndWait(queryAllByLabelText("comment on recipe")[0], () => {
-					expectStorageCall(AsyncStorage.getItem, "localRecipeDetails");
+					expectStorageCall(AsyncStorage.getItem, "localRecipeDetails", false);
 					expectStorageSet(AsyncStorage.setItem, "localRecipeDetails", [testRecipeDetails]);
 					expectRecipeNavigation(mockNavigate, 113, true);
 				});

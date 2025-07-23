@@ -14,7 +14,7 @@ describe("apiCall", () => {
 
         mockFailingCallback = jest.fn(() => {
             // eslint-disable-next-line no-undef
-            throw new Exception
+            throw new Error
         })
 
         mockErrorCallback = jest.fn(() => {

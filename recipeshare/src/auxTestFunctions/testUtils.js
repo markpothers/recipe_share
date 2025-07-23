@@ -65,9 +65,15 @@ export const expectNoNavigation = (mockNavigate) => {
 	expect(mockNavigate).not.toHaveBeenCalled();
 };
 
-// Storage assertion utilities
-export const expectStorageCall = (mockGetItem, key, callback) => {
-	expect(mockGetItem).toHaveBeenCalledWith(key, expect.any(Function));
+// Storage assertion utilities  
+export const expectStorageCall = (mockGetItem, key, expectCallback = true) => {
+	if (expectCallback) {
+		// For old callback pattern (recipe/chef details)
+		expect(mockGetItem).toHaveBeenCalledWith(key, expect.any(Function));
+	} else {
+		// For new async/await pattern (recipe/chef lists) 
+		expect(mockGetItem).toHaveBeenCalledWith(key);
+	}
 };
 
 export const expectStorageSet = (mockSetItem, key, value) => {

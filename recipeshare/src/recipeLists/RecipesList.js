@@ -219,7 +219,7 @@ export class RecipesList extends React.Component {
 						filterOptions: result.filters,
 						awaitingServer: false,
 					});
-					saveRecipeListsLocally(
+					await saveRecipeListsLocally(
 						this.getQueryChefId(),
 						this.props.loggedInChef.id,
 						this.getRecipeListName(),
@@ -283,10 +283,12 @@ export class RecipesList extends React.Component {
 					servesOptions: result.serves,
 					filterOptions: result.filters,
 				});
-				saveRecipeListsLocally(this.getQueryChefId(), this.props.loggedInChef.id, this.getRecipeListName(), [
-					...this.getRecipeList(),
-					...result.recipes,
-				]);
+				await saveRecipeListsLocally(
+					this.getQueryChefId(),
+					this.props.loggedInChef.id,
+					this.getRecipeListName(),
+					[...this.getRecipeList(), ...result.recipes]
+				);
 				this.props.updateSingleRecipeList(this.props.route.key, [...this.getRecipeList(), ...result.recipes]);
 			} catch (e) {
 				if (e.name === "Logout") {
@@ -359,7 +361,7 @@ export class RecipesList extends React.Component {
 				const recipeDetails = await getRecipeDetails(recipeID, this.props.loggedInChef.auth_token);
 				if (recipeDetails) {
 					// console.log(recipeDetails.recipe)
-					saveRecipeDetailsLocally(recipeDetails, this.props.loggedInChef.id);
+					await saveRecipeDetailsLocally(recipeDetails, this.props.loggedInChef.id);
 					await this.props.storeRecipeDetails(recipeDetails);
 					this.setState(
 						{
@@ -540,7 +542,9 @@ export class RecipesList extends React.Component {
 					);
 					if (likePosted) {
 						this.updateAttributeCountInRecipeLists(recipeID, "likes_count", "chef_liked", 1);
-						this.props.fetchChefDetails && (await this.props.fetchChefDetails());
+						if (this.props.fetchChefDetails) {
+							await this.props.fetchChefDetails();
+						}
 					}
 				} catch (e) {
 					if (e.name === "Logout") {
@@ -567,7 +571,9 @@ export class RecipesList extends React.Component {
 					);
 					if (unlikePosted) {
 						this.updateAttributeCountInRecipeLists(recipeID, "likes_count", "chef_liked", -1);
-						this.props.fetchChefDetails && this.props.fetchChefDetails();
+						if (this.props.fetchChefDetails) {
+							await this.props.fetchChefDetails();
+						}
 					}
 				} catch (e) {
 					if (e.name === "Logout") {
@@ -620,7 +626,9 @@ export class RecipesList extends React.Component {
 					);
 					if (reSharePosted) {
 						this.updateAttributeCountInRecipeLists(recipeID, "shares_count", "chef_shared", 1);
-						this.props.fetchChefDetails && this.props.fetchChefDetails();
+						if (this.props.fetchChefDetails) {
+							await this.props.fetchChefDetails();
+						}
 					}
 				} catch (e) {
 					if (e.name === "Logout") {
@@ -864,7 +872,9 @@ export class RecipesList extends React.Component {
 										searchBarZIndex: 1,
 									});
 								}
-								Platform.OS === "ios" && (previousScrollViewOffset = y);
+								if (Platform.OS === "ios") {
+									previousScrollViewOffset = y;
+								}
 							},
 						})}
 						nestedScrollEnabled={true}

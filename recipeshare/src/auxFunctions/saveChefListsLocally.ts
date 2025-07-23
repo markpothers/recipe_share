@@ -1,10 +1,11 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ListChef } from "../centralTypes";
 
-export const saveChefListsLocally = (chefId: number, myId: number, listName: number, chefList: ListChef[]): void => {
+export const saveChefListsLocally = async (chefId: number, myId: number, listName: string, chefList: ListChef[]): Promise<void> => {
 	const date = new Date().getTime();
 	// AsyncStorage.removeItem('localChefLists')
-	AsyncStorage.getItem("localChefLists", (err, res) => {
+	try {
+		const res = await AsyncStorage.getItem("localChefLists");
 		if (res == null) {
 			const newLocalChefsList = {
 				[chefId]: {
@@ -14,11 +15,11 @@ export const saveChefListsLocally = (chefId: number, myId: number, listName: num
 					},
 				},
 			};
-			AsyncStorage.setItem("localChefLists", JSON.stringify(newLocalChefsList));
+			await AsyncStorage.setItem("localChefLists", JSON.stringify(newLocalChefsList));
 		} else {
 			const localChefLists = JSON.parse(res);
 			const listKeys = Object.keys(localChefLists);
-			const oneWeek = 1000 * 60 * 3; //60 * 24 * 7
+			const oneWeek = 1000 * 60 * 60 * 24 * 7;
 
 			// for every chef ...
 			listKeys.forEach((key) => {
@@ -47,37 +48,27 @@ export const saveChefListsLocally = (chefId: number, myId: number, listName: num
 				},
 			};
 
-			AsyncStorage.setItem("localChefLists", JSON.stringify(localChefLists));
+			await AsyncStorage.setItem("localChefLists", JSON.stringify(localChefLists));
 		}
-	});
+	} catch {
+		// Handle errors gracefully - don't throw to avoid crashing the app
+	}
 };
 
-export const loadLocalChefLists = (chefId: number, listName: string): Promise<ListChef[]> => {
-	return new Promise((resolve) => {
-		AsyncStorage.getItem("localChefLists", (err, res) => {
-			// console.log(res)
-			if (res) {
-				const localChefLists = JSON.parse(res);
-				// console.log(Object.keys(localChefLists))
-				// Object.keys(localChefLists).forEach( chef => {
-				// console.log(Object.keys(localChefLists[chef]))
-				// })
-				// console.log(chefId)
-				if (Object.prototype.hasOwnProperty.call(localChefLists, chefId.toString())) {
-					if (Object.prototype.hasOwnProperty.call(localChefLists[chefId.toString()], listName)) {
-						// console.log('found a saved Chef list')
-						// console.log(localChefLists[chefId.toString()])
-						// let ids = localChefLists[chefId.toString()][listName].chefList.map(r => r.id)
-						// console.log(ids)
-						resolve(localChefLists[chefId.toString()][listName].chefList);
-					}
+export const loadLocalChefLists = async (chefId: number, listName: string): Promise<ListChef[]> => {
+	try {
+		const res = await AsyncStorage.getItem("localChefLists");
+		if (res) {
+			const localChefLists = JSON.parse(res);
+			if (Object.prototype.hasOwnProperty.call(localChefLists, chefId.toString())) {
+				if (Object.prototype.hasOwnProperty.call(localChefLists[chefId.toString()], listName)) {
+					return localChefLists[chefId.toString()][listName].chefList;
 				}
-			} else if (err) {
-				//console.log(err)
-			} else {
-				//console.log("loading local Chefs went wrong but didn't error")
 			}
-			resolve([]);
-		});
-	});
+		}
+		return [];
+	} catch {
+		// Handle errors gracefully by returning empty array
+		return [];
+	}
 };
