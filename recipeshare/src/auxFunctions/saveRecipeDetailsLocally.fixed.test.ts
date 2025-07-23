@@ -1,9 +1,8 @@
 import saveRecipeDetailsLocally from "./saveRecipeDetailsLocally";
 import { Recipe } from "../centralTypes";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Mock AsyncStorage
-jest.mock("@react-native-async-storage/async-storage", () => ({
+const mockAsyncStorage = {
 	getItem: jest.fn(),
 	setItem: jest.fn(),
 	removeItem: jest.fn(),
@@ -12,10 +11,9 @@ jest.mock("@react-native-async-storage/async-storage", () => ({
 	multiGet: jest.fn(),
 	multiSet: jest.fn(),
 	multiRemove: jest.fn(),
-}));
+};
 
-const mockGetItem = AsyncStorage.getItem as jest.MockedFunction<typeof AsyncStorage.getItem>;
-const mockSetItem = AsyncStorage.setItem as jest.MockedFunction<typeof AsyncStorage.setItem>;
+jest.mock("@react-native-async-storage/async-storage", () => mockAsyncStorage);
 
 describe("saveRecipeDetailsLocally (Fixed)", () => {
 	const mockCurrentDate = new Date("2023-01-01T00:00:00.000Z").getTime();
@@ -93,7 +91,7 @@ describe("saveRecipeDetailsLocally (Fixed)", () => {
 
 	describe("when no local recipe details exist", () => {
 		beforeEach(() => {
-			mockGetItem.mockResolvedValue(null);
+			mockAsyncStorage.getItem.mockResolvedValue(null);
 		});
 
 		it("creates new recipe list with the provided recipe", async () => {
@@ -101,8 +99,11 @@ describe("saveRecipeDetailsLocally (Fixed)", () => {
 
 			await saveRecipeDetailsLocally(mockRecipeDetails, 456);
 
-			expect(mockGetItem).toHaveBeenCalledWith("localRecipeDetails");
-			expect(mockSetItem).toHaveBeenCalledWith("localRecipeDetails", JSON.stringify([mockRecipeDetails]));
+			expect(mockAsyncStorage.getItem).toHaveBeenCalledWith("localRecipeDetails");
+			expect(mockAsyncStorage.setItem).toHaveBeenCalledWith(
+				"localRecipeDetails",
+				JSON.stringify([mockRecipeDetails])
+			);
 		});
 
 		it("returns a Promise when called", () => {
@@ -120,12 +121,12 @@ describe("saveRecipeDetailsLocally (Fixed)", () => {
 					dateSaved: new Date("2022-12-01T00:00:00.000Z").getTime(),
 				},
 			];
-			mockGetItem.mockResolvedValue(JSON.stringify(existingRecipes));
+			mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(existingRecipes));
 			jest.setSystemTime(mockCurrentDate);
 
 			await saveRecipeDetailsLocally(mockRecipeDetails, 456);
 
-			const setItemCall = mockSetItem.mock.calls[0];
+			const setItemCall = mockAsyncStorage.setItem.mock.calls[0];
 			const savedData = JSON.parse(setItemCall[1]);
 
 			expect(savedData).toHaveLength(2);
@@ -140,12 +141,12 @@ describe("saveRecipeDetailsLocally (Fixed)", () => {
 					dateSaved: new Date("2022-12-01T00:00:00.000Z").getTime(),
 				},
 			];
-			mockGetItem.mockResolvedValue(JSON.stringify(existingRecipes));
+			mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(existingRecipes));
 			jest.setSystemTime(mockCurrentDate);
 
 			await saveRecipeDetailsLocally(mockRecipeDetails, 456);
 
-			const setItemCall = mockSetItem.mock.calls[0];
+			const setItemCall = mockAsyncStorage.setItem.mock.calls[0];
 			const savedData = JSON.parse(setItemCall[1]);
 
 			expect(savedData).toHaveLength(1);
@@ -160,28 +161,26 @@ describe("saveRecipeDetailsLocally (Fixed)", () => {
 
 			const existingRecipes = [
 				{
-					recipe: { id: 998, name: "Old Recipe", chef_id: 999 }, // Not user's recipe, old, should be removed
+					recipe: { id: 998, name: "Old Recipe", chef_id: 999 }, // Not user's recipe
 					dateSaved: expiredTime,
-					likeable: true, // Not liked, so expires after one week
 				},
 				{
-					recipe: { id: 999, name: "Recent Recipe", chef_id: 888 }, // Not user's recipe, recent, should be kept
+					recipe: { id: 999, name: "Recent Recipe", chef_id: 888 }, // Not user's recipe
 					dateSaved: validTime,
-					likeable: true, // Not liked but recent
 				},
 			];
 
-			mockGetItem.mockResolvedValue(JSON.stringify(existingRecipes));
+			mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(existingRecipes));
 			jest.setSystemTime(mockCurrentDate);
 
 			await saveRecipeDetailsLocally(mockRecipeDetails, 456);
 
-			const setItemCall = mockSetItem.mock.calls[0];
+			const setItemCall = mockAsyncStorage.setItem.mock.calls[0];
 			const savedData = JSON.parse(setItemCall[1]);
 
-			// Should not contain the old recipe (998) - expired and not user's recipe
+			// Should not contain the old recipe (998)
 			expect(savedData.find((r: { recipe: { id: number } }) => r.recipe.id === 998)).toBeUndefined();
-			// Should contain the recent recipe (999) - within one week
+			// Should contain the recent recipe (999)
 			expect(savedData.find((r: { recipe: { id: number } }) => r.recipe.id === 999)).toBeDefined();
 			// Should contain the new recipe (123)
 			expect(savedData.find((r: { recipe: { id: number } }) => r.recipe.id === 123)).toBeDefined();
@@ -198,12 +197,12 @@ describe("saveRecipeDetailsLocally (Fixed)", () => {
 				},
 			];
 
-			mockGetItem.mockResolvedValue(JSON.stringify(existingRecipes));
+			mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(existingRecipes));
 			jest.setSystemTime(mockCurrentDate);
 
 			await saveRecipeDetailsLocally(mockRecipeDetails, 456);
 
-			const setItemCall = mockSetItem.mock.calls[0];
+			const setItemCall = mockAsyncStorage.setItem.mock.calls[0];
 			const savedData = JSON.parse(setItemCall[1]);
 
 			// Should keep the old user recipe
@@ -230,12 +229,12 @@ describe("saveRecipeDetailsLocally (Fixed)", () => {
 				},
 			];
 
-			mockGetItem.mockResolvedValue(JSON.stringify(existingRecipes));
+			mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(existingRecipes));
 			jest.setSystemTime(mockCurrentDate);
 
 			await saveRecipeDetailsLocally(mockRecipeDetails, 456);
 
-			const setItemCall = mockSetItem.mock.calls[0];
+			const setItemCall = mockAsyncStorage.setItem.mock.calls[0];
 			const savedData = JSON.parse(setItemCall[1]);
 
 			// Should keep the 2-month-old liked recipe
@@ -247,17 +246,17 @@ describe("saveRecipeDetailsLocally (Fixed)", () => {
 
 	describe("edge cases", () => {
 		it("handles AsyncStorage getItem errors gracefully", async () => {
-			mockGetItem.mockRejectedValue(new Error("Storage error"));
+			mockAsyncStorage.getItem.mockRejectedValue(new Error("Storage error"));
 			jest.setSystemTime(mockCurrentDate);
 
 			// Should not throw
 			await expect(saveRecipeDetailsLocally(mockRecipeDetails, 456)).resolves.toBeUndefined();
 			// Should not call setItem since error occurred
-			expect(mockSetItem).not.toHaveBeenCalled();
+			expect(mockAsyncStorage.setItem).not.toHaveBeenCalled();
 		});
 
 		it("handles malformed JSON in storage gracefully", async () => {
-			mockGetItem.mockResolvedValue("invalid json");
+			mockAsyncStorage.getItem.mockResolvedValue("invalid json");
 			jest.setSystemTime(mockCurrentDate);
 
 			// Should not throw and should handle gracefully
@@ -266,7 +265,7 @@ describe("saveRecipeDetailsLocally (Fixed)", () => {
 
 		it("sets dateSaved to current time", async () => {
 			const testTime = new Date("2023-06-15T10:30:00.000Z").getTime();
-			mockGetItem.mockResolvedValue(null);
+			mockAsyncStorage.getItem.mockResolvedValue(null);
 			jest.setSystemTime(testTime);
 
 			// Create a copy without dateSaved to test that it gets set
@@ -275,7 +274,7 @@ describe("saveRecipeDetailsLocally (Fixed)", () => {
 
 			await saveRecipeDetailsLocally(recipeWithoutDate as Recipe & { dateSaved: number }, 456);
 
-			const setItemCall = mockSetItem.mock.calls[0];
+			const setItemCall = mockAsyncStorage.setItem.mock.calls[0];
 			const savedData = JSON.parse(setItemCall[1]);
 
 			expect(savedData[0].dateSaved).toBe(testTime);
@@ -301,12 +300,12 @@ describe("saveRecipeDetailsLocally (Fixed)", () => {
 				},
 			];
 
-			mockGetItem.mockResolvedValue(JSON.stringify(existingRecipes));
+			mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(existingRecipes));
 			jest.setSystemTime(mockCurrentDate);
 
 			await saveRecipeDetailsLocally(mockRecipeDetails, 456);
 
-			const setItemCall = mockSetItem.mock.calls[0];
+			const setItemCall = mockAsyncStorage.setItem.mock.calls[0];
 			const savedData = JSON.parse(setItemCall[1]);
 
 			// Both should be removed as they're past their expiration

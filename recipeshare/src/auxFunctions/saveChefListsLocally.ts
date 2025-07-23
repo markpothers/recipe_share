@@ -1,7 +1,12 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ListChef } from "../centralTypes";
 
-export const saveChefListsLocally = async (chefId: number, myId: number, listName: string, chefList: ListChef[]): Promise<void> => {
+export const saveChefListsLocally = async (
+	chefId: number,
+	myId: number,
+	listName: string,
+	chefList: ListChef[]
+): Promise<void> => {
 	const date = new Date().getTime();
 	// AsyncStorage.removeItem('localChefLists')
 	try {

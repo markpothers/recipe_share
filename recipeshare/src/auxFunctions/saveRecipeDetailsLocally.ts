@@ -1,14 +1,17 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Recipe } from "../centralTypes";
 
-const saveRecipeDetailsLocally = async (recipeDetails: Recipe & { dateSaved: number }, userId: number): Promise<void> => {
+const saveRecipeDetailsLocally = async (
+	recipeDetails: Recipe & { dateSaved: number },
+	userId: number
+): Promise<void> => {
 	try {
 		const res = await AsyncStorage.getItem("localRecipeDetails");
 		const date = new Date().getTime();
 		recipeDetails.dateSaved = date;
-		
+
 		let newRecipesList: (Recipe & { dateSaved: number })[];
-		
+
 		if (res != null) {
 			const localRecipeDetails = JSON.parse(res);
 			newRecipesList = localRecipeDetails.filter(
@@ -36,7 +39,7 @@ const saveRecipeDetailsLocally = async (recipeDetails: Recipe & { dateSaved: num
 				return false;
 			}
 		});
-		
+
 		await AsyncStorage.setItem("localRecipeDetails", JSON.stringify(newRecipesList));
 	} catch {
 		// Handle errors gracefully - silent fail for local storage

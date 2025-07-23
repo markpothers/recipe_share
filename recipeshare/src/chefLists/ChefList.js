@@ -174,7 +174,12 @@ export default connect(
 				);
 				const combinedChefs = [...this.getChefList(), ...additionalChefs];
 				this.props.updateSingleChefList(this.props.route.key, combinedChefs);
-				await saveChefListsLocally(this.getQueryChefId(), this.props.loggedInChef.id, this.getChefListName(), combinedChefs);
+				await saveChefListsLocally(
+					this.getQueryChefId(),
+					this.props.loggedInChef.id,
+					this.getChefListName(),
+					combinedChefs
+				);
 			} catch (e) {
 				if (e.name === "Logout") {
 					this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });

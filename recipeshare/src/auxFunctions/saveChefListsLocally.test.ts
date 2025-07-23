@@ -60,10 +60,10 @@ describe("saveChefListsLocally", () => {
 
 			expect(mockGetItem).toHaveBeenCalledWith("localChefLists");
 			expect(mockSetItem).toHaveBeenCalled();
-			
+
 			const setItemCall = mockSetItem.mock.calls[0];
 			const savedData = JSON.parse(setItemCall[1]);
-			
+
 			expect(savedData).toHaveProperty("123");
 			expect(savedData["123"]).toHaveProperty("followers");
 			expect(savedData["123"]["followers"].chefList).toEqual(mockChefList);
@@ -72,22 +72,22 @@ describe("saveChefListsLocally", () => {
 
 		it("returns a Promise when called", () => {
 			mockGetItem.mockResolvedValue(null);
-			
+
 			const result = saveChefListsLocally(123, 456, "followers", mockChefList);
-			
+
 			expect(result).toBeInstanceOf(Promise);
 		});
 
 		it("adds chef list to existing storage structure", async () => {
 			const existingData = {
 				"456": {
-					"following": {
+					following: {
 						chefList: [{ id: 999, username: "existingchef" }],
 						dateSaved: mockCurrentDate - 1000,
 					},
 				},
 			};
-			
+
 			mockGetItem.mockResolvedValue(JSON.stringify(existingData));
 			jest.setSystemTime(mockCurrentDate);
 
@@ -95,7 +95,7 @@ describe("saveChefListsLocally", () => {
 
 			const setItemCall = mockSetItem.mock.calls[0];
 			const savedData = JSON.parse(setItemCall[1]);
-			
+
 			// Should preserve existing data
 			expect(savedData["456"]["following"]).toBeDefined();
 			// Should add new data
@@ -106,13 +106,13 @@ describe("saveChefListsLocally", () => {
 		it("updates existing chef list when same parameters provided", async () => {
 			const existingData = {
 				"123": {
-					"followers": {
+					followers: {
 						chefList: [{ id: 999, username: "oldchef" }],
 						dateSaved: mockCurrentDate - 1000,
 					},
 				},
 			};
-			
+
 			mockGetItem.mockResolvedValue(JSON.stringify(existingData));
 			jest.setSystemTime(mockCurrentDate);
 
@@ -120,35 +120,37 @@ describe("saveChefListsLocally", () => {
 
 			const setItemCall = mockSetItem.mock.calls[0];
 			const savedData = JSON.parse(setItemCall[1]);
-			
+
 			expect(savedData["123"]["followers"].chefList).toEqual(mockChefList);
 			expect(savedData["123"]["followers"].dateSaved).toBe(mockCurrentDate);
 		});
 
 		it("removes chef lists older than 7 days (but preserves myId lists)", async () => {
 			const currentTime = mockCurrentDate;
-			const expiredTime = currentTime - (1000 * 60 * 60 * 24 * 8); // 8 days ago (expired)
-			const validTime = currentTime - (1000 * 60 * 60 * 24 * 6); // 6 days ago (valid)
+			const expiredTime = currentTime - 1000 * 60 * 60 * 24 * 8; // 8 days ago (expired)
+			const validTime = currentTime - 1000 * 60 * 60 * 24 * 6; // 6 days ago (valid)
 
 			const existingData = {
-				"999": { // Different chef, not myId (456), should be cleaned up
-					"followers": {
+				"999": {
+					// Different chef, not myId (456), should be cleaned up
+					followers: {
 						chefList: [{ id: 998, username: "expiredchef" }],
 						dateSaved: expiredTime,
 					},
-					"following": {
+					following: {
 						chefList: [{ id: 999, username: "validchef" }],
 						dateSaved: validTime,
 					},
 				},
-				"456": { // This is myId, should never expire
-					"followers": {
+				"456": {
+					// This is myId, should never expire
+					followers: {
 						chefList: [{ id: 777, username: "my-old-chef" }],
 						dateSaved: expiredTime, // Even though old, should be preserved
 					},
 				},
 			};
-			
+
 			mockGetItem.mockResolvedValue(JSON.stringify(existingData));
 			jest.setSystemTime(mockCurrentDate);
 
@@ -156,7 +158,7 @@ describe("saveChefListsLocally", () => {
 
 			const setItemCall = mockSetItem.mock.calls[0];
 			const savedData = JSON.parse(setItemCall[1]);
-			
+
 			// Should keep chef 999 but only the valid "following" list (expired "followers" should be removed)
 			expect(savedData["999"]).toBeDefined();
 			expect(savedData["999"]["followers"]).toBeUndefined(); // Expired list removed
@@ -173,7 +175,7 @@ describe("saveChefListsLocally", () => {
 
 			// Should not throw but also not save due to JSON parse error
 			await expect(saveChefListsLocally(123, 456, "followers", mockChefList)).resolves.toBeUndefined();
-			
+
 			// Should not call setItem since JSON parsing failed
 			expect(mockSetItem).not.toHaveBeenCalled();
 		});
@@ -196,7 +198,7 @@ describe("saveChefListsLocally", () => {
 
 			const setItemCall = mockSetItem.mock.calls[0];
 			const savedData = JSON.parse(setItemCall[1]);
-			
+
 			expect(savedData["123"]["followers"].dateSaved).toBe(testTime);
 		});
 	});
@@ -213,16 +215,16 @@ describe("saveChefListsLocally", () => {
 
 		it("returns a Promise when called", () => {
 			mockGetItem.mockResolvedValue(null);
-			
+
 			const result = loadLocalChefLists(123, "followers");
-			
+
 			expect(result).toBeInstanceOf(Promise);
 		});
 
 		it("returns chef list when data exists", async () => {
 			const storedData = {
 				"123": {
-					"followers": {
+					followers: {
 						chefList: mockChefList,
 						dateSaved: mockCurrentDate,
 					},
@@ -239,7 +241,7 @@ describe("saveChefListsLocally", () => {
 		it("returns empty array when specific chef does not exist", async () => {
 			const storedData = {
 				"999": {
-					"followers": {
+					followers: {
 						chefList: mockChefList,
 						dateSaved: mockCurrentDate,
 					},
@@ -256,7 +258,7 @@ describe("saveChefListsLocally", () => {
 		it("returns empty array when specific list name does not exist", async () => {
 			const storedData = {
 				"123": {
-					"following": {
+					following: {
 						chefList: mockChefList,
 						dateSaved: mockCurrentDate,
 					},
@@ -315,11 +317,11 @@ describe("saveChefListsLocally", () => {
 
 			// Save multiple lists
 			await saveChefListsLocally(123, 456, "followers", mockChefList);
-			
+
 			// Update mock to return the first saved data
 			const firstSave = mockSetItem.mock.calls[0][1];
 			mockGetItem.mockResolvedValue(firstSave);
-			
+
 			await saveChefListsLocally(123, 456, "following", chefList2);
 
 			// Get final saved data
@@ -335,7 +337,7 @@ describe("saveChefListsLocally", () => {
 			// This test verifies the critical timeout fix (3 minutes → 7 days)
 			const oneWeek = 1000 * 60 * 60 * 24 * 7;
 			const threeMinutes = 1000 * 60 * 3;
-			
+
 			// The bug was using 3 minutes instead of 7 days
 			expect(oneWeek).toBe(604800000); // 7 days in milliseconds
 			expect(threeMinutes).toBe(180000); // 3 minutes in milliseconds
