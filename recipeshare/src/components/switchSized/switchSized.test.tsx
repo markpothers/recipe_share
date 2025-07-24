@@ -116,4 +116,121 @@ describe("SwitchSized", () => {
 		expect(mockChangeFunction).toHaveBeenCalled();
 		expect(mockChangeFunction).toHaveBeenCalledTimes(2);
 	});
+
+	test("can be rendered as disabled on Android with opacity styling", async () => {
+		Platform.OS = "android";
+		setMockDeviceType(1);
+		const { toJSON } = render(
+			<Provider store={store}>
+				<SwitchSized value={true} onValueChange={mockChangeFunction} disabled={true} />
+			</Provider>
+		);
+		expect(toJSON()).toMatchSnapshot();
+	});
+
+	test("can be rendered as disabled on iOS without opacity styling", async () => {
+		Platform.OS = "ios";
+		setMockDeviceType(1);
+		const { toJSON } = render(
+			<Provider store={store}>
+				<SwitchSized value={true} onValueChange={mockChangeFunction} disabled={true} />
+			</Provider>
+		);
+		expect(toJSON()).toMatchSnapshot();
+	});
+
+	test("can be rendered with custom trackColor", async () => {
+		Platform.OS = "ios";
+		setMockDeviceType(1);
+		const customTrackColor = { true: "#ff0000", false: "#00ff00" };
+		const { toJSON } = render(
+			<Provider store={store}>
+				<SwitchSized value={true} onValueChange={mockChangeFunction} trackColor={customTrackColor} />
+			</Provider>
+		);
+		expect(toJSON()).toMatchSnapshot();
+	});
+
+	test("can be rendered with custom thumbColor", async () => {
+		Platform.OS = "ios";
+		setMockDeviceType(1);
+		const customThumbColor = "#0000ff";
+		const { toJSON } = render(
+			<Provider store={store}>
+				<SwitchSized value={true} onValueChange={mockChangeFunction} thumbColor={customThumbColor} />
+			</Provider>
+		);
+		expect(toJSON()).toMatchSnapshot();
+	});
+
+	test("can be rendered with accessibility label", async () => {
+		Platform.OS = "ios";
+		setMockDeviceType(1);
+		const { toJSON } = render(
+			<Provider store={store}>
+				<SwitchSized
+					value={true}
+					onValueChange={mockChangeFunction}
+					accessibilityLabel="Test switch for toggling feature"
+					testID="accessibleSwitch"
+				/>
+			</Provider>
+		);
+		expect(toJSON()).toMatchSnapshot();
+	});
+
+	test("renders default colors when no custom colors provided on iOS", async () => {
+		Platform.OS = "ios";
+		setMockDeviceType(1);
+		const { toJSON } = render(
+			<Provider store={store}>
+				<SwitchSized value={false} onValueChange={mockChangeFunction} />
+			</Provider>
+		);
+		expect(toJSON()).toMatchSnapshot();
+	});
+
+	test("renders default colors when no custom colors provided on Android", async () => {
+		Platform.OS = "android";
+		setMockDeviceType(1);
+		const { toJSON } = render(
+			<Provider store={store}>
+				<SwitchSized value={false} onValueChange={mockChangeFunction} />
+			</Provider>
+		);
+		expect(toJSON()).toMatchSnapshot();
+	});
+
+	test("can be rendered as enabled on Android without opacity styling", async () => {
+		Platform.OS = "android";
+		setMockDeviceType(1);
+		const { toJSON } = render(
+			<Provider store={store}>
+				<SwitchSized value={true} onValueChange={mockChangeFunction} disabled={false} />
+			</Provider>
+		);
+		expect(toJSON()).toMatchSnapshot();
+	});
+
+	test("can be rendered on iOS with deviceType != 1 (no scaling)", async () => {
+		Platform.OS = "ios";
+		setMockDeviceType(3); // Not iPhone (deviceType 1) or iPad (deviceType 2)
+		const { toJSON } = render(
+			<Provider store={store}>
+				<SwitchSized value={true} onValueChange={mockChangeFunction} />
+			</Provider>
+		);
+		expect(toJSON()).toMatchSnapshot();
+	});
+
+	test("can be rendered on Android with deviceType == 1 (no iOS scaling)", async () => {
+		Platform.OS = "android";
+		setMockDeviceType(1); // deviceType 1 but not iOS, so no scaling
+		const { toJSON } = render(
+			<Provider store={store}>
+				<SwitchSized value={true} onValueChange={mockChangeFunction} />
+			</Provider>
+		);
+		expect(toJSON()).toMatchSnapshot();
+	});
 });

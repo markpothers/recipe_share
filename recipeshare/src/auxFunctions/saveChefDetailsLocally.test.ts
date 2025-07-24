@@ -50,30 +50,32 @@ describe("saveChefDetailsLocally", () => {
 
 	describe("when no local chef details exist", () => {
 		beforeEach(() => {
-			mockAsyncStorage.getItem.mockImplementation((key, callback) => {
-				callback?.(null, null);
-				return Promise.resolve(null);
-			});
+			mockAsyncStorage.getItem.mockResolvedValue(null);
 		});
 
-		it("creates new chef list with the provided chef", () => {
+		it("creates new chef list with the provided chef", async () => {
 			jest.setSystemTime(mockCurrentDate);
 
-			saveChefDetailsLocally(mockChef, 456);
+			await saveChefDetailsLocally(mockChef, 456);
 
-			expect(mockAsyncStorage.getItem).toHaveBeenCalledWith("localChefDetails", expect.any(Function));
+			expect(mockAsyncStorage.getItem).toHaveBeenCalledWith("localChefDetails");
 			expect(mockAsyncStorage.setItem).toHaveBeenCalledWith(
 				"localChefDetails",
 				JSON.stringify([mockChef]) // No dateSaved added when no existing data
 			);
 		});
 
-		it("does not await the AsyncStorage operations", () => {
+		it("returns a promise and uses async/await pattern", async () => {
 			const setItemSpy = jest.spyOn(mockAsyncStorage, "setItem");
+			setItemSpy.mockResolvedValue(undefined);
 
-			saveChefDetailsLocally(mockChef, 456);
+			const result = saveChefDetailsLocally(mockChef, 456);
 
-			// Verify the function returns void immediately
+			// Should return a Promise
+			expect(result).toBeInstanceOf(Promise);
+
+			await result;
+
 			expect(setItemSpy).toHaveBeenCalled();
 		});
 	});
@@ -90,16 +92,13 @@ describe("saveChefDetailsLocally", () => {
 		};
 
 		beforeEach(() => {
-			mockAsyncStorage.getItem.mockImplementation((key, callback) => {
-				callback?.(null, JSON.stringify([existingChef1, existingChef2]));
-				return Promise.resolve(JSON.stringify([existingChef1, existingChef2]));
-			});
+			mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify([existingChef1, existingChef2]));
 		});
 
-		it("adds new chef to existing list", () => {
+		it("adds new chef to existing list", async () => {
 			jest.setSystemTime(mockCurrentDate);
 
-			saveChefDetailsLocally(mockChef, 456);
+			await saveChefDetailsLocally(mockChef, 456);
 
 			const expectedChefsList = [
 				existingChef1, // kept (within one week)
@@ -112,10 +111,10 @@ describe("saveChefDetailsLocally", () => {
 			);
 		});
 
-		it("removes expired chef details (older than one week)", () => {
+		it("removes expired chef details (older than one week)", async () => {
 			jest.setSystemTime(mockCurrentDate);
 
-			saveChefDetailsLocally(mockChef, 456);
+			await saveChefDetailsLocally(mockChef, 456);
 
 			const setItemCall = mockAsyncStorage.setItem.mock.calls[0];
 			const savedChefs = JSON.parse(setItemCall[1]) as StoredChef[];
@@ -126,20 +125,17 @@ describe("saveChefDetailsLocally", () => {
 			expect(savedChefs.find((chef: StoredChef) => chef.chef.id === 111)).toBeDefined();
 		});
 
-		it("keeps user's own chef details regardless of age", () => {
+		it("keeps user's own chef details regardless of age", async () => {
 			const userChef = {
 				chef: { id: 456, username: "currentuser" },
 				dateSaved: mockCurrentDate - 1000 * 60 * 60 * 24 * 30, // 30 days ago
 			};
 
-			mockAsyncStorage.getItem.mockImplementation((key, callback) => {
-				callback?.(null, JSON.stringify([userChef, existingChef2]));
-				return Promise.resolve(JSON.stringify([userChef, existingChef2]));
-			});
+			mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify([userChef, existingChef2]));
 
 			jest.setSystemTime(mockCurrentDate);
 
-			saveChefDetailsLocally(mockChef, 456); // userId matches userChef.chef.id
+			await saveChefDetailsLocally(mockChef, 456); // userId matches userChef.chef.id
 
 			const setItemCall = mockAsyncStorage.setItem.mock.calls[0];
 			const savedChefs = JSON.parse(setItemCall[1]) as StoredChef[];
@@ -148,20 +144,17 @@ describe("saveChefDetailsLocally", () => {
 			expect(savedChefs.find((chef: StoredChef) => chef.chef.id === 456)).toBeDefined();
 		});
 
-		it("updates existing chef details when chef already exists", () => {
+		it("updates existing chef details when chef already exists", async () => {
 			const existingMatchingChef = {
 				chef: { id: 123, username: "oldusername" },
 				dateSaved: mockCurrentDate - 1000 * 60 * 60 * 24 * 2,
 			};
 
-			mockAsyncStorage.getItem.mockImplementation((key, callback) => {
-				callback?.(null, JSON.stringify([existingChef1, existingMatchingChef]));
-				return Promise.resolve(JSON.stringify([existingChef1, existingMatchingChef]));
-			});
+			mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify([existingChef1, existingMatchingChef]));
 
 			jest.setSystemTime(mockCurrentDate);
 
-			saveChefDetailsLocally(mockChef, 456);
+			await saveChefDetailsLocally(mockChef, 456);
 
 			const setItemCall = mockAsyncStorage.setItem.mock.calls[0];
 			const savedChefs = JSON.parse(setItemCall[1]) as StoredChef[];
@@ -175,46 +168,37 @@ describe("saveChefDetailsLocally", () => {
 	});
 
 	describe("edge cases", () => {
-		it("handles AsyncStorage getItem errors by treating them as no data", () => {
-			mockAsyncStorage.getItem.mockImplementation((key, callback) => {
-				callback?.(new Error("Storage error"), null);
-				return Promise.resolve(null);
-			});
+		it("handles AsyncStorage getItem errors by treating them as no data", async () => {
+			mockAsyncStorage.getItem.mockRejectedValue(new Error("Storage error"));
 
 			jest.setSystemTime(mockCurrentDate);
 
-			// The function doesn't check for errors, so it treats null result as "no data"
-			saveChefDetailsLocally(mockChef, 456);
+			await saveChefDetailsLocally(mockChef, 456);
 
-			// Should create new chef list since res is null
-			expect(mockAsyncStorage.setItem).toHaveBeenCalledWith("localChefDetails", JSON.stringify([mockChef]));
+			// Should create new chef list since error results in fallback
+			expect(mockAsyncStorage.setItem).toHaveBeenCalledWith(
+				"localChefDetails",
+				JSON.stringify([{ ...mockChef, dateSaved: mockCurrentDate }])
+			);
 		});
 
-		it("handles malformed JSON in storage", () => {
-			mockAsyncStorage.getItem.mockImplementation((key, callback) => {
-				callback?.(null, "invalid json {");
-				return Promise.resolve("invalid json {");
-			});
+		it("handles malformed JSON in storage", async () => {
+			mockAsyncStorage.getItem.mockResolvedValue("invalid json {");
 
-			// This will actually throw when trying to JSON.parse
-			expect(() => {
-				saveChefDetailsLocally(mockChef, 456);
-			}).toThrow();
+			// This will throw when trying to JSON.parse
+			await expect(saveChefDetailsLocally(mockChef, 456)).rejects.toThrow();
 		});
 
-		it("handles chef details with undefined dateSaved when existing data exists", () => {
+		it("handles chef details with undefined dateSaved when existing data exists", async () => {
 			// Set up existing data so the function goes to the main branch
-			mockAsyncStorage.getItem.mockImplementation((key, callback) => {
-				callback?.(null, JSON.stringify([]));
-				return Promise.resolve(JSON.stringify([]));
-			});
+			mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify([]));
 
 			const chefWithoutDate = { ...mockChef };
 			delete (chefWithoutDate as StoredChef).dateSaved;
 
 			jest.setSystemTime(mockCurrentDate);
 
-			saveChefDetailsLocally(chefWithoutDate, 456);
+			await saveChefDetailsLocally(chefWithoutDate, 456);
 
 			const setItemCall = mockAsyncStorage.setItem.mock.calls[0];
 			const savedChefs = JSON.parse(setItemCall[1]) as StoredChef[];
@@ -222,23 +206,18 @@ describe("saveChefDetailsLocally", () => {
 			expect(savedChefs[0].dateSaved).toBe(mockCurrentDate);
 		});
 
-		it("throws when trying to parse empty storage result", () => {
-			mockAsyncStorage.getItem.mockImplementation((key, callback) => {
-				callback?.(null, "");
-				return Promise.resolve("");
-			});
+		it("throws when trying to parse empty storage result", async () => {
+			mockAsyncStorage.getItem.mockResolvedValue("");
 
 			jest.setSystemTime(mockCurrentDate);
 
 			// Empty string is not null, so function tries to JSON.parse("") which throws
-			expect(() => {
-				saveChefDetailsLocally(mockChef, 456);
-			}).toThrow("Unexpected end of JSON input");
+			await expect(saveChefDetailsLocally(mockChef, 456)).rejects.toThrow("Unexpected end of JSON input");
 		});
 	});
 
 	describe("date filtering logic", () => {
-		it("correctly calculates one week threshold", () => {
+		it("correctly calculates one week threshold", async () => {
 			const oneWeek = 1000 * 60 * 60 * 24 * 7;
 			const recentChef = {
 				chef: { id: 111, username: "recent" },
@@ -249,14 +228,11 @@ describe("saveChefDetailsLocally", () => {
 				dateSaved: mockCurrentDate - oneWeek - 1000, // Just over one week
 			};
 
-			mockAsyncStorage.getItem.mockImplementation((key, callback) => {
-				callback?.(null, JSON.stringify([recentChef, oldChef]));
-				return Promise.resolve(JSON.stringify([recentChef, oldChef]));
-			});
+			mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify([recentChef, oldChef]));
 
 			jest.setSystemTime(mockCurrentDate);
 
-			saveChefDetailsLocally(mockChef, 456);
+			await saveChefDetailsLocally(mockChef, 456);
 
 			const setItemCall = mockAsyncStorage.setItem.mock.calls[0];
 			const savedChefs = JSON.parse(setItemCall[1]) as StoredChef[];

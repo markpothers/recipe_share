@@ -89,7 +89,7 @@ describe("OfflineMessage", () => {
 		);
 		expect(toJSON()).toMatchSnapshot();
 		expect(getByText("Network error occurred")).toBeTruthy();
-		expect(getByText('"Connection timeout"')).toBeTruthy(); // JSON.stringify adds quotes
+		expect(getByText("\"Connection timeout\"")).toBeTruthy(); // JSON.stringify adds quotes
 	});
 
 	test("renders with diagnostics when diagnostics is an object", () => {

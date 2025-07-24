@@ -1,5 +1,348 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`TextPopup renders with children components 1`] = `
+<Modal
+  animationType="fade"
+  hardwareAccelerated={false}
+  transparent={true}
+  visible={true}
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "backgroundColor": "#fff59b",
+          "borderColor": "#104e01",
+          "borderRadius": 11.25,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "maxHeight": 1133.8999999999999,
+          "width": 600,
+        }
+      }
+    >
+      <View
+        style={
+          {
+            "justifyContent": "center",
+            "paddingBottom": 13.34,
+            "paddingTop": 13.34,
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={1.5}
+          style={
+            {
+              "color": "#104e01",
+              "fontSize": 33.65552620959067,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          Privacy Policy
+        </Text>
+      </View>
+      <View
+        style={
+          [
+            {
+              "backgroundColor": "white",
+              "borderColor": "#104e01",
+              "borderRadius": 11.25,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "overflow": "hidden",
+              "width": 573.32,
+            },
+            {
+              "maxHeight": 933.8,
+            },
+          ]
+        }
+      >
+        <RCTScrollView>
+          <View>
+            <Text
+              maxFontSizeMultiplier={2}
+              style={
+                {
+                  "margin": "2%",
+                }
+              }
+            >
+              This is privacy policy text
+            </Text>
+            <View>
+              <Text>
+                Additional Content
+              </Text>
+            </View>
+          </View>
+        </RCTScrollView>
+      </View>
+      <View
+        style={
+          {
+            "borderRadius": 11.25,
+            "flexDirection": "row",
+            "justifyContent": "flex-end",
+            "marginTop": 13.34,
+            "width": 573.32,
+          }
+        }
+      >
+        <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            {
+              "alignItems": "center",
+              "backgroundColor": "#104e01",
+              "borderRadius": 11.25,
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginBottom": 13.34,
+              "minHeight": 80.03999999999999,
+              "minWidth": "40%",
+              "opacity": 1,
+            }
+          }
+        >
+          <Icon
+            name="check"
+            size={53.36}
+            style={
+              {
+                "color": "#fff59b",
+              }
+            }
+          />
+          <Text
+            maxFontSizeMultiplier={2}
+            style={
+              {
+                "color": "#fff59b",
+                "fontSize": 14,
+                "fontWeight": "bold",
+                "marginLeft": "5%",
+                "marginRight": "5%",
+                "textAlign": "center",
+              }
+            }
+          >
+            Close
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</Modal>
+`;
+
+exports[`TextPopup renders with different title and text content 1`] = `
+<Modal
+  animationType="fade"
+  hardwareAccelerated={false}
+  transparent={true}
+  visible={true}
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "backgroundColor": "#fff59b",
+          "borderColor": "#104e01",
+          "borderRadius": 11.25,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "maxHeight": 1133.8999999999999,
+          "width": 600,
+        }
+      }
+    >
+      <View
+        style={
+          {
+            "justifyContent": "center",
+            "paddingBottom": 13.34,
+            "paddingTop": 13.34,
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={1.5}
+          style={
+            {
+              "color": "#104e01",
+              "fontSize": 33.65552620959067,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          Custom Dialog Title
+        </Text>
+      </View>
+      <View
+        style={
+          [
+            {
+              "backgroundColor": "white",
+              "borderColor": "#104e01",
+              "borderRadius": 11.25,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "overflow": "hidden",
+              "width": 573.32,
+            },
+            {
+              "maxHeight": 933.8,
+            },
+          ]
+        }
+      >
+        <RCTScrollView>
+          <View>
+            <Text
+              maxFontSizeMultiplier={2}
+              style={
+                {
+                  "margin": "2%",
+                }
+              }
+            >
+              This is some custom text content for testing purposes.
+            </Text>
+          </View>
+        </RCTScrollView>
+      </View>
+      <View
+        style={
+          {
+            "borderRadius": 11.25,
+            "flexDirection": "row",
+            "justifyContent": "flex-end",
+            "marginTop": 13.34,
+            "width": 573.32,
+          }
+        }
+      >
+        <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            {
+              "alignItems": "center",
+              "backgroundColor": "#104e01",
+              "borderRadius": 11.25,
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginBottom": 13.34,
+              "minHeight": 80.03999999999999,
+              "minWidth": "40%",
+              "opacity": 1,
+            }
+          }
+        >
+          <Icon
+            name="check"
+            size={53.36}
+            style={
+              {
+                "color": "#fff59b",
+              }
+            }
+          />
+          <Text
+            maxFontSizeMultiplier={2}
+            style={
+              {
+                "color": "#fff59b",
+                "fontSize": 14,
+                "fontWeight": "bold",
+                "marginLeft": "5%",
+                "marginRight": "5%",
+                "textAlign": "center",
+              }
+            }
+          >
+            Close
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</Modal>
+`;
+
 exports[`TextPopup renders with some mock props 1`] = `
 <Modal
   animationType="fade"
@@ -209,6 +552,175 @@ Contact Us
 ----------
 
 If you have any questions about these Terms, please contact us at:
+            </Text>
+          </View>
+        </RCTScrollView>
+      </View>
+      <View
+        style={
+          {
+            "borderRadius": 11.25,
+            "flexDirection": "row",
+            "justifyContent": "flex-end",
+            "marginTop": 13.34,
+            "width": 573.32,
+          }
+        }
+      >
+        <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            {
+              "alignItems": "center",
+              "backgroundColor": "#104e01",
+              "borderRadius": 11.25,
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginBottom": 13.34,
+              "minHeight": 80.03999999999999,
+              "minWidth": "40%",
+              "opacity": 1,
+            }
+          }
+        >
+          <Icon
+            name="check"
+            size={53.36}
+            style={
+              {
+                "color": "#fff59b",
+              }
+            }
+          />
+          <Text
+            maxFontSizeMultiplier={2}
+            style={
+              {
+                "color": "#fff59b",
+                "fontSize": 14,
+                "fontWeight": "bold",
+                "marginLeft": "5%",
+                "marginRight": "5%",
+                "textAlign": "center",
+              }
+            }
+          >
+            Close
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</Modal>
+`;
+
+exports[`TextPopup renders without children (children prop not provided) 1`] = `
+<Modal
+  animationType="fade"
+  hardwareAccelerated={false}
+  transparent={true}
+  visible={true}
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "backgroundColor": "#fff59b",
+          "borderColor": "#104e01",
+          "borderRadius": 11.25,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "maxHeight": 1133.8999999999999,
+          "width": 600,
+        }
+      }
+    >
+      <View
+        style={
+          {
+            "justifyContent": "center",
+            "paddingBottom": 13.34,
+            "paddingTop": 13.34,
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={1.5}
+          style={
+            {
+              "color": "#104e01",
+              "fontSize": 33.65552620959067,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          No Children Test
+        </Text>
+      </View>
+      <View
+        style={
+          [
+            {
+              "backgroundColor": "white",
+              "borderColor": "#104e01",
+              "borderRadius": 11.25,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "overflow": "hidden",
+              "width": 573.32,
+            },
+            {
+              "maxHeight": 933.8,
+            },
+          ]
+        }
+      >
+        <RCTScrollView>
+          <View>
+            <Text
+              maxFontSizeMultiplier={2}
+              style={
+                {
+                  "margin": "2%",
+                }
+              }
+            >
+              Testing without children prop
             </Text>
           </View>
         </RCTScrollView>

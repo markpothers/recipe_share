@@ -1,38 +1,48 @@
-import AsyncStorage from "@react-native-async-storage/async-storage"
-import { Chef } from "../centralTypes"
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Chef } from "../centralTypes";
 
-const saveChefDetailsLocally = (chefDetails: Chef & { dateSaved?: number }, userId: number): void => {
-	AsyncStorage.getItem("localChefDetails", (err, res) => {
+const saveChefDetailsLocally = async (chefDetails: Chef & { dateSaved?: number }, userId: number): Promise<void> => {
+	try {
+		const res = await AsyncStorage.getItem("localChefDetails");
 		if (res != null) {
-			const localChefDetails = JSON.parse(res)
-			let newChefsList = localChefDetails.filter((localChef) => localChef.chef.id !== chefDetails.chef.id)
+			const localChefDetails = JSON.parse(res);
+			let newChefsList = localChefDetails.filter((localChef) => localChef.chef.id !== chefDetails.chef.id);
 
-			const date = new Date().getTime()
-			chefDetails.dateSaved = date
-			newChefsList.push(chefDetails)
+			const date = new Date().getTime();
+			chefDetails.dateSaved = date;
+			newChefsList.push(chefDetails);
 
 			//get rid of recipes that have been saved too long
-			const oneWeek = 1000 * 60 * 60 * 24 * 7
+			const oneWeek = 1000 * 60 * 60 * 24 * 7;
 			newChefsList = newChefsList.filter((listChef) => {
 				if (listChef.chef.id == userId) {
 					//keep my own details
 					// console.log('chef is me')
-					return listChef
+					return listChef;
 				} else if (listChef.dateSaved >= date - oneWeek) {
 					//keep viewed recipes for one month
 					// console.log('recipe is young')
-					return listChef
+					return listChef;
 				} else {
-					return
+					return;
 				}
-			})
+			});
 
-			AsyncStorage.setItem("localChefDetails", JSON.stringify(newChefsList))
+			await AsyncStorage.setItem("localChefDetails", JSON.stringify(newChefsList));
 		} else {
-			const newChefsList = [chefDetails]
-			AsyncStorage.setItem("localChefDetails", JSON.stringify(newChefsList))
+			const newChefsList = [chefDetails];
+			await AsyncStorage.setItem("localChefDetails", JSON.stringify(newChefsList));
 		}
-	})
-}
+	} catch (error) {
+		// Handle getItem errors by creating new list (fallback behavior)
+		if (error instanceof SyntaxError) {
+			// Re-throw JSON parsing errors
+			throw error;
+		}
+		// For AsyncStorage errors, create a new list as fallback
+		const newChefsList = [chefDetails];
+		await AsyncStorage.setItem("localChefDetails", JSON.stringify(newChefsList));
+	}
+};
 
-export default saveChefDetailsLocally
+export default saveChefDetailsLocally;

@@ -1,5 +1,118 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`SpinachAppContainer renders children correctly 1`] = `
+<RCTSafeAreaView
+  style={
+    {
+      "borderColor": "blue",
+      "borderWidth": 0,
+      "flex": 1,
+    }
+  }
+>
+  <View
+    onLayout={[Function]}
+    style={
+      [
+        {
+          "alignItems": "center",
+          "borderColor": "red",
+          "borderWidth": 0,
+          "flex": 1,
+        },
+        {
+          "paddingBottom": 0,
+        },
+      ]
+    }
+  >
+    <Image
+      resizeMode="cover"
+      source={
+        {
+          "testUri": "../../../assets/images/spinach.jpg",
+        }
+      }
+      style={
+        {
+          "borderColor": "black",
+          "borderWidth": 0,
+          "height": 1334,
+          "position": "absolute",
+          "width": 750,
+        }
+      }
+    />
+    <RCTScrollView
+      keyboardShouldPersistTaps="always"
+      nestedScrollEnabled={true}
+      scrollEnabled={true}
+      style={
+        {
+          "borderColor": "yellow",
+          "borderWidth": 0,
+          "flex": 1,
+        }
+      }
+    >
+      <View>
+        <View
+          testID="test-child"
+        >
+          <Text>
+            Test Child Content
+          </Text>
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>
+</RCTSafeAreaView>
+`;
+
+exports[`SpinachAppContainer renders multiple children correctly 1`] = `
+<RCTSafeAreaView
+  style={
+    {
+      "borderColor": "blue",
+      "borderWidth": 0,
+      "flex": 1,
+    }
+  }
+>
+  <Image
+    resizeMode="cover"
+    source={
+      {
+        "testUri": "../../../assets/images/spinach.jpg",
+      }
+    }
+    style={
+      {
+        "borderColor": "black",
+        "borderWidth": 0,
+        "height": 1334,
+        "position": "absolute",
+        "width": 750,
+      }
+    }
+  />
+  <View
+    testID="child-1"
+  >
+    <Text>
+      First Child
+    </Text>
+  </View>
+  <View
+    testID="child-2"
+  >
+    <Text>
+      Second Child
+    </Text>
+  </View>
+</RCTSafeAreaView>
+`;
+
 exports[`SpinachAppContainer renders with scrollView and activityIndicator on Android 1`] = `
 <RCTSafeAreaView
   style={

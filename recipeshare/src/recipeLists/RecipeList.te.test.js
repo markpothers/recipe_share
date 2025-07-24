@@ -292,7 +292,7 @@ describe("Recipe List", () => {
 				commenting: false,
 			});
 
-			expectStorageCall(AsyncStorage.getItem, "localRecipeDetails", false);
+			expectStorageCall(AsyncStorage.getItem, "localRecipeDetails");
 			expectStorageSet(AsyncStorage.setItem, "localRecipeDetails", [testRecipeDetails]);
 		});
 
@@ -306,31 +306,26 @@ describe("Recipe List", () => {
 				commenting: false,
 			});
 
-			expectStorageCall(AsyncStorage.getItem, "localRecipeDetails", false);
+			expectStorageCall(AsyncStorage.getItem, "localRecipeDetails");
 			expectStorageSet(AsyncStorage.setItem, "localRecipeDetails", [testRecipeDetails]);
 		});
 
 		test("should be able to navigate to recipe details page from title using locally saved recipe if fetch fails", async () => {
 			const testRecipeDetails = recipeDetails.find((d) => d.id === 111);
 			getRecipeDetails.mockImplementation(() => Promise.reject({}));
-			AsyncStorage.getItem.mockImplementation((key, callback) => {
-				callback(null, JSON.stringify([testRecipeDetails]));
-			});
+			AsyncStorage.getItem.mockResolvedValue(JSON.stringify([testRecipeDetails]));
 
 			await pressAndExpectNavigation(getByText("Mini Baguettes"), mockNavigate, "RecipeDetails", {
 				recipeID: 111,
 				commenting: false,
 			});
 
-			expectStorageCall(AsyncStorage.getItem, "localRecipeDetails", true);
+			expectStorageCall(AsyncStorage.getItem, "localRecipeDetails");
 		});
 
 		test("should fail to navigate to recipe details if fetch fails and not saved locally", async () => {
-			const testRecipeDetails = recipeDetails.find((d) => d.id === 111);
 			getRecipeDetails.mockImplementation(() => Promise.reject({}));
-			AsyncStorage.getItem.mockImplementation((key, callback) => {
-				callback(null, JSON.stringify([]));
-			});
+			AsyncStorage.getItem.mockResolvedValue(JSON.stringify([]));
 
 			await pressAndExpectOfflineMessage(getByText("Mini Baguettes"), getByTestId);
 			expectNoNavigation(mockNavigate);
@@ -359,9 +354,7 @@ describe("Recipe List", () => {
 			const testChefDetails = chefDetails.find((d) => d.id === 1);
 			getRecipeDetails.mockImplementation(() => Promise.reject({}));
 			getChefDetails.mockImplementation(() => Promise.reject({}));
-			AsyncStorage.getItem.mockImplementation((key, callback) => {
-				callback(undefined, JSON.stringify([testChefDetails]));
-			});
+			AsyncStorage.getItem.mockResolvedValue(JSON.stringify([testChefDetails]));
 
 			await pressAndExpectNavigation(queryAllByText("Pothers")[1], mockNavigate, "ChefDetails", { chefID: 1 });
 		});
@@ -369,9 +362,7 @@ describe("Recipe List", () => {
 		test("should show offline message and not navigate to chef details if api fails and not stored locally", async () => {
 			getRecipeDetails.mockImplementation(() => Promise.reject({}));
 			getChefDetails.mockImplementation(() => Promise.reject({}));
-			AsyncStorage.getItem.mockImplementation((key, callback) => {
-				callback(undefined, JSON.stringify([]));
-			});
+			AsyncStorage.getItem.mockResolvedValue(JSON.stringify([]));
 
 			await pressAndExpectOfflineMessage(queryAllByText("Pothers")[1], getByTestId);
 			expectNoNavigation(mockNavigate);
@@ -380,7 +371,7 @@ describe("Recipe List", () => {
 		test("should show offline message and not navigate to chef details if api fails and no recipes are stored locally", async () => {
 			getRecipeDetails.mockImplementation(() => Promise.reject({}));
 			getChefDetails.mockImplementation(() => Promise.reject({}));
-			AsyncStorage.getItem.mockImplementation((key, callback) => callback());
+			AsyncStorage.getItem.mockResolvedValue(null);
 
 			await pressAndExpectOfflineMessage(queryAllByText("Pothers")[1], getByTestId);
 			expectNoNavigation(mockNavigate);
@@ -480,7 +471,7 @@ describe("Recipe List", () => {
 				AsyncStorage.getItem.mockResolvedValue(JSON.stringify([]));
 
 				await commentOnRecipeAndWait(queryAllByLabelText("comment on recipe")[0], () => {
-					expectStorageCall(AsyncStorage.getItem, "localRecipeDetails", false);
+					expectStorageCall(AsyncStorage.getItem, "localRecipeDetails");
 					expectStorageSet(AsyncStorage.setItem, "localRecipeDetails", [testRecipeDetails]);
 					expectRecipeNavigation(mockNavigate, 113, true);
 				});

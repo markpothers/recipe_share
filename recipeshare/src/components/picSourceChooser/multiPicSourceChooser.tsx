@@ -11,7 +11,7 @@ import {
 	TouchableOpacity,
 	View,
 } from "react-native";
-import { ImageSource, RecipeImage } from "../centralTypes";
+import { ImageSource } from "../../centralTypes";
 import React, { useEffect, useRef, useState } from "react";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 

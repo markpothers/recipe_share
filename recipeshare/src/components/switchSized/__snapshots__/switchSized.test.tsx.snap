@@ -1,5 +1,119 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`SwitchSized can be rendered as disabled on Android with opacity styling 1`] = `
+<AndroidSwitch
+  accessibilityRole="switch"
+  accessibilityState={
+    {
+      "disabled": true,
+    }
+  }
+  enabled={false}
+  on={true}
+  onChange={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    [
+      null,
+      {
+        "opacity": 0.5,
+      },
+      {
+        "height": 46.690000000000005,
+        "marginVertical": 6.67,
+      },
+    ]
+  }
+  thumbTintColor="#4b7142"
+  trackColorForFalse="#64715599"
+  trackColorForTrue="#5c8a5199"
+  trackTintColor="#5c8a5199"
+/>
+`;
+
+exports[`SwitchSized can be rendered as disabled on iOS without opacity styling 1`] = `
+<RCTSwitch
+  accessibilityRole="switch"
+  disabled={true}
+  onChange={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  onTintColor="#5c8a5199"
+  style={
+    [
+      {
+        "height": 31,
+        "width": 51,
+      },
+      [
+        null,
+        null,
+        null,
+      ],
+    ]
+  }
+  thumbTintColor={null}
+  tintColor={null}
+  value={true}
+/>
+`;
+
+exports[`SwitchSized can be rendered as enabled on Android without opacity styling 1`] = `
+<AndroidSwitch
+  accessibilityRole="switch"
+  accessibilityState={
+    {
+      "disabled": false,
+    }
+  }
+  enabled={true}
+  on={true}
+  onChange={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    [
+      null,
+      null,
+      {
+        "height": 46.690000000000005,
+        "marginVertical": 6.67,
+      },
+    ]
+  }
+  thumbTintColor="#4b7142"
+  trackColorForFalse="#64715599"
+  trackColorForTrue="#5c8a5199"
+  trackTintColor="#5c8a5199"
+/>
+`;
+
+exports[`SwitchSized can be rendered on Android with deviceType == 1 (no iOS scaling) 1`] = `
+<AndroidSwitch
+  accessibilityRole="switch"
+  enabled={true}
+  on={true}
+  onChange={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    [
+      null,
+      null,
+      {
+        "height": 46.690000000000005,
+        "marginVertical": 6.67,
+      },
+    ]
+  }
+  thumbTintColor="#4b7142"
+  trackColorForFalse="#64715599"
+  trackColorForTrue="#5c8a5199"
+  trackTintColor="#5c8a5199"
+/>
+`;
+
 exports[`SwitchSized can be rendered on an android switch is off 1`] = `
 <AndroidSwitch
   accessibilityRole="switch"
@@ -102,6 +216,32 @@ exports[`SwitchSized can be rendered on an iPhone with reduced size switches whe
 />
 `;
 
+exports[`SwitchSized can be rendered on iOS with deviceType != 1 (no scaling) 1`] = `
+<RCTSwitch
+  accessibilityRole="switch"
+  onChange={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  onTintColor="#5c8a5199"
+  style={
+    [
+      {
+        "height": 31,
+        "width": 51,
+      },
+      [
+        null,
+        null,
+        null,
+      ],
+    ]
+  }
+  thumbTintColor={null}
+  tintColor={null}
+  value={true}
+/>
+`;
+
 exports[`SwitchSized can be rendered on iPad with regular switch where switch is off 1`] = `
 <AndroidSwitch
   accessibilityRole="switch"
@@ -149,5 +289,136 @@ exports[`SwitchSized can be rendered on iPad with regular switch where switch is
   trackColorForFalse="#64715599"
   trackColorForTrue="#5c8a5199"
   trackTintColor="#5c8a5199"
+/>
+`;
+
+exports[`SwitchSized can be rendered with accessibility label 1`] = `
+<RCTSwitch
+  accessibilityLabel="Test switch for toggling feature"
+  accessibilityRole="switch"
+  onChange={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  onTintColor="#5c8a5199"
+  style={
+    [
+      {
+        "height": 31,
+        "width": 51,
+      },
+      [
+        null,
+        null,
+        null,
+      ],
+    ]
+  }
+  testID="accessibleSwitch"
+  thumbTintColor={null}
+  tintColor={null}
+  value={true}
+/>
+`;
+
+exports[`SwitchSized can be rendered with custom thumbColor 1`] = `
+<RCTSwitch
+  accessibilityRole="switch"
+  onChange={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  onTintColor="#5c8a5199"
+  style={
+    [
+      {
+        "height": 31,
+        "width": 51,
+      },
+      [
+        null,
+        null,
+        null,
+      ],
+    ]
+  }
+  thumbTintColor="#0000ff"
+  tintColor={null}
+  value={true}
+/>
+`;
+
+exports[`SwitchSized can be rendered with custom trackColor 1`] = `
+<RCTSwitch
+  accessibilityRole="switch"
+  onChange={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  onTintColor="#ff0000"
+  style={
+    [
+      {
+        "height": 31,
+        "width": 51,
+      },
+      [
+        null,
+        null,
+        null,
+      ],
+    ]
+  }
+  thumbTintColor={null}
+  tintColor="#00ff00"
+  value={true}
+/>
+`;
+
+exports[`SwitchSized renders default colors when no custom colors provided on Android 1`] = `
+<AndroidSwitch
+  accessibilityRole="switch"
+  enabled={true}
+  on={false}
+  onChange={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    [
+      null,
+      null,
+      {
+        "height": 46.690000000000005,
+        "marginVertical": 6.67,
+      },
+    ]
+  }
+  thumbTintColor="#eaeaea"
+  trackColorForFalse="#64715599"
+  trackColorForTrue="#5c8a5199"
+  trackTintColor="#64715599"
+/>
+`;
+
+exports[`SwitchSized renders default colors when no custom colors provided on iOS 1`] = `
+<RCTSwitch
+  accessibilityRole="switch"
+  onChange={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  onTintColor="#5c8a5199"
+  style={
+    [
+      {
+        "height": 31,
+        "width": 51,
+      },
+      [
+        null,
+        null,
+        null,
+      ],
+    ]
+  }
+  thumbTintColor={null}
+  tintColor={null}
+  value={false}
 />
 `;

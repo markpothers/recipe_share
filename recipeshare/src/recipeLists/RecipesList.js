@@ -382,7 +382,8 @@ export class RecipesList extends React.Component {
 					this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
 				}
 				// console.log("looking for local recipes");
-				AsyncStorage.getItem("localRecipeDetails", (err, res) => {
+				try {
+					const res = await AsyncStorage.getItem("localRecipeDetails");
 					if (res != null) {
 						let localRecipeDetails = JSON.parse(res);
 						let thisRecipeDetails = localRecipeDetails.find(
@@ -415,7 +416,15 @@ export class RecipesList extends React.Component {
 							};
 						});
 					}
-				});
+				} catch {
+					// Handle AsyncStorage error
+					this.setState((state) => {
+						return {
+							dataICantGet: [...state.dataICantGet, recipeID],
+							awaitingServer: false,
+						};
+					});
+				}
 			}
 			this.setState({ awaitingServer: false });
 		});
@@ -437,7 +446,8 @@ export class RecipesList extends React.Component {
 					this.props.navigation.navigate("ProfileCover", { screen: "Profile", params: { logout: true } });
 				}
 				// console.log('looking for local chefs')
-				AsyncStorage.getItem("localChefDetails", (err, res) => {
+				try {
+					const res = await AsyncStorage.getItem("localChefDetails");
 					if (res != null) {
 						// console.log('found some local chefs')
 						let localChefDetails = JSON.parse(res);
@@ -465,7 +475,15 @@ export class RecipesList extends React.Component {
 							};
 						});
 					}
-				});
+				} catch {
+					// Handle AsyncStorage error
+					this.setState((state) => {
+						return {
+							dataICantGet: [...state.dataICantGet, recipeID],
+							awaitingServer: false,
+						};
+					});
+				}
 			}
 			this.setState(() => ({ awaitingServer: false }));
 		});

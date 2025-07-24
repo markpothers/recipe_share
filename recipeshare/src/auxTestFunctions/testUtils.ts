@@ -89,7 +89,8 @@ export const expectNoNavigation = (mockNavigate: NavigationMock): void => {
 
 // Storage assertion utilities
 export const expectStorageCall = (mockGetItem: StorageMock, key: string): void => {
-	expect(mockGetItem).toHaveBeenCalledWith(key, expect.any(Function));
+	// Promise-based API (modern)
+	expect(mockGetItem).toHaveBeenCalledWith(key);
 };
 
 export const expectStorageSet = (mockSetItem: StorageMock, key: string, value: unknown): void => {
