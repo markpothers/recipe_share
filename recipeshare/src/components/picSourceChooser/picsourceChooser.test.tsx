@@ -98,4 +98,46 @@ describe("picSourceChooser", () => {
 		fireEvent.press(getByText("Save & Close"));
 		expect(mockSourceChosen).toHaveBeenCalled();
 	});
+
+	test("it should handle component with index prop", async () => {
+		const { getByText: getByTextWithIndex } = render(
+			<PicSourceChooser
+				saveImage={mockSaveImage}
+				sourceChosen={mockSourceChosen}
+				key={"pic-chooser"}
+				imageSource={"mockInitialImageUrl"}
+				cancelChooseImage={mockCancelChooseImage}
+				index="2" // With index as string
+			/>
+		);
+
+		fireEvent.press(getByTextWithIndex("Cancel"));
+		expect(mockCancelChooseImage).toHaveBeenCalledWith("mockInitialImageUrl", "2");
+		expect(mockSourceChosen).toHaveBeenCalled();
+	});
+
+	test("it should handle save image with index", async () => {
+		const { getByText: getByTextWithIndex } = render(
+			<PicSourceChooser
+				saveImage={mockSaveImage}
+				sourceChosen={mockSourceChosen}
+				key={"pic-chooser"}
+				imageSource={"mockInitialImageUrl"}
+				cancelChooseImage={mockCancelChooseImage}
+				index="1" // With index as string
+			/>
+		);
+
+		fireEvent.press(getByTextWithIndex("Take photo"));
+
+		await waitFor(() => {
+			expect(mockSaveImage).toHaveBeenCalledWith(
+				{
+					canceled: false,
+					uri: "mockCameraUri",
+				},
+				"1" // Index should be passed as string
+			);
+		});
+	});
 });

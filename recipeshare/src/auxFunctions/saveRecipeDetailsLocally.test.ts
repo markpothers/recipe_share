@@ -17,7 +17,7 @@ jest.mock("@react-native-async-storage/async-storage", () => ({
 const mockGetItem = AsyncStorage.getItem as jest.MockedFunction<typeof AsyncStorage.getItem>;
 const mockSetItem = AsyncStorage.setItem as jest.MockedFunction<typeof AsyncStorage.setItem>;
 
-describe("saveRecipeDetailsLocally (Fixed)", () => {
+describe("saveRecipeDetailsLocally", () => {
 	const mockCurrentDate = new Date("2023-01-01T00:00:00.000Z").getTime();
 
 	// Create a mock recipe details that matches the Recipe type but allows for missing properties

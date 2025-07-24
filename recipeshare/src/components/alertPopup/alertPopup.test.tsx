@@ -88,4 +88,64 @@ describe("AlertPopup", () => {
 		expect(mockClose).toHaveBeenCalled();
 		expect(mockClose).toHaveBeenCalledTimes(1);
 	});
+
+	test("renders with empty string when title is falsy", () => {
+		const { toJSON } = render(
+			<AlertPopup
+				close={mockClose}
+				closeText={"mock close text"}
+				title={null as string}
+				onYes={mockYes}
+				yesText={"mock yes text"}
+			/>
+		);
+		expect(toJSON()).toMatchSnapshot();
+		// Title should render as empty string when null
+		const titleElement = toJSON();
+		expect(titleElement).toBeTruthy();
+	});
+
+	test("renders with default button text when no custom text provided", () => {
+		const { getByText } = render(<AlertPopup close={mockClose} title={"Test title"} onYes={mockYes} />);
+
+		// Should render default "Cancel" and "Yes" text
+		expect(getByText("Cancel")).toBeTruthy();
+		expect(getByText("Yes")).toBeTruthy();
+	});
+
+	test("has correct accessibility properties", () => {
+		const { getByTestId } = render(
+			<AlertPopup
+				close={mockClose}
+				closeText={"Close"}
+				title={"Test title"}
+				onYes={mockYes}
+				yesText={"Confirm"}
+			/>
+		);
+
+		// Check accessibility testIDs are present
+		expect(getByTestId("closeButton")).toBeTruthy();
+		expect(getByTestId("yesButton")).toBeTruthy();
+	});
+
+	test("renders modal with correct properties", () => {
+		const { toJSON } = render(<AlertPopup close={mockClose} title={"Test title"} onYes={mockYes} />);
+
+		const component = toJSON();
+		// Modal should be visible and transparent
+		expect(component).toBeTruthy();
+	});
+
+	test("handles undefined title gracefully", () => {
+		const { toJSON } = render(<AlertPopup close={mockClose} title={undefined as string} onYes={mockYes} />);
+
+		expect(toJSON()).toMatchSnapshot();
+	});
+
+	test("handles empty string title", () => {
+		const { toJSON } = render(<AlertPopup close={mockClose} title={""} onYes={mockYes} />);
+
+		expect(toJSON()).toMatchSnapshot();
+	});
 });

@@ -283,5 +283,68 @@ describe("multiPicSourceChooser", () => {
 			fireEvent.press(getByText("Save & Close"));
 			expect(mockSourceChosen).toHaveBeenCalled();
 		});
+
+		test("it should handle move left when already at leftmost position", async () => {
+			fireEvent.press(getByText("Sort left"));
+			expect(mockSaveImages).toHaveBeenCalledWith([recipeImages[0], recipeImages[1]]);
+		});
+
+		test("it should handle move right when already at rightmost position", async () => {
+			fireEvent.scroll(getByTestId("multiPicFlatList"), {
+				nativeEvent: {
+					contentSize: { height: 300, width: 600 },
+					contentOffset: { y: 0, x: 300 },
+					layoutMeasurement: { height: 300, width: 300 },
+				},
+			});
+			fireEvent(getByTestId("multiPicFlatList"), "onMomentumScrollEnd", {
+				nativeEvent: { contentOffset: { x: 300 } },
+			});
+			fireEvent.press(getByText("Sort right"));
+			expect(mockSaveImages).toHaveBeenCalledWith([recipeImages[0], recipeImages[1]]);
+		});
+
+		test("it should handle scroll to index failed", async () => {
+			const flatList = getByTestId("multiPicFlatList");
+			fireEvent(flatList, "onScrollToIndexFailed");
+			// Should not crash when scroll fails
+			expect(flatList).toBeTruthy();
+		});
+
+		test("it should handle flat list layout changes", async () => {
+			const flatList = getByTestId("multiPicFlatList");
+
+			fireEvent(flatList, "onLayout", {
+				nativeEvent: {
+					layout: { x: 0, y: 0, width: 300, height: 200 },
+				},
+			});
+
+			expect(flatList).toBeTruthy();
+		});
+
+		test("it should handle momentum scroll end", async () => {
+			const flatList = getByTestId("multiPicFlatList");
+
+			fireEvent(flatList, "onMomentumScrollEnd", {
+				nativeEvent: {
+					contentOffset: { x: 150, y: 0 },
+				},
+			});
+
+			expect(flatList).toBeTruthy();
+		});
+
+		test("it should render with empty image sources", async () => {
+			const { getByText } = render(
+				<MultiPicSourceChooser
+					imageSources={[]} // Empty array
+					sourceChosen={mockSourceChosen}
+					saveImages={mockSaveImages}
+				/>
+			);
+
+			expect(getByText("No image\nselected")).toBeTruthy();
+		});
 	});
 });

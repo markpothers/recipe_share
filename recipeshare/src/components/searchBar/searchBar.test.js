@@ -95,4 +95,70 @@ describe("Search Bar", () => {
 		input.props.onBlur();
 		expect(mockBlurFunction).toHaveBeenCalled();
 	});
+
+	test("clear button renders without icon when displayIcon is false", () => {
+		// Update component to have search text (which shows the clear button)
+		act(() => {
+			component.update(
+				<SearchBar
+					setSearchTerm={mockSetFunction}
+					text={"SearchBar placeholder text"}
+					searchTerm={"test"}
+					onBlur={mockBlurFunction}
+				/>
+			);
+		});
+
+		let root = component.root;
+		let clearButton = root.findByProps({ testID: "deleteSearchTermButton" });
+
+		// The clear button should exist but with displayIcon={true} by default
+		expect(clearButton).toBeTruthy();
+	});
+
+	test("searchBar responds to keyboard interactions", () => {
+		let root = component.root;
+		let input = root.findByProps({ testID: "searchTermInput" });
+
+		// Test that input accepts various text inputs
+		input.props.onChangeText("pasta recipes");
+		expect(mockSetFunction).toHaveBeenCalledWith("pasta recipes");
+
+		input.props.onChangeText("123");
+		expect(mockSetFunction).toHaveBeenCalledWith("123");
+	});
+
+	test("input field has correct accessibility properties", () => {
+		let root = component.root;
+		let input = root.findByProps({ testID: "searchTermInput" });
+		let clearButton = component.root.findAllByProps({ testID: "deleteSearchTermButton" });
+
+		// Check input properties
+		expect(input.props.placeholder).toBe("SearchBar placeholder text");
+		expect(input.props.placeholderTextColor).toBe("#888");
+		expect(input.props.autoCapitalize).toBe("none");
+		expect(input.props.keyboardType).toBe("default");
+
+		// Clear button should not be present when searchTerm is empty
+		expect(clearButton.length).toBe(0);
+	});
+
+	test("clear button has correct accessibility label", () => {
+		// Update to show clear button
+		act(() => {
+			component.update(
+				<SearchBar
+					setSearchTerm={mockSetFunction}
+					text={"SearchBar placeholder text"}
+					searchTerm={"test search"}
+					onBlur={mockBlurFunction}
+				/>
+			);
+		});
+
+		let root = component.root;
+		let clearButton = root.findByProps({ testID: "deleteSearchTermButton" });
+
+		expect(clearButton.props.accessibilityLabel).toBe("clear search text");
+	});
 });

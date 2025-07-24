@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchBarClearButton matches snapshot when displayIcon is false 1`] = `
+<View
+  accessibilityLabel="clear search text"
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "alignItems": "center",
+      "alignSelf": "flex-end",
+      "height": "100%",
+      "justifyContent": "center",
+      "opacity": 1,
+      "width": 75,
+    }
+  }
+  testID="deleteSearchTermButton"
+/>
+`;
+
+exports[`SearchBarClearButton matches snapshot when displayIcon is true 1`] = `
+<View
+  accessibilityLabel="clear search text"
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "alignItems": "center",
+      "alignSelf": "flex-end",
+      "height": "100%",
+      "justifyContent": "center",
+      "opacity": 1,
+      "width": 75,
+    }
+  }
+  testID="deleteSearchTermButton"
+>
+  <Icon
+    name="close"
+    size={46.690000000000005}
+    style={
+      {
+        "color": "#505050",
+      }
+    }
+  />
+</View>
+`;

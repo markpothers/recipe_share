@@ -498,6 +498,500 @@ exports[`AlertPopup calls the yes function when button pressed 1`] = `
 </Modal>
 `;
 
+exports[`AlertPopup handles empty string title 1`] = `
+<Modal
+  animationType="fade"
+  hardwareAccelerated={false}
+  presentationStyle="overFullScreen"
+  statusBarTranslucent={true}
+  transparent={true}
+  visible={true}
+>
+  <View
+    accessibilityRole="alert"
+    style={
+      [
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+        },
+        {
+          "height": 1334,
+          "width": 750,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "backgroundColor": "#fff59b",
+          "borderColor": "#104e01",
+          "borderRadius": 11.25,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "marginLeft": "7.5%",
+          "marginRight": "7.5%",
+          "width": 637.5,
+        }
+      }
+    >
+      <View
+        style={
+          {
+            "justifyContent": "center",
+            "paddingTop": 13.34,
+            "width": "90%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={1.5}
+          style={
+            {
+              "color": "#104e01",
+              "fontSize": 33.65552620959067,
+              "fontWeight": "bold",
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          [
+            {
+              "borderColor": "red",
+              "borderWidth": 0,
+              "overflow": "hidden",
+              "width": "100%",
+            },
+            {
+              "marginBottom": 26.68,
+              "marginTop": 26.68,
+              "width": 600,
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            [
+              {
+                "alignItems": "center",
+                "borderColor": "purple",
+                "borderRadius": 11.25,
+                "borderWidth": 0,
+                "flexDirection": "row",
+                "flexWrap": "wrap",
+                "justifyContent": "space-between",
+                "marginTop": 6.67,
+                "minHeight": 80.03999999999999,
+                "overflow": "hidden",
+                "width": "100%",
+              },
+              {
+                "justifyContent": "space-around",
+              },
+            ]
+          }
+        >
+          <View
+            accessibilityRole="button"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "alignItems": "center",
+                "backgroundColor": "#104e01",
+                "borderColor": "#104e01",
+                "borderRadius": 11.25,
+                "borderWidth": 1,
+                "flexDirection": "row",
+                "height": "100%",
+                "justifyContent": "space-evenly",
+                "maxWidth": "50%",
+                "minHeight": 80.03999999999999,
+                "minWidth": 285,
+                "opacity": 1,
+              }
+            }
+            testID="closeButton"
+          >
+            <Icon
+              name="cancel"
+              size={53.36}
+              style={
+                {
+                  "color": "#fff59b",
+                }
+              }
+            />
+            <Text
+              maxFontSizeMultiplier={2}
+              style={
+                {
+                  "color": "#fff59b",
+                  "fontSize": 27.53633962602873,
+                  "fontWeight": "bold",
+                  "paddingHorizontal": 7.5,
+                  "textAlign": "center",
+                }
+              }
+            >
+              Cancel
+            </Text>
+          </View>
+          <View
+            accessibilityRole="button"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "alignItems": "center",
+                "backgroundColor": "#104e01",
+                "borderColor": "#104e01",
+                "borderRadius": 11.25,
+                "borderWidth": 1,
+                "flexDirection": "row",
+                "height": "100%",
+                "justifyContent": "space-evenly",
+                "maxWidth": "50%",
+                "minHeight": 80.03999999999999,
+                "minWidth": 285,
+                "opacity": 1,
+              }
+            }
+            testID="yesButton"
+          >
+            <Icon
+              name="check"
+              size={53.36}
+              style={
+                {
+                  "color": "#fff59b",
+                }
+              }
+            />
+            <Text
+              maxFontSizeMultiplier={2}
+              style={
+                {
+                  "color": "#fff59b",
+                  "fontSize": 27.53633962602873,
+                  "fontWeight": "bold",
+                  "paddingHorizontal": 7.5,
+                  "textAlign": "center",
+                }
+              }
+            >
+              Yes
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</Modal>
+`;
+
+exports[`AlertPopup handles undefined title gracefully 1`] = `
+<Modal
+  animationType="fade"
+  hardwareAccelerated={false}
+  presentationStyle="overFullScreen"
+  statusBarTranslucent={true}
+  transparent={true}
+  visible={true}
+>
+  <View
+    accessibilityRole="alert"
+    style={
+      [
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+        },
+        {
+          "height": 1334,
+          "width": 750,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "backgroundColor": "#fff59b",
+          "borderColor": "#104e01",
+          "borderRadius": 11.25,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "marginLeft": "7.5%",
+          "marginRight": "7.5%",
+          "width": 637.5,
+        }
+      }
+    >
+      <View
+        style={
+          {
+            "justifyContent": "center",
+            "paddingTop": 13.34,
+            "width": "90%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={1.5}
+          style={
+            {
+              "color": "#104e01",
+              "fontSize": 33.65552620959067,
+              "fontWeight": "bold",
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          [
+            {
+              "borderColor": "red",
+              "borderWidth": 0,
+              "overflow": "hidden",
+              "width": "100%",
+            },
+            {
+              "marginBottom": 26.68,
+              "marginTop": 26.68,
+              "width": 600,
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            [
+              {
+                "alignItems": "center",
+                "borderColor": "purple",
+                "borderRadius": 11.25,
+                "borderWidth": 0,
+                "flexDirection": "row",
+                "flexWrap": "wrap",
+                "justifyContent": "space-between",
+                "marginTop": 6.67,
+                "minHeight": 80.03999999999999,
+                "overflow": "hidden",
+                "width": "100%",
+              },
+              {
+                "justifyContent": "space-around",
+              },
+            ]
+          }
+        >
+          <View
+            accessibilityRole="button"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "alignItems": "center",
+                "backgroundColor": "#104e01",
+                "borderColor": "#104e01",
+                "borderRadius": 11.25,
+                "borderWidth": 1,
+                "flexDirection": "row",
+                "height": "100%",
+                "justifyContent": "space-evenly",
+                "maxWidth": "50%",
+                "minHeight": 80.03999999999999,
+                "minWidth": 285,
+                "opacity": 1,
+              }
+            }
+            testID="closeButton"
+          >
+            <Icon
+              name="cancel"
+              size={53.36}
+              style={
+                {
+                  "color": "#fff59b",
+                }
+              }
+            />
+            <Text
+              maxFontSizeMultiplier={2}
+              style={
+                {
+                  "color": "#fff59b",
+                  "fontSize": 27.53633962602873,
+                  "fontWeight": "bold",
+                  "paddingHorizontal": 7.5,
+                  "textAlign": "center",
+                }
+              }
+            >
+              Cancel
+            </Text>
+          </View>
+          <View
+            accessibilityRole="button"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "alignItems": "center",
+                "backgroundColor": "#104e01",
+                "borderColor": "#104e01",
+                "borderRadius": 11.25,
+                "borderWidth": 1,
+                "flexDirection": "row",
+                "height": "100%",
+                "justifyContent": "space-evenly",
+                "maxWidth": "50%",
+                "minHeight": 80.03999999999999,
+                "minWidth": 285,
+                "opacity": 1,
+              }
+            }
+            testID="yesButton"
+          >
+            <Icon
+              name="check"
+              size={53.36}
+              style={
+                {
+                  "color": "#fff59b",
+                }
+              }
+            />
+            <Text
+              maxFontSizeMultiplier={2}
+              style={
+                {
+                  "color": "#fff59b",
+                  "fontSize": 27.53633962602873,
+                  "fontWeight": "bold",
+                  "paddingHorizontal": 7.5,
+                  "textAlign": "center",
+                }
+              }
+            >
+              Yes
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</Modal>
+`;
+
 exports[`AlertPopup renders with 1 button when no close button and customizable text 1`] = `
 <Modal
   animationType="fade"
@@ -1187,6 +1681,253 @@ exports[`AlertPopup renders with 2 buttons and default text 1`] = `
               }
             >
               Yes
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</Modal>
+`;
+
+exports[`AlertPopup renders with empty string when title is falsy 1`] = `
+<Modal
+  animationType="fade"
+  hardwareAccelerated={false}
+  presentationStyle="overFullScreen"
+  statusBarTranslucent={true}
+  transparent={true}
+  visible={true}
+>
+  <View
+    accessibilityRole="alert"
+    style={
+      [
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+        },
+        {
+          "height": 1334,
+          "width": 750,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "backgroundColor": "#fff59b",
+          "borderColor": "#104e01",
+          "borderRadius": 11.25,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "marginLeft": "7.5%",
+          "marginRight": "7.5%",
+          "width": 637.5,
+        }
+      }
+    >
+      <View
+        style={
+          {
+            "justifyContent": "center",
+            "paddingTop": 13.34,
+            "width": "90%",
+          }
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={1.5}
+          style={
+            {
+              "color": "#104e01",
+              "fontSize": 33.65552620959067,
+              "fontWeight": "bold",
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          [
+            {
+              "borderColor": "red",
+              "borderWidth": 0,
+              "overflow": "hidden",
+              "width": "100%",
+            },
+            {
+              "marginBottom": 26.68,
+              "marginTop": 26.68,
+              "width": 600,
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            [
+              {
+                "alignItems": "center",
+                "borderColor": "purple",
+                "borderRadius": 11.25,
+                "borderWidth": 0,
+                "flexDirection": "row",
+                "flexWrap": "wrap",
+                "justifyContent": "space-between",
+                "marginTop": 6.67,
+                "minHeight": 80.03999999999999,
+                "overflow": "hidden",
+                "width": "100%",
+              },
+              {
+                "justifyContent": "space-around",
+              },
+            ]
+          }
+        >
+          <View
+            accessibilityRole="button"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "alignItems": "center",
+                "backgroundColor": "#104e01",
+                "borderColor": "#104e01",
+                "borderRadius": 11.25,
+                "borderWidth": 1,
+                "flexDirection": "row",
+                "height": "100%",
+                "justifyContent": "space-evenly",
+                "maxWidth": "50%",
+                "minHeight": 80.03999999999999,
+                "minWidth": 285,
+                "opacity": 1,
+              }
+            }
+            testID="closeButton"
+          >
+            <Icon
+              name="cancel"
+              size={53.36}
+              style={
+                {
+                  "color": "#fff59b",
+                }
+              }
+            />
+            <Text
+              maxFontSizeMultiplier={2}
+              style={
+                {
+                  "color": "#fff59b",
+                  "fontSize": 27.53633962602873,
+                  "fontWeight": "bold",
+                  "paddingHorizontal": 7.5,
+                  "textAlign": "center",
+                }
+              }
+            >
+              mock close text
+            </Text>
+          </View>
+          <View
+            accessibilityRole="button"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "alignItems": "center",
+                "backgroundColor": "#104e01",
+                "borderColor": "#104e01",
+                "borderRadius": 11.25,
+                "borderWidth": 1,
+                "flexDirection": "row",
+                "height": "100%",
+                "justifyContent": "space-evenly",
+                "maxWidth": "50%",
+                "minHeight": 80.03999999999999,
+                "minWidth": 285,
+                "opacity": 1,
+              }
+            }
+            testID="yesButton"
+          >
+            <Icon
+              name="check"
+              size={53.36}
+              style={
+                {
+                  "color": "#fff59b",
+                }
+              }
+            />
+            <Text
+              maxFontSizeMultiplier={2}
+              style={
+                {
+                  "color": "#fff59b",
+                  "fontSize": 27.53633962602873,
+                  "fontWeight": "bold",
+                  "paddingHorizontal": 7.5,
+                  "textAlign": "center",
+                }
+              }
+            >
+              mock yes text
             </Text>
           </View>
         </View>
