@@ -43,8 +43,7 @@ exports[`SwitchSized can be rendered as disabled on iOS without opacity styling 
   style={
     [
       {
-        "height": 31,
-        "width": 51,
+        "alignSelf": "flex-start",
       },
       [
         null,
@@ -174,8 +173,7 @@ exports[`SwitchSized can be rendered on an iPhone with reduced size switches whe
   style={
     [
       {
-        "height": 31,
-        "width": 51,
+        "alignSelf": "flex-start",
       },
       [
         null,
@@ -200,8 +198,7 @@ exports[`SwitchSized can be rendered on an iPhone with reduced size switches whe
   style={
     [
       {
-        "height": 31,
-        "width": 51,
+        "alignSelf": "flex-start",
       },
       [
         null,
@@ -226,8 +223,7 @@ exports[`SwitchSized can be rendered on iOS with deviceType != 1 (no scaling) 1`
   style={
     [
       {
-        "height": 31,
-        "width": 51,
+        "alignSelf": "flex-start",
       },
       [
         null,
@@ -303,8 +299,7 @@ exports[`SwitchSized can be rendered with accessibility label 1`] = `
   style={
     [
       {
-        "height": 31,
-        "width": 51,
+        "alignSelf": "flex-start",
       },
       [
         null,
@@ -330,8 +325,7 @@ exports[`SwitchSized can be rendered with custom thumbColor 1`] = `
   style={
     [
       {
-        "height": 31,
-        "width": 51,
+        "alignSelf": "flex-start",
       },
       [
         null,
@@ -356,8 +350,7 @@ exports[`SwitchSized can be rendered with custom trackColor 1`] = `
   style={
     [
       {
-        "height": 31,
-        "width": 51,
+        "alignSelf": "flex-start",
       },
       [
         null,
@@ -407,8 +400,7 @@ exports[`SwitchSized renders default colors when no custom colors provided on iO
   style={
     [
       {
-        "height": 31,
-        "width": 51,
+        "alignSelf": "flex-start",
       },
       [
         null,

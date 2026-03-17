@@ -3,7 +3,6 @@
 exports[`TextPopup renders with children components 1`] = `
 <Modal
   animationType="fade"
-  hardwareAccelerated={false}
   transparent={true}
   visible={true}
 >
@@ -177,7 +176,6 @@ exports[`TextPopup renders with children components 1`] = `
 exports[`TextPopup renders with different title and text content 1`] = `
 <Modal
   animationType="fade"
-  hardwareAccelerated={false}
   transparent={true}
   visible={true}
 >
@@ -346,7 +344,6 @@ exports[`TextPopup renders with different title and text content 1`] = `
 exports[`TextPopup renders with some mock props 1`] = `
 <Modal
   animationType="fade"
-  hardwareAccelerated={false}
   transparent={true}
   visible={true}
 >
@@ -643,7 +640,6 @@ If you have any questions about these Terms, please contact us at:
 exports[`TextPopup renders without children (children prop not provided) 1`] = `
 <Modal
   animationType="fade"
-  hardwareAccelerated={false}
   transparent={true}
   visible={true}
 >

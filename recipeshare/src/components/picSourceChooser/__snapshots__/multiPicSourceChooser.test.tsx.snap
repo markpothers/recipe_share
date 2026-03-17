@@ -3,7 +3,6 @@
 exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should load and render 1`] = `
 <Modal
   animationType="fade"
-  hardwareAccelerated={false}
   onRequestClose={[MockFunction]}
   transparent={true}
   visible={true}
@@ -805,7 +804,6 @@ exports[`multiPicSourceChooser multiPicSourceChooser with no pictures should loa
 exports[`multiPicSourceChooser multiPicSourceChooser with some pictures should load and render 1`] = `
 <Modal
   animationType="fade"
-  hardwareAccelerated={false}
   onRequestClose={[MockFunction]}
   transparent={true}
   visible={true}

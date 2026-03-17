@@ -1,7 +1,7 @@
 let databaseURL;
 
 if (__DEV__) {
-	databaseURL = "http://10.0.0.251:3000/api"; // Surface Pro IP address
+	databaseURL = "http://10.0.0.250:3000/api"; // Surface Pro IP address
 	// databaseURL = "http://10.0.0.145:3000/api"; // Surface Pro IP address
 	// databaseURL = "http://192.168.4.86:3000/api"; // Macboox Pro IP address
 	// databaseURL = "http://10.0.0.78:3000/api"; // Macboox Pro IP address

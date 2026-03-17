@@ -1041,8 +1041,7 @@ exports[`create chef page createChef functions should display errors after submi
                       style={
                         [
                           {
-                            "height": 31,
-                            "width": 51,
+                            "alignSelf": "flex-start",
                           },
                           [
                             null,
@@ -1232,8 +1231,7 @@ exports[`create chef page createChef functions should display errors after submi
                       style={
                         [
                           {
-                            "height": 31,
-                            "width": 51,
+                            "alignSelf": "flex-start",
                           },
                           [
                             null,
@@ -2394,8 +2392,7 @@ exports[`create chef page createChef functions should load and render 1`] = `
                       style={
                         [
                           {
-                            "height": 31,
-                            "width": 51,
+                            "alignSelf": "flex-start",
                           },
                           [
                             null,
@@ -2585,8 +2582,7 @@ exports[`create chef page createChef functions should load and render 1`] = `
                       style={
                         [
                           {
-                            "height": 31,
-                            "width": 51,
+                            "alignSelf": "flex-start",
                           },
                           [
                             null,

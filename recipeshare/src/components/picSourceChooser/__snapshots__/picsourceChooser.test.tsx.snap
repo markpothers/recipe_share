@@ -3,7 +3,6 @@
 exports[`picSourceChooser should load and render 1`] = `
 <Modal
   animationType="fade"
-  hardwareAccelerated={false}
   onRequestClose={[MockFunction]}
   transparent={true}
   visible={true}

@@ -3,7 +3,6 @@
 exports[`DynamicMenu renders with an outer close container and as many buttons as in list 1`] = `
 <Modal
   animationType="none"
-  hardwareAccelerated={false}
   transparent={true}
   visible={true}
 >

@@ -3,7 +3,6 @@
 exports[`AlertPopup calls the close function when button pressed 1`] = `
 <Modal
   animationType="fade"
-  hardwareAccelerated={false}
   presentationStyle="overFullScreen"
   statusBarTranslucent={true}
   transparent={true}
@@ -252,7 +251,6 @@ exports[`AlertPopup calls the close function when button pressed 1`] = `
 exports[`AlertPopup calls the yes function when button pressed 1`] = `
 <Modal
   animationType="fade"
-  hardwareAccelerated={false}
   presentationStyle="overFullScreen"
   statusBarTranslucent={true}
   transparent={true}
@@ -501,7 +499,6 @@ exports[`AlertPopup calls the yes function when button pressed 1`] = `
 exports[`AlertPopup handles empty string title 1`] = `
 <Modal
   animationType="fade"
-  hardwareAccelerated={false}
   presentationStyle="overFullScreen"
   statusBarTranslucent={true}
   transparent={true}
@@ -748,7 +745,6 @@ exports[`AlertPopup handles empty string title 1`] = `
 exports[`AlertPopup handles undefined title gracefully 1`] = `
 <Modal
   animationType="fade"
-  hardwareAccelerated={false}
   presentationStyle="overFullScreen"
   statusBarTranslucent={true}
   transparent={true}
@@ -995,7 +991,6 @@ exports[`AlertPopup handles undefined title gracefully 1`] = `
 exports[`AlertPopup renders with 1 button when no close button and customizable text 1`] = `
 <Modal
   animationType="fade"
-  hardwareAccelerated={false}
   presentationStyle="overFullScreen"
   statusBarTranslucent={true}
   transparent={true}
@@ -1195,7 +1190,6 @@ exports[`AlertPopup renders with 1 button when no close button and customizable 
 exports[`AlertPopup renders with 2 buttons and customizable text 1`] = `
 <Modal
   animationType="fade"
-  hardwareAccelerated={false}
   presentationStyle="overFullScreen"
   statusBarTranslucent={true}
   transparent={true}
@@ -1444,7 +1438,6 @@ exports[`AlertPopup renders with 2 buttons and customizable text 1`] = `
 exports[`AlertPopup renders with 2 buttons and default text 1`] = `
 <Modal
   animationType="fade"
-  hardwareAccelerated={false}
   presentationStyle="overFullScreen"
   statusBarTranslucent={true}
   transparent={true}
@@ -1693,7 +1686,6 @@ exports[`AlertPopup renders with 2 buttons and default text 1`] = `
 exports[`AlertPopup renders with empty string when title is falsy 1`] = `
 <Modal
   animationType="fade"
-  hardwareAccelerated={false}
   presentationStyle="overFullScreen"
   statusBarTranslucent={true}
   transparent={true}

@@ -31,7 +31,8 @@ Build and maintain RecipeShare, which is an Expo + React Native mobile app with 
 
 ## Rules of Engagement
 
-- For any task that will change more than a handful of lines of code in one file, establish a clear understanding of how a task will be completed before proceeding
+- Do not start making code changes until told to proceed. Discuss first how a solution will be implmented. Discussions about code do not immediately require code changes until agreed.
+For any task that will change more than a handful of lines of code in one file, establish a clear understanding of how a task will be completed before proceeding
 - Keep user flows stable (auth, browse, details, create/edit recipe, profile).
 - Make safe, incremental changes with tests.
 - Minimize the number of collateral changes made when executing a task. Do not refactor some code if that refactoring was not part of the agreed task. If a piece of code needs is insecure/non-performant/needs refactoring, note it for discussion when the current task is complete
@@ -164,9 +165,9 @@ yarn go
 **Build and Environment Notes**
 
 - Runtime/deploy target is Ruby 3.2 + Rails 7 on Google App Engine (`app.yaml`, `app standard.yaml`, `app flex.yaml`).
-- Local api runs via `yarn api` (`rails s -b 10.0.0.251 -p 3000`); production profile is `yarn api:prod`.
+- Local api runs via `yarn api` (`rails s -b 10.0.0.250 -p 3000`); production profile is `yarn api:prod`.
 - Frontend dev/build uses Vite + `vite_rails` (`yarn go` for dev server, `yarn build` for production assets).
-- Vite host/port is configured in `config/vite.json` (`10.0.0.251:3036`; test port `3037`).
+- Vite host/port is configured in `config/vite.json` (`10.0.0.250:3036`; test port `3037`).
 - Database is PostgreSQL in all environments via Rails credentials in `config/database.yml` (`Google` credential keys for username/password/database/host).
 - Cloud SQL local tunnel is started with `yarn sql` using `cloud-sql-proxy` and instance `recipe-share-272202:us-central1:recipe-share`.
 - App Engine config pins one instance by default (standard and flex variants) and connects Cloud SQL via `beta_settings.cloud_sql_instances`.
