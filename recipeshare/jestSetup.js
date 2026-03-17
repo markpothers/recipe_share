@@ -22,6 +22,37 @@ jest.mock("expo-secure-store", () => ({
 
 jest.mock("react-native-webview", () => ({}));
 
+// SDK 55 updates draggable-flatlist/reanimated internals to rely on worklets
+// native initialization, which is not available in Jest.
+jest.mock("react-native-draggable-flatlist", () => {
+	const React = require("react");
+	const { View } = require("react-native");
+
+	const ScaleDecorator = ({ children }) => React.createElement(React.Fragment, null, children);
+	const MockDraggableFlatList = ({ data = [], renderItem, ListFooterComponent, ...rest }) => {
+		return React.createElement(
+			View,
+			rest,
+			data.map((item, index) =>
+				renderItem({
+					item,
+					index,
+					drag: jest.fn(),
+					isActive: false,
+					getIndex: () => index,
+				}),
+			),
+			ListFooterComponent ? React.createElement(ListFooterComponent) : null,
+		);
+	};
+
+	return {
+		__esModule: true,
+		default: MockDraggableFlatList,
+		ScaleDecorator,
+	};
+});
+
 // fixes a bug where this is undefined.  It was removed from react.reanimated at some point
 // and I think some dependencies have not been updated to account for it, at least, not in
 // testing.
