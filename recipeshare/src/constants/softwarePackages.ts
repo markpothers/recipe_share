@@ -5,7 +5,7 @@ export const softwarePackages = [
 		url: "https://github.com/react-native-async-storage/async-storage/blob/master/LICENSE",
 	},
 	{
-		name: "@react-native-community/masked-view",
+		name: "@react-native-masked-view/masked-view",
 		copyright: "Copyright (c) , Facebook, Inc.",
 		url: "https://github.com/react-native-masked-view/masked-view/blob/master/LICENSE",
 	},

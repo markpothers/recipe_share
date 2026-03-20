@@ -43,6 +43,7 @@ For any task that will change more than a handful of lines of code in one file, 
 - If a task is unclear, ask for clarification as to how it should be handled.
 - Always include a short verification summary in the final response.
 - If initial edits do not solve a problem, reconsider the proposed solution, do not layer non-working fixes without discussion
+- The majority of testing is done on Android. Always point out likely differences with iOS that require specific testing
 - Definition of Done (Default). A task is complete when:
   - Code compiles and targeted flows are verified.
   - Relevant tests pass (or new tests added for changed behavior).

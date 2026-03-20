@@ -71,6 +71,8 @@ yarn-debug.log*
 
 #React git ignore
 .DS_STORE
+.DS_Store
+**/.DS_Store
 node_modules
 scripts/flow/*/.flowconfig
 scripts/rollup/results.json

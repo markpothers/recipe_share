@@ -537,7 +537,7 @@ exports[`About Page renders displaying licenses 1`] = `
                 }
               >
                 • 
-                @react-native-community/masked-view
+                @react-native-masked-view/masked-view
                 ; 
               </Text>
               <Text
