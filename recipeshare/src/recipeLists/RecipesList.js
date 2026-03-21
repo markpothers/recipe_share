@@ -343,7 +343,7 @@ export class RecipesList extends React.Component {
 	};
 
 	deleteRecipeList = () => {
-		let newAllRecipeLists = this.props.allRecipeLists;
+		let newAllRecipeLists = { ...this.props.allRecipeLists };
 		delete newAllRecipeLists[this.props.route.key];
 		this.props.updateAllRecipeLists(newAllRecipeLists);
 	};

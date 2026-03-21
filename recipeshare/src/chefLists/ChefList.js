@@ -198,7 +198,7 @@ export default connect(
 		};
 
 		deleteChefList = () => {
-			let newAllChefLists = this.props.allChefLists;
+			let newAllChefLists = { ...this.props.allChefLists };
 			delete newAllChefLists[this.props.route.key];
 			this.props.updateAllChefLists(newAllChefLists);
 		};
