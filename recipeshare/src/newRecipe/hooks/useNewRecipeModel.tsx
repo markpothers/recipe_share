@@ -12,6 +12,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Keyboard } from "react-native";
 import NetInfo from "@react-native-community/netinfo";
 import { clearedFilters } from "../../constants/clearedFilters";
+import { runtimeConfig, type NewRecipeSeedMode } from "../../constants/runtimeConfig";
 import { emptyRecipe } from "../recipeTemplates/emptyRecipe";
 import { getMinutesFromTimeString } from "../../auxFunctions/getTimeStringFromMinutes";
 import { longTestRecipe } from "../recipeTemplates/longTestRecipe";
@@ -19,20 +20,8 @@ import { shortTestRecipe } from "../recipeTemplates/shortTestRecipe";
 import { useSpeechToText } from "./useSpeechToText";
 import uuid from "react-native-uuid";
 
-type NewRecipeSeedMode = "empty" | "short" | "long";
-
-const configuredSeedMode = (process.env.EXPO_PUBLIC_NEW_RECIPE_SEED_MODE || "")
-	.trim()
-	.toLowerCase() as NewRecipeSeedMode;
-const isTestEnv = process.env.NODE_ENV === "test";
-const isProductionRuntime = !__DEV__ && !isTestEnv;
-
-const getNewRecipeSeed = (): NewRecipe => {
-	if (isProductionRuntime) {
-		return emptyRecipe;
-	}
-
-	switch (configuredSeedMode) {
+const getNewRecipeSeed = (seedMode: NewRecipeSeedMode): NewRecipe => {
+	switch (seedMode) {
 		case "short":
 			return shortTestRecipe;
 		case "long":
@@ -43,7 +32,7 @@ const getNewRecipeSeed = (): NewRecipe => {
 	}
 };
 
-const selectedSeedRecipe = getNewRecipeSeed();
+const selectedSeedRecipe = getNewRecipeSeed(runtimeConfig.seedMode);
 
 export const useNewRecipeModel = (
 	navigation: NewRecipeNavigationProps,

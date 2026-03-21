@@ -2,6 +2,35 @@ import fetchMock from "jest-fetch-mock";
 
 fetchMock.enableMocks();
 
+const suppressedConsoleFragments = [
+	"SafeAreaView has been deprecated and will be removed in a future release",
+];
+
+const shouldSuppressConsoleMessage = (args) => {
+	const message = args
+		.map((arg) => (typeof arg === "string" ? arg : ""))
+		.join(" ");
+
+	return suppressedConsoleFragments.some((fragment) => message.includes(fragment));
+};
+
+const originalWarn = console.warn;
+const originalError = console.error;
+
+console.warn = (...args) => {
+	if (shouldSuppressConsoleMessage(args)) {
+		return;
+	}
+	originalWarn(...args);
+};
+
+console.error = (...args) => {
+	if (shouldSuppressConsoleMessage(args)) {
+		return;
+	}
+	originalError(...args);
+};
+
 // Voice package removed - fallback implementation doesn't need mocking
 // jest.mock("@react-native-voice/voice");
 

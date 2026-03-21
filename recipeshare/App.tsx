@@ -3,7 +3,7 @@ import "react-native-gesture-handler"; // required by react-navigation
 import * as SplashScreen from "expo-splash-screen";
 
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
-import { LogBox, Platform, StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
@@ -50,7 +50,6 @@ export default function App() {
 		return null;
 	}
 
-	LogBox.ignoreAllLogs();
 	return (
 		<SafeAreaProvider onLayout={onLayoutRootView}>
 			<NavigationContainer

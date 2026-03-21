@@ -1,6 +1,5 @@
-const productionURL = "https://www.recipe-share.com/api";
-const configuredURL = (process.env.EXPO_PUBLIC_API_URL || "").trim();
+import { runtimeConfig } from "./runtimeConfig";
 
-const databaseURL = (configuredURL.length > 0 ? configuredURL : productionURL).replace(/\/+$/, "");
+const databaseURL = runtimeConfig.apiUrl;
 
 export { databaseURL };
