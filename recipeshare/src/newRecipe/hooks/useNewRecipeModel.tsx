@@ -14,12 +14,36 @@ import NetInfo from "@react-native-community/netinfo";
 import { clearedFilters } from "../../constants/clearedFilters";
 import { emptyRecipe } from "../recipeTemplates/emptyRecipe";
 import { getMinutesFromTimeString } from "../../auxFunctions/getTimeStringFromMinutes";
+import { longTestRecipe } from "../recipeTemplates/longTestRecipe";
 import { shortTestRecipe } from "../recipeTemplates/shortTestRecipe";
 import { useSpeechToText } from "./useSpeechToText";
 import uuid from "react-native-uuid";
 
-const isDev = __DEV__ && process.env.NODE_ENV !== "test"? true : false;
-const testRecipe = shortTestRecipe;
+type NewRecipeSeedMode = "empty" | "short" | "long";
+
+const configuredSeedMode = (process.env.EXPO_PUBLIC_NEW_RECIPE_SEED_MODE || "")
+	.trim()
+	.toLowerCase() as NewRecipeSeedMode;
+const isTestEnv = process.env.NODE_ENV === "test";
+const isProductionRuntime = !__DEV__ && !isTestEnv;
+
+const getNewRecipeSeed = (): NewRecipe => {
+	if (isProductionRuntime) {
+		return emptyRecipe;
+	}
+
+	switch (configuredSeedMode) {
+		case "short":
+			return shortTestRecipe;
+		case "long":
+			return longTestRecipe;
+		case "empty":
+		default:
+			return emptyRecipe;
+	}
+};
+
+const selectedSeedRecipe = getNewRecipeSeed();
 
 export const useNewRecipeModel = (
 	navigation: NewRecipeNavigationProps,
@@ -41,8 +65,7 @@ export const useNewRecipeModel = (
 	const [scrollingEnabled, setScrollingEnabled] = useState<boolean>(true);
 	const [errors, setErrors] = useState<string | string[]>([]);
 	const [offlineDiagnostics, setOfflineDiagnostics] = useState<string>("");
-	const [testing] = useState<boolean>(isDev);
-	const [newRecipeDetails, setNewRecipeDetails] = useState<NewRecipe>(isDev ? testRecipe : emptyRecipe);
+	const [newRecipeDetails, setNewRecipeDetails] = useState<NewRecipe>(selectedSeedRecipe);
 	const [instructionHeights, setInstructionHeights] = useState<number[]>([]);
 	const [averageInstructionHeight, setAverageInstructionHeight] = useState<number>(responsiveHeight(6.5));
 	const [instructionsLength, setInstructionsLength] = useState<number>(100); // start with a high number so first number is always a decrease
@@ -246,7 +269,7 @@ export const useNewRecipeModel = (
 	const clearNewRecipeDetails = async () => {
 		AsyncStorage.removeItem("localNewRecipeDetails", async () => {
 			setAlertPopupShowing(false);
-			setNewRecipeDetails(testing ? testRecipe : emptyRecipe);
+			setNewRecipeDetails(selectedSeedRecipe);
 			setInstructionHeights([]);
 			setAverageInstructionHeight(responsiveHeight(6.5));
 			// this.setState({
