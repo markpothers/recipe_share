@@ -2,10 +2,18 @@ export { useAppDispatch, useAppSelector } from "./hooks";
 export * from "./types";
 export type { RootState } from "./store";
 
-export { getLoggedInChef, getDeviceType, getLoggedInUserDetails, getStayLoggedIn } from "./selectors";
+export {
+	getLoggedInChef,
+	getDeviceType,
+	getLoggedInUserDetails,
+	getStayLoggedIn,
+	getAuthLoaded,
+	getAuthLoggedIn,
+} from "./selectors";
 
 export {
 	updateSingleRecipeList,
+	setAuthBootstrapState,
 	updateAllRecipeLists,
 	updateSingleChefList,
 	updateAllChefLists,

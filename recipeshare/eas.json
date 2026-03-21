@@ -5,20 +5,37 @@
 	"build": {
 		"devClient": {
 			"developmentClient": true,
-			"distribution": "internal"
+			"distribution": "internal",
+			"env": {
+				"EXPO_PUBLIC_API_URL": "https://www.recipe-share.com/api",
+				"EXPO_PUBLIC_NEW_RECIPE_SEED_MODE": "empty"
+			}
 		},
 		"development": {
 			"developmentClient": false,
-			"distribution": "store"
+			"distribution": "store",
+			"env": {
+				"EXPO_PUBLIC_API_URL": "https://www.recipe-share.com/api",
+				"EXPO_PUBLIC_NEW_RECIPE_SEED_MODE": "empty"
+			}
 		},
 		"local": {
 			"android": {
 				"buildType": "apk",
 				"gradleCommand": ":app:assembleRelease",
 				"developmentClient": true
+			},
+			"env": {
+				"EXPO_PUBLIC_API_URL": "https://www.recipe-share.com/api",
+				"EXPO_PUBLIC_NEW_RECIPE_SEED_MODE": "empty"
 			}
 		},
-		"production": {}
+		"production": {
+			"env": {
+				"EXPO_PUBLIC_API_URL": "https://www.recipe-share.com/api",
+				"EXPO_PUBLIC_NEW_RECIPE_SEED_MODE": "empty"
+			}
+		}
 	},
 	"submit": {
 		"production": {}

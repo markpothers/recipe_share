@@ -6,6 +6,8 @@ export type ReduxStateType = {
 
 export type RootStateType = {
 	deviceType: number;
+	authLoaded: boolean;
+	authLoggedIn: boolean;
 	loggedInChef: LoggedInChef;
 	allRecipeLists: Record<string, ListRecipe[]>;
 	allChefLists: Record<string, ListChef[]>;

@@ -97,3 +97,7 @@ chrome-user-data
 .vscode
 *.swp
 *.swo
+
+# recipeshare local env files
+recipeshare/.env.dev
+recipeshare/.env.prod

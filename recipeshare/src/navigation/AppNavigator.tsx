@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { StackScreenProps, createStackNavigator } from "@react-navigation/stack";
 
 import AppLoading from "../users/appLoading";
 import CreateChef from "../users/createChef";
 import LoginScreen from "../users/login";
 import MainDrawerNavigator from "./MainDrawerNavigator";
+import { getAuthLoaded, getAuthLoggedIn } from "../redux/selectors";
+import { setAuthBootstrapState } from "../redux/rootReducer";
+import { useAppDispatch, useAppSelector } from "../redux";
 
 // import MainDrawerNavigatorContainer from "./MainDrawerNavigatorContainer";
 
@@ -42,9 +45,15 @@ const LoginStack = createStackNavigator<LoginStackParamList>();
 const AppLoadingStack = createStackNavigator<AppLoadingStackParamList>();
 
 const AppNavigator = () => {
-	const [loadedAndLoggedIn, setLoadedAndLoggedIn] = useState({ loaded: false, loggedIn: false });
+	const dispatch = useAppDispatch();
+	const loaded = useAppSelector(getAuthLoaded);
+	const loggedIn = useAppSelector(getAuthLoggedIn);
 
-	if (loadedAndLoggedIn.loaded == true && loadedAndLoggedIn.loggedIn == true) {
+	const setLoadedAndLoggedIn = (args: { loaded: boolean; loggedIn: boolean }) => {
+		dispatch(setAuthBootstrapState(args));
+	};
+
+	if (loaded == true && loggedIn == true) {
 		return (
 			<AppNavigatorStack.Navigator initialRouteName="Home" id={undefined}>
 				<HomeStack.Screen name="Home" options={{ headerShown: false }}>
@@ -52,7 +61,7 @@ const AppNavigator = () => {
 				</HomeStack.Screen>
 			</AppNavigatorStack.Navigator>
 		);
-	} else if (loadedAndLoggedIn.loaded == true && loadedAndLoggedIn.loggedIn == false) {
+	} else if (loaded == true && loggedIn == false) {
 		return (
 			<AppNavigatorStack.Navigator initialRouteName="Login" id={undefined}>
 				<LoginStack.Screen

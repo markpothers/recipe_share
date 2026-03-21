@@ -3,6 +3,8 @@ import { RootStateType } from "./types";
 //exported ONLY for unit testing
 export const initialRootState: RootStateType =  {
 		deviceType: 0,
+		authLoaded: false,
+		authLoggedIn: false,
 		loggedInChef: {
 		id: 0,
 		e_mail: "",

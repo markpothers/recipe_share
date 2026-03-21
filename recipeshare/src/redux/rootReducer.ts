@@ -18,6 +18,10 @@ const rootReducer = createSlice({
 		setDeviceType(state, action: PayloadAction<number>) {
 			state.deviceType = action.payload;
 		},
+		setAuthBootstrapState(state, action: PayloadAction<{ loaded: boolean; loggedIn: boolean }>) {
+			state.authLoaded = action.payload.loaded;
+			state.authLoggedIn = action.payload.loggedIn;
+		},
 		updateSingleRecipeList(state, action: PayloadAction<UpdateSingleRecipeList>) {
 			state.allRecipeLists[action.payload.listKey] = action.payload.recipeList;
 		},
@@ -109,6 +113,7 @@ const rootReducer = createSlice({
 
 export const {
 	setDeviceType,
+	setAuthBootstrapState,
 	updateSingleRecipeList,
 	updateAllRecipeLists,
 	updateSingleChefList,
