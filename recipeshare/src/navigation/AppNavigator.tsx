@@ -84,11 +84,9 @@ const AppNavigator = () => {
 		return (
 			<AppNavigatorStack.Navigator initialRouteName="AppLoadingStack" id={undefined}>
 				<AppNavigatorStack.Screen name="AppLoadingStack" options={{ headerShown: false }}>
-					{(props) => (
+					{() => (
 						<AppLoadingStack.Navigator id={undefined}>
-							<AppLoadingStack.Screen name="AppLoading" options={{ headerShown: false }}>
-								{(_props) => <AppLoading {..._props} setLoadedAndLoggedIn={setLoadedAndLoggedIn} />}
-							</AppLoadingStack.Screen>
+							<AppLoadingStack.Screen name="AppLoading" options={{ headerShown: false }} component={AppLoading} />
 						</AppLoadingStack.Navigator>
 					)}
 				</AppNavigatorStack.Screen>

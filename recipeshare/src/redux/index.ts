@@ -12,6 +12,7 @@ export {
 } from "./selectors";
 
 export {
+	initializeAuthBootstrap,
 	updateSingleRecipeList,
 	setAuthBootstrapState,
 	updateAllRecipeLists,

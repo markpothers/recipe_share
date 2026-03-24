@@ -1,4 +1,5 @@
 import { Comment, ListChef, ListRecipe, MakePic, MakePicChef, Recipe } from "../centralTypes";
+import { restorePersistedSession } from "../auxFunctions/authSessionStorage";
 import {
 	ParameterContent,
 	RootStateType,
@@ -8,6 +9,7 @@ import {
 	UpdateSingleRecipeList,
 } from "./types";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import type { AppDispatch } from "./store";
 
 import { initialRootState } from "./initialRootState";
 
@@ -108,6 +110,19 @@ const rootReducer = createSlice({
 		},
 	},
 });
+
+export const initializeAuthBootstrap = () => async (dispatch: AppDispatch): Promise<void> => {
+	const restoredSession = await restorePersistedSession();
+	if (restoredSession.loggedIn && restoredSession.chef) {
+		dispatch(stayLoggedIn(true));
+		dispatch(updateLoggedInChef(restoredSession.chef));
+		dispatch(setAuthBootstrapState({ loaded: true, loggedIn: true }));
+		return;
+	}
+
+	dispatch(stayLoggedIn(false));
+	dispatch(setAuthBootstrapState({ loaded: true, loggedIn: false }));
+};
 
 // dispatch(stayLoggedIn(true))
 

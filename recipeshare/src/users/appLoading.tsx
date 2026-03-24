@@ -1,67 +1,16 @@
 import * as Device from "expo-device";
 
-import { AppLoadingNavigationProps, AppLoadingRouteProps } from "../navigation";
 import { Image, ImageBackground, View } from "react-native";
-import React, { useCallback, useEffect } from "react";
-import { stayLoggedIn, updateLoggedInChef, useAppDispatch } from "../redux";
+import React, { useEffect } from "react";
+import { initializeAuthBootstrap, useAppDispatch } from "../redux";
 
-import { restorePersistedSession } from "../auxFunctions/authSessionStorage";
 import { setDeviceType } from "../redux/rootReducer";
 import { styles } from "./usersStyleSheet";
 import spinachJpg from "../../assets/images/spinach.jpg";
 import yellowLogo from "../../assets/images/yellowLogo.png";
 
-type OwnProps = {
-	navigation: AppLoadingNavigationProps;
-	route: AppLoadingRouteProps;
-	setLoadedAndLoggedIn: (args: { loaded: boolean; loggedIn: boolean }) => void;
-};
-export default function AppLoading({ setLoadedAndLoggedIn }: OwnProps) {
-	// const stayLoggedIn = useAppSelector((state) => state.stayLoggedIn);
+export default function AppLoading() {
 	const dispatch = useAppDispatch();
-
-	const setStayLoggedIn = useCallback(
-		(value: boolean) => {
-			// dispatch({ type: "STAY_LOGGED_IN", value: value });
-			dispatch(stayLoggedIn(value));
-		},
-		[dispatch]
-	);
-
-	const updateLoggedInChefInState = useCallback(
-		(
-			id: number,
-			e_mail: string,
-			username: string,
-			auth_token: string,
-			image_url: string,
-			is_admin: boolean,
-			is_member: boolean
-		) => {
-			// dispatch({
-			// 	type: "UPDATE_LOGGED_IN_CHEF",
-			// 	id: id,
-			// 	e_mail: e_mail,
-			// 	username: username,
-			// 	auth_token: auth_token,
-			// 	image_url: image_url,
-			// 	is_admin: is_admin,
-			// 	is_member: is_member,
-			// });
-			dispatch(
-				updateLoggedInChef({
-					id: id,
-					e_mail: e_mail,
-					username: username,
-					auth_token: auth_token,
-					image_url: image_url,
-					is_admin: is_admin,
-					is_member: is_member,
-				})
-			);
-		},
-		[dispatch]
-	);
 
 	useEffect(() => {
 		const getDeviceType = async () => {
@@ -69,21 +18,8 @@ export default function AppLoading({ setLoadedAndLoggedIn }: OwnProps) {
 			dispatch(setDeviceType(deviceType));
 		};
 		getDeviceType();
-		const checkLoggedIn = async () => {
-			const restoredSession = await restorePersistedSession();
-			if (restoredSession.loggedIn && restoredSession.chef) {
-				const { id, e_mail, username, auth_token, image_url, is_admin, is_member } = restoredSession.chef;
-				setStayLoggedIn(true);
-				updateLoggedInChefInState(id, e_mail, username, auth_token, image_url, is_admin, is_member);
-				await setLoadedAndLoggedIn({ loaded: true, loggedIn: true });
-				return;
-			}
-
-			setStayLoggedIn(false);
-			await setLoadedAndLoggedIn({ loaded: true, loggedIn: false });
-		};
-		checkLoggedIn();
-	}, [dispatch, setStayLoggedIn, updateLoggedInChefInState, setLoadedAndLoggedIn]);
+		dispatch(initializeAuthBootstrap());
+	}, [dispatch]);
 
 	return (
 		<View style={styles.mainPageContainer}>
