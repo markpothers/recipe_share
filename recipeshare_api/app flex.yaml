@@ -4,6 +4,10 @@ runtime: ruby
 
 env_variables:
   SECRET_KEY_BASE: <%= Rails.application.credentials[:secret_key_base] %>
+  JWT_SECRET_KEY: <%= Rails.application.credentials.dig(:JWT, :production_secret_key) || Rails.application.credentials.dig(:JWT, :secret_key) %>
+  JWT_ISSUER: recipe-share-production
+  JWT_AUDIENCE: recipe-share-mobile-production
+  JWT_AUTH_TTL_SECONDS: "2592000"
 
 beta_settings:
   cloud_sql_instances: "recipe-share-272202:us-central1:recipe-share"

@@ -54,7 +54,7 @@ class ChefsController < ApplicationController
       @chef.password_is_auto = false
       @chef.password_created_at = Time.now
       if @chef.save
-        @chef.activation_digest = JWT.encode({id: @chef.id}, Rails.application.credentials.JWT[:secret_key])
+        @chef.activation_digest = JWT.encode({id: @chef.id}, JwtConfig.secret_key, "HS256")
         if image_params[:image_url] != ""
           hex = ApplicationRecord.get_file_name
           mediaURL = ApplicationRecord.save_image(Rails.application.credentials.buckets[Rails.env.to_sym][:chef_avatars], hex, image_params[:image_url])
@@ -144,7 +144,7 @@ class ChefsController < ApplicationController
     if @chef.nil?
       render json: {error: true, message: "forgotPassword"}
     elsif @chef.deactivated  # reactivate chef
-      @chef.update_attribute(:activation_digest, JWT.encode({id: @chef.id}, Rails.application.credentials.JWT[:secret_key]))
+      @chef.update_attribute(:activation_digest, JWT.encode({id: @chef.id}, JwtConfig.secret_key, "HS256"))
       ChefMailer.with(chef: @chef).reactivate_account.deliver_now
       render json: {error: true, message: "reactivate"}
     elsif @chef

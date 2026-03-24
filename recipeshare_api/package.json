@@ -9,6 +9,7 @@
     "upgrade": "bin/vite upgrade",
     "clean": "bin/vite clobber",
     "api": "rails s -b 0.0.0.0 -p 3000",
+    "api:dev:jwt": "rails s -b 0.0.0.0 -p 3000",
     "api:prod": "rails s -b 0.0.0.0 -p 3000 -e production",
     "sql": " ./cloud-sql-proxy recipe-share-272202:us-central1:recipe-share"
   },

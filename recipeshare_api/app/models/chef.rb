@@ -46,7 +46,16 @@ class Chef < ApplicationRecord
     end
 
     def auth_token
-        JWT.encode({id: self.id}, Rails.application.credentials.JWT[:secret_key])
+        now = Time.now.to_i
+        payload = {
+            id: self.id,
+            iss: JwtConfig.issuer,
+            aud: JwtConfig.audience,
+            iat: now,
+            exp: now + JwtConfig.auth_token_ttl_seconds,
+        }
+
+        JWT.encode(payload, JwtConfig.secret_key, "HS256")
     end
 
     def as_json(*)

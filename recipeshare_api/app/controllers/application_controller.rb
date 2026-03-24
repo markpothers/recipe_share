@@ -5,7 +5,15 @@ class ApplicationController < ActionController::Base
     # byebug
 
     token = request.headers["Authorization"].split(" ")[1]
-    payload = JWT.decode(token, Rails.application.credentials.JWT[:secret_key])[0]
+    decode_options = {
+      algorithm: "HS256",
+      verify_iss: true,
+      iss: JwtConfig.issuer,
+      verify_aud: true,
+      aud: JwtConfig.audience,
+      verify_expiration: true,
+    }
+    payload = JWT.decode(token, JwtConfig.secret_key, true, decode_options)[0]
     if Chef.find(payload["id"])
       @chef = Chef.find(payload["id"])
       if @chef.activated
