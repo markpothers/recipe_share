@@ -4,16 +4,15 @@ import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-nat
 import { storeChefDetails, storeNewFollowers, updateNewUserDetails } from "../redux";
 
 import AppHeaderRight from "../navigation/appHeaderRight";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import ChefDetailsCard from "../chefDetails/ChefDetailsCard";
 import ChefEditor from "./chefEditor";
 import DeleteChefOption from "./deleteChefOption";
 import DynamicMenu from "../dynamicMenu/DynamicMenu";
 import NetInfo from "@react-native-community/netinfo"; //5ms
 import React from "react";
+import { clearPersistedSession } from "../auxFunctions/authSessionStorage";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
 import { connect } from "react-redux";
-import { deleteToken } from "../auxFunctions/saveLoadToken";
 
 // import { getDatabaseBackup } from '../fetches/getDatabaseBackup'
 // import { getDatabaseRestore } from '../fetches/getDatabaseRestore'
@@ -131,8 +130,7 @@ export default connect(
 
 		componentDidMount = async () => {
 			if (this.props.route.params?.logout) {
-				deleteToken();
-				AsyncStorage.removeItem("chef");
+				await clearPersistedSession();
 				this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: false });
 			}
 			await this.generateHeaderButtonList();
@@ -308,8 +306,7 @@ export default connect(
 				const chef = this.props.loggedInChef;
 				const deletedChef = await destroyChef(chef.auth_token, chef.id, deleteRecipes);
 				if (deletedChef) {
-					deleteToken();
-					AsyncStorage.removeItem("chef");
+					await clearPersistedSession();
 					this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: false });
 				}
 			} else {

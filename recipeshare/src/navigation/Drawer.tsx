@@ -5,10 +5,9 @@ import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { responsiveFontSize, responsiveHeight } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { clearPersistedSession } from "../auxFunctions/authSessionStorage";
 import defaultChef from "../../assets/images/default-chef.jpg";
-import { deleteToken } from "../auxFunctions/saveLoadToken";
 import { getLoggedInChef } from "../redux";
 import greenLogo from "../../assets/images/greenLogo.png";
 import { styles } from "./drawerStyleSheet";
@@ -32,11 +31,9 @@ const CustomDrawer = (props: OwnProps & DrawerContentComponentProps) => {
 		getDeviceType();
 	}, []);
 
-	const logout = () => {
-		deleteToken();
-		AsyncStorage.removeItem("chef", () => {
-			props.setLoadedAndLoggedIn({ loaded: true, loggedIn: false });
-		});
+	const logout = async () => {
+		await clearPersistedSession();
+		props.setLoadedAndLoggedIn({ loaded: true, loggedIn: false });
 	};
 
 	return (

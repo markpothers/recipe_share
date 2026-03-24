@@ -5,9 +5,7 @@ import { Image, ImageBackground, View } from "react-native";
 import React, { useCallback, useEffect } from "react";
 import { stayLoggedIn, updateLoggedInChef, useAppDispatch } from "../redux";
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { LoginChef } from "../centralTypes";
-import { loadToken } from "../auxFunctions/saveLoadToken";
+import { restorePersistedSession } from "../auxFunctions/authSessionStorage";
 import { setDeviceType } from "../redux/rootReducer";
 import { styles } from "./usersStyleSheet";
 import spinachJpg from "../../assets/images/spinach.jpg";
@@ -72,21 +70,17 @@ export default function AppLoading({ setLoadedAndLoggedIn }: OwnProps) {
 		};
 		getDeviceType();
 		const checkLoggedIn = async () => {
-			const token = await loadToken();
-			if (token) {
-				const storedChef: LoginChef = JSON.parse(await AsyncStorage.getItem("chef"));
-				if (storedChef != null) {
-					storedChef.auth_token = token;
-					const { id, e_mail, username, auth_token, image_url, is_admin, is_member } = storedChef;
-					setStayLoggedIn(true);
-					updateLoggedInChefInState(id, e_mail, username, auth_token, image_url, is_admin, is_member);
-					await setLoadedAndLoggedIn({ loaded: true, loggedIn: true });
-				} else {
-					await setLoadedAndLoggedIn({ loaded: true, loggedIn: false });
-				}
-			} else {
-				await setLoadedAndLoggedIn({ loaded: true, loggedIn: false });
+			const restoredSession = await restorePersistedSession();
+			if (restoredSession.loggedIn && restoredSession.chef) {
+				const { id, e_mail, username, auth_token, image_url, is_admin, is_member } = restoredSession.chef;
+				setStayLoggedIn(true);
+				updateLoggedInChefInState(id, e_mail, username, auth_token, image_url, is_admin, is_member);
+				await setLoadedAndLoggedIn({ loaded: true, loggedIn: true });
+				return;
 			}
+
+			setStayLoggedIn(false);
+			await setLoadedAndLoggedIn({ loaded: true, loggedIn: false });
 		};
 		checkLoggedIn();
 	}, [dispatch, setStayLoggedIn, updateLoggedInChefInState, setLoadedAndLoggedIn]);

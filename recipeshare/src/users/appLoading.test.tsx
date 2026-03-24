@@ -71,4 +71,17 @@ describe("appLoading page", () => {
 		);
 		await waitFor(() => expect(mockSetLoadedAndLoggedIn).toHaveBeenCalledWith({ loaded: true, loggedIn: true }));
 	});
+
+	test("should recover to logged out when stored chef JSON is corrupt", async () => {
+		(loadToken as jest.MockedFunction<typeof loadToken>).mockImplementation(() => Promise.resolve("myMockToken"));
+		(AsyncStorage.getItem as jest.MockedFunction<typeof AsyncStorage.getItem>).mockImplementation(() =>
+			Promise.resolve("{bad json")
+		);
+		render(
+			<Provider store={store}>
+				<AppLoading navigation={navigation} route={route} setLoadedAndLoggedIn={mockSetLoadedAndLoggedIn} />
+			</Provider>
+		);
+		await waitFor(() => expect(mockSetLoadedAndLoggedIn).toHaveBeenCalledWith({ loaded: true, loggedIn: false }));
+	});
 });

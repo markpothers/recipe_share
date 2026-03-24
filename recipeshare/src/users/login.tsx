@@ -18,7 +18,7 @@ import { responsiveHeight, responsiveWidth } from "react-native-responsive-dimen
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { centralStyles } from "../centralStyleSheet"; //eslint-disable-line no-unused-vars
-import { saveToken } from "../auxFunctions/saveLoadToken";
+import { persistSession } from "../auxFunctions/authSessionStorage";
 import { styles } from "./usersStyleSheet";
 import yellowLogo from "../../assets/images/yellowLogo.png";
 
@@ -110,22 +110,18 @@ export default function Login(props: OwnProps) {
 			} else {
 				if (stayingLoggedIn) {
 					dispatch(clearLoginUserDetails());
-					dispatch(
-						updateLoggedInChef({
-							id: response.id,
-							e_mail: response.e_mail,
-							username: response.username,
-							auth_token: response.auth_token,
-							image_url: response.image_url,
-							is_admin: response.is_admin,
-							is_member: response.is_member,
-						})
-					);
-					await saveToken(response.auth_token);
-					delete response.auth_token;
-					AsyncStorage.setItem("chef", JSON.stringify(response), () => {
-						props.navigation.navigate("CreateChef", { successfulLogin: true }); //this navigate command is used to trigger Apple Keychain.  CreateChef will immediately perform the required actions to login.
-					});
+					const loggedInChef = {
+						id: response.id,
+						e_mail: response.e_mail,
+						username: response.username,
+						auth_token: response.auth_token,
+						image_url: response.image_url,
+						is_admin: response.is_admin,
+						is_member: response.is_member,
+					};
+					dispatch(updateLoggedInChef(loggedInChef));
+					await persistSession(loggedInChef);
+					props.navigation.navigate("CreateChef", { successfulLogin: true }); //this navigate command is used to trigger Apple Keychain.  CreateChef will immediately perform the required actions to login.
 				} else {
 					dispatch(
 						updateLoggedInChef({

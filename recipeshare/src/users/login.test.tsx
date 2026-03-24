@@ -8,12 +8,12 @@ import { Provider } from "react-redux";
 import React from "react";
 import { configureStore } from "@reduxjs/toolkit";
 import { rootReducer } from "../redux";
-import { saveToken } from "../auxFunctions/saveLoadToken";
+import { persistSession } from "../auxFunctions/authSessionStorage";
 
 // manual mocks
 jest.mock("../fetches/loginChef");
 jest.mock("../fetches/getNewPassword");
-jest.mock("../auxFunctions/saveLoadToken");
+jest.mock("../auxFunctions/authSessionStorage");
 
 describe("login page", () => {
 	let store, mockListener, mockListenerRemove, mockNavigate, navigation, route;
@@ -24,6 +24,7 @@ describe("login page", () => {
 				root: rootReducer,
 			},
 		});
+		(persistSession as jest.MockedFunction<typeof persistSession>).mockClear();
 
 		mockListener = jest.fn();
 		mockNavigate = jest.fn();
@@ -223,7 +224,7 @@ describe("login page", () => {
 
 		test("logs in successfully staying logged in", async () => {
 			// arrange
-			const originalLoginResponse = { ...loginResponse }; // copied because it gets modified in the actual method
+			const originalLoginResponse = { ...loginResponse };
 			(postLoginChef as jest.MockedFunction<typeof postLoginChef>).mockImplementation(() =>
 				Promise.resolve(loginResponse)
 			);
@@ -237,14 +238,15 @@ describe("login page", () => {
 			// assert
 			await waitFor(() => expect(getByPlaceholderText("e-mail").props.value).toStrictEqual("")); // value is updated in redux by clearLoginUserDetails
 			expect(getByPlaceholderText("password").props.value).toStrictEqual(""); //value is updated in redux
-			const loginResponseWithoutAuth = { ...originalLoginResponse };
-			delete loginResponseWithoutAuth.auth_token;
-			expect(AsyncStorage.setItem).toBeCalledWith(
-				"chef",
-				JSON.stringify(loginResponseWithoutAuth),
-				expect.any(Function)
-			);
-			expect(saveToken).toHaveBeenCalledWith(originalLoginResponse.auth_token);
+			expect(persistSession).toHaveBeenCalledWith({
+				id: originalLoginResponse.id,
+				e_mail: originalLoginResponse.e_mail,
+				username: originalLoginResponse.username,
+				auth_token: originalLoginResponse.auth_token,
+				image_url: originalLoginResponse.image_url,
+				is_admin: originalLoginResponse.is_admin,
+				is_member: originalLoginResponse.is_member,
+			});
 			expect(store.getState().root.loggedInChef).toStrictEqual({
 				id: originalLoginResponse.id,
 				e_mail: originalLoginResponse.e_mail,
@@ -283,7 +285,7 @@ describe("login page", () => {
 				is_admin: loginResponse.is_admin,
 				is_member: loginResponse.is_member,
 			}); //value is updated in redux by UpdateLoggedInChefInState
-			expect(saveToken).not.toHaveBeenCalledWith();
+			expect(persistSession).not.toHaveBeenCalled();
 			expect(mockNavigate).toHaveBeenCalledWith("CreateChef", {
 				successfulLogin: true,
 			});
