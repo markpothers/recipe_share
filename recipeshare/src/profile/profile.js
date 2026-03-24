@@ -132,6 +132,7 @@ export default connect(
 			if (this.props.route.params?.logout) {
 				await clearPersistedSession();
 				this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: false });
+				return;
 			}
 			await this.generateHeaderButtonList();
 			this.addDynamicMenuButtonsToHeader();
