@@ -1,6 +1,6 @@
 
 
-export const getTimeStringFromMinutes = (totalMinutes: number): string => {
+export const getTimeStringFromMinutes = (totalMinutes: number|null|undefined): string => {
 	if (totalMinutes) {
 		const hr = (Math.floor(totalMinutes / 60)).toString().padStart(2, "0")
 		const min = (totalMinutes - (parseInt(hr) * 60)).toString().padStart(2, "0")
@@ -14,7 +14,7 @@ export const getTimeStringFromMinutes = (totalMinutes: number): string => {
 	}
 }
 
-export const getMinutesFromTimeString = (timeString: string): number => {
+export const getMinutesFromTimeString = (timeString: string | null | undefined): number => {
 	if (timeString) {
 		const split = timeString.split(":")
 		const totalMinutes = (parseInt(split[0]) * 60) + (parseInt(split[1]))

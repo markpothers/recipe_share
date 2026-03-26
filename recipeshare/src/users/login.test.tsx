@@ -124,7 +124,7 @@ describe("login page", () => {
 			</Provider>
 		);
 		fireEvent.press(getByTestId("registerButton"));
-		await waitFor(() => expect(mockNavigate).toBeCalledWith("CreateChef"));
+		await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith("CreateChef"));
 	});
 
 	test("renders with thanks for registering popup", async () => {
@@ -201,7 +201,7 @@ describe("login page", () => {
 
 			// assert
 			await waitFor(() =>
-				expect(mockNavigate).toBeCalledWith("CreateChef", {
+				expect(mockNavigate).toHaveBeenCalledWith("CreateChef", {
 					successfulLogin: true,
 				})
 			);
@@ -219,7 +219,7 @@ describe("login page", () => {
 			fireEvent.press(getByText("Login"));
 
 			// assert
-			await waitFor(() => expect(AsyncStorage.removeItem).toBeCalledWith("rememberedEmail"));
+			await waitFor(() => expect(AsyncStorage.removeItem).toHaveBeenCalledWith("rememberedEmail"));
 		});
 
 		test("logs in successfully staying logged in", async () => {
@@ -275,7 +275,7 @@ describe("login page", () => {
 			// assert
 			await waitFor(() => expect(getByPlaceholderText("e-mail").props.value).toStrictEqual("")); // value is updated in redux by clearLoginUserDetails
 			expect(getByPlaceholderText("password").props.value).toStrictEqual(""); //value is updated in redux
-			expect(AsyncStorage.setItem).not.toBeCalled();
+			expect(AsyncStorage.setItem).not.toHaveBeenCalled();
 			expect(store.getState().root.loggedInChef).toStrictEqual({
 				id: loginResponse.id,
 				e_mail: loginResponse.e_mail,

@@ -1,7 +1,10 @@
 {
 	"compilerOptions": {
 		"jsx": "react",
-		"esModuleInterop": true
+		"esModuleInterop": true,
+		"isolatedModules": true,
+		"forceConsistentCasingInFileNames": true,
+		"types": ["jest", "node", "react", "react-native"]
 	},
 	"extends": "expo/tsconfig.base"
 }

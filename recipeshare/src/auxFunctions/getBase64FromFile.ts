@@ -1,6 +1,6 @@
 import * as ImageManipulator from "expo-image-manipulator";
 
-export const getBase64FromFile = async (uri: string): Promise<string> => {
+export const getBase64FromFile = async (uri: string | null | undefined): Promise<string> => {
 	if (uri) {
 		try {
 			const compressedImage = await ImageManipulator.manipulateAsync(uri, [], {

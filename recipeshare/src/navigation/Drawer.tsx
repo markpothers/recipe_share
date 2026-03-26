@@ -164,7 +164,7 @@ const CustomDrawer = (props: DrawerContentComponentProps) => {
 	);
 };
 
-function AvatarImage(props) {
+function AvatarImage(props: { image_url: string }) {
 	const URL = props.image_url;
 	if (!URL) {
 		return <Image style={styles.avatarThumbnail} source={defaultChef} />;
