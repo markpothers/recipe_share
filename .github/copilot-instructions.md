@@ -49,6 +49,7 @@ For any task that will change more than a handful of lines of code in one file, 
   - Relevant tests pass (or new tests added for changed behavior).
   - Lint passes for touched areas.
   - Final summary includes changed files, validation performed, and residual risks.
+  - Docs are checked and updated if any relevant changes have been made.
 
 ## Tech Stack (versions will change as Expo updates)
 
