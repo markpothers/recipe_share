@@ -7,7 +7,7 @@ import {
 	TextPopup,
 } from "../components";
 import { Keyboard, Linking, Text, TextInput, TouchableOpacity, View } from "react-native";
-import { RootState, updateLoginUserDetails, updateNewUserDetails } from "../redux";
+import { RootState, setAuthBootstrapState, updateLoginUserDetails, updateNewUserDetails } from "../redux";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
 
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -35,6 +35,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
+	setAuthBootstrapState,
 	saveChefDetails: (parameter, content) => {
 		return (dispatch) => {
 			// dispatch({ type: "UPDATE_NEW_USER_DETAILS", parameter: parameter, content: content })
@@ -71,14 +72,14 @@ export default connect(
 
 		componentDidMount = () => {
 			if (this.props.route.params?.successfulLogin == true) {
-				this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: true });
+				this.props.setAuthBootstrapState({ loaded: true, loggedIn: true });
 			}
 			this.setState({ awaitingServer: false });
 		};
 
 		componentDidUpdate = () => {
 			if (this.props.route.params?.successfulLogin == true) {
-				this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: true });
+				this.props.setAuthBootstrapState({ loaded: true, loggedIn: true });
 			}
 		};
 

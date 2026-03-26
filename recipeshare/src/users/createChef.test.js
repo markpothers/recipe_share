@@ -25,8 +25,7 @@ describe("create chef page", () => {
 	describe("logging in to save username to Keychain", () => {
 		// this behaviour is required to have a navigate event which triggers keychain to
 		// offer to save usernames and passwords
-		test("when passed successful login flag, calls setLoadedAndLoggedIn", () => {
-			const mockSetLoadedAndLoggedIn = jest.fn();
+		test("when passed successful login flag, sets auth bootstrap state", async () => {
 			const store = configureStore({
 				reducer: {
 					root: rootReducer,
@@ -39,17 +38,12 @@ describe("create chef page", () => {
 							navigate: jest.fn(),
 						}}
 						route={{ params: { successfulLogin: true } }}
-						setLoadedAndLoggedIn={mockSetLoadedAndLoggedIn}
 					/>
 					,
 				</Provider>
 			);
-			waitFor(() =>
-				expect(mockSetLoadedAndLoggedIn).toHaveBeenCalledWith({
-					loaded: true,
-					loggedIn: true,
-				})
-			);
+			await waitFor(() => expect(store.getState().root.authLoaded).toBe(true));
+			expect(store.getState().root.authLoggedIn).toBe(true);
 		});
 	});
 
@@ -58,7 +52,6 @@ describe("create chef page", () => {
 			mockNavigate,
 			navigation,
 			route,
-			mockSetLoadedAndLoggedIn,
 			getByTestId,
 			queryAllByTestId,
 			getByPlaceholderText,
@@ -79,7 +72,6 @@ describe("create chef page", () => {
 			});
 
 			mockNavigate = jest.fn();
-			mockSetLoadedAndLoggedIn = jest.fn();
 
 			navigation = {
 				navigate: mockNavigate,
@@ -93,7 +85,7 @@ describe("create chef page", () => {
 
 			const rendered = render(
 				<Provider store={store}>
-					<CreateChef navigation={navigation} route={route} setLoadedAndLoggedIn={mockSetLoadedAndLoggedIn} />
+					<CreateChef navigation={navigation} route={route} />
 				</Provider>
 			);
 

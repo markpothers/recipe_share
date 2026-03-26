@@ -6,8 +6,7 @@ import CreateChef from "../users/createChef";
 import LoginScreen from "../users/login";
 import MainDrawerNavigator from "./MainDrawerNavigator";
 import { getAuthLoaded, getAuthLoggedIn } from "../redux/selectors";
-import { setAuthBootstrapState } from "../redux/rootReducer";
-import { useAppDispatch, useAppSelector } from "../redux";
+import { useAppSelector } from "../redux";
 
 // import MainDrawerNavigatorContainer from "./MainDrawerNavigatorContainer";
 
@@ -45,39 +44,20 @@ const LoginStack = createStackNavigator<LoginStackParamList>();
 const AppLoadingStack = createStackNavigator<AppLoadingStackParamList>();
 
 const AppNavigator = () => {
-	const dispatch = useAppDispatch();
 	const loaded = useAppSelector(getAuthLoaded);
 	const loggedIn = useAppSelector(getAuthLoggedIn);
-
-	const setLoadedAndLoggedIn = (args: { loaded: boolean; loggedIn: boolean }) => {
-		dispatch(setAuthBootstrapState(args));
-	};
 
 	if (loaded == true && loggedIn == true) {
 		return (
 			<AppNavigatorStack.Navigator initialRouteName="Home" id={undefined}>
-				<HomeStack.Screen name="Home" options={{ headerShown: false }}>
-					{(props) => <MainDrawerNavigator {...props} setLoadedAndLoggedIn={setLoadedAndLoggedIn} />}
-				</HomeStack.Screen>
+				<HomeStack.Screen name="Home" options={{ headerShown: false }} component={MainDrawerNavigator} />
 			</AppNavigatorStack.Navigator>
 		);
 	} else if (loaded == true && loggedIn == false) {
 		return (
 			<AppNavigatorStack.Navigator initialRouteName="Login" id={undefined}>
-				<LoginStack.Screen
-					name="Login"
-					options={{ headerShown: false }}
-					// setLoadedAndLoggedIn={setLoadedAndLoggedIn}
-				>
-					{(props) => <LoginScreen {...props} setLoadedAndLoggedIn={setLoadedAndLoggedIn} />}
-				</LoginStack.Screen>
-				<LoginStack.Screen
-					name="CreateChef"
-					options={{ headerShown: false }}
-					// setLoadedAndLoggedIn={setLoadedAndLoggedIn}
-				>
-					{(props) => <CreateChef {...props} setLoadedAndLoggedIn={setLoadedAndLoggedIn} />}
-				</LoginStack.Screen>
+				<LoginStack.Screen name="Login" options={{ headerShown: false }} component={LoginScreen} />
+				<LoginStack.Screen name="CreateChef" options={{ headerShown: false }} component={CreateChef} />
 			</AppNavigatorStack.Navigator>
 		);
 	} else {

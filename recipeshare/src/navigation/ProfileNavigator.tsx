@@ -11,12 +11,7 @@ import { responsiveHeight } from "react-native-responsive-dimensions"; //eslint-
 
 const Stack = createStackNavigator<ProfileStackParamList>();
 
-type OwnProps = {
-	setLoadedAndLoggedIn: (args: { loaded: boolean; loggedIn: boolean }) => void;
-};
-
-const ProfileStack = (props: ProfileCoverProps & OwnProps) => {
-	const fwdProps = props;
+const ProfileStack = (_props: ProfileCoverProps) => {
 	return (
 		<Stack.Navigator
 			id={undefined}
@@ -43,7 +38,7 @@ const ProfileStack = (props: ProfileCoverProps & OwnProps) => {
 					headerTitle: (props) => <AppHeader {...props} text={"Profile"} />,
 				})}
 			>
-				{(props) => <Profile {...props} setLoadedAndLoggedIn={fwdProps.setLoadedAndLoggedIn} />}
+				{(props) => <Profile {...props} />}
 			</Stack.Screen>
 			<Stack.Screen
 				name="NewRecipe"

@@ -29,7 +29,6 @@ import yellowLogo from "../../assets/images/yellowLogo.png";
 type OwnProps = {
 	navigation: LoginNavigationProps;
 	route: LoginRouteProps;
-	setLoadedAndLoggedIn: (args: { loaded: boolean; loggedIn: boolean }) => void;
 };
 
 export default function Login(props: OwnProps) {

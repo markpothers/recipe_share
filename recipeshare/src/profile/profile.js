@@ -1,7 +1,7 @@
 import { AlertPopup, OfflineMessage, PicSourceChooser, SpinachAppContainer } from "../components";
 import { destroyChef, getChefDetails } from "../fetches";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
-import { storeChefDetails, storeNewFollowers, updateNewUserDetails } from "../redux";
+import { setAuthBootstrapState, storeChefDetails, storeNewFollowers, updateNewUserDetails } from "../redux";
 
 import AppHeaderRight from "../navigation/appHeaderRight";
 import ChefDetailsCard from "../chefDetails/ChefDetailsCard";
@@ -39,6 +39,7 @@ const mapDispatchToProps = {
 			dispatch(storeNewFollowers({ chefID: `chef${followee_id}`, followers: followers }));
 		};
 	},
+	setAuthBootstrapState,
 	saveChefDetails: (parameter, content) => {
 		return (dispatch) => {
 			// dispatch({ type: "UPDATE_NEW_USER_DETAILS", parameter: parameter, content: content });
@@ -131,7 +132,7 @@ export default connect(
 		componentDidMount = async () => {
 			if (this.props.route.params?.logout) {
 				await clearPersistedSession();
-				this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: false });
+				this.props.setAuthBootstrapState({ loaded: true, loggedIn: false });
 				return;
 			}
 			await this.generateHeaderButtonList();
@@ -308,7 +309,7 @@ export default connect(
 				const deletedChef = await destroyChef(chef.auth_token, chef.id, deleteRecipes);
 				if (deletedChef) {
 					await clearPersistedSession();
-					this.props.setLoadedAndLoggedIn({ loaded: true, loggedIn: false });
+					this.props.setAuthBootstrapState({ loaded: true, loggedIn: false });
 				}
 			} else {
 				this.setState({ renderOfflineMessage: true, offlineDiagnostics: netInfoState });

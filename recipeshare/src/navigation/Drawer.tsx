@@ -8,17 +8,15 @@ import { responsiveFontSize, responsiveHeight } from "react-native-responsive-di
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { clearPersistedSession } from "../auxFunctions/authSessionStorage";
 import defaultChef from "../../assets/images/default-chef.jpg";
+import { setAuthBootstrapState } from "../redux/rootReducer";
 import { getLoggedInChef } from "../redux";
 import greenLogo from "../../assets/images/greenLogo.png";
 import { styles } from "./drawerStyleSheet";
-import { useAppSelector } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
-type OwnProps = {
-	setLoadedAndLoggedIn: (args: { loaded: boolean; loggedIn: boolean }) => void;
-};
-
-const CustomDrawer = (props: OwnProps & DrawerContentComponentProps) => {
+const CustomDrawer = (props: DrawerContentComponentProps) => {
 	const [isTablet, setIsTablet] = useState(false);
+	const dispatch = useAppDispatch();
 	const loggedInChef = useAppSelector(getLoggedInChef);
 
 	useEffect(() => {
@@ -33,7 +31,7 @@ const CustomDrawer = (props: OwnProps & DrawerContentComponentProps) => {
 
 	const logout = async () => {
 		await clearPersistedSession();
-		props.setLoadedAndLoggedIn({ loaded: true, loggedIn: false });
+		dispatch(setAuthBootstrapState({ loaded: true, loggedIn: false }));
 	};
 
 	return (
