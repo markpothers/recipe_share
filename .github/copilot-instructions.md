@@ -31,6 +31,9 @@ Build and maintain RecipeShare, which is an Expo + React Native mobile app with 
 
 ## Rules of Engagement
 
+- Communication style: Keep responses short and clear. Avoid verbose explanations.
+- When a task surfaces more than 3 issues for discussion, present them one at a time. Wait for resolution of each before moving to the next.
+- Track the outcome of each sub-discussion in a running plan. Implement all agreed changes together once all issues have been reviewed.
 - Do not start making code changes until told to proceed. Discuss first how a solution will be implmented. Discussions about code do not immediately require code changes until agreed.
 For any task that will change more than a handful of lines of code in one file, establish a clear understanding of how a task will be completed before proceeding
 - Keep user flows stable (auth, browse, details, create/edit recipe, profile).
@@ -43,6 +46,7 @@ For any task that will change more than a handful of lines of code in one file, 
 - If a task is unclear, ask for clarification as to how it should be handled.
 - Always include a short verification summary in the final response.
 - If initial edits do not solve a problem, reconsider the proposed solution, do not layer non-working fixes without discussion
+- If you attempt to fix a bug and it is not fixed; do not compound bad decisions by adding more fixes. Undo the attempted fix and try something else.  If one bug requires multiple changes, explain why they are all needed.
 - The majority of testing is done on Android. Always point out likely differences with iOS that require specific testing
 - Definition of Done (Default). A task is complete when:
   - Code compiles and targeted flows are verified.
