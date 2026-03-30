@@ -1,11 +1,23 @@
 import * as ImagePicker from "expo-image-picker";
 
-import { Ingredient, NewRecipe, RecipeImage, RecipeIngredient, RecipeInstruction, Unit } from "../../centralTypes";
+import {
+	Filters,
+	InstructionImage,
+	Ingredient,
+	NewRecipe,
+	RecipeImage,
+	RecipeIngredient,
+	RecipeInstruction,
+	Unit,
+	Recipe,
+	Instruction,
+	FilterSettings,
+} from "../../centralTypes";
 import { NewRecipeNavigationProps, NewRecipeRouteProps } from "../../navigation";
 import React, { useCallback, useEffect, useState } from "react";
 import { fetchIngredients, patchRecipe, postInstructionImage, postRecipe, postRecipeImage } from "../../fetches";
 import { getLoggedInChef, useAppSelector } from "../../redux";
-import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+import { responsiveHeight } from "react-native-responsive-dimensions";
 
 import AppHeader from "../../navigation/appHeader";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -34,11 +46,35 @@ const getNewRecipeSeed = (seedMode: NewRecipeSeedMode): NewRecipe => {
 
 const selectedSeedRecipe = getNewRecipeSeed(runtimeConfig.seedMode);
 
+const getErrorName = (error: unknown): string | undefined => {
+	if (typeof error === "object" && error !== null && "name" in error) {
+		const maybeName = (error as { name?: unknown }).name;
+		if (typeof maybeName === "string") {
+			return maybeName;
+		}
+	}
+	return undefined;
+};
+
+const getErrorMessage = (error: unknown): string => {
+	if (typeof error === "string") {
+		return error;
+	}
+	if (error instanceof Error) {
+		return error.message;
+	}
+	try {
+		return JSON.stringify(error);
+	} catch {
+		return "Unknown error";
+	}
+};
+
 export const useNewRecipeModel = (
 	navigation: NewRecipeNavigationProps,
 	route: NewRecipeRouteProps,
-	nextInstructionInput: React.MutableRefObject<any>,
-	nextIngredientInput: React.MutableRefObject<any>
+	nextInstructionInput: React.RefObject<{ focus: () => void } | null>,
+	nextIngredientInput: React.RefObject<{ focus: () => void } | null>
 ) => {
 	const loggedInChef = useAppSelector(getLoggedInChef);
 	const [renderOfflineMessage, setRenderOfflineMessage] = useState<boolean>(false);
@@ -70,7 +106,7 @@ export const useNewRecipeModel = (
 			const ingredients = await fetchIngredients(loggedInChef.auth_token);
 			if (ingredients) {
 				// remove untrimmed duplicates
-				const uniqueIngredients = {};
+				const uniqueIngredients: Record<string, Ingredient> = {};
 				ingredients.forEach((ingredient) => {
 					uniqueIngredients[ingredient.name.trim()] = ingredient;
 				});
@@ -82,7 +118,8 @@ export const useNewRecipeModel = (
 	}, [loggedInChef.auth_token]);
 
 	const setEditRecipeDetails = useCallback(async () => {
-		const savedEditingRecipe = JSON.parse(await AsyncStorage.getItem("localEditRecipeDetails"));
+		const savedEditingRecipeRaw = await AsyncStorage.getItem("localEditRecipeDetails");
+		const savedEditingRecipe = savedEditingRecipeRaw ? JSON.parse(savedEditingRecipeRaw) : null;
 		if (
 			savedEditingRecipe &&
 			savedEditingRecipe.newRecipeDetails.recipeId == route.params?.recipe_details.recipe.id
@@ -145,13 +182,14 @@ export const useNewRecipeModel = (
 	]);
 
 	const saveNewRecipeDetailsLocally = useCallback(
-		(forceNew = false) => {
+		(forceNew = false, recipeDetailsToSave: NewRecipe | null = null) => {
+			const detailsToSave = recipeDetailsToSave ?? newRecipeDetails;
 			const dataToSave = {
-				newRecipeDetails: newRecipeDetails,
+				newRecipeDetails: detailsToSave,
 				instructionHeights: instructionHeights,
 				averageInstructionHeight: averageInstructionHeight,
 			};
-			if (!forceNew && newRecipeDetails.recipeId) {
+			if (!forceNew && detailsToSave.recipeId) {
 				AsyncStorage.setItem("localEditRecipeDetails", JSON.stringify(dataToSave), () => {
 					// console.log('localEditRecipeDetails saved')
 				});
@@ -270,7 +308,7 @@ export const useNewRecipeModel = (
 			});
 		});
 	};
-	const clearEditRecipeDetails = async (editedRecipeSavedToDatabase) => {
+	const clearEditRecipeDetails = async (editedRecipeSavedToDatabase: boolean) => {
 		AsyncStorage.removeItem("localEditRecipeDetails", async () => {
 			setAlertPopupShowing(false);
 			// primarily this is to clear out the instructions so when repopulated they layout and measure their heights correctly
@@ -310,7 +348,7 @@ export const useNewRecipeModel = (
 	};
 
 	const handleInstructionsSort = (newInstructions: RecipeInstruction[]) => {
-		const newInstructionHeights = [];
+		const newInstructionHeights: number[] = [];
 		newInstructions.forEach((inst) => {
 			const index = newRecipeDetails.instructions.findIndex((i) => i.id === inst.id);
 			newInstructionHeights.push(instructionHeights[index]);
@@ -368,7 +406,7 @@ export const useNewRecipeModel = (
 		setAwaitingServer(false);
 	};
 
-	const toggleFilterCategory = (category) => {
+	const toggleFilterCategory = (category: Filters) => {
 		setNewRecipeDetails({
 			...newRecipeDetails,
 			filter_settings: {
@@ -387,24 +425,34 @@ export const useNewRecipeModel = (
 		});
 	};
 
-	const postImages = async (newRecipeDetails, recipe) => {
+	const postImages = async (
+		newRecipeDetailsToPost: NewRecipe,
+		recipe: Recipe & {
+			instructions: Instruction[];
+		}
+	) => {
 		try {
 			await Promise.all(
-				newRecipeDetails.primaryImages.map((image, index) => {
+				newRecipeDetailsToPost.primaryImages.map((image, index: number) => {
+					const existingImageId = "id" in image ? image.id : 0;
+					const uploadedImageUri = "uri" in image ? image.uri : "";
 					return postRecipeImage(
 						loggedInChef.id,
 						loggedInChef.auth_token,
 						recipe.recipe.id,
-						image.id || 0,
+						existingImageId || 0,
 						index,
-						image.uri
+						uploadedImageUri
 					);
 				})
 			);
 			// Post instruction images using newRecipeDetails.instructions
 			await Promise.all(
-				newRecipeDetails.instructions.map((instruction, index) => {
+				newRecipeDetailsToPost.instructions.map((instruction, index: number) => {
 					const recipeInstruction = recipe.instructions.find((i) => i.step === index);
+					if (!recipeInstruction) {
+						return Promise.resolve(true);
+					}
 					// for new images, the image is the local uri and has no id
 					// it needs to be uploaded to the server along with the instruction id
 					if (instruction.image && typeof instruction.image === "string" && instruction.image !== "") {
@@ -430,8 +478,7 @@ export const useNewRecipeModel = (
 				})
 			);
 			return true;
-		} catch (e) {
-			console.error("Error posting images:", e);
+		} catch {
 			setErrors(
 				"The recipe saved successfully but not all the images could be saved. Please finish submission now or later to try again. Your recipe will be visible without those images that failed already."
 			);
@@ -489,7 +536,7 @@ export const useNewRecipeModel = (
 						}
 					}
 				} catch (e) {
-					if (e.name === "Logout") {
+					if (getErrorName(e) === "Logout") {
 						navigation.navigate("ProfileCover", {
 							screen: "Profile",
 							params: { logout: true, title: "Profile" },
@@ -497,7 +544,7 @@ export const useNewRecipeModel = (
 					}
 					// console.log(e)
 					setRenderOfflineMessage(true);
-					setOfflineDiagnostics(e);
+					setOfflineDiagnostics(getErrorMessage(e));
 					setAwaitingServer(false);
 				}
 			} else {
@@ -527,13 +574,14 @@ export const useNewRecipeModel = (
 							setErrors(recipe.message);
 							setAwaitingServer(false);
 						} else {
-							setNewRecipeDetails({
+							const newRecipeDetailsWithId = {
 								...newRecipeDetails,
 								recipeId: recipe.recipe.id,
-							});
+							};
+							setNewRecipeDetails(newRecipeDetailsWithId);
 
 							// save the recipe locally with its new id to make sure resubmissions don't submit duplicates (as often as possible)
-							saveNewRecipeDetailsLocally(true);
+							saveNewRecipeDetailsLocally(true, newRecipeDetailsWithId);
 							// navigation.setParams({
 							// recipeDetails: { recipe: { id: recipe.recipe.id } },
 							// });
@@ -551,7 +599,7 @@ export const useNewRecipeModel = (
 						}
 					}
 				} catch (e) {
-					if (e.name === "Logout") {
+					if (getErrorName(e) === "Logout") {
 						navigation.navigate("ProfileCover", {
 							screen: "Profile",
 							params: { title: "Profile", logout: true },
@@ -559,7 +607,7 @@ export const useNewRecipeModel = (
 					}
 					// console.log(e)
 					setRenderOfflineMessage(true);
-					setOfflineDiagnostics(e);
+					setOfflineDiagnostics(getErrorMessage(e));
 					setAwaitingServer(false);
 				}
 			}
@@ -569,18 +617,18 @@ export const useNewRecipeModel = (
 	};
 
 	// console.log("newRecipeDetails:", newRecipeDetails.instructions);
-	const setRecipeParamsForEditing = async (recipeDetails) => {
+	const setRecipeParamsForEditing = async (recipeDetails: Recipe) => {
 		const { recipe } = recipeDetails;
-		const newIngredients = recipeDetails.ingredient_uses.map((ingredient_use) => {
+		const newIngredients: RecipeIngredient[] = recipeDetails.ingredient_uses.map((ingredient_use) => {
+			const ingredientName =
+				recipeDetails.ingredients.find((ingredient) => ingredient.id == ingredient_use.ingredient_id)?.name ||
+				"";
 			return {
-				ingredientId: ingredient_use.ingredient_id,
+				name: ingredientName,
 				quantity: ingredient_use.quantity,
-				unit: ingredient_use.unit,
+				unit: ingredient_use.unit as Unit,
 			};
 		});
-		newIngredients.forEach(
-			(use) => (use.name = recipeDetails.ingredients.find((ingredient) => ingredient.id == use.ingredientId).name)
-		);
 		const newInstructions = recipeDetails.instructions.map((i) => {
 			const image = recipeDetails.instruction_images.find((j) => j.instruction_id == i.id);
 			return {
@@ -592,49 +640,64 @@ export const useNewRecipeModel = (
 		setInstructionHeights(recipeDetails.instructions.map(() => responsiveHeight(6.5)));
 		setAverageInstructionHeight(responsiveHeight(6.5));
 		setErrors([]);
+		const recipeId = (recipe.id as number) || 0;
+		const prepTime = (recipe.prep_time as number) || 0;
+		const cookTime = (recipe.cook_time as number) || 0;
+		const totalTime = (recipe.total_time as number) || 0;
+		const recipeTime = (recipe.time as string | null) || null;
+		const getFilterValue = (snakeKey: string, titleKey: Filters): boolean => {
+			const snakeValue = recipe[snakeKey];
+			if (typeof snakeValue === "boolean") {
+				return snakeValue;
+			}
+			const titleValue = recipe[titleKey];
+			return typeof titleValue === "boolean" ? titleValue : false;
+		};
 		setNewRecipeDetails({
-			recipeId: recipe.id,
-			name: recipe.name,
+			recipeId: recipeId,
+			name: (recipe.name as string) || "",
 			instructions: newInstructions,
 			ingredients: newIngredients.length > 0 ? newIngredients : [],
-			difficulty: recipe.difficulty.toString(),
+			difficulty: String(recipe.difficulty ?? "0") as NewRecipe["difficulty"],
 			times: {
-				prepTime: recipe.prep_time > 0 ? recipe.prep_time : 0,
-				cookTime: recipe.cook_time > 0 ? recipe.cook_time : 0,
-				totalTime:
-					recipe.total_time > 0 ? recipe.total_time : recipe.time ? getMinutesFromTimeString(recipe.time) : 0,
+				prepTime: prepTime > 0 ? prepTime : 0,
+				cookTime: cookTime > 0 ? cookTime : 0,
+				totalTime: totalTime > 0 ? totalTime : recipeTime ? getMinutesFromTimeString(recipeTime) : 0,
 			},
-			primaryImages: recipeDetails.recipe_images?.length > 0 ? recipeDetails.recipe_images : [{ uri: "" }],
+			primaryImages:
+				recipeDetails.recipe_images && recipeDetails.recipe_images.length > 0
+					? recipeDetails.recipe_images
+					: ([{ uri: "" }] as NewRecipe["primaryImages"]),
 			filter_settings: {
-				Breakfast: recipe["breakfast"],
-				Lunch: recipe["lunch"],
-				Dinner: recipe["dinner"],
-				Chicken: recipe["chicken"],
-				"Red meat": recipe["red_meat"],
-				Seafood: recipe["seafood"],
-				Vegetarian: recipe["vegetarian"],
-				Salad: recipe["salad"],
-				Vegan: recipe["vegan"],
-				Soup: recipe["soup"],
-				Dessert: recipe["dessert"],
-				Side: recipe["side"],
-				"Whole 30": recipe["whole_30"],
-				Paleo: recipe["paleo"],
-				"Freezer meal": recipe["freezer_meal"],
-				Keto: recipe["keto"],
-				Weeknight: recipe["weeknight"],
-				Weekend: recipe["weekend"],
-				"Gluten free": recipe["gluten_free"],
-				Bread: recipe["bread"],
-				"Dairy free": recipe["dairy_free"],
-				"White meat": recipe["white_meat"],
+				Breakfast: getFilterValue("breakfast", "Breakfast"),
+				Lunch: getFilterValue("lunch", "Lunch"),
+				Dinner: getFilterValue("dinner", "Dinner"),
+				Chicken: getFilterValue("chicken", "Chicken"),
+				"Red meat": getFilterValue("red_meat", "Red meat"),
+				Seafood: getFilterValue("seafood", "Seafood"),
+				Vegetarian: getFilterValue("vegetarian", "Vegetarian"),
+				Salad: getFilterValue("salad", "Salad"),
+				Vegan: getFilterValue("vegan", "Vegan"),
+				Soup: getFilterValue("soup", "Soup"),
+				Dessert: getFilterValue("dessert", "Dessert"),
+				Side: getFilterValue("side", "Side"),
+				"Whole 30": getFilterValue("whole_30", "Whole 30"),
+				Paleo: getFilterValue("paleo", "Paleo"),
+				"Freezer meal": getFilterValue("freezer_meal", "Freezer meal"),
+				Keto: getFilterValue("keto", "Keto"),
+				Weeknight: getFilterValue("weeknight", "Weeknight"),
+				Weekend: getFilterValue("weekend", "Weekend"),
+				"Gluten free": getFilterValue("gluten_free", "Gluten free"),
+				Bread: getFilterValue("bread", "Bread"),
+				"Dairy free": getFilterValue("dairy_free", "Dairy free"),
+				"White meat": getFilterValue("white_meat", "White meat"),
 			},
-			cuisine: recipe.cuisine,
-			serves: recipe.serves,
-			acknowledgement: recipe.acknowledgement,
-			acknowledgementLink: recipe.acknowledgement_link,
-			description: recipe.description,
-			showBlogPreview: recipe.show_blog_preview,
+			cuisine: (recipe.cuisine as NewRecipe["cuisine"]) || "Any",
+			serves: (recipe.serves as NewRecipe["serves"]) || "Any",
+			acknowledgement: (recipe.acknowledgement as string) || "",
+			acknowledgementLink: (recipe.acknowledgement_link as string) || "",
+			description: (recipe.description as string) || "",
+			showBlogPreview: Boolean(recipe.show_blog_preview),
 		});
 	};
 

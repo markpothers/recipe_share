@@ -235,6 +235,25 @@ describe("Recipe List", () => {
 
 			expectElementCount(queryAllByTestId("recipeCard"), recipeList.length);
 		});
+
+		test("renders offline message and no recipes when device is offline on initial load", async () => {
+			NetInfo.setReturnValue(false);
+
+			const { getByTestId, queryAllByTestId } = await waitFor(async () =>
+				render(
+					<Provider store={store}>
+						<RecipesList navigation={navigation} route={route} listChoice={"all"} />
+					</Provider>
+				)
+			);
+
+			await waitFor(() => {
+				expectElementExists(getByTestId("offlineMessage"));
+			});
+
+			expectElementCount(queryAllByTestId("recipeCard"), 0);
+			expectApiCallCount(getRecipeList, 0);
+		});
 	});
 
 	describe("interacting with recipe cards", () => {
@@ -464,6 +483,41 @@ describe("Recipe List", () => {
 				expectCountChange(queryAllByLabelText("likes count")[1], 1);
 			});
 		});
+		
+		describe("when device goes offline during interactions", () => {
+			beforeEach(() => {
+				postRecipeLike.mockClear();
+				destroyRecipeLike.mockClear();
+				postReShare.mockClear();
+				destroyReShare.mockClear();
+				NetInfo.setReturnValue(false);
+			});
+
+			afterEach(() => {
+				NetInfo.setReturnValue(true);
+			});
+
+			test("liking a recipe while offline shows offline message and does not call api", async () => {
+				await pressAndExpectOfflineMessage(queryAllByLabelText("like recipe")[0], getByTestId);
+				expectApiCallCount(postRecipeLike, 0);
+			});
+
+			test("un-liking a recipe while offline shows offline message and does not call api", async () => {
+				await pressAndExpectOfflineMessage(queryAllByLabelText("unlike recipe")[0], getByTestId);
+				expectApiCallCount(destroyRecipeLike, 0);
+			});
+
+			test("sharing a recipe while offline shows offline message and does not call api", async () => {
+				await pressAndExpectOfflineMessage(queryAllByLabelText("share recipe with followers")[0], getByTestId);
+				expectApiCallCount(postReShare, 0);
+			});
+
+			test("un-sharing a recipe while offline shows offline message and does not call api", async () => {
+				await pressAndExpectOfflineMessage(queryAllByLabelText("remove share")[0], getByTestId);
+				expectApiCallCount(destroyReShare, 0);
+			});
+		});
+
 		describe("commenting", () => {
 			test("commenting should navigate to recipe with commenting == true", async () => {
 				const testRecipeDetails = recipeDetails.find((d) => d.id === 113);
@@ -613,6 +667,95 @@ describe("Recipe List", () => {
 	describe("interacting with the list", () => {
 		// 	test.skip("scrolling to the bottom should load more recipes", async () => {});
 		// 	test.skip("pull to refresh should reload the list", async () => {});
+		test("scrolling to end should request next page offset", async () => {
+			getRecipeList
+				.mockResolvedValueOnce({
+					recipes: recipeList,
+					cuisines,
+					serves,
+					filterOptions: clearedFilters,
+				})
+				.mockResolvedValueOnce({
+					recipes: [],
+					cuisines,
+					serves,
+					filterOptions: clearedFilters,
+				});
+
+			const { getByTestId, queryAllByTestId } = await waitFor(async () =>
+				render(
+					<Provider store={store}>
+						<RecipesList navigation={navigation} route={route} listChoice={"all"} />
+					</Provider>
+				)
+			);
+
+			await waitForLoadingToComplete(queryAllByTestId);
+
+			await act(async () => {
+				fireEvent(getByTestId("recipeListFlatList"), "onEndReached");
+			});
+
+			await waitFor(() => {
+				expect(getRecipeList).toHaveBeenCalledTimes(2);
+			});
+
+			const secondCall = getRecipeList.mock.calls[1];
+			expect(secondCall[3]).toEqual(recipeList.length);
+		});
+
+		test("refresh after pagination should reset offset to zero", async () => {
+			getRecipeList
+				.mockResolvedValueOnce({
+					recipes: recipeList,
+					cuisines,
+					serves,
+					filterOptions: clearedFilters,
+				})
+				.mockResolvedValueOnce({
+					recipes: [],
+					cuisines,
+					serves,
+					filterOptions: clearedFilters,
+				})
+				.mockResolvedValueOnce({
+					recipes: recipeList,
+					cuisines,
+					serves,
+					filterOptions: clearedFilters,
+				});
+
+			const { getByTestId, queryAllByTestId } = await waitFor(async () =>
+				render(
+					<Provider store={store}>
+						<RecipesList navigation={navigation} route={route} listChoice={"all"} />
+					</Provider>
+				)
+			);
+
+			await waitForLoadingToComplete(queryAllByTestId);
+
+			await act(async () => {
+				fireEvent(getByTestId("recipeListFlatList"), "onEndReached");
+			});
+
+			await waitFor(() => {
+				expect(getRecipeList).toHaveBeenCalledTimes(2);
+			});
+
+			const list = getByTestId("recipeListFlatList");
+			await act(async () => {
+				await list.props.refreshControl.props.onRefresh();
+			});
+
+			await waitFor(() => {
+				expect(getRecipeList).toHaveBeenCalledTimes(3);
+			});
+
+			const thirdCall = getRecipeList.mock.calls[2];
+			expect(thirdCall[3]).toEqual(0);
+		});
+
 		test("typing in the search box should reload the list", async () => {
 			//arrange
 			const chiRecipes = recipeList.filter((r) => r.name.toLowerCase().includes("chi"));
@@ -652,6 +795,9 @@ describe("Recipe List", () => {
 
 			// assert
 			expect(getRecipeList).toHaveBeenCalledTimes(2);
+			const secondCall = getRecipeList.mock.calls[1];
+			expect(secondCall[3]).toEqual(0);
+			expect(secondCall[9]).toEqual("chi");
 		});
 		test("clearing the search box should reload the list", async () => {
 			//arrange
@@ -705,6 +851,9 @@ describe("Recipe List", () => {
 
 			// assert - should reload with all recipes
 			expect(getRecipeList).toHaveBeenCalledTimes(3);
+			const thirdCall = getRecipeList.mock.calls[2];
+			expect(thirdCall[3]).toEqual(0);
+			expect(thirdCall[9]).toEqual("");
 		});
 	});
 });

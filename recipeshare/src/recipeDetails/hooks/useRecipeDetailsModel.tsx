@@ -212,6 +212,7 @@ export const useRecipeDetailsModel = ({ navigation, route }: OwnProps) => {
 	};
 
 	const updateAttributeCountInRecipeLists = useCallback(
+		//todo: attributes could be more specific: likes-count, makes-count, comments-count, shares-count 
 		(recipeId: number, attribute: string, toggle: string, diff: number) => {
 			const newAllRecipeLists = {};
 			Object.keys(allRecipeLists).forEach((list) => {
@@ -225,9 +226,10 @@ export const useRecipeDetailsModel = ({ navigation, route }: OwnProps) => {
 						return recipe;
 					}
 				});
+				//todo: update recipeList key to be specific strings rather than 'string'
 				newAllRecipeLists[list] = recipeList;
 			});
-			dispatch(updateAllRecipeLists(allRecipeLists));
+			dispatch(updateAllRecipeLists(newAllRecipeLists));
 		},
 		[allRecipeLists, dispatch]
 	);

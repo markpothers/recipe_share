@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions";
 
 export const styles = StyleSheet.create({
 	recipeCard: {
@@ -8,14 +8,13 @@ export const styles = StyleSheet.create({
 		width: "100%",
 		borderStyle: "solid",
 		borderColor: "#104e01",
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		borderWidth: 1,
-		backgroundColor: "white"
+		backgroundColor: "white",
 	},
 	recipeCardTopPostedByContainer: {
 		borderBottomWidth: 0.5,
 		borderBottomColor: "#104e01",
-		// height: 25,
 		width: "96.4%",
 		marginLeft: "1.6%",
 		marginRight: "2%",
@@ -23,41 +22,36 @@ export const styles = StyleSheet.create({
 		paddingTop: responsiveHeight(0.5),
 		flexDirection: "row",
 		alignItems: "center",
-		// borderWidth: 1,
-		// flexWrap: 'wrap'
 	},
 	recipeCardTopPostedByTouchable: {
-		// borderWidth: 1,
-		maxWidth: responsiveWidth(60)
+		maxWidth: responsiveWidth(60),
 	},
 	recipeCardTopContainer: {
 		flexDirection: "row",
 		width: "100%",
 		marginTop: "1%",
-		marginBottom: "1%"
+		marginBottom: "1%",
 	},
 	recipeCardTopLeftContainer: {
 		flex: 8,
 		justifyContent: "center",
-		// borderWidth: 1,
 	},
 	recipeCardTopRightContainer: {
 		flex: 2,
 		justifyContent: "center",
 		alignItems: "center",
 		overflow: "hidden",
-		// borderWidth: 1,
 	},
 	avatarThumbnail: {
 		height: responsiveHeight(9),
 		width: responsiveHeight(9),
 		marginRight: "4%",
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 	},
 	recipeCardTopLeftUpperContainer: {
 		width: "96%",
 		marginLeft: "2%",
-		marginRight: "2%"
+		marginRight: "2%",
 	},
 	recipeCardTopLeftMiddleContainer: {
 		width: "96%",
@@ -72,42 +66,41 @@ export const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 		marginLeft: "2%",
-		marginRight: "2%"
+		marginRight: "2%",
 	},
 	recipeCardImageContainer: {
 		height: responsiveWidth(75),
 		width: responsiveWidth(100),
-		alignItems:"center",
-		alignSelf: "center"
+		alignItems: "center",
+		alignSelf: "center",
 	},
 	thumbnail: {
 		position: "absolute",
 		height: "100%",
-		width: responsiveWidth(100)-4,
-		borderRadius:responsiveWidth(1.5)
+		width: responsiveWidth(100) - 4,
+		borderRadius: responsiveWidth(1.5),
 	},
 	recipeCardBottomContainer: {
 		flexDirection: "row",
 		marginTop: "1%",
 		marginBottom: "1%",
-		// height: 25,
 	},
 	recipeCardBottomSubContainers: {
 		flexDirection: "row",
 		flex: 1,
 		justifyContent: "center",
-		alignItems: "center"
+		alignItems: "center",
 	},
 	icon: {
 		color: "#505050",
 		alignSelf: "center",
-		marginRight: "10%"
+		marginRight: "10%",
 	},
 	recipeCardHighlighted: {
 		fontWeight: "bold",
 		fontSize: responsiveFontSize(2.1),
 		color: "#505050",
-		textAlign: "left"
+		textAlign: "left",
 	},
 	recipeCardTopOther: {
 		fontSize: responsiveFontSize(1.9),
@@ -124,7 +117,7 @@ export const styles = StyleSheet.create({
 		fontSize: responsiveFontSize(2.1),
 		fontWeight: "bold",
 		color: "#505050",
-		textAlign: "center"
+		textAlign: "center",
 	},
 	filterButton: {
 		position: "absolute",
@@ -138,8 +131,8 @@ export const styles = StyleSheet.create({
 		alignItems: "center",
 		bottom: responsiveHeight(4),
 		right: responsiveHeight(4),
-		borderRadius:responsiveWidth(1.5),
-		zIndex: 1
+		borderRadius: responsiveWidth(1.5),
+		zIndex: 1,
 	},
 	filterIcon: {
 		color: "#104e01",
@@ -148,10 +141,10 @@ export const styles = StyleSheet.create({
 		color: "#990000",
 		position: "absolute",
 		right: -responsiveHeight(1.25),
-		top: -responsiveHeight(1.25)
+		top: -responsiveHeight(1.25),
 	},
 	cantNavigateMessageContainer: {
-		borderRadius:responsiveWidth(1.5),
+		borderRadius: responsiveWidth(1.5),
 		position: "absolute",
 		alignSelf: "center",
 		top: "35%",
@@ -160,18 +153,17 @@ export const styles = StyleSheet.create({
 		borderWidth: 1,
 		borderColor: "#fff59b",
 		justifyContent: "center",
-		alignItems: "center"
+		alignItems: "center",
 	},
 	cantNavigateMessageText: {
 		color: "#fff59b",
 		paddingHorizontal: responsiveWidth(2),
 		paddingVertical: responsiveHeight(1),
 		textAlign: "center",
-		fontSize: responsiveFontSize(2)
+		fontSize: responsiveFontSize(2),
 	},
 	reSharedIcon: {
 		color: "#505050",
-		// alignSelf: 'center',
-		marginRight: responsiveWidth(2)
+		marginRight: responsiveWidth(2),
 	},
 });

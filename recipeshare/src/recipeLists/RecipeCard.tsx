@@ -1,6 +1,7 @@
-import { Image, Text, TouchableOpacity, View } from "react-native";
-import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions"; //eslint-disable-line no-unused-vars
+import { Image, ImageSourcePropType, Text, TouchableOpacity, View } from "react-native";
+import { responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions";
 
+import { ListRecipe } from "../centralTypes";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { OfflineMessage } from "../components";
 import React from "react";
@@ -9,13 +10,38 @@ import defaultRecipeImage from "../../assets/images/default-recipe.jpg";
 import { getTimeStringFromMinutes } from "../auxFunctions/getTimeStringFromMinutes";
 import { styles } from "./recipeListStyleSheet";
 
-export default class RecipeCard extends React.PureComponent {
-	navigateToSharer = (chefID) => {
+type RecipeCardProps = ListRecipe & {
+	listChoice?: string;
+	renderOfflineMessage?: number[];
+	clearOfflineMessage: (recipeID: number) => void;
+	navigateToRecipeDetails: (recipeID: number, commenting?: boolean) => void;
+	navigateToChefDetails: (chefID: number, recipeID: number) => void;
+	likeRecipe: (recipeID: number) => void;
+	unlikeRecipe: (recipeID: number) => void;
+	makeRecipe: (recipeID: number) => void;
+	reShareRecipe: (recipeID: number) => void;
+	unReShareRecipe: (recipeID: number) => void;
+};
+
+type AvatarImageProps = {
+	chefimage_url: string | null;
+};
+
+type PostedByProps = {
+	navigateToSharer: (chefID: number) => void;
+	username: string | null;
+	sharer_id: number;
+};
+
+export default class RecipeCard extends React.PureComponent<RecipeCardProps> {
+	navigateToSharer = (chefID: number) => {
 		this.props.navigateToChefDetails(chefID, this.props.id);
 	};
 
 	render() {
-		const imageSource = this.props.image_url ? { uri: this.props.image_url } : defaultRecipeImage;
+		const imageSource: ImageSourcePropType = this.props.image_url
+			? { uri: this.props.image_url }
+			: defaultRecipeImage;
 		return (
 			<View style={styles.recipeCard} testID={"recipeCard"}>
 				{this.props.renderOfflineMessage?.includes(this.props.id) && (
@@ -27,7 +53,7 @@ export default class RecipeCard extends React.PureComponent {
 						}}
 					/>
 				)}
-				{this.props.sharer_id && (
+				{this.props.sharer_id && this.props.sharer_username && (
 					<PostedBy
 						navigateToSharer={this.navigateToSharer}
 						username={this.props.sharer_username}
@@ -90,12 +116,12 @@ export default class RecipeCard extends React.PureComponent {
 						testID={"reShareButton"}
 						style={styles.recipeCardBottomSubContainers}
 						onPress={
-							this.props.chef_shared == 0
+							this.props.chef_shared === 0
 								? () => this.props.reShareRecipe(this.props.id)
 								: () => this.props.unReShareRecipe(this.props.id)
 						}
 					>
-						{this.props.chef_shared == 0 ? (
+						{this.props.chef_shared === 0 ? (
 							<Icon
 								name="share-outline"
 								size={responsiveHeight(3.5)}
@@ -122,12 +148,12 @@ export default class RecipeCard extends React.PureComponent {
 						testID={"likeButton"}
 						style={styles.recipeCardBottomSubContainers}
 						onPress={
-							this.props.chef_liked == 0
+							this.props.chef_liked === 0
 								? () => this.props.likeRecipe(this.props.id)
 								: () => this.props.unlikeRecipe(this.props.id)
 						}
 					>
-						{this.props.chef_liked == 0 ? (
+						{this.props.chef_liked === 0 ? (
 							<Icon
 								name="heart-outline"
 								size={responsiveHeight(3.5)}
@@ -159,7 +185,7 @@ export default class RecipeCard extends React.PureComponent {
 						style={styles.recipeCardBottomSubContainers}
 						onPress={() => this.props.navigateToRecipeDetails(this.props.id, true)}
 					>
-						{this.props.chef_commented == 0 ? (
+						{this.props.chef_commented === 0 ? (
 							<Icon
 								name="comment-outline"
 								size={responsiveHeight(3.5)}
@@ -188,16 +214,15 @@ export default class RecipeCard extends React.PureComponent {
 	}
 }
 
-function AvatarImage(chefimage_url) {
-	const URL = chefimage_url.chefimage_url;
-	if (!URL) {
+function AvatarImage({ chefimage_url }: AvatarImageProps) {
+	if (!chefimage_url) {
 		return <Image style={styles.avatarThumbnail} source={defaultChef} accessibilityLabel={"picture of chef"} />;
-	} else {
-		return <Image style={styles.avatarThumbnail} source={{ uri: URL }} accessibilityLabel={"picture of chef"} />;
 	}
+
+	return <Image style={styles.avatarThumbnail} source={{ uri: chefimage_url }} accessibilityLabel={"picture of chef"} />;
 }
 
-function PostedBy(props) {
+function PostedBy(props: PostedByProps) {
 	return (
 		<View testID={"postedByElement"} style={styles.recipeCardTopPostedByContainer}>
 			<Icon name="share" size={responsiveHeight(3.5)} style={styles.reSharedIcon} />

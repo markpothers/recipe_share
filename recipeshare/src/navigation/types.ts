@@ -18,6 +18,22 @@ export type ProfileCoverProps = DrawerScreenProps<MainDrawerParamList, "ProfileC
 
 type CommonParams = { title?: string };
 
+export enum RecipeListChoice {
+	newestRecipes = "Newest Recipes",
+	topRecipes = "Top Recipes",
+	myFeed = " My Feed",
+	myRecipes = "My Recipes",
+	recipesILike = "Recipes I Like"
+}
+
+export enum ChefListChoice {
+	chefsIFollow = "Chefs I Follow",
+	chefsFollowingMe = "Chefs Following Me",
+	newestChefs = "Newest Chefs",
+	topChefs = "Top Chefs"
+}
+
+
 // MyRecipeBook
 export type MyRecipeBookStackParamList = {
 	NewRecipe: { recipe_details: Recipe; title?: string };
@@ -55,32 +71,32 @@ export type MyRecipeBookNavigationProps = MyRecipeBookProps["navigation"];
 export type MyRecipeBookRouteProps = MyRecipeBookProps["route"];
 
 export type MyRecipeBookTabsParamList = {
-	"My Feed": undefined;
-	"My Recipes": { refresh?: boolean; deleteId?: number };
-	"Recipes I Like": undefined;
-	"Chefs I Follow": undefined;
-	"Chefs Following Me": undefined;
+	[RecipeListChoice.myFeed]: undefined;
+	[RecipeListChoice.myRecipes]: { refresh?: boolean; deleteId?: number };
+	[RecipeListChoice.recipesILike]: undefined;
+	[ChefListChoice.chefsIFollow]: undefined;
+	[ChefListChoice.chefsFollowingMe]: undefined;
 };
 
 export type MyFeedTabProps = CompositeScreenProps<
-	MaterialTopTabScreenProps<MyRecipeBookTabsParamList, "My Feed">,
+	MaterialTopTabScreenProps<MyRecipeBookTabsParamList, RecipeListChoice.myFeed>,
 	MyRecipeBookProps
 >;
 export type MyRecipesTabProps = CompositeScreenProps<
-	MaterialTopTabScreenProps<MyRecipeBookTabsParamList, "My Recipes">,
+	MaterialTopTabScreenProps<MyRecipeBookTabsParamList, RecipeListChoice.myRecipes>,
 	MyRecipeBookProps
 >;
 export type RecipesILikeTabProps = CompositeScreenProps<
-	MaterialTopTabScreenProps<MyRecipeBookTabsParamList, "Recipes I Like">,
+	MaterialTopTabScreenProps<MyRecipeBookTabsParamList, RecipeListChoice.recipesILike>,
 	MyRecipeBookProps
 >;
 // export type RecipesIMadeTabProps = CompositeScreenProps<MaterialTopTabScreenProps<MyRecipeBookTabsParamList, "Recipes I Made">, MyRecipeBookProps>;
 export type ChefsIFollowTabProps = CompositeScreenProps<
-	MaterialTopTabScreenProps<MyRecipeBookTabsParamList, "Chefs I Follow">,
+	MaterialTopTabScreenProps<MyRecipeBookTabsParamList, ChefListChoice.chefsIFollow>,
 	MyRecipeBookProps
 >;
 export type ChefsFollowingMeTabProps = CompositeScreenProps<
-	MaterialTopTabScreenProps<MyRecipeBookTabsParamList, "Chefs Following Me">,
+	MaterialTopTabScreenProps<MyRecipeBookTabsParamList, ChefListChoice.chefsFollowingMe>,
 	MyRecipeBookProps
 >;
 
@@ -112,26 +128,26 @@ export type BrowseRecipesNavigationProps = BrowseRecipesProps["navigation"];
 export type BrowseRecipesRouteProps = BrowseRecipesProps["route"];
 
 export type BrowseRecipesTabsParamList = {
-	"Newest Recipes": undefined;
-	"Top Recipes": undefined;
-	"Newest Chefs": undefined;
-	"Top Chefs": undefined;
+	[RecipeListChoice.newestRecipes]: undefined;
+	[RecipeListChoice.topRecipes]: undefined;
+	[ChefListChoice.newestChefs]: undefined;
+	[ChefListChoice.topChefs]: undefined;
 };
 
 export type NewestRecipesTabProps = CompositeScreenProps<
-	MaterialTopTabScreenProps<BrowseRecipesTabsParamList, "Newest Recipes">,
+	MaterialTopTabScreenProps<BrowseRecipesTabsParamList, RecipeListChoice.newestRecipes>,
 	BrowseRecipesProps
 >;
 export type TopRecipesTabProps = CompositeScreenProps<
-	MaterialTopTabScreenProps<BrowseRecipesTabsParamList, "Top Recipes">,
+	MaterialTopTabScreenProps<BrowseRecipesTabsParamList, RecipeListChoice.topRecipes>,
 	BrowseRecipesProps
 >;
 export type NewestChefsTabProps = CompositeScreenProps<
-	MaterialTopTabScreenProps<BrowseRecipesTabsParamList, "Newest Chefs">,
+	MaterialTopTabScreenProps<BrowseRecipesTabsParamList, ChefListChoice.newestChefs>,
 	BrowseRecipesProps
 >;
 export type TopChefsTabProps = CompositeScreenProps<
-	MaterialTopTabScreenProps<BrowseRecipesTabsParamList, "Top Chefs">,
+	MaterialTopTabScreenProps<BrowseRecipesTabsParamList, ChefListChoice.topChefs>,
 	BrowseRecipesProps
 >;
 
@@ -153,3 +169,4 @@ export type ProfileRouteProps = ProfileProps["route"];
 export type AboutProps = CompositeScreenProps<StackScreenProps<ProfileStackParamList, "About">, ProfileCoverProps>;
 export type AboutNavigationProps = AboutProps["navigation"];
 export type AboutRouteProps = AboutProps["route"];
+
