@@ -68,7 +68,6 @@ const RecipeDetails = ({ navigation, route }: OwnProps) => {
 		chefNameTextColor,
 		imagePopupDetails,
 		imagePopupShowing,
-		webviewHeight,
 		webviewLoading,
 		webviewCanRespondToEvents,
 		setCommentsTopY,
@@ -85,7 +84,6 @@ const RecipeDetails = ({ navigation, route }: OwnProps) => {
 		setChefNameTextColor,
 		setImagePopupDetails,
 		setImagePopupShowing,
-		setWebviewHeight,
 		setWebviewCanRespondToEvents,
 		navigateToChefDetails,
 		editRecipe,
@@ -305,27 +303,18 @@ const RecipeDetails = ({ navigation, route }: OwnProps) => {
 							The blog:
 						</Text>
 						<View style={styles.webviewContainer}>
-							<ScrollView nestedScrollEnabled={true}>
-								<WebView
-									source={{ uri: recipeDetails.recipe.acknowledgement_link }}
-									injectedJavaScript={`
-											window.ReactNativeWebView.postMessage(
-												Math.max(document.body.offsetHeight, document.body.scrollHeight)
-											)
-										`}
-									onMessage={(e) => {
-										const newHeight = parseInt(e.nativeEvent.data);
-										if (newHeight > 0) {
-											setWebviewHeight(newHeight);
-										}
-									}}
-									contentContainerStyle={{ borderRadius: responsiveWidth(1.5) }}
-									style={{
-										borderRadius: responsiveWidth(1.5),
-										height: webviewHeight,
-										width: "100%",
-									}}
-									onShouldStartLoadWithRequest={(event) => {
+							<WebView
+								source={{ uri: recipeDetails.recipe.acknowledgement_link }}
+								style={{ flex: 1 }}
+								nestedScrollEnabled={true}
+								scrollEnabled={true}
+								setSupportMultipleWindows={false}
+								javaScriptCanOpenWindowsAutomatically={false}
+								injectedJavaScriptBeforeContentLoaded={`
+									window.open = function () { return null; };
+									true;
+								`}
+								onShouldStartLoadWithRequest={(event) => {
 										if (webviewCanRespondToEvents) {
 											if (Platform.OS === "ios") {
 												if (
@@ -356,10 +345,9 @@ const RecipeDetails = ({ navigation, route }: OwnProps) => {
 										// webviewCanRespondToEvents: true,
 										// });
 									}}
-									allowsInlineMediaPlayback={true}
-									mediaPlaybackRequiresUserAction={true}
-								/>
-							</ScrollView>
+								allowsInlineMediaPlayback={true}
+								mediaPlaybackRequiresUserAction={true}
+							/>
 							{webviewLoading && <StyledActivityIndicator />}
 						</View>
 					</View>

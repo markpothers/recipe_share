@@ -84,7 +84,6 @@ export const useRecipeDetailsModel = ({ navigation, route }: OwnProps) => {
 		MakePic | InstructionImage | Record<string, never>
 	>({});
 	const [imagePopupShowing, setImagePopupShowing] = React.useState<boolean>(false);
-	const [webviewHeight, setWebviewHeight] = React.useState<number>(responsiveHeight(60));
 	const [webviewLoading, setWebviewLoading] = React.useState<boolean>(true);
 	const [webviewCanRespondToEvents, setWebviewCanRespondToEvents] = React.useState<boolean>(false);
 	const [appStateListener, setAppStateListener] = React.useState<NativeEventSubscription>(null);
@@ -607,7 +606,6 @@ export const useRecipeDetailsModel = ({ navigation, route }: OwnProps) => {
 		chefNameTextColor,
 		imagePopupDetails,
 		imagePopupShowing,
-		webviewHeight,
 		webviewLoading,
 		webviewCanRespondToEvents,
 		setCommentsTopY,
@@ -624,7 +622,6 @@ export const useRecipeDetailsModel = ({ navigation, route }: OwnProps) => {
 		setChefNameTextColor,
 		setImagePopupDetails,
 		setImagePopupShowing,
-		setWebviewHeight,
 		setWebviewCanRespondToEvents,
 		navigateToChefDetails,
 		editRecipe,
