@@ -59,7 +59,7 @@ export default function App() {
 				}}
 			>
 				<Provider store={store}>
-					<SafeAreaView style={styles.container}>
+					<SafeAreaView style={styles.container} edges={["top", "bottom"]}>
 						<StatusBar
 							backgroundColor="#000"
 							style={Platform.OS === "ios" ? "auto" : "light"}

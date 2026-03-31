@@ -1,4 +1,4 @@
-import { Image, KeyboardAvoidingView, Platform, SafeAreaView, ScrollView } from "react-native";
+import { Image, KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
 import React, { useState } from "react";
 
 import StyledActivityIndicator from "../styledActivityIndicator/styledActivityIndicator";
@@ -17,7 +17,7 @@ const SpinachAppContainer = ({ scrollingEnabled, awaitingServer, children }: Own
 
 	if (scrollingEnabled) {
 		return (
-			<SafeAreaView style={centralStyles.fullPageSafeAreaView}>
+			<View style={centralStyles.fullPageSafeAreaView}>
 				<KeyboardAvoidingView
 					style={centralStyles.fullPageKeyboardAvoidingView}
 					// @ts-ignore
@@ -40,11 +40,11 @@ const SpinachAppContainer = ({ scrollingEnabled, awaitingServer, children }: Own
 						{children}
 					</ScrollView>
 				</KeyboardAvoidingView>
-			</SafeAreaView>
+			</View>
 		);
 	} else {
 		return (
-			<SafeAreaView style={centralStyles.fullPageSafeAreaView}>
+			<View style={centralStyles.fullPageSafeAreaView}>
 				<Image
 					source={spinachJpg}
 					style={centralStyles.spinachFullBackground}
@@ -52,7 +52,7 @@ const SpinachAppContainer = ({ scrollingEnabled, awaitingServer, children }: Own
 				/>
 				{awaitingServer && <StyledActivityIndicator />}
 				{children}
-			</SafeAreaView>
+			</View>
 		);
 	}
 };

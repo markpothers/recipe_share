@@ -9,11 +9,7 @@
     "version": "0.0.21",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "splash": {
-      "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
+
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -72,7 +68,15 @@
           ]
         }
       ],
-      "expo-web-browser"
+      "expo-web-browser",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#104e01",
+          "image": "./assets/images/yellowLogo.png",
+          "imageWidth": 300
+        }
+      ]
     ]
   }
 }

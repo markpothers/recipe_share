@@ -5,7 +5,7 @@ exports[`create chef page createChef functions can view and close privacy policy
 exports[`create chef page createChef functions can view and close terms and conditions 1`] = `[Function]`;
 
 exports[`create chef page createChef functions should display errors after submitting a bad new chef 1`] = `
-<RCTSafeAreaView
+<View
   style={
     {
       "borderColor": "blue",
@@ -1532,11 +1532,11 @@ exports[`create chef page createChef functions should display errors after submi
       </View>
     </RCTScrollView>
   </View>
-</RCTSafeAreaView>
+</View>
 `;
 
 exports[`create chef page createChef functions should load and render 1`] = `
-<RCTSafeAreaView
+<View
   style={
     {
       "borderColor": "blue",
@@ -2883,5 +2883,5 @@ accept T&C
       </View>
     </RCTScrollView>
   </View>
-</RCTSafeAreaView>
+</View>
 `;

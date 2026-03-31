@@ -6,7 +6,7 @@ import { responsiveHeight } from "react-native-responsive-dimensions";
 import { useAppSelector } from "../redux/hooks";
 
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import RecipeCard from "./RecipeCard";
 import { centralStyles } from "../centralStyleSheet";
 import { styles } from "./recipeListStyleSheet";
@@ -33,6 +33,14 @@ const RecipesList = (props: RecipesListProps) => {
 		allRecipeLists,
 		loggedInChef,
 	});
+
+	const scrollHandler = useMemo(
+		() =>
+			Animated.event([{ nativeEvent: { contentOffset: { y: model.yOffset } } }], {
+				useNativeDriver: true,
+			}),
+		[model.yOffset]
+	);
 
 	const renderRecipeListItem = useCallback(
 		({ item, index }: { item: ListRecipe; index: number }) => {
@@ -105,16 +113,14 @@ const RecipesList = (props: RecipesListProps) => {
 					<Animated.View
 						style={{
 							position: "absolute",
-							zIndex: model.searchBarZIndex,
-							transform: [
-								{
-									translateY: model.yOffset.interpolate({
-										inputRange: [model.currentYTop, model.currentYTop + responsiveHeight(7)],
-										outputRange: [0, -responsiveHeight(7)],
-										extrapolate: "clamp",
-									}),
-								},
-							],
+						zIndex: 1,
+					transform: [
+						{
+							translateY: model.clampedScroll.interpolate({
+								inputRange: [0, responsiveHeight(7)],
+								outputRange: [0, -responsiveHeight(7)],							extrapolate: "clamp",							}),
+						},
+					],
 						}}
 					>
 						<SearchBar
@@ -162,11 +168,7 @@ const RecipesList = (props: RecipesListProps) => {
 					onEndReachedThreshold={2.5}
 					initialNumToRender={model.recipeList.length}
 					scrollEventThrottle={16}
-					onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: model.yOffset } } }], {
-						useNativeDriver: true,
-						listener: model.onScroll,
-					})}
-					nestedScrollEnabled={true}
+					onScroll={scrollHandler}
 				/>
 				{model.filterDisplayed && (
 					<FilterMenu

@@ -1,6 +1,6 @@
 {
 	"cli": {
-		"version": ">= 0.54.1"
+		"version": ">= 14.0.0"
 	},
 	"build": {
 		"devClient": {
@@ -11,7 +11,7 @@
 				"EXPO_PUBLIC_NEW_RECIPE_SEED_MODE": "empty"
 			}
 		},
-		"development": {
+		"releaseStaging": {
 			"developmentClient": false,
 			"distribution": "store",
 			"env": {
@@ -31,6 +31,7 @@
 			}
 		},
 		"production": {
+			"distribution": "store",
 			"env": {
 				"EXPO_PUBLIC_API_URL": "https://www.recipe-share.com/api",
 				"EXPO_PUBLIC_NEW_RECIPE_SEED_MODE": "empty"

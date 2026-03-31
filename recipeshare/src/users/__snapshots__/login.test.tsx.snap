@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`login page logging in under different conditions should display activation required message if account is not activated 1`] = `
-<RCTSafeAreaView
+<View
   style={
     {
       "borderColor": "blue",
@@ -901,11 +901,11 @@ exports[`login page logging in under different conditions should display activat
       </View>
     </RCTScrollView>
   </View>
-</RCTSafeAreaView>
+</View>
 `;
 
 exports[`login page logging in under different conditions should display deactivated message if account was deactivated 1`] = `
-<RCTSafeAreaView
+<View
   style={
     {
       "borderColor": "blue",
@@ -1805,11 +1805,11 @@ exports[`login page logging in under different conditions should display deactiv
       </View>
     </RCTScrollView>
   </View>
-</RCTSafeAreaView>
+</View>
 `;
 
 exports[`login page logging in under different conditions should display invalid credentials message from a bad login 1`] = `
-<RCTSafeAreaView
+<View
   style={
     {
       "borderColor": "blue",
@@ -2709,11 +2709,11 @@ exports[`login page logging in under different conditions should display invalid
       </View>
     </RCTScrollView>
   </View>
-</RCTSafeAreaView>
+</View>
 `;
 
 exports[`login page logging in under different conditions should display password expired message if temp password has expired 1`] = `
-<RCTSafeAreaView
+<View
   style={
     {
       "borderColor": "blue",
@@ -3613,11 +3613,11 @@ exports[`login page logging in under different conditions should display passwor
       </View>
     </RCTScrollView>
   </View>
-</RCTSafeAreaView>
+</View>
 `;
 
 exports[`login page logging in under different conditions should display reactivated message if account was reactivated 1`] = `
-<RCTSafeAreaView
+<View
   style={
     {
       "borderColor": "blue",
@@ -4517,11 +4517,11 @@ exports[`login page logging in under different conditions should display reactiv
       </View>
     </RCTScrollView>
   </View>
-</RCTSafeAreaView>
+</View>
 `;
 
 exports[`login page logging in under different conditions should instruct how to reset password if email is empty 1`] = `
-<RCTSafeAreaView
+<View
   style={
     {
       "borderColor": "blue",
@@ -5421,11 +5421,11 @@ exports[`login page logging in under different conditions should instruct how to
       </View>
     </RCTScrollView>
   </View>
-</RCTSafeAreaView>
+</View>
 `;
 
 exports[`login page logging in under different conditions should password reset message after reset 1`] = `
-<RCTSafeAreaView
+<View
   style={
     {
       "borderColor": "blue",
@@ -6325,11 +6325,11 @@ exports[`login page logging in under different conditions should password reset 
       </View>
     </RCTScrollView>
   </View>
-</RCTSafeAreaView>
+</View>
 `;
 
 exports[`login page should load and render 1`] = `
-<RCTSafeAreaView
+<View
   style={
     {
       "borderColor": "blue",
@@ -7199,5 +7199,5 @@ exports[`login page should load and render 1`] = `
       </View>
     </RCTScrollView>
   </View>
-</RCTSafeAreaView>
+</View>
 `;

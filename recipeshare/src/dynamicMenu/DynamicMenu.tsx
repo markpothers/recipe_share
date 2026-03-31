@@ -1,4 +1,5 @@
-import { Animated, Modal, SafeAreaView, Text, TouchableOpacity } from "react-native"
+import { Animated, Modal, Text, TouchableOpacity } from "react-native"
+import { SafeAreaView } from "react-native-safe-area-context"
 import React, { useEffect, useState } from "react"
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions" //eslint-disable-line no-unused-vars
 

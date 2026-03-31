@@ -6,7 +6,15 @@ exports[`DynamicMenu renders with an outer close container and as many buttons a
   transparent={true}
   visible={true}
 >
-  <RCTSafeAreaView
+  <RNCSafeAreaView
+    edges={
+      {
+        "bottom": "additive",
+        "left": "additive",
+        "right": "additive",
+        "top": "additive",
+      }
+    }
     style={
       {
         "flex": 1,
@@ -523,6 +531,6 @@ exports[`DynamicMenu renders with an outer close container and as many buttons a
         </View>
       </View>
     </View>
-  </RCTSafeAreaView>
+  </RNCSafeAreaView>
 </Modal>
 `;

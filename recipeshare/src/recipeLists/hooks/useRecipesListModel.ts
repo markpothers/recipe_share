@@ -1,4 +1,4 @@
-import { Animated, FlatList, Platform } from "react-native";
+import { Animated, FlatList } from "react-native";
 import { responsiveHeight } from "react-native-responsive-dimensions";
 import {
 	destroyReShare,
@@ -99,8 +99,7 @@ export type RecipesListModel = {
 	renderNoRecipesMessage: boolean;
 	searchTerm: string;
 	yOffset: Animated.Value;
-	currentYTop: number;
-	searchBarZIndex: number;
+	clampedScroll: ReturnType<typeof Animated.diffClamp>;
 	cuisineOptions: Cuisine[];
 	selectedCuisine: Cuisine;
 	servesOptions: Serves[];
@@ -124,7 +123,6 @@ export type RecipesListModel = {
 	fetchFilterChoices: () => Promise<void>;
 	refresh: () => Promise<void>;
 	onEndReached: () => void;
-	onScroll: (...args: unknown[]) => void;
 	navigateToRecipeDetails: (recipeID: number, commenting?: boolean) => Promise<void>;
 	navigateToChefDetails: (chefID: number, recipeID: number) => Promise<void>;
 	likeRecipe: (recipeID: number) => Promise<void>;
@@ -149,7 +147,6 @@ export const useRecipesListModel = ({
 	const searchBar = useRef<{ focus?: () => void } | null>(null);
 	const recipeFlatList = useRef<FlatList<ListRecipe> | null>(null);
 	const abortController = useRef(new AbortController());
-	const previousScrollViewOffset = useRef(0);
 	const recipeListRef = useRef<ListRecipe[]>([]);
 	const isFetchingMore = useRef(false);
 	const routeRef = useRef(route);
@@ -165,8 +162,7 @@ export const useRecipesListModel = ({
 	const [renderNoRecipesMessage, setRenderNoRecipesMessage] = useState(false);
 	const [searchTerm, setSearchTermState] = useState("");
 	const yOffset = useRef(new Animated.Value(0)).current;
-	const [currentYTop, setCurrentYTop] = useState(0);
-	const [searchBarZIndex, setSearchBarZIndex] = useState(0);
+	const clampedScroll = useRef(Animated.diffClamp(yOffset, -responsiveHeight(7), responsiveHeight(7))).current;
 	const [cuisineOptions, setCuisineOptions] = useState<Cuisine[]>(cuisines);
 	const [selectedCuisine, setSelectedCuisineState] = useState<Cuisine>("Any");
 	const [servesOptions, setServesOptions] = useState<Serves[]>(serves);
@@ -754,15 +750,10 @@ export const useRecipesListModel = ({
 	);
 
 	const handleSearchBarFocus = useCallback(() => {
-		setSearchBarZIndex(1);
 		searchBar.current?.focus?.();
 	}, []);
 
-	const handleSearchBarBlur = useCallback(() => {
-		if (currentYTop === 0) {
-			setSearchBarZIndex(0);
-		}
-	}, [currentYTop]);
+	const handleSearchBarBlur = useCallback(() => {}, []);
 
 	const hideOfflineMessage = useCallback(() => {
 		setRenderOfflineMessage(false);
@@ -807,32 +798,9 @@ export const useRecipesListModel = ({
 
 	const onScroll = useCallback(
 		(...args: unknown[]) => {
-			const eventArg = args[0] as {
-				nativeEvent: {
-					contentOffset: { y: number };
-					velocity?: { y?: number };
-				};
-			};
-			const y = eventArg.nativeEvent.contentOffset.y;
-			const velocityY = eventArg.nativeEvent.velocity?.y || 0;
-			const isIncreasing = Platform.OS === "ios" ? y > previousScrollViewOffset.current : velocityY > 0;
-			if (y <= 0) {
-				setCurrentYTop(0);
-				setSearchBarZIndex(0);
-			}
-			if (y > 0 && y > currentYTop + responsiveHeight(7) && isIncreasing) {
-				setCurrentYTop(y - responsiveHeight(7));
-				setSearchBarZIndex(1);
-			}
-			if (y > 0 && y < currentYTop - responsiveHeight(7) && !isIncreasing) {
-				setCurrentYTop(y);
-				setSearchBarZIndex(1);
-			}
-			if (Platform.OS === "ios") {
-				previousScrollViewOffset.current = y;
-			}
+			void args;
 		},
-		[currentYTop]
+		[]
 	);
 
 	return {
@@ -846,8 +814,7 @@ export const useRecipesListModel = ({
 		renderNoRecipesMessage,
 		searchTerm,
 		yOffset,
-		currentYTop,
-		searchBarZIndex,
+		clampedScroll,
 		cuisineOptions,
 		selectedCuisine,
 		servesOptions,
@@ -871,7 +838,6 @@ export const useRecipesListModel = ({
 		fetchFilterChoices,
 		refresh,
 		onEndReached,
-		onScroll,
 		navigateToRecipeDetails,
 		navigateToChefDetails,
 		likeRecipe,

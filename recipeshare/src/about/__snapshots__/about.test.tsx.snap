@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`About Page renders displaying licenses 1`] = `
-<RCTSafeAreaView
+<View
   style={
     {
       "borderColor": "blue",
@@ -4063,11 +4063,11 @@ exports[`About Page renders displaying licenses 1`] = `
       </RCTScrollView>
     </View>
   </View>
-</RCTSafeAreaView>
+</View>
 `;
 
 exports[`About Page renders displaying privacy policy 1`] = `
-<RCTSafeAreaView
+<View
   style={
     {
       "borderColor": "blue",
@@ -4809,11 +4809,11 @@ If you have any questions about this Privacy Policy, please contact us:
       </RCTScrollView>
     </View>
   </View>
-</RCTSafeAreaView>
+</View>
 `;
 
 exports[`About Page renders displaying terms & conditions by default 1`] = `
-<RCTSafeAreaView
+<View
   style={
     {
       "borderColor": "blue",
@@ -5404,5 +5404,5 @@ If you have any questions about these Terms, please contact us at:
       </RCTScrollView>
     </View>
   </View>
-</RCTSafeAreaView>
+</View>
 `;
