@@ -1,6 +1,6 @@
 ---
 description: "Use when: check for regressions after refactoring, regression risk review, review refactored component, scroll behavior broken, stale closure, lifecycle parity check, header button not working, search bar positioning issue, pagination broken, FlatList behavior, useEffect dependency audit, callback stability review."
-tools: [read, search, write]
+tools: [read, search, edit, execute]
 name: RegressionReviewAgent
 ---
 

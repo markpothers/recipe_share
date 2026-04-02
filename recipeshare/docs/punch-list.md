@@ -2,6 +2,8 @@
 
 1. Standardize fetch request behavior across all api calls (timeout handling, auth header injection, logout/error behavior, and response/error shape).
 2. Standardize timeout and retry policy for network requests so transient failures behave consistently.
+3. Resolve known nested VirtualizedList warning in Chef Details tabs (ChefList inside parent ScrollView). Keep current behavior for now because scrolling the details card out of the way to access chef recipe/chef lists is intentional; revisit with an alternative layout that preserves this UX.
+4. Resolve TypeScript navigation typing false positives in chef list flow (`useChefListModel`/`ChefList`) caused by unions of composite navigation props and overloaded `navigate`/`push` signatures; runtime behavior is correct, but typing should be made explicit to remove noise.
 
 ## Completed
 

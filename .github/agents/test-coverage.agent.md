@@ -1,6 +1,6 @@
 ---
 description: "Use when: test coverage review, add tests for a component, identify missing tests, edge cases in tests, review test suite, hook tests, test gaps, what should be tested, testing a refactored component, test plan for new hook."
-tools: [read, search, write]
+tools: [read, search, edit, execute]
 name: TestCoverageAgent
 ---
 

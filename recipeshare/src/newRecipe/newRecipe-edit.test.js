@@ -106,55 +106,46 @@ describe("New Recipe page", () => {
 				rte.recipe.name,
 				[
 					{
-						ingredientId: 393,
 						name: "Pea protein powder, scoop",
 						quantity: "1",
 						unit: "each",
 					},
 					{
-						ingredientId: 394,
 						name: "Ground flax meal",
 						quantity: "1",
 						unit: "tbsp",
 					},
 					{
-						ingredientId: 73,
 						name: "Oat milk",
 						quantity: "1",
 						unit: "cup",
 					},
 					{
-						ingredientId: 395,
 						name: "Almond yoghurt",
 						quantity: "0.25",
 						unit: "cup",
 					},
 					{
-						ingredientId: 396,
 						name: "Almond butter",
 						quantity: "2",
 						unit: "tbsp",
 					},
 					{
-						ingredientId: 397,
 						name: "Frozen banana",
 						quantity: "0.5",
 						unit: "each",
 					},
 					{
-						ingredientId: 400,
 						name: "Frozen blackberries or raspberries",
 						quantity: "8",
 						unit: "each",
 					},
 					{
-						ingredientId: 399,
 						name: "Ice",
 						quantity: "0.5",
 						unit: "cup",
 					},
 					{
-						ingredientId: 68,
 						name: "Water",
 						quantity: "0.5...1",
 						unit: "cup",
@@ -207,9 +198,9 @@ describe("New Recipe page", () => {
 				99, // recipe id
 				144, // image id
 				0, // index
-				undefined
+				""
 			);
-			expectApiCallCount(postInstructionImage, 2);
+			expectApiCallCount(postInstructionImage, 1);
 			expectApiCall(postInstructionImage,
 				22, // chef id
 				"mockAuthToken",
