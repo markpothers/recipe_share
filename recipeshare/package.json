@@ -8,8 +8,6 @@
 		"build:android": "eas build --platform android",
 		"build:devClient:android": "eas build --profile devClient --platform android --clear-cache",
 		"build:devClient:ios": "eas build --profile devClient --platform ios --clear-cache",
-		"build:development:android": "eas build --profile development --platform android --clear-cache",
-		"build:development:ios": "eas build --profile development --platform ios --clear-cache",
 		"build:production:android": "eas build --profile production --platform android",
 		"build:ios": "eas build --platform ios",
 		"release:open-testing": "eas build --profile production --platform android --auto-submit --submit-profile openTesting",
@@ -30,7 +28,6 @@
 		"lint:watch": "yarn lint -- --w --changed ",
 		"prebuild:android": "npx expo prebuild --clean",
 		"prebuild:devClient:android": "npx expo prebuild --clean",
-		"prebuild:development": "npx expo prebuild --clean",
 		"prebuild:ios": "npx expo prebuild --clean",
 		"testServer": "json-server --watch ./testServer/testData.js --routes ./testServer/routes.json --host 10.0.0.78 --middlewares ./testServer/middleware.js",
 		"getipmac": "ipconfig getifaddr en0"
