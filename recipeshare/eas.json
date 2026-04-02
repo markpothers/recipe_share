@@ -1,6 +1,7 @@
 {
 	"cli": {
-		"version": ">= 14.0.0"
+		"version": ">= 14.0.0",
+		"appVersionSource": "remote"
 	},
 	"build": {
 		"devClient": {
@@ -32,6 +33,7 @@
 		},
 		"production": {
 			"distribution": "store",
+			"autoIncrement": true,
 			"env": {
 				"EXPO_PUBLIC_API_URL": "https://www.recipe-share.com/api",
 				"EXPO_PUBLIC_NEW_RECIPE_SEED_MODE": "empty"
@@ -39,6 +41,15 @@
 		}
 	},
 	"submit": {
-		"production": {}
+		"openTesting": {
+			"android": {
+				"track": "beta"
+			}
+		},
+		"production": {
+			"android": {
+				"track": "production"
+			}
+		}
 	}
 }
