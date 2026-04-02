@@ -1,6 +1,6 @@
 ---
 description: "Use when: refactoring a class component, convert class to functional component, extract hook from class component, migrate lifecycle methods to hooks, JS to TS component conversion, planning a component split, naming a hook file, starting a new refactoring task in RecipeShare."
-tools: [read, search, write]
+tools: [read, search, edit, execute]
 name: RefactorAgent
 ---
 

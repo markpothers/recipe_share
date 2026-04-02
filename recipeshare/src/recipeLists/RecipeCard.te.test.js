@@ -3,7 +3,7 @@ import React from "react";
 import { render, fireEvent } from "@testing-library/react-native";
 // import renderer from 'react-test-renderer';
 
-import RecipeCard from "./RecipeCard.js"
+import RecipeCard from "./RecipeCard"
 // import { mockRecipeList } from '../../__mocks__/mockRecipeList.js'
 // import OfflineMessage from '../offlineMessage/offlineMessage';
 import { recipeList } from "../../__mocks__/data/recipeList"

@@ -1,6 +1,6 @@
 ---
 description: "Use when: type alignment review, centralTypes audit, type overlap, missing types, duplicate types, typescript types review, hook return types, promote local type to central types, type conflicts, type continuity across components, type hygiene, TS type review for a file or component."
-tools: [read, search, write]
+tools: [read, search, edit, execute]
 name: TypeGuardianAgent
 ---
 

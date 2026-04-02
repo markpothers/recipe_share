@@ -376,3 +376,10 @@ export type HeaderButton = {
 	text: string;
 	action: () => void;
 };
+
+export type ChefListQuery =
+	| "chef_followees"
+	| "chef_followers"
+	| "all_chefs"
+	| "most_liked_chefs"
+	| "most_made_chefs";

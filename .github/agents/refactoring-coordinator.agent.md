@@ -1,6 +1,6 @@
 ---
 description: "Use when: full refactoring analysis, start a refactoring task, analyze a class component for refactoring, full workup on a class component, refactoring brief, comprehensive component review, orchestrate refactoring agents, run all refactoring checks."
-tools: [read, search, write, agent]
+tools: [read, search, edit, execute, agent]
 agents: [TypeGuardianAgent, RefactorAgent, RegressionReviewAgent, TestCoverageAgent]
 name: RefactoringCoordinator
 ---
