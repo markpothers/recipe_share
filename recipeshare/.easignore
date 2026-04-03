@@ -1,0 +1,29 @@
+# Reduce EAS upload size by excluding files not needed for cloud builds.
+
+# Local and editor artifacts
+.expo/
+.vscode/
+coverage/
+
+# Native folders are generated during EAS managed/prebuild workflows
+android/
+ios/
+
+# Test-only sources
+__mocks__/
+src/**/*.test.ts
+src/**/*.test.tsx
+src/**/__snapshots__/
+jest.config.js
+jestSetup.js
+testServer/
+
+# Documentation and local tooling
+docs/
+buildScripts/
+
+# Misc local files
+.watchmanconfig
+.env.dev
+.env.prod
+.env.example
