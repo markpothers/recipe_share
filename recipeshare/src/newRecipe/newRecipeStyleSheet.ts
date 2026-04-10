@@ -261,7 +261,8 @@ export const styles = StyleSheet.create({
 		backgroundColor: "white",
 		borderRadius: responsiveWidth(1.5),
 		maxHeight: responsiveHeight(25),
-		width: "100%",
+		width: responsiveWidth(77),
+		left: responsiveWidth(13),
 		borderStyle: "solid",
 		borderWidth: 1,
 		borderColor: "#104e01",
@@ -276,7 +277,6 @@ export const styles = StyleSheet.create({
 		},
 		shadowOpacity: 0.25,
 		shadowRadius: 3.84,
-		overflow: "scroll",
 	},
 	ingredientDeleteTrashCanButton: {
 		// zIndex: 1,

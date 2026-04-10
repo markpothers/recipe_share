@@ -12,6 +12,7 @@ import { Filters, Ingredient, RecipeIngredient, RecipeInstruction } from "../cen
 import {
 	FlatList,
 	Keyboard,
+	ScrollView,
 	Text,
 	TextInput,
 	TouchableOpacity,
@@ -26,8 +27,9 @@ import { AlertPopup } from "../components";
 import DraggableFlatList from "react-native-draggable-flatlist";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import IngredientAutoComplete from "./ingredientAutoComplete";
-import { IngredientAutocompleteBar } from "./IngredientAutocompleteBar";
+// import { IngredientAutocompleteBar } from "./IngredientAutocompleteBar"; // kept for future use
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
+import { LinearGradient } from "expo-linear-gradient";
 import { InstructionRow } from "./components/instructionRow";
 import NetInfo from "@react-native-community/netinfo";
 import { NewRecipeProps } from "../navigation";
@@ -117,29 +119,10 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 	} = useNewRecipeModel(props.navigation, props.route, nextInstructionInput, nextIngredientInput);
 	const [ingredientAutocompleteVisible, setIngredientAutocompleteVisible] = React.useState(false);
 	const [ingredientAutocompleteId, setIngredientAutocompleteId] = React.useState<string | null>(null);
-	const [ingredientAutocompleteValue, setIngredientAutocompleteValue] = React.useState("");
-	const [keyboardHeight, setKeyboardHeight] = React.useState(0);
-
-	React.useEffect(() => {
-		// Use correct type for keyboard event
-		const onKeyboardDidShow = (e: { endCoordinates?: { height: number } }) => {
-			setKeyboardHeight(e.endCoordinates ? e.endCoordinates.height : 0);
-		};
-		const onKeyboardDidHide = () => {
-			setKeyboardHeight(0);
-		};
-		const showSub = Keyboard.addListener("keyboardDidShow", onKeyboardDidShow);
-		const hideSub = Keyboard.addListener("keyboardDidHide", onKeyboardDidHide);
-		return () => {
-			showSub.remove();
-			hideSub.remove();
-		};
-	}, []);
 
 	// Handler for IngredientAutoComplete focus
-	const handleIngredientNameFocus = (ingredientId: string, currentName: string) => {
+	const handleIngredientNameFocus = (ingredientId: string) => {
 		setIngredientAutocompleteId(ingredientId);
-		setIngredientAutocompleteValue(currentName);
 		setIngredientAutocompleteVisible(true);
 	};
 
@@ -161,35 +144,48 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 		setIngredientAutocompleteId(null);
 	};
 
-	// Handler for closing the autocomplete bar
-	const handleIngredientAutocompleteClose = () => {
-		setIngredientAutocompleteVisible(false);
-		setIngredientAutocompleteId(null);
-	};
+	// Handler for closing the autocomplete bar (kept for potential future use)
+	// const handleIngredientAutocompleteClose = () => {
+	// 	setIngredientAutocompleteVisible(false);
+	// 	setIngredientAutocompleteId(null);
+	// };
 
 	// Handler for toggling autocomplete bar from icon
-	const handleIngredientAutocompleteIconPress = (ingredientId: string, currentName: string) => {
+	const handleIngredientAutocompleteIconPress = (ingredientId: string) => {
 		if (ingredientAutocompleteVisible && ingredientAutocompleteId === ingredientId) {
 			setIngredientAutocompleteVisible(false);
 			setIngredientAutocompleteId(null);
 		} else {
 			setIngredientAutocompleteId(ingredientId);
-			setIngredientAutocompleteValue(currentName);
 			setIngredientAutocompleteVisible(true);
 		}
 	};
 
-	// Filter suggestions based on current input
-	const ingredientSuggestions = ingredientsList
-		.filter(
-			(ing) =>
-				ing.name.toLowerCase().startsWith(ingredientAutocompleteValue.toLowerCase()) &&
-				ingredientAutocompleteValue.length > 1
-		)
-		.sort((a, b) => (a.name > b.name ? 1 : -1));
+	// Filter suggestions based on current input (kept for future use; per-row suggestions computed in renderIngredientItem)
+	// const ingredientSuggestions = ingredientsList
+	// 	.filter(
+	// 		(ing) =>
+	// 			ing.name.toLowerCase().startsWith(ingredientAutocompleteValue.toLowerCase()) &&
+	// 			ingredientAutocompleteValue.length > 1
+	// 	)
+	// 	.sort((a, b) => (a.name > b.name ? 1 : -1));
 
 	// Only show autocomplete bar if more than one suggestion
-	const showAutocompleteBar = ingredientAutocompleteVisible && ingredientSuggestions.length > 1;
+	// const showAutocompleteBar = ingredientAutocompleteVisible && ingredientSuggestions.length > 1;
+
+	// Computed overlay dropdown data (updated each render — dropdown is rendered outside the FlatList)
+	const openIngredient = ingredientAutocompleteId
+		? newRecipeDetails.ingredients.find((i) => i.id === ingredientAutocompleteId)
+		: null;
+	const openIngredientSuggestions: Ingredient[] =
+		openIngredient && openIngredient.name.length > 1
+			? ingredientsList
+					.filter((ing) => ing.name.toLowerCase().startsWith(openIngredient.name.toLowerCase()))
+					.sort((a, b) => (a.name > b.name ? 1 : -1))
+			: [];
+	const openIngredientIndex = ingredientAutocompleteId
+		? newRecipeDetails.ingredients.findIndex((i) => i.id === ingredientAutocompleteId)
+		: -1;
 
 	const renderAlertPopup = () => {
 		const isEditing = props.route.params?.recipe_details !== undefined;
@@ -278,13 +274,6 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 		);
 	};
 
-	// Handler for updating ingredient name and showing autocomplete
-	const handleIngredientNameChange = (ingredientId: string, newName: string) => {
-		setIngredientAutocompleteId(ingredientId);
-		setIngredientAutocompleteValue(newName);
-		setIngredientAutocompleteVisible(true);
-	};
-
 	// Abstracted renderItem for Ingredient
 	const renderIngredientItem = ({
 		item,
@@ -323,7 +312,10 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 					{...(isActive !== undefined && { isActive })}
 					onIngredientNameFocus={handleIngredientNameFocus}
 					onIngredientNameBlur={handleIngredientNameBlur}
-					onIngredientNameChange={(newName: string) => handleIngredientNameChange(item.id, newName)}
+					onIngredientNameChange={() => {
+						setIngredientAutocompleteId(item.id ?? "");
+						setIngredientAutocompleteVisible(true);
+					}}
 					onAutocompleteIconPress={handleIngredientAutocompleteIconPress}
 					ingredientSuggestions={ingredientSuggestions}
 					autocompleteOpenIngredientId={ingredientAutocompleteId}
@@ -960,6 +952,7 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 								<View
 									style={[
 										centralStyles.formSection,
+										{ position: "relative", overflow: "visible" },
 										// autoCompleteFocused !== null && { zIndex: 1 },
 										{
 											// paddingBottom:
@@ -1031,6 +1024,40 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 														: 0,
 											}}
 										/>
+									)}
+									{/* Autocomplete suggestion overlay — rendered outside FlatList to avoid stacking/clip issues */}
+									{openIngredientIndex >= 0 && openIngredientSuggestions.length > 1 && (
+										<View
+											style={[
+												styles.autoCompleteList,
+												{
+													top: openIngredientIndex * responsiveHeight(13) + responsiveHeight(6.5),
+													overflow: "hidden",
+												},
+											]}
+										>
+											<ScrollView
+												style={{ flex: 1 }}
+												keyboardShouldPersistTaps="always"
+												nestedScrollEnabled={true}
+											>
+												{openIngredientSuggestions.map((sug) => (
+													<TouchableOpacity
+														key={sug.id.toString()}
+														onPress={() => handleIngredientAutocompleteSelect(sug)}
+														activeOpacity={0.7}
+													>
+														<Text style={styles.autocompleteListText}>{sug.name}</Text>
+													</TouchableOpacity>
+												))}
+											</ScrollView>
+											{/* Fade-to-white at bottom to indicate scrollability */}
+											<LinearGradient
+												pointerEvents="none"
+												colors={["rgba(255,255,255,0)", "rgba(255,255,255,1)"]}
+												style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: responsiveHeight(5) }}
+											/>
+										</View>
 									)}
 								</View>
 								<View
@@ -1222,16 +1249,6 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 						<View style={[centralStyles.formSectionSeparatorContainer, { marginBottom: 0 }]}></View>
 					</TouchableOpacity>
 			</KeyboardAwareScrollView>
-			{/* Autocomplete Bar absolutely positioned above the keyboard using keyboard height */}
-			{showAutocompleteBar && (
-				<IngredientAutocompleteBar
-					visible={showAutocompleteBar}
-					suggestions={ingredientSuggestions}
-					onSelect={handleIngredientAutocompleteSelect}
-					onRequestClose={handleIngredientAutocompleteClose}
-					keyboardHeight={keyboardHeight}
-				/>
-			)}
 		</SpinachAppContainer>
 	);
 };
