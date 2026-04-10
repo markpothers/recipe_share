@@ -12,9 +12,6 @@ import { Filters, Ingredient, RecipeIngredient, RecipeInstruction } from "../cen
 import {
 	FlatList,
 	Keyboard,
-	KeyboardAvoidingView,
-	Platform,
-	ScrollView,
 	Text,
 	TextInput,
 	TouchableOpacity,
@@ -30,6 +27,7 @@ import DraggableFlatList from "react-native-draggable-flatlist";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import IngredientAutoComplete from "./ingredientAutoComplete";
 import { IngredientAutocompleteBar } from "./IngredientAutocompleteBar";
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 import { InstructionRow } from "./components/instructionRow";
 import NetInfo from "@react-native-community/netinfo";
 import { NewRecipeProps } from "../navigation";
@@ -397,17 +395,13 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 			{choosingInstructionPicture && renderInstructionPictureChooser()}
 			{alertPopupShowing && renderAlertPopup()}
 			{helpShowing && renderHelp()}
-			<KeyboardAvoidingView
-				style={centralStyles.fullPageKeyboardAvoidingView}
-				behavior={Platform.OS === "ios" ? "padding" : "height"}
-				keyboardVerticalOffset={Platform.OS === "ios" ? responsiveHeight(9) + 12 : 0}
+			<KeyboardAwareScrollView
+				style={centralStyles.fullPageScrollView}
+				nestedScrollEnabled={true}
+				scrollEnabled={scrollingEnabled}
+				keyboardShouldPersistTaps={"always"}
+				bottomOffset={16}
 			>
-				<ScrollView
-					style={centralStyles.fullPageScrollView}
-					nestedScrollEnabled={true}
-					scrollEnabled={scrollingEnabled}
-					keyboardShouldPersistTaps={"always"}
-				>
 					<TouchableOpacity
 						style={[
 							centralStyles.formContainer,
@@ -986,7 +980,7 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 												height:
 													newRecipeDetails.ingredients.length > 0
 														? newRecipeDetails.ingredients.length * responsiveHeight(13) +
-														  responsiveHeight(0.5)
+															responsiveHeight(0.5)
 														: 0,
 											}}
 										/>
@@ -1019,7 +1013,7 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 												height:
 													newRecipeDetails.ingredients.length > 0
 														? newRecipeDetails.ingredients.length * responsiveHeight(13) +
-														  responsiveHeight(0.5)
+															responsiveHeight(0.5)
 														: 0,
 											}}
 										/>
@@ -1033,7 +1027,7 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 												height:
 													newRecipeDetails.ingredients.length > 0
 														? newRecipeDetails.ingredients.length * responsiveHeight(13) +
-														  responsiveHeight(0.5)
+															responsiveHeight(0.5)
 														: 0,
 											}}
 										/>
@@ -1227,8 +1221,7 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 						{/* separator */}
 						<View style={[centralStyles.formSectionSeparatorContainer, { marginBottom: 0 }]}></View>
 					</TouchableOpacity>
-				</ScrollView>
-			</KeyboardAvoidingView>
+			</KeyboardAwareScrollView>
 			{/* Autocomplete Bar absolutely positioned above the keyboard using keyboard height */}
 			{showAutocompleteBar && (
 				<IngredientAutocompleteBar

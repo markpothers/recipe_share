@@ -18,11 +18,12 @@ export const IngredientAutocompleteBar: React.FC<IngredientAutocompleteBarProps>
 	suggestions,
 	onSelect,
 	onRequestClose,
+	keyboardHeight = 0,
 }) => {
 	if (!visible) return null;
 
-	// Always stick to the bottom of the screen (just above the keyboard)
-	const containerStyle = [styles.container, { bottom: 0 }];
+	// Position the bar just above the keyboard
+	const containerStyle = [styles.container, { bottom: keyboardHeight }];
 
 	return (
 		<View style={containerStyle} pointerEvents="box-none">

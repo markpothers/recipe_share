@@ -8,6 +8,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 import AppNavigator from "./src/navigation/AppNavigator";
+import { KeyboardProvider } from "react-native-keyboard-controller";
 import { Provider } from "react-redux";
 import { StatusBar } from "expo-status-bar";
 import { store } from "./src/redux/store";
@@ -59,13 +60,15 @@ export default function App() {
 				}}
 			>
 				<Provider store={store}>
-					<SafeAreaView style={styles.container} edges={["top", "bottom"]}>
-						<StatusBar
-							backgroundColor="#000"
-							style={Platform.OS === "ios" ? "auto" : "light"}
-						/>
-						<AppNavigator />
-					</SafeAreaView>
+					<KeyboardProvider>
+						<SafeAreaView style={styles.container} edges={["top", "bottom"]}>
+							<StatusBar
+								backgroundColor="#000"
+								style={Platform.OS === "ios" ? "auto" : "light"}
+							/>
+							<AppNavigator />
+						</SafeAreaView>
+					</KeyboardProvider>
 				</Provider>
 			</NavigationContainer>
 		</SafeAreaProvider>
