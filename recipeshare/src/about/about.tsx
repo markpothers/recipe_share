@@ -1,4 +1,4 @@
-import { Linking, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Linking, Platform, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import React, { useCallback, useRef, useState } from "react";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions";
 
@@ -15,8 +15,6 @@ export const About = () => {
 	const scrollView = useRef<ScrollView>(null);
 	const [awaitingServer] = useState(false);
 	const [activeTab, setActiveTab] = useState<"terms" | "privacy" | "licenses">("terms");
-	const appVersion = Constants.nativeApplicationVersion ?? Constants.expoConfig?.version ?? "00";
-	const buildVersion = Constants.nativeBuildVersion ?? "00";
 
 	const switchTab = useCallback((tab: "terms" | "privacy" | "licenses") => {
 		setActiveTab(tab);
@@ -37,7 +35,15 @@ export const About = () => {
 						<Text maxFontSizeMultiplier={2} style={styles.text}>
 							App Version:
 						</Text>
-						<Text maxFontSizeMultiplier={2} style={styles.text}>{`${appVersion}.${buildVersion}`}</Text>
+						{Platform.OS == "ios" ? (
+							<Text maxFontSizeMultiplier={2} style={styles.text}>{`${
+								Constants.expoConfig?.version ?? "00"
+							}.${Constants.expoConfig?.ios?.buildNumber ?? "00"}`}</Text>
+						) : (
+							<Text maxFontSizeMultiplier={2} style={styles.text}>{`${
+								Constants.expoConfig?.version ?? "00"
+							}.${Constants.expoConfig?.android?.versionCode ?? "00"}`}</Text>
+						)}
 					</View>
 				</View>
 			</View>
