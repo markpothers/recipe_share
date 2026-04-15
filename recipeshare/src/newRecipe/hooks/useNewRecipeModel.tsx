@@ -158,6 +158,9 @@ export const useNewRecipeModel = (
 					setNewRecipeDetails(savedNewRecipeDetails);
 					setInstructionHeights(savedInstructionsHeights);
 					setAverageInstructionHeight(savedAverageInstructionHeights);
+					// Sync length snapshots so the focus effects don't misread the load as a user-added row
+					setIngredientsLength(savedNewRecipeDetails.ingredients.length);
+					setInstructionsLength(savedNewRecipeDetails.instructions.length);
 				}
 			}
 			setAwaitingServer(false);
