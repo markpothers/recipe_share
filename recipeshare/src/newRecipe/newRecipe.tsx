@@ -212,7 +212,6 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 	};
 
 	const renderPrimaryPictureChooser = () => {
-		Keyboard.dismiss();
 		return (
 			<MultiPicSourceChooser
 				saveImages={savePrimaryImages}
@@ -225,10 +224,7 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 
 	// Remove all references to instructionImageIndex and update renderInstructionPictureChooser to use the id-based approach.
 	const renderInstructionPictureChooser = () => {
-		Keyboard.dismiss();
-		// Find the instruction being edited (e.g., the one for which choosingInstructionPicture is true)
-		// For this refactor, let's assume you store the id of the instruction being edited in a variable, e.g., choosingInstructionPictureId
-		// If not, you should add it to your state in useNewRecipeModel and update all logic accordingly.
+		// Find the instruction being edited
 		const instruction = newRecipeDetails.instructions.find((inst) => inst.id === choosingInstructionPicture);
 		const imageSource =
 			instruction && instruction.image
@@ -392,7 +388,7 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 				nestedScrollEnabled={true}
 				scrollEnabled={scrollingEnabled}
 				keyboardShouldPersistTaps={"always"}
-				bottomOffset={16}
+				bottomOffset={75}
 			>
 					<TouchableOpacity
 						style={[
@@ -969,6 +965,7 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 											keyExtractor={(item) => item.id!}
 											renderItem={({ item, index }) => renderIngredientItem({ item, index })}
 											scrollEnabled={false}
+											keyboardShouldPersistTaps="always"
 											style={{
 												height:
 													newRecipeDetails.ingredients.length > 0
@@ -1002,6 +999,7 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 											}}
 											// nestedScrollEnabled={true}
 											scrollEnabled={false}
+											keyboardShouldPersistTaps="always"
 											style={{
 												height:
 													newRecipeDetails.ingredients.length > 0
@@ -1016,6 +1014,7 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 											keyExtractor={(item) => item.id!}
 											renderItem={({ item, index }) => renderIngredientItem({ item, index })}
 											scrollEnabled={false}
+											keyboardShouldPersistTaps="always"
 											style={{
 												height:
 													newRecipeDetails.ingredients.length > 0
@@ -1135,6 +1134,7 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 											keyExtractor={(item, index) => `instruction-${index}`}
 											renderItem={({ item, index }) => renderInstructionItem({ item, index })}
 											scrollEnabled={false}
+											keyboardShouldPersistTaps="always"
 										/>
 									) : !(
 											alertPopupShowing ||
@@ -1161,6 +1161,7 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 											}}
 											// nestedScrollEnabled={true}
 											scrollEnabled={false}
+											keyboardShouldPersistTaps="always"
 										/>
 									) : (
 										<FlatList
@@ -1168,6 +1169,7 @@ const NewRecipe = (props: OwnProps & NewRecipeProps) => {
 											keyExtractor={(item, index) => `instruction-${index}`}
 											renderItem={({ item, index }) => renderInstructionItem({ item, index })}
 											scrollEnabled={false}
+											keyboardShouldPersistTaps="always"
 										/>
 									)}
 								</View>

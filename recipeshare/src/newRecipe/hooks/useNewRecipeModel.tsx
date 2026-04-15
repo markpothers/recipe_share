@@ -229,14 +229,14 @@ export const useNewRecipeModel = (
 
 	useEffect(() => {
 		if (newRecipeDetails.instructions.length - instructionsLength === 1 && nextInstructionInput.current) {
-			nextInstructionInput.current.focus();
+			setTimeout(() => nextInstructionInput.current?.focus(), 50);
 		}
 		setInstructionsLength(newRecipeDetails.instructions.length);
 	}, [newRecipeDetails.instructions.length, instructionsLength, nextInstructionInput]);
 
 	useEffect(() => {
 		if (newRecipeDetails.ingredients.length - ingredientsLength === 1 && nextIngredientInput.current) {
-			nextIngredientInput.current.focus();
+			setTimeout(() => nextIngredientInput.current?.focus(), 50);
 		}
 		setIngredientsLength(newRecipeDetails.ingredients.length);
 	}, [newRecipeDetails.ingredients.length, ingredientsLength, nextIngredientInput]);
@@ -247,7 +247,10 @@ export const useNewRecipeModel = (
 
 	const askToReset = () => setAlertPopupShowing(true);
 
-	const choosePrimaryPicture = () => setChoosingPrimaryPicture(true);
+	const choosePrimaryPicture = () => {
+		Keyboard.dismiss();
+		setChoosingPrimaryPicture(true);
+	};
 
 	const primarySourceChosen = async () => setChoosingPrimaryPicture(false);
 
@@ -386,6 +389,7 @@ export const useNewRecipeModel = (
 	};
 
 	const chooseInstructionPicture = (id: string) => {
+		Keyboard.dismiss();
 		setChoosingInstructionPicture(id);
 	};
 
