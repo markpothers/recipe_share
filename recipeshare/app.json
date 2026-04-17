@@ -1,82 +1,81 @@
 {
-  "expo": {
-    "name": "Recipe-Share",
-    "slug": "recipe-share",
-    "platforms": [
-      "ios",
-      "android"
-    ],
-    "version": "0.0.21",
-    "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.recipe-share.recipe-share",
-      "buildNumber": "2.0.59",
-      "associatedDomains": [
-        "webcredentials:www.recipe-share.com"
-      ],
-      "infoPlist": {
-        "NSCameraUsageDescription": "Recipe-Share requires access to your camera to let you set a profile picture and upload pictures of recipes. Your images will not be shared with 3rd parties outside the Recipe-Share app.",
-        "NSPhotoLibraryUsageDescription": "Recipe-Share requires access to your camera roll to let you set a profile picture and upload pictures of recipes. Your images will not be shared with 3rd parties outside the Recipe-Share app.",
-        "NSPhotoLibraryAddUsageDescription": "Recipe-Share requires access to your camera roll to let you set a profile picture and upload pictures of recipes. Your images will not be shared with 3rd parties outside the Recipe-Share app.",
-        "NSSpeechRecognitionUsageDescription": "Recipe-Share requires speech recognition permission to easier allow you to input instructions when creating a recipe.",
-        "UIRequiresFullScreen": true
-      }
-    },
-    "android": {
-      "package": "com.recipe_share.recipe_share",
-      "versionCode": 59,
-      "permissions": [
-        "CAMERA",
-        "android.permission.READ_MEDIA_IMAGES",
-        "android.permission.RECORD_AUDIO"
-      ],
-      "icon": "./assets/images/icon.png",
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/images/iconForeground.png",
-        "backgroundImage": "./assets/images/iconBackground.png"
-      }
-    },
-    "androidStatusBar": {
-      "backgroundColor": "#000000",
-      "barStyle": "light-content"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "2ebe3530-e000-11e9-a464-1daf89a8f23f"
-      }
-    },
-    "plugins": [
-      "expo-font",
-      "expo-secure-store",
-      "expo-asset",
-      [
-        "expo-speech-recognition",
-        {
-          "microphonePermission": "Allow $(PRODUCT_NAME) to use the microphone for speech-to-text when creating recipes.",
-          "speechRecognitionPermission": "Allow $(PRODUCT_NAME) to use speech recognition for easier recipe creation.",
-          "androidSpeechServicePackages": [
-            "com.google.android.googlequicksearchbox"
-          ]
-        }
-      ],
-      "expo-web-browser",
-      [
-        "expo-splash-screen",
-        {
-          "backgroundColor": "#104e01",
-          "image": "./assets/images/icon.png",
-          "imageWidth": 200
-        }
-      ]
-    ]
-  }
+	"expo": {
+		"name": "Recipe-Share",
+		"slug": "recipe-share",
+		"platforms": [
+			"ios",
+			"android"
+		],
+		"version": "0.0.21",
+		"orientation": "portrait",
+		"icon": "./assets/images/icon.png",
+		"updates": {
+			"fallbackToCacheTimeout": 0
+		},
+		"assetBundlePatterns": [
+			"**/*"
+		],
+		"ios": {
+			"supportsTablet": true,
+			"bundleIdentifier": "com.recipe-share.recipe-share",
+			"buildNumber": "2.0.59",
+			"associatedDomains": [
+				"webcredentials:www.recipe-share.com"
+			],
+			"infoPlist": {
+				"NSCameraUsageDescription": "Recipe-Share requires access to your camera to let you set a profile picture and upload pictures of recipes. Your images will not be shared with 3rd parties outside the Recipe-Share app.",
+				"NSPhotoLibraryUsageDescription": "Recipe-Share requires access to your camera roll to let you set a profile picture and upload pictures of recipes. Your images will not be shared with 3rd parties outside the Recipe-Share app.",
+				"NSPhotoLibraryAddUsageDescription": "Recipe-Share requires access to your camera roll to let you set a profile picture and upload pictures of recipes. Your images will not be shared with 3rd parties outside the Recipe-Share app.",
+				"NSSpeechRecognitionUsageDescription": "Recipe-Share requires speech recognition permission to easier allow you to input instructions when creating a recipe.",
+				"UIRequiresFullScreen": true
+			}
+		},
+		"android": {
+			"package": "com.recipe_share.recipe_share",
+			"versionCode": 59,
+			"permissions": [
+				"CAMERA",
+				"android.permission.READ_MEDIA_IMAGES",
+				"android.permission.RECORD_AUDIO"
+			],
+			"icon": "./assets/images/icon.png",
+			"adaptiveIcon": {
+				"foregroundImage": "./assets/images/iconForeground.png",
+				"backgroundImage": "./assets/images/iconBackground.png"
+			}
+		},
+		"androidStatusBar": {
+			"backgroundColor": "#000000",
+			"barStyle": "light-content"
+		},
+		"extra": {
+			"eas": {
+				"projectId": "2ebe3530-e000-11e9-a464-1daf89a8f23f"
+			}
+		},
+		"plugins": [
+			"expo-font",
+			"expo-secure-store",
+			"expo-asset",
+			[
+				"expo-speech-recognition",
+				{
+					"microphonePermission": "Allow $(PRODUCT_NAME) to use the microphone for speech-to-text when creating recipes.",
+					"speechRecognitionPermission": "Allow $(PRODUCT_NAME) to use speech recognition for easier recipe creation.",
+					"androidSpeechServicePackages": [
+						"com.google.android.googlequicksearchbox"
+					]
+				}
+			],
+			"expo-web-browser",
+			[
+				"expo-splash-screen",
+				{
+					"backgroundColor": "#104e01",
+					"image": "./assets/images/icon.png",
+					"imageWidth": 150
+				}
+			]
+		]
+	}
 }
