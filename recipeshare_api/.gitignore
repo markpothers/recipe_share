@@ -33,6 +33,10 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+/config/credentials/development.key
+/config/credentials/test.key
+/config/credentials/development.yml.enc
+/config/credentials/test.yml.enc
 
 # Vite Ruby
 /public/vite*
