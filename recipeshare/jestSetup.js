@@ -51,6 +51,22 @@ jest.mock("expo-secure-store", () => ({
 
 jest.mock("react-native-webview", () => ({}));
 
+jest.mock("react-native-keyboard-controller", () => {
+	const React = require("react");
+	const { ScrollView } = require("react-native");
+
+	const KeyboardProvider = ({ children }) => React.createElement(React.Fragment, null, children);
+	const KeyboardAwareScrollView = React.forwardRef((props, ref) =>
+		React.createElement(ScrollView, { ...props, ref }),
+	);
+
+	return {
+		__esModule: true,
+		KeyboardProvider,
+		KeyboardAwareScrollView,
+	};
+});
+
 // SDK 55 updates draggable-flatlist/reanimated internals to rely on worklets
 // native initialization, which is not available in Jest.
 jest.mock("react-native-draggable-flatlist", () => {
